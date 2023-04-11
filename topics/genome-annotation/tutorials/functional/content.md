@@ -6,7 +6,7 @@
 
 # Functional annotation
 
-## **EggNOG Mapper**
+## EggNOG Mapper
 
 **EggNOG Mapper** compares each protein sequence of the annotation to a huge set of ortholog groups from the [EggNOG database](http://eggnog5.embl.de). In this database, each ortholog group is associated with functional annotation like [Gene Ontology (GO)](http://www.geneontology.org/) terms or [KEGG pathways](https://www.genome.jp/kegg/pathway.html). When the protein sequence of a new gene is found to be very similar to one of these ortholog groups, the corresponding functional annotation is transfered to this new gene.
 
@@ -24,7 +24,7 @@ The output of this tool is a tabular file, where each line represents a gene fro
 
 Display the file and explore which kind of identifiers were found by EggNOG Mapper.
 
-## **InterProScan**
+## InterProScan
 
 [InterPro](https://www.ebi.ac.uk/interpro/) is a huge integrated database of protein families. Each family is characterized by one or muliple signatures (i.e. sequence motifs) that are specific to the protein family, and corresponding functional annotation like protein names or [Gene Ontology (GO)](http://www.geneontology.org/). A good proportion of the signatures are manually curated, which means they are of very good quality.
 

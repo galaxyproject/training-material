@@ -12,31 +12,31 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Nucleoli segmentation and feature extraction using CellProfiler" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-20 15:55:57 +0000" />
-<meta name="DC.creator" content="Beatriz Serrano-Solano" />
-<meta name="DC.creator" content="Jean-Karim Hériché" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Nucleoli segmentation and feature extraction using CellProfiler">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-20 15:55:57 +0000">
+<meta name="DC.creator" content="Beatriz Serrano-Solano">
+<meta name="DC.creator" content="Jean-Karim Hériché">
 
         
         
         
         
-        <meta name="description" content="Image analysis using Galaxy" />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Nucleoli segmentation and feature extraction using CellPr..." />
-        <meta property="og:description" content="Image analysis using Galaxy" />
+        <meta name="description" content="Image analysis using Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Nucleoli segmentation and feature extraction using CellPr...">
+        <meta property="og:description" content="Image analysis using Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -458,10 +458,222 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-imaging">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-20 15:55:57 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Nucleoli segmentation and feature extraction using CellProfiler",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Imaging",
+    "description": "Image analysis using Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Nucleoli segmentation and feature extraction using CellProfiler' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html",
+  "timeRequired": "PT4H",
+  "keywords": "imaging",
+  "description": "The questions this  addresses are:\n - How do I run an image analysis pipeline on public data using CellProfiler?\n - How do I analyse the DNA channel of fluorescence siRNA screens?\n - How do I download public image data into my history?\n - How do I segment and label cell nuclei?\n - How do I segment nucleoli (as the absence of DNA)?\n - How do I combine nuclei and nucleoli into one segmentation mask?\n - How do I extract the background of an image?\n - How do I relate the nucleoli to their parent nucleus?\n - How do I measure the image and object features?\n - How do I measure the image quality?\n\n\nThe objectives are:\n - How to download images from a public image repository.\n - How to segment cell nuclei using CellProfiler in Galaxy.\n - How to segment cell nucleoli using CellProfiler in Galaxy.\n - How to extract features for images, nuclei and nucleoli.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "name": "Beatriz Serrano-Solano",
+      "image": "https://avatars.githubusercontent.com/beatrizserrano",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5862-6132",
+      "orcid": "https://orcid.org/0000-0002-5862-6132"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/",
+      "name": "Jean-Karim Hériché",
+      "image": "https://avatars.githubusercontent.com/jkh1",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "name": "Beatriz Serrano-Solano",
+      "image": "https://avatars.githubusercontent.com/beatrizserrano",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5862-6132",
+      "orcid": "https://orcid.org/0000-0002-5862-6132"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/",
+      "name": "Jean-Karim Hériché",
+      "image": "https://avatars.githubusercontent.com/jkh1",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3382",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3382",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3382"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-imaging">
     <h1 data-toc-skip>Nucleoli segmentation and feature extraction using CellProfiler</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -472,9 +684,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -569,7 +781,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/imaging/tutorials/tutorial-CP/workflows/" title="Workflows" alt="Nucleoli segmentation and feature extraction using CellProfiler workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/imaging/tutorials/tutorial-CP/workflows/" title="Nucleoli segmentation and feature extraction using CellProfiler workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -583,13 +795,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/imaging/tutorials/tutorial-CP/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/imaging/tutorials/tutorial-CP/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -615,7 +824,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -762,6 +971,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
     
         
     
@@ -789,6 +1004,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -799,13 +1015,14 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In DNA staining of cells, nucleoli can be identified as the absence of DNA in nuclei (<a href="#figure-1">Fig. 1</a>).
 Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based RNA interference (RNAi) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alternative to performing new experiments.
 In particular, regardless of the targeted biological process, many screens include a DNA label and therefore can also reveal the effect of gene knock-downs on nucleoli.</p>
 
-<figure id="figure-1"><img src="../../images/tutorial-CP/img_dna_channel.png" alt="DNA channel. " width="50%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> DNA channel from the screen described in <span class="citation"><a href="#Heriche_2014">“<b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>” 2014</a></span>. The red arrows point at nucleoli.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/tutorial-CP/img_dna_channel.png" alt="DNA channel. " width="50%" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> DNA channel from the screen described in <span class="citation"><a href="#Heriche_2014">“<b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>” 2014</a></span>. The red arrows point at nucleoli.</figcaption></figure>
 
 <p>In this tutorial, we will analyse DNA channel images of publicly available RNAi screens to extract numerical descriptors (i.e. features) of nucleoli.
 The images and associated metadata will be retrieved from the <a href="http://idr.openmicroscopy.org/">Image Data Resource (IDR)</a>, a repository that collects image datasets of tissues and cells.</p>
@@ -820,12 +1037,12 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>3) <strong>CellProfiler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to actually run the pipeline.</p>
 
-<figure id="figure-2"><img src="../../images/tutorial-CP/wf.jpg" alt="High-level view of the workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> High-level view of the workflow</figcaption></figure>
+<figure id="figure-2"><img src="../../images/tutorial-CP/wf.jpg" alt="High-level view of the workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> High-level view of the workflow</figcaption></figure>
 
 <p>In this tutorial, you will learn how to create a workflow that downloads a selection of images from the IDR, and uses CellProfiler to segment the nuclei and nucleoli. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -860,14 +1077,14 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <h1 id="get-data">Get data</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-download-images-from-the-idr" aria-label="hands-on box: Download images from the IDR"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Download images from the IDR</div>
+  <div class="box-title hands-on-title" id="hands-on-download-images-from-the-idr"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Download images from the IDR</div>
 
   <ol>
     <li>
       <p>If you are logged in, create a new history for this tutorial.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p><strong>IDR Download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
@@ -883,15 +1100,15 @@ The images and associated metadata will be retrieved from the <a href="http://id
       </ul>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-get-the-idr-link-from-a-manual-selection-of-images"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-get-the-idr-link-from-a-manual-selection-of-images-contents" aria-expanded="true" aria-label="Toggle tip box: Get the IDR link from a manual selection of images"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Get the IDR link from a manual selection of images<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-get-the-idr-link-from-a-manual-selection-of-images"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-get-the-idr-link-from-a-manual-selection-of-images" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Get the IDR link from a manual selection of images<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>To get the valid IDR link, go to the <a href="http://idr.openmicroscopy.org/webclient/?show=screen-102">dataset of interest in the IDR</a> and select in the preview of a plate a few images ((figure <a href="#figure-3">Fig. 3</a> - 1)). Once you see them at the bottom of the page (figure <a href="#figure-3">Fig. 3</a> - 2), select them again and click the link button in the top-right corner of the right panel (figure <a href="#figure-3">Fig. 3</a> - 3).</p>
 
-        <figure id="figure-3"><img src="../../images/tutorial-CP/IDR_interface.jpg" alt="IDR interface. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> IDR interface</figcaption></figure>
+        <figure id="figure-3"><img src="../../images/tutorial-CP/IDR_interface.jpg" alt="IDR interface. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> IDR interface</figcaption></figure>
       </blockquote>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
         <p><strong>IMPORTANT:</strong> When the number of images to download is high, it is strongly recommended to enable the option <em>“Download images in a tarball?”</em> in order to improve the performance.</p>
       </blockquote>
@@ -901,7 +1118,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>Why are we taking the <code class="language-plaintext highlighter-rouge">Cy3</code> channel in the <a href="http://idr.openmicroscopy.org/webclient/img_detail/295900/">example data</a>?</li>
@@ -909,7 +1126,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -929,7 +1146,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>The tool <strong>Starting Modules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> comprises the first 4 modules of the standalone CellProfiler. It needs to be the first tool of a workflow because it sets the naming and metadata handling for the rest of tools.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-specify-metadata-to-cellprofiler" aria-label="hands-on box: Specify metadata to CellProfiler"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Specify metadata to CellProfiler</div>
+  <div class="box-title hands-on-title" id="hands-on-specify-metadata-to-cellprofiler"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Specify metadata to CellProfiler</div>
 
   <ol>
     <li><strong>Starting Modules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -972,7 +1189,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
         <p>The images downloaded from the IDR are named following the pattern: <code class="language-plaintext highlighter-rouge">plateName__imageID__cropX__cropY__cropWidth__cropHeight</code>. These fields indicate to which plate the image belongs, what is the identifier of the image in the IDR, and the 4 cropping parameters selected. In our case, the upper-left corner (X, Y) and the width and height from there. We have a total of 6 metadata values encoded in the name of the file, separated by <code class="language-plaintext highlighter-rouge">__</code>. The pattern to extract our metadata from the file name properly is, therefore: <code class="language-plaintext highlighter-rouge">field1__field2__field3__field4__field5__field6</code>. It is important to keep in mind that, for CellProfiler, our <code class="language-plaintext highlighter-rouge">plateName</code> will be called <code class="language-plaintext highlighter-rouge">field1</code>, <code class="language-plaintext highlighter-rouge">imageID</code> will be <code class="language-plaintext highlighter-rouge">field2</code>, <code class="language-plaintext highlighter-rouge">cropX</code> will be <code class="language-plaintext highlighter-rouge">field3</code>, etc. These matches are relevant for a meaningful interpretation of the features.</p>
       </blockquote>
@@ -999,7 +1216,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>In the first step, we will identify the nuclei that are complete, meaning that they are not touching the borders of the image.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-segment-nuclei-that-are-complete-within-the-boundaries-of-the-image" aria-label="hands-on box: Segment nuclei that are complete within the boundaries of the image"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Segment nuclei that are complete within the boundaries of the image</div>
+  <div class="box-title hands-on-title" id="hands-on-segment-nuclei-that-are-complete-within-the-boundaries-of-the-image"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Segment nuclei that are complete within the boundaries of the image</div>
 
   <ol>
     <li><strong>IdentifyPrimaryObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1039,7 +1256,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
         <ul>
           <li>The names entered to the input image and objects have to be consistent (case sensitive) with the ones in <em>NamesAndTypes</em> and the tools to follow.</li>
@@ -1053,12 +1270,12 @@ The images and associated metadata will be retrieved from the <a href="http://id
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>We are using here Otsu’s thresholding method for segmentation. What other segmentation options are available? What is the difference between them?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <em>global</em> methods we have <code class="language-plaintext highlighter-rouge">Manual</code>, <code class="language-plaintext highlighter-rouge">Measurement</code>, <code class="language-plaintext highlighter-rouge">Minimum cross entropy</code>, <code class="language-plaintext highlighter-rouge">Otsu</code> and <code class="language-plaintext highlighter-rouge">Robust background</code>. For the <em>adaptive</em> ones we only have <code class="language-plaintext highlighter-rouge">Otsu</code>. Check the parameters’ help to get more information on each one.</p>
 
@@ -1068,15 +1285,15 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>From the previous tool, we got a group of objects (nuclei). Now, we want to export the segmentation masks as a single image to check how well the segmentation algorithm is performing. We also want to label the nuclei with their identifiers for future visual inspection of the results. The output of this step will look like (you will only get this image after running the whole workflow):</p>
 
-<figure id="figure-4"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="Identified nuclei with labels. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Identified nuclei with labels.</figcaption></figure>
+<figure id="figure-4"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="Identified nuclei with labels. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Identified nuclei with labels.</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Why are some nuclei not labeled in the image above?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>We have indicated to the tool <strong>IdentifyPrimaryObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that the nuclei that are either outside the diameter range or touching the border should be discarded.</p>
 
@@ -1085,7 +1302,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-mask-the-nuclei-detected" aria-label="hands-on box: Mask the nuclei detected"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Mask the nuclei detected</div>
+  <div class="box-title hands-on-title" id="hands-on-mask-the-nuclei-detected"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Mask the nuclei detected</div>
 
   <ol>
     <li><strong>ConvertObjectsToImage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1138,7 +1355,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
         <p>The <code class="language-plaintext highlighter-rouge">Text color</code> parameter can be any of your choice, the hexa code is not really relevant. The only consideration is that it needs to be visible on top of the nuclei.</p>
       </blockquote>
@@ -1151,7 +1368,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>The nucleoli are lacking intensity in the DNA staining and therefore, we need to enhance the black holes before masking.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-detect-and-mask-dark-holes" aria-label="hands-on box: Detect and mask dark holes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Detect and mask dark holes</div>
+  <div class="box-title hands-on-title" id="hands-on-detect-and-mask-dark-holes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Detect and mask dark holes</div>
 
   <ol>
     <li><strong>EnhanceOrSuppressFeatures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1190,7 +1407,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>Now that we have all the holes in one mask, we can segment the nucleoli as individual objects in the same way as we did with the nuclei. All the nucleoli can be then combined into one single image.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-segment-nucleoli-as-individual-objects" aria-label="hands-on box: Segment nucleoli as individual objects"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Segment nucleoli as individual objects</div>
+  <div class="box-title hands-on-title" id="hands-on-segment-nucleoli-as-individual-objects"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Segment nucleoli as individual objects</div>
 
   <ol>
     <li><strong>IdentifyPrimaryObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1244,10 +1461,10 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>We have now one segmentation mask per image with all the nuclei detected, <code class="language-plaintext highlighter-rouge">MaskNuclei</code>, and another one for the nucleoli, <code class="language-plaintext highlighter-rouge">MaskNucleoli</code>. These are binary masks in which the background is black and the objects detected are white. We would like to check whether both segmentation steps went well. That could be achieved by combining both of them (using different colors) into one image. Here, we are converting the nucleus mask to blue and the nucleoli to magenta. The outcome that you will obtain after the execution of the workflow will look like:</p>
 
-<figure id="figure-5"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="Combined mask for nuclei and nucleoli. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Combined segmentation masks for nuclei (blue) and nucleoli (magenta).</figcaption></figure>
+<figure id="figure-5"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="Combined mask for nuclei and nucleoli. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Combined segmentation masks for nuclei (blue) and nucleoli (magenta).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-and-save-the-nuclei-and-nucleoli-masks" aria-label="hands-on box: Convert and save the nuclei and nucleoli masks"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert and save the nuclei and nucleoli masks</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-and-save-the-nuclei-and-nucleoli-masks"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Convert and save the nuclei and nucleoli masks</div>
 
   <ol>
     <li><strong>GrayToColor</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1287,7 +1504,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
         <ul>
           <li>You can pick any other color of your choice, as long as the contrast is good enough to distinguish both objects.</li>
@@ -1308,7 +1525,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <h2 id="identify-the-foreground">Identify the foreground</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-segment-all-nuclei" aria-label="hands-on box: Segment all nuclei"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Segment all nuclei</div>
+  <div class="box-title hands-on-title" id="hands-on-segment-all-nuclei"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Segment all nuclei</div>
 
   <ol>
     <li><strong>IdentifyPrimaryObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1362,7 +1579,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <h2 id="remove-the-foreground-from-the-original-image">Remove the foreground from the original image</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-subtract-the-foreground-from-the-original-image" aria-label="hands-on box: Subtract the foreground from the original image"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Subtract the foreground from the original image</div>
+  <div class="box-title hands-on-title" id="hands-on-subtract-the-foreground-from-the-original-image"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Subtract the foreground from the original image</div>
 
   <p><strong>ImageMath</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1410,7 +1627,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>A step that requires special attention is the relationship nucleolus-nucleus. This is useful to compute statistics on the number of nucleoli by nucleus.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-5" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
   <p>The order in which the tools in this section are chained is not relevant for the outcome.</p>
 </blockquote>
@@ -1418,7 +1635,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <h2 id="measure-the-granularity-texture-intensity-size-and-shape">Measure the granularity, texture, intensity, size and shape</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-measure-the-granularity-texture-intensity-size-and-shape" aria-label="hands-on box: Measure the granularity, texture, intensity, size and shape"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Measure the granularity, texture, intensity, size and shape</div>
+  <div class="box-title hands-on-title" id="hands-on-measure-the-granularity-texture-intensity-size-and-shape"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Measure the granularity, texture, intensity, size and shape</div>
 
   <ol>
     <li><strong>MeasureGranularity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1509,12 +1726,12 @@ The images and associated metadata will be retrieved from the <a href="http://id
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Why are we measuring the granularity, texture and intensity of the original image and the nuclei only?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The nucleoli was not stained in the DNA channel and hence, the granularity, texture and intensity are constant values.</p>
 
@@ -1527,7 +1744,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>It might be relevant to compute some statistics on the number of nucleoli inside each nucleus. CellProfiler has a very interesting module to relate both objects, in which each one of the nucleoli is assigned an identifier and linked to the identifier of its parent nucleus.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-relate-nucleoli-to-their-parent-nucleus" aria-label="hands-on box: Relate nucleoli to their parent nucleus"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Relate nucleoli to their parent nucleus</div>
+  <div class="box-title hands-on-title" id="hands-on-relate-nucleoli-to-their-parent-nucleus"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Relate nucleoli to their parent nucleus</div>
 
   <ol>
     <li><strong>RelateObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1552,7 +1769,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>In this section, we will measure the image quality, the area occupied by the nuclei and nucleoli in the original image and the intensity of the foreground and background.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-measure-the-image-quality" aria-label="hands-on box: Measure the image quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Measure the image quality</div>
+  <div class="box-title hands-on-title" id="hands-on-measure-the-image-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Measure the image quality</div>
 
   <ol>
     <li><strong>MeasureImageQuality</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1645,12 +1862,12 @@ The images and associated metadata will be retrieved from the <a href="http://id
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>In step 3, we are measuring the area occupied by objects for the DNA twice. Why is that?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>We want to have the global intensity of the image, so the parameter <em>“Measure the intensity only from areas enclosed by objects?”</em> has to be set to <code class="language-plaintext highlighter-rouge">No</code>. However, we also want to obtain the intensity of the foreground, so only the parts of the images that are enclosed by nuclei.</p>
 
@@ -1663,7 +1880,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>All the parameters that we have measured related to the images and objects need to be exported to a file for each one of 6 example images analysed.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-export-features" aria-label="hands-on box: Export features"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Export features</div>
+  <div class="box-title hands-on-title" id="hands-on-export-features"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Export features</div>
 
   <p><strong>ExportToSpreadsheet</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1681,7 +1898,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>All the steps in our workflow (except for the <strong>IDR download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) have been passing through an <code class="language-plaintext highlighter-rouge">output_pipeline</code> as a parameter. This was the way to assemble all the modules from CellProfiler, now we can run all of them together!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-cellprofiler-pipeline" aria-label="hands-on box: Run CellProfiler pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run CellProfiler pipeline</div>
+  <div class="box-title hands-on-title" id="hands-on-run-cellprofiler-pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run CellProfiler pipeline</div>
 
   <p><strong>CellProfiler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1695,7 +1912,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
   </ul>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-6" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+    <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
     <p>This is the only time-consuming step of the workflow, as it needs to perform the whole analysis in the input dataset.</p>
   </blockquote>
@@ -1706,10 +1923,12 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>In this tutorial, you have downloaded images from a public image repository into your Galaxy history. After that, you have built and run a typical image analysis pipeline, composed of segmentation of several objects and feature extraction. As an outcome, you got plenty of features to analyse! And some masks to check that the segmentation algorithms worked as expected. Now you are ready to perform your biological data analysis!</p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.</p>
@@ -1751,33 +1970,9 @@ The images and associated metadata will be retrieved from the <a href="http://id
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Nucleoli segmentation and feature extraction using CellProfiler (Imaging)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Nucleoli segmentation and feature extraction using CellProfiler (Imaging)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1795,7 +1990,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1836,7 +2031,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1848,29 +2043,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

@@ -12,34 +12,34 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Regional GAM" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-28 13:41:44 +0000" />
-<meta name="DC.creator" content="Clara Urfer" />
-<meta name="DC.creator" content="Elisa Michon" />
-<meta name="DC.creator" content="Yvan Le Bras" />
-<meta name="DC.creator" content="Bérénice Batut" />
-<meta name="DC.creator" content="Simon Benateau" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Regional GAM">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-28 13:41:44 +0000">
+<meta name="DC.creator" content="Clara Urfer">
+<meta name="DC.creator" content="Elisa Michon">
+<meta name="DC.creator" content="Yvan Le Bras">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Simon Benateau">
 
         
         
         
         
-        <meta name="description" content="Learn to analyse Ecological data through Galaxy." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Regional GAM" />
-        <meta property="og:description" content="Learn to analyse Ecological data through Galaxy." />
+        <meta name="description" content="Learn to analyse Ecological data through Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Regional GAM">
+        <meta property="og:description" content="Learn to analyse Ecological data through Galaxy.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -591,10 +591,352 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-ecology">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-28 13:41:44 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Regional GAM",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Ecology",
+    "description": "Learn to analyse Ecological data through Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Regional GAM' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html",
+  "timeRequired": "PT2H30M",
+  "keywords": "ecology, Species populations EBV class, Species traits EBV class, EBV dataset, EBV workflow",
+  "description": "The questions this  addresses are:\n - What are abundance and trends of a butterfly species?\n\n\nThe objectives are:\n - Obtain and filter/manipulate occurrence data\n - Compute and visualize phenology of a species through the years\n - Compute temporal abundance trends\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/claraurf/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/claraurf/",
+      "name": "Clara Urfer",
+      "image": "https://avatars.githubusercontent.com/claraurf",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/emichn/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/emichn/",
+      "name": "Elisa Michon",
+      "image": "https://avatars.githubusercontent.com/emichn",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "name": "Yvan Le Bras",
+      "image": "https://avatars.githubusercontent.com/yvanlebras",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8504-068X",
+      "orcid": "https://orcid.org/0000-0002-8504-068X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/sbenateau/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/sbenateau/",
+      "name": "Simon Benateau",
+      "image": "https://avatars.githubusercontent.com/sbenateau",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/claraurf/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/claraurf/",
+      "name": "Clara Urfer",
+      "image": "https://avatars.githubusercontent.com/claraurf",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/emichn/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/emichn/",
+      "name": "Elisa Michon",
+      "image": "https://avatars.githubusercontent.com/emichn",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "name": "Yvan Le Bras",
+      "image": "https://avatars.githubusercontent.com/yvanlebras",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8504-068X",
+      "orcid": "https://orcid.org/0000-0002-8504-068X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/sbenateau/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/sbenateau/",
+      "name": "Simon Benateau",
+      "image": "https://avatars.githubusercontent.com/sbenateau",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Ecology",
+      "description": "Learn to analyse Ecological data through Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0610",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0610"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-ecology">
     <h1 data-toc-skip>Regional GAM</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -605,9 +947,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -677,7 +1019,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/ecology/tutorials/regionalGAM/workflows/" title="Workflows" alt="Regional GAM workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/ecology/tutorials/regionalGAM/workflows/" title="Regional GAM workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -691,13 +1033,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/ecology/tutorials/regionalGAM/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/ecology/tutorials/regionalGAM/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -723,7 +1062,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -865,6 +1204,8 @@
     
         
     
+        
+    
     </ul>
 
 
@@ -881,6 +1222,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -891,6 +1233,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>This tutorial will show you how to study species abundance through the computation of a flight curve, abundance index, and trends. It will explain you how to use different <a href="https://github.com/RetoSchmucki/regionalGAM">regionalGAM</a> tools on Galaxy allowing you to deal with datasets containing abundance information for various species per site and per date through a couple of years.</p>
@@ -900,7 +1243,7 @@
 <p>You will basically learn how to create a file on the basis of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -932,17 +1275,17 @@
 <h2 id="data-upload">Data upload</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial and give it a proper name like <code class="language-plaintext highlighter-rouge">regionalGAM tutorial</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the CSV dataset file with only one species from <a href="https://zenodo.org/record/1324204#.W2BmRn7fNE4">Zenodo</a> or from the data library (ask your instructor)</p>
@@ -951,10 +1294,10 @@
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
       <p>Check that the file contains a header corresponding to: <code class="language-plaintext highlighter-rouge">"SPECIES","SITE","YEAR","MONTH","DAY","COUNT"</code>, and that all the non numeric content are between double quotes as “x” and that separators are “,”</p>
@@ -965,7 +1308,7 @@
 
 <p>This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names (“SPECIES”), observation site (“SITE”), date of the observation (“YEAR”,”MONTH”,”DAY”) and number of individuals (“COUNT”). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae. It is found in the Central and Southern Europe, North Africa Anatolia, and Caucasus.</p>
 
-<figure id="figure-1"><img src="../../images/regionalGAM/Gatekeeper-Pyronia_tithonus-male.jpg" alt="Gatekeeper (Pironia tithonus). " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Gatekeeper (Pironia tithonus) Charles J Sharp</figcaption></figure>
+<figure id="figure-1"><img src="../../images/regionalGAM/Gatekeeper-Pyronia_tithonus-male.jpg" alt="Gatekeeper (Pironia tithonus). " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Gatekeeper (Pironia tithonus) Charles J Sharp</figcaption></figure>
 
 <h2 id="prepare-the-data">Prepare the data</h2>
 
@@ -974,7 +1317,7 @@
 <p>Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We want to create a down-sampled file, by selecting the lines where NLBMS is found.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-downsample-and-hide-some-information" aria-label="hands-on box: Downsample and hide some information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Downsample and hide some information</div>
+  <div class="box-title hands-on-title" id="hands-on-downsample-and-hide-some-information"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Downsample and hide some information</div>
   <ol>
     <li><strong>Text reformatting with awk</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
@@ -996,26 +1339,26 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>How many sites do you have before and after removing the sites from outside the Netherlands?</p>
 
   <p>You may need to use a tool like <strong>Count occurrences of each record</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. If you want to run the same tool with same parameters to several input files, you can directly specify the <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong> option on the tool form for the <em>“from dataset”</em> parameter).</p>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-select-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-multiple-datasets-contents" aria-expanded="true" aria-label="Toggle tip box: Select multiple datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Select multiple datasets<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>   <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li> </ol> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-select-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-multiple-datasets" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Select multiple datasets<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>   <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li> </ol> </blockquote>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The dataset contains 280 sites now against 1143 before down-sampling.</p>
   </blockquote>
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-if-your-original-data-is-in-rdata-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-if-your-original-data-is-in-rdata-format-contents" aria-expanded="true" aria-label="Toggle details box: If your original data is in RData format"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: If your original data is in RData format<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-if-your-original-data-is-in-rdata-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-if-your-original-data-is-in-rdata-format" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: If your original data is in RData format<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-data-upload-1" aria-label="hands-on box: Data upload."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload.</div>
+    <div class="box-title hands-on-title" id="hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload.</div>
     <ol>
       <li>
         <p>Import the RData</p>
@@ -1044,12 +1387,12 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
   <p>If the tool <strong>RData parser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> don’t succeed to create a single tabular file, it generates separate files, each of them containing one column. The file with the <code class="language-plaintext highlighter-rouge">TREND</code> header can be let aside as we don’t need it for what will follow.</p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <p>If Rdata parser fails to generate a single unified tabular file, can you propose a way to regenerate such a dataset ?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>You can do that using:</p>
       <ol>
         <li><strong>Paste two files side by side tool</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1078,7 +1421,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 <p>As the dataset is quite big and may contain heterogeneous information, we need to know whether the data are about one species or more.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-how-many-species-are-taken-into-account-in-this-dataset" aria-label="hands-on box: How many species are taken into account in this dataset?"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: How many species are taken into account in this dataset?</div>
+  <div class="box-title hands-on-title" id="hands-on-how-many-species-are-taken-into-account-in-this-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: How many species are taken into account in this dataset?</div>
 
   <ol>
     <li><strong>Count occurrences of each record</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1095,7 +1438,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-datasets-containing-information-about-more-than-one-species"><button class="gtn-boxify-button details" type="button" aria-controls="details-datasets-containing-information-about-more-than-one-species-contents" aria-expanded="true" aria-label="Toggle details box: Datasets containing information about more than one species"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Datasets containing information about more than one species<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-datasets-containing-information-about-more-than-one-species"><button class="gtn-boxify-button details" type="button" aria-controls="details-datasets-containing-information-about-more-than-one-species" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Datasets containing information about more than one species<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.</p>
 
@@ -1107,7 +1450,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 </code></pre></div>  </div>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <ol>
       <li>How many species does your initial dataset take into account ?</li>
@@ -1115,7 +1458,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>The dataset contains information on 2 different species</li>
@@ -1128,7 +1471,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
   <p>We now need to create a new file containing the data for only one species</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-creating-a-new-file-containing-only-the-data-from-one-species" aria-label="hands-on box: Creating a new file containing only the data from one species"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a new file containing only the data from one species</div>
+    <div class="box-title hands-on-title" id="hands-on-creating-a-new-file-containing-only-the-data-from-one-species"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating a new file containing only the data from one species</div>
     <ol>
       <li>Copy the name of the species you are interested in (for example: “Aglais io”).</li>
       <li><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
@@ -1157,7 +1500,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 <p>Now you have a file containing all the data on the species of interest. The main goal of this step is to model one phenology per year using a general additive model (GAM) with time and sites as explanatory variables. This model will be used to predict values for missing counts at local sites in order to improve the quality of the abundance indices.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-phenology" aria-label="hands-on box: Phenology"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Phenology</div>
+  <div class="box-title hands-on-title" id="hands-on-phenology"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Phenology</div>
   <ol>
     <li><strong>Flight curve</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
@@ -1197,7 +1540,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 <p>This graph displays the modeled flight curve of <em>Pyronia tithonus</em> over the years. But the first year is “null”, probably a left-over of the 1st line with the header, and the week number is not shown.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-new-column-of-the-dataset-containing-the-week-and-the-year" aria-label="hands-on box: Create a new column of the dataset containing the week and the year"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create a new column of the dataset containing the week and the year</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-new-column-of-the-dataset-containing-the-week-and-the-year"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create a new column of the dataset containing the week and the year</div>
   <ol>
     <li><strong>Count occurrences of each record</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
@@ -1211,12 +1554,12 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
       <p>Inspect and expand the output data from <strong>Count occurrences of each record</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <p>What can you see in this file?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>A list of the years and the number of occurrence for each year which should match the number of days for each year.</p>
         </blockquote>
       </blockquote>
@@ -1250,7 +1593,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
       <p><strong>Remove beginning of a file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to remove first line (to avoid header in the visualization)</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-dataset-with-information-about-more-than-one-species" aria-label="comment box: Dataset with information about more than one species"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Dataset with information about more than one species</div>
+        <div class="box-title comment-title" id="comment-dataset-with-information-about-more-than-one-species"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Dataset with information about more than one species</div>
         <p>If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.</p>
       </blockquote>
     </li>
@@ -1287,7 +1630,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 <p>This shows the abundance of <em>Pyronia tithonus</em>, over the weeks. We can see there is a peak every year as expected and we can notice some differences in the values between the weeks and years, but not how the weeks overlap between the years. We will plot a stalked version of this visualization to check if there are no unexpected changes and have an idea of the quality of the reconstructed phenology.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualize-the-years-on-a-stacked-graph" aria-label="hands-on box: Visualize the years on a stacked graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualize the years on a stacked graph</div>
+  <div class="box-title hands-on-title" id="hands-on-visualize-the-years-on-a-stacked-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualize the years on a stacked graph</div>
   <ol>
     <li><strong>Scatterplot w ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
@@ -1312,12 +1655,12 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 <p>With this graph, we can see that <em>Pyronia tithonus</em> records are always around the same weeks every year. We can also see small differences between years but overall the phenology is quite stable and the results of this step seem good and allow us to continue with the calculation of the abundance index.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-working-with-more-than-one-species"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-with-more-than-one-species-contents" aria-expanded="true" aria-label="Toggle details box: Working with more than one species"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Working with more than one species<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-working-with-more-than-one-species"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-with-more-than-one-species" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Working with more than one species<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you are working with more than one species, you should follow the next steps</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+    <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
     <ol>
       <li><strong>Paste two files side by side</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
         <ul>
@@ -1330,7 +1673,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 
     <blockquote class="comment">
 
-      <div class="box-title comment-title" id="comment-you-can-add-other-species" aria-label="comment box: You can add other species."><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: You can add other species.</div>
+      <div class="box-title comment-title" id="comment-you-can-add-other-species"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: You can add other species.</div>
       <p>In order to do so you will have to do as explained below:</p>
       <ol>
         <li><strong>Paste two files side by side</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1348,7 +1691,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
   <p>If your input dataset contains information about more than one species, you can now generate a chart for the multi-species dataset:</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-1" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+    <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
     <ol>
       <li>Inspect and expand the output data from <strong>flight curve</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       <li>Click on the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> (<strong>Visualize</strong>) icon</li>
@@ -1392,7 +1735,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 <p>We now would like to create a file showing the abundance index per year of a chosen species in a certain site.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-an-abundance-index" aria-label="hands-on box: Generate an abundance index"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate an abundance index</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-an-abundance-index"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate an abundance index</div>
   <ol>
     <li><strong>Abundance index</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
@@ -1417,7 +1760,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 <p>The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the future.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-expected-temporal-trend" aria-label="hands-on box: Expected temporal trend"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Expected temporal trend</div>
+  <div class="box-title hands-on-title" id="hands-on-expected-temporal-trend"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Expected temporal trend</div>
   <ol>
     <li><strong>Expected temporal trend</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
@@ -1446,7 +1789,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 <p>We would like to know if the year has an influence on the abundance of a species. We will use a linear regression to do that.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-more-details-about-the-statistics"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-about-the-statistics-contents" aria-expanded="true" aria-label="Toggle details box: More details about the statistics"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More details about the statistics<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-details-about-the-statistics"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-about-the-statistics" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: More details about the statistics<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The model fitted to the data is:
 \(Y_i = \alpha + \beta x_i + \epsilon_i\)
 with \(Y_i\) = value of the dependent variable for the unit \(i\)
@@ -1458,7 +1801,7 @@ with \(Y_i\) = value of the dependent variable for the unit \(i\)
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-model-temporal-trend-with-linear-regression" aria-label="hands-on box: Model temporal trend with linear regression"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Model temporal trend with linear regression</div>
+  <div class="box-title hands-on-title" id="hands-on-model-temporal-trend-with-linear-regression"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Model temporal trend with linear regression</div>
   <ol>
     <li><strong>Model temporal trend with a simple linear regression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
       <ul>
@@ -1484,7 +1827,7 @@ with \(Y_i\) = value of the dependent variable for the unit \(i\)
 </ol>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>What are the estimates of the regression coefficients?</li>
@@ -1493,7 +1836,7 @@ with \(Y_i\) = value of the dependent variable for the unit \(i\)
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Intercept is 183.33852 and the slope (Year) is -0.08952.</li>
@@ -1507,7 +1850,7 @@ with \(Y_i\) = value of the dependent variable for the unit \(i\)
 <p>We can also test for autocorrelation in the data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-if-there-is-autocorrelation-of-residuals" aria-label="hands-on box: Check if there is autocorrelation of residuals"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check if there is autocorrelation of residuals</div>
+  <div class="box-title hands-on-title" id="hands-on-check-if-there-is-autocorrelation-of-residuals"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check if there is autocorrelation of residuals</div>
   <ol>
     <li><strong>Autocorrelation test check for temporal autocorrelation in the residuals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters.
       <ul>
@@ -1524,7 +1867,7 @@ with \(Y_i\) = value of the dependent variable for the unit \(i\)
 <h2 id="take-into-account-the-autocorrelation">Take into account the autocorrelation</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-model-temporal-trend-taking-into-account-autocorrelation-of-residuals" aria-label="hands-on box: Model temporal trend taking into account autocorrelation of residuals"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Model temporal trend taking into account autocorrelation of residuals</div>
+  <div class="box-title hands-on-title" id="hands-on-model-temporal-trend-taking-into-account-autocorrelation-of-residuals"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Model temporal trend taking into account autocorrelation of residuals</div>
   <ol>
     <li><strong>Linear regression ajusted for autocorrelation in the residuals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters.
       <ul>
@@ -1538,7 +1881,7 @@ with \(Y_i\) = value of the dependent variable for the unit \(i\)
 <p>For this step you can use the scratchbook function in order to see the results of both models at the same time.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-how-to-use-the-scratchbook"><button class="gtn-boxify-button details" type="button" aria-controls="details-how-to-use-the-scratchbook-contents" aria-expanded="true" aria-label="Toggle details box: How to use the scratchbook"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: How to use the scratchbook<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-how-to-use-the-scratchbook"><button class="gtn-boxify-button details" type="button" aria-controls="details-how-to-use-the-scratchbook" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: How to use the scratchbook<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>You can follow this tutorial if you want to learn how to use the scratchbook.
 https://usegalaxy.org/tours/core.scratchbook</p>
 
@@ -1551,7 +1894,7 @@ We will therefore, based on the AIC, select the model taking into account the au
 We can now represent the data with the trend line from the model.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plot-the-data-and-the-trend-line-from-the-model" aria-label="hands-on box: Plot the data and the trend line from the model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot the data and the trend line from the model</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-the-data-and-the-trend-line-from-the-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot the data and the trend line from the model</div>
   <ol>
     <li><strong>Plot abundance with trend line</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters.
       <ul>
@@ -1570,10 +1913,12 @@ We can now represent the data with the trend line from the model.</p>
 
 <p>In this tutorial, you have analyzed regional GAM data to extract useful information in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data for one specific species of your choice. From there, you can show the phenology of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the phenology of various species. Afterwards, we have shown you how to create a dataset containing the information on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to assess the abundance of species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate whether the year has an influence on the abundance of a species or not.</p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>We sequentially computed phenology, abundance index, trend and model this trend</p>
@@ -1611,33 +1956,9 @@ We can now represent the data with the trend line from the model.</p>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Regional GAM (Ecology)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Regional GAM (Ecology)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1655,7 +1976,7 @@ We can now represent the data with the trend line from the model.</p>
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1696,7 +2017,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1708,29 +2029,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

@@ -12,32 +12,32 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Connecting Galaxy to a compute cluster" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-09 11:03:19 +0000" />
-<meta name="DC.creator" content="Nate Coraor" />
-<meta name="DC.creator" content="Björn Grüning" />
-<meta name="DC.creator" content="Helena Rasche" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Connecting Galaxy to a compute cluster">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-11-09 11:03:19 +0000">
+<meta name="DC.creator" content="Nate Coraor">
+<meta name="DC.creator" content="Björn Grüning">
+<meta name="DC.creator" content="Helena Rasche">
 
         
         
         
         
-        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Connecting Galaxy to a compute cluster" />
-        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta name="description" content="Resources related to configuration and maintenance of Gal...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Connecting Galaxy to a compute cluster">
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/gat.png" />
+        <meta property="og:image" content="/training-material/assets/images/gat.png">
 
         
         <script type="application/ld+json">
@@ -549,10 +549,312 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-admin">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-11-09 11:03:19 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Connecting Galaxy to a compute cluster",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Connecting Galaxy to a compute cluster' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "admin, jobs, ansible, git-gat",
+  "description": "The questions this  addresses are:\n - How to connect Galaxy to a compute cluster?\n - What are job metrics?\n - What sort of information can I collect?\n - Where can I find this information?\n\n\nThe objectives are:\n - Be familiar with the basics of installing, configuring, and using Slurm\n - Understand all components of the Galaxy job running stack\n - Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem\n - Have a strong understanding of Galaxy job destinations\n - Understand the purpose and function of Galaxy job metrics\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "name": "Nate Coraor",
+      "image": "https://avatars.githubusercontent.com/natefoo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-8083-2963",
+      "orcid": "https://orcid.org/0000-0001-8083-2963"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "orcid": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "name": "Nate Coraor",
+      "image": "https://avatars.githubusercontent.com/natefoo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-8083-2963",
+      "orcid": "https://orcid.org/0000-0001-8083-2963"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "orcid": "https://orcid.org/0000-0002-3079-6586"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-admin">
     <h1 data-toc-skip>Connecting Galaxy to a compute cluster</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -563,9 +865,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -860,13 +1162,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -900,6 +1199,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -910,15 +1210,16 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <p>The tools that are added to Galaxy can have a wide variance in the compute resources that they require and work efficiently on.
 To account for this, Galaxy’s job configuration needs to be tuned to run these tools properly. In addition, site-specific variables must
 be taken into consideration when choosing where to run jobs and what parameters to run them with.</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#installing-slurm" id="markdown-toc-installing-slurm">Installing Slurm</a></li>
@@ -941,22 +1242,22 @@ be taken into consideration when choosing where to run jobs and what parameters 
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path" aria-label="comment box: Galaxy Admin Training Path"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">     <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">     <li class="disabled">         <span>Step 1</span>         <span>ansible-galaxy</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">     <li class="disabled">         <span>Step 2</span>         <span>tus</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">     <li class="disabled">         <span>Step 3</span>         <span>cvmfs</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">     <li class="disabled">         <span>Step 4</span>         <span>singularity</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">     <li class="disabled">         <span>Step 5</span>         <span>tool-management</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">     <li class="disabled">         <span>Step 6</span>         <span>data-library</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">     <li class="active">         <span>Step 7</span>         <span>connect-to-compute-cluster</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">     <li class="">         <span>Step 8</span>         <span>job-destinations</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">     <li class="">         <span>Step 9</span>         <span>pulsar</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">     <li class="">         <span>Step 10</span>         <span>gxadmin</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">     <li class="">         <span>Step 11</span>         <span>monitoring</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">     <li class="">         <span>Step 12</span>         <span>tiaas</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">     <li class="">         <span>Step 13</span>         <span>reports</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">     <li class="">         <span>Step 14</span>         <span>ftp</span>     </li>          </a>      </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #86d486;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">     <li class="disabled">         <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">             <div>Step 1</div>             <div>ansible-galaxy</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">             <div>Step 2</div>             <div>tus</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">             <div>Step 3</div>             <div>cvmfs</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">             <div>Step 4</div>             <div>singularity</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">             <div>Step 5</div>             <div>tool-management</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">             <div>Step 6</div>             <div>data-library</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="active">         <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">             <div>Step 7</div>             <div>connect-to-compute-cluster</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">             <div>Step 8</div>             <div>job-destinations</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">             <div>Step 9</div>             <div>pulsar</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">             <div>Step 10</div>             <div>gxadmin</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">             <div>Step 11</div>             <div>monitoring</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">             <div>Step 12</div>             <div>tiaas</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">             <div>Step 13</div>             <div>reports</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">             <div>Step 14</div>             <div>ftp</div>         </a>     </li>           </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #a8ffa8;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
 
 <h2 id="installing-slurm">Installing Slurm</h2>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-ansible-best-practices" aria-label="comment box: Ansible Best Practices"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Ansible Best Practices</div>
+  <div class="box-title comment-title" id="comment-ansible-best-practices"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Ansible Best Practices</div>
   <p>If you’ve set up your Galaxy server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial, you will have created a <code class="language-plaintext highlighter-rouge">galaxyservers</code> group in your inventory file, <code class="language-plaintext highlighter-rouge">hosts</code>, and placed your variables in <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>. Although for the purposes of this tutorial, the Galaxy server and Slurm controller/node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the <code class="language-plaintext highlighter-rouge">galaxyservers</code> group for simplicity, but in your own deployment you should consider creating some additional groups for Slurm controller(s), Slurm nodes, and Slurm clients.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-do-you-need-a-drm"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-do-you-need-a-drm-contents" aria-expanded="true" aria-label="Toggle tip box: Do you need a DRM?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Do you need a DRM?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-do-you-need-a-drm"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-do-you-need-a-drm" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Do you need a DRM?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you have a smaller server, do you still need a DRM? Yes! You should definitely run Slurm or a similar option. If you don’t, as soon as you restart Galaxy with local runners, any running jobs will be killed. Even with a handful of users, it is a good idea to keep 1-2 CPU cores/4GB RAM reserved for Galaxy.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-slurm" aria-label="hands-on box: Installing Slurm"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing Slurm</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-slurm"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing Slurm</div>
 
   <ol>
     <li>
@@ -976,7 +1277,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-read-a-diff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-read-a-diff-contents" aria-expanded="true" aria-label="Toggle tip box: How to read a Diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to read a Diff<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you haven’t worked with diffs before, this can be something quite new or different.</p>   <p>If we have two files, let’s say a grocery list, in two files. We’ll call them ‘a’ and ‘b’.</p>   <blockquote class="code-2col">   <blockquote class="code-in">     <div class="box-title code-in-title" id="code-in-old" aria-label="code-in box: Old"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Old</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat old<br />🍎<br />🍐<br />🍊<br />🍋<br />🍒<br />🥑<br /></code></pre></div>    </div>   </blockquote>   <blockquote class="code-out">     <div class="box-title code-out-title" id="code-out-new" aria-label="code-out box: New"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: New</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat new<br />🍎<br />🍐<br />🍊<br />🍋<br />🍍<br />🥑<br /></code></pre></div>    </div>   </blockquote> </blockquote>   <p>We can see that they have some different entries. We’ve removed 🍒 because they’re awful, and replaced them with an 🍍</p>   <p>Diff lets us compare these files</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff old new<br />5c5<br />&lt; 🍒<br /><span class="nt">---</span><br /><span class="o">&gt;</span> 🍍<br /></code></pre></div></div>   <p>Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.</p>   <p>There are a couple different formats to diffs, one is the ‘unified diff’</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> old new<br /><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:06:36.340962616 +0100<br />@@ <span class="nt">-3</span>,4 +3,4 @@<br /> 🍊<br /> 🍋<br />-🍒<br />+🍍<br /> 🥑<br /></code></pre></div></div>   <p>This is basically what you see in the training materials which gives you a lot of context about the changes:</p>   <ul>   <li><code class="language-plaintext highlighter-rouge">--- old</code> is the ‘old’ file in our view</li>   <li><code class="language-plaintext highlighter-rouge">+++ new</code> is the ‘new’ file</li>   <li>@@ these lines tell us where the change occurs and how many lines are added or removed.</li>   <li>Lines starting with a - are removed from our ‘new’ file</li>   <li>Lines with a + have been added.</li> </ul>   <p>So when you go to apply these diffs to your files in the training:</p>   <ol>   <li>Ignore the header</li>   <li>Remove lines starting with - from your file</li>   <li>Add lines starting with + to your file</li> </ol>   <p>The other lines (🍊/🍋 and 🥑) above just provide “context”, they help you know where a change belongs in a file, but <strong>should not be edited</strong> when you’re making the above change. Given the above diff, you would find a line with a 🍒, and replace it with a 🍍</p>   <h4 id="added--removed-lines">Added &amp; Removed Lines</h4>   <p>Removals are very easy to spot, we just have removed lines</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:10:14.370722802 +0100<br />@@ <span class="nt">-4</span>,3 +4,2 @@<br /> 🍋<br /> 🍒<br />-🥑<br /></code></pre></div></div>   <p>And additions likewise are very easy, just add a new line, between the other lines in your file.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:11:11.422135393 +0100<br />@@ <span class="nt">-1</span>,3 +1,4 @@<br /> 🍎<br />+🍍<br /> 🍐<br /> 🍊<br /></code></pre></div></div>   <h4 id="completely-new-files">Completely new files</h4>   <p>Completely new files look a bit different, there the “old” file is <code class="language-plaintext highlighter-rouge">/dev/null</code>, the empty file in a Linux machine.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> /dev/null old<br /><span class="nt">---</span> /dev/null	2022-02-15 11:47:16.100000270 +0100<br />+++ old	2022-02-16 14:06:19.697132568 +0100<br />@@ <span class="nt">-0</span>,0 +1,6 @@<br />+🍎<br />+🍐<br />+🍊<br />+🍋<br />+🍒<br />+🥑<br /></code></pre></div></div>   <p>And removed files are similar, except with the new file being /dev/null</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ /dev/null	2022-02-15 11:47:16.100000270 +0100<br />@@ <span class="nt">-1</span>,6 +0,0 @@<br />-🍎<br />-🍐<br />-🍊<br />-🍋<br />-🍒<br />-🥑<br /></code></pre></div></div> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-read-a-diff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-read-a-diff" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: How to read a Diff<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you haven’t worked with diffs before, this can be something quite new or different.</p>   <p>If we have two files, let’s say a grocery list, in two files. We’ll call them ‘a’ and ‘b’.</p>   <blockquote class="code-2col">   <blockquote class="code-in">     <div class="box-title code-in-title" id="code-in-old"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Old</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat old<br />🍎<br />🍐<br />🍊<br />🍋<br />🍒<br />🥑<br /></code></pre></div>    </div>   </blockquote>   <blockquote class="code-out">     <div class="box-title code-out-title" id="code-out-new"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: New</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat new<br />🍎<br />🍐<br />🍊<br />🍋<br />🍍<br />🥑<br /></code></pre></div>    </div>   </blockquote> </blockquote>   <p>We can see that they have some different entries. We’ve removed 🍒 because they’re awful, and replaced them with an 🍍</p>   <p>Diff lets us compare these files</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff old new<br />5c5<br />&lt; 🍒<br /><span class="nt">---</span><br /><span class="o">&gt;</span> 🍍<br /></code></pre></div></div>   <p>Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.</p>   <p>There are a couple different formats to diffs, one is the ‘unified diff’</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> old new<br /><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:06:36.340962616 +0100<br />@@ <span class="nt">-3</span>,4 +3,4 @@<br /> 🍊<br /> 🍋<br />-🍒<br />+🍍<br /> 🥑<br /></code></pre></div></div>   <p>This is basically what you see in the training materials which gives you a lot of context about the changes:</p>   <ul>   <li><code class="language-plaintext highlighter-rouge">--- old</code> is the ‘old’ file in our view</li>   <li><code class="language-plaintext highlighter-rouge">+++ new</code> is the ‘new’ file</li>   <li>@@ these lines tell us where the change occurs and how many lines are added or removed.</li>   <li>Lines starting with a - are removed from our ‘new’ file</li>   <li>Lines with a + have been added.</li> </ul>   <p>So when you go to apply these diffs to your files in the training:</p>   <ol>   <li>Ignore the header</li>   <li>Remove lines starting with - from your file</li>   <li>Add lines starting with + to your file</li> </ol>   <p>The other lines (🍊/🍋 and 🥑) above just provide “context”, they help you know where a change belongs in a file, but <strong>should not be edited</strong> when you’re making the above change. Given the above diff, you would find a line with a 🍒, and replace it with a 🍍</p>   <h4 id="added--removed-lines">Added &amp; Removed Lines</h4>   <p>Removals are very easy to spot, we just have removed lines</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:10:14.370722802 +0100<br />@@ <span class="nt">-4</span>,3 +4,2 @@<br /> 🍋<br /> 🍒<br />-🥑<br /></code></pre></div></div>   <p>And additions likewise are very easy, just add a new line, between the other lines in your file.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:11:11.422135393 +0100<br />@@ <span class="nt">-1</span>,3 +1,4 @@<br /> 🍎<br />+🍍<br /> 🍐<br /> 🍊<br /></code></pre></div></div>   <h4 id="completely-new-files">Completely new files</h4>   <p>Completely new files look a bit different, there the “old” file is <code class="language-plaintext highlighter-rouge">/dev/null</code>, the empty file in a Linux machine.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> /dev/null old<br /><span class="nt">---</span> /dev/null	2022-02-15 11:47:16.100000270 +0100<br />+++ old	2022-02-16 14:06:19.697132568 +0100<br />@@ <span class="nt">-0</span>,0 +1,6 @@<br />+🍎<br />+🍐<br />+🍊<br />+🍋<br />+🍒<br />+🥑<br /></code></pre></div></div>   <p>And removed files are similar, except with the new file being /dev/null</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ /dev/null	2022-02-15 11:47:16.100000270 +0100<br />@@ <span class="nt">-1</span>,6 +0,0 @@<br />-🍎<br />-🍐<br />-🍊<br />-🍋<br />-🍒<br />-🥑<br /></code></pre></div></div> </blockquote>
 
       <p>The <code class="language-plaintext highlighter-rouge">galaxyproject.repos</code> role adds the <a href="https://depot.galaxyproject.org/yum/">Galaxy Packages for Enterprise Linux (GPEL)</a> repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the <a href="https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa">Slurm-DRMAA PPA</a> (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).</p>
     </li>
@@ -984,7 +1285,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
       <p>In the same directory, run:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1035,7 +1336,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1120,20 +1421,20 @@ localhost      1    debug*        idle    1    2:1:1      1        0      1   (n
 <p>Galaxy runs <code class="language-plaintext highlighter-rouge">sbatch</code> jobs but we can use both <code class="language-plaintext highlighter-rouge">srun</code> and <code class="language-plaintext highlighter-rouge">sbatch</code> to test:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-commands-with-srun" aria-label="hands-on box: Running commands with `srun`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running commands with `srun`</div>
+  <div class="box-title hands-on-title" id="hands-on-running-commands-with-srun"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Running commands with `srun`</div>
 
   <ol>
     <li>
       <p>Use <a href="https://slurm.schedmd.com/srun.html"><code class="language-plaintext highlighter-rouge">srun</code></a> to run the command <code class="language-plaintext highlighter-rouge">uname -a</code></p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun uname -a
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
         <p>Your output may look slightly different:</p>
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>srun <span class="nb">uname</span> <span class="nt">-a</span>
 <span class="gp">Linux gat-1.oz.training.galaxyproject.eu 5.4.0-48-generic #</span>52-Ubuntu SMP Thu Sep 10 10:58:49 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
@@ -1147,19 +1448,19 @@ localhost      1    debug*        idle    1    2:1:1      1        0      1   (n
 <p>Although it looks like this command ran as if I had not used <code class="language-plaintext highlighter-rouge">srun</code>, it was in fact routed through Slurm.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-commands-with-sbatch" aria-label="hands-on box: Running commands with `sbatch`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running commands with `sbatch`</div>
+  <div class="box-title hands-on-title" id="hands-on-running-commands-with-sbatch"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Running commands with `sbatch`</div>
 
   <ol>
     <li>
       <p>Create a test job script somewhere, such as in <code class="language-plaintext highlighter-rouge">~/sbatch-test.sh</code>. It should be a batch script which runs <code class="language-plaintext highlighter-rouge">uname -a</code>, <code class="language-plaintext highlighter-rouge">uptime</code>, and sleeps for 30 seconds.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <p>What does your shell script look like?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="nb">uname</span> <span class="nt">-a</span>
 <span class="nb">uptime
@@ -1172,7 +1473,7 @@ sleep </span>30
       <p>Make the script executable:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x ~/sbatch-test.sh
 </code></pre></div>        </div>
       </blockquote>
@@ -1181,12 +1482,12 @@ sleep </span>30
       <p>Use <a href="https://slurm.schedmd.com/sbatch.html"><code class="language-plaintext highlighter-rouge">sbatch</code></a> to submit the job script</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <p>What command did you run?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>sbatch ~/sbatch-test.sh
 </code></pre></div>          </div>
         </blockquote>
@@ -1196,13 +1497,13 @@ sleep </span>30
       <p>Use <a href="https://slurm.schedmd.com/squeue.html"><code class="language-plaintext highlighter-rouge">squeue</code></a> to check the queue</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-4" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>squeue
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-1" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
         <p>Your output may look slightly different:</p>
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
    3     debug sbatch-t   ubuntu  R       0:22      1 localhost
@@ -1220,7 +1521,7 @@ sleep </span>30
 <p>Above Slurm in the stack is slurm-drmaa, a library that provides a translational interface from the Slurm API to the generalized DRMAA API in C.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-slurm-drmaa" aria-label="hands-on box: Installing Slurm-DRMAA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing Slurm-DRMAA</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-slurm-drmaa"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing Slurm-DRMAA</div>
 
   <ol>
     <li>
@@ -1246,7 +1547,7 @@ sleep </span>30
       <p>Run the playbook (<code class="language-plaintext highlighter-rouge">ansible-playbook galaxy.yml</code>)</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-5" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1262,7 +1563,7 @@ sleep </span>30
 <p>At the top of the stack sits Galaxy. Galaxy must now be configured to use the cluster we’ve just set up. The DRMAA Python documentation (and Galaxy’s own documentation) instruct that you should set the <code class="language-plaintext highlighter-rouge">$DRMAA_LIBRARY_PATH</code> environment variable so that DRMAA Python can find <code class="language-plaintext highlighter-rouge">libdrmaa.so</code> (aka slurm-drmaa). Because Galaxy runs under systemd, the environment that Galaxy starts under is controlled by the <code class="language-plaintext highlighter-rouge">environment</code> option in systemd service unit that the ansible role manages. The galaxy task should thus be updated to refer to the path to slurm-drmaa, which is <code class="language-plaintext highlighter-rouge">/usr/lib/slurm-drmaa/lib/libdrmaa.so.1</code>:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-making-galaxy-aware-of-drmaa" aria-label="hands-on box: Making Galaxy aware of DRMAA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Making Galaxy aware of DRMAA</div>
+  <div class="box-title hands-on-title" id="hands-on-making-galaxy-aware-of-drmaa"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Making Galaxy aware of DRMAA</div>
 
   <ol>
     <li>
@@ -1321,7 +1622,7 @@ sleep </span>30
       <p>Run your Galaxy playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-6" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1330,13 +1631,13 @@ sleep </span>30
       <p>Watch the logs to check that everything loads correctly</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-7" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl -f -u galaxy
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-2" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
         <p>Your output may look slightly different:</p>
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
 Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
@@ -1352,14 +1653,14 @@ Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.job
 <p>You should now be able to run a Galaxy job through Slurm. The simplest way to test is using the upload tool to upload some text.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-testing-a-slurm-job" aria-label="hands-on box: Testing a Slurm Job"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Testing a Slurm Job</div>
+  <div class="box-title hands-on-title" id="hands-on-testing-a-slurm-job"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Testing a Slurm Job</div>
 
   <ol>
     <li>
       <p>If you’re not still following the log files with <code class="language-plaintext highlighter-rouge">journalctl</code>, do so now.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-8" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl -f -u galaxy
 </code></pre></div>        </div>
       </blockquote>
@@ -1371,7 +1672,7 @@ Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.job
       <p>Click “Start” and then “Close”</p>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-3" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out-3"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
         <p>Your output may look slightly different. In your <code class="language-plaintext highlighter-rouge">journalctl</code> terminal window you should see the following messages:</p>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs.mapper DEBUG 2020-02-10 09:37:17,946 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Mapped job to destination id: slurm
@@ -1421,14 +1722,14 @@ galaxy.jobs DEBUG 2020-02-10 09:37:24,917 [p:9859,w:0,m:2] [SlurmRunner.work_thr
 <p>Slurm allows us to query the exit state of jobs for a time period of the value of Slurm’s <code class="language-plaintext highlighter-rouge">MinJobAge</code> option, which defaults to 300 (seconds, == 5 minutes):</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-9" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-9"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
   <p>Your job number is potentially different.</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scontrol show job 4
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-4" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+  <div class="box-title code-out-title" id="code-out-4"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
   <p>Your output may also look slightly different:</p>
   <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">JobId=4 JobName=g1_upload1_admin_example_org
    UserId=galaxy(999) GroupId=galaxy(999) MCS_label=N/A
@@ -1463,7 +1764,7 @@ galaxy.jobs DEBUG 2020-02-10 09:37:24,917 [p:9859,w:0,m:2] [SlurmRunner.work_thr
 <p>After the job has been purged from the active jobs database, a bit of information (but not as much as <code class="language-plaintext highlighter-rouge">scontrol</code> provides) can be retrieved from Slurm’s logs. However, it’s a good idea to set up Slurm’s accounting database to keep old job information in a queryable format.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-which-directories-need-to-be-shared-on-a-cluster"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-which-directories-need-to-be-shared-on-a-cluster-contents" aria-expanded="true" aria-label="Toggle tip box: Which directories need to be shared on a cluster?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Which directories need to be shared on a cluster?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-which-directories-need-to-be-shared-on-a-cluster"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-which-directories-need-to-be-shared-on-a-cluster" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Which directories need to be shared on a cluster?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The following directories need to be accesible via the same path on both the head node and compute nodes:</p>
   <ul>
     <li><code class="language-plaintext highlighter-rouge">galaxy_shed_tools_dir</code></li>
@@ -1484,7 +1785,7 @@ galaxy.jobs DEBUG 2020-02-10 09:37:24,917 [p:9859,w:0,m:2] [SlurmRunner.work_thr
 <p>Some work has been done to try to analyse job runtime metrics to optimise cluster allocation based on job inputs, and enhance job submission (<span class="citation"><a href="#Tyryshkina_2019">Tyryshkina <i>et al.</i> 2019</a></span>). More work will be done in this area.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-note" aria-label="comment box: Note"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note</div>
+  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note</div>
 
   <p>Job metrics are only visible to Galaxy <em>admin users</em>, unless you set <code class="language-plaintext highlighter-rouge">expose_potentially_sensitive_job_metrics: true</code>, like UseGalaxy.eu does. EU’s intention with this is to empower users and make everything as transparent as possible.</p>
 
@@ -1502,14 +1803,14 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 <p>These include very basic submission parameters. We want more information!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setting-up-the-job-metrics-plugin-configuration" aria-label="hands-on box: Setting up the job metrics plugin configuration"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting up the job metrics plugin configuration</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-up-the-job-metrics-plugin-configuration"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setting up the job metrics plugin configuration</div>
 
   <ol>
     <li>
       <p>Edit the <strong>global</strong> (for all hosts) group variables file, <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code>:</p>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars-contents" aria-expanded="true" aria-label="Toggle details box: Why are we editing &quot;all&quot; instead of &quot;galaxyservers&quot; vars?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Why are we editing &quot;all&quot; instead of &quot;galaxyservers&quot; vars?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Why are we editing &quot;all&quot; instead of &quot;galaxyservers&quot; vars?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>Both Galaxy and Pulsar use job metrics plugins, and when we configure Pulsar later, we will want it to have the same metrics plugin configuration as Galaxy. Putting this variable in <code class="language-plaintext highlighter-rouge">all.yml</code> will allow us to refer to it later when setting the corresponding variable for Pulsar.</p>
       </blockquote>
 
@@ -1538,7 +1839,7 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
       <p>Run your Galaxy playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-10" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-10"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1550,13 +1851,13 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 <p>Currently, the job metrics plugin configuration is stored in a separate configuration file from Galaxy’s main configuration file (<code class="language-plaintext highlighter-rouge">galaxy.yml</code>). By setting <code class="language-plaintext highlighter-rouge">galaxy_job_metrics_plugins</code>, we instructed the <code class="language-plaintext highlighter-rouge">galaxyproject.galaxy</code> role to create this file, and update the option (<code class="language-plaintext highlighter-rouge">job_metrics_config_file</code>) in <code class="language-plaintext highlighter-rouge">galaxy.yml</code> that sets the path to this file. You can inspect the contents of the new config file on your Galaxy server:</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-11" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-11"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/galaxy/config/job_metrics_conf.yml
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-out code-max-300">
-  <div class="box-title code-out-title" id="code-out-bash" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+  <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
   <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="c1">##</span>
 <span class="c1">## This file is managed by Ansible.  ALL CHANGES WILL BE OVERWRITTEN.</span>
@@ -1576,7 +1877,7 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 <p>With this, the job metrics collection and recording should be set up. Now when you run a job, you will see many more metrics:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-some-metrics" aria-label="hands-on box: Generate some metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate some metrics</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-some-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate some metrics</div>
 
   <ol>
     <li>
@@ -1600,7 +1901,7 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 <p>You can access the data via BioBlend (<a href="https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics"><code class="language-plaintext highlighter-rouge">JobsClient.get_metrics</code></a>), or via SQL with <a href="https://usegalaxy-eu.github.io/gxadmin/#/README.query?id=query-tool-metrics"><code class="language-plaintext highlighter-rouge">gxadmin</code></a>.</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-got-lost-along-the-way" aria-label="comment box: Got lost along the way?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Got lost along the way?</div>   <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-7">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-6...step-7#files_bucket">the previous tutorial</a>.</p>   <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Got lost along the way?</div>   <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-7">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-6...step-7#files_bucket">the previous tutorial</a>.</p>   <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p> </blockquote>
 
 <h2 id="further-reading">Further Reading</h2>
 
@@ -1614,10 +1915,12 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
   <li><a href="http://slurm.schedmd.com/accounting.html">Slurm Accounting documentation</a> explains how to set up SlurmDBD.</li>
 </ul>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Galaxy supports a variety of different DRMs.</p>
@@ -1652,33 +1955,9 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Connecting Galaxy to a compute cluster (Galaxy Server administration)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Connecting Galaxy to a compute cluster (Galaxy Server administration)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1696,7 +1975,7 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1737,7 +2016,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1869,29 +2148,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     </ul>
                 </blockquote>
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

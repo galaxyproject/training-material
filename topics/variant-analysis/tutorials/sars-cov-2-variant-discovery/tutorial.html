@@ -12,31 +12,31 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-03-05 09:19:48 +0000" />
-<meta name="DC.creator" content="Wolfgang Maier" />
-<meta name="DC.creator" content="Bérénice Batut" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-03-05 09:19:48 +0000">
+<meta name="DC.creator" content="Wolfgang Maier">
+<meta name="DC.creator" content="Bérénice Batut">
 
         
         
         
         
-        <meta name="description" content="Genetic differences (variants) between healthy and diseas..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Mutation calling, viral genome reconstruction and lineage..." />
-        <meta property="og:description" content="Genetic differences (variants) between healthy and diseas..." />
+        <meta name="description" content="Genetic differences (variants) between healthy and diseas...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Mutation calling, viral genome reconstruction and lineage...">
+        <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -523,10 +523,287 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-variant-analysis">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-03-05 09:19:48 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Variant Analysis",
+    "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html",
+  "timeRequired": "PT3H",
+  "keywords": "variant-analysis, covid19, virology",
+  "description": "The questions this  addresses are:\n - How can we extract annotated allelic variants in SARS-Cov-2 sequences in Galaxy?\n - Which tools and workflows can we use to identify SARS-CoV-2 lineages in Galaxy?\n\n\nThe objectives are:\n - Repeat SARS-CoV-2 data preparation\n - Select and run workflow to extract annotated allelic variants from FASTQ files\n - Run workflow to summarize and generate report for previously called allelic variants\n - Interpret summaries for annotated allelic variants\n - Run workflow to extract consensus sequences\n - Select and run tools to assign clades/lineages\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "name": "Wolfgang Maier",
+      "image": "https://avatars.githubusercontent.com/wm75",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9464-6640",
+      "orcid": "https://orcid.org/0000-0002-9464-6640"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "name": "Wolfgang Maier",
+      "image": "https://avatars.githubusercontent.com/wm75",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9464-6640",
+      "orcid": "https://orcid.org/0000-0002-9464-6640"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Variant Analysis",
+      "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0199",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0199",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0199"
+    }
+  ],
+  "educationalLevel": "Intermediate"
+}
+</script>
+
+<article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -537,9 +814,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -696,13 +973,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -721,7 +995,10 @@
 
 
   
-  <li class="btn btn-default supporting_material">
+<!-- GTN Video Library true -->
+  
+<li class="btn btn-default supporting_material">
+  
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
         <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
     </a>
@@ -743,7 +1020,9 @@
         
         
     </ul>
-   </li>
+  
+</li>
+  
    
 
 
@@ -752,7 +1031,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -780,6 +1059,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -790,6 +1070,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for monitoring the emergence and spread of new variants, and for understanding the evolutionary dynamics of the virus.</p>
@@ -803,7 +1084,7 @@
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-further-reading"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading-contents" aria-expanded="true" aria-label="Toggle details box: Further reading"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Further reading<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-further-reading"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Further reading<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>More information about the workflows, including benchmarking, can be found</p>
   <ul>
     <li>on the Galaxy Covid-19 effort website: <a href="https://covid19.galaxyproject.org/">covid19.galaxyproject.org</a></li>
@@ -821,7 +1102,7 @@
 </ul>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -851,20 +1132,20 @@
 <p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history" aria-label="hands-on box: Prepare the Galaxy history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepare the Galaxy history</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the Galaxy history</div>
 
   <ol>
     <li>
       <p>Create a new history for this analysis</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Rename the history</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -898,7 +1179,7 @@
     <p>and organize the imported data as a dataset collection.</p>
 
     <blockquote class="comment">
-      <div class="box-title comment-title" id="comment-collections" aria-label="comment box: Collections"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Collections</div>
+      <div class="box-title comment-title" id="comment-collections"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Collections</div>
 
       <p>A dataset collection is a way to represent an arbitrarily large collection of samples as a singular entity within a user’s workspace. For an in-depth introduction to the concept you can follow this <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">dedicated tutorial</a>.</p>
 
@@ -908,7 +1189,7 @@
     <p>Import from <a href="https://www.ncbi.nlm.nih.gov/sra">NCBI’s Sequence Read Archive (SRA) at NCBI</a> with the help of a dedicated tool, which will organize the data into collections for you.</p>
 
     <blockquote class="comment">
-      <div class="box-title comment-title" id="comment-getting-data-from-sra" aria-label="comment box: Getting data from SRA"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Getting data from SRA</div>
+      <div class="box-title comment-title" id="comment-getting-data-from-sra"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Getting data from SRA</div>
 
       <p><a href="/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html">A dedicated tutorial is available to explain how to find and import SARS-CoV-2 data from SRA</a>.</p>
 
@@ -917,7 +1198,7 @@
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-datasets" aria-label="hands-on box: Import datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-import-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import datasets</div>
 
   <ol>
     <li>
@@ -928,25 +1209,25 @@
           <p>Option 1 <a href="https://youtu.be/FFCDx1rMGAQ"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span></a>: Your own local data using <strong>Upload Data</strong> (recommended for 1-10 datasets).</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-upload-few-files-1-10"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-few-files-1-10-contents" aria-expanded="true" aria-label="Toggle tip box: Upload few files (1-10)"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload few files (1-10)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <strong>Upload Data</strong> on the top of the left panel</li>   <li>Click on <strong>Choose local file</strong> and select the files or drop the files in the <strong>Drop files here</strong> part</li>   <li>Click on <strong>Start</strong></li>   <li>Click on <strong>Close</strong></li> </ol> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-upload-few-files-1-10"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-few-files-1-10" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Upload few files (1-10)<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <strong>Upload Data</strong> on the top of the left panel</li>   <li>Click on <strong>Choose local file</strong> and select the files or drop the files in the <strong>Drop files here</strong> part</li>   <li>Click on <strong>Start</strong></li>   <li>Click on <strong>Close</strong></li> </ol> </blockquote>
         </li>
         <li>
           <p>Option 2 <a href="https://youtu.be/hC8KSuT_OP8"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span></a>: Your own local data using <strong>FTP</strong> (recommended for &gt;10 datasets)</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-upload-many-files-10-via-ftp"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-many-files-10-via-ftp-contents" aria-expanded="true" aria-label="Toggle tip box: Upload many files (&gt;10) via FTP"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload many files (&gt;10) via FTP<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p>Make sure to have an FTP client installed</p>     <p>There are many options. We can recommend <a href="https://filezilla-project.org/">FileZilla</a>, a free FTP client that is available on Windows, MacOS, and Linux.</p>   </li>   <li>Establish FTP connection to the Galaxy server     <ol>       <li>Provide the Galaxy server’s FTP server name (e.g. <code class="language-plaintext highlighter-rouge">usegalaxy.org</code>, <code class="language-plaintext highlighter-rouge">ftp.usegalaxy.eu</code>)</li>       <li>Provide the <strong>username</strong> (usually the email address) and the <strong>password</strong> on the Galaxy server</li>       <li>Connect</li>     </ol>   </li>   <li>     <p>Add the files to the FTP server by dragging/dropping them or right clicking on them and uploading them</p>     <p>The FTP transfer will start. We need to wait until they are done.</p>   </li>   <li>Open the Upload menu on the Galaxy server</li>   <li>Click on <strong>Choose FTP file</strong> on the bottom</li>   <li>Select files to import into the history</li>   <li>Click on <strong>Start</strong></li> </ol> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-upload-many-files-10-via-ftp"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-many-files-10-via-ftp" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Upload many files (&gt;10) via FTP<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p>Make sure to have an FTP client installed</p>     <p>There are many options. We can recommend <a href="https://filezilla-project.org/">FileZilla</a>, a free FTP client that is available on Windows, MacOS, and Linux.</p>   </li>   <li>Establish FTP connection to the Galaxy server     <ol>       <li>Provide the Galaxy server’s FTP server name (e.g. <code class="language-plaintext highlighter-rouge">usegalaxy.org</code>, <code class="language-plaintext highlighter-rouge">ftp.usegalaxy.eu</code>)</li>       <li>Provide the <strong>username</strong> (usually the email address) and the <strong>password</strong> on the Galaxy server</li>       <li>Connect</li>     </ol>   </li>   <li>     <p>Add the files to the FTP server by dragging/dropping them or right clicking on them and uploading them</p>     <p>The FTP transfer will start. We need to wait until they are done.</p>   </li>   <li>Open the Upload menu on the Galaxy server</li>   <li>Click on <strong>Choose FTP file</strong> on the bottom</li>   <li>Select files to import into the history</li>   <li>Click on <strong>Start</strong></li> </ol> </blockquote>
         </li>
         <li>
           <p>Option 3: From the shared data library</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>     <p>Navigate to</p>     <p><em>GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686</em> or  the correct folder as indicated by your instructor</p>   </li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>     <p>Navigate to</p>     <p><em>GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686</em> or  the correct folder as indicated by your instructor</p>   </li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
         </li>
         <li>
           <p>Option 4: From an external server via URL</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
           <p>For our example datasets, the datasets are stored on <a href="https://zenodo.org/record/5036687">Zenodo</a> and can be retrieved using the following URLs:</p>
 
@@ -998,13 +1279,13 @@ https://zenodo.org/record/5036687/files/ERR5949469_2.fastqsanger.gz
           <p>Option 1 <a href="https://youtu.be/6ZU9hFjnRDo"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span></a>: Single-end data (Illumina or ONT data)</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a dataset collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a dataset collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
         </li>
         <li>
           <p>Option 2 <a href="https://youtu.be/6toVj35q1r0"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span></a>: Paired-end data (Illumina data)</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a paired collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a paired collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward reads</li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse reads</li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a paired collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward reads</li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse reads</li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
 
           <p>For the example datasets:</p>
           <ul>
@@ -1038,7 +1319,7 @@ https://zenodo.org/record/5036687/files/ERR5949469_2.fastqsanger.gz
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-learning-to-build-collections-automatically" aria-label="comment box: Learning to build collections automatically"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Learning to build collections automatically</div>
+  <div class="box-title comment-title" id="comment-learning-to-build-collections-automatically"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Learning to build collections automatically</div>
 
   <p>It is possible to build collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc., directly during upload of the data. <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html">A dedicated tutorial is available to explain the different possibilities</a>.</p>
 
@@ -1065,7 +1346,7 @@ https://zenodo.org/record/5036687/files/ERR5949469_2.fastqsanger.gz
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-auxiliary-datasets" aria-label="hands-on box: Import auxiliary datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import auxiliary datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-import-auxiliary-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import auxiliary datasets</div>
 
   <ol>
     <li>Import the auxiliary datasets:
@@ -1077,7 +1358,7 @@ https://zenodo.org/record/5036687/files/ERR5949469_2.fastqsanger.gz
       </ul>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-not-using-artic-v3-amplified-sequencing-data"><button class="gtn-boxify-button details" type="button" aria-controls="details-not-using-artic-v3-amplified-sequencing-data-contents" aria-expanded="true" aria-label="Toggle details box: Not using ARTIC v3 amplified sequencing data?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Not using ARTIC v3 amplified sequencing data?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-not-using-artic-v3-amplified-sequencing-data"><button class="gtn-boxify-button details" type="button" aria-controls="details-not-using-artic-v3-amplified-sequencing-data" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Not using ARTIC v3 amplified sequencing data?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The instructions here assume you will be analyzing the example samples
 suggested above, which have been amplified using version 3 of the ARTIC
@@ -1102,7 +1383,7 @@ suggest to upload.</p>
           <p>Option 1: From the shared data library</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>     <p>Navigate to</p>     <p><em>GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686</em> or  the correct folder as indicated by your instructor</p>   </li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>     <p>Navigate to</p>     <p><em>GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686</em> or  the correct folder as indicated by your instructor</p>   </li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
         </li>
         <li>
           <p>Option 2: From <a href="https://zenodo.org/record/4555735">Zenodo</a></p>
@@ -1114,7 +1395,7 @@ https://zenodo.org/record/4555735/files/ARTIC_amplicon_info_v3.tsv
 </code></pre></div>          </div>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
         </li>
         <li>
           <p>Option 3: From a shared history:</p>
@@ -1125,7 +1406,7 @@ https://zenodo.org/record/4555735/files/ARTIC_amplicon_info_v3.tsv
           </ul>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
         </li>
       </ul>
 
@@ -1154,7 +1435,7 @@ Galaxy shows the following <code class="language-plaintext highlighter-rouge">fo
 the datatype of the corresponding dataset now to the intended format.</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
         </li>
       </ul>
 
@@ -1212,7 +1493,7 @@ correctly already.</p>
 </table>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-about-the-workflows"><button class="gtn-boxify-button details" type="button" aria-controls="details-about-the-workflows-contents" aria-expanded="true" aria-label="Toggle details box: About the workflows"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: About the workflows<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-about-the-workflows"><button class="gtn-boxify-button details" type="button" aria-controls="details-about-the-workflows" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: About the workflows<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
     <li>The two Illumina RNASeq workflows (Illumina RNAseq SE and Illumina RNAseq PE) perform read mapping with <strong>bwa-mem</strong> and <strong>bowtie2</strong>, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with <strong>lofreq</strong>.</li>
@@ -1228,7 +1509,7 @@ correctly already.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-from-fastq-to-annotated-avs" aria-label="hands-on box: From FASTQ to annotated AVs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: From FASTQ to annotated AVs</div>
+  <div class="box-title hands-on-title" id="hands-on-from-fastq-to-annotated-avs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: From FASTQ to annotated AVs</div>
 
   <ol>
     <li>
@@ -1260,7 +1541,7 @@ correctly already.</p>
           <p>Option 2: Import the workflow from <a href="https://dockstore.org/">Dockstore</a> using Galaxy’s workflow search</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-using-the-search"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-using-the-search-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow using the search"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow using the search<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>   <li>     <p>Click on <strong>search form</strong> in <strong>Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong></p>   </li>   <li>     <p>Select <em>“TRS Server”</em>: <code class="language-plaintext highlighter-rouge">Dockstore</code></p>   </li>   <li>     <p>Type <code class="language-plaintext highlighter-rouge">organization:"iwc-workflows"</code> in the search query</p>   </li>   <li>     <p>Expand the correct workflow</p>   </li>   <li>     <p>Click on the wanted version</p>     <p>The workflow will be imported in your workflows</p>   </li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-using-the-search"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-using-the-search" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow using the search<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>   <li>     <p>Click on <strong>search form</strong> in <strong>Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong></p>   </li>   <li>     <p>Select <em>“TRS Server”</em>: <code class="language-plaintext highlighter-rouge">Dockstore</code></p>   </li>   <li>     <p>Type <code class="language-plaintext highlighter-rouge">organization:"iwc-workflows"</code> in the search query</p>   </li>   <li>     <p>Expand the correct workflow</p>   </li>   <li>     <p>Click on the wanted version</p>     <p>The workflow will be imported in your workflows</p>   </li> </ul> </blockquote>
 
           <p>For the example dataset: <code class="language-plaintext highlighter-rouge">sars-cov-2-pe-illumina-artic-variant-calling/COVID-19-PE-ARTIC-ILLUMINA</code></p>
         </li>
@@ -1283,7 +1564,7 @@ correctly already.</p>
               <p>Import the workflow to Galaxy</p>
 
               <!--SNIPPET-->
-              <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+              <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
             </li>
           </ul>
         </li>
@@ -1293,7 +1574,7 @@ correctly already.</p>
       <p>Run <strong>COVID-19: variation analysis on …</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
 
       <ul>
         <li>
@@ -1340,7 +1621,7 @@ correctly already.</p>
 <p>This workflow takes the collection of called (with lofreq) and annotated (with SnpEff) variants (one VCF dataset per input sample) that got generated as one of the outputs of any of the four variation analysis workflows above, and generates two tabular reports and an overview plot summarizing all the variant information for your batch of samples.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-use-the-right-collection-of-annotated-variants" aria-label="warning box: Use the right collection of annotated variants!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Use the right collection of annotated variants!</div>
+  <div class="box-title warning-title" id="warning-use-the-right-collection-of-annotated-variants"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Use the right collection of annotated variants!</div>
   <p>The variation analysis workflow should have generated <em>two</em> collections of annotated variants - one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code>, the other one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code>.</p>
 
   <p>If you have analyzed ampliconic data with any of the <strong>variation analysis of ARTIC</strong> data workflows, then please consider the strand-bias soft-filtered collection experimental and proceed with the <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code> collection as input to the next workflow.</p>
@@ -1350,7 +1631,7 @@ correctly already.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-from-annotated-avs-per-sample-to-av-summary" aria-label="hands-on box: From annotated AVs per sample to AV summary"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: From annotated AVs per sample to AV summary</div>
+  <div class="box-title hands-on-title" id="hands-on-from-annotated-avs-per-sample-to-av-summary"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: From annotated AVs per sample to AV summary</div>
 
   <ol>
     <li>
@@ -1375,7 +1656,7 @@ correctly already.</p>
           <p>Option 2: Import the workflow from <a href="https://dockstore.org/">Dockstore</a> using Galaxy’s workflow search</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-using-the-search-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-using-the-search-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow using the search"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow using the search<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>   <li>     <p>Click on <strong>search form</strong> in <strong>Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong></p>   </li>   <li>     <p>Select <em>“TRS Server”</em>: <code class="language-plaintext highlighter-rouge">Dockstore</code></p>   </li>   <li>     <p>Type <code class="language-plaintext highlighter-rouge">organization:"iwc-workflows"</code> in the search query</p>   </li>   <li>     <p>Expand the workflow named <code class="language-plaintext highlighter-rouge">sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING</code></p>   </li>   <li>     <p>Click on the wanted version</p>     <p>The workflow will be imported in your workflows</p>   </li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-using-the-search-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-using-the-search-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow using the search<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>   <li>     <p>Click on <strong>search form</strong> in <strong>Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong></p>   </li>   <li>     <p>Select <em>“TRS Server”</em>: <code class="language-plaintext highlighter-rouge">Dockstore</code></p>   </li>   <li>     <p>Type <code class="language-plaintext highlighter-rouge">organization:"iwc-workflows"</code> in the search query</p>   </li>   <li>     <p>Expand the workflow named <code class="language-plaintext highlighter-rouge">sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING</code></p>   </li>   <li>     <p>Click on the wanted version</p>     <p>The workflow will be imported in your workflows</p>   </li> </ul> </blockquote>
         </li>
         <li>
           <p>Option 3: Import the workflow via its github repo link</p>
@@ -1389,7 +1670,7 @@ correctly already.</p>
               <p>Import the workflow to Galaxy</p>
 
               <!--SNIPPET-->
-              <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+              <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
             </li>
           </ul>
         </li>
@@ -1399,7 +1680,7 @@ correctly already.</p>
       <p>Run <strong>COVID-19: variation analysis reporting</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
 
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1564,7 +1845,7 @@ correctly already.</p>
     </table>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+      <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
       <ol>
         <li>How many AVs are found for all samples?</li>
@@ -1573,13 +1854,13 @@ correctly already.</p>
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>
             <p>By expanding the dataset in the history, we have the number of lines in the file. 868 lines for the example datasets. The first line is the header of the table. Then 867 AVs.</p>
           </li>
-          <li>We can filter the table to get only the AVs for the first sample <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+          <li>We can filter the table to get only the AVs for the first sample <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter</em>”: <code class="language-plaintext highlighter-rouge">Combined Variant Report by Sample</code></li>
               <li><em>“With following condition</em>”: <code class="language-plaintext highlighter-rouge">c1=='ERR5931005'</code> (to adapt with the sample name)</li>
@@ -1588,7 +1869,7 @@ correctly already.</p>
 
             <p>We got then only the AVs for the selected sample (48 for ERR5931005).</p>
           </li>
-          <li>To get the number of AVs for each sample, we can run <span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:
+          <li>To get the number of AVs for each sample, we can run <span class="tool" data-tool="Grouping1" title="Group data tool"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: <code class="language-plaintext highlighter-rouge">Combined Variant Report by Sample</code></li>
               <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -1711,7 +1992,7 @@ correctly already.</p>
     </table>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+      <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
       <ol>
         <li>How many AVs are found?</li>
@@ -1722,7 +2003,7 @@ correctly already.</p>
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>
@@ -1731,7 +2012,7 @@ correctly already.</p>
           <li>
             <p>The different impacts of the AVs are HIGH, MODERATE and LOW.</p>
           </li>
-          <li>To get the number of AVs for each impact levels, we can run <span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:
+          <li>To get the number of AVs for each impact levels, we can run <span class="tool" data-tool="Grouping1" title="Group data tool"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: <code class="language-plaintext highlighter-rouge">Combined Variant Report by Variant</code></li>
               <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
@@ -1755,7 +2036,7 @@ correctly already.</p>
               <li>9 HIGH AVs</li>
             </ul>
           </li>
-          <li>We can filter the table to get only the AVs with HIGH impact by running <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+          <li>We can filter the table to get only the AVs with HIGH impact by running <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter</em>”: <code class="language-plaintext highlighter-rouge">Combined Variant Report by Variant</code></li>
               <li><em>“With following condition</em>”: <code class="language-plaintext highlighter-rouge">c4=='HIGH'</code></li>
@@ -1764,7 +2045,7 @@ correctly already.</p>
 
             <p>The different effects for the 9 HIGH AVs are STOP_GAINED and FRAME_SHIFT.</p>
           </li>
-          <li>We can filter the table to get the AVs for which <code class="language-plaintext highlighter-rouge">countunique(Sample)</code> is equal the number of samples (18 in our example dataset): <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+          <li>We can filter the table to get the AVs for which <code class="language-plaintext highlighter-rouge">countunique(Sample)</code> is equal the number of samples (18 in our example dataset): <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter</em>”: <code class="language-plaintext highlighter-rouge">Combined Variant Report by Variant</code></li>
               <li><em>“With following condition</em>”: <code class="language-plaintext highlighter-rouge">c11==18</code> (to adapt to the number of sample)</li>
@@ -1802,7 +2083,7 @@ correctly already.</p>
 <p>The workflow takes a collection of VCFs and a collection of the corresponding aligned reads (for the purpose of calculating genome-wide coverage) such as produced by the first workflow we ran.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-use-the-right-collections-as-input" aria-label="warning box: Use the right collections as input!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Use the right collections as input!</div>
+  <div class="box-title warning-title" id="warning-use-the-right-collections-as-input"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Use the right collections as input!</div>
   <p>The variation analysis workflow should have generated <em>two</em> collections of annotated variants - one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code>, the other one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code>.</p>
 
   <p>If you have analyzed ampliconic data with any of the <strong>variation analysis of ARTIC</strong> data workflows, then please consider the strand-bias soft-filtered collection experimental and proceed with the <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code> collection as input to the next workflow.</p>
@@ -1814,7 +2095,7 @@ correctly already.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-from-avs-to-consensus-sequences" aria-label="hands-on box: From AVs to consensus sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: From AVs to consensus sequences</div>
+  <div class="box-title hands-on-title" id="hands-on-from-avs-to-consensus-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: From AVs to consensus sequences</div>
 
   <ol>
     <li>
@@ -1839,7 +2120,7 @@ correctly already.</p>
           <p>Option 2: Import the workflow from <a href="https://dockstore.org/">Dockstore</a> using Galaxy’s workflow search</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-using-the-search-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-using-the-search-2-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow using the search"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow using the search<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>   <li>     <p>Click on <strong>search form</strong> in <strong>Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong></p>   </li>   <li>     <p>Select <em>“TRS Server”</em>: <code class="language-plaintext highlighter-rouge">Dockstore</code></p>   </li>   <li>     <p>Type <code class="language-plaintext highlighter-rouge">organization:"iwc-workflows"</code> in the search query</p>   </li>   <li>     <p>Expand the workflow named <code class="language-plaintext highlighter-rouge">sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION</code></p>   </li>   <li>     <p>Click on the wanted version</p>     <p>The workflow will be imported in your workflows</p>   </li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-using-the-search-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-using-the-search-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow using the search<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>   <li>     <p>Click on <strong>search form</strong> in <strong>Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong></p>   </li>   <li>     <p>Select <em>“TRS Server”</em>: <code class="language-plaintext highlighter-rouge">Dockstore</code></p>   </li>   <li>     <p>Type <code class="language-plaintext highlighter-rouge">organization:"iwc-workflows"</code> in the search query</p>   </li>   <li>     <p>Expand the workflow named <code class="language-plaintext highlighter-rouge">sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION</code></p>   </li>   <li>     <p>Click on the wanted version</p>     <p>The workflow will be imported in your workflows</p>   </li> </ul> </blockquote>
         </li>
         <li>
           <p>Option 2: Import the workflow via its github repo link</p>
@@ -1853,7 +2134,7 @@ correctly already.</p>
               <p>Import the workflow to Galaxy</p>
 
               <!--SNIPPET-->
-              <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+              <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
             </li>
           </ul>
         </li>
@@ -1863,7 +2144,7 @@ correctly already.</p>
       <p>Run <strong>COVID-19: consensus construction</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
 
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1922,10 +2203,10 @@ correctly already.</p>
 <p>Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used to assign a SARS-CoV-2 genome sequence the most likely lineage based on the PANGO nomenclature system.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-from-consensus-sequences-to-clade-assignations-using-pangolin" aria-label="hands-on box: From consensus sequences to clade assignations using Pangolin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: From consensus sequences to clade assignations using Pangolin</div>
+  <div class="box-title hands-on-title" id="hands-on-from-consensus-sequences-to-clade-assignations-using-pangolin"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: From consensus sequences to clade assignations using Pangolin</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/3.1.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/3.1.4+galaxy0"><strong>Pangolin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/3.1.4+galaxy0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/3.1.4+galaxy0" title="Pangolin tool"><strong>Pangolin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/3.1.4+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTA File(s)”</em>: <code class="language-plaintext highlighter-rouge">Multisample consensus FASTA</code></li>
       </ul>
@@ -2014,14 +2295,14 @@ correctly already.</p>
 </table>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>How many different lineages have been found? How many samples for each lineage?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>To summarize the number of lineages and number of samples for  each lineage, we can run <span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:</p>
+    <p>To summarize the number of lineages and number of samples for  each lineage, we can run <span class="tool" data-tool="Grouping1" title="Group data tool"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:</p>
     <ul>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: output of <strong>pangolin</strong></li>
       <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
@@ -2053,10 +2334,10 @@ correctly already.</p>
 <p>Nextclade assigns clades, calls mutations and performs sequence quality checks on SARS-CoV-2 genomes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-from-consensus-sequences-to-clade-assignations-using-nextclade" aria-label="hands-on box: From consensus sequences to clade assignations using Nextclade"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: From consensus sequences to clade assignations using Nextclade</div>
+  <div class="box-title hands-on-title" id="hands-on-from-consensus-sequences-to-clade-assignations-using-nextclade"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: From consensus sequences to clade assignations using Nextclade</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/0.14.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/0.14.4+galaxy0"><strong>Nextclade</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/0.14.4+galaxy0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/0.14.4+galaxy0" title="Nextclade tool"><strong>Nextclade</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/0.14.4+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SARS-CoV-2 consensus sequences (FASTA)”</em>: <code class="language-plaintext highlighter-rouge">Multisample consensus FASTA</code></li>
         <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output options”</em>: <code class="language-plaintext highlighter-rouge">Tabular format report</code></li>
@@ -2284,16 +2565,16 @@ correctly already.</p>
 </table>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>How many different lineages have been found? How many samples for each lineage?</p>
 
-  <figure id="figure-1"><img src="../../images/sars-cov-2-variant-discovery/ncov_clades.png" alt="Illustration of phylogenetic relationship of clades, as used in Nextclade. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Illustration of phylogenetic relationship of clades, as used in Nextclade (Source: <a href="https://clades.nextstrain.org/">Nextclade</a>)</figcaption></figure>
+  <figure id="figure-1"><img src="../../images/sars-cov-2-variant-discovery/ncov_clades.png" alt="Illustration of phylogenetic relationship of clades, as used in Nextclade. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Illustration of phylogenetic relationship of clades, as used in Nextclade (Source: <a href="https://clades.nextstrain.org/">Nextclade</a>)</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>To summarize the number of lineages and number of samples for  each lineage, we can run <span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:</p>
+    <p>To summarize the number of lineages and number of samples for  each lineage, we can run <span class="tool" data-tool="Grouping1" title="Group data tool"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:</p>
     <ul>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: output of <strong>Nextclade</strong></li>
       <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
@@ -2325,24 +2606,24 @@ correctly already.</p>
 <p>We can compare <strong>Pangolin</strong> and <strong>Nextclade</strong> clade assignments by extracting interesting columns and joining them into a single dataset using sample ids.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-comparison-clade-assignations" aria-label="hands-on box: Comparison clade assignations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Comparison clade assignations</div>
+  <div class="box-title hands-on-title" id="hands-on-comparison-clade-assignations"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Comparison clade assignations</div>
 
   <ol>
-    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Nextclade</strong></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2,c5</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Pangolin</strong></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="join1" title="Tested with join1"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>
+    <li><span class="tool" data-tool="join1" title="Join two Datasets tool"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join</em>”: output of first <strong>cut</strong></li>
         <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -2360,16 +2641,18 @@ correctly already.</p>
 
 <p>In this tutorial, we used a collection of Galaxy workflows for the detection and interpretation of sequence variants in SARS-CoV-2:</p>
 
-<figure id="figure-2"><img src="../../images/sars-cov-2-variant-discovery/schema.png" alt="Analysis flow in the tutorial. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Analysis flow in the tutorial</figcaption></figure>
+<figure id="figure-2"><img src="../../images/sars-cov-2-variant-discovery/schema.png" alt="Analysis flow in the tutorial. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Analysis flow in the tutorial</figcaption></figure>
 
 <p>The workflows can be freely used and immediately accessed from the three global Galaxy instances. Each is capable of supporting thousands of users running hundreds of thousands of analyses per month.</p>
 
 <p>It is also possible to automate the workflow runs using the command line as explained in <a href="/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html">a dedicated tutorial</a>.</p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>4 specialized, best-practice variant calling workflows are available for the identification of annotated allelic variants from raw sequencing data depending on the exact type of input</p>
@@ -2413,33 +2696,9 @@ correctly already.</p>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data (Variant Analysis)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data (Variant Analysis)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -2457,7 +2716,7 @@ correctly already.</p>
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -2498,7 +2757,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -2510,29 +2769,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

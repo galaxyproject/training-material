@@ -12,34 +12,34 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="VGP assembly pipeline - short version" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-03-13 22:50:35 +0000" />
-<meta name="DC.creator" content="Delphine Lariviere" />
-<meta name="DC.creator" content="Alex Ostrovsky" />
-<meta name="DC.creator" content="Cristóbal Gallardo" />
-<meta name="DC.creator" content="Brandon Pickett" />
-<meta name="DC.creator" content="Linelle Abueg" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="VGP assembly pipeline - short version">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-03-13 22:50:35 +0000">
+<meta name="DC.creator" content="Delphine Lariviere">
+<meta name="DC.creator" content="Alex Ostrovsky">
+<meta name="DC.creator" content="Cristóbal Gallardo">
+<meta name="DC.creator" content="Brandon Pickett">
+<meta name="DC.creator" content="Linelle Abueg">
 
         
         
         
         
-        <meta name="description" content="DNA sequence data has become an indispensable tool for Mo..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: VGP assembly pipeline - short version" />
-        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo..." />
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Mo...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: VGP assembly pipeline - short version">
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -622,10 +622,383 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-assembly">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-03-13 22:50:35 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "VGP assembly pipeline - short version",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Assembly",
+    "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+    "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'VGP assembly pipeline - short version' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "assembly, pacbio, eukaryote, VGP",
+  "description": "The questions this  addresses are:\n - what combination of tools can produce the highest quality assembly of vertebrate genomes?\n - How can we evaluate how good it is?\n\n\nThe objectives are:\n - Learn the tools necessary to perform a de novo assembly of a vertebrate genome\n - Evaluate the quality of the assembly\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/",
+      "name": "Delphine Lariviere",
+      "image": "https://avatars.githubusercontent.com/delphine-l",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6421-3484",
+      "orcid": "https://orcid.org/0000-0001-6421-3484"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/",
+      "name": "Alex Ostrovsky",
+      "image": "https://avatars.githubusercontent.com/astrovsky01",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "orcid": "https://orcid.org/0000-0002-5752-2155"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pickettbd/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pickettbd/",
+      "name": "Brandon Pickett",
+      "image": "https://avatars.githubusercontent.com/pickettbd",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abueg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abueg/",
+      "name": "Linelle Abueg",
+      "image": "https://avatars.githubusercontent.com/abueg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/",
+      "name": "Delphine Lariviere",
+      "image": "https://avatars.githubusercontent.com/delphine-l",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6421-3484",
+      "orcid": "https://orcid.org/0000-0001-6421-3484"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/",
+      "name": "Alex Ostrovsky",
+      "image": "https://avatars.githubusercontent.com/astrovsky01",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "orcid": "https://orcid.org/0000-0002-5752-2155"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pickettbd/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pickettbd/",
+      "name": "Brandon Pickett",
+      "image": "https://avatars.githubusercontent.com/pickettbd",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abueg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abueg/",
+      "name": "Linelle Abueg",
+      "image": "https://avatars.githubusercontent.com/abueg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Assembly",
+      "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0196",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0196",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0196"
+    }
+  ],
+  "educationalLevel": "Intermediate"
+}
+</script>
+
+<article class="tutorial topic-assembly">
     <h1 data-toc-skip>VGP assembly pipeline - short version</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -636,9 +1009,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -755,7 +1128,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/assembly/tutorials/vgp_workflow_training/workflows/" title="Workflows" alt="VGP assembly pipeline - short version workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/assembly/tutorials/vgp_workflow_training/workflows/" title="VGP assembly pipeline - short version workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -769,13 +1142,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/assembly/tutorials/vgp_workflow_training/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/assembly/tutorials/vgp_workflow_training/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -801,7 +1171,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -956,6 +1326,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -991,6 +1363,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -1001,6 +1374,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>The Vertebrate Genome Project (VGP), a project of the Genome 10K (G10K) Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species (<span class="citation"><a href="#Rhie2021">Rhie <i>et al.</i> 2020</a></span>). The VGP has developed a fully automated <em>de-novo</em> genome assembly pipeline, which uses a combination of three different technologies: Pacbio high fidelity reads (HiFi), Bionano optical maps, and all-versus-all chromatin conformation capture (Hi-C) data.</p>
@@ -1010,7 +1384,7 @@
 <p>GWS facilitates analysis repeatability, while minimizing the number of manual steps required to execute an analysis workflow, and automating the process of inputting parameters and software tool version tracking. The objective of this training is to explain how to run the VGP workflow, focusing on what are the required inputs and which outputs are generated and delegating how the steps are executed to the GWS.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1050,13 +1424,13 @@
 <p>The <abbr title="Vertebrate Genome Project">VGP</abbr> assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the workflow to the available data.</p>
 
 <blockquote>
-  <figure id="figure-1"><img src="../../images/vgp_assembly/VGP_workflow_modules.png" alt="Figure 1: VGP pipeline modules. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> VGP assembly pipeline. The VGP workflow is implemented in a modular fashion: it consists of five independent subworkflows. In addition, it includes some additional workflows (not shown in the figure), required for exporting the results to GenomeArk.</figcaption></figure>
+  <figure id="figure-1"><img src="../../images/vgp_assembly/VGP_workflow_modules.png" alt="Figure 1: VGP pipeline modules. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> VGP assembly pipeline. The VGP workflow is implemented in a modular fashion: it consists of five independent subworkflows. In addition, it includes some additional workflows (not shown in the figure), required for exporting the results to GenomeArk.</figcaption></figure>
 </blockquote>
 
 <p>The VGP pipeline first uses an assembly program to generate contiguous sequences in an assembly (contigs). When <abbr title="all-versus-all chromatin conformation capture">Hi-C</abbr> data and Bionano data are avilable, then they are used to generate one or more contigs joined by gap sequence (scaffolds). When both data types are available, then Bionano scaffolding is run first before Hi-C scaffolding, but if optical maps are not available then HiC scaffolding can be run on the contigs.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-input-option-order" aria-label="comment box: Input option order"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Input option order</div>
+  <div class="box-title comment-title" id="comment-input-option-order"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Input option order</div>
   <p>This tutorial assumes the input datasets are high-quality. QC on raw read data should be performed before it is used. QC on raw read data is outside the scope of this tutorial.</p>
 </blockquote>
 
@@ -1065,7 +1439,7 @@
 <p>For this tutorial, the first step is to get the datasets from Zenodo. The VGP assembly pipeline uses data generated by a variety of technologies, including PacBio HiFi reads, Bionano optical maps, and Hi-C chromatin interaction maps.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -1127,12 +1501,12 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-working-with-your-own-data"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-with-your-own-data-contents" aria-expanded="true" aria-label="Toggle details box: Working with your own data"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Working with your own data<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-working-with-your-own-data"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-with-your-own-data" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Working with your own data<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If working on a genome other than the example yeast genome, you can upload the VGP data from the <a href="https://genomeark.s3.amazonaws.com/index.html">VGP/Genome Ark AWS S3 bucket</a> as follows:</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-import-data-from-genomeark" aria-label="hands-on box: Import data from GenomeArk"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import data from GenomeArk</div>
+    <div class="box-title hands-on-title" id="hands-on-import-data-from-genomeark"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import data from GenomeArk</div>
 
     <ol>
       <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>upload</strong> menu</li>
@@ -1144,7 +1518,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   <p>You can find the VGP data following this path: <code class="language-plaintext highlighter-rouge">/species/${Genus}_${species}/${specimen_code}/genomic_data</code>. Inside a given datatype directory (<em>e.g.</em> <code class="language-plaintext highlighter-rouge">pacbio</code>), select all the relevant files individually until all the desired files are highlighted and click the <kbd>Ok</kbd> button. Note that there may be multiple pages of files listed. Also note that you may not want every file listed.</p>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a dataset collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a dataset collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
 
 </blockquote>
 
@@ -1153,16 +1527,16 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <h2 id="import-workflows-from-workflowhub">Import workflows from WorkflowHub</h2>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-import-workflows-from-workflowhub"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-import-workflows-from-workflowhub-contents" aria-expanded="true" aria-label="Toggle tip box: Import workflows from WorkflowHub"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Import workflows from WorkflowHub<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p><a href="https://workflowhub.eu/">WorkflowHub</a> is a workflow management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.</p>   <blockquote class="notranslate hands_on">   <div class="box-title hands-on-title" id="hands-on-import-a-workflow" aria-label="hands-on box:  Import a workflow "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Import a workflow</div>   <ol>     <li>Click on the <strong>Workflow</strong> menu, located in the top bar.</li>     <li>Click on the <strong>Import</strong> button, located in the right corner.</li>     <li>       <p>In the section “Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)”, click on <strong>Search form</strong>.</p>     </li>     <li>In the <strong>TRS Server: <em>workflowhub.eu</em></strong> menu you should type <code class="language-plaintext highlighter-rouge">name:vgp</code> <img src="/training-material/topics/assembly/images/vgp_assembly/workflow_list.png" alt="galaxy TRS workflow search field, name:vgp is entered in the search bar, and five different workflows all labelled VGP are listed" /></li>     <li>Click on the desired workflow, and finally select the latest available version.</li>   </ol> </blockquote>   <p>After that, the imported workflows will appear in the main workflow menu. In order to initialize the workflow, we just need to click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> icon.</p> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-import-workflows-from-workflowhub"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-import-workflows-from-workflowhub" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Import workflows from WorkflowHub<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p><a href="https://workflowhub.eu/">WorkflowHub</a> is a workflow management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.</p>   <blockquote class="notranslate hands_on">   <div class="box-title hands-on-title" id="hands-on-import-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Import a workflow</div>   <ol>     <li>Click on the <strong>Workflow</strong> menu, located in the top bar.</li>     <li>Click on the <strong>Import</strong> button, located in the right corner.</li>     <li>       <p>In the section “Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)”, click on <strong>Search form</strong>.</p>     </li>     <li>In the <strong>TRS Server: <em>workflowhub.eu</em></strong> menu you should type <code class="language-plaintext highlighter-rouge">name:vgp</code> <img src="/training-material/topics/assembly/images/vgp_assembly/workflow_list.png" alt="galaxy TRS workflow search field, name:vgp is entered in the search bar, and five different workflows all labelled VGP are listed" /></li>     <li>Click on the desired workflow, and finally select the latest available version.</li>   </ol> </blockquote>   <p>After that, the imported workflows will appear in the main workflow menu. In order to initialize the workflow, we just need to click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> icon.</p> </blockquote>
 
 <p>The workflows imported are marked with a red square in the following figure:</p>
 
-<figure id="figure-2"><img src="../../images/vgp_assembly/imported_workflows.png" alt="Figure 2: Workflow menu. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.</figcaption></figure>
+<figure id="figure-2"><img src="../../images/vgp_assembly/imported_workflows.png" alt="Figure 2: Workflow menu. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.</figcaption></figure>
 
 <p>Once we have imported the datasets and the workflows, we can start with the genome assembly.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-workflow-centric-research-objects" aria-label="comment box: Workflow-centric Research Objects"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Workflow-centric Research Objects</div>
+  <div class="box-title comment-title" id="comment-workflow-centric-research-objects"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Workflow-centric Research Objects</div>
 
   <p>In WorkflowHub, workflows are packaged, registered, downloaded and exchanged as Research Objects using the RO-Crate specification, with test and example data, managed metadata profiles, citations and more.</p>
 
@@ -1175,7 +1549,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <p>Now that our data and workflows are imported, we can run our first workflow. Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size according to our data. The present pipeline uses <strong>Meryl</strong> for generating the k-mer database and <strong>Genomescope2</strong> for determining genome characteristics based on a k-mer analysis.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-vgp-genome-profile-analysis-workflow" aria-label="hands-on box: VGP genome profile analysis workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP genome profile analysis workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-vgp-genome-profile-analysis-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: VGP genome profile analysis workflow</div>
 
   <ol>
     <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
@@ -1191,7 +1565,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-k-mer-length" aria-label="comment box: K-mer length"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: K-mer length</div>
+    <div class="box-title comment-title" id="comment-k-mer-length"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: K-mer length</div>
     <p>In this tutorial, we are using a k-mer length of 31. This can vary, but the VGP pipeline tends to use a k-mer length of 21, which tends to work well for most mammalian-size genomes. There is more discussion about k-mer length trade-offs in the extended VGP pipeline tutorial.</p>
   </blockquote>
 
@@ -1199,7 +1573,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>Once the workflow has finished, we can evaluate the linear plot generated by <strong>Genomescope</strong> (fig. 3), which includes valuable information such as the observed k-mer profile, fitted models and estimated parameters. This file corresponds to the dataset <code class="language-plaintext highlighter-rouge">26</code>.</p>
 
-<figure id="figure-3"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="Figure 3: Genomescope plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> GenomeScope2 k-mer profile. The first peak located at about 25x corresponds to the heterozygous peak. The second peak at 50x, corresponds to the homozygous peak. The plot also includes information about the the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (ab), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).</figcaption></figure>
+<figure id="figure-3"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="Figure 3: Genomescope plot. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> GenomeScope2 k-mer profile. The first peak located at about 25x corresponds to the heterozygous peak. The second peak at 50x, corresponds to the homozygous peak. The plot also includes information about the the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (ab), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).</figcaption></figure>
 
 <p>This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit &gt; 93%). Low frequency <em>k</em>-mers are the result of sequencing errors, and are indicated by the red line. GenomeScope2 estimated a haploid genome size of around 11.7 Mbp, a value reasonably close to the <em>Saccharomyces</em> genome size.</p>
 
@@ -1210,7 +1584,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <p>To generate <abbr title="contiguous sequences in an assembly">contigs</abbr>, the VGP pipeline uses <strong>hifiasm</strong>. After genome profiling, the next step is to run the <strong>VGP HiFi phased assembly with hifiasm and HiC data workflow</strong>. This workflow uses <strong>hifiasm</strong> (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alternate pseudohaplotype assemblies. This workflow includes three tools for evaluating assembly quality: <strong>gfastats</strong>, <strong>BUSCO</strong> and <strong>Merqury</strong>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-vgp-hifi-phased-assembly-with-hifiasm-and-hic-data-workflow" aria-label="hands-on box: VGP HiFi phased assembly with hifiasm and HiC data workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP HiFi phased assembly with hifiasm and HiC data workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-vgp-hifi-phased-assembly-with-hifiasm-and-hic-data-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: VGP HiFi phased assembly with hifiasm and HiC data workflow</div>
   <ol>
     <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
     <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">VGP HiFi phased assembly with hifiasm and HiC data</code></li>
@@ -1227,7 +1601,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-input-option-order-1" aria-label="comment box: Input option order"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Input option order</div>
+    <div class="box-title comment-title" id="comment-input-option-order-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Input option order</div>
     <p>Note that the order of the inputs may differ slightly.</p>
   </blockquote>
 
@@ -1238,12 +1612,12 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <p>According to the report, both assemblies are quite similar; the primary assembly includes 18 <abbr title="contiguous sequences in an assembly">contigs</abbr>, whose cumulative length is around 12.2Mbp. The alternate assembly includes 17 contigs, whose total length is 11.3Mbp. As we can see in figure 4a, both assemblies come close to the estimated genome size, which is as expected since we used hifiasm-HiC mode to generate phased assemblies which lowers the chance of false duplications that can inflate assembly size.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-are-you-working-with-pri-alt-assemblies" aria-label="comment box: Are you working with pri/alt assemblies?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Are you working with pri/alt assemblies?</div>
+  <div class="box-title comment-title" id="comment-are-you-working-with-pri-alt-assemblies"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Are you working with pri/alt assemblies?</div>
   <p>This tutorial uses the hifiasm-HiC workflow, which generates phased hap1 and hap2 assemblies. The phasing helps lower the chance of false duplications, since the phasing information helps the assembler know which genomic variation is heterozygosity at the same locus versus being two different loci entirely. If you are working with primary/alternate assemblies (especially if there is no internal purging in the initial assembly), you can expect higher false duplication rates than we observe here with the yeast HiC hap1/hap2.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>What is the longest contig in the primary assembly? And in the alternate one?</li>
@@ -1252,7 +1626,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The longest contig in the primary assembly is 1.532.843 bp, and 1.532.843 bp in the alternate assembly.</li>
@@ -1266,12 +1640,12 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>Next, we are going to evaluate the outputs generated by <strong>BUSCO</strong>. This tool provides quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses (<span class="citation"><a href="#Simo2015">Simão <i>et al.</i> 2015</a></span>).</p>
 
-<figure id="figure-4"><img src="../../images/vgp_assembly/BUSCO_full_table.png" alt="Figure 5 : BUSCO. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> BUSCO full table. It contains the complete results in a tabular format with scores and lengths of BUSCO matches, and coordinates.</figcaption></figure>
+<figure id="figure-4"><img src="../../images/vgp_assembly/BUSCO_full_table.png" alt="Figure 5 : BUSCO. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> BUSCO full table. It contains the complete results in a tabular format with scores and lengths of BUSCO matches, and coordinates.</figcaption></figure>
 
 <p>As we can see in the report, the results are simplified into four categories: <em>complete and single-copy</em>, <em>complete and duplicated</em>, <em>fragmented</em> and <em>missing</em>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>How many complete BUSCO genes have been identified in the primary assembly?</li>
@@ -1279,7 +1653,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>According to the report, our assembly contains the complete sequence of 2080 complete BUSCO genes (97.3%).</li>
@@ -1294,7 +1668,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>By default, <strong>Merqury</strong> generates three collections as output: stats, plots and assembly consensus quality (QV) stats. The “stats” collection contains the completeness statistics, while the “QV stats” collection contains the quality value statistics. Let’s have a look at the copy number (CN) spectrum plot, known as the <em>spectra-cn</em> plot. The spectra-cn plot looks at both of your assemblies (here, your haplotypes) taken <em>together</em> (fig. 6a).  We can see a small amount of false duplications here: at the 50 mark on the x-axis, there is a small amount of k-mers present at 3-copy across the two assemblies (the green bump).</p>
 
-<figure id="figure-5"><img src="../../images/vgp_assembly/yeast_c_merqury_cn.png" alt="Figure 6: Merqury spectra-cn plot for initial yeast contigs. " width="100%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Merqury CN plot for these yeast haplotypes. The plot tracks the multiplicity of each k-mer found in the read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve. K-mer distribution of both haplotypes (a). K-mer distribution of an individual haplotype (b)</figcaption></figure>
+<figure id="figure-5"><img src="../../images/vgp_assembly/yeast_c_merqury_cn.png" alt="Figure 6: Merqury spectra-cn plot for initial yeast contigs. " width="100%" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Merqury CN plot for these yeast haplotypes. The plot tracks the multiplicity of each k-mer found in the read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve. K-mer distribution of both haplotypes (a). K-mer distribution of an individual haplotype (b)</figcaption></figure>
 
 <p>Thus, we know there is some false duplication (the 3-copy green bump) present as 2-copy in one of our assemblies, but we don’t know which one. We can look at the individual copy number spectrum for each haplotype in order to figure out which one contains the 2-copy k-mers (<em>i.e.</em>, the false duplications). In the Merqury spectra-CN plot for hap2 we can see the small bump of 2-copy k-mers at around the 50 mark on the x-axis (fig. 6b).</p>
 
@@ -1307,7 +1681,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <p>An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplotypes, as well as all hemizygous regions from both haplotypes (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in downstream analysis, we are going to run the <strong>VGP purge assembly with purge_dups workflow</strong>, which will allow to identify and reassign heterozygous contigs. This step is only necessary if haplotypic duplications are observed, and the output should be carefully checked for overpurging.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-vgp-purge-assembly-with-purge-dups-pipeline-workflow" aria-label="hands-on box: VGP purge assembly with purge_dups pipeline  workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP purge assembly with purge_dups pipeline  workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-vgp-purge-assembly-with-purge-dups-pipeline-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: VGP purge assembly with purge_dups pipeline  workflow</div>
 
   <ol>
     <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
@@ -1334,7 +1708,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <p>Once the assemblies generated by <strong>hifiasm</strong> have been purged, the next step is to run the <strong>VGP hybrid scaffolding with Bionano optical maps workflow</strong>. It will integrate the information provided by optical maps with primary assembly sequences in order to detect and correct chimeric joins and misoriented contigs. In addition, this workflow includes some additonal steps for evaluating the outputs.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-vgp-hybrid-scaffolding-with-bionano-optical-maps-workflow" aria-label="hands-on box: VGP hybrid scaffolding with Bionano optical maps workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP hybrid scaffolding with Bionano optical maps workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-vgp-hybrid-scaffolding-with-bionano-optical-maps-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: VGP hybrid scaffolding with Bionano optical maps workflow</div>
 
   <ol>
     <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
@@ -1358,7 +1732,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <p>It is also recommended to examine <strong>BUSCO</strong> outputs. In the summary image (fig. 7c), which can be found in the daset <code class="language-plaintext highlighter-rouge">117</code>, we can appreciate that most of the universal single-copy orthologs are present in our assembly at the expected single-copy.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>How many scaffolds are in the primary assembly after the hybrid scaffolding?</li>
@@ -1367,7 +1741,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The number of contigs is 17.</li>
@@ -1386,7 +1760,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 <p>In this final stage, we will run the <strong>VGP hybrid scaffolding with HiC data</strong>, which exploits the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them. This information allows further scaffolding the Bionano scaffolds using <strong>SALSA2</strong>, usually generating chromosome-level scaffolds.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-vgp-hybrid-scaffolding-with-hic-data" aria-label="hands-on box: VGP hybrid scaffolding with HiC data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP hybrid scaffolding with HiC data</div>
+  <div class="box-title hands-on-title" id="hands-on-vgp-hybrid-scaffolding-with-hic-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: VGP hybrid scaffolding with HiC data</div>
 
   <ol>
     <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
@@ -1406,7 +1780,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>In order to evaluate the Hi-C hybrid scaffolding, we are going to compare the contact maps before and after running the HiC hybrid scaffolding workflow (fig. 8), corresponding to the datasets <code class="language-plaintext highlighter-rouge">130</code> and <code class="language-plaintext highlighter-rouge">141</code> respectively.</p>
 
-<figure id="figure-6"><img src="../../images/vgp_assembly/hi-c_pretext_final.png" alt="Figure 8: Pretext final contact map. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Hi-C maps generated by Pretext using Hi-C data. The red circles indicate the  differences between the contact maps generated after (a) and before (b) Hi-C hybrid scaffolding.</figcaption></figure>
+<figure id="figure-6"><img src="../../images/vgp_assembly/hi-c_pretext_final.png" alt="Figure 8: Pretext final contact map. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Hi-C maps generated by Pretext using Hi-C data. The red circles indicate the  differences between the contact maps generated after (a) and before (b) Hi-C hybrid scaffolding.</figcaption></figure>
 
 <p>The regions marked with red circles highlight the most notable difference between the two contact maps, where inversion has been fixed.</p>
 
@@ -1414,19 +1788,21 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>To sum up, it is worthwhile to compare the final assembly with the <a href="https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_assembly_stats.txt"><em>S. cerevisiae</em> S288C reference genome</a>.</p>
 
-<figure id="figure-7"><img src="../../images/vgp_assembly/stats_conclusion.png" alt="Figure 9: Final stats. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Comparison between the final assembly generated in this training and the reference genome. Contiguity plot using the reference genome size (a). Assemby statistics (b).</figcaption></figure>
+<figure id="figure-7"><img src="../../images/vgp_assembly/stats_conclusion.png" alt="Figure 9: Final stats. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Comparison between the final assembly generated in this training and the reference genome. Contiguity plot using the reference genome size (a). Assemby statistics (b).</figcaption></figure>
 
 <p>With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.9a,b). It is noteworthy that the reference genome consists of 17 sequences, while our assembly includes only 16 chromosomes. This is due to the fact that the reference genome also includes the sequence of the mitochondrial DNA, which consists of 85,779 bp. The remaining statistics exhibit very similar values (fig. 9b).</p>
 
-<figure id="figure-8"><img src="../../images/vgp_assembly/hi-c_pretext_conclusion.png" alt="Figure 10: Comparison reference genome. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Comparison between contact maps generated using the final assembly (a) and the reference genome (b).</figcaption></figure>
+<figure id="figure-8"><img src="../../images/vgp_assembly/hi-c_pretext_conclusion.png" alt="Figure 10: Comparison reference genome. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Comparison between contact maps generated using the final assembly (a) and the reference genome (b).</figcaption></figure>
 
 <p>If we compare the contact map of our assembled genome (fig. 10a) with the reference assembly (fig. 10b), we can see that the two are indistinguishable, suggesting that we have generated a chromosome level genome assembly.</p>
 
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>The VGP pipeline allows to generate error-free, near gapless reference-quality genome assemblies</p>
@@ -1503,33 +1879,9 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=VGP assembly pipeline - short version (Assembly)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=VGP assembly pipeline - short version (Assembly)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1547,7 +1899,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1588,7 +1940,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1600,29 +1952,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

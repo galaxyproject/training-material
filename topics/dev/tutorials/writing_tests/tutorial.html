@@ -12,31 +12,31 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/writing_tests/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/writing_tests/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Writing Automated Tests for Galaxy" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-01-23 14:30:52 +0000" />
-<meta name="DC.creator" content="John Davis" />
-<meta name="DC.creator" content="John Chilton" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Writing Automated Tests for Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-01-23 14:30:52 +0000">
+<meta name="DC.creator" content="John Davis">
+<meta name="DC.creator" content="John Chilton">
 
         
         
         
         
-        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Writing Automated Tests for Galaxy" />
-        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Writing Automated Tests for Galaxy">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -467,10 +467,231 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-dev">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-01-23 14:30:52 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Writing Automated Tests for Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Writing Automated Tests for Galaxy' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/writing_tests/tutorial.html",
+  "timeRequired": "PT3H",
+  "keywords": "dev",
+  "description": "The objectives are:\n - Learn about the different types of automated tests in Galaxy\n - Learn to write API tests\n - Learn to write unit tests\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    "Familiarity with basic Git commands",
+    "Basic knowledge of Python and JavaScript",
+    "Mac OS or Linux that can run Galaxy & your favorite IDE or editor",
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture/slides.html",
+      "name": "Galaxy Code Architecture",
+      "description": "Slides for 'Galaxy Code Architecture' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/",
+      "name": "John Davis",
+      "image": "https://avatars.githubusercontent.com/jdavcs",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1363-1245",
+      "orcid": "https://orcid.org/0000-0002-1363-1245"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "name": "John Chilton",
+      "image": "https://avatars.githubusercontent.com/jmchilton",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6794-0756",
+      "orcid": "https://orcid.org/0000-0002-6794-0756"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/",
+      "name": "John Davis",
+      "image": "https://avatars.githubusercontent.com/jdavcs",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1363-1245",
+      "orcid": "https://orcid.org/0000-0002-1363-1245"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "name": "John Chilton",
+      "image": "https://avatars.githubusercontent.com/jmchilton",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6794-0756",
+      "orcid": "https://orcid.org/0000-0002-6794-0756"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-dev">
     <h1 data-toc-skip>Writing Automated Tests for Galaxy</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -481,9 +702,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -645,7 +866,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -673,6 +894,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -683,8 +905,9 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#testing-in-galaxy" id="markdown-toc-testing-in-galaxy">Testing in Galaxy</a></li>
@@ -735,10 +958,10 @@
 <h1 id="local-development-environment-setup">Local development environment setup</h1>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-contribute-to-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-contribute-to-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: How to Contribute to Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to Contribute to Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To contribute to galaxy, a GitHub account is required. Changes are proposed via a <a href="https://docs.github.com/en/github/collaborating-with-pull-requests">pull request</a>. This allows the project maintainers to review the changes and suggest improvements.</p>   <p>The general steps are as follows:</p>   <ol>   <li>Fork the Galaxy repository</li>   <li>Clone your fork</li>   <li>Make changes in a new branch</li>   <li>Commit your changes, push branch to your fork</li>   <li>Open a pull request for this branch in the upstream Galaxy repository</li> </ol>   <blockquote class="details">   <div class="box-title details-title" id="details-git-github-and-galaxy-core"><button class="gtn-boxify-button details" type="button" aria-controls="details-git-github-and-galaxy-core-contents" aria-expanded="true" aria-label="Toggle details box: Git, Github, and Galaxy Core"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Git, Github, and Galaxy Core<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>For a lot more information about Git branching and managing a repository on Github,  see the <a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a> tutorial.</p>   <p>The <a href="/training-material/topics/dev/tutorials/architecture/slides.html">Galaxy Core Architecture slides</a> have a lot of important Galaxy core-related information related to branches,  project management, and contributing to Galaxy - under the Project Management section of the slides.</p> </blockquote> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-contribute-to-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-contribute-to-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: How to Contribute to Galaxy<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To contribute to galaxy, a GitHub account is required. Changes are proposed via a <a href="https://docs.github.com/en/github/collaborating-with-pull-requests">pull request</a>. This allows the project maintainers to review the changes and suggest improvements.</p>   <p>The general steps are as follows:</p>   <ol>   <li>Fork the Galaxy repository</li>   <li>Clone your fork</li>   <li>Make changes in a new branch</li>   <li>Commit your changes, push branch to your fork</li>   <li>Open a pull request for this branch in the upstream Galaxy repository</li> </ol>   <blockquote class="details">   <div class="box-title details-title" id="details-git-github-and-galaxy-core"><button class="gtn-boxify-button details" type="button" aria-controls="details-git-github-and-galaxy-core" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Git, Github, and Galaxy Core<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>For a lot more information about Git branching and managing a repository on Github,  see the <a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a> tutorial.</p>   <p>The <a href="/training-material/topics/dev/tutorials/architecture/slides.html">Galaxy Core Architecture slides</a> have a lot of important Galaxy core-related information related to branches,  project management, and contributing to Galaxy - under the Project Management section of the slides.</p> </blockquote> </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setup-your-local-galaxy-instance" aria-label="hands-on box: Setup your local Galaxy instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setup your local Galaxy instance</div>
+  <div class="box-title hands-on-title" id="hands-on-setup-your-local-galaxy-instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setup your local Galaxy instance</div>
 
   <ol>
     <li>Use GitHub UI to fork Galaxy’s repository at <code class="language-plaintext highlighter-rouge">galaxyproject/galaxy</code>.</li>
@@ -746,7 +969,7 @@
       <p>Clone your forked repository to a local path, further referred to as <code class="language-plaintext highlighter-rouge">GALAXY_ROOT</code> and <code class="language-plaintext highlighter-rouge">cd</code> into <code class="language-plaintext highlighter-rouge">GALAXY_ROOT</code>. Note that we specify the tutorial branch with the <code class="language-plaintext highlighter-rouge">-b</code> option:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/&lt;your-username&gt;/galaxy GALAXY_ROOT
 <span class="nb">cd </span>GALAXY_ROOT
 </code></pre></div>        </div>
@@ -756,7 +979,7 @@
       <p>Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. This is generally done with the <code class="language-plaintext highlighter-rouge">common_startup.sh</code> script:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash scripts/common_startup.sh <span class="nt">--dev-wheels</span>
 </code></pre></div>        </div>
       </blockquote>
@@ -767,7 +990,7 @@
       <p>Activate your new virtual environment:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
 </code></pre></div>        </div>
       </blockquote>
@@ -778,7 +1001,7 @@
       <p>Finally, let’s create a new branch for your edits:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> my-training
 </code></pre></div>        </div>
       </blockquote>
@@ -787,13 +1010,13 @@
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div class="box-title code-in-title" id="code-in-bash-4" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div class="box-title code-out-title" id="code-out" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+          <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  training
 <span class="k">*</span> my-training
 </code></pre></div>          </div>
@@ -830,7 +1053,7 @@
 <p>If your test fails, one way to debug it is to insert a <code class="language-plaintext highlighter-rouge">breakpoint()</code> statement into the body of the test (right after the call to <code class="language-plaintext highlighter-rouge">_get</code> would be a logical spot), and then use <a href="https://docs.python.org/3/library/pdb.html">pdb</a>, Python’s interactive debugger, to explore the response at runtime with the test paused (see <a href="/training-material/topics/dev/tutorials/debugging/tutorial.html">Debugging Galaxy</a> for more details on using pdb to debug Galaxy).</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Example of a basic API test.</p>
 
@@ -888,7 +1111,7 @@
 <p>The response will return the Role object, so testing it is straightforward.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>API test for creating an object.</p>
 
@@ -955,7 +1178,7 @@
 <p>We could generate our own unique name, but we can also simply use an existing method used across Galaxy’s tests: <code class="language-plaintext highlighter-rouge">get_random_name()</code> (we need to add an import and override the <code class="language-plaintext highlighter-rouge">setUp</code> method for that: see the solution code). Now we have a test we can safely run together with our old test (or with any number of other tests that create role objects).</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Alternative test for creating an object. Note the <code class="language-plaintext highlighter-rouge">setUp</code> method and the new import.</p>
 
@@ -1016,7 +1239,7 @@
 <p>The question is, how do we create the datasets and the histories (and all their respective dependencies?). One way would be to use the API for each such object. However, that would result in a barely readable test function which would mostly consist of setup code. Instead, we want our tests to be simple and understandable at a glance, and contain as little infrastructure code as possible. Enter dataset populators! This is one of many abstractions available to you that make it much easier to write tests that otherwise would have required nontrivial setup.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Using populators.</p>
 
@@ -1045,7 +1268,7 @@
 <p>And we are done! Here’s the final version of the code we added to this testing module.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Final code.</p>
 
@@ -1141,7 +1364,7 @@
 <p>We’ll start with the <code class="language-plaintext highlighter-rouge">parse_bytesize</code> function. Look at the code of the function and identify the logic that, you think, needs testing. Essentially, you want to ensure that any combination of valid input produces the expected output. Next, add a few tests. (see <a href="https://docs.pytest.org/en/7.1.x/how-to/assert.html">https://docs.pytest.org/en/7.1.x/how-to/assert.html</a> for examples)</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Example of tests for the <code class="language-plaintext highlighter-rouge">parse_bytesize</code> function:</p>
 
@@ -1167,7 +1390,7 @@
 <p>Run the tests to verify they pass. You can use the <code class="language-plaintext highlighter-rouge">pytest</code> command:</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-5" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pytest <span class="nb">test</span>/unit/util/test_bytesize.py
 </code></pre></div>  </div>
 </blockquote>
@@ -1177,7 +1400,7 @@
 <p>Now let’s add a test that verifies that invalid input raises an error, as expected.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Example of a test verifying a raised exception. Make sure you add the <code class="language-plaintext highlighter-rouge">pytest</code> import.</p>
 
@@ -1200,7 +1423,7 @@
 <p>Let’s move on to the <code class="language-plaintext highlighter-rouge">to_unit</code> method of the <code class="language-plaintext highlighter-rouge">ByteSize</code>class. Just like you did for the previous function, add a few tests that verify that valid input produces expected output, and invalid input raises an error.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Example of tests for the <code class="language-plaintext highlighter-rouge">ByteSize.to_unit</code> method:</p>
 
@@ -1243,7 +1466,7 @@
 <p>Let’s start by factoring out the ByteSize object creation into a fixture (see <a href="https://docs.pytest.org/en/7.1.x/how-to/fixtures.html">https://docs.pytest.org/en/7.1.x/how-to/fixtures.html</a>). In this particular case moving this code into a fixture might be unnecessary, however, it provides an example of an approach that is very useful in more complex scenarios and is heavily used in Galaxy’s testing code.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Factoring out code into a fixture: we declare a fixture using pytest’s built-in <code class="language-plaintext highlighter-rouge">fixture</code> decorator,
 and then simply pass it as an argument to our tests.</p>
@@ -1289,7 +1512,7 @@ and then simply pass it as an argument to our tests.</p>
 <p>Finally, our <code class="language-plaintext highlighter-rouge">test_bytesize_to_unit</code> test has a lot of assert statements of the same form. We can do better! Let’s use pytest’s test parametrization feature (see <a href="https://docs.pytest.org/en/7.1.x/how-to/parametrize.html">https://docs.pytest.org/en/7.1.x/how-to/parametrize.html</a>) to eliminate this redundancy. Again, as with the fixture example, this particular case would be fine without this feature. However, sometime you want to run the same test function on hundreds of different input combinations, in which case this feature is invaluable (e.g. Galaxy’s tool tests, or integration tests for configuration settings).</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Example of parametrizing a test. Replace the previous version of <code class="language-plaintext highlighter-rouge">test_bytesize_to_unit</code> with the
 following. Note that the test function takes 2 additional arguments.</p>
@@ -1335,7 +1558,7 @@ following. Note that the test function takes 2 additional arguments.</p>
 <p>First, let’s test the case when the function returns early - when the email argument is the empty string or when its value is the same as the value of the <code class="language-plaintext highlighter-rouge">email</code> attribute of the provided User object. The first case is trivial, but the next one requires a User object. However, if we think about it, we only care about that user having a given string as its <code class="language-plaintext highlighter-rouge">email</code> attribute. So let’s use a “test double” - a stand-in empty object, and give it an <code class="language-plaintext highlighter-rouge">email</code> attribute. We’ll call it <code class="language-plaintext highlighter-rouge">MockUser</code> (strictly speaking, it’s a stub, and <a href="https://martinfowler.com/articles/mocksArentStubs.html">“mocks aren’t stubs”</a>, but we’ll follow the naming convention often used in Galaxy). We can pass <code class="language-plaintext highlighter-rouge">None</code> as the transaction object in both cases.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Example of replacing an object with a test double:</p>
 
@@ -1366,13 +1589,13 @@ following. Note that the test function takes 2 additional arguments.</p>
 <p>Now run the tests for this module:</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-6" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pytest <span class="nb">test</span>/unit/data/security/test_validate_user_input.py
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning" aria-label="warning box: "><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning</div>
+  <div class="box-title warning-title" id="warning"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning</div>
   <p>As a word of caution, mocking (or any kind of patching to accommodate testing) may lead to brittle tests: by relying too much on <em>how</em> the logic is implemented, we’ll be forced to adjust the test each time that implementation changes. It’s a tradeoff between having narrowly-scoped tests that will point to the exact location of the problem but may lock the code under test into a given state, and higher-level integration-type tests that test the end result without “looking under the hood”, but may be less helpful when pinpointing the exact cause of a failed test. So, use sparingly and keep it simple.</p>
 </blockquote>
 
@@ -1383,7 +1606,7 @@ following. Note that the test function takes 2 additional arguments.</p>
 <p>For this, we need to factor out the code that calls the database into its own function - then we can override that function for our test. So let’s modify <code class="language-plaintext highlighter-rouge">lib/galaxy/security/validate_user_input.py</code>.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Factoring out the database call.</p>
 
@@ -1471,7 +1694,7 @@ following. Note that the test function takes 2 additional arguments.</p>
 <p>Now we can use pytest’s “monkeypatch” built-in fixture to replace that function with a stub method and then use it to return <code class="language-plaintext highlighter-rouge">True</code> or <code class="language-plaintext highlighter-rouge">False</code> to test both cases. (see <a href="https://docs.pytest.org/en/7.1.x/how-to/monkeypatch.html?highlight=monkeypatch">https://docs.pytest.org/en/7.1.x/how-to/monkeypatch.html?highlight=monkeypatch</a> for more details).</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Monkeypatching the factored out function. Note the added import.</p>
 
@@ -1497,7 +1720,7 @@ following. Note that the test function takes 2 additional arguments.</p>
 <p>How would you fix this problem?</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Factor out the logic for obtaining both lists:</p>
   <ol>
@@ -1553,7 +1776,7 @@ local variables.</li>
 <p>Run the tests. They still fail. That’s because we haven’t replaced the new functions with a mock for our test. Try to do that - it’s the same approach as we used for monkeypatching the <code class="language-plaintext highlighter-rouge">check_for_existing_email</code> function. Note that both lists should be <code class="language-plaintext highlighter-rouge">None</code> to be ignored.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Monkeypatch the email lists: return <code class="language-plaintext highlighter-rouge">None</code> for both, then override as needed:</p>
 
@@ -1578,7 +1801,7 @@ local variables.</li>
 <p>Now that our tests pass, it’s time to test the last bit of logic: the allowlist and the blocklist. Our first step is to add a simple test to verify that if the allow-list is not empty, only emails with allowed domain names will be validated.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>First take on testing the allowlist.</p>
 
@@ -1598,7 +1821,7 @@ local variables.</li>
 <p>However, again, we are getting a lot of duplication from our monkeypatching code, and there are more tests to come. Time to move some of it into fixtures; <strong>leave only the code that is specific to the test</strong>.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Factor out all common monkeypatching into fixtures. Note the <code class="language-plaintext highlighter-rouge">pytest</code> import.</p>
 
@@ -1658,7 +1881,7 @@ local variables.</li>
 <p>Before we add more tests, let’s reformat our code to group all the tests that target the <code class="language-plaintext highlighter-rouge">validate_email</code> function in one class. Keep in mind that each test gets its own instance of the class - so you cannot share instance state across tests. However, grouping related tests makes the testing module easier to navigate (there are more benefits; see <a href="https://docs.pytest.org/en/7.1.x/getting-started.html#group-multiple-tests-in-a-class">https://docs.pytest.org/en/7.1.x/getting-started.html#group-multiple-tests-in-a-class</a>).</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Group related tests in one class. Note that you need to add <code class="language-plaintext highlighter-rouge">self</code> as the first
 argument to each test function. You also need to add <code class="language-plaintext highlighter-rouge">self</code> to the call to <code class="language-plaintext highlighter-rouge">MockUser()</code>. Leave
@@ -1703,7 +1926,7 @@ the fixtures outside the class body, so that they can be reused by other test co
 <p>Now we have all the infrastructure in place. We need to add 2 more tests. First, you may notice that if the allowlist is not empty, the blocklist is ignored. Let’s write a test to verify this.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Testing ignoring the blocklist.</p>
 
@@ -1724,7 +1947,7 @@ the fixtures outside the class body, so that they can be reused by other test co
 <p>Finally, let’s test the blocklist.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Testing the blocklist.</p>
 
@@ -1740,7 +1963,7 @@ the fixtures outside the class body, so that they can be reused by other test co
 <p>And we are done! Here’s the final version of the code we’ve added to this testing module.</p>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-20"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-20-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-20"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-20" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Final code listing (excluding the 2 added imports).</p>
 
@@ -1805,10 +2028,12 @@ the fixtures outside the class body, so that they can be reused by other test co
 </blockquote>
 
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Read the Writing Tests for Galaxy documentation article</p>
@@ -1858,33 +2083,9 @@ the fixtures outside the class body, so that they can be reused by other test co
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Writing Automated Tests for Galaxy (Development in Galaxy)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Writing Automated Tests for Galaxy (Development in Galaxy)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1902,7 +2103,7 @@ the fixtures outside the class body, so that they can be reused by other test co
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1943,7 +2144,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1955,29 +2156,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

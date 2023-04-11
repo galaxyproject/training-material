@@ -12,33 +12,33 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Trio Analysis using Synthetic Datasets from RD-Connect GPAP" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-03-27 13:17:12 +0000" />
-<meta name="DC.creator" content="Jasper Ouwerkerk" />
-<meta name="DC.creator" content="Wolfgang Maier" />
-<meta name="DC.creator" content="Helena Rasche" />
-<meta name="DC.creator" content="Saskia Hiltemann" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Trio Analysis using Synthetic Datasets from RD-Connect GPAP">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-03-27 13:17:12 +0000">
+<meta name="DC.creator" content="Jasper Ouwerkerk">
+<meta name="DC.creator" content="Wolfgang Maier">
+<meta name="DC.creator" content="Helena Rasche">
+<meta name="DC.creator" content="Saskia Hiltemann">
 
         
         
         
         
-        <meta name="description" content="Genetic differences (variants) between healthy and diseas..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Trio Analysis using Synthetic Datasets from RD-Connect GPAP" />
-        <meta property="og:description" content="Genetic differences (variants) between healthy and diseas..." />
+        <meta name="description" content="Genetic differences (variants) between healthy and diseas...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Trio Analysis using Synthetic Datasets from RD-Connect GPAP">
+        <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -612,10 +612,374 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-variant-analysis">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-03-27 13:17:12 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Trio Analysis using Synthetic Datasets from RD-Connect GPAP",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Variant Analysis",
+    "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Trio Analysis using Synthetic Datasets from RD-Connect GPAP' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "variant-analysis, cyoa",
+  "description": "The questions this  addresses are:\n - How do you import data from the EGA?\n - How to download files with HTSGET in Galaxy?\n - How do you pre-process VCFs?\n - How do you identify causative variants?\n\n\nThe objectives are:\n - Requesting DAC access and importing data from the EGA.\n - Pre-process VCFs using regular expressions.\n - Use annotations and phenotype information to find the causative variant(s).\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/JasperO98/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/JasperO98/",
+      "name": "Jasper Ouwerkerk",
+      "image": "https://avatars.githubusercontent.com/JasperO98",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "name": "Wolfgang Maier",
+      "image": "https://avatars.githubusercontent.com/wm75",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9464-6640",
+      "orcid": "https://orcid.org/0000-0002-9464-6640"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/JasperO98/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/JasperO98/",
+      "name": "Jasper Ouwerkerk",
+      "image": "https://avatars.githubusercontent.com/JasperO98",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "name": "Wolfgang Maier",
+      "image": "https://avatars.githubusercontent.com/wm75",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9464-6640",
+      "orcid": "https://orcid.org/0000-0002-9464-6640"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Variant Analysis",
+      "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0199",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0199",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0199"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Trio Analysis using Synthetic Datasets from RD-Connect GPAP</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -626,9 +990,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -766,7 +1130,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/variant-analysis/tutorials/trio-analysis/workflows/" title="Workflows" alt="Trio Analysis using Synthetic Datasets from RD-Connect GPAP workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/variant-analysis/tutorials/trio-analysis/workflows/" title="Trio Analysis using Synthetic Datasets from RD-Connect GPAP workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -804,7 +1168,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -951,6 +1315,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
     
         
     
@@ -978,6 +1348,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -988,20 +1359,21 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>To discover causal mutations of inherited diseases it’s common practice to do a trio analysis. In a trio analysis DNA is sequenced of both the patient and parents. Using this method, it’s possible to identify multiple inheritance patterns. Some examples of these patterns are autosomal recessive, autosomal dominant, and  de-novo variants, which are represented in the figure below. To elaborate, the most left tree shows an autosomal dominant inhertitance pattern where the offspring inherits a faulty copy of the gene from one of the parents. The center subfigure represents an autosomal recessive disease, here the offspring inherited a faulty copy of the same gene from both parents. In the right subfigure a de-novo mutation is shown, which is caused by a mutation during the offspring’s lifetime.</p>
 
-<figure id="figure-1"><img src="../../images/trio-analysis/pedigree.svg" alt="Image of three family trees representing a different inheritance pattern each, from left to right the trees have a title on top with: autosomal dominant, autosomal recessive, and De-Novo. The families consists of a father, mother, and son. Under the trees there is a legend which shows, from left to right, a red diagonal line with the text 'Affected', a white square with a black border with the text 'Male Variant Absent', a white circle with a black border with the text 'Female Variant Absent', a half-blackened white square with a black border with the text 'Male Variant Present', and a half-blackened circle with a black border with the text 'Female Variant Present'." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Three family trees representing autosomal dominant (left), autosomal recessive (center), and a de-novo inheritence pattern (right) from parents to son.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/trio-analysis/pedigree.svg" alt="Image of three family trees representing a different inheritance pattern each, from left to right the trees have a title on top with: autosomal dominant, autosomal recessive, and De-Novo. The families consists of a father, mother, and son. Under the trees there is a legend which shows, from left to right, a red diagonal line with the text 'Affected', a white square with a black border with the text 'Male Variant Absent', a white circle with a black border with the text 'Female Variant Absent', a half-blackened white square with a black border with the text 'Male Variant Present', and a half-blackened circle with a black border with the text 'Female Variant Present'." loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Three family trees representing autosomal dominant (left), autosomal recessive (center), and a de-novo inheritence pattern (right) from parents to son.</figcaption></figure>
 
 <p>To discover these mutations either whole exome sequencing (WES) or whole genome sequencing (WGS) can be used. With these technologies it is possible to uncover the DNA of the parents and offspring to find (shared) mutations in the DNA. These mutations can include insertions/deletions (indels), loss of heterozygosity (LOH), single nucleotide variants (SNVs), copy number variations (CNVs), and fusion genes.</p>
 
-<p>In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span>  tool, so we don’t have to leave Galaxy to retrieve our data.</p>
+<p>In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span>  tool, so we don’t have to leave Galaxy to retrieve our data.</p>
 
 <p>We will not start our analysis from scratch, since the main goal of this tutorial is to use the HTSGET protocol to download variant information from an online archive and to find the causative variant from those variants. If you want to learn how to do the analysis from scratch, using the raw reads, you can have a look at the <a href="/training-material/topics/variant-analysis/tutorials/exome-seq/tutorial.html">Exome sequencing data analysis for diagnosing a genetic disease</a> tutorial.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1063,7 +1435,7 @@
 	
 
 	
-	<script type="text/javascript">
+	<script>
 		function ready(fn) {
 			if (document.readyState != 'loading'){
 				fn();
@@ -1082,7 +1454,7 @@
   <p>I see, you can’t wait to get DAC access. To download the data from zenodo for this tutorial you can follow the step below.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-retrieve-data-from-zenodo" aria-label="hands-on box: Retrieve data from zenodo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Retrieve data from zenodo</div>
+    <div class="box-title hands-on-title" id="hands-on-retrieve-data-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Retrieve data from zenodo</div>
 
     <ol>
       <li>Import the 3 VCFs from <a href="https://zenodo.org/record/6483454">Zenodo</a> to Galaxy <strong>as a collection</strong>.
@@ -1092,7 +1464,7 @@ https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
 </code></pre></div>        </div>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>     <p>Click on <strong>Collection</strong> on the top</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li>     <p>Click on <strong>Build</strong> when available</p>   </li>   <li>     <p>Enter a name for the collection</p>   </li>   <li>Click on <strong>Create list</strong> (and wait a bit)</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>     <p>Click on <strong>Collection</strong> on the top</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li>     <p>Click on <strong>Build</strong> when available</p>   </li>   <li>     <p>Enter a name for the collection</p>   </li>   <li>Click on <strong>Create list</strong> (and wait a bit)</li> </ul> </blockquote>
       </li>
       <li>
         <p>Set the datatype to <strong>vcf</strong>.</p>
@@ -1104,7 +1476,7 @@ https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
         <p>If you forgot to select the <em>“Collections”</em> tab during upload, please put the file in a collection now.</p>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a dataset collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a dataset collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
       </li>
     </ol>
 
@@ -1118,10 +1490,10 @@ https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
   <p>Our test data is stored in EGA, which can be easily accessed using the EGA Download Client. Our specific EGA dataset accession ID is: “EGAD00001008392”. However, before you can access this data you need to request DAC access to this dataset. This can be requested by emailing to <a href="mailto:helpdesk@ega-archive.org">helpdesk@ega-archive.org</a>, don’t forget to mention the dataset ID! When the EGA grants you access it will create an account for you, if you don’t have it already. Next, you should link your account to your Galaxy account by going to the homepage on Galaxy and at the top bar click <strong>User &gt; Preferences &gt; Manage Information</strong>. Now add your email and password of your (new) EGA account under: <strong>Your EGA (european Genome Archive) account</strong>. After that you can check if you can log in and see if you have access to the dataset.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-check-log-in-and-authorized-datasets" aria-label="hands-on box: Check log-in and authorized datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check log-in and authorized datasets</div>
+    <div class="box-title hands-on-title" id="hands-on-check-log-in-and-authorized-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check log-in and authorized datasets</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span>  with the following parameters:
         <ul>
           <li><em>“What would you like to do?”</em>: <code class="language-plaintext highlighter-rouge">List my authorized datasets</code></li>
         </ul>
@@ -1129,7 +1501,7 @@ https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
     </ol>
 
     <blockquote class="comment">
-      <div class="box-title comment-title" id="comment-check-if-the-dataset-is-listed" aria-label="comment box: Check if the dataset is listed."><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Check if the dataset is listed.</div>
+      <div class="box-title comment-title" id="comment-check-if-the-dataset-is-listed"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Check if the dataset is listed.</div>
 
       <p>Check if your dataset is listed in the output of the tool. If not you can look at the header of the output to find out why it is not listed. When the header does not provide any information you could have a look at the error message by clicking on the <strong>eye</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> of the output dataset and then click on the icon <strong>view details</strong> <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span>. The error should be listed at <strong>Tool Standard Error</strong>.</p>
     </blockquote>
@@ -1137,13 +1509,13 @@ https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
   </blockquote>
 
   <h2 id="download-list-of-files">Download list of files</h2>
-  <p>When you have access to the EGA dataset, you can download all the needed files. However, the EGA dataset contains many different filetypes and cases, but we are only interested in the VCFs from case 5 and, to reduce execution time, the variants on chromosome 17. To be able to donwload these files we first need to request the list of files from which we can download. Make sure to use <strong>version 4+</strong> of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span> .</p>
+  <p>When you have access to the EGA dataset, you can download all the needed files. However, the EGA dataset contains many different filetypes and cases, but we are only interested in the VCFs from case 5 and, to reduce execution time, the variants on chromosome 17. To be able to donwload these files we first need to request the list of files from which we can download. Make sure to use <strong>version 4+</strong> of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span> .</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-request-list-of-files-in-the-dataset" aria-label="hands-on box: Request list of files in the dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Request list of files in the dataset</div>
+    <div class="box-title hands-on-title" id="hands-on-request-list-of-files-in-the-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Request list of files in the dataset</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span>  <strong>version 4+</strong> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span>  <strong>version 4+</strong> with the following parameters:
         <ul>
           <li><em>“What would you like to do?”</em>: <code class="language-plaintext highlighter-rouge">List files in a datasets</code></li>
           <li><em>“EGA Dataset Accession ID?”</em>: <code class="language-plaintext highlighter-rouge">EGAD00001008392</code></li>
@@ -1152,7 +1524,7 @@ https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
     </ol>
 
     <!--SNIPPET-->
-    <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-tool-version"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-tool-version-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the tool version"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the tool version<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool.</p>   <p><strong>Switching to a different version</strong> of a tool:</p>   <ul>   <li>Open the tool</li>   <li>Click on the <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> versions logo at the <strong>top right</strong></li>   <li>Select the desired version from the dropdown list</li> </ul> </blockquote>
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-tool-version"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-tool-version" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the tool version<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool.</p>   <p><strong>Switching to a different version</strong> of a tool:</p>   <ul>   <li>Open the tool</li>   <li>Click on the <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> versions logo at the <strong>top right</strong></li>   <li>Select the desired version from the dropdown list</li> </ul> </blockquote>
 
   </blockquote>
 
@@ -1160,10 +1532,10 @@ https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
   <p>Now that we have listed all the files, we need to filter out the files we actually need. We can do this by using a simple regular expression or regex. With regex it will be easy to find or replace patterns within a textfile.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-filter-out-vcfs-from-list-of-files" aria-label="hands-on box: Filter out VCFs from list of files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter out VCFs from list of files</div>
+    <div class="box-title hands-on-title" id="hands-on-filter-out-vcfs-from-list-of-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter out VCFs from list of files</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">List of EGA datasets</code> (output of <strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           <li><em>“Type of regex”</em>: <code class="language-plaintext highlighter-rouge">Extended (egrep)</code></li>
@@ -1183,10 +1555,10 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 </code></pre></div>  </div>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-download-listed-vcfs" aria-label="hands-on box: Download listed VCFs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Download listed VCFs</div>
+    <div class="box-title hands-on-title" id="hands-on-download-listed-vcfs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Download listed VCFs</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span>  with the following parameters:
         <ul>
           <li><em>“What would you like to do?”</em>: <code class="language-plaintext highlighter-rouge">Download multiple files (based on a file with IDs)</code>
             <ul>
@@ -1201,7 +1573,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
     <p>After the download you should have a collection with one file for each family member, i.e. mother (M), father (F), and case (IC). Make sure the files are recognized as the <strong>vcf_bgzip</strong> format.</p>
 
     <!--SNIPPET-->
-    <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
   </blockquote>
 
@@ -1209,7 +1581,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
   <p>Finally, we need to decompress our bgzipped VCFs, since we will use a text manipulation tool as a next step to process the VCFs. To decompress the vcf we will use a built-in tool from Galaxy, which can be accessed by manipulating the file itself in a similair fashion as changing its detected type.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-convert-compressed-vcf-to-uncompressed" aria-label="hands-on box: Convert compressed vcf to uncompressed."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert compressed vcf to uncompressed.</div>
+    <div class="box-title hands-on-title" id="hands-on-convert-compressed-vcf-to-uncompressed"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Convert compressed vcf to uncompressed.</div>
 
     <p>Open the collection of VCFs and execute the following steps for each VCF.</p>
 
@@ -1231,7 +1603,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
     <p>After transforming all the VCFs you need to combine the converted VCFs into a colllection again.</p>
 
     <!--SNIPPET-->
-    <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-1-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a dataset collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check the 3 vcf files</li>   <li>     <p>Click <strong>3 of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a dataset collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check the 3 vcf files</li>   <li>     <p>Click <strong>3 of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
 
   </blockquote>
 
@@ -1244,10 +1616,10 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 <p>Firstly, our next tool has some assumptions about our input VCFs. The tool expects the chromosome numbers to start with a prefix <code class="language-plaintext highlighter-rouge">chr</code>. Our VCFs only use the chromosome numbers however, the VCFs just use the chromosome numbers. This is due to a difference in reference genome used when creating the VCFs. To change the prefix in the VCFs we will use regex again.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-chr-prefix-using-regex" aria-label="hands-on box: Add chr prefix using regex"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add chr prefix using regex</div>
+  <div class="box-title hands-on-title" id="hands-on-add-chr-prefix-using-regex"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add chr prefix using regex</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1"><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find And Replace tool"><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">VCFs</code> (output of <strong>Convert compressed file to uncompressed.</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -1272,7 +1644,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-explaining-the-regex" aria-label="comment box: Explaining the regex."><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Explaining the regex.</div>
+    <div class="box-title comment-title" id="comment-explaining-the-regex"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Explaining the regex.</div>
 
     <p>The two regex patterns might look complicated but they are quite simple if you break them down in components.</p>
     <ul>
@@ -1300,13 +1672,13 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 
 <p>One of the normalization steps is splitting multiallelic variants, 2 variants detected on the same position but on a different allele. Splitting these records will put the 2 variants on a separate line, that way the impact of the individual mutations can be evaluated. In addition, indels need to be left-aligned and normalized because that’s how they are stored in the annotation databases. An indel is left-aligned and normalized, according to <span class="citation"><a href="#Tan2015">Tan <i>et al.</i> 2015</a></span>, “if and only if it is no longer possible to shift its position to the left while keeping the length of all its alleles constant” and “if it is represented in as few nucleotides as possible”.</p>
 
-<figure id="figure-2"><img src="../../images/trio-analysis/variant_normalization.png" alt="Image of different representations of the same variant. On the top the variant is shown in the reference sequence GGGCACACACAGGG and the alternate sequence GGGCACACAGGG. Underneath the image is divided into two panels, the left panel aligns each allele to the reference genome, and the right panel represents the variants in a VCF with the columns POS (position), REF (reference), and ALT (alternate). From top to bottom it shows that A is not left-aligned with the reference CAC and the alternate C  at position 6, B is neither left-aligned nor parsimonious with reference GCACA and alternate GCA at position 3, C is not parsimonious with reference GGCA and alternate GG at position 2, and D is normalized with reference GCA and the alternate position G at position 3." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> The different ways to represent INDELs. (Source: https://academic.oup.com/bioinformatics/article/31/13/2202/196142)</figcaption></figure>
+<figure id="figure-2"><img src="../../images/trio-analysis/variant_normalization.png" alt="Image of different representations of the same variant. On the top the variant is shown in the reference sequence GGGCACACACAGGG and the alternate sequence GGGCACACAGGG. Underneath the image is divided into two panels, the left panel aligns each allele to the reference genome, and the right panel represents the variants in a VCF with the columns POS (position), REF (reference), and ALT (alternate). From top to bottom it shows that A is not left-aligned with the reference CAC and the alternate C  at position 6, B is neither left-aligned nor parsimonious with reference GCACA and alternate GCA at position 3, C is not parsimonious with reference GGCA and alternate GG at position 2, and D is normalized with reference GCA and the alternate position G at position 3." loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The different ways to represent INDELs. (Source: https://academic.oup.com/bioinformatics/article/31/13/2202/196142)</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-normalize-vcf" aria-label="hands-on box: Normalize VCF"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Normalize VCF</div>
+  <div class="box-title hands-on-title" id="hands-on-normalize-vcf"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Normalize VCF</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1"><strong>bcftools norm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1" title="bcftools norm tool"><strong>bcftools norm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“VCF/BCF Data”</em>: <code class="language-plaintext highlighter-rouge">VCFs with chr prefix</code> (output of <strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome</code>
@@ -1328,7 +1700,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
   </ol>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-check-the-normalization-summary"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-check-the-normalization-summary-contents" aria-expanded="true" aria-label="Toggle tip box: Check the normalization summary"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Check the normalization summary<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-check-the-normalization-summary"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-check-the-normalization-summary" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Check the normalization summary<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>You can have a look at the summary to check what changes were made. First, expand the output of bcftools norm (by clicking on the box) and it should be listed in the box. If not you can find it by clicking on the icon view details <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> and look at the output of the ToolStandard Error.</p>
 
@@ -1340,10 +1712,10 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 <p>After normalizing the VCFs we will filter out the variants with a NON_REF tag in the ALT column, the column which represents the mutated nucleotide(s). According to the header, these sites correspond to: “any possible alternative allele at this location”. So these sites are a sort of placeholders for potential variants. However we are not interested in this kind of variants and they slow our analysis down quite a lot, so we will filter them out.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-out-non-ref-sites" aria-label="hands-on box: Filter out NON_REF sites"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter out NON_REF sites</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-out-non-ref-sites"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter out NON_REF sites</div>
 
   <ol>
-    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter tool"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Normalized VCFs</code> (output of <strong>bcftools norm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c5!='&lt;NON_REF&gt;'</code></li>
@@ -1355,7 +1727,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>Why didn’t we filter out the NON_REF site directly after filtering? Have a look at the VCFs before and after normalization.</li>
@@ -1363,23 +1735,23 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
-      <li>The <code class="language-plaintext highlighter-rouge">&lt;NON_REF&gt;</code> sites were sometimes also represented as a multi allelic variant e.g., <code class="language-plaintext highlighter-rouge">chr17	302	.	T	TA,&lt;NON_REF&gt;</code> which would not be filtered out with the <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  tool.</li>
-      <li>Possibly, if the <code class="language-plaintext highlighter-rouge">&lt;NON_REF&gt;</code> variants were filtered out and if the <code class="language-plaintext highlighter-rouge">&lt;NON_REF&gt;</code> tag was removed from multi-allelic variants. However, the last task (splitting multi-allelic sites) can already be handled by <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1"><strong>bcftools norm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1</span></span>  and it might involve more sophisticated steps to properly split these variants.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">&lt;NON_REF&gt;</code> sites were sometimes also represented as a multi allelic variant e.g., <code class="language-plaintext highlighter-rouge">chr17	302	.	T	TA,&lt;NON_REF&gt;</code> which would not be filtered out with the <span class="tool" data-tool="Filter1" title="Filter tool"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  tool.</li>
+      <li>Possibly, if the <code class="language-plaintext highlighter-rouge">&lt;NON_REF&gt;</code> variants were filtered out and if the <code class="language-plaintext highlighter-rouge">&lt;NON_REF&gt;</code> tag was removed from multi-allelic variants. However, the last task (splitting multi-allelic sites) can already be handled by <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1" title="bcftools norm tool"><strong>bcftools norm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1</span></span>  and it might involve more sophisticated steps to properly split these variants.</li>
     </ol>
   </blockquote>
 
 </blockquote>
 
 <h2 id="merge-vcf-collection-into-one-dataset">Merge VCF collection into one dataset</h2>
-<p>Finally, we can merge the 3 separate files of the parents and patient into a single VCF. This will put overlapping variants on the same line by aligning the samples format column. If a sample misses a certain variant then on the line of that variant the sample’s format information will look like this: <code class="language-plaintext highlighter-rouge">./.:.:.:.:.:.</code>. This makes it easier to find shared and missing variants between the parents and ofspring. A tool which can do this is the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10"><strong>bcftools merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10</span></span>  tool.</p>
+<p>Finally, we can merge the 3 separate files of the parents and patient into a single VCF. This will put overlapping variants on the same line by aligning the samples format column. If a sample misses a certain variant then on the line of that variant the sample’s format information will look like this: <code class="language-plaintext highlighter-rouge">./.:.:.:.:.:.</code>. This makes it easier to find shared and missing variants between the parents and ofspring. A tool which can do this is the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10" title="bcftools merge tool"><strong>bcftools merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10</span></span>  tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-merge-vcfs" aria-label="hands-on box: Merge VCFs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Merge VCFs</div>
+  <div class="box-title hands-on-title" id="hands-on-merge-vcfs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Merge VCFs</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10"><strong>bcftools merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10" title="bcftools merge tool"><strong>bcftools merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Other VCF/BCF Datasets”</em>: <code class="language-plaintext highlighter-rouge">&lt;NON_REF&gt; filtered VCFs</code> (output of <strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Restrict to”</em>:
@@ -1396,7 +1768,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-checking-the-merged-vcf" aria-label="comment box: Checking the merged VCF."><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Checking the merged VCF.</div>
+        <div class="box-title comment-title" id="comment-checking-the-merged-vcf"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Checking the merged VCF.</div>
 
         <p>Check the merged VCF, now each line should contain 3 sample columns, namely <code class="language-plaintext highlighter-rouge">Case6F</code>, <code class="language-plaintext highlighter-rouge">Case6M</code>, and <code class="language-plaintext highlighter-rouge">Case6C</code>. These columns represent the presence of the variant for the mother, father, and offspring.</p>
       </blockquote>
@@ -1406,16 +1778,16 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 </blockquote>
 
 <h1 id="annotation">Annotation</h1>
-<p>To understand what the effect of our variants are, we need to annotate our variants. We will use the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1"><strong>SnpEff eff</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1</span></span> , which will compare our variants to a database of variants with known effects.</p>
+<p>To understand what the effect of our variants are, we need to annotate our variants. We will use the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1" title="SnpEff eff tool"><strong>SnpEff eff</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1</span></span> , which will compare our variants to a database of variants with known effects.</p>
 
 <h2 id="annotate-with-snpeff">Annotate with SNPeff</h2>
 <p>Running SnpEff will produce the annotated VCF and an HTML summary file. The annotations are added to the INFO column in the VCF and the added INFO IDs (<code class="language-plaintext highlighter-rouge">ANN</code>, <code class="language-plaintext highlighter-rouge">LOF</code>, and <code class="language-plaintext highlighter-rouge">NMD</code>) are explained in the header. The summary files include the HTML stats file which contains general metrics, such as the number of annotated variants, the impact of all the variants, and much more.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotation-with-snpeff" aria-label="hands-on box: Annotation with SnpEff"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Annotation with SnpEff</div>
+  <div class="box-title hands-on-title" id="hands-on-annotation-with-snpeff"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotation with SnpEff</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1"><strong>SnpEff eff:</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1" title="SnpEff eff: tool"><strong>SnpEff eff:</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequence changes (SNPs, MNPs, InDels)”</em>: <code class="language-plaintext highlighter-rouge">Merged VCF</code> (output of <strong>bcftools merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">VCF (only if input is VCF)</code></li>
@@ -1433,7 +1805,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>How many variants got annotated?</li>
@@ -1441,7 +1813,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>The number of variants processed is 209,143.</li>
       <li>Most variants are found in the intronic regions. However, this is to be expected since the mutations in intonic regions generally do not affect the gene.</li>
@@ -1452,7 +1824,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 
 <h1 id="gemini-analyses">GEMINI analyses</h1>
 <p>Next, we will transform our VCF into a GEMINI database which makes it easier to query the VCFs and to determine different inheritence patterns between the mother, father, and offspring. In addition, GEMINI will add even more annotations to the variants. This allows us to filter the variants even more which gets us to closer to the real causative variant.
-All these steps are performed by the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2"><strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2</span></span>  tool. However, before we can load the VCF we also need to define a pedigree file.</p>
+All these steps are performed by the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="GEMINI load tool"><strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2</span></span>  tool. However, before we can load the VCF we also need to define a pedigree file.</p>
 
 <h2 id="create-a-pedigree-file-describing-the-family-trio">Create a pedigree file describing the family trio</h2>
 <p>A pedigree file is a file that informs GEMINI which family members are affected by the disease and which sample name corresponds to what individual. This information is saved as a table containing information about the phenotype of the family.</p>
@@ -1467,7 +1839,7 @@ All these steps are performed by the <span class="tool" data-tool="toolshed.g2.b
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-the-ped-file" aria-label="hands-on box: Creating the PED file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating the PED file</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-ped-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating the PED file</div>
 
   <ol>
     <li>Upload the pedigree file from below.
@@ -1480,20 +1852,20 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
   </ol>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Open the Galaxy Upload Manager</li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new file<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Open the Galaxy Upload Manager</li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
 
 </blockquote>
 
-<p>For more information on the PED file you can read the help section of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2"><strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2</span></span>  tool in the description, which can be found at the bottom of the page when clicking on the tool.</p>
+<p>For more information on the PED file you can read the help section of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="GEMINI load tool"><strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2</span></span>  tool in the description, which can be found at the bottom of the page when clicking on the tool.</p>
 
 <h2 id="load-gemini-database">Load GEMINI database</h2>
 <p>Now we can transform the subsampled VCF and PED file into a GEMINI database. Note that this can take a very long time depending on the size of the VCF. In our case it should take around 30-40 minutes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-transform-vcf-and-ped-files-into-a-gemini-database" aria-label="hands-on box: Transform VCF and PED files into a GEMINI database"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Transform VCF and PED files into a GEMINI database</div>
+  <div class="box-title hands-on-title" id="hands-on-transform-vcf-and-ped-files-into-a-gemini-database"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Transform VCF and PED files into a GEMINI database</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2"><strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="GEMINI load tool"><strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“VCF dataset to be loaded in the GEMINI database”</em>: <code class="language-plaintext highlighter-rouge">SNPeff annotated VCF</code> (output of <strong>SnpEff eff</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample and family information in PED format”</em>: the pedigree file prepared above</li>
@@ -1507,17 +1879,17 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
 <p>With the GEMINI database it is now possible to identify the causative variant that could explain the breast cancer in the mother and daughter. The inheritance information makes it a bit easier to determine which tool to run to find the causative variant, instead of finding it by trying all the different inheritance patterns.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Which inheritance pattern could have occurred in this family trio?</p>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-possible-patterns"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-possible-patterns-contents" aria-expanded="true" aria-label="Toggle tip box: Possible patterns"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Possible patterns<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-    <p>The available inheritance patterns can be found in the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1"><strong>GEMINI inheritance pattern</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1</span></span>  tool.</p>
+    <div class="box-title tip-title" id="tip-possible-patterns"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-possible-patterns" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Possible patterns<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>The available inheritance patterns can be found in the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1" title="GEMINI inheritance pattern tool"><strong>GEMINI inheritance pattern</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1</span></span>  tool.</p>
   </blockquote>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ul>
       <li>Since both the daughter and mother are affected, and the father likely unaffected<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>, the mutation is most probably dominant. The disease could still be recessive if the father has one copy of the faulty gene, however this is less likely.</li>
@@ -1533,13 +1905,13 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
 
 <p>Based on these findings it would make sense to start looking for inherited autosomal dominant variants as a first step. If there are no convincing candidate mutations it would always be possible to look at the other less likely inheritance patterns, namely de-novo, compound heterozygous, and LOH events.</p>
 
-<p>To find the most plausible causative variant we will use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1"><strong>GEMINI inheritance pattern</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1</span></span>  tool. This tool allows us to select the most likely inheritance pattern (autosomal dominant). Below it is explained how to run the tool for this specific pattern, but you can always try other inheritence patterns if you are curious.</p>
+<p>To find the most plausible causative variant we will use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1" title="GEMINI inheritance pattern tool"><strong>GEMINI inheritance pattern</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1</span></span>  tool. This tool allows us to select the most likely inheritance pattern (autosomal dominant). Below it is explained how to run the tool for this specific pattern, but you can always try other inheritence patterns if you are curious.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-gemini-autosomal-dominant-inhertiance-pattern" aria-label="hands-on box: Run GEMINI autosomal dominant inhertiance pattern"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run GEMINI autosomal dominant inhertiance pattern</div>
+  <div class="box-title hands-on-title" id="hands-on-run-gemini-autosomal-dominant-inhertiance-pattern"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run GEMINI autosomal dominant inhertiance pattern</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1"><strong>GEMINI inheritance pattern</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1" title="GEMINI inheritance pattern tool"><strong>GEMINI inheritance pattern</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GEMINI database”</em>: <code class="language-plaintext highlighter-rouge">GEMINI database</code> (output of <strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Your assumption about the inheritance pattern of the phenotype of interest”</em>: <code class="language-plaintext highlighter-rouge">Autosomal dominant</code>
@@ -1576,12 +1948,12 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Did you find the causative variant in the output of the GEMINI inheritance pattern tool?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The only pathogenic variant related to breast cancer in the output, according to clinvar, is a SNP at chr17 at position 41215919 on the BRCA1 gene which transforms a G into a T, which is shown below.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chr17	41215919	G	T	missense_variant	BRCA1	pathogenic,other
 </code></pre></div>    </div>
@@ -1596,7 +1968,7 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
 <h1 id="workflow">Workflow</h1>
 <p>Here is the final layout of the workflow. For more details you can download the workflow from the overview at the top of the page.</p>
 
-<figure id="figure-3"><img src="../../images/trio-analysis/workflow.png" alt="Image showing the whole workflow of the tutorial. Each seperate step is represented by a rectangular block with the tool name in the upper part in blue and the lower part shows the output in white. In the top left the workflow starts with the EGA Download Client which ouputs the authorized datasets (txt), below that again the EGA Download Client is shown which outputs the list of files in the ega dataset, which is connected to the search in textfiles tool. That tool is connected again to an EGA Download Client step where the VCFs are downloaded using the list of files from the previous tool. This step is connected to a decompress step to change the bgzipped VCFs to regular VCFs. That step is connected to a Filter step which outputs a VCF. The next connected step is the bcftools norm tool which outputs a normalized VCF. Then the normalized VCFs are processed using the Text reformatting tool. Using the output from that step the bcftools megre step is used to output a single VCF and connect it to the SnpEff eff tool. This tool annotates the VCF and that step is connected to the GEMINI load tool which is also connected to step block with the title pedigree. Then the GEMINI load tool connects to the GEMINI inheritance pattern block which outputs an tabular file called GEMINI autosomal_dominant pattern. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> The workflow to download the VCFs and find the causative variant. If you skipped the EGA download step then the workflow starts at the second column. Here each column represents a seperate step, from left to right the steps are: Data preparation, Pre-Processing, Annotation, and GEMINI analysis.</figcaption></figure>
+<figure id="figure-3"><img src="../../images/trio-analysis/workflow.png" alt="Image showing the whole workflow of the tutorial. Each seperate step is represented by a rectangular block with the tool name in the upper part in blue and the lower part shows the output in white. In the top left the workflow starts with the EGA Download Client which ouputs the authorized datasets (txt), below that again the EGA Download Client is shown which outputs the list of files in the ega dataset, which is connected to the search in textfiles tool. That tool is connected again to an EGA Download Client step where the VCFs are downloaded using the list of files from the previous tool. This step is connected to a decompress step to change the bgzipped VCFs to regular VCFs. That step is connected to a Filter step which outputs a VCF. The next connected step is the bcftools norm tool which outputs a normalized VCF. Then the normalized VCFs are processed using the Text reformatting tool. Using the output from that step the bcftools megre step is used to output a single VCF and connect it to the SnpEff eff tool. This tool annotates the VCF and that step is connected to the GEMINI load tool which is also connected to step block with the title pedigree. Then the GEMINI load tool connects to the GEMINI inheritance pattern block which outputs an tabular file called GEMINI autosomal_dominant pattern. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The workflow to download the VCFs and find the causative variant. If you skipped the EGA download step then the workflow starts at the second column. Here each column represents a seperate step, from left to right the steps are: Data preparation, Pre-Processing, Annotation, and GEMINI analysis.</figcaption></figure>
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
@@ -1606,10 +1978,12 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
   </ol>
 </div>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Downloading whole datasets with HTSGET is safe and easy with Galaxy.</p>
@@ -1652,33 +2026,9 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Trio Analysis using Synthetic Datasets from RD-Connect GPAP (Variant Analysis)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Trio Analysis using Synthetic Datasets from RD-Connect GPAP (Variant Analysis)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1696,7 +2046,7 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1737,7 +2087,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1749,29 +2099,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

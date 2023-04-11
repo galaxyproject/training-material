@@ -12,34 +12,34 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial_ES.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial_ES.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Filtrado, representación y exploración de secuenciación de ARN de células únicas" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-17 13:32:57 +0000" />
-<meta name="DC.creator" content="Wendi Bacon" />
-<meta name="DC.creator" content="Patricia Carvajal López" />
-<meta name="DC.creator" content="Beatriz Serrano-Solano" />
-<meta name="DC.creator" content="Nicolas Palopoli" />
-<meta name="DC.creator" content="Lorena Gallego Villar" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Filtrado, representación y exploración de secuenciación de ARN de células únicas">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-11-17 13:32:57 +0000">
+<meta name="DC.creator" content="Wendi Bacon">
+<meta name="DC.creator" content="Patricia Carvajal López">
+<meta name="DC.creator" content="Beatriz Serrano-Solano">
+<meta name="DC.creator" content="Nicolas Palopoli">
+<meta name="DC.creator" content="Lorena Gallego Villar">
 
         
         
         
         
-        <meta name="description" content="Training material and practicals for all kinds of single ..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Filtrado, representación y exploración de secuenciación d..." />
-        <meta property="og:description" content="Training material and practicals for all kinds of single ..." />
+        <meta name="description" content="Training material and practicals for all kinds of single ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Filtrado, representación y exploración de secuenciación d...">
+        <meta property="og:description" content="Training material and practicals for all kinds of single ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -605,10 +605,356 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-single-cell">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-11-17 13:32:57 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Filtrado, representación y exploración de secuenciación de ARN de células únicas",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": null,
+    "alternateName": "es"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html",
+      "name": "Generating a single cell matrix using Alevin",
+      "description": "Hands-on for 'Generating a single cell matrix using Alevin' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "orcid": "https://orcid.org/0000-0002-8170-8806"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pclo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pclo/",
+      "name": "Patricia Carvajal López",
+      "image": "https://avatars.githubusercontent.com/pclo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "name": "Beatriz Serrano-Solano",
+      "image": "https://avatars.githubusercontent.com/beatrizserrano",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5862-6132",
+      "orcid": "https://orcid.org/0000-0002-5862-6132"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/npalopoli/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/npalopoli/",
+      "name": "Nicolas Palopoli",
+      "image": "https://avatars.githubusercontent.com/npalopoli",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lgallegovillar/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lgallegovillar/",
+      "name": "Lorena Gallego Villar",
+      "image": "https://avatars.githubusercontent.com/lgallegovillar",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "orcid": "https://orcid.org/0000-0002-8170-8806"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pclo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pclo/",
+      "name": "Patricia Carvajal López",
+      "image": "https://avatars.githubusercontent.com/pclo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "name": "Beatriz Serrano-Solano",
+      "image": "https://avatars.githubusercontent.com/beatrizserrano",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5862-6132",
+      "orcid": "https://orcid.org/0000-0002-5862-6132"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/npalopoli/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/npalopoli/",
+      "name": "Nicolas Palopoli",
+      "image": "https://avatars.githubusercontent.com/npalopoli",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lgallegovillar/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lgallegovillar/",
+      "name": "Lorena Gallego Villar",
+      "image": "https://avatars.githubusercontent.com/lgallegovillar",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ],
+  "educationalLevel": "Advanced"
+}
+</script>
+
+<article class="tutorial topic-single-cell">
     <h1 data-toc-skip>Filtrado, representación y exploración de secuenciación de ARN de células únicas</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -619,9 +965,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Descripción General</div>
+        <div id="overview-box" class="box-title">Descripción General</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas:</strong>
         <ul>
@@ -777,7 +1123,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/" title="Workflows" alt="Filter, Plot and Explore Single-cell RNA-seq Data workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/" title="Filter, Plot and Explore Single-cell RNA-seq Data workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Flujos de trabajos
     </a>
 
@@ -791,13 +1137,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -823,7 +1166,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Disponible en estas instancias de Galaxy 
     </a>
     <ul class="dropdown-menu">
@@ -948,6 +1291,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -983,6 +1328,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">GTN Framework tiene licencia del MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -993,17 +1339,18 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introducción">Introducción</h1>
 
 <p>Has hecho el trabajo para crear una matriz de células únicas, con recuentos de genes y mitocondrias y con grupos de metadatos celulares de todas tus variables de interés (si no, por favor consulta <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">este tutorial</a> para hacerlo). Ahora analizaremos completamente nuestros datos para eliminar las células con poca calidad, para reducir las dimensiones de los datos que dificultan el trabajo, y finalmente, para intentar definir nuestros agrupamientos ¡y darles significado biológico! Hay muchos paquetes para analizar datos de células únicas - Seurat <span class="citation"><a href="#Satija2015">Satija <i>et al.</i> 2015</a></span>, Scanpy <span class="citation"><a href="#Wolf2018">Wolf <i>et al.</i> 2018</a></span>, Monocle <span class="citation"><a href="#Trapnell2014">Trapnell <i>et al.</i> 2014</a></span>, Scater <span class="citation"><a href="#McCarthy2017">McCarthy <i>et al.</i> 2017</a></span>, etc. Aquí trabajaremos con Scanpy porque es la opción con más herramientas disponibles en Galaxy.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-tutoriales-por-todos-lados" aria-label="comment box: ¿Tutoriales por todos lados?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: ¿Tutoriales por todos lados?</div>
+  <div class="box-title comment-title" id="comment-tutoriales-por-todos-lados"><i class="far fa-comment-dots" aria-hidden="true"></i> Comentario: ¿Tutoriales por todos lados?</div>
   <p>Este tutorial es similar a otro tutorial fantástico: <a href="/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">Clustering 3k PBMC</a>. Este tutorial profundiza mucho más en el análisis, en particular en la visualización y la ciencia tras la identificación de marcadores. Todos los pasos se ilustran a la perfección ya que los datos experimentales están limpios y bien anotados. Aquí, trabajaremos con datos más desorganizados para ayudarte a tomar decisiones durante el análisis. Te recomendamos que sigas los tutoriales de célula única disponibles para aumentar tu confianza y experiencia. Para instructores: ten en cuenta que este tutorial dispone de opciones para grupos pequeños.</p>
 </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>En este tutorial cubriremos:</p>
 
@@ -1046,7 +1393,7 @@
 <p>Te proporcionamos un conjunto de datos experimentales de ratón de restricción en el crecimiento fetal <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>. Este es el conjunto de datos generado a partir de <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">este tutorial</a> si usaste los ficheros FASTQ completos en vez de los reducidos (ver el estudio del Single Cell Expression Atlas <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">aquí</a> y todos los datos del proyecto <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">aquí</a>). Puedes encontrar estos datos en este <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---input">historial de entrada</a> o descargarlo del link a Zenodo que aparece más abajo.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-subir-o-cargar-los-datos" aria-label="hands-on box: Subir o cargar los datos"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Subir o cargar los datos</div>
+  <div class="box-title hands-on-title" id="hands-on-subir-o-cargar-los-datos"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Subir o cargar los datos</div>
 
   <ol>
     <li>Crear un nuevo historial para este tutorial</li>
@@ -1057,14 +1404,14 @@
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importación-por-medio-de-enlaces"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importación-por-medio-de-enlaces-contents" aria-expanded="true" aria-label="Toggle tip box: Importación por medio de enlaces"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Importación por medio de enlaces<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copia los enlaces</li>   <li>     <p>Abre el manejador de carga de datos de Galaxy (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> en la parte superior derecha del panel de herramientas)</p>   </li>   <li>Selecciona ‘Pegar/Traer datos’ <strong>Paste/Fetch Data</strong></li>   <li>     <p>Copia los enlaces en el campo de textos</p>   </li>   <li>     <p>Presiona ‘Iniciar’ <strong>Start</strong></p>   </li>   <li>     <p><strong>Close</strong> Cierra la ventana.</p>   </li>   <li>Galaxy utiliza los URLs como nombres de forma predeterminada , así que los tendrás que cambiar a algunos que sean más útiles o informativos. the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importación-por-medio-de-enlaces"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importación-por-medio-de-enlaces" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Importación por medio de enlaces<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copia los enlaces</li>   <li>     <p>Abre el manejador de carga de datos de Galaxy (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> en la parte superior derecha del panel de herramientas)</p>   </li>   <li>Selecciona ‘Pegar/Traer datos’ <strong>Paste/Fetch Data</strong></li>   <li>     <p>Copia los enlaces en el campo de textos</p>   </li>   <li>     <p>Presiona ‘Iniciar’ <strong>Start</strong></p>   </li>   <li>     <p><strong>Close</strong> Cierra la ventana.</p>   </li>   <li>Galaxy utiliza los URLs como nombres de forma predeterminada , así que los tendrás que cambiar a algunos que sean más útiles o informativos. the window</li> </ul> </blockquote>
     </li>
     <li><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de los conjuntos de datos <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
     <li>
       <p>Verificar que el tipo o formato de los datos es <code class="language-plaintext highlighter-rouge">h5ad</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-cambiar-el-tipo-de-datos"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-cambiar-el-tipo-de-datos-contents" aria-expanded="true" aria-label="Toggle tip box: Cambiar el tipo de datos"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Cambiar el tipo de datos<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Selecciona sobre el <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>icono del lápiz</strong> para editar los atributos del conjunto de datos</li>   <li>Selecciona en la pestaña <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> en la parte superior del panel central</li>   <li>Selecciona <code class="language-plaintext highlighter-rouge">h5ad</code></li>   <li>Da clic en el botón <strong>Change datatype</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-cambiar-el-tipo-de-datos"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-cambiar-el-tipo-de-datos" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Cambiar el tipo de datos<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Selecciona sobre el <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>icono del lápiz</strong> para editar los atributos del conjunto de datos</li>   <li>Selecciona en la pestaña <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> en la parte superior del panel central</li>   <li>Selecciona <code class="language-plaintext highlighter-rouge">h5ad</code></li>   <li>Da clic en el botón <strong>Change datatype</strong></li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1075,7 +1422,7 @@
 <p>Has generado un objeto anotado de tipo AnnData a partir de tus archivos FASTQ de secuenciación de ARN de células únicas sin procesar. Sin embargo, sólo has completado un filtrado “aproximado” de tus datos - todavía hay muchas “celdas” que son fondos procedentes de gotas vacías o simplemente de baja calidad. Habrá también genes que podrían ser artefactos o que aparecen con tan baja frecuencia que las herramientas estadísticas fallan al analizarlos. Este ruido tanto en las células como en los genes no sólo hace difícil distinguir la información biológica real del ruido, sino que también intensifica la parte computacional del análisis. ¡Las lecturas espurias consumen gran parte de la capacidad computacional de analizar! Lo primero que tenemos que hacer pues es filtrar la matriz para obtener datos limpios y poder extraer información significativa para acelerar el análisis.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-preguntas" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Preguntas</div>
 
   <ol>
     <li>¿Qué información se almacena en tu objeto AnnData? La última herramienta para generar este objeto contó los genes asociados a la mitocondria en tu matriz. ¿Dónde están almacenados los datos?</li>
@@ -1083,26 +1430,26 @@
   </ol>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-pista"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-pista-contents" aria-expanded="true" aria-label="Toggle tip box: Pista"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Pista<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-pista"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-pista" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Pista<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Es preferible usar la misma herramienta que usaste en el tutorial previo para examinar tu AnnData, porque ¡no es tan sencillo como examinar el conjunto de datos Anndata en el historial!</p>
 
     <blockquote class="notranslate hands_on">
-      <div class="box-title hands-on-title" id="hands-on-inspeccionando-objetos-anndata" aria-label="hands-on box: Inspeccionando objetos AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Inspeccionando objetos AnnData</div>
+      <div class="box-title hands-on-title" id="hands-on-inspeccionando-objetos-anndata"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Inspeccionando objetos AnnData</div>
 
       <ol>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
             <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
           </ul>
         </li>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
             <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
           </ul>
         </li>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
             <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
@@ -1112,7 +1459,7 @@
     </blockquote>
   </blockquote>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-respuestas"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuestas-contents" aria-expanded="true" aria-label="Toggle solution box: Respuestas"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Respuestas<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-respuestas"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuestas" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Respuestas<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Si examinas tu objeto AnnData encontrarás un número de métricas de control de calidad diferentes tanto para células <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>obs</strong> como <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> genes <strong>var</strong>.
@@ -1132,7 +1479,7 @@
 <p><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> <strong>Buen consejo para ahorrar tiempo</strong> - ¡convierte las tres salidas de <strong>Inspect AnnData</strong> señaladas arriba en un workflow para tener acceso rápido!</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-extraer-un-flujo-de-trabajo-de-tu-historial"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-extraer-un-flujo-de-trabajo-de-tu-historial-contents" aria-expanded="true" aria-label="Toggle tip box: Extraer un flujo de trabajo de tu historial"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Extraer un flujo de trabajo de tu historial<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Elimina cualquier trabajo fallido o no deseado de tu historial.</li>   <li>Haz clic en <strong>Opciones de historial</strong> (icono de engranaje <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span>) en la parte superior del panel de historial.</li>   <li>Selecciona <strong>Extraer flujo de trabajo</strong></li>   <li>Verifica los pasos, ingresa un nombre para tu flujo de trabajo y presiona el botón <strong>Crear flujo de trabajo</strong>.</li> </ol> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-extraer-un-flujo-de-trabajo-de-tu-historial"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-extraer-un-flujo-de-trabajo-de-tu-historial" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Extraer un flujo de trabajo de tu historial<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Elimina cualquier trabajo fallido o no deseado de tu historial.</li>   <li>Haz clic en <strong>Opciones de historial</strong> (icono de engranaje <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span>) en la parte superior del panel de historial.</li>   <li>Selecciona <strong>Extraer flujo de trabajo</strong></li>   <li>Verifica los pasos, ingresa un nombre para tu flujo de trabajo y presiona el botón <strong>Crear flujo de trabajo</strong>.</li> </ol> </blockquote>
 
 <h2 id="generar-gráficos-de-control-de-calidad">Generar gráficos de control de calidad</h2>
 
@@ -1143,10 +1490,10 @@
 <h3 id="creando-los-gráficos">Creando los gráficos</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-haciendo-gráficos-qc" aria-label="hands-on box: Haciendo gráficos QC"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Haciendo gráficos QC</div>
+  <div class="box-title hands-on-title" id="hands-on-haciendo-gráficos-qc"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Haciendo gráficos QC</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1164,7 +1511,7 @@
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> salida <code class="language-plaintext highlighter-rouge">Violin - genotype - log</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1182,7 +1529,7 @@
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Violin - sex - log</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1200,7 +1547,7 @@
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Violin - batch - log</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Scatter plot along observations or variables axes, using 'pl.scatter'</code>
@@ -1218,7 +1565,7 @@
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Scatter - mito x UMIs</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Scatter plot along observations or variables axes, using 'pl.scatter'</code>
@@ -1236,7 +1583,7 @@
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Scatter - mito x genes</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Scatter plot along observations or variables axes, using 'pl.scatter'</code>
@@ -1262,10 +1609,10 @@
 <p>¡Eso fue mucha información! Abordemos por secciones y veamos qué preguntas pueden ayudar a resolver estos gráficos. El <em>scratchbook</em> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> puede ser útil aquí para ver los distintos gráficos al mismo tiempo.</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-uso-del-cuaderno-de-apuntes-para-ver-varios-conjuntos-de-datos"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-uso-del-cuaderno-de-apuntes-para-ver-varios-conjuntos-de-datos-contents" aria-expanded="true" aria-label="Toggle tip box: Uso del cuaderno de apuntes para ver varios conjuntos de datos"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Uso del cuaderno de apuntes para ver varios conjuntos de datos<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Si deseas ver dos o más conjuntos de datos al mismo tiempo, puedes usar la función <strong>Scratchbook</strong> en Galaxy:     1. <strong>Haz clic</strong> en el icono <em>Scratchbook</em> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> en la barra de menú superior.        - Debería aparecer ver una pequeña marca de verificación en el icono     2. <strong>Ver</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> un conjunto de datos haciendo clic en el icono de ojo <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> para ver el resultado.        - Deberías ver la salida en una ventana emergente sobre Galaxy        - Puedes cambiar el tamaño de esta ventana arrastrando la esquina inferior derecha     3. <strong>Haz clic</strong> fuera del archivo para salir del Scratchbook     4. <strong>Ver</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> un segundo conjunto de datos de tu historial        - Ahora deberías poder ver una segunda ventana con el nuevo conjunto de datos        - Esto hace que sea más fácil comparar las dos salidas.     5. Repite estos pasos para todos los archivos que desees comparar.     6. Puedes desactivar <strong>Scratchbook</strong> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> haciendo clic en el icono nuevamente.</p> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-uso-del-cuaderno-de-apuntes-para-ver-varios-conjuntos-de-datos"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-uso-del-cuaderno-de-apuntes-para-ver-varios-conjuntos-de-datos" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Uso del cuaderno de apuntes para ver varios conjuntos de datos<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Si deseas ver dos o más conjuntos de datos al mismo tiempo, puedes usar la función <strong>Scratchbook</strong> en Galaxy:     1. <strong>Haz clic</strong> en el icono <em>Scratchbook</em> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> en la barra de menú superior.        - Debería aparecer ver una pequeña marca de verificación en el icono     2. <strong>Ver</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> un conjunto de datos haciendo clic en el icono de ojo <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> para ver el resultado.        - Deberías ver la salida en una ventana emergente sobre Galaxy        - Puedes cambiar el tamaño de esta ventana arrastrando la esquina inferior derecha     3. <strong>Haz clic</strong> fuera del archivo para salir del Scratchbook     4. <strong>Ver</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> un segundo conjunto de datos de tu historial        - Ahora deberías poder ver una segunda ventana con el nuevo conjunto de datos        - Esto hace que sea más fácil comparar las dos salidas.     5. Repite estos pasos para todos los archivos que desees comparar.     6. Puedes desactivar <strong>Scratchbook</strong> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> haciendo clic en el icono nuevamente.</p> </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-variación-en-lote" aria-label="question box: Pregunta - Variación en lote"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta - Variación en lote</div>
+  <div class="box-title question-title" id="question-pregunta-variación-en-lote"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta - Variación en lote</div>
 
   <p>¿Existen diferencias en la profundidad de secuenciación a lo largo de las muestras?</p>
   <ol>
@@ -1274,11 +1621,11 @@
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-respuesta"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuesta-contents" aria-expanded="true" aria-label="Toggle solution box: Respuesta"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Respuesta<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-respuesta"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuesta" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Respuesta<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>¡El diagrama <code class="language-plaintext highlighter-rouge">violin - batch - log</code> tendrá todo lo que buscas!
-        <figure id="figure-1"><img src="../../images/scrna-casestudy/wab-violin-batch-log.png" alt="Violin - batch - log. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 1:</span> Violin - lote - log (Datos crudos)</figcaption></figure>
+        <figure id="figure-1"><img src="../../images/scrna-casestudy/wab-violin-batch-log.png" alt="Violin - batch - log. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 1</strong>:</span> Violin - lote - log (Datos crudos)</figcaption></figure>
       </li>
       <li>Teniendo en cuenta que está en escala logarítmica - lo que significa que pequeñas diferencias pueden significar grandes diferencias - la representación en forma de violín tiene probablemente un aspecto similar.
         <ul>
@@ -1294,7 +1641,7 @@
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-variables-biológicas" aria-label="question box: Pregunta - Variables biológicas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta - Variables biológicas</div>
+  <div class="box-title question-title" id="question-pregunta-variables-biológicas"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta - Variables biológicas</div>
 
   <p>¿Hay diferencias en la profundidad de secuenciación en los diferentes sexos? ¿Genotipos?</p>
   <ol>
@@ -1304,12 +1651,12 @@
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-respuesta-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuesta-1-contents" aria-expanded="true" aria-label="Toggle solution box: Respuesta"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Respuesta<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-respuesta-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuesta-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Respuesta<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Al igual que anteriormente, los diagramas <code class="language-plaintext highlighter-rouge">violin - sex - log</code> y <code class="language-plaintext highlighter-rouge">violin - genotype - log</code> tendrán lo que buscas.
-        <figure id="figure-2"><img src="../../images/scrna-casestudy/wab-violin-sex-log.png" alt="Violin - sex - log. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 2:</span> Violin - sexo - log (Datos crudos)</figcaption></figure>
-        <figure id="figure-3"><img src="../../images/scrna-casestudy/wab-violin-genotype-log.png" alt="Violin - genotype - log. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 3:</span> Violin - genotipo - log (Datos crudos)</figcaption></figure>
+        <figure id="figure-2"><img src="../../images/scrna-casestudy/wab-violin-sex-log.png" alt="Violin - sex - log. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 2</strong>:</span> Violin - sexo - log (Datos crudos)</figcaption></figure>
+        <figure id="figure-3"><img src="../../images/scrna-casestudy/wab-violin-genotype-log.png" alt="Violin - genotype - log. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 3</strong>:</span> Violin - genotipo - log (Datos crudos)</figcaption></figure>
       </li>
       <li>No hay grandes diferencias en profundidad de secuenciación en los diferentes sexos diría yo - ¡aunque tú puedes no estar de acuerdo!
         <ul>
@@ -1338,7 +1685,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <p>Ahora que hemos evaluado la diferencia en nuestras muestras, miraremos a las librerías en general para identificar los umbrales apropiados para nuestro análisis.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-filtrar-umbrales" aria-label="question box: Pregunta - Filtrar umbrales"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta - Filtrar umbrales</div>
+  <div class="box-title question-title" id="question-pregunta-filtrar-umbrales"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta - Filtrar umbrales</div>
 
   <p>¿Qué umbral deberías fijar para <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code>?</p>
   <ol>
@@ -1347,12 +1694,12 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-respuesta-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuesta-2-contents" aria-expanded="true" aria-label="Toggle solution box: Respuesta"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Respuesta<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-respuesta-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuesta-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Respuesta<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Cualquier diagrama con <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code> funcionaría aquí en realidad. Algunas personas prefieren diagramas de dispersión frente a los diagramas de violín.</li>
     </ol>
-    <figure id="figure-4"><img src="../../images/scrna-casestudy/wab-scatter-genesxmito.png" alt="Scatter-genesxmito. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 4:</span> Dispersión - mito x genes (Datos crudos)</figcaption></figure>
+    <figure id="figure-4"><img src="../../images/scrna-casestudy/wab-scatter-genesxmito.png" alt="Scatter-genesxmito. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 4</strong>:</span> Dispersión - mito x genes (Datos crudos)</figcaption></figure>
 
     <ol>
       <li>En <code class="language-plaintext highlighter-rouge">Scatter - mito x genes</code> puedes ver cómo las células con <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code> hasta, quizás, <code class="language-plaintext highlighter-rouge">5.7</code> (sobre 300 genes) a menudo tienen alto <code class="language-plaintext highlighter-rouge">pct_counts_mito</code>.
@@ -1373,12 +1720,12 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-respuesta-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuesta-3-contents" aria-expanded="true" aria-label="Toggle solution box: Respuesta"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Respuesta<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-respuesta-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuesta-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Respuesta<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Como anteriormente, ¡cualquier diagrama con <code class="language-plaintext highlighter-rouge">log1p_n_total_counts</code> funcionaría! De nuevo, usaremos un diagrama de dispersión aquí, ¡pero puedes usar un diagram de violín si quieres!</li>
     </ol>
-    <figure id="figure-5"><img src="../../images/scrna-casestudy/wab-scatter-countsxmito.png" alt="Scatter-countsxmito. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 5:</span> Gráfico de dispersión - mito x UMIs (Datos crudos)</figcaption></figure>
+    <figure id="figure-5"><img src="../../images/scrna-casestudy/wab-scatter-countsxmito.png" alt="Scatter-countsxmito. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 5</strong>:</span> Gráfico de dispersión - mito x UMIs (Datos crudos)</figcaption></figure>
 
     <ol>
       <li>Podemos ver que necesitaremos fijar un umbral más alto (lo que tiene sentido, ya que esperaríamos más UMIs por célula que genes únicos). De nuevo, quizás siendo un poco agresivos en nuestros umbrales, podríamos elegir <code class="language-plaintext highlighter-rouge">6.3</code>, por ejemplo (que equivale a unos 500 conteos/célula).
@@ -1397,12 +1744,12 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-respuesta-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuesta-4-contents" aria-expanded="true" aria-label="Toggle solution box: Respuesta"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Respuesta<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-respuesta-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-respuesta-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Respuesta<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Cualquier plot con <code class="language-plaintext highlighter-rouge">pct_counts_mito</code> funcionaría bien, sin embargo, los diagramas de dispersión son más fáciles de interpretar. Los usaremos igual que la última vez.</li>
     </ol>
-    <figure id="figure-6"><img src="../../images/scrna-casestudy/wab-scatter-countsxmito.png" alt="Scatter-countsxmito. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 6:</span> Gráfico de dispersión - mito x UMIs (Datos crudos)</figcaption></figure>
+    <figure id="figure-6"><img src="../../images/scrna-casestudy/wab-scatter-countsxmito.png" alt="Scatter-countsxmito. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 6</strong>:</span> Gráfico de dispersión - mito x UMIs (Datos crudos)</figcaption></figure>
 
     <ol>
       <li>Podemos ver una tendencia clara donde las células que tienen sobre un 5% de conteo mito o superior también tienen muchos menos conteos totales. Estas células tienen baja calidad, enturbiarán nuestros datos, y han estado posiblemente sometidas a condiciones de estrés o ruptura previa a la encapsulación en la gota. Aunque el 5% es un corte bastante común, estos datos son bastante complicados, así que solo por diversión elegiremos un umbral más agresivo de un <code class="language-plaintext highlighter-rouge">4.5%</code>.
@@ -1420,7 +1767,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <p>¡Es el momento de aplicar estos umbrales a tus datos! Pero primero recordemos cuántas células y genes se encuentran en tu objeto: <code class="language-plaintext highlighter-rouge">25281 células</code> y <code class="language-plaintext highlighter-rouge">35734 genes</code>. ¡Veamos cómo van cambiando estos conteos!</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-estás-trabajando-en-grupo-hora-decisiva"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-grupo-hora-decisiva-contents" aria-expanded="true" aria-label="Toggle details box: ¿Estás trabajando en grupo? ¡Hora decisiva!"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Estás trabajando en grupo? ¡Hora decisiva!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-estás-trabajando-en-grupo-hora-decisiva"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-grupo-hora-decisiva" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Detalles: ¿Estás trabajando en grupo? ¡Hora decisiva!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Si estás trabajando en grupo, en este punto puedes tomar diversas direcciones, una con un <em>control</em> y el resto con variaciones en los números con las cuales puedas comparar los resultados a lo largo de los tutoriales.</p>
   <ul>
     <li>Control
@@ -1435,10 +1782,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtra-las-células-por-log1p-n-genes-by-counts" aria-label="hands-on box: Filtra las células por log1p_n_genes_by_counts"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Filtra las células por log1p_n_genes_by_counts</div>
+  <div class="box-title hands-on-title" id="hands-on-filtra-las-células-por-log1p-n-genes-by-counts"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Filtra las células por log1p_n_genes_by_counts</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Scanpy FilterCells tool"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li>En <em>“Parameters to select cells to keep”</em>:
@@ -1457,7 +1804,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Genes-filtered Object</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot con scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot con scanpy tool"><strong>Plot con scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Genes-filtered Object</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1475,7 +1822,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Violin - Filterbygenes</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Genes-filtered Object</code></li>
         <li><em>“What to inspect??”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
@@ -1488,7 +1835,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <p>Nota que <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Scanpy Filtercells</strong> te permite poner <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> múltiples parámetros al mismo tiempo (ejm. los filtros <code class="language-plaintext highlighter-rouge">log1p_total_counts</code>, <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code>,y <code class="language-plaintext highlighter-rouge">pct_counts_mito</code>) en el mismo paso. La única razón por la que no estamos haciendo eso aquí es para que puedas ver lo que cada filtro logra. Como tal, examina tu plot y la información general.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-preguntas-1" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas-1"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Preguntas</div>
 
   <ol>
     <li>Interpreta el gráfico de violín</li>
@@ -1496,9 +1843,9 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <figure id="figure-7"><img src="../../images/scrna-casestudy/wab-violin-raw-filteredgenes.png" alt="Violinplot-filteronce. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 7:</span> Datos crudos vs el primer filtrado - genes/células</figcaption></figure>
+    <figure id="figure-7"><img src="../../images/scrna-casestudy/wab-violin-raw-filteredgenes.png" alt="Violinplot-filteronce. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 7</strong>:</span> Datos crudos vs el primer filtrado - genes/células</figcaption></figure>
     <ol>
       <li>La única parte que parece haber cambiado es <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code>. Observa que la parte inferior del gráfico de violín está más plano - este es el umbral más bajo que se ha establecido. Idealmente, esto hubiera creado un hermoso diagrama de violín debido a que habría una clara población de células con bajo número de genes. Desafortunadamente, este no es el caso, pero sigue siendo un filtro razonable.</li>
       <li>Puedes ver en <code class="language-plaintext highlighter-rouge">General - Filterbygenes</code> que ahora tienes <code class="language-plaintext highlighter-rouge">14,501 cells x 35,734 genes</code>.</li>
@@ -1509,10 +1856,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtrar-células-con-base-en-log1p-total-counts" aria-label="hands-on box: Filtrar células con base en log1p_total_counts"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Filtrar células con base en log1p_total_counts</div>
+  <div class="box-title hands-on-title" id="hands-on-filtrar-células-con-base-en-log1p-total-counts"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Filtrar células con base en log1p_total_counts</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Scanpy FilterCells tool"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“nput object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Genes-filtered Object</code></li>
         <li>En <em>“Parameters to select cells to keep”</em>:
@@ -1531,7 +1878,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Counts-filtered Object</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with  scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with  scanpy tool"><strong>Plot with  scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Counts-filtered Object</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1549,7 +1896,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Violin - Filterbycounts</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect  AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect  AnnData tool"><strong>Inspect  AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Counts-filtered Object</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
@@ -1560,7 +1907,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-preguntas-2" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas-2"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Preguntas</div>
 
   <ol>
     <li>Interpreta el gráfico de violín</li>
@@ -1568,9 +1915,9 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-1-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <figure id="figure-8"><img src="../../images/scrna-casestudy/wab-violin-filteredgenesxfilteredcounts.png" alt="Violinplot-filtertwice. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 8:</span> 1er filtro vs 2do filtro - conteos/célula</figcaption></figure>
+    <figure id="figure-8"><img src="../../images/scrna-casestudy/wab-violin-filteredgenesxfilteredcounts.png" alt="Violinplot-filtertwice. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 8</strong>:</span> 1er filtro vs 2do filtro - conteos/célula</figcaption></figure>
     <ol>
       <li>Nos enfocaremos en <code class="language-plaintext highlighter-rouge">log1p_total_counts</code>. De manera similar a la superior, la parte inferior de la forma del violín se ha aplanado debido al umbral.</li>
       <li>En <code class="language-plaintext highlighter-rouge">General - Filterbycounts</code>, puedes ver que ahora tienes <code class="language-plaintext highlighter-rouge">7,916 cells x 35,734 genes</code>.</li>
@@ -1581,10 +1928,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtrar-células-con-base-en-pct-counts-mito" aria-label="hands-on box: Filtrar células con base en pct_counts_mito"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Filtrar células con base en pct_counts_mito</div>
+  <div class="box-title hands-on-title" id="hands-on-filtrar-células-con-base-en-pct-counts-mito"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Filtrar células con base en pct_counts_mito</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0</span></span>  utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Scanpy FilterCells tool"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0</span></span>  utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Counts-filtered Object</code></li>
         <li>En <em>“Parameters to select cells to keep”</em>:
@@ -1603,7 +1950,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de la salida a <code class="language-plaintext highlighter-rouge">Mito-filtered Object</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-filtered Object</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1631,7 +1978,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Violin - Filterbymito</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect  AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect  AnnData tool"><strong>Inspect  AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-filtered Object</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
@@ -1642,7 +1989,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-preguntas-3" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas-3"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Preguntas</div>
 
   <ol>
     <li>Interpretar el gráfico de violín</li>
@@ -1650,9 +1997,9 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-2-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <figure id="figure-9"><img src="../../images/scrna-casestudy/wab-violin-mitofilter.png" alt="Violinplot-filtermito. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 9:</span> Gráficos de violín después del filtrado de genes, conteos y mito contenido/célula</figcaption></figure>
+    <figure id="figure-9"><img src="../../images/scrna-casestudy/wab-violin-mitofilter.png" alt="Violinplot-filtermito. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 9</strong>:</span> Gráficos de violín después del filtrado de genes, conteos y mito contenido/célula</figcaption></figure>
     <ol>
       <li>Si observamos los ejes detalladamente podemos ver que el <code class="language-plaintext highlighter-rouge">pct_counts_mito</code> se ha reducido.</li>
       <li>En <code class="language-plaintext highlighter-rouge">General - Filterbymito</code>, puedes ver que ahora tienes <code class="language-plaintext highlighter-rouge">7,874 × cells x 35,734 genes</code>.</li>
@@ -1663,12 +2010,12 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 </blockquote>
 
 <p>Si te es de ayuda, aquí tenemos un vistazo al resumen general.</p>
-<figure id="figure-10"><img src="../../images/scrna-casestudy/wab-violins2gether.png" alt="Violinplot-Summary. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 10:</span> Resumen de filtrado</figcaption></figure>
+<figure id="figure-10"><img src="../../images/scrna-casestudy/wab-violins2gether.png" alt="Violinplot-Summary. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 10</strong>:</span> Resumen de filtrado</figcaption></figure>
 
 <p>¡Excelente trabajo! Sin embargo, eliminaste un montón de células, y ya que los genes capturados son esporádicos (ejemplo, un pequeño porcentaje del transcriptoma completo por célula), esto significa que hay un número de genes en tu matriz que al momento no están en ninguna de las células restantes. Los genes que no aparecen en ninguna célula, ni siquiera en una o dos células, causarán que algunas de las herramientas analíticas funcionen incorrectamente (o dejen de funcionar) y en general, no serán informativos con respecto a la biología del fenómeno analizado. !Entonces eliminemos estos genes! Nota que <code class="language-plaintext highlighter-rouge">3</code> no es necesariamente el mejor número, más bien es un umbral bastante conservador. Podrías subir hasta 10 o más.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-estás-trabajando-en-grupo-tomemos-algunas-decisiones"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-grupo-tomemos-algunas-decisiones-contents" aria-expanded="true" aria-label="Toggle details box: ¿Estás trabajando en grupo? ¡Tomemos algunas decisiones!"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Estás trabajando en grupo? ¡Tomemos algunas decisiones!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-estás-trabajando-en-grupo-tomemos-algunas-decisiones"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-grupo-tomemos-algunas-decisiones" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Detalles: ¿Estás trabajando en grupo? ¡Tomemos algunas decisiones!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Ahora pueden trabajar en equipos y hacer distintos análisis, un equipo optando por un <em>control</em> y el resto variando números de tal forma que puedan comparar resultados a lo largo de los tutoriales.</p>
   <ul>
     <li>Variable: <strong>n_cells</strong></li>
@@ -1678,10 +2025,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtrado-de-genes" aria-label="hands-on box: Filtrado de genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Filtrado de genes</div>
+  <div class="box-title hands-on-title" id="hands-on-filtrado-de-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Filtrado de genes</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0"><strong>Scanpy FilterGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0" title="Scanpy FilterGenes tool"><strong>Scanpy FilterGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Mito-filtered Object</code></li>
         <li>En <em>“Parameters to select genes to keep”</em>:
@@ -1700,7 +2047,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Filtered Object</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect  AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect  AnnData tool"><strong>Inspect  AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matriz anotada de datos”</em>: <code class="language-plaintext highlighter-rouge">Filtered Object</code></li>
         <li><em>“¿Qué inspeccionar?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
@@ -1758,10 +2105,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <p>Por el momento tienes una matriz de 7874 células por 14832 genes. Estos son muchos datos. Tenemos dos problemas aquí - primero, ya sabes que hay diferencias en cuántos transcritos y genes han sido cuantificados por células. Esta variable técnica puede no dejar muy en claro diferencias biológicas. Segundo, nos encanta visualizar resultados en gráficos x/y. Por ejemplo, <em>Gapdh</em> puede ser uno de los ejes, y <em>Actin</em> puede ser otro, y grafica las células en los ejes bidimensionales con base en cuántos transcritos posee cada una. Esto puede ser bueno, pero añadir una tercera dimensión (o en este caso, 14830 dimensiones más) es un poco más complejo. Por tanto, nuestros siguientes pasos se enfocan en transformar nuestro enorme objeto de datos en algo que sea más fácil de analizar y visualizar.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-normalización" aria-label="hands-on box: Normalización"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Normalización</div>
+  <div class="box-title hands-on-title" id="hands-on-normalización"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Normalización</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.6.0+galaxy0"><strong>Scanpy NormaliseData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.6.0+galaxy0" title="Scanpy NormaliseData tool"><strong>Scanpy NormaliseData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Filtered Object</code></li>
       </ul>
@@ -1774,10 +2121,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <p>Ahora tenemos que considerar la reducción de las dimensiones de nuestros genes. Tenemos muchísimos genes, pero no todos ellos son diferentes de célula a célula. Por ejemplo, los genes de mantenimiento (housekeeping) se caracterizan por no tener mucho cambio de célula a célula, por tanto podremos moverlos para simplificar el conjunto de datos. Marcaremos los genes que muestran variación entre células para su análisis posterior.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-encuentra-los-genes-variables" aria-label="hands-on box: Encuentra los genes variables"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Encuentra los genes variables</div>
+  <div class="box-title hands-on-title" id="hands-on-encuentra-los-genes-variables"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Encuentra los genes variables</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.6.0+galaxy0"><strong>Scanpy FindVariableGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.6.0+galaxy0" title="Scanpy FindVariableGenes tool"><strong>Scanpy FindVariableGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de  <strong>Scanpy NormaliseData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Flavor of computing normalised dispersion”</em>: <code class="language-plaintext highlighter-rouge">Seurat</code></li>
@@ -1789,10 +2136,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <p>Ahora vamos a escalar nuestros datos de tal manera que todos los genes tengan la misma varianza y cero de media. Es importante configurar nuestros datos para reducciones de dimensionalidad subsecuentes. También ayuda a anular las diferencias de profundidad de secuenciación entre muestras. Nota que las diferencias de escala, entre otras, no son los valores que tendrás al final (ejemplo, si tu célula tiene niveles promedio de GAPDH), no aparecerá como ‘0’ cuando calcules las diferencias de genes entre clusters.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-escalar-datos" aria-label="hands-on box: Escalar datos"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Escalar datos</div>
+  <div class="box-title hands-on-title" id="hands-on-escalar-datos"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Escalar datos</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0"><strong>Scanpy ScaleData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0</span></span>  utilizando los siguiente parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0" title="Scanpy ScaleData tool"><strong>Scanpy ScaleData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0</span></span>  utilizando los siguiente parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy FindVariableGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Truncate to this value after scaling”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
@@ -1811,21 +2158,21 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <p>Los componentes principales se calculan a partir de datos con alta dimensionalidad para poder encontrar la mayor dispersión en el conjunto de datos. Así es que, en nuestras <code class="language-plaintext highlighter-rouge">2262</code> dimensiones con gran variabilidad, tendremos una línea (eje) que refleje la mayor dispersión y variación a través de las células. Ese será nuestro Componente Principal. Podemos calcular los primeros componentes principales <code class="language-plaintext highlighter-rouge">x</code> en nuestros datos para reducir drásticamente el número de dimensiones.</p>
 
 <blockquote>
-  <div class="box-title comment-title" id="comment-2262" aria-label="comment box: ¿2262?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: ¿2262?</div>
+  <div class="box-title comment-title" id="comment-2262"><i class="far fa-comment-dots" aria-hidden="true"></i> Comentario: ¿2262?</div>
   <p>¿De dónde proviene el <code class="language-plaintext highlighter-rouge">2262</code>? La forma más rápida de figurar cuantos genes tienes con alta variabilidad, en mi opinión, es volver a ejecutar <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> la herramienta <strong>Scanpy FindVariableGenes</strong> y seleccionar el parámetro <em>Remove genes not marked as highly variable</em> (“eliminar genes que no están marcados con alta variabilidad”). Después puedes inspeccionar el objeto resultante y verás que hay sólo 2262 genes. En los siguientes pasos el proceso únicamente utilizará los genes con alta variabilidad para realizar sus cálculos, pero como regla general, te recomiendo encarecidamente que incluyas los genes no variables (ejemplo, utiliza la salida general de tu herramienta FindVariableGenes, la cual contiene más de 2262 genes). Este tutorial no funcionará al final de la etapa de graficación si únicamente utilizas solo los 2262 o 2000 genes con alta variabilidad (si es que le impones algún límite).</p>
 </blockquote>
 
 <blockquote class="comment hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cálculo-de-los-componentes-principales" aria-label="hands-on box: Cálculo de los Componentes Principales"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Cálculo de los Componentes Principales</div>
+  <div class="box-title hands-on-title" id="hands-on-cálculo-de-los-componentes-principales"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Cálculo de los Componentes Principales</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1"><strong>Scanpy RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1</span></span>  utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1" title="Scanpy RunPCA tool"><strong>Scanpy RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1</span></span>  utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy ScaleData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Number of PCs to producer”</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span>  utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">PCA: Scatter plot in PCA coordinates, using 'pl.pca_variance_ratio'</code></li>
@@ -1840,7 +2187,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 
 <p>¿Te cuestionas el por qué 50 Componentes Principales? Bueno, estamos bastante seguros de que 50 es una sobreestimación. Examina <code class="language-plaintext highlighter-rouge">PCA Variance</code>.</p>
 
-<figure id="figure-11"><img src="../../images/scrna-casestudy/wab-pcavariance.png" alt="PCA-variance. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 11:</span> Variabilidad explicada por CP</figcaption></figure>
+<figure id="figure-11"><img src="../../images/scrna-casestudy/wab-pcavariance.png" alt="PCA-variance. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 11</strong>:</span> Variabilidad explicada por CP</figcaption></figure>
 
 <p>Podemos ver que en realidad no existe mucha variación que pueda ser explicada una vez que pasamos del componente 19. Así es que nos ahorraremos un buen de tiempo y datos confusos si nos enfocamos en los primeros <code class="language-plaintext highlighter-rouge">20</code> CPs.</p>
 
@@ -1849,7 +2196,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <p>En este punto seguimos enfocándonos en aproximadamente 20 dimensiones. Necesitamos identificar qué tan similar es una célula comparada con otra, esto a través de cada célula y a través de estas dimensiones. Para esto, utilizaremos el gráfico de “k-nearest neighbor” (kNN - k vecindades más cercanas), para identificar qué células se encuentran más cercanas unas de otras y cuáles no. El gráfico kNN muestra las conexiones entre las células si sus distancias son casi las k-ésimas distancias más cortas de esa célula con respecto a las otras (¡cuando son graficadas en este espacio de 20 dimensiones). Esto será crucial para identificar clusters, y es necesario para graficar un UMAP. Asignar valores mayores de vecindad dará pie a la preservación de una estructura más global a costa de la pérdida de una estructura local detallada. En general, a este parámetro frecuentemente se le asignan valores entre el 5 y el 50, con la opción de asignar por defecto valores de 10 a 15](https://github.com/lmcinnes/umap).</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-estás-trabajando-en-grupos-tomemos-decisiones"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-grupos-tomemos-decisiones-contents" aria-expanded="true" aria-label="Toggle details box: ¿Estás trabajando en grupos? ¡Tomemos decisiones!"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Estás trabajando en grupos? ¡Tomemos decisiones!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-estás-trabajando-en-grupos-tomemos-decisiones"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-grupos-tomemos-decisiones" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Detalles: ¿Estás trabajando en grupos? ¡Tomemos decisiones!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Si estás trabajando en grupos ahora pueden dividir el trabajo, unos pueden trabajar con un  <em>control</em> y el resto trabajar con distintos números para que puedan comparar sus resultados posteriormente por lo que resta del tutorial.</p>
   <ul>
     <li>Control
@@ -1863,10 +2210,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cómputo-de-gráfico-computegraph" aria-label="hands-on box: Cómputo de gráfico - ComputeGraph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Cómputo de gráfico - ComputeGraph</div>
+  <div class="box-title hands-on-title" id="hands-on-cómputo-de-gráfico-computegraph"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Cómputo de gráfico - ComputeGraph</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4"><strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4</span></span>  utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4" title="Scanpy ComputeGraph tool"><strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4</span></span>  utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1882,7 +2229,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <p>Dos visualizaciones importantes en estos datos son tSNE y UMAP. Debemos calcular las coordenadas para ambos antes de la visualización. Para tSNE, el parámetro <a href="https://www.nature.com/articles/s41467-019-13056-x"><strong>perplexity</strong></a> puede ser cambiado de tal manera que represente de mejor forma a los datos, mientras que para UMAP el cambio principal sería el modificar en sí mismo el gráfico kNN, por medio del cambio de <strong>neighbours</strong> (vecinos).</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-estás-trabajando-en-grupos-tomemos-decisiones-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-grupos-tomemos-decisiones-1-contents" aria-expanded="true" aria-label="Toggle details box: ¿Estás trabajando en grupos? ¡Tomemos decisiones!"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Estás trabajando en grupos? ¡Tomemos decisiones!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-estás-trabajando-en-grupos-tomemos-decisiones-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-grupos-tomemos-decisiones-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Detalles: ¿Estás trabajando en grupos? ¡Tomemos decisiones!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Si estás trabajando en grupos ahora pueden dividir el trabajo, unos pueden trabajar con un <em>control</em> y el resto trabajar con distintos números para que posteriormente puedan comparar sus resultados por lo que resta del tutorial.</p>
   <ul>
     <li>Control
@@ -1895,17 +2242,17 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cálculo-de-tsne-y-umap" aria-label="hands-on box: Cálculo de  tSNE y UMAP"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Cálculo de  tSNE y UMAP</div>
+  <div class="box-title hands-on-title" id="hands-on-cálculo-de-tsne-y-umap"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Cálculo de  tSNE y UMAP</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2"><strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2</span></span>  utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2" title="Scanpy RunTSNE tool"><strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2</span></span>  utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“The perplexity is related to the number of nearest neighbours, select a value between 5 and 50”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1"><strong>Scanpy RunUMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1</span></span>  utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1" title="Scanpy RunUMAP tool"><strong>Scanpy RunUMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1</span></span>  utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1919,12 +2266,12 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <h1 id="clusters-de-células-y-marcadores-génicos">Clusters de células y marcadores génicos</h1>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
+  <div class="box-title question-title" id="question-pregunta"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta</div>
 
   <p>Tomemos un poco de distancia y examinemos qué tenemos. ¿Qué es exactamente lo que quieres obtener de tus datos?¿Qué quieres visualizar y qué necesitas de tus datos para obtener información?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-3-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>En realidad necesitamos dos cosas - primero, necesitamos asegurarnos que nuestro experimento fue bien configurado. Es decir, que nuestras réplicas biológicas deberían superponerse, e idealmente, nuestras variables deberían mostrar diferencias entre sí. Segundo, queremos obtener conocimiento a partir de este experimento - queremos saber qué tipo de células se encuentran presentes en nuestros datos, qué genes controlan este tipo de células, y en este caso, cómo podrían verse afectados por nuestra variable biológica de restricción del crecimiento. ¿Cómo afecta esto a las células en desarrollo y que genes lo controlan? Por tanto, ¡añadamos información sobre los agrupamientos de células y los marcadores génicos!</p>
 
@@ -1935,7 +2282,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <p>Por fin, ¡identifiquemos clusters! Por desgracia, esto no es tan “majestuoso” como los biólogos creen  - las matemáticas empleadas no necesariamente identifican clusters de células verdaderos. Cada algoritmo utilizado para identificar clusters de células se queda corto en el contexto de un biólogo que conoce bien sus datos, que sabe qué células deberían estar presentes, y que puede probarlo en el laboratorio. Por tanto, ¡vamos a aprovecharlo al máximo como punto de partida y veremos qué sucede! Vamos a definir los clusters del gráfico kNN con base en cuántas conexiones tienen las células unas con otras. Aproximadamente, esto dependerá de un parámetro de “resolución” (<strong>resolution</strong>) para identificar qué tan granular quieres hacer este proceso.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-estás-trabajando-en-grupos-tomemos-decisiones-2"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-grupos-tomemos-decisiones-2-contents" aria-expanded="true" aria-label="Toggle details box: ¿Estás trabajando en grupos? ¡Tomemos decisiones!"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Estás trabajando en grupos? ¡Tomemos decisiones!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-estás-trabajando-en-grupos-tomemos-decisiones-2"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-grupos-tomemos-decisiones-2" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Detalles: ¿Estás trabajando en grupos? ¡Tomemos decisiones!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Ah sí, ¡también tenemos que tomar otra decisión! Lamentablemente, el análisis de células únicas no es algo tan sencillo.</p>
   <ul>
     <li>Control
@@ -1950,10 +2297,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-encontrar-agrupamientos-findclusters" aria-label="hands-on box: Encontrar agrupamientos - FindClusters"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Encontrar agrupamientos - FindClusters</div>
+  <div class="box-title hands-on-title" id="hands-on-encontrar-agrupamientos-findclusters"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Encontrar agrupamientos - FindClusters</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4"><strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4</span></span>  utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4" title="Scanpy FindCluster tool"><strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4</span></span>  utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy RunUMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Utilizar los valores por defecto del programa”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1968,10 +2315,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <h2 id="encuentra-marcadores">Encuentra marcadores</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-encuentra-marcadores" aria-label="hands-on box: Encuentra marcadores"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Encuentra marcadores</div>
+  <div class="box-title hands-on-title" id="hands-on-encuentra-marcadores"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Encuentra marcadores</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3"><strong>Scanpy FindMarkers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3</span></span>   con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3" title="Scanpy FindMarkers tool"><strong>Scanpy FindMarkers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3</span></span>   con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy FindClusters</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code> &lt;— Confía en mí, hay un fallo extraño en algunas versiones de la herramienta que se soluciona simplemente marcando <code class="language-plaintext highlighter-rouge">No</code> aquí &gt;</li>
@@ -1986,7 +2333,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <p>Pero también estamos interesados en las diferencias entre los genotipos, así que también comprobemos eso (ten en cuenta que en este caso se está convirtiendo en un análisis de RNA-seq masivo, porque estamos comparando todas las células de un determinado genotipo contra todas las células del otro)</p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4"><strong>Scanpy FindMarkers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4" title="Scanpy FindMarkers tool"><strong>Scanpy FindMarkers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“The sample grouping/clustering to use”</em>: <code class="language-plaintext highlighter-rouge">genotype</code></li>
@@ -2004,10 +2351,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 <p>Ahora, hay un pequeño problema aquí, y es que cuando inspeccionas la tabla de salida de marcadores, no verás nombres de genes, sino que verás los IDs de Ensembl. Aunque esta es una forma más precisa de hacerlo desde el punto de vista bioinformático (¡cada ID no tiene un nombre de gen!), es probable que queramos ver los nombres de los genes más reconocidos ¡así que introduzcamos algo de esa información!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-añadir-los-nombres-de-los-genes" aria-label="hands-on box: Añadir los nombres de los genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Añadir los nombres de los genes</div>
+  <div class="box-title hands-on-title" id="hands-on-añadir-los-nombres-de-los-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Añadir los nombres de los genes</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
@@ -2018,7 +2365,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <p>Esto proporciona a nuestra tabla todos los posibles genes con sus nombres.</p>
 
   <ol>
-    <li><span class="tool" data-tool="join1" title="Tested with join1"><strong>Join two Datasets side by side on a specified field</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="join1" title="Join two Datasets side by side on a specified field tool"><strong>Join two Datasets side by side on a specified field</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> Select multiple files: <code class="language-plaintext highlighter-rouge">Markers - cluster</code> and <code class="language-plaintext highlighter-rouge">Markers - genotype</code></li>
         <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
@@ -2035,7 +2382,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <p>Tenemos una gran cantidad de información extra en nuestra tabla de marcadores de genes que no necesitamos, así que..</p>
 
   <ol>
-    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  con los siguientes parámetros:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2,c3,c4,c11,c5,c6,c7,c8</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> Selecciona varios documentos: <code class="language-plaintext highlighter-rouge">out_file1</code> y <code class="language-plaintext highlighter-rouge">output_file2</code> (salidas de <strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -2053,10 +2400,10 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
 Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento de marcadores” que también hiciste. Para ser honesto, en la práctica, ahora estarías gastando un montón de tiempo buscando lo que hace cada gen (gracias a Google). Sin embargo, existen cada vez más herramientas de anotación automatizada, siempre y cuando tengas una buena referencia (conjunto de datos bien anotado que usarás como ideal). Mientras tanto, hagamos esto a la antigua, y simplemente copiemos un montón de marcadores en el documento original.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-representemos-gráficamente-las-células" aria-label="hands-on box: ¡Representemos gráficamente las células!"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: ¡Representemos gráficamente las células!</div>
+  <div class="box-title hands-on-title" id="hands-on-representemos-gráficamente-las-células"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: ¡Representemos gráficamente las células!</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">pca</code></li>
@@ -2065,7 +2412,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
         <li><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> <em>Puedes volver a ejecutar  <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> la misma herramienta de nuevo, pero cambia <code class="language-plaintext highlighter-rouge">pca</code>por <code class="language-plaintext highlighter-rouge">tsne</code>y finalmente por <code class="language-plaintext highlighter-rouge">umap</code> para saltarte los dos pasos siguientes.</em></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">tsne</code></li>
@@ -2073,7 +2420,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
         <li><em>“Field for gene symbols”</em>: <code class="language-plaintext highlighter-rouge">Symbol</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">umap</code></li>
@@ -2093,14 +2440,14 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
 <h2 id="interpretación-biológica">Interpretación biológica</h2>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-la-apariencia-lo-es-todo" aria-label="question box: Pregunta - La apariencia lo es todo"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta - La apariencia lo es todo</div>
+  <div class="box-title question-title" id="question-pregunta-la-apariencia-lo-es-todo"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta - La apariencia lo es todo</div>
 
   <p>¿Qué visualización es la más útil para obtener una visión general de nuestros datos, <em>pca</em>, <em>tsne</em> o <em>umap</em>?</p>
 
-  <figure id="figure-12"><img src="../../images/scrna-casestudy/wab-3visualisations.png" alt="PCA-tSNE-UMAP. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 12:</span> Agrupamiento de Louvain por reducción de dimensión</figcaption></figure>
+  <figure id="figure-12"><img src="../../images/scrna-casestudy/wab-3visualisations.png" alt="PCA-tSNE-UMAP. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 12</strong>:</span> Agrupamiento de Louvain por reducción de dimensión</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-4-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Puedes ver por qué un PCA generalmente no es suficiente para ver agrupaciones de muestras - ten en cuenta que, sólo estás viendo los componentes 1 y 2 y, por lo tanto,he aquí la razón por la cual las visualizaciones de reducción de la dimensionalidad tSNE y UMAP son tan útiles. Pero no hay necesariamente un claro ganador entre tSNE y UMAP, aunque creo que UMAP es ligeramente más claro con sus agrupamientos, así que nos ceñiremos a esto para el resto del análisis.</p>
 
@@ -2152,17 +2499,17 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
   </tbody>
 </table>
 
-<figure id="figure-13"><img src="../../images/scrna-casestudy/wab-markergeneumaps.png" alt="Marker Gene UMAPs. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 13:</span> Ubicaciones conocidas de genes marcadores</figcaption></figure>
+<figure id="figure-13"><img src="../../images/scrna-casestudy/wab-markergeneumaps.png" alt="Marker Gene UMAPs. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 13</strong>:</span> Ubicaciones conocidas de genes marcadores</figcaption></figure>
 
 <p>Los autores no estaban interesados en seguir anotando las células DP, así que nosotros tampoco. A veces, esto ocurre. Las matemáticas intentan llamar a las agrupaciones de tamaño similar, sean o no biológicamente relevantes. O bien, la pregunta que se hace no precisa realmente tal granularidad de agrupaciones.</p>
 
 <h3 id="anotando-agrupaciones">Anotando agrupaciones</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-anotando-agrupaciones" aria-label="hands-on box: Anotando agrupaciones"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Anotando agrupaciones</div>
+  <div class="box-title hands-on-title" id="hands-on-anotando-agrupaciones"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Anotando agrupaciones</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate AnnData tool"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Rename categories of annotation</code></li>
@@ -2171,7 +2518,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
         <li>Un momento… Lamentablemente esto elimina la numeración original de las agrupaciones. En caso de que quieras recuperarla, se puede volver a añadir la anotación.</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1" title="AnnData Operations tool"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in hdf5 AnnData format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“Copy observations (such as clusters)”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <em>Yes</em></li>
@@ -2182,7 +2529,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
         <li>Has añadido las nuevas anotaciones de las células, ahora titulada  `louvain_0´. ¿Qué, no es suficiente? ¿Quieres cambiar el título también? Que así sea.</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> con los siguientes parámetros::
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1" title="AnnData Operations tool"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> con los siguientes parámetros::
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in hdf5 AnnData format”</em>: (output of <strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Change field names in AnnData observations”</em></li>
@@ -2197,7 +2544,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
         <li>¡Es hora de volver a visualizar con gráficos! <i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Siéntete libre de volver a ejecutar <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> la herramienta <strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> en el nuevo objeto que visualiza gráficamente <code class="language-plaintext highlighter-rouge">cell_type</code> para acelerar esto. De lo contrario…</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span>  con los siguientes parámetros::
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span>  con los siguientes parámetros::
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">umap</code></li>
@@ -2209,19 +2556,19 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
 
 </blockquote>
 
-<figure id="figure-14"><img src="../../images/scrna-casestudy/wab-annotatedcells.png" alt="Annotated cell types. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 14:</span> Nuestro UMAP anotado</figcaption></figure>
+<figure id="figure-14"><img src="../../images/scrna-casestudy/wab-annotatedcells.png" alt="Annotated cell types. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 14</strong>:</span> Nuestro UMAP anotado</figcaption></figure>
 
 <p>Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra variable, ¡ciencia en estado puro!</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-genotipo" aria-label="question box: Pregunta - Genotipo"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta - Genotipo</div>
+  <div class="box-title question-title" id="question-pregunta-genotipo"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta - Genotipo</div>
 
   <p>¿Existen diferencias en el genotipo? O bien en términos biológicos, ¿hay un impacto de la restricción del crecimiento en el desarrollo de las células T en el timo?</p>
 
-  <figure id="figure-15"><img src="../../images/scrna-casestudy/wab-genotypedifferences.png" alt="Genotype Images. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 15:</span> Diferencias de genotipo</figcaption></figure>
+  <figure id="figure-15"><img src="../../images/scrna-casestudy/wab-genotypedifferences.png" alt="Genotype Images. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 15</strong>:</span> Diferencias de genotipo</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-5-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Podemos ver que DP-L,  parece alejarse del grupo de DP-M, así como las células T maduras (o en particular la mitad superior) carecen de algunas células knockout. ¿Quizás existe algún tipo de inhibición aquí? ¡INTERESANTE! ¿Y ahora qué? Podríamos seguir examinando los transcritos presentes en esas dos poblaciones, y quizás también mirar la tabla de marcadores de genotipo… ¡Hay mucho que investigar! Pero antes de que te pongas a explorar a tu antojo, analicemos también esto un poco más técnicamente.</p>
 
@@ -2234,19 +2581,19 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
 <p>¿Es real nuestro análisis? ¿Es correcto? Bueno, podemos evaluarlo un poco.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-efecto-de-lote-batch-effect" aria-label="question box: Pregunta - Efecto de lote ”Batch effect”"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta - Efecto de lote ”Batch effect”</div>
+  <div class="box-title question-title" id="question-pregunta-efecto-de-lote-batch-effect"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta - Efecto de lote ”Batch effect”</div>
 
   <p>¿existe un efecto de lote “batch effect”?</p>
 
-  <figure id="figure-16"><img src="../../images/scrna-casestudy/wab-batcheffect.png" alt="Batch effect. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 16:</span> Efecto de lote?</figcaption></figure>
+  <figure id="figure-16"><img src="../../images/scrna-casestudy/wab-batcheffect.png" alt="Batch effect. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 16</strong>:</span> Efecto de lote?</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-6-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Si bien se esperan algunos cambios, no hay nada de qué preocuparse, DP-L parece estar limitado a  sólo dos muestras: N706 y N705. Ahora, para ser justos, ambas son de fenotipo normal, pero aún así, no es bueno que sólo el 50% de las muestras de fenotipo normal estén realmente en ese grupo. ¿Se puede decir que es la razón por la que no hay células knockout allí? Es posible que haya un poco de efecto de lote “batch effect”, por lo que se debería considerar el uso de la corrección de lote en este conjunto de datos. Sin embargo, si centramos nuestra atención en el otro agrupamiento -células T maduras- en el que hay mezcla de lotes, todavía podemos evaluar esto biológicamente incluso sin corrección de lotes.
 Además, también analizaremos el effecto de confusión del sexo.</p>
 
-    <figure id="figure-17"><img src="../../images/scrna-casestudy/wab-sex-batch.png" alt="Sex effect. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 17:</span> Diferencias de sexo</figcaption></figure>
+    <figure id="figure-17"><img src="../../images/scrna-casestudy/wab-sex-batch.png" alt="Sex effect. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 17</strong>:</span> Diferencias de sexo</figcaption></figure>
 
     <p>Observamos que la única muestra femenina -desgraciadamente, una de las tres muestras knockout- parece estar distribuida en las mismas zonas que las muestras knockout en general, por lo que, afortunadamente, no parece ser un factor de confusión y podemos seguir aprendiendo de nuestros datos. Lo ideal sería volver a realizar este experimento con más muestras de hembras o sustituir esta muestra de hembras por la de machos.</p>
 
@@ -2255,14 +2602,14 @@ Además, también analizaremos el effecto de confusión del sexo.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-efecto-de-profundidad" aria-label="question box: Pregunta - Efecto de profundidad"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta - Efecto de profundidad</div>
+  <div class="box-title question-title" id="question-pregunta-efecto-de-profundidad"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta - Efecto de profundidad</div>
 
   <p>¿Existen agrupaciones o diferencias impulsadas por la profundidad de la secuenciación, un factor técnico y aleatorio?</p>
 
-  <figure id="figure-18"><img src="../../images/scrna-casestudy/wab-umap-totalcounts.png" alt="Sequencing depth. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 18:</span> Conteo a través de grupos</figcaption></figure>
+  <figure id="figure-18"><img src="../../images/scrna-casestudy/wab-umap-totalcounts.png" alt="Sequencing depth. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 18</strong>:</span> Conteo a través de grupos</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-7-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>¡Eureka! Esto explica el extraño cambio de DP entre las células de fenotipo normal y las de knockout: el lado derecho de las células DP simplemente tiene una mayor profundidad de secuenciación (UMIs/célula) que las del lado izquierdo. Eso explica parte del subgrupo que estamos viendo en esa franja. Es importante destacar que no vemos que las agrupaciones de DP-L o (sobre todo) de células T maduras se vean afectadas de forma similar. Así que, aunque de nuevo, esta variable de la profundidad de secuenciación podría ser algo a lo que habría que retroceder de alguna manera, no parece estar afectando a nuestro conjunto de datos. En general, cuanto menos se retroceda/modifique los datos, mejor: hay que ser lo más fiel posible a los datos en crudo y sólo utilizar las matemáticas para corregir los datos cuando sea realmente necesario (¡y no para crear ideas donde no las hay!).</p>
 
@@ -2271,14 +2618,14 @@ Además, también analizaremos el effecto de confusión del sexo.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-pureza-de-la-muestras" aria-label="question box: Pregunta - Pureza de la muestras"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta - Pureza de la muestras</div>
+  <div class="box-title question-title" id="question-pregunta-pureza-de-la-muestras"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta - Pureza de la muestras</div>
 
   <p>¿Crees que hemos procesado estas muestras lo suficientemente bien?</p>
 
-  <figure id="figure-19"><img src="../../images/scrna-casestudy/wab-hba.png" alt="Sequencing depth. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 19:</span> Hemoglobina a través de grupos</figcaption></figure>
+  <figure id="figure-19"><img src="../../images/scrna-casestudy/wab-hba.png" alt="Sequencing depth. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 19</strong>:</span> Hemoglobina a través de grupos</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-8-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Hemos visto en las imágenes anteriores que estos agrupamientos no están muy compactados o definidos, por lo que podríamos considerar un filtrado más severo. Por ejemplo, aunque la hemoglobina es alta en la agrupación de los hematíes, aparece en toda la muestra en números bajos. Esto sugiere que hay un fondo en el medio en el que estaban las células, y podríamos considerar en el laboratorio húmedo “wet lab” tratar de obtener una muestra más pura y de mejor calidad, o en el laboratorio seco “dry lab”, emplear técnicas como SoupX u otras para eliminar este fondo. Jugar con los ajustes de filtrado (aumentando los recuentos mínimos por célula, etc.) suele ser el punto de partida en estos escenarios.</p>
 
@@ -2287,14 +2634,14 @@ Además, también analizaremos el effecto de confusión del sexo.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-resolución-de-agrupaciones" aria-label="question box: Pregunta -Resolución de agrupaciones"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta -Resolución de agrupaciones</div>
+  <div class="box-title question-title" id="question-pregunta-resolución-de-agrupaciones"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta -Resolución de agrupaciones</div>
 
   <p>¿Consideras que la agrupación es adecuada? es decir, ¿hay agrupaciones individuales que crees que deberían estar separadas, y agrupaciones múltiples que podrían combinarse?</p>
 
-  <figure id="figure-20"><img src="../../images/scrna-casestudy/wab-umap-itm2a.png" alt="Itm2a Expression. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 20:</span> Itm2a a través de grupos</figcaption></figure>
+  <figure id="figure-20"><img src="../../images/scrna-casestudy/wab-umap-itm2a.png" alt="Itm2a Expression. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 20</strong>:</span> Itm2a a través de grupos</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-9-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Es importante tener en cuenta, por si acaso todos los bioinformáticos combinan sus fuerzas para atacar a los biólogos: ¡que una agrupación no parezca una agrupación a simple vista NO es suficiente para decir que no es una agrupación! Pero si nos fijamos en la biología aquí, nos esforzamos por encontrar genes marcadores para distinguir la población DP, que sabemos que también se ve afectada por la profundidad de la secuenciación. Es un argumento razonable que DP-M1, DP-M2 y DP-M3 podrían no ser tan diferentes. Tal vez necesitemos más profundidad de secuenciación en todas las células DP, o compararlas explícitamente entre sí (¡considera las variaciones de FindMarkers!). Sin embargo, DP-L parece salir del grupo de DP y también tiene menos células knockout, por lo que podríamos ver lo que DP-L está expresando en los genes marcadores. Si miramos más a T-mat, podemos ver que su gen marcador -Itm2a- sólo se expresa en la mitad superior del agrupamiento. Podrías considerar la posibilidad de subclasificar esto para indagar más, ya sea cambiando la resolución o analizando esta agrupación sola.
 Si miramos las diferencias entre solo los genotipos (por así decir, el “pseudo-bulk”) podemos ver que la mayoría de los genes en esa lista son realmente ribosomales. Esto podría ser un fondo constitutivo, podría estar relacionado con el ciclo celular, podría ser biológico, o las tres cosas. Se podría considerar la posibilidad de analizar el estado del ciclo de las células, o incluso hacer una regresión (que es lo que hicieron los autores).</p>
@@ -2311,10 +2658,10 @@ Si miramos las diferencias entre solo los genotipos (por así decir, el “pseud
 <p>Antes de que te dejemos explorar lo desconocido, habrás notado que las interpretaciones anteriores son sólo algunas de las opciones posibles. Más aún, es posible que te hayas divertido intentando averiguar qué muestra es de qué genotipo y qué sexo, y pasando repetidamente de un gráfico a otro. Averiguar qué gráficos serán los definitivos y publicables requiere mucho tiempo y muchos intentos ¡Por suerte, existe un útil visor interactivo <span class="citation"><a href="#Cakir2020">Cakir <i>et al.</i> 2020</a></span> <span class="citation"><a href="#Moreno2020.04.08.032698">Moreno <i>et al.</i> 2020</a></span> que puede ayudarte a explorar sin tener que producir nuevos gráficos una y otra vez!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cellxgene" aria-label="hands-on box: Cellxgene"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Cellxgene</div>
+  <div class="box-title hands-on-title" id="hands-on-cellxgene"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Cellxgene</div>
 
   <ol>
-    <li><span class="tool" data-tool="interactive_tool_cellxgene" title="Tested with interactive_tool_cellxgene"><strong>Interactive CellXgene Environment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_cellxgene</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="interactive_tool_cellxgene" title="Interactive CellXgene Environment tool"><strong>Interactive CellXgene Environment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_cellxgene</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate dataset”</em>: <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>
       </ul>
@@ -2343,7 +2690,7 @@ Si miramos las diferencias entre solo los genotipos (por así decir, el “pseud
 <h1 id="conclusión">Conclusión</h1>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-trabajando-en-grupo-el-final"><button class="gtn-boxify-button details" type="button" aria-controls="details-trabajando-en-grupo-el-final-contents" aria-expanded="true" aria-label="Toggle details box: ¿Trabajando en grupo? ¡El final!"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Trabajando en grupo? ¡El final!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-trabajando-en-grupo-el-final"><button class="gtn-boxify-button details" type="button" aria-controls="details-trabajando-en-grupo-el-final" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Detalles: ¿Trabajando en grupo? ¡El final!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Es de esperar que, independientemente de la vía de análisis que hayas tomado, hayas encontrado las mismas interpretaciones generales. Si no es así, este es un buen momento para hablar y considerar con tu grupo por qué puede ser así: ¿qué decisión fue “errónea” o “desacertada”, y cómo te asegurarias de interpretar correctamente tus datos en el futuro? El mejor consejo: probar y equivocarse es una buena idea, lo creas o no, y cuantas más formas encuentres de la misma manera, más seguro estarás. Pero no hay nada mejor que la validación experimental…
 Para aquellos que no tomaron las opciones de “control”, por favor haced lo siguiente:</p>
   <blockquote>
@@ -2353,7 +2700,7 @@ Para aquellos que no tomaron las opciones de “control”, por favor haced lo s
         <p>Añade una anotación en el historial <i class="fas fa-comment" aria-hidden="true"></i><span class="visually-hidden">history-annotate</span> que incluya los parámetros que has cambiado/los pasos que has cambiado respecto al <em>control</em></p>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-compartiendo-un-historial"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-compartiendo-un-historial-contents" aria-expanded="true" aria-label="Toggle tip box: Compartiendo un historial"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Compartiendo un historial<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Compartir tu historial permite a otros importar y acceder a los conjuntos de datos, parámetros y pasos de tu historial.</p>   <ol>   <li><strong>Compartir a través de un enlace</strong>     <ul>       <li>Abre el menú <strong>Opciones de historial</strong> <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> (icono de engranaje) en la parte superior del panel de historial         <ul>           <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">galaxy-toggle</span> <strong>Hacer que el historial sea accesible</strong></li>           <li>Aparecerá un <strong>Compartir enlace</strong> que puedes dar a otros usuarios.</li>         </ul>       </li>       <li>Cualquiera que tenga este enlace puede ver y copiar tu historial.</li>     </ul>   </li>   <li><strong>Publica tu historial</strong>     <ul>       <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">galaxy-toggle</span> <strong>Hacer que el historial esté disponible públicamente en Historias publicadas</strong></li>       <li>Cualquiera en este servidor Galaxy podrá ver tu historial en el menú <em>Datos compartidos</em></li>     </ul>   </li>   <li><strong>Comparte solo con otro usuario</strong>.     <ul>       <li>Haz clic en el botón <strong>Compartir con un usuario</strong> en la parte inferior</li>       <li>Ingresa una dirección de correo electrónico del usuario con el que deseas compartir</li>       <li>Tu historial se compartirá solo con este usuario.</li>     </ul>   </li>   <li><strong>Encontrar historiales que otros han compartido conmigo</strong>     <ul>       <li>Haz clic en el menú <strong>Usuario</strong> en la barra superior</li>       <li>Selecciona <strong>Historiales compartidos conmigo</strong></li>       <li>Aquí verás todos los historiales que otros han compartido contigo directamente ** Nota: ** Si deseas realizar cambios en tu historial sin afectar la versión compartida, crea una copia mediante al ícono <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <em>Opciones de historial</em> en tu historial y haciendo clic en <em>Copiar</em></li>     </ul>   </li> </ol> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-compartiendo-un-historial"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-compartiendo-un-historial" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Compartiendo un historial<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Compartir tu historial permite a otros importar y acceder a los conjuntos de datos, parámetros y pasos de tu historial.</p>   <ol>   <li><strong>Compartir a través de un enlace</strong>     <ul>       <li>Abre el menú <strong>Opciones de historial</strong> <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> (icono de engranaje) en la parte superior del panel de historial         <ul>           <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">galaxy-toggle</span> <strong>Hacer que el historial sea accesible</strong></li>           <li>Aparecerá un <strong>Compartir enlace</strong> que puedes dar a otros usuarios.</li>         </ul>       </li>       <li>Cualquiera que tenga este enlace puede ver y copiar tu historial.</li>     </ul>   </li>   <li><strong>Publica tu historial</strong>     <ul>       <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">galaxy-toggle</span> <strong>Hacer que el historial esté disponible públicamente en Historias publicadas</strong></li>       <li>Cualquiera en este servidor Galaxy podrá ver tu historial en el menú <em>Datos compartidos</em></li>     </ul>   </li>   <li><strong>Comparte solo con otro usuario</strong>.     <ul>       <li>Haz clic en el botón <strong>Compartir con un usuario</strong> en la parte inferior</li>       <li>Ingresa una dirección de correo electrónico del usuario con el que deseas compartir</li>       <li>Tu historial se compartirá solo con este usuario.</li>     </ul>   </li>   <li><strong>Encontrar historiales que otros han compartido conmigo</strong>     <ul>       <li>Haz clic en el menú <strong>Usuario</strong> en la barra superior</li>       <li>Selecciona <strong>Historiales compartidos conmigo</strong></li>       <li>Aquí verás todos los historiales que otros han compartido contigo directamente ** Nota: ** Si deseas realizar cambios en tu historial sin afectar la versión compartida, crea una copia mediante al ícono <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <em>Opciones de historial</em> en tu historial y haciendo clic en <em>Copiar</em></li>     </ul>   </li> </ol> </blockquote>
       </li>
       <li>Siéntete libre de explorar cualquier otra historia similar</li>
     </ol>
@@ -2366,10 +2713,12 @@ Para aquellos que no tomaron las opciones de “control”, por favor haced lo s
 
 <p>Para debatir con científicos afines, ¡únete a nuestro canal Gitter para todo lo relacionado con Galaxy-single cell! <a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" alt="Gitter. " loading="lazy" /></a></p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Puntos clave</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Puntos clave</div>
                     <ul>
                         
                         <li><p>Los datos de células únicas son enormes, y sus dimensiones (# genes) deben reducirse para ser analizados</p>
@@ -2413,33 +2762,9 @@ Para aquellos que no tomaron las opciones de “control”, por favor haced lo s
                 <br>¿Has usado este material como aprendiz o estudiante? Haz click en el formulario a continuación para dejarnos tu opinión<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Filtrado, representación y exploración de secuenciación de ARN de células únicas (Single Cell)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Filtrado, representación y exploración de secuenciación de ARN de células únicas (Single Cell)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Cómo citar este tutorial</h1>
                 <p>
@@ -2457,7 +2782,7 @@ Para aquellos que no tomaron las opciones de “control”, por favor haced lo s
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -2498,7 +2823,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -2633,29 +2958,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     </ul>
                 </blockquote>
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

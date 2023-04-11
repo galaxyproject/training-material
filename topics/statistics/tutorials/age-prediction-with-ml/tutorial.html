@@ -12,31 +12,31 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/age-prediction-with-ml/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/age-prediction-with-ml/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Age prediction using machine learning" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
-<meta name="DC.creator" content="Ekaterina Polkh" />
-<meta name="DC.creator" content="Anup Kumar" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Age prediction using machine learning">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.creator" content="Ekaterina Polkh">
+<meta name="DC.creator" content="Anup Kumar">
 
         
         
         
         
-        <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Age prediction using machine learning" />
-        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta name="description" content="Statistical Analyses for omics data and machine learning ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Age prediction using machine learning">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -454,10 +454,218 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-statistics">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-18 14:23:35 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Age prediction using machine learning",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Age prediction using machine learning' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/age-prediction-with-ml/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "statistics",
+  "description": "The questions this  addresses are:\n - How to use machine learning to create predictive models from biological datasets (RNA-seq and DNA methylation)?\n\n\nThe objectives are:\n - Learn ageing biomarkers from RNA-seq and DNA methylation datasets\n - Apply regression based machine learning algorithms\n - Learn feature selection and hyperparameter optimisation\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/",
+      "name": "Ekaterina Polkh",
+      "image": "https://avatars.githubusercontent.com/polkhe",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "name": "Anup Kumar",
+      "image": "https://avatars.githubusercontent.com/anuprulez",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/",
+      "name": "Ekaterina Polkh",
+      "image": "https://avatars.githubusercontent.com/polkhe",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "name": "Anup Kumar",
+      "image": "https://avatars.githubusercontent.com/anuprulez",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-statistics">
     <h1 data-toc-skip>Age prediction using machine learning</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -468,9 +676,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -540,7 +748,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/age-prediction-with-ml/workflows/" title="Workflows" alt="Age prediction using machine learning workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/age-prediction-with-ml/workflows/" title="Age prediction using machine learning workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -554,13 +762,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/age-prediction-with-ml/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/age-prediction-with-ml/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -586,7 +791,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -737,6 +942,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -772,6 +983,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -782,6 +994,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p><a href="https://en.wikipedia.org/wiki/Machine_learning">Machine Learning</a> is used to create predictive models by learning features from datasets. In the studies performed by <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a> and <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a>, biomarkers are examined to predict the chronological age of humans by analysing the RNA-seq gene expression levels and DNA methylation pattern respectively. Different machine learning algorithms are used in these studies to select specific biomarkers to make age prediction. The RNA-seq gene expression (<a href="https://www.ebi.ac.uk/training/online/glossary/fpkm">FPKM</a>) dataset is generated using fibroblast cell lines of humans. The skin fibroblasts cells keep damage that happens with age. Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. Within each individual, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/">DNA methylation</a> changes with age. This knowledge is used to select useful biomarkers from DNA methylation dataset. The <a href="https://en.wikipedia.org/wiki/CpG_site">CpGs sites</a> with the highest correlation to age are selected as the biomarkers/features. In both these studies, specific biomarkers are analysed by machine learning algorithms to create an age prediction model.</p>
@@ -789,19 +1002,19 @@
 <p>The datasets from these studies contain features (present as columns). The last column in both the datasets refers to <code class="language-plaintext highlighter-rouge">age</code> which is used as labels/targets. Since the targets are real numbers, the machine learning task becomes <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a>. Using these features and targets, a model is learned using machine learning (regression) which learns a mapping between these features and targets. Using machine learning tools in Galaxy, we can achieve comparable prediction scores to those achieved by published analyses. In this tutorial, we will apply a couple of (<a href="https://scikit-learn.org/stable/">scikit-learn</a>) machine learning tools to <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">RNA-seq</a> and <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">DNA methylation</a> datasets to predict the chronological age of humans. This tutorial is divided into two parts - one with an RNA-seq dataset and another with a DNA methylation dataset.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>In cross-validation, a dataset is divided into <code class="language-plaintext highlighter-rouge">k</code> equal parts (<code class="language-plaintext highlighter-rouge">k</code> should be at least <code class="language-plaintext highlighter-rouge">2</code>). One part is used as the validation set to evaluate the performance of any machine learning algorithm and the remaining parts are used for learning/training.</p>
 </blockquote>
 
 <h4 id="r2-coefficient-of-determination">R2 (coefficient of determination)</h4>
 <p>In both the parts, learning on datasets is done using cross-validation and the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">R2</a> scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures <a href="#figure-1">1</a> and <a href="#figure-2">2</a>. In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the <code class="language-plaintext highlighter-rouge">x = y</code> line as the true and predicted targets are close to each other. In figure <a href="#figure-1">1</a>, we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is <code class="language-plaintext highlighter-rouge">-0.06</code>. But, figure <a href="#figure-2">2</a> shows a better pattern as most of the points lie along the line and the R2 score is almost <code class="language-plaintext highlighter-rouge">1.0</code>. For RNA-seq dataset, we will compute the cross-validated R2 score using the training set and for DNA methylation dataset, we will compute the R2 score for the test set.</p>
 
-<figure id="figure-1"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> This shows an example of a bad model as most of the points are scattered. For a model to be good, most of the points should lie along the x = y  line. It means that the predicted target on the y (vertical) axis is close to the true targets on the x (horizontal) axis.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> This shows an example of a bad model as most of the points are scattered. For a model to be good, most of the points should lie along the x = y  line. It means that the predicted target on the y (vertical) axis is close to the true targets on the x (horizontal) axis.</figcaption></figure>
 
-<figure id="figure-2"><img src="../../images/age-prediction-with-ml/model_good.png" alt="model_good. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> This shows an example of a good model as most of the points lie along the x = y line. Because most of the points lie along the x = y line, R2 score is 0.99 very close to the best score of 1.0</figcaption></figure>
+<figure id="figure-2"><img src="../../images/age-prediction-with-ml/model_good.png" alt="model_good. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> This shows an example of a good model as most of the points lie along the x = y line. Because most of the points lie along the x = y line, R2 score is 0.99 very close to the best score of 1.0</figcaption></figure>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -836,11 +1049,11 @@
 <p>The RNA-seq dataset is collected from fibroblast cell lines belonging to 133 healthy patients with age ranging from 1 to 94 years. The skin fibroblasts cells dataset is conducive for age prediction related studies for multiple reasons - these skin fibroblasts hold age-related damage, contain phenotypic, epigenomic and transcriptomic changes which are age-dependent and it is easy to collect this dataset using non-invasive techniques. Using this dataset, we perform an <a href="https://en.wikipedia.org/wiki/Hyperparameter_optimization">exhaustive search</a> (also known as grid search) for finding the best features and then apply <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet">ElasticNet regressor</a> with 5-fold cross-validation. The R2 score achieved is comparable to the predictions found in the study performed by <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a>.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-5-fold-cross-validation"><button class="gtn-boxify-button details" type="button" aria-controls="details-5-fold-cross-validation-contents" aria-expanded="true" aria-label="Toggle details box: 5-fold cross-validation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: 5-fold cross-validation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-5-fold-cross-validation"><button class="gtn-boxify-button details" type="button" aria-controls="details-5-fold-cross-validation" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: 5-fold cross-validation<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>It is a model validation technique which estimates the performance of a predictive model on an unseen data. A dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> folds and these folds are categorised into training and validation sets. The idea of cross-validation is shown in figure <a href="#figure-3">3</a>. The complete dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> equal parts. 80% of the dataset is used for training and the remaining 20% is used for validating the performance of training. This is done for <code class="language-plaintext highlighter-rouge">5</code> folds/iterations, each time the validation set (20% of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over <code class="language-plaintext highlighter-rouge">5</code> folds.</p>
 
-  <figure id="figure-3"><img src="../../images/age-prediction-with-ml/5fold_cv.png" alt="5fold_cv. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> The image shows how the 5-fold cross-validation works. The complete dataset is divided into 5 equal parts/folds. 4 parts (80%) of the data (training set shown in yellow) are used for training the model and the remaining one part is used for evaluating (validation set shown in blue) the trained model. This is repeated for 5 times till every part/fold is used as the validation set. The accuracies computed for different validation folds are averaged to give 5-fold cross-validation accuracy.</figcaption></figure>
+  <figure id="figure-3"><img src="../../images/age-prediction-with-ml/5fold_cv.png" alt="5fold_cv. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The image shows how the 5-fold cross-validation works. The complete dataset is divided into 5 equal parts/folds. 4 parts (80%) of the data (training set shown in yellow) are used for training the model and the remaining one part is used for evaluating (validation set shown in blue) the trained model. This is repeated for 5 times till every part/fold is used as the validation set. The accuracies computed for different validation folds are averaged to give 5-fold cross-validation accuracy.</figcaption></figure>
 
 </blockquote>
 
@@ -849,14 +1062,14 @@
 <p>We proceed to the analysis by uploading the RNA-seq dataset. The dataset has <code class="language-plaintext highlighter-rouge">133</code> rows corresponding to human patients and over <code class="language-plaintext highlighter-rouge">27,000</code> columns specifying genes. The last column <code class="language-plaintext highlighter-rouge">age</code> contains the chronological age. For the validation set, this <code class="language-plaintext highlighter-rouge">age</code> column is predicted and the R2 metric is computed.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/2545213#.XEWTJ9-YVa0">Zenodo</a></p>
@@ -865,26 +1078,26 @@
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the dataset to <code class="language-plaintext highlighter-rouge">training_data_normal</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>In the <code class="language-plaintext highlighter-rouge">training_data_normal</code> dataset, you might have noticed that it showed <code class="language-plaintext highlighter-rouge">134</code> rows instead of <code class="language-plaintext highlighter-rouge">133</code> rows. The first row contains the header information i.e. the description of each column.</p>
 </blockquote>
 
@@ -893,7 +1106,7 @@
 <p>We can see that this RNA-seq dataset is high-dimensional. There are over <code class="language-plaintext highlighter-rouge">27,000</code> columns/features. Generally, not all the features in the dataset are useful for prediction. We need only those features which increase the predictive ability of the model. To filter these features, we perform feature selection and retain only those which are useful. To do that, we use <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest">SelectKBest</a> module. This approach involves extracting those features which are most correlated to the target (<code class="language-plaintext highlighter-rouge">age</code> in our dataset). <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression">F-regression</a> is used for the extraction of features. Moreover, we are not sure of how many of these features we will need. To find the right number of features, we do a hyperparameter search (to find the best combination of values of different parameters). It works by setting many different numbers of features to determine to number which gives the highest accuracy. To wrap this feature selector with a regressor, we will use the <strong>Pipeline builder</strong> tool. This tool creates a sequential flow of algorithms to execute on datasets. Since the hyperparameters will be tuned, we choose to output the parameters for searchCV. The tool does not take any dataset as input. Rather, the outputs will be used as inputs to the <strong>Hyperparameter search</strong> tool (explained in the following step). We will use ElasticNet as a regressor which creates an age prediction model. It is a linear regressor with <code class="language-plaintext highlighter-rouge">l1</code> (also called lasso) and <code class="language-plaintext highlighter-rouge">l2</code> (also called ridge) as regularisers. Regularisation is a technique used in machine learning to prevent overfitting. Overfitting happens when a machine learning algorithm starts memorising the dataset it is trained upon, rather than learning general features. The consequence of overfitting is that the accuracy on the training set is good, but results on the unseen set (test set) are poor, which happens because the algorithm has not learned general features from the dataset. To prevent overfitting, regularisers like <code class="language-plaintext highlighter-rouge">l1</code> and <code class="language-plaintext highlighter-rouge">l2</code> are used. <code class="language-plaintext highlighter-rouge">L1</code> is a linear term added to the error function of a machine learning algorithm and <code class="language-plaintext highlighter-rouge">l2</code> adds a squared term to the error function. More details about <code class="language-plaintext highlighter-rouge">l1</code> and <code class="language-plaintext highlighter-rouge">l2</code> can found <a href="https://www.kaggle.com/residentmario/l1-norms-versus-l2-norms">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-pipeline" aria-label="hands-on box: Create pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create pipeline</div>
+  <div class="box-title hands-on-title" id="hands-on-create-pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create pipeline</div>
 
   <ol>
     <li><strong>Pipeline builder</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -961,12 +1174,12 @@
 <p>For these three parameters, we have 24 different combinations (4 x 2 x 3) of values and we will verify the performance of each combination. The parameter <strong>k</strong> is used for feature selection and parameters <strong>normalize</strong> and <strong>alpha</strong> are used for the regressor. There are many more hyperparameters of the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet">ElasticNet</a> regressor which are explained in the official documentation of scikit-learn. However, the combination of the above three parameters already gives a comparable accuracy published in the study <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a>. Therefore, we will stick to these parameters.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>It is advisable to tune all the parameters of a machine learning algorithm for a dataset if no prior information is available about the subset of parameters which works best for the dataset.</p>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>These parameters have the same description and values in the second part of the tutorial where we will again use the <strong>Hyperparameter search</strong> tool.</p>
 </blockquote>
 
@@ -975,7 +1188,7 @@
 <p>We will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hyperparameter-search" aria-label="hands-on box: Hyperparameter search"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hyperparameter search</div>
+  <div class="box-title hands-on-title" id="hands-on-hyperparameter-search"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hyperparameter search</div>
 
   <ol>
     <li><strong>Hyperparameter search</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1069,7 +1282,7 @@
 <p>The tool returns two outputs, one of which is a table with numerical results. Please inspect it carefully: the <code class="language-plaintext highlighter-rouge">rank_test_score</code> column shows the ranking of different combinations based on the values in the <code class="language-plaintext highlighter-rouge">mean_test_score</code> column.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>What is the best <code class="language-plaintext highlighter-rouge">mean_test_score</code> value estimated by the <strong>Hyperparameter search</strong> tool?</li>
@@ -1078,7 +1291,7 @@
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>0.73 (it is close to the best R2 score (0.81) achieved by a customised ensemble algorithm explained by <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a>)</li>
@@ -1095,7 +1308,7 @@
 <p>We will visualize the tabular output of <strong>Hyperparameter search</strong> tool from the previous step using the <strong>Parallel coordinates plot of tabular data</strong> tool. There are multiple columns in the tabular output, but we will focus on only a few of them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-parallel-coordinates-plot" aria-label="hands-on box: Create parallel coordinates plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create parallel coordinates plot</div>
+  <div class="box-title hands-on-title" id="hands-on-create-parallel-coordinates-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create parallel coordinates plot</div>
 
   <ol>
     <li><strong>Parallel coordinates plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1111,15 +1324,15 @@
 
 <p>The output plot has the following legend: the colour-coding is based on the <code class="language-plaintext highlighter-rouge">mean_test_score</code> (<code class="language-plaintext highlighter-rouge">c3</code>) column. You can follow the line leading to the score along every column with the parameters’ settings. The columns <code class="language-plaintext highlighter-rouge">c4, c5</code> and <code class="language-plaintext highlighter-rouge">c6</code> are the parameters we chose and <code class="language-plaintext highlighter-rouge">c3</code> is the accuracy column present in the <code class="language-plaintext highlighter-rouge">tabular</code> output of <strong>Hyperparameter search</strong> tool.</p>
 
-<figure id="figure-4"><img src="../../images/age-prediction-with-ml/parallel_coor_plot.png" alt="data. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> The visualization of the hyperparameter optimisation tool output. We optimised the values of 3 hyperparameters (alpha, normalize and k). These can be seen as the columns (first three from left to right) in the plot. The rightmost column contains the accuracy values (mean_test_score).</figcaption></figure>
+<figure id="figure-4"><img src="../../images/age-prediction-with-ml/parallel_coor_plot.png" alt="data. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> The visualization of the hyperparameter optimisation tool output. We optimised the values of 3 hyperparameters (alpha, normalize and k). These can be seen as the columns (first three from left to right) in the plot. The rightmost column contains the accuracy values (mean_test_score).</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>What are the worst performing combinations of hyperparameters (name four)?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Worst four:</p>
     <ul>
@@ -1135,7 +1348,7 @@
 
 <h2 id="compare-results-with-original-paper">Compare results with original paper</h2>
 
-<figure id="figure-5"><img src="../../images/age-prediction-with-ml/rna_seq_age.png" alt="rna_seq_age_paper. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> The plot shows accuracy obtained in the paper from Jason G. Fleischer et al. 2018 (Predicting age from the transcriptome of human dermal fibroblasts) using ElasticNet regressor. The R2 scores achieved in the tutorial and mentioned in the paper using the same regressor are comparable.</figcaption></figure>
+<figure id="figure-5"><img src="../../images/age-prediction-with-ml/rna_seq_age.png" alt="rna_seq_age_paper. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> The plot shows accuracy obtained in the paper from Jason G. Fleischer et al. 2018 (Predicting age from the transcriptome of human dermal fibroblasts) using ElasticNet regressor. The R2 scores achieved in the tutorial and mentioned in the paper using the same regressor are comparable.</figcaption></figure>
 
 <h2 id="summary">Summary</h2>
 
@@ -1150,7 +1363,7 @@
 <p>We proceed with the analysis by uploading new datasets. You might want to create a new history first. The training set contains <code class="language-plaintext highlighter-rouge">208</code> rows corresponding to humans and <code class="language-plaintext highlighter-rouge">13</code> features (age-correlated CpG sites in DNA methylation dataset). The last column is <code class="language-plaintext highlighter-rouge">age</code>. The test set contains <code class="language-plaintext highlighter-rouge">104</code> rows and the same number of features as the training set. The <code class="language-plaintext highlighter-rouge">age</code> column in the test set is predicted after training on the training set. Another dataset <code class="language-plaintext highlighter-rouge">test_rows_labels</code> contains the true age values of the test set which is used to compute R2 scores between true and predicted age.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-1" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -1163,19 +1376,19 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the datasets as <code class="language-plaintext highlighter-rouge">train_rows</code>, <code class="language-plaintext highlighter-rouge">test_rows_labels</code> and <code class="language-plaintext highlighter-rouge">test_rows</code> respectively.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Check that the datatype of all the three datasets is <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1188,7 +1401,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 <p>We will create a pipeline with <strong>Pipeline builder</strong> tool, but this time, we just specify the regressor. <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a> has used <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor">Random Forest</a> as the regressor and we can conclude from this study that the ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor">Gradient boosting</a> which is an ensemble-based regressor because it uses multiple decision tree regressors internally and predicts by taking the collective performances of the predictions (by multiple decision trees). It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelised. The <strong>Pipeline builder</strong> tool will wrap this regressor and return a zipped file and a tabular file containing all tunable hyperparameters.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-pipeline-1" aria-label="hands-on box: Create pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create pipeline</div>
+  <div class="box-title hands-on-title" id="hands-on-create-pipeline-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create pipeline</div>
 
   <ol>
     <li><strong>Pipeline builder</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1211,7 +1424,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>The <a href="https://scikit-learn.org/stable/modules/ensemble.html#ensemble"><em>ensemble</em></a> method uses multiple learning models internally for better predictions.</p>
 </blockquote>
 
@@ -1225,7 +1438,7 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 <p>We will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hyperparameter-search-1" aria-label="hands-on box: Hyperparameter search"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hyperparameter search</div>
+  <div class="box-title hands-on-title" id="hands-on-hyperparameter-search-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hyperparameter search</div>
 
   <ol>
     <li><strong>Hyperparameter search</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1305,14 +1518,14 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>What is the optimal number of estimators for the given dataset?</p>
 
   <p>Hint: Please look at the <code class="language-plaintext highlighter-rouge">mean_test_score</code> column in the tabular result from the <strong>Hyperparameter search</strong> tool.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>(Even though the default value of the number of estimators for Gradient boosting regressor is <code class="language-plaintext highlighter-rouge">100</code>, <code class="language-plaintext highlighter-rouge">75</code> gives the best accuracy. That’s why it is important to perform hyperparameter search to tune these parameters for any dataset). 50 estimators also give almost the same accuracy.</li>
@@ -1327,7 +1540,7 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 <p>Using the <strong>Hyperparameter search</strong> tool, we found the best model based on the training data. Now, we will predict age in the test dataset using this model in order to see if the model has learned important features which can be generalised on a new dataset. The test dataset (<code class="language-plaintext highlighter-rouge">test_rows</code>) contains the same number of features, but does not contain the <code class="language-plaintext highlighter-rouge">age</code> column. This is predicted using the trained model.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-predict-age" aria-label="hands-on box: Predict age"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict age</div>
+  <div class="box-title hands-on-title" id="hands-on-predict-age"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Predict age</div>
 
   <ol>
     <li><strong>Ensemble methods for classification and regression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1350,7 +1563,7 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 <p>In the previous step, we generated predictions for the test dataset. We have one more dataset (<code class="language-plaintext highlighter-rouge">test_rows_labels</code>) which contains the true age values of the test set. Using the true and predicted values of age in the test set, we will verify the performance by analysing the plots.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-regression-plots" aria-label="hands-on box: Create regression plots"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create regression plots</div>
+  <div class="box-title hands-on-title" id="hands-on-create-regression-plots"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create regression plots</div>
 
   <ol>
     <li><strong>Plot actual vs predicted curves and residual plots of tabular data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1366,31 +1579,31 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 <p>The tool outputs three HTML files which contain the interactive plots.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Inspect the plots. What can you say about the predictions?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Figures <a href="#figure-6">6</a> and <a href="#figure-8">8</a> show that the prediction is good because the predicted age lies close to the true age.</p>
 
   </blockquote>
 </blockquote>
 
-<figure id="figure-6"><img src="../../images/age-prediction-with-ml/scatter_plot.png" alt="Scatter plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Scatter plot for true and predicted age for test set. It is evident from the plot that most of the points lie along the x = y line, which means that true and predicted ages are close to each other. The root mean squared error in predicting age is 3.76 years and R2 score (0.94) is close to the best score of 1.0.</figcaption></figure>
+<figure id="figure-6"><img src="../../images/age-prediction-with-ml/scatter_plot.png" alt="Scatter plot. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Scatter plot for true and predicted age for test set. It is evident from the plot that most of the points lie along the x = y line, which means that true and predicted ages are close to each other. The root mean squared error in predicting age is 3.76 years and R2 score (0.94) is close to the best score of 1.0.</figcaption></figure>
 
 <p>We can see in the scatter plot (figure <a href="#figure-6">6</a>) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (<code class="language-plaintext highlighter-rouge">RMSE</code>) is <code class="language-plaintext highlighter-rouge">3.76</code> and the R2 score is <code class="language-plaintext highlighter-rouge">0.94</code>.</p>
 
-<figure id="figure-7"><img src="../../images/age-prediction-with-ml/residual_plot.png" alt="Residuals. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The plot shows the residuals (predicted age - true) age against the predicted age. For a good learning/training, this plot should not show any distinct pattern and the points should be symmetrically distributed along the y = 0 line.</figcaption></figure>
+<figure id="figure-7"><img src="../../images/age-prediction-with-ml/residual_plot.png" alt="Residuals. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> The plot shows the residuals (predicted age - true) age against the predicted age. For a good learning/training, this plot should not show any distinct pattern and the points should be symmetrically distributed along the y = 0 line.</figcaption></figure>
 
 <p>The <a href="http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/">residual plot</a> shown in figure <a href="#figure-7">7</a> is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good model, there should not be any visible pattern with the plotted points.</p>
 
-<figure id="figure-8"><img src="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" alt="True vs predicted age. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> The plot shows the true vs predicted age for all the samples in the test set. We can see that the predicted values are close to the true values.</figcaption></figure>
+<figure id="figure-8"><img src="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" alt="True vs predicted age. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> The plot shows the true vs predicted age for all the samples in the test set. We can see that the predicted values are close to the true values.</figcaption></figure>
 
 <h2 id="compare-results-with-original-paper-1">Compare results with original paper</h2>
 
-<figure id="figure-9"><img src="../../images/age-prediction-with-ml/dnam_age_paper.png" alt="dnam_image_paper. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> The plot is from Jana Naue et al. 2017 (Chronological age prediction based on DNA methylation) and shows a scatter plot with the predicted age on the vertical axis and the true age on the horizontal axis. The plot is comparable to the scatter plot shown in figure 6. The RMSE score is also comparable. The paper used Random forest as the regressor and we used Gradient boosting as the regressor.</figcaption></figure>
+<figure id="figure-9"><img src="../../images/age-prediction-with-ml/dnam_age_paper.png" alt="dnam_image_paper. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> The plot is from Jana Naue et al. 2017 (Chronological age prediction based on DNA methylation) and shows a scatter plot with the predicted age on the vertical axis and the true age on the horizontal axis. The plot is comparable to the scatter plot shown in figure 6. The RMSE score is also comparable. The paper used Random forest as the regressor and we used Gradient boosting as the regressor.</figcaption></figure>
 
 <h2 id="summary-1">Summary</h2>
 
@@ -1400,10 +1613,12 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 
 <p>In our tutorial, we were able to use machine learning tools in Galaxy to reproduce the results reported in these scientific studies - <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a> and <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a>. We also learned how to work with high-dimensional datasets, perform a hyperparameter search and cross-validation. Further, we can reuse the trained models to make predictions on a new dataset provided that this new dataset has the same features. There are numerous other machine learning algorithms available in Galaxy which can also be tried out on these datasets to verify whether the accuracy can be improved.</p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Various machine learning algorithms should be used to find the best ones</p>
@@ -1438,33 +1653,9 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Age prediction using machine learning (Statistics and machine learning)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Age prediction using machine learning (Statistics and machine learning)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1482,7 +1673,7 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1523,7 +1714,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1535,29 +1726,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

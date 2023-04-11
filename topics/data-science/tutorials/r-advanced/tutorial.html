@@ -12,34 +12,34 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-advanced/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-advanced/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Advanced R in Galaxy" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
-<meta name="DC.creator" content="The Carpentries" />
-<meta name="DC.creator" content="Bérénice Batut" />
-<meta name="DC.creator" content="Fotis E. Psomopoulos" />
-<meta name="DC.creator" content="Toby Hodges" />
-<meta name="DC.creator" content="Erasmus+ Programme" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Advanced R in Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.creator" content="The Carpentries">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Fotis E. Psomopoulos">
+<meta name="DC.creator" content="Toby Hodges">
+<meta name="DC.creator" content="Erasmus+ Programme">
 
         
         
         
         
-        <meta name="description" content="These lessons will help you get your feet in data science..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Advanced R in Galaxy" />
-        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta name="description" content="These lessons will help you get your feet in data science...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Advanced R in Galaxy">
+        <meta property="og:description" content="These lessons will help you get your feet in data science...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -613,10 +613,374 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-data-science">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-18 14:23:35 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Advanced R in Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Advanced R in Galaxy' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-advanced/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "data-science, R",
+  "description": "The questions this  addresses are:\n - How can I manipulate data using R in Galaxy?\n - How do I get started with tabular data from Galaxy in R?\n\n\nThe objectives are:\n - Be able to load and explore the shape and contents of a tabular dataset using base R functions.\n - Understand factors and how they can be used to store and work with categorical data.\n - Apply common `dplyr` functions to manipulate data in R.\n - Employ the ‘pipe’ operator to link together a sequence of functions.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/rstudio/tutorial.html",
+      "name": "RStudio in Galaxy",
+      "description": "Hands-on for 'RStudio in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/r-basics/tutorial.html",
+      "name": "R basics in Galaxy",
+      "description": "Hands-on for 'R basics in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "name": "The Carpentries",
+      "image": "https://avatars.githubusercontent.com/carpentries",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "name": "Fotis E. Psomopoulos",
+      "image": "https://avatars.githubusercontent.com/fpsom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0222-4273",
+      "orcid": "https://orcid.org/0000-0002-0222-4273"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tobyhodges/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tobyhodges/",
+      "name": "Toby Hodges",
+      "image": "https://avatars.githubusercontent.com/tobyhodges",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1766-456X",
+      "orcid": "https://orcid.org/0000-0003-1766-456X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/",
+      "name": "Erasmus+ Programme",
+      "image": "https://avatars.githubusercontent.com/erasmusplus",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "name": "The Carpentries",
+      "image": "https://avatars.githubusercontent.com/carpentries",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "name": "Fotis E. Psomopoulos",
+      "image": "https://avatars.githubusercontent.com/fpsom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0222-4273",
+      "orcid": "https://orcid.org/0000-0002-0222-4273"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tobyhodges/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tobyhodges/",
+      "name": "Toby Hodges",
+      "image": "https://avatars.githubusercontent.com/tobyhodges",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1766-456X",
+      "orcid": "https://orcid.org/0000-0003-1766-456X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/",
+      "name": "Erasmus+ Programme",
+      "image": "https://avatars.githubusercontent.com/erasmusplus",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Intermediate"
+}
+</script>
+
+<article class="tutorial topic-data-science">
     <h1 data-toc-skip>Advanced R in Galaxy</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -627,9 +991,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -863,6 +1227,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -873,6 +1238,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>With HTS-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">“Reference-based RNA-Seq data analysis”</a>, and create some visualisations.</p>
@@ -884,7 +1250,7 @@
 <p>R is one of the most widely-used and powerful programming languages in bioinformatics. R especially shines where a variety of statistical tools are required (e.g. RNA-Seq, population genomics, etc.) and in the generation of publication-quality graphs and figures. Rather than get into an R vs. Python debate (both are useful), keep in mind that many of the concepts you will learn apply to Python and other programming languages.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-on-the-content-of-the-tutorial" aria-label="comment box: On the content of the tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: On the content of the tutorial</div>
+  <div class="box-title comment-title" id="comment-on-the-content-of-the-tutorial"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: On the content of the tutorial</div>
 
   <p>We believe that every learner can <strong>achieve competency with R</strong>. You have reached competency when you find that you are able to <strong>use R to handle common analysis challenges in a reasonable amount of time</strong> (which includes time needed to look at learning materials, search for answers online, and ask colleagues for help). As you spend more time using R (there is no substitute for regular use and practice) you will find yourself gaining competency and even expertise. The more familiar you get, the more complex the analyses you will be able to carry out, with less frustration, and in less time - the fantastic world of R awaits you!</p>
 
@@ -901,7 +1267,7 @@
   </ul>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-where-to-learn-more"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-where-to-learn-more-contents" aria-expanded="true" aria-label="Toggle tip box: Where to learn more"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Where to learn more<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-where-to-learn-more"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-where-to-learn-more" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Where to learn more<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The following are good resources for learning more about R. Some of them can be quite technical, but if you are a regular R user you may ultimately need this technical knowledge.</p>
     <ul>
@@ -919,7 +1285,7 @@
 <p>In this tutorial, we will take the list of DE genes extracted from DESEq2’s output that we generated in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">“Reference-based RNA-Seq data analysis” tutorial</a>, manipulate it and create some visualizations.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -951,7 +1317,7 @@
 <p>A substantial amount of the data we work with in science is tabular data, i.e. data arranged in rows and columns - also known as spreadsheets.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-few-principles-when-working-with-data" aria-label="comment box: Few principles when working with data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Few principles when working with data</div>
+  <div class="box-title comment-title" id="comment-few-principles-when-working-with-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Few principles when working with data</div>
   <p>We want to remind you of a few principles before we work with our first set of example data:</p>
 
   <ol>
@@ -981,12 +1347,12 @@
 <p>There are several ways to import data into R. For our purpose here, we will focus on using the tools every R installation comes with (so called “base” R) to import a comma-delimited file containing the results of our variant calling workflow. We will need to load the sheet using a function called <code class="language-plaintext highlighter-rouge">read.csv()</code>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-review-the-arguments-of-the-read-csv-function" aria-label="question box: Review the arguments of the `read.csv()` function"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Review the arguments of the `read.csv()` function</div>
+  <div class="box-title question-title" id="question-review-the-arguments-of-the-read-csv-function"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Review the arguments of the `read.csv()` function</div>
 
   <p>Before using the <code class="language-plaintext highlighter-rouge">read.csv()</code> function, use R’s help feature to answer the following questions.</p>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-getting-help-in-r"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-getting-help-in-r-contents" aria-expanded="true" aria-label="Toggle tip box: Getting help in R"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Getting help in R<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-getting-help-in-r"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-getting-help-in-r" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Getting help in R<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Entering <code class="language-plaintext highlighter-rouge">?</code> before the function name and then running that line will bring up the help documentation. Also, when reading this particular help be careful to pay attention to the <code class="language-plaintext highlighter-rouge">read.csv</code> expression under the <strong>Usage</strong> heading. Other answers will be in the <strong>Arguments</strong> heading.</p>
   </blockquote>
 
@@ -998,7 +1364,7 @@
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The <code class="language-plaintext highlighter-rouge">read.csv() </code>function has the argument <code class="language-plaintext highlighter-rouge">header</code> set to <code class="language-plaintext highlighter-rouge">TRUE</code> by default, this means the function always assumes the first row is header information, (i.e. column names)</li>
@@ -1015,7 +1381,7 @@
 <p>Now, let’s read the file with the annotated differentially expressed genes that was produced in the “<a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">Reference-based RNA-Seq data analysis</a>” tutorial.</p>
 
 <!--
-> <div class="box-title hands-on-title" id="hands-on-import-dataset-into-galaxy" aria-label="hands-on box: Import dataset into Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import dataset into Galaxy</div>
+> <div class="box-title hands-on-title" id="hands-on-import-dataset-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import dataset into Galaxy</div>
 > 1. In Galaxy, upload the following file from Zenodo:
 >    ```
 >    https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular
@@ -1027,7 +1393,7 @@
 -->
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-the-annotated-differentially-expressed-genes" aria-label="hands-on box: Read the annotated differentially expressed genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Read the annotated differentially expressed genes</div>
+  <div class="box-title hands-on-title" id="hands-on-read-the-annotated-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read the annotated differentially expressed genes</div>
   <ol>
     <li>Create a new script (if needed)</li>
     <li>
@@ -1043,7 +1409,7 @@
   </ol>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-upload-files-from-a-galaxy-history-to-rstudio"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-files-from-a-galaxy-history-to-rstudio-contents" aria-expanded="true" aria-label="Toggle tip box: Upload files from a Galaxy history to RStudio"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload files from a Galaxy history to RStudio<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-upload-files-from-a-galaxy-history-to-rstudio"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-files-from-a-galaxy-history-to-rstudio" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Upload files from a Galaxy history to RStudio<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Rstudio in Galaxy provides some special functions to import and export from your history.</p>
 
     <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gx_get</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># will import dataset number 2 from your history</span><span class="w">
@@ -1054,7 +1420,7 @@
 <p>In the <strong>Environment</strong> panel, you should have the <code class="language-plaintext highlighter-rouge">annotatedDEgenes</code> object, listed as 130 obs. (observations/rows) of 1 variable (column) - so the command worked (sort of)!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-inspect-the-annotateddegenes-file" aria-label="hands-on box: Inspect the annotatedDEgenes file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect the annotatedDEgenes file</div>
+  <div class="box-title hands-on-title" id="hands-on-inspect-the-annotateddegenes-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspect the annotatedDEgenes file</div>
   <ol>
     <li>Double-click on the name of the object in the <strong>Environment</strong> panel</li>
   </ol>
@@ -1066,7 +1432,7 @@
 <p>As you can see, there is a problem with how the data has been loaded. The table should contain 130 observations of 13 variables.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-identify-the-issue-with-data" aria-label="question box: Identify the issue with data"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Identify the issue with data</div>
+  <div class="box-title question-title" id="question-identify-the-issue-with-data"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Identify the issue with data</div>
 
   <ol>
     <li>What is wrong?</li>
@@ -1074,7 +1440,7 @@
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The data file was not delimited by commas (<code class="language-plaintext highlighter-rouge">,</code>) which is the default expected delimiter for <code class="language-plaintext highlighter-rouge">read.csv()</code>. Instead it seems like it’s delimited by “white space”, i.e. spaces and/or tabs.</li>
@@ -1085,7 +1451,7 @@
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-correctly-tabular-file" aria-label="hands-on box: Read correctly tabular file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Read correctly tabular file</div>
+  <div class="box-title hands-on-title" id="hands-on-read-correctly-tabular-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read correctly tabular file</div>
   <ol>
     <li>
       <p>Read the file given it’s a tabular file</p>
@@ -1119,7 +1485,7 @@
 <p>Tabular data are stored in R using <strong>data frame</strong>. A data frame could also be thought of as a collection of vectors, all of which have the same length.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-learn-more-about-our-data-frame" aria-label="hands-on box: Learn more about our data frame"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Learn more about our data frame</div>
+  <div class="box-title hands-on-title" id="hands-on-learn-more-about-our-data-frame"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Learn more about our data frame</div>
   <ol>
     <li>
       <p>Get summary statistics of <code class="language-plaintext highlighter-rouge">annotatedDEgenes</code> using <code class="language-plaintext highlighter-rouge">summary</code> function</p>
@@ -1205,7 +1571,7 @@
 <p>Since some of the data in our data frame are factors, lets see how factors work.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-inspect-a-factor-object" aria-label="hands-on box: Inspect a factor object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect a factor object</div>
+  <div class="box-title hands-on-title" id="hands-on-inspect-a-factor-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspect a factor object</div>
   <ol>
     <li>
       <p>Extract the <code class="language-plaintext highlighter-rouge">feature</code> column to a new object called <code class="language-plaintext highlighter-rouge">feature</code></p>
@@ -1229,7 +1595,7 @@
 <p>What we get back are the items in our factor, and also something called “Levels”. <strong>Levels are the different categories contained in a factor</strong>. By default, R will organize the levels in a factor in alphabetical order. So the first level in this factor is “lincRNA”.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-the-structure-of-a-factor-object" aria-label="hands-on box: Get the structure of a factor object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get the structure of a factor object</div>
+  <div class="box-title hands-on-title" id="hands-on-get-the-structure-of-a-factor-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the structure of a factor object</div>
   <ol>
     <li>
       <p>Get the structure of the <code class="language-plaintext highlighter-rouge">feature</code> object</p>
@@ -1246,7 +1612,7 @@
 <p>One of the most common uses for factors is to plot categorical values. For example, suppose we want to know how many of our differentially expressed genes correspond to different features.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plot-a-factor-object" aria-label="hands-on box: Plot a factor object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot a factor object</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-a-factor-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot a factor object</div>
   <ol>
     <li>
       <p>Plot the number of levels in the <code class="language-plaintext highlighter-rouge">feature</code> object using <code class="language-plaintext highlighter-rouge">plot</code> function</p>
@@ -1268,7 +1634,7 @@
 <p>The first thing to remember is that a data frame is two-dimensional (rows and columns). Therefore, to select a specific value we will once again use <code class="language-plaintext highlighter-rouge">[]</code> (bracket) notation, but we will specify more than one value (except in some cases where we are taking a range).</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-subsetting-a-data-frame" aria-label="question box: Subsetting a data frame"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Subsetting a data frame</div>
+  <div class="box-title question-title" id="question-subsetting-a-data-frame"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Subsetting a data frame</div>
 
   <p>Run the following indices and functions to figure out what they return</p>
 
@@ -1288,7 +1654,7 @@
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -1494,7 +1860,7 @@
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-new-data-frame-by-subsetting-an-existing-one" aria-label="hands-on box: Create a new data frame by subsetting an existing one"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create a new data frame by subsetting an existing one</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-new-data-frame-by-subsetting-an-existing-one"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create a new data frame by subsetting an existing one</div>
   <ol>
     <li>
       <p>Create a new data frame containing only observations from the “+” strand</p>
@@ -1553,7 +1919,7 @@
 <p>First, its very important to recognize that coercion happens in R all the time. This can be a good thing when R gets it right, or a bad thing when the result is not what you expect.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-format-gene-names" aria-label="hands-on box: Format gene names"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Format gene names</div>
+  <div class="box-title hands-on-title" id="hands-on-format-gene-names"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Format gene names</div>
   <ol>
     <li>
       <p>Check the structure of the <code class="language-plaintext highlighter-rouge">Gene.name</code> column</p>
@@ -1587,7 +1953,7 @@
 <p>R will sometimes coerce without you asking for it (implicit coercion). You can explicitly change it (explicit coercion).</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-avoiding-needless-coercion"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-avoiding-needless-coercion-contents" aria-expanded="true" aria-label="Toggle tip box: Avoiding needless coercion"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Avoiding needless coercion<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-avoiding-needless-coercion"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-avoiding-needless-coercion" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Avoiding needless coercion<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>One way to avoid needless coercion when importing a data frame using functions such as <code class="language-plaintext highlighter-rouge">read.csv()</code> is to set the argument <code class="language-plaintext highlighter-rouge">StringsAsFactors</code> to <code class="language-plaintext highlighter-rouge">FALSE</code>. By default, this argument is <code class="language-plaintext highlighter-rouge">TRUE</code>. Setting it to <code class="language-plaintext highlighter-rouge">FALSE</code> will treat any non-numeric column to a character type. Going through the <code class="language-plaintext highlighter-rouge">read.csv() </code>documentation, you will also see you can explicitly type your columns using the <code class="language-plaintext highlighter-rouge">colClasses</code> argument. Other R packages (such as the Tidyverse <code class="language-plaintext highlighter-rouge">readr</code>) don’t have this particular conversion issue, but many packages will still try to guess a data type.</p>
 </blockquote>
 
@@ -1598,7 +1964,7 @@
 <p>Let’s look at the <code class="language-plaintext highlighter-rouge">Base.mean</code> column, i.e. the mean of normalized counts of all samples, normalizing for sequencing depth and library composition.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-inspect-the-base-mean-column-and-sort" aria-label="hands-on box: Inspect the `Base.mean` column and sort"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect the `Base.mean` column and sort</div>
+  <div class="box-title hands-on-title" id="hands-on-inspect-the-base-mean-column-and-sort"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspect the `Base.mean` column and sort</div>
   <ol>
     <li>
       <p>Get the maximum value of <code class="language-plaintext highlighter-rouge">Base.mean</code> column</p>
@@ -1616,11 +1982,11 @@
 </span></code></pre></div>      </div>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-changing-the-order" aria-label="question box: Changing the order"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Changing the order</div>
+        <div class="box-title question-title" id="question-changing-the-order"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Changing the order</div>
         <p>The <code class="language-plaintext highlighter-rouge">order()</code> function lists values in increasing order by default. Look at the documentation for this function and change <code class="language-plaintext highlighter-rouge">sorted_by_BaseMean</code> to start with differentially expressed means with the greatest base mean.</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">sorted_by_BaseMean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="p">[</span><span class="n">order</span><span class="p">(</span><span class="n">annotatedDEgenes</span><span class="o">$</span><span class="n">Base.mean</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="o">&gt;</span><span class="w"> </span><span class="n">head</span><span class="p">(</span><span class="n">sorted_by_BaseMean</span><span class="o">$</span><span class="n">Base.mean</span><span class="p">)</span><span class="w">
@@ -1645,7 +2011,7 @@
 <p>We can save data frame as table in our Galaxy history to use it as input for other tools.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-save-data-frame-in-galaxy-history" aria-label="hands-on box: Save data frame in Galaxy history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Save data frame in Galaxy history</div>
+  <div class="box-title hands-on-title" id="hands-on-save-data-frame-in-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Save data frame in Galaxy history</div>
 
   <ol>
     <li>
@@ -1669,7 +2035,7 @@
 <p>The functions we’ve been using so far, like <code class="language-plaintext highlighter-rouge">str()</code>, come built into R. By using packages, we can access more functions. Here, we would like to use <a href="https://cran.r-project.org/package=dplyr"><code class="language-plaintext highlighter-rouge">dplyr</code></a> package provides a number of very useful functions for manipulating data frames in a way that will reduce repetition, reduce the probability of making errors, and probably even save you some typing. As an added bonus, you might even find the <code class="language-plaintext highlighter-rouge">dplyr</code> grammar easier to read.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-what-is-dplyr" aria-label="comment box: What is dplyr?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: What is dplyr?</div>
+  <div class="box-title comment-title" id="comment-what-is-dplyr"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What is dplyr?</div>
 
   <p>The package <code class="language-plaintext highlighter-rouge">dplyr</code> is a fairly new (2014) package that tries to provide easy tools for the most common data manipulation tasks. It is built to work directly with data frames. The thinking behind it was largely inspired by the package <code class="language-plaintext highlighter-rouge">plyr</code> which has been in use for some time but suffered from being slow in some cases.<code class="language-plaintext highlighter-rouge"> dplyr</code> addresses this by porting much of the computation to C++. An additional feature is the ability to work with data stored directly in an external database. The benefits of doing this are that the data can be managed natively in a relational database, queries can be conducted on that database, and only the results of the query returned.</p>
 
@@ -1679,7 +2045,7 @@
 <p>To use <code class="language-plaintext highlighter-rouge">dplyr</code>, we need first to install the package and then load it to be able to use it.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-and-load-dyplr" aria-label="hands-on box: Install and load dyplr"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install and load dyplr</div>
+  <div class="box-title hands-on-title" id="hands-on-install-and-load-dyplr"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Install and load dyplr</div>
 
   <ol>
     <li>
@@ -1690,7 +2056,7 @@
 </span></code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-didn-t-work"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-didn-t-work-contents" aria-expanded="true" aria-label="Toggle tip box: Didn't work?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Didn't work?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-didn-t-work"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-didn-t-work" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Didn't work?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>You might need to install dyplr first</p>
 
         <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"dplyr"</span><span class="p">)</span><span class="w">
@@ -1710,7 +2076,7 @@
 <p>To select columns, instead with bracket, we could use the <code class="language-plaintext highlighter-rouge">select</code> function of <code class="language-plaintext highlighter-rouge">dplyr</code></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-select-column" aria-label="hands-on box: Select column"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Select column</div>
+  <div class="box-title hands-on-title" id="hands-on-select-column"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Select column</div>
 
   <ol>
     <li>
@@ -1757,7 +2123,7 @@
 <p><code class="language-plaintext highlighter-rouge">dplyr</code> also provides useful functions to select columns based on their names. For instance, <code class="language-plaintext highlighter-rouge">starts_with()</code> allows you to select columns that starts with specific letters.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-select-columns-that-start-with-the-letter-quot-p-quot" aria-label="hands-on box: Select columns that start with the letter &quot;P&quot;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Select columns that start with the letter &quot;P&quot;</div>
+  <div class="box-title hands-on-title" id="hands-on-select-columns-that-start-with-the-letter-quot-p-quot"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Select columns that start with the letter &quot;P&quot;</div>
 
   <ol>
     <li>
@@ -1783,14 +2149,14 @@
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-selecting-on-multiple-conditions" aria-label="question box: Selecting on multiple conditions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Selecting on multiple conditions</div>
+  <div class="box-title question-title" id="question-selecting-on-multiple-conditions"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Selecting on multiple conditions</div>
 
   <p>Create a table that contains all the columns with the letter “s” in their name except for the column “Wald.Stats”, and that contains the column “End”.</p>
 
   <p>Hint: look at the help for the function <code class="language-plaintext highlighter-rouge">starts_with()</code> we’ve just covered.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">select</span><span class="p">(</span><span class="n">annotatedDEgenes</span><span class="p">,</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="s2">"s"</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="n">Wald.Stats</span><span class="p">,</span><span class="w"> </span><span class="n">End</span><span class="p">)</span><span class="w">
 </span></code></pre></div>    </div>
@@ -1800,7 +2166,7 @@
 <p>Similarly to choose rows, we can use the <code class="language-plaintext highlighter-rouge">filter()</code> function.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-rows" aria-label="hands-on box: Filter rows"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter rows</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-rows"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter rows</div>
 
   <ol>
     <li>
@@ -1822,7 +2188,7 @@
 </span></code></pre></div>      </div>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-equivalent-in-base-r-code" aria-label="comment box: Equivalent in base R code"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Equivalent in base R code</div>
+        <div class="box-title comment-title" id="comment-equivalent-in-base-r-code"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Equivalent in base R code</div>
         <p>Note that this is equivalent to the base R code below, but is easier to read!</p>
 
         <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="p">[</span><span class="n">annotatedDEgenes</span><span class="o">$</span><span class="n">Strand</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"+"</span><span class="p">,]</span><span class="w">
@@ -1851,7 +2217,7 @@
 <p><code class="language-plaintext highlighter-rouge">filter()</code> allows to combine multiple conditions. They need to be separated using a <code class="language-plaintext highlighter-rouge">,</code> as arguments to the function, they will be combined using the <code class="language-plaintext highlighter-rouge">&amp;</code> (AND) logical operator. If you need to use the <code class="language-plaintext highlighter-rouge">|</code> (OR) logical operator, you can specify it explicitly:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-rows-for-multiple-conditions" aria-label="hands-on box: Filter rows for multiple conditions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter rows for multiple conditions</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-rows-for-multiple-conditions"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter rows for multiple conditions</div>
 
   <ol>
     <li>
@@ -1872,7 +2238,7 @@
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-practising-with-conditionals" aria-label="question box: Practising with conditionals"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Practising with conditionals</div>
+  <div class="box-title question-title" id="question-practising-with-conditionals"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Practising with conditionals</div>
 
   <p>Select all the rows for genes that:</p>
   <ul>
@@ -1881,7 +2247,7 @@
   </ul>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">filter</span><span class="p">(</span><span class="n">annotatedDEgenes</span><span class="p">,</span><span class="w"> </span><span class="n">Start</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">1e6</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">End</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">2e6</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">log2.FC.</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">P.adj</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">1e-75</span><span class="p">)</span><span class="w">
 </span></code></pre></div>    </div>
@@ -1893,7 +2259,7 @@
 <p>We can do this with <strong>pipes</strong>. Pipes, are a fairly recent addition to R. They let you take the output of one function and send it directly to the next, which is useful when you need to do many things to the same data set. It was possible to do this before pipes were added to R, but it was much messier and more difficult. Pipes in R look like <code class="language-plaintext highlighter-rouge">%&gt;%</code> and are made available via the <code class="language-plaintext highlighter-rouge">magrittr</code> package, which is installed as part of <code class="language-plaintext highlighter-rouge">dplyr</code>.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-pipes-on-rstudio" aria-label="comment box: Pipes on RStudio"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Pipes on RStudio</div>
+  <div class="box-title comment-title" id="comment-pipes-on-rstudio"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Pipes on RStudio</div>
 
   <p>With RStudio, you can type the pipe with</p>
   <ul>
@@ -1903,7 +2269,7 @@
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-select-and-filter" aria-label="hands-on box: Select and filter"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Select and filter</div>
+  <div class="box-title hands-on-title" id="hands-on-select-and-filter"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Select and filter</div>
 
   <ol>
     <li>
@@ -1936,7 +2302,7 @@
 </ol>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-no-need-to-give-1st-argument-to-the-functions" aria-label="comment box: No need to give 1st argument to the functions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: No need to give 1st argument to the functions</div>
+  <div class="box-title comment-title" id="comment-no-need-to-give-1st-argument-to-the-functions"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: No need to give 1st argument to the functions</div>
 
   <p>Since <code class="language-plaintext highlighter-rouge">%&gt;%</code> takes the object on its left and passes it as the first argument to the function on its right, we don’t need to explicitly include the data frame as an argument to the <code class="language-plaintext highlighter-rouge">filter()</code> and <code class="language-plaintext highlighter-rouge">select()</code> functions any more.</p>
 
@@ -1949,7 +2315,7 @@
 <p>If we want to create a new object with this smaller version of the data we can do so by assigning it to a new object.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-select-and-filter-to-create-new-object" aria-label="hands-on box: Select and filter to create new object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Select and filter to create new object</div>
+  <div class="box-title hands-on-title" id="hands-on-select-and-filter-to-create-new-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Select and filter to create new object</div>
 
   <ol>
     <li>
@@ -1979,7 +2345,7 @@
 <p>This new object includes all of the data from this sample.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pipes-and-up-regulation" aria-label="question box: Pipes and up-regulation"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Pipes and up-regulation</div>
+  <div class="box-title question-title" id="question-pipes-and-up-regulation"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Pipes and up-regulation</div>
 
   <p>Starting with the <code class="language-plaintext highlighter-rouge">annotatedDEgenes</code> data frame, use pipes to</p>
   <ul>
@@ -1988,7 +2354,7 @@
   </ul>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
     </span><span class="n">filter</span><span class="p">(</span><span class="n">Chromosome</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"chr3L"</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">log2.FC.</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
     </span><span class="n">select</span><span class="p">(</span><span class="n">GeneID</span><span class="p">,</span><span class="w"> </span><span class="n">P.adj</span><span class="p">,</span><span class="w"> </span><span class="n">log2.FC.</span><span class="p">)</span><span class="w">
@@ -2005,7 +2371,7 @@
 <p>Let’s create a column <code class="language-plaintext highlighter-rouge">FC</code> to our <code class="language-plaintext highlighter-rouge">annotatedDEgenes</code> data frame that show the observed expression as a multiple of the reference level.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-select-and-filter-to-create-new-object-1" aria-label="hands-on box: Select and filter to create new object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Select and filter to create new object</div>
+  <div class="box-title hands-on-title" id="hands-on-select-and-filter-to-create-new-object-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Select and filter to create new object</div>
 
   <ol>
     <li>
@@ -2028,12 +2394,12 @@
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-selected-mutation" aria-label="question box: Selected mutation"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Selected mutation</div>
+  <div class="box-title question-title" id="question-selected-mutation"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Selected mutation</div>
 
   <p>Create a column with the gene length and just look at the <code class="language-plaintext highlighter-rouge">GeneID</code>, <code class="language-plaintext highlighter-rouge">Chromosome</code>, <code class="language-plaintext highlighter-rouge">Start</code>, <code class="language-plaintext highlighter-rouge">End</code>, and <code class="language-plaintext highlighter-rouge">Length</code> columns</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
    </span><span class="n">mutate</span><span class="p">(</span><span class="n">Length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">End</span><span class="o">-</span><span class="n">Start</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
    </span><span class="n">select</span><span class="p">(</span><span class="n">GeneID</span><span class="p">,</span><span class="w"> </span><span class="n">Chromosome</span><span class="p">,</span><span class="w"> </span><span class="n">Start</span><span class="p">,</span><span class="w"> </span><span class="n">End</span><span class="p">,</span><span class="w"> </span><span class="n">Length</span><span class="p">)</span><span class="w">
@@ -2049,7 +2415,7 @@ then combine the results.</p>
 <p><code class="language-plaintext highlighter-rouge">dplyr</code> makes this very easy through the use of the <code class="language-plaintext highlighter-rouge">group_by()</code> function, which splits the data into groups. When the data is grouped in this way <code class="language-plaintext highlighter-rouge">summarize()</code> can be used to collapse each group into a single-row summary, by applying an aggregating or summary function to each group.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-group-and-summarize-data" aria-label="hands-on box: Group and summarize data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Group and summarize data</div>
+  <div class="box-title hands-on-title" id="hands-on-group-and-summarize-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Group and summarize data</div>
 
   <ol>
     <li>
@@ -2077,7 +2443,7 @@ then combine the results.</p>
 <p>We can also apply many other functions to individual columns to get other summary statistics.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-group-and-summarize-data-1" aria-label="hands-on box: Group and summarize data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Group and summarize data</div>
+  <div class="box-title hands-on-title" id="hands-on-group-and-summarize-data-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Group and summarize data</div>
 
   <ol>
     <li>
@@ -2101,14 +2467,14 @@ then combine the results.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-summarizing-groups" aria-label="question box: Summarizing groups"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Summarizing groups</div>
+  <div class="box-title question-title" id="question-summarizing-groups"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Summarizing groups</div>
 
   <p>What are the longest genes in each chromosome?</p>
 
   <p>Hint: the function <code class="language-plaintext highlighter-rouge">abs()</code> returns the absolute value.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
    </span><span class="n">mutate</span><span class="p">(</span><span class="n">GeneLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">abs</span><span class="p">(</span><span class="n">End</span><span class="o">-</span><span class="n">Start</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
@@ -2127,7 +2493,7 @@ then combine the results.</p>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-missing-data-and-base-functions" aria-label="comment box: Missing data and base functions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Missing data and base functions</div>
+  <div class="box-title comment-title" id="comment-missing-data-and-base-functions"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Missing data and base functions</div>
 
   <p>R has many base functions like <code class="language-plaintext highlighter-rouge">mean()</code>, <code class="language-plaintext highlighter-rouge">median()</code>, <code class="language-plaintext highlighter-rouge">min()</code>, and <code class="language-plaintext highlighter-rouge">max()</code> that are useful to compute summary statistics. These are also called “built-in functions” because they come with R and don’t require that you install any additional packages.</p>
 
@@ -2137,12 +2503,12 @@ then combine the results.</p>
 <p><code class="language-plaintext highlighter-rouge">group_by()</code> can also take multiple column names.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-counting" aria-label="question box: Counting"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Counting</div>
+  <div class="box-title question-title" id="question-counting"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Counting</div>
 
   <p>How many genes are found on each strand of each chromosome?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
    </span><span class="n">count</span><span class="p">(</span><span class="n">Chromosome</span><span class="p">,</span><span class="w"> </span><span class="n">Strand</span><span class="p">)</span><span class="w">
@@ -2174,7 +2540,7 @@ then combine the results.</p>
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-spread-a-key-value-pair-across-multiple-columns" aria-label="hands-on box: Spread a key-value pair across multiple columns"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Spread a key-value pair across multiple columns</div>
+  <div class="box-title hands-on-title" id="hands-on-spread-a-key-value-pair-across-multiple-columns"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Spread a key-value pair across multiple columns</div>
 
   <ol>
     <li>
@@ -2185,7 +2551,7 @@ then combine the results.</p>
 </span></code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-didn-t-work-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-didn-t-work-1-contents" aria-expanded="true" aria-label="Toggle tip box: Didn't work?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Didn't work?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-didn-t-work-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-didn-t-work-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Didn't work?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>You might need to install tidyr first</p>
 
         <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"tidyr"</span><span class="p">)</span><span class="w">
@@ -2218,7 +2584,7 @@ then combine the results.</p>
 <p>The opposite operation of <code class="language-plaintext highlighter-rouge">spread()</code> is taken care by <code class="language-plaintext highlighter-rouge">gather()</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-gather-columns-into-key-value-pairs" aria-label="hands-on box: Gather columns into key-value pairs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Gather columns into key-value pairs</div>
+  <div class="box-title hands-on-title" id="hands-on-gather-columns-into-key-value-pairs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Gather columns into key-value pairs</div>
 
   <ol>
     <li>
@@ -2249,14 +2615,14 @@ then combine the results.</p>
 <p>We specify the names of the new columns, and here add <code class="language-plaintext highlighter-rouge">-Chromosome</code> as this column shouldn’t be affected by the reshaping:</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-categorising-expression-levels" aria-label="question box: Categorising expression levels"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Categorising expression levels</div>
+  <div class="box-title question-title" id="question-categorising-expression-levels"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Categorising expression levels</div>
 
   <ol>
     <li>
       <p>Classify each gene as either “up-regulated” (fold change &gt; 1) or “down-regulated” (fold change &lt; 1) and create a table with <code class="language-plaintext highlighter-rouge">Chromosome</code> as rows, the two new labels as columns, and the number of genes in the cells.</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
    </span><span class="n">mutate</span><span class="p">(</span><span class="n">exp_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">case_when</span><span class="p">(</span><span class="w">
@@ -2286,10 +2652,12 @@ then combine the results.</p>
 </blockquote>
 
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>It is easy to import data into R from tabular formats. However, you still need to check that R has imported and interpreted your data correctly.</p>
@@ -2327,33 +2695,9 @@ then combine the results.</p>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Advanced R in Galaxy (Foundations of Data Science)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Advanced R in Galaxy (Foundations of Data Science)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -2371,7 +2715,7 @@ then combine the results.</p>
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -2412,7 +2756,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -2498,29 +2842,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     </ul>
                 </blockquote>
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

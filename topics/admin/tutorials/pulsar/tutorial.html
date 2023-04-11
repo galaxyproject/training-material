@@ -12,35 +12,35 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Running Jobs on Remote Resources with Pulsar" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-03-27 13:29:13 +0000" />
-<meta name="DC.creator" content="Nate Coraor" />
-<meta name="DC.creator" content="Simon Gladman" />
-<meta name="DC.creator" content="Marius van den Beek" />
-<meta name="DC.creator" content="Helena Rasche" />
-<meta name="DC.creator" content="Gianmauro Cuccuru" />
-<meta name="DC.creator" content="Mira Kuntz" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Running Jobs on Remote Resources with Pulsar">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-03-27 13:29:13 +0000">
+<meta name="DC.creator" content="Nate Coraor">
+<meta name="DC.creator" content="Simon Gladman">
+<meta name="DC.creator" content="Marius van den Beek">
+<meta name="DC.creator" content="Helena Rasche">
+<meta name="DC.creator" content="Gianmauro Cuccuru">
+<meta name="DC.creator" content="Mira Kuntz">
 
         
         
         
         
-        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Running Jobs on Remote Resources with Pulsar" />
-        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta name="description" content="Resources related to configuration and maintenance of Gal...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Running Jobs on Remote Resources with Pulsar">
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/gat.png" />
+        <meta property="og:image" content="/training-material/assets/images/gat.png">
 
         
         <script type="application/ld+json">
@@ -758,10 +758,518 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-admin">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-03-27 13:29:13 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Running Jobs on Remote Resources with Pulsar",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Running Jobs on Remote Resources with Pulsar' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html",
+  "timeRequired": "PT60M",
+  "keywords": "admin, ansible, jobs, git-gat",
+  "description": "The questions this  addresses are:\n - How does pulsar work?\n - How can I deploy it?\n\n\nThe objectives are:\n - Have an understanding of what Pulsar is and how it works\n - Install and configure a RabbitMQ message queueing server\n - Install and configure a Pulsar server on a remote linux machine\n - Be able to get Galaxy to send jobs to a remote Pulsar server\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/slides.html",
+      "name": "Connecting Galaxy to a compute cluster",
+      "description": "Slides for 'Connecting Galaxy to a compute cluster' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html",
+      "name": "Connecting Galaxy to a compute cluster",
+      "description": "Hands-on for 'Connecting Galaxy to a compute cluster' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html",
+      "name": "Mapping Jobs to Destinations",
+      "description": "Hands-on for 'Mapping Jobs to Destinations' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/slides.html",
+      "name": "Reference Data with CVMFS",
+      "description": "Slides for 'Reference Data with CVMFS' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/tutorial.html",
+      "name": "Reference Data with CVMFS",
+      "description": "Hands-on for 'Reference Data with CVMFS' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    "A server/VM on which to deploy Pulsar"
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "name": "Nate Coraor",
+      "image": "https://avatars.githubusercontent.com/natefoo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-8083-2963",
+      "orcid": "https://orcid.org/0000-0001-8083-2963"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/",
+      "name": "Simon Gladman",
+      "image": "https://avatars.githubusercontent.com/slugger70",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6100-4385",
+      "orcid": "https://orcid.org/0000-0002-6100-4385"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "name": "Marius van den Beek",
+      "image": "https://avatars.githubusercontent.com/mvdbeek",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/",
+      "name": "Gianmauro Cuccuru",
+      "image": "https://avatars.githubusercontent.com/gmauro",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5335-545X",
+      "orcid": "https://orcid.org/0000-0002-5335-545X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/",
+      "name": "Mira Kuntz",
+      "image": "https://avatars.githubusercontent.com/mira-miracoli",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/",
+      "name": "Nate Coraor",
+      "image": "https://avatars.githubusercontent.com/natefoo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-8083-2963",
+      "orcid": "https://orcid.org/0000-0001-8083-2963"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/",
+      "name": "Simon Gladman",
+      "image": "https://avatars.githubusercontent.com/slugger70",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6100-4385",
+      "orcid": "https://orcid.org/0000-0002-6100-4385"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "name": "Marius van den Beek",
+      "image": "https://avatars.githubusercontent.com/mvdbeek",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/",
+      "name": "Gianmauro Cuccuru",
+      "image": "https://avatars.githubusercontent.com/gmauro",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5335-545X",
+      "orcid": "https://orcid.org/0000-0002-5335-545X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/",
+      "name": "Mira Kuntz",
+      "image": "https://avatars.githubusercontent.com/mira-miracoli",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-admin">
     <h1 data-toc-skip>Running Jobs on Remote Resources with Pulsar</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -772,9 +1280,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -1372,13 +1880,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/admin/tutorials/pulsar/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/admin/tutorials/pulsar/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -1397,7 +1902,10 @@
 
 
   
-  <li class="btn btn-default supporting_material">
+<!-- GTN Video Library true -->
+  
+<li class="btn btn-default supporting_material">
+  
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
         <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
     </a>
@@ -1429,7 +1937,9 @@
         
         
     </ul>
-   </li>
+  
+</li>
+  
    
 
 
@@ -1446,6 +1956,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -1456,6 +1967,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <p>Pulsar is the Galaxy Project’s remote job running system. It was written by John Chilton (<a href="https://github.com/jmchilton">@jmchilton</a>) of the Galaxy Project. It is a python server application that can accept jobs from a Galaxy server, submit them to a local resource and then send the results back to the originating Galaxy server.</p>
 
 <p>More details on Pulsar can be found at:</p>
@@ -1475,7 +1987,7 @@
 </ul>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#this-tutorial-assumes-that" id="markdown-toc-this-tutorial-assumes-that">This tutorial assumes that</a></li>
@@ -1492,7 +2004,7 @@
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path" aria-label="comment box: Galaxy Admin Training Path"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">     <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">     <li class="disabled">         <span>Step 1</span>         <span>ansible-galaxy</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">     <li class="disabled">         <span>Step 2</span>         <span>tus</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">     <li class="disabled">         <span>Step 3</span>         <span>cvmfs</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">     <li class="disabled">         <span>Step 4</span>         <span>singularity</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">     <li class="disabled">         <span>Step 5</span>         <span>tool-management</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">     <li class="disabled">         <span>Step 6</span>         <span>data-library</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">     <li class="disabled">         <span>Step 7</span>         <span>connect-to-compute-cluster</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">     <li class="disabled">         <span>Step 8</span>         <span>job-destinations</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">     <li class="active">         <span>Step 9</span>         <span>pulsar</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">     <li class="">         <span>Step 10</span>         <span>gxadmin</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">     <li class="">         <span>Step 11</span>         <span>monitoring</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">     <li class="">         <span>Step 12</span>         <span>tiaas</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">     <li class="">         <span>Step 13</span>         <span>reports</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">     <li class="">         <span>Step 14</span>         <span>ftp</span>     </li>          </a>      </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #86d486;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">     <li class="disabled">         <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">             <div>Step 1</div>             <div>ansible-galaxy</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">             <div>Step 2</div>             <div>tus</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">             <div>Step 3</div>             <div>cvmfs</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">             <div>Step 4</div>             <div>singularity</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">             <div>Step 5</div>             <div>tool-management</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">             <div>Step 6</div>             <div>data-library</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">             <div>Step 7</div>             <div>connect-to-compute-cluster</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">             <div>Step 8</div>             <div>job-destinations</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="active">         <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">             <div>Step 9</div>             <div>pulsar</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">             <div>Step 10</div>             <div>gxadmin</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">             <div>Step 11</div>             <div>monitoring</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">             <div>Step 12</div>             <div>tiaas</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">             <div>Step 13</div>             <div>reports</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">             <div>Step 14</div>             <div>ftp</div>         </a>     </li>           </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #a8ffa8;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
 
 <h2 id="this-tutorial-assumes-that">This tutorial assumes that</h2>
 
@@ -1503,7 +2015,7 @@
 </ul>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-this-is-not-intended-as-a-standalone-pulsar-guide"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-this-is-not-intended-as-a-standalone-pulsar-guide-contents" aria-expanded="true" aria-label="Toggle tip box: This is NOT intended as a standalone Pulsar guide"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: This is NOT intended as a standalone Pulsar guide<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-this-is-not-intended-as-a-standalone-pulsar-guide"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-this-is-not-intended-as-a-standalone-pulsar-guide" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: This is NOT intended as a standalone Pulsar guide<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>This tutorial is not intended to be a standalone Pulsar setup guide. If you read carefully and understand Ansible, it is likely you can figure out which portions are required to just setup Pulsar.</p>
 </blockquote>
 
@@ -1511,7 +2023,7 @@
 
 <p>We will be installing the RabbitMQ server daemon onto the Galaxy server to act as an intermediary message passing system between Galaxy and the remote Pulsar. The figure below shows a schematic representation of the system.</p>
 
-<figure id="figure-1"><img src="../../images/pulsar_amqp_schema.png" alt="Schematic diagram of Galaxy communicating with a Pulsar server via the RabbitMQ server. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Schematic diagram of Galaxy communicating with a Pulsar server via the RabbitMQ server. Red arrows represent AMQP communications and blue represent file transfers (initiated by the Pulsar server.)</figcaption></figure>
+<figure id="figure-1"><img src="../../images/pulsar_amqp_schema.png" alt="Schematic diagram of Galaxy communicating with a Pulsar server via the RabbitMQ server. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Schematic diagram of Galaxy communicating with a Pulsar server via the RabbitMQ server. Red arrows represent AMQP communications and blue represent file transfers (initiated by the Pulsar server.)</figcaption></figure>
 
 <h3 id="how-it-will-work">How it will work</h3>
 
@@ -1535,7 +2047,7 @@
 </ul>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-other-file-transport-methods-for-pulsar"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-other-file-transport-methods-for-pulsar-contents" aria-expanded="true" aria-label="Toggle tip box: Other file transport methods for Pulsar"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Other file transport methods for Pulsar<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-other-file-transport-methods-for-pulsar"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-other-file-transport-methods-for-pulsar" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Other file transport methods for Pulsar<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Pulsar can use a variety of file transport methods including:</p>
   <ul>
@@ -1558,7 +2070,7 @@
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-why-are-we-using-pulsar-in-mq-mode-here-and-not-the-restful-interface"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-are-we-using-pulsar-in-mq-mode-here-and-not-the-restful-interface-contents" aria-expanded="true" aria-label="Toggle details box: Why are we using Pulsar in MQ mode here and not the RESTful interface?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Why are we using Pulsar in MQ mode here and not the RESTful interface?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-why-are-we-using-pulsar-in-mq-mode-here-and-not-the-restful-interface"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-are-we-using-pulsar-in-mq-mode-here-and-not-the-restful-interface" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Why are we using Pulsar in MQ mode here and not the RESTful interface?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>We are teaching you to install Pulsar and configure it in MQ mode in this tutorial. Configuring Pulsar in RESTful mode is also possible and is quite useful in certain situations. However, in the most common situation MQ mode is preferable for a number of reasons:</p>
   <ul>
     <li>When running Pulsar in RESTful mode, all of the job control and data transfer is controlled by the Galaxy server usually using http transfers. This can place a limit on the size of files that can be transferred without constant configuring of the webserver.</li>
@@ -1580,7 +2092,7 @@
 <p>Firstly we will add and configure another <em>role</em> to our Galaxy playbook - a community role which runs RabbitMQ in docker and configures it. In order to have docker installed automatically, we use geelingguy’s docker role, which luckly needs no configuration changes. Additionally we will use the Galaxy community role for deploying Pulsar</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-the-ansible-roles" aria-label="hands-on box: Install the Ansible roles"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install the Ansible roles</div>
+  <div class="box-title hands-on-title" id="hands-on-install-the-ansible-roles"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Install the Ansible roles</div>
 
   <ol>
     <li>
@@ -1600,13 +2112,13 @@
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-read-a-diff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-read-a-diff-contents" aria-expanded="true" aria-label="Toggle tip box: How to read a Diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to read a Diff<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you haven’t worked with diffs before, this can be something quite new or different.</p>   <p>If we have two files, let’s say a grocery list, in two files. We’ll call them ‘a’ and ‘b’.</p>   <blockquote class="code-2col">   <blockquote class="code-in">     <div class="box-title code-in-title" id="code-in-old" aria-label="code-in box: Old"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Old</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat old<br />🍎<br />🍐<br />🍊<br />🍋<br />🍒<br />🥑<br /></code></pre></div>    </div>   </blockquote>   <blockquote class="code-out">     <div class="box-title code-out-title" id="code-out-new" aria-label="code-out box: New"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: New</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat new<br />🍎<br />🍐<br />🍊<br />🍋<br />🍍<br />🥑<br /></code></pre></div>    </div>   </blockquote> </blockquote>   <p>We can see that they have some different entries. We’ve removed 🍒 because they’re awful, and replaced them with an 🍍</p>   <p>Diff lets us compare these files</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff old new<br />5c5<br />&lt; 🍒<br /><span class="nt">---</span><br /><span class="o">&gt;</span> 🍍<br /></code></pre></div></div>   <p>Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.</p>   <p>There are a couple different formats to diffs, one is the ‘unified diff’</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> old new<br /><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:06:36.340962616 +0100<br />@@ <span class="nt">-3</span>,4 +3,4 @@<br /> 🍊<br /> 🍋<br />-🍒<br />+🍍<br /> 🥑<br /></code></pre></div></div>   <p>This is basically what you see in the training materials which gives you a lot of context about the changes:</p>   <ul>   <li><code class="language-plaintext highlighter-rouge">--- old</code> is the ‘old’ file in our view</li>   <li><code class="language-plaintext highlighter-rouge">+++ new</code> is the ‘new’ file</li>   <li>@@ these lines tell us where the change occurs and how many lines are added or removed.</li>   <li>Lines starting with a - are removed from our ‘new’ file</li>   <li>Lines with a + have been added.</li> </ul>   <p>So when you go to apply these diffs to your files in the training:</p>   <ol>   <li>Ignore the header</li>   <li>Remove lines starting with - from your file</li>   <li>Add lines starting with + to your file</li> </ol>   <p>The other lines (🍊/🍋 and 🥑) above just provide “context”, they help you know where a change belongs in a file, but <strong>should not be edited</strong> when you’re making the above change. Given the above diff, you would find a line with a 🍒, and replace it with a 🍍</p>   <h4 id="added--removed-lines">Added &amp; Removed Lines</h4>   <p>Removals are very easy to spot, we just have removed lines</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:10:14.370722802 +0100<br />@@ <span class="nt">-4</span>,3 +4,2 @@<br /> 🍋<br /> 🍒<br />-🥑<br /></code></pre></div></div>   <p>And additions likewise are very easy, just add a new line, between the other lines in your file.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:11:11.422135393 +0100<br />@@ <span class="nt">-1</span>,3 +1,4 @@<br /> 🍎<br />+🍍<br /> 🍐<br /> 🍊<br /></code></pre></div></div>   <h4 id="completely-new-files">Completely new files</h4>   <p>Completely new files look a bit different, there the “old” file is <code class="language-plaintext highlighter-rouge">/dev/null</code>, the empty file in a Linux machine.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> /dev/null old<br /><span class="nt">---</span> /dev/null	2022-02-15 11:47:16.100000270 +0100<br />+++ old	2022-02-16 14:06:19.697132568 +0100<br />@@ <span class="nt">-0</span>,0 +1,6 @@<br />+🍎<br />+🍐<br />+🍊<br />+🍋<br />+🍒<br />+🥑<br /></code></pre></div></div>   <p>And removed files are similar, except with the new file being /dev/null</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ /dev/null	2022-02-15 11:47:16.100000270 +0100<br />@@ <span class="nt">-1</span>,6 +0,0 @@<br />-🍎<br />-🍐<br />-🍊<br />-🍋<br />-🍒<br />-🥑<br /></code></pre></div></div> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-read-a-diff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-read-a-diff" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: How to read a Diff<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you haven’t worked with diffs before, this can be something quite new or different.</p>   <p>If we have two files, let’s say a grocery list, in two files. We’ll call them ‘a’ and ‘b’.</p>   <blockquote class="code-2col">   <blockquote class="code-in">     <div class="box-title code-in-title" id="code-in-old"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Old</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat old<br />🍎<br />🍐<br />🍊<br />🍋<br />🍒<br />🥑<br /></code></pre></div>    </div>   </blockquote>   <blockquote class="code-out">     <div class="box-title code-out-title" id="code-out-new"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: New</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat new<br />🍎<br />🍐<br />🍊<br />🍋<br />🍍<br />🥑<br /></code></pre></div>    </div>   </blockquote> </blockquote>   <p>We can see that they have some different entries. We’ve removed 🍒 because they’re awful, and replaced them with an 🍍</p>   <p>Diff lets us compare these files</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff old new<br />5c5<br />&lt; 🍒<br /><span class="nt">---</span><br /><span class="o">&gt;</span> 🍍<br /></code></pre></div></div>   <p>Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.</p>   <p>There are a couple different formats to diffs, one is the ‘unified diff’</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> old new<br /><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:06:36.340962616 +0100<br />@@ <span class="nt">-3</span>,4 +3,4 @@<br /> 🍊<br /> 🍋<br />-🍒<br />+🍍<br /> 🥑<br /></code></pre></div></div>   <p>This is basically what you see in the training materials which gives you a lot of context about the changes:</p>   <ul>   <li><code class="language-plaintext highlighter-rouge">--- old</code> is the ‘old’ file in our view</li>   <li><code class="language-plaintext highlighter-rouge">+++ new</code> is the ‘new’ file</li>   <li>@@ these lines tell us where the change occurs and how many lines are added or removed.</li>   <li>Lines starting with a - are removed from our ‘new’ file</li>   <li>Lines with a + have been added.</li> </ul>   <p>So when you go to apply these diffs to your files in the training:</p>   <ol>   <li>Ignore the header</li>   <li>Remove lines starting with - from your file</li>   <li>Add lines starting with + to your file</li> </ol>   <p>The other lines (🍊/🍋 and 🥑) above just provide “context”, they help you know where a change belongs in a file, but <strong>should not be edited</strong> when you’re making the above change. Given the above diff, you would find a line with a 🍒, and replace it with a 🍍</p>   <h4 id="added--removed-lines">Added &amp; Removed Lines</h4>   <p>Removals are very easy to spot, we just have removed lines</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:10:14.370722802 +0100<br />@@ <span class="nt">-4</span>,3 +4,2 @@<br /> 🍋<br /> 🍒<br />-🥑<br /></code></pre></div></div>   <p>And additions likewise are very easy, just add a new line, between the other lines in your file.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:11:11.422135393 +0100<br />@@ <span class="nt">-1</span>,3 +1,4 @@<br /> 🍎<br />+🍍<br /> 🍐<br /> 🍊<br /></code></pre></div></div>   <h4 id="completely-new-files">Completely new files</h4>   <p>Completely new files look a bit different, there the “old” file is <code class="language-plaintext highlighter-rouge">/dev/null</code>, the empty file in a Linux machine.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> /dev/null old<br /><span class="nt">---</span> /dev/null	2022-02-15 11:47:16.100000270 +0100<br />+++ old	2022-02-16 14:06:19.697132568 +0100<br />@@ <span class="nt">-0</span>,0 +1,6 @@<br />+🍎<br />+🍐<br />+🍊<br />+🍋<br />+🍒<br />+🥑<br /></code></pre></div></div>   <p>And removed files are similar, except with the new file being /dev/null</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ /dev/null	2022-02-15 11:47:16.100000270 +0100<br />@@ <span class="nt">-1</span>,6 +0,0 @@<br />-🍎<br />-🍐<br />-🍊<br />-🍋<br />-🍒<br />-🥑<br /></code></pre></div></div> </blockquote>
     </li>
     <li>
       <p>Now install it with:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1636,7 +2148,7 @@
 <p>Notice the variable we used instead of directly placing the password there. It will be read from vault instead.</p>
 
 <blockquote class="tip_title">
-  <div class="box-title tip-title" id="tip-tagging-users"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tagging-users-contents" aria-expanded="true" aria-label="Toggle tip box: Tagging users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Tagging users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-tagging-users"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tagging-users" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Tagging users<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Optional: You can add tags to each user if required. e.g. For an admin user it could be useful to add in a <em>administrator</em> tag. These tags allow you to grant permissions to every user with a specific tag.</p>
 </blockquote>
 
@@ -1645,7 +2157,7 @@
 <p>We also need to set some RabbitMQ server configuration variables. Such as where its security certificates are and which ports to listen on (both via localhost and network).</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-port-accessibility-is-important"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-port-accessibility-is-important-contents" aria-expanded="true" aria-label="Toggle tip box: Port accessibility is important!"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Port accessibility is important!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-port-accessibility-is-important"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-port-accessibility-is-important" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Port accessibility is important!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>We will need to make sure that the RabbitMQ default port is open and accessible on the server we are installing RabbitMQ onto. (In our case this is the Galaxy server). Additionally, RabbitMQ provides a management interface for us, where we can see e.g. queues, connections and statistics.</p>
 
   <table>
@@ -1679,14 +2191,14 @@
 <h3 id="add-rabbitmq-configuration-to-galaxy-vm">Add RabbitMQ configuration to Galaxy VM.</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-rabbitmq-settings-to-galaxy-vm-groupvars-file" aria-label="hands-on box: Add RabbitMQ settings to Galaxy VM groupvars file."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add RabbitMQ settings to Galaxy VM groupvars file.</div>
+  <div class="box-title hands-on-title" id="hands-on-add-rabbitmq-settings-to-galaxy-vm-groupvars-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add RabbitMQ settings to Galaxy VM groupvars file.</div>
 
   <ol>
     <li>
       <p>Edit your <code class="language-plaintext highlighter-rouge">group_vars/secret.yml</code> and define some random passwords:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-vault edit group_vars/secret.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1796,7 +2308,7 @@
 </code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-rabbitmq-installation-errors"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-rabbitmq-installation-errors-contents" aria-expanded="true" aria-label="Toggle tip box: RabbitMQ installation errors?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: RabbitMQ installation errors?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-rabbitmq-installation-errors"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-rabbitmq-installation-errors" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: RabbitMQ installation errors?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>RabbitMQ depends on specific Erlang versions. If the Erlang version has been updated, you may need to change the value of <code class="language-plaintext highlighter-rouge">rabbitmq_version:</code> in the configuration above. <a href="https://www.rabbitmq.com/which-erlang.html">Information on the RabbitMQ Erlag version requirements.</a></p>
       </blockquote>
     </li>
@@ -1818,7 +2330,7 @@
 </code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-why-is-this-at-the-end"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-is-this-at-the-end-contents" aria-expanded="true" aria-label="Toggle tip box: Why is this at the end?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why is this at the end?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-why-is-this-at-the-end"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-is-this-at-the-end" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Why is this at the end?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>This is one of the constant problems with Ansible, how do you order everything correctly? Does an ordering exist such that a single run of the playbook will have everything up and working? We encounter one such instance of this problem now.</p>
 
         <p>Here are the dependencies between the roles:</p>
@@ -1867,7 +2379,7 @@
       <p>Run the playbook.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1876,13 +2388,13 @@
       <p>The rabbitmq server daemon will have been installed on your Galaxy VM. Check that it’s running now:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker ps
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div class="box-title code-out-title" id="code-out-bash" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+        <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
 
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">CONTAINER</span> <span class="err">ID</span>   <span class="err">IMAGE</span>             <span class="err">COMMAND</span>                  <span class="err">CREATED</span>        <span class="err">STATUS</span>       <span class="err">PORTS</span>                                                                                              <span class="err">NAMES</span>
 <span class="err">d0d69d035768</span>   <span class="err">rabbitmq:3.9.11</span>   <span class="err">"docker-entrypoint.s…"</span>   <span class="err">6</span> <span class="err">months</span> <span class="err">ago</span>   <span class="err">Up</span> <span class="err">5</span> <span class="err">hours</span>   <span class="err">4369/tcp,</span> <span class="err">0.0.0.0:5671-&gt;5671/tcp,</span> <span class="err">5672/tcp,</span> <span class="err">15691-15692/tcp,</span> <span class="err">25672/tcp,</span> <span class="err">0.0.0.0:15672-&gt;15672/tcp</span>   <span class="err">rabbit_hole</span>
@@ -1898,13 +2410,13 @@ file, it falls back to the default configuration (listens <em>without</em> ssl o
 <code class="language-plaintext highlighter-rouge">tcp/5672</code>) so be sure to check that everything is OK before continuing.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-4" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec </span>rabbit_hole rabbitmq-diagnostics status
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div class="box-title code-out-title" id="code-out-bash-1" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+        <div class="box-title code-out-title" id="code-out-bash-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
 
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">...</span>
 
@@ -1922,7 +2434,7 @@ file, it falls back to the default configuration (listens <em>without</em> ssl o
       <p>Since we enabled metrics, let’s check if the api works:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-5" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <p>Make sure to replace &lt;password&gt; with the one from your vault.
 If you don’t have jq installed, just leave that part with the pipe out, it just makes it prettier.</p>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-s</span> <span class="nt">-u</span> admin:&lt;password&gt; https://localhost:15672/api/whoami | jq
@@ -1930,7 +2442,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div class="box-title code-out-title" id="code-out-bash-2" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+        <div class="box-title code-out-title" id="code-out-bash-2"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
 
         <p>This should report the following response:</p>
 
@@ -1950,13 +2462,13 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       <p>But wait! There are more ways it can go wrong. To be extra sure, run a quick <code class="language-plaintext highlighter-rouge">curl</code> command.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-6" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:5672
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div class="box-title code-out-title" id="code-out-bash-3" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+        <div class="box-title code-out-title" id="code-out-bash-3"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
 
         <p>This should report the following response:</p>
 
@@ -1973,13 +2485,13 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-7" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-k</span> https://localhost:5671 <span class="nt">--output</span> - <span class="o">&amp;&amp;</span> <span class="nb">printf</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div class="box-title code-out-title" id="code-out-bash-4" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+        <div class="box-title code-out-title" id="code-out-bash-4"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
 
         <p>This should report the following response:</p>
 
@@ -2071,7 +2583,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configure-pulsar-group-variables" aria-label="hands-on box: Configure pulsar group variables"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure pulsar group variables</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-pulsar-group-variables"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configure pulsar group variables</div>
 
   <ol>
     <li>
@@ -2135,7 +2647,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 </code></pre></div>      </div>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-running-non-conda-tools"><button class="gtn-boxify-button details" type="button" aria-controls="details-running-non-conda-tools-contents" aria-expanded="true" aria-label="Toggle details box: Running non-conda tools"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Running non-conda tools<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-running-non-conda-tools"><button class="gtn-boxify-button details" type="button" aria-controls="details-running-non-conda-tools" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Running non-conda tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>If the tool you want to run on Pulsar doesn’t have a conda package, you will need to make alternative arrangements! This is complex and beyond our scope here. See the <a href="https://pulsar.readthedocs.io/en/latest/">Pulsar documentation</a> for details.</p>
       </blockquote>
     </li>
@@ -2161,7 +2673,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 <p>We need to include a couple of pre-tasks to install virtualenv, git, etc.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-the-playbook" aria-label="hands-on box: Creating the playbook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating the playbook</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-playbook"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating the playbook</div>
 
   <ol>
     <li>
@@ -2200,14 +2712,14 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-the-playbook" aria-label="hands-on box: Run the Playbook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run the Playbook</div>
+  <div class="box-title hands-on-title" id="hands-on-run-the-playbook"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run the Playbook</div>
 
   <ol>
     <li>
       <p>Run the playbook.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-8" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook pulsar.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -2215,7 +2727,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       <p>After the script has run, pulsar will be installed on the remote machines!</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-connection-issues"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-connection-issues-contents" aria-expanded="true" aria-label="Toggle tip box: Connection issues?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Connection issues?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-connection-issues"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-connection-issues" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Connection issues?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>If your remote pulsar machine uses a different key, you may need to supply the <code class="language-plaintext highlighter-rouge">ansible-playbook</code> command with the private key for the connection using the <code class="language-plaintext highlighter-rouge">--private-key key.pem</code> option.</p>
       </blockquote>
     </li>
@@ -2248,7 +2760,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 <p>For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on Pulsar.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configure-galaxy" aria-label="hands-on box: Configure Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configure Galaxy</div>
 
   <ol>
     <li>
@@ -2308,7 +2820,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       <p>Install the BWA and BWA-MEM tools, if needed.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-install-tools-via-the-admin-ui"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-install-tools-via-the-admin-ui-contents" aria-expanded="true" aria-label="Toggle tip box: Install tools via the Admin UI"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Install tools via the Admin UI<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open Galaxy in your browser and type <code class="language-plaintext highlighter-rouge">bwa</code> in the tool search box on the left. If “Map with BWA-MEM” is among the search results, you can skip the following steps.</li>   <li>Access the Admin menu from the top bar (you need to be logged-in with an email specified in the <code class="language-plaintext highlighter-rouge">admin_users</code> setting)</li>   <li>Click “Install and Uninstall”, which can be found on the left, under “Tool Management”</li>   <li>Enter <code class="language-plaintext highlighter-rouge">bwa</code> in the search interface</li>   <li>Click on the first hit, having <code class="language-plaintext highlighter-rouge">devteam</code> as owner</li>   <li>Click the “Install” button for the latest revision</li>   <li>Enter “Mapping” as the target section and click “OK”.</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-install-tools-via-the-admin-ui"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-install-tools-via-the-admin-ui" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Install tools via the Admin UI<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open Galaxy in your browser and type <code class="language-plaintext highlighter-rouge">bwa</code> in the tool search box on the left. If “Map with BWA-MEM” is among the search results, you can skip the following steps.</li>   <li>Access the Admin menu from the top bar (you need to be logged-in with an email specified in the <code class="language-plaintext highlighter-rouge">admin_users</code> setting)</li>   <li>Click “Install and Uninstall”, which can be found on the left, under “Tool Management”</li>   <li>Enter <code class="language-plaintext highlighter-rouge">bwa</code> in the search interface</li>   <li>Click on the first hit, having <code class="language-plaintext highlighter-rouge">devteam</code> as owner</li>   <li>Click the “Install” button for the latest revision</li>   <li>Enter “Mapping” as the target section and click “OK”.</li> </ol> </blockquote>
     </li>
     <li>
       <p>We now need to tell Galaxy to send BWA and BWA-MEM jobs to the <code class="language-plaintext highlighter-rouge">pulsar</code> destination. We specify this in the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section of the <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file.</p>
@@ -2334,7 +2846,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       <p>Finally run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-9" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-9"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -2353,7 +2865,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 <p>Now we will upload a small set of data to run bwa-mem with.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-testing-the-pulsar-destination" aria-label="hands-on box: Testing the Pulsar destination"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Testing the Pulsar destination</div>
+  <div class="box-title hands-on-title" id="hands-on-testing-the-pulsar-destination"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Testing the Pulsar destination</div>
 
   <ol>
     <li>
@@ -2397,7 +2909,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <p>How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-got-lost-along-the-way" aria-label="comment box: Got lost along the way?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Got lost along the way?</div>   <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-9">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-8...step-9#files_bucket">the previous tutorial</a>.</p>   <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Got lost along the way?</div>   <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-9">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-8...step-9#files_bucket">the previous tutorial</a>.</p>   <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p> </blockquote>
 
 <h2 id="retries-of-the-staging-actions">Retries of the staging actions</h2>
 
@@ -2468,10 +2980,12 @@ The aim of these parameters is to control the retrying of staging actions in the
 
 <p>You’re ready to ship your Galaxy jobs around the world! Now wherever you have compute space, you know how to setup a Pulsar node and connect it to Galaxy. Let us know if you come up with creative places to run your Galaxy jobs (coworker’s laptops, your IoT fridge, the sky is the limit if it’s x86 and has python)</p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Pulsar allows you to easily add geographically distributed compute resources into your Galaxy instance</p>
@@ -2503,33 +3017,9 @@ The aim of these parameters is to control the retrying of staging actions in the
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Running Jobs on Remote Resources with Pulsar (Galaxy Server administration)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Running Jobs on Remote Resources with Pulsar (Galaxy Server administration)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -2547,7 +3037,7 @@ The aim of these parameters is to control the retrying of staging actions in the
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -2588,7 +3078,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -2600,29 +3090,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

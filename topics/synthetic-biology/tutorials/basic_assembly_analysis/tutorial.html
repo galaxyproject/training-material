@@ -12,35 +12,35 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Designing plasmids encoding predicted pathways by using the BASIC assembly method" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000" />
-<meta name="DC.creator" content="Kenza Bazi-Kabbaj" />
-<meta name="DC.creator" content="Thomas Duigou" />
-<meta name="DC.creator" content="Joan Hérisson" />
-<meta name="DC.creator" content="Guillaume Gricourt" />
-<meta name="DC.creator" content="Ioana Popescu" />
-<meta name="DC.creator" content="Jean-Loup Faulon" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Designing plasmids encoding predicted pathways by using the BASIC assembly method">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-11-28 09:55:50 +0000">
+<meta name="DC.creator" content="Kenza Bazi-Kabbaj">
+<meta name="DC.creator" content="Thomas Duigou">
+<meta name="DC.creator" content="Joan Hérisson">
+<meta name="DC.creator" content="Guillaume Gricourt">
+<meta name="DC.creator" content="Ioana Popescu">
+<meta name="DC.creator" content="Jean-Loup Faulon">
 
         
         
         
         
-        <meta name="description" content="Synthetic Biology is the engineering of biology : the del..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Designing plasmids encoding predicted pathways by using t..." />
-        <meta property="og:description" content="Synthetic Biology is the engineering of biology : the del..." />
+        <meta name="description" content="Synthetic Biology is the engineering of biology : the del...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Designing plasmids encoding predicted pathways by using t...">
+        <meta property="og:description" content="Synthetic Biology is the engineering of biology : the del...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -650,10 +650,410 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-synthetic-biology">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-11-28 09:55:50 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Designing plasmids encoding predicted pathways by using the BASIC assembly method",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Synthetic Biology",
+    "description": "Synthetic Biology is the engineering of biology : the deliberate (re)design and construction of novel biological and biologically based parts, devices and systems to perform new functions for useful purposes, that draws on principles elucidated from biology and engineering.\nBy applying these principles to living systems, Synthetic Biology overcomes mimicry and optimisation-led research and introduces a rationale and systematic approach to the construction and (re)design.\nSynthetic Biology is at the intersection of engineering, bioscience, chemistry, and information technology.\nThe goal of synthetic biology is to extend or modify the behavior of organisms and engineer them to perform new tasks. \nIn this section, the tutorials shows how to design metabolic pathways for producing the desired chemical targets.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Designing plasmids encoding predicted pathways by using the BASIC assembly method' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.html",
+  "timeRequired": "PT15M",
+  "keywords": "synthetic-biology",
+  "description": "The questions this  addresses are:\n - How to design plasmids encoding predicted pathways using BASIC assembly method ?\n - How to generate scripts enabling the automatic build of plasmids ?\n\n\nThe objectives are:\n - Annotate the SBML pathway using Selenzy tool.\n - Design plasmids encoding predicted pathways using rpbasicdesign tool.\n - Generate dnabot scripts enabling the automatic build of plasmids.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "name": "Kenza Bazi-Kabbaj",
+      "image": "https://avatars.githubusercontent.com/kenza12",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4319-5616",
+      "orcid": "https://orcid.org/0000-0002-4319-5616"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "name": "Thomas Duigou",
+      "image": "https://avatars.githubusercontent.com/tduigou",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2649-2950",
+      "orcid": "https://orcid.org/0000-0002-2649-2950"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "name": "Joan Hérisson",
+      "image": "https://avatars.githubusercontent.com/breakthewall",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9741-0847",
+      "orcid": "https://orcid.org/0000-0001-9741-0847"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "name": "Guillaume Gricourt",
+      "image": "https://avatars.githubusercontent.com/guillaume-gricourt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0143-5535",
+      "orcid": "https://orcid.org/0000-0003-0143-5535"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "name": "Ioana Popescu",
+      "image": "https://avatars.githubusercontent.com/ioanagry",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2547-8935",
+      "orcid": "https://orcid.org/0000-0003-2547-8935"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "name": "Jean-Loup Faulon",
+      "image": "https://avatars.githubusercontent.com/jfaulon",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4274-2953",
+      "orcid": "https://orcid.org/0000-0003-4274-2953"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "name": "Kenza Bazi-Kabbaj",
+      "image": "https://avatars.githubusercontent.com/kenza12",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4319-5616",
+      "orcid": "https://orcid.org/0000-0002-4319-5616"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "name": "Thomas Duigou",
+      "image": "https://avatars.githubusercontent.com/tduigou",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2649-2950",
+      "orcid": "https://orcid.org/0000-0002-2649-2950"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "name": "Joan Hérisson",
+      "image": "https://avatars.githubusercontent.com/breakthewall",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9741-0847",
+      "orcid": "https://orcid.org/0000-0001-9741-0847"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "name": "Guillaume Gricourt",
+      "image": "https://avatars.githubusercontent.com/guillaume-gricourt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0143-5535",
+      "orcid": "https://orcid.org/0000-0003-0143-5535"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "name": "Ioana Popescu",
+      "image": "https://avatars.githubusercontent.com/ioanagry",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2547-8935",
+      "orcid": "https://orcid.org/0000-0003-2547-8935"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "name": "Jean-Loup Faulon",
+      "image": "https://avatars.githubusercontent.com/jfaulon",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4274-2953",
+      "orcid": "https://orcid.org/0000-0003-4274-2953"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Synthetic Biology",
+      "description": "Synthetic Biology is the engineering of biology : the deliberate (re)design and construction of novel biological and biologically based parts, devices and systems to perform new functions for useful purposes, that draws on principles elucidated from biology and engineering.\nBy applying these principles to living systems, Synthetic Biology overcomes mimicry and optimisation-led research and introduces a rationale and systematic approach to the construction and (re)design.\nSynthetic Biology is at the intersection of engineering, bioscience, chemistry, and information technology.\nThe goal of synthetic biology is to extend or modify the behavior of organisms and engineer them to perform new tasks. \nIn this section, the tutorials shows how to design metabolic pathways for producing the desired chemical targets.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3895",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3895",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3895"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-synthetic-biology">
     <h1 data-toc-skip>Designing plasmids encoding predicted pathways by using the BASIC assembly method</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -664,9 +1064,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -739,7 +1139,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/" title="Workflows" alt="Designing plasmids encoding predicted pathways by using the BASIC assembly method workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/" title="Designing plasmids encoding predicted pathways by using the BASIC assembly method workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -770,7 +1170,10 @@
 
 
   
-  <li class="btn btn-default supporting_material">
+<!-- GTN Video Library true -->
+  
+<li class="btn btn-default supporting_material">
+  
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
         <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
     </a>
@@ -791,7 +1194,9 @@
         
         
     </ul>
-   </li>
+  
+</li>
+  
    
 
 
@@ -800,7 +1205,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -811,6 +1216,8 @@
             </a>
         </li>
     
+    
+        
     
         
     
@@ -950,6 +1357,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -960,6 +1368,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>Synthetic biology is a novel engineering discipline which requires computational tools for the design of metabolic pathways for the production of chemicals such as SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering (<span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>).</p>
@@ -977,7 +1386,7 @@
 <p><img src="../../images/basic_assembly_workflow.png" alt="Genetic Design - BASIC Assembly Workflow. " loading="lazy" /></p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1014,7 +1423,7 @@
 <h2 id="get-data">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial named <em>Genetic Design - BASIC Assembly Analysis</em>.</li>
@@ -1028,14 +1437,14 @@ https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/rp_002_0011.xm
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the datasets if you want to shorten the file names.
 Rename <code class="language-plaintext highlighter-rouge">rp_002_0011.xml</code> to <code class="language-plaintext highlighter-rouge">pathway.xml</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1049,10 +1458,10 @@ The tool provides several scores that can be combined in order to define an over
 <p><img src="../../images/selenzy_tool.png" alt="Selenzyme Results. " loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotate-enzymes-with-uniprot-ids-from-a-sbml-pathway" aria-label="hands-on box: Annotate enzymes with Uniprot IDs from a SBML pathway"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Annotate enzymes with Uniprot IDs from a SBML pathway</div>
+  <div class="box-title hands-on-title" id="hands-on-annotate-enzymes-with-uniprot-ids-from-a-sbml-pathway"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotate enzymes with Uniprot IDs from a SBML pathway</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0"><strong>Selenzyme</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0" title="Selenzyme tool"><strong>Selenzyme</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pathway (SBML)”</em>: Select <code class="language-plaintext highlighter-rouge">pathway.xml</code> from your current history</li>
         <li>In <em>“Advanced Options”</em>:
@@ -1064,7 +1473,7 @@ The tool provides several scores that can be combined in order to define an over
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
         <p>This tool will produce annotated pathway with UniProt IDs in XML and CSV format.</p>
       </blockquote>
@@ -1074,14 +1483,14 @@ The tool provides several scores that can be combined in order to define an over
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>How are identified the enzyme in the SBML file?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Enzyme are identified by their UniProt ID</li>
@@ -1105,10 +1514,10 @@ The tool provides several scores that can be combined in order to define an over
 <p>BasicDesign converts the SBML file into CSV files describing the DNA-parts to be included into each construct (in an operon format, i.e. with only one promoter) and enumerate possible combinations of promoters, RBSs and enzymes into constructs. Depending on the numbers of enzymes per reaction, of RBSs and promoters available, and whether or not to perform CDS permutation within the operon, the number of constructs may vary.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-genetic-constructs-from-the-previously-annotated-sbml-file" aria-label="hands-on box: Generate genetic constructs from the previously annotated SBML file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate genetic constructs from the previously annotated SBML file</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-genetic-constructs-from-the-previously-annotated-sbml-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate genetic constructs from the previously annotated SBML file</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4"><strong>BasicDesign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4" title="BasicDesign tool"><strong>BasicDesign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“rpSBML file”: <code class="language-plaintext highlighter-rouge">uniprot_ids</code> (output of <strong>Selenzyme</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in xml format)</em></li>
         <li>In <em>“Advanced Options”</em>:
@@ -1119,7 +1528,7 @@ The tool provides several scores that can be combined in order to define an over
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
         <p>This tool will output a CSV constructs file (listing the constructs to be built), where each row corresponds to one construct and consists of a sequence of BASIC linker and DNA part IDs. The two other outputted CSV files provide the plate coordinates of (i) the BASIC linkers and (ii) the DNA-parts that the user will need to provide. Additionally, one SBOL (Synthetic Biology Open Language) file is produced for each construct generated. These files can be downloaded and visualized using online tools such as <a href="https://visbol.org/">VisBOL</a>.</p>
       </blockquote>
@@ -1129,14 +1538,14 @@ The tool provides several scores that can be combined in order to define an over
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>How many constructs did you get ?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>88 construct designs were generated in CSV and SBOL format.</li>
@@ -1151,10 +1560,10 @@ The tool provides several scores that can be combined in order to define an over
 <p>In the last step, the DNA-Bot tool (<span class="citation"><a href="#Storch2020">Storch <i>et al.</i> 2020</a></span>) reads the list of constructs (previously produced by BasicDesign) and the DNA-parts position on the source plates and generates a set of python scripts to drive an Opentrons liquid handling robot for building the the plasmids. Optional parameters can be set by the user to define the plastic labwares to be used, and set protocol parameters such as washing or incubation times for purification step (<code class="language-plaintext highlighter-rouge">dnabot_paris_settings.yaml</code>).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-dna-bot-python-scripts" aria-label="hands-on box: Generate DNA Bot python scripts"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate DNA Bot python scripts</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-dna-bot-python-scripts"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate DNA Bot python scripts</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0"><strong>DNA-Bot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0" title="DNA-Bot tool"><strong>DNA-Bot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source Construct”</em>: <code class="language-plaintext highlighter-rouge">Constructs</code> (output of <strong>BasicDesign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Plate files”</em>: Select these two files: <code class="language-plaintext highlighter-rouge">User parts plate</code> (output of <strong>BasicDesign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>), <code class="language-plaintext highlighter-rouge">Biolegio plate</code> (output of <strong>BasicDesign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) with <strong>Multiple datasets</strong>.</li>
@@ -1168,10 +1577,10 @@ The tool provides several scores that can be combined in order to define an over
   </ol>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-select-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-multiple-datasets-contents" aria-expanded="true" aria-label="Toggle tip box: Select multiple datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Select multiple datasets<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>   <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li> </ol> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-select-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-multiple-datasets" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Select multiple datasets<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>   <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li> </ol> </blockquote>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+    <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
     <p>This tool will output DNA-Bot scripts in tar format. You need to download it and decompress the archive. After downloading these scripts onto a computer connected to an Opentrons, one can perform the automated construction of the plasmids at the bench. Additional metadata meaningful to keep track of parameters are also outputted by the tool.
 <img src="../../images/dnabot_outputs.png" alt="Dnabot Outputs. " loading="lazy" />
@@ -1180,14 +1589,14 @@ The tool provides several scores that can be combined in order to define an over
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>Looking at the scripts names, can you figure out the main steps of DNA-Bot ?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>DNA-Bot outputs python scripts that implement the 4 assembly steps: clip reactions, purification, assembly and strain transformation. In short, the <strong>Clip reactions</strong> step prepares the mixes for the ligation of the individual DNA parts with the linkers; the <strong>Purification</strong> step purifies the linker-ligated DNA parts using magnetic beads and the Opentrons magnetic module; the <strong>Assembly</strong> step mixes the DNA purified parts to build the final constructs; while the <strong>Transformation</strong> step transforms the chassis micro-organism with the plasmid and inoculates onto agar.</li>
@@ -1202,14 +1611,14 @@ The tool provides several scores that can be combined in order to define an over
 <p>In this section, you can run the Genetic Design - BASIC Assembly Workflow more easily and fastly following these instructions:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-execute-the-entire-workflow-in-one-go" aria-label="hands-on box: Execute the entire workflow in one go."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Execute the entire workflow in one go.</div>
+  <div class="box-title hands-on-title" id="hands-on-execute-the-entire-workflow-in-one-go"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Execute the entire workflow in one go.</div>
 
   <ol>
     <li>
       <p>Import your <strong>Genetic Design - Basic Assembly Workflow</strong> by uploading the <a href="https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga"><strong>workflow file</strong></a>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
     <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see <strong>Genetic Design - Basic Assembly Workflow</strong></li>
     <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>
@@ -1223,7 +1632,7 @@ The tool provides several scores that can be combined in order to define an over
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
         <p>All the outputs will be automatically generated and identical to the previous ones.</p>
       </blockquote>
@@ -1232,10 +1641,12 @@ The tool provides several scores that can be combined in order to define an over
 </blockquote>
 
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Knowing the reaction is not sufficient to implement a pathway, one needs to find out which enzyme is capable of catalyzing the reactions. For this, Selenzyme is used to search for enzymes using reactions as query. As a result, UniProt IDs of enzymes are stored as annotation in SBML files.</p>
@@ -1276,33 +1687,9 @@ The tool provides several scores that can be combined in order to define an over
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Designing plasmids encoding predicted pathways by using the BASIC assembly method (Synthetic Biology)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Designing plasmids encoding predicted pathways by using the BASIC assembly method (Synthetic Biology)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1320,7 +1707,7 @@ The tool provides several scores that can be combined in order to define an over
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1361,7 +1748,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1373,29 +1760,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

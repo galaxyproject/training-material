@@ -12,31 +12,31 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-02-23 14:55:23 +0000" />
-<meta name="DC.creator" content="Bérénice Batut" />
-<meta name="DC.creator" content="Engy Nasr" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-02-23 14:55:23 +0000">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Engy Nasr">
 
         
         
         
         
-        <meta name="description" content="Metagenomics is a discipline that enables the genomic stu..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Pathogen detection from (direct Nanopore) sequencing data..." />
-        <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu..." />
+        <meta name="description" content="Metagenomics is a discipline that enables the genomic stu...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Pathogen detection from (direct Nanopore) sequencing data...">
+        <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -367,10 +367,131 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-metagenomics">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-02-23 14:55:23 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Metagenomics",
+    "description": "Metagenomics is a discipline that enables the genomic study of uncultured microorganisms",
+    "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html",
+  "timeRequired": "PT4H",
+  "keywords": "metagenomics, Nanopore data analysis, Pathogens detection, Phylogenetic tree, Heatmap, cyoa",
+  "description": "The questions this  addresses are:\n - What are the preprocessing steps to prepare ONT sequencing data for further analysis?\n - How to identify pathogens using sequencing data?\n - How to track the found pathogens through all your samples datasets?\n\n\nThe objectives are:\n - Check quality reports generated by FastQC and NanoPlot for metagenomics Nanopore data\n - Preprocess the sequencing data to remove adapters, poor quality base content and host/contaminating reads\n - Perform taxonomy profiling indicating and visualizing up to species level in the samples\n - Identify pathogens based on the found virulence factor gene products via assembly, identify strains and indicate all antimicrobial resistance genes in samples\n - Identify pathogens via SNP calling and build the consensus gemone of the samples\n - Relate all samples' pathogenic genes for tracking pathogens via phylogenetic trees and heatmaps\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Metagenomics",
+      "description": "Metagenomics is a discipline that enables the genomic study of uncultured microorganisms",
+      "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3174"
+    }
+  ],
+  "educationalLevel": "Beginner"
+}
+</script>
+
+<article class="tutorial topic-metagenomics">
     <h1 data-toc-skip>Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -410,9 +531,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -508,7 +629,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/" title="Workflows" alt="Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/" title="Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -546,7 +667,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -696,6 +817,8 @@
     
         
     
+        
+    
     </ul>
 
 
@@ -712,6 +835,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -722,6 +846,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>Food contamination with pathogens is a major burden on our society. In the year 2019, foodborne pathogens caused 137 hospitalisations in Germany <a href="https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&amp;v=4">(BVL 2019)</a>. Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to <em>Salmonella spp.</em> followed by <em>Campylobacter spp.</em> and Noroviruses, as studied by the <a href="https://www.who.int/publications/i/item/9789241565165"><strong>Food safety - World Health Organization (WHO)</strong></a>.</p>
@@ -742,7 +867,7 @@
 <p>The currently available studies used Illumina sequencing, generating short reads. Longer read lengths, generated by third-generation sequencing platforms such as Pacific Biosciences (PacBio) and Oxford Nanopore Technologies (ONT), make it <strong>easier and more practical to identify strains with fewer reads</strong>. MinION (from Oxford Nanopore) is a portable, real-time device for ONT sequencing. Several proof-of-principle studies have shown the <strong>utility of ONT long-read sequencing from metagenomic samples for pathogen identification</strong> (<span class="citation"><a href="#CIUFFREDA20211497">Ciuffreda <i>et al.</i> 2021</a></span>).</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-nanopore-sequencing" aria-label="comment box: Nanopore sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Nanopore sequencing</div>   <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>   <ol>   <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>   <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>   <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li> </ol>   <p><img src="/training-material/topics/metagenomics/images/plasmid-metagenomics-nanopore/nanopore_sequencing.png" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://doi.org/10.7875/togopic.2020.01&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br /></p>   <p>When using Oxford Nanopore Technologies (ONT) sequencing, the change in electrical current is measured over the membrane of a flow cell. When nucleotides pass the pores in the flow cell the current change is translated (basecalled) to nucleotides by a basecaller. A schematic overview is given in the picture above.</p>   <p>When sequencing using a MinIT or MinION Mk1C, the basecalling software is present on the devices. With basecalling the electrical signals are translated to bases (A,T,G,C) with a quality score per base. The sequenced DNA strand will be basecalled and this will form one read. Multiple reads will be stored in a fastq file.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-nanopore-sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Nanopore sequencing</div>   <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>   <ol>   <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>   <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>   <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li> </ol>   <p><img src="/training-material/topics/metagenomics/images/plasmid-metagenomics-nanopore/nanopore_sequencing.png" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://doi.org/10.7875/togopic.2020.01&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br /></p>   <p>When using Oxford Nanopore Technologies (ONT) sequencing, the change in electrical current is measured over the membrane of a flow cell. When nucleotides pass the pores in the flow cell the current change is translated (basecalled) to nucleotides by a basecaller. A schematic overview is given in the picture above.</p>   <p>When sequencing using a MinIT or MinION Mk1C, the basecalling software is present on the devices. With basecalling the electrical signals are translated to bases (A,T,G,C) with a quality score per base. The sequenced DNA strand will be basecalled and this will form one read. Multiple reads will be stored in a fastq file.</p> </blockquote>
 
 <p>To identify and track foodborne pathogens using long-read metagenomic sequencing, different samples of potentially contaminated food (at different time points or different locations) are prepared, DNA is extracted and sequenced using MinION (ONT). The generated sequencing data then need to be processed using bioinformatics tools.</p>
 
@@ -765,7 +890,7 @@
 <p>DNA in the samples is extracted, analyzed with qPCR, and sequenced via Nanopore. We start the tutorial from raw data generated by Nanopore.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -804,20 +929,20 @@
 <p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this analysis</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Rename the history</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -826,7 +951,7 @@
 <p>Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ files with the sequenced samples.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-datasets" aria-label="hands-on box: Import datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-import-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import datasets</div>
 
   <ol>
     <li>
@@ -837,15 +962,15 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
       <p>Add a tag to each dataset (one with <code class="language-plaintext highlighter-rouge">#Barcode10</code> and the other <code class="language-plaintext highlighter-rouge">#Barcode11</code>)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Adding a tag<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -873,7 +998,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
 	
 
 	
-	<script type="text/javascript">
+	<script>
 		function ready(fn) {
 			if (document.readyState != 'loading'){
 				fn();
@@ -904,7 +1029,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
   <p>We will run all these steps using a single workflow, then discuss each step and the results in more detail.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-pre-processing" aria-label="hands-on box: Pre-Processing"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Pre-Processing</div>
+    <div class="box-title hands-on-title" id="hands-on-pre-processing"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Pre-Processing</div>
 
     <ol>
       <li><strong>Import the workflow</strong> into Galaxy
@@ -914,20 +1039,20 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
         </ul>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
       </li>
       <li>
         <p>Run <strong>Workflow 1:  Nanopore Datasets - Pre-Processing</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters</p>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
 
         <ul>
           <li>
             <p><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“1: Nanopore reads of a sample”</em>: FastQ files</p>
 
             <!--SNIPPET-->
-            <blockquote class="tip">   <div class="box-title tip-title" id="tip-select-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-multiple-datasets-contents" aria-expanded="true" aria-label="Toggle tip box: Select multiple datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Select multiple datasets<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>   <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li> </ol> </blockquote>
+            <blockquote class="tip">   <div class="box-title tip-title" id="tip-select-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-multiple-datasets" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Select multiple datasets<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>   <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li> </ol> </blockquote>
           </li>
           <li>
             <p><em>“2: Host to Remove Specifier”</em>: <code class="language-plaintext highlighter-rouge">^.*Gallus|Homo|Bos.*$</code></p>
@@ -968,19 +1093,19 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
     <div class="Long-Version">
 
       <blockquote class="notranslate hands_on">
-        <div class="box-title hands-on-title" id="hands-on-initial-quality-assessment" aria-label="hands-on box:  Initial quality assessment "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Initial quality assessment</div>
+        <div class="box-title hands-on-title" id="hands-on-initial-quality-assessment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Initial quality assessment</div>
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span>  with the following parameters:
             <ul>
               <li>
                 <p><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Raw read data from your current history”</em>: both FastQ file</p>
 
                 <!--SNIPPET-->
-                <blockquote class="tip">   <div class="box-title tip-title" id="tip-select-multiple-datasets-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-multiple-datasets-1-contents" aria-expanded="true" aria-label="Toggle tip box: Select multiple datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Select multiple datasets<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>   <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li> </ol> </blockquote>
+                <blockquote class="tip">   <div class="box-title tip-title" id="tip-select-multiple-datasets-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-multiple-datasets-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Select multiple datasets<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>   <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li> </ol> </blockquote>
               </li>
             </ul>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1"><strong>NanoPlot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="NanoPlot tool"><strong>NanoPlot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1</span></span>  with the following parameters:
             <ul>
               <li><em>“Select multifile mode”</em>: <code class="language-plaintext highlighter-rouge">batch</code>
                 <ul>
@@ -994,7 +1119,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
             </ul>
 
             <blockquote class="comment">
-              <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+              <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
               <p>This step, as it does not require the results of FastQC to run, can be launched even if FastQC is not ready</p>
             </blockquote>
           </li>
@@ -1010,16 +1135,16 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
     <div class="Long-Version">
 
       <blockquote class="notranslate hands_on">
-        <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering" aria-label="hands-on box:  Read trimming and filtering "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Read trimming and filtering</div>
+        <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Read trimming and filtering</div>
 
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.4"><strong>Porechop</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.4</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.4" title="Porechop tool"><strong>Porechop</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.4</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA/FASTQ”</em>: both FastQ file</li>
               <li><em>“Output format for the reads”</em>: <code class="language-plaintext highlighter-rouge">fastq.gz</code></li>
             </ul>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0" title="fastp tool"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0</span></span>  with the following parameters:
             <ul>
               <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
                 <ul>
@@ -1034,7 +1159,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
             </ul>
 
             <blockquote class="comment">
-              <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+              <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
               <p>This step can be launched even if <strong>Porechop</strong> is not done. It will be scheduled and wait until <strong>Porechop</strong> is done to start.</p>
             </blockquote>
           </li>
@@ -1049,14 +1174,14 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
     <div class="Long-Version">
 
       <blockquote class="notranslate hands_on">
-        <div class="box-title hands-on-title" id="hands-on-final-quality-checks" aria-label="hands-on box:  Final quality checks "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Final quality checks</div>
+        <div class="box-title hands-on-title" id="hands-on-final-quality-checks"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Final quality checks</div>
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Raw read data from your current history”</em>: outputs of <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
             </ul>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1"><strong>NanoPlot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="NanoPlot tool"><strong>NanoPlot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1</span></span>  with the following parameters:
             <ul>
               <li><em>“Select multifile mode”</em>: <code class="language-plaintext highlighter-rouge">batch</code>
                 <ul>
@@ -1069,7 +1194,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
               </li>
             </ul>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
             <ul>
               <li>In <em>“Results”</em>:
                 <ul>
@@ -1112,7 +1237,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Inspect the HTML output of <strong>MultiQC</strong> for <code class="language-plaintext highlighter-rouge">Barcode10</code></p>
 
@@ -1123,7 +1248,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Before trimming the file has 114,986 sequences and After trimming the file has 91,434 sequences</li>
@@ -1138,7 +1263,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>For more information about how to interpret the plots generated by <strong>FastQC</strong> and <strong>MultiQC</strong>, please see our dedicated <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control”</a> Tutorial.</p>
 </blockquote>
 
@@ -1156,10 +1281,10 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
     <div class="Long-Version">
 
       <blockquote class="notranslate hands_on">
-        <div class="box-title hands-on-title" id="hands-on-read-taxonomic-classification-for-host-filtering" aria-label="hands-on box: Read taxonomic classification for host filtering "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Read taxonomic classification for host filtering</div>
+        <div class="box-title hands-on-title" id="hands-on-read-taxonomic-classification-for-host-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read taxonomic classification for host filtering</div>
 
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Kraken2 tool"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1</span></span>  with the following parameters:
             <ul>
               <li><em>“Single or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
                 <ul>
@@ -1185,7 +1310,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
     </div>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+      <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
       <p>Inspect the report of <strong>Kraken2</strong> for <code class="language-plaintext highlighter-rouge">Barcode10</code></p>
 
@@ -1195,7 +1320,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li><em>Gallus gallus</em> (taxid 9031), which is chicken</li>
@@ -1215,10 +1340,10 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
     <div class="Long-Version">
 
       <blockquote class="notranslate hands_on">
-        <div class="box-title hands-on-title" id="hands-on-host-read-filtering" aria-label="hands-on box:  Host read filtering "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Host read filtering</div>
+        <div class="box-title hands-on-title" id="hands-on-host-read-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Host read filtering</div>
 
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/2.0.0"><strong>Filter Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/2.0.0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/2.0.0" title="Filter Tabular tool"><strong>Filter Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/2.0.0</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Tabular Dataset to filter”</em>: <code class="language-plaintext highlighter-rouge">Classification</code> outputs of <strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li>In <em>“Filter Tabular Input Lines”</em>:
@@ -1250,7 +1375,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
               </li>
             </ul>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7" title="Tested with toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7"><strong>Filter sequences by ID</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7" title="Filter sequences by ID tool"><strong>Filter sequences by ID</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sequence file to be filtered”</em>: outputs of <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li><em>“Filter using the ID list from”</em>: <code class="language-plaintext highlighter-rouge">tabular file</code>
@@ -1271,12 +1396,12 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
 </ol>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
   <p>We will need the outputs from this section in the next one.  If yours is still running or you get an error you can go on and upload it so you can start the next workflow, the next hands-on is optional.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-optional-data-upload" aria-label="hands-on box: Optional Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Optional Data upload</div>
+    <div class="box-title hands-on-title" id="hands-on-optional-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Optional Data upload</div>
 
     <ol>
       <li>
@@ -1299,25 +1424,25 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <p>In this section we would like to identify the different organisms found in our samples by assigning taxonomy levels to the reads starting from the kingdom level down to the species level and visualize the result. It’s important to check what might be the species of a possible pathogen to be found, it gets us closer to the investigation as well as discovering possible multiple food infections if any existed.</p>
 
 <!--SNIPPET-->
-<blockquote class="details">   <div class="box-title details-title" id="details-what-is-taxonomy"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-taxonomy-contents" aria-expanded="true" aria-label="Toggle details box: What is Taxonomy?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: What is Taxonomy?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Taxonomy is the method used to naming, defining (circumscribing) and classifying groups of biological organisms based on shared characteristics such as morphological characteristics, phylogenetic characteristics, DNA data, etc. It is founded on the concept that the similarities descend from a common evolutionary ancestor.</p>   <p>Defined groups of organisms are known as <strong>taxa</strong>. Taxa are given a taxonomic rank and are aggregated into super groups of higher rank to create a taxonomic hierarchy. The taxonomic hierarchy includes eight levels: <strong>Domain, Kingdom, Phylum, Class, Order, Family, Genus and Species.</strong></p>   <p><img src="/training-material/topics/metagenomics/faqs/images/taxonomy.png" alt="Example of taxonomy. It starts, top to bottom, with Kingdom &quot;Animalia&quot;, Phylum &quot;Chordata&quot;, Class &quot;Mammalia&quot;, and Order &quot;Carnivora&quot;. Then it splits in 3. On the left, Family &quot;Felidae&quot;, with 2 genus &quot;Felis&quot; and &quot;Panthera&quot; and below 3 species &quot;F. catus&quot; and &quot;F. pardalis&quot; below &quot;Felis&quot;, &quot;P. pardus&quot; below &quot;Panthera&quot;. In the middle, Family &quot;Canidae&quot;, genus &quot;Canis&quot; and 2 species &quot;C. familiaris&quot; and &quot;C. lupus&quot;. On the right, Family &quot;Ursidae&quot;, Genus &quot;Ursus&quot; and 2 species &quot;U. arctos&quot; and &quot;U. horribilus&quot;. Below each species is a illustration of the species" /></p>   <p>The classification system begins with <strong>3 domains</strong> that encompass all living and extinct forms of life</p>   <ul>   <li>The <strong>Bacteria</strong> and <strong>Archae</strong> are mostly microscopic, but quite widespread.</li>   <li>Domain <strong>Eukarya</strong> contains more complex organisms</li> </ul>   <p>When new species are found, they are assigned into taxa in the taxonomic hierarchy. For example for the cat:</p>   <table>   <thead>     <tr>       <th>Level</th>       <th>Classification</th>     </tr>   </thead>   <tbody>     <tr>       <td>Domain</td>       <td>Eukaryota</td>     </tr>     <tr>       <td>Kingdom</td>       <td>Animalia</td>     </tr>     <tr>       <td>Phylum</td>       <td>Chordata</td>     </tr>     <tr>       <td>Class</td>       <td>Mammalia</td>     </tr>     <tr>       <td>Order</td>       <td>Carnivora</td>     </tr>     <tr>       <td>Family</td>       <td>Felidae</td>     </tr>     <tr>       <td>Genus</td>       <td><em>Felis</em></td>     </tr>     <tr>       <td>Species</td>       <td><em>F. catus</em></td>     </tr>   </tbody> </table>   <p>Let’s explore taxonomy in the Tree of Life, using <a href="https://lifemap.univ-lyon1.fr/">Lifemap</a></p>   <iframe id="Lifemap" src="https://lifemap.univ-lyon1.fr/explore.html" frameborder="0" width="100%" height="600px"></iframe> </blockquote>
+<blockquote class="details">   <div class="box-title details-title" id="details-what-is-taxonomy"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-taxonomy" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: What is Taxonomy?<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Taxonomy is the method used to naming, defining (circumscribing) and classifying groups of biological organisms based on shared characteristics such as morphological characteristics, phylogenetic characteristics, DNA data, etc. It is founded on the concept that the similarities descend from a common evolutionary ancestor.</p>   <p>Defined groups of organisms are known as <strong>taxa</strong>. Taxa are given a taxonomic rank and are aggregated into super groups of higher rank to create a taxonomic hierarchy. The taxonomic hierarchy includes eight levels: <strong>Domain, Kingdom, Phylum, Class, Order, Family, Genus and Species.</strong></p>   <p><img src="/training-material/topics/metagenomics/faqs/images/taxonomy.png" alt="Example of taxonomy. It starts, top to bottom, with Kingdom &quot;Animalia&quot;, Phylum &quot;Chordata&quot;, Class &quot;Mammalia&quot;, and Order &quot;Carnivora&quot;. Then it splits in 3. On the left, Family &quot;Felidae&quot;, with 2 genus &quot;Felis&quot; and &quot;Panthera&quot; and below 3 species &quot;F. catus&quot; and &quot;F. pardalis&quot; below &quot;Felis&quot;, &quot;P. pardus&quot; below &quot;Panthera&quot;. In the middle, Family &quot;Canidae&quot;, genus &quot;Canis&quot; and 2 species &quot;C. familiaris&quot; and &quot;C. lupus&quot;. On the right, Family &quot;Ursidae&quot;, Genus &quot;Ursus&quot; and 2 species &quot;U. arctos&quot; and &quot;U. horribilus&quot;. Below each species is a illustration of the species" /></p>   <p>The classification system begins with <strong>3 domains</strong> that encompass all living and extinct forms of life</p>   <ul>   <li>The <strong>Bacteria</strong> and <strong>Archae</strong> are mostly microscopic, but quite widespread.</li>   <li>Domain <strong>Eukarya</strong> contains more complex organisms</li> </ul>   <p>When new species are found, they are assigned into taxa in the taxonomic hierarchy. For example for the cat:</p>   <table>   <thead>     <tr>       <th>Level</th>       <th>Classification</th>     </tr>   </thead>   <tbody>     <tr>       <td>Domain</td>       <td>Eukaryota</td>     </tr>     <tr>       <td>Kingdom</td>       <td>Animalia</td>     </tr>     <tr>       <td>Phylum</td>       <td>Chordata</td>     </tr>     <tr>       <td>Class</td>       <td>Mammalia</td>     </tr>     <tr>       <td>Order</td>       <td>Carnivora</td>     </tr>     <tr>       <td>Family</td>       <td>Felidae</td>     </tr>     <tr>       <td>Genus</td>       <td><em>Felis</em></td>     </tr>     <tr>       <td>Species</td>       <td><em>F. catus</em></td>     </tr>   </tbody> </table>   <p>Let’s explore taxonomy in the Tree of Life, using <a href="https://lifemap.univ-lyon1.fr/">Lifemap</a></p>   <iframe id="Lifemap" src="https://lifemap.univ-lyon1.fr/explore.html" frameborder="0" width="100%" height="600px"></iframe> </blockquote>
 
 <p>In the previous section we ran <strong>Kraken2</strong> along with the <strong>Kalamari</strong> database, which is also a kind of taxonomy profiling but the database used is designed to include all possible host sequences. In the following part, we run <strong>Kraken2</strong> again; but this time with one of its built-in databases, <strong>Standard PlusPF</strong>, which can give us more insight into pathogen candidate species than <strong>Kalamari</strong>. You can test this yourself by comparing reports of both <strong>Kraken2</strong> runs.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-kraken2-and-the-k-mer-approach-for-taxonomy-classification"><button class="gtn-boxify-button details" type="button" aria-controls="details-kraken2-and-the-k-mer-approach-for-taxonomy-classification-contents" aria-expanded="true" aria-label="Toggle details box: Kraken2 and the k-mer approach for taxonomy classification"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Kraken2 and the k-mer approach for taxonomy classification<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-kraken2-and-the-k-mer-approach-for-taxonomy-classification"><button class="gtn-boxify-button details" type="button" aria-controls="details-kraken2-and-the-k-mer-approach-for-taxonomy-classification" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Kraken2 and the k-mer approach for taxonomy classification<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>In the \(k\)-mer approach for taxonomy classification, we use a database containing DNA sequences of genomes whose taxonomy we already know. On a computer, the genome sequences are broken into short pieces of length \(k\) (called \(k\)-mers), usually 30bp.</p>
 
   <p><strong>Kraken</strong> examines the \(k\)-mers within the query sequence, searches for them in the database, looks for where these are placed within the taxonomy tree inside the database, makes the classification with the most probable position, then maps \(k\)-mers to the lowest common ancestor (LCA) of all genomes known to contain the given \(k\)-mer.</p>
 
-  <figure id="figure-1"><img src="../../images/metagenomics-nanopore/kmers-kraken.jpg" alt="Kraken2. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Kraken sequence classification algorithm. To classify a sequence, each k-mer in the sequence is mapped to the lowest common ancestor (LCA, i.e. the lowest node) of the genomes that contain that k-mer in the database. The taxa associated with the sequence's k-mers, as well as the taxa's ancestors, form a pruned subtree of the general taxonomy tree, which is used for classification. In the classification tree, each node has a weight equal to the number of k-mers in the sequence associated with the node's taxon. Each root-to-leaf (RTL) path in the classification tree is scored by adding all weights in the path, and the maximal RTL path in the classification tree is the classification path (nodes highlighted in yellow). The leaf of this classification path (the orange, leftmost leaf in the classification tree) is the classification used for the query sequence. Source: <span class="citation"><a href="#Wood2014">Wood and Salzberg 2014</a></span></figcaption></figure>
+  <figure id="figure-1"><img src="../../images/metagenomics-nanopore/kmers-kraken.jpg" alt="Kraken2. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Kraken sequence classification algorithm. To classify a sequence, each k-mer in the sequence is mapped to the lowest common ancestor (LCA, i.e. the lowest node) of the genomes that contain that k-mer in the database. The taxa associated with the sequence's k-mers, as well as the taxa's ancestors, form a pruned subtree of the general taxonomy tree, which is used for classification. In the classification tree, each node has a weight equal to the number of k-mers in the sequence associated with the node's taxon. Each root-to-leaf (RTL) path in the classification tree is scored by adding all weights in the path, and the maximal RTL path in the classification tree is the classification path (nodes highlighted in yellow). The leaf of this classification path (the orange, leftmost leaf in the classification tree) is the classification used for the query sequence. Source: <span class="citation"><a href="#Wood2014">Wood and Salzberg 2014</a></span></figcaption></figure>
 
 </blockquote>
 
 <div class="Short-Version">
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-taxonomy-profiling-and-visualisation" aria-label="hands-on box: Taxonomy Profiling and visualisation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Taxonomy Profiling and visualisation</div>
+    <div class="box-title hands-on-title" id="hands-on-taxonomy-profiling-and-visualisation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Taxonomy Profiling and visualisation</div>
 
     <ol>
       <li><strong>Import the workflow</strong> into Galaxy
@@ -1334,7 +1459,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
         </ul>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
       </li>
     </ol>
 
@@ -1347,10 +1472,10 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <div class="Long-Version">
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-taxonomy-profiling" aria-label="hands-on box:  Taxonomy Profiling "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Taxonomy Profiling</div>
+    <div class="box-title hands-on-title" id="hands-on-taxonomy-profiling"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Taxonomy Profiling</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Kraken2 tool"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1</span></span>  with the following parameters:
         <ul>
           <li><em>“Single or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
             <ul>
@@ -1371,7 +1496,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 </div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Inspect the <strong>Kraken2</strong> report for <code class="language-plaintext highlighter-rouge">Barcode10</code> tag</p>
 
@@ -1383,7 +1508,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li><em>Escherichia coli</em> with 10,243 sequences</li>
@@ -1401,10 +1526,10 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <div class="Long-Version">
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-biom-generation" aria-label="hands-on box:  BIOM generation "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  BIOM generation</div>
+    <div class="box-title hands-on-title" id="hands-on-biom-generation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  BIOM generation</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken_biom/kraken_biom/1.2.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/kraken_biom/kraken_biom/1.2.0+galaxy1"><strong>Kraken-biom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken_biom/kraken_biom/1.2.0+galaxy1</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken_biom/kraken_biom/1.2.0+galaxy1" title="Kraken-biom tool"><strong>Kraken-biom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken_biom/kraken_biom/1.2.0+galaxy1</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input files to Kraken-biom: Kraken report output file(s)”</em>: Report outputs of <strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: Leave empty</li>
@@ -1423,10 +1548,10 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <div class="Long-Version">
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-visualisation-with-phinch" aria-label="hands-on box:  Visualisation with Phinch "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Visualisation with Phinch</div>
+    <div class="box-title hands-on-title" id="hands-on-visualisation-with-phinch"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Visualisation with Phinch</div>
 
     <ol>
-      <li><span class="tool" data-tool="interactive_tool_phinch" title="Tested with interactive_tool_phinch"><strong>Phinch Visualisation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_phinch</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="interactive_tool_phinch" title="Phinch Visualisation tool"><strong>Phinch Visualisation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_phinch</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Biom1 dataset”</em>: output of <strong>Kraken-biom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         </ul>
@@ -1440,14 +1565,14 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <p>Now let’s now explore the <strong>Phinch visulization</strong> tool running for <code class="language-plaintext highlighter-rouge">Barcode11</code> tag</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-explore-data-interactively" aria-label="hands-on box: Explore data interactively"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Explore data interactively</div>
+  <div class="box-title hands-on-title" id="hands-on-explore-data-interactively"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Explore data interactively</div>
 
   <ol>
     <li>
       <p>Open Phinch interactive tool</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-contents" aria-expanded="true" aria-label="Toggle tip box: Open interactive tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Open interactive tool<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the Phinch visualization to be running (Job Info)</li>   <li>Click on Phinch visualization</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Open interactive tool<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the Phinch visualization to be running (Job Info)</li>   <li>Click on Phinch visualization</li> </ol> </blockquote>
     </li>
     <li>
       <p>Click on <strong>Proceed to Gallery</strong> button on the top right of the opened webpage to see all the plots</p>
@@ -1457,7 +1582,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>What is the most commonly found species?</li>
@@ -1466,7 +1591,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li><em>Salmonella enterica</em> with 17,309 sequences</li>
@@ -1482,7 +1607,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>While these steps are running, you can move on to the next section <strong>Gene based pathogenic identification</strong> and run the steps there, as well. Both analyses can execute in parallel.</p>
 </blockquote>
 
@@ -1510,7 +1635,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <p>As outputs, we will get our <strong>FASTA</strong> and <strong>Tabular</strong> files to track genes and visualize our pathogenic identification. For that we will need one more file to create a report and we can upload it directly:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-1" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -1528,7 +1653,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <div class="Short-Version">
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-gene-based-pathogenic-identification" aria-label="hands-on box: Gene based Pathogenic Identification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Gene based Pathogenic Identification</div>
+    <div class="box-title hands-on-title" id="hands-on-gene-based-pathogenic-identification"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Gene based Pathogenic Identification</div>
 
     <ol>
       <li><strong>Import the workflow</strong> into Galaxy
@@ -1538,7 +1663,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
         </ul>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
       </li>
       <li>Run <strong>Workflow 3: Nanopore Datasets - Gene based Pathogenic Identification</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
         <ul>
@@ -1548,7 +1673,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
         </ul>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
       </li>
       <li>Repeat step 2 and run the same <strong>workflow</strong> again for the second tag
         <ul>
@@ -1558,7 +1683,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
         </ul>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-3-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
       </li>
     </ol>
 
@@ -1577,16 +1702,16 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
     <div class="Long-Version">
 
       <blockquote class="hands-on">
-        <div class="box-title hands-on-title" id="hands-on-assembly-with-flye" aria-label="hands-on box:  Assembly with Flye "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Assembly with Flye</div>
+        <div class="box-title hands-on-title" id="hands-on-assembly-with-flye"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Assembly with Flye</div>
 
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0" title="Flye tool"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0</span></span>  with the following parameters:
             <ul>
               <li>
                 <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input reads”</em>: Outputs without matched ID of <strong>Filter sequences by ID</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for <code class="language-plaintext highlighter-rouge">Barcode10</code></p>
 
                 <blockquote class="comment">
-                  <div class="box-title comment-title" id="comment-5" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+                  <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
                   <p>We need to run <strong>Flye</strong> individually on each sample otherwise <strong>Flye</strong> runs by default a co-assembly mode, <em>i.e.</em> it combines read of both samples together before running the assembly.</p>
                 </blockquote>
               </li>
@@ -1595,7 +1720,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
               <li><em>“Reduced contig assembly coverage”</em>: <code class="language-plaintext highlighter-rouge">Disable reduced coverage for initial disjointing assembly</code></li>
             </ul>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0" title="Flye tool"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input reads”</em>: Outputs without matched ID of <strong>Filter sequences by ID</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for <code class="language-plaintext highlighter-rouge">Barcode11</code></li>
               <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Nanopore HQ (--nano-hq)</code></li>
@@ -1614,9 +1739,9 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
     <div class="Long-Version">
 
       <blockquote class="hands-on">
-        <div class="box-title hands-on-title" id="hands-on-visualization-of-the-assembly-grap" aria-label="hands-on box:  Visualization of the assembly grap "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Visualization of the assembly grap</div>
+        <div class="box-title hands-on-title" id="hands-on-visualization-of-the-assembly-grap"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Visualization of the assembly grap</div>
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2"><strong>Bandage Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2" title="Bandage Image tool"><strong>Bandage Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Graphical Fragment Assembly”</em>: Assembly graph outputs of <strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
             </ul>
@@ -1632,10 +1757,10 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
     <div class="Long-Version">
 
       <blockquote class="hands-on">
-        <div class="box-title hands-on-title" id="hands-on-contig-polishing" aria-label="hands-on box:  Contig polishing "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Contig polishing</div>
+        <div class="box-title hands-on-title" id="hands-on-contig-polishing"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Contig polishing</div>
 
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy0"><strong>medaka consensus pipeline</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy0" title="medaka consensus pipeline tool"><strong>medaka consensus pipeline</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy0</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select basecalls”</em>: Outputs without matched ID of <strong>Filter sequences by ID</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select assembly”</em>: Output of <strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1649,14 +1774,14 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
       <p>To keep information about the provenance of the contigs, we can rename them to add contig information to them.</p>
 
       <blockquote class="hands-on">
-        <div class="box-title hands-on-title" id="hands-on-contig-renaming-to-add-sample-names" aria-label="hands-on box:  Contig renaming to add sample names "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Contig renaming to add sample names</div>
+        <div class="box-title hands-on-title" id="hands-on-contig-renaming-to-add-sample-names"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Contig renaming to add sample names</div>
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1"><strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="FASTA-to-Tabular tool"><strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Convert these sequences”</em>: output of <strong>medaka consensus pipeline</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
             </ul>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace tool"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for <code class="language-plaintext highlighter-rouge">Barcode10</code></li>
               <li>In <em>“Find and Replace”</em>:
@@ -1682,9 +1807,9 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
             <p>Rename the output to <code class="language-plaintext highlighter-rouge">Contigs Table - Barcode10</code></p>
 
             <!--SNIPPET-->
-            <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+            <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace tool"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for <code class="language-plaintext highlighter-rouge">Barcode11</code></li>
               <li>In <em>“Find and Replace”</em>:
@@ -1710,9 +1835,9 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
             <p>Rename the output to <code class="language-plaintext highlighter-rouge">Contigs Table - Barcode11</code></p>
 
             <!--SNIPPET-->
-            <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+            <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1"><strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool"><strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Tab-delimited file”</em>: outputs of <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -1728,7 +1853,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Inspect <strong>Flye</strong> and <strong>Medaka consensus pipeline</strong> output results for <code class="language-plaintext highlighter-rouge">Barcode10</code></p>
 
@@ -1739,7 +1864,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>After <strong>Flye</strong> we have got 137 contigs</li>
@@ -1761,10 +1886,10 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <div class="Long-Version">
 
   <blockquote class="hands-on">
-    <div class="box-title hands-on-title" id="hands-on-multilocus-sequence-typing" aria-label="hands-on box:  Multilocus Sequence Typing "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Multilocus Sequence Typing</div>
+    <div class="box-title hands-on-title" id="hands-on-multilocus-sequence-typing"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Multilocus Sequence Typing</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.22.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.22.0"><strong>MLST</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.22.0</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.22.0" title="MLST tool"><strong>MLST</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.22.0</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“input_files”</em>:  Sample Specific <code class="language-plaintext highlighter-rouge">Contigs-BarcodeXX</code> FASTA files with contigs</li>
           <li><em>“Specify advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">Yes, see full parameter list</code>
@@ -1790,7 +1915,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Inspect <strong>MLST</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> results</p>
 
@@ -1799,7 +1924,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>senterica_achtman_2 (<span class="citation"><a href="#sentericaachtman2">“<b>Multilocus Sequence Typing as a Replacement for Serotyping in Salmonella enterica</b>” 2012</a></span>)</li>
@@ -1815,10 +1940,10 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <div class="Long-Version">
 
   <blockquote class="hands-on">
-    <div class="box-title hands-on-title" id="hands-on-antimicrobial-resistance-genes-identification" aria-label="hands-on box:  Antimicrobial Resistance Genes Identification "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Antimicrobial Resistance Genes Identification</div>
+    <div class="box-title hands-on-title" id="hands-on-antimicrobial-resistance-genes-identification"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Antimicrobial Resistance Genes Identification</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1"><strong>ABRicate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1" title="ABRicate tool"><strong>ABRicate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file (Fasta, Genbank or EMBL file)”</em>: Sample Specific <code class="language-plaintext highlighter-rouge">Contigs-BarcodeXX</code> FASTA files with contigs</li>
           <li>In <em>“Advanced options”</em>:
@@ -1855,12 +1980,12 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 
 <!--<div class="Long-Version" markdown="1">
 
-> <div class="box-title hands-on-title" id="hands-on-antimicrobial-resistance-genes-identification-1" aria-label="hands-on box:  Antimicrobial Resistance Genes Identification "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Antimicrobial Resistance Genes Identification</div>
-> 2. <span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
+> <div class="box-title hands-on-title" id="hands-on-antimicrobial-resistance-genes-identification-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Antimicrobial Resistance Genes Identification</div>
+> 2. <span class="tool" data-tool="Cut1" title="Cut tool"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
 >    - *"Cut columns"*: `c13`
 >    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"From"*: `report` (output of the **ABRicate** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run)
 >
-> 3. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0"><strong>Add line to file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0</span></span>  with the following parameters:
+> 3. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0" title="Add line to file tool"><strong>Add line to file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0</span></span>  with the following parameters:
 >    - *"text to add"*: `Spike2Barcode10` or `Spike2bBarcode11` respectively to the tag chosen for the first parameter (the sample ID)
 >    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"input file"*: `out_file1` (output of the **Cut** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
 {: .hands-on}
@@ -1868,7 +1993,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 </div>-->
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Inspect <strong>ABRicate</strong> output files from <code class="language-plaintext highlighter-rouge">Barcode10</code>and <code class="language-plaintext highlighter-rouge">Barcode11</code> tags</p>
 
@@ -1878,7 +2003,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>5 <strong>AMR</strong> genes were found:
@@ -1899,7 +2024,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <p>In this step we return back to the main goal of the tutorial where we want to identify the pathogens: <strong>identify if the bacteria found in our samples are pathogenic bacteria or not</strong>. One of the ways to do that is to identify if the sequences include genes with a <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2646308/">Virulence Facor</a> or not, such that if the samples include gene(s) with a Virulence Factor then it for sure is a pathogen.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-definitions" aria-label="comment box: Definitions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Definitions</div>
+  <div class="box-title comment-title" id="comment-definitions"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Definitions</div>
 
   <p><strong>Bacterial Pathogen</strong>: A bacterial pathogen is usually defined as any bacterium that has the capacity to cause disease. Its ability to cause disease is called pathogenicity.</p>
 
@@ -1914,10 +2039,10 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <div class="Long-Version">
 
   <blockquote class="hands-on">
-    <div class="box-title hands-on-title" id="hands-on-virulence-factor-identification" aria-label="hands-on box:  Virulence Factor identification "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Virulence Factor identification</div>
+    <div class="box-title hands-on-title" id="hands-on-virulence-factor-identification"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Virulence Factor identification</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1"><strong>ABRicate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1" title="ABRicate tool"><strong>ABRicate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file (Fasta, Genbank or EMBL file)”</em>:   Sample Specific <code class="language-plaintext highlighter-rouge">Contigs-BarcodeXX</code> FASTA files with contigs</li>
           <li>In <em>“Advanced options”</em>:
@@ -1934,7 +2059,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 </div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-7" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Inspect <strong>VFs of genes Identified by VFDB</strong> output file from<code class="language-plaintext highlighter-rouge">Barcode10</code>and <code class="language-plaintext highlighter-rouge">Barcode11</code> tags</p>
 
@@ -1944,7 +2069,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>123</li>
@@ -1957,9 +2082,9 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <div class="Long-Version">
 
   <blockquote class="hands-on">
-    <div class="box-title hands-on-title" id="hands-on-formatting" aria-label="hands-on box:  Formatting "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Formatting</div>
+    <div class="box-title hands-on-title" id="hands-on-formatting"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Formatting</div>
     <ol>
-      <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="Cut1" title="Cut tool"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
         <ul>
           <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c13</code></li>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“From”</em>: outputs of <strong>ABRicate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1968,7 +2093,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
       <li>
         <p>Rename the outputs <code class="language-plaintext highlighter-rouge">VFs accessions - Barcode10</code> and <code class="language-plaintext highlighter-rouge">VFs accessions - Barcode11</code></p>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0"><strong>Add line to file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0" title="Add line to file tool"><strong>Add line to file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0</span></span>  with the following parameters:
         <ul>
           <li><em>“text to add”</em>: <code class="language-plaintext highlighter-rouge">Barcode10</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <code class="language-plaintext highlighter-rouge">VFs accessions - Barcode10</code></li>
@@ -1977,7 +2102,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
       <li>
         <p>Rename the output <code class="language-plaintext highlighter-rouge">VFs accessions with SampleID as a header- Barcode10</code></p>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0"><strong>Add line to file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0" title="Add line to file tool"><strong>Add line to file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0</span></span>  with the following parameters:
         <ul>
           <li><em>“text to add”</em>: <code class="language-plaintext highlighter-rouge">Barcode11</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <code class="language-plaintext highlighter-rouge">VFs accessions - Barcode11</code></li>
@@ -2002,7 +2127,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <p>In this training, we are testing <em>Salmonella enterica</em>, with different strains of which our samples were spiked. So we will now upload to our history the reference genome of <a href="https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]"><em>S. enterica</em></a> we originally obtained from the <a href="https://www.ncbi.nlm.nih.gov/">National Center for Biotechnology Information (NCBI) database</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-2" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -2018,7 +2143,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <div class="Short-Version">
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-snp-based-pathogenic-identification" aria-label="hands-on box: SNP based Pathogenic Identification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: SNP based Pathogenic Identification</div>
+    <div class="box-title hands-on-title" id="hands-on-snp-based-pathogenic-identification"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: SNP based Pathogenic Identification</div>
 
     <ol>
       <li><strong>Import the workflow</strong> into Galaxy
@@ -2028,7 +2153,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
         </ul>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
       </li>
       <li>Run <strong>Workflow 4: Nanopore Datasets - SNP based Pathogenic Identification</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
         <ul>
@@ -2054,9 +2179,9 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
     <div class="Long-Version">
 
       <blockquote class="hands-on">
-        <div class="box-title hands-on-title" id="hands-on-mapping-to-reference-genome" aria-label="hands-on box:  Mapping to reference genome "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Mapping to reference genome</div>
+        <div class="box-title hands-on-title" id="hands-on-mapping-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Mapping to reference genome</div>
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0"><strong>Map with minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0" title="Map with minimap2 tool"><strong>Map with minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0</span></span>  with the following parameters:
             <ul>
               <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
                 <ul>
@@ -2079,16 +2204,16 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
     <p><strong>Identify variants and single nucleotide variants</strong> using <strong>Clair3</strong> (<span class="citation"><a href="#Zheng2021">Zheng <i>et al.</i> 2021</a></span>), which is designed specifically for Nanopore datasets and giving better results than other variant calling tools, as well as being new and up-to-date.</p>
 
     <blockquote class="comment-on">
-      <div class="box-title comment-title" id="comment-6" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+      <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
       <p><a href="https://github.com/nanoporetech/medaka"><strong>Medaka consensus tool</strong> and <strong>medaka variant tool</strong></a> can be also used instead of <strong>Clair3</strong>, they give similar results but they are much slower then <strong>Clair3</strong> and offer fewer options.</p>
     </blockquote>
 
     <div class="Long-Version">
 
       <blockquote class="hands-on">
-        <div class="box-title hands-on-title" id="hands-on-variant-or-snp-calling" aria-label="hands-on box:  Variant or SNP Calling "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Variant or SNP Calling</div>
+        <div class="box-title hands-on-title" id="hands-on-variant-or-snp-calling"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Variant or SNP Calling</div>
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/clair3/clair3/0.1.12+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/clair3/clair3/0.1.12+galaxy0"><strong>Clair3</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/clair3/clair3/0.1.12+galaxy0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/clair3/clair3/0.1.12+galaxy0" title="Clair3 tool"><strong>Clair3</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/clair3/clair3/0.1.12+galaxy0</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM/CRAM file input”</em>: Outputs of <strong>Map with minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li><em>“Reference genome source”</em>: <code class="language-plaintext highlighter-rouge">History</code>
@@ -2126,9 +2251,9 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
     <div class="Long-Version">
 
       <blockquote class="hands-on">
-        <div class="box-title hands-on-title" id="hands-on-left-align-and-normalize-indels" aria-label="hands-on box: Left-align and normalize indels"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Left-align and normalize indels</div>
+        <div class="box-title hands-on-title" id="hands-on-left-align-and-normalize-indels"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Left-align and normalize indels</div>
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1"><strong>bcftools norm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1" title="bcftools norm tool"><strong>bcftools norm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“VCF/BCF Data”</em>: Outputs of <strong>Clair3</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history</code>
@@ -2148,16 +2273,16 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
     <p><strong>Filter variants</strong> to keep only the pass and good quality variants using <strong>SnpSift Filter</strong> (<span class="citation"><a href="#Cingolani2012">Cingolani <i>et al.</i> 2012</a></span>)</p>
 
     <blockquote class="comment-on">
-      <div class="box-title comment-title" id="comment-7" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+      <div class="box-title comment-title" id="comment-7"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
       <p><a href="https://csb5.github.io/lofreq/"><strong>LoFreq filter</strong></a> can be also used instead, both tools performs equal and fast results.</p>
     </blockquote>
 
     <div class="Long-Version">
 
       <blockquote class="hands-on">
-        <div class="box-title hands-on-title" id="hands-on-filter-variants" aria-label="hands-on box: Filter variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter variants</div>
+        <div class="box-title hands-on-title" id="hands-on-filter-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter variants</div>
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1"><strong>SnpSift Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1" title="SnpSift Filter tool"><strong>SnpSift Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input variant list in VCF format”</em>: Outputs of <strong>bcftools norm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li><em>“Type of filter expression”</em>: <code class="language-plaintext highlighter-rouge">Simple expression</code>
@@ -2193,9 +2318,9 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
     <div class="Long-Version">
 
       <blockquote class="hands-on">
-        <div class="box-title hands-on-title" id="hands-on-extract-a-tabular-report" aria-label="hands-on box: Extract a tabular report"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract a tabular report</div>
+        <div class="box-title hands-on-title" id="hands-on-extract-a-tabular-report"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract a tabular report</div>
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0"><strong>SnpSift Extract Fields</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0" title="SnpSift Extract Fields tool"><strong>SnpSift Extract Fields</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Variant input file in VCF format”</em>: Outputs of <strong>SnpSift Filter</strong></li>
               <li><em>“Fields to extract”</em>: <code class="language-plaintext highlighter-rouge">CHROM POS ID REF ALT FILTER</code></li>
@@ -2209,7 +2334,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 </ol>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-8" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Now let’s inspect the outputs for <code class="language-plaintext highlighter-rouge">Barcode10</code> tag:</p>
 
@@ -2220,7 +2345,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Before filtering: 2,652</li>
@@ -2241,9 +2366,9 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <div class="Long-Version">
 
   <blockquote class="hands-on">
-    <div class="box-title hands-on-title" id="hands-on-consensus-genome-building" aria-label="hands-on box:  Consensus Genome Building "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Consensus Genome Building</div>
+    <div class="box-title hands-on-title" id="hands-on-consensus-genome-building"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Consensus Genome Building</div>
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3"><strong>bcftools consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3" title="bcftools consensus tool"><strong>bcftools consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“VCF/BCF Data”</em>: Outputs of <strong>SnpSift Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history</code>
@@ -2259,7 +2384,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 </div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-9" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Inspect the <strong>bcftools consensus</strong> output for <code class="language-plaintext highlighter-rouge">Barcode11</code> tag</p>
 
@@ -2269,7 +2394,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>We got 2 sequences: the complete genome and the complete <a href="https://www.genome.gov/genetics-glossary/Plasmid">plasmid</a> genome.</li>
@@ -2281,12 +2406,12 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
 <h1 id="pathogen-tracking-among-all-samples">Pathogen Tracking among all samples</h1>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-8" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-8"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
   <p>If you did not get your <strong>Gene based pathogenic identification</strong> section output files needed yet or you got an error for some reason, you can go on and download them all or the ones missing from Zenodo so you can start this workflow, please don’t forget to create the collections for them as explained in the pervious hands-on.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-optional-data-upload-1" aria-label="hands-on box: Optional Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Optional Data upload</div>
+    <div class="box-title hands-on-title" id="hands-on-optional-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Optional Data upload</div>
 
     <ol>
       <li>
@@ -2303,7 +2428,7 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
 </code></pre></div>        </div>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       </li>
     </ol>
 
@@ -2320,14 +2445,14 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
 <p>With these two types of visualizations we can have an overview of all samples and the genes, but also how samples are related to each other, which common pathogenic genes they share. Given the time of the sampling and the location one can easily identify using these graphs, where and when the contamination has occurred among the different samples.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-organize-data" aria-label="hands-on box: Organize data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Organize data</div>
+  <div class="box-title hands-on-title" id="hands-on-organize-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Organize data</div>
 
   <ol>
     <li>
       <p>Create a collection named <code class="language-plaintext highlighter-rouge">VFs</code> with <code class="language-plaintext highlighter-rouge">VFs</code> files for both tags</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a dataset collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a dataset collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
     </li>
     <li>
       <p>Create a collection named <code class="language-plaintext highlighter-rouge">VFs accessions</code> with <code class="language-plaintext highlighter-rouge">VFs accessions</code> files for both tags</p>
@@ -2345,7 +2470,7 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
 <div class="Short-Version">
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-all-samples-analysis" aria-label="hands-on box: All Samples Analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: All Samples Analysis</div>
+    <div class="box-title hands-on-title" id="hands-on-all-samples-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: All Samples Analysis</div>
 
     <ol>
       <li><strong>Import the workflow</strong> into Galaxy
@@ -2355,7 +2480,7 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
         </ul>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-3-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
       </li>
       <li>Run <strong>Workflow 5: Nanopore Datasets - Reports of All Samples along with Full genomes and VF genes Phylogenetic trees</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
         <ul>
@@ -2367,7 +2492,7 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
         </ul>
 
         <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-4-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
       </li>
     </ol>
 
@@ -2388,10 +2513,10 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
       <p>Combine VFs accessions for samples into a table and get 0 or 1 for absence / presence</p>
 
       <blockquote class="notranslate hands_on">
-        <div class="box-title hands-on-title" id="hands-on-heatmap" aria-label="hands-on box:  Heatmap "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Heatmap</div>
+        <div class="box-title hands-on-title" id="hands-on-heatmap"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Heatmap</div>
 
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1"><strong>Multi-Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1" title="Multi-Join tool"><strong>Multi-Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to join”</em>: <code class="language-plaintext highlighter-rouge">VFs accessions with SampleID - Barcode10</code></li>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“add additional file”</em>: <code class="language-plaintext highlighter-rouge">VFs accessions with SampleID - Barcode11</code></li>
@@ -2402,7 +2527,7 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
               <li><em>“Ignore duplicated keys”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             </ul>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace tool"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Multi-Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li>In <em>“Find and Replace”</em>:
@@ -2425,7 +2550,7 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
               </li>
             </ul>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace tool"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li>In <em>“Find and Replace”</em>:
@@ -2455,14 +2580,14 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
       <p>Draw heatmap</p>
 
       <blockquote class="hands-on">
-        <div class="box-title hands-on-title" id="hands-on-heatmap-1" aria-label="hands-on box:  Heatmap "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Heatmap</div>
+        <div class="box-title hands-on-title" id="hands-on-heatmap-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Heatmap</div>
         <ol>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2"><strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2" title="Transpose tool"><strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: output of <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
             </ul>
           </li>
-          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap/ggplot2_heatmap/3.4.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap/ggplot2_heatmap/3.4.0+galaxy0"><strong>Heatmap w ggplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap/ggplot2_heatmap/3.4.0+galaxy0</span></span>  with the following parameters:
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap/ggplot2_heatmap/3.4.0+galaxy0" title="Heatmap w ggplot tool"><strong>Heatmap w ggplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap/ggplot2_heatmap/3.4.0+galaxy0</span></span>  with the following parameters:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select table”</em>: output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li><em>“Select input dataset options”</em>: <code class="language-plaintext highlighter-rouge">Dataset with header and row names</code>
@@ -2488,7 +2613,7 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
 </div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-10" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Now let’s see how your heatmap looks like, you can zoom-in and out in your Galaxy history.</p>
 
@@ -2500,7 +2625,7 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>A lot of bacteria pathogen <strong>VF</strong> gene products identified by the <strong>VFDB</strong> are common in both samples, three of them are with the following accession number: <strong>NP_461810</strong>, <strong>NP_461809</strong> and <strong>NP_459541</strong></li>
@@ -2532,34 +2657,34 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
   <p>To get the sequence to align, we need to extract the sequences of the VFs in the contigs:</p>
 
   <blockquote class="hands-on">
-    <div class="box-title hands-on-title" id="hands-on-extract-the-sequences-of-the-vfs" aria-label="hands-on box:  Extract the sequences of the VFs "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Extract the sequences of the VFs</div>
+    <div class="box-title hands-on-title" id="hands-on-extract-the-sequences-of-the-vfs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Extract the sequences of the VFs</div>
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"><strong>Collapse Collecction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collecction tool"><strong>Collapse Collecction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>: <code class="language-plaintext highlighter-rouge">Contigs</code></li>
           <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>: <code class="language-plaintext highlighter-rouge">VFs</code></li>
           <li><em>“Keep one header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="Remove beginning1" title="Tested with Remove beginning1"><strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Remove beginning1</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="Remove beginning1" title="Remove beginning tool"><strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Remove beginning1</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: output of 2nd <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6"><strong>Split by group</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" title="Split by group tool"><strong>Split by group</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to split”</em>: output of <strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 13</code></li>
           <li><em>“Include header in splits?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7" title="Tested with toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7"><strong>Filter sequences by ID</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7" title="Filter sequences by ID tool"><strong>Filter sequences by ID</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequence file to be filtered”</em>: output of 1st <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li><em>“Filter using the ID list from”</em>: <code class="language-plaintext highlighter-rouge">tabular file</code>
@@ -2578,10 +2703,10 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
   <p>We can now run multiple sequence alignment, build the trees for each VF and display them.</p>
 
   <blockquote class="hands-on">
-    <div class="box-title hands-on-title" id="hands-on-phylogenetic-tree-building" aria-label="hands-on box:  Phylogenetic Tree building "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Phylogenetic Tree building</div>
+    <div class="box-title hands-on-title" id="hands-on-phylogenetic-tree-building"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Phylogenetic Tree building</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1+galaxy1"><strong>ClustalW</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1+galaxy1</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1+galaxy1" title="ClustalW tool"><strong>ClustalW</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1+galaxy1</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTA file”</em>: output of <strong>Filter sequences by ID</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li><em>“Data type”</em>: <code class="language-plaintext highlighter-rouge">DNA nucleotide sequences</code></li>
@@ -2589,7 +2714,7 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
           <li><em>“Output complete alignment (or specify part to output)”</em>: <code class="language-plaintext highlighter-rouge">Complete alignment</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fasttree/fasttree/2.1.10+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fasttree/fasttree/2.1.10+galaxy1"><strong>FASTTREE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fasttree/fasttree/2.1.10+galaxy1</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fasttree/fasttree/2.1.10+galaxy1" title="FASTTREE tool"><strong>FASTTREE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fasttree/fasttree/2.1.10+galaxy1</span></span>  with the following parameters:
         <ul>
           <li><em>“Aligned sequences file (FASTA or Phylip format)”</em>: <code class="language-plaintext highlighter-rouge">fasta</code>
             <ul>
@@ -2600,7 +2725,7 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
           <li><em>“Protein or nucleotide alignment”</em>: <code class="language-plaintext highlighter-rouge">Nucleotide</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1"><strong>Newick Display</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1" title="Newick Display tool"><strong>Newick Display</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Newick file”</em>: output of <strong>FASTTREE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li><em>“Branch support”</em>: <code class="language-plaintext highlighter-rouge">Hide branch support</code></li>
@@ -2614,7 +2739,7 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
 </div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-11" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Now let’s see how your trees for the bacteria pathogen gene with accession IDs: <strong>AAF98391</strong>, <strong>NP_249099</strong> and <strong>NP_460111</strong> look like. To access that go to the output of Newick</p>
 
@@ -2625,7 +2750,7 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -2652,10 +2777,12 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
 
 <p>In this tutorial, we have tried the workflow designed to detect and track pathogens in our food and drinks. Through out the full workflow we used our Nanopore sequenced datasets from Biolytix and analyzed it, found the pathogens and tracked it. This approach can be summarized with the following scheme:</p>
 
-<figure id="figure-2"><img src="./images/FoodBorne-Workflow-updated.png" alt="Foodborne full workflow big picture. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> The complete picture of the workflow used in this training highlighting, not all, but the most important steps done in 5 sub-workflows explained in the training</figcaption></figure>
+<figure id="figure-2"><img src="./images/FoodBorne-Workflow-updated.png" alt="Foodborne full workflow big picture. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The complete picture of the workflow used in this training highlighting, not all, but the most important steps done in 5 sub-workflows explained in the training</figcaption></figure>
 
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
 
                 <h1>Frequently Asked Questions</h1>
@@ -2697,33 +2824,9 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition (Metagenomics)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition (Metagenomics)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -2741,7 +2844,7 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -2785,7 +2888,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -2797,29 +2900,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

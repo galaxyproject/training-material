@@ -12,31 +12,31 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/classification_regression/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/classification_regression/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Machine learning: classification and regression" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
-<meta name="DC.creator" content="Anup Kumar" />
-<meta name="DC.creator" content="Bérénice Batut" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Machine learning: classification and regression">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.creator" content="Anup Kumar">
+<meta name="DC.creator" content="Bérénice Batut">
 
         
         
         
         
-        <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Machine learning: classification and regression" />
-        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta name="description" content="Statistical Analyses for omics data and machine learning ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Machine learning: classification and regression">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -458,10 +458,222 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-statistics">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-18 14:23:35 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Machine learning: classification and regression",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Machine learning: classification and regression' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/classification_regression/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "statistics",
+  "description": "The questions this  addresses are:\n - what are classification and regression techniques?\n - How they can be used for prediction?\n - How visualizations can be used to analyze predictions?\n\n\nThe objectives are:\n - Explain the types of supervised machine learning - classification and regression.\n - Learn how to make predictions using the training and test dataset.\n - Visualize the predictions.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "name": "Anup Kumar",
+      "image": "https://avatars.githubusercontent.com/anuprulez",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "name": "Anup Kumar",
+      "image": "https://avatars.githubusercontent.com/anuprulez",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-statistics">
     <h1 data-toc-skip>Machine learning: classification and regression</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -472,9 +684,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -550,7 +762,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/classification_regression/workflows/" title="Workflows" alt="Machine learning: classification and regression workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/classification_regression/workflows/" title="Machine learning: classification and regression workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -564,13 +776,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/classification_regression/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/classification_regression/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -596,7 +805,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -751,6 +960,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -786,6 +1001,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -796,27 +1012,28 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>Machine learning is a subset of artificial intelligence (AI) that provides machines with the ability to automatically learn from data without being explicitly programmed. It is a combined field of computer science, mathematics and statistics to create a predictive model by learning patterns in a dataset. The dataset may have an output field which makes the learning process supervised. The <a href="https://en.wikipedia.org/wiki/Supervised_learning">supervised learning</a> methods in machine learning have outputs (also called as targets or classes or categories) defined in the datasets in a column. These targets can either be  integers or real (continuous) numbers. When the targets are integers, the learning task is known as classification. Each row in the dataset is a sample and the classification is assigning a class label/target to each sample. The algorithm which is used for this learning task is called a classifier. When the targets are real numbers, the learning task is called regression and the algorithm which is used for this task is called a regressor. We will go through classification first and look at regression later in this tutorial.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>What are features and outputs/targets in a dataset?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Features and targets of a breast cancer dataset:</p>
-    <figure id="figure-1"><img src="images/breast_cancer_classification.png" alt="Breast_cancer_targets. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The image shows a breast cancer dataset with 8 rows and 10 columns. Each column is a feature and encodes a specific information about breast cancer or detected tumor. For example, the feature "clump thickness" gives information about whether the cells are mono or multi-layered. Similarly, other columns/features provide different information about the tumor. The last column is the "target" column which identifies whether the tumor is benign (0) or malignant (1) for each row of the dataset. Here, the targets are discrete which makes the learning task classification. In another task, if these targets contain continuous values, the learning task will become regression.</figcaption></figure>
+    <figure id="figure-1"><img src="images/breast_cancer_classification.png" alt="Breast_cancer_targets. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The image shows a breast cancer dataset with 8 rows and 10 columns. Each column is a feature and encodes a specific information about breast cancer or detected tumor. For example, the feature "clump thickness" gives information about whether the cells are mono or multi-layered. Similarly, other columns/features provide different information about the tumor. The last column is the "target" column which identifies whether the tumor is benign (0) or malignant (1) for each row of the dataset. Here, the targets are discrete which makes the learning task classification. In another task, if these targets contain continuous values, the learning task will become regression.</figcaption></figure>
 
   </blockquote>
 
 </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -848,11 +1065,11 @@
 <p>A <a href="https://en.wikipedia.org/wiki/Statistical_classification">classification</a> task assigns a category/class to each sample by learning a decision boundary in a dataset. This dataset is called a training dataset and contains samples and desired class/category for each sample. The training dataset contains “features” as columns and a mapping between these features and the target is learned for each sample. The performance of mapping is evaluated using a test dataset (which is separate from training dataset). The test dataset contains only the feature columns and not the target column. The target column is predicted using the mapping learned on the training dataset. In this tutorial, we will use a classifier to train a model using a training dataset, predict the targets for test dataset and visualize the results using plots.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>The terms like ‘targets’, ‘classes’, ‘categories’ or ‘labels’ have been used interchangeably for the classification part of this tutorial. They contain identical meaning. For regression, we will just use ‘targets’.</p>
 </blockquote>
 
-<figure id="figure-2"><img src="images/classification.png" alt="classification. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new sample comes for which we do not know whether it is a tumor or no tumor, we use this decision boundary to compute the actual class.</figcaption></figure>
+<figure id="figure-2"><img src="images/classification.png" alt="classification. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new sample comes for which we do not know whether it is a tumor or no tumor, we use this decision boundary to compute the actual class.</figcaption></figure>
 
 <p>In figure <a href="#figure-2">2</a>, the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary, which can be used to classify or categorize an unseen/new sample. The line is the decision boundary. There are different ways to learn this decision boundary. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when the dataset is complex and requires non-linear decision boundaries, more powerful classifiers like <code class="language-plaintext highlighter-rouge">support vector machine</code> or  <code class="language-plaintext highlighter-rouge">tree</code> or <code class="language-plaintext highlighter-rouge">ensemble</code> based classifiers may prove to be beneficial. In the following part, we will perform classification on breast cancer dataset using a linear classifier and then will analyze the results with plots. Let’s begin by uploading the necessary datasets.</p>
 
@@ -861,14 +1078,14 @@
 <p>The datasets to be used for classification contain 9 features. Each feature contains some unique information about breast cancer including the thickness of clump, cell-size, cell-shape and so on. More information about the dataset can be found here - <a href="https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(original)">a</a> and <a href="https://sites.google.com/a/googlesciencefair.com/science-fair-2012-project-64a91af142a459cfb486ed5cb05f803b2eb41354-1333130785-87/observations">b</a>. In addition to these features, the training dataset contains one more column as the <code class="language-plaintext highlighter-rouge">target</code>. It has a binary value (0 or 1) for each row. <code class="language-plaintext highlighter-rouge">0</code> indicates no breast cancer (benign) and <code class="language-plaintext highlighter-rouge">1</code> (malignant) indicates breast cancer. The test dataset does not contain the <code class="language-plaintext highlighter-rouge">target</code> column (which should be predicted by a classifier). The third dataset contains all the samples from the test dataset, this time including the <code class="language-plaintext highlighter-rouge">target</code> column which is needed to compare between real and predicted targets.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the following datasets and choose the type of data as <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
@@ -879,13 +1096,13 @@ https://zenodo.org/record/3248907/files/breast-w_train.tsv
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename datasets to <code class="language-plaintext highlighter-rouge">breast-w_train</code>, <code class="language-plaintext highlighter-rouge">breast-w_test</code> and <code class="language-plaintext highlighter-rouge">breast-w_targets</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -896,7 +1113,7 @@ https://zenodo.org/record/3248907/files/breast-w_train.tsv
 <p>The training dataset is used for learning the associations between features and the targets. The classifier learns general patterns in a dataset and saves a trained model. This model can be used for classifying a new sample. In this step, we will use <code class="language-plaintext highlighter-rouge">breast-w_train</code> as the training dataset and apply <a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC">SVM</a> (support vector machine) classifier. It will learn features from the dataset and maps them to the targets. This mapping is called a trained model. The training step produces a model file of type <code class="language-plaintext highlighter-rouge">zip</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-train-the-model" aria-label="hands-on box: Train the model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train the model</div>
+  <div class="box-title hands-on-title" id="hands-on-train-the-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Train the model</div>
 
   <ol>
     <li><strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the classifier on training dataset:
@@ -934,12 +1151,12 @@ https://zenodo.org/record/3248907/files/breast-w_train.tsv
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>What is learned by the classifier?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Two attributes <strong>coef_</strong> and <strong>intercept_</strong> are learned by the classifier using the training dataset. The <strong>coef_</strong> contains importance weight for each feature and <strong>intercept_</strong> is just a
 constant scalar. However, for different classifiers, these attributes are different. The attributes shown here are specific to the <strong>Linear support vector</strong> classifier.
@@ -954,7 +1171,7 @@ These attributes are stored in the trained model and can be accessed by reading 
 <p>After the training process is complete, we can see the trained model file (<code class="language-plaintext highlighter-rouge">zip</code> file) which contains information about patterns in the form of weights. The trained model is used to predict the classes of the test (<code class="language-plaintext highlighter-rouge">breast-w_test</code>) dataset. It assigns a class (either tumor or no tumor) to each row in the <code class="language-plaintext highlighter-rouge">breast-w_test</code> dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-predict-classes-using-the-trained-model" aria-label="hands-on box: Predict classes using the trained model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict classes using the trained model</div>
+  <div class="box-title hands-on-title" id="hands-on-predict-classes-using-the-trained-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Predict classes using the trained model</div>
 
   <ol>
     <li><strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict classes of test dataset using the trained model:
@@ -978,7 +1195,7 @@ These attributes are stored in the trained model and can be accessed by reading 
 <p>We should evaluate the quality of predictions by comparing them against the true targets. To do this, we will use another dataset (<code class="language-plaintext highlighter-rouge">breast-w_targets</code>). This is the same as the test dataset (<code class="language-plaintext highlighter-rouge">breast-w_test</code>) but contains an extra <code class="language-plaintext highlighter-rouge">target</code> column containing the true classes of the test dataset. With the predicted and true classes, the learned model is evaluated to verify how correct the predictions are. To visualise these predictions, a plotting tool is used. It creates three plots - confusion matrix, precision, recall and F1 and ROC and AUC. We will mainly analyze the precision and recall plot.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-and-visualize-the-predictions" aria-label="hands-on box: Check and visualize the predictions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check and visualize the predictions</div>
+  <div class="box-title hands-on-title" id="hands-on-check-and-visualize-the-predictions"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check and visualize the predictions</div>
   <ol>
     <li><strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualise the predictions:
       <ul>
@@ -997,17 +1214,17 @@ These attributes are stored in the trained model and can be accessed by reading 
   <li>
     <p><a href="https://en.wikipedia.org/wiki/Confusion_matrix">Confusion matrix</a>:</p>
 
-    <figure id="figure-3"><img src="images/confusion_matrix.png" alt="confusion_matrix. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Confusion matrix of the predictions as a heatmap. The horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). For a good prediction, the diagonal running from top-left to bottom-right should contain less number of samples (because it shows the counts of incorrectly predicted samples). Hovering over each box in Galaxy shows the true and predicted class labels and the count of samples.</figcaption></figure>
+    <figure id="figure-3"><img src="images/confusion_matrix.png" alt="confusion_matrix. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Confusion matrix of the predictions as a heatmap. The horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). For a good prediction, the diagonal running from top-left to bottom-right should contain less number of samples (because it shows the counts of incorrectly predicted samples). Hovering over each box in Galaxy shows the true and predicted class labels and the count of samples.</figcaption></figure>
   </li>
   <li>
     <p><a href="https://en.wikipedia.org/wiki/Precision_and_recall">Precision, recall and F1 score</a>:</p>
 
-    <figure id="figure-4"><img src="images/precision_recall_f1.png" alt="prf1_scores. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Precision, recall and F1 score. These scores determine the robustness of classification. It shows 1 for both the classes (shown along the horizontal axis) which means that all the samples belonging to these classes have been classified correctly. In the 'breast-w_test' dataset, all the samples with predicted class '0' (no tumor) have the true class as '0' (precision = 1.0) while not all samples with the predicted class as '1' have the true class as '1' (precision &lt; 1.0) (see precision curve). The recall curve is the opposite of the precision curve. Not all the samples with the true class as '0' are predicted as class '0' (recall &lt; 1.0) and all the samples with the true class as '1' are predicted as class '1' (recall = 1.0) (see recall curve). It is important to analyze the plot for any classification task to verify the accuracy across different classes which provides more information about the balanced or imbalanced accuracy across multiple classes present in the dataset.</figcaption></figure>
+    <figure id="figure-4"><img src="images/precision_recall_f1.png" alt="prf1_scores. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Precision, recall and F1 score. These scores determine the robustness of classification. It shows 1 for both the classes (shown along the horizontal axis) which means that all the samples belonging to these classes have been classified correctly. In the 'breast-w_test' dataset, all the samples with predicted class '0' (no tumor) have the true class as '0' (precision = 1.0) while not all samples with the predicted class as '1' have the true class as '1' (precision &lt; 1.0) (see precision curve). The recall curve is the opposite of the precision curve. Not all the samples with the true class as '0' are predicted as class '0' (recall &lt; 1.0) and all the samples with the true class as '1' are predicted as class '1' (recall = 1.0) (see recall curve). It is important to analyze the plot for any classification task to verify the accuracy across different classes which provides more information about the balanced or imbalanced accuracy across multiple classes present in the dataset.</figcaption></figure>
   </li>
   <li>
     <p><a href="https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5">Receiver operator characteristics (ROC) and area under ROC (AUC)</a>:</p>
 
-    <figure id="figure-5"><img src="images/roc.png" alt="roc_scores. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards the top-left of this plot. For a bad prediction, it is close to the orange line (y = x).</figcaption></figure>
+    <figure id="figure-5"><img src="images/roc.png" alt="roc_scores. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards the top-left of this plot. For a bad prediction, it is close to the orange line (y = x).</figcaption></figure>
   </li>
 </ol>
 
@@ -1020,14 +1237,14 @@ These attributes are stored in the trained model and can be accessed by reading 
 
 <p>For classification, the targets are integers. However, when the targets in a dataset are real numbers, the machine learning task becomes <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a>. Each sample in the dataset has a real-valued output or target. Figure <a href="#figure-6">6</a> shows how a (regression) curve is fitted which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points. The target for a new sample will lie on the curve learned by the regression task. A regressor learns the mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear or non-linear. In this part of the tutorial, we will perform regression on <a href="https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html">body density</a> dataset.</p>
 
-<figure id="figure-6"><img src="images/regression.png" alt="regression. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Regression fit through data points. These data points are the targets of the training dataset. A curve is learned which best explains all these points. The target for a new sample will lie along the curve learned by the regression task.</figcaption></figure>
+<figure id="figure-6"><img src="images/regression.png" alt="regression. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Regression fit through data points. These data points are the targets of the training dataset. A curve is learned which best explains all these points. The target for a new sample will lie along the curve learned by the regression task.</figcaption></figure>
 
 <h2 id="data-upload-1">Data upload</h2>
 
 <p>The dataset contains information about human <a href="https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html">body density</a>. It includes 14 features like underwater body density, age, weight, height, neck circumference and so on. The target is the percent body fat. The aim of the task is to learn a mapping between several body features and fat content inside the human body. Using this learning, the body fat percentage can be predicted using other features. To carry out this task, we will need training and test datasets. Again, we will also prepare another test dataset with targets included to evaluate the regression performance. <code class="language-plaintext highlighter-rouge">body_fat_train</code> dataset is used as the training dataset and <code class="language-plaintext highlighter-rouge">body_fat_test</code> as the test dataset. The dataset <code class="language-plaintext highlighter-rouge">body_fat_test_labels</code> contains the true targets for the test dataset (<code class="language-plaintext highlighter-rouge">body_fat_test</code>).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-1" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial.</li>
@@ -1040,13 +1257,13 @@ https://zenodo.org/record/3248907/files/body_fat_test.tsv
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename datasets to <code class="language-plaintext highlighter-rouge">body_fat_train</code>, <code class="language-plaintext highlighter-rouge">body_fat_test_labels</code> and <code class="language-plaintext highlighter-rouge">body_fat_test</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1058,7 +1275,7 @@ https://zenodo.org/record/3248907/files/body_fat_test.tsv
 the <a href="http://scikit-learn.org/stable/modules/ensemble.html#regression">Gradient boosting regressor</a>. It is an ensemble-based regressor because its prediction is the collective performance of multiple weak learners (e.g. decision trees). It learns features from training dataset (<code class="language-plaintext highlighter-rouge">body_fat_train</code>) and maps all the rows to their respective targets (real numbers). The process of mapping gives a trained model.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-train-a-model" aria-label="hands-on box: Train a model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train a model</div>
+  <div class="box-title hands-on-title" id="hands-on-train-a-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Train a model</div>
 
   <ol>
     <li><strong>Ensemble methods for classification and regression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the regressor:
@@ -1096,12 +1313,12 @@ the <a href="http://scikit-learn.org/stable/modules/ensemble.html#regression">Gr
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>What is learned by the regressor?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Unlike the <strong>Linear support vector</strong> classifier (used for classification in the first part of the tutorial) which learned only two attributes,
 the <strong>Gradient boosting</strong> regressor learns multiple attributes such as <strong>feature_importances_</strong> (weight for each feature/column),
@@ -1117,7 +1334,7 @@ These attributes are used to predict the target for a new sample and are stored 
 <p>After learning on the training dataset, we should evaluate the performance on the test dataset to know whether the algorithm learned general patterns from the training dataset or not. These patterns are used to predict a new sample and a similar accuracy is expected. Similar to the classification task, the trained model is evaluated on <code class="language-plaintext highlighter-rouge">body_fat_test</code> which predicts a target value for each row. The predicted targets are compared to the expected targets to measure the robustness of learning.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-predict-targets-using-the-model" aria-label="hands-on box: Predict targets using the model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict targets using the model</div>
+  <div class="box-title hands-on-title" id="hands-on-predict-targets-using-the-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Predict targets using the model</div>
 
   <ol>
     <li><strong>Ensemble methods for classification and regression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict targets of test dataset using the trained model:
@@ -1141,7 +1358,7 @@ These attributes are used to predict the target for a new sample and are stored 
 <p>We will evaluate the predictions by comparing them to the expected targets.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-and-visualize-the-predictions-1" aria-label="hands-on box: Check and visualize the predictions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check and visualize the predictions</div>
+  <div class="box-title hands-on-title" id="hands-on-check-and-visualize-the-predictions-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check and visualize the predictions</div>
   <ol>
     <li><strong>Plot actual vs predicted curves and residual plots</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualise the predictions:
       <ul>
@@ -1158,17 +1375,17 @@ These attributes are used to predict the target for a new sample and are stored 
   <li>
     <p>True vs predicted targets curves:</p>
 
-    <figure id="figure-7"><img src="images/true_pred_curves.png" alt="true_predicted. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> True vs predicted targets curves. The corresponding points in both these curves should be close to each other for a good regression performance. We can see that the plot shows this behaviour.</figcaption></figure>
+    <figure id="figure-7"><img src="images/true_pred_curves.png" alt="true_predicted. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> True vs predicted targets curves. The corresponding points in both these curves should be close to each other for a good regression performance. We can see that the plot shows this behaviour.</figcaption></figure>
   </li>
   <li>
     <p><a href="https://towardsdatascience.com/everything-you-need-to-know-about-scatter-plots-for-data-visualisation-924144c0bc5">Scatter plot</a> for true vs. predicted targets:</p>
 
-    <figure id="figure-8"><img src="images/true_vs_pred_scatter.png" alt="scatter_plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. The more points are aligned along the x = y line, the better the prediction. The R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0. The RMSE (root mean squared error) is also small (1.32) which also tells us that the predicted targets are close to the true targets.</figcaption></figure>
+    <figure id="figure-8"><img src="images/true_vs_pred_scatter.png" alt="scatter_plot. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. The more points are aligned along the x = y line, the better the prediction. The R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0. The RMSE (root mean squared error) is also small (1.32) which also tells us that the predicted targets are close to the true targets.</figcaption></figure>
   </li>
   <li>
     <p><a href="http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/">Residual plot</a> between residual (predicted - true) and predicted targets:</p>
 
-    <figure id="figure-9"><img src="images/residual_plot.png" alt="residual_plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.</figcaption></figure>
+    <figure id="figure-9"><img src="images/residual_plot.png" alt="residual_plot. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.</figcaption></figure>
   </li>
 </ol>
 
@@ -1180,10 +1397,12 @@ These attributes are used to predict the target for a new sample and are stored 
 <h1 id="conclusion">Conclusion</h1>
 <p>We learned how to perform classification and regression using different datasets and machine learning tools in Galaxy. Moreover, we visualized the results using multiple plots to ascertain the robustness of machine learning tasks. There are many other classifiers and regressors in the machine learning suite which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these classifiers and regressors. The classifiers and regressors have lots of parameters which can be altered while performing the analyses to see if they affect the prediction accuracy. It may be beneficial to perform hyperparameter search to tune these parameters of classifiers and regressors for different datasets. Some data pre-processors can also be used to clean the datasets.</p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>There is two types of machine learning’s supervised approaches, classification and regression.</p>
@@ -1224,33 +1443,9 @@ These attributes are used to predict the target for a new sample and are stored 
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Machine learning: classification and regression (Statistics and machine learning)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Machine learning: classification and regression (Statistics and machine learning)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1268,7 +1463,7 @@ These attributes are used to predict the target for a new sample and are stored 
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1309,7 +1504,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1321,29 +1516,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

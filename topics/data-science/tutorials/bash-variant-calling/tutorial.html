@@ -12,34 +12,34 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/bash-variant-calling/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/bash-variant-calling/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Variant Calling Workflow" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 10:10:13 +0000" />
-<meta name="DC.creator" content="Sofoklis Keisaris" />
-<meta name="DC.creator" content="Fotis E. Psomopoulos" />
-<meta name="DC.creator" content="Saskia Hiltemann" />
-<meta name="DC.creator" content="Helena Rasche" />
-<meta name="DC.creator" content="The Carpentries" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Variant Calling Workflow">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-11-28 10:10:13 +0000">
+<meta name="DC.creator" content="Sofoklis Keisaris">
+<meta name="DC.creator" content="Fotis E. Psomopoulos">
+<meta name="DC.creator" content="Saskia Hiltemann">
+<meta name="DC.creator" content="Helena Rasche">
+<meta name="DC.creator" content="The Carpentries">
 
         
         
         
         
-        <meta name="description" content="These lessons will help you get your feet in data science..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Variant Calling Workflow" />
-        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta name="description" content="These lessons will help you get your feet in data science...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Variant Calling Workflow">
+        <meta property="og:description" content="These lessons will help you get your feet in data science...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -584,10 +584,345 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-data-science">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-11-28 10:10:13 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Variant Calling Workflow",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Variant Calling Workflow' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/bash-variant-calling/tutorial.html",
+  "timeRequired": "PT50M",
+  "keywords": "data-science",
+  "description": "The questions this  addresses are:\n - How do I find sequence variants between my sample and a reference genome?\n\n\nThe objectives are:\n - Understand the steps involved in variant calling.\n - Describe the types of data formats encountered during variant calling.\n - Use command line tools to perform variant calling.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Sofokli5/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Sofokli5/",
+      "name": "Sofoklis Keisaris",
+      "image": "https://avatars.githubusercontent.com/Sofokli5",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4833-4726",
+      "orcid": "https://orcid.org/0000-0002-4833-4726"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "name": "Fotis E. Psomopoulos",
+      "image": "https://avatars.githubusercontent.com/fpsom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0222-4273",
+      "orcid": "https://orcid.org/0000-0002-0222-4273"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "name": "The Carpentries",
+      "image": "https://avatars.githubusercontent.com/carpentries",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Sofokli5/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Sofokli5/",
+      "name": "Sofoklis Keisaris",
+      "image": "https://avatars.githubusercontent.com/Sofokli5",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4833-4726",
+      "orcid": "https://orcid.org/0000-0002-4833-4726"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "name": "Fotis E. Psomopoulos",
+      "image": "https://avatars.githubusercontent.com/fpsom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0222-4273",
+      "orcid": "https://orcid.org/0000-0002-0222-4273"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "name": "The Carpentries",
+      "image": "https://avatars.githubusercontent.com/carpentries",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-data-science">
     <h1 data-toc-skip>Variant Calling Workflow</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -598,9 +933,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -645,6 +980,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -655,19 +991,20 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <p>In this tutorial we are working with files from a long-term evolution study of an <em>E. coli</em> population (designated Ara-3). We will perform variant calling to see how the population changed over time. We care how this population changed relative to the original population, <em>E. coli</em> strain REL606. Therefore, we will align each of our samples to the <em>E. coli</em> REL606 reference genome, and see what differences exist in our reads versus the genome.</p>
 
 <p>The whole proccess is designed to be run in RStudio as an Interactive Tool, directly in Galaxy.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
   <p>This tutorial is significantly based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://datacarpentry.org/wrangling-genomics/">“Data Wrangling and Processing for Genomics”</a> lesson</p>
 
 </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -685,10 +1022,10 @@
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-rstudio" aria-label="hands_on box: Launch RStudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</div>   <p>Depending on which server you are using, you may be able to run RStudio directly in Galaxy. If that is not available, RStudio Cloud can be an alternative.</p>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-in-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-in-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio in Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio in Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently RStudio in Galaxy is only available on <a href="https://usegalaxy.eu">UseGalaxy.eu</a> and <a href="https://usegalaxy.org">UseGalaxy.org</a></p>   <ol>     <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here to launch RStudio</a></li>     <li>Click Run Tool</li>     <li>The tool will start running and will stay running permanently</li>     <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>   </ol> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-cloud-if-not-available-on-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-cloud-if-not-available-on-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio Cloud if not available on Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio Cloud if not available on Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If RStudio is not available on the Galaxy instance:</p>   <ol>     <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>     <li>Create a new project</li>   </ol> </blockquote> </blockquote>
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-rstudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Launch RStudio</div>   <p>Depending on which server you are using, you may be able to run RStudio directly in Galaxy. If that is not available, RStudio Cloud can be an alternative.</p>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-in-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-in-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Launch RStudio in Galaxy<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently RStudio in Galaxy is only available on <a href="https://usegalaxy.eu">UseGalaxy.eu</a> and <a href="https://usegalaxy.org">UseGalaxy.org</a></p>   <ol>     <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here to launch RStudio</a></li>     <li>Click Run Tool</li>     <li>The tool will start running and will stay running permanently</li>     <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>   </ol> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-cloud-if-not-available-on-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-cloud-if-not-available-on-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Launch RStudio Cloud if not available on Galaxy<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If RStudio is not available on the Galaxy instance:</p>   <ol>     <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>     <li>Create a new project</li>   </ol> </blockquote> </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-software-to-use" aria-label="hands-on box: Software to use"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Software to use</div>
+  <div class="box-title hands-on-title" id="hands-on-software-to-use"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Software to use</div>
 
   <p>The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself.
 We go to “Tools” and pick the “Shell…” option and we are good to go. Our workspace is the left, terminal window that just opened.</p>
@@ -696,7 +1033,7 @@ We go to “Tools” and pick the “Shell…” option and we are good to go. O
   <p>Fortunately, <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-environment-and-packages" aria-label="code-in box: Environment and Packages"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Environment and Packages</div>
+    <div class="box-title code-in-title" id="code-in-environment-and-packages"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Environment and Packages</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>conda create <span class="nt">-n</span> name_of_your_env bwa samtools bcftools
 <span class="nv">$ </span>conda activate name_of_your_env
 </code></pre></div>    </div>
@@ -767,7 +1104,7 @@ sequences against a large reference genome.</p>
 <h1 id="setting-up">Setting up</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-download-genome" aria-label="hands-on box: Download Genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Download Genome</div>
+  <div class="box-title hands-on-title" id="hands-on-download-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Download Genome</div>
 
   <p>First we download the reference genome for <em>E. coli</em> REL606. Although we could copy or move the file with <code class="language-plaintext highlighter-rouge">cp</code> or <code class="language-plaintext highlighter-rouge">mv</code>, most genomics workflows begin with a download step, so we will practice that here.</p>
 
@@ -781,13 +1118,13 @@ sequences against a large reference genome.</p>
   </blockquote>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <p>We saved this file as <code class="language-plaintext highlighter-rouge">data/ref_genome/ecoli_rel606.fasta.gz</code> and then decompressed it.
 What is the real name of the genome?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">head </span>data/ref_genome/ecoli_rel606.fasta
 </code></pre></div>      </div>
@@ -800,7 +1137,7 @@ Keep this chromosome name (<code class="language-plaintext highlighter-rouge">CP
   <p>We will also download a set of trimmed FASTQ files to work with that will enable us to run our variant calling workflow quite quickly.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-getting-easy-to-work-fastq-files" aria-label="code-in box: Getting easy-to-work FASTQ files"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Getting easy-to-work FASTQ files</div>
+    <div class="box-title code-in-title" id="code-in-getting-easy-to-work-fastq-files"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Getting easy-to-work FASTQ files</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">-L</span> <span class="nt">-o</span> sub.tar.gz https://ndownloader.figshare.com/files/14418248
 <span class="nv">$ </span><span class="nb">tar </span>xvf sub.tar.gz
 <span class="nv">$ </span><span class="nb">mv </span>sub/ ~/dc_workshop/data/trimmed_fastq_small
@@ -812,18 +1149,18 @@ Keep this chromosome name (<code class="language-plaintext highlighter-rouge">CP
   </blockquote>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-create-result-directories" aria-label="code-in box: Create result directories"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Create result directories</div>
+    <div class="box-title code-in-title" id="code-in-create-result-directories"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Create result directories</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> results/sam results/bam results/bcf results/vcf
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-index-the-reference-genome" aria-label="hands-on box: Index the reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Index the reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-index-the-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Index the reference genome</div>
   <p>Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-indexing-with-bwa" aria-label="code-in box: Indexing with `bwa`"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Indexing with `bwa`</div>
+    <div class="box-title code-in-title" id="code-in-indexing-with-bwa"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Indexing with `bwa`</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bwa index data/ref_genome/ecoli_rel606.fasta
 </code></pre></div>    </div>
   </blockquote>
@@ -831,7 +1168,7 @@ Keep this chromosome name (<code class="language-plaintext highlighter-rouge">CP
   <p>While the index is created, you will see output that looks something like this:</p>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+    <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[bwa_index] Pack FASTA... 0.04 sec
 [bwa_index] Construct BWT for the packed sequence...
 [bwa_index] 1.05 seconds elapse.
@@ -847,7 +1184,7 @@ Keep this chromosome name (<code class="language-plaintext highlighter-rouge">CP
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-align-reads-to-reference-genome" aria-label="hands-on box: Align reads to reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Align reads to reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-align-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Align reads to reference genome</div>
 
   <p>The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an
 aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it
@@ -867,13 +1204,13 @@ samples in our dataset (<code class="language-plaintext highlighter-rouge">SRR25
 iterating this whole process on all of our sample files.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-aligning-with-bwa" aria-label="code-in box: Aligning with bwa"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Aligning with bwa</div>
+    <div class="box-title code-in-title" id="code-in-aligning-with-bwa"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Aligning with bwa</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq <span class="o">&gt;</span> results/sam/SRR2584866.aligned.sam
 </code></pre></div>    </div>
   </blockquote>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-1" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+    <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[M::bwa_idx_load_from_disk] read 0 ALT contigs
 [M::process] read 77446 sequences (10000033 bp)...
 [M::process] read 77296 sequences (10000182 bp)...
@@ -912,16 +1249,16 @@ displayed below with the different fields highlighted.</p>
 <p>Image from <a href="https://datacarpentry.org/wrangling-genomics/">“Data Wrangling and Processing for Genomics”</a></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-sam-to-bam" aria-label="hands-on box: SAM to BAM"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: SAM to BAM</div>
+  <div class="box-title hands-on-title" id="hands-on-sam-to-bam"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: SAM to BAM</div>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: bash</div>
+    <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: bash</div>
     <p>We will convert the SAM file to BAM format using the <code class="language-plaintext highlighter-rouge">samtools</code> program with the <code class="language-plaintext highlighter-rouge">view</code> command and tell this command that the input is in SAM format (<code class="language-plaintext highlighter-rouge">-S</code>) and to output BAM format (<code class="language-plaintext highlighter-rouge">-b</code>):</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools view <span class="nt">-S</span> <span class="nt">-b</span> results/sam/SRR2584866.aligned.sam <span class="o">&gt;</span> results/bam/SRR2584866.aligned.bam
 </code></pre></div>    </div>
   </blockquote>
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-2" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+    <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[samopen] SAM header is present: 1 sequences.
 </code></pre></div>    </div>
   </blockquote>
@@ -929,18 +1266,18 @@ displayed below with the different fields highlighted.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-sort-bam-file-by-coordinates" aria-label="hands-on box: Sort BAM file by coordinates"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Sort BAM file by coordinates</div>
+  <div class="box-title hands-on-title" id="hands-on-sort-bam-file-by-coordinates"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Sort BAM file by coordinates</div>
 
   <p>Next we sort the BAM file using the <code class="language-plaintext highlighter-rouge">sort</code> command from <code class="language-plaintext highlighter-rouge">samtools</code>. <code class="language-plaintext highlighter-rouge">-o</code> tells the command where to write the output.</p>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-sort-command" aria-label="code-in box: `sort` command"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: `sort` command</div>
+    <div class="box-title code-in-title" id="code-in-sort-command"><i class="far fa-keyboard" aria-hidden="true"></i> Input: `sort` command</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools <span class="nb">sort</span> <span class="nt">-o</span> results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam
 </code></pre></div>    </div>
   </blockquote>
 
   <p>Our files are pretty small, so we will not see this output. If you run the workflow with larger files, you will see something like this:</p>
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-3" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+    <div class="box-title code-out-title" id="code-out-3"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[bam_sort_core] merging from 2 files...
 </code></pre></div>    </div>
@@ -951,7 +1288,7 @@ displayed below with the different fields highlighted.</p>
   <p>You can use samtools to learn more about this bam file as well.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-flagstat-command" aria-label="code-in box: `flagstat` command"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: `flagstat` command</div>
+    <div class="box-title code-in-title" id="code-in-flagstat-command"><i class="far fa-keyboard" aria-hidden="true"></i> Input: `flagstat` command</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
 </code></pre></div>    </div>
   </blockquote>
@@ -959,7 +1296,7 @@ displayed below with the different fields highlighted.</p>
   <p>This will give you the following statistics about your sorted bam file:</p>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-4" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+    <div class="box-title code-out-title" id="code-out-4"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>351169 + 0 in total (QC-passed reads + QC-failed reads)
 0 + 0 secondary
 1169 + 0 supplementary
@@ -990,19 +1327,19 @@ variants.</p>
 <p>Image from <a href="https://datacarpentry.org/wrangling-genomics/">“Data Wrangling and Processing for Genomics”</a></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-step-1-calculate-the-read-coverage-of-positions-in-the-genome" aria-label="hands-on box: Step 1: Calculate the read coverage of positions in the genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Step 1: Calculate the read coverage of positions in the genome</div>
+  <div class="box-title hands-on-title" id="hands-on-step-1-calculate-the-read-coverage-of-positions-in-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Step 1: Calculate the read coverage of positions in the genome</div>
 
   <p>Do the first pass on variant calling by counting read coverage with
 <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools</a>. We will
 use the command <code class="language-plaintext highlighter-rouge">mpileup</code>. The flag <code class="language-plaintext highlighter-rouge">-O b</code> tells bcftools to generate a
 bcf format output file, <code class="language-plaintext highlighter-rouge">-o</code> specifies where to write the output file, and <code class="language-plaintext highlighter-rouge">-f</code> flags the path to the reference genome:</p>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-mpileup-command" aria-label="code-in box: `mpileup` command"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: `mpileup` command</div>
+    <div class="box-title code-in-title" id="code-in-mpileup-command"><i class="far fa-keyboard" aria-hidden="true"></i> Input: `mpileup` command</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bcftools mpileup <span class="nt">-O</span> b <span class="nt">-o</span> results/bcf/SRR2584866_raw.bcf <span class="nt">-f</span> data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
 </code></pre></div>    </div>
   </blockquote>
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-5" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+    <div class="box-title code-out-title" id="code-out-5"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[mpileup] 1 samples in 1 input files
 </code></pre></div>    </div>
   </blockquote>
@@ -1012,11 +1349,11 @@ bcf format output file, <code class="language-plaintext highlighter-rouge">-o</c
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-step-2-detect-the-single-nucleotide-variants-snvs" aria-label="hands-on box: Step 2: Detect the single nucleotide variants (SNVs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Step 2: Detect the single nucleotide variants (SNVs</div>
+  <div class="box-title hands-on-title" id="hands-on-step-2-detect-the-single-nucleotide-variants-snvs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Step 2: Detect the single nucleotide variants (SNVs</div>
 
   <p>Identify SNVs using bcftools <code class="language-plaintext highlighter-rouge">call</code>. We have to specify ploidy with the flag <code class="language-plaintext highlighter-rouge">--ploidy</code>, which is one for the haploid <em>E. coli</em>. <code class="language-plaintext highlighter-rouge">-m</code> allows for multiallelic and rare-variant calling, <code class="language-plaintext highlighter-rouge">-v</code> tells the program to output variant sites only (not every site in the genome), and <code class="language-plaintext highlighter-rouge">-o</code> specifies where to write the output file:</p>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-call-command" aria-label="code-in box: `call` command"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: `call` command</div>
+    <div class="box-title code-in-title" id="code-in-call-command"><i class="far fa-keyboard" aria-hidden="true"></i> Input: `call` command</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bcftools call <span class="nt">--ploidy</span> 1 <span class="nt">-m</span> <span class="nt">-v</span> <span class="nt">-o</span> results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf
 </code></pre></div>    </div>
   </blockquote>
@@ -1024,11 +1361,11 @@ bcf format output file, <code class="language-plaintext highlighter-rouge">-o</c
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf" aria-label="hands-on box: Step 3: Filter and report the SNV variants in variant calling format (VCF"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Step 3: Filter and report the SNV variants in variant calling format (VCF</div>
+  <div class="box-title hands-on-title" id="hands-on-step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Step 3: Filter and report the SNV variants in variant calling format (VCF</div>
 
   <p>Filter the SNVs for the final output in VCF format, using <code class="language-plaintext highlighter-rouge">vcfutils.pl</code>:</p>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-filtering-with-vcfutils-pl-command" aria-label="code-in box: Filtering with `vcfutils.pl` command"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Filtering with `vcfutils.pl` command</div>
+    <div class="box-title code-in-title" id="code-in-filtering-with-vcfutils-pl-command"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Filtering with `vcfutils.pl` command</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  <span class="o">&gt;</span> results/vcf/SRR2584866_final_variants.vcf
 </code></pre></div>    </div>
   </blockquote>
@@ -1036,7 +1373,7 @@ bcf format output file, <code class="language-plaintext highlighter-rouge">-o</c
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-explore-the-vcf-format" aria-label="hands-on box: Explore the VCF format:"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Explore the VCF format:</div>
+  <div class="box-title hands-on-title" id="hands-on-explore-the-vcf-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Explore the VCF format:</div>
 
   <blockquote class="code-in">
     <p><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span></p>
@@ -1200,12 +1537,12 @@ However, in reality we need to filter on multiple other metrics.</p>
 to learn more about the VCF file format.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Use the <code class="language-plaintext highlighter-rouge">grep</code> and <code class="language-plaintext highlighter-rouge">wc</code> commands you have learned to assess how many variants are in the vcf file.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <blockquote class="code-in">
       <p><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span></p>
@@ -1223,7 +1560,7 @@ to learn more about the VCF file format.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assess-the-alignment-visualization-optional-step" aria-label="hands-on box: Assess the alignment (visualization) - optional step"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assess the alignment (visualization) - optional step</div>
+  <div class="box-title hands-on-title" id="hands-on-assess-the-alignment-visualization-optional-step"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assess the alignment (visualization) - optional step</div>
 
   <p>It is often instructive to look at your data in a genome browser. Visualization will allow you to get a “feel” for
 the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you
@@ -1233,7 +1570,7 @@ Institute’s Integrative Genomics Viewer (IGV) which requires
 software installation and transfer of files.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-in-order-for-us-to-visualize-the-alignment-files-we-will-need-to-index-the-bam-file-using-samtools" aria-label="code-in box:  In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input:  In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:</div>
+    <div class="box-title code-in-title" id="code-in-in-order-for-us-to-visualize-the-alignment-files-we-will-need-to-index-the-bam-file-using-samtools"><i class="far fa-keyboard" aria-hidden="true"></i> Input:  In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:</div>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools index results/bam/SRR2584866.aligned.sorted.bam
 </code></pre></div>    </div>
@@ -1248,14 +1585,14 @@ It uses different colors to display mapping quality or base quality, subjected t
   <p>In order to visualize our mapped reads, we use <code class="language-plaintext highlighter-rouge">tview</code>, giving it the sorted bam file and the reference file:</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-visualize-with-tview" aria-label="code-in box: Visualize with `tview`"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Visualize with `tview`</div>
+    <div class="box-title code-in-title" id="code-in-visualize-with-tview"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Visualize with `tview`</div>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools tview results/bam/SRR2584866.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
 </code></pre></div>    </div>
   </blockquote>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-6" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+    <div class="box-title code-out-title" id="code-out-6"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1         11        21        31        41        51        61        71        81        91        101       111       121
 AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTGGTTACCTGCCGTGAGTAAATTAAAATTTTATTGACTTAGGTCACTAAATAC
 ..................................................................................................................................
@@ -1295,13 +1632,13 @@ this box, type the name of the “chromosome” followed by a colon and the posi
 (e.g. for this sample, type <code class="language-plaintext highlighter-rouge">CP000819.1:50</code> to view the 50th base. Type <code class="language-plaintext highlighter-rouge">Ctrl^C</code> or <code class="language-plaintext highlighter-rouge">q</code> to exit <code class="language-plaintext highlighter-rouge">tview</code>.</p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <p>Visualize the alignment of the reads for our <code class="language-plaintext highlighter-rouge">SRR2584866</code> sample. What variant is present at
 position 4377265? What is the canonical nucleotide in that position?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools tview ~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 </code></pre></div>      </div>
@@ -1354,17 +1691,19 @@ Use <a href="http://software.broadinstitute.org/software/igv/AlignmentData">this
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-bwa-alignment-options"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-bwa-alignment-options-contents" aria-expanded="true" aria-label="Toggle tip box: BWA alignment options"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: BWA alignment options<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-bwa-alignment-options"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-bwa-alignment-options" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: BWA alignment options<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence
 reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such
 as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it
 is faster and more accurate.</p>
 </blockquote>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Bioinformatic command line tools are collections of commands that can be used to carry out bioinformatic analyses.</p>
@@ -1399,33 +1738,9 @@ is faster and more accurate.</p>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Variant Calling Workflow (Foundations of Data Science)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Variant Calling Workflow (Foundations of Data Science)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1443,7 +1758,7 @@ is faster and more accurate.</p>
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1484,7 +1799,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1496,29 +1811,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

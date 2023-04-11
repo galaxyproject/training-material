@@ -12,32 +12,32 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/text-mining_simtext/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/text-mining_simtext/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Text-mining with the SimText toolset" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
-<meta name="DC.creator" content="Marie Gramm" />
-<meta name="DC.creator" content="Dennis Lal group" />
-<meta name="DC.creator" content="Daniel Blankenberg" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Text-mining with the SimText toolset">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.creator" content="Marie Gramm">
+<meta name="DC.creator" content="Dennis Lal group">
+<meta name="DC.creator" content="Daniel Blankenberg">
 
         
         
         
         
-        <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Text-mining with the SimText toolset" />
-        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta name="description" content="Statistical Analyses for omics data and machine learning ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Text-mining with the SimText toolset">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -505,10 +505,268 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-statistics">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-18 14:23:35 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Text-mining with the SimText toolset",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Text-mining with the SimText toolset' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/text-mining_simtext/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "statistics, interactive-tools",
+  "description": "The questions this  addresses are:\n - How can I automatically collect PubMed data for a set of biomedical entities such as genes?\n - How can I analyze similarities among biomedical entities based on PubMed data on large-scale?\n\n\nThe objectives are:\n - Learn how to use the SimText toolset\n - Upload a table with biomedical entities in Galaxy\n - Retrieve PubMed data for each of the biomedical entities\n - Extract biomedical terms from the PubMed data for each biomedical entity\n - Analyze the similarity among the biomedical entities based on the extracted data in an interactive app\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mgramm1/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mgramm1/",
+      "name": "Marie Gramm",
+      "image": "https://avatars.githubusercontent.com/mgramm1",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4217-5277",
+      "orcid": "https://orcid.org/0000-0002-4217-5277"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dlalgroup/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dlalgroup/",
+      "name": "Dennis Lal group",
+      "image": "https://avatars.githubusercontent.com/dlalgroup",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "name": "Daniel Blankenberg",
+      "image": "https://avatars.githubusercontent.com/blankenberg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6833-9049",
+      "orcid": "https://orcid.org/0000-0002-6833-9049"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mgramm1/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mgramm1/",
+      "name": "Marie Gramm",
+      "image": "https://avatars.githubusercontent.com/mgramm1",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4217-5277",
+      "orcid": "https://orcid.org/0000-0002-4217-5277"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dlalgroup/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dlalgroup/",
+      "name": "Dennis Lal group",
+      "image": "https://avatars.githubusercontent.com/dlalgroup",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "name": "Daniel Blankenberg",
+      "image": "https://avatars.githubusercontent.com/blankenberg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6833-9049",
+      "orcid": "https://orcid.org/0000-0002-6833-9049"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-statistics">
     <h1 data-toc-skip>Text-mining with the SimText toolset</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -519,9 +777,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -600,7 +858,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/text-mining_simtext/workflows/" title="Workflows" alt="Text-mining with the SimText toolset workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/text-mining_simtext/workflows/" title="Text-mining with the SimText toolset workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -614,13 +872,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/text-mining_simtext/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/text-mining_simtext/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -646,7 +901,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -787,6 +1042,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
             UseGalaxy.org.au
         </a>
@@ -816,6 +1073,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -826,6 +1084,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>Literature exploration in <a href="https://pubmed.ncbi.nlm.nih.gov/">PubMed</a> on a large number of biomedical entities (e.g., genes, diseases, or experiments) can be time-consuming and challenging, especially when assessing associations between entities. Here, we use SimText, a toolset for literature research that allows you to collect text from PubMed for any given set of biomedical entities, extract associated terms, and analyze similarities among them and their key characteristics in an interactive tool.</p>
@@ -834,10 +1093,10 @@
 
 <p>The workflow combines 3 main steps, starting with the retrieval of PubMed data for each of the genes. We then use the PubMed data from each gene to extract related scientific terms that are all combined in one large binary matrix. Finally, we explore the generated data in an interactive tool that performs different unsupervised machine-learning algorithms to analyze the similarities/ the grouping among the genes based on their extracted terms from the literature.</p>
 
-<figure id="figure-1"><img src="images/simtext_overview_tutorial.png" alt="Tutorial overview. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Schematic presentation of the workflow.</figcaption></figure>
+<figure id="figure-1"><img src="images/simtext_overview_tutorial.png" alt="Tutorial overview. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Schematic presentation of the workflow.</figcaption></figure>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -857,14 +1116,14 @@
 <p>The input data is a simple table with the genes we want to analyze as well as their pre-existing grouping (the grouping is required later on to compare it to our text-based gene grouping). In order for the tools to recognize the column with the biomedical entities of interest, our 95 genes, the column name should start with “ID_”, and for the grouping variable with “GROUPING_”.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the input file from <a href="https://zenodo.org/api/files/b7b2b1d8-bb18-423d-9fe4-3bce858265ac/clingen_data">Zenodo</a></p>
@@ -873,7 +1132,7 @@
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -884,24 +1143,24 @@
 <p>In the first step we collect PubMed data for each of the genes. The genes are used as search queries to download a defined number of PMIDs, here up to 500, from PubMed. The PMIDs are saved in additional columns of our input data.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-ncbi-api-key-optional"><button class="gtn-boxify-button details" type="button" aria-controls="details-ncbi-api-key-optional-contents" aria-expanded="true" aria-label="Toggle details box: NCBI API key (optional)"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: NCBI API key (optional)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-ncbi-api-key-optional"><button class="gtn-boxify-button details" type="button" aria-controls="details-ncbi-api-key-optional" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: NCBI API key (optional)<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>To speed up the the download of PubMed data users can obtain an API key from the settings page of their NCBI account (to create an account, visit http://www.ncbi.nlm.nih.gov/account/) and add it to the Galaxy user-preferences (User → Preferences → Manage Information).</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-step-1-pubmed-query-tool" aria-label="hands-on box: Step 1: PubMed query tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Step 1: PubMed query tool</div>
+  <div class="box-title hands-on-title" id="hands-on-step-1-pubmed-query-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Step 1: PubMed query tool</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pubmed_by_queries/pubmed_by_queries/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pubmed_by_queries/pubmed_by_queries/0.0.2"><strong>PubMed query</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pubmed_by_queries/pubmed_by_queries/0.0.2</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pubmed_by_queries/pubmed_by_queries/0.0.2" title="PubMed query tool"><strong>PubMed query</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pubmed_by_queries/pubmed_by_queries/0.0.2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with query terms”</em>: Input dataset</li>
         <li><em>“Number of PMIDs (or abstracts) to save per ID”</em>: <code class="language-plaintext highlighter-rouge">500</code></li>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
         <p>The tool is also able to save the abstracts as text instead of their PMIDs. This feature is used for another type of analysis (see <span class="citation"><a href="#gramm2020">Gramm <i>et al.</i> 2020</a></span>), or can be used if the user wants to use the tool independent from a workflow to retrieve many abstract texts at once. For the next step of our example in this tutorial, only PMIDs are required.</p>
       </blockquote>
@@ -915,10 +1174,10 @@
 <p>Next, we extract the 100 most frequent ‘Disease’ and ‘Gene’ terms (PubTator annotations) from the PubMed data. All genes with their 100 associated terms are then combined in one large binary matrix. Each row represents a gene and each column one of the extracted terms. This matrix is later used to find similar genes, i.e. genes that have many common terms associated with them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extraction-of-pubtator-annotations" aria-label="hands-on box: Extraction of PubTator annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extraction of PubTator annotations</div>
+  <div class="box-title hands-on-title" id="hands-on-extraction-of-pubtator-annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extraction of PubTator annotations</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pmids_to_pubtator_matrix/pmids_to_pubtator_matrix/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pmids_to_pubtator_matrix/pmids_to_pubtator_matrix/0.0.2"><strong>PMIDs to PubTator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pmids_to_pubtator_matrix/pmids_to_pubtator_matrix/0.0.2</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pmids_to_pubtator_matrix/pmids_to_pubtator_matrix/0.0.2" title="PMIDs to PubTator tool"><strong>PMIDs to PubTator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pmids_to_pubtator_matrix/pmids_to_pubtator_matrix/0.0.2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with PMID IDs”</em>: output of <strong>PubMed query</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“categories”</em>: <code class="language-plaintext highlighter-rouge">Genes Diseases</code></li>
@@ -926,7 +1185,7 @@
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-pubtator" aria-label="comment box: PubTator"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: PubTator</div>
+        <div class="box-title comment-title" id="comment-pubtator"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: PubTator</div>
         <p>PubTator annotates terms of the following categories: Gene, Disease, Mutation, Species and Chemical.
 In this example we chose to only extract gene and disease terms but you can also select other categories if you are interested in those.</p>
 
@@ -949,10 +1208,10 @@ The following features are generated:</p>
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-explore-data-interactively" aria-label="hands-on box: Explore data interactively"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Explore data interactively</div>
+  <div class="box-title hands-on-title" id="hands-on-explore-data-interactively"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Explore data interactively</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="interactive_tool_simtext_app" title="Tested with interactive_tool_simtext_app"><strong>interactive_tool_simtext_app</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_simtext_app</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="interactive_tool_simtext_app" title="interactive_tool_simtext_app tool"><strong>interactive_tool_simtext_app</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_simtext_app</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: initial input file with genes and pre-existing grouping</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix file”</em>: output of <strong>PMIDs to PubTator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -962,22 +1221,24 @@ The following features are generated:</p>
       <p>Open interactive tool</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-contents" aria-expanded="true" aria-label="Toggle tip box: Open interactive tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Open interactive tool<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the SimText app to be running (Job Info)</li>   <li>Click on SimText app</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Open interactive tool<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the SimText app to be running (Job Info)</li>   <li>Click on SimText app</li> </ol> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<figure id="figure-2"><img src="images/simtextapp_wordcloud.gif" alt="Wordcloud. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Left: For all genes a wordcloud with their associated terms cen be generated. Right: In the dimension reduction plot the similarities among the genes can be explored. The colouring corresponds to the pre-existing disorder categories.</figcaption></figure>
-<figure id="figure-3"><img src="images/simtextapp_clustering.gif" alt="Clustering. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Hierarchical clustering of the matrix. Different clustering methods can be selected and the adjusted rand index be calculated.</figcaption></figure>
+<figure id="figure-2"><img src="images/simtextapp_wordcloud.gif" alt="Wordcloud. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Left: For all genes a wordcloud with their associated terms cen be generated. Right: In the dimension reduction plot the similarities among the genes can be explored. The colouring corresponds to the pre-existing disorder categories.</figcaption></figure>
+<figure id="figure-3"><img src="images/simtextapp_clustering.gif" alt="Clustering. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Hierarchical clustering of the matrix. Different clustering methods can be selected and the adjusted rand index be calculated.</figcaption></figure>
 
 <h1 id="conclusion">Conclusion</h1>
 
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>The SimText toolset allows large-scale literature analysis of a set of biomedical entities such as genes or diseases</p>
@@ -1015,33 +1276,9 @@ The following features are generated:</p>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Text-mining with the SimText toolset (Statistics and machine learning)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Text-mining with the SimText toolset (Statistics and machine learning)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1059,7 +1296,7 @@ The following features are generated:</p>
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1100,7 +1337,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1112,29 +1349,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

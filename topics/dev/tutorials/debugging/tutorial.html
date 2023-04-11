@@ -12,32 +12,32 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Debugging Galaxy" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 10:10:13 +0000" />
-<meta name="DC.creator" content="Assunta DeSanto" />
-<meta name="DC.creator" content="John Davis" />
-<meta name="DC.creator" content="John Chilton" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Debugging Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-11-28 10:10:13 +0000">
+<meta name="DC.creator" content="Assunta DeSanto">
+<meta name="DC.creator" content="John Davis">
+<meta name="DC.creator" content="John Chilton">
 
         
         
         
         
-        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Debugging Galaxy" />
-        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Debugging Galaxy">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -510,10 +510,273 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-dev">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-11-28 10:10:13 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Debugging Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Debugging Galaxy' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html",
+  "timeRequired": "PT4H",
+  "keywords": "dev",
+  "description": "The questions this  addresses are:\n - How do I debug Galaxy?\n\n\nThe objectives are:\n - Fix a broken branch\n - Interpret the results of failed tests on GitHub\n - Run individual tests locally\n - Fix errors identified by failing tests\n - Debug simple runtime errors using the Python debugger\n - Write tests exposing the identified bug\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    "Familiarity with basic Git commands",
+    "Basic knowledge of Python and JavaScript",
+    "Mac OS or Linux that can run Galaxy & your favorite IDE or editor",
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture/slides.html",
+      "name": "Galaxy Code Architecture",
+      "description": "Slides for 'Galaxy Code Architecture' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/assuntad23/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/assuntad23/",
+      "name": "Assunta DeSanto",
+      "image": "https://avatars.githubusercontent.com/assuntad23",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/",
+      "name": "John Davis",
+      "image": "https://avatars.githubusercontent.com/jdavcs",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1363-1245",
+      "orcid": "https://orcid.org/0000-0002-1363-1245"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "name": "John Chilton",
+      "image": "https://avatars.githubusercontent.com/jmchilton",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6794-0756",
+      "orcid": "https://orcid.org/0000-0002-6794-0756"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/assuntad23/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/assuntad23/",
+      "name": "Assunta DeSanto",
+      "image": "https://avatars.githubusercontent.com/assuntad23",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/",
+      "name": "John Davis",
+      "image": "https://avatars.githubusercontent.com/jdavcs",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1363-1245",
+      "orcid": "https://orcid.org/0000-0002-1363-1245"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "name": "John Chilton",
+      "image": "https://avatars.githubusercontent.com/jmchilton",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6794-0756",
+      "orcid": "https://orcid.org/0000-0002-6794-0756"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-dev">
     <h1 data-toc-skip>Debugging Galaxy</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -524,9 +787,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -676,13 +939,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/dev/tutorials/debugging/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/dev/tutorials/debugging/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -701,7 +961,10 @@
 
 
   
-  <li class="btn btn-default supporting_material">
+<!-- GTN Video Library true -->
+  
+<li class="btn btn-default supporting_material">
+  
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
         <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
     </a>
@@ -724,7 +987,9 @@
         </li>
         
     </ul>
-   </li>
+  
+</li>
+  
    
 
 
@@ -733,7 +998,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -761,6 +1026,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -771,6 +1037,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>In this tutorial we will demonstrate how to find and fix common types of bugs you may encounter as a contributor to Galaxy. We will step you through the process of finding and fixing a bug - from locating specific errors in the logs of Galaxy’s GitHub Actions, to identifying their cause, developing a solution and committing your edits</p>
@@ -778,7 +1045,7 @@
 <p>With the skills from this tutorial, it is our hope that you will feel more prepared to develop solutions for Galaxy and more confidently navigate any obstacles along the way.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
@@ -816,7 +1083,7 @@
 <h2 id="contributing-to-galaxy">Contributing to Galaxy</h2>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-contribute-to-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-contribute-to-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: How to Contribute to Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to Contribute to Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To contribute to galaxy, a GitHub account is required. Changes are proposed via a <a href="https://docs.github.com/en/github/collaborating-with-pull-requests">pull request</a>. This allows the project maintainers to review the changes and suggest improvements.</p>   <p>The general steps are as follows:</p>   <ol>   <li>Fork the Galaxy repository</li>   <li>Clone your fork</li>   <li>Make changes in a new branch</li>   <li>Commit your changes, push branch to your fork</li>   <li>Open a pull request for this branch in the upstream Galaxy repository</li> </ol>   <blockquote class="details">   <div class="box-title details-title" id="details-git-github-and-galaxy-core"><button class="gtn-boxify-button details" type="button" aria-controls="details-git-github-and-galaxy-core-contents" aria-expanded="true" aria-label="Toggle details box: Git, Github, and Galaxy Core"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Git, Github, and Galaxy Core<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>For a lot more information about Git branching and managing a repository on Github,  see the <a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a> tutorial.</p>   <p>The <a href="/training-material/topics/dev/tutorials/architecture/slides.html">Galaxy Core Architecture slides</a> have a lot of important Galaxy core-related information related to branches,  project management, and contributing to Galaxy - under the Project Management section of the slides.</p> </blockquote> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-contribute-to-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-contribute-to-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: How to Contribute to Galaxy<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To contribute to galaxy, a GitHub account is required. Changes are proposed via a <a href="https://docs.github.com/en/github/collaborating-with-pull-requests">pull request</a>. This allows the project maintainers to review the changes and suggest improvements.</p>   <p>The general steps are as follows:</p>   <ol>   <li>Fork the Galaxy repository</li>   <li>Clone your fork</li>   <li>Make changes in a new branch</li>   <li>Commit your changes, push branch to your fork</li>   <li>Open a pull request for this branch in the upstream Galaxy repository</li> </ol>   <blockquote class="details">   <div class="box-title details-title" id="details-git-github-and-galaxy-core"><button class="gtn-boxify-button details" type="button" aria-controls="details-git-github-and-galaxy-core" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Git, Github, and Galaxy Core<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>For a lot more information about Git branching and managing a repository on Github,  see the <a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a> tutorial.</p>   <p>The <a href="/training-material/topics/dev/tutorials/architecture/slides.html">Galaxy Core Architecture slides</a> have a lot of important Galaxy core-related information related to branches,  project management, and contributing to Galaxy - under the Project Management section of the slides.</p> </blockquote> </blockquote>
 
 <p>In this tutorial, instead of cloning Galaxy’s default branch, we will clone a branch that has been created for this tutorial and contains several bugs that you’ll need to identify and fix. Also, we won’t be opening a pull request in the upstream Galaxy repository.</p>
 
@@ -825,7 +1092,7 @@
 <p>Good news! All of the failing tests are on the same Galaxy branch! That means you only need to download and work off of one branch. The downside is that this is one buggy branch with issues all over the place. We have no doubts that you can solve them though!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setup-your-local-galaxy-instance" aria-label="hands-on box: Setup your local Galaxy instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setup your local Galaxy instance</div>
+  <div class="box-title hands-on-title" id="hands-on-setup-your-local-galaxy-instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setup your local Galaxy instance</div>
 
   <ol>
     <li>Use GitHub UI to fork Galaxy’s repository at <code class="language-plaintext highlighter-rouge">galaxyproject/galaxy</code>.</li>
@@ -833,7 +1100,7 @@
       <p>Clone your forked repository to a local path, further referred to as <code class="language-plaintext highlighter-rouge">GALAXY_ROOT</code> and <code class="language-plaintext highlighter-rouge">cd</code> into <code class="language-plaintext highlighter-rouge">GALAXY_ROOT</code>. Note that we specify the tutorial branch with the <code class="language-plaintext highlighter-rouge">-b</code> option:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">-b</span> training2022 https://github.com/&lt;your-username&gt;/galaxy GALAXY_ROOT
 <span class="nb">cd </span>GALAXY_ROOT
 </code></pre></div>        </div>
@@ -845,7 +1112,7 @@
       <p>Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. This is generally done with the <code class="language-plaintext highlighter-rouge">common_startup.sh</code> script:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash scripts/common_startup.sh <span class="nt">--dev-wheels</span>
 </code></pre></div>        </div>
       </blockquote>
@@ -856,7 +1123,7 @@
       <p>Activate your new virtual environment:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
 </code></pre></div>        </div>
       </blockquote>
@@ -867,7 +1134,7 @@
       <p>Finally, let’s create a new branch for your edits:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> my-training
 </code></pre></div>        </div>
       </blockquote>
@@ -876,13 +1143,13 @@
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div class="box-title code-in-title" id="code-in-bash-4" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div class="box-title code-out-title" id="code-out" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+          <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  training2022
 <span class="k">*</span> my-training
 </code></pre></div>          </div>
@@ -899,7 +1166,7 @@
 <p>Most of Galaxy unit tests are designed to test a separate component or function, are very fast, and do not require a running Galaxy instance. Finding the issue causing a unit test to fail is relatively straightforward.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-fixing-a-failing-unit-test" aria-label="hands-on box: Fixing a failing unit test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fixing a failing unit test</div>
+  <div class="box-title hands-on-title" id="hands-on-fixing-a-failing-unit-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Fixing a failing unit test</div>
 
   <ol>
     <li>
@@ -908,7 +1175,7 @@
       <p>Head over to the <a href="https://github.com/galaxyproject/galaxy">Galaxy repository on GitHub</a> and in the branch drop-down select the “training” branch. Click the red “x” next to the last commit, you’ll get a drop-down listing of workflow results; find “Unit tests / Test (3…” and click “Details”. This will display a detailed report that includes information about the failed tests. Try to find the failed tests.</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>The log lists 2 failed tests:</p>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- FAILED lib/galaxy/model/tags.py::galaxy.model.tags.TagHandler.parse_tags
 - FAILED test/unit/util/test_utils.py::test_strip_control_characters
@@ -924,7 +1191,7 @@
       <p>Instead, we will run the tests locally. Furthermore, we will run a specific test that we know is failing: this will give us the instant feedback we need.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-5" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <p>Make sure you are in <code class="language-plaintext highlighter-rouge">GALAXY_ROOT</code> and your virtual environment is activated. If not, activate it:</p>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
 </code></pre></div>        </div>
@@ -933,7 +1200,7 @@
       <p>The simplest way to run the failing test locally is using pytest directly:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-6" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pytest <span class="nb">test</span>/unit/util/test_utils.py
 </code></pre></div>        </div>
       </blockquote>
@@ -941,7 +1208,7 @@
       <p>Do you see the error message?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>The test gives us a very specific error message:</p>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AssertionError: assert 'b l a' == 'bla'
 - bla
@@ -968,7 +1235,7 @@
       <p>Can you see what’s causing this behavior?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>The genexp is evaluated and subsequently joined using a space as a delimiter. The space is, obviously, a typo: we don’t want to <em>add</em> anything to the string, so the delimiter should be the empty string instead:</p>
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="s">""</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">unicodify</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">unicodedata</span><span class="p">.</span><span class="n">category</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="s">"Cc"</span><span class="p">)</span>
 </code></pre></div>        </div>
@@ -991,7 +1258,7 @@
 <p>API tests test various aspects of the Galaxy API, as well as general backend aspects of Galaxy using the API. These tests require a Galaxy instance.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-fixing-a-failing-api-test" aria-label="hands-on box: Fixing a failing API test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fixing a failing API test</div>
+  <div class="box-title hands-on-title" id="hands-on-fixing-a-failing-api-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Fixing a failing API test</div>
 
   <ol>
     <li>
@@ -1000,7 +1267,7 @@
       <p>We’ll follow the same process we used in the unit test section. On GitHub, click the same red “x” and select the “API tests / Test (3…” workflow and click “Details”. Try to find the failed tests.</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>The log lists multiple failed tests. Some of them were caused by bugs you’ll be fixing in later sections of this tutorial. For this exercise, we care about these two failed tests:</p>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_404_on_unknown_license
 FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_license
@@ -1018,7 +1285,7 @@ FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_licen
       <p>Let’s run the failed test:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-7" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-api</span> lib/galaxy_test/api/test_licenses.py
 </code></pre></div>        </div>
       </blockquote>
@@ -1026,7 +1293,7 @@ FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_licen
       <p>Two tests are failing. Do you see the error messages?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>We see the following error messages:</p>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_404_on_unknown_license - AssertionError: Request status code (500) was not expected value 404. Body was INVALID JSON RESPONSE &lt;Internal Server Error&gt;
 FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_license - AssertionError: Request status code (404) was not expected value 200. Body was {'err_msg': "License 'Apache-2.0' not found", 'err_code': 404001}
@@ -1071,7 +1338,7 @@ FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_licen
       <p>If we carefully trace the code in <code class="language-plaintext highlighter-rouge">LicensesManager</code>, we’ll find the error. Do you see it?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>The <code class="language-plaintext highlighter-rouge">get_license_by_id()</code> method raises an <code class="language-plaintext highlighter-rouge">ObjectNotFound</code> error (which results in the 404 status code we see in the test result). This error is a direct result of the LicensesManager <code class="language-plaintext highlighter-rouge">get</code> method called on the previous line (<code class="language-plaintext highlighter-rouge">license = self.get(id)</code>) - take a look at that method:</p>
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">uri</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">_by_index</span><span class="p">:</span>
@@ -1098,12 +1365,12 @@ FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_licen
 <p>Client Linting is important to reduce errors, improve quality of the codebase, and enforce common rules. These rules are defined by the eslinter defined with Vue best practices, primarily. On Github, the command <code class="language-plaintext highlighter-rouge">eslint</code> is run to start the process for linting code on the client side.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-python-linting" aria-label="comment box: Python Linting"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Python Linting</div>
+  <div class="box-title comment-title" id="comment-python-linting"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Python Linting</div>
   <p>For backend consistency, we also have a Python linter. While we won’t be running you through that exercise today, you may encounter a Python linting issue in the future. The way to diagnose and treat these is very similar to the way to do it for the front end.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-fixing-client-linting-error" aria-label="hands-on box: Fixing client linting error"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fixing client linting error</div>
+  <div class="box-title hands-on-title" id="hands-on-fixing-client-linting-error"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Fixing client linting error</div>
 
   <ol>
     <li>
@@ -1128,7 +1395,7 @@ FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_licen
       <p>Alright, so we’ve seen the failure, but we want to verify it locally now. For this, you’ll need to open up a terminal.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-8" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <p>Make sure you are in <code class="language-plaintext highlighter-rouge">GALAXY_ROOT</code> and your virtual environment is activated. If not, activate it:</p>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
 </code></pre></div>        </div>
@@ -1142,7 +1409,7 @@ FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_licen
       <p><strong>Finding and fixing the issue</strong></p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>You are currently in <code class="language-plaintext highlighter-rouge">GALAXY_ROOT/client</code>.
 In the file <code class="language-plaintext highlighter-rouge">src/components/RuleBuilder/RuleComponent.vue</code>, there is an unused import. Simply delete the line that says <code class="language-plaintext highlighter-rouge">import Vue from "vue";</code></p>
@@ -1168,7 +1435,7 @@ In the file <code class="language-plaintext highlighter-rouge">src/components/Ru
 <p>Client tests are tests written by developers to test front-end code. In the case of the test we’re going to walk through right now, we’re looking at a Vue test failure, which means the component that it’s testing is definitely a Vue component.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-fixing-a-failing-client-unit-test" aria-label="hands-on box: Fixing a failing client unit test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fixing a failing client unit test</div>
+  <div class="box-title hands-on-title" id="hands-on-fixing-a-failing-client-unit-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Fixing a failing client unit test</div>
 
   <ol>
     <li>
@@ -1177,7 +1444,7 @@ In this section we, again, can’t demonstrate the remote output, so we descibe 
 One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicking on Details beside that failure, will open up a the terminal output from that test. Here you should be able to see what test is failing.</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The failing test file is <code class="language-plaintext highlighter-rouge">src/components/RuleBuilder/SavedRulesSelector.test.js</code>, and the failing test in that file is <code class="language-plaintext highlighter-rouge">SavedRulesSelector › disables history icon if there is no history</code>.</p>
       </blockquote>
@@ -1186,7 +1453,7 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
       <p><strong>Running the test locally</strong></p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-9" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-9"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <p>Make sure you are in <code class="language-plaintext highlighter-rouge">GALAXY_ROOT</code> and your virtual environment is activated. If not, activate it:</p>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
 </code></pre></div>        </div>
@@ -1212,7 +1479,7 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
       <p>The solution is hidden below, but try your hand at fixing it first:</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>The failure is only happening on the disabled test case, so take a look in the template of <code class="language-plaintext highlighter-rouge">SavedRulesSelector</code> where the conditions for adding disabled are defined.</p>
 
         <p>The way it’s worded in the test (and the way one could think about it logically), is that if there is no history, the button should be disabled, but the code says</p>
@@ -1226,7 +1493,7 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
       <p>If you think you’ve got it, try running the test locally again to be sure.</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-running-fewer-client-tests" aria-label="comment box: Running fewer client tests"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Running fewer client tests</div>
+        <div class="box-title comment-title" id="comment-running-fewer-client-tests"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Running fewer client tests</div>
         <p>If you don’t want to run the whole suite of client tests, you can add keywords that match the test path/name. For example both <code class="language-plaintext highlighter-rouge">yarn run jest rule</code> and <code class="language-plaintext highlighter-rouge">yarn jest selector</code> will work, but the former will run other tests with rule in the path/module name.</p>
       </blockquote>
     </li>
@@ -1247,7 +1514,7 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
 <p>Selenium is the end-to-end or integration testing framework that we use; so these tests often are designed to test both frontend and backend code. This makes fixing them a little difficult, but we are sure you can do it!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-fixing-a-failing-selenium-test" aria-label="hands-on box: Fixing a failing Selenium test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fixing a failing Selenium test</div>
+  <div class="box-title hands-on-title" id="hands-on-fixing-a-failing-selenium-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Fixing a failing Selenium test</div>
 
   <ol>
     <li>
@@ -1258,7 +1525,7 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
       <p>Try to identify which tests are failing based on artifacts you downloaded.</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The failing tests are:</p>
 
@@ -1280,7 +1547,7 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
       <p>A command like that will still run all of the tests defined in that python file, so we need to find out where the tests that failed are defined. Try seaching the baseline for our three failing Selenium tests; what files are they in?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The failing tests are defined in these files:</p>
 
@@ -1293,12 +1560,12 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
       <p>Now that we have the files, we can run the selenium tests. The command to do this should be very similar to <code class="language-plaintext highlighter-rouge">./run_tests.sh -selenium lib/galaxy_test/selenium/test_sign_out.py</code>. The only difference should be the python file where the tests are defined. Try it yourself, before checking out the solution.</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>Either of these two commands will work:</p>
 
         <blockquote class="code-in">
-          <div class="box-title code-in-title" id="code-in-bash-10" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-10"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-selenium</span> lib/galaxy_test/selenium/test_collection_builders.py
 </code></pre></div>          </div>
           <p>or</p>
@@ -1321,7 +1588,7 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
       <p>Looking at the test run in the headless browser, alongside the definition for the test should help you understand what might be going wrong. Try and figure out where the problem is on your own, before looking at the solution.</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The problem is that the tests are expecting a different HID (history identifier) than what is being made available to them. Since all the failing tests have to do with Lists, you might want to check out the ListCollectionCreator.</p>
 
@@ -1361,7 +1628,7 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-fixing-a-runtime-error" aria-label="hands-on box: Fixing a runtime error"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fixing a runtime error</div>
+  <div class="box-title hands-on-title" id="hands-on-fixing-a-runtime-error"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Fixing a runtime error</div>
 
   <ol>
     <li>
@@ -1375,13 +1642,13 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div class="box-title code-in-title" id="code-in-bash-11" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-11"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">GALAXY_CONFIG_FILE</span><span class="o">=</span>config/galaxy.yml uvicorn <span class="nt">--app-dir</span> lib <span class="nt">--factory</span> galaxy.webapps.galaxy.fast_factory:factory
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div class="box-title code-out-title" id="code-out-1" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+          <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
           <p>The first startup may take a few minutes. Eventually, you’ll see the following output (the PID will be different):</p>
 
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
@@ -1412,7 +1679,7 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
       <p>To figure out what’s happening, our best bet is to look at the Galaxy log (look at the terminal window from which you launched Galaxy). Can you see the error message?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>You should see something like this:</p>
 
@@ -1448,7 +1715,7 @@ Exception: This should not happen!
       <p>Add a <code class="language-plaintext highlighter-rouge">breakpoint()</code> statement to your code, right above the <code class="language-plaintext highlighter-rouge">if/else</code> block.</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">126</span>         <span class="n">breakpoint</span><span class="p">()</span>
  <span class="mi">97</span>         <span class="k">if</span> <span class="n">str_as_bool</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"show_datasets"</span><span class="p">,</span> <span class="s">"True"</span><span class="p">)):</span>
@@ -1462,13 +1729,13 @@ Exception: This should not happen!
       <p>Now we need to restart Galaxy. However, to use pdb, we need to enable Galaxy’s debug configuration option. In general, it may be a good idea to enable this in your <code class="language-plaintext highlighter-rouge">galaxy.yml</code> configuration file (just copy or rename <code class="language-plaintext highlighter-rouge">config/galaxy.yml.sample</code> and uncomment the option you want to set). However, for the purposes of this exercise, it’s enough to set the <code class="language-plaintext highlighter-rouge">GALAXY_CONFIG_DEBUG</code> environment variable when running Galaxy:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-12" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-12"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">GALAXY_CONFIG_DEBUG</span><span class="o">=</span>1 <span class="nv">GALAXY_CONFIG_FILE</span><span class="o">=</span>config/galaxy.yml uvicorn <span class="nt">--app-dir</span> lib <span class="nt">--factory</span> galaxy.webapps.galaxy.fast_factory:factory
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-why-we-set-the-debug-option" aria-label="comment box: Why we set the debug option"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Why we set the debug option</div>
+        <div class="box-title comment-title" id="comment-why-we-set-the-debug-option"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Why we set the debug option</div>
 
         <p>The reason for setting the <code class="language-plaintext highlighter-rouge">debug</code> option for releases prior to 22.05 was quite esoteric: among other things, it prevents uWSGI (no longer used as of 22.05) from remapping <code class="language-plaintext highlighter-rouge">stdin</code> to <code class="language-plaintext highlighter-rouge">dev/null</code> which would prevent tools like pdb from running.</p>
       </blockquote>
@@ -1483,7 +1750,7 @@ Exception: This should not happen!
       <p>You’re at the pdb prompt. From here you can execute Python code interactively. The logs printed to <code class="language-plaintext highlighter-rouge">stdout</code> can be distracting, so try to ignore them. Let’s explore what’s happening in the next line:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-pdb" aria-label="code-in box: Pdb"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Pdb</div>
+        <div class="box-title code-in-title" id="code-in-pdb"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Pdb</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(Pdb) trans
 &lt;galaxy.webapps.base.webapp.GalaxyWebTransaction object at 0x7f3664eee2b0&gt;
 (Pdb) trans.app
@@ -1503,7 +1770,7 @@ Exception: This should not happen!
       <p>Head over to <code class="language-plaintext highlighter-rouge">lib/galaxy/config/__init__.py</code> and look for the class <code class="language-plaintext highlighter-rouge">CommonConfigurationMixin</code>. Once you find it, look for the definition of its <code class="language-plaintext highlighter-rouge">get</code> method. When you find it, look at the method signature. What is the meaning of the argument <code class="language-plaintext highlighter-rouge">'True'</code> that is passed to this method in <code class="language-plaintext highlighter-rouge">datasets.py</code> on line 97?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">584</span>     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 <span class="mi">585</span>         <span class="c1"># Warning: the value of self.config_dict['foo'] may be different from self.foo
@@ -1516,7 +1783,7 @@ Exception: This should not happen!
       <p>Back to <code class="language-plaintext highlighter-rouge">datasets.py</code>, line 97. Now we know that <code class="language-plaintext highlighter-rouge">True</code> is the default value that will be returned if the key <code class="language-plaintext highlighter-rouge">show_datasets</code> does not exist in the <code class="language-plaintext highlighter-rouge">config_dict</code> dictionary. Moving on:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-pdb-1" aria-label="code-in box: Pdb"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Pdb</div>
+        <div class="box-title code-in-title" id="code-in-pdb-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Pdb</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(Pdb) trans.app.config.get('show_datasets')
 (Pdb) trans.app.config.get('show_datasets', 'True')
 'True'
@@ -1528,7 +1795,7 @@ Exception: This should not happen!
       <p>Next step: <code class="language-plaintext highlighter-rouge">str_to_bool</code>. First, let’s pass it the value <code class="language-plaintext highlighter-rouge">'True'</code>:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-pdb-2" aria-label="code-in box: Pdb"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Pdb</div>
+        <div class="box-title code-in-title" id="code-in-pdb-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Pdb</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(Pdb) str_as_bool('True')
 False
 </code></pre></div>        </div>
@@ -1538,7 +1805,7 @@ False
 Head over to the function’s definition (you can tell from the import statement at the top of the file that it’s in <code class="language-plaintext highlighter-rouge">lib/galaxy/util/__init__.py</code>) and try to figure out if there is an error.</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">117</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
 <span class="mi">118</span>     <span class="s">"""This is for training only."""</span>
@@ -1561,7 +1828,7 @@ Head over to the function’s definition (you can tell from the import statement
       <p>Start with a blank test function. Then call the funtion under test (<code class="language-plaintext highlighter-rouge">str_as_bool</code>) and assert that when you pass it the value <code class="language-plaintext highlighter-rouge">'True'</code>, it returns <code class="language-plaintext highlighter-rouge">True</code>. Can you think of more cases to test?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>Your first step could be something like this:</p>
 
@@ -1590,7 +1857,7 @@ Head over to the function’s definition (you can tell from the import statement
       <p>Can you think of a simple way to fix the function so that our test passes?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>One way to do it is to simply convert the input value to lowercase:</p>
 
@@ -1613,7 +1880,7 @@ Head over to the function’s definition (you can tell from the import statement
       <p>Now that we have the <code class="language-plaintext highlighter-rouge">str_as_bool</code> function covered by test, as a bonus, we can safely do some minor refactoring: the test will prevent us from breaking things. Can you simplify the function’s code?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">117</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
 <span class="mi">118</span>     <span class="s">""" This is for training only."""</span>
@@ -1641,10 +1908,12 @@ Head over to the function’s definition (you can tell from the import statement
 
 <p>First of all, thank you for completing this tutorial. We hope you feel more confident debugging Galaxy code and understanding how to navigate the testing frameworks we utilize. Of course, we are always available to help answer questions and support you!</p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Always run individual failing tests locally to minimize the feedback loop.</p>
@@ -1694,33 +1963,9 @@ Head over to the function’s definition (you can tell from the import statement
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Debugging Galaxy (Development in Galaxy)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Debugging Galaxy (Development in Galaxy)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1738,7 +1983,7 @@ Head over to the function’s definition (you can tell from the import statement
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1779,7 +2024,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1791,29 +2036,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

@@ -12,33 +12,33 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-flow/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-flow/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Python - Flow Control" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-02-13 13:04:13 +0000" />
-<meta name="DC.creator" content="The Carpentries" />
-<meta name="DC.creator" content="Helena Rasche" />
-<meta name="DC.creator" content="Donny Vrins" />
-<meta name="DC.creator" content="Bazante Sanders" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Python - Flow Control">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-02-13 13:04:13 +0000">
+<meta name="DC.creator" content="The Carpentries">
+<meta name="DC.creator" content="Helena Rasche">
+<meta name="DC.creator" content="Donny Vrins">
+<meta name="DC.creator" content="Bazante Sanders">
 
         
         
         
         
-        <meta name="description" content="These lessons will help you get your feet in data science..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Python - Flow Control" />
-        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta name="description" content="These lessons will help you get your feet in data science...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Python - Flow Control">
+        <meta property="og:description" content="These lessons will help you get your feet in data science...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -530,10 +530,292 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-data-science">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-02-13 13:04:13 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Python - Flow Control",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Python - Flow Control' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-flow/tutorial.html",
+  "timeRequired": "PT40M",
+  "keywords": "data-science, jupyter-notebook",
+  "description": "The questions this  addresses are:\n - How can my programs do different things based on data values?\n\n\nThe objectives are:\n - Write conditional statements including `if`, `elif`, and `else` branches.\n - Correctly evaluate expressions containing `and` and `or`.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "name": "The Carpentries",
+      "image": "https://avatars.githubusercontent.com/carpentries",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dirowa/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dirowa/",
+      "name": "Donny Vrins",
+      "image": "https://avatars.githubusercontent.com/dirowa",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "name": "Bazante Sanders",
+      "image": "https://avatars.githubusercontent.com/bazante1",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "name": "The Carpentries",
+      "image": "https://avatars.githubusercontent.com/carpentries",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dirowa/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dirowa/",
+      "name": "Donny Vrins",
+      "image": "https://avatars.githubusercontent.com/dirowa",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "name": "Bazante Sanders",
+      "image": "https://avatars.githubusercontent.com/bazante1",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner"
+}
+</script>
+
+<article class="tutorial topic-data-science">
     <h1 data-toc-skip>Python - Flow Control</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -544,9 +826,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -653,6 +935,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -662,13 +945,14 @@
             </div>
             <div class="col-sm-10">
                  
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
                      
                      
                      
                      
                     
                         <blockquote class="comment">
-                            <div class="box-title" aria-label="comment box">Best viewed in a Jupyter Notebook</div>
+                            <div class="box-title">Best viewed in a Jupyter Notebook</div>
                             <p>
                                 This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
                             </p>
@@ -701,19 +985,21 @@
                             </p>
                         </blockquote>
                     
-                 
+                </section>
+                
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <p>“Flow Control” is how we describe when we change the flow of code’s execution, based on some conditions. Here we’ll learn how to take different actions depending on what data out program sees, or how to run code only if some condition is true.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://swcarpentry.github.io/python-novice-inflammation/">Programming with Python</a> and <a href="https://swcarpentry.github.io/python-novice-gapminder/">Plotting and Programming in Python</a>, which are licensed CC-BY 4.0.</p>
 
   <p>Adaptations have been made to make this work better in a GTN/Galaxy environment.</p>
 </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -800,7 +1086,7 @@ Python simply does nothing if the test is false:</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-if-behaviour" aria-label="question box: If behaviour"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: If behaviour</div>
+  <div class="box-title question-title" id="question-if-behaviour"><i class="far fa-question-circle" aria-hidden="true"></i> Question: If behaviour</div>
 
   <p>Try changing the <code class="language-plaintext highlighter-rouge">num</code> value and see what happens for different values.</p>
 
@@ -813,7 +1099,7 @@ Python simply does nothing if the test is false:</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Condition is activated!</li>
       <li>Nothing, but not because it is a float! Because it’s less than 100</li>
@@ -840,7 +1126,7 @@ else:
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-if-elif-elif-elif-else"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-elif-elif-elif-else-contents" aria-expanded="true" aria-label="Toggle tip box: If/Elif/Elif/Elif/Else:"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: If/Elif/Elif/Elif/Else:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-if-elif-elif-elif-else"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-elif-elif-elif-else" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If/Elif/Elif/Elif/Else:<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>if/elif/else cases follow these rules:</p>
 
   <ul>
@@ -881,7 +1167,7 @@ rather than a single equals sign <code class="language-plaintext highlighter-rou
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-predict-what-happens" aria-label="question box: Predict what happens"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Predict what happens</div>
+  <div class="box-title question-title" id="question-predict-what-happens"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Predict what happens</div>
   <p>Predict the outcomes of the following values of <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> above. Predicting what you think the code will do is a useful skill to practice</p>
   <ol>
     <li>a = 0; b = -1</li>
@@ -891,7 +1177,7 @@ rather than a single equals sign <code class="language-plaintext highlighter-rou
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>at least one part is false</li>
       <li>at least one part is false</li>
@@ -910,7 +1196,7 @@ rather than a single equals sign <code class="language-plaintext highlighter-rou
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-true-and-false"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-true-and-false-contents" aria-expanded="true" aria-label="Toggle tip box: `True` and `False`"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: `True` and `False`<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-true-and-false"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-true-and-false" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: `True` and `False`<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p><code class="language-plaintext highlighter-rouge">True</code> and <code class="language-plaintext highlighter-rouge">False</code> are special words in Python called <code class="language-plaintext highlighter-rouge">booleans</code>,
 which represent truth values. A statement such as <code class="language-plaintext highlighter-rouge">1 &lt; 0</code> returns
 the value <code class="language-plaintext highlighter-rouge">False</code>, while <code class="language-plaintext highlighter-rouge">-1 &lt; 0</code> returns the value <code class="language-plaintext highlighter-rouge">True</code>.</p>
@@ -988,7 +1274,7 @@ that you formulated in the previous question.
 <h2 id="exercises">Exercises</h2>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
   <p><code class="language-plaintext highlighter-rouge">if</code>s, <code class="language-plaintext highlighter-rouge">elif</code>s and <code class="language-plaintext highlighter-rouge">else</code>s get evaluated in blocks. Look at the following code and list the lines that are part of a single block.</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.  if x:
@@ -1008,7 +1294,7 @@ that you formulated in the previous question.
 </code></pre></div>  </div>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>“Blocks” of if/elif/elses</p>
     <ul>
       <li>must start with an <code class="language-plaintext highlighter-rouge">if</code></li>
@@ -1031,7 +1317,7 @@ that you formulated in the previous question.
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-how-many-paths" aria-label="question box: How Many Paths?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: How Many Paths?</div>
+  <div class="box-title question-title" id="question-how-many-paths"><i class="far fa-question-circle" aria-hidden="true"></i> Question: How Many Paths?</div>
 
   <p>Consider this code:</p>
 
@@ -1054,7 +1340,7 @@ Why did you pick this answer?</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>C gets printed because the first two conditions, <code class="language-plaintext highlighter-rouge">4 &gt; 5</code> and <code class="language-plaintext highlighter-rouge">4 == 5</code>, are not true,
 but <code class="language-plaintext highlighter-rouge">4 &lt; 5</code> is true.</p>
   </blockquote>
@@ -1064,7 +1350,7 @@ but <code class="language-plaintext highlighter-rouge">4 &lt; 5</code> is true.<
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-close-enough" aria-label="question box: Close Enough"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Close Enough</div>
+  <div class="box-title question-title" id="question-close-enough"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Close Enough</div>
 
   <p>Write some conditions that print <code class="language-plaintext highlighter-rouge">True</code> if the variable <code class="language-plaintext highlighter-rouge">a</code> is within <code class="language-plaintext highlighter-rouge">10</code> of the variable <code class="language-plaintext highlighter-rouge">b</code>
 and <code class="language-plaintext highlighter-rouge">False</code> otherwise.
@@ -1072,7 +1358,7 @@ Compare your implementation with your partner’s:
 do you get the same answer for all possible pairs of numbers?</p>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-abs"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-abs-contents" aria-expanded="true" aria-label="Toggle tip box: abs"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: abs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-abs"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-abs" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: abs<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>There is a [built-in function <code class="language-plaintext highlighter-rouge">abs</code>][abs-function] that returns the absolute value of
 a number:</p>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">))</span>
@@ -1083,7 +1369,7 @@ a number:</p>
   </blockquote>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: 1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: 1<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: 1<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = 5
 b = 5.1
 
@@ -1095,7 +1381,7 @@ else:
   </blockquote>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: 2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: 2<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: 2<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print(abs(a - b) &lt;= 10)
 </code></pre></div>    </div>
 
@@ -1108,7 +1394,7 @@ have string representations which can be printed.</p>
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pitfalls" aria-label="question box: Pitfalls"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Pitfalls</div>
+  <div class="box-title question-title" id="question-pitfalls"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Pitfalls</div>
 
   <p>A <em>integer</em> number between 0 and 100 will be provided to this function. Answer these two questions:</p>
 
@@ -1133,7 +1419,7 @@ elif 57 &lt; num &lt;= 86:
 </code></pre></div>  </div>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>No, it won’t. 32 is the only value there that doesn’t print anything. You can either do <code class="language-plaintext highlighter-rouge">x &lt; 57</code> and later <code class="language-plaintext highlighter-rouge">57 &lt;= x</code> to test the bigger and smaller values, or you can make use <code class="language-plaintext highlighter-rouge">x &lt; 57</code> and <code class="language-plaintext highlighter-rouge">56 &lt; x</code>, which have the same results, but <strong>only with integers</strong>. If your code accepted a float, e.g. <code class="language-plaintext highlighter-rouge">56.5</code>, both of those tests would be true. So <code class="language-plaintext highlighter-rouge">x &lt; 57</code> and later <code class="language-plaintext highlighter-rouge">57 &lt;= x</code> is the preferred way to write that.</li>
       <li><code class="language-plaintext highlighter-rouge">86</code> is the most obvious solution to this, the programmer added a check specifically to see if the value was 86, but instead it’s caught by the previous case.</li>
@@ -1157,14 +1443,16 @@ elif 57 &lt; num &lt;= 86:
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-why-a-synthetic-example-like-this"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-a-synthetic-example-like-this-contents" aria-expanded="true" aria-label="Toggle tip box: Why a synthetic example like this?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why a synthetic example like this?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-why-a-synthetic-example-like-this"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-a-synthetic-example-like-this" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Why a synthetic example like this?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Complicated if/elif/else cases are common in code, you need to be able to spot these sort of issues. For example there are large if/else cases in the <a href="https://github.com/galaxyproject/galaxy/blob/9143dd7ca46d150ebfb26febbe187979f682da51/tools/stats/grouping.py#L153-L176">Galaxy codebase</a>, sometimes nested even, and being ale to predict their behaviour is really important to being able to work with the code. <a href="https://github.com/galaxyproject/galaxy/blob/9143dd7ca46d150ebfb26febbe187979f682da51/tools/stats/grouping.py#L185-L195">Missing else cases</a> are sometimes important, sometimes a bug, sometimes just the code hasn’t been implemented yet, which is why we always write good code comments!</p>
 </blockquote>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Use <code class="language-plaintext highlighter-rouge">if condition</code> to start a conditional statement, <code class="language-plaintext highlighter-rouge">elif condition</code> to provide additional tests, and <code class="language-plaintext highlighter-rouge">else</code> to provide a default.</p>
@@ -1214,33 +1502,9 @@ elif 57 &lt; num &lt;= 86:
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Python - Flow Control (Foundations of Data Science)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Python - Flow Control (Foundations of Data Science)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1258,7 +1522,7 @@ elif 57 &lt; num &lt;= 86:
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1299,7 +1563,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1318,29 +1582,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     </ul>
                 </blockquote>
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

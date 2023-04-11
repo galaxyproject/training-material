@@ -12,32 +12,32 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="1: RNA-Seq reads to counts" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-02-07 10:11:21 +0000" />
-<meta name="DC.creator" content="Maria Doyle" />
-<meta name="DC.creator" content="Belinda Phipson" />
-<meta name="DC.creator" content="Harriet Dashnow" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="1: RNA-Seq reads to counts">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-02-07 10:11:21 +0000">
+<meta name="DC.creator" content="Maria Doyle">
+<meta name="DC.creator" content="Belinda Phipson">
+<meta name="DC.creator" content="Harriet Dashnow">
 
         
         
         
         
-        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: 1: RNA-Seq reads to counts" />
-        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: 1: RNA-Seq reads to counts">
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -606,10 +606,369 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-transcriptomics">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-02-07 10:11:21 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "1: RNA-Seq reads to counts",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Transcriptomics",
+    "description": "Training material for all kinds of transcriptomics analysis.",
+    "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for '1: RNA-Seq reads to counts' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html",
+  "timeRequired": "PT3H",
+  "keywords": "transcriptomics, collections, mouse, QC",
+  "description": "The questions this  addresses are:\n - How to convert RNA-seq reads into counts?\n - How to perform quality control (QC) of RNA-seq reads?\n - How to do this analysis efficiently in Galaxy?\n\n\nThe objectives are:\n - Learn how RNA-seq reads are converted into counts\n - Understand QC steps that can be performed on RNA-seq reads\n - Generate interactive reports to summarise QC information with MultiQC\n - Use the Galaxy Rule-based Uploader to import FASTQs from URLs\n - Make use of Galaxy Collections for a tidy analysis\n - Create a Galaxy Workflow that converts RNA-seq reads into counts\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html",
+      "name": "Reference-based RNA-Seq data analysis",
+      "description": "Hands-on for 'Reference-based RNA-Seq data analysis' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html",
+      "name": "Using dataset collections",
+      "description": "Hands-on for 'Using dataset collections' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html",
+      "name": "Rule Based Uploader",
+      "description": "Hands-on for 'Rule Based Uploader' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/",
+      "name": "Maria Doyle",
+      "image": "https://avatars.githubusercontent.com/mblue9",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4847-8436",
+      "orcid": "https://orcid.org/0000-0003-4847-8436"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/",
+      "name": "Belinda Phipson",
+      "image": "https://avatars.githubusercontent.com/bphipson",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hdashnow/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hdashnow/",
+      "name": "Harriet Dashnow",
+      "image": "https://avatars.githubusercontent.com/hdashnow",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/",
+      "name": "Maria Doyle",
+      "image": "https://avatars.githubusercontent.com/mblue9",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4847-8436",
+      "orcid": "https://orcid.org/0000-0003-4847-8436"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/",
+      "name": "Belinda Phipson",
+      "image": "https://avatars.githubusercontent.com/bphipson",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hdashnow/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hdashnow/",
+      "name": "Harriet Dashnow",
+      "image": "https://avatars.githubusercontent.com/hdashnow",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Transcriptomics",
+      "description": "Training material for all kinds of transcriptomics analysis.",
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3308",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-transcriptomics">
     <h1 data-toc-skip>1: RNA-Seq reads to counts</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -620,9 +979,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -958,7 +1317,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/" title="Workflows" alt="1: RNA-Seq reads to counts workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/" title="1: RNA-Seq reads to counts workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -972,13 +1331,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -1004,7 +1360,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -1159,6 +1515,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -1194,6 +1556,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -1204,6 +1567,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.</p>
@@ -1218,10 +1582,10 @@
 
 <p>This is a Galaxy tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/07-rnaseq-day2.html">COMBINE R RNAseq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">at a workshop in 2016</a>.</p>
 
-<figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Tutorial Dataset</figcaption></figure>
+<figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Tutorial Dataset</figcaption></figure>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1260,7 +1624,7 @@
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
 <h1 id="preparing-the-reads">Preparing the reads</h1>
 
@@ -1288,7 +1652,7 @@
 </table>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-collections-and-sample-names"><button class="gtn-boxify-button details" type="button" aria-controls="details-collections-and-sample-names-contents" aria-expanded="true" aria-label="Toggle details box: Collections and sample names"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Collections and sample names<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-collections-and-sample-names"><button class="gtn-boxify-button details" type="button" aria-controls="details-collections-and-sample-names" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Collections and sample names<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Collections can also help to maintain the original sample names on the files throughout the tools used. The screenshots below show what we would see in one of the MultiQC reports that we will generate if we used datasets versus a collection.</p>
 
@@ -1335,16 +1699,16 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial e.g. <code class="language-plaintext highlighter-rouge">RNA-seq reads to counts</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the files from Zenodo using Galaxy’s Rule-based Uploader.</p>
@@ -1360,7 +1724,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
         <li>
           <p>Click <strong>Build</strong></p>
 
-          <figure id="figure-2"><img src="../../images/rna-seq-reads-to-counts/rule_uploader.png" alt="Rule-based Uploader. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Rule-based Uploader</figcaption></figure>
+          <figure id="figure-2"><img src="../../images/rna-seq-reads-to-counts/rule_uploader.png" alt="Rule-based Uploader. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Rule-based Uploader</figcaption></figure>
         </li>
         <li>
           <p>In the <code class="language-plaintext highlighter-rouge">rules editor</code> that pops up:</p>
@@ -1392,7 +1756,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
             <li>Click <code class="language-plaintext highlighter-rouge">Upload</code></li>
           </ul>
 
-          <figure id="figure-3"><img src="../../images/rna-seq-reads-to-counts/rule_editor.png" alt="Rules Editor. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Rules Editor</figcaption></figure>
+          <figure id="figure-3"><img src="../../images/rna-seq-reads-to-counts/rule_editor.png" alt="Rules Editor. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Rules Editor</figcaption></figure>
 
           <p>You should see a collection (list) called <code class="language-plaintext highlighter-rouge">fastqs</code> in your history containing all 12 FASTQ files.</p>
         </li>
@@ -1405,7 +1769,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
 <p>If your data is not accessible by URL, for example, if your FASTQ files are located on your laptop and are not too large, you can upload into a collection as below. If they are large you could use FTP. You can take a look at the <a href="/training-material/topics/galaxy-interface/tutorials/get-data/slides.html">Getting data into Galaxy slides</a> for more information.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-upload-local-files-into-a-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-local-files-into-a-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Upload local files into a collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload local files into a collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-upload-local-files-into-a-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-local-files-into-a-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Upload local files into a collection<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
     <li>Open the Galaxy Upload Manager</li>
@@ -1427,7 +1791,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
 <p>If your FASTQ files are located in Shared Data, you can import them into your history as a collection as below.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-import-files-from-shared-data-into-a-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-import-files-from-shared-data-into-a-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Import files from Shared Data into a collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Import files from Shared Data into a collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-import-files-from-shared-data-into-a-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-import-files-from-shared-data-into-a-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Import files from Shared Data into a collection<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
     <li>In the Menu at the top go to Shared Data &gt; Data Libraries</li>
@@ -1454,7 +1818,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
 <p>Take a look at one of the FASTQ files to see what it contains.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-take-a-look-at-fastq-format" aria-label="hands-on box: Take a look at FASTQ format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Take a look at FASTQ format</div>
+  <div class="box-title hands-on-title" id="hands-on-take-a-look-at-fastq-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Take a look at FASTQ format</div>
 
   <ol>
     <li>Click on the collection name (<code class="language-plaintext highlighter-rouge">fastqs</code>)</li>
@@ -1463,7 +1827,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-fastq-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-fastq-format-contents" aria-expanded="true" aria-label="Toggle details box: FASTQ format"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: FASTQ format<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-fastq-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-fastq-format" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: FASTQ format<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you are not familiar with FASTQ format, see the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a></p>
 </blockquote>
 
@@ -1474,10 +1838,10 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
 <p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and Cutadapt (<span class="citation"><a href="#marcel2011cutadapt">Marcel 2011</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-raw-reads-with-b-fastqc-b" aria-label="hands-on box: Check raw reads with &lt;b&gt;FastQC&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check raw reads with <b>FastQC</b></div>
+  <div class="box-title hands-on-title" id="hands-on-check-raw-reads-with-b-fastqc-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check raw reads with <b>FastQC</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">fastqs</code> (Input dataset collection)</li>
       </ul>
@@ -1486,19 +1850,19 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
   </ol>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Selecting a dataset collection as input<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
   <ol>
     <li>What is the read length?</li>
     <li>What base quality score encoding is used?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The read length is 100 bp.</li>
@@ -1506,7 +1870,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
 This information can be seen at the top of the FastQC Webpage as below.</li>
     </ol>
 
-    <figure id="figure-4"><img src="../../images/rna-seq-reads-to-counts/fastqc_webpage.png" alt="FastQC Webpage. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> FastQC Webpage</figcaption></figure>
+    <figure id="figure-4"><img src="../../images/rna-seq-reads-to-counts/fastqc_webpage.png" alt="FastQC Webpage. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> FastQC Webpage</figcaption></figure>
 
   </blockquote>
 
@@ -1515,10 +1879,10 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>The FastQC report contains a lot of information and we can look at the report for each sample. However, that is quite a few reports, 12 for this dataset. If you had more samples it could be a lot more. Luckily, there is a very useful tool called MultiQC (<span class="citation"><a href="#ewels2016multiqc">Ewels <i>et al.</i> 2016</a></span>) that can summarise QC information for multiple samples into a single report. We’ll generate a few MultiQC outputs in this tutorial so we’ll add name tags so we can differentiate them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-aggregate-fastqc-reports-with-b-multiqc-b" aria-label="hands-on box: Aggregate FastQC reports with &lt;b&gt;MultiQC&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Aggregate FastQC reports with <b>MultiQC</b></div>
+  <div class="box-title hands-on-title" id="hands-on-aggregate-fastqc-reports-with-b-multiqc-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Aggregate FastQC reports with <b>MultiQC</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters to aggregate the FastQC reports
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters to aggregate the FastQC reports
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -1537,7 +1901,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   </ol>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Adding a tag<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
 
 </blockquote>
 
@@ -1545,24 +1909,24 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>You should see that most of the plots in the small FASTQs look similar to the full dataset. However, in the small FASTQs, there is less duplication, some Ns in the reads and some overrepresented sequences.</p>
 
-<figure id="figure-5"><img src="../../images/rna-seq-reads-to-counts/fastqc_table.png" alt="General Statistics. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> General Statistics</figcaption></figure>
-<figure id="figure-6"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png" alt="Sequence Counts. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequence Counts</figcaption></figure>
-<figure id="figure-7"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Sequence Quality</figcaption></figure>
-<figure id="figure-8"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Per Sequence Quality Scores</figcaption></figure>
-<figure id="figure-9"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Per Sequence GC Content</figcaption></figure>
-<figure id="figure-10"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_n_content_plot.png" alt="Per base N content. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Per base N content</figcaption></figure>
-<figure id="figure-11"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Sequence Duplication Levels</figcaption></figure>
-<figure id="figure-12"><img src="../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png" alt="Adapter Content. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Adapter Content</figcaption></figure>
+<figure id="figure-5"><img src="../../images/rna-seq-reads-to-counts/fastqc_table.png" alt="General Statistics. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> General Statistics</figcaption></figure>
+<figure id="figure-6"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png" alt="Sequence Counts. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Sequence Counts</figcaption></figure>
+<figure id="figure-7"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Sequence Quality</figcaption></figure>
+<figure id="figure-8"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Per Sequence Quality Scores</figcaption></figure>
+<figure id="figure-9"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Per Sequence GC Content</figcaption></figure>
+<figure id="figure-10"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_n_content_plot.png" alt="Per base N content. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Per base N content</figcaption></figure>
+<figure id="figure-11"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Sequence Duplication Levels</figcaption></figure>
+<figure id="figure-12"><img src="../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png" alt="Adapter Content. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Adapter Content</figcaption></figure>
 
 <p>See the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a> for more information on FastQC plots.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>What do you think of the overall quality of the sequences?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Overall, the samples look pretty good. The main things to note here are:</p>
     <ul>
@@ -1581,10 +1945,10 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <h2 id="trim-reads">Trim reads</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-trim-reads-with-b-cutadapt-b" aria-label="hands-on box: Trim reads with &lt;b&gt;Cutadapt&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Trim reads with <b>Cutadapt</b></div>
+  <div class="box-title hands-on-title" id="hands-on-trim-reads-with-b-cutadapt-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Trim reads with <b>Cutadapt</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0" title="Cutadapt tool"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0</span></span>
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
@@ -1632,15 +1996,15 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <h2 id="trimmed-reads-qc">Trimmed reads QC</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-qc-of-trimmed-reads-with-b-fastqc-b" aria-label="hands-on box: QC of trimmed reads with &lt;b&gt;FastQC&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: QC of trimmed reads with <b>FastQC</b></div>
+  <div class="box-title hands-on-title" id="hands-on-qc-of-trimmed-reads-with-b-fastqc-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: QC of trimmed reads with <b>FastQC</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">RawData</code> (output of <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters to aggregate the FastQC reports
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters to aggregate the FastQC reports
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -1661,8 +2025,8 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-13"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_adapter_content.png" alt="Adapter Content post-trimming. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Adapter Content post-trimming</figcaption></figure>
-<figure id="figure-14"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_fastqc_sequence_length_distribution_plot.png" alt="Sequence Length post-trimming. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Sequence Length post-trimming</figcaption></figure>
+<figure id="figure-13"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_adapter_content.png" alt="Adapter Content post-trimming. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Adapter Content post-trimming</figcaption></figure>
+<figure id="figure-14"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_fastqc_sequence_length_distribution_plot.png" alt="Sequence Length post-trimming. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Sequence Length post-trimming</figcaption></figure>
 
 <p>After trimming we can see that:</p>
 
@@ -1678,10 +2042,10 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <h2 id="map-reads-to-reference-genome">Map reads to reference genome</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-map-reads-to-reference-with-b-hisat2-b" aria-label="hands-on box: Map reads to reference with &lt;b&gt;HISAT2&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Map reads to reference with <b>HISAT2</b></div>
+  <div class="box-title hands-on-title" id="hands-on-map-reads-to-reference-with-b-hisat2-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Map reads to reference with <b>HISAT2</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy0"><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy0" title="HISAT2 tool"><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome</code>
           <ul>
@@ -1701,7 +2065,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters to aggregate the HISAT2 summary files
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters to aggregate the HISAT2 summary files
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -1716,7 +2080,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-settings-for-paired-end-or-stranded-reads" aria-label="comment box: Settings for Paired-end or Stranded reads"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Settings for Paired-end or Stranded reads</div>
+  <div class="box-title comment-title" id="comment-settings-for-paired-end-or-stranded-reads"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Settings for Paired-end or Stranded reads</div>
 
   <ul>
     <li>If you have <strong>paired-end</strong> reads
@@ -1734,7 +2098,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-15"><img src="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" alt="HISAT2 mapping. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> HISAT2 mapping</figcaption></figure>
+<figure id="figure-15"><img src="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" alt="HISAT2 mapping. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> HISAT2 mapping</figcaption></figure>
 
 <p>An important metric to check is the percentage of reads mapped to the reference genome. A low percentage can indicate issues with the data or analysis. Over 90% of reads have mapped in all samples, which is a good mapping rate, and the vast majority of reads have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.</p>
 
@@ -1745,7 +2109,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>A BAM (<a href="https://en.wikipedia.org/wiki/SAM_(file_format)">Binary Alignment Map</a>) file is a compressed binary file storing the read sequences, whether they have been aligned to a reference sequence (e.g. a chromosome), and if so, the position on the reference sequence at which they have been aligned.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-inspect-a-bam-sam-file" aria-label="hands-on box: Inspect a BAM/SAM file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect a BAM/SAM file</div>
+  <div class="box-title hands-on-title" id="hands-on-inspect-a-bam-sam-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspect a BAM/SAM file</div>
 
   <ol>
     <li>Inspect the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> output of <strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1842,7 +2206,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-9" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Which information do you find in a SAM/BAM file?</li>
@@ -1850,7 +2214,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Sequences and quality information, like a FASTQ</li>
       <li>Mapping information, Location of the read on the chromosome, Mapping quality, etc</li>
@@ -1859,7 +2223,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-downloading-a-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-downloading-a-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Downloading a collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Downloading a collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-downloading-a-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-downloading-a-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Downloading a collection<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>To download a collection of datasets (e.g. the collection of BAM files) click on the floppy disk icon within the collection. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.</p>
 
@@ -1870,7 +2234,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>The alignment produces a set of BAM files, where each file contains the read alignments for each sample. In the BAM file, there is a chromosomal location for every read that mapped. Now that we have figured out where each read comes from in the genome, we need to summarise the information across genes or exons. The mapped reads can be counted across mouse genes by using a tool called featureCounts (<span class="citation"><a href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a></span>). featureCounts requires gene annotation specifying the genomic start and end position of each exon of each gene. For convenience, featureCounts contains built-in annotation for mouse (<code class="language-plaintext highlighter-rouge">mm10</code>, <code class="language-plaintext highlighter-rouge">mm9</code>) and human (<code class="language-plaintext highlighter-rouge">hg38</code>, <code class="language-plaintext highlighter-rouge">hg19</code>) genome assemblies, where exon intervals are defined from the NCBI RefSeq annotation of the reference genome. Reads that map to exons of genes are added together to obtain the count for each gene, with some care taken with reads that span exon-exon boundaries. The output is a count for each Entrez Gene ID, which are numbers such as <code class="language-plaintext highlighter-rouge">100008567</code>. For other species, users will need to read in a data frame in GTF format to define the genes and exons. Users can also specify a custom annotation file in SAF format. See the tool help in Galaxy, which has an example of what an SAF file should like like, or the Rsubread users guide for more information.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
   <p>In this example we have kept many of the default settings, which are typically optimised to work well under a variety of situations. For example, the default setting for featureCounts is that it only keeps reads that uniquely map to the reference genome. For testing differential expression of genes, this is preferred, as the reads are unambigously assigned to one place in the genome, allowing for easier interpretation of the results. Understanding all the different parameters you can change involves doing a lot of reading about the tool that you are using, and can take a lot of time to understand! We won’t be going into the details of the parameters you can change here, but you can get more information from looking at the tool help.</p>
 </blockquote>
@@ -1878,10 +2242,10 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <h2 id="count-reads-mapped-to-genes">Count reads mapped to genes</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-count-reads-mapped-to-genes-with-b-featurecounts-b" aria-label="hands-on box: Count reads mapped to genes with &lt;b&gt;featureCounts&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Count reads mapped to genes with <b>featureCounts</b></div>
+  <div class="box-title hands-on-title" id="hands-on-count-reads-mapped-to-genes-with-b-featurecounts-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Count reads mapped to genes with <b>featureCounts</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2"><strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2" title="featureCounts tool"><strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Alignment file”</em>: <code class="language-plaintext highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Gene annotation file”</em>: <code class="language-plaintext highlighter-rouge">featureCounts built-in</code>
@@ -1891,7 +2255,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">featureCounts</code>
           <ul>
@@ -1905,7 +2269,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-settings-for-paired-end-or-stranded-reads-1" aria-label="comment box: Settings for Paired-end or Stranded reads"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Settings for Paired-end or Stranded reads</div>
+  <div class="box-title comment-title" id="comment-settings-for-paired-end-or-stranded-reads-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Settings for Paired-end or Stranded reads</div>
 
   <ul>
     <li>If you have <strong>paired-end</strong> reads
@@ -1927,15 +2291,15 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-16"><img src="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" alt="featureCounts assignments. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> featureCounts assignments</figcaption></figure>
+<figure id="figure-16"><img src="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" alt="featureCounts assignments. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> featureCounts assignments</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>What % reads are assigned to exons?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>~60-70% of reads are assigned to exons. This is a fairly typical number for RNA-seq.</p>
 
@@ -1950,10 +2314,10 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>The counts files are currently in the format of one file per sample. However, it is often convenient to have a count matrix. A count matrix is a single table containing the counts for all samples, with the genes in rows and the samples in columns. The counts files are all within a collection so we can use the Galaxy <strong>Column Join on multiple datasets</strong> tool to easily create a count matrix from the single counts files.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-count-matrix-with-b-column-join-on-multiple-datasets-b" aria-label="hands-on box: Create count matrix with &lt;b&gt;Column Join on multiple datasets&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create count matrix with <b>Column Join on multiple datasets</b></div>
+  <div class="box-title hands-on-title" id="hands-on-create-count-matrix-with-b-column-join-on-multiple-datasets-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create count matrix with <b>Column Join on multiple datasets</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3"><strong>Column Join on multiple datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Column Join on multiple datasets tool"><strong>Column Join on multiple datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Tabular files”</em>: <code class="language-plaintext highlighter-rouge">Counts</code> (output of <strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Identifier column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
@@ -1967,7 +2331,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>Take a look at the output. Note that as the tutorial uses a small subset of the data (~ 1000 reads per sample), to save on processing time, most rows in that matrix will contain all zeros (there will be ~600 non-zero rows). The output for the full dataset is shown below.</p>
 
-<figure id="figure-17"><img src="../../images/rna-seq-reads-to-counts/count_matrix.png" alt="Count matrix. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Count matrix</figcaption></figure>
+<figure id="figure-17"><img src="../../images/rna-seq-reads-to-counts/count_matrix.png" alt="Count matrix. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Count matrix</figcaption></figure>
 
 <p>Now it is easier to see the counts for a gene across all samples. The accompanying tutorial, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>, shows how gene information (symbols etc) can be added to a count matrix.</p>
 
@@ -1978,7 +2342,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>We’ll use a prepared workflow to run the first few of the QCs below. This will also demonstrate how you can make use of Galaxy workflows to easily run and reuse multiple analysis steps. The workflow will run the first three tools: <strong>Infer Experiment</strong>, <strong>MarkDuplicates</strong> and <strong>IdxStats</strong> and generate a <strong>MultiQC</strong> report. You can then edit the workflow if you’d like to add other steps.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-qc-report-workflow" aria-label="hands-on box: Run QC report workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run QC report workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-run-qc-report-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run QC report workflow</div>
 
   <ol>
     <li><strong>Import the workflow</strong> into Galaxy
@@ -1988,13 +2352,13 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
     <li>Import this file as type BED file:
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download
 </code></pre></div>      </div>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>Run <strong>Workflow QC Report</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
@@ -2004,7 +2368,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
     <li>Inspect the <code class="language-plaintext highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
@@ -2017,16 +2381,16 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC (<span class="citation"><a href="#wang2012rseqc">Wang <i>et al.</i> 2012</a></span>) tools, a reference bed file of genes (<code class="language-plaintext highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link <code class="language-plaintext highlighter-rouge">https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download</code> (and rename to <code class="language-plaintext highlighter-rouge">reference genes</code>) or import a file from Shared data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to BED12</strong> tool can be used to convert a GTF into a BED file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-strandness-with-b-infer-experiment-b" aria-label="hands-on box: Check strandness with &lt;b&gt;Infer Experiment&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check strandness with <b>Infer Experiment</b></div>
+  <div class="box-title hands-on-title" id="hands-on-check-strandness-with-b-infer-experiment-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check strandness with <b>Infer Experiment</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1" title="Tested with toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1"><strong>Infer Experiment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1" title="Infer Experiment tool"><strong>Infer Experiment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam file”</em>: <code class="language-plaintext highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">reference genes</code> (Reference BED file)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
@@ -2049,15 +2413,15 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-18"><img src="../../images/rna-seq-reads-to-counts/rseqc_infer_experiment_plot.png" alt="Infer Experiment. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Infer Experiment</figcaption></figure>
+<figure id="figure-18"><img src="../../images/rna-seq-reads-to-counts/rseqc_infer_experiment_plot.png" alt="Infer Experiment. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Infer Experiment</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Do you think the data is stranded or unstranded?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>It is unstranded as approximately equal numbers of reads have aligned to the sense and antisense strands.</p>
 
@@ -2070,15 +2434,15 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, PCR amplification of a low complexity library (not many transcripts) due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the <strong>Picard MarkDuplicates</strong> tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps. In general, we consider normal to obtain up to 50% of duplication.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-duplicate-reads-with-b-markduplicates-b" aria-label="hands-on box: Check duplicate reads with &lt;b&gt;MarkDuplicates&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check duplicate reads with <b>MarkDuplicates</b></div>
+  <div class="box-title hands-on-title" id="hands-on-check-duplicate-reads-with-b-markduplicates-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check duplicate reads with <b>MarkDuplicates</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3" title="MarkDuplicates tool"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: <code class="language-plaintext highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
@@ -2101,15 +2465,15 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-19"><img src="../../images/rna-seq-reads-to-counts/picard_deduplication.png" alt="MarkDups metrics. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 19:</span> MarkDups metrics</figcaption></figure>
+<figure id="figure-19"><img src="../../images/rna-seq-reads-to-counts/picard_deduplication.png" alt="MarkDups metrics. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> MarkDups metrics</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Which two samples have the most duplicates detected?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p><code class="language-plaintext highlighter-rouge">MCL1-LE</code> and <code class="language-plaintext highlighter-rouge">MCL1-LF</code> have the highest number of duplicates in mapped reads compared to the other samples, similar to what we saw in the raw reads with FastQC.</p>
 
@@ -2122,15 +2486,15 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>You can check the numbers of reads mapped to each chromosome with the <strong>Samtools IdxStats</strong> tool. This can help assess the sample quality, for example, if there is an excess of mitochondrial contamination. It could also help to check the sex of the sample through the numbers of reads mapping to X/Y or to see if any chromosomes have highly expressed genes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-count-reads-mapping-to-each-chromosome-with-b-idxstats-b" aria-label="hands-on box: Count reads mapping to each chromosome with &lt;b&gt;IdxStats&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Count reads mapping to each chromosome with <b>IdxStats</b></div>
+  <div class="box-title hands-on-title" id="hands-on-count-reads-mapping-to-each-chromosome-with-b-idxstats-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Count reads mapping to each chromosome with <b>IdxStats</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4"><strong>IdxStats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4" title="IdxStats tool"><strong>IdxStats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file”</em>: <code class="language-plaintext highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
@@ -2153,11 +2517,11 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-20"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-mapped-reads-plot.png" alt="IdxStats chromsome mappings. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 20:</span> IdxStats Chromosome Mappings</figcaption></figure>
-<figure id="figure-21"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-xy-plot.png" alt="IdxStats XY . " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 21:</span> IdxStats X/Y Mappings</figcaption></figure>
+<figure id="figure-20"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-mapped-reads-plot.png" alt="IdxStats chromsome mappings. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> IdxStats Chromosome Mappings</figcaption></figure>
+<figure id="figure-21"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-xy-plot.png" alt="IdxStats XY . " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> IdxStats X/Y Mappings</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>What do you think of the chromosome mappings?</li>
@@ -2165,7 +2529,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Some of the samples have very high mapping on chromosome 5. What is going on there?</li>
@@ -2181,10 +2545,10 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>The coverage of reads along gene bodies can be assessed to check if there is any bias in coverage. For example, a bias towards the 3’ end of genes could indicate degradation of the RNA. Alternatively, a 3’ bias could indicate that the data is from a 3’ assay (e.g. oligodT-primed, 3’RNA-seq). You can use the RSeQC <strong>Gene Body Coverage (BAM)</strong> tool to assess gene body coverage in the BAM files.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-coverage-of-genes-with-b-gene-body-coverage-bam-b" aria-label="hands-on box: Check coverage of genes with &lt;b&gt;Gene Body Coverage (BAM)&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check coverage of genes with <b>Gene Body Coverage (BAM)</b></div>
+  <div class="box-title hands-on-title" id="hands-on-check-coverage-of-genes-with-b-gene-body-coverage-bam-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check coverage of genes with <b>Gene Body Coverage (BAM)</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3" title="Tested with toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3"><strong>Gene Body Coverage (BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3" title="Gene Body Coverage (BAM) tool"><strong>Gene Body Coverage (BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3</span></span>  with the following parameters:
       <ul>
         <li><em>“Run each sample separately, or combine mutiple samples into one plot”</em>: <code class="language-plaintext highlighter-rouge">Run each sample separately</code>
           <ul>
@@ -2194,7 +2558,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">reference genes</code> (Input dataset)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
@@ -2218,18 +2582,18 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-22"><img src="../../images/rna-seq-reads-to-counts/rseqc_gene_body_coverage_plot.png" alt="Gene Body Coverage. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 22:</span> Gene Body Coverage</figcaption></figure>
+<figure id="figure-22"><img src="../../images/rna-seq-reads-to-counts/rseqc_gene_body_coverage_plot.png" alt="Gene Body Coverage. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 22</strong>:</span> Gene Body Coverage</figcaption></figure>
 
 <p>The plot below from the RSeQC website shows what samples with 3’biased coverage would look like.</p>
-<figure id="figure-23"><img src="../../images/rna-seq-reads-to-counts/genebodycoverage.png" alt="Gene Body Coverage comparison. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 23:</span> Gene Body Coverage comparison</figcaption></figure>
+<figure id="figure-23"><img src="../../images/rna-seq-reads-to-counts/genebodycoverage.png" alt="Gene Body Coverage comparison. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 23</strong>:</span> Gene Body Coverage comparison</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>What do you think of the coverage across gene bodies in these samples?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>It looks good. This plot looks a bit noisy in the small FASTQs but it still shows there’s pretty even coverage from 5’ to 3’ ends with no obvious bias in all the samples.</p>
 
@@ -2242,16 +2606,16 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>We can also check the distribution of reads across known gene features, such as exons (CDS, 5’UTR, 3’UTR), introns and intergenic regions. In RNA-seq we expect most reads to map to exons rather than introns or intergenic regions. It is also the reads mapped to exons that will be counted so it is good to check what proportions of reads have mapped to those. High numbers of reads mapping to intergenic regions could indicate the presence of DNA contamination.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-distribution-of-reads-with-b-read-distribution-b" aria-label="hands-on box: Check distribution of reads with &lt;b&gt;Read Distribution&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check distribution of reads with <b>Read Distribution</b></div>
+  <div class="box-title hands-on-title" id="hands-on-check-distribution-of-reads-with-b-read-distribution-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check distribution of reads with <b>Read Distribution</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1" title="Tested with toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1"><strong>Read Distribution</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1" title="Read Distribution tool"><strong>Read Distribution</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam/.sam file”</em>: <code class="language-plaintext highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">reference genes</code> (Input dataset)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
@@ -2275,15 +2639,15 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-24"><img src="../../images/rna-seq-reads-to-counts/rseqc_read_distribution_plot.png" alt="Read Distribution. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Read Distribution</figcaption></figure>
+<figure id="figure-24"><img src="../../images/rna-seq-reads-to-counts/rseqc_read_distribution_plot.png" alt="Read Distribution. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 24</strong>:</span> Read Distribution</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-7" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>What do you think of the read distribution?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>It looks good, most of the reads have mapped to exons and not many to introns or intergenic regions. The samples have pretty consistent read distribution, albeit with slightly higher numbers of reads mapping to CDS exons for <code class="language-plaintext highlighter-rouge">MCL1-LC</code> and <code class="language-plaintext highlighter-rouge">MCL1-LD</code>, and <code class="language-plaintext highlighter-rouge">MCL1-LE</code> and <code class="language-plaintext highlighter-rouge">MCL1-LF</code> have more reads mapping to CDS exons than the other samples.</p>
 
@@ -2294,12 +2658,12 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-8" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Can you think of any other QCs that could be performed on RNA-seq reads?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The reads could be checked for:</p>
     <ul>
@@ -2317,10 +2681,12 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>In this tutorial we have seen how reads (FASTQ files) can be converted into counts. We have also seen QC steps that can be performed to help assess the quality of the data. A follow-on tutorial, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>, shows how to perform differential expression and QC on the counts for this dataset.</p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>In RNA-seq, reads (FASTQs) are mapped to a reference genome with a spliced aligner (e.g HISAT2, STAR)</p>
@@ -2374,33 +2740,9 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=1: RNA-Seq reads to counts (Transcriptomics)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=1: RNA-Seq reads to counts (Transcriptomics)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -2418,7 +2760,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -2459,7 +2801,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -2545,29 +2887,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     </ul>
                 </blockquote>
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

@@ -12,33 +12,33 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-04-01 00:26:39 +0000" />
-<meta name="DC.creator" content="Marius van den Beek" />
-<meta name="DC.creator" content="Dave Clements" />
-<meta name="DC.creator" content="Daniel Blankenberg" />
-<meta name="DC.creator" content="Anton Nekrutenko" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-04-01 00:26:39 +0000">
+<meta name="DC.creator" content="Marius van den Beek">
+<meta name="DC.creator" content="Dave Clements">
+<meta name="DC.creator" content="Daniel Blankenberg">
+<meta name="DC.creator" content="Anton Nekrutenko">
 
         
         
         
         
-        <meta name="description" content="Genetic differences (variants) between healthy and diseas..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-C..." />
-        <meta property="og:description" content="Genetic differences (variants) between healthy and diseas..." />
+        <meta name="description" content="Genetic differences (variants) between healthy and diseas...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-C...">
+        <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -608,10 +608,370 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-variant-analysis">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-04-01 00:26:39 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Variant Analysis",
+    "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html",
+  "timeRequired": "PT45M",
+  "keywords": "variant-analysis, covid19, virology",
+  "description": "The questions this  addresses are:\n - Learn how to get and use data from the Sequence Read Archive in Galaxy.\n\n\nThe objectives are:\n - Understand how Galaxy and the Sequence Read Archive interact.\n - Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "name": "Marius van den Beek",
+      "image": "https://avatars.githubusercontent.com/mvdbeek",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "name": "Dave Clements",
+      "image": "https://avatars.githubusercontent.com/tnabtaf",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9970-6657",
+      "orcid": "https://orcid.org/0000-0002-9970-6657"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "name": "Daniel Blankenberg",
+      "image": "https://avatars.githubusercontent.com/blankenberg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6833-9049",
+      "orcid": "https://orcid.org/0000-0002-6833-9049"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "name": "Anton Nekrutenko",
+      "image": "https://avatars.githubusercontent.com/nekrut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/",
+      "name": "Marius van den Beek",
+      "image": "https://avatars.githubusercontent.com/mvdbeek",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "name": "Dave Clements",
+      "image": "https://avatars.githubusercontent.com/tnabtaf",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9970-6657",
+      "orcid": "https://orcid.org/0000-0002-9970-6657"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "name": "Daniel Blankenberg",
+      "image": "https://avatars.githubusercontent.com/blankenberg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6833-9049",
+      "orcid": "https://orcid.org/0000-0002-6833-9049"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "name": "Anton Nekrutenko",
+      "image": "https://avatars.githubusercontent.com/nekrut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Variant Analysis",
+      "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0199",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0199",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0199"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -622,9 +982,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -750,7 +1110,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/variant-analysis/tutorials/sars-cov-2/workflows/" title="Workflows" alt="From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/variant-analysis/tutorials/sars-cov-2/workflows/" title="From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -764,13 +1124,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/variant-analysis/tutorials/sars-cov-2/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/variant-analysis/tutorials/sars-cov-2/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -796,7 +1153,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -951,6 +1308,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -986,6 +1349,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -996,6 +1360,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>The aim of this tutorial is to introduce you to the processing of next generation sequencing data in Galaxy.  This tutorial uses a COVID-19 variant calling from Illumina data, but it isn’t about variant calling <em>per se</em>.</p>
@@ -1033,7 +1398,7 @@ SRA, like many data sources is Galaxy aware.  It has support for sending informa
 </ul>
 
 <!--
-> <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+> <div class="box-title agenda-title" id="agenda">Agenda</div>
 >
 > In this tutorial, we will cover:
 >
@@ -1056,7 +1421,7 @@ The [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) is the prima
 
 This tutorial covers how to get sequence data from SRA into Galaxy using a direct connection between the two.
 
-> <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+> <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 >
 > You will also hear SRA referred to as the *Short Read Archive*, its original name.
 >
@@ -1067,13 +1432,13 @@ This tutorial covers how to get sequence data from SRA into Galaxy using a direc
 
 SRA can be reached either directly through it's website, or through the tool panel on Galaxy.
 
-> <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+> <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 >
 > Initially the tool panel option for accessing SRA exists only on the [usegalaxy.org server](https://usegalaxy.org/).  Support for the direct connection to SRA will be included in the 20.05 release of Galaxy
 {: .comment}
 
 
-> <div class="box-title hands-on-title" id="hands-on-explore-sra-entrez" aria-label="hands-on box: Explore SRA Entrez"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Explore SRA Entrez</div>
+> <div class="box-title hands-on-title" id="hands-on-explore-sra-entrez"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Explore SRA Entrez</div>
 >
 > 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
 > 1. If your history is not already empty, than start a new history (see [galaxy interface tutorial](/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) for more on Galaxy histories)
@@ -1089,7 +1454,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 {: .hands_on}
 
 
-> <div class="box-title hands-on-title" id="hands-on-generate-list-of-matching-experiments-using-entrez" aria-label="hands-on box: Generate list of matching experiments using Entrez"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate list of matching experiments using Entrez</div>
+> <div class="box-title hands-on-title" id="hands-on-generate-list-of-matching-experiments-using-entrez"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate list of matching experiments using Entrez</div>
 >
 > Now that you have a basic familiarity with SRA Entrez, let's find the sequences used in this tutorial.
 >
@@ -1103,7 +1468,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 {: .hands_on}
 
 
-> <div class="box-title hands-on-title" id="hands-on-go-from-entrez-to-sra-run-selector" aria-label="hands-on box: Go from Entrez to SRA Run Selector"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Go from Entrez to SRA Run Selector</div>
+> <div class="box-title hands-on-title" id="hands-on-go-from-entrez-to-sra-run-selector"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Go from Entrez to SRA Run Selector</div>
 >
 > View results as an expanded interactive table using the RunSelector.
 >
@@ -1111,7 +1476,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 >
 > <img src="../../images/sra_entrez_result.png" alt="sra entrez result. "  loading="lazy">
 >
-> > <div class="box-title tip-title" id="tip-what-if-you-don-t-see-the-run-selector-link"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-if-you-don-t-see-the-run-selector-link-contents" aria-expanded="true" aria-label="Toggle tip box: What if you don't see the Run Selector Link?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What if you don't see the Run Selector Link?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> > <div class="box-title tip-title" id="tip-what-if-you-don-t-see-the-run-selector-link"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-if-you-don-t-see-the-run-selector-link" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What if you don't see the Run Selector Link?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 > >
 > > You may have noticed this text earlier when you were exploring Entrez search.  This text only appears some of the time, when the number of search results falls within a fairly broad window.  You won't see it if you only have a few results, and you won't see it if you have more results than the Run Selector can accept.
 > >
@@ -1136,7 +1501,7 @@ We are using Entrez and the Run Selector how they are designed to be used:
     1. Narrow those results using that knowledge.
 
 
-> <div class="box-title comment-title" id="comment-run-selector-is-both-more-and-less-than-entrez" aria-label="comment box: Run Selector is both more and less than Entrez"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Run Selector is both more and less than Entrez</div>
+> <div class="box-title comment-title" id="comment-run-selector-is-both-more-and-less-than-entrez"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Run Selector is both more and less than Entrez</div>
 >
 > Run Selector can do most, but not all of what Entrez search syntax can do.  Run selector uses *faceted search* technology which is easy to use, and powerful, but which has inherent limits.  Specifically, Entrez will work better when searching on attributes that have tens, hundreds, or thousands of different values.  Run Selector will work better searching attributes with fewer than 20 different values.  Fortunately, that describes most searches.
 {: .comment}
@@ -1149,14 +1514,14 @@ The Run Selector window is divided into several panels:
 * **`Found x Items`** Initially, this is the list of items sent to Run Selector from Entrez.  This list will shrink as we apply filters to it.
 <img src="../../images/sra_run_selector.png" alt="sra run selector. "  loading="lazy">
 
-> <div class="box-title comment-title" id="comment-why-did-the-number-of-found-items-i-go-up-i" aria-label="comment box: Why did the number of found items <i>go up?</i>"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Why did the number of found items <i>go up?</i></div>
+> <div class="box-title comment-title" id="comment-why-did-the-number-of-found-items-i-go-up-i"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why did the number of found items <i>go up?</i></div>
 >
 > Recall that the Entrez interface lists SRA experiments (SRX entries).  Run Selector lists *runs* &mdash; sequencing datasets &mdash; and there are *one or more* runs per experiment. We have the same data as before, we are now just seeing it in finer detail.
 {: .comment}
 
 The `Filters List` in the upper left shows columns in our results that have either continuous numerical values, or 10 or less (you can change this number) distinct values in them.  **Scroll** down through the list select a few of the filters.  When a filter is selected, a *values* box appears below, listing options for this filter, and the number of runs with each option.  These values / options are pulled from the dataset metadata.  Try **selecting** a few interesting sounding filters and then **select** one or more options for each filter. Try **unselecting** options and filters. As you do this, the number of found results will decrease or increase.
 
-> <div class="box-title tip-title" id="tip-use-filters-to-better-understand-the-data"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-use-filters-to-better-understand-the-data-contents" aria-expanded="true" aria-label="Toggle tip box: Use Filters to better understand the data"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Use Filters to better understand the data<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> <div class="box-title tip-title" id="tip-use-filters-to-better-understand-the-data"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-use-filters-to-better-understand-the-data" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Use Filters to better understand the data<span class="fold-unfold fa fa-minus-square"></span></button></div>
 >
 > Filters are how you narrow the datasets under consideration for sending to Galaxy, but they are also an excellent way to understand your data:
 > First, selecting a filter is an easy way to see the range of values in a column.  You may not be able to [find documentation on what the `sirs_outcome` column means](https://www.google.com/search?q=sra+sirs_outcome), but you can possibly figure it out by seeing what values are in it.
@@ -1164,7 +1529,7 @@ The `Filters List` in the upper left shows columns in our results that have eith
 {: .tip}
 
 
-> <div class="box-title hands-on-title" id="hands-on-narrow-your-results-using-run-selector" aria-label="hands-on box: Narrow your results using Run Selector"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Narrow your results using Run Selector</div>
+> <div class="box-title hands-on-title" id="hands-on-narrow-your-results-using-run-selector"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Narrow your results using Run Selector</div>
 >
 > 1. If you have any filters turned on, **unselect** them.
 >     Once you have done this, there won't be any *values* boxes appearing below the `Filters List`.
@@ -1179,7 +1544,7 @@ This reduces your `Found Items` list from tens of thousands of runs to 3 runs (a
 
 It's possible to select every remaining run by **clicking** the checkmark at the top of the first column.  You can unselect everything by **clicking** the `X`.
 
-> <div class="box-title hands-on-title" id="hands-on-select-runs-and-send-to-galaxy" aria-label="hands-on box: Select runs and send to Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Select runs and send to Galaxy</div>
+> <div class="box-title hands-on-title" id="hands-on-select-runs-and-send-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Select runs and send to Galaxy</div>
 >
 > 1. Select all runs by **clicking** the `X`.
 >    And now, the `Galaxy` button is live.
@@ -1191,7 +1556,7 @@ It's possible to select every remaining run by **clicking** the checkmark at the
 
 When we click `Galaxy` in Run Selector several things happen.  First, it launches a new browser tab or window which opens in Galaxy.  You will see the *big green box* indicating that the handshake between SRA and Galaxy was successful and you will then see a new `SRA` job in your history panel.  This box may start out as gray / pending, indicating that the transfer has not yet started, or it may go straight to yellow / running or to green / done.
 
-> <div class="box-title hands-on-title" id="hands-on-examine-the-new-sra-dataset" aria-label="hands-on box: Examine the new SRA Dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Examine the new SRA Dataset</div>
+> <div class="box-title hands-on-title" id="hands-on-examine-the-new-sra-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Examine the new SRA Dataset</div>
 >
 > 1. Once the `SRA` transfer is complete, **click** on the dataset's <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon.
 >
@@ -1210,7 +1575,7 @@ Lets now use that metadata to fetch the sequence data from SRA.  SRA provides to
 <p>First we need to find a good dataset to play with. The <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a> is the primary archive of <em>unassembled reads</em>  operated by the <a href="https://www.ncbi.nlm.nih.gov/">US National Institutes of Health (NIH)</a>.  SRA is a great place to get the sequencing data that underlie publications and studies. Let’s do that:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
 
   <ol>
     <li>Go to NCBI’s SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra</li>
@@ -1235,7 +1600,7 @@ Here is how it should look like:
 <p>Now that we have downloaded this file we can go to a Galaxy instance and start processing it.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
   <p>Note that the file we just downloaded is <strong>not</strong> sequencing data itself. Rather, it is <em>metadata</em> describing properties of sequencing reads. We will filter this list down to just a few accessions that will be used in the remainder of this tutorial.</p>
 
@@ -1244,7 +1609,7 @@ Here is how it should look like:
 <h2 id="process-and-filter-sraruninfocsv-file-in-galaxy">Process and filter <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> file in Galaxy</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-sraruninfo-csv-file-into-galaxy" aria-label="hands-on box: Upload `SraRunInfo.csv` file into Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload `SraRunInfo.csv` file into Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-sraruninfo-csv-file-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload `SraRunInfo.csv` file into Galaxy</div>
 
   <ol>
     <li>Go to your Galaxy instance of choice such as one of the <a href="https://usegalaxy.org/">usegalaxy.org</a>, <a href="https://usegalaxy.eu">usegalaxy.eu</a>, <a href="https://usegalaxy.org.au">usegalaxy.org.au</a> or any other. (This tutorial uses usegalaxy.org).</li>
@@ -1262,15 +1627,15 @@ Here is how it should look like:
 <p>Galaxy can process all 2,000+ datasets but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets <code class="language-plaintext highlighter-rouge">SRR11954102</code> and <code class="language-plaintext highlighter-rouge">SRR12733957</code>. So, let’s pull them out.</p>
 
 <!--SNIPPET-->
-<blockquote class="warning">   <div class="box-title warning-title" id="warning-beware-of-cuts" aria-label="warning box: Beware of Cuts"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Beware of Cuts</div>   <p>The section below uses <strong>Cut</strong> tool. There are two <strong>cut</strong> tools in Galaxy due to historical reasons. This example uses tool with the full name <strong>Cut columns from a table (cut)</strong>. However, the same logic applies to the other tool. It simply has a slightly different interface.</p> </blockquote>
+<blockquote class="warning">   <div class="box-title warning-title" id="warning-beware-of-cuts"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Beware of Cuts</div>   <p>The section below uses <strong>Cut</strong> tool. There are two <strong>cut</strong> tools in Galaxy due to historical reasons. This example uses tool with the full name <strong>Cut columns from a table (cut)</strong>. However, the same logic applies to the other tool. It simply has a slightly different interface.</p> </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-a-subset-of-data" aria-label="hands-on box: Creating a subset of data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a subset of data</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-a-subset-of-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating a subset of data</div>
 
   <ol>
     <li>Find <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> “<strong>Select lines that match an expression</strong>” tool in <strong>Filter and Sort</strong> section of the tool panel.
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-finding-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-finding-tools-contents" aria-expanded="true" aria-label="Toggle tip box: Finding tools"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Finding tools<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-finding-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-finding-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Finding tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>Galaxy may have an overwhelming amount of tools installed. To find a specific tool type the tool name in the tool panel search box to find the tool.</p>
       </blockquote>
     </li>
@@ -1296,7 +1661,7 @@ SRR11954102
 <h2 id="download-sequencing-data-with-faster-download-and-extract-reads-in-fastq">Download sequencing data with <strong>Faster Download and Extract Reads in FASTQ</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description-1" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
 
   <ol>
     <li><strong>Faster Download and Extract Reads in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1340,7 +1705,7 @@ See the Collections tutorials for more.</p>
 <p>In this part of the tutorial we will perform variant calling and basic analysis of the datasets downloaded above. We will start by downloading the Wuhan-Hu-1 SARS-CoV-2 reference sequence, then run adapter trimming, alignment and variant calling and finally look at the geographic distribution of some of the found variants.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-the-usegalaxy-covid-19-analysis-project" aria-label="comment box: The usegalaxy.* COVID-19 analysis project"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: The usegalaxy.* COVID-19 analysis project</div>
+  <div class="box-title comment-title" id="comment-the-usegalaxy-covid-19-analysis-project"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: The usegalaxy.* COVID-19 analysis project</div>
   <p>This tutorial uses a subset of the data and runs through the
 <a href="https://covid19.galaxyproject.org/genomics/4-variation/">Variation Analysis</a>
 section of <a href="https://covid19.galaxyproject.org/">covid19.galaxyproject.org</a>.
@@ -1355,7 +1720,7 @@ being updated continuously as new datasets are made public.</p>
 <p>This <a href="https://doi.org/10.5281/zenodo.3906454">data is available from Zenodo</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-the-reference-genome-data" aria-label="hands-on box: Get the reference genome data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get the reference genome data</div>
+  <div class="box-title hands-on-title" id="hands-on-get-the-reference-genome-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the reference genome data</div>
 
   <ol>
     <li>
@@ -1365,7 +1730,7 @@ being updated continuously as new datasets are made public.</p>
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1378,7 +1743,7 @@ being updated continuously as new datasets are made public.</p>
 <p>Removing sequencing adapters improves alignments and variant calling. <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can automatically detect widely used sequencing adapters.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description-2" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
 
   <ol>
     <li><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1403,7 +1768,7 @@ being updated continuously as new datasets are made public.</p>
 <p><strong>BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-align-sequencing-reads-to-reference-genome" aria-label="hands-on box: Align sequencing reads to reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Align sequencing reads to reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-align-sequencing-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Align sequencing reads to reference genome</div>
 
   <ol>
     <li><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1431,7 +1796,7 @@ being updated continuously as new datasets are made public.</p>
 <p><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> removes duplicate sequences originating from library preparation artifacts and sequencing artifacts. It is important to remove these artefactual sequences to avoid artificial overrepresentation of single molecule.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-pcr-duplicates" aria-label="hands-on box: Remove PCR duplicates"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove PCR duplicates</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-pcr-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Remove PCR duplicates</div>
 
   <ol>
     <li><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1449,7 +1814,7 @@ being updated continuously as new datasets are made public.</p>
 <p>After the duplicate marking step above we can generate statistic about the alignment we have generated.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-alignment-statistics" aria-label="hands-on box: Generate alignment statistics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate alignment statistics</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-alignment-statistics"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate alignment statistics</div>
 
   <ol>
     <li><strong>Samtools stats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1470,7 +1835,7 @@ being updated continuously as new datasets are made public.</p>
 <p><strong>Realign reads</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> corrects misalignments around insertions and deletions. This is required in order to accurately detect variants.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-realign-reads-around-indels" aria-label="hands-on box: Realign reads around indels"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Realign reads around indels</div>
+  <div class="box-title hands-on-title" id="hands-on-realign-reads-around-indels"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Realign reads around indels</div>
 
   <ol>
     <li><strong>Realign reads</strong> with lofreq <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1496,7 +1861,7 @@ being updated continuously as new datasets are made public.</p>
 <p>This step adds indel qualities into our alignment file. This is necessary in order to call variants using <strong>Call variants</strong> with lofreq <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-indel-qualities" aria-label="hands-on box: Add indel qualities"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add indel qualities</div>
+  <div class="box-title hands-on-title" id="hands-on-add-indel-qualities"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add indel qualities</div>
 
   <ol>
     <li><strong>Insert indel qualities</strong> with lofreq <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1522,7 +1887,7 @@ being updated continuously as new datasets are made public.</p>
 <p>We are now ready to call variants.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-call-variants" aria-label="hands-on box: Call variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Call variants</div>
+  <div class="box-title hands-on-title" id="hands-on-call-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Call variants</div>
 
   <ol>
     <li><strong>Call variants</strong> with lofreq <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1568,7 +1933,7 @@ being updated continuously as new datasets are made public.</p>
 <p>We will now annotate the variants we called in the previous step with the effect they have on the SARS-CoV-2 genome.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotate-variant-effects" aria-label="hands-on box: Annotate variant effects"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Annotate variant effects</div>
+  <div class="box-title hands-on-title" id="hands-on-annotate-variant-effects"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotate variant effects</div>
 
   <ol>
     <li><strong>SnpEff eff:</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1592,7 +1957,7 @@ being updated continuously as new datasets are made public.</p>
 <p>We will now select various effects from the VCF and create a tabular file that is easier to understand for humans.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-table-of-variants" aria-label="hands-on box: Create table of variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create table of variants</div>
+  <div class="box-title hands-on-title" id="hands-on-create-table-of-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create table of variants</div>
 
   <ol>
     <li><strong>SnpSift Extract Fields</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1616,7 +1981,7 @@ being updated continuously as new datasets are made public.</p>
 <p>We will now summarize our analysis with MultiQC, which generates a beautiful report for our data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-summarize-data" aria-label="hands-on box: Summarize data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Summarize data</div>
+  <div class="box-title hands-on-title" id="hands-on-summarize-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Summarize data</div>
 
   <ol>
     <li><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1691,10 +2056,12 @@ being updated continuously as new datasets are made public.</p>
 
 <p>Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.</p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Sequence data in the SRA can be directly imported into Galaxy</p>
@@ -1726,33 +2093,9 @@ being updated continuously as new datasets are made public.</p>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis (Variant Analysis)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis (Variant Analysis)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1770,7 +2113,7 @@ being updated continuously as new datasets are made public.</p>
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1811,7 +2154,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1823,29 +2166,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

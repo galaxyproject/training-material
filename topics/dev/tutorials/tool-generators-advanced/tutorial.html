@@ -12,30 +12,30 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators-advanced/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators-advanced/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="ToolFactory: Generating Tools From More Complex Scripts" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000" />
-<meta name="DC.creator" content="Ross Lazarus" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="ToolFactory: Generating Tools From More Complex Scripts">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-11-28 09:55:50 +0000">
+<meta name="DC.creator" content="Ross Lazarus">
 
         
         
         
         
-        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: ToolFactory: Generating Tools From More Complex Scripts" />
-        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: ToolFactory: Generating Tools From More Complex Scripts">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -510,10 +510,275 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-dev">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-11-28 09:55:50 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "ToolFactory: Generating Tools From More Complex Scripts",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'ToolFactory: Generating Tools From More Complex Scripts' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators-advanced/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "dev",
+  "description": "The questions this  addresses are:\n - What else can I do with the ToolFactory?\n\n\nThe objectives are:\n - Further develop your ToolFactory Skills\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html",
+      "name": "A Short Introduction to Galaxy",
+      "description": "Slides for 'A Short Introduction to Galaxy' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html",
+      "name": "A short introduction to Galaxy",
+      "description": "Hands-on for 'A short introduction to Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html",
+      "name": "Galaxy 101 for everyone",
+      "description": "Hands-on for 'Galaxy 101 for everyone' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-integration/slides.html",
+      "name": "Tool development and integration into Galaxy",
+      "description": "Slides for 'Tool development and integration into Galaxy' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "http://planemo.readthedocs.io/en/latest/writing_standalone.html",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive"
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/interactive-environments/slides.html",
+      "name": "Galaxy Interactive Environments",
+      "description": "Slides for 'Galaxy Interactive Environments' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/slides.html",
+      "name": "Introduction to the ToolFactory tutorial.",
+      "description": "Slides for 'Introduction to the ToolFactory tutorial.' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/tutorial.html",
+      "name": "ToolFactory: Generating Tools From Simple Scripts",
+      "description": "Hands-on for 'ToolFactory: Generating Tools From Simple Scripts' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/",
+      "name": "Ross Lazarus",
+      "image": "https://avatars.githubusercontent.com/fubar2",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/",
+      "name": "Ross Lazarus",
+      "image": "https://avatars.githubusercontent.com/fubar2",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-dev">
     <h1 data-toc-skip>ToolFactory: Generating Tools From More Complex Scripts</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -524,9 +789,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -845,13 +1110,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/dev/tutorials/tool-generators-advanced/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/dev/tutorials/tool-generators-advanced/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -870,7 +1132,10 @@
 
 
   
-  <li class="btn btn-default supporting_material">
+<!-- GTN Video Library true -->
+  
+<li class="btn btn-default supporting_material">
+  
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
         <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
     </a>
@@ -892,7 +1157,9 @@
         
         
     </ul>
-   </li>
+  
+</li>
+  
    
 
 
@@ -901,7 +1168,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -929,6 +1196,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -939,8 +1207,9 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#welcome-background-and-a-users-guide-to-this-training-material" id="markdown-toc-welcome-background-and-a-users-guide-to-this-training-material">Welcome, background and a user’s guide to this training material</a>    <ol>
@@ -1027,7 +1296,7 @@ on their own workstations, preparing them for sharing and deployment to producti
 system is damaged, the Appliance can be rebuilt from scratch in a few minutes.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-under-the-hood"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-under-the-hood-contents" aria-expanded="true" aria-label="Toggle tip box: Under the hood:"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Under the hood:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-under-the-hood"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-under-the-hood" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Under the hood:<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
     <li>It uses <a href="https://github.com/hexylena/galaxyxml">galaxyml</a> to generate the tool XML from ToolFactory form settings.</li>
@@ -1095,7 +1364,7 @@ automated code generator in a tailored, readily deployed appliance.</li>
 <h2 id="installation">Installation</h2>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-security-advisory" aria-label="warning box: Security advisory!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Security advisory!</div>
+  <div class="box-title warning-title" id="warning-security-advisory"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Security advisory!</div>
   <ul>
     <li><em>Please do not install the ToolFactory on any public server</em></li>
     <li>Although it will only run for administrative users, it allows unlimited scripting and that exposes unwise security weakness for any public facing machine.</li>
@@ -1106,10 +1375,10 @@ automated code generator in a tailored, readily deployed appliance.</li>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-launching-the-appliance" aria-label="hands-on box: Launching the Appliance"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launching the Appliance</div>
+  <div class="box-title hands-on-title" id="hands-on-launching-the-appliance"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Launching the Appliance</div>
 
   <blockquote class="warning">
-    <div class="box-title warning-title" id="warning-pull-the-images-first-as-shown-below-to-save-time" aria-label="warning box: `Pull` the images first as shown below to save time."><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: `Pull` the images first as shown below to save time.</div>
+    <div class="box-title warning-title" id="warning-pull-the-images-first-as-shown-below-to-save-time"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: `Pull` the images first as shown below to save time.</div>
 
     <p>If they are not found locally the first time you run <code class="language-plaintext highlighter-rouge">docker-compose up</code>, docker will build them, taking half an hour or more instead of a couple of minutes.</p>
 
@@ -1126,7 +1395,7 @@ automated code generator in a tailored, readily deployed appliance.</li>
       <p>Clone/Download, Change to the compose directory, and launch it:</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-installing-the-docker-files-pulling-and-launching-the-appliance"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-installing-the-docker-files-pulling-and-launching-the-appliance-contents" aria-expanded="true" aria-label="Toggle tip box: Installing the docker files, pulling and launching the Appliance"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Installing the docker files, pulling and launching the Appliance<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-installing-the-docker-files-pulling-and-launching-the-appliance"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-installing-the-docker-files-pulling-and-launching-the-appliance" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Installing the docker files, pulling and launching the Appliance<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/fubar2/toolfactory-galaxy-server
 <span class="nb">cd </span>toolfactory-galaxy-server/compose
 <span class="nb">mkdir export
@@ -1136,7 +1405,7 @@ docker-compose up
       </blockquote>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-appliance-tips"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-appliance-tips-contents" aria-expanded="true" aria-label="Toggle tip box: Appliance tips"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Appliance tips<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-appliance-tips"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-appliance-tips" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Appliance tips<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ul>
           <li><code class="language-plaintext highlighter-rouge">docker-compose pull</code> and making the local export directory <em>are only needed the first time</em>.</li>
@@ -1178,7 +1447,7 @@ docker-compose up
       </ul>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-demonstration-tools-are-the-functional-documentation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-demonstration-tools-are-the-functional-documentation-contents" aria-expanded="true" aria-label="Toggle tip box: Demonstration tools are the functional documentation"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Demonstration tools are the functional documentation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-demonstration-tools-are-the-functional-documentation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-demonstration-tools-are-the-functional-documentation" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Demonstration tools are the functional documentation<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ul>
           <li>At first login you will find the demonstration history ready to explore if you waited for all the first run installation activity to die down</li>
@@ -1195,7 +1464,7 @@ docker-compose up
       </blockquote>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-patience"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-patience-contents" aria-expanded="true" aria-label="Toggle tip box: Patience!"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Patience!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-patience"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-patience" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Patience!<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
 Check for Conda or other processes if things seem stuck.</p>
       </blockquote>
@@ -1222,7 +1491,7 @@ Check for Conda or other processes if things seem stuck.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-brief-guide-to-toolfactory-appliance-operation" aria-label="hands-on box: Brief Guide to ToolFactory Appliance Operation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Brief Guide to ToolFactory Appliance Operation</div>
+  <div class="box-title hands-on-title" id="hands-on-brief-guide-to-toolfactory-appliance-operation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Brief Guide to ToolFactory Appliance Operation</div>
 
   <h2 id="generating-new-tools---what-happens-when-you-press-execute-on-a-completed-toolfactory-form">Generating new tools - what happens when you press <code class="language-plaintext highlighter-rouge">execute</code> on a completed ToolFactory form?</h2>
 
@@ -1275,7 +1544,7 @@ Congratulations on acquiring a local instance of the ToolFactory Appliance</p>
 <h1 id="hands-on-learning-to-use-the-toolfactory">Hands-on: Learning to use the ToolFactory</h1>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-using-an-appliance-involves-dependency-installation-that-may-cause-long-pauses"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-an-appliance-involves-dependency-installation-that-may-cause-long-pauses-contents" aria-expanded="true" aria-label="Toggle tip box: Using an Appliance involves dependency installation that may cause long pauses..."><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using an Appliance involves dependency installation that may cause long pauses...<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-using-an-appliance-involves-dependency-installation-that-may-cause-long-pauses"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-an-appliance-involves-dependency-installation-that-may-cause-long-pauses" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Using an Appliance involves dependency installation that may cause long pauses...<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>There will be delays as any new dependencies are installed for the first time</p>
   <ul>
     <li>the first ToolFactory run after first starting a new Appliance will involve Conda installing the ToolFactory dependencies before running the job.</li>
@@ -1286,7 +1555,7 @@ Congratulations on acquiring a local instance of the ToolFactory Appliance</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-exploring-the-sample-tools-by-regenerating-their-original-toolfactory-forms" aria-label="hands-on box: Exploring the sample tools by regenerating their original ToolFactory forms"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Exploring the sample tools by regenerating their original ToolFactory forms</div>
+  <div class="box-title hands-on-title" id="hands-on-exploring-the-sample-tools-by-regenerating-their-original-toolfactory-forms"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Exploring the sample tools by regenerating their original ToolFactory forms</div>
 
   <ul>
     <li>With the ToolFactory working and the sample history active as described above</li>
@@ -1353,7 +1622,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-repeats-demonstration-generated-tool-xml"><button class="gtn-boxify-button details" type="button" aria-controls="details-repeats-demonstration-generated-tool-xml-contents" aria-expanded="true" aria-label="Toggle details box: Repeats demonstration generated tool XML"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Repeats demonstration generated tool XML<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-repeats-demonstration-generated-tool-xml"><button class="gtn-boxify-button details" type="button" aria-controls="details-repeats-demonstration-generated-tool-xml" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Repeats demonstration generated tool XML<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"repeats_demo"</span> <span class="na">id=</span><span class="s">"repeats_demo"</span> <span class="na">version=</span><span class="s">"2.00"</span><span class="nt">&gt;</span>
   <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
@@ -1473,7 +1742,7 @@ Script::
 </ul>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-the-default-generated-test-for-output-collections-always-passes-because-it-doesn-t-test-anything" aria-label="warning box: The default generated test for output collections always passes because it doesn't test anything."><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: The default generated test for output collections always passes because it doesn't test anything.</div>
+  <div class="box-title warning-title" id="warning-the-default-generated-test-for-output-collections-always-passes-because-it-doesn-t-test-anything"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: The default generated test for output collections always passes because it doesn't test anything.</div>
 
   <ul>
     <li>Supplying a test over-ride is recommended for collections.</li>
@@ -1488,7 +1757,7 @@ Script::
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-plotter-collection-output-demonstration-tool-form-generated-xml-and-outputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-plotter-collection-output-demonstration-tool-form-generated-xml-and-outputs-contents" aria-expanded="true" aria-label="Toggle details box: `plotter` collection output demonstration tool form, generated XML and outputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `plotter` collection output demonstration tool form, generated XML and outputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-plotter-collection-output-demonstration-tool-form-generated-xml-and-outputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-plotter-collection-output-demonstration-tool-form-generated-xml-and-outputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: `plotter` collection output demonstration tool form, generated XML and outputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
     <li>The ToolFactory form for the plotter example tool
@@ -1621,7 +1890,7 @@ Script::
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-select-test-select-field-demonstration-tool-generated-xml"><button class="gtn-boxify-button details" type="button" aria-controls="details-select-test-select-field-demonstration-tool-generated-xml-contents" aria-expanded="true" aria-label="Toggle details box: `select_test` select field demonstration tool generated XML"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `select_test` select field demonstration tool generated XML<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-select-test-select-field-demonstration-tool-generated-xml"><button class="gtn-boxify-button details" type="button" aria-controls="details-select-test-select-field-demonstration-tool-generated-xml" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: `select_test` select field demonstration tool generated XML<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The ToolFactory form section for user configurable command line settings is
  configured as shown here for the select demonstration</p>
@@ -1720,7 +1989,7 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-planemo-lint-demonstration-tool-generated-xml"><button class="gtn-boxify-button details" type="button" aria-controls="details-planemo-lint-demonstration-tool-generated-xml-contents" aria-expanded="true" aria-label="Toggle details box: `planemo lint` demonstration tool generated XML"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `planemo lint` demonstration tool generated XML<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-planemo-lint-demonstration-tool-generated-xml"><button class="gtn-boxify-button details" type="button" aria-controls="details-planemo-lint-demonstration-tool-generated-xml" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: `planemo lint` demonstration tool generated XML<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The labels for outputs have been edited to include the tool name in this sample - this is not possible at present in the ToolFactory.</p>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"planemo_lint"</span> <span class="na">id=</span><span class="s">"planemo_lint"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
@@ -1835,7 +2104,7 @@ Script::
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-prolog-and-lisp-demonstration-tools"><button class="gtn-boxify-button details" type="button" aria-controls="details-prolog-and-lisp-demonstration-tools-contents" aria-expanded="true" aria-label="Toggle details box: `Prolog` and `Lisp` demonstration tools"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `Prolog` and `Lisp` demonstration tools<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-prolog-and-lisp-demonstration-tools"><button class="gtn-boxify-button details" type="button" aria-controls="details-prolog-and-lisp-demonstration-tools" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: `Prolog` and `Lisp` demonstration tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"prolog_demo"</span> <span class="na">id=</span><span class="s">"prolog_demo"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
   <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
   <span class="c">&lt;!--Created by admin@galaxy.org at 04/04/2021 17:21:32 using the Galaxy Tool Factory.--&gt;</span>
@@ -1979,7 +2248,7 @@ Lisp in the ToolFactory
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-bwa-test-command-override-sample-the-command-override"><button class="gtn-boxify-button details" type="button" aria-controls="details-bwa-test-command-override-sample-the-command-override-contents" aria-expanded="true" aria-label="Toggle details box: `bwa_test_command_override` sample - the command override"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `bwa_test_command_override` sample - the command override<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-bwa-test-command-override-sample-the-command-override"><button class="gtn-boxify-button details" type="button" aria-controls="details-bwa-test-command-override-sample-the-command-override" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: `bwa_test_command_override` sample - the command override<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>ToolFactory command over-ride section adapted from the Planemo BWA example.</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ## Build reference
@@ -2006,7 +2275,7 @@ samtools sort -o "${bwa_test_commover_bam_output}" temporary_bam_file.bam
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-bwa-test-toolfactory-positional-bash-sample-alternative"><button class="gtn-boxify-button details" type="button" aria-controls="details-bwa-test-toolfactory-positional-bash-sample-alternative-contents" aria-expanded="true" aria-label="Toggle details box: `bwa_test_toolfactory_positional_bash` sample alternative."><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `bwa_test_toolfactory_positional_bash` sample alternative.<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-bwa-test-toolfactory-positional-bash-sample-alternative"><button class="gtn-boxify-button details" type="button" aria-controls="details-bwa-test-toolfactory-positional-bash-sample-alternative" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: `bwa_test_toolfactory_positional_bash` sample alternative.<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>ToolFactory form bash script to replace above command over-ride section:</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>REFFILE=$1
@@ -2156,7 +2425,7 @@ It should be there if the XML for the new tool appeared without complaint. Pleas
 <h2 id="why-is-the-form-so-complex">Why is the form so complex?</h2>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-summary-details-needed-and-how-they-are-used-to-generate-a-new-tool"><button class="gtn-boxify-button details" type="button" aria-controls="details-summary-details-needed-and-how-they-are-used-to-generate-a-new-tool-contents" aria-expanded="true" aria-label="Toggle details box: Summary: details needed and how they are used to generate a new tool"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Summary: details needed and how they are used to generate a new tool<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-summary-details-needed-and-how-they-are-used-to-generate-a-new-tool"><button class="gtn-boxify-button details" type="button" aria-controls="details-summary-details-needed-and-how-they-are-used-to-generate-a-new-tool" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Summary: details needed and how they are used to generate a new tool<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <h4 id="what-information-is-needed-to-generate-a-tool-">What information is needed to generate a tool ?</h4>
 
@@ -2312,10 +2581,12 @@ Thanks all! It has been a lot of fun.</p>
  <a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=27" alt="Avatar" />Marius van den Beek</a> for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.</li>
 </ul>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>The ToolFactory Appliance includes an automated form driven tool generator available as a pop-up Docker appliance.</p>
@@ -2368,33 +2639,9 @@ Thanks all! It has been a lot of fun.</p>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=ToolFactory: Generating Tools From More Complex Scripts (Development in Galaxy)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=ToolFactory: Generating Tools From More Complex Scripts (Development in Galaxy)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -2412,7 +2659,7 @@ Thanks all! It has been a lot of fun.</p>
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -2453,7 +2700,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -2465,29 +2712,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

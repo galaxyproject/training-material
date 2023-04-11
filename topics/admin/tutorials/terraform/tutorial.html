@@ -12,30 +12,30 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Deploying a compute cluster in OpenStack via Terraform" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
-<meta name="DC.creator" content="Helena Rasche" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Deploying a compute cluster in OpenStack via Terraform">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.creator" content="Helena Rasche">
 
         
         
         
         
-        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Deploying a compute cluster in OpenStack via Terraform" />
-        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta name="description" content="Resources related to configuration and maintenance of Gal...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Deploying a compute cluster in OpenStack via Terraform">
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/gat.png" />
+        <meta property="og:image" content="/training-material/assets/images/gat.png">
 
         
         <script type="application/ld+json">
@@ -393,10 +393,158 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-admin">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-18 14:23:35 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Deploying a compute cluster in OpenStack via Terraform",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Deploying a compute cluster in OpenStack via Terraform' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/tutorial.html",
+  "timeRequired": "PT60M",
+  "keywords": "admin, terraform, deploying, cloud",
+  "description": "The questions this  addresses are:\n - What is Terraform?\n - In which situations is it good/bad?\n - How to use it for managing your VM cluster\n\n\nThe objectives are:\n - Learn Terraform basics\n - Launch a VM with Terraform\n - Launch and tear down a cluster with Terraform\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-admin">
     <h1 data-toc-skip>Deploying a compute cluster in OpenStack via Terraform</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -407,9 +555,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -470,13 +618,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/admin/tutorials/terraform/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/admin/tutorials/terraform/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -510,6 +655,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -520,6 +666,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="overview">Overview</h1>
 
 <p>In this tutorial we will briefly cover what <a href="https://www.terraform.io">Terraform</a> is and how you can leverage it for your needs. This will not make you an expert on Terraform but will give you the tools you need in order to maintain your cloud infrastructure as code.</p>
@@ -527,7 +674,7 @@
 <p>This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient. This tutorial uses the OpenStack provider for Terraform. Other Cloud providers are available, but their invocation will be different from that which is described here.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
@@ -593,7 +740,7 @@ Knowing that your infrastructure is exactly what you expect it to be can simplif
 <p>We will start small, by managing a single VM in our cloud account. Make sure you have your OpenStack credentials available.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-obtaining-credentials-from-openstack-dashboard"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-obtaining-credentials-from-openstack-dashboard-contents" aria-expanded="true" aria-label="Toggle tip box: Obtaining credentials from OpenStack dashboard"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Obtaining credentials from OpenStack dashboard<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-obtaining-credentials-from-openstack-dashboard"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-obtaining-credentials-from-openstack-dashboard" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Obtaining credentials from OpenStack dashboard<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>You can download the environment file with the credentials from the OpenStack dashboard.</p>
 
@@ -617,7 +764,7 @@ Knowing that your infrastructure is exactly what you expect it to be can simplif
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setting-up-terraform" aria-label="hands-on box: Setting up Terraform"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting up Terraform</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-up-terraform"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setting up Terraform</div>
 
   <ol>
     <li>
@@ -638,12 +785,12 @@ Knowing that your infrastructure is exactly what you expect it to be can simplif
       <p>Run <code class="language-plaintext highlighter-rouge">terraform init</code></p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <p>What did the output look like?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>If this is not the first time you’ve run it, you will see Terraform download any missing providers:</p>
 
@@ -690,21 +837,21 @@ commands will detect it and remind you to do so if necessary.
 <p>We will start by managing your SSH keypair for the cloud as this is an easy thing to add.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-your-operating-system" aria-label="comment box: Your Operating System"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Your Operating System</div>
+  <div class="box-title comment-title" id="comment-your-operating-system"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Your Operating System</div>
 
   <p>If you are on Windows and do not know your public key, please skip to the “Adding an Instance” section, as you probably do not have the tools installed to do this, and we cannot document how to do it. Instead you can simply reference the key by name later. We will point out this location.</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-keypairs" aria-label="hands-on box: Keypairs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Keypairs</div>
+  <div class="box-title hands-on-title" id="hands-on-keypairs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Keypairs</div>
 
   <ol>
     <li>
       <p>Find the public key you will use for connecting to the your new VM. It is usually known as <code class="language-plaintext highlighter-rouge">id_rsa.pub</code></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-no-public-key" aria-label="comment box: No public key"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: No public key</div>
+        <div class="box-title comment-title" id="comment-no-public-key"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: No public key</div>
         <p>If you can find the private key file (possibly a <code class="language-plaintext highlighter-rouge">cloud.pem</code> file you downloaded earlier from OpenStack), then you can find the public key by running the command:</p>
 
         <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh-keygen <span class="nt">-y</span> <span class="nt">-f</span> /path/to/key.pem
@@ -724,12 +871,12 @@ commands will detect it and remind you to do so if necessary.
       <p>Run <code class="language-plaintext highlighter-rouge">terraform plan</code></p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <p>What does the output look like? Did it execute successfully?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>If you have not sourced your OpenStack credentials file, you will see something like the following:</p>
 
@@ -806,7 +953,7 @@ can't guarantee that exactly these actions will be performed if
 <p>Lastly it informs us that we did not save our plan. Terraform can maintain a concept of what the remote resource’s state looks like between your <code class="language-plaintext highlighter-rouge">terraform plan</code> and <code class="language-plaintext highlighter-rouge">terraform apply</code> steps. This is a more advanced feature and will not be covered today.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-applying-our-plan" aria-label="hands-on box: Applying our plan"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Applying our plan</div>
+  <div class="box-title hands-on-title" id="hands-on-applying-our-plan"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Applying our plan</div>
 
   <p>Now that you’ve reviewed the plan and everything looks good, we’re ready to apply our changes.</p>
 
@@ -853,7 +1000,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 </code></pre></div>      </div>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-quot-key-pair-my-key-already-exists-quot" aria-label="comment box: &quot;Key pair 'my-key' already exists&quot;"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: &quot;Key pair 'my-key' already exists&quot;</div>
+        <div class="box-title comment-title" id="comment-quot-key-pair-my-key-already-exists-quot"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: &quot;Key pair 'my-key' already exists&quot;</div>
 
         <p>If you see an error message that says:</p>
 
@@ -880,7 +1027,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 </ul>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-doing-this-training-outside-of-a-training-event" aria-label="comment box: Doing this training outside of a training event"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Doing this training outside of a training event</div>
+  <div class="box-title comment-title" id="comment-doing-this-training-outside-of-a-training-event"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Doing this training outside of a training event</div>
   <p>If you are doing this training outside of an event, then you will likely need to do some additional steps specific to your Cloud:</p>
 
   <ol>
@@ -898,14 +1045,14 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 <p>You are now ready to launch an instance!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-launching-an-instance" aria-label="hands-on box: Launching an Instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launching an Instance</div>
+  <div class="box-title hands-on-title" id="hands-on-launching-an-instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Launching an Instance</div>
 
   <ol>
     <li>
       <p>Open your <code class="language-plaintext highlighter-rouge">main.tf</code> in your text editor and add the following.</p>
 
       <blockquote class="warning">
-        <div class="box-title warning-title" id="warning-correct-image-flavor-network-security-group-names" aria-label="warning box: Correct image/flavor/network/security_group names"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Correct image/flavor/network/security_group names</div>
+        <div class="box-title warning-title" id="warning-correct-image-flavor-network-security-group-names"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Correct image/flavor/network/security_group names</div>
         <p>The documentation below notes some specific values for the <code class="language-plaintext highlighter-rouge">image_name</code>, <code class="language-plaintext highlighter-rouge">flavor_name</code>, <code class="language-plaintext highlighter-rouge">security_groups</code>, and <code class="language-plaintext highlighter-rouge">network</code> properties. These <em>may not be correct</em> for your training, instead your instructor will provide these values to you.</p>
       </blockquote>
 
@@ -1053,7 +1200,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 <p>You now have a running instance! We do not know the IP address so we cannot login yet. You can obtain that from the OpenStack dashboard, or via the <code class="language-plaintext highlighter-rouge">terraform show</code> command</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-terraform-show-and-logging-in" aria-label="hands-on box: `terraform show` and logging in"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: `terraform show` and logging in</div>
+  <div class="box-title hands-on-title" id="hands-on-terraform-show-and-logging-in"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: `terraform show` and logging in</div>
 
   <ol>
     <li>
@@ -1158,7 +1305,7 @@ Uptime............: up 5 minutes
 <p>We will start by setting up the new nodes and launching them as a test:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adding-configuration-for-other-nodes" aria-label="hands-on box: Adding configuration for other nodes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding configuration for other nodes</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-configuration-for-other-nodes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adding configuration for other nodes</div>
 
   <ol>
     <li>
@@ -1248,12 +1395,12 @@ Do you want to perform these actions?
       <p>It should complete successfully</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <p>What did the output look like?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_instance_v2.nfs: Creation complete after 2m55s (ID: 421f0899-f2c1-43c9-8bbe-9b0415c8f4f4)
 openstack_compute_instance_v2.exec[0]: Creation complete after 2m57s (ID: 1ae02775-a0ff-47a5-907f-513190a8548e)
@@ -1274,7 +1421,7 @@ Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 <p><a href="https://cloud-init.io/"><code class="language-plaintext highlighter-rouge">cloud-init</code></a> is used for this process, it allows for injecting files and executing commands as part of the boot process.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-other-actions"><button class="gtn-boxify-button details" type="button" aria-controls="details-other-actions-contents" aria-expanded="true" aria-label="Toggle details box: Other actions"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Other actions<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-other-actions"><button class="gtn-boxify-button details" type="button" aria-controls="details-other-actions" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Other actions<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>cloud-init allows for many more actions to be executed as well, you can read about them in <a href="https://cloudinit.readthedocs.io/en/latest/">the documentation</a>.</p>
 </blockquote>
 
@@ -1300,7 +1447,7 @@ Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 <p>This will create a file with the value from <code class="language-plaintext highlighter-rouge">content</code>, owned by root/group root, in <code class="language-plaintext highlighter-rouge">/etc/condor/condor_config.local</code>. So let’s re-structure our <code class="language-plaintext highlighter-rouge">main.tf</code> file to have some configuration:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cloud-init" aria-label="hands-on box: cloud-init"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: cloud-init</div>
+  <div class="box-title hands-on-title" id="hands-on-cloud-init"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: cloud-init</div>
 
   <ol>
     <li>
@@ -1415,7 +1562,7 @@ EOF
       <p>Compare your final configuration against ours:</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-final-configuration"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-final-configuration-contents" aria-expanded="true" aria-label="Toggle solution box: Final Configuration"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: Final Configuration<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-final-configuration"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-final-configuration" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Final Configuration<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_keypair_v2" "my-cloud-key" {
   name       = "my-key"
   public_key = "ssh-rsa AAAAB3..."
@@ -1591,7 +1738,7 @@ Do you want to perform these actions?
 <p>We now have a running cluster! Let’s log in</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cluster-usage" aria-label="hands-on box: Cluster Usage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Cluster Usage</div>
+  <div class="box-title hands-on-title" id="hands-on-cluster-usage"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cluster Usage</div>
 
   <ol>
     <li>
@@ -1606,12 +1753,12 @@ Do you want to perform these actions?
       <p>After your central manager VM booted, the executor nodes booted as well. Then, using the IP address of the central manager, the executors contacted that machine, and advertised their availability to run jobs.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <p>What does the output look like? How many executor nodes do you see?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[centos@central-manager share]$ condor_status
 Name                   OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
 
@@ -1671,7 +1818,7 @@ sleep 1
 <p>Terraform has the ability to produce a graph showing the relationship of resources in your infrastructure. We will produce a graphic for our current terraform plan:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-infrastructure-graph" aria-label="hands-on box: Infrastructure Graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Infrastructure Graph</div>
+  <div class="box-title hands-on-title" id="hands-on-infrastructure-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Infrastructure Graph</div>
 
   <ol>
     <li>
@@ -1686,13 +1833,13 @@ sleep 1
       <p>Open up <code class="language-plaintext highlighter-rouge">graph.png</code> in an image viewer</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <p>What did the output look like?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-          <figure id="figure-1"><img src="../../images/graph.png" alt="A simple graph. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A simple graph showing the structure of the infrastructure in this lesson</figcaption></figure>
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <figure id="figure-1"><img src="../../images/graph.png" alt="A simple graph. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A simple graph showing the structure of the infrastructure in this lesson</figcaption></figure>
         </blockquote>
       </blockquote>
     </li>
@@ -1702,20 +1849,20 @@ sleep 1
 
 <p>This is a very simple resrouce graph:</p>
 
-<figure id="figure-2"><img src="../../images/graph.png" alt="A simple graph. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> A simple graph showing the structure of the infrastructure in this lesson</figcaption></figure>
+<figure id="figure-2"><img src="../../images/graph.png" alt="A simple graph. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A simple graph showing the structure of the infrastructure in this lesson</figcaption></figure>
 
 <p>The dependencies follow the arrows, the NFS depends on the keypair being setup. The <code class="language-plaintext highlighter-rouge">test</code> machine (central manager) depends on the NFS server being available (and having an IP), the exec nodes depend on the central manager server. This is a somewhat simplified view, there are more dependencies which are not shown for simplicity (e.g. the exec nodes depend on NFS)</p>
 
 <p>If you have variables this can produce a more complex dependency graph:</p>
 
-<figure id="figure-3"><img src="../../images/graph2.png" alt="A more complex graph showing variables. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> A more complex graph showing variables</figcaption></figure>
+<figure id="figure-3"><img src="../../images/graph2.png" alt="A more complex graph showing variables. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A more complex graph showing variables</figcaption></figure>
 
 <p>Once you develop complex infrastructure, these graphics become less useful.</p>
 
 <h1 id="tearing-everything-down">Tearing Everything Down</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cleanup" aria-label="hands-on box: Cleanup"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Cleanup</div>
+  <div class="box-title hands-on-title" id="hands-on-cleanup"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cleanup</div>
 
   <ol>
     <li>
@@ -1801,10 +1948,12 @@ condor_drain <span class="si">$(</span><span class="nb">hostname</span><span cla
 
 <p>All of <a href="https://github.com/usegalaxy-eu/infrastructure/">our virtual infrastructure</a> is managed, publicly, with Terraform. We hope that this can inspire others and give people ideas of the sort of things they can accomplish with Terraform. If you have questions over the way we have done certain things, feel free to file an issue and ask us!</p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Terraform lets you develop and implement infrastructure-as-code within your organisation</p>
@@ -1836,33 +1985,9 @@ condor_drain <span class="si">$(</span><span class="nb">hostname</span><span cla
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Deploying a compute cluster in OpenStack via Terraform (Galaxy Server administration)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Deploying a compute cluster in OpenStack via Terraform (Galaxy Server administration)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1880,7 +2005,7 @@ condor_drain <span class="si">$(</span><span class="nb">hostname</span><span cla
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1921,7 +2046,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1933,29 +2058,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

@@ -12,30 +12,30 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="From small to large-scale genome comparison" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
-<meta name="DC.creator" content="Esteban Perez-Wohlfeil" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="From small to large-scale genome comparison">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.creator" content="Esteban Perez-Wohlfeil">
 
         
         
         
         
-        <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: From small to large-scale genome comparison" />
-        <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta name="description" content="Genome annotation is a multi-level process that includes ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: From small to large-scale genome comparison">
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes ...">
         
-        <meta property="og:image" content="/training-material/assets/images/gga.png" />
+        <meta property="og:image" content="/training-material/assets/images/gga.png">
 
         
         <script type="application/ld+json">
@@ -426,10 +426,191 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-genome-annotation">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-18 14:23:35 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "From small to large-scale genome comparison",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'From small to large-scale genome comparison' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "genome-annotation",
+  "description": "The questions this  addresses are:\n - How can we run pairwise genome comparisons using Galaxy?\n - How can we run massive chromosome comparisons in Galaxy?\n - How can we quickly visualize genome comparisons in Galaxy?\n\n\nThe objectives are:\n - Learn the basics of pairwise sequence comparison\n - Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels\n - Learn how to post-process your sequence comparisons\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html",
+      "name": "Galaxy 101",
+      "description": "Hands-on for 'Galaxy 101' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/estebanpw/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/estebanpw/",
+      "name": "Esteban Perez-Wohlfeil",
+      "image": "https://avatars.githubusercontent.com/estebanpw",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/estebanpw/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/estebanpw/",
+      "name": "Esteban Perez-Wohlfeil",
+      "image": "https://avatars.githubusercontent.com/estebanpw",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0362",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0362",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0362"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-genome-annotation">
     <h1 data-toc-skip>From small to large-scale genome comparison</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -440,9 +621,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -571,7 +752,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/" title="Workflows" alt="From small to large-scale genome comparison workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/" title="From small to large-scale genome comparison workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -585,13 +766,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -617,7 +795,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -770,6 +948,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
             UseGalaxy.org.au
         </a>
@@ -799,6 +979,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -809,6 +990,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <!-- This is a comment. -->
@@ -825,7 +1007,7 @@
 </ul>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -858,16 +1040,16 @@
 <p>First we will be uploading the data to Galaxy so that we can run our tools on it.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-mycoplasma-data-upload" aria-label="hands-on box: Mycoplasma data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Mycoplasma data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-mycoplasma-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Mycoplasma data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial and give it a descriptive name (e.g. “Mycoplasma comparison hands-on”)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
       <p>Import <code class="language-plaintext highlighter-rouge">mycoplasma-232.fasta</code> and <code class="language-plaintext highlighter-rouge">mycoplasma-7422.fasta</code> from <a href="https://zenodo.org/record/4485547#.YBj8XHmCGUk">Zenodo</a>.</p>
@@ -877,7 +1059,7 @@ https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <p>As default, Galaxy takes the link as name, so rename them.</p>
     </li>
@@ -885,9 +1067,9 @@ https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
       <p>Rename the files to <code class="language-plaintext highlighter-rouge">232.fasta</code> and <code class="language-plaintext highlighter-rouge">7422.fasta</code> and change the datatype if needed to <code class="language-plaintext highlighter-rouge">fasta</code> (Galaxy will auto-discover the format of the files).</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -896,14 +1078,14 @@ https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
 <p>If you were successful, both sequences should now be available as <code class="language-plaintext highlighter-rouge">.fasta</code> datasets in your history.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>What do you think about the size of the sequences in regards to the difficulty of comparing them? (You can check the size of the files by clicking on the information icon)</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>It always depends on the focus of our study. For instance, if we were looking for optimal alignments, two 1 MB sequences are indeed large enough to make most approaches either fail or take a decent amount of time and resources. On the other hand, if we were looking for seed-based local alignments (e.g. <code class="language-plaintext highlighter-rouge">GECKO</code> or <code class="language-plaintext highlighter-rouge">BLAST</code> (<span class="citation"><a href="#BLAST">Altschul <i>et al.</i> 1990</a></span>) ), the comparison would require merely seconds (check the slides for more information).</li>
     </ol>
@@ -919,9 +1101,9 @@ https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
 <p>We will now run a comparison between <em>Mycoplasma hyopneumoniae 232</em> and <em>Mycoplasma hyopneumoniae 7422</em> in Galaxy using <code class="language-plaintext highlighter-rouge">GECKO</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-comparing-two-mycoplasmas-with-gecko" aria-label="hands-on box: Comparing two mycoplasmas with GECKO"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Comparing two mycoplasmas with GECKO</div>
+  <div class="box-title hands-on-title" id="hands-on-comparing-two-mycoplasmas-with-gecko"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Comparing two mycoplasmas with GECKO</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2"><strong>GECKO</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2" title="GECKO tool"><strong>GECKO</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Query sequence”</em>: <code class="language-plaintext highlighter-rouge">232.fasta</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference sequence”</em>: <code class="language-plaintext highlighter-rouge">7422.fasta</code></li>
@@ -933,7 +1115,7 @@ https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
     </li>
     <li>Check out the files that have been generated, i.e. the <code class="language-plaintext highlighter-rouge">CSV</code> and the <code class="language-plaintext highlighter-rouge">Alignments</code> file.
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>What information is provided in the <code class="language-plaintext highlighter-rouge">CSV</code> file?</li>
@@ -942,7 +1124,7 @@ https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The <code class="language-plaintext highlighter-rouge">CSV</code> file contains a summary of the detected High-Scoring Segment Pairs (HSPs) or alignments. The file is divided in a few rows of metadata (e.g. containing the sequence names) and one row per alignment detected. Check out the <code class="language-plaintext highlighter-rouge">GECKO</code> help (bottom of the tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> page to know what each column does!</li>
             <li>The <code class="language-plaintext highlighter-rouge">Alignments</code> file contains the actual regions of the query and reference sequence for each alignment detected. With this file, you can investigate individual alignments, find mutations and differences between the sequences, extract the aligned part, etc.</li>
@@ -952,7 +1134,7 @@ https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
       </blockquote>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-note-about-parameters" aria-label="comment box: Note about parameters"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note about parameters</div>
+        <div class="box-title comment-title" id="comment-note-about-parameters"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note about parameters</div>
         <ol>
           <li>Besides the <code class="language-plaintext highlighter-rouge">minimum length</code> and <code class="language-plaintext highlighter-rouge">minimum similarity</code> parameters, which are applied as a filter after the comparison is completed, the <code class="language-plaintext highlighter-rouge">k-mer seed size</code> is an internal parameter that regulates the number of seeds that can be found. A smaller <code class="language-plaintext highlighter-rouge">k-mer</code> size will translate into detecting more seeds, which are starting points for alignments.</li>
           <li>Notice that this parameter must be taken into account depending on the type of sequence that we are working with. For example, if we set <code class="language-plaintext highlighter-rouge">k-mer seed size</code> to <code class="language-plaintext highlighter-rouge">32</code>, then <code class="language-plaintext highlighter-rouge">GECKO</code> will attempt to find alignments that start with 32 consecutive, equally aligned base pairs between the two sequences. If your sequences are far away from each other (in terms of evolutionary distance) then it will be very hard to find such 32 consecutive base pairs!</li>
@@ -969,29 +1151,29 @@ https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
 <p>We will now use additional tools to post-process our alignments. Consider the case where you are interested in a set of DNA repeats located at a given position in the sequences.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-note-about-interactive-exploration-of-alignments" aria-label="comment box: Note about interactive exploration of alignments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note about interactive exploration of alignments</div>
+  <div class="box-title comment-title" id="comment-note-about-interactive-exploration-of-alignments"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note about interactive exploration of alignments</div>
   <p>In a different scenario where e.g. you do not know what to look for or need to find the location of particular alignments, and you need an interactive exploration, you can also use <code class="language-plaintext highlighter-rouge">GECKO-MGV</code> to ease the process. <code class="language-plaintext highlighter-rouge">GECKO-MGV</code>generates a visual representation where you can zoom in and out of the alignments, select and export as FASTA, etc., find more in the <code class="language-plaintext highlighter-rouge">GECKO-MGV</code> article (<span class="citation"><a href="#diaz2019combining">Diaz-del-Pino <i>et al.</i> 2019</a></span>) or run it with a dockerized container from <a href="https://github.com/estebanpw/docker-geckomgv">here</a>.</p>
 </blockquote>
 
 <p>For our current experiment, we will be looking for the following set of repeats:</p>
 
-<figure id="figure-1"><img src="../../images/hpc-for-lsgc/GeckoMGV01.PNG" alt="Mycoplasma hyopneumoniae comparison example. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> (Left) Sequence comparison between <em>Mycoplasma hyopneumoniae</em> 232 and 7422. (Right) Zoomed-in region where the repeats of interest are located.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/hpc-for-lsgc/GeckoMGV01.PNG" alt="Mycoplasma hyopneumoniae comparison example. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> (Left) Sequence comparison between <em>Mycoplasma hyopneumoniae</em> 232 and 7422. (Right) Zoomed-in region where the repeats of interest are located.</figcaption></figure>
 
 <p>Let’s extract the repeats highlighted in red (Figure 1, right) which are aligned to the position 19,610 in the query sequence and perform a multiple sequence alignment on them to check if there are any evolutionary differences. The sequences will be extracted from the reference (i.e. <em>Mycoplasma hyopneumoniae 7422</em>) since this is where the repeats duplicate in respect to the query sequence (notice that in Figure 1 we are selecting the ones stacked vertically).</p>
 
 <h3 id="extracting-repeat-alignments-and-running-multiple-sequence-alignment">Extracting repeat alignments and running Multiple Sequence Alignment</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-multiple-sequence-alignment-of-a-set-of-repeats" aria-label="hands-on box: Multiple Sequence Alignment of a set of repeats"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Multiple Sequence Alignment of a set of repeats</div>
+  <div class="box-title hands-on-title" id="hands-on-multiple-sequence-alignment-of-a-set-of-repeats"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Multiple Sequence Alignment of a set of repeats</div>
   <ol>
-    <li>Search for the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2"><strong>Text reformatting with AWK</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span>  and run it with the following parameters
+    <li>Search for the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting with AWK tool"><strong>Text reformatting with AWK</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span>  and run it with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Gecko on data 2 and 1: Alignments</code> (Note: if you have run the previous experiment with different parameters, make sure to select here the alignments file corresponding to the first experiment, and make sure you ran it with the same parameters!)</li>
         <li><em>“AWK Program”</em>: <code class="language-plaintext highlighter-rouge">BEGIN{FS=" "} /@\(196[0-9][0-9]/ { printf("&gt;sequence%s%s\n", $(NF-1), $NF); getline; while(substr($0,1,1) != "&gt;"){ if(substr($0,1,1) =="Y"){ print $2; } getline; } } </code> (Paste this code into the text box)</li>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-note-about-awk" aria-label="comment box: Note about AWK"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note about AWK</div>
+        <div class="box-title comment-title" id="comment-note-about-awk"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note about AWK</div>
         <p>Although the AWK script looks a bit threatening, it is very simple:</p>
         <ul>
           <li>The <code class="language-plaintext highlighter-rouge">BEGIN{FS=" "}</code> tells it to separate fields by a space.</li>
@@ -1005,11 +1187,11 @@ https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
       <p>Change the name of the output file <code class="language-plaintext highlighter-rouge">Text reformatting on data ...</code> to <code class="language-plaintext highlighter-rouge">repeats</code> Change the datatype to <code class="language-plaintext highlighter-rouge">.fasta</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2"><strong>ClustalW</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="ClustalW tool"><strong>ClustalW</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: <code class="language-plaintext highlighter-rouge">repeats.fasta</code></li>
         <li><em>“Data type”</em>: <code class="language-plaintext highlighter-rouge">DNA nucleotide sequences</code></li>
@@ -1088,7 +1270,7 @@ sequence@_19610_25551_      CTTCTTT-----
 
 <p>Before jumping on the hands-on, let us see an example of the second case: say we wanted to study the evolutionary rearrangements between the grass and common wheat genomes (<em>Aegilops tauschii</em> and <em>Triticum aestivum</em>). The following plot shows the comparison:</p>
 
-<figure id="figure-2"><img src="../../images/hpc-for-lsgc/Chrom07.png" alt="Large-scale genome comparison example. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Chromosome comparison for <em>Aegilops tauschii</em> and <em>Triticum aestivum</em>. Since both genomes have seven chromosomes, we would require seven times seven comparisons, i.e. 49 chromosome comparisons with each sequence being over 500 MBs in size!</figcaption></figure>
+<figure id="figure-2"><img src="../../images/hpc-for-lsgc/Chrom07.png" alt="Large-scale genome comparison example. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Chromosome comparison for <em>Aegilops tauschii</em> and <em>Triticum aestivum</em>. Since both genomes have seven chromosomes, we would require seven times seven comparisons, i.e. 49 chromosome comparisons with each sequence being over 500 MBs in size!</figcaption></figure>
 
 <p>Now there are some things to note here: (1) these alignment-free comparisons can be performed very quickly, (2) we can visually see the large rearrangements and (3) we can identify which chromosome comparisons actually have any signal. This last point is interesting because it allows us to use <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> to quickly identify which comparisons are worth to perform with more accurate tools and avoid lots of unnecessary computation (in this case only the diagonal has similarity, but it might not be the case, <em>e.g.</em> <em>Homo sapiens</em> and <em>Mus musculus</em>).</p>
 
@@ -1097,16 +1279,16 @@ sequence@_19610_25551_      CTTCTTT-----
 <h2 id="preparing-the-data-1">Preparing the data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-chromosome-data-upload" aria-label="hands-on box: Chromosome data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Chromosome data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-chromosome-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Chromosome data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial and give it a descriptive name (e.g. “Chromosome comparison hands-on”)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-1-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
       <p>Import <code class="language-plaintext highlighter-rouge">aegilops_tauschii_chr1.fasta</code> and <code class="language-plaintext highlighter-rouge">triticum_aestivum_chr1.fasta</code> from <a href="https://zenodo.org/record/4485547#.YBj8XHmCGUk">Zenodo</a>.</p>
@@ -1116,7 +1298,7 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <p>As default, Galaxy takes the link as name, so rename them.</p>
     </li>
@@ -1124,11 +1306,11 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
       <p>Rename the files to <code class="language-plaintext highlighter-rouge">aegilops.fasta</code> and <code class="language-plaintext highlighter-rouge">triticum.fasta</code> and change the datatype to <code class="language-plaintext highlighter-rouge">fasta</code> if needed.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-2-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-2-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-note-on-the-name-of-the-chromosomes" aria-label="comment box: Note on the name of the chromosomes"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note on the name of the chromosomes</div>
+        <div class="box-title comment-title" id="comment-note-on-the-name-of-the-chromosomes"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note on the name of the chromosomes</div>
         <p>Please notice that these chromosomes are not labelled as “chromosome 1” at their original sources. We have renamed them for simplicity.</p>
       </blockquote>
     </li>
@@ -1137,14 +1319,14 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>We already discussed the mycoplasma sequences in regards to their size. What do you think about the size of the two chromosomes that we will be comparing now from a computational standpoint?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Chromosome-like sequences are arguably some of the largest DNA sequences you can find. Regarding the comparison, optimal chromosome comparison typically requires either large clusters to be run or special hardware accelerators (such as GPUs). On the other hand, for seed-based local alignment we can still use common approaches, but they will take a considerable amount of time. Finally, if we use alignment-free methods such as <code class="language-plaintext highlighter-rouge">CHROMEISTER</code>, we can perform a comparison in few minutes (check the slides for more information) instead of hours.</li>
     </ol>
@@ -1156,9 +1338,9 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
 <h2 id="running-the-comparison-1">Running the comparison</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-comparing-two-plant-chromosomes-with-chromeister" aria-label="hands-on box: Comparing two plant chromosomes with CHROMEISTER"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Comparing two plant chromosomes with CHROMEISTER</div>
+  <div class="box-title hands-on-title" id="hands-on-comparing-two-plant-chromosomes-with-chromeister"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Comparing two plant chromosomes with CHROMEISTER</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a"><strong>CHROMEISTER</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a" title="CHROMEISTER tool"><strong>CHROMEISTER</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Query sequence”</em>: <code class="language-plaintext highlighter-rouge">aegilops.fasta</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference sequence”</em>: <code class="language-plaintext highlighter-rouge">triticum.fasta</code></li>
@@ -1181,7 +1363,7 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-about-parameters" aria-label="comment box: About parameters"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: About parameters</div>
+        <div class="box-title comment-title" id="comment-about-parameters"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: About parameters</div>
 
         <p>Some of the parameters used in <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> are similar to those in <code class="language-plaintext highlighter-rouge">GECKO</code>, but others are new, in particular:</p>
         <ol>
@@ -1202,7 +1384,7 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
 
 <p>Your <code class="language-plaintext highlighter-rouge">Comparison dotplot</code> file (remember to inspect each using the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon) should look like this:</p>
 
-<figure id="figure-3"><img src="../../images/hpc-for-lsgc/aegilops-triticum.png" alt="Single chromosome comparison. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Each axis corresponds to one sequence, from origin to end. </figcaption></figure>
+<figure id="figure-3"><img src="../../images/hpc-for-lsgc/aegilops-triticum.png" alt="Single chromosome comparison. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Each axis corresponds to one sequence, from origin to end. </figcaption></figure>
 
 <p>Figure 3 shows the comparison plot for the plant chromosomes. Notice that the origin of both sequences is at the top-left and the ending is at the bottom-right of the plot. Noise and small repeats are filtered out automatically by <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> to allow focusing on where the main similarity blocks are located. We can see that there three types of blocks:</p>
 
@@ -1213,7 +1395,7 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
 </ul>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-note-on-the-comparison-plot" aria-label="comment box: Note on the comparison plot"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note on the comparison plot</div>
+  <div class="box-title comment-title" id="comment-note-on-the-comparison-plot"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note on the comparison plot</div>
   <p>Notice that the comparison plot is only an approximation. It is aimed at showing the general location and direction of syntenies. For example, if <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> was run with parameter <strong>Output dotplot size</strong> equal to <code class="language-plaintext highlighter-rouge">1000</code>, then each pixel in the plot contains the averaged information of nearly 500,000 base pairs! Thus, any block can contain lots of smaller rearrangements, mutations, inversions, etc., that are ignored for the sake of providing a clean overview of the general alignment direction in a pairwise comparison.</p>
 </blockquote>
 
@@ -1223,7 +1405,7 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
 
 <p>Let us now see how the blocks detected in the comparison are automatically classified for further processing. Figure 4 shows the blocks detected heuristically from the comparison and classified according to their position and orientation. This plot is available in the file <strong>Detected events plot</strong>.</p>
 
-<figure id="figure-4"><img src="../../images/hpc-for-lsgc/aegilops-triticum-events.png" alt="Events in chromosome comparison. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Automatically detected events in the chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Legend: conserved blocks (red), inverted blocks (green) and transposed blocks (blue)</figcaption></figure>
+<figure id="figure-4"><img src="../../images/hpc-for-lsgc/aegilops-triticum-events.png" alt="Events in chromosome comparison. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Automatically detected events in the chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Legend: conserved blocks (red), inverted blocks (green) and transposed blocks (blue)</figcaption></figure>
 
 <p>In Figure 4 we can see a similar plot to that in Figure 3 but with the addition of colors. Each detected block is labelled according to whether it is in the main diagonal (red), transposed (blue) or inverted (green). Inverted transpositions are also labelled green. Notice that this automatic classification process is based on the Hough transform (<span class="citation"><a href="#duda1972use">Duda and Hart 1972</a></span>) which is governed by a set of parameters which can therefore affect the sensitivity of the detection of blocks, and hence some blocks can be missed.</p>
 
@@ -1257,10 +1439,12 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
 <p>On the other hand, from a theoretical standpoint, we have discussed why sequence comparison is a difficult problem, how the length of the sequences can affect runtimes, the complexity of the algorithms, impact of parameters, etc., in order to give researchers a broader understanding of how to use sequence comparison algorithms for their scientific experiments (more details in the slides).</p>
 
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>We learnt that sequence comparison is a demanding problem and that there are several ways to approach it</p>
@@ -1303,33 +1487,9 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=From small to large-scale genome comparison (Genome Annotation)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=From small to large-scale genome comparison (Genome Annotation)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1347,7 +1507,7 @@ https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1388,7 +1548,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1400,29 +1560,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

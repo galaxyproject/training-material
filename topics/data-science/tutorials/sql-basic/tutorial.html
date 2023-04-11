@@ -12,34 +12,34 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/sql-basic/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/sql-basic/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Introduction to SQL" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 09:52:08 +0000" />
-<meta name="DC.creator" content="The Carpentries" />
-<meta name="DC.creator" content="Helena Rasche" />
-<meta name="DC.creator" content="Donny Vrins" />
-<meta name="DC.creator" content="Bazante Sanders" />
-<meta name="DC.creator" content="Avans Hogeschool" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Introduction to SQL">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-18 09:52:08 +0000">
+<meta name="DC.creator" content="The Carpentries">
+<meta name="DC.creator" content="Helena Rasche">
+<meta name="DC.creator" content="Donny Vrins">
+<meta name="DC.creator" content="Bazante Sanders">
+<meta name="DC.creator" content="Avans Hogeschool">
 
         
         
         
         
-        <meta name="description" content="These lessons will help you get your feet in data science..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Introduction to SQL" />
-        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta name="description" content="These lessons will help you get your feet in data science...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Introduction to SQL">
+        <meta property="og:description" content="These lessons will help you get your feet in data science...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -573,10 +573,334 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-data-science">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-18 09:52:08 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to SQL",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Introduction to SQL' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/sql-basic/tutorial.html",
+  "timeRequired": "PT3H",
+  "keywords": "data-science, SQL, jupyter-notebook",
+  "description": "The questions this  addresses are:\n - How can I get data from a database?\n - How can I sort a query's results?\n - How can I remove duplicate values from a query's results?\n - How can I select subsets of data?\n - How can I calculate new values on the fly?\n - How do databases represent missing information?\n - What special handling does missing information require?\n\n\nThe objectives are:\n - Explain the difference between a table, a record, and a field.\n - Explain the difference between a database and a database manager.\n - Write a query to select all values for specific fields from a single table.\n - Write queries that display results in a particular order.\n - Write queries that eliminate duplicate values from data.\n - Write queries that select records that satisfy user-specified conditions.\n - Explain the order in which the clauses in a query are executed.\n - Write queries that calculate new values for each selected record.\n - Explain how databases represent missing information.\n - Explain the three-valued logic databases use when manipulating missing information.\n - Write queries that handle missing information correctly.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "name": "The Carpentries",
+      "image": "https://avatars.githubusercontent.com/carpentries",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dirowa/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dirowa/",
+      "name": "Donny Vrins",
+      "image": "https://avatars.githubusercontent.com/dirowa",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "name": "Bazante Sanders",
+      "image": "https://avatars.githubusercontent.com/bazante1",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/avans-atgm/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/avans-atgm/",
+      "name": "Avans Hogeschool",
+      "image": "https://avatars.githubusercontent.com/avans-atgm",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/carpentries/",
+      "name": "The Carpentries",
+      "image": "https://avatars.githubusercontent.com/carpentries",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dirowa/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dirowa/",
+      "name": "Donny Vrins",
+      "image": "https://avatars.githubusercontent.com/dirowa",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/",
+      "name": "Bazante Sanders",
+      "image": "https://avatars.githubusercontent.com/bazante1",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/avans-atgm/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/avans-atgm/",
+      "name": "Avans Hogeschool",
+      "image": "https://avatars.githubusercontent.com/avans-atgm",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner"
+}
+</script>
+
+<article class="tutorial topic-data-science">
     <h1 data-toc-skip>Introduction to SQL</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -587,9 +911,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -709,13 +1033,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/sql-basic/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/sql-basic/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -749,6 +1070,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -758,13 +1080,14 @@
             </div>
             <div class="col-sm-10">
                  
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
                      
                      
                      
                      
                     
                         <blockquote class="comment">
-                            <div class="box-title" aria-label="comment box">Best viewed in a Jupyter Notebook</div>
+                            <div class="box-title">Best viewed in a Jupyter Notebook</div>
                             <p>
                                 This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
                             </p>
@@ -791,10 +1114,12 @@
                             </p>
                         </blockquote>
                     
-                 
+                </section>
+                
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
   <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://github.com/swcarpentry/sql-novice-survey/">Databases and SQL</a> lesson, which is licensed CC-BY 4.0.</p>
 
@@ -805,7 +1130,7 @@
 </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -854,7 +1179,7 @@ We will only look at a handful of queries,
 but that handful accounts for most of what scientists do.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-changing-database-managers"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-database-managers-contents" aria-expanded="true" aria-label="Toggle tip box: Changing Database Managers"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing Database Managers<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-changing-database-managers"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-database-managers" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing Database Managers<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Many database managers — Oracle,
 IBM DB2, PostgreSQL, MySQL, Microsoft Access, and SQLite —  understand
@@ -1168,14 +1493,14 @@ statements, to distinguish them from tables and column names. This is
 the convention that we will use for this lesson.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-is-a-personal-and-family-name-column-a-good-design" aria-label="question box: Is a personal and family name column a good design?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Is a personal and family name column a good design?</div>
+  <div class="box-title question-title" id="question-is-a-personal-and-family-name-column-a-good-design"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Is a personal and family name column a good design?</div>
   <p>If you were tasked with designing a database to store this same data, is storing the name data in
 this way the best way to do it? Why or why not?</p>
 
   <p>Can you think of any names that would be difficult to enter in such a schema?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>No, it is generally not. There are a lot of <a href="https://shinesolutions.com/2018/01/08/falsehoods-programmers-believe-about-names-with-examples/">falsehoods that programmers believe about names</a>.
 The situation is much more complex as you can read in that article, but names vary wildly and
 generally placing constraints on how names are entered is only likely to frustrate you or your
@@ -1237,12 +1562,12 @@ we can select all of the columns in a table using <code class="language-plaintex
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-selecting-site-names" aria-label="question box: Selecting Site Names"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Selecting Site Names</div>
+  <div class="box-title question-title" id="question-selecting-site-names"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Selecting Site Names</div>
 
   <p>Write a query that selects only the <code class="language-plaintext highlighter-rouge">name</code> column from the <code class="language-plaintext highlighter-rouge">Site</code> table.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT name FROM Site;
 </code></pre></div>    </div>
@@ -1272,7 +1597,7 @@ we can select all of the columns in a table using <code class="language-plaintex
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-query-style" aria-label="question box: Query Style"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Query Style</div>
+  <div class="box-title question-title" id="question-query-style"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Query Style</div>
 
   <p>Many people format queries as:</p>
 
@@ -1389,7 +1714,7 @@ from least to greatest).</p>
 <p>We can sort in the opposite order using <code class="language-plaintext highlighter-rouge">DESC</code> (for “descending”):</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-a-note-on-ordering"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-note-on-ordering-contents" aria-expanded="true" aria-label="Toggle tip box: A note on ordering"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: A note on ordering<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-a-note-on-ordering"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-note-on-ordering" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: A note on ordering<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>While it may look that the records are consistent every time we ask for them in this lesson, that is because no one has changed or modified any of the data so far. Remember to use <code class="language-plaintext highlighter-rouge">ORDER BY</code> if you want the rows returned to have any sort of consistent or predictable order.</p>
 </blockquote>
@@ -1422,12 +1747,12 @@ removing duplicates.</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-finding-distinct-dates" aria-label="question box: Finding Distinct Dates"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Finding Distinct Dates</div>
+  <div class="box-title question-title" id="question-finding-distinct-dates"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Finding Distinct Dates</div>
 
   <p>Write a query that selects distinct dates from the <code class="language-plaintext highlighter-rouge">Visited</code> table.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT DISTINCT dated FROM Visited;
 </code></pre></div>    </div>
@@ -1472,13 +1797,13 @@ removing duplicates.</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-displaying-full-names" aria-label="question box: Displaying Full Names"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Displaying Full Names</div>
+  <div class="box-title question-title" id="question-displaying-full-names"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Displaying Full Names</div>
 
   <p>Write a query that displays the full names of the scientists in the <code class="language-plaintext highlighter-rouge">Person</code> table,
 ordered by family name.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT personal, family FROM Person ORDER BY family ASC;
 </code></pre></div>    </div>
@@ -1520,7 +1845,7 @@ ordered by family name.</p>
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-is-sorting-names-useful"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-is-sorting-names-useful-contents" aria-expanded="true" aria-label="Toggle tip box: Is sorting names useful?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Is sorting names useful?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-is-sorting-names-useful"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-is-sorting-names-useful" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Is sorting names useful?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you are someone with a name which falls at the end of the alphabet, you’ve likely been
 penalised for this your entire life. Alphabetically sorting names should always be looked at
 critically and through a lens to whether you are fairly reflecting everyone’s contributions,
@@ -1542,7 +1867,7 @@ with their choices of who to collaborate with. See <span class="citation"><a hre
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-name-collation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-name-collation-contents" aria-expanded="true" aria-label="Toggle tip box: Name collation"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Name collation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-name-collation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-name-collation" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Name collation<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>When you are sorting things in SQL, you need to be aware of something called collation which can
 affect your results if you have values that are not the letters A-Z. Collating is the process of
 sorting values, and this affects many human languages when storing data in a database.</p>
@@ -1611,7 +1936,7 @@ we can ask for all information from the DR-1 site collected before 1930:</p>
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-date-types"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-date-types-contents" aria-expanded="true" aria-label="Toggle tip box: Date Types"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Date Types<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-date-types"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-date-types" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Date Types<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Most database managers have a special data type for dates.
 In fact, many have two:
@@ -1634,7 +1959,7 @@ but not nearly as complicated as figuring out
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-30-1930-or-2030"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-30-1930-or-2030-contents" aria-expanded="true" aria-label="Toggle tip box: '30: 1930 or 2030?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: '30: 1930 or 2030?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-30-1930-or-2030"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-30-1930-or-2030" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: '30: 1930 or 2030?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Storing the year as the last two digits causes problems in databases, and is part of what caused
 <a href="https://en.wikipedia.org/wiki/Year_2000_problem">Y2K</a>. Be sure to use the databases’ built in
 format for storing dates, if it is available as that will generally avoid any major issues.</p>
@@ -1693,7 +2018,7 @@ to give a second level of filtering:</p>
 not to the entire rows as they are being processed.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-growing-queries"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-growing-queries-contents" aria-expanded="true" aria-label="Toggle tip box: Growing Queries"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Growing Queries<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-growing-queries"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-growing-queries" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Growing Queries<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>What we have just done is how most people “grow” their <abbr title="Structured Query Language">SQL</abbr> queries.
 We started with something simple that did part of what we wanted,
@@ -1716,7 +2041,7 @@ and use that.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-fix-this-query" aria-label="question box: Fix This Query"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Fix This Query</div>
+  <div class="box-title question-title" id="question-fix-this-query"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Fix This Query</div>
 
   <p>Suppose we want to select all sites that lie within 48 degrees of the equator.
 Our first query is:</p>
@@ -1728,7 +2053,7 @@ Our first query is:</p>
 and rewrite the query so that it is correct.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Because we used <code class="language-plaintext highlighter-rouge">OR</code>, a site on the South Pole for example will still meet
 the second criteria and thus be included. Instead, we want to restrict this
@@ -1743,14 +2068,14 @@ to sites that meet <em>both</em> criteria:</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-finding-outliers" aria-label="question box: Finding Outliers"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Finding Outliers</div>
+  <div class="box-title question-title" id="question-finding-outliers"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Finding Outliers</div>
 
   <p>Normalized salinity readings are supposed to be between 0.0 and 1.0.
 Write a query that selects all records from <code class="language-plaintext highlighter-rouge">Survey</code>
 with salinity values outside this range.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM Survey WHERE quant = 'sal' AND ((reading &gt; 1.0) OR (reading &lt; 0.0));
 </code></pre></div>    </div>
@@ -1786,7 +2111,7 @@ with salinity values outside this range.</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-matching-patterns" aria-label="question box:  Matching Patterns"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question:  Matching Patterns</div>
+  <div class="box-title question-title" id="question-matching-patterns"><i class="far fa-question-circle" aria-hidden="true"></i> Question:  Matching Patterns</div>
 
   <p>Which of these expressions are true?</p>
 
@@ -1799,7 +2124,7 @@ with salinity values outside this range.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>True because these are the same character.</li>
@@ -1815,7 +2140,7 @@ with salinity values outside this range.</p>
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-case-insensitive-matching"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-case-insensitive-matching-contents" aria-expanded="true" aria-label="Toggle tip box: Case-insensitive matching"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Case-insensitive matching<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-case-insensitive-matching"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-case-insensitive-matching" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Case-insensitive matching<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>But what about if you don’t care about if it’s <code class="language-plaintext highlighter-rouge">ALPHA</code> or <code class="language-plaintext highlighter-rouge">alpha</code> in the database, and you are
 using a language that has a notion of case (unlike e.g. Chinese, Japenese)?</p>
 
@@ -1873,7 +2198,7 @@ for example by using the string concatenation operator <code class="language-pla
 issues.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-fixing-salinity-readings" aria-label="question box:  Fixing Salinity Readings"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question:  Fixing Salinity Readings</div>
+  <div class="box-title question-title" id="question-fixing-salinity-readings"><i class="far fa-question-circle" aria-hidden="true"></i> Question:  Fixing Salinity Readings</div>
 
   <p>After further reading,
 we realize that Valentina Roerich
@@ -1883,7 +2208,7 @@ from the <code class="language-plaintext highlighter-rouge">Survey</code> table
 with the values divided by 100.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT taken, reading / 100 FROM Survey WHERE person = 'roe' AND quant = 'sal';
 </code></pre></div>    </div>
@@ -1913,7 +2238,7 @@ with the values divided by 100.</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-unions" aria-label="question box: Unions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Unions</div>
+  <div class="box-title question-title" id="question-unions"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Unions</div>
 
   <p>The <code class="language-plaintext highlighter-rouge">UNION</code> operator combines the results of two queries:</p>
 
@@ -2001,7 +2326,7 @@ The output should be something like:</p>
   </table>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT taken, reading FROM Survey WHERE person != 'roe' AND quant = 'sal' UNION SELECT taken, reading / 100 FROM Survey WHERE person = 'roe' AND quant = 'sal' ORDER BY taken ASC;
 </code></pre></div>    </div>
@@ -2012,7 +2337,7 @@ The output should be something like:</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-selecting-major-site-identifiers" aria-label="question box: Selecting Major Site Identifiers"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Selecting Major Site Identifiers</div>
+  <div class="box-title question-title" id="question-selecting-major-site-identifiers"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Selecting Major Site Identifiers</div>
 
   <p>The site identifiers in the <code class="language-plaintext highlighter-rouge">Visited</code> table have two parts
 separated by a ‘-‘:</p>
@@ -2050,7 +2375,7 @@ Use these two functions to produce a list of unique major site identifiers.
 the list should contain only “DR” and “MSK”).</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT DISTINCT substr(site, 1, instr(site, '-') - 1) AS MajorSite FROM Visited;
 </code></pre></div>    </div>
   </blockquote>
@@ -2169,14 +2494,14 @@ are averaging it. Aggregation functions will be addressed in more
 detail in <a href="#">the next section</a>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-sorting-by-known-date" aria-label="question box: Sorting by Known Date"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Sorting by Known Date</div>
+  <div class="box-title question-title" id="question-sorting-by-known-date"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Sorting by Known Date</div>
 
   <p>Write a query that sorts the records in <code class="language-plaintext highlighter-rouge">Visited</code> by date,
 omitting entries for which the date is not known
 (i.e., is null).</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM Visited WHERE dated IS NOT NULL ORDER BY dated ASC;
 </code></pre></div>    </div>
@@ -2234,7 +2559,7 @@ omitting entries for which the date is not known
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-null-in-a-set" aria-label="question box: NULL in a Set"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: NULL in a Set</div>
+  <div class="box-title question-title" id="question-null-in-a-set"><i class="far fa-question-circle" aria-hidden="true"></i> Question: NULL in a Set</div>
 
   <p>What do you expect the following query to produce?</p>
 
@@ -2243,7 +2568,7 @@ omitting entries for which the date is not known
 
   <p>What does it actually produce?</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>You might expect the above query to return rows where dated is either ‘1927-02-08’ or NULL.
 Instead it only returns rows where dated is ‘1927-02-08’, the same as you would get from this
@@ -2266,7 +2591,7 @@ not a value and is therefore simply ignored.</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pros-and-cons-of-sentinels" aria-label="question box: Pros and Cons of Sentinels"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Pros and Cons of Sentinels</div>
+  <div class="box-title question-title" id="question-pros-and-cons-of-sentinels"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Pros and Cons of Sentinels</div>
 
   <p>Some database designers prefer to use
 a sentinel value
@@ -2282,10 +2607,12 @@ What burdens or risks does it introduce?</p>
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Try solutions here!</span>
 </code></pre></div></div>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>A relational database stores information in tables, each of which has a fixed set of columns and a variable number of records.</p>
@@ -2386,33 +2713,9 @@ What burdens or risks does it introduce?</p>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Introduction to SQL (Foundations of Data Science)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Introduction to SQL (Foundations of Data Science)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -2430,7 +2733,7 @@ What burdens or risks does it introduce?</p>
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -2471,7 +2774,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -2587,29 +2890,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     </ul>
                 </blockquote>
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

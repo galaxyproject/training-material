@@ -12,32 +12,32 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Making sense of a newly assembled genome" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-06 17:58:17 +0000" />
-<meta name="DC.creator" content="Anton Nekrutenko" />
-<meta name="DC.creator" content="Delphine Lariviere" />
-<meta name="DC.creator" content="Helena Rasche" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Making sense of a newly assembled genome">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-06 17:58:17 +0000">
+<meta name="DC.creator" content="Anton Nekrutenko">
+<meta name="DC.creator" content="Delphine Lariviere">
+<meta name="DC.creator" content="Helena Rasche">
 
         
         
         
         
-        <meta name="description" content="DNA sequence data has become an indispensable tool for Mo..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Making sense of a newly assembled genome" />
-        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo..." />
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Mo...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Making sense of a newly assembled genome">
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -565,10 +565,328 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-assembly">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-06 17:58:17 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Making sense of a newly assembled genome",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Assembly",
+    "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+    "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Making sense of a newly assembled genome' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html",
+  "timeRequired": "PT4H",
+  "keywords": "assembly, prokaryote",
+  "description": "The questions this  addresses are:\n - I just assembled a genome. How does it compare with already sequenced genomes?\n - How do I find rearranged, inserted, or deleted regions?\n\n\nThe objectives are:\n - Identification of the most closely related genome to my new assembly\n - Perform sequence comparison to locate rearrangements\n - Identify genes located in deletions\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/unicycler-assembly/slides.html",
+      "name": "Unicycler Assembly",
+      "description": "Slides for 'Unicycler Assembly' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html",
+      "name": "Unicycler Assembly",
+      "description": "Hands-on for 'Unicycler Assembly' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "name": "Anton Nekrutenko",
+      "image": "https://avatars.githubusercontent.com/nekrut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/",
+      "name": "Delphine Lariviere",
+      "image": "https://avatars.githubusercontent.com/delphine-l",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6421-3484",
+      "orcid": "https://orcid.org/0000-0001-6421-3484"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "name": "Anton Nekrutenko",
+      "image": "https://avatars.githubusercontent.com/nekrut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/",
+      "name": "Delphine Lariviere",
+      "image": "https://avatars.githubusercontent.com/delphine-l",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6421-3484",
+      "orcid": "https://orcid.org/0000-0001-6421-3484"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Assembly",
+      "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0196",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0196",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0196"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-assembly">
     <h1 data-toc-skip>Making sense of a newly assembled genome</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -579,9 +897,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -750,7 +1068,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/assembly/tutorials/ecoli_comparison/workflows/" title="Workflows" alt="Making sense of a newly assembled genome workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/assembly/tutorials/ecoli_comparison/workflows/" title="Making sense of a newly assembled genome workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -764,13 +1082,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/assembly/tutorials/ecoli_comparison/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/assembly/tutorials/ecoli_comparison/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -796,7 +1111,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -975,6 +1290,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
     
         
         <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
@@ -1010,6 +1331,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -1020,10 +1342,11 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <p>In this tutorial we begin with a new genome assembly just produced in the <a href="/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html">Unicycler tutorial</a>. This is an assembly of <em>E. coli</em> C, which we will be comparing to assemblies of all other complete genes of this species.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#finding-closely-related-genomes" id="markdown-toc-finding-closely-related-genomes">Finding closely related genomes</a>    <ol>
@@ -1055,7 +1378,7 @@
 <p><a href="https://en.wikipedia.org/wiki/Escherichia_coli"><em>E. coli</em></a> is one of the most studied organisms. There are thousands of complete genomes (in fact, the total number of <em>E. coli</em> assemblies in Genbank is over 10,500). Here we will shows how to uploaded all (!) complete <em>E. coli</em> genomes at once.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-slow-steps-ahead" aria-label="comment box: Slow steps ahead"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Slow steps ahead</div>
+  <div class="box-title comment-title" id="comment-slow-steps-ahead"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Slow steps ahead</div>
   <p>The first part of this tutorial can take a significant amount of time to find the most related genomes. If you want, you can upload this (outdated) copy of the NCBI E. Coli Genomes table to your history:</p>
 
   <ol>
@@ -1066,7 +1389,7 @@
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>And skip ahead to <a href="#comparing-genome-architectures">comparing the most related genomes</a>.</p>
@@ -1081,7 +1404,7 @@
 <p><a href="https://www.ncbi.nlm.nih.gov/">NCBI</a> is the resource that would store <a href="https://www.ncbi.nlm.nih.gov/genome/genomes/167">all complete <em>E. coli</em> genomes</a>. This list contains over 500 genomes and so uploading them by hand will likely result in carpal tunnel syndrome, which we want to prevent. Galaxy has several features that are specifically designed for uploading and managing large sets of similar types of data. The following two <strong>Hands-on</strong> sections show how they can be used to import all completed <em>E. coli</em> genomes into Galaxy.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-preparing-a-list-of-all-complete-i-e-coli-i-genomes" aria-label="hands-on box: Preparing a list of all complete &lt;i&gt;E. coli&lt;/i&gt; genomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Preparing a list of all complete <i>E. coli</i> genomes</div>
+  <div class="box-title hands-on-title" id="hands-on-preparing-a-list-of-all-complete-i-e-coli-i-genomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Preparing a list of all complete <i>E. coli</i> genomes</div>
 
   <ol>
     <li>
@@ -1095,7 +1418,7 @@
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-getting-the-data-directly-from-ncbi"><button class="gtn-boxify-button details" type="button" aria-controls="details-getting-the-data-directly-from-ncbi-contents" aria-expanded="true" aria-label="Toggle details box: Getting the data directly from NCBI"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Getting the data directly from NCBI<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-getting-the-data-directly-from-ncbi"><button class="gtn-boxify-button details" type="button" aria-controls="details-getting-the-data-directly-from-ncbi" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Getting the data directly from NCBI<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>For this tutorial we made this dataset available from Zenodo, but it is of course also possible to obtain the data directly from NCBI.
 Note that the format of the files on NCBI may change, which means some of the parameter settings of tools in this tutorial will need
@@ -1127,24 +1450,24 @@ to be altered (e.g. column numbers) when using data directly from NCBI.</p>
       <p>As this file is a CSV file, we need to convert it to TSV before Galaxy can use it.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format-contents" aria-expanded="true" aria-label="Toggle tip box: Converting the file format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Converting the file format<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the upper part <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong>, select <code class="language-plaintext highlighter-rouge">Convert CSV to Tabular</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Converting the file format<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the upper part <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong>, select <code class="language-plaintext highlighter-rouge">Convert CSV to Tabular</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename this file to <code class="language-plaintext highlighter-rouge">genomes.tsv</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format-1-contents" aria-expanded="true" aria-label="Toggle tip box: Converting the file format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Converting the file format<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the upper part <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong>, select <code class="language-plaintext highlighter-rouge">Convert CSV to Tabular</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Converting the file format<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the upper part <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong>, select <code class="language-plaintext highlighter-rouge">Convert CSV to Tabular</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-preparing-a-list-of-all-complete-i-e-coli-i-genomes-1" aria-label="hands-on box: Preparing a list of all complete &lt;i&gt;E. coli&lt;/i&gt; genomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Preparing a list of all complete <i>E. coli</i> genomes</div>
+  <div class="box-title hands-on-title" id="hands-on-preparing-a-list-of-all-complete-i-e-coli-i-genomes-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Preparing a list of all complete <i>E. coli</i> genomes</div>
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>    columns from a table:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut tool"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>    columns from a table:</p>
 
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c20</code></li>
@@ -1154,12 +1477,12 @@ to be altered (e.g. column numbers) when using data directly from NCBI.</p>
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <p>How does your data look?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>It should look like this:
 1               | 2
@@ -1186,7 +1509,7 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
 
 <p>Now that the list is formatted as a table in a spreadsheet, it is time to upload it into Galaxy. There is a problem though: the URLs (web addresses) in the list do not actually point to sequence files that we would need to perform alignments. Instead they point to directories. For example, this URL: <a href="ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1">GCA_000008865.1_ASM886v1</a> points to a directory (rather than a file) containing many files, most of which we do not need.</p>
 
-<figure id="figure-1"><img src="../../images/genbank_dir.png" alt="GenBank assembly files for an E. coli strain. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A list of files for an <i>E. coli</i> assembly. For further analyses we only need the dataset ending with <code>_genomic.fna.gz</code>.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/genbank_dir.png" alt="GenBank assembly files for an E. coli strain. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A list of files for an <i>E. coli</i> assembly. For further analyses we only need the dataset ending with <code>_genomic.fna.gz</code>.</figcaption></figure>
 
 <p>So to download sequence files we need to edit URLs by adding filenames to them. For example, in the case of the URL shown above we need to add <code class="language-plaintext highlighter-rouge">/GCA_000008865.1_ASM886v1</code> and <code class="language-plaintext highlighter-rouge">_genomic.fna.gz</code> to the end to get this:</p>
 
@@ -1196,7 +1519,7 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
 <p>This can be done as a two step process where we first copy the end part of the existing URL (<code class="language-plaintext highlighter-rouge">/GCA_000008865.1_ASM886v1</code>) and then add a fixed string <code class="language-plaintext highlighter-rouge">_genomic.fna.gz</code> to the end of it. Doing this by hand is crazy and trying to do it in a spreadsheet is complicated. Fortunately, Galaxy’s new rule-based uploader can help, as shown in the next <strong>Hands-on</strong> section:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -1206,7 +1529,7 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
       <p>Switch to the <code class="language-plaintext highlighter-rouge">Rule-based</code> tab on the right</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-using-the-rule-based-uploader"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-the-rule-based-uploader-contents" aria-expanded="true" aria-label="Toggle tip box: Using the Rule-based Uploader"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using the Rule-based Uploader<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-using-the-rule-based-uploader"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-the-rule-based-uploader" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Using the Rule-based Uploader<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>There is a detailed tutorial on using the <a href="../../../galaxy-data-manipulation/tutorials/upload-rules/tutorial.html">Rule based Uploader</a> if you want to learn about the more advanced features available.</p>
       </blockquote>
 
@@ -1217,7 +1540,7 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
       </ul>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-dataset-not-there"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-dataset-not-there-contents" aria-expanded="true" aria-label="Toggle tip box: dataset not there?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: dataset not there?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-dataset-not-there"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-dataset-not-there" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: dataset not there?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>If the dataset doesn’t appear in the select list, refresh your page.</p>
       </blockquote>
     </li>
@@ -1271,10 +1594,10 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
 <p>Before starting any analyses we need to upload the assembly produced in <a href="/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html">Unicycler tutorial</a> from Zenodo:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-uploading-i-e-coli-i-assembly-into-galaxy" aria-label="hands-on box: Uploading &lt;i&gt;E. coli&lt;/i&gt; assembly into Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Uploading <i>E. coli</i> assembly into Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-uploading-i-e-coli-i-assembly-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Uploading <i>E. coli</i> assembly into Galaxy</div>
 
   <ol>
-    <li><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>   :
+    <li><span class="tool" data-tool="upload1" title="Upload tool"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>   :
       <ul>
         <li>Click <strong>Paste/Fetch data</strong> button (Bottom of the interface box)</li>
         <li><strong>Paste</strong> <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code> into the box.</li>
@@ -1286,9 +1609,9 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-finding-tools-mentioned-in-this-tutorial"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-finding-tools-mentioned-in-this-tutorial-contents" aria-expanded="true" aria-label="Toggle tip box: Finding tools mentioned in this tutorial"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Finding tools mentioned in this tutorial<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-finding-tools-mentioned-in-this-tutorial"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-finding-tools-mentioned-in-this-tutorial" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Finding tools mentioned in this tutorial<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Galaxy instances contain hundreds of tools. As a result, it can be hard to find tools mentioned in tutorials such as this one. To help with this challenge, Galaxy has a search box at the top of the left panel. Use this box to find the tools mentioned here.</p>
-  <figure id="figure-2"><img src="../../images/tool_search.png" alt="Tool search. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Use search box to find tools!</figcaption></figure>
+  <figure id="figure-2"><img src="../../images/tool_search.png" alt="Tool search. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Use search box to find tools!</figcaption></figure>
 </blockquote>
 
 <p>The assembly we just uploaded has two issues that need to be addressed before proceeding with our analysis:</p>
@@ -1303,16 +1626,16 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
 <p>Because phiX173 is around 5,000bp, we can remove those sequences by setting a minimum length of 10,000:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-fixing-assembly" aria-label="hands-on box: Fixing assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fixing assembly</div>
+  <div class="box-title hands-on-title" id="hands-on-fixing-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Fixing assembly</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2"><strong>Filter sequences by length</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2" title="Filter sequences by length tool"><strong>Filter sequences by length</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2</span></span>  with the following parameters:
       <ul>
         <li><em>“Fasta file”</em>: the dataset you’ve just uploaded. (<code class="language-plaintext highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code>).</li>
         <li><em>“Minimal length”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span>  in entire line:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text tool"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span>  in entire line:
       <ul>
         <li><em>“File to process”</em>: the output of the Filter sequences by length <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“1: Replacement”</em>
@@ -1324,10 +1647,10 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">E. coli C</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">E. coli C</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-regular-expressions"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-regular-expressions-contents" aria-expanded="true" aria-label="Toggle tip box: Regular Expressions"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Regular Expressions<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-regular-expressions"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-regular-expressions" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Regular Expressions<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The program we just entered is a so-called <a href="https://en.wikipedia.org/wiki/Regular_expression">Regular Expression</a></p>
 
@@ -1348,14 +1671,14 @@ Detailed description of regular expressions is outside of the scope of this tuto
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <ol>
       <li>What is the meaning of <code class="language-plaintext highlighter-rouge">^</code> character is SED expression?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>It tells SED to start matching from the beginning of the string.</li>
@@ -1371,9 +1694,9 @@ Detailed description of regular expressions is outside of the scope of this tuto
 <p>Now everything is loaded and ready to go. We will now align our assembly against each of the <em>E. coli</em> genomes we have uploaded into the collection. To do this we will use <a href="https://lastz.github.io/lastz/">LASTZ</a>—an aligner designed for long sequences.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-lastz" aria-label="hands-on box: Running LASTZ"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running LASTZ</div>
+  <div class="box-title hands-on-title" id="hands-on-running-lastz"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Running LASTZ</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span>  with the following parameters:
       <ul>
         <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="language-plaintext highlighter-rouge">from your history</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a reference dataset”</em>: the “Complete genomes” collection we uploaded earlier</li>
@@ -1397,7 +1720,7 @@ Detailed description of regular expressions is outside of the scope of this tuto
 <p>Note that because we started LASTZ on <em>a collection</em> of <em>E. coli</em> genomes, it will output alignment information as <em>a collection</em> as well. A collection is simply a way to represent large sets of similar data in a compact way within Galaxy’s interface.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-it-will-take-a-while" aria-label="warning box: It will take a while!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: It will take a while!</div>
+  <div class="box-title warning-title" id="warning-it-will-take-a-while"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: It will take a while!</div>
   <p>Please understand that alignment is not an instantaneous process: allow several hours for these jobs to clear.</p>
 </blockquote>
 
@@ -1434,7 +1757,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The alignment information produced by LASTZ is a collection. In this collection each element contains alignment data between each of the <em>E. coli</em> genomes and our assembly:</p>
 
-<figure id="figure-3"><img src="../../images/lastz_collection.png" alt="LASTZ collection. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> LASTZ produced a collection where each element corresponds to an alignment between an <i>E. coli</i> genome and our assembly. Here one of the elements is expanded (to expand an element simply click on it).</figcaption></figure>
+<figure id="figure-3"><img src="../../images/lastz_collection.png" alt="LASTZ collection. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> LASTZ produced a collection where each element corresponds to an alignment between an <i>E. coli</i> genome and our assembly. Here one of the elements is expanded (to expand an element simply click on it).</figcaption></figure>
 <p>.</p>
 
 <h2 id="collapsing-collection">Collapsing collection</h2>
@@ -1442,9 +1765,9 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <p>Collections are a wonderful way to organize large sets of data and parallelize data processing like we did here with LASTZ. However, at this point we need to combine all data into one dataset. Follow the steps below to accomplish this:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-combining-collection-into-a-single-dataset" aria-label="hands-on box: Combining collection into a single dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combining collection into a single dataset</div>
+  <div class="box-title hands-on-title" id="hands-on-combining-collection-into-a-single-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Combining collection into a single dataset</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>  with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the output of <strong>LASTZ</strong> (collecion input)</li>
       </ul>
@@ -1459,9 +1782,9 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <p>To make further analyses we need to get an idea about alignment data generated with LASTZ. To do this let’s select a random subsample of the large dataset we’ve generated above. This is necessary because processing the entire dataset will take time and will not give us a better insight anyway. So first we will select 10,000 lines from the alignment data:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-selecting-random-subset-of-data" aria-label="hands-on box: Selecting random subset of data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Selecting random subset of data</div>
+  <div class="box-title hands-on-title" id="hands-on-selecting-random-subset-of-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Selecting random subset of data</div>
   <ol>
-    <li><span class="tool" data-tool="random_lines1" title="Tested with random_lines1"><strong>Select random lines from a file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: random_lines1</span></span>    with the following parameters:
+    <li><span class="tool" data-tool="random_lines1" title="Select random lines from a file tool"><strong>Select random lines from a file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: random_lines1</span></span>    with the following parameters:
       <ul>
         <li><em>“Randomly select”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
         <li><em>“from”</em>: the output from <code class="language-plaintext highlighter-rouge">Collapse Collection</code></li>
@@ -1473,7 +1796,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <p>Now we can visualize this dataset to discover generalities:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-graphing-alignment-data" aria-label="hands-on box: Graphing alignment data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Graphing alignment data</div>
+  <div class="box-title hands-on-title" id="hands-on-graphing-alignment-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Graphing alignment data</div>
   <ol>
     <li>Expand random subset of alignment data generated on the previous step by clicking on it.</li>
     <li>You will see “chart” button <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span>. Click on it.</li>
@@ -1487,14 +1810,14 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The relationship between the alignment identity and alignment length looks like this (remember that this is only a subsample of the data):</p>
 
-<figure id="figure-4"><img src="../../images/id_vs_len.png" alt="Identity versus length. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Alignment identity (%) versus length (bp). This graph is truncated at the top</figcaption></figure>
+<figure id="figure-4"><img src="../../images/id_vs_len.png" alt="Identity versus length. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Alignment identity (%) versus length (bp). This graph is truncated at the top</figcaption></figure>
 
 <p>You can see that most alignments are short and have relatively low identity. Thus we can filter the original dataset by identity and length. Judging from this graph we can select alignment longer than 10,000 bp with identity above 90%.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtering-data" aria-label="hands-on box: Filtering data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filtering data</div>
+  <div class="box-title hands-on-title" id="hands-on-filtering-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filtering data</div>
   <ol>
-    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  data on any column using simple expressions:
+    <li><span class="tool" data-tool="Filter1" title="Filter tool"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  data on any column using simple expressions:
       <ul>
         <li><em>“Filter”</em>: the full dataset, from the output of the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3 &gt;= 90 and c4 &gt;= 10000</code> (here <code class="language-plaintext highlighter-rouge">c</code> stands for <em>column</em>).</li>
@@ -1517,9 +1840,9 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <p>However, to extract this information from our data we need to aggregate it. In other words, for each <em>E. coli</em> genome we need to calculate the total number of alignment blocks, their combined length, and average identity. The following section explains how to do this:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-aggregating-the-data" aria-label="hands-on box: Aggregating the data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Aggregating the data</div>
+  <div class="box-title hands-on-title" id="hands-on-aggregating-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Aggregating the data</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0"><strong>Datamash (operations on tabular data)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</span></span>    with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Datamash (operations on tabular data) tool"><strong>Datamash (operations on tabular data)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</span></span>    with the following parameters:
       <ul>
         <li><em>“Input tabular dataset”</em>: output of the previous <code class="language-plaintext highlighter-rouge">Filter</code> step.</li>
         <li><em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">2</code>. (column 1 contains name of the <em>E. coli</em> genome we mapped against)</li>
@@ -1560,7 +1883,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <p>The dataset generated above lists each <em>E. coli</em> genome accession only once and will have aggregate information for the number of alignment blocks, mean identity, and total length. Let’s graph these data:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-graphing-aggregated-data" aria-label="hands-on box: Graphing aggregated data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Graphing aggregated data</div>
+  <div class="box-title hands-on-title" id="hands-on-graphing-aggregated-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Graphing aggregated data</div>
   <ol>
     <li>Expand the aggregated data generated on the previous step by clicking on it.</li>
     <li>You will see “chart” button <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span>. Click on it.</li>
@@ -1575,21 +1898,21 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The relationship between the number of alignment blocks and total alignment length looks like this:</p>
 
-<figure id="figure-5"><img src="../../images/best_genomes_chart.png" alt="Identity versus length. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Number of alignment blocks versus total alignment length (bp).</figcaption></figure>
+<figure id="figure-5"><img src="../../images/best_genomes_chart.png" alt="Identity versus length. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Number of alignment blocks versus total alignment length (bp).</figcaption></figure>
 
 <p>A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have a SMALL number of alignment blocks but HIGH total alignment length. Mousing over these three dots (if you set <strong>Data point labels</strong> correctly in the previous step) will reveal their accession numbers: <code class="language-plaintext highlighter-rouge">LT906474.1</code>, <code class="language-plaintext highlighter-rouge">CP024090.1</code>, and <code class="language-plaintext highlighter-rouge">CP020543.1</code>.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-things-change" aria-label="warning box: Things change"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Things change</div>
+  <div class="box-title warning-title" id="warning-things-change"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Things change</div>
   <p>It is possible that when you repeat these steps the set of sequences in NCBI will have changed and you will obtain different accession numbers. Keep this in mind.</p>
 </blockquote>
 
 <p>Let’s find table entries corresponding to these:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extracting-into-about-best-hits" aria-label="hands-on box: Extracting into about best hits"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extracting into about best hits</div>
+  <div class="box-title hands-on-title" id="hands-on-extracting-into-about-best-hits"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extracting into about best hits</div>
   <ol>
-    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: to the output from <code class="language-plaintext highlighter-rouge">Datamash</code></li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">LT906474|CP024090|CP020543</code>. (Here <code class="language-plaintext highlighter-rouge">|</code> means <code class="language-plaintext highlighter-rouge">or</code>).</li>
@@ -1632,11 +1955,11 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <h2 id="getting-sequences-and-annotations">Getting sequences and annotations</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-uploading-sequences-and-annotations" aria-label="hands-on box: Uploading sequences and annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Uploading sequences and annotations</div>
+  <div class="box-title hands-on-title" id="hands-on-uploading-sequences-and-annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Uploading sequences and annotations</div>
   <p>Using the three accession listed above we will fetch necessary data from NCBI. We will use the spreadsheet we uploaded at the start to accomplish this.</p>
 
   <ol>
-    <li><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  the <em>E. coli</em> C genome if you have not done so already:
+    <li><span class="tool" data-tool="upload1" title="Upload tool"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  the <em>E. coli</em> C genome if you have not done so already:
       <ul>
         <li>Click <strong>Paste/Fetch data</strong> button (Bottom of the interface box)</li>
         <li><strong>Paste</strong> <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code> into the box.</li>
@@ -1644,14 +1967,14 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
         <li>Click <strong>Start</strong></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: the <code class="language-plaintext highlighter-rouge">genomes.tsv</code> you uploaded earlier</li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">LT906474|CP024090|CP020543</code></li>
       </ul>
     </li>
     <li>
-      <p><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  columns from a table:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut tool"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  columns from a table:</p>
 
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c20</code></li>
@@ -1681,12 +2004,12 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
           </ul>
 
           <blockquote class="tip">
-            <div class="box-title tip-title" id="tip-dataset-not-there-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-dataset-not-there-1-contents" aria-expanded="true" aria-label="Toggle tip box: dataset not there?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: dataset not there?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title tip-title" id="tip-dataset-not-there-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-dataset-not-there-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: dataset not there?<span class="fold-unfold fa fa-minus-square"></span></button></div>
             <p>If the dataset doesn’t appear in the select list, refresh your page.</p>
           </blockquote>
 
           <blockquote class="tip">
-            <div class="box-title tip-title" id="tip-take-a-shortcut"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-take-a-shortcut-contents" aria-expanded="true" aria-label="Toggle tip box: Take a Shortcut"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Take a Shortcut<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title tip-title" id="tip-take-a-shortcut"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-take-a-shortcut" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Take a Shortcut<span class="fold-unfold fa fa-minus-square"></span></button></div>
             <p>This step is quite long and potentially error prone. If you want to skip those steps, you can copy and paste this bit of text:</p>
 
             <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"rules"</span><span class="p">:[{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_regex"</span><span class="p">,</span><span class="nl">"target_column"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"expression"</span><span class="p">:</span><span class="s2">".*(</span><span class="se">\\</span><span class="s2">/GCA.*$)"</span><span class="p">,</span><span class="nl">"group_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_concatenate"</span><span class="p">,</span><span class="nl">"target_column_0"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"target_column_1"</span><span class="p">:</span><span class="mi">2</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"remove_columns"</span><span class="p">,</span><span class="nl">"target_columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_value"</span><span class="p">,</span><span class="nl">"value"</span><span class="p">:</span><span class="s2">"_feature_table.txt.gz"</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_value"</span><span class="p">,</span><span class="nl">"value"</span><span class="p">:</span><span class="s2">"_genomic.fna.gz"</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_concatenate"</span><span class="p">,</span><span class="nl">"target_column_0"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"target_column_1"</span><span class="p">:</span><span class="mi">2</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_concatenate"</span><span class="p">,</span><span class="nl">"target_column_0"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"target_column_1"</span><span class="p">:</span><span class="mi">3</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"remove_columns"</span><span class="p">,</span><span class="nl">"target_columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_value"</span><span class="p">,</span><span class="nl">"value"</span><span class="p">:</span><span class="s2">"Genes"</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_value"</span><span class="p">,</span><span class="nl">"value"</span><span class="p">:</span><span class="s2">"DNA"</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_regex"</span><span class="p">,</span><span class="nl">"target_column"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"expression"</span><span class="p">:</span><span class="s2">".*</span><span class="se">\\</span><span class="s2">/(.*)"</span><span class="p">,</span><span class="nl">"group_count"</span><span class="p">:</span><span class="mi">1</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"swap_columns"</span><span class="p">,</span><span class="nl">"target_column_0"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"target_column_1"</span><span class="p">:</span><span class="mi">5</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"remove_columns"</span><span class="p">,</span><span class="nl">"target_columns"</span><span class="p">:[</span><span class="mi">5</span><span class="p">]},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"split_columns"</span><span class="p">,</span><span class="nl">"target_columns_0"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span><span class="nl">"target_columns_1"</span><span class="p">:[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]}],</span><span class="nl">"mapping"</span><span class="p">:[{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"list_identifiers"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="nl">"editing"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"url"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">]},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"collection_name"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">2</span><span class="p">]}]}</span><span class="w">
@@ -1812,10 +2135,10 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
 <p>Now we will perform alignments between our assembly and the three most closely related genomes to get a detailed look at any possible genome architecture changes. We will again use LASTZ:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-aligning-again" aria-label="hands-on box: Aligning again"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Aligning again</div>
+  <div class="box-title hands-on-title" id="hands-on-aligning-again"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Aligning again</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span>  with the following parameters:
       <ul>
         <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="language-plaintext highlighter-rouge">from your history</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a reference dataset”</em>: <code class="language-plaintext highlighter-rouge">DNA</code>, the <em>E. coli</em> genomes we uploaded earlier</li>
@@ -1824,7 +2147,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
           <ul>
             <li><em>“Perform chaining of HSPs with no penalties”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
               <blockquote class="tip">
-                <div class="box-title tip-title" id="tip-what-does-chaining-do"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-does-chaining-do-contents" aria-expanded="true" aria-label="Toggle tip box: What does chaining do?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What does chaining do?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+                <div class="box-title tip-title" id="tip-what-does-chaining-do"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-does-chaining-do" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: What does chaining do?<span class="fold-unfold fa fa-minus-square"></span></button></div>
                 <p>For more information about chaining <a href="https://lastz.github.io/lastz/#ex_stages">look here</a></p>
               </blockquote>
             </li>
@@ -1864,7 +2187,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
       <p>Rename the <code class="language-plaintext highlighter-rouge">LASTZ on collection... mapped reads</code> something more memorable like <code class="language-plaintext highlighter-rouge">LASTZ Alignments</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the collection</li>   <li>Click on the name of the collection at the top</li>   <li>Change the name  to <code class="language-plaintext highlighter-rouge">LASTZ Alignments</code></li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the collection</li>   <li>Click on the name of the collection at the top</li>   <li>Change the name  to <code class="language-plaintext highlighter-rouge">LASTZ Alignments</code></li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -1872,15 +2195,15 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
 
 <p>Because we chose to produce Dot Plots as well, LASTZ will generate two collections: one containing alignment data and the other containing DotPlots in PNG format:</p>
 
-<figure id="figure-6"><img src="../../images/three_dot_plots.png" alt="Dot Plots. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Target (X-axis) is indicated above each dot plot. Query (Y-axis) is our assembly. Red circle indicates a region deleted in our assembly.</figcaption></figure>
+<figure id="figure-6"><img src="../../images/three_dot_plots.png" alt="Dot Plots. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Target (X-axis) is indicated above each dot plot. Query (Y-axis) is our assembly. Red circle indicates a region deleted in our assembly.</figcaption></figure>
 
 <p>A quick conclusion that can be drawn here is that there is a large inversion in CP020543 and deletion in our assembly.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-interpreting-dot-plots"><button class="gtn-boxify-button details" type="button" aria-controls="details-interpreting-dot-plots-contents" aria-expanded="true" aria-label="Toggle details box: Interpreting Dot Plots"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Interpreting Dot Plots<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-interpreting-dot-plots"><button class="gtn-boxify-button details" type="button" aria-controls="details-interpreting-dot-plots" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Interpreting Dot Plots<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you are not sure how to interpret Dot Plots here is a great explanation by <a href="http://schatz-lab.org/">Michael Schatz</a>:</p>
 
-  <figure id="figure-7"><img src="../../images/dotplot.png" alt="Interpreting Dot Plots. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.</figcaption></figure>
+  <figure id="figure-7"><img src="../../images/dotplot.png" alt="Interpreting Dot Plots. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.</figcaption></figure>
 </blockquote>
 
 <p>For a moment let’s leave LASTZ result and create a browser that would allows us to display our results.</p>
@@ -1894,11 +2217,11 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
 <p>The first step will be collapsing the collection containing the three genomes into a single file:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-a-single-fasta-dataset-with-all-genomes" aria-label="hands-on box: Creating a single FASTA dataset with all genomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a single FASTA dataset with all genomes</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-a-single-fasta-dataset-with-all-genomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating a single FASTA dataset with all genomes</div>
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span></p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span></p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse”</em> the three genomes (collection) named <code class="language-plaintext highlighter-rouge">DNA</code></li>
@@ -1908,9 +2231,9 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
       <p>Convert the datatype of this output to uncompress it</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format-2-contents" aria-expanded="true" aria-label="Toggle tip box: Converting the file format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Converting the file format<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the upper part <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong>, select <code class="language-plaintext highlighter-rouge">Convert compressed to uncompressed</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Converting the file format<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the upper part <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong>, select <code class="language-plaintext highlighter-rouge">Convert compressed to uncompressed</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0</span></span>  tail-to-head (cat):
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Concatenate datasets tool"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0</span></span>  tail-to-head (cat):
       <ul>
         <li><em>“Datasets to concatenate”</em>: <code class="language-plaintext highlighter-rouge">Collapse collection ... uncompressed</code>, the output from the uncompression step.</li>
         <li>Click <strong>Insert Dataset</strong> button
@@ -1924,7 +2247,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
       <p>Rename the output to <code class="language-plaintext highlighter-rouge">DNA (E. coli C + Relatives)</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">DNA (E. coli C + Relatives)</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">DNA (E. coli C + Relatives)</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -2016,7 +2339,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
 <p>Column 13 of the fields chosen by us for <a href="#hands-on-aligning-again">LASTZ run</a> is <code class="language-plaintext highlighter-rouge">number</code>. This is an incrementing number given by LASTZ to every alignment block so it can be uniquely identified. The problem is that by running LASTZ on a collection of three genomes it generated a number for each output independently starting with <code class="language-plaintext highlighter-rouge">1</code> each time. So these alignments identified are unique within each individual run but are redundant for multiple runs. We can fix that by pre-pending each alignment identified (column 12) with the name of the target sequence (column 2). This would create alignments that are truly unique. For example, in the case of the LASTZ output shown above alignment identifier <code class="language-plaintext highlighter-rouge">1</code> will become <code class="language-plaintext highlighter-rouge">CP020543.11</code>, <code class="language-plaintext highlighter-rouge">2</code> will become <code class="language-plaintext highlighter-rouge">CP020543.12</code> and so on.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-bed-format" aria-label="comment box: BED format"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: BED format</div>
+  <div class="box-title comment-title" id="comment-bed-format"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: BED format</div>
   <p>Our goal is to convert this into a format that will be acceptable to the genome browser. One of such formats is <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED</a>. In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:</p>
 
   <ol>
@@ -2030,10 +2353,10 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-lastz-output-to-bed" aria-label="hands-on box: Convert LASTZ output to BED"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert LASTZ output to BED</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-lastz-output-to-bed"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Convert LASTZ output to BED</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</span></span>  in a specific column:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Replace Text tool"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</span></span>  in a specific column:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: output of LASTZ (<code class="language-plaintext highlighter-rouge">LASTZ Alignments</code>)</li>
         <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column 12</code></li>
@@ -2041,7 +2364,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
         <li><em>“Replace with”</em>: leave empty</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1"><strong>Merge Columns together</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1" title="Merge Columns together tool"><strong>Merge Columns together</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select data”</em>: the output of the previous step, <code class="language-plaintext highlighter-rouge">Replace Text on collection ...</code></li>
         <li><em>“Merge column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code> (this is the Target sequence name)</li>
@@ -2049,11 +2372,11 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
       </ul>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-output-information"><button class="gtn-boxify-button details" type="button" aria-controls="details-output-information-contents" aria-expanded="true" aria-label="Toggle details box: Output information"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Output information<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-output-information"><button class="gtn-boxify-button details" type="button" aria-controls="details-output-information" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Output information<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>The tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, <code class="language-plaintext highlighter-rouge">CP020543.1</code> and <code class="language-plaintext highlighter-rouge">LT906474.1</code> because they will have accessions embedded within alignment block IDs. For example, the first alignment between <code class="language-plaintext highlighter-rouge">CP020543.1</code> and our assembly <code class="language-plaintext highlighter-rouge">Ecoli_C</code> will have alignment block id <code class="language-plaintext highlighter-rouge">CP020543.11</code>, while the 225th alignment between <code class="language-plaintext highlighter-rouge">LT906474.1</code> and <code class="language-plaintext highlighter-rouge">Ecoli_C</code> will have ID <code class="language-plaintext highlighter-rouge">LT906474.1225</code>. Because of this we can collapse the entire collection of alignments into a single dataset:</p>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse”</em>: the output of the previous step, <code class="language-plaintext highlighter-rouge">Merge Columns on collection...</code></li>
       </ul>
@@ -2064,10 +2387,10 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
       <p>We will reuse this file later so let’s rename it <code class="language-plaintext highlighter-rouge">Unprocessed Alignments</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-2-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Unprocessed Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Unprocessed Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
-      <p><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  columns from a table:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut tool"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  columns from a table:</p>
 
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2,c4,c5,c14,c12,c8</code></li>
@@ -2075,7 +2398,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
       </ul>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-converting-to-bed"><button class="gtn-boxify-button details" type="button" aria-controls="details-converting-to-bed-contents" aria-expanded="true" aria-label="Toggle details box: Converting to BED"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Converting to BED<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-converting-to-bed"><button class="gtn-boxify-button details" type="button" aria-controls="details-converting-to-bed" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Converting to BED<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>Let’s look again at the data we generated in the last step:</p>
 
         <table>
@@ -2157,7 +2480,7 @@ In the second BED, column 1 will contain name of our assembly: <code class="lang
       </blockquote>
 
       <blockquote class="warning">
-        <div class="box-title warning-title" id="warning-there-are-multiple-b-cut-b-tools" aria-label="warning box: There are multiple &lt;b&gt;CUT&lt;/b&gt; tools!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: There are multiple <b>CUT</b> tools!</div>
+        <div class="box-title warning-title" id="warning-there-are-multiple-b-cut-b-tools"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: There are multiple <b>CUT</b> tools!</div>
         <p>The Hands-On box below uses <strong>Cut</strong> tool. Beware that some Galaxy instances contain multiple <strong>Cut</strong> tools. The one that is used below is called <strong>Cut columns from a table</strong> while the other one, which we will NOT use is called <strong>Cut columns from a table (cut)</strong>. It is a small difference, but the tools are different.</p>
       </blockquote>
 
@@ -2203,7 +2526,7 @@ In the second BED, column 1 will contain name of our assembly: <code class="lang
       </table>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-not-exactly-the-same"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-not-exactly-the-same-contents" aria-expanded="true" aria-label="Toggle tip box: Not exactly the same?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Not exactly the same?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-not-exactly-the-same"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-not-exactly-the-same" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Not exactly the same?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>Depending on the steps and other choices, the genomes may be in a different order here. This is unimportant, as all of the same alignments are contained in the file, just the ordering is different. As long as these columns look correct (start/end in column 2/3 are reasonable, a number between 0-100 in column 5, and a + or - in column 6) then it is OK.</p>
       </blockquote>
     </li>
@@ -2211,9 +2534,9 @@ In the second BED, column 1 will contain name of our assembly: <code class="lang
       <p>Rename this “Target Alignments”</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-3-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Target Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Target Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
-    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c7,c9,c10,c14,c12,c8</code> (look at the data shown above and the definition of BED to see why we make these choices.)</li>
         <li><em>“From”</em>: <code class="language-plaintext highlighter-rouge">Unprocessed alignments</code>, the output of <strong>collection collapse</strong></li>
@@ -2223,9 +2546,9 @@ In the second BED, column 1 will contain name of our assembly: <code class="lang
       <p>Rename this “Query Alignments”</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-4-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Query Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Query Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
-    <li><span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets tail-to-head</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>
+    <li><span class="tool" data-tool="cat1" title="Concatenate datasets tail-to-head tool"><strong>Concatenate datasets tail-to-head</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>
       <ul>
         <li><em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">Query Alignments</code></li>
         <li>Click “Insert Dataset” button</li>
@@ -2236,10 +2559,10 @@ In the second BED, column 1 will contain name of our assembly: <code class="lang
       <p>Change the datatype of the output to BED and rename the output “Target &amp; Query Alignments”</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">bed</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">bed</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-5-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Target &amp; Query Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-5" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Target &amp; Query Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -2396,9 +2719,9 @@ we will produce a collection with three datasets just like the original <code cl
 Finally we can cut necessary columns from these datasets. These columns are 8 (start), 9 (end), 15 (gene symbol), 21 (dummy column we just created), and c10 (strand), and then we can add the genome name.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-cdss-from-annotation-datasets" aria-label="hands-on box: Extract CDSs from annotation datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract CDSs from annotation datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-cdss-from-annotation-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract CDSs from annotation datasets</div>
   <ol>
-    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: the collection containing annotations, <code class="language-plaintext highlighter-rouge">Genes</code></li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">^CDS</code></li>
@@ -2406,7 +2729,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
       <p>This is because we want to retain all lines that begin (<code class="language-plaintext highlighter-rouge">^</code>) with <code class="language-plaintext highlighter-rouge">CDS</code>.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0"><strong>Add column to an existing dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0</span></span>    with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0" title="Add column to an existing dataset tool"><strong>Add column to an existing dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0</span></span>    with the following parameters:
       <ul>
         <li><em>“Add this value”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“to Dataset”</em>: the collection produced by the previous step (<code class="language-plaintext highlighter-rouge">Select on collection...</code>)</li>
@@ -2415,7 +2738,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
       <p>This will be used for the “score” field of the BED file since we do not have a proper “score”</p>
     </li>
     <li>
-      <p><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:</p>
 
       <p>We will produce two BED files, one using the product name (e.g. “chromosomal replication initiator protein DnaA”) and one using the symbol (e.g. “thrA”). The product name is much more interesting to see in visualisations, but the symbol is more often used in other analyses and we will use that file later. We will start with the product name:</p>
 
@@ -2463,7 +2786,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
       <p>As we mentioned above these datasets lack genome IDs such as <code class="language-plaintext highlighter-rouge">CP020543.1</code>. However, the individual elements in the collection we’ve created already have genome IDs. We will leverage this when collapsing this collection into a single dataset:</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>    with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>    with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Cut on collection...</code>)</li>
         <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -2471,7 +2794,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
       </ul>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  in a specific column</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  in a specific column</p>
 
       <p>Many bed parsers do not like whitespace in the <code class="language-plaintext highlighter-rouge">Name</code> column, so we will replace that</p>
 
@@ -2486,16 +2809,16 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
       <p>Change the datatype of the collection to <code class="language-plaintext highlighter-rouge">bed</code> and rename it to <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives)</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">bed</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">bed</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-6-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives)</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-6" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives)</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
         <p>How does your output look?</p>
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>The resulting dataset should look like this:</p>
 
@@ -2548,7 +2871,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:</p>
 
       <p>We will produce two BED files, one using the product name (e.g. “chromosomal replication initiator protein DnaA”) and one using the symbol (e.g. “thrA”). The product name is much more interesting to see in visualisations, but the symbol is more often used in other analyses and we will use that file later. We will start with the product name:</p>
 
@@ -2594,7 +2917,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </tbody>
       </table>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span>  with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Cut on collection...</code>)</li>
         <li><em>“Append File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -2605,10 +2928,10 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
       <p>Change the datatype of the collection to <code class="language-plaintext highlighter-rouge">bed</code> and rename it to <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives) with Symbol Name</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-2-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">bed</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">bed</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-7"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-7-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives) with Symbol Name</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-7"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-7" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives) with Symbol Name</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -2618,19 +2941,19 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
 <p>It can be useful to have the complement of the aligned regions, to know which regions are unique.</p>
 
-<figure id="figure-8"><img src="../../images/complement.png" alt="Complementing genomic ranges. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from BEDTools documentation).</figcaption></figure>
+<figure id="figure-8"><img src="../../images/complement.png" alt="Complementing genomic ranges. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from BEDTools documentation).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-a-genome-file" aria-label="hands-on box: Creating a genome file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a genome file</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-a-genome-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating a genome file</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1"><strong>Compute sequence length</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1</span></span> :
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1" title="Compute sequence length tool"><strong>Compute sequence length</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1</span></span> :
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Compute length for these sequences”</em>: <code class="language-plaintext highlighter-rouge">DNA (E. coli + Relatives)</code>, the FASTA dataset we generated from <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Strip fasta description from header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span>  data in ascending or descending order:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span>  data in ascending or descending order:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Compute sequence length on ...</code>)</li>
         <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -2639,10 +2962,10 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
         <p>How does the output look?</p>
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>This will generate a dataset that looks like this:</p>
 
@@ -2675,13 +2998,13 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </blockquote>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0"><strong>SortBED order the intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0" title="SortBED order the intervals tool"><strong>SortBED order the intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort the following BED file”</em>: <code class="language-plaintext highlighter-rouge">Target &amp; Query Alignments</code></li>
         <li><em>“Sort by”</em> on its default setting (<code class="language-plaintext highlighter-rouge">chromosome, then by start position (asc)</code>)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0"><strong>ComplementBed Extract intervals not represented by an interval file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0" title="ComplementBed Extract intervals not represented by an interval file tool"><strong>ComplementBed Extract intervals not represented by an interval file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0</span></span>  with the following parameters:
       <ul>
         <li><em>“BED/VCF/GFF file”</em>: output of the <strong>SortBED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in the previous step</li>
         <li><em>“Genome file”</em>: <code class="language-plaintext highlighter-rouge">Genome file from your history</code>
@@ -2691,7 +3014,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>   data on any column using simple expressions
+    <li><span class="tool" data-tool="Filter1" title="Filter tool"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>   data on any column using simple expressions
       <ul>
         <li><em>“Filter”</em>: dataset from the last step (<code class="language-plaintext highlighter-rouge">Complement of SortBed on ...</code>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3-c2&gt;=10000</code></li>
@@ -2700,10 +3023,10 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
       <p>Note: Here we are computing the length (difference between end (column 3) and start (column 2) and making sure it is above 10,000).</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
         <p>How does your output look?</p>
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>The resulting dataset should look like this:</p>
 
@@ -2762,20 +3085,20 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 <p>You will notice that all three genomes have a region starting past 3,200,000 and only <code class="language-plaintext highlighter-rouge">CP020543.1</code> has another region starting at 1,668,702. However, this region reflects some unique feature of <code class="language-plaintext highlighter-rouge">CP020543.1</code> rather than that of our assembly. This is why we will concentrate on the <em>common</em> region which is deleted in our genome, but is present in the three closely related <em>E. coli</em> strains:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-restricting-list-of-deleted-regions-to-the-i-common-i-deletion" aria-label="hands-on box: Restricting list of deleted regions to the &lt;i&gt;common&lt;/i&gt; deletion"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Restricting list of deleted regions to the <i>common</i> deletion</div>
+  <div class="box-title hands-on-title" id="hands-on-restricting-list-of-deleted-regions-to-the-i-common-i-deletion"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Restricting list of deleted regions to the <i>common</i> deletion</div>
 
   <ol>
-    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
       <ul>
         <li><em>“Filter”</em>: dataset from the last step (<code class="language-plaintext highlighter-rouge">Filter on data...</code>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c2 &gt; 2000000</code>.</li>
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
         <p>How does your output look?</p>
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>The new set of regions will look like this:</p>
 
@@ -2822,7 +3145,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
       <p>Rename this dataset <code class="language-plaintext highlighter-rouge">Gaps</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-8"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-8-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Gaps</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-8"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-8" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Gaps</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -2834,9 +3157,9 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 <p>JBrowse is an interactive genome browser, which has been integrated into Galaxy as a workflow-compatible tool that you can use to summarise all of the datasets we’ve created thusfar:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-view-genomes" aria-label="hands-on box: View genomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: View genomes</div>
+  <div class="box-title hands-on-title" id="hands-on-view-genomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: View genomes</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1</span></span>  genome browser:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1" title="JBrowse tool"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1</span></span>  genome browser:
       <ul>
         <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
@@ -2903,10 +3226,10 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 <p>Alternatively to JBrowse, we can use Circos to create a nice image of the alignments:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-circos" aria-label="hands-on box: Circos"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Circos</div>
+  <div class="box-title hands-on-title" id="hands-on-circos"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Circos</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span>  with the following parameters:
       <ul>
         <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="language-plaintext highlighter-rouge">from your history</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a reference dataset”</em>: <code class="language-plaintext highlighter-rouge">DNA</code>, the <em>E. coli</em> genomes we uploaded earlier</li>
@@ -2923,23 +3246,23 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>  with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the MAF output of <strong>LASTZ</strong> (collecion input)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7"><strong>Circos: Alignemnts to Links</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7</span></span>  reformats alignment files to prepare for Circos:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7" title="Circos: Alignemnts to Links tool"><strong>Circos: Alignemnts to Links</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7</span></span>  reformats alignment files to prepare for Circos:
       <ul>
         <li><em>“Alignment file”</em>: the output of the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7"><strong>Circos: Interval to Tiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7</span></span>  reformats interval files for Circos’ use:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7" title="Circos: Interval to Tiles tool"><strong>Circos: Interval to Tiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7</span></span>  reformats interval files for Circos’ use:
       <ul>
         <li><em>“BED File”</em>: <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives)</code></li>
       </ul>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7"><strong>Circos</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7</span></span>  genome browser:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7" title="Circos tool"><strong>Circos</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7</span></span>  genome browser:</p>
 
       <ul>
         <li>In the section <em>“Karyoytype”</em>
@@ -3031,19 +3354,19 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
 <p>This should produce a lovely Circos plot of your data:</p>
 
-<figure id="figure-9"><img src="../../images/ecoli-comparison.png" alt="Circos plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Circos plot of the four genomes. The insertion in the related genomes is visible around the 3.2Mb region</figcaption></figure>
+<figure id="figure-9"><img src="../../images/ecoli-comparison.png" alt="Circos plot. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Circos plot of the four genomes. The insertion in the related genomes is visible around the 3.2Mb region</figcaption></figure>
 
 <h2 id="extracting-genes-programmatically">Extracting genes programmatically</h2>
 
 <p>Above we’ve been able to look at genes that appear to be deleted in our assembly. But what we really need is to create a list that can be interrogated further. For example, which of these genes are essential? We can easily create such a list by overlapping coordinates of genes with coordinates of our deletion. But to do this we first need to create a set of coordinates corresponding to the deletion. We could do this by inspecting the genome browser, or we can do it automatically by intersecting the gap regions with the list of genes:</p>
 
-<figure id="figure-10"><img src="../../images/intersect.png" alt="Intersect between two BED datasets. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Computing intersect means finding overlapping regions in two BED datasets (image from BEDTools documentation).</figcaption></figure>
+<figure id="figure-10"><img src="../../images/intersect.png" alt="Intersect between two BED datasets. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Computing intersect means finding overlapping regions in two BED datasets (image from BEDTools documentation).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-finding-genes-deleted-in-our-assembly" aria-label="hands-on box: Finding genes deleted in our assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Finding genes deleted in our assembly</div>
+  <div class="box-title hands-on-title" id="hands-on-finding-genes-deleted-in-our-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Finding genes deleted in our assembly</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2"><strong>Intersect intervals find overlapping intervals in various ways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2" title="Intersect intervals find overlapping intervals in various ways tool"><strong>Intersect intervals find overlapping intervals in various ways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2</span></span>  with the following parameters:
       <ul>
         <li><em>“File A to intersect with B”</em>: <code class="language-plaintext highlighter-rouge">Gaps</code></li>
         <li><em>“File(s) B to intersect with A”</em>: <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives) with Symbol Name</code></li>
@@ -3151,7 +3474,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 <p>Goodall et al. have recently published a list of essential genes for <em>E. coli</em> K-12 (<span class="citation"><a href="#Goodall2018">Goodall <i>et al.</i> 2018</a></span>). We can use their data to answer this question. This paper contains a supplementary file in Excel format listing genes and whether they are essential or not. We have converted this to a <kbd>tab</kbd> delimited file for you, but you could do this in any spreadsheet application:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-data" aria-label="hands-on box: Import data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import data</div>
+  <div class="box-title hands-on-title" id="hands-on-import-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import data</div>
 
   <ol>
     <li>
@@ -3161,7 +3484,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -3211,10 +3534,10 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 <p>The two truly important columns here are 1 (gene name) and 4 (is gene essential?). Let’s join the results of the intersection with this list:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-are-there-essential-genes" aria-label="hands-on box: Are there essential genes?"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Are there essential genes?</div>
+  <div class="box-title hands-on-title" id="hands-on-are-there-essential-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Are there essential genes?</div>
 
   <ol>
-    <li><span class="tool" data-tool="join1" title="Tested with join1"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>  side by side on a specified field:
+    <li><span class="tool" data-tool="join1" title="Join two Datasets tool"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>  side by side on a specified field:
       <ul>
         <li><em>“Join”</em>: the results of the <a href="#hands-on-finding-genes-deleted-in-our-assembly">intersect operation</a>(<code class="language-plaintext highlighter-rouge">Intersect intervals on data...</code>)</li>
         <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 7</code> (because it contains gene names. If it is not a drop down enter <code class="language-plaintext highlighter-rouge">7</code>.)</li>
@@ -3754,10 +4077,12 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
   </tbody>
 </table>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>We learned how to download large sets of completed genomes from NCBI</p>
@@ -3798,33 +4123,9 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Making sense of a newly assembled genome (Assembly)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Making sense of a newly assembled genome (Assembly)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -3842,7 +4143,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -3883,7 +4184,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -3895,29 +4196,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

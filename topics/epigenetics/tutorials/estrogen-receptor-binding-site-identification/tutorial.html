@@ -12,34 +12,34 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Identification of the binding sites of the Estrogen receptor" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-02-17 10:40:02 +0000" />
-<meta name="DC.creator" content="Friederike Dündar" />
-<meta name="DC.creator" content="Anika Erxleben" />
-<meta name="DC.creator" content="Bérénice Batut" />
-<meta name="DC.creator" content="Vivek Bhardwaj" />
-<meta name="DC.creator" content="Fidel Ramirez" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Identification of the binding sites of the Estrogen receptor">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-02-17 10:40:02 +0000">
+<meta name="DC.creator" content="Friederike Dündar">
+<meta name="DC.creator" content="Anika Erxleben">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Vivek Bhardwaj">
+<meta name="DC.creator" content="Fidel Ramirez">
 
         
         
         
         
-        <meta name="description" content="DNA methylation is an epigenetic mechanism used by higher..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Identification of the binding sites of the Estrogen receptor" />
-        <meta property="og:description" content="DNA methylation is an epigenetic mechanism used by higher..." />
+        <meta name="description" content="DNA methylation is an epigenetic mechanism used by higher...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Identification of the binding sites of the Estrogen receptor">
+        <meta property="og:description" content="DNA methylation is an epigenetic mechanism used by higher...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -651,7 +651,408 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-epigenetics">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-02-17 10:40:02 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Identification of the binding sites of the Estrogen receptor",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Epigenetics",
+    "description": "DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromosome inactivating, imprinting, and gene silencing of germline specific gene and repetitive elements.",
+    "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Identification of the binding sites of the Estrogen receptor' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/tutorial.html",
+  "timeRequired": "PT3H",
+  "keywords": "epigenetics, ChIP-seq, work-in-progress",
+  "description": "The questions this  addresses are:\n - How is raw ChIP-seq data processed and analyzed?\n - What are the binding sites of the Estrogen receptor?\n\n\nThe objectives are:\n - Inspect read quality with FastQC\n - Map reads with Bowtie2\n - Assess the quality of an ChIP-seq experiments\n - Extract coverage files\n - Call enriched regions or peaks\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/friedue/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/friedue/",
+      "name": "Friederike Dündar",
+      "image": "https://avatars.githubusercontent.com/friedue",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "name": "Anika Erxleben",
+      "image": "https://avatars.githubusercontent.com/erxleben",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7427-6478",
+      "orcid": "https://orcid.org/0000-0002-7427-6478"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/",
+      "name": "Vivek Bhardwaj",
+      "image": "https://avatars.githubusercontent.com/vivekbhr",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/",
+      "name": "Fidel Ramirez",
+      "image": "https://avatars.githubusercontent.com/fidelram",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/friedue/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/friedue/",
+      "name": "Friederike Dündar",
+      "image": "https://avatars.githubusercontent.com/friedue",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "name": "Anika Erxleben",
+      "image": "https://avatars.githubusercontent.com/erxleben",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7427-6478",
+      "orcid": "https://orcid.org/0000-0002-7427-6478"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/",
+      "name": "Vivek Bhardwaj",
+      "image": "https://avatars.githubusercontent.com/vivekbhr",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/",
+      "name": "Fidel Ramirez",
+      "image": "https://avatars.githubusercontent.com/fidelram",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Epigenetics",
+      "description": "DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromosome inactivating, imprinting, and gene silencing of germline specific gene and repetitive elements.",
+      "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3173",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3173",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3173"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-epigenetics">
     <h1 data-toc-skip>Identification of the binding sites of the Estrogen receptor</h1>
     
     <div class="alert alert-warning" role="alert">
@@ -661,6 +1062,7 @@
     </div>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -671,9 +1073,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -811,7 +1213,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/workflows/" title="Workflows" alt="Identification of the binding sites of the Estrogen receptor workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/workflows/" title="Identification of the binding sites of the Estrogen receptor workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -825,13 +1227,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -857,7 +1256,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -996,6 +1395,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -1031,6 +1436,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -1041,6 +1447,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>This exercise uses the dataset from the Nature publication by <a href="https://www.ncbi.nlm.nih.gov/pubmed/22217937">Ross-Inness et al., 2012</a>.
@@ -1106,7 +1513,7 @@ The input files are used to identify potential sequencing bias, like open chroma
 <p>Because of the long processing time for the large original files, we have downsampled the original data and provide already processed data for subsequent steps.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
@@ -1147,20 +1554,20 @@ The input files are used to identify potential sequencing bias, like open chroma
 <p>The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-control" aria-label="hands-on box: Quality control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality control</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial and give it a proper name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import <code class="language-plaintext highlighter-rouge">patient1_input_good_outcome</code> from <a href="https://zenodo.org/record/892432/files/patient1_input_good_outcome.fastq">Zenodo</a> or from the data library into the history</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-importing-data-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-importing-data-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data via links<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ul>
           <li>Copy the link location</li>
@@ -1175,7 +1582,7 @@ The input files are used to identify potential sequencing bias, like open chroma
       </blockquote>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ul>
           <li>Go into “Shared data” (top panel) then “Data libraries”</li>
@@ -1192,7 +1599,7 @@ The input files are used to identify potential sequencing bias, like open chroma
       <p>Inspect the file by clicking on the <code class="language-plaintext highlighter-rouge">eye</code> icon</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>How are the DNA sequences stored?</li>
@@ -1200,7 +1607,7 @@ The input files are used to identify potential sequencing bias, like open chroma
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The DNA sequences are stored in the second line of every 4-line group</li>
             <li>This file is called a <a href="https://en.wikipedia.org/wiki/FASTQ_format">FastQ file</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
@@ -1222,7 +1629,7 @@ The input files are used to identify potential sequencing bias, like open chroma
 <p>It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= low quality bases).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-control-1" aria-label="hands-on box: Quality control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality control</div>
 
   <ol>
     <li>Run <strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1235,7 +1642,7 @@ The input files are used to identify potential sequencing bias, like open chroma
       </ul>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (<code class="language-plaintext highlighter-rouge">fastqsanger</code>). You can edit the data type by clicking on the <code class="language-plaintext highlighter-rouge">pencil</code> symbol.</p>
       </blockquote>
@@ -1253,7 +1660,7 @@ The input files are used to identify potential sequencing bias, like open chroma
 <p>Nowadays, there are many read alignment programs for shotgun sequenced DNA, Bowtie2 being one of them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-mapping" aria-label="hands-on box: Mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Mapping</div>
+  <div class="box-title hands-on-title" id="hands-on-mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Mapping</div>
 
   <ol>
     <li><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1265,14 +1672,14 @@ The input files are used to identify potential sequencing bias, like open chroma
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>How many reads where mapped?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>This information can be accessed by clicking on the resulting history entry. You can see some basic mapping statistics once the alignment is completed. 16676 (66.96%) were mapped exactly 1 time and 7919 (31.80%) aligned &gt;1 times. The overall alignment rate is then 98.76%.</li>
           </ol>
@@ -1295,7 +1702,7 @@ The input files are used to identify potential sequencing bias, like open chroma
 <h2 id="visualization-using-a-genome-browser">Visualization using a Genome Browser</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualization-of-the-reads-in-igv" aria-label="hands-on box: Visualization of the reads in IGV"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualization of the reads in IGV</div>
+  <div class="box-title hands-on-title" id="hands-on-visualization-of-the-reads-in-igv"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualization of the reads in IGV</div>
 
   <ol>
     <li>Click on the <code class="language-plaintext highlighter-rouge">display with IGV local</code> to load the reads into the IGV browser</li>
@@ -1306,14 +1713,14 @@ The input files are used to identify potential sequencing bias, like open chroma
 <p>The reads have a direction: they are mapped to the forward or reverse strand, respectively. When hovering over a read, extra information is displayed</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>Some reads have colored lines included. What is this?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Try to zoom in in one of those lines and you will see the answer!</li>
     </ol>
@@ -1321,7 +1728,7 @@ The input files are used to identify potential sequencing bias, like open chroma
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>Because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can be changed in the IGV preferences panel.</p>
 </blockquote>
 
@@ -1330,7 +1737,7 @@ The input files are used to identify potential sequencing bias, like open chroma
 <p>As mentioned above, you can convert the binary BAM file into a simple (but large!) text file, which is called a <a href="https://en.wikipedia.org/wiki/SAM_(file_format)">SAM</a> (Sequence Alignment Map) file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-conversion-into-a-sam-file" aria-label="hands-on box: Conversion into a SAM file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Conversion into a SAM file</div>
+  <div class="box-title hands-on-title" id="hands-on-conversion-into-a-sam-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Conversion into a SAM file</div>
 
   <ol>
     <li><strong>BAM-to-SAM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1352,14 +1759,14 @@ The input files are used to identify potential sequencing bias, like open chroma
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>Which information do you find in a SAM/BAM file? What is the additional information compared to a FASTQ file.</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Sequences and Quality information, like FASTQ</li>
       <li>Mapping information; Location of the read on the chromosome; Mapping quality …</li>
@@ -1386,7 +1793,7 @@ That is, because the input samples should not have enriched regions included - r
 To save time, we already did that and we can now work directly on the BAM files of the 8 samples</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-correlation-between-samples" aria-label="hands-on box: Correlation between samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Correlation between samples</div>
+  <div class="box-title hands-on-title" id="hands-on-correlation-between-samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Correlation between samples</div>
 
   <ol>
     <li>Create a new history</li>
@@ -1430,16 +1837,16 @@ To save time, we already did that and we can now work directly on the BAM files 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
-  <figure id="figure-1"><img src="../../images/estrogen-receptor-binding-site-identification/plotCorrelation_output.png" alt="Output for plotCorrelation with the correlation scores between the 8 samples. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Correlation scores between the 8 samples</figcaption></figure>
+  <figure id="figure-1"><img src="../../images/estrogen-receptor-binding-site-identification/plotCorrelation_output.png" alt="Output for plotCorrelation with the correlation scores between the 8 samples. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Correlation scores between the 8 samples</figcaption></figure>
 
   <ol>
     <li>How are your samples clustered? Does that correspond to your expectations?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Badly, this is due to the subsampling of our data. You should expect better results from your real data.</li>
       <li>Expected is that your inputs and your ChIP samples cluster together.</li>
@@ -1448,7 +1855,7 @@ To save time, we already did that and we can now work directly on the BAM files 
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>More information on these two tools can be found at the <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">deepTools documentation page</a>.</p>
 </blockquote>
 
@@ -1457,12 +1864,12 @@ To save time, we already did that and we can now work directly on the BAM files 
 <p>To evaluate the quality of the immuno-precipitation step, we can compute the IP strength. It determines how well the signal in the ChIP-seq sample can be differentiated from the background distribution of reads in the control sample. To do that we take the data for one Patient and compare the input sample and the ChIP-seq sample.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>For more information on how the IP strength is estimated, you can check the <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">deepTools documentation page</a>.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-ip-strength-estimation" aria-label="hands-on box: IP strength estimation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: IP strength estimation</div>
+  <div class="box-title hands-on-title" id="hands-on-ip-strength-estimation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: IP strength estimation</div>
 
   <ol>
     <li><strong>plotFingerprint</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1477,26 +1884,26 @@ To save time, we already did that and we can now work directly on the BAM files 
 
 <p>The plotFingerprint tool generates a fingerprint plot. You need to intepret it to know the IP strength. The <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">deepTools documentation</a> explains it clearly:</p>
 
-<figure id="figure-2"><img src="../../images/estrogen-receptor-binding-site-identification/QC_fingerprint.png" alt="A guide to interpret a fingerprint plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> How to interpret a fingerprint plot? Image extracted from the deepTools documentation</figcaption></figure>
+<figure id="figure-2"><img src="../../images/estrogen-receptor-binding-site-identification/QC_fingerprint.png" alt="A guide to interpret a fingerprint plot. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> How to interpret a fingerprint plot? Image extracted from the deepTools documentation</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
-  <figure id="figure-3"><img src="../../images/estrogen-receptor-binding-site-identification/plotFingerprint_output.png" alt="Output for plotFingerprint with the fingerprint plot to estimate the IP strength. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Fingerprint plot for the Patient 1 to estimate the IP strength</figcaption></figure>
+  <figure id="figure-3"><img src="../../images/estrogen-receptor-binding-site-identification/plotFingerprint_output.png" alt="Output for plotFingerprint with the fingerprint plot to estimate the IP strength. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Fingerprint plot for the Patient 1 to estimate the IP strength</figcaption></figure>
 
   <ol>
     <li>What do you think about the quality of the IP for this experiment?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The difference between input and ChIP signal is not totally clear. 20% of chromosome 1 are not sequenced
  at all and the ChIP signal is only slightly more enrichted then the input.</p>
   </blockquote>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-optional-ip-strength-estimation-other-samples" aria-label="hands-on box: (Optional) IP strength estimation (other samples)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: (Optional) IP strength estimation (other samples)</div>
+  <div class="box-title hands-on-title" id="hands-on-optional-ip-strength-estimation-other-samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: (Optional) IP strength estimation (other samples)</div>
 
   <ol>
     <li>Run the same analysis on data of the 3 other patients</li>
@@ -1521,7 +1928,7 @@ to extract which parts of the genome have been enriched (more reads mapped) with
 These differences can bias the interpretation of the number of reads mapped to a specific genome region.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-coverage-file-normalization" aria-label="hands-on box: Coverage file normalization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Coverage file normalization</div>
+  <div class="box-title hands-on-title" id="hands-on-coverage-file-normalization"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Coverage file normalization</div>
 
   <ol>
     <li><strong>IdxStats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1530,7 +1937,7 @@ These differences can bias the interpretation of the number of reads mapped to a
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>What is the output of this tool?</li>
@@ -1538,7 +1945,7 @@ These differences can bias the interpretation of the number of reads mapped to a
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>This tool estimates how many reads mapped to which chromosome. Furthermore, it tells the chromosome lengths and naming convention (with or without ‘chr’ in the beginning)</li>
             <li>1,089,370 for ChIP-seq samples and 1,467,480 for the input</li>
@@ -1556,14 +1963,14 @@ These differences can bias the interpretation of the number of reads mapped to a
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-7" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>What are the different columns of a <code class="language-plaintext highlighter-rouge">bedgraph</code> file?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>chrom, chromStart, chromEnd and a data value</li>
           </ol>
@@ -1575,14 +1982,14 @@ These differences can bias the interpretation of the number of reads mapped to a
       <p><strong>IGV</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to inspect both signal coverages (input and ChIP samples) in IGV</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-8" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>What is a bigWig file?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>A bigWig file is a compressed bedgraph file. Similar in relation as BAm to SAM, but this time just for coverage data. This means bigWig and bedgraph
 files are much smaller than BAM or SAM files.</p>
         </blockquote>
@@ -1597,7 +2004,7 @@ files are much smaller than BAM or SAM files.</p>
 <p>To extract only the information induced by the immunoprecipitation, we normalize for each patient the coverage file for the sample that underwent immunoprecipitation by the coverage file for the input sample. Here we use the tool bamCompare which compare 2 BAM files while caring for sequencing depth normalization.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generation-of-input-normalized-coverage-files" aria-label="hands-on box: Generation of input-normalized coverage files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generation of input-normalized coverage files</div>
+  <div class="box-title hands-on-title" id="hands-on-generation-of-input-normalized-coverage-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generation of input-normalized coverage files</div>
 
   <ol>
     <li><strong>bamCompare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1611,14 +2018,14 @@ files are much smaller than BAM or SAM files.</p>
           <p>“Region of the genome to limit the operation to” to <code class="language-plaintext highlighter-rouge">chr11</code> (to reduce the computation time for the tutorial)</p>
 
           <blockquote class="question">
-            <div class="box-title question-title" id="question-9" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+            <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
             <ol>
               <li>What does mean a positive or a negative value in the 4th column?</li>
             </ol>
 
             <blockquote class="solution">
-              <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+              <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
               <ol>
                 <li>The 4th column contains the log2 of the number of reads ratio between the ChIP-seq sample and the input sample. A positive value means that the coverage on the portion is more important in the ChIP-seq sample than in the input sample</li>
               </ol>
@@ -1642,7 +2049,7 @@ files are much smaller than BAM or SAM files.</p>
 <p>We can also call the enriched regions, or peaks, found in the ChIP-seq samples.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-peak-calling" aria-label="hands-on box: Peak calling"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Peak calling</div>
+  <div class="box-title hands-on-title" id="hands-on-peak-calling"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Peak calling</div>
 
   <ol>
     <li><strong>MACS2 callpeak</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1654,7 +2061,7 @@ files are much smaller than BAM or SAM files.</p>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
         <p>The advanced options may be adjusted, depending of the samples.
 If your ChIP-seq experiment targets regions of broad enrichment, <em>e.g.</em> non-punctuate histone modifications, select calling of broad regions.
 If your sample has a low duplication rate (<em>e.g.</em> below 10%), you might keep all duplicate reads (tags). Otherwise, you might use the ‘auto’ option to estimate the maximal allowed number of duplicated reads per genomic location.</p>
@@ -1680,7 +2087,7 @@ If your sample has a low duplication rate (<em>e.g.</em> below 10%), you might k
 <h2 id="computematrix">computeMatrix</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualization-of-the-coverage" aria-label="hands-on box: Visualization of the coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualization of the coverage</div>
+  <div class="box-title hands-on-title" id="hands-on-visualization-of-the-coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualization of the coverage</div>
 
   <ol>
     <li><strong>UCSC Main</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1714,7 +2121,7 @@ If your sample has a low duplication rate (<em>e.g.</em> below 10%), you might k
 <h2 id="plotheatmap">plotHeatmap</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualization-of-the-coverage-1" aria-label="hands-on box: Visualization of the coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualization of the coverage</div>
+  <div class="box-title hands-on-title" id="hands-on-visualization-of-the-coverage-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualization of the coverage</div>
   <ol>
     <li><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
@@ -1729,7 +2136,7 @@ If your sample has a low duplication rate (<em>e.g.</em> below 10%), you might k
 
 <h1 id="conclusion">Conclusion</h1>
 
-<figure id="figure-4"><img src="../../images/estrogen-receptor-binding-site-identification/tutorial-scheme.png" alt="Summary of the different steps of the tutorial and the generated files. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Different steps of the tutorials with the generated files</figcaption></figure>
+<figure id="figure-4"><img src="../../images/estrogen-receptor-binding-site-identification/tutorial-scheme.png" alt="Summary of the different steps of the tutorial and the generated files. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Different steps of the tutorials with the generated files</figcaption></figure>
 
 <h1 id="additional-exercise-if-you-have-finished-all-above">Additional exercise (if you have finished all above)</h1>
 
@@ -1739,21 +2146,21 @@ If your sample has a low duplication rate (<em>e.g.</em> below 10%), you might k
 We need to check that our samples do not have more reads from regions of the genome with high GC.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
   <p>GC bias was for many years a big problem, but recent advances in sample preparation have solved this problem to a degree that you can skip this step more often.</p>
 </blockquote>
 
 <p>For practical reasons, we will focus here only on one of our BAM files. With real data you should repeat these steps for all your samples.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-10" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>Can you guess why it makes more sense to check the input files for GC bias?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>We only want to assess the bias induced by the PCR-based protocols. This is not possible with the ChIP samples, as the enriched regions (binding sites) can have a potential GC enrichment on their own.</li>
     </ol>
@@ -1761,7 +2168,7 @@ We need to check that our samples do not have more reads from regions of the gen
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-gc-bias-assessment" aria-label="hands-on box: GC bias assessment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: GC bias assessment</div>
+  <div class="box-title hands-on-title" id="hands-on-gc-bias-assessment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: GC bias assessment</div>
 
   <ol>
     <li><strong>computeGCbias</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1775,16 +2182,16 @@ We need to check that our samples do not have more reads from regions of the gen
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-11" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
-        <figure id="figure-5"><img src="../../images/estrogen-receptor-binding-site-identification/computeGCBias_output.png" alt="Output for computeGCbias with the GC bias estimation. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Estimation of the GC bias for the input sample for the Patient 1</figcaption></figure>
+        <figure id="figure-5"><img src="../../images/estrogen-receptor-binding-site-identification/computeGCBias_output.png" alt="Output for computeGCbias with the GC bias estimation. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Estimation of the GC bias for the input sample for the Patient 1</figcaption></figure>
 
         <ol>
           <li>Does this dataset have a GC bias?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>There is no significantly more reads in the GC-rich regions.</li>
           </ol>
@@ -1797,7 +2204,7 @@ We need to check that our samples do not have more reads from regions of the gen
 <h2 id="plotting-heatmap-from-multiple-samples-with-clustering">Plotting heatmap from multiple samples with clustering</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plotting-multiple-samples" aria-label="hands-on box: plotting multiple samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: plotting multiple samples</div>
+  <div class="box-title hands-on-title" id="hands-on-plotting-multiple-samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: plotting multiple samples</div>
 
   <ol>
     <li>Run <strong>bamCompare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with  same parameters as above, for all 4 patients:
@@ -1842,10 +2249,12 @@ Inspect the output</li>
 
 </blockquote>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.</p>
@@ -1880,33 +2289,9 @@ Inspect the output</li>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Identification of the binding sites of the Estrogen receptor (Epigenetics)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Identification of the binding sites of the Estrogen receptor (Epigenetics)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1924,7 +2309,7 @@ Inspect the output</li>
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1965,7 +2350,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1977,29 +2362,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

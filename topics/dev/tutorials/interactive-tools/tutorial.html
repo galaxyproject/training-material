@@ -12,35 +12,35 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/interactive-tools/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/interactive-tools/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Galaxy Interactive Tools" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-01-23 14:28:11 +0000" />
-<meta name="DC.creator" content="Estelle Ancelet" />
-<meta name="DC.creator" content="Yvan Le Bras" />
-<meta name="DC.creator" content="Cameron Hyde" />
-<meta name="DC.creator" content="Lain Pavot" />
-<meta name="DC.creator" content="Anthony Bretaudeau" />
-<meta name="DC.creator" content="Helena Rasche" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Galaxy Interactive Tools">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-01-23 14:28:11 +0000">
+<meta name="DC.creator" content="Estelle Ancelet">
+<meta name="DC.creator" content="Yvan Le Bras">
+<meta name="DC.creator" content="Cameron Hyde">
+<meta name="DC.creator" content="Lain Pavot">
+<meta name="DC.creator" content="Anthony Bretaudeau">
+<meta name="DC.creator" content="Helena Rasche">
 
         
         
         
         
-        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Galaxy Interactive Tools" />
-        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Galaxy Interactive Tools">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -667,10 +667,427 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-dev">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-01-23 14:28:11 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Galaxy Interactive Tools",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Galaxy Interactive Tools' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/interactive-tools/tutorial.html",
+  "timeRequired": "PT3H",
+  "keywords": "dev",
+  "description": "The questions this  addresses are:\n - What is an Interactive Tool on Galaxy (GxIT)?\n - How to set up a GxIT?\n\n\nThe objectives are:\n - Discover what Galaxy Interactive Tools (GxIT) are\n - Understand how GxITs are structured\n - Understand how GxITs work\n - Be able to dockerise a basic web application\n - Be able to wrap a dockerised application as a GxIT\n - Be able to test and debug a new GxIT locally and on a Galaxy server\n - Be able to distribute a new GxIT for others to use\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-integration/slides.html",
+      "name": "Tool development and integration into Galaxy",
+      "description": "Slides for 'Tool development and integration into Galaxy' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "http://planemo.readthedocs.io/en/latest/writing_standalone.html",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive"
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/tutorial.html",
+      "name": "Creating Galaxy tools from Conda Through Deployment",
+      "description": "Hands-on for 'Creating Galaxy tools from Conda Through Deployment' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    "Docker basics"
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/eancelet/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/eancelet/",
+      "name": "Estelle Ancelet",
+      "image": "https://avatars.githubusercontent.com/eancelet",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "name": "Yvan Le Bras",
+      "image": "https://avatars.githubusercontent.com/yvanlebras",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8504-068X",
+      "orcid": "https://orcid.org/0000-0002-8504-068X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/neoformit/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/neoformit/",
+      "name": "Cameron Hyde",
+      "image": "https://avatars.githubusercontent.com/neoformit",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5913-9766",
+      "orcid": "https://orcid.org/0000-0002-5913-9766"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Lain-inrae/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Lain-inrae/",
+      "name": "Lain Pavot",
+      "image": "https://avatars.githubusercontent.com/Lain-inrae",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "orcid": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/eancelet/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/eancelet/",
+      "name": "Estelle Ancelet",
+      "image": "https://avatars.githubusercontent.com/eancelet",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "name": "Yvan Le Bras",
+      "image": "https://avatars.githubusercontent.com/yvanlebras",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8504-068X",
+      "orcid": "https://orcid.org/0000-0002-8504-068X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/neoformit/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/neoformit/",
+      "name": "Cameron Hyde",
+      "image": "https://avatars.githubusercontent.com/neoformit",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5913-9766",
+      "orcid": "https://orcid.org/0000-0002-5913-9766"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Lain-inrae/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Lain-inrae/",
+      "name": "Lain Pavot",
+      "image": "https://avatars.githubusercontent.com/Lain-inrae",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "orcid": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-dev">
     <h1 data-toc-skip>Galaxy Interactive Tools</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -681,9 +1098,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -909,7 +1326,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -937,6 +1354,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -947,6 +1365,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <!--
 
 Notes:
@@ -971,13 +1390,13 @@ The environment_variables would be needed to retrieve data from Galaxy History. 
 <p>There are three elements to a GxIT - an application script, a Docker container and a Galaxy tool XML file. This tutorial will take you through creating those components, and installing them as a new Interactive Tool into a local Galaxy instance and an existing Galaxy instance.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-if-you-plan-to-use-an-existing-galaxy-instance" aria-label="comment box: If you plan to use an existing Galaxy instance"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: If you plan to use an existing Galaxy instance</div>
+  <div class="box-title comment-title" id="comment-if-you-plan-to-use-an-existing-galaxy-instance"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: If you plan to use an existing Galaxy instance</div>
   <p>The Galaxy server requires specific configuration in order to run Interactive Tools! Please refer to <a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">this admin tutorial</a> for setting up a compatible Galaxy instance for development and testing of your GxIT.
 As well as updating the Galaxy server configuration, you will also have to configure the server’s DNS provider to allow wildcard DNS records. This allows Galaxy to create unique host names (subdomains) for GxITs to be served over, separating them from the main Galaxy application.</p>
 </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1048,7 +1467,7 @@ output is not sufficient, then it’s time to start building your first
 Interactive Tool!</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-interactive-tool-infrastructure" aria-label="comment box: Interactive tool infrastructure"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Interactive tool infrastructure</div>
+  <div class="box-title comment-title" id="comment-interactive-tool-infrastructure"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Interactive tool infrastructure</div>
   <p>Interactive tools require some rather complex infrastructure in order to work! However, most of the infrastructure requirements are taken care of by Galaxy core. As such, wrapping a new GxIT requires only three components:</p>
   <ul>
     <li>Application script(s)</li>
@@ -1089,7 +1508,7 @@ the tutorial, we’ll sprinkle in some tips on how to speed up the development
 cycle.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-a-note-on-architecture" aria-label="comment box: A note on architecture"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: A note on architecture</div>
+  <div class="box-title comment-title" id="comment-a-note-on-architecture"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: A note on architecture</div>
   <p>When building a GxIT, it is best to keep as much logic as possible in the tool XML, while keeping the Docker image as generic as possible. Why? Updating the tool XML is simple for Galaxy admins and developers in the future. They can view the tool XML directly on the server and understand how the tool works. The Docker image, meanwhile, is relatively opaque to other developers and administrators. To understand the container they must locate the original Dockerfile, which is not always available. Updating the container is more complex, as we will see later. Additionally, keeping the Docker container generic makes it testable outside of Galaxy.</p>
 
   <p>In short: updating the Docker container is hard, but updating the tool XML is easy!</p>
@@ -1111,7 +1530,7 @@ to see an example of how this can be done.</p>
 In the following sections, we will study how it was built.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
 
   <p>First, let’s clone the repository to take a quick look at it.</p>
 
@@ -1143,7 +1562,7 @@ In the following sections, we will study how it was built.</p>
 <h2 id="the-dockerfile">The Dockerfile</h2>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-a-brief-primer-on-docker"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-brief-primer-on-docker-contents" aria-expanded="true" aria-label="Toggle tip box: A brief primer on Docker"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: A brief primer on Docker<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-a-brief-primer-on-docker"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-brief-primer-on-docker" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: A brief primer on Docker<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Docker allows an entire application context to be containerized. A typical web application consists of an operating system, installed dependancies, web server configuration, database configuration and, of course, the codebase of the software itself. A Docker container can encapsulate all of these components in a single “image”, which can be run on any machine with Docker installed.</p>
 
   <p><strong>Essentials of Docker:</strong></p>
@@ -1251,7 +1670,7 @@ If so, don’t forget to create a <code class="language-plaintext highlighter-ro
 next to your Dockerfile.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-1" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
 
   <p>Let’s start working on this Docker container.</p>
 
@@ -1270,7 +1689,7 @@ docker build <span class="nt">-t</span> <span class="nv">$IMAGE_TAG</span> <span
 </code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-automating-the-build"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-automating-the-build-contents" aria-expanded="true" aria-label="Toggle tip box: Automating the build"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Automating the build<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-automating-the-build"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-automating-the-build" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Automating the build<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>While developing the Docker container you may find yourself tweaking and rebuilding the container image many times.
 In the GitHub repository linked above, you’ll notice that the author has used a <code class="language-plaintext highlighter-rouge">Makefile</code> to accelerate the build and deploy process.
 This allows the developer to simply run <code class="language-plaintext highlighter-rouge">make docker</code> and <code class="language-plaintext highlighter-rouge">make push_hub</code> to build and push the container, or <code class="language-plaintext highlighter-rouge">make</code> to rebuild the container after making changes during development. Check out the <code class="language-plaintext highlighter-rouge">Makefile</code> to see what commands can be run using <code class="language-plaintext highlighter-rouge">make</code> in this repository.</p>
@@ -1293,7 +1712,7 @@ This allows the developer to simply run <code class="language-plaintext highligh
 <p>Before we go pushing our container to the cloud, we should give it a local test run to ensure that it’s working correctly on our development machine. Have a play and see how our little web app works!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-2" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Run our application in the container</span>
 docker run <span class="nt">-it</span> <span class="nt">-p</span> 127.0.0.1:8765:<span class="nv">$PORT</span> <span class="nv">$IMAGE_TAG</span>
 
@@ -1319,7 +1738,7 @@ has great documentation on creating repositories, authenticating with tokens
 and pushing images.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-3" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set remote tag for your container. This should include your username and</span>
 <span class="c"># repository name for Docker Hub.</span>
 <span class="nv">REMOTE</span><span class="o">=</span>&lt;DOCKERHUB_USERNAME&gt;/my-first-gxit
@@ -1335,7 +1754,7 @@ docker push <span class="nv">$REMOTE</span>:latest
 </code></pre></div>  </div>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-production-container-hosting"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-production-container-hosting-contents" aria-expanded="true" aria-label="Toggle tip box: Production container hosting"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Production container hosting<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-production-container-hosting"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-production-container-hosting" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Production container hosting<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>For production deployment, the
 <a href="https://docs.galaxyproject.org/en/latest/admin/special_topics/mulled_containers.html">Galaxy standard</a>
 for container image hosting is
@@ -1362,7 +1781,7 @@ our new Docker container as a Galaxy tool.</p>
 <h2 id="the-tool-xml">The tool XML</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-4" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
 
   <p>Create a Galaxy tool XML file named <code class="language-plaintext highlighter-rouge">interactivetool_tabulator.xml</code>. The file is similar to a regular tool XML, but calls on our remote Docker image as a dependency. The tags that we are most concerned with are:</p>
   <ul>
@@ -1373,7 +1792,7 @@ our new Docker container as a Galaxy tool.</p>
   </ul>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-writing-the-tool-command" aria-label="comment box: Writing the tool command"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Writing the tool command</div>
+    <div class="box-title comment-title" id="comment-writing-the-tool-command"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Writing the tool command</div>
 
     <p>This step can cause a lot of confusion. Here are a few pointer that you will find critical to understanding the process:</p>
     <ul>
@@ -1384,7 +1803,7 @@ our new Docker container as a Galaxy tool.</p>
   </blockquote>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-writing-the-gxit-tool-xml"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-writing-the-gxit-tool-xml-contents" aria-expanded="true" aria-label="Toggle tip box: Writing the GxIT tool XML"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Writing the GxIT tool XML<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-writing-the-gxit-tool-xml"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-writing-the-gxit-tool-xml" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Writing the GxIT tool XML<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ul>
       <li>Refer to the <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html">Galaxy tool XML docs</a>.</li>
@@ -1396,7 +1815,7 @@ our new Docker container as a Galaxy tool.</p>
   </blockquote>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"interactive_tool_tabulator"</span> <span class="na">tool_type=</span><span class="s">"interactive"</span> <span class="na">name=</span><span class="s">"Tabulator"</span> <span class="na">version=</span><span class="s">"0.1"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;description&gt;</span>Tuto tool for Gxit<span class="nt">&lt;/description&gt;</span>
@@ -1484,7 +1903,7 @@ our new Docker container as a Galaxy tool.</p>
 Let’s check this integration on your machine. You can use a VM if you prefer not to modify your machine environment.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-a-note-on-the-os" aria-label="comment box: A note on the OS"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: A note on the OS</div>
+  <div class="box-title comment-title" id="comment-a-note-on-the-os"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: A note on the OS</div>
   <p>This part of the tutorial has been tested on Ubuntu and Debian and there is no guaranteed success for other operating systems.
 If you have another OS on your machine (i.e. Windows or MacOS), you may need to use an Ubuntu virtual machine or perhaps try <a href="https://docs.microsoft.com/en-us/windows/wsl/install">Windows subsystem for Linux</a>.</p>
 </blockquote>
@@ -1492,14 +1911,14 @@ If you have another OS on your machine (i.e. Windows or MacOS), you may need to 
 <h2 id="docker-installation">Docker installation</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-docker" aria-label="hands-on box: Install Docker"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install Docker</div>
+  <div class="box-title hands-on-title" id="hands-on-install-docker"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Install Docker</div>
   <p>Install Docker as described on the <a href="https://docs.docker.com/engine/install/">docker website</a>. Click on your distribution name to get specific information.</p>
 </blockquote>
 
 <h2 id="galaxy-installation">Galaxy installation</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-galaxy" aria-label="hands-on box: Install Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-install-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Install Galaxy</div>
 
   <p>For Ubuntu:</p>
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install git to get Galaxy project</span>
@@ -1517,7 +1936,7 @@ git clone https://github.com/galaxyproject/galaxy
 <h2 id="galaxy-configuration">Galaxy configuration</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-5" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
 
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/GxIT/galaxy/config
 <span class="c"># Create custom config files</span>
@@ -1565,7 +1984,7 @@ the Galaxy core application directory, and adding the tool to our
 <code class="language-plaintext highlighter-rouge">tool_conf_interactive.xml</code> file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing" aria-label="hands-on box: Installing"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing</div>
+  <div class="box-title hands-on-title" id="hands-on-installing"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing</div>
 
   <ol>
     <li>
@@ -1604,7 +2023,7 @@ the Galaxy core application directory, and adding the tool to our
 We just need to add a single line to this file to enable our tool. Can you figure it out?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;toolbox</span> <span class="na">monitor=</span><span class="s">"true"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"interactivetools"</span> <span class="na">name=</span><span class="s">"Interactive Tools"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"interactive/interactivetool_tabulator.xml"</span> <span class="nt">/&gt;</span>
@@ -1626,7 +2045,7 @@ We just need to add a single line to this file to enable our tool. Can you figur
 <p>Have a look in the web interface of your Galaxy instance. You should find the new tool under the “Interactive tools” section in the tool panel. If so, we are ready to start testing it out!</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-distributing-a-new-gxit"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-distributing-a-new-gxit-contents" aria-expanded="true" aria-label="Toggle tip box: Distributing a new GxIT"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Distributing a new GxIT<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-distributing-a-new-gxit"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-distributing-a-new-gxit" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Distributing a new GxIT<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>To release a GxIT for production use, we must distribute two components:</p>
   <ul>
@@ -1645,7 +2064,7 @@ We just need to add a single line to this file to enable our tool. Can you figur
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-install-a-gxit-with-an-ansible-playbook"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-install-a-gxit-with-an-ansible-playbook-contents" aria-expanded="true" aria-label="Toggle tip box: Install a GxIT with an Ansible playbook"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Install a GxIT with an Ansible playbook<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-install-a-gxit-with-an-ansible-playbook"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-install-a-gxit-with-an-ansible-playbook" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Install a GxIT with an Ansible playbook<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The steps that we took in this section can be easily incorporated into an Ansible playbook for deploying GxITs to a Galaxy server. This means that you can manage and deploy a GxIT as part of your Galaxy instance without merging into the <code class="language-plaintext highlighter-rouge">galaxyproject/galaxy</code> repository (or a fork of it).</p>
 
@@ -1692,12 +2111,12 @@ demonstrates how this can be acheived by adding our tool XML to the “local too
 <p>The most obvious way to test a tool is simply to run it in the Galaxy UI, straight from the tool panel. If you are extremely lucky, you will find that the tool starts up and runs without error. But we all know that never happens! So this is where we start iteratively debugging our tool, until it functions as expected.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-a-successful-tool-run" aria-label="comment box: A successful tool run"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: A successful tool run</div>
+  <div class="box-title comment-title" id="comment-a-successful-tool-run"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: A successful tool run</div>
   <p>It is worth pointing out that the appearance of a GxIT in the Galaxy user history is not intuitive when you are used to running “regular” tool jobs. When the history item turns orange (“processing”), that’s when a GxIT is actually ready to use! At this point, the tool UI should refresh and display a link to the active GxIT. Remember, the history item doesn’t turn green until a job has terminated. With a GxIT, that only happens when the tool has been stopped by the user, or by wall time limits imposed by the Galaxy administrators.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-gxit-testing-infrastructure"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-gxit-testing-infrastructure-contents" aria-expanded="true" aria-label="Toggle tip box: GxIT testing infrastructure"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: GxIT testing infrastructure<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-gxit-testing-infrastructure"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-gxit-testing-infrastructure" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: GxIT testing infrastructure<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Testing and debugging is currently the trickiest part of GxIT development. Ideally, Galaxy core will be developed in the future to better support the process, but for the time being we have to make the most with what is available! In the future, we would like to see GxITs being tested with Planemo, and being installed and tested by Ephemeris from the ToolShed.</p>
 </blockquote>
 
@@ -1745,7 +2164,7 @@ that are accessible in the command section of the tool XML - these can be handy 
 <p>We have demonstrated how to pass an input file to the Docker container. But what if the application needs to interact with the user’s Galaxy history? For example, if the user creates a file within the application. That’s where the environment variables created in the tool XML become useful.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-access-histories-in-r"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-access-histories-in-r-contents" aria-expanded="true" aria-label="Toggle tip box: Access histories in R"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Access histories in R<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-access-histories-in-r"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-access-histories-in-r" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Access histories in R<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>From the <a href="https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_rstudio.xml">R-Studio GxIT</a> we can see that there is <a href="https://github.com/hexylena/rGalaxyConnector">an R library</a> that allows us to interact with Galaxy histories.</p>
 
   <p>“The convenience functions <code class="language-plaintext highlighter-rouge">gx_put()</code> and <code class="language-plaintext highlighter-rouge">gx_get()</code> are available to you to interact with your current Galaxy history. You can save your workspace with <code class="language-plaintext highlighter-rouge">gx_save()</code>”</p>
@@ -1770,10 +2189,12 @@ that are accessible in the command section of the tool XML - these can be handy 
   <li>You can also open a <code class="language-plaintext highlighter-rouge">bash</code> terminal inside the container to check the container state while the application is running: <code class="language-plaintext highlighter-rouge">docker exec -it mycontainer /bin/bash</code></li>
 </ul>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Galaxy Interactive Tools (GxIT) provide an interface for external web applications to be embedded in Galaxy</p>
@@ -1817,33 +2238,9 @@ that are accessible in the command section of the tool XML - these can be handy 
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Galaxy Interactive Tools (Development in Galaxy)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Galaxy Interactive Tools (Development in Galaxy)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1861,7 +2258,7 @@ that are accessible in the command section of the tool XML - these can be handy 
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1902,7 +2299,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1914,29 +2311,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

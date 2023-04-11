@@ -12,33 +12,33 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial_ES.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial_ES.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-01-23 14:38:17 +0000" />
-<meta name="DC.creator" content="Wendi Bacon" />
-<meta name="DC.creator" content="Jonathan Manning" />
-<meta name="DC.creator" content="Patricia Carvajal López" />
-<meta name="DC.creator" content="Alejandra Escobar-Zepeda" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-01-23 14:38:17 +0000">
+<meta name="DC.creator" content="Wendi Bacon">
+<meta name="DC.creator" content="Jonathan Manning">
+<meta name="DC.creator" content="Patricia Carvajal López">
+<meta name="DC.creator" content="Alejandra Escobar-Zepeda">
 
         
         
         
         
-        <meta name="description" content="Training material and practicals for all kinds of single ..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Generación de una matriz de datos de secuenciación de ARN..." />
-        <meta property="og:description" content="Training material and practicals for all kinds of single ..." />
+        <meta name="description" content="Training material and practicals for all kinds of single ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Generación de una matriz de datos de secuenciación de ARN...">
+        <meta property="og:description" content="Training material and practicals for all kinds of single ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -573,10 +573,325 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-single-cell">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-01-23 14:38:17 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": null,
+    "alternateName": "es"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides.html",
+      "name": "An introduction to scRNA-seq data analysis",
+      "description": "Slides for 'An introduction to scRNA-seq data analysis' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-umis/tutorial.html",
+      "name": "Understanding Barcodes",
+      "description": "Hands-on for 'Understanding Barcodes' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "orcid": "https://orcid.org/0000-0002-8170-8806"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/",
+      "name": "Jonathan Manning",
+      "image": "https://avatars.githubusercontent.com/pinin4fjords",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pclo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pclo/",
+      "name": "Patricia Carvajal López",
+      "image": "https://avatars.githubusercontent.com/pclo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ales-ibt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ales-ibt/",
+      "name": "Alejandra Escobar-Zepeda",
+      "image": "https://avatars.githubusercontent.com/ales-ibt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "orcid": "https://orcid.org/0000-0002-8170-8806"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/",
+      "name": "Jonathan Manning",
+      "image": "https://avatars.githubusercontent.com/pinin4fjords",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pclo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pclo/",
+      "name": "Patricia Carvajal López",
+      "image": "https://avatars.githubusercontent.com/pclo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ales-ibt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ales-ibt/",
+      "name": "Alejandra Escobar-Zepeda",
+      "image": "https://avatars.githubusercontent.com/ales-ibt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ],
+  "educationalLevel": "Advanced"
+}
+</script>
+
+<article class="tutorial topic-single-cell">
     <h1 data-toc-skip>Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -587,9 +902,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Descripción General</div>
+        <div id="overview-box" class="box-title">Descripción General</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas:</strong>
         <ul>
@@ -785,7 +1100,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/workflows/" title="Workflows" alt="Generating a single cell matrix using Alevin workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/workflows/" title="Generating a single cell matrix using Alevin workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Flujos de trabajos
     </a>
 
@@ -799,13 +1114,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -831,7 +1143,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Disponible en estas instancias de Galaxy 
     </a>
     <ul class="dropdown-menu">
@@ -956,6 +1268,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -987,6 +1301,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">GTN Framework tiene licencia del MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -997,6 +1312,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>Este tutorial te ayudará a pasar de datos crudos de secuenciación en archivos FASTQ a una matriz de datos en formato AnnData donde cada célula es una fila y cada gen es una columna. Pero, ¿Qué es una matriz de datos y cuál es el formato AnnData? Lo averiguaremos a su debido tiempo. Enfatizamos que este es el primer paso para procesar datos de secuenciación de células únicas para poder realizar su análisis.</p>
@@ -1006,7 +1322,7 @@
 <p>Debido a la enorme cantidad de datos, hemos reducido la resolución de los archivos FASTQ para poder acelerar el análisis. Una vez que hemos aclarado este punto, todavía tienes que mapear enormes cantidades de lecturas al inmenso genoma murino, así que ¡ve por una taza de café y prepárate para iniciar el análisis!</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>En este tutorial abordaremos:</p>
 
@@ -1060,7 +1376,7 @@
 <p>Utilizaremos Alevin <span class="citation"><a href="#article-Alevin">Srivastava <i>et al.</i> 2019</a></span> con propósitos demostrativos, sin embargo no avalamos ningún método en particular.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-comentario" aria-label="comment box: Comentario"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: Comentario</div>
+  <div class="box-title comment-title" id="comment-comentario"><i class="far fa-comment-dots" aria-hidden="true"></i> Comentario: Comentario</div>
   <ul>
     <li>Notas sobre la traducción y uso de términos técnicos
 En este tutorial manejaremos algunos términos en el idioma original ya que simplificará la búsqueda posterior de información sobre el tema. Estas notas aparecerán en este tipo de recuadros y los términos estarán listados con la viñeta “•”.</li>
@@ -1082,7 +1398,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 Adicionalmente, necesitarás un transcriptoma (en formato FASTA) contra el cual podrás mapear tus lecturas, así como la información génica de cada transcrito (en un archivo tipo GTF). Adicionalmente, estos archivos están disponibles en el historial anteriormente mencionado, al igual que en los enlaces de Zenodo mostrados en la parte inferior de este párrafo, así que puede que tarden un buen rato en importarse. Puedes acceder a <a href="https://www.ensembl.org/info/data/ftp/index.html">Ensembl si deseas bajar datos</a> para tu especie de interés.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-cargar-datos-parte-1" aria-label="hands-on box: Práctica: Cargar datos - Parte 1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Cargar datos - Parte 1</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-cargar-datos-parte-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Cargar datos - Parte 1</div>
 
   <ol>
     <li>Crear un historial nuevo para este tutorial</li>
@@ -1097,7 +1413,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importación-por-medio-de-enlaces"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importación-por-medio-de-enlaces-contents" aria-expanded="true" aria-label="Toggle tip box: Importación por medio de enlaces"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Importación por medio de enlaces<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copia los enlaces</li>   <li>     <p>Abre el manejador de carga de datos de Galaxy (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> en la parte superior derecha del panel de herramientas)</p>   </li>   <li>Selecciona ‘Pegar/Traer datos’ <strong>Paste/Fetch Data</strong></li>   <li>     <p>Copia los enlaces en el campo de textos</p>   </li>   <li>     <p>Presiona ‘Iniciar’ <strong>Start</strong></p>   </li>   <li>     <p><strong>Close</strong> Cierra la ventana.</p>   </li>   <li>Galaxy utiliza los URLs como nombres de forma predeterminada , así que los tendrás que cambiar a algunos que sean más útiles o informativos. the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importación-por-medio-de-enlaces"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importación-por-medio-de-enlaces" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Importación por medio de enlaces<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copia los enlaces</li>   <li>     <p>Abre el manejador de carga de datos de Galaxy (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> en la parte superior derecha del panel de herramientas)</p>   </li>   <li>Selecciona ‘Pegar/Traer datos’ <strong>Paste/Fetch Data</strong></li>   <li>     <p>Copia los enlaces en el campo de textos</p>   </li>   <li>     <p>Presiona ‘Iniciar’ <strong>Start</strong></p>   </li>   <li>     <p><strong>Close</strong> Cierra la ventana.</p>   </li>   <li>Galaxy utiliza los URLs como nombres de forma predeterminada , así que los tendrás que cambiar a algunos que sean más útiles o informativos. the window</li> </ul> </blockquote>
     </li>
     <li>Cambiar el nombre <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de los conjuntos de datos</li>
   </ol>
@@ -1105,7 +1421,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-preguntas" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Preguntas</div>
 
   <p>Dale un vistazo a los archivos que ahora están en tu historial.</p>
   <ol>
@@ -1115,7 +1431,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-soluciones"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-soluciones-contents" aria-expanded="true" aria-label="Toggle solution box: Soluciones"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Soluciones<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-soluciones"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-soluciones" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Soluciones<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>La lectura 1 (SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k)  contiene el código de barras de la célula y el UMI ya que es significativamente más corta (¡solo 20pb!), en comparación con r_2 que es la lectura más larga de transcrito. Cambiaremos de nombre a estos archivos y los llamaremos N701-Read1 y N701-Read2 para hacer más claro el análisis.</li>
@@ -1134,7 +1450,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>Notarás en tus datos de ejemplo que la anotación de referencia murina se obtuvo en formato GTF desde Ensembl. Esta anotación contiene genes, exones, transcritos y todo tipo de información adicional de las secuencias. Utilizaremos esta información para generar el mapeo de correspondencia transcrito/genes. Esto lo haremos por medio del traspaso de información a una herramienta que extrae exclusivamente los identificadores de transcrito que necesitamos.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-comentario-1" aria-label="comment box: Comentario"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: Comentario</div>
+  <div class="box-title comment-title" id="comment-comentario-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comentario: Comentario</div>
   <p>Nota sobre la traducción y uso de términos técnicos</p>
   <ul>
     <li>Spike-in,	transcrito de ARN de cantidad y secuencia conocida utilizado para calibrar mediciones en ensayos de hibridación de ARN. Nos referiremos a este control con su nombre en el idioma inglés ya que su traducción no es utilizada comúnmente.</li>
@@ -1142,18 +1458,18 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-preguntas-1" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas-1"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Preguntas</div>
 
   <p>¿Cuál de los ‘atributos’ en la última columna de los archivos GTF contiene los identificadores de transcrito y de gen?</p>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-una-pequeña-pista"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-una-pequeña-pista-contents" aria-expanded="true" aria-label="Toggle tip box: Una pequeña pista"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Una pequeña pista<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-una-pequeña-pista"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-una-pequeña-pista" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Una pequeña pista<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>El archivo está organizado de tal modo que la última columna (con el nombre ‘Group’ en el encabezado) contiene una gran cantidad de información: attribute1 “información asociada con el atributo1”;attribute2 “información asociada con el atributo 2” etc.</p>
   </blockquote>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>A gene_id y transcript_id les sigue “ensembl gene_id” y “ensembl transcript_id”</p>
   </blockquote>
 </blockquote>
@@ -1161,10 +1477,10 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>Ahora es el momento de analizar el archivo GTF utilizando el paquete de R <a href="https://bioconductor.org/packages/release/bioc/html/rtracklayer.html">rtracklayer</a>. Este análisis proporcionará una tabla de conversión con un listado de identificadores de transcritos y sus genes correspondientes para hacer conteos. Adicionalmente, ya que generaremos nuestro propio índice binario (más sobre esto en secciones posteriores), también necesitaremos proporcionar nuestro archivo FASTA para que pueda ser filtrado y que al final solo contenga la información del transcriptoma que está contenida en el archivo GTF.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-generar-un-archivo-fasta-filtrado-y-un-mapa-de-correspondencia-de-transcritos-a-genes" aria-label="hands-on box: Práctica: Generar un archivo FASTA filtrado y un mapa de correspondencia de transcritos a genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Generar un archivo FASTA filtrado y un mapa de correspondencia de transcritos a genes</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-generar-un-archivo-fasta-filtrado-y-un-mapa-de-correspondencia-de-transcritos-a-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Generar un archivo FASTA filtrado y un mapa de correspondencia de transcritos a genes</div>
 
   <ol>
-    <li>Ejecutar la herramienta GTF2GeneList <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6</span></span>  utilizando los siguiente parámetros:
+    <li>Ejecutar la herramienta GTF2GeneList <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6" title="GTF2GeneList tool"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6</span></span>  utilizando los siguiente parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ensembl GTF file”</em>: <code class="language-plaintext highlighter-rouge">GTF file in the history</code> <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-history</span></li>
         <li><em>“Feature type for which to derive annotation”</em>: <code class="language-plaintext highlighter-rouge">transcript</code> (Tus secuencias provienen de secuenciación de transcriptoma, por tanto este es tu punto inicial)</li>
@@ -1190,7 +1506,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>Alevin reduce a un solo proceso los pasos requeridos para realizar dscRNA-Seq. Dichas herramientas requieren comparar las secuencias de tu muestra a una referencia que contenga todas las secuencias probables de transcritos (un ‘transcriptoma). Esto contendrá las secuencias biológicas de los transcritos conocidos en una especie determinada, y quizás también contendrá secuencias técnicas como ‘spike ins’.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-cómo-trabaja-alevin"><button class="gtn-boxify-button details" type="button" aria-controls="details-cómo-trabaja-alevin-contents" aria-expanded="true" aria-label="Toggle details box: ¿Cómo trabaja Alevin?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Cómo trabaja Alevin?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-cómo-trabaja-alevin"><button class="gtn-boxify-button details" type="button" aria-controls="details-cómo-trabaja-alevin" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Detalles: ¿Cómo trabaja Alevin?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Alevin necesita convertir las secuencias de texto contenidas dentro del formato FASTA a algo con lo que pueda realizar búsquedas rápidamente dentro del transcriptoma, ese ‘algo’ es un archivo llamado ‘índice’ (‘index’). El índice es un archivo binario (un tipo de archivos optimizados para el uso de ordenadores y que no es legible ‘por humanos’), pero permite que Alevin realice búsquedas rápidas. El índice puede variar entre experimentos debido al tipo de secuencias técnicas y biológicas que necesitamos incluir en él, y ya que frecuentemente queremos utilizar las referencias más actualizadas, ya sea que provengan de Ensembl o NCBI, a menudo pudiésemos terminar reconstruyendo los índices. El generar estos índices requiere mucho tiempo. Échale un vistazo al archivo FASTA no comprimido para que veas cómo es la estructura inicial.</p>
 
@@ -1207,30 +1523,30 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
 <p>Ahora podemos ejecutar Alevin. Esta herramienta no aparecerá en las búsquedas dentro de algunas de las instancias públicas. Si esto sucede, haz click sobre la pestaña Single Cell en la parte izquierda de la pantalla y desplázate hacia abajo hasta encontrar la herramienta Alevin. Consejo: Si haces click sobre las herramientas (tools) dentro de la opción ‘tutorial’ de Galaxy siempre tendrás la versión correcta de la herramienta. En este caso: Galaxy Version 1.3.0+galaxy2 - debe ser la versión por defecto; si no lo es, haz click sobre ‘Versiones’ (‘Versions’) y escoge dicha versión.</p>
 
-<figure id="figure-1"><img src="../../images/scrna-casestudy/wab-tutorial-in-galaxy.png" alt="Tutorial option in Galaxy. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 1:</span> La opción de tutorial está situada en la parte superior derecha de Galaxy</figcaption></figure>
+<figure id="figure-1"><img src="../../images/scrna-casestudy/wab-tutorial-in-galaxy.png" alt="Tutorial option in Galaxy. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 1</strong>:</span> La opción de tutorial está situada en la parte superior derecha de Galaxy</figcaption></figure>
 
-<figure id="figure-2"><img src="../../images/scrna-casestudy/wab-tutorial-option-filler.png" alt="Accessing tools in the tutorial option within Galaxy. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 2:</span> Haz click sobre la herramienta en el tutorial de Galaxy</figcaption></figure>
+<figure id="figure-2"><img src="../../images/scrna-casestudy/wab-tutorial-option-filler.png" alt="Accessing tools in the tutorial option within Galaxy. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 2</strong>:</span> Haz click sobre la herramienta en el tutorial de Galaxy</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-practica-ejecutando-alevin" aria-label="hands-on box: Practica: Ejecutando Alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Practica: Ejecutando Alevin</div>
+  <div class="box-title hands-on-title" id="hands-on-practica-ejecutando-alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Practica: Ejecutando Alevin</div>
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2</span></span></p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2" title="Alevin tool"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2</span></span></p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-preguntas-2" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+        <div class="box-title question-title" id="question-preguntas-2"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Preguntas</div>
 
         <p>Intenta dar valores a los parámetros de Alevin utilizando lo que sabes por el momento.</p>
 
         <blockquote class="tip">
-          <div class="box-title tip-title" id="tip-sobre-la-direccionalidad-de-las-cadenas-de-rna-strandness"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-sobre-la-direccionalidad-de-las-cadenas-de-rna-strandness-contents" aria-expanded="true" aria-label="Toggle tip box: Sobre la direccionalidad de las cadenas de RNA (Strandness)"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Sobre la direccionalidad de las cadenas de RNA (Strandness)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title tip-title" id="tip-sobre-la-direccionalidad-de-las-cadenas-de-rna-strandness"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-sobre-la-direccionalidad-de-las-cadenas-de-rna-strandness" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Sobre la direccionalidad de las cadenas de RNA (Strandness)<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>La documentación sobre ‘Tipos de bibliotecas de fragmentos’ (‘Fragment Library Types‘) de de la herramienta salmón, el ejecutar el comando de Alevin (<a href="https://salmon.readthedocs.io/en/latest/library_type.html]">salmon.readthedocs.io/en/latest/library_type.html</a> y <a href="https://salmon.readthedocs.io/en/latest/alevin.html">salmon.readthedocs.io/en/latest/alevin.html</a>) nos serán de ayuda en este caso; aunque ten en cuenta que la imagen ahí se dibuja con el ARN 5’ en la parte superior, mientras que en este protocolo de scRNA-Seq el segmento polyA es capturado por su extremo 3’, y, por lo tanto, efectivamente la hebra inferior o inversa.)</p>
         </blockquote>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-solución-valores-de-los-parámetros"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-valores-de-los-parámetros-contents" aria-expanded="true" aria-label="Toggle solution box: Solución: valores de los parámetros"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución: valores de los parámetros<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-solución-valores-de-los-parámetros"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-valores-de-los-parámetros" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución: valores de los parámetros<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ul>
             <li><em>“Select a reference transcriptome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use one from the history</code>
               <ul>
@@ -1260,7 +1576,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-comentario-2" aria-label="comment box: Comentario"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: Comentario</div>
+  <div class="box-title comment-title" id="comment-comentario-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comentario: Comentario</div>
   <p>Notas sobre la traducción de algunos de los valores de los parámetros:
 En este tutorial manejaremos algunos términos en el idioma original ya que simplificará la búsqueda posterior de información sobre el tema. Estas notas aparecerán en estos recuadros y los términos estarán listados con la viñeta “•”.</p>
   <ul>
@@ -1304,7 +1620,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-qué-sucede-si-estoy-procesando-una-muestra-10x" aria-label="comment box: ¿Qué sucede si estoy procesando una muestra 10x??"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: ¿Qué sucede si estoy procesando una muestra 10x??</div>
+  <div class="box-title comment-title" id="comment-qué-sucede-si-estoy-procesando-una-muestra-10x"><i class="far fa-comment-dots" aria-hidden="true"></i> Comentario: ¿Qué sucede si estoy procesando una muestra 10x??</div>
 
   <p>En Alevin, “Protocol” (Protocolo) es el parámetro principal que debe cambiarse para una muestra 10X Chromium. Simplemente selecciona los reactivos correspondientes a la química de 10x en lugar de Drop-seq.</p>
 </blockquote>
@@ -1320,7 +1636,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>Este es el formato “matrix market” (MTX).</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-preguntas-3" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas-3"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Preguntas</div>
 
   <p>Echa un vistazo a los diversos archivos generados después de ejecutar Alevin. ¿Puedes localizar las siguientes dos cosas?…</p>
   <ol>
@@ -1329,7 +1645,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-1-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Inspecciona <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> el archivo <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> meta_info.json. Puedes ver que la tasa de mapeo es un insignificante <code class="language-plaintext highlighter-rouge">24.75%</code>. Esta tasa es terrible. ¿Por qué sucede esto? Recuerda que este archivo fue submuestreado, siendo específicos, solo tomamos las últimas 400,000 lecturas del archivo FASTQ. La tasa general de mapeo del archivo es de alrededor del 50%, que sigue siendo una tasa muy baja, pero en general se pueden esperar tasas de mapeos ligeramente menores para muestras que fueron procesadas durante los inicios de las técnicas Drop-Seq y la secuenciación de ARN de células únicas. Actualmente las muestras procesadas con la técnica 10x son mucho mejores. Después de todo, los datos que estamos utilizando son reales, no son datos de prueba.</li>
@@ -1341,7 +1657,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 </blockquote>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-de-aquí-en-adelante-selecciona-la-entrada-apropiada" aria-label="warning box: De aquí en adelante selecciona la entrada apropiada."><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> ¡Precaucion!: De aquí en adelante selecciona la entrada apropiada.</div>
+  <div class="box-title warning-title" id="warning-de-aquí-en-adelante-selecciona-la-entrada-apropiada"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> ¡Precaucion!: De aquí en adelante selecciona la entrada apropiada.</div>
   <p>Asegurate de usar el archivo <strong>quants_mat.mtx.gz</strong>, NO EL ARCHIVO <em>quants_tier.mtx.gz</em>.</p>
 </blockquote>
 
@@ -1352,10 +1668,10 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>La pregunta que buscamos contestar aquí es: “En su mayoría, ¿tenemos una sola célula por gota?”. Este es el principal objetivo, pero no es del todo sencillo obtener exactamente una sola célula por cada gota. En algunas ocasiones casi ninguna célula logra depositarse en las gotas, en otras ocasiones tenemos demasiadas células por gota. Cuando menos deberíamos poder distinguir fácilmente las gotas que contienen células de las que no las contienen.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-generar-un-gráfico-inicial-de-control-de-calidad-qc" aria-label="hands-on box: Práctica: Generar un gráfico inicial de control de calidad (QC)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Generar un gráfico inicial de control de calidad (QC)</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-generar-un-gráfico-inicial-de-control-de-calidad-qc"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Generar un gráfico inicial de control de calidad (QC)</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2</span></span>  Gráfico de rangos de códigos de barras obtenido por técnicas de goteo (Droplet barcode rank plot) con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Droplet barcode rank plot tool"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2</span></span>  Gráfico de rangos de códigos de barras obtenido por técnicas de goteo (Droplet barcode rank plot) con los siguientes parámetros:
       <ul>
         <li><em>“Input MTX-format matrix?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A two-column tab-delimited file, with barcodes in the first column and frequencies in the second”</em>: <code class="language-plaintext highlighter-rouge">raw_cb_frequencies.txt</code></li>
@@ -1366,25 +1682,25 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
   </ol>
 </blockquote>
 
-<figure id="figure-3"><img src="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" alt="raw droplet barcode plots-400k. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 3:</span> Subconjunto de datos crudos, 400k cadenas</figcaption></figure>
+<figure id="figure-3"><img src="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" alt="raw droplet barcode plots-400k. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 3</strong>:</span> Subconjunto de datos crudos, 400k cadenas</figcaption></figure>
 
 <p>La imagen aquí generada (4000k) no es muy informativa - pero ten en cuenta que tan solo estás manejando una fracción de las lecturas. Si procesas la muestra completa (que involucra los mismos pasos mencionados en la parte superior, pero que tardaría mucho más tiempo) obtendrás la imagen siguiente.</p>
 
-<figure id="figure-4"><img src="../../images/scrna-casestudy/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 4:</span> Muestra completa - 32,579,453 lecturas - datos crudos</figcaption></figure>
+<figure id="figure-4"><img src="../../images/scrna-casestudy/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 4</strong>:</span> Muestra completa - 32,579,453 lecturas - datos crudos</figcaption></figure>
 
 <p>Esta es la formulación del gráfico de código de barras que basamos en una <a href="https://github.com/COMBINE-lab/salmon/issues/362#issuecomment-490160480">discusión</a> que entablamos con miembros de la comunidad científica. Los gráficos de líneas suaves de la izquierda son los principales; estos gráficos muestran, clasificados de los más bajos a los más altos, los conteos de UMIs para códigos de barras individuales. Esperamos una fuerte caída entre las gotas que contienen células y las gotas vacías o que solo contienen restos celulares. Este no es un conjunto de datos ideal, así que en perspectiva, en un mundo ideal un conjunto de datos muy limpio proveniente de procesados 10x, los datos se asemejarían un poco más a la siguiente imagen del atlas de pulmón (ver <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6653/results/tsne">aquí</a> el estudio del Atlas de Expresión de Células Únicas y la remisión del proyecto <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6653/">aquí</a>).</p>
 
-<figure id="figure-5"><img src="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" alt="raw droplet barcode plots - lung atlas. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 5:</span> Datos ‘bonitos’ - crudos</figcaption></figure>
+<figure id="figure-5"><img src="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" alt="raw droplet barcode plots - lung atlas. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 5</strong>:</span> Datos ‘bonitos’ - crudos</figcaption></figure>
 
 <p>En este gráfico puedes ver más claramente una flexión tipo “rodilla”, mostrando el corte entre las gotas vacías y las gotas que contienen células.</p>
 
 <p>A la derecha encontramos los gráficos de densidad de la primera, y los umbrales generados ya sea utilizando <a href="https://bioconductor.org/packages/release/bioc/html/DropletUtils.html">dropletUtils</a> o por medio del método descrito en la discusión que se mencionó con anterioridad (en la parte superior). Podremos utilizar cualquiera de estos umbrales para seleccionar células, asumiendo que cualquier medición con conteos menores es una célula válida. Alevin hace algo similar por defecto, y podemos aprender algo de esto graficando únicamente los códigos de barras que retiene Alevin.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-obtener-el-gráfico-de-código-de-barras-de-alevin" aria-label="hands-on box: Práctica: Obtener el gráfico de código de barras de Alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Obtener el gráfico de código de barras de Alevin</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-obtener-el-gráfico-de-código-de-barras-de-alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Obtener el gráfico de código de barras de Alevin</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2</span></span>  Genera el gráfico de código de barras basado en goteos utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Droplet barcode rank plot tool"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2</span></span>  Genera el gráfico de código de barras basado en goteos utilizando los siguientes parámetros:
       <ul>
         <li><em>“Input MTX-format matrix?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Matrix-market format matrix file, with cells by column (overrides –barcode-frequencies if supplied)”</em>: <code class="language-plaintext highlighter-rouge">quants_mat.mtx</code></li>
@@ -1398,15 +1714,15 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
   </ol>
 </blockquote>
 
-<figure id="figure-6"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-400k.png" alt="raw droplet barcode plots - 400k. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 6:</span> 400k sub-muestreo - Alevin procesado</figcaption></figure>
+<figure id="figure-6"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-400k.png" alt="raw droplet barcode plots - 400k. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 6</strong>:</span> 400k sub-muestreo - Alevin procesado</figcaption></figure>
 
 <p>Y la muestra completa se ve como la siguiente figura:</p>
 
-<figure id="figure-7"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 7:</span> Muestra total - 32,579,453 lecturas - Alevin procesado</figcaption></figure>
+<figure id="figure-7"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 7</strong>:</span> Muestra total - 32,579,453 lecturas - Alevin procesado</figcaption></figure>
 
 <p>Y concluyendo, he aquí el gráfico del atlas de pulmón.</p>
 
-<figure id="figure-8"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-lung.png" alt="raw droplet barcode plots - total. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 8:</span> Datos bonitos - Alevin procesado</figcaption></figure>
+<figure id="figure-8"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-lung.png" alt="raw droplet barcode plots - total. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 8</strong>:</span> Datos bonitos - Alevin procesado</figcaption></figure>
 
 <p>Debes ver una caída casi vertical de la curva, que es donde Alevin truncó la distribución (después de haber excluido muchos códigos de barra celulares que tuvieron &lt;10 UMI, Alevin posteriormente selecciona un umbral basándose en la curva y elimina los códigos de barras con menos UMIs)</p>
 
@@ -1417,9 +1733,9 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <h2 id="generar-una-matriz-sin-procesamiento-en-un-formato-utilizable">Generar una matriz sin procesamiento en un formato utilizable</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-prevenir-que-alevin-utilice-sus-propios-umbrales" aria-label="hands-on box: Práctica: Prevenir que Alevin utilice sus propios umbrales"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Prevenir que Alevin utilice sus propios umbrales</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-prevenir-que-alevin-utilice-sus-propios-umbrales"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Prevenir que Alevin utilice sus propios umbrales</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2</span></span>  (Haz clic sobre la última salida de Alevin para volver a ejecutar)
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2" title="Alevin tool"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2</span></span>  (Haz clic sobre la última salida de Alevin para volver a ejecutar)
       <ul>
         <li><em>“Optional commands”</em></li>
         <li><em>“keepCBFraction”</em>: ‘1’ - por ejemplo conservarlos todos</li>
@@ -1429,16 +1745,16 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
   </ol>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-para-volver-a-ejecutar-una-herramienta"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-para-volver-a-ejecutar-una-herramienta-contents" aria-expanded="true" aria-label="Toggle tip box: Para volver a ejecutar una herramienta"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Para volver a ejecutar una herramienta<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li><strong>Expande</strong> uno de los conjuntos de datos de la salida de la herramienta haciendo clic sobre él</li>   <li><strong>Selecciona</strong> volver a ejecutar <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> de la herramienta</li> </ol>   <p>Esto es de utilidad si quieres volver a correr la herramienta variando ligeramente los valores de los parámetros, o si deseas verificar la configuración de parámetros que utilizaste.</p> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-para-volver-a-ejecutar-una-herramienta"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-para-volver-a-ejecutar-una-herramienta" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Para volver a ejecutar una herramienta<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li><strong>Expande</strong> uno de los conjuntos de datos de la salida de la herramienta haciendo clic sobre él</li>   <li><strong>Selecciona</strong> volver a ejecutar <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> de la herramienta</li> </ol>   <p>Esto es de utilidad si quieres volver a correr la herramienta variando ligeramente los valores de los parámetros, o si deseas verificar la configuración de parámetros que utilizaste.</p> </blockquote>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
+  <div class="box-title question-title" id="question-pregunta"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta</div>
 
   <p>¿Cuántas células hay ahora en la salida?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-2-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>¡Ahora hay <code class="language-plaintext highlighter-rouge">22539</code> células en quants_mat_rows! Muchas más que las <code class="language-plaintext highlighter-rouge">2163</code> que Alevin filtró. ¡Esto necesita ser filtrado en serio con emptyDrops!</li>
@@ -1451,15 +1767,15 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>Alevin da salida a un formato MTX, el cual puede ser la entrada del paquete dropletUtils y procesarse en emptyDrops. Desafortunadamente la matriz tiene una orientación equivocada. La matriz no puede ser procesada por herramientas cuya entrada son archivos como los que produce el software 10X. Necesitamos ‘transformar’ la matriz de tal forma que las células esten en columnas y los genes en filas.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning" aria-label="warning box: "><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> ¡Precaucion!</div>
+  <div class="box-title warning-title" id="warning"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> ¡Precaucion!</div>
   <p>¡No mezcles los archivos de distintas ejecuciones de Alevin! Utiliza la última ejecución, la cual tiene los números más altos en el historial.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-transformación-de-la-matriz" aria-label="hands-on box: Práctica: Transformación de la matriz"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Transformación de la matriz</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-transformación-de-la-matriz"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Transformación de la matriz</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5"><strong>salmonKallistoMtxTo10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5" title="salmonKallistoMtxTo10x tool"><strong>salmonKallistoMtxTo10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“.mtx-format matrix”</em>: <code class="language-plaintext highlighter-rouge">quants_mat.mtx.gz</code> (la salida de la herramienta <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited genes file”</em>: <code class="language-plaintext highlighter-rouge">quants_mat_cols.txt</code> (la salida de la herramienta <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1477,12 +1793,12 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <h2 id="añadir-metadatos-de-genes">Añadir metadatos de genes</h2>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-1" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
+  <div class="box-title question-title" id="question-pregunta-1"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta</div>
 
   <p>¿Dónde podemos encontrar esta información sobre los genes?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-3-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Dentro de un archivo GTF, nuestro viejo amigo.</p>
 
@@ -1491,12 +1807,12 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-2" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
+  <div class="box-title question-title" id="question-pregunta-2"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta</div>
 
   <p>¿Cual de los ‘atributos’ dentro de la última columna del archivo contiene el acrónimo de los genes?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-4-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>gene_name</p>
 
@@ -1507,10 +1823,10 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>Ahora vamos a volver a ejecutar la herramienta que extrae información contenida dentro de nuestro archivo GTF.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-generar-información-de-genes" aria-label="hands-on box: Práctica: Generar información de genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Generar información de genes</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-generar-información-de-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Generar información de genes</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6" title="GTF2GeneList tool"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6</span></span>  con los siguientes parámetros:
       <ul>
         <li><em>“Feature type for which to derive annotation”</em>: <code class="language-plaintext highlighter-rouge">gene</code></li>
         <li><em>“Field to place first in output table”</em>: <code class="language-plaintext highlighter-rouge">gene_id</code></li>
@@ -1529,10 +1845,10 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>Inspecciona <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> el objeto <strong>Gene Information</strong> del historial. Ahora has incluido un nuevo campo para gene_id, esto incluye el nombre de los genes y una columna para información mitocondrial (false = not mitochondrial, true = mitochondrial). Necesitamos añadir esta información a la tabla de salida ‘Gene table’ proveniente de la herramienta salmonKallistoMtxto10x. Sin embargo, necesitamos mantener la tabla ‘Gene table’ en el mismo orden, ya que se hace referencia a ella en las filas de la tabla ‘Matrix table’.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-combinar-la-tabla-de-genes-mtx-con-la-información-de-los-genes" aria-label="hands-on box: Práctica: Combinar la tabla de genes MTX con la información de los genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Combinar la tabla de genes MTX con la información de los genes</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-combinar-la-tabla-de-genes-mtx-con-la-información-de-los-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Combinar la tabla de genes MTX con la información de los genes</div>
 
   <ol>
-    <li><span class="tool" data-tool="join1" title="Tested with join1"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="join1" title="Join two Datasets tool"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>  con los siguientes parámetros:
       <ul>
         <li><em>“Join”</em>: <code class="language-plaintext highlighter-rouge">Gene Table</code></li>
         <li><em>“Using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -1546,7 +1862,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 
       <p>Si inspeccionas <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> el objeto, verás que hemos unido estas tablas y que ahora tiene algunos pocos gene_id repetidos. Eliminemos estas repeticiones manteniendo a su vez el orden original de la tabla ‘Gene Table’.</p>
     </li>
-    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  con los siguientes parámetros:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c4,c5</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -1564,10 +1880,10 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>La herramienta emptyDrops <span class="citation"><a href="#article-emptyDrops">Lun <i>et al.</i> 2019</a></span> trabaja con un tipo específico de objeto R llamado SingleCellExperiment. Necesitamos convertir nuestros archivos transformados MTX a este tipo de objetos, esto lo haremos utilizando la herramienta Read10x de DropletUtils:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-convertir-al-formato-singlecellexperiment" aria-label="hands-on box: Práctica: Convertir al formato SingleCellExperiment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Convertir al formato SingleCellExperiment</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-convertir-al-formato-singlecellexperiment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Convertir al formato SingleCellExperiment</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2"><strong>DropletUtils Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2" title="DropletUtils Read10x tool"><strong>DropletUtils Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix in sparse matrix format (.mtx)”</em>: <code class="language-plaintext highlighter-rouge">Matrix table</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Table”</em>: <code class="language-plaintext highlighter-rouge">Annotated Gene Table</code></li>
@@ -1582,10 +1898,10 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>¡Fantástico! Ya hemos convertido la matriz en el objeto que ocupamos, siendo más específicos, la hemos convertido al formato SingleCellExperiment, ¡Ahora podemos ejecutar emptyDrops! Pero primero deshagámonos de esas gotas que no contienen células.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-emptydrops" aria-label="hands-on box: Práctica: emptyDrops"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: emptyDrops</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-emptydrops"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: emptyDrops</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1"><strong>DropletUtils emptyDrops</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1" title="DropletUtils emptyDrops tool"><strong>DropletUtils emptyDrops</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SingleCellExperiment rdata object”</em>: <code class="language-plaintext highlighter-rouge">SCE Object</code></li>
         <li><em>“Should barcodes estimated to have no cells be removed from the output object?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1599,18 +1915,18 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pregunta-3" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
+  <div class="box-title question-title" id="question-pregunta-3"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Pregunta</div>
 
   <p>¿Cuántos códigos de barras de células quedan después de procesar emptyDrops? ¿Por qué será esto?</p>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-pista"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-pista-contents" aria-expanded="true" aria-label="Toggle tip box: Pista"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Pista<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-pista"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-pista" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Pista<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Si haces clic sobre el <code class="language-plaintext highlighter-rouge">Stringent-Object</code> en el historial <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-history</span>, el texto de la ventana dice <code class="language-plaintext highlighter-rouge">22 barcodes</code> o algo similar.  ¿Por qué es tan bajo?
 Toma en consideración, ¿Es este un conjunto de datos completo?</p>
   </blockquote>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-solución-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-5-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Solución<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Recuerda que este conjunto de datos está submestreado. Si observas detenidamente los parámetros de emptyDrops, verás que la herramienta estableció un umbral mínimo de 100 UMI. Analizando los gráficos de códigos de barras mostrados en este tutorial, para la muestra de 400k lecturas, verás que este umbral es demasiado riguroso para la muestra submuestreada. Saliendo de dudas, este umbral mínimo daría como resultado <code class="language-plaintext highlighter-rouge">3011</code> códigos de barras para la muestra total.</p>
 
@@ -1621,7 +1937,7 @@ Toma en consideración, ¿Es este un conjunto de datos completo?</p>
 <p>Ejecutemos de nuevo y cambiemos parámetros; volvamos a ejecutar la herramienta con un umbral mínimo más laxo.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-estás-trabajando-en-equipo-hora-de-tomar-decisiones"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-equipo-hora-de-tomar-decisiones-contents" aria-expanded="true" aria-label="Toggle details box: ¿Estás trabajando en equipo? ¡Hora de tomar decisiones!"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Estás trabajando en equipo? ¡Hora de tomar decisiones!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-estás-trabajando-en-equipo-hora-de-tomar-decisiones"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-equipo-hora-de-tomar-decisiones" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Detalles: ¿Estás trabajando en equipo? ¡Hora de tomar decisiones!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Si estáis trabajando en equipo en este punto tenéis la oportunidad de tomar diversas rutas, la primera utilizando un control y el resto variando números para que podáis comparar resultados a lo largo de los tutoriales.</p>
   <ul>
     <li>Variable: <strong>UMI count lower bound</strong></li>
@@ -1631,10 +1947,10 @@ Toma en consideración, ¿Es este un conjunto de datos completo?</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-emptydrops-intentemoslo-de-nuevo" aria-label="hands-on box: Práctica: emptyDrops - ¡Intentemoslo de nuevo!"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: emptyDrops - ¡Intentemoslo de nuevo!</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-emptydrops-intentemoslo-de-nuevo"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: emptyDrops - ¡Intentemoslo de nuevo!</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1"><strong>DropletUtils emptyDrops</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1</span></span>  con los siguiente parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1" title="DropletUtils emptyDrops tool"><strong>DropletUtils emptyDrops</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1</span></span>  con los siguiente parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SingleCellExperiment rdata object”</em>: <code class="language-plaintext highlighter-rouge">SCE Object</code></li>
         <li><em>“UMI count lower bound”</em>: <code class="language-plaintext highlighter-rouge">5</code> - aquí puedes usar diversos valores y ver que sucede</li>
@@ -1651,10 +1967,10 @@ Toma en consideración, ¿Es este un conjunto de datos completo?</p>
 <p>¡En este punto debes tener <code class="language-plaintext highlighter-rouge">111</code> códigos de barras! Ahora tienes una matriz de expresión anotada y lista para los procesos y análisis subsecuentes, ¡Bien hecho! Sin embargo, en los siguientes tutoriales nos vincularemos al uso de una herramienta llamada Scanpy. Por tanto, necesitarás convertir este objeto SingleCellExperiment a un formato llamado <code class="language-plaintext highlighter-rouge">annData</code>, el cual es una variante de un archivo que utiliza un formato llamado <code class="language-plaintext highlighter-rouge">hdf5</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-conversión-al-formato-anndata" aria-label="hands-on box: Práctica: Conversión al formato AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Conversión al formato AnnData</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-conversión-al-formato-anndata"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Conversión al formato AnnData</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1"><strong>SCEasy convert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool"><strong>SCEasy convert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1</span></span>  con los siguientes parámetros:
       <ul>
         <li><em>“Direction of conversion”</em>: <code class="language-plaintext highlighter-rouge">SingleCellExperiment to AnnData</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in SingleCellExperiment RDS format”</em>: <code class="language-plaintext highlighter-rouge">&lt;pon tu número aquí&gt;UMI-Object</code></li>
@@ -1677,7 +1993,7 @@ Toma en consideración, ¿Es este un conjunto de datos completo?</p>
 <h2 id="datos">Datos</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-cargar-datos-combinar-archivos" aria-label="hands-on box: Práctica: Cargar datos - Combinar archivos"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Cargar datos - Combinar archivos</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-cargar-datos-combinar-archivos"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Cargar datos - Combinar archivos</div>
 
   <ol>
     <li>Crear un historial huevo para este tutorial (si es que no estás importando el historial mencionado en la parte superior)</li>
@@ -1696,14 +2012,14 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importación-por-medio-de-enlaces-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importación-por-medio-de-enlaces-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importación por medio de enlaces"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Importación por medio de enlaces<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copia los enlaces</li>   <li>     <p>Abre el manejador de carga de datos de Galaxy (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> en la parte superior derecha del panel de herramientas)</p>   </li>   <li>Selecciona ‘Pegar/Traer datos’ <strong>Paste/Fetch Data</strong></li>   <li>     <p>Copia los enlaces en el campo de textos</p>   </li>   <li>     <p>Presiona ‘Iniciar’ <strong>Start</strong></p>   </li>   <li>     <p><strong>Close</strong> Cierra la ventana.</p>   </li>   <li>Galaxy utiliza los URLs como nombres de forma predeterminada , así que los tendrás que cambiar a algunos que sean más útiles o informativos. the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importación-por-medio-de-enlaces-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importación-por-medio-de-enlaces-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Importación por medio de enlaces<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copia los enlaces</li>   <li>     <p>Abre el manejador de carga de datos de Galaxy (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> en la parte superior derecha del panel de herramientas)</p>   </li>   <li>Selecciona ‘Pegar/Traer datos’ <strong>Paste/Fetch Data</strong></li>   <li>     <p>Copia los enlaces en el campo de textos</p>   </li>   <li>     <p>Presiona ‘Iniciar’ <strong>Start</strong></p>   </li>   <li>     <p><strong>Close</strong> Cierra la ventana.</p>   </li>   <li>Galaxy utiliza los URLs como nombres de forma predeterminada , así que los tendrás que cambiar a algunos que sean más útiles o informativos. the window</li> </ul> </blockquote>
     </li>
     <li>Cambiar de nombre al conjunto de datos</li>
     <li>
       <p>Verifica que el tipo de datos sea <code class="language-plaintext highlighter-rouge">h5ad</code> de lo contrario ¡Necesitarás cambiar cada tipo de datos al formato <code class="language-plaintext highlighter-rouge">h5ad</code>!</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-cambiar-el-tipo-de-datos"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-cambiar-el-tipo-de-datos-contents" aria-expanded="true" aria-label="Toggle tip box: Cambiar el tipo de datos"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Cambiar el tipo de datos<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Selecciona sobre el <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>icono del lápiz</strong> para editar los atributos del conjunto de datos</li>   <li>Selecciona en la pestaña <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> en la parte superior del panel central</li>   <li>Selecciona <code class="language-plaintext highlighter-rouge">datatypes</code></li>   <li>Da clic en el botón <strong>Change datatype</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-cambiar-el-tipo-de-datos"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-cambiar-el-tipo-de-datos" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Consejo: Cambiar el tipo de datos<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Selecciona sobre el <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>icono del lápiz</strong> para editar los atributos del conjunto de datos</li>   <li>Selecciona en la pestaña <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> en la parte superior del panel central</li>   <li>Selecciona <code class="language-plaintext highlighter-rouge">datatypes</code></li>   <li>Da clic en el botón <strong>Change datatype</strong></li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1713,10 +2029,10 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
 <h2 id="concatenación-de-objetos">Concatenación de objetos</h2>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-concatenación-de-objetos-anndata" aria-label="hands-on box: Práctica: Concatenación de objetos AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Concatenación de objetos AnnData</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-concatenación-de-objetos-anndata"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Concatenación de objetos AnnData</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate AnnData tool"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">N701-400k-AnnData</code></li>
         <li><em>“Function to manipulate the object”</em>: ‘Concatenate along the observations axis’</li>
@@ -1732,22 +2048,22 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>¡Demos un vistazo a lo que hemos hecho! Desafortunadamente, los objetos AnnData son bastante complicados, así que aquí el icono del ojo <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> no nos será de mucha ayuda. En lugar de esto, de aquí en adelante vamos a utilizar una herramienta para visualizar nuestro objeto.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-inspección-de-objetos-anndata" aria-label="hands-on box: Práctica: Inspección de objetos AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Inspección de objetos AnnData</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-inspección-de-objetos-anndata"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Inspección de objetos AnnData</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguiente parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>  con los siguiente parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: la salida de la herramienta <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>   con los siguiente parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>   con los siguiente parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: la salida de la herramienta <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>   con los siguiente parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span>   con los siguiente parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: la salida de la herramienta <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
@@ -1759,7 +2075,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>Ya hemos visualizado las tres salidas de <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Inspect AnnData</strong>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-preguntas-4" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas-4"><i class="far fa-question-circle" aria-hidden="true"></i> Preguntas: Preguntas</div>
 
   <ol>
     <li>¿Cuántas células tienes ahora?</li>
@@ -1767,7 +2083,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-soluciones-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-soluciones-1-contents" aria-expanded="true" aria-label="Toggle solution box: Soluciones"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Soluciones<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-soluciones-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-soluciones-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solución: Soluciones<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Si verificas la salida <strong>General information</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, podrás ver que ahora tienes <code class="language-plaintext highlighter-rouge">4079 células</code>, ya que la matriz ahora tiene 4079 células y 35,734 genes. También puedes observar esto en los tamaños de los archivos <strong>obs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (células) and <strong>var</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (genes).</li>
@@ -1781,7 +2097,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
 <p>Configura el historial de ejemplo con los índices más antiguos en la parte inferior.</p>
 
-<figure id="figure-9"><img src="../../images/scrna-casestudy/wab-history-files-ascending.png" alt="Ordered history. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 9:</span> Nota como N701 es el más bajo, en orden ascendente al N707</figcaption></figure>
+<figure id="figure-9"><img src="../../images/scrna-casestudy/wab-history-files-ascending.png" alt="Ordered history. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 9</strong>:</span> Nota como N701 es el más bajo, en orden ascendente al N707</figcaption></figure>
 
 <p>Por tanto, cuando se concatenan, el lote (<code class="language-plaintext highlighter-rouge">batch</code>) aparece de la siguiente manera:</p>
 
@@ -1845,10 +2161,10 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>Los dos metadatos más críticos en este experimento son <code class="language-plaintext highlighter-rouge">sex</code> y <code class="language-plaintext highlighter-rouge">genotype</code>. Posteriormente, vamos a colorear nuestros gráficos de células según los valores de estos parámetros, así que vamos a añadirlos ya.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-etiquetas-de-sexo" aria-label="hands-on box: Práctica: Etiquetas de sexo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Etiquetas de sexo</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-etiquetas-de-sexo"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Etiquetas de sexo</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text in a specific column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text in a specific column tool"><strong>Replace Text in a specific column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: la salida de la herramienta <strong>Inspect AnnData: Key-indexed observations annotation (obs)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>
@@ -1884,7 +2200,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
       <p>Ahora queremos únicamente la columna que contiene la información de sexo -  al final agregaremos esto en la anotación celular del objeto AnnData</p>
     </li>
-    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  con los siguientes parámetros:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c9</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -1898,10 +2214,10 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>Estuvo divertido, ahora hagámoslo de nuevo pero para el genotipo.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-etiquetas-de-genotipo" aria-label="hands-on box: Práctica: Etiquetas de genotipo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Etiquetas de genotipo</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-etiquetas-de-genotipo"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Etiquetas de genotipo</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text in a specific column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text in a specific column tool"><strong>Replace Text in a specific column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: la salida de la herramienta <strong>Inspect AnnData: Key-indexed observations annotation (obs)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>
@@ -1937,7 +2253,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
       <p>Ahora queremos únicamente la columna que contiene la información de genotipo -  al final agregaremos esto en la anotación celular del objeto AnnData.</p>
     </li>
-    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  con los siguientes parámetros:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c9</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -1951,10 +2267,10 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>Es posible que desees hacer esto con distintos tipos de metadatos - qué laboratorios manejaron las muestras, en qué día se procesaron, etc. Una vez que hayas agregado todas tus columnas de metadatos, podemos entonces adherirlas unas a otras antes de conectarlas al objeto AnnData.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-combinar-las-columnas-de-metadatos" aria-label="hands-on box: Práctica: Combinar las columnas de metadatos"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Combinar las columnas de metadatos</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-combinar-las-columnas-de-metadatos"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Combinar las columnas de metadatos</div>
 
   <ol>
-    <li><span class="tool" data-tool="Paste1" title="Tested with Paste1"><strong>Paste two files side by side</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Paste1</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="Paste1" title="Paste two files side by side tool"><strong>Paste two files side by side</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Paste1</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Paste”</em>: <code class="language-plaintext highlighter-rouge">Genotype metadata</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“and”</em>: <code class="language-plaintext highlighter-rouge">Sex metadata</code></li>
@@ -1968,10 +2284,10 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>¡Agrégalo al objeto AnnData!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-añadir-los-metadatos-al-objeto-anndata" aria-label="hands-on box: Práctica: Añadir los metadatos al objeto AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Añadir los metadatos al objeto AnnData</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-añadir-los-metadatos-al-objeto-anndata"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Añadir los metadatos al objeto AnnData</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate AnnData tool"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: la salida de la herramienta <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Add new annotation(s) for observations or variables</code></li>
@@ -1985,10 +2301,10 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>¡Perfecto! Ahora puedes ejecutar <strong>Inspect AnnData</strong> para verificación, pero primero limpiemos un poco más este objeto. Sería mucho mejor si “lote” (<code class="language-plaintext highlighter-rouge">batch</code>) significara algo, en lugar de “el orden en el que la herramienta ‘Manipulate AnnData’ agregó mis conjuntos de datos”.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-etiquetado-de-lotes" aria-label="hands-on box: Práctica:  Etiquetado de lotes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica:  Etiquetado de lotes</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-etiquetado-de-lotes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica:  Etiquetado de lotes</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate AnnData tool"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: la salida de la herramienta <strong>Manipulate AnnData - Add new annotations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Rename categories of annotation</code></li>
@@ -2006,10 +2322,10 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>¿Recuerdas cuando mencionamos mitocondrias en los inicios de este tutorial? Y en muestras de células únicas, ¿Cómo de frecuente el ARN mitocondrial es un indicador de estrés durante la disociación? Probablemente deberíamos hacer algo con nuestra columna de verdadero/falso (true/false) en la anotación de genes, la cual nos provee información sobre las células. Ya sea que hayas combinado los archivos FASTQ o que estés analizando solo un archivo necesitarás hacer esto (saltándose así las secciones 4 y 5).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-calculando-el-arn-mitocondrial-en-las-células" aria-label="hands-on box: Práctica: Calculando el ARN mitocondrial en las células"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Calculando el ARN mitocondrial en las células</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-calculando-el-arn-mitocondrial-en-las-células"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Calculando el ARN mitocondrial en las células</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1" title="AnnData Operations tool"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1</span></span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in hdf5 AnnData format”</em>: la salida de la herramienta <strong>Manipulate AnnData - Rename categories</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Format of output object”</em>: <code class="language-plaintext highlighter-rouge">AnnData format</code></li>
@@ -2031,10 +2347,10 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>Si te interesa analizar datos de acceso público, particularmente del <a href="https://www.ebi.ac.uk/gxa/sc/home">Single Cell Expression Atlas</a>, quizá te interese la herramienta <span class="citation"><a href="#Moreno2020.04.08.032698">Moreno <i>et al.</i> 2020</a></span>, la cual más bien reduce estos pasos en uno. <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads">Aquí</a>  puedes encontrar el conjunto de datos para este tutorial, el cual tiene el número de identificación de experimento <code class="language-plaintext highlighter-rouge">E-MTAB-6945</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-práctica-obtener-datos-de-el-atlas-de-expresión-de-células-únicas" aria-label="hands-on box: Práctica: Obtener datos de el Atlas de Expresión de Células Únicas"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Práctica: Obtener datos de el Atlas de Expresión de Células Únicas</div>
+  <div class="box-title hands-on-title" id="hands-on-práctica-obtener-datos-de-el-atlas-de-expresión-de-células-únicas"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Práctica: Práctica: Obtener datos de el Atlas de Expresión de Células Únicas</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2"><strong>EBI SCXA Data Retrieval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2" title="EBI SCXA Data Retrieval tool"><strong>EBI SCXA Data Retrieval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2</span></span>  con los siguientes parámetros:
       <ul>
         <li><em>“SC-Atlas experiment accession”</em>: <code class="language-plaintext highlighter-rouge">E-MTAB-6945</code></li>
         <li><em>“Choose the type of matrix to download”</em>: <code class="language-plaintext highlighter-rouge">Raw filtered counts</code></li>
@@ -2042,7 +2358,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
       <p>Ahora necesitamos transformar estos datos en un objeto tipo AnnData</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.6.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.6.0+galaxy0"><strong>Scanpy Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.6.0+galaxy0" title="Scanpy Read10x tool"><strong>Scanpy Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.6.0+galaxy0</span></span>  con los siguientes parámetros:
       <ul>
         <li><em>“Expression matrix in sparse matrix format (.mtx)”</em>: <code class="language-plaintext highlighter-rouge">EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)</code></li>
         <li><em>“Gene table”</em>:  <code class="language-plaintext highlighter-rouge">EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)</code></li>
@@ -2057,9 +2373,9 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
 <h1 id="conclusion">Conclusion</h1>
 
-<figure id="figure-10"><img src="../../images/scrna-casestudy/wab-alevin-part1workflow.png" alt="Workflow Part 1. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 10:</span> Flujo de trabajo - Pasos 1-3</figcaption></figure>
+<figure id="figure-10"><img src="../../images/scrna-casestudy/wab-alevin-part1workflow.png" alt="Workflow Part 1. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 10</strong>:</span> Flujo de trabajo - Pasos 1-3</figcaption></figure>
 
-<figure id="figure-11"><img src="../../images/scrna-casestudy/wab-alevin-part2workflow.png" alt="Workflow Part 2. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 11:</span> Flujo de trabajo - Pasos 4-6</figcaption></figure>
+<figure id="figure-11"><img src="../../images/scrna-casestudy/wab-alevin-part2workflow.png" alt="Workflow Part 2. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 11</strong>:</span> Flujo de trabajo - Pasos 4-6</figcaption></figure>
 
 <p>¡Has llegado al final de esta sesión! Quizá te interese echarle un vistazo a un <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---answer-key-1">ejemplo de un historial</a> y a la <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-2">Parte 2 del flujo de trabajo</a>. Nota que según la forma en que ejecutes el flujo de trabajo este requerirá que cambies la columna (<code class="language-plaintext highlighter-rouge">column</code>) que contiene el lote de metadatos. <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---total-anndata-example">Aquí</a> puedes encontrar el objeto final que contiene todas las lecturas.</p>
 
@@ -2075,10 +2391,12 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
 <p>¡Únete a nuestro canal de Gitter de secuenciación de ARN de células únicas para tomar parte en discusiones con científicos con ideas afines a las tuyas! <a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" alt="Gitter. " loading="lazy" /></a></p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Puntos clave</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Puntos clave</div>
                     <ul>
                         
                         <li><p>Partiendo de archivos FASTQ crear un objeto AnnData que sea accesible con scanpy, incluir metadatos relevantes sobre células y genes</p>
@@ -2119,33 +2437,9 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
                 <br>¿Has usado este material como aprendiz o estudiante? Haz click en el formulario a continuación para dejarnos tu opinión<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin (Single Cell)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin (Single Cell)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Cómo citar este tutorial</h1>
                 <p>
@@ -2163,7 +2457,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -2204,7 +2498,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -2286,29 +2580,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     </ul>
                 </blockquote>
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

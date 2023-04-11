@@ -12,35 +12,35 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/retrosynthesis_analysis/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/retrosynthesis_analysis/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Generating theoretical possible pathways for the production of Lycopene in E.Coli using Retrosynthesis tools" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000" />
-<meta name="DC.creator" content="Guillaume Gricourt" />
-<meta name="DC.creator" content="Thomas Duigou" />
-<meta name="DC.creator" content="Kenza Bazi-Kabbaj" />
-<meta name="DC.creator" content="Joan Hérisson" />
-<meta name="DC.creator" content="Ioana Popescu" />
-<meta name="DC.creator" content="Jean-Loup Faulon" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Generating theoretical possible pathways for the production of Lycopene in E.Coli using Retrosynthesis tools">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-11-28 09:55:50 +0000">
+<meta name="DC.creator" content="Guillaume Gricourt">
+<meta name="DC.creator" content="Thomas Duigou">
+<meta name="DC.creator" content="Kenza Bazi-Kabbaj">
+<meta name="DC.creator" content="Joan Hérisson">
+<meta name="DC.creator" content="Ioana Popescu">
+<meta name="DC.creator" content="Jean-Loup Faulon">
 
         
         
         
         
-        <meta name="description" content="Synthetic Biology is the engineering of biology : the del..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Generating theoretical possible pathways for the producti..." />
-        <meta property="og:description" content="Synthetic Biology is the engineering of biology : the del..." />
+        <meta name="description" content="Synthetic Biology is the engineering of biology : the del...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Generating theoretical possible pathways for the producti...">
+        <meta property="og:description" content="Synthetic Biology is the engineering of biology : the del...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -650,10 +650,410 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-synthetic-biology">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-11-28 09:55:50 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Generating theoretical possible pathways for the production of Lycopene in E.Coli using Retrosynthesis tools",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Synthetic Biology",
+    "description": "Synthetic Biology is the engineering of biology : the deliberate (re)design and construction of novel biological and biologically based parts, devices and systems to perform new functions for useful purposes, that draws on principles elucidated from biology and engineering.\nBy applying these principles to living systems, Synthetic Biology overcomes mimicry and optimisation-led research and introduces a rationale and systematic approach to the construction and (re)design.\nSynthetic Biology is at the intersection of engineering, bioscience, chemistry, and information technology.\nThe goal of synthetic biology is to extend or modify the behavior of organisms and engineer them to perform new tasks. \nIn this section, the tutorials shows how to design metabolic pathways for producing the desired chemical targets.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Generating theoretical possible pathways for the production of Lycopene in E.Coli using Retrosynthesis tools' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/retrosynthesis_analysis/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "synthetic-biology",
+  "description": "The questions this  addresses are:\n - Which heterologous pathways are candidates to produce a compound in a chassis?\n\n\nThe objectives are:\n - Define what data are required to run RetroSynthesis analysis.\n - Understanding how to run the tools to search heterologous pathways.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "name": "Guillaume Gricourt",
+      "image": "https://avatars.githubusercontent.com/guillaume-gricourt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0143-5535",
+      "orcid": "https://orcid.org/0000-0003-0143-5535"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "name": "Thomas Duigou",
+      "image": "https://avatars.githubusercontent.com/tduigou",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2649-2950",
+      "orcid": "https://orcid.org/0000-0002-2649-2950"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "name": "Kenza Bazi-Kabbaj",
+      "image": "https://avatars.githubusercontent.com/kenza12",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4319-5616",
+      "orcid": "https://orcid.org/0000-0002-4319-5616"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "name": "Joan Hérisson",
+      "image": "https://avatars.githubusercontent.com/breakthewall",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9741-0847",
+      "orcid": "https://orcid.org/0000-0001-9741-0847"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "name": "Ioana Popescu",
+      "image": "https://avatars.githubusercontent.com/ioanagry",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2547-8935",
+      "orcid": "https://orcid.org/0000-0003-2547-8935"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "name": "Jean-Loup Faulon",
+      "image": "https://avatars.githubusercontent.com/jfaulon",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4274-2953",
+      "orcid": "https://orcid.org/0000-0003-4274-2953"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "name": "Guillaume Gricourt",
+      "image": "https://avatars.githubusercontent.com/guillaume-gricourt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0143-5535",
+      "orcid": "https://orcid.org/0000-0003-0143-5535"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "name": "Thomas Duigou",
+      "image": "https://avatars.githubusercontent.com/tduigou",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2649-2950",
+      "orcid": "https://orcid.org/0000-0002-2649-2950"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "name": "Kenza Bazi-Kabbaj",
+      "image": "https://avatars.githubusercontent.com/kenza12",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4319-5616",
+      "orcid": "https://orcid.org/0000-0002-4319-5616"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "name": "Joan Hérisson",
+      "image": "https://avatars.githubusercontent.com/breakthewall",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9741-0847",
+      "orcid": "https://orcid.org/0000-0001-9741-0847"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "name": "Ioana Popescu",
+      "image": "https://avatars.githubusercontent.com/ioanagry",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2547-8935",
+      "orcid": "https://orcid.org/0000-0003-2547-8935"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "name": "Jean-Loup Faulon",
+      "image": "https://avatars.githubusercontent.com/jfaulon",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4274-2953",
+      "orcid": "https://orcid.org/0000-0003-4274-2953"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Synthetic Biology",
+      "description": "Synthetic Biology is the engineering of biology : the deliberate (re)design and construction of novel biological and biologically based parts, devices and systems to perform new functions for useful purposes, that draws on principles elucidated from biology and engineering.\nBy applying these principles to living systems, Synthetic Biology overcomes mimicry and optimisation-led research and introduces a rationale and systematic approach to the construction and (re)design.\nSynthetic Biology is at the intersection of engineering, bioscience, chemistry, and information technology.\nThe goal of synthetic biology is to extend or modify the behavior of organisms and engineer them to perform new tasks. \nIn this section, the tutorials shows how to design metabolic pathways for producing the desired chemical targets.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3895",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3895",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3895"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-synthetic-biology">
     <h1 data-toc-skip>Generating theoretical possible pathways for the production of Lycopene in E.Coli using Retrosynthesis tools</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -664,9 +1064,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -724,7 +1124,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/synthetic-biology/tutorials/retrosynthesis_analysis/workflows/" title="Workflows" alt="Generating theoretical possible pathways for the production of Lycopene in E.Coli using Retrosynthesis tools workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/synthetic-biology/tutorials/retrosynthesis_analysis/workflows/" title="Generating theoretical possible pathways for the production of Lycopene in E.Coli using Retrosynthesis tools workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -755,7 +1155,10 @@
 
 
   
-  <li class="btn btn-default supporting_material">
+<!-- GTN Video Library true -->
+  
+<li class="btn btn-default supporting_material">
+  
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
         <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
     </a>
@@ -776,7 +1179,9 @@
         
         
     </ul>
-   </li>
+  
+</li>
+  
    
 
 
@@ -785,7 +1190,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -796,6 +1201,8 @@
             </a>
         </li>
     
+    
+        
     
         
     
@@ -935,6 +1342,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -945,6 +1353,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p><a href="https://galaxy-synbiocad.org/">Galaxy-SynBioCAD portal</a> is the first toolshed for synthetic biology, metabolic engineering, and industrial biotechnology (<span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>). It provides a set of Retrosynthesis tools aimed at finding pathways to synthesize heterologous compounds in chassis organisms (<strong>RetroRules</strong> (<span class="citation"><a href="#Duigou2018">Duigou <i>et al.</i> 2018</a></span>), <strong>RetroPath2.0</strong> (<span class="citation"><a href="#Delpine2018">Delépine <i>et al.</i> 2018</a></span>), <strong>RP2Paths</strong>, <strong>rpCompletion</strong>).</p>
@@ -970,7 +1379,7 @@
 <p>Note that we will run the steps of this workflow individually so as not to neglect the understanding of the intermediate steps as well. Then, we will run the workflow automatically so that it itself retrieves the outputs from the previous step and gives them as input to the next tool.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1014,16 +1423,16 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
 <h2 id="download-a-model">Download a model</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-select-a-model" aria-label="hands-on box: Select a model."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Select a model.</div>
+  <div class="box-title hands-on-title" id="hands-on-select-a-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Select a model.</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1"><strong>Pick SBML Model</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1" title="Pick SBML Model tool"><strong>Pick SBML Model</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1</span></span>  with the following parameters:
       <ul>
         <li><i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> <em>“Strain”</em>: <code class="language-plaintext highlighter-rouge">Escherichia coli str. K-12 substr. MG1655 (iML1515)</code></li>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-what-does-this-tool-do" aria-label="comment box: What does this tool do?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: What does this tool do?</div>
+        <div class="box-title comment-title" id="comment-what-does-this-tool-do"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What does this tool do?</div>
 
         <p>The selected SBML model is downloaded from the <a href="http://bigg.ucsd.edu/">BiGG database</a>.</p>
       </blockquote>
@@ -1033,14 +1442,14 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>What is the file format of the model?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The SBML is based on XML.</li>
@@ -1053,17 +1462,17 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
 <h2 id="create-a-sink-file-from-the-sbml-model">Create a sink file from the SBML model</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-a-sink-file" aria-label="hands-on box: Generate a sink file."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a sink file.</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-a-sink-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate a sink file.</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpextractsink/rpextractsink/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpextractsink/rpextractsink/5.12.1"><strong>Sink from SBML</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpextractsink/rpextractsink/5.12.1</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpextractsink/rpextractsink/5.12.1" title="Sink from SBML tool"><strong>Sink from SBML</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpextractsink/rpextractsink/5.12.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Strain”</em>: <code class="language-plaintext highlighter-rouge">sbml_model</code> (output of <strong>Pick SBML Model</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“SBML compartment ID”</em>: <code class="language-plaintext highlighter-rouge">c</code></li>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-choose-a-compartment-corresponding-to-your-model" aria-label="comment box: Choose a compartment corresponding to your model"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Choose a compartment corresponding to your model</div>
+        <div class="box-title comment-title" id="comment-choose-a-compartment-corresponding-to-your-model"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Choose a compartment corresponding to your model</div>
 
         <p>You can specify the compartment from which the tool will extract the chemical species.
 The default is <code class="language-plaintext highlighter-rouge">c</code>, the BiGG code for the cytoplasm.
@@ -1074,7 +1483,7 @@ If the user wishes to upload an SBML file from another source, then this value m
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>What this tool does?</li>
@@ -1082,7 +1491,7 @@ If the user wishes to upload an SBML file from another source, then this value m
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>This tool creates a friendly CSV file format that can be used as sink input for RetroPath2.0.</li>
@@ -1096,10 +1505,10 @@ If the user wishes to upload an SBML file from another source, then this value m
 <h2 id="retrieve-the-reaction-rules">Retrieve the reaction rules</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-a-file-with-all-reactions" aria-label="hands-on box: Generate a file with all reactions."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a file with all reactions.</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-a-file-with-all-reactions"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate a file with all reactions.</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6"><strong>RRules Parser </strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6" title="RRules Parser  tool"><strong>RRules Parser </strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6</span></span>  with the following parameters:
       <ul>
         <li><em>“Rule Type”</em>: <code class="language-plaintext highlighter-rouge">retro</code></li>
         <li><em>“Select the diameters of the reactions rules”</em>: <code class="language-plaintext highlighter-rouge">2</code>, <code class="language-plaintext highlighter-rouge">4</code>, <code class="language-plaintext highlighter-rouge">6</code>, <code class="language-plaintext highlighter-rouge">8</code>, <code class="language-plaintext highlighter-rouge">10</code>, <code class="language-plaintext highlighter-rouge">12</code>, <code class="language-plaintext highlighter-rouge">14</code> and <code class="language-plaintext highlighter-rouge">16</code></li>
@@ -1107,7 +1516,7 @@ If the user wishes to upload an SBML file from another source, then this value m
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-how-to-choose-a-right-diameter" aria-label="comment box: How to choose a right diameter ?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: How to choose a right diameter ?</div>
+        <div class="box-title comment-title" id="comment-how-to-choose-a-right-diameter"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How to choose a right diameter ?</div>
 
         <p>The diameter of the sphere including the atoms around the reacting center.
 The higher is the diameter, the more specific are the rules.</p>
@@ -1117,7 +1526,7 @@ The higher is the diameter, the more specific are the rules.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>Does a low diameter select specific rules?</li>
@@ -1125,7 +1534,7 @@ The higher is the diameter, the more specific are the rules.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>No, a low diameter selects more unspecific rules.</li>
@@ -1145,10 +1554,10 @@ The retrosynthesis network is outputted as a CSV file providing reactions in the
 <h2 id="launch-retropath20">Launch <strong>RetroPath2.0</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-build-a-reaction-network" aria-label="hands-on box: Build a reaction network"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build a reaction network</div>
+  <div class="box-title hands-on-title" id="hands-on-build-a-reaction-network"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Build a reaction network</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/retropath2/retropath2/2.3.0" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/retropath2/retropath2/2.3.0"><strong>RetroPath2.0</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/retropath2/retropath2/2.3.0</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/retropath2/retropath2/2.3.0" title="RetroPath2.0 tool"><strong>RetroPath2.0</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/retropath2/retropath2/2.3.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Rules File”</em>: <code class="language-plaintext highlighter-rouge">out_rules</code> (output of <strong>RRules Parser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sink File”</em>: <code class="language-plaintext highlighter-rouge">sink</code> (output of <strong>Sink from SBML</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1160,7 +1569,7 @@ The retrosynthesis network is outputted as a CSV file providing reactions in the
       </ul>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-inchi-format"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-inchi-format-contents" aria-expanded="true" aria-label="Toggle tip box: InChi format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: InChi format<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-inchi-format"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-inchi-format" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: InChi format<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>Be careful, you must have <code class="language-plaintext highlighter-rouge">InChi=</code> in front of your InChi key.</p>
       </blockquote>
@@ -1169,14 +1578,14 @@ The retrosynthesis network is outputted as a CSV file providing reactions in the
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>What is the file format produce by RetroPath2.0?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>A csv file.</li>
@@ -1193,16 +1602,16 @@ We need to split the network and perform some adjustments to these pathways.</p>
 
 <h2 id="split-the-network">Split the network</h2>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-build-a-reaction-network-1" aria-label="hands-on box: Build a reaction network"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build a reaction network</div>
+  <div class="box-title hands-on-title" id="hands-on-build-a-reaction-network-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Build a reaction network</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rp2paths/rp2paths/1.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rp2paths/rp2paths/1.5.0"><strong>RP2paths</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rp2paths/rp2paths/1.5.0</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rp2paths/rp2paths/1.5.0" title="RP2paths tool"><strong>RP2paths</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rp2paths/rp2paths/1.5.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RetroPath2.0 Pathways”</em>: <code class="language-plaintext highlighter-rouge">Reaction_Network</code> (output of <strong>RetroPath2.0</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-principle" aria-label="comment box: Principle"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Principle</div>
+        <div class="box-title comment-title" id="comment-principle"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Principle</div>
 
         <p>Extracts the set of pathways that lies in a metabolic space file output by the RetroPath2.0 workflow</p>
       </blockquote>
@@ -1211,7 +1620,7 @@ We need to split the network and perform some adjustments to these pathways.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>Why producing multiple pathways?</li>
@@ -1219,7 +1628,7 @@ We need to split the network and perform some adjustments to these pathways.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>One network could represent several pathways, so several solutions.</li>
@@ -1233,10 +1642,10 @@ We need to split the network and perform some adjustments to these pathways.</p>
 <h2 id="refine-reactions">Refine reactions</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-refine-reactions" aria-label="hands-on box: Refine reactions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Refine reactions</div>
+  <div class="box-title hands-on-title" id="hands-on-refine-reactions"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Refine reactions</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpcompletion/rpcompletion/5.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpcompletion/rpcompletion/5.12.2"><strong>Complete Reactions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpcompletion/rpcompletion/5.12.2</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpcompletion/rpcompletion/5.12.2" title="Complete Reactions tool"><strong>Complete Reactions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpcompletion/rpcompletion/5.12.2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RP2paths pathways”</em>: <code class="language-plaintext highlighter-rouge">master_pathways</code> (output of <strong>RP2paths</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RP2paths compounds”</em>: <code class="language-plaintext highlighter-rouge">compounds</code> (output of <strong>RP2paths</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1245,7 +1654,7 @@ We need to split the network and perform some adjustments to these pathways.</p>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-principle-1" aria-label="comment box: Principle"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Principle</div>
+        <div class="box-title comment-title" id="comment-principle-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Principle</div>
 
         <p>Each reaction rule can correspond to several template reactions, the task here is to enumerate the different possible transformations according to these templates.
 Because the RetroRules reaction rules consider only one substrate at a time, some compounds are by purpose omitted: the task here is to complete the predicted reactions by putting back these omitted compounds (mostly  cofactors).
@@ -1256,7 +1665,7 @@ The node converts each predicted pathway to distinct SBML files.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>How many solutions are found?</li>
@@ -1265,7 +1674,7 @@ The node converts each predicted pathway to distinct SBML files.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>We have 9 candidates.</li>
@@ -1281,14 +1690,14 @@ The node converts each predicted pathway to distinct SBML files.</p>
 <p>In this section, you can run the RetroSynthesis Workflow more easily and fastly following these instructions:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-execute-the-entire-workflow-in-one-go" aria-label="hands-on box: Execute the entire workflow in one go."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Execute the entire workflow in one go.</div>
+  <div class="box-title hands-on-title" id="hands-on-execute-the-entire-workflow-in-one-go"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Execute the entire workflow in one go.</div>
 
   <ol>
     <li>
       <p>Import your <strong>RetroSynthesis workflow</strong> by uploading the <a href="https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/RetroSynthesis.ga"><strong>workflow file</strong></a>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
     <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see <strong>RetroSynthesis</strong> workflow.</li>
     <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>
@@ -1299,7 +1708,7 @@ The node converts each predicted pathway to distinct SBML files.</p>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
         <p>All the outputs will be automatically generated and identical to the previous ones.</p>
       </blockquote>
@@ -1317,10 +1726,12 @@ Three main steps were involved:</p>
   <li>Enumerate all solutions found by RetroPath2.0</li>
 </ol>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Get heterologous pathways which produce a compound in a chassis</p>
@@ -1354,33 +1765,9 @@ Three main steps were involved:</p>
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Generating theoretical possible pathways for the production of Lycopene in E.Coli using Retrosynthesis tools (Synthetic Biology)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Generating theoretical possible pathways for the production of Lycopene in E.Coli using Retrosynthesis tools (Synthetic Biology)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1398,7 +1785,7 @@ Three main steps were involved:</p>
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1439,7 +1826,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1451,29 +1838,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

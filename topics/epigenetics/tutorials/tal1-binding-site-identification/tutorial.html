@@ -12,34 +12,34 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
-<meta name="DC.creator" content="Mallory Freeberg" />
-<meta name="DC.creator" content="Mo Heydarian" />
-<meta name="DC.creator" content="Vivek Bhardwaj" />
-<meta name="DC.creator" content="Joachim Wolff" />
-<meta name="DC.creator" content="Anika Erxleben" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.creator" content="Mallory Freeberg">
+<meta name="DC.creator" content="Mo Heydarian">
+<meta name="DC.creator" content="Vivek Bhardwaj">
+<meta name="DC.creator" content="Joachim Wolff">
+<meta name="DC.creator" content="Anika Erxleben">
 
         
         
         
         
-        <meta name="description" content="DNA methylation is an epigenetic mechanism used by higher..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Identification of the binding sites of the T-cell acute l..." />
-        <meta property="og:description" content="DNA methylation is an epigenetic mechanism used by higher..." />
+        <meta name="description" content="DNA methylation is an epigenetic mechanism used by higher...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Identification of the binding sites of the T-cell acute l...">
+        <meta property="og:description" content="DNA methylation is an epigenetic mechanism used by higher...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -652,10 +652,413 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-epigenetics">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-18 14:23:35 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Epigenetics",
+    "description": "DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromosome inactivating, imprinting, and gene silencing of germline specific gene and repetitive elements.",
+    "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html",
+  "timeRequired": "PT3H",
+  "keywords": "epigenetics, ChIP-seq",
+  "description": "The questions this  addresses are:\n - How is raw ChIP-seq data processed and analyzed?\n - What are the binding sites of TAL1?\n - Which genes are regulated by TAL1?\n\n\nThe objectives are:\n - Inspect read quality with FastQC\n - Perform read trimming with Trimmomatic\n - Align trimmed reads with BWA\n - Assess quality and reproducibility of experiments\n - Identify TAL1 binding sites with MACS2\n - Determine unique/common TAL1 binding sites from G1E and Megakaryocytes\n - Identify unique/common TAL1 peaks occupying gene promoters\n - Visually inspect TAL1 peaks with Trackster\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "url": "https://wiki.galaxyproject.org/Learn/Visualization",
+      "name": "Trackster"
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/",
+      "name": "Mallory Freeberg",
+      "image": "https://avatars.githubusercontent.com/malloryfreeberg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/",
+      "name": "Mo Heydarian",
+      "image": "https://avatars.githubusercontent.com/moheydarian",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/",
+      "name": "Vivek Bhardwaj",
+      "image": "https://avatars.githubusercontent.com/vivekbhr",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/",
+      "name": "Joachim Wolff",
+      "image": "https://avatars.githubusercontent.com/joachimwolff",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "name": "Anika Erxleben",
+      "image": "https://avatars.githubusercontent.com/erxleben",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7427-6478",
+      "orcid": "https://orcid.org/0000-0002-7427-6478"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/",
+      "name": "Mallory Freeberg",
+      "image": "https://avatars.githubusercontent.com/malloryfreeberg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/",
+      "name": "Mo Heydarian",
+      "image": "https://avatars.githubusercontent.com/moheydarian",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/",
+      "name": "Vivek Bhardwaj",
+      "image": "https://avatars.githubusercontent.com/vivekbhr",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/",
+      "name": "Joachim Wolff",
+      "image": "https://avatars.githubusercontent.com/joachimwolff",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "name": "Anika Erxleben",
+      "image": "https://avatars.githubusercontent.com/erxleben",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7427-6478",
+      "orcid": "https://orcid.org/0000-0002-7427-6478"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Epigenetics",
+      "description": "DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromosome inactivating, imprinting, and gene silencing of germline specific gene and repetitive elements.",
+      "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3173",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3173",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3173"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-epigenetics">
     <h1 data-toc-skip>Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -666,9 +1069,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -824,7 +1227,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/" title="Workflows" alt="Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1) workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/" title="Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1) workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -838,13 +1241,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -870,7 +1270,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -1037,6 +1437,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -1072,6 +1478,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -1082,6 +1489,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>This tutorial uses ChIP-seq datasets from a study published by <span class="citation"><a href="#Wu_2014">Wu <i>et al.</i> 2014</a></span>. The goal of this study was to investigate “the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation.”</p>
@@ -1202,7 +1610,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
 </table>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -1236,26 +1644,26 @@ Input control experiments are used to identify and remove sampling bias, for exa
 <p>As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial <a href="/training-material/topics/sequence-analysis">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-performing-quality-control" aria-label="hands-on box: Performing quality control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Performing quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-performing-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Performing quality control</div>
 
   <ol>
     <li>
       <p>Create and name a new history for this tutorial.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the ChIP-seq raw data (*.fastqsanger) from <a href="https://doi.org/10.5281/zenodo.197100">Zenodo</a>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Examine the data in a FASTQ file by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>What are four key features of a FASTQ file?</li>
@@ -1263,7 +1671,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>A FASTQ file contains a sequence identifier and additional information, the raw sequence, information about the sequence again with optional information, and quality information about the sequence.</li>
             <li>A FASTA file contains only the description of the sequence and the sequence itself. A FASTA file does not contain any quality information.</li>
@@ -1272,15 +1680,15 @@ Input control experiments are used to identify and remove sampling bias, for exa
       </blockquote>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> : Run FastQC on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC web page</a>.</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> : Run FastQC on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC web page</a>.</p>
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: The uploaded fastqsanger files.</li>
       </ul>
 
-      <figure id="figure-1"><img src="../../images/tal1/fastqc_before.png" alt="fastqbefore. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Sequence quality per base generated by FastQC before end trimming.</figcaption></figure>
+      <figure id="figure-1"><img src="../../images/tal1/fastqc_before.png" alt="fastqbefore. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Sequence quality per base generated by FastQC before end trimming.</figcaption></figure>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>What does the y-axis represent in Figure 3?</li>
@@ -1288,7 +1696,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The phred-score. This score gives the probability of an incorrect base <em>e.g.</em> a score of 20 means that it is likely by 1% that one base is incorrect. See <a href="https://en.wikipedia.org/wiki/Phred_quality_score">here</a> for more information.</li>
             <li>This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. See <a href="https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina">here</a> for more information.</li>
@@ -1304,10 +1712,10 @@ Input control experiments are used to identify and remove sampling bias, for exa
 <p>It is often necessary to trim a sequenced read to remove bases sequenced with high uncertainty (<em>i.e.</em> low-quality bases). In addition, artificial adaptor sequences used in library preparation protocols need to be removed before attempting to align the reads to a reference genome.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-trimming-and-clipping-reads" aria-label="hands-on box: Trimming and clipping reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Trimming and clipping reads</div>
+  <div class="box-title hands-on-title" id="hands-on-trimming-and-clipping-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Trimming and clipping reads</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0" title="Tested with toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0</span></span> : Run Trimmomatic to trim low-quality reads.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0" title="Trimmomatic tool"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0</span></span> : Run Trimmomatic to trim low-quality reads.
       <ul>
         <li><em>“Single-end or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code></li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTQ file”</em>: Select all of the FASTQ files</li>
@@ -1318,32 +1726,32 @@ Input control experiments are used to identify and remove sampling bias, for exa
       </ul>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-changing-datatypes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-datatypes-contents" aria-expanded="true" aria-label="Toggle tip box: Changing datatypes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing datatypes<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-changing-datatypes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-datatypes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing datatypes<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>If the FASTQ files cannot be selected, check whether their format is FASTQ with Sanger-scaled quality values (<em>fastqsanger</em>). If not, you can edit the data type by clicking on the pencil symbol next to a file in the history, clicking the “Datatype” tab, and choosing <em>fastqsanger</em> as the “New Type”.</p>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> : Rerun FastQC on each trimmed/clipped FASTQ file to determine whether low-quality and adaptor sequences were correctly removed.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> : Rerun FastQC on each trimmed/clipped FASTQ file to determine whether low-quality and adaptor sequences were correctly removed.
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: The output of Trimmomatic.</li>
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>How did the range of read lengths change after trimming/clipping?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>Before trimming, all the reads were the same length, which reflected the number of rounds of nucleotide incorporation in the sequencing experiment. After trimming, read lengths span a range of values reflecting different lengths of the actual DNA fragments captured during the ChIP experiement.</li>
           </ol>
         </blockquote>
       </blockquote>
 
-      <figure id="figure-2"><img src="../../images/tal1/fastqc_after.png" alt="fastqafter. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Sequence quality per base generated by FastQC after end trimming.</figcaption></figure>
+      <figure id="figure-2"><img src="../../images/tal1/fastqc_after.png" alt="fastqafter. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Sequence quality per base generated by FastQC after end trimming.</figcaption></figure>
     </li>
   </ol>
 </blockquote>
@@ -1354,10 +1762,10 @@ Input control experiments are used to identify and remove sampling bias, for exa
 Nowadays, there are many read alignment programs for sequenced DNA, BWA being one of them. You can read more about the BWA algorithm and tool <a href="https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btp324">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-aligning-reads-to-a-reference-genome" aria-label="hands-on box: Aligning reads to a reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Aligning reads to a reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-aligning-reads-to-a-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Aligning reads to a reference genome</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4"><strong>BWA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4</span></span> : Run BWA to map the trimmed/clipped reads to the mouse genome.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4" title="BWA tool"><strong>BWA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4</span></span> : Run BWA to map the trimmed/clipped reads to the mouse genome.
       <ul>
         <li><em>“Will you select a reference genome…“</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code></li>
         <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Mouse (mus musculus) mm10</code></li>
@@ -1369,13 +1777,13 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
       <p>Rename files to reflect the origin and contents.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Inspect a file produced by BWA.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>What datatype is the BWA output file?</li>
@@ -1383,7 +1791,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The output is a BAM file.</li>
             <li>Check the number of lines for each file in your history. This gives you a rough estimate.</li>
@@ -1391,7 +1799,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
         </blockquote>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3"><strong>Samtools idxstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3</span></span> : Run idxstats to get statistics of the BWA alignments.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3" title="Samtools idxstats tool"><strong>Samtools idxstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3</span></span> : Run idxstats to get statistics of the BWA alignments.
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM file”</em>: Select all of the mapped BAM files</li>
       </ul>
@@ -1400,7 +1808,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
       <p>Examine the output (<i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span>)</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>What does each column in the output represent (<strong>Tip</strong>: look at the Tool Form)?</li>
@@ -1409,7 +1817,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>Column 1: Reference sequence identifier
 Column 2: Reference sequence length
@@ -1431,19 +1839,19 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We expect that the replicate samples will cluster more closely to each other than to other samples. We will be use tools from the package deepTools for the next few steps. More information on deepTools can be found <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assessing-correlation-between-samples" aria-label="hands-on box: Assessing correlation between samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assessing correlation between samples</div>
+  <div class="box-title hands-on-title" id="hands-on-assessing-correlation-between-samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assessing correlation between samples</div>
 
   <p>multiBamSummary splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small bin size here because we are working with a subset of reads that align to only a fraction of the genome.</p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.3.2.0.0"><strong>multiBamSummary</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.3.2.0.0</span></span> : Run multiBamSummary to get read coverage of the alignments.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.3.2.0.0" title="multiBamSummary tool"><strong>multiBamSummary</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.3.2.0.0</span></span> : Run multiBamSummary to get read coverage of the alignments.
       <ul>
         <li><em>“Sample order matters”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Bam files”</em>: Select all of the aligned BAM files</li>
         <li><em>“Bin size in bp”</em>: 1000</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.3.2.0.0"><strong>plotCorrelation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.3.2.0.0</span></span> : Run plotCorrelation to visualize the results.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.3.2.0.0" title="plotCorrelation tool"><strong>plotCorrelation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.3.2.0.0</span></span> : Run plotCorrelation to visualize the results.
       <ul>
         <li><em>“Matrix file from the multiBamSummary tool”</em>: Select the multiBamSummary output file</li>
         <li><em>“Correlation method”</em>: <code class="language-plaintext highlighter-rouge">Pearson</code></li>
@@ -1456,7 +1864,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
       <p>Feel free to play around with these parameter settings!</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>Why do we want to skip zeros in <strong>plotCorrelation</strong>?</li>
@@ -1465,7 +1873,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless.</li>
             <li>The clusters are different, <em>e.g.</em> Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. <a href="http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/"> More information about Pearson and Spearman’s correlation. </a></li>
@@ -1474,7 +1882,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         </blockquote>
       </blockquote>
 
-      <figure id="figure-3"><img src="../../images/tal1/plotCorrelation_heatmap_pearson_1kb.png" alt="heatmap. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Heatmap of correlation matrix generated by plotCorrelation.</figcaption></figure>
+      <figure id="figure-3"><img src="../../images/tal1/plotCorrelation_heatmap_pearson_1kb.png" alt="heatmap. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Heatmap of correlation matrix generated by plotCorrelation.</figcaption></figure>
     </li>
   </ol>
 </blockquote>
@@ -1486,10 +1894,10 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We will now evaluate the quality of the immunoprecipitation step in the ChIP-seq protocol.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assessing-ip-strength" aria-label="hands-on box: Assessing IP strength"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assessing IP strength</div>
+  <div class="box-title hands-on-title" id="hands-on-assessing-ip-strength"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assessing IP strength</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.3.2.0.0"><strong>plotFingerprint</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.3.2.0.0</span></span> : Run plotFingerprint to assess ChIP signal strength.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.3.2.0.0" title="plotFingerprint tool"><strong>plotFingerprint</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.3.2.0.0</span></span> : Run plotFingerprint to assess ChIP signal strength.
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Bam files”</em>: Select all of the aligned BAM files for the G1E cell type</li>
         <li><em>“Show advanced options”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
@@ -1503,10 +1911,10 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
     <li>
       <p>View the output images.</p>
 
-      <figure id="figure-4"><img src="../../images/tal1/plotFingerprint_graph_v2.png" alt="fingerprintimage. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Strength of immunoprecipitation of TAL1.</figcaption></figure>
+      <figure id="figure-4"><img src="../../images/tal1/plotFingerprint_graph_v2.png" alt="fingerprintimage. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Strength of immunoprecipitation of TAL1.</figcaption></figure>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>What does this graph in Figure 10 represent?</li>
@@ -1516,7 +1924,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>It shows us how good the ChIP Signal compared to the control signal is. An ideal control (input) with perfect uniform distribution of reads along the genome (<em>i.e.</em> without enrichment in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank.</li>
             <li>We expect that the control (input) signal is more or less uniform distributed over the genome (<em>e.g.</em> like the green line in the image above). The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis.</li>
@@ -1544,10 +1952,10 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>More information about MACS2 can be found in <span class="citation"><a href="#Zhang_2008">Zhang <i>et al.</i> 2008</a></span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-determining-tal1-binding-sites" aria-label="hands-on box: Determining TAL1 binding sites"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Determining TAL1 binding sites</div>
+  <div class="box-title hands-on-title" id="hands-on-determining-tal1-binding-sites"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Determining TAL1 binding sites</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6"><strong>MACS2 callpeak</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6</span></span> : Run MACS2 callpeak with the aligned read files from the previous step as Treatment (TAL1) and Control (input).
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6" title="MACS2 callpeak tool"><strong>MACS2 callpeak</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6</span></span> : Run MACS2 callpeak with the aligned read files from the previous step as Treatment (TAL1) and Control (input).
       <ul>
         <li><em>“Are you pooling Treatment Files?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“ChIP-Seq Treatment File”</em>: Select all of the replicate ChIP-Seq treatment aligned BAM files for one cell type</li>
@@ -1577,7 +1985,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-inspecting-peaks-and-aligned-data-with-trackster" aria-label="hands-on box: Inspecting peaks and aligned data with Trackster"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspecting peaks and aligned data with Trackster</div>
+  <div class="box-title hands-on-title" id="hands-on-inspecting-peaks-and-aligned-data-with-trackster"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspecting peaks and aligned data with Trackster</div>
 
   <ol>
     <li>
@@ -1586,7 +1994,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
     <li>
       <p>Click “Visualize” on the page header and select “Create Visualization”</p>
 
-      <figure id="figure-5"><img src="../../images/tal1/create-visualization.png" alt="vizbutton. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Trackster can be accessed from the Visualize button at the top of the screen.</figcaption></figure>
+      <figure id="figure-5"><img src="../../images/tal1/create-visualization.png" alt="vizbutton. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Trackster can be accessed from the Visualize button at the top of the screen.</figcaption></figure>
     </li>
     <li>Set up Trackster
       <ul>
@@ -1603,7 +2011,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         <li>Click “Create”</li>
       </ul>
 
-      <figure id="figure-6"><img src="../../images/tal1/configure-visualization.png" alt="tracksterdb. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Assign session name and reference genome.</figcaption></figure>
+      <figure id="figure-6"><img src="../../images/tal1/configure-visualization.png" alt="tracksterdb. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Assign session name and reference genome.</figcaption></figure>
     </li>
     <li>Add tracks to Trackster
       <ul>
@@ -1622,27 +2030,27 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         <li>Play around with the track configurations, for example the color or the display mode</li>
       </ul>
 
-      <figure id="figure-7"><img src="../../images/tal1/add-tracks.png" alt="tracksterselect. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Select data from the history to view in Trackster.</figcaption></figure>
+      <figure id="figure-7"><img src="../../images/tal1/add-tracks.png" alt="tracksterselect. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Select data from the history to view in Trackster.</figcaption></figure>
     </li>
     <li>
       <p>Navigate to the <em>Runx1</em> locus (<code class="language-plaintext highlighter-rouge">chr16:92501466-92926074</code>) to inspect the aligned reads and TAL1 peaks.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-7" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>What do you see at the <em>Runx1</em> locus in Trackster?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>Directly upstream of the shorter <em>Runx1</em> gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.</li>
           </ol>
         </blockquote>
       </blockquote>
 
-      <figure id="figure-8"><img src="../../images/tal1/Trackster_Runx1_locus.png" alt="runx1. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> The Runx1 locus with TAL1 peaks identified.</figcaption></figure>
+      <figure id="figure-8"><img src="../../images/tal1/Trackster_Runx1_locus.png" alt="runx1. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> The Runx1 locus with TAL1 peaks identified.</figcaption></figure>
     </li>
   </ol>
 </blockquote>
@@ -1651,7 +2059,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We show here an alternative to Trackster, <a href="http://software.broadinstitute.org/software/igv/">IGV</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-inspecting-peaks-with-igv" aria-label="hands-on box: Inspecting peaks with IGV"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspecting peaks with IGV</div>
+  <div class="box-title hands-on-title" id="hands-on-inspecting-peaks-with-igv"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspecting peaks with IGV</div>
 
   <ol>
     <li>Open IGV on your local computer.</li>
@@ -1665,24 +2073,24 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We have processed ChIP-seq data from two stages of hematopoiesis and have lists of TAL1-occupied sites (peaks) in both cellular states. The next analysis step is to identify TAL1 peaks that are <em>shared</em> between the two cellular states and peaks that are <em>specific</em> to either cellular state.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-identifying-unique-and-common-tal1-peaks-between-states" aria-label="hands-on box: Identifying unique and common TAL1 peaks between states"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Identifying unique and common TAL1 peaks between states</div>
+  <div class="box-title hands-on-title" id="hands-on-identifying-unique-and-common-tal1-peaks-between-states"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Identifying unique and common TAL1 peaks between states</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0"><strong>bedtools Intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0</span></span> : Run bedtools Intersect intervals to find peaks that exist both in G1E and megakaryocytes.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="bedtools Intersect intervals tool"><strong>bedtools Intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0</span></span> : Run bedtools Intersect intervals to find peaks that exist both in G1E and megakaryocytes.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select the TAL1 G1E narrow peaks BED file</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File B to intersect with A”</em>: Select the TAL1 Megakaryocytes narrow peaks BED file</li>
         <li>Running this tool with the default settings will return overlapping peaks of both files.</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0"><strong>bedtools Intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0</span></span> : Run bedtools Intersect intervals to find peaks that exist only in G1E.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="bedtools Intersect intervals tool"><strong>bedtools Intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0</span></span> : Run bedtools Intersect intervals to find peaks that exist only in G1E.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select the TAL1 G1E narrow peaks BED file</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File B to intersect with A”</em>: Select the TAL1 Megakaryocytes narrow peaks BED file</li>
         <li><em>“Report only those alignments that **do not** overlap the BED file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0"><strong>bedtools Intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0</span></span> : Run bedtools Intersect intervals to find peaks that exist only in megakaryocytes.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="bedtools Intersect intervals tool"><strong>bedtools Intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0</span></span> : Run bedtools Intersect intervals to find peaks that exist only in megakaryocytes.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select the TAL1 Megakaryocytes narrow peaks BED file</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File B to intersect with A”</em>: Select the TAL1 G1E narrow peaks BED file</li>
@@ -1693,7 +2101,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
       <p>Rename files to reflect the origin and contents.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-8" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>How many TAL1 peaks are common to both G1E cells and megakaryocytes?</li>
@@ -1702,7 +2110,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>1 peak (answer may vary depending on references and tool versions used)</li>
             <li>407 peaks (answer may vary depending on references and tool versions used)</li>
@@ -1719,10 +2127,10 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We will generate Input normalized coverage (bigWig) files for the ChIP samples, using the bamCompare tool from deepTools2. bamCompare provides multiple options to compare the two files (<em>e.g.</em> log2ratio, subtraction). We will use log2 ratio of the ChIP samples over Input.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generating-input-normalized-bigwigs" aria-label="hands-on box: Generating input-normalized bigwigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generating input-normalized bigwigs</div>
+  <div class="box-title hands-on-title" id="hands-on-generating-input-normalized-bigwigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generating input-normalized bigwigs</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0"><strong>bamCompare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0</span></span> : Run bamCompare to get the log2 read ratios between treatment and control samples.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0" title="bamCompare tool"><strong>bamCompare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0</span></span> : Run bamCompare to get the log2 read ratios between treatment and control samples.
       <ul>
         <li><em>“First BAM/CRAM file (</em>e.g.* treated sample)”*: Select the Megakaryocyte TAL1 aligned BAM file for replicate 1 (R1)</li>
         <li><em>“Second BAM/CRAM file (</em>e.g.* control sample)”*: Select the Megakaryocyte input aligned BAM file for replicate 1 (R1)</li>
@@ -1751,10 +2159,10 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>Optionally, you can use plotProfile to create a profile plot using to computeMatrix output.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-calculating-signal-matrix-on-macs2-output" aria-label="hands-on box: Calculating signal matrix on MACS2 output"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculating signal matrix on MACS2 output</div>
+  <div class="box-title hands-on-title" id="hands-on-calculating-signal-matrix-on-macs2-output"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Calculating signal matrix on MACS2 output</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0</span></span> : Run computeMatrix to prepare data for plotting a heatmap of TAL1 peaks.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="computeMatrix tool"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0</span></span> : Run computeMatrix to prepare data for plotting a heatmap of TAL1 peaks.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Select Regions</em> &gt; <em>“Regions to plot”</em>: Select the MACS2 narrow peaks files for G1E cells (TAL1 over Input)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Score file”</em>: Select the bigWig files for the G1E cells (log2 ratios from bamCompare)</li>
@@ -1772,10 +2180,10 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plotting-a-heatmap-of-tal1-peaks" aria-label="hands-on box: Plotting a heatmap of TAL1 peaks"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plotting a heatmap of TAL1 peaks</div>
+  <div class="box-title hands-on-title" id="hands-on-plotting-a-heatmap-of-tal1-peaks"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plotting a heatmap of TAL1 peaks</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1</span></span> : Run plotHeatmap to create a heatmap for score distributions across TAL1 peak genomic regions in each cell type.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="plotHeatmap tool"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1</span></span> : Run plotHeatmap to create a heatmap for score distributions across TAL1 peak genomic regions in each cell type.
       <ul>
         <li><em>“Matrix file from the computeMatrix tool”</em>: Select the computeMatrix output for G1E cells</li>
         <li><em>“Show advanced options”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1799,10 +2207,10 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We will now check whether the samples have more reads from regions of the genome with high GC.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assessing-gc-bias" aria-label="hands-on box: Assessing GC bias"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assessing GC bias</div>
+  <div class="box-title hands-on-title" id="hands-on-assessing-gc-bias"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assessing GC bias</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/3.3.2.0.0"><strong>computeGCbias</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/3.3.2.0.0</span></span> : Run computeGCbias to determine the GC bias of the sequenced reads.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/3.3.2.0.0" title="computeGCbias tool"><strong>computeGCbias</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/3.3.2.0.0</span></span> : Run computeGCbias to determine the GC bias of the sequenced reads.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bam file”</em>: Select an aligned BAM file</li>
         <li><em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">locally cached</code></li>
@@ -1813,7 +2221,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-9" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>Why would we worry more about checking for GC bias in an input file?</li>
@@ -1821,7 +2229,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is expected that certain genomic regions contain more reads (<em>i.e.</em> regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.</li>
             <li>To answer this question, run the computeGCbias tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation <a href="https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background">here</a>.</li>
@@ -1830,10 +2238,10 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
       </blockquote>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0"><strong>correctGCbias</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0</span></span> : Run correctGCbias to generate GC-corrected BAM/CRAM files.</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0" title="correctGCbias tool"><strong>correctGCbias</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0</span></span> : Run correctGCbias to generate GC-corrected BAM/CRAM files.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-10" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <ol>
           <li>What does the tool correctGCbias do?</li>
@@ -1842,7 +2250,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The correctGCbias tool removes reads from regions with higher coverage than expected (typically corresponding to GC-rich regions) and adds reads to regions with lower coverage than expected (typically corresponding to AT-rich regions).</li>
             <li>The output of this tool is a GC-corrected file in BAM, bigWig, or bedGraph format.</li>
@@ -1860,10 +2268,12 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 
 <p>In this exercise you imported raw Illumina sequencing data, evaluated the quality before and after you trimmed reads with low confidence scores, aligned the trimmed reads, identified TAL1 peaks relative to the negative control (background), and visualized the aligned reads and TAL1 peaks relative to gene structures and positions. Additional, you assessed the “goodness” of the experiments by looking at metrics such as GC bias and IP enrichment.</p>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.</p>
@@ -1902,33 +2312,9 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1) (Epigenetics)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1) (Epigenetics)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1946,7 +2332,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1987,7 +2373,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1999,29 +2385,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

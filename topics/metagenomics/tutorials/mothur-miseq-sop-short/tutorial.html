@@ -12,32 +12,32 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="16S Microbial Analysis with mothur (short)" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2019-05-01 12:49:44 +0000" />
-<meta name="DC.creator" content="Saskia Hiltemann" />
-<meta name="DC.creator" content="Bérénice Batut" />
-<meta name="DC.creator" content="Dave Clements" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="16S Microbial Analysis with mothur (short)">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2019-05-01 12:49:44 +0000">
+<meta name="DC.creator" content="Saskia Hiltemann">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Dave Clements">
 
         
         
         
         
-        <meta name="description" content="Metagenomics is a discipline that enables the genomic stu..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: 16S Microbial Analysis with mothur (short)" />
-        <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu..." />
+        <meta name="description" content="Metagenomics is a discipline that enables the genomic stu...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: 16S Microbial Analysis with mothur (short)">
+        <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -509,10 +509,272 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-metagenomics">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2019-05-01 12:49:44 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "16S Microbial Analysis with mothur (short)",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Metagenomics",
+    "description": "Metagenomics is a discipline that enables the genomic study of uncultured microorganisms",
+    "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for '16S Microbial Analysis with mothur (short)' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "metagenomics",
+  "description": "The questions this  addresses are:\n - What is the effect of normal variation in the gut microbiome on host health?\n\n\nThe objectives are:\n - Analyze of 16S rRNA sequencing data using the mothur toolsuite in Galaxy\n - Using a mock community to assess the error rate of your sequencing experiment\n - Visualize sample diversity using Krona and Phinch\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "name": "Dave Clements",
+      "image": "https://avatars.githubusercontent.com/tnabtaf",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9970-6657",
+      "orcid": "https://orcid.org/0000-0002-9970-6657"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/",
+      "name": "Dave Clements",
+      "image": "https://avatars.githubusercontent.com/tnabtaf",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9970-6657",
+      "orcid": "https://orcid.org/0000-0002-9970-6657"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Metagenomics",
+      "description": "Metagenomics is a discipline that enables the genomic study of uncultured microorganisms",
+      "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3174"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-metagenomics">
     <h1 data-toc-skip>16S Microbial Analysis with mothur (short)</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -523,9 +785,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -595,7 +857,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/" title="Workflows" alt="16S Microbial Analysis with mothur (short) workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/" title="16S Microbial Analysis with mothur (short) workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -609,13 +871,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -634,7 +893,10 @@
 
 
   
-  <li class="btn btn-default supporting_material">
+<!-- GTN Video Library true -->
+  
+<li class="btn btn-default supporting_material">
+  
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
         <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
     </a>
@@ -656,7 +918,9 @@
         
         
     </ul>
-   </li>
+  
+</li>
+  
    
 
 
@@ -665,7 +929,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -828,6 +1092,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -863,6 +1133,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -873,6 +1144,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 
 <h1 id="overview">Overview</h1>
 
@@ -880,7 +1152,7 @@
 <a href="https://www.mothur.org/wiki/MiSeq_SOP">Standard Operating Procedure (SOP) for MiSeq data</a>, developed by the <a href="http://www.schlosslab.org/">Schloss lab</a>, the creators of the mothur software package <span class="citation"><a href="#Schloss2009">Schloss <i>et al.</i> 2009</a></span>.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-note-two-versions-of-this-tutorial" aria-label="comment box: Note: Two versions of this tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note: Two versions of this tutorial</div>
+  <div class="box-title comment-title" id="comment-note-two-versions-of-this-tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note: Two versions of this tutorial</div>
 
   <p>Because this tutorial consists of many steps, we have made two versions of it, one long and one short.</p>
 
@@ -892,7 +1164,7 @@ more in-depth discussion of each step, please see the <a href="/training-materia
 </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -935,14 +1207,14 @@ more in-depth discussion of each step, please see the <a href="/training-materia
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
 <h1 id="obtaining-and-preparing-data">Obtaining and preparing data</h1>
 
 <p>In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS data.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-the-16s-ribosomal-rna-gene" aria-label="comment box: Background: The 16S ribosomal RNA gene"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: The 16S ribosomal RNA gene</div>
+  <div class="box-title comment-title" id="comment-background-the-16s-ribosomal-rna-gene"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background: The 16S ribosomal RNA gene</div>
   <p><img src="../../images/16S_gene.png" alt="The 16S ribosomal RNA gene. " loading="lazy" /> <br /><br /></p>
 
   <p>The 16S rRNA gene has several properties that make it ideally suited for our purposes</p>
@@ -982,7 +1254,7 @@ additionally sequenced a mock community with a known composition (genomic DNA fr
 for this mock sample are contained in the file <code class="language-plaintext highlighter-rouge">HMP_MOCK.v35.fasta</code></p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-dataset-naming-scheme" aria-label="comment box: Dataset naming scheme"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Dataset naming scheme</div>
+  <div class="box-title comment-title" id="comment-dataset-naming-scheme"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Dataset naming scheme</div>
   <p>For this tutorial, you are given 10 pairs of files. For example, the following pair of files:<br />
  <code class="language-plaintext highlighter-rouge">F3D0_S188_L001_R1_001.fastq</code><br />
  <code class="language-plaintext highlighter-rouge">F3D0_S188_L001_R2_001.fastq</code></p>
@@ -1002,14 +1274,14 @@ in this document differ slightly from the description on their website -->
 <p>All data required for this tutorial has been made available from Zenodo <a href="https://doi.org/10.5281/zenodo.800651"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg" alt="DOI. " loading="lazy" /></a></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data" aria-label="hands-on box: Obtaining our data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtaining our data</div>
+  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Obtaining our data</div>
 
   <ol>
     <li>
       <p>Make sure you have an empty analysis history. Give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li><strong>Import Sample Data.</strong>
       <ul>
@@ -1018,7 +1290,7 @@ in this document differ slightly from the description on their website -->
 using the URLs listed in the box below (click <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> to expand):</p>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-list-of-zenodo-urls"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-list-of-zenodo-urls-contents" aria-expanded="true" aria-label="Toggle solution box: List of Zenodo URLs"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: List of Zenodo URLs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-list-of-zenodo-urls"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-list-of-zenodo-urls" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: List of Zenodo URLs<span class="fold-unfold fa fa-minus-square"></span></button></div>
             <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/F3D0_R1.fastq
 https://zenodo.org/record/800651/files/F3D0_R2.fastq
 https://zenodo.org/record/800651/files/F3D141_R1.fastq
@@ -1063,10 +1335,10 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
           </blockquote>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
         </li>
       </ul>
     </li>
@@ -1083,7 +1355,7 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
       </ul>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-list-of-zenodo-urls-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-list-of-zenodo-urls-1-contents" aria-expanded="true" aria-label="Toggle solution box: List of Zenodo URLs"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: List of Zenodo URLs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-list-of-zenodo-urls-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-list-of-zenodo-urls-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: List of Zenodo URLs<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
 https://zenodo.org/record/800651/files/silva.v4.fasta
 https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
@@ -1104,7 +1376,7 @@ which will differ only by <code class="language-plaintext highlighter-rouge">_R1
 convention, so that our tools will know which files belong together. We do this by building a <strong>List of Dataset Pairs</strong></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-organizing-our-data-into-a-paired-collection" aria-label="hands-on box: Organizing our data into a paired collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Organizing our data into a paired collection</div>
+  <div class="box-title hands-on-title" id="hands-on-organizing-our-data-into-a-paired-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Organizing our data into a paired collection</div>
 
   <ol>
     <li>
@@ -1185,10 +1457,10 @@ the consensus base call. A new quality score is derived by combining the two ori
 the reads for all the overlapping positions.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-combine-forward-and-reverse-reads-into-contigs" aria-label="hands-on box: Combine forward and reverse reads into contigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combine forward and reverse reads into contigs</div>
+  <div class="box-title hands-on-title" id="hands-on-combine-forward-and-reverse-reads-into-contigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Combine forward and reverse reads into contigs</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1"><strong>Make.contigs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1</span></span>  with the following parameters</li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1" title="Make.contigs tool"><strong>Make.contigs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1</span></span>  with the following parameters</li>
     <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Way to provide files”</em>: <code class="language-plaintext highlighter-rouge">Multiple pairs - Combo mode</code></li>
     <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Fastq pairs”</em>: the collection you just created</li>
     <li>Leave all other parameters to the default settings</li>
@@ -1227,14 +1499,14 @@ Finally we count how often each of the unique sequences occurs in the given samp
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-perform-data-cleaning" aria-label="hands-on box: Perform data cleaning"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Perform data cleaning</div>
+  <div class="box-title hands-on-title" id="hands-on-perform-data-cleaning"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Perform data cleaning</div>
 
   <ol>
     <li>
       <p><strong>Import the workflow</strong> into Galaxy</p>
 
       <!--SNIPPET-->
-      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflow" aria-label="hands_on box: Importing and Launching a workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Importing and Launching a workflow</div>   <div class="galaxy-proxy-active-show"> Click here to run the  <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control"><strong>Quality Control</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <p class="galaxy-proxy-active-hide">Or copy the URL (e.g. via right-click) of <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga">this workflow</a>, and import the workflow into Galaxy</p>   <div class="galaxy-proxy-active-hide"> <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>  </div> </blockquote>
+      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a workflow</div>   <div class="galaxy-proxy-active-show"> Click here to run the  <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control"><strong>Quality Control</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <p class="galaxy-proxy-active-hide">Or copy the URL (e.g. via right-click) of <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga">this workflow</a>, and import the workflow into Galaxy</p>   <div class="galaxy-proxy-active-hide"> <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>  </div> </blockquote>
     </li>
     <li>
       <p>Run <strong>Workflow 1: Quality Control</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
@@ -1246,12 +1518,12 @@ Finally we count how often each of the unique sequences occurs in the given samp
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <ol>
       <li>How many sequences were removed in the screening step?</li>
@@ -1259,7 +1531,7 @@ Finally we count how often each of the unique sequences occurs in the given samp
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>
           <p>The screening removed <strong>23,488</strong> sequences.</p>
@@ -1291,7 +1563,7 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 the number of duplicates of this sequence observed in each sample.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-representative-sequences-vs-total-sequences" aria-label="comment box: Representative sequences vs Total sequences"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Representative sequences vs Total sequences</div>
+  <div class="box-title comment-title" id="comment-representative-sequences-vs-total-sequences"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Representative sequences vs Total sequences</div>
   <p>From now on, we will only work with the set of <em>unique sequences</em>, but it’s important to remember that these represent a larger
 number of <em>total sequences</em>, which we keep track of in the <em>count table</em>.</p>
 
@@ -1313,10 +1585,10 @@ with the most common k-mers and the unique sequence a standard global sequence a
 (using the Needleman-Wunsch algorithm).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-align-sequences" aria-label="hands-on box: Align sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Align sequences</div>
+  <div class="box-title hands-on-title" id="hands-on-align-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Align sequences</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0"><strong>Align.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0" title="Align.seqs tool"><strong>Align.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Unique.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="language-plaintext highlighter-rouge">silva.v4.fasta</code> reference file from your history
@@ -1324,12 +1596,12 @@ with the most common k-mers and the unique sequence a standard global sequence a
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
         <p>Have a look at the alignment output, what do you see?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>At first glance, it might look like there is not much information there. We see our read names, but only period <code class="language-plaintext highlighter-rouge">.</code> characters below it.</p>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;M00967_43_000000000-A3JHG_1_1101_14069_1827
 ............................................................................
@@ -1350,7 +1622,7 @@ There are different alignment characters in this output:</p>
         </blockquote>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0"><strong>Summary.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0" title="Summary.seqs tool"><strong>Summary.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">align</code> output from <strong>Align.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: <code class="language-plaintext highlighter-rouge">count_table</code> output from <strong>Count.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1408,13 +1680,13 @@ this chimera removal using the <code class="language-plaintext highlighter-rouge
 <strong>Chimera.vsearch</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-chimeras" aria-label="comment box: Background: Chimeras"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: Chimeras</div>
+  <div class="box-title comment-title" id="comment-background-chimeras"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: Chimeras</div>
   <p><img src="../../images/chimeras.jpg" alt="Chemirec sequence" />
 (slide credit: <a href="http://slideplayer.com/slide/4559004/">http://slideplayer.com/slide/4559004/ </a>)</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-clean-aligned-sequences-and-chimera-removal" aria-label="hands-on box: Clean Aligned sequences and Chimera Removal"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Clean Aligned sequences and Chimera Removal</div>
+  <div class="box-title hands-on-title" id="hands-on-clean-aligned-sequences-and-chimera-removal"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Clean Aligned sequences and Chimera Removal</div>
 
   <ol>
     <li><strong>Import the workflow</strong> into Galaxy
@@ -1424,7 +1696,7 @@ this chimera removal using the <code class="language-plaintext highlighter-rouge
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
     <li>Run <strong>Workflow 2: Data Cleaning and Chimera Removal</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
@@ -1434,12 +1706,12 @@ this chimera removal using the <code class="language-plaintext highlighter-rouge
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-7" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <ol>
       <li>How many chimeric sequences were detected?</li>
@@ -1447,7 +1719,7 @@ this chimera removal using the <code class="language-plaintext highlighter-rouge
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>
@@ -1485,7 +1757,7 @@ TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-
 set provided by the Schloss lab</a> based on the RDP (Ribosomal Database Project, <span class="citation"><a href="#Cole2013">Cole <i>et al.</i> 2013</a></span>) reference taxonomy.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-taxonomic-assignment" aria-label="comment box: Background: Taxonomic assignment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: Taxonomic assignment</div>
+  <div class="box-title comment-title" id="comment-background-taxonomic-assignment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: Taxonomic assignment</div>
 
   <p>In this tutorial we will use the RDP classifier and reference taxonomy for classification, but there are several different taxonomic
 assignment algorithms and reference databases available for this purpose.</p>
@@ -1525,7 +1797,7 @@ that have survived all the cleaning steps up to this point. We are generally not
 and want to remove them from our dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-taxonomic-classification-and-removal-of-non-bacterial-sequences" aria-label="hands-on box: Taxonomic Classification and removal of non-bacterial sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Taxonomic Classification and removal of non-bacterial sequences</div>
+  <div class="box-title hands-on-title" id="hands-on-taxonomic-classification-and-removal-of-non-bacterial-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Taxonomic Classification and removal of non-bacterial sequences</div>
 
   <ol>
     <li><strong>Import the workflow</strong> into Galaxy
@@ -1535,7 +1807,7 @@ and want to remove them from our dataset.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
     <li>Run <strong>Workflow 3: Classification</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
@@ -1547,17 +1819,17 @@ and want to remove them from our dataset.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-9" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <p>How many non-bacterial sequences were removed? Determine both the number of <em>representative sequences</em> and <em>total sequences</em> removed.</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>There were <strong>20 representative sequences</strong> removed, representing <strong>162 total sequences</strong>.
 This can be determined by looking at the summary.seqs log outputs before the <strong>Remove.lineage</strong> step (after chimera removal), and after.</p>
     </blockquote>
@@ -1572,7 +1844,7 @@ our sequencing and bioinformatics pipeline is.</p>
 <p><a href="../mothur-miseq-sop/tutorial.html#optional-calculate-error-rates-based-on-our-mock-community"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to extended tutorial</a></p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-skipping-the-mock-community-analysis" aria-label="comment box: Skipping the mock community analysis"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Skipping the mock community analysis</div>
+  <div class="box-title comment-title" id="comment-skipping-the-mock-community-analysis"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Skipping the mock community analysis</div>
 
   <p>The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to <a href="#otu-clustering">the next section</a>
 where we will cluster our sequences into OTUs, classify them and perform some visualisations.
@@ -1586,7 +1858,7 @@ of which you know the exact composition and is something we recommend to do, bec
 accurate your sequencing and analysis protocol is.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-mock-communities" aria-label="comment box: Background: Mock communities"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: Mock communities</div>
+  <div class="box-title comment-title" id="comment-background-mock-communities"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background: Mock communities</div>
 
   <p><strong>What is a mock community?</strong></p>
 
@@ -1615,7 +1887,7 @@ A mock community sample was sequenced for different combinations of sequencer an
 Since we know the expected outcome, we can assess the accuracy of each pipeline. A similar approach can be used to
 assess different parameter settings of the <em>in-silico</em>  analysis pipeline.</p>
 
-  <figure id="figure-1"><img src="../../images/mock_community.jpg" alt="example results of mock community sequencing to assess error rates. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)</figcaption></figure>
+  <figure id="figure-1"><img src="../../images/mock_community.jpg" alt="example results of mock community sequencing to assess error rates. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)</figcaption></figure>
 
   <p><strong>Further reading</strong></p>
 
@@ -1632,10 +1904,10 @@ exactly what we would expect the analysis to produce as a result.</p>
 <p>First, let’s extract the sequences belonging to our mock samples from our data:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-mock-sample-from-our-dataset" aria-label="hands-on box: extract mock sample from our dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: extract mock sample from our dataset</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-mock-sample-from-our-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: extract mock sample from our dataset</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0"><strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0" title="Get.groups tool"><strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group file or count table”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Remove.lineage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“groups”</em>: <code class="language-plaintext highlighter-rouge">Mock</code></li>
@@ -1659,9 +1931,9 @@ Selected 4046 sequences from your count file
 the reads from our mock sample back to their known sequences, to see how many fail to match.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assess-error-rates-based-on-a-mock-community" aria-label="hands-on box: Assess error rates based on a mock community"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assess error rates based on a mock community</div>
+  <div class="box-title hands-on-title" id="hands-on-assess-error-rates-based-on-a-mock-community"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assess error rates based on a mock community</div>
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0"><strong>Seq.error</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0" title="Seq.error tool"><strong>Seq.error</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="language-plaintext highlighter-rouge">HMP_MOCK.v35.fasta</code> file from your history</li>
@@ -1703,7 +1975,7 @@ a clustering is derived using the OptiClust algorithm:</p>
 </ol>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-what-are-operational-taxonomic-units-otus" aria-label="comment box: Background: What are Operational Taxonomic Units (OTUs)?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: What are Operational Taxonomic Units (OTUs)?</div>
+  <div class="box-title comment-title" id="comment-background-what-are-operational-taxonomic-units-otus"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: What are Operational Taxonomic Units (OTUs)?</div>
 
   <p>In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
@@ -1717,7 +1989,7 @@ separation.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cluster-mock-sequences-into-otus" aria-label="hands-on box: Cluster mock sequences into OTUs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Cluster mock sequences into OTUs</div>
+  <div class="box-title hands-on-title" id="hands-on-cluster-mock-sequences-into-otus"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cluster mock sequences into OTUs</div>
 
   <ol>
     <li><strong>Import the workflow</strong> into Galaxy
@@ -1727,7 +1999,7 @@ separation.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-3-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
     <li>Run <strong>Workflow 4: Mock OTU Clustering</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
@@ -1737,16 +2009,16 @@ separation.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-3-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-11" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <p>How many OTUs were identified in our mock community?</p>
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>Answer: <strong>34</strong></p>
 
       <p>This can be determined by opening the shared file or OTU list and looking at the header line. You will see a column for each OTU</p>
@@ -1786,7 +2058,7 @@ something like this:</p>
 best efforts, some chimeras or other contaminations may have slipped through our filtering steps.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-rarefaction" aria-label="comment box: Background: Rarefaction"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: Rarefaction</div>
+  <div class="box-title comment-title" id="comment-background-rarefaction"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: Rarefaction</div>
 
   <p>To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
 plots the number of species as a function of the number of individuals sampled. The curve usually begins
@@ -1811,7 +2083,7 @@ species rich habitat, only a small fraction has been sampled.</p>
 approaches, please refer to the <a href="https://www.mothur.org/wiki/MiSeq_SOP">mothur wiki page</a>.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-what-are-operational-taxonomic-units-otus-1" aria-label="comment box: Background: What are Operational Taxonomic Units (OTUs)?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: What are Operational Taxonomic Units (OTUs)?</div>
+  <div class="box-title comment-title" id="comment-background-what-are-operational-taxonomic-units-otus-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: What are Operational Taxonomic Units (OTUs)?</div>
 
   <p>In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
@@ -1827,7 +2099,7 @@ separation.</p>
 <p>We will now repeat the OTU clustering we performed on our mock community for our real datasets. We use a slightly different workflow because these tools are faster for larger datasets. We will also normalize our data by subsampling to the level of the sample with the lowest number of sequences in it.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cluster-our-data-into-otus" aria-label="hands-on box: Cluster our data into OTUs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Cluster our data into OTUs</div>
+  <div class="box-title hands-on-title" id="hands-on-cluster-our-data-into-otus"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cluster our data into OTUs</div>
 
   <ol>
     <li><strong>Import the workflow</strong> into Galaxy
@@ -1837,7 +2109,7 @@ separation.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-4-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
     <li>Run <strong>Workflow 5: OTU Clustering</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
@@ -1848,7 +2120,7 @@ separation.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-4-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1873,12 +2145,12 @@ Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lac
 sequences (100%) were binned in the genus <em><a href="https://en.wikipedia.org/wiki/Alistipes">Alistipes</a></em>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-12" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Which samples contained sequences belonging to an OTU classified as Staphylococcus?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Examine the <code class="language-plaintext highlighter-rouge">tax.summary</code> file output by <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
     <p>Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
@@ -1898,7 +2170,7 @@ or between samples (beta diversity). However, diversity is not a physical quanti
 and many different metrics have been proposed to quantify diversity by <span class="citation"><a href="#Finotello2016">Finotello <i>et al.</i> 2016</a></span>.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-species-diversity" aria-label="comment box: Background: Species Diversity"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: Species Diversity</div>
+  <div class="box-title comment-title" id="comment-background-species-diversity"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background: Species Diversity</div>
 
   <p>Species diversity consists of three components: species richness, taxonomic or phylogenetic diversity and species evenness.</p>
 
@@ -1916,7 +2188,7 @@ smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, cov
 ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;). A comparison of several different diversity metrics is discussed in <span class="citation"><a href="#BonillaRosso2012">Bonilla-Rosso <i>et al.</i> 2012</a></span></p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-15" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
     <p>To understand the difference between richness and evenness, consider the following example:</p>
 
     <p><img src="../../images/richness-evenness-blank.png" alt="illustration of richness and evenness. " loading="lazy" /></p>
@@ -1927,7 +2199,7 @@ ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;). A comparison 
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>Both communities have 4 different species, so they have same richness.</li>
         <li>Community B is more even, because each species has the same abundance.</li>
@@ -1956,7 +2228,7 @@ definition of diversity and as always, the metric you choose to use may influenc
 rarefaction measures the number of observed OTUs as a function of the subsampling size.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-rarefaction-1" aria-label="comment box: Background: Rarefaction"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: Rarefaction</div>
+  <div class="box-title comment-title" id="comment-background-rarefaction-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: Rarefaction</div>
 
   <p>To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
 plots the number of species as a function of the number of individuals sampled. The curve usually begins
@@ -1975,7 +2247,7 @@ species rich habitat, only a small fraction has been sampled.</p>
 <p>We will use a plotting tool to visualize the rarefaction curves, and use <strong>Summary.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to calculate a number of different alpha diversity metrics on all our samples.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-alpha-diversity" aria-label="hands-on box: Alpha Diversity"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Alpha Diversity</div>
+  <div class="box-title hands-on-title" id="hands-on-alpha-diversity"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Alpha Diversity</div>
 
   <ol>
     <li><strong>Import the workflow</strong> into Galaxy
@@ -1985,7 +2257,7 @@ species rich habitat, only a small fraction has been sampled.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-5-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-5" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
     <li>Run <strong>Workflow 6: Alpha Diversity</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
@@ -1994,7 +2266,7 @@ species rich habitat, only a small fraction has been sampled.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-5-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-5" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -2060,7 +2332,7 @@ coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wi
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-beta-diversity" aria-label="hands-on box: Beta Diversity"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Beta Diversity</div>
+  <div class="box-title hands-on-title" id="hands-on-beta-diversity"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Beta Diversity</div>
 
   <ol>
     <li><strong>Import the workflow</strong> into Galaxy
@@ -2070,7 +2342,7 @@ coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wi
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-6-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-6" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
     <li>Run <strong>Workflow 7: Beta Diversity</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
@@ -2080,7 +2352,7 @@ coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wi
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-6-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-6" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -2123,17 +2395,17 @@ of the others.</p>
 <p>A tool we can use to visualize the composition of our community, is <a href="https://github.com/marbl/Krona/wiki">Krona</a></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-krona" aria-label="hands-on box: Krona"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Krona</div>
+  <div class="box-title hands-on-title" id="hands-on-krona"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Krona</div>
 
   <p>First we convert our mothur taxonomy file to a format compatible with Krona</p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0"><strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0" title="Taxonomy-to-Krona tool"><strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Taxonomy file”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Krona pie chart tool"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0</span></span>  with the following parameters
       <ul>
         <li><em>“Type of input”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> output from <strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2148,12 +2420,12 @@ innermost ring labeled “Bacteroidetes” below:</p>
 <iframe id="krona" src="krona_all.html" frameborder="0" width="100%" height="900px"> <img src="../../images/krona.png" alt="Krona. " loading="lazy" /> </iframe>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-16" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-16"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>What percentage of your sample was labelled <code class="language-plaintext highlighter-rouge">Lactobacillus</code>?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
 clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
 any point in the hierarchy (here 5% of all)</p>
@@ -2174,7 +2446,7 @@ about the groups. But luckily we can get <strong>Classify.otu</strong> <i class=
 taxonomy files. In the following exercise, we will create a Krona plot with per-sample subplots.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-exercise-per-sample-plots" aria-label="question box: Exercise: per-sample plots"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Exercise: per-sample plots</div>
+  <div class="box-title question-title" id="question-exercise-per-sample-plots"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Exercise: per-sample plots</div>
 
   <p>Try to create per-sample Krona plots. An few hints are given below, and the full answer
 is given in the solution box. <br /></p>
@@ -2190,7 +2462,7 @@ is given in the solution box. <br /></p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-full-solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-full-solution-contents" aria-expanded="true" aria-label="Toggle solution box: Full Solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: Full Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-full-solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-full-solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Full Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Find the previous run of <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in your history
@@ -2212,12 +2484,12 @@ is given in the solution box. <br /></p>
 
         <p><br /> You should now have a collection with per-sample files <br /><br /></p>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0"><strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0</span></span>  with the following parameters
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0" title="Taxonomy-to-Krona tool"><strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0</span></span>  with the following parameters
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Taxonomy file”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> collection from <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0</span></span>  with the following parameters
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Krona pie chart tool"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0</span></span>  with the following parameters
         <ul>
           <li><em>“Type of input”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code></li>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: the collection from <strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2239,10 +2511,10 @@ is given in the solution box. <br /></p>
 view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-phinch" aria-label="hands-on box: Phinch"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Phinch</div>
+  <div class="box-title hands-on-title" id="hands-on-phinch"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Phinch</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0"><strong>Make.biom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0" title="Make.biom tool"><strong>Make.biom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“shared”</em>: the output from <strong>Sub.sample</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“constaxonomy”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2267,7 +2539,7 @@ view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
  <img src="../../../../shared/images/phinch_overviewpage.png" alt="Phinch overview. " loading="lazy" /></p>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-no-link-to-phinch-on-your-dataset" aria-label="comment box: No link to Phinch on your dataset?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: No link to Phinch on your dataset?</div>
+    <div class="box-title comment-title" id="comment-no-link-to-phinch-on-your-dataset"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: No link to Phinch on your dataset?</div>
 
     <p>If this visualisation link is not present on your Galaxy dataset, you can download the generated BIOM file from Galaxy,
 and upload it directly to the Phinch server at <a href="https://usegalaxy.eu/phinch/index.html">https://usegalaxy.eu/phinch/</a>. <br /><br /></p>
@@ -2286,10 +2558,12 @@ This file can also be visualized in Phinch2, but requires installation of Phinch
 <p><img src="../../images/mothur_sop_pipeline.jpg" alt="mothur sop tutorial pipeline. " width="50%" loading="lazy" /></p>
 
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>16S rRNA gene sequencing analysis results depend on the many algorithms used and their settings</p>
@@ -2346,33 +2620,9 @@ This file can also be visualized in Phinch2, but requires installation of Phinch
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=16S Microbial Analysis with mothur (short) (Metagenomics)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=16S Microbial Analysis with mothur (short) (Metagenomics)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -2390,7 +2640,7 @@ This file can also be visualized in Phinch2, but requires installation of Phinch
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -2431,7 +2681,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -2443,29 +2693,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

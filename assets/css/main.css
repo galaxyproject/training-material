@@ -35,7 +35,7 @@
   --code-foreground: #fff;
   --code-background: #000;
   --border-light: #ddd;
-  --hyperlink: #0067d6;
+  --hyperlink: #0056b3;
   --hyperlink-hover: #004590;
   --brand-color: #2c3143;
   --brand-color-contrast: #fff;
@@ -1037,9 +1037,6 @@ figure {
 figure > img {
   margin-bottom: 1rem;
 }
-figure .figcaption-prefix {
-  font-weight: bold;
-}
 figure figcaption {
   text-align: justify;
 }
@@ -1066,6 +1063,9 @@ nav.navbar {
 nav.navbar.navbar-dark .navbar-brand, nav.navbar.navbar-dark .navbar-nav .nav-link {
   color: var(--brand-color-contrast);
 }
+nav.navbar a {
+  border: none;
+}
 nav.navbar .navbar-brand, nav.navbar .navbar-nav li {
   padding: 0.5em;
   background: var(--navbar-item-background);
@@ -1075,6 +1075,9 @@ nav.navbar .navbar-brand:hover, nav.navbar .navbar-nav li:hover {
 }
 nav.navbar a.navbar-brand {
   padding-right: 2.5em;
+}
+nav.navbar a {
+  text-decoration: none;
 }
 nav.navbar .navbar-collapse {
   justify-content: flex-end;
@@ -1902,13 +1905,18 @@ blockquote.feedback > .box-title button {
   width: 1px;
 }
 
-/* WCAG Contrast. These aim to pass AA level for normal sized text. */
+/* WCAG Contrast. These aim to pass AAA level for normal sized text. */
 a {
   color: var(--hyperlink);
+  border-bottom: 1px dotted var(--hyperlink);
 }
-a:hover, a:focus, a:active {
+a:hover, a:focus, a:focus-visible, a:active {
   color: var(--hyperlink-hover);
-  text-decoration: underline;
+  border-bottom: 1px solid var(--hyperlink-hover);
+  text-decoration: none;
+}
+a.logo {
+  border: none;
 }
 
 .text-muted {
@@ -1949,7 +1957,6 @@ nav[data-toggle=toc] .nav li a:hover, nav[data-toggle=toc] .nav li a:focus, nav[
   padding-left: 0px;
   color: var(--hyperlink);
   border-left: none;
-  text-decoration: underline;
 }
 
 .col-sm-2 {
@@ -1991,7 +1998,7 @@ nav[data-toggle=toc] .nav li a:hover, nav[data-toggle=toc] .nav li a:focus, nav[
   flex-direction: row;
   align-items: center;
   border-radius: 1em;
-  border: 1px solid var(--hyperlink);
+  border: 1px dotted var(--hyperlink);
   padding-right: 0.5em;
   margin: 0.2em;
   line-height: 1em;
@@ -2003,6 +2010,8 @@ nav[data-toggle=toc] .nav li a:hover, nav[data-toggle=toc] .nav li a:focus, nav[
   margin: 0 0.25em 0 0;
 }
 .contributor-badge:hover {
+  background: var(--brand-color);
+  color: var(--brand-color-contrast);
   border: 1px solid var(--hyperlink-hover);
 }
 
@@ -2041,9 +2050,6 @@ div.highlight:hover .btn, div.highlight .btn:focus {
 }
 #tutorial_list #clear_search {
   cursor: pointer;
-}
-#tutorial_list .topic-icon {
-  padding: 0.5rem 0.75rem;
 }
 
 ul.supporting_material .btn {
@@ -2263,6 +2269,16 @@ a.btn div {
   padding: 5px;
   font-size: 1.5rem;
   margin: 5px;
+}
+
+.btn-primary {
+  background-color: var(--brand-color);
+  border-color: var(--brand-color);
+}
+
+.btn-success {
+  background-color: #1d7531;
+  border-color: #1d7531;
 }
 
 /* CYOA */

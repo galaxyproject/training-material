@@ -12,31 +12,31 @@
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 
-        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
-<meta name="DC.type" content="text" />
-<meta name="DC.title" content="PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis" />
-<meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
-<meta name="DC.creator" content="Vijay" />
-<meta name="DC.creator" content="Daniel Blankenberg" />
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.creator" content="Vijay">
+<meta name="DC.creator" content="Daniel Blankenberg">
 
         
         
         
         
-        <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis" />
-        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta name="description" content="Statistical Analyses for omics data and machine learning ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -458,10 +458,222 @@
 
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<section class="tutorial topic-statistics">
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-10-18 14:23:35 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html",
+  "timeRequired": "PT1H30M",
+  "keywords": "statistics, Machine learning, Pan-cancer, cancer biomarkers, oncogenes and tumor suppressor genes",
+  "description": "The questions this  addresses are:\n - How to predict aberrant pathway activity in The Cancer Genome Atlas (TCGA) using Machine learning approaches?\n\n\nThe objectives are:\n - Learn to predict aberrant pathway activity using RNA-Seq data, mutational status and copy number variation data from TCGA.\n - Apply logistic regression based machine learning algorithms on TCGA data.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nvk747/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nvk747/",
+      "name": "Vijay",
+      "image": "https://avatars.githubusercontent.com/nvk747",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "name": "Daniel Blankenberg",
+      "image": "https://avatars.githubusercontent.com/blankenberg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6833-9049",
+      "orcid": "https://orcid.org/0000-0002-6833-9049"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nvk747/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nvk747/",
+      "name": "Vijay",
+      "image": "https://avatars.githubusercontent.com/nvk747",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/",
+      "name": "Daniel Blankenberg",
+      "image": "https://avatars.githubusercontent.com/blankenberg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6833-9049",
+      "orcid": "https://orcid.org/0000-0002-6833-9049"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-statistics">
     <h1 data-toc-skip>PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis</h1>
     
 
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
@@ -472,9 +684,9 @@
 
 
     <blockquote class="overview">
-        <div class="box-title" aria-label="overview box">Overview</div>
+        <div id="overview-box" class="box-title">Overview</div>
         
-        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
         
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
@@ -541,7 +753,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/workflows/" title="Workflows" alt="PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/workflows/" title="PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -555,13 +767,10 @@
             
             
             
-                 <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/faqs/" title="Frequently Asked Questions">
         <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
     </a>
-  </li>
-
-
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -587,7 +796,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
     </a>
     <ul class="dropdown-menu">
@@ -598,6 +807,8 @@
             </a>
         </li>
     
+    
+        
     
         
     
@@ -737,6 +948,7 @@
             <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
         </div>
     </blockquote>
+    </section>
 
     <div class="container">
         <div class="row">
@@ -747,6 +959,7 @@
             <div class="col-sm-10">
                  
 
+                <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
 <p>Signaling pathways are among the most commonly altered across different tumor types. Many tumors possess at least one driver alteration and nearly half of such alterations are potentially targeted by currently available drugs. A recent study in TCGA tumors has identified patterns of somatic variations and mechanisms in 10 canonical pathways
@@ -758,10 +971,10 @@
 
 <p>In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA dataset using RNA-Seq information and mutational and copy number information of following frequently altered genes. We named this tutorial as PanCancer Aberrant Pathway Activity Analysis (PAPAA).</p>
 
-<figure id="figure-1"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_pathway.png" alt="pi3k_pathway. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Genes used in this study from ERK/RAS/PI3K pathway. Red text indicates Oncogenes (OG), blue text indicates Tumor suppressors genes (TSG).</figcaption></figure>
+<figure id="figure-1"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_pathway.png" alt="pi3k_pathway. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Genes used in this study from ERK/RAS/PI3K pathway. Red text indicates Oncogenes (OG), blue text indicates Tumor suppressors genes (TSG).</figcaption></figure>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>Let’s learn how to install this tutorial using Docker with galaxy, and how to download the datasets from Zenodo :</p>
 
@@ -795,7 +1008,7 @@
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-tutorial-for-galaxy-docker-container-installation-and-running-the-workflow" aria-label="hands-on box: Tutorial for galaxy docker container installation and running the workflow:"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Tutorial for galaxy docker container installation and running the workflow:</div>
+  <div class="box-title hands-on-title" id="hands-on-tutorial-for-galaxy-docker-container-installation-and-running-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Tutorial for galaxy docker container installation and running the workflow:</div>
   <ol>
     <li>Pulling the docker image from docker hub: Open a terminal and type the following command:
    <code class="language-plaintext highlighter-rouge">docker pull nvk747/galaxy_papaa:0.1.9</code></li>
@@ -811,7 +1024,7 @@
 <h1 id="get-data-for-analysis-from-classifier-to-pharmacological-correlations">Get data for analysis from classifier to pharmacological correlations</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -844,7 +1057,7 @@ https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/tcga_dictionar
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-some-additional-files-that-you-can-use-for-alternative-analysis" aria-label="hands-on box: Some additional files that you can use for alternative analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Some additional files that you can use for alternative analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-some-additional-files-that-you-can-use-for-alternative-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Some additional files that you can use for alternative analysis</div>
   <ol>
     <li>These files are provided to optionally enable you to perform an additional analysis, using the same methodology
 described here, but are not required for the main tutorial.</li>
@@ -863,12 +1076,12 @@ https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_wnt_genes
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-note" aria-label="comment box: Note:"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note:</div>
+  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note:</div>
   <p>Some of the imported files may still contain a <strong>.gz</strong> extension but only uncompressed files are used in our analysis. So kindly ignore the extension!!</p>
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-datasets-descriptions"><button class="gtn-boxify-button details" type="button" aria-controls="details-datasets-descriptions-contents" aria-expanded="true" aria-label="Toggle details box: Datasets descriptions"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Datasets descriptions<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-datasets-descriptions"><button class="gtn-boxify-button details" type="button" aria-controls="details-datasets-descriptions" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Datasets descriptions<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
     <li><strong>pancan_rnaseq_freeze.tsv:</strong> Publicly available gene expression data for the TCGA Pan-cancer dataset. This file has gene-expression data for ~20,000 genes (columns) in ~10,000 samples (rows).</li>
@@ -906,7 +1119,7 @@ https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_wnt_genes
 <p><strong><em>Machine learning methodology</em></strong>
 Logistic regression is a kind of machine learning approach where statistical analysis is used to predict the outcome of a dependent variable based on observed changes in other variables. e.g. Changes in gene expression are directly connected to alterations/mutations in genes. We used above approach to predict mutational status given the gene expression. Optimizing to the above prediction of mutational status with gene expression variable, we used elastic net penalty with gradient descent algorithm is used to find the optimal cost function by going over a number of iterations. The objective of the classifier is to determine the probability a given sample (<em>i</em>) has a aberrant gene event given the sample’s RNA-Seq measurements (<em>Xi</em>). In order to achieve the objective, the classifier learns a vector of coefficients or gene-specific weights (<em>w</em>) that optimize the following penalized logistic function.</p>
 
-<figure id="figure-2"><img src="../../images/aberrant_pi3k_pathway_analysis/equation.png" alt="Equations for probability measurement . " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutational status can be estimated by Multiplying Xi with gene specific weights (W). The negative log likelihood (L) is used for calculating minimum weights for each sample</figcaption></figure>
+<figure id="figure-2"><img src="../../images/aberrant_pi3k_pathway_analysis/equation.png" alt="Equations for probability measurement . " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutational status can be estimated by Multiplying Xi with gene specific weights (W). The negative log likelihood (L) is used for calculating minimum weights for each sample</figcaption></figure>
 
 <p>Where <em>alpha</em> and <em>l</em> are regularization and elastic net mixing hyperparameters respectively. Their optimal values are found during 5 fold cross validation by using scikit-learn <a href="https://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html">girdsearchCV</a> approach.</p>
 
@@ -938,14 +1151,14 @@ Logistic regression is a kind of machine learning approach where statistical ana
 <h2 id="papaa-pancancer-classifier">PAPAA: PanCancer classifier</h2>
 <p>This first step is designed to generate model with ERK/RAS/PI3K signaling axis pathway genes (path_genes): ERBB2, KRAS, PIK3CA ,AKT11 genes and various the Cancer Genome Atlas (TCGA) cancer types/diseases: BLCA, BRCA, CESC, COAD, ESCA, LUAD, LUSC, OV, PRAD, READ, STAD, UCEC, and UCS (ref: tcga_dictionary.tsv). This step takes gene expression information (pancan_rnaseq_freeze.tsv), mutational information (pancan_mutation_freeze.tsv), load of mutations in each samples (mutation_burden_freeze.tsv), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv &amp; copy_number_gain_status.tsv) and generates PI3K_OG model. AUROC and AUPR metrics are calculated for training,test,CV and random shuffled sets. As an additional option, the generated model was used to evaluate alternative genes (PTEN, PIK3R1, and STK11) and alternative diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance.</p>
 
-<figure id="figure-3"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png" alt="Prediction metrics for PI3K_OG model. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.</figcaption></figure>
-<figure id="figure-4"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_classifier_coef.png" alt="PI3K_OG Classifier Coefficients. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> PI3K_OG classifier coefficients represent the genes that impact the classification</figcaption></figure>
+<figure id="figure-3"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png" alt="Prediction metrics for PI3K_OG model. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.</figcaption></figure>
+<figure id="figure-4"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_classifier_coef.png" alt="PI3K_OG Classifier Coefficients. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> PI3K_OG classifier coefficients represent the genes that impact the classification</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generating-model-from-erbb2-pik3ca-kras-akt1-genes-with-specific-disease-types" aria-label="hands-on box: Generating model from ERBB2,PIK3CA,KRAS,AKT1 genes with specific disease types"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generating model from ERBB2,PIK3CA,KRAS,AKT1 genes with specific disease types</div>
+  <div class="box-title hands-on-title" id="hands-on-generating-model-from-erbb2-pik3ca-kras-akt1-genes-with-specific-disease-types"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generating model from ERBB2,PIK3CA,KRAS,AKT1 genes with specific disease types</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9"><strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9" title="PAPAA: PanCancer classifier tool"><strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_rnaseq_freeze.tsv</code> (Input dataset).</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset).</li>
@@ -969,7 +1182,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-pancancer-classifier-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-pancancer-classifier-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `pancancer_classifier.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `pancancer_classifier.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-pancancer-classifier-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-pancancer-classifier-py-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `pancancer_classifier.py` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--genes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
     <li>--diseases: Comma separated string of disease types/TCGA acronyms for classifier</li>
@@ -995,7 +1208,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <ul>
     <li>Log file for script run and additional information</li>
     <li>A combined disease model (Pan-model) and individual disease models are generated.</li>
@@ -1013,10 +1226,10 @@ Logistic regression is a kind of machine learning approach where statistical ana
 <p>This step is designed to generate individual pan-within models for each individual disease. It takes the same inputs as first step and generates similar output for each individual disease.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generating-models-for-individual-diseases-listed-for-erbb2-pik3ca-kras-akt1" aria-label="hands-on box: Generating models for individual diseases listed for ERBB2,PIK3CA,KRAS,AKT1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generating models for individual diseases listed for ERBB2,PIK3CA,KRAS,AKT1</div>
+  <div class="box-title hands-on-title" id="hands-on-generating-models-for-individual-diseases-listed-for-erbb2-pik3ca-kras-akt1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generating models for individual diseases listed for ERBB2,PIK3CA,KRAS,AKT1</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9"><strong>PAPAA: PanCancer within disease analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9" title="PAPAA: PanCancer within disease analysis tool"><strong>PAPAA: PanCancer within disease analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_rnaseq_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset)</li>
@@ -1034,7 +1247,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-within-disease-analysis-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-within-disease-analysis-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `within_disease_analysis.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `within_disease_analysis.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-within-disease-analysis-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-within-disease-analysis-py-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `within_disease_analysis.py` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--genes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
     <li>--diseases: Comma separated string of disease types/TCGA acronyms for classifier</li>
@@ -1053,7 +1266,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs-1" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <p>This tool creates individual classifiers from each of the diseases specified to generate the full or pan model. Each of the classifiers has a similar output as specified for the pan-cancer classifier. The within models are trained using the same combination of targenes but considering only one disease for training and testing.</p>
   <ul>
     <li>Log file for script run and additional information</li>
@@ -1068,13 +1281,13 @@ Logistic regression is a kind of machine learning approach where statistical ana
 
 <h2 id="pancancer-compare-within-models">PanCancer compare within models</h2>
 <p>we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model and individual models.</p>
-<figure id="figure-5"><img src="../../images/aberrant_pi3k_pathway_analysis/within.png" alt="Compare Pan model with with-in disease model. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Cross-validation performance characteristic metric AUROC for the pan-cancer model compared to individual models trained on each cancer type</figcaption></figure>
+<figure id="figure-5"><img src="../../images/aberrant_pi3k_pathway_analysis/within.png" alt="Compare Pan model with with-in disease model. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Cross-validation performance characteristic metric AUROC for the pan-cancer model compared to individual models trained on each cancer type</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-compare-the-erbb2-pik3ca-kras-akt1-pan-model-with-individual-disease-models" aria-label="hands-on box: compare the ERBB2_PIK3CA_KRAS_AKT1 pan model with individual disease models"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: compare the ERBB2_PIK3CA_KRAS_AKT1 pan model with individual disease models</div>
+  <div class="box-title hands-on-title" id="hands-on-compare-the-erbb2-pik3ca-kras-akt1-pan-model-with-individual-disease-models"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: compare the ERBB2_PIK3CA_KRAS_AKT1 pan model with individual disease models</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9"><strong>PAPAA: PanCancer compare within models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9" title="PAPAA: PanCancer compare within models tool"><strong>PAPAA: PanCancer compare within models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier summary”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: Pancancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1087,7 +1300,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-compare-within-models-r-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-compare-within-models-r-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `compare_within_models.R` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `compare_within_models.R` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-compare-within-models-r-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-compare-within-models-r-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `compare_within_models.R` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--pancan_model: location of pan and pan-within-disease models classifier_summary.txt/s and classifier_coefficients.tsv/s dataset collections.</li>
     <li>--alt_model: location of alt and alt-within-disease models classifier_summary.txt/s and classifier_coefficients.tsv/s dataset collections.</li>
@@ -1095,7 +1308,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs-2" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <ul>
     <li>Comparison plots for Pan and Pan_within models (“auroc_comparison.pdf” and “aupr_comparison.pdf”)</li>
     <li>Comparison plots for altgene, alt_within, Pan_alt models (“alt_gene_auroc_comparison.pdf” and “alt_gene_aupr_comparison.pdf”)</li>
@@ -1106,10 +1319,10 @@ Logistic regression is a kind of machine learning approach where statistical ana
 <p>In this step we would like to predict ‘y’ status (mutational status) using ‘x’ matrix (gene expression). We subset the x matrix to top variable genes (determined by Median Absolute Deviation), scaling the expression and adding covariate information. A logit transformation will be applied to output probabilities and classifier decisions.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-apply-weights-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model</div>
+  <div class="box-title hands-on-title" id="hands-on-apply-weights-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9"><strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9" title="PAPAA: PanCancer apply weights tool"><strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_rnaseq_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset)</li>
@@ -1127,7 +1340,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-apply-weights-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-apply-weights-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `apply_weights.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `apply_weights.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-apply-weights-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-apply-weights-py-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `apply_weights.py` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--classifier_summary: String of the location of classifier_summary.txt file</li>
     <li>--copy_number: Supplement Y matrix with copy number events</li>
@@ -1142,7 +1355,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs-3" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <ul>
     <li>Apply a logit transform on expression values (y = 1/(1+e^(-wX))) to output mutational probabilities. Generates “classifier_decisions.tsv” file which has scores/probabilities and other covariate information.  The scores/probabilities will be used for gene ranking and variant specific classification.</li>
     <li>Log file for script run and additional information</li>
@@ -1151,13 +1364,13 @@ Logistic regression is a kind of machine learning approach where statistical ana
 
 <h2 id="pancancer-visualize-decisions">PanCancer visualize decisions</h2>
 <p>In this step we generate visualization plots using classifier decision function for samples in each individual disease, total decisions for all samples in all diseases, and hypermutated samples in all diseases.</p>
-<figure id="figure-6"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_total_decisions.png" alt="PI3K_OG_total_decisions_plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Probability density plot for total decisions for all samples with the given classifier decision function</figcaption></figure>
+<figure id="figure-6"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_total_decisions.png" alt="PI3K_OG_total_decisions_plot. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Probability density plot for total decisions for all samples with the given classifier decision function</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualize-decisions-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: Visualize decisions for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualize decisions for ERBB2_PIK3CA_KRAS_AKT1 model</div>
+  <div class="box-title hands-on-title" id="hands-on-visualize-decisions-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualize decisions for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9"><strong>PAPAA: PanCancer visualize decisions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9" title="PAPAA: PanCancer visualize decisions tool"><strong>PAPAA: PanCancer visualize decisions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1166,7 +1379,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-visualize-decisions-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-visualize-decisions-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `visualize_decisions.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `visualize_decisions.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-visualize-decisions-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-visualize-decisions-py-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `visualize_decisions.py` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--classifier_decisions: String of the folder location of classifier_decisions.tsv</li>
     <li>--custom: Comma separated list of columns to plot
@@ -1175,7 +1388,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs-4" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <ul>
     <li>Log file for script run and additional information</li>
     <li>Visualize decision function for all samples (“total_decisions.pdf”)</li>
@@ -1188,10 +1401,10 @@ Logistic regression is a kind of machine learning approach where statistical ana
 <p>In this step we combined variant level information for each mutation combining with classifier predictions.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-map-mutation-class-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: map mutation class for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: map mutation class for ERBB2_PIK3CA_KRAS_AKT1 model</div>
+  <div class="box-title hands-on-title" id="hands-on-map-mutation-class-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: map mutation class for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9"><strong>PAPAA: PanCancer map mutation class</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9" title="PAPAA: PanCancer map mutation class tool"><strong>PAPAA: PanCancer map mutation class</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“string of the genes to extract or gene list file”</em>: <code class="language-plaintext highlighter-rouge">path_rtk_ras_pi3k_genes.txt</code> (Input dataset)</li>
@@ -1205,7 +1418,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-map-mutation-class-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-map-mutation-class-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `map_mutation_class.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `map_mutation_class.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-map-mutation-class-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-map-mutation-class-py-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `map_mutation_class.py` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--classifier_decisions: String of the location of folder containing classifier_decisions.tsv</li>
     <li>--path_genes: Comma separated string of HUGO symbols for all genes in the pathway or Pathway genes list file</li>
@@ -1216,7 +1429,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs-5" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <ul>
     <li>Merge per sample classifier scores with mutation types present in each sample and generate “mutation_classification_scores.tsv” file</li>
     <li>Log file for script run and additional information</li>
@@ -1227,10 +1440,10 @@ Logistic regression is a kind of machine learning approach where statistical ana
 <p>In this step we combine classifier weights, copy number information, recalculate metrics for positive samples, visualize distribution for AUROC and AUPR for all genes and metrics for each gene.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-alternative-genes-pathway-mapper-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: alternative genes pathway mapper for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: alternative genes pathway mapper for ERBB2_PIK3CA_KRAS_AKT1 model</div>
+  <div class="box-title hands-on-title" id="hands-on-alternative-genes-pathway-mapper-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: alternative genes pathway mapper for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9"><strong>PAPAA: PanCancer alternative genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9" title="PAPAA: PanCancer alternative genes pathwaymapper tool"><strong>PAPAA: PanCancer alternative genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Comma separated string of HUGO gene symbols”</em>: <code class="language-plaintext highlighter-rouge">ERBB2,PIK3CA,KRAS,AKT1</code></li>
@@ -1246,7 +1459,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-alternative-genes-pathwaymapper-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-alternative-genes-pathwaymapper-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `targene_alternative_genes_pathwaymapper.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `targene_alternative_genes_pathwaymapper.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-alternative-genes-pathwaymapper-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-alternative-genes-pathwaymapper-py-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `targene_alternative_genes_pathwaymapper.py` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--genes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
     <li>--path_genes: Comma separated string of HUGO symbols for all genes in the target pathway or path_genes.csv file</li>
@@ -1260,7 +1473,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs-6" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs-6"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <ul>
     <li>Calculate and display pathway metrics (“pathway_metrics_pathwaymapper.txt”)</li>
     <li>Visualize Distribution of AUROC and AUPRC for all genes and Get Metrics for All Genes (“all_gene_metric_ranks.tsv”)</li>
@@ -1270,13 +1483,13 @@ Logistic regression is a kind of machine learning approach where statistical ana
 
 <h2 id="pancancer-pathway-count-heatmaps">PanCancer pathway count heatmaps</h2>
 <p>This step generates combined heatmap from mutation and copy number information and summarizes mutation, copy and total counts per sample for all the genes in target pathway.</p>
-<figure id="figure-7"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_combined_heatmap.png" alt="PI3K_OG_combined_heatmap. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Combined count heatmap (mutation and copynumber) for all genes in the target pathway with in each cancer type</figcaption></figure>
+<figure id="figure-7"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_combined_heatmap.png" alt="PI3K_OG_combined_heatmap. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Combined count heatmap (mutation and copynumber) for all genes in the target pathway with in each cancer type</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-heatmaps-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: Heatmaps for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Heatmaps for ERBB2_PIK3CA_KRAS_AKT1 model</div>
+  <div class="box-title hands-on-title" id="hands-on-heatmaps-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Heatmaps for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9"><strong>PAPAA: PanCancer pathway count heatmaps</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9" title="PAPAA: PanCancer pathway count heatmaps tool"><strong>PAPAA: PanCancer pathway count heatmaps</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer metrics pathwaymapper”</em>: <code class="language-plaintext highlighter-rouge">pathway_metrics_pathwaymapper.txt</code> (output of <strong>PAPAA: PanCancer alternative genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1296,7 +1509,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-pathway-count-heatmaps-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-pathway-count-heatmaps-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `targene_pathway_count_heatmaps.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `targene_pathway_count_heatmaps.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-pathway-count-heatmaps-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-pathway-count-heatmaps-py-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `targene_pathway_count_heatmaps.py` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--genes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
     <li>--path_genes: Comma separated string of HUGO symbols for all genes in the target pathway or path_genes.csv file</li>
@@ -1312,7 +1525,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs-7" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs-7"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <ul>
     <li>Mutational count heatmap for all genes in the target pathway with in each cancer type (cancer_type_mutation_heatmap.pdf).</li>
     <li>Copy number count heatmap for all genes in the target pathway with in each cancer type (cancer_type_copy_number_heatmap.pdf).</li>
@@ -1326,10 +1539,10 @@ Logistic regression is a kind of machine learning approach where statistical ana
 <p>This step generates plots summarizing various analysis, including heatmaps for distribution of aberrant events across tumors, distribution of predictions at variant levels.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-summary-figures-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: Summary figures for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Summary figures for ERBB2_PIK3CA_KRAS_AKT1 model</div>
+  <div class="box-title hands-on-title" id="hands-on-summary-figures-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Summary figures for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9"><strong>PAPAA: PanCancer targene summary figures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9" title="PAPAA: PanCancer targene summary figures tool"><strong>PAPAA: PanCancer targene summary figures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1344,7 +1557,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-summary-figures-r-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-summary-figures-r-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `targene_summary_figures.R` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `targene_summary_figures.R` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-summary-figures-r-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-summary-figures-r-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `targene_summary_figures.R` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--classifier_summary: String of the location of classifier data</li>
     <li>--seed: Value specifies the initial value of the random number seed</li>
@@ -1352,7 +1565,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs-8" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs-8"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <ul>
     <li>Heatmap for mutation and gain proportions for the genes used in model across all the TCGA cancer types (all_targene_heatmap.pdf”)</li>
     <li>Heatmap for total mutation and total gain proportions for the genes used in model across all the TCGA cancer types (targene_heatmap.pdf”)</li>
@@ -1370,14 +1583,14 @@ Logistic regression is a kind of machine learning approach where statistical ana
 
 <h2 id="pancancer-targene-cell-line-predictions">PanCancer targene cell line predictions</h2>
 <p>In this step we use our classifier information and predict mutational status for various cell lines in CCLE and GDSC data sources.</p>
-<figure id="figure-8"><img src="../../images/aberrant_pi3k_pathway_analysis/ccle_classification.png" alt="CCLE_targene_celline_classification. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> PI3K_OG classifiers applied to CCLE cell lines. Cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.</figcaption></figure>
-<figure id="figure-9"><img src="../../images/aberrant_pi3k_pathway_analysis/gdsc_classification.png" alt="GDSC_targene_celline_classification. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> PI3K_OG classifiers applied to CCLE 390 standard cell lines between CCLE and GDSC cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots. </figcaption></figure>
+<figure id="figure-8"><img src="../../images/aberrant_pi3k_pathway_analysis/ccle_classification.png" alt="CCLE_targene_celline_classification. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> PI3K_OG classifiers applied to CCLE cell lines. Cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.</figcaption></figure>
+<figure id="figure-9"><img src="../../images/aberrant_pi3k_pathway_analysis/gdsc_classification.png" alt="GDSC_targene_celline_classification. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> PI3K_OG classifiers applied to CCLE 390 standard cell lines between CCLE and GDSC cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots. </figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-analysis-of-ccle-and-gdsc-cell-lines-using-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: Analysis of CCLE and GDSC cell-lines using ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Analysis of CCLE and GDSC cell-lines using ERBB2_PIK3CA_KRAS_AKT1 model</div>
+  <div class="box-title hands-on-title" id="hands-on-analysis-of-ccle-and-gdsc-cell-lines-using-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Analysis of CCLE and GDSC cell-lines using ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9"><strong>PAPAA: PanCancer targene cell line predictions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9" title="PAPAA: PanCancer targene cell line predictions tool"><strong>PAPAA: PanCancer targene cell line predictions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1398,7 +1611,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-cell-line-predictions-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-cell-line-predictions-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `targene_cell_line_predictions.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `targene_cell_line_predictions.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-cell-line-predictions-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-cell-line-predictions-py-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `targene_cell_line_predictions.py` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--targenes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
     <li>--path_genes: Comma separated string of HUGO symbols for all genes in the target pathway or path_genes.csv file</li>
@@ -1414,7 +1627,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs-9" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs-9"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <ul>
     <li>Generate predictions for CCLE data using targene classifier(ccle_histogram.png)</li>
     <li>Generate classifier scores for CCLE cell lines and combines CCLE mutational data and variant data with classifier scores (ccle_targene_classifier_scores.tsv).</li>
@@ -1433,13 +1646,13 @@ Logistic regression is a kind of machine learning approach where statistical ana
 
 <h2 id="pancancer-external-sample-status-prediction">PanCancer external sample status prediction</h2>
 <p>In this step we use our classifier information and predict mutational status from external gene expression data. Gene expression data from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822">GSE69822</a>, where MCF10a cell lines are either having PI3KCA/PTENKO mutation or WT/WT+A66 treated samples. Note WT+A66 is wild-type MCF10a cell line treated with A66 a potent PI3K inhibitor. A distribution plot is generated to see how many samples match to prediction. Samples with scores below 0.5 are considered WT and above 0.5 are considered mutant.</p>
-<figure id="figure-10"><img src="../../images/aberrant_pi3k_pathway_analysis/external.png" alt="GSE69822_samples_classification. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT/WT+A66 (blue circles) or having a PIK3CA-H1074R/PTENKO mutation (orange circles).</figcaption></figure>
+<figure id="figure-10"><img src="../../images/aberrant_pi3k_pathway_analysis/external.png" alt="GSE69822_samples_classification. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT/WT+A66 (blue circles) or having a PIK3CA-H1074R/PTENKO mutation (orange circles).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-external-sample-evaluation-with-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model</div>
+  <div class="box-title hands-on-title" id="hands-on-external-sample-evaluation-with-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9"><strong>PAPAA: PanCancer external sample status prediction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9" title="PAPAA: PanCancer external sample status prediction tool"><strong>PAPAA: PanCancer external sample status prediction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1451,7 +1664,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-external-sample-pred-targene-classifier-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-external-sample-pred-targene-classifier-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `external_sample_pred_targene_classifier.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `external_sample_pred_targene_classifier.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-external-sample-pred-targene-classifier-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-external-sample-pred-targene-classifier-py-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `external_sample_pred_targene_classifier.py` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--classifier_summary: String of the location of classifier scores file</li>
     <li>--expression_file: File path for external sample expression data file (fpkm/rpkm/rlog/vlog/nlog values)</li>
@@ -1460,7 +1673,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs-10" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs-10"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <ul>
     <li>Model based classification scores distribution Plots for external normal and tumor samples (“targene_external_sample_predictions.pdf and targene_external_sample_predictions_1.pdf”)</li>
     <li>Log file for script run and additional information</li>
@@ -1470,10 +1683,10 @@ Logistic regression is a kind of machine learning approach where statistical ana
 <h2 id="pancancer-targene-pharmacology">PanCancer targene pharmacology</h2>
 <p>In this step we use the classifier derived cell line predictions and use them to evaluate pharmacological response of these cell lines. We plot log IC50 with classifier scores for each cell line and draw a correlation for drug response in absence or presence of targene mutations.</p>
 
-<figure id="figure-11"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_gdsc1_ccle_drug.png" alt="Afatinib_pharmacological_response. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Natural log fitted IC50 (Ln-IC50) values of Afatinib pharmacological response compared against PI3K_OG classifier scores of various cell lines. Cell lines with mutant (orange) or wild-type (blue) for ERBB2, KRAS, PIK3CA, AKT1 are indicated. The trend lines and p values are shown separately for wild-type or mutant cell lines. Cell lines treated with Afatinib, a known EGFR inhibitor.</figcaption></figure>
+<figure id="figure-11"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_gdsc1_ccle_drug.png" alt="Afatinib_pharmacological_response. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Natural log fitted IC50 (Ln-IC50) values of Afatinib pharmacological response compared against PI3K_OG classifier scores of various cell lines. Cell lines with mutant (orange) or wild-type (blue) for ERBB2, KRAS, PIK3CA, AKT1 are indicated. The trend lines and p values are shown separately for wild-type or mutant cell lines. Cell lines treated with Afatinib, a known EGFR inhibitor.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-gdsc1-and-gdsc2-pharmacological-analysis-using-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: GDSC1 and GDSC2 pharmacological analysis using ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: GDSC1 and GDSC2 pharmacological analysis using ERBB2_PIK3CA_KRAS_AKT1 model</div>
+  <div class="box-title hands-on-title" id="hands-on-gdsc1-and-gdsc2-pharmacological-analysis-using-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: GDSC1 and GDSC2 pharmacological analysis using ERBB2_PIK3CA_KRAS_AKT1 model</div>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“gdsc1 targene pharmacology predictions”</em>: <code class="language-plaintext highlighter-rouge">gdsc1_targene_pharmacology_predictions.tsv</code> (output of <strong>PAPAA: PanCancer targene cell line predictions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“gdsc2 targene pharmacology predictions”</em>: <code class="language-plaintext highlighter-rouge">gdsc2_targene_pharmacology_predictions.tsv</code> (output of <strong>PAPAA: PanCancer targene cell line predictions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1484,7 +1697,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-pharmacology-r-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-pharmacology-r-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `targene_pharmacology.R` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `targene_pharmacology.R` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-pharmacology-r-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-pharmacology-r-inputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: PanCancer Aberrant Pathway Activity Analysis `targene_pharmacology.R` inputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--classifier_results: String of the location of classifier folder</li>
     <li>--compound: Filename of list of pharmacological compounds for evaluation</li>
@@ -1492,7 +1705,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-outputs-11" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
+  <div class="box-title comment-title" id="comment-outputs-11"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
   <ul>
     <li>Scatter plots with visualizing drug response compared to GDSC targene classifier scores
    for GDSC1 pharmacological dataset (GDSC1_targene_all_drug_response.pdf)</li>
@@ -1506,7 +1719,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-tutorial-questions" aria-label="question box: Tutorial Questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Tutorial Questions</div>
+  <div class="box-title question-title" id="question-tutorial-questions"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Tutorial Questions</div>
 
   <ol>
     <li>Can you build a classifier for tumor suppressor genes (TSG) combination in PI3K pathway?</li>
@@ -1514,7 +1727,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Try building PI3K_TSG model using (<a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=PTEN">PTEN</a>,<a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=PIK3R1">PIK3R1</a>,<a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=STK11">STK11</a> genes and BRCA,COAD,ESCA,HNSC,LGG,LUAD,LUSC,PRAD,READ,GBM, UCEC,UCS cancer-types). The PI3K_TSG model should show a very different transcriptomic signature compared to PI3K_OG model. We should see unique predictive biomarkers associated with tumors with TSG mutations. e.g. GYS1,CABC1,GLUD1,GRB7. This suggests that tumors with TSG mutations have different molecular paths although they have similar phenotypes compared to tumors with OG mutations.</li>
@@ -1535,12 +1748,14 @@ Logistic regression is a kind of machine learning approach where statistical ana
   <li>In addition we used our models to evaluated cell-lines pharmacological response against various compounds. This information will be helpful to improve personalized medicine approaches to various individuals.</li>
 </ul>
 
-<figure id="figure-12"><img src="../../images/aberrant_pi3k_pathway_analysis/project_summary.png" alt="tutorial_summary. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Galaxy based Machine Learning approach for Pan-cancer Aberrant Pathway Activity Analysis(PAPAA) using TCGA multi-omic data. </figcaption></figure>
+<figure id="figure-12"><img src="../../images/aberrant_pi3k_pathway_analysis/project_summary.png" alt="tutorial_summary. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Galaxy based Machine Learning approach for Pan-cancer Aberrant Pathway Activity Analysis(PAPAA) using TCGA multi-omic data. </figcaption></figure>
 
+                </section>
 
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
                 
                 <blockquote class="key_points">
-                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Machine learning based Aberrant pathway activity analysis can distinguish normal and tumor samples. Also can identify transcriptomic signature of tumors associated with oncogene or tumor suppressor gene mutations.</p>
@@ -1585,33 +1800,9 @@ Logistic regression is a kind of machine learning approach where statistical ana
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <div id="feedback-button">
-                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                </div>
-                <div id="feedback-form">
-                </div>
-                <script type="text/javascript">
-                    (function (window, document) {
-                        function onDocumentReady(fn) {
-                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                fn();
-                            } else {
-                                document.addEventListener('DOMContentLoaded', fn);
-                            }
-                        }
-
-                        onDocumentReady(function () {
-                            $("#feedback-button").click(function(evt){
-                                var e = $(evt.target)
-                                e.hide();
-
-                                $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis (Statistics and machine learning)">Loading...</iframe>
-                                `)
-                            })
-                        });
-                    })(window, document);
-                </script>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis (Statistics and machine learning)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1629,7 +1820,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
                 <blockquote class="details">
 
                   <div id="citation-bibtex" class="box-title">
-                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
                       <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
                     </button>
@@ -1670,7 +1861,7 @@ note = "[Online; accessed TODAY]"
                 
 
 
-<script type="text/javascript">
+<script>
 // update the date on load, or leave fallback of 'today'
 d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
@@ -1682,29 +1873,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+                </section>
 
             </div>
         </div>
     </div>
-</section>
+</article>
 <br/>
 <br/>
 <br/>
 
         </div>
         
-        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
-        <script type="text/javascript">
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
