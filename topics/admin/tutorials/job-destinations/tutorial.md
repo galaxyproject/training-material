@@ -417,7 +417,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    {: data-commit="TPV clamp max cores and mem"}
 >
 > These changes indicate that the destination will accept jobs that are up to `max_accepted_cores: 24` and `max_accepted_mem: 256`. If the tool requests resources that exceed these limits, the tool will be rejected
-> by the destination. However, once accepted, the resources will be forcibly clamped down to 16 and 128 at most because of the `max_cores` and `max_mem` clauses. Therefore, a trick that can be used here to support
+> by the destination. However, once accepted, the resources will be forcibly clamped down to 16 and 128 at most because of the `max_cores` and `max_mem` clauses. (E.g. a tool requesting 24 cores would only be submitted with 16 cores at maximum.) Therefore, a trick that can be used here to support
 > job resource requirements in the shared database that are much larger than your destination can actually support, is to combine `max_accepted_cores/mem/gpus with `max_cores/mem/gpus` to accept the job and then
 > clamp it down to a supported range. This allows even the largest resource requirement in the shared database to be accomodated.
 >
