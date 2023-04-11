@@ -51,7 +51,9 @@ contributions:
     - hexylena
     - pavanvidem
     - nomadscientist
-
+   funding:
+    - eosc-life
+    
 notebook:
   language: r
   snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md 
