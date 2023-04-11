@@ -87,20 +87,20 @@ This first step consist of downloading and properly prepare the data to use it i
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 >
-> 2. Download the files from [Scihub](https://scihub.copernicus.eu/dhus/#/home) or from [PEPS](https://peps.cnes.fr/rocket/#/search?maxRecords=50&page=1) :
+> 2. Download the files from [Scihub](https://scihub.copernicus.eu/dhus/#/home), [PEPS](https://peps.cnes.fr/rocket/#/search?maxRecords=50&page=1) or [Theia](https://catalogue.theia-land.fr) :
 >
 >    You will have to to create an account for either of these platform.
->    Select Sentinel 2 and choose the Product type "S2MSI2A".
+>    Select Reflectance, Sentinel 2 and "Niveau 2A" (level 2A).
 >
->    ![Scihub portal welcome page](../../images/remote_sensing/scihub.png "Scihub portal")
+>    ![Theia portal welcome page](../../images/remote_sensing/theia.png "Theia portal")
 >
->    This an example of the Copernicus portal, Scihub. You need to download a zip folder. Keep it that way.
+>    This an example of the Theia land portal. You need to download a zip folder. Keep it that way.
 >
 > 3. Upload the zip folder
 >
 >    {% snippet faqs/galaxy/datasets_upload.md %}
 >
-> 4. You can **rename** {% icon galaxy-pencil %} the dataset, `sentinel_2_data.zip` for example, and to keep informations about the original name `S2A_MSIL2A.....zip`
+> 4. You can **rename** {% icon galaxy-pencil %} the dataset, `sentinel_2_data.zip` for example, and to keep informations about the original name `SENTINEL2A.....zip`
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
@@ -116,7 +116,7 @@ Using preprocS2 R package, this step provides a unique tool to read, crop, resam
 >
 > 1. {% tool [Preprocessing sentinel 2 data](toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Input data"*: `sentinel_2_data.zip` (Input dataset)
->    - {% icon param-select %} *"Where does your data come from ?"*: 'From Scihub or Peps'
+>    - {% icon param-select %} *"Where does your data come from ?"*: 'From Theia'
 >
 > 2. Click on **Execute**
 >
