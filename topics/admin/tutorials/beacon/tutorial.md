@@ -6,14 +6,18 @@ zenodo_link: ""
 questions:
     - What is a Beacon?
     - How do I deploy it?
+    - Is v1 the same as v2?
 objectives:
     - Deploy a Beacon
 time_estimation: "30m"
 key_points:
-    - idk bru
+    - While deprecated, Beacon v1 is easy to deploy
+    - It can also tick some boxes for grants!
 contributions:
     authorship:
     - hexylena
+    editing:
+    - shiltemann
     funding:
     - CINECA-Project
 subtopic: features
@@ -30,8 +34,10 @@ tags:
   - git-gat
 ---
 
-This tutorial will guide you through setting up a Beacon!
-TODO: write some more things about beacon
+This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-project.io/)!
+
+> The Beacon Project is developed under a Global Alliance for Genomics and Health (GA4GH) Iniciative for the federated discovery of genomic data in biomedical research and clinical applications. 
+{: .quote}
 
 > <warning-title>Beacon v1</warning-title>
 > This deploys an older Beacon v1 which was a simpler system.
@@ -72,7 +78,14 @@ TODO: write some more things about beacon
 >    ```
 >    {: data-commit="Add hosts"}
 >
->    TODO: tip box about children. We get to learn ansible features!
+>    > <tip-title>What are these :children?<tip-title>
+>    > Here we use some of the more advanced features of Ansible's Inventory system.
+>    > We declare a host group called 'beacon' with no hosts of its own.
+>    > 
+>    > Then we declare that this beacon group has two children: beacon-import, and beacon server. We can then define host groups for those two entries with as many different hosts as we need. This makes it very easy to scale up configuration.
+>    > 
+>    > Here we will be using that feature to declare some 'beacon variables', which will be shared between the beacon-server and beacon-importer. Because they're children of 'beacon', they'll inherit any group variables defined for `group_vars/beacon.yml`.
+>    {: .tip}
 >
 > 1. Setup the requirements
 >
@@ -136,14 +149,16 @@ TODO: write some more things about beacon
 >    +beacon_info_org_logo_url: https://galaxyproject.org/images/galaxy-logos/galaxy_project_logo_square.png
 >    +beacon_info_org_info: More information about the organisation than just the description can go here.
 >    +# Script Configuration
->    +galaxy_api_url: "https://{{ groups['beacon-server'][0] }}"
+>    +galaxy_api_url: "https://{{ groups['galaxyservers'][0] }}"
 >    +script_user: beacon
 >    +script-dir: /home/beacon/script
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add relevant group variables"}
 >
->    TODO: tip about 'groups' variable
+>    > <tip-title>Groups?<tip-title>
+>    > Here we again use some advanced features of Ansible's inventory system. Ansible knows the name of every hostname in the inventory. Now that we want to point the beacon configuration, either at the database which should be on `beacon-server`, or at Galaxy in `galaxyservers`, we ask the `groups` variable for what the inventory looks like. We use `[0]` to pull out the first hostname we find for both of those groups.
+>    {: .tip}
 >
 > 3. Add the beacon-server playbook
 >
@@ -216,8 +231,12 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    > ```
 >    {: .code-in}
 >
->    ```yaml
->    galaxy_api_key: your api key from galaxy
+>    ```diff
+>    --- a/group_vars/secret.yml
+>    +++ b/group_vars/secret.yml
+>    @@ -1,13 +1,15 @@
+>    +galaxy_api_key: your-galaxy-api-key
+>    +vault_beacon_db_password: some-super-secret-password
 >    ```
 >
 >    <!-- Ignore this, just for the gat-automation. Vaults are ugly to work with :(
@@ -226,7 +245,7 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    ```diff
 >    --- a/group_vars/secret.yml
 >    +++ b/group_vars/secret.yml
->    @@ -1,13 +1,14 @@
+>    @@ -1,13 +1,17 @@
 >     $ANSIBLE_VAULT;1.1;AES256
 >    -62346261323266656232393034396134316636376533376139666437363535393562663838613938
 >    -6336666266633563346337623265353935646361326337610a393834333233313461346439376438
@@ -240,19 +259,22 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    -39323064336237646432323530313065303331326636353334343862373330313133326363363063
 >    -38383564636161396435666164643334656435393533643163393434623434656238633631633939
 >    -33353232666432376661
->    +34653138616237303566323134333934633262663531653733393332353263663736373737393136
->    +3861366264656366333663303138353266303139356332650a343562633839366135366331666138
->    +38386166346138646364626539383336633763303633623634326235643335636232613061306439
->    +3134626233663563320a363533393066623165376331643663303233396232316161656436626339
->    +64663838343565376465613962663832663862653264633331316363353664343735363163366361
->    +62363633306233316534353737346563353564386235663634306233663332356162646632383934
->    +33613134313231616432303237343933313863623738363330656631373936343966343832636437
->    +39383666303965333762306131393565313366613261376333343630383234336131386165313230
->    +66653830363335303936616364653538613238376235386539643461376432663835303535666462
->    +66656461613530613137393039376234633235353235613064303435663937376437613461333837
->    +30363431326631323736666563633263623966376138656630616464633834313363366239346637
->    +31333562663962376561353034653662623337376665363731393235633065306332623734643264
->    +35353635383966313261616538346661366365636365313631373230383565333037
+>    +62346462626130353731316233643332313965663232316430333231363531373038393233336439
+>    +3234393435663964303162363933323762643039333732360a613338326139623964303265353330
+>    +65303037653639373839316538626230623336313138346438393039633734383962343439653134
+>    +3139663062666237300a633738383964393735393338313561306233643937313033303066363130
+>    +32666266623766353838386434636130333263636563373739653739653562623834666135356234
+>    +64643166366233656531656236396665643439626434353238326362326332626431323532396164
+>    +35313762363333373463303936316233393033303239663238323739333133363362383935366562
+>    +38376333663461326363633931663539313532376639373134313531663263386264636333623035
+>    +32326637343630323265623062383962383963613231616230336238616562653039333964303262
+>    +35643734626535376663366532633034616162396163626136613765666139613736303232336561
+>    +36626337666362643339663935366232366632316662613466623235353934336635313063366139
+>    +38376632656234313431313535626366393531636239626432343166633564353566356663343865
+>    +39356133373134343235613332373331376135303636313232633664303539333962663535646561
+>    +39643765356230313830633633396139333339613331343763323665326366383065316661636137
+>    +38663138363633653434636433666665653632383964303433303538343630326337336438666530
+>    +64313537623738616532
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add beacon/galaxy passwords to the vault"}
@@ -303,8 +325,4 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    {: .code-in }
 {: .hands_on}
 
-Congratulations, you've set up a Beacon for Galaxy
-
-## Check that it works
-
-????
+Congratulations, you've set up a Beacon v1 for Galaxy! Go check it out at `/beacon/` on your server.
