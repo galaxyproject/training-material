@@ -55,7 +55,7 @@ TODO: write some more things about beacon
 >    ```diff
 >    --- a/hosts
 >    +++ b/hosts
->    @@ -4,3 +4,12 @@ gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    @@ -6,3 +6,12 @@ galaxyservers
 >     gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
 >     [monitoring]
 >     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
@@ -80,7 +80,7 @@ TODO: write some more things about beacon
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -40,3 +40,7 @@
+>    @@ -36,3 +36,7 @@
 >       version: 2.1.3
 >     - src: galaxyproject.proftpd
 >       version: 0.3.1
@@ -274,10 +274,10 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -97,4 +97,15 @@ server {
->             uwsgi_param          UWSGI_SCHEME $scheme;
->             include              uwsgi_params;
->         }
+>    @@ -95,4 +95,14 @@ server {
+>          location /reports/ {
+>              proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
+>          }
 >    +
 >    +    location /beacon {
 >    +        proxy_pass http://{{ groups['beacon-server'][0] }};
@@ -288,7 +288,6 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    +        proxy_set_header Connection $connection_upgrade;
 >    +        proxy_set_header Host $host;
 >    +    }
->    +
 >     }
 >    {% endraw %}
 >    ```
