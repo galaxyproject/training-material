@@ -2321,7 +2321,6 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    allow_user_impersonation: true
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
->    +>>>>>>> 1c229da (admin/ansible-galaxy/0025: Add production facing vars)
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
