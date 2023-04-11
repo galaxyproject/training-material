@@ -27,7 +27,6 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
-draft: true
 tags:
   - ga4gh
   - beacon
