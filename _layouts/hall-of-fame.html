@@ -1,5 +1,6 @@
 ---
 layout: base
+lang: en
 ---
 
 {% assign contributors = site.data['contributors'] %}
@@ -33,11 +34,11 @@ layout: base
                 {% else %}
                     <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true">
                 {% endif %}
-                </a>
 
                 <div class="name" aria-hidden="true">
                     {{ contributors[username].name | default: username }}
                 </div>
+                </a>
 
                 {% assign has_philosophy = false %}
                 {% for story in stories %}

@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{{ page.title | default: site.title }}</title>
+        <title>{{ page.title | default: site.title | strip_html }}</title>
         {% if jekyll.environment == 'production' %}
             {% include _includes/analytics.html %}
         {% endif %}
@@ -170,9 +170,10 @@ Useful when presenting."
 .footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/main{{ page.url }})]
 {% endif %}
     </textarea>
-	<script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
-    <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript">
+	<script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
+    <script>
       var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
       var hljs = remark.highlighter.engine;
       var snippets = document.querySelectorAll('code.remark-code');
@@ -184,7 +185,7 @@ Useful when presenting."
       }});
     </script>
 
-    <script type="text/javascript">
+    <script>
         if(window.location.hostname === "galaxyproject.github.io") {
             // Redirect
             var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;

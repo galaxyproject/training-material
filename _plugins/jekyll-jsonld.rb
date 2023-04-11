@@ -43,7 +43,7 @@ module Jekyll
         end
       }
 
-      return attributes.map{|a, b| "<meta name=\"#{a}\" content=\"#{b}\" />" }.join("\n")
+      return attributes.map{|a, b| "<meta name=\"#{a}\" content=\"#{b}\">" }.join("\n")
     end
 
     def get_authors(material)

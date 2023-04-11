@@ -47,7 +47,7 @@ module Jekyll
           prefix = figcaption_prefix(page, site)
           "<figure id=\"figure-#{num}\">" +
             "<img src=\"#{url}\" alt=\"#{alt}\" #{style} loading=\"lazy\">" +
-            "<figcaption><span class=\"figcaption-prefix\">#{prefix}#{num}:</span> #{title}</figcaption>" +
+            "<figcaption><span class=\"figcaption-prefix\"><strong>#{prefix}#{num}</strong>:</span> #{title}</figcaption>" +
           "</figure>"
         end
       }
