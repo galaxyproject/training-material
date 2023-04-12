@@ -151,6 +151,47 @@ To demonstrate a real-life scenario and TPV's role in it, let's plan on setting 
 
 Of course, this tool doesn't actually *use* the allocated number of cores. In a real tool, you would call the tools's underlying command with whatever flag that tool provides to control the number of threads or processes it starts, such as `samtools sort -@ \${GALAXY_SLOTS:-1}`.
 
+## Safeguard: TPV Linting
+
+If we want to change something in production, it is always a good idea to have a safeguard in place. In our case, we would like to check the TPV configuration files for syntax errors, so nothing will break when we deploy broken yaml files or change them quickly on the server. TPV-lint-and-copy works with two separated locations, one where you can safely edit your files and the actual production config directory that galaxy reads. Once you are done with your changes, you can run the script and it will automatically lint and copy over the files, if they are correct and mentioned in your job_conf.yml file.  
+And of course, Galaxy has an Ansible Role for that.
+
+><hands-on-title>Adding automated TPV-lind-and-copy-script</hands-on-title>
+>
+> 1. Add the role to your `requirements.yml`.
+>    {% raw %}
+>    ```diff
+>    +  - name: usegalaxy_eu.tpv_auto_lint
+>    +    version: 0.2.1
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add tpv-auto-lint to requirements"}
+> 2. Change your `group_vars/galaxyservers.yml`. We need to create a new directory and add that directory name as variable for the role. Default name is TPV_DO_NOT_TOUCH for extra safety 😉. If you want a different name, you need to change the `tpv_config_dir_name` variable, too.
+>    {% raw %}
+>    ```diff
+>    +galaxy_dirs:
+>    +  - "{{ galaxy_config_dir }}/TPV_DO_NOT_TOUCH"
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add TPV config dir"}
+> 3. Add the role to your `galaxy.yml` playbook.
+>    {% raw %}
+>    ```diff
+>    +    - usegalaxy_eu.tpv_auto_lint
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add tpv-auto-lint role"}
+> 4. Run the Galaxy playbook. Because we modified `job_conf.yml`, Galaxy will be restarted to reread its config files.
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+> 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Run Tool button.
+{: .hands_on}
 ## Configuring TPV
 
 We want our tool to run with more than one core. To do this, we need to instruct Slurm to allocate more cores for this job. First however, we need to configure Galaxy to use TPV.
