@@ -299,6 +299,9 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        +
 >        +flower_ui_users:
 >        +  - name: admin
+>        +flower_environment_variables:
+>        +  GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
+>        +flower_proxy_prefix: /flower
 >        {% endraw %}
 >        ```
 >        {: data-commit="Add requirement" data-ref="add-req"}
