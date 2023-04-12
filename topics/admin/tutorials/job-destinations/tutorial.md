@@ -22,6 +22,7 @@ contributors:
     - natefoo
     - bgruening
     - nuwang
+    - mira-miracoli
   editing: # And reviewing
     - hexylena
     - afgane
