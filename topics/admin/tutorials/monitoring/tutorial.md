@@ -79,10 +79,10 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -30,3 +30,5 @@
->       version: 1.4.1
->     - src: galaxyproject.pulsar
->       version: 1.0.10
+>    @@ -34,3 +34,5 @@
+>       version: 1.8.0
+>     - src: usegalaxy_eu.flower
+>       version: 0.3.1-alpha
 >    +- src: usegalaxy_eu.influxdb
 >    +  version: v6.0.7
 >    {% endraw %}
@@ -204,8 +204,8 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -32,3 +32,5 @@
->       version: 1.0.10
+>    @@ -36,3 +36,5 @@
+>       version: 0.3.1-alpha
 >     - src: usegalaxy_eu.influxdb
 >       version: v6.0.7
 >    +- src: cloudalchemy.grafana
@@ -415,7 +415,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -34,3 +34,5 @@
+>    @@ -38,3 +38,5 @@
 >       version: v6.0.7
 >     - src: cloudalchemy.grafana
 >       version: 0.14.2
@@ -440,7 +440,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -51,6 +51,7 @@
+>    @@ -53,6 +53,7 @@
 >         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
@@ -503,10 +503,11 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -240,6 +240,15 @@ rabbitmq_users:
->         password: "{{ vault_rabbitmq_password_vhost }}"
->         vhost: /pulsar/galaxy_au
->     
+>    @@ -277,3 +277,12 @@ flower_broker_url: "amqp://flower:{{ vault_rabbitmq_password_flower }}@localhost
+>     flower_ui_users:
+>       - name: admin
+>         password: "{{ vault_flower_user_password}}"
+>    +
 >    +# Telegraf
 >    +telegraf_plugins_extra:
 >    +  listen_galaxy_routes:
@@ -515,10 +516,6 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    +      - service_address = ":8125"
 >    +      - metric_separator = "."
 >    +      - allowed_pending_messages = 10000
->    +
->     # TUS
->     galaxy_tusd_port: 1080
->     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add extra monitoring for Galaxy"}
@@ -798,7 +795,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -251,6 +251,13 @@ telegraf_plugins_extra:
+>    @@ -289,3 +289,10 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000
@@ -809,9 +806,6 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    +      - timeout = "10s"
 >    +      - data_format = "influx"
 >    +      - interval = "15s"
->     
->     # TUS
->     galaxy_tusd_port: 1080
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add extra monitoring for Galaxy"}

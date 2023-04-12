@@ -85,7 +85,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -38,3 +38,5 @@
+>    @@ -42,3 +42,5 @@
 >       version: 0.12.0
 >     - src: galaxyproject.tiaas2
 >       version: 2.1.3
@@ -113,7 +113,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    @@ -157,11 +157,13 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
->       - nginx
+>       - www-data
 >    +  - proftpd
 >     certbot_share_key_ids:
 >       - "999:999"
@@ -158,10 +158,11 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -255,6 +255,27 @@ rabbitmq_users:
->         password: "{{ vault_rabbitmq_password_vhost }}"
->         vhost: /pulsar/galaxy_au
->     
+>    @@ -313,3 +313,24 @@ telegraf_plugins_extra:
+>     tiaas_dir: /srv/tiaas
+>     tiaas_admin_user: admin
+>     tiaas_admin_pass: changeme
+>    +
 >    +# Proftpd:
 >    +proftpd_galaxy_auth: yes
 >    +galaxy_ftp_upload_dir: "{{ galaxy_config.galaxy.ftp_upload_dir }}"
@@ -182,10 +183,6 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    +  - PassivePorts: 56000 60000
 >    +proftpd_use_mod_tls_shmcache: false
 >    +proftpd_tls_options: NoSessionReuseRequired
->    +
->     # Telegraf
->     telegraf_plugins_extra:
->       listen_galaxy_routes:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add proftpd variables"}
@@ -218,9 +215,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -46,6 +46,7 @@
->           become: true
->           become_user: "{{ galaxy_user_name }}"
+>    @@ -48,6 +48,7 @@
+>         - geerlingguy.redis
+>         - usegalaxy_eu.flower
 >         - galaxyproject.nginx
 >    +    - galaxyproject.proftpd
 >         - geerlingguy.docker

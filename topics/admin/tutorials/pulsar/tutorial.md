@@ -273,7 +273,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    @@ -137,8 +137,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
->       - nginx
+>       - www-data
 >    +certbot_share_key_ids:
 >    +  - "999:999"
 >     certbot_post_renewal: |
