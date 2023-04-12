@@ -75,7 +75,7 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    @@ -10,3 +10,5 @@
 >       version: 0.3.1
 >     - src: usegalaxy_eu.certbot
->       version: 0.1.7
+>       version: 0.1.9
 >    +- src: galaxyproject.gxadmin
 >    +  version: 0.0.12
 >    {% endraw %}

@@ -85,7 +85,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -34,3 +34,5 @@
+>    @@ -38,3 +38,5 @@
 >       version: 0.12.0
 >     - src: galaxyproject.tiaas2
 >       version: 2.1.3
@@ -110,14 +110,16 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -218,9 +218,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
+>    @@ -157,11 +157,13 @@ certbot_environment: staging
+>     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
->       - rabbitmq
 >    +  - proftpd
+>     certbot_share_key_ids:
+>       - "999:999"
 >     certbot_post_renewal: |
 >         systemctl restart nginx || true
->         systemctl restart rabbitmq-server || true
+>         docker restart rabbit_hole || true
 >    +    systemctl restart proftpd || true
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
@@ -134,7 +136,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -159,6 +159,9 @@ galaxy_config:
+>    @@ -98,6 +98,9 @@ galaxy_config:
 >         # Monitoring
 >         statsd_host: localhost
 >         statsd_influxdb: true
@@ -156,7 +158,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -312,6 +312,27 @@ rabbitmq_users:
+>    @@ -255,6 +255,27 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -216,14 +218,14 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -48,6 +48,7 @@
->         - usegalaxy_eu.rabbitmqserver
->         - galaxyproject.tiaas2
+>    @@ -46,6 +46,7 @@
+>           become: true
+>           become_user: "{{ galaxy_user_name }}"
 >         - galaxyproject.nginx
 >    +    - galaxyproject.proftpd
->         - galaxyproject.gxadmin
->         - galaxyproject.tusd
->         - galaxyproject.cvmfs
+>         - geerlingguy.docker
+>         - usegalaxy_eu.rabbitmqserver
+>         - galaxyproject.tiaas2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook"}

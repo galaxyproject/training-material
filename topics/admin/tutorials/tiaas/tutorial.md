@@ -63,7 +63,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -32,3 +32,5 @@
+>    @@ -36,3 +36,5 @@
 >       version: 0.14.2
 >     - src: dj-wasabi.telegraf
 >       version: 0.12.0
@@ -90,7 +90,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -311,6 +311,11 @@ telegraf_plugins_extra:
+>    @@ -259,6 +259,11 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
@@ -172,14 +172,14 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -46,6 +46,7 @@
->           become_user: "{{ galaxy_user_name }}"
+>    @@ -48,6 +48,7 @@
+>         - galaxyproject.nginx
 >         - geerlingguy.docker
 >         - usegalaxy_eu.rabbitmqserver
 >    +    - galaxyproject.tiaas2
->         - galaxyproject.nginx
 >         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
+>         - galaxyproject.cvmfs
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TIaaS role to the Galaxy playbook"}
@@ -340,16 +340,20 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -193,6 +193,7 @@ galaxy_local_tools:
->     galaxy_dynamic_job_rules:
->     - my_rules.py
->     - map_resources.py
->    +- traffic.py
->     
->     # Certbot
->     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+>    --- a/files/galaxy/config/tpv_rules_local.yml
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -8,6 +8,11 @@ tools:
+>         mem: cores * 4
+>         params:
+>           walltime: 8
+>    +    rules:
+>    +      - id: tiaas
+>    +        if: |
+>    +          # TODO
+>    +          # ...
+>       .*testing.*:
+>         cores: 2
+>         mem: cores * 4
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}
@@ -358,28 +362,16 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -34,7 +34,7 @@ galaxy_job_config:
->       handling:
->         assign: ['db-skip-locked']
->       execution:
->    -    default: singularity
->    +    default: traffic_controller
->         environments:
->           local_env:
->             runner: local_runner
->    @@ -92,6 +92,10 @@ galaxy_job_config:
->             rewrite_parameters: true
->             transport: curl
->             outputs_to_working_directory: false
->    +      # Next year this will be replaced with the TPV.
->    +      traffic_controller:
->    +        runner: dynamic
->    +        function: traffic_controller
->       resources:
->         default: default
->         groups:
+>    --- a/files/galaxy/config/tpv_rules_local.yml
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -13,6 +13,7 @@ tools:
+>             if: |
+>               # TODO
+>               # ...
+>    +          # TODO
+>       .*testing.*:
+>         cores: 2
+>         mem: cores * 4
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup job conf"}

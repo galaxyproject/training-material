@@ -53,7 +53,7 @@ To allow your user to upload via TUS, you will need to:
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -12,3 +12,5 @@
->       version: 0.1.7
+>       version: 0.1.9
 >     - src: galaxyproject.gxadmin
 >       version: 0.0.12
 >    +- name: galaxyproject.tusd

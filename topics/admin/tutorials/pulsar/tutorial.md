@@ -141,10 +141,10 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -22,3 +22,7 @@
->       version: 0.0.3
->     - src: galaxyproject.slurm
+>    @@ -24,3 +24,9 @@
 >       version: 1.0.1
+>     - name: usegalaxy_eu.tpv_auto_lint
+>       version: 0.2.1
 >    +- src: geerlingguy.docker
 >    +  version: 6.1.0
 >    +- src: usegalaxy_eu.rabbitmqserver
@@ -270,7 +270,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -178,8 +178,10 @@ certbot_environment: staging
+>    @@ -137,8 +137,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
@@ -282,7 +282,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -229,6 +231,44 @@ slurm_config:
+>    @@ -188,6 +191,45 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -307,7 +307,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +    verify: verify_peer
 >    +    cacertfile: /etc/ssl/certs/fullchain.pem
 >    +    certfile: /etc/ssl/certs/cert.pem
->    +    keyfile: /etc/ssl/user/privkey-rabbitmq.pem
+>    +    keyfile: /etc/ssl/user/privkey-999:999.pem
 >    +    fail_if_no_peer_cert: 'false'
 >    +  management_agent:
 >    +    disable_metrics_collector: "false"
@@ -324,7 +324,6 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +  - user: galaxy_au
 >    +    password: "{{ vault_rabbitmq_password_vhost }}"
 >    +    vhost: /pulsar/galaxy_au
->    +
 >    +
 >     # TUS
 >     galaxy_tusd_port: 1080
@@ -343,8 +342,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -44,6 +44,8 @@
->         - role: galaxyproject.miniconda
+>    @@ -46,6 +46,8 @@
 >           become: true
 >           become_user: "{{ galaxy_user_name }}"
 >         - galaxyproject.nginx
@@ -352,6 +350,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +    - usegalaxy_eu.rabbitmqserver
 >         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
+>         - galaxyproject.cvmfs
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role"}
@@ -733,25 +732,25 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -82,6 +82,16 @@ galaxy_job_config:
->           dynamic_cores_time:
->             runner: dynamic
->             function: dynamic_cores_time
->    +      pulsar:
->    +        runner: pulsar_runner
->    +        default_file_action: remote_transfer
->    +        dependency_resolution: remote
->    +        jobs_directory: /mnt/pulsar/files/staging
->    +        persistence_directory: /mnt/pulsar/files/persisted_data
->    +        remote_metadata: false
->    +        rewrite_parameters: true
->    +        transport: curl
->    +        outputs_to_working_directory: false
->       resources:
->         default: default
->         groups:
+>    --- a/files/galaxy/config/tpv_rules_local.yml
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -54,3 +54,16 @@ destinations:
+>         max_mem: 8
+>         params:
+>           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
+>    +
+>    +  # IDK @cat-bro please confirm.
+>    +  pulsar:
+>    +    runner: pulsar_runner
+>    +    default_file_action: remote_transfer
+>    +    dependency_resolution: remote
+>    +    jobs_directory: /mnt/pulsar/files/staging
+>    +    persistence_directory: /mnt/pulsar/files/persisted_data
+>    +    remote_metadata: false
+>    +    rewrite_parameters: true
+>    +    transport: curl
+>    +    outputs_to_working_directory: false
+>    +
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar destination"}
@@ -770,19 +769,19 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -103,6 +103,10 @@ galaxy_job_config:
->         - id: testing
->           environment: dynamic_cores_time
->           resources: testing
->    +    - id: bwa
->    +      environment: pulsar
->    +    - id: bwa_mem
->    +      environment: pulsar
+>    --- a/files/galaxy/config/tpv_rules_local.yml
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -26,6 +26,10 @@ tools:
+>             cores: int(job.get_param_values(app)['__job_resource']['cores'])
+>             params:
+>                walltime: "{int(job.get_param_values(app)['__job_resource']['time'])}"
+>    +  bwa:
+>    +    # Send to pulsar
+>    +  bwa_mem:
+>    +    # Send to pulsar
 >     
->     galaxy_config:
->       galaxy:
+>     destinations:
+>       local_env:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Send bwa and bwa-mem to pulsar"}
