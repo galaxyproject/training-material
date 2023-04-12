@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Inferring Trajectories using Scanpy (Python)
+title: Inferring Trajectories using Scapy (Python)
 subtopic: single-cell-CS
 priority: 4
 zenodo_link: 'https://zenodo.org/record/7075718'
