@@ -134,7 +134,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    +- name: geerlingguy.redis
 >    +  version: 1.8.0
 >    +- name: usegalaxy_eu.flower
->    +  version: 0.3.1-alpha
+>    +  version: 1.0.0
 >    +- name: usegalaxy_eu.galaxy_systemd
 >    +  version: 2.1.0
 >    {% endraw %}
@@ -278,7 +278,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >        {% endraw %}
 >        ```
 >        {: data-commit="Add requirement" data-ref="add-req"}
->>     2. Flower
+>     2. Flower
 >        Flower has a few variables, too, for example, we need to point it to our virtual environment:
 >
 >        | Variable             | Type          | Description                                                                                                                                                                    |
@@ -315,7 +315,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >        +flower_python_path: server/lib
 >        +flower_venv_dir: "{{ galaxy_venv_dir }}"
 >        +flower_app_name: galaxy.celery
->        +
+>        +flower_db_file: "{{ galaxy_root }}/var/flower.db"
 >        +flower_persistent: true
 >        +
 >        +flower_broker_api: "https://flower:{{ vault_rabbitmq_password_flower }}@localhost:5671/api/"
@@ -342,10 +342,29 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >               ansible.builtin.cron:
 >        {% endraw %}
 >        ```
->        {: data-commit="Add requirement" data-ref="add-req"}
+>        {: data-commit="Add flower role" data-ref="add-req"}
 >
 > 4. Now it is time to change the `group_vars/galaxyservers.yml` and enable celery in galaxy config.
-> 
+>    Add the following lines to your file:
+>     {% raw %}
+>     ```diff
+>     --- a/group_vars/galaxyservers.yml
+>     +++ b/group_vars/galaxyservers.yml
+>     @@ -174,6 +174,11 @@ galaxy_config:
+>            preload: true
+>          celery:
+>            concurrency: 2
+>     +      enable_celery_beat: true
+>     +      enable: true
+>     +      queues: celery,galaxy.internal,galaxy.external
+>     +      pool: threads
+>     +      memory_limit: 2G
+>            loglevel: DEBUG
+>          handlers:
+>            handler
+>     {% endraw %}
+>     ```
+>     {: data-commit="Add celery" data-ref="add-req"}
 {: .hands_on}
 
 # Test Celery
@@ -360,6 +379,7 @@ We can simply do that by starting an upload to our Galaxy.
 >    Click on {% icon galaxy-upload %}Upload Data, select a file from your computer and click `upload`.
 > 3. The Workers should now receive a new tasks. Click on `Succeeded` and then on the UUID of the last upload task.  
 >    You should see all its details here and the info that is was successful.
+>
 {: .hands_on}
 
 
