@@ -231,7 +231,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_vhosts:
 >           - /pulsar/galaxy_au
->        +  - galaxy
+>        +  - galaxy_internal
 >         
 >         rabbitmq_users:
 >           - user: admin
@@ -241,11 +241,11 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >             vhost: /pulsar/galaxy_au
 >        +  - user: galaxy
 >        +    password: "{{ vault_rabbitmq_password_galaxy }}"
->        +    vhost: galaxy
+>        +    vhost: galaxy_internal
 >        +  - user: flower
 >        +    password: "{{ vault_rabbitmq_password_flower }}"
 >        +    tags: administrator
->        +    vhost: galaxy
+>        +    vhost: galaxy_internal
 >         
 >         # TUS
 >         galaxy_tusd_port: 1080
@@ -271,6 +271,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        | `flower_python_path`  | string | Should point to galaxy's `server/lib` directory (default) |
 >        | `flower_broker_api`  | string | URL to broker's API with login credentials. |
 >        | `flower_broker_url`  | string | Flower's RabbitMQ connection string. |
+>        | `flower_db_file`  | string | When Flower is in persistent mode, use this path for the database. |
 >        {: id="flower-variables-table"}
 >        Let's add variables to our `group_vars/galaxyservers.yml`:
 >
@@ -285,11 +286,12 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        +
 >        +# Flower
 >        +flower_python_version: python3
->        +flower_app_dir: "{{ galaxy_root }}/var/"
+>        +flower_app_dir: "{{ galaxy_root }}"
 >        +flower_log_file: /var/log/flower
 >        +flower_python_path: "{{ galaxy_root }}/server/lib"
 >        +flower_venv_dir: "{{ galaxy_venv_dir }}"
 >        +flower_app_name: galaxy.celery
+>        +flower_db_file: "{{ galaxy_root }}/var/flower.db"
 >        +
 >        +flower_persistent: true
 >        +

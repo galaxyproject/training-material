@@ -167,7 +167,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    @@ -22,3 +22,5 @@
 >       version: 0.0.3
 >     - src: galaxyproject.slurm
->       version: 1.0.1
+>       version: 1.0.2
 >    +- name: usegalaxy_eu.tpv_auto_lint
 >    +  version: 0.2.1
 >    {% endraw %}

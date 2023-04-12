@@ -81,7 +81,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    +- src: galaxyproject.repos
 >    +  version: 0.0.3
 >    +- src: galaxyproject.slurm
->    +  version: 1.0.1
+>    +  version: 1.0.2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
