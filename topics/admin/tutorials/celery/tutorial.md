@@ -15,6 +15,7 @@ key_points:
 contributions:
   authorship:
   - mira-miracoli
+  - hexylena
 requirements:
   - type: "internal"
     topic_name: admin
@@ -26,7 +27,6 @@ subtopic: data
 tags:
   - ansible
   - git-gat
-draft: true
 ---
 
 # Overview
@@ -110,14 +110,14 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -30,3 +30,7 @@
->       version: 1.4.1
->     - src: galaxyproject.pulsar
->       version: 1.0.10
->    +- src: geerlingguy.redis
+>    @@ -36,3 +36,9 @@
+>       version: 2.1.3
+>     - src: galaxyproject.proftpd
+>       version: 0.3.1
+>    +- name: geerlingguy.redis
 >    +  version: 1.8.0
->    +- src: usegalaxy_eu.flower
->    +  version: 0.3.1-alpha
+>    +- name: usegalaxy_eu.flower
+>    +  version: 1.0.1
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
@@ -145,7 +145,6 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >
 >        Luckily we can leave them all on default and don't need to change anything for Redis in the vars.  
 >        Let's add the role to our playbook then:
->
 >        {% raw %}
 >        ```diff
 >        --- a/galaxy.yml
@@ -173,6 +172,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >
 >        ```yaml
 >        vault_rabbitmq_password_flower: "a-really-long-password-here"
+>        vault_rabbitmq_password_galaxy: "a-different-really-long-password"
 >        vault_flower_user_password: "another-different-really-long-password"
 >        ```
 >
@@ -251,9 +251,8 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         galaxy_tusd_port: 1080
 >        {% endraw %}
 >        ```
->        {: data-commit="Add requirement"}
->
->     2. Flower
+>        {: data-commit="Configure rabbitmq users"}
+>>     2. Flower
 >        Flower has a few variables, too, for example, we need to point it to our virtual environment:
 >
 >        | Variable             | Type          | Description                                                                                                                                                                    |
@@ -299,6 +298,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        +
 >        +flower_ui_users:
 >        +  - name: admin
+>        +    password: "{{ vault_flower_user_password}}"
 >        +flower_environment_variables:
 >        +  GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
 >        +flower_proxy_prefix: /flower
@@ -357,7 +357,3 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    > {: data-cmd="true"}
 >    {: .code-in }
 {: .hands_on}
-
-Congratulations, you've set up Redis and Flower!
-
-TODO: nginx routes.
