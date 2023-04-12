@@ -1845,7 +1845,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    +certbot_environment: staging
 >    +certbot_well_known_root: /srv/nginx/_well-known_root
 >    +certbot_share_key_users:
->    +  - nginx
+>    +  - www-data
 >    +certbot_post_renewal: |
 >    +    systemctl restart nginx || true
 >    +certbot_domains:

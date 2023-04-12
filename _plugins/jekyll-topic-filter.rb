@@ -313,7 +313,6 @@ module TopicFilter
     else
       domain = "/training-material/"
     end
-
     # Similar as above.
     workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
     if workflows.length > 0
