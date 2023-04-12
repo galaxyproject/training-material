@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Trajectory Analysis: Monocle3 in R'
+title: 'Inferring Trajectories using Monocle3 (R)'
 subtopic: single-cell-CS
 priority: 6
 zenodo_link: 'https://zenodo.org/record/7455590'

@@ -22,7 +22,7 @@ module Gtn
         self._get_image_dimensions(match[1].strip)
       elsif ! url.match(/https?:\/\//)
         img_path = File.absolute_path(File.join(tuto_dir, url))
-        if File.exists?(img_path)
+        if File.exist?(img_path)
           self._get_image_dimensions(img_path)
         end
       else
