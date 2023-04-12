@@ -1879,7 +1879,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +certbot_environment: staging
 >    +certbot_well_known_root: /srv/nginx/_well-known_root
 >    +certbot_share_key_users:
->    +  - nginx
+>    +  - www-data
 >    +certbot_post_renewal: |
 >    +    systemctl restart nginx || true
 >    +certbot_domains:

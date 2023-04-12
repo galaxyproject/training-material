@@ -260,10 +260,10 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
->    +  - rabbitmq
+>    +  - root
 >     certbot_post_renewal: |
 >         systemctl restart nginx || true
->    +    systemctl restart rabbitmq-server || true
+>    +    docker restart rabbit_hole || true
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
@@ -277,6 +277,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +
 >    +rabbitmq_config:
 >    +- rabbit:
+>    +  - consumer_timeout: 3600000
 >    +  - tcp_listeners:
 >    +    - "'127.0.0.1'": 5672
 >    +  - ssl_listeners:
@@ -284,7 +285,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +  - ssl_options:
 >    +     - cacertfile: /etc/ssl/certs/fullchain.pem
 >    +     - certfile: /etc/ssl/certs/cert.pem
->    +     - keyfile: /etc/ssl/user/privkey-rabbitmq.pem
+>    +     - keyfile: /etc/ssl/user/privkey-root.pem
 >    +     - fail_if_no_peer_cert: 'false'
 >    +
 >    +rabbitmq_vhosts:
