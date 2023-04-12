@@ -339,6 +339,33 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >        {% endraw %}
 >        ```
 >        {: data-commit="Add requirement" data-ref="add-req"}
+>
+> 4. Now it is time to change the `group_vars/galaxyservers.yml` and enable celery in galaxy config.
+> 
+{: .hands_on}
+
+# Test Celery
+Now that everything is running, we want to test celery and watch it processing tasks.
+We can simply do that by starting an upload to our Galaxy.
+
+> <hands-on-title>Test Celery and monitor tasks with Flower</hands-on-title>
+> 1. First, open a new tab and type `localhost:5555` then log in with `username: admin` and you password.
+>    You should see an overview with active workers.  
+>    Keep that tab open
+> 2. In split view, open a second browser window and open you Galaxy page.
+>    Click on {% icon galaxy-upload %}Upload Data, select a file from you computer and click upload.
+> 3. The Workers should now receive a new tasks. Click on `Succeeded` and then on the UUID of the last upload task.  
+>    You should see all its details here and the info that is was successful.
+{: .hands_on}
+
+
+
+
+
+
+
+
+
 >    > <tip-title>What is a good size for this?</tip-title>
 >    > In production UseGalaxy.org.au uses 100GB, different sites have different needs and you can make your cache smaller depending on your usage. E.g. if your users only use one dataset from the reference data (e.g. just hg38) then perhaps you don't need such a large cache.
 >    {: .tip}
