@@ -205,7 +205,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +              - "{{ galaxy_config_dir }}/tpv_rules_local.yml"
 >           tools:
 >             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->               environment: local_env
+>               environment: tpv_dispatcher
 >    @@ -117,6 +98,10 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
