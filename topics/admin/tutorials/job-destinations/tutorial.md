@@ -190,7 +190,6 @@ And of course, Galaxy has an Ansible Role for that.
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Run Tool button.
 {: .hands_on}
 ## Configuring TPV
 
