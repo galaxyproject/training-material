@@ -15,6 +15,7 @@ key_points:
 contributions:
   authorship:
   - mira-miracoli
+  editing:
   - hexylena
 requirements:
   - type: "internal"
