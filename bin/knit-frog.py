@@ -167,6 +167,7 @@ for idx, diff in enumerate(diffs):
             else:
                 line = line.strip()
                 line = line.replace('https://your-galaxy', 'https://$(hostname -f)')
+                line = line.replace('https://galaxy.example.org', 'https://$(hostname -f)')
                 line = line.replace('<api-key>', 'adminkey')
                 cmdhandle.write(line + "\n")
     elif 'data-test' in diff[-1]:
