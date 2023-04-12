@@ -166,11 +166,11 @@ And of course, Galaxy has an Ansible Role for that.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tpv-auto-lint to requirements"}
-> 2. Change your `group_vars/galaxyservers.yml`. We need to create a new directory and add that directory name as variable for the role. Default name is TPV_DO_NOT_TOUCH for extra safety 😉. If you want a different name, you need to change the `tpv_config_dir_name` variable, too.
+> 2. Change your `group_vars/galaxyservers.yml`. We need to create a new directory and add that directory name as variable for the role. Default name is 'TPV_DO_NOT_TOUCH' for extra safety 😉. If you want a different name, you need to change the `tpv_config_dir_name` variable, too.
 >    {% raw %}
 >    ```diff
 >    +galaxy_dirs:
->    +  - "{{ galaxy_config_dir }}/TPV_DO_NOT_TOUCH"
+>    +  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TPV config dir"}
@@ -243,7 +243,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +            function: map_tool_to_destination
 >    +            rules_module: tpv.rules
 >    +            tpv_config_files:
->    +              - "{{ galaxy_config_dir }}/tpv_rules_local.yml"
+>    +              - "{{ tpv_config_dir }}/tpv_rules_local.yml"
 >           tools:
 >             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >               environment: local_env
@@ -253,7 +253,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >
 >    +galaxy_config_files:
 >    +  - src: files/galaxy/config/tpv_rules_local.yml
->    +    dest: "{{ galaxy_config_dir }}/tpv_rules_local.yml"
+>    +    dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
 >    +
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
@@ -423,7 +423,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >                 rules_module: tpv.rules
 >                 tpv_config_files:
 >    +              - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
->                   - config/tpv_rules_local.yml
+>                   - "{{ tpv_config_dir }}/tpv_rules_local.yml"
 >           tools:
 >             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >    {% endraw %}
@@ -574,7 +574,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    @@ -42,9 +42,17 @@ galaxy_config:
 >                 tpv_config_files:
 >                   - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
->                   - config/tpv_rules_local.yml
+>                   - "{{ tpv_config_dir }}/tpv_rules_local.yml"
 >    +      resources:
 >    +        default: default
 >    +        groups:
