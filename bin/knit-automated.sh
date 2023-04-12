@@ -97,7 +97,7 @@ elif [[ "$op" == "roundtrip" ]]; then
 	rm -rf ${DIR}
 	bash $0 export
 	cd ${DIR} || exit
-	git init && \
+	git init && git config --local --add commit.gpgsign false && \
 		git am -3 -C2 -- *.patch
 	cd -
 	bash $0 import
