@@ -230,15 +230,15 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        @@ -233,6 +233,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
->           - /pulsar/galaxy_au
+>           - /pulsar/puslar_au
 >        +  - galaxy_internal
 >         
 >         rabbitmq_users:
 >           - user: admin
 >        @@ -242,6 +243,13 @@ rabbitmq_users:
->           - user: galaxy_au
+>           - user: puslar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
->             vhost: /pulsar/galaxy_au
+>             vhost: /pulsar/puslar_au
 >        +  - user: galaxy
 >        +    password: "{{ vault_rabbitmq_password_galaxy }}"
 >        +    vhost: galaxy_internal

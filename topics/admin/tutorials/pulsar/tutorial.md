@@ -314,16 +314,16 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +  consumer_timeout: 21600000 # 6 hours in milliseconds
 >    +
 >    +rabbitmq_vhosts:
->    +  - /pulsar/galaxy_au
+>    +  - /pulsar/pulsar_au
 >    +
 >    +rabbitmq_users:
 >    +  - user: admin
 >    +    password: "{{ vault_rabbitmq_admin_password }}"
 >    +    tags: administrator
 >    +    vhost: /
->    +  - user: galaxy_au
+>    +  - user: pulsar_au
 >    +    password: "{{ vault_rabbitmq_password_vhost }}"
->    +    vhost: /pulsar/galaxy_au
+>    +    vhost: /pulsar/pulsar_au
 >    +
 >     # TUS
 >     galaxy_tusd_port: 1080
@@ -574,7 +574,7 @@ Some of the other options we will be using are:
 >    +  persistence_directory: "{{ pulsar_persistence_dir }}"
 >    +  tool_dependency_dir: "{{ pulsar_dependencies_dir }}"
 >    +  # The following are the settings for the pulsar server to contact the message queue with related timeouts etc.
->    +  message_queue_url: "pyamqp://galaxy_au:{{ vault_rabbitmq_password_vhost }}@{{ galaxy_server_hostname }}:5671//pulsar/galaxy_au?ssl=1"
+>    +  message_queue_url: "pyamqp://pulsar_au:{{ vault_rabbitmq_password_vhost }}@{{ galaxy_server_hostname }}:5671//pulsar/pulsar_au?ssl=1"
 >    +  min_polling_interval: 0.5
 >    +  amqp_publish_retry: True
 >    +  amqp_publish_retry_max_retries: 5
@@ -713,7 +713,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >           load: galaxy.jobs.runners.slurm:SlurmJobRunner
 >    +    pulsar_runner:
 >    +      load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
->    +      amqp_url: "pyamqp://galaxy_au:{{ vault_rabbitmq_password_vhost }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
+>    +      amqp_url: "pyamqp://pulsar_au:{{ vault_rabbitmq_password_vhost }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
 >    +      amqp_acknowledge: true
 >    +      amqp_ack_republish_time: 1200
 >    +      amqp_consumer_timeout: 2
