@@ -134,7 +134,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    +- name: geerlingguy.redis
 >    +  version: 1.8.0
 >    +- name: usegalaxy_eu.flower
->    +  version: 1.0.0
+>    +  version: 1.0.1
 >    +- name: usegalaxy_eu.galaxy_systemd
 >    +  version: 2.1.0
 >    {% endraw %}
