@@ -59,68 +59,65 @@ notebook:
   snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md 
 ---
 
-## Files upload
-
-While the installation in running in the Terminal tab, you can work on other things in JupyterLab. Let's upload the files you downloaded from Galaxy: the notebook and three data files - cell annotations, gene annotations and unprocessed expression matrix.
-
-><hands-on-title>Files upload</hands-on-title>
->
-> 1. In the folder window, Upload the `single-cell-scrna-case_monocle3-rstudio.ipynb` and three data files that you had downloaded from your computer. 
-> ![Screenshot of the folder window in JupyterLab, highlighting 'Upload' button.](../../images/scrna-casestudy-monocle/upload_notebook.jpg "Click here to upload the files.")
->
-> 2. Right-click on the files and rename them so that it’s easier to refer to them:
-> - `GalaxyX-[Extracted_cell_annotations_(obs)]` to `cells`
-> - `GalaxyX-[Extracted gene annotations (var)]` to `genes`
-> - `GalaxyX-[Unprocessed expression matrix]` to `expression`
->
-> 3. Open the notebook by double clicking it in the file window.
->
-{: .hands_on}
-
-From now on, you can switch to the notebook you just opened in JuyterLab and follow the tutorial in there! 
-
-
-## Setting the environment
+## Setting the environment and files upload
 Once the installation is done, we should load the needed packages into our notebook. 
+
+```r
+install.packages("Rcpp")    # needed for reduce_dimension to avoid AnnoyAngular error; library(Rcpp) might work as well depending on the version
+```
+
 ```r
 library(monocle3)
 library(biomaRt)
-library(Rcpp)         # needed for reduce_dimension to avoid AnnoyAngular error
 library(magrittr)     # needed for %>%
 ```
-Alright, the libraries are here - so now let's read in our data files. 
 
-> <question-title></question-title>
->
-> What is the datatype of the uploaded files?
->
-> > <solution-title></solution-title>
-> >
-> > If you first downloaded the files from Galaxy and then uploaded them into RStudio, you should be able to see the extension `.tabular`. You might not see it if you fetched data directly from your history, but you can easily check the type of data in Galaxy, and - what's more - change it there. But today we're focusing on coding!
-> >
-> {: .solution}
->
-{: .question}
-
-As mentioned above, the datatype of our files is tabular, so we will use `read.delim()` function to read them in. In this function, the first argument is the file path - in our case, the files are in the same folder as the notebook, so the file path is the same as the file name. You can always check that by right-clicking on the file and choosing `Copy path`. The second argument, `row.names=1` takes the column number of the data file from which to take the row names. 
 ```r
-# read in the files
-cell_metadata <- read.delim('cells.tabular', row.names=1)
-gene_metadata <- read.delim('genes.tabular', row.names=1)
-expression_matrix <- read.delim('expression.tabular', row.names=1)
+install.packages("anndata")
 ```
 
-> <question-title></question-title>
+Alright, the libraries are here - so now let's get our AnnData file. 
+
+## Upload, view and modify the files
+
+We can download the file into Jupyter notebook also using a Zendo link. The first argument is the download link and the second one is the name under which the downloaded file is saved:
+```r
+download.file('https://zenodo.org/record/7455590/files/AnnData_filtered.h5ad', 'AnnData.h5ad')
+```
+Then we have to read in this h5ad file:
+```r
+ann <- anndata::read_h5ad('AnnData.h5ad')
+```
+Now we store all the information we need in AnnData object. However, Monocle uses *cell_data_set class* to hold expression data,which requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. Therefore, we have to somehow 'transfer' that information from our AnnData object to Monocle's cell_data_set (cds). AnnData stores a data matrix `X` together with annotations of observations `obs` and variables `var`, so we can extract those parameters and use them for further analysis.
+
+```r
+expression_matrix <- ann$X
+cell_metadata <- ann$obs
+gene_metadata <- ann$var
+```
+
+> <tip-title>Uploading files from your computer is also an option!</tip-title>
 >
-> Why should we set `row.names=1`?
+> If you already have files containing the expression matrix, genes and cells metadata, you can upload them to JupyLab and generate cds file from them! For example, if you first downloaded the files from Galaxy your files will have `.tabular` extension. In this case, we will use `read.delim()` function to read them in. In this function, the first argument is the file path - in our case, the files are in the same folder as the notebook, so the file path is the same as the file name. You can always check that by right-clicking on the file and choosing `Copy path`. The second argument, `row.names=1` takes the column number of the data file from which to take the row names. 
+> ```r
+> # read in the files
+> cell_metadata <- read.delim('cells.tabular', row.names=1)
+> gene_metadata <- read.delim('genes.tabular', row.names=1)
+> expression_matrix <- read.delim('expression.tabular', row.names=1)
+> ```
 >
-> > <solution-title></solution-title>
+> > <question-title></question-title>
 > >
-> > This allows us to ensure that the expression value matrix has the same number of columns as the `cell_metadata` has rows and the same number of rows as the `gene_metadata` has rows. Importantly, row names of the `cell_metadata` object should match the column names of the expression matrix and row names of the `gene_metadata` object should match row names of the expression matrix.
+> > Why should we set `row.names=1`?
 > >
-> {: .solution}
+> > > <solution-title></solution-title>
+> > >
+> > > This allows us to ensure that the expression value matrix has the same number of columns as the `cell_metadata` has rows and the same number of rows as the `gene_metadata` has rows. Importantly, row names of the `cell_metadata` object should match the column names of the expression matrix and row names of the `gene_metadata` object should match row names of the expression matrix.
+> > >
+> > {: .solution}
+> {: .question}
 >
-{: .question}
+{: .tip}
 
 
 ><tip-title>Reading in the files for RStudio users</tip-title>
@@ -150,8 +147,6 @@ expression_matrix <- read.delim('expression.tabular', row.names=1)
 {: .tip}
 
 
-## View and modify the files
-
 According to [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/), `expression_matrix` should have genes as rows and cells as columns. Let's check if that's the case here.
 ```r
 expression_matrix           # preview the content of the file by calling its name
@@ -171,7 +166,6 @@ The second column indeed contains gene symbols, but is called "Symbol" instead o
 colnames(gene_metadata)[2] <- 'gene_short_name'     # change the column name
 colnames(gene_metadata)                             # see the changes
 ```
-
 
 ## Generating CDS object
 Now let’s store our files in one object – the cell_data_set. This is the main class used by Monocle to hold single cell expression data. The class is derived from the Bioconductor SingleCellExperiment class. It's similar to Python's AnnData storing a data matrix together with annotations of observations and variables. There are three ways of creating CDS object in monocle:
