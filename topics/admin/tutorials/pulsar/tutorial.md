@@ -270,7 +270,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -140,8 +140,11 @@ certbot_environment: staging
+>    @@ -137,8 +137,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -282,7 +282,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -191,6 +194,45 @@ slurm_config:
+>    @@ -188,6 +191,45 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -707,10 +707,10 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -20,6 +20,16 @@ galaxy_job_config:
->           workers: 4
+>    @@ -21,6 +21,16 @@ galaxy_job_config:
 >         slurm:
 >           load: galaxy.jobs.runners.slurm:SlurmJobRunner
+>           drmaa_library_path: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
 >    +    pulsar_runner:
 >    +      load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
 >    +      amqp_url: "pyamqp://pulsar_au:{{ vault_rabbitmq_password_vhost }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"

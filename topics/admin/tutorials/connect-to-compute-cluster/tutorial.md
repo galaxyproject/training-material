@@ -360,53 +360,23 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 
 > <hands-on-title>Making Galaxy aware of DRMAA</hands-on-title>
 >
-> 1. Open your group variables and add the environment variable:
+> 3. First, we need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. Since we already have a good default destination that uses singularity, we will simply modify that to use the slurm runner. Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. <!-- Note that we also need to set a default destination now that more than one destination is defined. --> In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of a defined plugin:
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -97,6 +97,8 @@ galaxy_config:
->           # Other options that will be passed to gunicorn
->           extra_args: '--forwarded-allow-ips="*"'
->           preload: true
->    +      environment:
->    +        DRMAA_LIBRARY_PATH: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
->         celery:
->           concurrency: 2
->           loglevel: DEBUG
->    @@ -106,6 +108,9 @@ galaxy_config:
->             pools:
->               - job-handlers
->               - workflow-schedulers
->    +      environment:
->    +        DRMAA_LIBRARY_PATH: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
->    +
->     
->     galaxy_config_templates:
->       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
->    {% endraw %}
->    ```
->    {: data-commit="Configure DRMAA_LIBRARY_PATH"}
->
->    This environment variable will then be supplied to any web process (zerglings or mules).
->
-> 3. Next, we need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. Since we already have a good default destination that uses singularity, we will simply modify that to use the slurm runner. Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. <!-- Note that we also need to set a default destination now that more than one destination is defined. --> In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of a defined plugin:
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -18,6 +18,8 @@ galaxy_job_config:
+>    @@ -18,6 +18,9 @@ galaxy_job_config:
 >         local_runner:
 >           load: galaxy.jobs.runners.local:LocalJobRunner
 >           workers: 4
 >    +    slurm:
 >    +      load: galaxy.jobs.runners.slurm:SlurmJobRunner
+>    +      drmaa_library_path: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
->    @@ -26,6 +28,16 @@ galaxy_job_config:
+>    @@ -26,6 +29,16 @@ galaxy_job_config:
 >           local_env:
 >             runner: local_runner
 >             tmp_dir: true

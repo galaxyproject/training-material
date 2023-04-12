@@ -227,18 +227,18 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -233,6 +233,7 @@ rabbitmq_config:
+>        @@ -230,6 +230,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
->           - /pulsar/puslar_au
+>           - /pulsar/pulsar_au
 >        +  - galaxy_internal
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -242,6 +243,13 @@ rabbitmq_users:
->           - user: puslar_au
+>        @@ -239,6 +240,13 @@ rabbitmq_users:
+>           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
->             vhost: /pulsar/puslar_au
+>             vhost: /pulsar/pulsar_au
 >        +  - user: galaxy
 >        +    password: "{{ vault_rabbitmq_password_galaxy }}"
 >        +    vhost: galaxy_internal
@@ -279,7 +279,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -263,3 +263,22 @@ tusd_instances:
+>        @@ -260,3 +260,22 @@ tusd_instances:
 >               - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
 >               - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
 >               - "-hooks-http-forward-headers=X-Api-Key,Cookie"
