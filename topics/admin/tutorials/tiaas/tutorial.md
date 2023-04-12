@@ -301,79 +301,54 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 
 > <hands-on-title>Writing a dynamic job destination</hands-on-title>
 >
-> 1. Create and open `templates/galaxy/dynamic_job_rules/hogwarts.py`
->
->    {% raw %}
->    ```diff
->    --- /dev/null
->    +++ b/templates/galaxy/dynamic_job_rules/traffic.py
->    @@ -0,0 +1,19 @@
->    +from galaxy.jobs import JobDestination
->    +from galaxy.jobs.mapper import JobMappingException
->    +import os
->    +
->    +def traffic_controller(app, user):
->    +    # Check that the user is not anonymous
->    +    if not user:
->    +        return app.job_config.get_destination('slurm')
->    +
->    +    # Collect the user's roles
->    +    user_roles = [role.name for role in user.all_roles() if not role.deleted]
->    +
->    +    # If any of these are prefixed with 'training-'
->    +    if any([role.startswith('training-') for role in user_roles]):
->    +        # Then they are a training user, we will send their jobs to pulsar,
->    +        # Or give them extra resources
->    +        return app.job_config.get_destination('slurm-2c') # or pulsar, if available
->    +
->    +    return app.job_config.get_destination('slurm')
->    {% endraw %}
->    ```
->    {: data-commit="Setup traffic controller for jobs"}
->
->    This destination will check that the `user_email` is in a training group (role starting with `training-`).
->
-> 2. As usual, we need to instruct Galaxy of where to find this file. Edit your group variables file and add the following:
+> 1. This destination will check that the `user_email` is in a training group (role starting with `training-`).
 >
 >    {% raw %}
 >    ```diff
 >    --- a/files/galaxy/config/tpv_rules_local.yml
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -8,6 +8,11 @@ tools:
->         mem: cores * 4
->         params:
->           walltime: 8
+>    @@ -35,6 +35,17 @@ tools:
+>           require:
+>             - pulsar
+>     
+>    +roles:
+>    +  training.*:
 >    +    rules:
->    +      - id: tiaas
->    +        if: |
->    +          # TODO
->    +          # ...
->       .*testing.*:
->         cores: 2
->         mem: cores * 4
+>    +    - id: tiaas
+>    +      max_cores: 2
+>    +      max_mem: max_cores * 3.8  # TODO check multiplier
+>    +      scheduling:
+>    +        require:
+>    +          - slurm
+>    +          - training
+>    +
+>     destinations:
+>       local_env:
+>         runner: local_runner
+>    @@ -63,6 +74,20 @@ destinations:
+>         params:
+>           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
+>     
+>    +  slurm-training:
+>    +    inherits: singularity
+>    +    runner: slurm
+>    +    max_accepted_cores: 12
+>    +    max_accepted_mem: 120
+>    +    max_cores: 2 # Limit the cores
+>    +    max_mem: 8 # Limit the memory
+>    +    params:
+>    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time=00:30:00
+>    +    scheduling:
+>    +      require:
+>    +        - slurm
+>    +        - training
+>    +
+>       pulsar:
+>         runner: pulsar_runner
+>         params:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}
->
-> 3. We next need to configure this plugin in our job configuration (`templates/galaxy/config/job_conf.yml.j2`):
->
->    {% raw %}
->    ```diff
->    --- a/files/galaxy/config/tpv_rules_local.yml
->    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -13,6 +13,7 @@ tools:
->             if: |
->               # TODO
->               # ...
->    +          # TODO
->       .*testing.*:
->         cores: 2
->         mem: cores * 4
->    {% endraw %}
->    ```
->    {: data-commit="Setup job conf"}
->
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.yml.j2`. Additionally it will send all jobs through the traffic controller, but we want upload jobs to stay local. They should always run locally.
 >
 > 6. Run the playbook
 >
