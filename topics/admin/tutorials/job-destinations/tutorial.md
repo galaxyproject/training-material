@@ -246,7 +246,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +              - "{{ tpv_config_dir }}/tpv_rules_local.yml"
 >           tools:
 >             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->               environment: local_env
+>               environment: tpv_dispatcher
 >    @@ -117,6 +98,10 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
@@ -430,6 +430,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    ```
 >    {: data-commit="Importing TPV shared database via job conf"}
 >
+>
 > Note how TPV allows the file to be imported directly via its http url. As many local and remote rule files as necessary can be combined, with rule files specified later overriding
 > any previously specified rule files. The TPV shared database does not define destinations, only cores and mem settings, as well as any required environment vars.
 > Take a look at the shared database of rules and note that some tools have very large recommended memory settings, which may or may not be available within your local cluster.
@@ -462,11 +463,9 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 > job resource requirements in the shared database that are much larger than your destination can actually support, is to combine `max_accepted_cores/mem/gpus with `max_cores/mem/gpus` to accept the job and then
 > clamp it down to a supported range. This allows even the largest resource requirement in the shared database to be accomodated.
 >
-> <comment-title>Clamping in practice</comment-title>
->
-> For the purposes of this tutorial, we've clamped down from 16 cores to 2 cores, and mem from 256 to 8, which is unlikely to work in practice. In production, you will probably need to manually test
-> any tools that exceed your cluster's capabilities, and decide whether you want those tools to run in the first place.
->
+> > <comment-title>Clamping in practice</comment-title>
+> > For the purposes of this tutorial, we've clamped down from 16 cores to 2 cores, and mem from 256 to 8, which is unlikely to work in practice. In production, you will probably need to manually test
+> > any tools that exceed your cluster's capabilities, and decide whether you want those tools to run in the first place.
 > {: .comment}
 >
 > 3. Run the Galaxy playbook.
@@ -478,7 +477,6 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-
 # Basic access controls
 
 You may wish to apply some basic restrictions on which users are allowed to run specific tools. TPV accomodates user and role specific rules. In addition, TPV supports tagging of tools, users, roles and destinations. These tags
