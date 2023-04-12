@@ -236,7 +236,7 @@ Let's see it in action!
 >    - Go to https://\<server\>/tiaas/new/
 >    - Here you will find the request form users will fill in to request TIaaS:
 >      ![TIaaS request form](../../images/tiaas/tiaas_request_form.png)
->    - For *"Training Identifier"*, fill in `gryffindor` (or remember this value if you enter something different)
+>    - For *"Training Identifier"*, fill in `gat`
 >      - This is the `<training-id>` used in the URLs listed above used for:
 >        1. Workshop participants to join the tiaas group
 >        2. Workshop instructors to monitor the progress of their participants.
@@ -263,13 +263,13 @@ Let's see it in action!
 > 3. **Join TIaaS Training**
 >    - Make sure you are logged in to Galaxy
 >    - On the day of the workshop, participants will visit a following URL to join the TIaaS group
->      - https://\<server\>/join-training/gryffindor
+>      - https://\<server\>/join-training/gat
 >      - A confirmation dialog should appear if all went well:
 >        ![Join TIaaS](../../images/tiaas/tiaas_join_training.png)
 >
 > 4. **Monitor TIaaS status**
 >    - This is very useful for instructors to monitor the job state of their participants
->    - Go to https://\<server\>/join-training/gryffindor/status
+>    - Go to https://\<server\>/join-training/gat/status
 >    - In the Dasboard you should see that one user (you) has joined the training \
 >    - Run some jobs to see the dashboard in action
 >      ![TIaaS dashboard](../../images/tiaas/tiaas_dashboard.png)
@@ -296,7 +296,7 @@ Let's see it in action!
 
 While observability for teachers or trainers is already a huge benefit, one of the primary benefits of {TIaaS} is that your jobs get sent to dedicated compute resources, which won't be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.
 
-In order to achieve this, we first need some way to *sort* the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *traffic controller* to figure out where jobs belong.
+In order to achieve this, we first need some way to sort the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *traffic controller* to figure out where jobs belong.
 
 
 > <hands-on-title>Writing a dynamic job destination</hands-on-title>
@@ -337,7 +337,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    +    max_cores: 2 # Limit the cores
 >    +    max_mem: 8 # Limit the memory
 >    +    params:
->    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time=00:30:00
+>    +      native_specification: --nodes=1 --ntasks=1 --mem={round(mem*1024)} --cpus-per-task={cores} --time=00:30:00
 >    +    scheduling:
 >    +      require:
 >    +        - slurm
