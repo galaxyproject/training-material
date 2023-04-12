@@ -274,10 +274,11 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
->    +  - rabbitmq
+>    +certbot_share_key_ids:
+>    +  - "999:999"
 >     certbot_post_renewal: |
 >         systemctl restart nginx || true
->    +    systemctl restart rabbitmq-server || true
+>    +    docker restart rabbit_hole || true
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos

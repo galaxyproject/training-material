@@ -280,7 +280,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +- src: galaxyproject.miniconda
 >    +  version: 0.3.1
 >    +- src: usegalaxy_eu.certbot
->    +  version: 0.1.7
+>    +  version: 0.1.9
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
