@@ -49,7 +49,7 @@ From the Celery website:
 >Language interoperability can also be achieved exposing an HTTP endpoint and having a task that requests it (webhooks)."
 >
 > -- [https://docs.celeryq.dev/en/stable/getting-started/introduction.html#what-s-a-task-queue](https://docs.celeryq.dev/en/stable/getting-started/introduction.html#what-s-a-task-queue)
-{: .quote id="celery-quote"}
+{: .quote}
 
 [A slideshow presentation on this subject is available](slides.html). 
 
@@ -253,7 +253,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```
 >        {: data-commit="Add requirement"}
 >
->>     2. Flower
+>     2. Flower
 >        Flower has a few variables, too, for example, we need to point it to our virtual environment:
 >
 >        | Variable             | Type          | Description                                                                                                                                                                    |
@@ -272,14 +272,14 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        | `flower_broker_api`  | string | URL to broker's API with login credentials. |
 >        | `flower_broker_url`  | string | Flower's RabbitMQ connection string. |
 >        | `flower_db_file`  | string | When Flower is in persistent mode, use this path for the database. |
->        {: id="flower-variables-table"}
+>
 >        Let's add variables to our `group_vars/galaxyservers.yml`:
 >
 >        {% raw %}
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -263,3 +263,20 @@ tusd_instances:
+>        @@ -263,3 +263,22 @@ tusd_instances:
 >               - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
 >               - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
 >               - "-hooks-http-forward-headers=X-Api-Key,Cookie"
@@ -304,8 +304,10 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        +flower_proxy_prefix: /flower
 >        {% endraw %}
 >        ```
->        {: data-commit="Add requirement" data-ref="add-req"}
->        Now we can add the Flower Role to our Playbook:
+>        {: data-commit="Configure flower"}
+>
+> 1. Now we can add the Flower Role to our Playbook:
+>
 >        {% raw %}
 >        ```diff
 >        --- a/galaxy.yml
@@ -320,7 +322,31 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >             - usegalaxy_eu.rabbitmqserver
 >        {% endraw %}
 >        ```
->        {: data-commit="Add requirement" data-ref="add-req"}
+>        {: data-commit="Add flower to playbook"}
+>
+> 1. And finally expose it via nginx:
+>
+>        {% raw %}
+>        ```diff
+>        --- a/templates/nginx/galaxy.j2
+>        +++ b/templates/nginx/galaxy.j2
+>        @@ -84,4 +84,13 @@ server {
+>             location /training-material/ {
+>                 proxy_pass https://training.galaxyproject.org/training-material/;
+>             }
+>        +
+>        +    location /flower {
+>        +        proxy_pass http://localhost:5555;
+>        +        proxy_set_header Host $host;
+>        +        proxy_redirect off;
+>        +        proxy_http_version 1.1;
+>        +        proxy_set_header Upgrade $http_upgrade;
+>        +        proxy_set_header Connection "upgrade";
+>        +    }
+>         }
+>        {% endraw %}
+>        ```
+>        {: data-commit="Add nginx routes"}
 >
 > 5. Run the playbook
 >

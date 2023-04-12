@@ -102,7 +102,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -91,4 +91,8 @@ server {
+>    @@ -100,4 +100,8 @@ server {
 >         }
 >     
 >         {{ tiaas_nginx_routes }}

@@ -281,9 +281,9 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -84,4 +84,10 @@ server {
->         location /training-material/ {
->             proxy_pass https://training.galaxyproject.org/training-material/;
+>    @@ -93,4 +93,10 @@ server {
+>             proxy_set_header Upgrade $http_upgrade;
+>             proxy_set_header Connection "upgrade";
 >         }
 >    +
 >    +    location /grafana/ {
@@ -503,10 +503,10 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -280,3 +280,12 @@ flower_broker_url: "amqp://flower:{{ vault_rabbitmq_password_flower }}@localhost
->     
->     flower_ui_users:
->       - name: admin
+>    @@ -282,3 +282,12 @@ flower_ui_users:
+>     flower_environment_variables:
+>       GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
+>     flower_proxy_prefix: /flower
 >    +
 >    +# Telegraf
 >    +telegraf_plugins_extra:
@@ -795,7 +795,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -292,3 +292,10 @@ telegraf_plugins_extra:
+>    @@ -294,3 +294,10 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000
