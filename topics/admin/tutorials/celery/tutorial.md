@@ -111,10 +111,10 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -36,3 +36,9 @@
->       version: 2.1.3
->     - src: galaxyproject.proftpd
->       version: 0.3.1
+>    @@ -30,3 +30,7 @@
+>       version: 1.4.1
+>     - src: galaxyproject.pulsar
+>       version: 1.0.10
 >    +- name: geerlingguy.redis
 >    +  version: 1.8.0
 >    +- name: usegalaxy_eu.flower
@@ -302,7 +302,6 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        +    password: "{{ vault_flower_user_password}}"
 >        +flower_environment_variables:
 >        +  GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
->        +flower_proxy_prefix: /flower
 >        {% endraw %}
 >        ```
 >        {: data-commit="Configure flower"}

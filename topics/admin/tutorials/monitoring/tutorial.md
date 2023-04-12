@@ -81,8 +81,8 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    +++ b/requirements.yml
 >    @@ -34,3 +34,5 @@
 >       version: 1.8.0
->     - src: usegalaxy_eu.flower
->       version: 0.3.1-alpha
+>     - name: usegalaxy_eu.flower
+>       version: 1.0.1
 >    +- src: usegalaxy_eu.influxdb
 >    +  version: v6.0.7
 >    {% endraw %}
@@ -205,7 +205,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -36,3 +36,5 @@
->       version: 0.3.1-alpha
+>       version: 1.0.1
 >     - src: usegalaxy_eu.influxdb
 >       version: v6.0.7
 >    +- src: cloudalchemy.grafana
@@ -504,9 +504,9 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -279,3 +279,12 @@ flower_ui_users:
+>         password: "{{ vault_flower_user_password}}"
 >     flower_environment_variables:
 >       GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
->     flower_proxy_prefix: /flower
 >    +
 >    +# Telegraf
 >    +telegraf_plugins_extra:

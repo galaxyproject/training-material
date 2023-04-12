@@ -91,7 +91,7 @@ To allow your user to upload via TUS, you will need to:
 >    @@ -135,3 +137,16 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
->     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+>     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >    +
 >    +# TUS
 >    +galaxy_tusd_port: 1080
