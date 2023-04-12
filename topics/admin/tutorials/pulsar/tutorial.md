@@ -734,23 +734,25 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/files/galaxy/config/tpv_rules_local.yml
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -54,3 +54,16 @@ destinations:
+>    @@ -54,3 +54,18 @@ destinations:
 >         max_mem: 8
 >         params:
 >           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
 >    +
->    +  # IDK @cat-bro please confirm.
 >    +  pulsar:
 >    +    runner: pulsar_runner
->    +    default_file_action: remote_transfer
->    +    dependency_resolution: remote
->    +    jobs_directory: /mnt/pulsar/files/staging
->    +    persistence_directory: /mnt/pulsar/files/persisted_data
->    +    remote_metadata: false
->    +    rewrite_parameters: true
->    +    transport: curl
->    +    outputs_to_working_directory: false
->    +
+>    +    params:
+>    +      default_file_action: remote_transfer
+>    +      dependency_resolution: remote
+>    +      jobs_directory: /mnt/pulsar/files/staging
+>    +      persistence_directory: /mnt/pulsar/files/persisted_data
+>    +      remote_metadata: false
+>    +      rewrite_parameters: true
+>    +      transport: curl
+>    +      outputs_to_working_directory: false
+>    +    scheduling:
+>    +      require:
+>    +        - pulsar
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar destination"}
@@ -771,14 +773,18 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/files/galaxy/config/tpv_rules_local.yml
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -26,6 +26,10 @@ tools:
+>    @@ -26,6 +26,14 @@ tools:
 >             cores: int(job.get_param_values(app)['__job_resource']['cores'])
 >             params:
 >                walltime: "{int(job.get_param_values(app)['__job_resource']['time'])}"
->    +  bwa:
->    +    # Send to pulsar
->    +  bwa_mem:
->    +    # Send to pulsar
+>    +  .*/bwa/.*:
+>    +    scheduling:
+>    +      require:
+>    +        - pulsar
+>    +  .*/bwa_mem/.*:
+>    +    scheduling:
+>    +      require:
+>    +        - pulsar
 >     
 >     destinations:
 >       local_env:
