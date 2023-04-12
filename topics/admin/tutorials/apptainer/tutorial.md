@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+- /topics/admin/tutorials/singularity/tutorial
 
 title: "Use Apptainer containers for running Galaxy jobs"
 zenodo_link: ""
@@ -15,8 +17,6 @@ contributors:
   - hexylena
   - mira-miracoli
 subtopic: jobs
-redirect_from:
-- /topics/admin/tutorials/singularity/tutorial
 tags:
   - jobs
   - ansible
@@ -85,7 +85,7 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    @@ -16,3 +16,5 @@
 >       version: 0.0.1
 >     - src: galaxyproject.cvmfs
->       version: 0.2.13
+>       version: 0.2.21
 >    +- src: usegalaxy_eu.apptainer
 >    +  version: 0.0.1
 >    {% endraw %}
@@ -109,9 +109,9 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -28,6 +28,7 @@
->           package:
+>    @@ -30,6 +30,7 @@
 >             name: ['tmpreaper']
+>           when: ansible_os_family == 'Debian'
 >       roles:
 >    +    - usegalaxy_eu.apptainer
 >         - galaxyproject.galaxy

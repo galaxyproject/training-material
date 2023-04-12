@@ -77,7 +77,7 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >     - src: usegalaxy_eu.certbot
 >       version: 0.1.7
 >    +- src: galaxyproject.gxadmin
->    +  version: 0.0.8
+>    +  version: 0.0.12
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement"}
@@ -154,16 +154,18 @@ Before we begin backing up our Galaxy data, let's set up automated cleanups to e
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -21,6 +21,12 @@
+>    @@ -21,6 +21,14 @@
 >         - name: Install Dependencies
 >           package:
 >             name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-venv', 'python3-setuptools']
 >    +    - name: Install RHEL/CentOS/Rocky specific dependencies
 >    +      package:
 >    +        name: ['tmpwatch']
+>    +      when: ansible_os_family == 'RedHat'
 >    +    - name: Install Debian/Ubuntu specific dependencies
 >    +      package:
 >    +        name: ['tmpreaper']
+>    +      when: ansible_os_family == 'Debian'
 >       roles:
 >         - galaxyproject.galaxy
 >         - role: galaxyproject.miniconda

@@ -172,7 +172,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -44,6 +44,7 @@
+>    @@ -46,6 +46,7 @@
 >           become_user: "{{ galaxy_user_name }}"
 >         - geerlingguy.docker
 >         - usegalaxy_eu.rabbitmqserver

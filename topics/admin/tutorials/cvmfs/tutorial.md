@@ -184,11 +184,11 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -14,3 +14,5 @@
->       version: 0.0.8
+>       version: 0.0.12
 >     - name: galaxyproject.tusd
 >       version: 0.0.1
 >    +- src: galaxyproject.cvmfs
->    +  version: 0.2.13
+>    +  version: 0.2.21
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
@@ -309,7 +309,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -35,6 +35,7 @@
+>    @@ -37,6 +37,7 @@
 >         - galaxyproject.nginx
 >         - galaxyproject.gxadmin
 >         - galaxyproject.tusd

@@ -55,7 +55,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >     - name: usegalaxy_eu.rabbitmqserver
 >       version: 1.4.1
 >    +- src: galaxyproject.gxadmin
->    +  version: 0.0.8
+>    +  version: 0.0.12
 >    {% endraw %}
 >    ```
 >

@@ -270,7 +270,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +++ b/requirements.yml
 >    @@ -0,0 +1,12 @@
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.8
+>    +  version: 0.10.11
 >    +- src: galaxyproject.nginx
 >    +  version: 0.7.1
 >    +- src: galaxyproject.postgresql
@@ -2296,7 +2296,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -39,6 +39,28 @@ galaxy_config:
+>    @@ -39,6 +39,27 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -2321,7 +2321,6 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    allow_user_impersonation: true
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
->    +>>>>>>> 1c229da (admin/ansible-galaxy/0025: Add production facing vars)
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
@@ -2537,7 +2536,31 @@ If you've been following along you should have a production-ready Galaxy, secure
 
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
-{% snippet topics/admin/faqs/git-attributes.md %}
+> <hands-on-title>Using Git with Ansible Vaults</hands-on-title>
+> When looking at `git log` to see what you changed, you cannot easily look into
+> Ansible Vault changes: you just see the changes in the encrypted versions which
+> is unpleasant to read.
+> 
+> Instead we can use [`.gitattributes`](https://www.git-scm.com/docs/gitattributes) to tell `git` that we want to use a
+> different program to visualise differences between two versions of a file,
+> namely `ansible-vault`.
+> 
+> 1. Check your `git log -p` and see how the Vault changes look (you can type `/vault` to search). Notice that they're just changed encoded content.
+> 1. Create the file `.gitattributes` in the same folder as your `galaxy.yml` playbook, with the following contents:
+> 
+>    ```
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/.gitattributes
+>    @@ -0,0 +1 @@
+>    +group_vars/secret.yml diff=ansible-vault merge=binary
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add git attributes"}
+> 
+> 1. Try again to `git log -p` and look for the vault changes. Note that you can now see the decrypted content! Very useful.
+{: .hands_on}
 
 {% snippet topics/admin/faqs/missed-something.md step=1 %}
 

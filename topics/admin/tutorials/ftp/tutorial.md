@@ -216,7 +216,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -46,6 +46,7 @@
+>    @@ -48,6 +48,7 @@
 >         - usegalaxy_eu.rabbitmqserver
 >         - galaxyproject.tiaas2
 >         - galaxyproject.nginx
