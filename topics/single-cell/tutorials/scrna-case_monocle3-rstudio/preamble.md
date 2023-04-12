@@ -9,7 +9,7 @@ This tutorial is the next one in the [Single-cell RNA-seq: Case Study]({% link t
 ## Get data
 In the [Monocle3 in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}), we showed that Monocle3 works great with annotated data, but what if your data is not annotated yet? Is it still possible to use Monocle? The answer is yes, Monocle can annotate cells according to their type, which you will perform in this tutorial. 
 
-First, we need to retrieve the appropriate data. We will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). We will use the filtered AnnData object, before normalisation and annotation, generated in the [filtering tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). You can simply go to the history of this tutorial, find step `20: Filtered Object` and download it. For ease of use, that was already done for you and you can import the file from Zenodo below. 
+First, we need to retrieve the appropriate data. We will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). We will use the filtered AnnData object, before normalisation and annotation, generated in the [filtering tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) as step `20: Filtered Object`. However for this tutorial, you don't have to download any files on your computer or even import files to Galaxy! We will show you the whole analysis in R, starting from AnnData object! If you wish, you can get this file to your Galaxy history, following the step below, but you can also jump directly into JupyLab.
 
 > <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
 >
@@ -42,30 +42,6 @@ First, we need to retrieve the appropriate data. We will continue to work on the
 {: .hands_on}
 
 
-## Preparing the files
-Monocle uses *cell_data_set class* to hold expression data. This class requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. We will extract that information from our AnnData object. 
-
-><hands-on-title>Extract and download the input files</hands-on-title>
->
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_filtered`
->    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
-> 2. Rename {% icon galaxy-pencil %} the observations annotation `Cell metadata (obs)`
->
-> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_filtered`
->    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
-> 4. Rename {% icon galaxy-pencil %} the annotation of variables `Gene metadata (var)`
->
-> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_filtered`
->    - *"What to inspect?"*: `The full data matrix`
-> 6. Rename {% icon galaxy-pencil %} the output `Expression matrix`
->
-> 7. Download the generated files from your history. To do so, just click on the {% icon galaxy-save %} save icon for `Cell metadata (obs)`, `Gene metadata (var)` and `Expression matrix`. We will need those later!
->
-{: .hands_on}
-
 ## Launching JupyterLab
 
 {% icon warning %} Please note: this is only currently available on the [usegalaxy.eu](https://usegalaxy.eu) and [usegalaxy.org](https://usegalaxy.org) sites.
@@ -84,6 +60,8 @@ Welcome to JupyterLab!
 > Do NOT delete or close this notebook dataset in your history. YOU WILL LOSE IT!
 {: .warning}
 
+## Open the notebook
+
 You have two options for how to proceed with this JupyterLab tutorial - you can run the tutorial from a pre-populated notebook, or you can copy and paste the code for each step into a fresh notebook and run it. The initial instructions for both options are below.
 
 > <hands-on-title>Option 1: Open the notebook directly in JupyterLab</hands-on-title>
@@ -99,6 +77,8 @@ You have two options for how to proceed with this JupyterLab tutorial - you can 
 >
 > 3. Select the notebook that appears in the list of files on the left.
 >
+>
+> Remember that you can also download this {% icon notebook %} [Jupyter Notebook]({{ ipynbpath }}) from the {% icon galaxy_instance %} Supporting Materials in the Overview box at the beginning of this tutorial.
 {: .hands_on}
 
 > <hands-on-title>Option 2: Creating a notebook</hands-on-title>
@@ -129,15 +109,16 @@ If you followed the {% icon tip %} tip above, you should already have your Jupyt
 > 2. In the Terminal tab open, write the following, preferably one line at a time:
 > ```
 >conda install -c conda-forge -c bioconda r-monocle3
+>conda install -c conda-forge -c bioconda anndata
 >conda install -c conda-forge r-viridislite
 >conda install -c conda-forge bioconductor-biomart
 >```
-> 4. If you are asked at any point `Proceed ([y]/n)?`, type `y` - surely we want to proceed!
+> 3. If you are asked at any point `Proceed ([y]/n)?`, type `y` - surely we want to proceed!
 >
 {: .hands_on}
 
 
-Installation will take a while, so in the meantime, when it's running, you can upload the files you downloaded: the notebook and three data files - cell annotations, gene annotations and unprocessed expression matrix.
+Installation will take a while, so in the meantime, when it's running, you can open the notebook and follow the rest of this tutorial there!
 
 ><tip-title>Installation for RStudio users</tip-title>
 >
