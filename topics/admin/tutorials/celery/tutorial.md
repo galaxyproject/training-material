@@ -353,7 +353,7 @@ We can simply do that by starting an upload to our Galaxy.
 >    You should see an overview with active workers.  
 >    Keep that tab open
 > 2. In split view, open a second browser window and open you Galaxy page.
->    Click on {% icon galaxy-upload %}Upload Data, select a file from you computer and click upload.
+>    Click on {% icon galaxy-upload %}Upload Data, select a file from your computer and click `upload`.
 > 3. The Workers should now receive a new tasks. Click on `Succeeded` and then on the UUID of the last upload task.  
 >    You should see all its details here and the info that is was successful.
 {: .hands_on}
