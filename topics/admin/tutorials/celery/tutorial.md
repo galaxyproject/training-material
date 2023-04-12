@@ -287,7 +287,6 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        +# Flower
 >        +flower_python_version: python3
 >        +flower_app_dir: "{{ galaxy_root }}"
->        +flower_log_file: /var/log/flower
 >        +flower_python_path: "{{ galaxy_root }}/server/lib"
 >        +flower_venv_dir: "{{ galaxy_venv_dir }}"
 >        +flower_app_name: galaxy.celery
