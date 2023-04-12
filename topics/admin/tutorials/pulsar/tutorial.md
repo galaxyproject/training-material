@@ -148,7 +148,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >    +- name: geerlingguy.docker
 >    +  version: 6.1.0
 >    +- name: usegalaxy_eu.rabbitmqserver
->    +  version: 1.4.1
+>    +  version: 1.4.2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
@@ -290,7 +290,8 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +  image: rabbitmq:3.11
 >    +  hostname: "{{ inventory_hostname }}"
 >    +
->    +rabbitmq_plugins: rabbitmq_management
+>    +rabbitmq_plugins:
+>    +  - rabbitmq_management
 >    +
 >    +rabbitmq_config:
 >    +  listeners:
