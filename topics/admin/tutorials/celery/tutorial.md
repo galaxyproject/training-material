@@ -255,6 +255,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
 >        @@ -305,9 +305,16 @@ rabbitmq_users:
+>        rabbitmq_vhosts:
+>          - /pulsar/galaxy_au
+>        + - galaxy
+>        @@ .... @@
 >             password: "{{ vault_rabbitmq_admin_password }}"
 >             tags: administrator
 >             vhost: /
