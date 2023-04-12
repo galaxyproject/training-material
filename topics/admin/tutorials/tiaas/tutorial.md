@@ -90,7 +90,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -296,3 +296,8 @@ telegraf_plugins_extra:
+>    @@ -299,3 +299,8 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"

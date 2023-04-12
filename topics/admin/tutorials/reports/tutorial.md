@@ -70,10 +70,10 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -120,6 +120,11 @@ galaxy_config:
->             pools:
->               - job-handlers
+>    @@ -123,6 +123,11 @@ galaxy_config:
 >               - workflow-schedulers
+>           environment:
+>             DRMAA_LIBRARY_PATH: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
 >    +    reports:
 >    +      enable: true
 >    +      url_prefix: /reports
@@ -82,7 +82,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >     
 >     galaxy_dirs:
 >       - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
->    @@ -135,6 +140,8 @@ galaxy_config_templates:
+>    @@ -138,6 +143,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"

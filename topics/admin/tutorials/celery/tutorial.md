@@ -227,7 +227,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -230,6 +230,7 @@ rabbitmq_config:
+>        @@ -233,6 +233,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
 >           - /pulsar/galaxy_au
@@ -235,7 +235,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -239,6 +240,13 @@ rabbitmq_users:
+>        @@ -242,6 +243,13 @@ rabbitmq_users:
 >           - user: galaxy_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/galaxy_au
@@ -279,7 +279,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -260,3 +260,20 @@ tusd_instances:
+>        @@ -263,3 +263,20 @@ tusd_instances:
 >               - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
 >               - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
 >               - "-hooks-http-forward-headers=X-Api-Key,Cookie"
@@ -300,7 +300,6 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        +
 >        +flower_ui_users:
 >        +  - name: admin
->        +    password: "{{ vault_flower_user_password}}"
 >        {% endraw %}
 >        ```
 >        {: data-commit="Add requirement" data-ref="add-req"}

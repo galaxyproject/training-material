@@ -104,7 +104,7 @@ To demonstrate a real-life scenario and TPV's role in it, let's plan on setting 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -126,6 +126,9 @@ galaxy_config_templates:
+>    @@ -130,6 +130,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -178,16 +178,15 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -120,6 +120,9 @@ galaxy_config:
->               - job-handlers
->               - workflow-schedulers
+>    @@ -123,6 +123,8 @@ galaxy_config:
+>           environment:
+>             DRMAA_LIBRARY_PATH: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
 >     
 >    +galaxy_dirs:
 >    +  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
->    +
+>     
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
->         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TPV config dir"}
@@ -229,7 +228,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -24,34 +24,15 @@ galaxy_job_config:
+>    @@ -23,34 +23,15 @@ galaxy_job_config:
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
@@ -272,7 +271,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -123,6 +104,10 @@ galaxy_config:
+>    @@ -126,6 +107,10 @@ galaxy_config:
 >     galaxy_dirs:
 >       - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
 >     
@@ -445,7 +444,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -32,6 +32,7 @@ galaxy_job_config:
+>    @@ -31,6 +31,7 @@ galaxy_job_config:
 >             function: map_tool_to_destination
 >             rules_module: tpv.rules
 >             tpv_config_files:
@@ -596,7 +595,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -34,6 +34,11 @@ galaxy_job_config:
+>    @@ -33,6 +33,11 @@ galaxy_job_config:
 >             tpv_config_files:
 >               - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
 >               - "{{ tpv_config_dir }}/tpv_rules_local.yml"
@@ -608,7 +607,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -48,6 +53,7 @@ galaxy_config:
+>    @@ -47,6 +52,7 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -616,7 +615,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -110,6 +116,8 @@ galaxy_config_files:
+>    @@ -113,6 +119,8 @@ galaxy_config_files:
 >         dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
 >     
 >     galaxy_config_templates:

@@ -366,14 +366,25 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -8,6 +8,7 @@ galaxy_root: /srv/galaxy
->     galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
->     galaxy_commit_id: release_23.0
->     galaxy_force_checkout: true
->    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"] # TODO(natefoo) fix plz
->     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->     miniconda_version: 4.12.0
->     miniconda_channels: ['conda-forge', 'defaults']
+>    @@ -97,6 +97,8 @@ galaxy_config:
+>           # Other options that will be passed to gunicorn
+>           extra_args: '--forwarded-allow-ips="*"'
+>           preload: true
+>    +      environment:
+>    +        DRMAA_LIBRARY_PATH: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
+>         celery:
+>           concurrency: 2
+>           loglevel: DEBUG
+>    @@ -106,6 +108,9 @@ galaxy_config:
+>             pools:
+>               - job-handlers
+>               - workflow-schedulers
+>    +      environment:
+>    +        DRMAA_LIBRARY_PATH: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
+>    +
+>     
+>     galaxy_config_templates:
+>       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure DRMAA_LIBRARY_PATH"}
@@ -386,7 +397,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -19,6 +19,8 @@ galaxy_job_config:
+>    @@ -18,6 +18,8 @@ galaxy_job_config:
 >         local_runner:
 >           load: galaxy.jobs.runners.local:LocalJobRunner
 >           workers: 4
@@ -395,7 +406,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
->    @@ -27,6 +29,16 @@ galaxy_job_config:
+>    @@ -26,6 +28,16 @@ galaxy_job_config:
 >           local_env:
 >             runner: local_runner
 >             tmp_dir: true

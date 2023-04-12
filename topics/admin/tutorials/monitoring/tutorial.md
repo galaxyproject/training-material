@@ -503,10 +503,10 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -277,3 +277,12 @@ flower_broker_url: "amqp://flower:{{ vault_rabbitmq_password_flower }}@localhost
+>    @@ -280,3 +280,12 @@ flower_broker_url: "amqp://flower:{{ vault_rabbitmq_password_flower }}@localhost
+>     
 >     flower_ui_users:
 >       - name: admin
->         password: "{{ vault_flower_user_password}}"
 >    +
 >    +# Telegraf
 >    +telegraf_plugins_extra:
@@ -530,7 +530,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -95,6 +95,9 @@ galaxy_config:
+>    @@ -94,6 +94,9 @@ galaxy_config:
 >         # Data Library Directories
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
@@ -795,7 +795,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -289,3 +289,10 @@ telegraf_plugins_extra:
+>    @@ -292,3 +292,10 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000
