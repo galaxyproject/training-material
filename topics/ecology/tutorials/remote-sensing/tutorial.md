@@ -412,7 +412,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 > For instance it allows you to compute one of GEO BON EBV [Canopy Chlorophyll Content](https://portal.geobon.org/ebv-detail?id=13). This EBV is computed by GEO BON on the Netherlands, here you can compute it on which ever Sentinel 2 data you want by chosing to calculate the indice CCCI.
 {: .details}
 
-![A graph showing the Canopy Chlorophyl Content index according to the longitude and latitude](../../images/remote_sensing/ccci.png "Canopy Chlorophyl Content index graph")
+![A tabular showing the Canopy Chlorophyl Content index according to the longitude and latitude](../../images/remote_sensing/ccci.png "Canopy Chlorophyl Content index tabular")
 
 > <question-title></question-title>
 >
