@@ -7,9 +7,9 @@ questions:
 - How to get spectral and biodiversity indicators from remote sensing data ?
 - Which kind of ecosystem are you studying ? global or canopy data ?
 objectives:
-- Getting Sentinel 2 data and reformating them in a generalize way
+- Getting Sentinel 2 data and reformatting them in a generalized way
 - Computing spectral indices such as the NDVI
-- Calculating and vizualizing biodiversity indicators
+- Calculating and visualizing biodiversity indicators
 - Comparing with in-situ data
 time_estimation: 48H
 key_points:
@@ -38,7 +38,7 @@ So, we will compute biodiversity and spectral indices mainly using reflectance i
 
 > <details-title>Definition of reflectance</details-title>
 >
-> The reflectance is a porportion on reflected light on an area. It's the ratio between the electromagnetic incident wave on the area and the reflected wave. It's often a percentage between reflected intensity and inicident intensity assumed as energy quantity.
+> The reflectance is a proportion on reflected light on an area. It's the ratio between the electromagnetic incident wave on the area and the reflected wave. It's often a percentage between reflected intensity and incident intensity assumed as energy quantity.
 >
 {: .details}
 
@@ -77,7 +77,7 @@ In this tutorial, we'll be working on Sentinel 2 data extracted from the Theia L
 {: .agenda}
 
 > <warning-title>It can take a bit of time</warning-title>
-> As your processing heavy data some of the steps can take some time. Notably, the step **Create Biodiversity maps** can run for 2 days. We advise to let it run and proceed with the tutorial. Once, the **pre-processing** part is done all the steps can be done separatly. Thus, no need for you to wait the end of each tool before running another one.
+> As your processing heavy data some of the steps can take some time. Notably, the step **Create Biodiversity maps** can run for 2 days. We advise to let it run and proceed with the tutorial. Once, the **pre-processing** part is done all the steps can be done separately. Thus, no need for you to wait the end of each tool before running another one.
 {: .warning}
 
 ## Upload and pre-processing of the data
@@ -140,7 +140,7 @@ Using preprocS2 R package, this step provides a unique tool to read, crop, resam
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The 2 files in the **Refelectance** folder that finish by "_Refl" and "_Refl.hdr"
+> > 1. The 2 files in the **Reflectance** folder that finish by "_Refl" and "_Refl.hdr"
 > >
 > {: .solution}
 >
