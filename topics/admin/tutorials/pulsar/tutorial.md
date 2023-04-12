@@ -290,7 +290,8 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +  image: rabbitmq:3.11
 >    +  hostname: "{{ inventory_hostname }}"
 >    +
->    +rabbitmq_plugins: rabbitmq_management
+>    +rabbitmq_plugins:
+>    +  - rabbitmq_management
 >    +
 >    +rabbitmq_config:
 >    +  listeners:
