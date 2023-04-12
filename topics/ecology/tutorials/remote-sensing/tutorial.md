@@ -78,7 +78,7 @@ In this tutorial, we'll be working on Sentinel 2 data extracted from the Theia L
 
 > <warning-title>It can take a bit of time</warning-title>
 > As your processing heavy data some of the steps can take some time. Notably, the step **Create Biodiversity maps** can run for 2 days. We advise to let it run and proceed with the tutorial. Once, the **pre-processing** part is done all the steps can be done separatly. Thus, no need for you to wait the end of each tool before running another one.
-> {: .warning}
+{: .warning}
 
 ## Upload and pre-processing of the data
 
