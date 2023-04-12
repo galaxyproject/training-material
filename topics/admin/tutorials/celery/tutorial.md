@@ -64,8 +64,7 @@ From the Celery website:
 
 {% snippet topics/admin/faqs/git-gat-path.md tutorial="celery" %}
 
-> The agenda we're going to follow today is: We're going to enable and configure celery, install a Redis server, the Flower dashboard and start Celery workers.
-{: .spoken data-visual="gtn" data-target="#agenda"}
+The agenda we're going to follow today is: We're going to enable and configure celery, install a Redis server, the Flower dashboard and start Celery workers.
 
 # Installing and Configuring
 
@@ -90,9 +89,8 @@ To proceed from here it is expected that:
 >
 {: .comment}
 
-> Redis is a very popular key-value-store database. It is very fast and a good backend for Celery.
-> If you want to learn more about Redis, visit their website: (https://redis.io/)[https://redis.io/]
-{: .spoken data-visual="gtn" data-target="#preparations:redis" }
+Redis is a very popular key-value-store database. It is very fast and a good backend for Celery.
+If you want to learn more about Redis, visit their website: (https://redis.io/)[https://redis.io/]
 
 Good news: Celery is already installed in your Galaxy's virtual environment if you followed the last tutorials and completed the Galaxy installation successfully.  
 Also RabbitMQ should be up and running after you completed the Pulsar tutorial.
@@ -101,7 +99,6 @@ Still we need to add a few things to out Playbooks.
 If you want to learn more about Redis, visit their website: [https://redis.io/](https://redis.io/)
 Installing Redis with Galaxy-EU's Ansible role is fast and simple, too!
  - Flower is a powerful dashboard for Celery and can be installed in Galaxy's venv using our role.
- - GalaxyEU's [Systemd Ansible Role](https://github.com/usegalaxy-eu/ansible-galaxy-systemd ), which we need to spin up workers automatically and as background processes.
 
 
 
@@ -113,11 +110,6 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 If the terms "Ansible", "role" and "playbook" mean nothing to you, please checkout [the Ansible introduction slides]({% link topics/admin/tutorials/ansible/slides.html %}) and [the Ansible introduction tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %})
 
 {% snippet topics/admin/faqs/ansible_local.md %}
-
-> Okay, so let's get started. If we go back to our
-> tutorial here, it says that we need to install the roles mentioned above into our
-> requirements.yml and then add it to our Ansible.
-{: .spoken data-visual="gtn" data-target="#hands-on-set-up-redis-flower-systemd-and-celery-with-ansible"}
 
 > <hands-on-title>Set up Redis, Flower, Systemd and Celery with Ansible</hands-on-title>
 >
@@ -135,18 +127,13 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    +  version: 1.8.0
 >    +- name: usegalaxy_eu.flower
 >    +  version: 1.0.1
->    +- name: usegalaxy_eu.galaxy_systemd
->    +  version: 2.1.0
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
 >
->    > Okay, so the first thing I'm going to do is I'm going to add the Redis, Flower and Systemd
->    > roles to the requirements.yml.
->    > Edit requirements.yml and we need to add this to the bottom of that file. Copy. Paste. And save it.
->    {: .spoken data-visual="terminal" data-ref="add-req"}
+>    Edit requirements.yml and we need to add this to the bottom of that file. Copy. Paste. And save it.
 >
 > 2. Install the role with:
 >
@@ -156,17 +143,6 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    > ```
 >    > {: data-cmd="true" data-ref="req-install"}
 >    {: .code-in}
->
->    > And now install the role into our local Ansible scripts using the
->    > ansible-galaxy command. And as you can see, it's downloading the
->    > roles.
->    {: .spoken data-visual="terminal" data-ref="req-install"}
->
->    > And if we look into roles now you can see that we have them.
->    {: .spoken data-visual="terminal" data-cmd="ls roles/"}
->
->    > Right, clear the screen.
->    {: .spoken data-visual="terminal" data-cmd="clear"}
 >
 > 3. Let's go now through all the Roles step-by-step:
 >
@@ -210,7 +186,6 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    
 >        ```yaml
 >        vault_rabbitmq_password_flower: "a-really-long-password-here"
->        vault_rabbitmq_password_galaxy: "a-different-really-long-password"
 >        vault_flower_user_password: "another-different-really-long-password"
 >        ```
 >
@@ -254,6 +229,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
+>         rabbitmq_vhosts:
+>        +  - galaxy
+>           - /pulsar/galaxy_au
 >        @@ -305,9 +305,16 @@ rabbitmq_users:
 >        rabbitmq_vhosts:
 >          - /pulsar/galaxy_au
@@ -310,9 +288,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >        +
 >        +# Flower
 >        +flower_python_version: python3
->        +flower_app_dir: "{{ galaxy_root }}"
+>        +flower_app_dir: "{{ galaxy_root }}/var/"
 >        +flower_log_file: /var/log/flower
->        +flower_python_path: server/lib
+>        +flower_python_path: "{{ galaxy_root }}/server/lib"
 >        +flower_venv_dir: "{{ galaxy_venv_dir }}"
 >        +flower_app_name: galaxy.celery
 >        +flower_db_file: "{{ galaxy_root }}/var/flower.db"
@@ -342,60 +320,16 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >               ansible.builtin.cron:
 >        {% endraw %}
 >        ```
->        {: data-commit="Add flower role" data-ref="add-req"}
+>        {: data-commit="Add requirement" data-ref="add-req"}
 >
-> 4. Now it is time to change the `group_vars/galaxyservers.yml` and enable celery in galaxy.gravity config.
->    Add the following lines to your file:
->     {% raw %}
->     ```diff
->     --- a/group_vars/galaxyservers.yml
->     +++ b/group_vars/galaxyservers.yml
->     @@ -174,6 +174,11 @@ galaxy_config:
->            preload: true
->          celery:
->            concurrency: 2
->     +      enable_celery_beat: true
->     +      enable: true
->     +      queues: celery,galaxy.internal,galaxy.external
->     +      pool: threads
->     +      memory_limit: 2G
->            loglevel: DEBUG
->          handlers:
->            handler
->     {% endraw %}
->     ```
->     {: data-commit="Add celery" data-ref="add-req"}
->     Now add the second part, Galaxy's Celery configuration:
->     {% raw %}
->     ```diff
->     --- a/group_vars/galaxyservers.yml
->     +++ b/group_vars/galaxyservers.yml
->     @@ -191,6 +191,9 @@ galaxy_config:
->            url_prefix: /reports
->            bind: "unix:{{ galaxy_mutable_config_dir }}/reports.sock"
->            config_file: "{{ galaxy_config_dir }}/reports.yml"
->     +    celery_conf:
->     +      result_backend: "redis://localhost:6379/0"
->     +      enable_celery_tasks: true
->      
->      galaxy_config_templates:
->        - src: templates/galaxy/config/container_resolvers_conf.yml.j2
->     {% endraw %}
->     ```
->     {: data-commit="Add celery-redis" data-ref="add-req"}
+> 5. Run the playbook
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in }
 {: .hands_on}
 
-# Test Celery
-Now that everything is running, we want to test celery and watch it processing tasks.
-We can simply do that by starting an upload to our Galaxy.
-
-> <hands-on-title>Test Celery and monitor tasks with Flower</hands-on-title>
-> 1. First, open a new tab and type `localhost:5555` then log in with `username: admin` and you password.
->    You should see an overview with active workers.  
->    Keep that tab open
-> 2. In split view, open a second browser window and open you Galaxy page.
->    Click on {% icon galaxy-upload %}Upload Data, select a file from your computer and click `upload`.
-> 3. The Workers should now receive a new tasks. Click on `Succeeded` and then on the UUID of the last upload task.  
->    You should see all its details here and the info that is was successful.
->
-{: .hands_on}
+Congratulations, you've set up Redis and Flower!
