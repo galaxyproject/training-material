@@ -109,6 +109,10 @@ cmdhandle.write("echo '[galaxyservers]' > ~/.hosts\n")
 cmdhandle.write('echo "$(hostname -f) ansible_connection=local ansible_user=$(whoami)"  >> ~/.hosts\n')
 cmdhandle.write("echo '[pulsarservers]' >> ~/.hosts\n")
 cmdhandle.write('echo "$(hostname -f) ansible_connection=local ansible_user=$(whoami)"  >> ~/.hosts\n')
+cmdhandle.write("echo '[dbservers:children]' >> ~/.hosts\n")
+cmdhandle.write("echo 'galaxyservers' >> ~/.hosts\n")
+cmdhandle.write("echo '[monitoring]' >> ~/.hosts\n")
+cmdhandle.write('echo "$(hostname -f) ansible_connection=local ansible_user=$(whoami)"  >> ~/.hosts\n')
 cmdhandle.write('export GALAXY_HOSTNAME="$(hostname -f)"\n')
 cmdhandle.write('export GALAXY_API_KEY=adminkey\n')
 cmdhandle.write("## The students should use a random password, we override with 'password' for reproducibility\n")
@@ -163,6 +167,7 @@ for idx, diff in enumerate(diffs):
             else:
                 line = line.strip()
                 line = line.replace('https://your-galaxy', 'https://$(hostname -f)')
+                line = line.replace('https://galaxy.example.org', 'https://$(hostname -f)')
                 line = line.replace('<api-key>', 'adminkey')
                 cmdhandle.write(line + "\n")
     elif 'data-test' in diff[-1]:

@@ -63,7 +63,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -36,3 +36,5 @@
+>    @@ -40,3 +40,5 @@
 >       version: 0.14.2
 >     - src: dj-wasabi.telegraf
 >       version: 0.12.0
@@ -90,18 +90,15 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -243,6 +243,11 @@ telegraf_plugins_extra:
+>    @@ -298,3 +298,8 @@ telegraf_plugins_extra:
+>           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"
->     
+>    +
 >    +# TIaaS setup
 >    +tiaas_dir: /srv/tiaas
 >    +tiaas_admin_user: admin
 >    +tiaas_admin_pass: changeme
->    +
->     # TUS
->     galaxy_tusd_port: 1080
->     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure tiaas"}
@@ -110,20 +107,21 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -8,6 +8,7 @@ pip_package: python3-pip                               # geerlingguy.pip
+>    --- a/group_vars/dbservers.yml
+>    +++ b/group_vars/dbservers.yml
+>    @@ -3,6 +3,7 @@
 >     postgresql_objects_users:
->       - name: galaxy
+>       - name: "{{ galaxy_user_name }}"
 >       - name: telegraf
 >    +  - name: tiaas
 >     postgresql_objects_databases:
->       - name: galaxy
->         owner: galaxy
->    @@ -16,6 +17,27 @@ postgresql_objects_privileges:
+>       - name: "{{ galaxy_db_name }}"
+>         owner: "{{ galaxy_user_name }}"
+>    @@ -11,7 +12,26 @@ postgresql_objects_privileges:
 >         roles: telegraf
 >         privs: SELECT
 >         objs: ALL_IN_SCHEMA
+>    -
 >    +  - database: galaxy
 >    +    roles: tiaas
 >    +    objs: galaxy_user,galaxy_session,job,history,workflow,workflow_invocation
@@ -144,10 +142,9 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +    objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
 >    +    type: sequence
 >    +    privs: USAGE,SELECT
->    +
+>     
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
->     postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add database privileges for TIaaS"}
@@ -172,12 +169,12 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -31,6 +31,7 @@
->           become_user: "{{ galaxy_user.name }}"
+>    @@ -50,6 +50,7 @@
+>         - galaxyproject.nginx
 >         - geerlingguy.docker
 >         - usegalaxy_eu.rabbitmqserver
 >    +    - galaxyproject.tiaas2
->         - galaxyproject.nginx
+>         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
 >    {% endraw %}
@@ -190,7 +187,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -90,4 +90,5 @@ server {
+>    @@ -99,4 +99,5 @@ server {
 >             proxy_set_header Host $http_host;
 >         }
 >     
@@ -299,7 +296,7 @@ Let's see it in action!
 
 While observability for teachers or trainers is already a huge benefit, one of the primary benefits of {TIaaS} is that your jobs get sent to dedicated compute resources, which won't be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.
 
-In order to achieve this, we first need some way to *sort* the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *sorting hat* to figure out where jobs belong.
+In order to achieve this, we first need some way to *sort* the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *traffic controller* to figure out where jobs belong.
 
 
 > <hands-on-title>Writing a dynamic job destination</hands-on-title>
@@ -309,13 +306,13 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/dynamic_job_rules/hogwarts.py
+>    +++ b/templates/galaxy/dynamic_job_rules/traffic.py
 >    @@ -0,0 +1,19 @@
 >    +from galaxy.jobs import JobDestination
 >    +from galaxy.jobs.mapper import JobMappingException
 >    +import os
 >    +
->    +def sorting_hat(app, user):
+>    +def traffic_controller(app, user):
 >    +    # Check that the user is not anonymous
 >    +    if not user:
 >    +        return app.job_config.get_destination('slurm')
@@ -332,7 +329,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    +    return app.job_config.get_destination('slurm')
 >    {% endraw %}
 >    ```
->    {: data-commit="Setup sorting hat for jobs"}
+>    {: data-commit="Setup traffic controller for jobs"}
 >
 >    This destination will check that the `user_email` is in a training group (role starting with `training-`).
 >
@@ -340,16 +337,20 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -137,6 +137,7 @@ galaxy_local_tools:
->     galaxy_dynamic_job_rules:
->     - my_rules.py
->     - map_resources.py
->    +- hogwarts.py
->     
->     # systemd
->     galaxy_manage_systemd: true
+>    --- a/files/galaxy/config/tpv_rules_local.yml
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -8,6 +8,11 @@ tools:
+>         mem: cores * 4
+>         params:
+>           walltime: 8
+>    +    rules:
+>    +      - id: tiaas
+>    +        if: |
+>    +          # TODO
+>    +          # ...
+>       .*testing.*:
+>         cores: 2
+>         mem: cores * 4
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}
@@ -358,33 +359,21 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -16,7 +16,7 @@ runners:
->         manager: _default_
->     
->     execution:
->    -  default: slurm
->    +  default: sorting_hat
->       environments:
->         local_dest:
->           runner: local_runner
->    @@ -73,6 +73,10 @@ execution:
->         dynamic_cores_time:
->           runner: dynamic
->           function: dynamic_cores_time
->    +    # Next year this will be replaced with the TPV.
->    +    sorting_hat:
->    +      runner: dynamic
->    +      function: sorting_hat
->     
->     resources:
->       default: default
+>    --- a/files/galaxy/config/tpv_rules_local.yml
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -13,6 +13,7 @@ tools:
+>             if: |
+>               # TODO
+>               # ...
+>    +          # TODO
+>       .*testing.*:
+>         cores: 2
+>         mem: cores * 4
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup job conf"}
 >
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.yml.j2`. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.yml.j2`. Additionally it will send all jobs through the traffic controller, but we want upload jobs to stay local. They should always run locally.
 >
 > 6. Run the playbook
 >
@@ -409,4 +398,6 @@ Congratulations! you have now set up {TIaaS} on your Galaxy server.
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=12 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=13 %}

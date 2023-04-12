@@ -85,7 +85,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -38,3 +38,5 @@
+>    @@ -42,3 +42,5 @@
 >       version: 0.12.0
 >     - src: galaxyproject.tiaas2
 >       version: 2.1.3
@@ -110,14 +110,16 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -159,9 +159,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
+>    @@ -157,11 +157,13 @@ certbot_environment: staging
+>     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
->       - nginx
->       - rabbitmq
+>       - www-data
 >    +  - proftpd
+>     certbot_share_key_ids:
+>       - "999:999"
 >     certbot_post_renewal: |
 >         systemctl restart nginx || true
->         systemctl restart rabbitmq-server || true
+>         docker restart rabbit_hole || true
 >    +    systemctl restart proftpd || true
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
@@ -134,16 +136,16 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -100,6 +100,9 @@ galaxy_config:
->         outputs_to_working_directory: true
->         # TUS
->         tus_upload_store: /data/tus
+>    @@ -98,6 +98,9 @@ galaxy_config:
+>         # Monitoring
+>         statsd_host: localhost
+>         statsd_influxdb: true
 >    +    # FTP
 >    +    ftp_upload_dir: /data/uploads
 >    +    ftp_upload_site: "{{ inventory_hostname }}"
 >       gravity:
+>         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add ftp vars in galaxy"}
@@ -156,10 +158,11 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -259,6 +259,27 @@ rabbitmq_users:
->         password: "{{ vault_rabbitmq_password_vhost }}"
->         vhost: /pulsar/galaxy_au
->     
+>    @@ -315,3 +315,24 @@ telegraf_plugins_extra:
+>     tiaas_dir: /srv/tiaas
+>     tiaas_admin_user: admin
+>     tiaas_admin_pass: changeme
+>    +
 >    +# Proftpd:
 >    +proftpd_galaxy_auth: yes
 >    +galaxy_ftp_upload_dir: "{{ galaxy_config.galaxy.ftp_upload_dir }}"
@@ -180,10 +183,6 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    +  - PassivePorts: 56000 60000
 >    +proftpd_use_mod_tls_shmcache: false
 >    +proftpd_tls_options: NoSessionReuseRequired
->    +
->     # Telegraf
->     telegraf_plugins_extra:
->       listen_galaxy_routes:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add proftpd variables"}
@@ -216,14 +215,14 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -33,6 +33,7 @@
->         - usegalaxy_eu.rabbitmqserver
->         - galaxyproject.tiaas2
+>    @@ -48,6 +48,7 @@
+>         - geerlingguy.redis
+>         - usegalaxy_eu.flower
 >         - galaxyproject.nginx
 >    +    - galaxyproject.proftpd
->         - galaxyproject.tusd
->         - galaxyproject.cvmfs
->         - galaxyproject.gxadmin
+>         - geerlingguy.docker
+>         - usegalaxy_eu.rabbitmqserver
+>         - galaxyproject.tiaas2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook"}
@@ -394,4 +393,6 @@ It's working!
 
 Congratulations! Let your users know this is an option, many of them will prefer to start large uploads from an FTP client.
 
-{% snippet topics/admin/faqs/missed-something.md step=14 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=15 %}

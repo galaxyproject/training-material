@@ -460,6 +460,22 @@ module GtnLinter
     }
   end
 
+  def self.new_more_accessible_boxes_agenda(contents)
+    #  \#\#\#
+    self.find_matching_texts(contents, /> (###\s+Agenda\s*)/)
+        .map { |idx, text, selected|
+      ReviewDogEmitter.error(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        replacement: "<agenda-title></agenda-title>",
+        message: "We have developed a new syntax for box titles, please consider using this instead.",
+        code: "GTN:010",
+      )
+    }
+  end
+
   def self.no_target_blank(contents)
     self.find_matching_texts(contents, /target=("_blank"|'_blank')/)
         .map { |idx, text, selected|
@@ -598,6 +614,7 @@ module GtnLinter
       *bad_tool_links(contents),
       *check_tool_link(contents),
       *new_more_accessible_boxes(contents),
+      *new_more_accessible_boxes_agenda(contents),
       *no_target_blank(contents),
       *check_bad_link(contents),
       *check_looks_like_heading(contents),
