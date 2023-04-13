@@ -10,6 +10,7 @@ objectives:
   - Configure and start Celery workers
   - Install Flower to the Galaxy venv and configure it
   - Use an Ansible playbook for all of the above.
+  - Monitor a Celery task using the Flower dashboard
 time_estimation: "1h"
 key_points:
 contributions:
@@ -33,7 +34,7 @@ tags:
 # Overview
 
 
-Celery is a distributed task queue written in Python that can spawn multiple workers and enables asynchronous task processing on multiple nodes. It supports scheduling, but can be used for real-time operations.
+Celery is a distributed task queue written in Python that can spawn multiple workers and enables asynchronous task processing on multiple nodes. It supports scheduling, but focuses more on real-time operations.
 
 From the Celery website:
 
@@ -84,9 +85,7 @@ To proceed from here it is expected that:
 >    - 22 for SSH, this can be a different port or via VPN or similar.
 >    - 80 for HTTP, this needs to be available to the world if you want to follow the LetsEncrypt portion of the tutorial.
 >    - 443 for HTTPs, this needs to be available to the world if you want to follow the LetsEncrypt portion of the tutorial.
->    - 5555 for the Flower dashboard
 >    - 5671 for AMQP for Pulsar, needed if you plan to setup Pulsar for remote job running.
->    - 6379 for Redis
 >
 {: .comment}
 
@@ -118,7 +117,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    +- name: geerlingguy.redis
 >    +  version: 1.8.0
 >    +- name: usegalaxy_eu.flower
->    +  version: 1.0.1
+>    +  version: 1.0.2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
@@ -220,7 +219,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >
 >        -->
 >
->        This is going in the vault as they are secrets we need to set. Both of our services, Galaxy and Pulsar, need these variables, so we'll need to make sure they're in both playbooks. Both Galaxy in the job configuration, and Pulsar in its configuration.
+>        This is going in the vault as they are secrets we need to set. Flower needs it's own RabbitMQ user with admin access and we want a different vhost for galaxy and celery.
 >
 >        Replace both with long random (or not) string.  
 >        Now add new users to the RabbitMQ configuration:
@@ -322,7 +321,49 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >             - usegalaxy_eu.rabbitmqserver
 >        {% endraw %}
 >        ```
->        {: data-commit="Add flower to playbook"}
+>        {: data-commit="Add flower role" data-ref="add-req"}
+>
+> 4. Now it is time to change the `group_vars/galaxyservers.yml` and enable celery in galaxy.gravity config.
+>    Add the following lines to your file:
+>     {% raw %}
+>     ```diff
+>     --- a/group_vars/galaxyservers.yml
+>     +++ b/group_vars/galaxyservers.yml
+>     @@ -174,6 +174,11 @@ galaxy_config:
+>            preload: true
+>          celery:
+>            concurrency: 2
+>     +      enable_celery_beat: true
+>     +      enable: true
+>     +      queues: celery,galaxy.internal,galaxy.external
+>     +      pool: threads
+>     +      memory_limit: 2G
+>            loglevel: DEBUG
+>          handlers:
+>            handler
+>     {% endraw %}
+>     ```
+>     {: data-commit="Add celery" data-ref="add-req"}
+>
+>     Now add the second part, Galaxy's Celery configuration:
+>     {% raw %}
+>     ```diff
+>     --- a/group_vars/galaxyservers.yml
+>     +++ b/group_vars/galaxyservers.yml
+>     @@ -191,6 +191,9 @@ galaxy_config:
+>            url_prefix: /reports
+>            bind: "unix:{{ galaxy_mutable_config_dir }}/reports.sock"
+>            config_file: "{{ galaxy_config_dir }}/reports.yml"
+>     +    amqp_internal_connection: "pyamqp://galaxy:{{ vault_rabbitmq_password_galaxy }}@localhost:5671/galaxy?ssl=1"
+>     +    celery_conf:
+>     +      result_backend: "redis://localhost:6379/0"
+>     +      enable_celery_tasks: true
+>      
+>      galaxy_config_templates:
+>        - src: templates/galaxy/config/container_resolvers_conf.yml.j2
+>     {% endraw %}
+>     ```
+>     {: data-commit="Add celery-redis" data-ref="add-req"}
 >
 > 1. And finally expose it via nginx:
 >
@@ -348,14 +389,31 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```
 >        {: data-commit="Add nginx routes"}
 >
-> 5. Run the playbook
+> 5. We are done with the changes and you can enter the command to run your playbook:
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
 >    > {: data-cmd="true"}
->    {: .code-in }
+>    {: .code-in}
+>    This should also restart Galaxy and spawn the amount of Celery workers, that we defined in the Gravity configuration.
+>
+{: .hands_on}
+
+# Test Celery
+
+Now that everything is running, we want to test celery and watch it processing tasks.
+We can simply do that by starting an upload to our Galaxy.
+
+> <hands-on-title>Test Celery and monitor tasks with Flower</hands-on-title>
+> 1. First, open a new tab and enter your machines hostname followed by `/flower/dashboard` then log in with `username: admin` and you password.
+>    You should see an overview with active workers.  
+>    Keep that tab open
+> 2. In split view, open a second browser window and open you Galaxy page.
+>    Click on {% icon galaxy-upload %} Upload Data, select a file from your computer and click `upload`.
+> 3. The Workers should now receive a new tasks. Click on `Succeeded` and then on the UUID of the last upload task.  
+>    You should see all its details here and the info that is was successful.
 {: .hands_on}
 
 {% snippet topics/admin/faqs/missed-something.md step=11 %}
