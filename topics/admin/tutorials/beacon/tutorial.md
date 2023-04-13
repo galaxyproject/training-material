@@ -93,7 +93,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -44,3 +44,7 @@
->       version: 2.1.3
+>       version: 2.1.5
 >     - src: galaxyproject.proftpd
 >       version: 0.3.1
 >    +- name: paprikant.beacon

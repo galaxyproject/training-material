@@ -88,7 +88,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    @@ -42,3 +42,5 @@
 >       version: 0.12.0
 >     - src: galaxyproject.tiaas2
->       version: 2.1.3
+>       version: 2.1.5
 >    +- src: galaxyproject.proftpd
 >    +  version: 0.3.1
 >    {% endraw %}
