@@ -1,5 +1,16 @@
 module Jekyll
   module DurationFilter
+
+    ##
+    # This function converts a duration string into a human readable string.
+    # Params:
+    # +duration+:: The duration string to convert (e.g. 1H30M, RFC 3339 formatted minus the leading P/T)
+    # Returns:
+    # +String+:: The human readable string
+    #
+    # Example:
+    #  {{ "T1H30M" | duration_to_human }}
+    #  => "1 hour 30 minutes"
     def duration_to_human(duration)
       # Match the different parts of the string, must match entire string or it will fail.
       match = /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/.match(duration)

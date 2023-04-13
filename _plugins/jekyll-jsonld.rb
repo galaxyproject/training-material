@@ -20,7 +20,17 @@ module Jekyll
       "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
     }
 
-
+    ##
+    # Generate the Dublin Core metadata for a material.
+    # Parmaeters:
+    # +material+:: The material to generate the metadata for.
+    # +site+:: The site object.
+    # Returns:
+    # A string containing the metadata.
+    #
+    # Example:
+    #  {{ material | generate_dublin_core: site }}
+    #  => <meta name="DC.identifier" content="..." />
     def generate_dublin_core(material, site)
       if material.key?('data') && material['data'].fetch('type', 'none') != "tutorial_hands_on"
         return

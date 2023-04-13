@@ -37,6 +37,10 @@ module Jekyll
       datastructure
     end
 
+    ##
+    # This generates the author pages
+    # Params
+    # +site+:: The site object
     def generate(site)
       if site.layouts.key? 'contributor_index'
         dir = 'hall-of-fame'
