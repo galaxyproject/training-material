@@ -1,11 +1,42 @@
 ---
-layout: base
+layout: page
 ---
+
+{% assign pathways = site.pages | where: "layout", "learning-pathway" %}
+
 
 # Learning Pathways
 
-Learning pathways are sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building knowledge as you go. We always recommend to follow the tutorials in the order they are listed in the pathway.
+Learning pathways are sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building up knowledge as you go. We always recommend to follow the tutorials in the order they are listed in the pathway.
 
-<!-- TODO: present as cards? -->
+<!-- list all available pathways as cards  -->
+<div class="pathway">
+{% for path in pathways %}
 
-[Intro to Galaxy and Genomics](intro-to-galaxy-and-genomics.html)
+{% assign coverimage = path.coverimage | default: "/assets/images/GTN.png" %}
+{% assign coverimagealt = path.coverimagealt | default: "GTN logo with a multi-coloured star and the words Galaxy Training Network"%}
+<div class="card pathwayitem">
+ <div class="card-header">
+   <a href="{{site.baseurl}}{{path.url}}"><h3 class="card-title">{{path.title}}</h3></a>
+ </div>
+ <div class="row no-gutters">
+  <div class="col-sm-5">
+   <img class="card-img pathwaycover" src="{{site.baseurl}}{{coverimage}}" alt="{{ coverimagealt }}" loading="lazy">
+  </div>
+  <div class="col-sm-7">
+   <div class="card-body">
+   {% for tag in path.tags %}
+   <span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag  }}</span>
+    {% endfor %}
+   <hr/>
+   <p class="card-text">
+     {{ path.description }}
+   </p>
+   <a href="{{site.baseurl}}{{path.url}}" class="btn btn-primary">View Learning Pathway</a>
+   </div>
+  </div>
+ </div>
+</div>
+
+{% endfor %}
+</div>
