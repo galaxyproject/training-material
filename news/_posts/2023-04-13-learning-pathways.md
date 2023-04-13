@@ -17,3 +17,7 @@ Teaching with Galaxy? Learning pathways are an ideal starting point to build the
 
 Want to add your own learning path? Check out this [FAQ]({% link topics/contributing/faqs/learning-pathways.md %}) for instructions. We very much welcome and encourage contributions of learning pathways!
 
+<a href="{% link learning-pathways/ %}" class="btn btn-primary">View Learning Pathways</a>
+
+<a href="{% link topics/contributing/faqs/learning-pathways.md %}" class="btn btn-primary">Learn how to add a Learning Pathway</a>
+
