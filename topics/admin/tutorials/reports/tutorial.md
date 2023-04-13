@@ -80,9 +80,9 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    +      bind: "unix:{{ galaxy_mutable_config_dir }}/reports.sock"
 >    +      config_file: "{{ galaxy_config_dir }}/reports.yml"
 >     
->     galaxy_dirs:
+>     galaxy_extra_dirs:
 >       - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
->    @@ -146,6 +151,8 @@ galaxy_config_templates:
+>    @@ -150,6 +155,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
