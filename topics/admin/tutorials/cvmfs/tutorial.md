@@ -92,7 +92,9 @@ From the Cern website:
 > well. So we're just going to get on with things.
 {: .spoken data-visual="gtn" data-target="#cvmfs-quote"}
 
-[A slideshow presentation on this subject is available](slides.html). More details on the usegalaxy.org (Galaxy Main's) [reference data setup and CVMFS system](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data).
+[A slideshow presentation on this subject]({% link topics/admin/tutorials/cvmfs/slides.html %}) is available. More [details are available on usegalaxy.org (Galaxy Main's) reference data setup](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data) and CVMFS system.
+
+This exercise uses Ansible to install and configure CVMFS and Galaxy's access to CVMFS. For a tutorial that does not use Ansible and gives a closer look at how reference data is configured in Galaxy, see [the Reference Data with CVMFS without Ansible tutorial]({% link topics/admin/tutorials/cvmfs-manual/tutorial.md %}).
 
 > <agenda-title></agenda-title>
 >
@@ -182,11 +184,11 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -14,3 +14,5 @@
->       version: 0.1.5
+>       version: 0.0.12
 >     - name: galaxyproject.tusd
 >       version: 0.0.1
 >    +- src: galaxyproject.cvmfs
->    +  version: 0.2.13
+>    +  version: 0.2.21
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
@@ -269,9 +271,13 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    {% raw %}
 >    ```diff
->    --- /dev/null
+>    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -0,0 +1,4 @@
+>    @@ -6,3 +6,8 @@ certbot_virtualenv_package_name: python3-venv     # usegalaxy_eu.certbot
+>     # Common variables needed by all hosts
+>     galaxy_user_name: galaxy
+>     galaxy_db_name: galaxy
+>    +
 >    +# CVMFS vars
 >    +cvmfs_role: client
 >    +galaxy_cvmfs_repos_enabled: config-repo
@@ -303,11 +309,14 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -20,3 +20,4 @@
->           become_user: "{{ galaxy_user.name }}"
+>    @@ -37,6 +37,7 @@
 >         - galaxyproject.nginx
+>         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >    +    - galaxyproject.cvmfs
+>       post_tasks:
+>         - name: Setup gxadmin cleanup task
+>           ansible.builtin.cron:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook" data-ref="pb"}
@@ -497,14 +506,15 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
+>    @@ -63,6 +63,8 @@ galaxy_config:
+>         outputs_to_working_directory: true
+>         # TUS
+>         tus_upload_store: /data/tus
+>    +    # CVMFS
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->         brand: "🧬🔬🚀"
->         admin_users: admin@example.org
->         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tool_data_table_config_path to group variables" data-ref="gvconf"}
@@ -591,7 +601,9 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=5 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=4 %}
 
 # Common Production Questions
 

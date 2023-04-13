@@ -93,7 +93,7 @@ Your "History" is in the panel at the right.
 >
 >    > <comment-title></comment-title>
 >    >
->    > In some previous version of Galaxy, you will need to clck on the history name to renmae it as shown here:
+>    > In some previous versions of Galaxy, you will need to click on the history name to rename it as shown here:
 >    > ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value.](../../../../shared/images/rename_history_old.png){:width="320px"}
 >    {: .comment}
 >

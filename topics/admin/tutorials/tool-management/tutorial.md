@@ -49,10 +49,10 @@ To run this tutorial, you will need to [install Ephemeris](https://ephemeris.rea
 
 > <tip-title>Installing Ephemeris in a Python virtual environment</tip-title>
 >
-> 1. Install `virtualenv` if it is not already available. On Ubuntu this can be done with `sudo apt install virtualenv`
+> 1. Install the Python `venv` package if it is not already available. On Ubuntu this can be done with `sudo apt install python3-venv`
 > 2. Create a virtual environment just for ephemeris, activate it and install ephemeris inside it:
 >    ```console
->    virtualenv -p python3 ~/ephemeris_venv
+>    python3 -m venv ~/ephemeris_venv
 >    . ~/ephemeris_venv/bin/activate
 >    pip install ephemeris
 >    ```
@@ -140,7 +140,7 @@ There are two ways to install tools, depending on how you specify the tools to i
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```bash
->    > > shed-tools install -g https://your-galaxy -a <api-key> --name bwa --owner devteam --section_label Mapping
+>    > > shed-tools install -g https://galaxy.example.org -a <api-key> --name bwa --owner devteam --section_label Mapping
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .solution}
@@ -178,7 +178,7 @@ For that, you can install from a YAML file:
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```bash
->    > > shed-tools install -g https://your-galaxy -a <api-key> -t workflow_tools.yml
+>    > > shed-tools install -g https://galaxy.example.org -a <api-key> -t workflow_tools.yml
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .solution}
@@ -193,17 +193,7 @@ For that, you can install from a YAML file:
 
 Occasionally the tool installation may fail due to network issues; if it does, just re-run the `shed-tools` installation process until it succeeds. This is a known issue the developers are working on.
 
-> <tip-title>Opening a split screen in byobu</tip-title>
-> <kbd>Shift-F2</kbd>: Create a horizontal split
->
-> <kbd>Shift-Left/Right/Up/Down</kbd>: Move focus among splits
->
-> <kbd>Ctrl-F6</kbd>:  Close split in focus
->
-> <kbd>Ctrl-D</kbd>:  (Linux, Mac users) Close split in focus
->
-> There are more byobu commands described in this [gist](https://gist.github.com/devhero/7b9a7281db0ac4ba683f)
-{: .tip}
+{% snippet topics/admin/faqs/byobu-shortcuts.md %}
 
 > <tip-title>Can I install tools without restarting?</tip-title>
 > Yes. The default tool config (`config/tool_conf.xml.sample`, copy to `config/tool_conf.xml` to modify) has an option, `monitor="true"` set in the root `<toolbox>` tag. This instructs Galaxy to watch the tool files referenced in that config and load or reload them as necessary. It will also add any tools you have added.
@@ -229,7 +219,7 @@ Having the tools installed is a good first step, but your users will expect that
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```bash
->    > > shed-tools test -g https://your-galaxy -a <api-key> --name bamtools_filter --owner devteam
+>    > > shed-tools test -g https://galaxy.example.org -a <api-key> --name bamtools_filter --owner devteam
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .solution}
@@ -330,8 +320,12 @@ If running ephemeris directly is not your preference, there is an Ansible [role]
 > Sometimes the toolbox will fail to reload. You can correct for this by manually triggering the toolbox reload with a query:
 >
 > ```console
-> curl -X PUT https://<your-galaxy>/api/configuration/toolbox -H "x-api-key: $GALAXY_API_KEY"
+> curl -X PUT https://galaxy.example.org/api/configuration/toolbox -H "x-api-key: $GALAXY_API_KEY"
 > ```
 >
 > This will request the toolbox to reload and you can check after if it's discovered your newly installed tools.
 {: .tip}
+
+<!--
+{% snippet topics/admin/faqs/missed-something.md step=6 %}
+-->

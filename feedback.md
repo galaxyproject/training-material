@@ -237,6 +237,8 @@ layout: base
             {% for tn in fdbk_by_topic %}
                 {% assign t_metadata = topics | where: "title",tn.name | first %}
                 {% assign topic_name = t_metadata['name'] %}
+                {% if topic_name == '' or topic_name == nil %}
+                {% else %}
                 <h3 id="topic-{{ topic_name }}">{{ tn.name }}  <a href="{{ site.baseurl }}/topics/{{ topic_name }}">{% icon galaxy_instance %}</a></h3>
                 <div class="row">
                     <!-- feedback over time  -->
@@ -287,7 +289,7 @@ layout: base
                 {% for tun in fdbk_by_tutorial %}
                     {% assign tuto_metadata = tutorials | where: "title",tun.name | first %}
                     {% assign tuto_name = tuto_metadata['dir'] | split: "/" | last %}
-                    {% if tuto_name == '' %}
+                    {% if tuto_name == '' or tuto_name == nil %}
                         <div class="alert alert-warning" role="alert">
                             <p>Tutorial "{{ tun.name }}" is not available anymore.</p>
                         </div>
@@ -393,6 +395,7 @@ layout: base
                     {% endif %}
                 {% endfor %}
                 </div>
+                {% endif %}
             {% endfor %}
         </div>
 

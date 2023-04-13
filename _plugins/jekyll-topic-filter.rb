@@ -306,6 +306,7 @@ module TopicFilter
         }
       }
     end
+
     # In dev configuration, this breaks for me. Not sure why config isn't available.
     if not site.config.nil? and site.config.has_key? "url"
       domain = "#{site.config['url']}#{site.config['baseurl']}"
