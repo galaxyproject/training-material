@@ -1,7 +1,20 @@
 module Jekyll
+  ##
+  # This class generates the GTN's author pags
   class AuthorPageGenerator < Generator
     safe true
 
+    ##
+    # This extracts the contributions and pushes them on to an existing
+    # datastructure, modifying it in the process. It's pretty gross.
+    #
+    # Params
+    # +t+:: The tutorial, slide, or news item
+    # +datastructure+:: The hash of contributors that the author information should be pushed onto
+    # +flat+:: Whether the datastructure is a flat array or a nested array
+    #
+    # Returns
+    # +datastructure+:: The modified datastructure
     def pusher(t, datastructure, flat)
       if t.data.has_key?('contributors')
         if flat
