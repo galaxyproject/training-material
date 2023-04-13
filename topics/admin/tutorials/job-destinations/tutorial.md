@@ -17,7 +17,7 @@ time_estimation: "2h"
 key_points:
   - Dynamic Tool Destinations are a convenient way to map
   - Job resource parameters can allow you to give your users control over job resource requirements, if they are knowledgeable about the tools and compute resources available to them.
-contributors:
+contributions:
   authorship:
     - natefoo
     - bgruening
