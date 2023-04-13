@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Trajectory Analysis: Monocle3 in R'
+title: 'Inferring Trajectories using Monocle3 (R)'
 subtopic: single-cell-CS
 priority: 6
 zenodo_link: 'https://zenodo.org/record/7455590'
@@ -320,7 +320,7 @@ plot_cells(cds_red_dim, color_cells_by="batch", label_cell_groups=FALSE)
 
 ![Left image showing dataset before batch correction: upper and lower right branches mostly consist of N705 and N706. Right image showing the dataset after batch correction: the cells from all the samples are evenly spread throughout the whole dataset.](../../images/scrna-casestudy-monocle/batch_correction.png "Comparison of the dataset before and after batch correction.")
 
-Do you see this? That’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using mutual nearest neighbor alignment, a technique introduced by John Marioni's lab ({% cite Haghverdi_2018 %}) and supported by Aaron Lun's package [batchelor](https://bioconductor.org/packages/release/bioc/html/batchelor.html). 
+Do you see this? That’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using mutual nearest neighbor alignment, a technique introduced by John Marioni's lab ({% cite Haghverdi_2018 %}) and supported by Aaron Lun's package [batchelor](https://bioconductor.org/packages/release/bioc/html/batchelor.html).
 Now we can move to the next step and perform dimensionality reduction.
 
 
