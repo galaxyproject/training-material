@@ -21,7 +21,7 @@ pathway:
     tutorials:
       - name: galaxy-intro-short
         topic: introduction
-      - name: galaxy-intor-101
+      - name: galaxy-intro-101
         topic: introduction
 
   - section: "Module 2: Basics of Genome Sequence Analysis"
