@@ -184,7 +184,7 @@ And of course, Galaxy has an Ansible Role for that.
 >     
 >    +galaxy_dirs:
 >    +  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
->    +
+>    +galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
