@@ -148,20 +148,26 @@ module Jekyll
     end
 
     def convert_to_material_list(site, materials)
-      # [{"name"=>"introduction", "topic"=>"admin"}, {"name"=>"ansible", "topic"=>"admin"}, {"name"=>"ansible-galaxy", "topic"=>"admin"}, {"name"=>"database", "topic"=>"admin"}, {"name"=>"uwsgi", "topic"=>"admin"}, {"name"=>"systemd-supervisor", "topic"=>"admin"}, {"name"=>"production", "topic"=>"admin"}, {"name"=>"toolshed", "topic"=>"admin"}, {"name"=>"management", "topic"=>"admin"}]
-      ret = materials.map{|m|
+      # [{"name"=>"introduction", "topic"=>"admin"}]
+      materials.map{|m|
         if m.key?("name") && m.key?("topic")
           found = TopicFilter.fetch_tutorial_material(site, m["topic"], m["name"])
           if found.nil?
             Jekyll.logger.warn  "Could not find material #{m["topic"]}/#{m["name"]} in the site data"
           end
-
           found
+        elsif m.key?("external") && m['external']
+          {
+            "layout" => "tutorial_hands_on",
+            "name" => m["name"],
+            "title" => m["name"],
+            "hands_on" => "external",
+            "hands_on_url" => m["link"],
+          }
         else
+          Jekyll.logger.warn  "[GTN] Unsure how to render #{m}"
         end
       }
-
-
     end
 
     def convert_workflow_path_to_trs(str)

@@ -44,10 +44,10 @@ pathway:
         topic: admin
       - name: connect-to-compute-cluster
         topic: admin
-      # - name: job_conf.xml
-      #  external: true
-      #  type: slides | hands_on
-      #  link: "https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/job_conf.xml.sample_advanced"
+      - name: job_conf.xml
+        external: true
+        link: "https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/job_conf.xml.sample_advanced"
+        #type: slides ## hands_on
 
   - section: "Module 3 "
     description: blabla
