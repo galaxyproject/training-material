@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Assembly of metagenomic sequencing data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-12-01 15:50:31 +0000">
+<meta name="DC.date" content="2023-04-11 19:15:51 +0000">
 <meta name="DC.creator" content="Polina Polunina">
 <meta name="DC.creator" content="Bérénice Batut">
 
@@ -65,7 +65,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-12-01 15:50:31 +0000",
+  "dateModified": "2023-04-11 19:15:51 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Assembly of metagenomic sequencing data",
   "interactivityType": "mixed",
@@ -393,7 +393,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-12-01 15:50:31 +0000",
+  "dateModified": "2023-04-11 19:15:51 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Assembly of metagenomic sequencing data",
   "interactivityType": "mixed",
@@ -627,7 +627,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/6958893">
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/7818827">
     <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
 </a>
 
@@ -842,7 +842,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 1, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 11, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -915,8 +915,11 @@
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#prepare-analysis-history-and-data" id="markdown-toc-prepare-analysis-history-and-data">Prepare analysis history and data</a></li>
   <li><a href="#assembly" id="markdown-toc-assembly">Assembly</a></li>
-  <li><a href="#quality-control-of-assembly" id="markdown-toc-quality-control-of-assembly">Quality control of assembly</a></li>
-  <li><a href="#visualization-of-the-de-novo-assembly-graph" id="markdown-toc-visualization-of-the-de-novo-assembly-graph">Visualization of the <em>de novo</em> assembly graph</a></li>
+  <li><a href="#quality-control-of-assembly" id="markdown-toc-quality-control-of-assembly">Quality control of assembly</a>    <ol>
+      <li><a href="#assembly-statistics" id="markdown-toc-assembly-statistics">Assembly statistics</a></li>
+      <li><a href="#icarus-contig-browser" id="markdown-toc-icarus-contig-browser">Icarus contig browser</a></li>
+    </ol>
+  </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
@@ -955,20 +958,20 @@
 
   <ol>
     <li>
-      <p>Import the sequence read raw data (*.fastqsanger.gz) from <a href="https://zenodo.org/record/6958893">Zenodo</a> or a data library:</p>
+      <p>Import the sequence read raw data (*.fastqsanger.gz) from <a href="https://zenodo.org/record/7818827">Zenodo</a> or a data library:</p>
 
-      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6958893/files/ERR2231567_Read_1.fastqsanger.gz
-https://zenodo.org/record/6958893/files/ERR2231567_Read_2.fastqsanger.gz
-https://zenodo.org/record/6958893/files/ERR2231568_Read_1.fastqsanger.gz
-https://zenodo.org/record/6958893/files/ERR2231568_Read_2.fastqsanger.gz
-https://zenodo.org/record/6958893/files/ERR2231569_Read_1.fastqsanger.gz
-https://zenodo.org/record/6958893/files/ERR2231569_Read_2.fastqsanger.gz
-https://zenodo.org/record/6958893/files/ERR2231570_Read_1.fastqsanger.gz
-https://zenodo.org/record/6958893/files/ERR2231570_Read_2.fastqsanger.gz
-https://zenodo.org/record/6958893/files/ERR2231571_Read_1.fastqsanger.gz
-https://zenodo.org/record/6958893/files/ERR2231571_Read_2.fastqsanger.gz
-https://zenodo.org/record/6958893/files/ERR2231572_Read_1.fastqsanger.gz
-https://zenodo.org/record/6958893/files/ERR2231572_Read_2.fastqsanger.gz
+      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7818827/files/ERR2231567_1.fastqsanger.gz
+https://zenodo.org/record/7818827/files/ERR2231567_2.fastqsanger.gz
+https://zenodo.org/record/7818827/files/ERR2231568_1.fastqsanger.gz
+https://zenodo.org/record/7818827/files/ERR2231568_2.fastqsanger.gz
+https://zenodo.org/record/7818827/files/ERR2231569_1.fastqsanger.gz
+https://zenodo.org/record/7818827/files/ERR2231569_2.fastqsanger.gz
+https://zenodo.org/record/7818827/files/ERR2231570_1.fastqsanger.gz
+https://zenodo.org/record/7818827/files/ERR2231570_2.fastqsanger.gz
+https://zenodo.org/record/7818827/files/ERR2231571_1.fastqsanger.gz
+https://zenodo.org/record/7818827/files/ERR2231571_2.fastqsanger.gz
+https://zenodo.org/record/7818827/files/ERR2231572_1.fastqsanger.gz
+https://zenodo.org/record/7818827/files/ERR2231572_2.fastqsanger.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1125,14 +1128,14 @@ https://zenodo.org/record/6958893/files/ERR2231572_Read_2.fastqsanger.gz
 
     <ol>
       <li>
-        <p>Import the six contig files from <a href="https://zenodo.org/record/6958893">Zenodo</a> or the Shared Data library:</p>
+        <p>Import the six contig files from <a href="https://zenodo.org/record/7818827">Zenodo</a> or the Shared Data library:</p>
 
-        <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6958893/files/ERR2231567_assembly.fasta
-https://zenodo.org/record/6958893/files/ERR2231568_assembly.fasta
-https://zenodo.org/record/6958893/files/ERR2231569_assembly.fasta
-https://zenodo.org/record/6958893/files/ERR2231570_assembly.fasta
-https://zenodo.org/record/6958893/files/ERR2231571_assembly.fasta
-https://zenodo.org/record/6958893/files/ERR2231572_assembly.fasta
+        <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7818827/files/contigs_ERR2231567.fasta
+https://zenodo.org/record/7818827/files/contigs_ERR2231568.fasta
+https://zenodo.org/record/7818827/files/contigs_ERR2231569.fasta
+https://zenodo.org/record/7818827/files/contigs_ERR2231570.fasta
+https://zenodo.org/record/7818827/files/contigs_ERR2231571.fasta
+https://zenodo.org/record/7818827/files/contigs_ERR2231572.fasta
 </code></pre></div>        </div>
       </li>
       <li>
@@ -1200,22 +1203,23 @@ https://zenodo.org/record/6958893/files/ERR2231572_assembly.fasta
   <div class="box-title hands-on-title" id="hands-on-evaluation-assembly-quality-with-metaquast"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Evaluation assembly quality with metaQUAST</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0" title="Quast tool"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0</span></span>  with parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1" title="Quast tool"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1</span></span>  with parameters:
       <ul>
-        <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
+        <li><em>“Assembly mode?</em>”: <code class="language-plaintext highlighter-rouge">Individual assembly (1 contig file per samples)</code>
           <ul>
-            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Contigs/scaffolds file”</em>: output <strong>MEGAHIT</strong></li>
-          </ul>
-        </li>
-        <li>
-          <p><em>“Reads options”</em>: <code class="language-plaintext highlighter-rouge">Illumina paired-end reads in paired collection</code></p>
+            <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
+              <ul>
+                <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Contigs/scaffolds file”</em>: output <strong>MEGAHIT</strong></li>
+              </ul>
+            </li>
+            <li>
+              <p><em>“Reads options”</em>: <code class="language-plaintext highlighter-rouge">Illumina paired-end reads in paired collection</code></p>
 
-          <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
-            <p>To make the job quicker, you can select <code class="language-plaintext highlighter-rouge">Disabled</code> here. The raw reads will then not been mapped to the assembly to compute metrics, like the coverage.</p>
-          </blockquote>
-
-          <ul>
+              <blockquote class="comment">
+                <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+                <p>To make the job quicker, you can select <code class="language-plaintext highlighter-rouge">Disabled</code> here. The raw reads will then not been mapped to the assembly to compute metrics, like the coverage.</p>
+              </blockquote>
+            </li>
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/FASTA files”</em>: <code class="language-plaintext highlighter-rouge">Raw reads</code></li>
           </ul>
         </li>
@@ -1237,14 +1241,14 @@ https://zenodo.org/record/6958893/files/ERR2231572_assembly.fasta
 
     <ol>
       <li>
-        <p>Import the metaQuast report file from <a href="https://zenodo.org/record/6958893">Zenodo</a> or the Shared Data library:</p>
+        <p>Import the metaQuast report file from <a href="https://zenodo.org/record/7818827">Zenodo</a> or the Shared Data library:</p>
 
-        <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6958893/files/ERR2231567_quast_report.html
-https://zenodo.org/record/6958893/files/ERR2231568_quast_report.html
-https://zenodo.org/record/6958893/files/ERR2231569_quast_report.html
-https://zenodo.org/record/6958893/files/ERR2231570_quast_report.html
-https://zenodo.org/record/6958893/files/ERR2231571_quast_report.html
-https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
+        <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7818827/files/quast_ERR2231567.html
+https://zenodo.org/record/7818827/files/quast_ERR2231568.html
+https://zenodo.org/record/7818827/files/quast_ERR2231569.html
+https://zenodo.org/record/7818827/files/quast_ERR2231570.html
+https://zenodo.org/record/7818827/files/quast_ERR2231571.html
+https://zenodo.org/record/7818827/files/quast_ERR2231572.html
 </code></pre></div>        </div>
       </li>
     </ol>
@@ -1252,9 +1256,11 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
   </blockquote>
 </blockquote>
 
-<p>Quast main output is the HTML report which aggregate different metrics.</p>
+<p>Quast main output are HTML reports which aggregate different metrics.</p>
 
-<p>On the top of the report is a table with in rows statistics for contigs larger than 500 bp for the different sample assemblies (columns). Let’s now look at the table and go from top to bottom:</p>
+<h2 id="assembly-statistics">Assembly statistics</h2>
+
+<p>On the top of each report is a table with in rows statistics for contigs larger than 500 bp for the different sample assemblies (columns). Let’s now look at the table and go from top to bottom:</p>
 
 <ol>
   <li>
@@ -1282,8 +1288,8 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
             <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
-              <li>The genome fraction is 20.8% for ERR2231568 (column ERR2231568 in ERR2231568 report) and 24.8% for ERR2231572 (column ERR2231572 in ERR2231572 report)</li>
-              <li>The highest genome fraction was found for <em>Leuconostoc pseudomesenteroides</em> for ERR2231568 (83.4%) and for <em>Lactobacillus</em> for ERR2231572 (91%). The genomes of <em>Leuconostoc pseudomesenteroides</em> and <em>Lactobacillus</em> could be then almost completely recovered from the assemblies of ERR2231568 and ERR2231572 respectively.</li>
+              <li>The genome fraction is 30.22% for ERR2231568 and 58.73% for ERR2231572</li>
+              <li>The highest genome fraction was found for <em>Leuconostoc pseudomesenteroides</em> for ERR2231568 (844%) and for <em>Lactobacillus</em> for ERR2231572 (91%). The genomes of <em>Leuconostoc pseudomesenteroides</em> and <em>Lactobacillus</em> could be then almost completely recovered from the assemblies of ERR2231568 and ERR2231572 respectively.</li>
             </ol>
 
           </blockquote>
@@ -1307,8 +1313,8 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
             <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
-              <li>The duplication ratio is 1.061% for ERR2231568 and 1.1% for ERR2231572 (column ERR2231572 in ERR2231572 report)</li>
-              <li>The highest duplication ratio was found for <em>Gluconobacter kondonii</em> for ERR2231568 (1.163%) and for <em>Lactobacillus brevis</em> for ERR2231572 (1.122%).</li>
+              <li>The duplication ratio is 1.068 for ERR2231568 and 1.1 for ERR2231572 (column ERR2231572 in ERR2231572 report)</li>
+              <li>The highest duplication ratio was found for <em>Gluconobacter kondonii</em> for ERR2231568 (1.156) and for <em>Lactobacillus brevis KB290</em> for ERR2231572 (1.178).</li>
             </ol>
 
           </blockquote>
@@ -1320,14 +1326,10 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
   <li>
     <p><strong>Read mapping</strong>: results of the mapping of the raw reads on the different assemblies (only if the <em>“Reads options”</em> is not disabled)</p>
 
-    <p>Here the reads for the selected sample are mapped to all assemblies</p>
-
     <blockquote class="question">
       <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
       <ol>
-        <li>By opening the report for ERR2231568, to which raw reads are the different sample assemblies compared to to extract information like percentage of mapped reads?</li>
-        <li>To get good information for each sample, which report and information should we look at?</li>
         <li>What is the % of read mapped for ERR2231568 assembly to ERR2231568 raw reads? And for ERR2231572 assembly to ERR2231572 raw reads?</li>
         <li>What is the percentage of reads used to build the assemblies for ERR2231568? and ERR2231572?</li>
       </ol>
@@ -1336,10 +1338,8 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
         <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
-          <li>To ERR2231568. That is a bug in the Galaxy tool. We are working on fix it so each sample assembly is compared to its corresponding raw reads.</li>
-          <li>To get the good information for ERR2231568, we should open the ERR2231568  and look only at column ERR2231568.</li>
-          <li>…% of ERR2231568 raw reads were mapped to ERR2231568 assembly (column ERR2231568 in ERR2231568 report) and 86.97% of ERR2231572 raw reads to ERR2231572 assembly (column ERR2231572 in ERR2231572 report).</li>
-          <li>…% of reads were used to the assemblies for ERR2231568 and  86.97% for ERR2231572.</li>
+          <li>79.47% of ERR2231568 raw reads were mapped to ERR2231568 assembly and 86.98% of ERR2231572 raw reads to ERR2231572 assembly.</li>
+          <li>79.47% of reads were used to the assemblies for ERR2231568 and  86.97% for ERR2231572.</li>
         </ol>
       </blockquote>
 
@@ -1448,8 +1448,8 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
             <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
-              <li>88 for ERR2231568 and 158 for ERR2231572</li>
-              <li><em>Pectobacterium carotovorum brasiliensis</em> for ERR2231568 and <em>Lactobacillus plantarum argentoratensis</em> for ERR2231572</li>
+              <li>78 for ERR2231568 and 151 for ERR2231572</li>
+              <li><em>Leuconostoc pseudomesenteroides</em> and <em>Tatumella morbirosei</em> for ERR2231568 and <em>Lactobacillus plantarum argentoratensis</em> for ERR2231572</li>
             </ol>
           </blockquote>
 
@@ -1472,10 +1472,10 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
             <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
-              <li>47 for ERR2231568 and 62 for ERR2231572.</li>
-              <li><em>Pectobacterium carotovorum brasiliensis</em> for ERR2231568 and <em>Lactobacillus vaccinostercus</em> for ERR2231572.</li>
-              <li>Interspecies translocations are translocations where the a contif has mapped on different reference genomes.</li>
-              <li>160 for ERR2231568 and 203 for ERR2231572.</li>
+              <li>25 for ERR2231568 and 55 for ERR2231572.</li>
+              <li><em>Leuconostoc pseudomesenteroides</em> for ERR2231568 and <em>Lactobacillus vaccinostercus</em> for ERR2231572.</li>
+              <li>Interspecies translocations are translocations where a contig has mapped on different reference genomes.</li>
+              <li>80 for ERR2231568 and 144 for ERR2231572.</li>
             </ol>
           </blockquote>
 
@@ -1496,8 +1496,8 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
             <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
-              <li>4 for ERR2231568 and 5 for ERR2231572.</li>
-              <li><em>Gluconobacter kondonii</em> and <em>Tatumella morbirosei</em> for ERR2231568 and <em>Lactobacillus hordei</em> for ERR2231572.</li>
+              <li>4 for ERR2231568 and 6 for ERR2231572.</li>
+              <li><em>Tatumella morbirosei</em> for ERR2231568 and <em>Lactobacillus sp</em> for ERR2231572.</li>
             </ol>
           </blockquote>
 
@@ -1520,8 +1520,8 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
         <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
-          <li>764,853 for ERR2231568 and 414,142 for ERR2231572.</li>
-          <li><em>Pantoea SM3</em> for ERR2231568 and <em>Leuconostoc pseudomesenteroides KCTC 3652</em> for ERR2231572.</li>
+          <li>503,352 for ERR2231568 and 287,270 for ERR2231572.</li>
+          <li><em>Pantoea rwandensis</em> for ERR2231568 and <em>Leuconostoc brevis KB290</em> for ERR2231572.</li>
         </ol>
       </blockquote>
 
@@ -1553,7 +1553,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
               <li>In the outputs of MEGAHIT, there are 228,719 contigs for ERR2231568 and 122,526 contigs.</li>
               <li>The numbers are lower in the metaQUAST results because metaQUAST reports there only the contigs longer than 500bp.</li>
               <li>The <strong># contigs (&gt;= 0 bp)</strong></li>
-              <li>Except the non aligned contigs, <em>Tatumella morbirosei</em> for ERR2231568 and <em>Leuconostoc pseudomesenteroides KCTC 3652</em> for ERR2231572.</li>
+              <li>Except the non aligned contigs, <em>Tatumella morbirosei</em> for ERR2231568 and <em>Leuconostoc brevis KB290</em> for ERR2231572.</li>
             </ol>
           </blockquote>
 
@@ -1651,100 +1651,202 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
   </li>
 </ol>
 
-<h1 id="visualization-of-the-de-novo-assembly-graph">Visualization of the <em>de novo</em> assembly graph</h1>
+<h2 id="icarus-contig-browser">Icarus contig browser</h2>
 
-<p>Current metagenome assemblers like MEGAHIT and MetaSPAdes use <strong>graphs</strong>, most typically a de Bruijn graph to stich reads together. In an ideal case, the graph would contain one distinct path for each genome of each micro-organisms, but complexities such as repeated sequences usually prevent this.</p>
+<p>Icarus generates contig size viewer and one or more contig alignment viewers (if reference genome/genomes are provided) that are accessible from the HTML report, by clicking on <code class="language-plaintext highlighter-rouge">View on Icarus contig browser</code>.</p>
 
-<p>Assembly graphs contain then <strong>branching structures</strong>: one node may lead into multiple others. <strong>Contigs</strong> correspond to the longest sequences in the graph that can be determined unambiguously. They are the final results of most assembler. But the assembly graph contains more information. It can be useful for finding sections of the graph, such as rRNA, or to try to find parts of a genome.</p>
+<h3 id="contig-size-viewer">Contig size viewer</h3>
 
-<p><strong>Bandage</strong> (<span class="citation"><a href="#wick2015bandage">Wick <i>et al.</i> 2015</a></span>) is a tool creating interactive visualisations of assembly graphs.</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualization-the-assembly-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualization the assembly graph</div>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10" title="megahit contig2fastg tool"><strong>megahit contig2fastg</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10</span></span>  with parameters:
-      <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Contig file”</em>: Output of <strong>MEGAHIT</strong></li>
-        <li>
-          <p><em>“K-mer length”</em>: <code class="language-plaintext highlighter-rouge">91</code></p>
-
-          <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-7"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
-            <p>To get the value, you need to</p>
-            <ol>
-              <li>Go into the <strong>MEGAHIT</strong> output collection</li>
-              <li>Expand one of the contig file by clicking on it in the history</li>
-              <li>Check in the dataset peek the name of the contig</li>
-              <li>Extract the value after the first <code class="language-plaintext highlighter-rouge">k</code> in the contig names</li>
-            </ol>
-          </blockquote>
-        </li>
-      </ul>
-    </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4" title="Bandage Image tool"><strong>Bandage Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4</span></span>  with parameters:
-      <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Graphical Fragment Assembly”</em>: Output of <strong>megahit contig2fastg</strong></li>
-      </ul>
-    </li>
-    <li>Inspect the generated image for ERR2231571</li>
-  </ol>
-</blockquote>
-
-<figure id="figure-7"><img src="./images/ERR2231571_graph.jpg" alt="Image shows the assembly graphs, with longer stretch on the top and many small contigs on the bottom. " width="1292" height="1000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Assembly graph for ERR2231571 sample</figcaption></figure>
-
-<p>The graph is quite disconnected. On the top, we can see the longer stretches, that includes multiples contigs (each contig having a different color). On the bottom are the shortest stretches or single contigs.</p>
-
-<p>But it is really hard to read or extract any information from the graph. Let’s inspect the information about the assembly graph</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualization-the-de-novo-assembly-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualization the *de novo* assembly graph</div>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2" title="Bandage Info tool"><strong>Bandage Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2</span></span>  with parameters:
-      <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Graphical Fragment Assembly”</em>: Output of <strong>megahit contig2fastg</strong></li>
-      </ul>
-    </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Column join tool"><strong>Column join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3</span></span>  with parameters:
-      <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Tabular files”</em>: Output of <strong>Bandage Info</strong></li>
-      </ul>
-    </li>
-    <li>Inspect the generated output</li>
-  </ol>
-</blockquote>
+<p>This viewer draws contigs ordered from longest to shortest. Let’s inspect this viewer for ERR2231568.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
+  <p>Open the Contig size viewer for ERR2231568 and define start as <code class="language-plaintext highlighter-rouge">0</code> and end as <code class="language-plaintext highlighter-rouge">500000</code></p>
+
+  <p><img src="./images/ERR2231568-contig-size-viewer.png" alt="Image shows on the Icarus Contig size viewer for ERR2231568, with a zoom between 0 500000. Below the menu, the contigs are drawn from the longest on the left to the shortest on the right. Each contig is filled with a different color: green for correct, red for misassembled, etc. Below the contigs is dispayed a bar to navigate through the contigs. " loading="lazy" /></p>
+
   <ol>
-    <li>How many nodes are in the graph for ERR2231568? And for ERR2231572? What does they correspond to?</li>
-    <li>How many edges are in the graph for ERR2231568? And for ERR2231572? What is the impact of these numbers in relation to the number of nodes on the graph?</li>
-    <li>How many connected components are there for ERR2231568? And for ERR2231572? What does they correspond to?</li>
-    <li>What is the percentage of dead ends are there for ERR2231568? And for ERR2231572?</li>
-    <li>What are the smallest and larges edge overlaps?</li>
-    <li>What is the largest component? For which sample?</li>
-    <li>What is the shortest node? What does they correspond to?</li>
+    <li>What is the color of the first contig? Why?</li>
+    <li>What is the red contig?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>There are 228,719 nodes for ERR2231568 and 122,526 for ERR2231572. They correspond to the number of contigs</li>
-      <li>There are 16,580 edges for ERR2231568 and 13,993 for ERR2231572. There are less edges than nodes in the graph. It means that many nodes/contigs are disconnected</li>
-      <li>There are 212,598 connected components, i.e. number of regions of the graph which are disconnected from each other, for ERR2231568 and 109,044 for ERR2231572</li>
-      <li>There are 94.0702% dead ends, i.e. the end of a node not connected to any other nodes, for ERR2231568 and 90.7032% for ERR2231572. It confirms the previous observation</li>
-      <li>The smallest and larges edge overlaps are 91bp, i.e. the k-mer length</li>
-      <li>The largest component is 340,003 bp for ERR2231567</li>
-      <li>The shortest node is 200 bp, i.e. the minimal size for a contig</li>
+      <li>The first contig is white because &gt;50% of the contigs is unaligned. By clicking on the contig, we see that only a small block is aligned: 223.41 – 223.65 kbp to Leuconostoc_pseudomesenteroides_KCTC_3652_NZ_BMBP01000002.1.</li>
+      <li>The red contig is a missamblied contig: it contains 2 blocks, with a translocation between them.</li>
     </ol>
-
   </blockquote>
 
 </blockquote>
 
+<p>Click <code class="language-plaintext highlighter-rouge">Main menu</code> on the top left to go back to the main Icarus page.</p>
+
+<h3 id="contig-alignment-viewer">Contig alignment viewer</h3>
+
+<p>If a reference genome is provided, there should be a table on the main Icarus page that looks like:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Genome</th>
+      <th># fragments</th>
+      <th>Length, bp</th>
+      <th>Mean genome fraction, %</th>
+      <th># misassembled blocks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Gluconobacter oxydans H24</td>
+      <td>2</td>
+      <td>3 816 232</td>
+      <td>10.989</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <td>Kosakonia cowanii</td>
+      <td>5</td>
+      <td>4 806 998</td>
+      <td>28.224</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>Lactococcus lactis subsp. lactis CV56</td>
+      <td>6</td>
+      <td>2 518 737</td>
+      <td>18.940 	23</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>When clicking on the genome name, the contigs are displayed according to their mapping to the reference genome. The viewer can additionally visualize genes, operons, and read coverage distribution along the genome, if any of those were fed to QUAST.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+  <p>Open the Contig alignment viewer for ERR2231568 and <em>Leuconostoc pseudomesenteroides</em> KCTC 3652, the most covered by contigs</p>
+
+  <p><img src="./images/ERR2231568-contig-alignment-viewer-leuconostoc.png" alt="Image shows on the Icarus alignment size viewer of ERR2231568 contigs for Leuconostoc pseudomesenteroides KCTC 3652. On the top are displayed the contigs aligend on the reference genome, with a zoom. Each contig is filled with a different color: green for correct, red for misassembled, etc. Below the contigs is dispayed a bar to navigate through the contigs. Below is a graph representing the GC percentage and coverage along the reference genome. " loading="lazy" /></p>
+
+  <ol>
+    <li>How are the organized the contigs on the top?</li>
+    <li>What the different colors for the contigs?</li>
+    <li>Why is there a big red block on the right?</li>
+    <li>What is the graph on the bottom?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The contigs are displayed based on their mapping on the reference genome of <em>Leuconostoc pseudomesenteroides</em> KCTC 3652</li>
+      <li>The different colors represent the different status for the contig: correct contigs, correct contigs but with &gt;50% of the contig unaligned, misassembled blocks. unchecked misassembled blocks, ambiguously mapped contigs, alternative blocks of misassembled contigs, etc.</li>
+      <li>The big red block on the right is contig k91_88833 with a misassembly on the left side, and overlap with 2 other contigs</li>
+      <li>The graph on the bottom represents the GC percentage and coverage by contigs along the reference genome</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-visualization-of-the-de-novo-assembly-graph"><button class="gtn-boxify-button details" type="button" aria-controls="details-visualization-of-the-de-novo-assembly-graph" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Visualization of the *de novo* assembly graph<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Current metagenome assemblers like MEGAHIT and MetaSPAdes use <strong>graphs</strong>, most typically a de Bruijn graph to stich reads together. In an ideal case, the graph would contain one distinct path for each genome of each micro-organisms, but complexities such as repeated sequences usually prevent this.</p>
+
+  <p>Assembly graphs contain then <strong>branching structures</strong>: one node may lead into multiple others. <strong>Contigs</strong> correspond to the longest sequences in the graph that can be determined unambiguously. They are the final results of most assembler. But the assembly graph contains more information. It can be useful for finding sections of the graph, such as rRNA, or to try to find parts of a genome.</p>
+
+  <p><strong>Bandage</strong> (<span class="citation"><a href="#wick2015bandage">Wick <i>et al.</i> 2015</a></span>) is a tool creating interactive visualisations of assembly graphs.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-visualization-the-assembly-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualization the assembly graph</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10" title="megahit contig2fastg tool"><strong>megahit contig2fastg</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10</span></span>  with parameters:
+        <ul>
+          <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Contig file”</em>: Output of <strong>MEGAHIT</strong></li>
+          <li>
+            <p><em>“K-mer length”</em>: <code class="language-plaintext highlighter-rouge">91</code></p>
+
+            <blockquote class="comment">
+              <div class="box-title comment-title" id="comment-7"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+              <p>To get the value, you need to</p>
+              <ol>
+                <li>Go into the <strong>MEGAHIT</strong> output collection</li>
+                <li>Expand one of the contig file by clicking on it in the history</li>
+                <li>Check in the dataset peek the name of the contig</li>
+                <li>Extract the value after the first <code class="language-plaintext highlighter-rouge">k</code> in the contig names</li>
+              </ol>
+            </blockquote>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4" title="Bandage Image tool"><strong>Bandage Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4</span></span>  with parameters:
+        <ul>
+          <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Graphical Fragment Assembly”</em>: Output of <strong>megahit contig2fastg</strong></li>
+        </ul>
+      </li>
+      <li>Inspect the generated image for ERR2231571</li>
+    </ol>
+  </blockquote>
+
+  <figure id="figure-7"><img src="./images/ERR2231571_graph.jpg" alt="Image shows the assembly graphs, with longer stretch on the top and many small contigs on the bottom. " width="1292" height="1000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Assembly graph for ERR2231571 sample</figcaption></figure>
+
+  <p>The graph is quite disconnected. On the top, we can see the longer stretches, that includes multiples contigs (each contig having a different color). On the bottom are the shortest stretches or single contigs.</p>
+
+  <p>But it is really hard to read or extract any information from the graph. Let’s inspect the information about the assembly graph</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-visualization-the-de-novo-assembly-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualization the *de novo* assembly graph</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2" title="Bandage Info tool"><strong>Bandage Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2</span></span>  with parameters:
+        <ul>
+          <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Graphical Fragment Assembly”</em>: Output of <strong>megahit contig2fastg</strong></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Column join tool"><strong>Column join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3</span></span>  with parameters:
+        <ul>
+          <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Tabular files”</em>: Output of <strong>Bandage Info</strong></li>
+        </ul>
+      </li>
+      <li>Inspect the generated output</li>
+    </ol>
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+    <ol>
+      <li>How many nodes are in the graph for ERR2231568? And for ERR2231572? What does they correspond to?</li>
+      <li>How many edges are in the graph for ERR2231568? And for ERR2231572? What is the impact of these numbers in relation to the number of nodes on the graph?</li>
+      <li>How many connected components are there for ERR2231568? And for ERR2231572? What does they correspond to?</li>
+      <li>What is the percentage of dead ends are there for ERR2231568? And for ERR2231572?</li>
+      <li>What are the smallest and larges edge overlaps?</li>
+      <li>What is the largest component? For which sample?</li>
+      <li>What is the shortest node? What does they correspond to?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>There are 228,719 nodes for ERR2231568 and 122,526 for ERR2231572. They correspond to the number of contigs</li>
+        <li>There are 16,580 edges for ERR2231568 and 13,993 for ERR2231572. There are less edges than nodes in the graph. It means that many nodes/contigs are disconnected</li>
+        <li>There are 212,598 connected components, i.e. number of regions of the graph which are disconnected from each other, for ERR2231568 and 109,044 for ERR2231572</li>
+        <li>There are 94.0702% dead ends, i.e. the end of a node not connected to any other nodes, for ERR2231568 and 90.7032% for ERR2231572. It confirms the previous observation</li>
+        <li>The smallest and larges edge overlaps are 91bp, i.e. the k-mer length</li>
+        <li>The largest component is 340,003 bp for ERR2231567</li>
+        <li>The shortest node is 200 bp, i.e. the minimal size for a contig</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+</blockquote>
 <!--# De-replication
 
 De-replication is the process of identifying sets of genomes that are the "same" in a list of genomes, and removing all but the “best” genome from each redundant set. How similar genomes need to be to be considered “same”, how to determine which genome is “best”, and other important decisions are discussed in [Important Concepts](https://drep.readthedocs.io/en/latest/choosing_parameters.html).
