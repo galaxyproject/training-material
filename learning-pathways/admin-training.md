@@ -37,9 +37,9 @@ pathway:
         topic: admin
       - name: tool-management
         topic: admin
-      - name: user-groups-quotas
+      - name: users-groups-quotas
         topic: admin
-      - name: data-libraries
+      - name: data-library
         topic: admin
       - name: bioblend-api
         topic: dev
@@ -55,7 +55,7 @@ pathway:
         #type: slides ## hands_on
       - name: job-destinations
         topic: admin
-      - name: heterogeneous-compute
+      - name: pulsar
         topic: admin
 
   - section: "Module 4"
