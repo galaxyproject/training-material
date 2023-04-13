@@ -99,8 +99,6 @@ Still we need to add a few things to out Playbooks.
 If you want to learn more about Redis, visit their website: [https://redis.io/](https://redis.io/)
 Installing Redis with Galaxy-EU's Ansible role is fast and simple, too!
  - Flower is a powerful dashboard for Celery and can be installed in Galaxy's venv using our role.
- - GalaxyEU's [Systemd Ansible Role](https://github.com/usegalaxy-eu/ansible-galaxy-systemd ), which we need to spin up workers automatically and as background processes.
-
 
 
 # Installing and Configuring
