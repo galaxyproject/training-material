@@ -419,8 +419,9 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >       version: v6.0.7
 >     - src: cloudalchemy.grafana
 >       version: 0.14.2
->    +- src: dj-wasabi.telegraf
->    +  version: 0.12.0
+>    +- name: dj-wasabi.telegraf
+>    +  src: https://github.com/dj-wasabi/ansible-telegraf
+>    +  version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add Telegraf requirement"}
@@ -504,7 +505,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -279,3 +279,12 @@ flower_ui_users:
->     
+>
 >     flower_environment_variables:
 >       GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
 >    +
@@ -780,7 +781,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    +    privs: SELECT
 >    +    objs: ALL_IN_SCHEMA
 >    +
->     
+>
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
 >    {% endraw %}

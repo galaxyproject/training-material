@@ -65,8 +65,9 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +++ b/requirements.yml
 >    @@ -40,3 +40,5 @@
 >       version: 0.14.2
->     - src: dj-wasabi.telegraf
->       version: 0.12.0
+>     - name: dj-wasabi.telegraf
+>       src: https://github.com/dj-wasabi/ansible-telegraf
+>       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
 >    +- src: galaxyproject.tiaas2
 >    +  version: 2.1.3
 >    {% endraw %}
@@ -142,7 +143,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +    objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
 >    +    type: sequence
 >    +    privs: USAGE,SELECT
->     
+>
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
 >    {% endraw %}
@@ -190,7 +191,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    @@ -99,4 +99,5 @@ server {
 >             proxy_set_header Host $http_host;
 >         }
->     
+>
 >    +    {{ tiaas_nginx_routes }}
 >     }
 >    {% endraw %}
@@ -310,7 +311,7 @@ In order to achieve this, we first need some way to sort the jobs of the trainin
 >    @@ -35,6 +35,17 @@ tools:
 >           require:
 >             - pulsar
->     
+>
 >    +roles:
 >    +  training.*:
 >    +    rules:
@@ -328,7 +329,7 @@ In order to achieve this, we first need some way to sort the jobs of the trainin
 >    @@ -63,6 +74,20 @@ destinations:
 >         params:
 >           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
->     
+>
 >    +  slurm-training:
 >    +    inherits: singularity
 >    +    runner: slurm
