@@ -156,9 +156,9 @@ We can see that in our matrix rows are cells and genes are columns, so we have t
 expression_matrix <- as.matrix(expression_matrix)   # change the type to matrix
 expression_matrix <- t(expression_matrix)           # transpose the matrix
 ```
-Another condition we have to satisfy if that one of the columns of the `gene_metadata` should be named "gene_short_name", which represents the gene symbol for each gene. Some functions won't work without that. Do we have such a column? Let's check.
+Another condition we have to satisfy is that one of the columns of the `gene_metadata` should be named "gene_short_name", which represents the gene symbol for each gene. Some functions won't work without that. Do we have such a column? Let's check.
 ```r
-gene_metadata             # preview the content of the file to check the name of the column containing gene symbols
+head(gene_metadata)             # preview the top ten rows of the file to check the name of the column containing gene symbols
 ```
 
 The second column indeed contains gene symbols, but is called "Symbol" instead of "gene_short_name". That can be easily changed by a simple assignment, as long as we know the number of the column that we want to modify. In our case the gene symbols are stored in column 2. We can access the column names by `colnames()`.
