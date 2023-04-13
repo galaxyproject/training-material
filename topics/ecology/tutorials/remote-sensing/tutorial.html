@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Sentinel 2 biodiversity</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/remote-sensing/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Sentinel 2 biodiversity">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-04-13 09:10:49 +0000">
+<meta name="DC.creator" content="Marie Josse">
+<meta name="DC.creator" content="Yvan Le Bras">
+
+        
+        
+        
+        
+        <meta name="description" content="Learn to analyse Ecological data through Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Sentinel 2 biodiversity">
+        <meta property="og:description" content="Learn to analyse Ecological data through Galaxy.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-04-13 09:10:49 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Sentinel 2 biodiversity",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Ecology",
+    "description": "Learn to analyse Ecological data through Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Sentinel 2 biodiversity' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/remote-sensing/tutorial.html",
+  "timeRequired": "PT48H",
+  "keywords": "ecology, Ecology, Remote sensing",
+  "description": "The questions this  addresses are:\n - How to get spectral and biodiversity indicators from remote sensing data ?\n - Which kind of ecosystem are you studying ? global or canopy data ?\n\n\nThe objectives are:\n - Getting Sentinel 2 data and reformatting them in a generalized way\n - Computing spectral indices such as the NDVI\n - Calculating and visualizing biodiversity indicators\n - Comparing with in-situ data\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Ecology",
+      "description": "Learn to analyse Ecological data through Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0610",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0610"
+    }
+  ]
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/ecology" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Ecology
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/remote-sensing/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/remote-sensing/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/remote-sensing/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/remote-sensing/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/remote-sensing/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/remote-sensing/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/ecology/faqs/" title="Check our FAQs for the Ecology topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/ecology/tutorials/remote-sensing/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/ecology/tutorials/remote-sensing/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-04-01/topics/ecology/tutorials/remote-sensing/tutorial.html" title="Version 2023-04-01">2023-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-03-01/topics/ecology/tutorials/remote-sensing/tutorial.html" title="Version 2023-03-01">2023-03-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-02-01/topics/ecology/tutorials/remote-sensing/tutorial.html" title="Version 2023-02-01">2023-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+
+
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-04-13 09:10:49 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Sentinel 2 biodiversity",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Ecology",
+    "description": "Learn to analyse Ecological data through Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Sentinel 2 biodiversity' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/remote-sensing/tutorial.html",
+  "timeRequired": "PT48H",
+  "keywords": "ecology, Ecology, Remote sensing",
+  "description": "The questions this  addresses are:\n - How to get spectral and biodiversity indicators from remote sensing data ?\n - Which kind of ecosystem are you studying ? global or canopy data ?\n\n\nThe objectives are:\n - Getting Sentinel 2 data and reformatting them in a generalized way\n - Computing spectral indices such as the NDVI\n - Calculating and visualizing biodiversity indicators\n - Comparing with in-situ data\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Ecology",
+      "description": "Learn to analyse Ecological data through Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0610",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0610"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-ecology">
+    <h1 data-toc-skip>Sentinel 2 biodiversity</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=27" alt="Avatar">Marie Josse</a><a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-yvanlebras"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/yvanlebras?s=27" alt="Avatar">Yvan Le Bras</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to get spectral and biodiversity indicators from remote sensing data ?</p>
+</li>
+        
+        <li><p>Which kind of ecosystem are you studying ? global or canopy data ?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Getting Sentinel 2 data and reformatting them in a generalized way</p>
+</li>
+        
+        <li><p>Computing spectral indices such as the NDVI</p>
+</li>
+        
+        <li><p>Calculating and visualizing biodiversity indicators</p>
+</li>
+        
+        <li><p>Comparing with in-situ data</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 48 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/ecology/tutorials/remote-sensing/workflows/" title="Sentinel 2 biodiversity workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/ecology/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
+            Galaxy India
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
+            UseGalaxy.fr
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 13, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="introduction">Introduction</h1>
+
+<p>This tutorial will guide you on getting Sentinel 2 data and processing them in order to calculate and visualize biodiversity indicators. This workflow made of 6 tools will allow you to explore Sentinel 2 data in the view of making biodiversity analyses.</p>
+
+<p>Spatial diversity measurements should not replace in situ biodiversity data, but rather complement existing data and approaches. Spatial diversity estimates are currently based on long time scales, allowing more general predictions about rates of change in diversity. In practice, spatial data incorporate information on surface properties, including functional aspects, taxonomy, phylogeny and genetic diversity. </p>
+
+<p>The tools explained here are useful for observing variations in spatial and temporal ecosystem properties given the intrinsic relationship between spatial variations in ecosystems and pixel values of spectral signals. A single measurement cannot provide a complete description of all the different aspects of ecosystem heterogeneity. Therefore, the combination of multiple tools in a Galaxy-Ecology workflow offers multiple approaches to unravel the complexity of ecosystem heterogeneity in space and time.</p>
+
+<p>So, we will compute biodiversity and spectral indices mainly using reflectance information.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-definition-of-reflectance"><button class="gtn-boxify-button details" type="button" aria-controls="details-definition-of-reflectance" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Definition of reflectance<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>The reflectance is a proportion on reflected light on an area. It’s the ratio between the electromagnetic incident wave on the area and the reflected wave. It’s often a percentage between reflected intensity and incident intensity assumed as energy quantity.</p>
+
+</blockquote>
+
+<figure id="figure-1"><img src="../../images/remote_sensing/sentinel_2.png" alt="Sentinel 2 toolsuite workflow: from the dowload of the data to the production of biodiversity indicators. " width="1760" height="1360" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Sentinel 2 toolsuite workflow</figcaption></figure>
+
+<p>Each part of this workflow has elementary steps :</p>
+<ul>
+  <li><strong>A first step</strong> to preprocess Sentinel 2 data:
+    <ul>
+      <li>Preprocess Sentinel 2 data</li>
+    </ul>
+  </li>
+  <li><strong>A second step</strong> to compute biodiversity indicators
+    <ul>
+      <li>Global overview</li>
+      <li>For Canopy</li>
+    </ul>
+  </li>
+  <li><strong>A third step</strong> to compute spectral indices:
+    <ul>
+      <li>Spectral indices</li>
+      <li>EBV</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-details-about-spectral-indices"><button class="gtn-boxify-button details" type="button" aria-controls="details-details-about-spectral-indices" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Details about spectral indices<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Spectral indices are used to highlight particular features or properties of the earth’s surface, e.g. vegetation, soil, water. They are developed on the basis of the spectral properties of the object of interest.</p>
+
+  <p>Knowledge of the leaf cell, plant structure, state, condition and spectral properties is essential to perform vegetation analysis using remote sensing data.  
+Spectral indices dedicated to vegetation analysis are developed on the basis that healthy vegetation reflects strongly in the near infrared (NIR) spectrum while absorbing strongly in the visible red.  </p>
+
+</blockquote>
+
+<p>In this tutorial, we’ll be working on Sentinel 2 data extracted from the Theia Land portal.  First those data will be prepared. After pre-processing to fit the input format of the tools, we’ll see how to calculate biodiversity metrics.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#upload-and-pre-processing-of-the-data" id="markdown-toc-upload-and-pre-processing-of-the-data">Upload and pre-processing of the data</a></li>
+    </ol>
+  </li>
+  <li><a href="#preparing-data" id="markdown-toc-preparing-data">Preparing data</a>    <ol>
+      <li><a href="#preprocessing-sentinel-2-data" id="markdown-toc-preprocessing-sentinel-2-data">Preprocessing sentinel 2 data</a></li>
+    </ol>
+  </li>
+  <li><a href="#producing-biodiversity-indicators" id="markdown-toc-producing-biodiversity-indicators">Producing biodiversity indicators</a>    <ol>
+      <li><a href="#compute-a-pca" id="markdown-toc-compute-a-pca">Compute a PCA</a></li>
+      <li><a href="#compute-biodiversity-indices" id="markdown-toc-compute-biodiversity-indices">Compute biodiversity indices</a></li>
+      <li><a href="#compute-a-pca-1" id="markdown-toc-compute-a-pca-1">Compute a PCA</a></li>
+      <li><a href="#create-biodiversity-maps" id="markdown-toc-create-biodiversity-maps">Create Biodiversity maps</a></li>
+      <li><a href="#processing-remote-sensing-data" id="markdown-toc-processing-remote-sensing-data">Processing remote sensing data</a></li>
+    </ol>
+  </li>
+  <li><a href="#spectral-indices" id="markdown-toc-spectral-indices">Spectral indices</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-it-can-take-a-bit-of-time"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: It can take a bit of time</div>
+  <p>As your processing heavy data some of the steps can take some time. Notably, the step <strong>Create Biodiversity maps</strong> can run for 2 days. We advise to let it run and proceed with the tutorial. Once, the <strong>pre-processing</strong> part is done all the steps can be done separately. Thus, no need for you to wait the end of each tool before running another one.</p>
+</blockquote>
+
+<h2 id="upload-and-pre-processing-of-the-data">Upload and pre-processing of the data</h2>
+
+<p>This first step consist of downloading and properly prepare the data to use it in Sentinel 2 toolsuite.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a name (example: “Sentinel 2 data for biodiversity tutorial”) for you to find it again later if needed.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+    </li>
+    <li>
+      <p>Download the files from <a href="https://scihub.copernicus.eu/dhus/#/home">Scihub</a>, <a href="https://peps.cnes.fr/rocket/#/search?maxRecords=50&amp;page=1">PEPS</a> or <a href="https://catalogue.theia-land.fr">Theia</a> :</p>
+
+      <p>You will have to to create an account for either of these platform.
+Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
+
+      <figure id="figure-2"><img src="../../images/remote_sensing/theia.png" alt="Theia portal welcome page. " width="1845" height="1006" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Theia portal</figcaption></figure>
+
+      <p>This an example of the Theia land portal. You need to download a zip folder. Keep it that way.</p>
+    </li>
+    <li>
+      <p>Upload the zip folder</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-upload-few-files-1-10"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-few-files-1-10" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Upload few files (1-10)<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <strong>Upload Data</strong> on the top of the left panel</li>   <li>Click on <strong>Choose local file</strong> and select the files or drop the files in the <strong>Drop files here</strong> part</li>   <li>Click on <strong>Start</strong></li>   <li>Click on <strong>Close</strong></li> </ol> </blockquote>
+    </li>
+    <li>
+      <p>You can <strong>rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset, <code class="language-plaintext highlighter-rouge">sentinel_2_data.zip</code> for example, and to keep informations about the original name <code class="language-plaintext highlighter-rouge">SENTINEL2A.....zip</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="preparing-data">Preparing data</h1>
+
+<p>Using preprocS2 R package, this step provides a unique tool to read, crop, resample the original image directory, and write it as a raster stack</p>
+
+<h2 id="preprocessing-sentinel-2-data">Preprocessing sentinel 2 data</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-preprocess"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Preprocess</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1" title="Preprocessing sentinel 2 data tool"><strong>Preprocessing sentinel 2 data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">sentinel_2_data.zip</code> (Input dataset)</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Where does your data come from ?”</em>: ‘From Theia’</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click on <strong>Execute</strong></p>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+
+        <p>The interesting output is the ENVI image format which is a binary raster file with an accompanying header file. The data are stored as a binary stream of bytes in a BIL file without extension and the metadata are stored in the .hdr file. These data are in the output <strong>Reflectance</strong>. You can directly use the output <strong>Reflectance</strong> for the rest of the analysis.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-3"><img src="../../images/remote_sensing/preproc.png" alt="Preprocessing outputs 3 of them : the cloud mask folder, the reflectance folder and a file with the mission source. " width="288" height="337" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Preprocessing outputs</figcaption></figure>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+  <ol>
+    <li>What are the files you are interested in for the following tools ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The 2 files in the <strong>Reflectance</strong> folder that finish by “_Refl” and “_Refl.hdr”</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="producing-biodiversity-indicators">Producing biodiversity indicators</h1>
+
+<p>You can choose to compute spectral and biodiversity indicators either for global remote sensing data or for a canopy.</p>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Here you can choose which tutorial you want to folllow according to if your are more interested about studying canopy remote sensing data or more global ones
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Global" onclick="cyoaChoice('Global')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Global</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Canopy" onclick="cyoaChoice('Canopy')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Canopy</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Global");
+		})
+	</script>
+	
+</blockquote>
+
+<!-- Choose your own adventure path -->
+<div class="Global">
+
+  <h2 id="compute-a-pca">Compute a PCA</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-principal-components-analysis-for-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Principal components analysis for remote sensing data</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1" title="Compute a PCA tool"><strong>Compute a PCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1</span></span>  with the following parameters:
+        <ul>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">Reflectance</code> (output of <strong>Preprocessing sentinel 2 data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            </ul>
+          </li>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Do you want to do a PCA or a SPCA ?”</em>: ‘PCA’</li>
+        </ul>
+
+        <blockquote class="tip">
+          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p>Check that the “Input raster” datatype is bil and that “Input raster header” datatype is hdr</p>
+
+          <ul>
+            <li>Go on your raster data</li>
+            <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> to edit it</li>
+            <li>Click on <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> Datatypes</li>
+            <li>On “New Type” <strong>Select</strong> bil</li>
+            <li>
+              <p>Press <strong>Save</strong></p>
+
+              <blockquote class="comment">
+                <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+
+                <p>Do the same for the raster header with the datatype hdr</p>
+              </blockquote>
+            </li>
+          </ul>
+
+        </blockquote>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <h2 id="compute-biodiversity-indices">Compute biodiversity indices</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-biodiversity-indicators-for-global-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Biodiversity indicators for global remote sensing data</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_global_indices/srs_global_indices/0.0.1" title="Compute biodiversity indices tool"><strong>Compute biodiversity indices</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_global_indices/srs_global_indices/0.0.1</span></span>  with the following parameters:
+        <ul>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">Reflectance</code> (output of <strong>Preprocessing sentinel 2 data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            </ul>
+          </li>
+          <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Write a number of the value of alpha”</em>: ‘1’</li>
+        </ul>
+
+        <blockquote class="tip">
+          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p>Check that the “Input raster” datatype is bil and that “Input raster header” datatype is hdr</p>
+
+          <ul>
+            <li>Go on your raster data</li>
+            <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> to edit it</li>
+            <li>Click on <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> Datatypes</li>
+            <li>On “New Type” <strong>Select</strong> bil</li>
+            <li>
+              <p>Press <strong>Save</strong></p>
+
+              <blockquote class="comment">
+                <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+
+                <p>Do the same for the raster header with the datatype hdr</p>
+              </blockquote>
+            </li>
+          </ul>
+
+        </blockquote>
+
+        <blockquote class="tip">
+          <div class="box-title tip-title" id="tip-you-can-use-the-output-of-compute-a-pca"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-you-can-use-the-output-of-compute-a-pca" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: You can use the output of **Compute a PCA**<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘Your already have the files in ENVI BIL format’</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input raster”</em>: <code class="language-plaintext highlighter-rouge">PCA raster</code> (output of <strong>Compute a PCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input header”</em>: <code class="language-plaintext highlighter-rouge">PCA header</code> (output of <strong>Compute a PCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Write a number of the value of alpha”</em>: ‘1’</li>
+          </ul>
+
+          <p>Here again check that the “Input raster” datatype is bil and that “Input raster header” datatype is hdr</p>
+
+        </blockquote>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <figure id="figure-4"><img src="../../images/remote_sensing/rasterdivtab.png" alt="Global biodiveristy tabular : a table summary with a column for each indicators calculated, the longitude and the latitude. " width="1406" height="891" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Global biodiveristy tabular</figcaption></figure>
+  <figure id="figure-5"><img src="../../images/remote_sensing/rasterdiv.png" alt="Global biodiveristy graph : angraph example for the shannon indice shown according to the longitude and latitude. " width="1129" height="940" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Global biodiveristy graph</figcaption></figure>
+
+  <p>These 2 pictures are only exemple it is normal if you don’t have exactly the same output.</p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+    <ol>
+      <li>How many biodiversity indicators do you have ?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>You should have 7 of them (Shannon, Renyi, Prao, Pielou, Hill, CRE, Berger-Parker). If you have only 5 of them, no problem, it just means you data are too small to compute CRE and Pielou but you can still continue your analysis.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</div>
+<p><!-- end CYOA path --></p>
+
+<!-- Choose your own adventure path -->
+<div class="Canopy">
+
+  <h2 id="compute-a-pca-1">Compute a PCA</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-principal-components-analysis-for-remote-sensing-data-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Principal components analysis for remote sensing data</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1" title="Compute a PCA tool"><strong>Compute a PCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1</span></span>  with the following parameters:
+        <ul>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">Reflectance</code> (output of <strong>Preprocessing sentinel 2 data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            </ul>
+          </li>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Do you want to do a PCA or a SPCA ?”</em>: ‘PCA’</li>
+        </ul>
+
+        <blockquote class="tip">
+          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p>Check that the “Input raster” datatype is bil and that “Input raster header” datatype is hdr</p>
+
+          <ul>
+            <li>Go on your raster data</li>
+            <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> to edit it</li>
+            <li>Click on <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> Datatypes</li>
+            <li>On “New Type” <strong>Select</strong> bil</li>
+            <li>
+              <p>Press <strong>Save</strong></p>
+
+              <blockquote class="comment">
+                <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+
+                <p>Do the same for the raster header with the datatype hdr</p>
+              </blockquote>
+            </li>
+          </ul>
+
+        </blockquote>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <h2 id="create-biodiversity-maps">Create Biodiversity maps</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-biodiversity-indicators-for-canopy-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Biodiversity indicators for canopy remote sensing data</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_diversity_maps/srs_diversity_maps/0.0.1" title="Mapping diversity tool"><strong>Mapping diversity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_diversity_maps/srs_diversity_maps/0.0.1</span></span>  with the following parameters:
+        <ul>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">Reflectance</code> (output of <strong>Preprocessing sentinel 2 data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            </ul>
+          </li>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Alpha, beta, functional diversity and comparison plot and map”</em>: ‘All of the above’</li>
+        </ul>
+
+        <blockquote class="tip">
+          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p>Check that the “Input raster” datatype is bil and that “Input raster header” datatype is hdr</p>
+
+          <ul>
+            <li>Go on your raster data</li>
+            <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> to edit it</li>
+            <li>Click on <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> Datatypes</li>
+            <li>On “New Type” <strong>Select</strong> bil</li>
+            <li>
+              <p>Press <strong>Save</strong></p>
+
+              <blockquote class="comment">
+                <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+
+                <p>Do the same for the raster header with the datatype hdr</p>
+              </blockquote>
+            </li>
+          </ul>
+
+        </blockquote>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <figure id="figure-6"><img src="../../images/remote_sensing/beta.png" alt="A graph showing the beta diversity according to the longitude and the latitude. " width="1111" height="951" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Beta diversity map</figcaption></figure>
+  <figure id="figure-7"><img src="../../images/remote_sensing/betatab.png" alt="A tabular with a column for the beta diversity, the longitude and the latitude. " width="1278" height="154" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Beta diversity tabular</figcaption></figure>
+
+  <h2 id="processing-remote-sensing-data">Processing remote sensing data</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-comparing-biodiversity-indicators-for-canopy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Comparing biodiversity indicators for canopy</div>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1" title="Comparing remote sensing data tool"><strong>Comparing remote sensing data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1</span></span>  with the following parameters:
+        <ul>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">Reflectance</code> (output of <strong>Preprocessing sentinel 2 data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            </ul>
+          </li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Plots folder zip”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+        </ul>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-shapefiles"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Shapefiles</div>
+
+          <p>Here you must provide your folder of shapefiles (at least 2 in order to have the beta diversity).</p>
+        </blockquote>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-check-datatype-if-you-use-your-own-envi-bil-files"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Check datatype if you use your own ENVI BIL files</div>
+
+          <p>Same as the compute spectral indices make sure you have the right datatypes bil and hdr.</p>
+        </blockquote>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <figure id="figure-8"><img src="../../images/remote_sensing/comp_bdmr.png" alt="Biodiversity comparison graph allowing to locate the different types of vegetation in the PCoA space. " width="1560" height="1170" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Biodiversity comparison graph</figcaption></figure>
+  <figure id="figure-9"><img src="../../images/remote_sensing/braycu.png" alt="Bray curtis table for the types of vegetation. " width="774" height="199" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Bray curtis table</figcaption></figure>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+    <ol>
+      <li>What kind of data do you need to use these tools ?</li>
+      <li>Do you need a shapefile for mapping the diversity ?</li>
+      <li>Why do you need multiple locations for comparing biodiversity ?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>This analisys is for data on forest, it’s a canopy study.</li>
+        <li>No, only for the comparison with in situ data.</li>
+        <li>The Bray curtis table compare the diversity between locations.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</div>
+<p><!-- end CYOA path --></p>
+
+<h1 id="spectral-indices">Spectral indices</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-compute-spectral-indices"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Compute spectral indices</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1" title="Compute spectral indices tool"><strong>Compute spectral indices</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">Reflectance</code> (output of <strong>Preprocessing sentinel 2 data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li>
+          <p><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Input the type of indice you want”</em>: ‘NDVI’</p>
+        </li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Do you want the raster layer of the indice as an output ?”</em>: ‘No’</li>
+      </ul>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>Check that the “Input raster” datatype is bil and that “Input raster header” datatype is hdr</p>
+
+        <ul>
+          <li>Go on your raster data</li>
+          <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> to edit it</li>
+          <li>Click on <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> Datatypes</li>
+          <li>On “New Type” <strong>Select</strong> bil</li>
+          <li>
+            <p>Press <strong>Save</strong></p>
+
+            <blockquote class="comment">
+              <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+
+              <p>Do the same for the raster header with the datatype hdr</p>
+            </blockquote>
+          </li>
+        </ul>
+
+      </blockquote>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+
+        <p>You can choose whichever indice you want</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-10"><img src="../../images/remote_sensing/ndvi.png" alt="A tabular with columns for the NDVI index, the longitude and the latitude. " width="1275" height="313" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Normalized different vegetation index</figcaption></figure>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-spectral-indices-and-essential-biodiversity-variables"><button class="gtn-boxify-button details" type="button" aria-controls="details-spectral-indices-and-essential-biodiversity-variables" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Spectral indices and Essential Biodiversity Variables<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Remotely sensed diversity is consistent with most of the essential spatially constrained biodiversity variables proposed by Skidmore et al. (2015). This highlights the need for increased dialogue and collaboration between the biodiversity monitoring community and the remote sensing community to make satellite remote sensing a tool of choice for conservation. Increased dialogue is also essential within the biodiversity monitoring community to achieve this. From this point of view multiple Satellite Remote Sensing EBV (SRS EBV) were created.
+Some of the indices proposed here will allow you to compute  SRS EBV.
+For instance it allows you to compute one of GEO BON EBV <a href="https://portal.geobon.org/ebv-detail?id=13">Canopy Chlorophyll Content</a>. This EBV is computed by GEO BON on the Netherlands, here you can compute it on which ever Sentinel 2 data you want by chosing to calculate the indice CCCI.</p>
+</blockquote>
+
+<figure id="figure-11"><img src="../../images/remote_sensing/ccci.png" alt="A tabular showing the Canopy Chlorophyl Content index according to the longitude and latitude. " width="1417" height="1181" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Canopy Chlorophyl Content index tabular</figcaption></figure>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+  <ol>
+    <li>What’s the difference between biodiversity indicators and spectral indices ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Biodiversity indicators give us informations on the heterogeneity of the landscape whereas spectral indices inform us on the well being of the vegetation.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>You are now all set to use your remote sensing data in order to do a biodiversity analysis. Before you go on one last reflexion.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+  <ol>
+    <li>Should remote sensing replace in-situ data ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>NO ! remote sensing and in-situ data should come and complete one another to have the most complete view of the state of biodiversity.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Remote sensing data can be useful to find hotspots of biodiversity.</p>
+</li>
+                        
+                        <li><p>Spectral indices are of key importance to asset vegetation well-being.</p>
+</li>
+                        
+                        <li><p>Always keep in mind that remote sensing and in-situ data are complementary.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/ecology/faqs/">FAQ page for the Ecology topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Sentinel 2 biodiversity (Ecology)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Marie Josse, Yvan Le Bras,  <b>Sentinel 2 biodiversity (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/remote-sensing/tutorial.html">https://training.galaxyproject.org/training-material/topics/ecology/tutorials/remote-sensing/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{ecology-remote-sensing,
+author = "Marie Josse and Yvan Le Bras",
+title = "Sentinel 2 biodiversity (Galaxy Training Materials)",
+year = "",
+month = "",
+day = ""
+url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/remote-sensing/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
+        var snippets=document.querySelectorAll('div.highlight');
+        [].forEach.call(snippets,function(snippet){
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+
+        var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+            target:function(trigger){return trigger.nextElementSibling;
+        }});
+        </script>
+        
+
+        <script type="text/javascript">
+            if(window.location.hostname === "galaxyproject.github.io") {
+                // Redirect
+                var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+                $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+                window.setTimeout(function(){
+                    window.location.href = redirect;
+                }, 5000)
+
+            }
+        </script>
+    </body>
+</html>

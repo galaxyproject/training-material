@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Champs blocs indicators">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-03-21 14:01:54 +0000">
+<meta name="DC.date" content="2023-04-11 14:52:45 +0000">
 <meta name="DC.creator" content="Marie Josse">
 <meta name="DC.creator" content="Yvan Le Bras">
 
@@ -65,7 +65,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-21 14:01:54 +0000",
+  "dateModified": "2023-04-11 14:52:45 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Champs blocs indicators",
   "interactivityType": "mixed",
@@ -494,7 +494,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-21 14:01:54 +0000",
+  "dateModified": "2023-04-11 14:52:45 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Champs blocs indicators",
   "interactivityType": "mixed",
@@ -1196,7 +1196,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 21, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 11, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1245,6 +1245,7 @@ Thus, the “mediolittoral boulder fields” habitat has been the subject of sev
   </li>
   <li><a href="#computing-dissimilarity-coefficient-for-each-site" id="markdown-toc-computing-dissimilarity-coefficient-for-each-site">Computing dissimilarity coefficient for each site</a>    <ol>
       <li><a href="#dissimilarity" id="markdown-toc-dissimilarity">Dissimilarity</a></li>
+      <li><a href="#diversity-indicators" id="markdown-toc-diversity-indicators">Diversity indicators</a></li>
     </ol>
   </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
@@ -1329,7 +1330,7 @@ You can come back to where you left off the tutorial anytime by clicking <i clas
   <blockquote>
     <ol>
       <li>
-        <p>Download your data on ESTAMP <a href="https://estamp.afbiodiversite.fr/donnees">estamp.afbiodiversite.fr</a>. You will get a zip folder.</p>
+        <p>Download your data on ESTAMP <a href="https://estamp.afbiodiversite.fr/">estamp.afbiodiversite.fr</a> website, clicking on “Accédez aux données” at the bottom of the page. You will get a zip folder.</p>
       </li>
       <li>
         <p>Unzip your folder. In the folder three files .csv will interest us :</p>
@@ -1429,9 +1430,11 @@ The tool form will be displayed in the central Galaxy panel.</li>
 
     <ol>
       <li>In the top of the History panel (on the right) go on the search box</li>
-      <li>Type the name of your site (for instance “Bilfot”)</li>
-      <li>If nothing show up click on <strong>show hidden</strong> (just beneath the name of the history in the History panel)</li>
+      <li>Click on the double arrows to display more filter options</li>
+      <li>Type the name of your site (for instance “Bilfot”) on the “Filter by name:” criteria then click on “No” for the “Visible:” criteria, as plots are created in a data collection and not directly visible on the history</li>
     </ol>
+
+    <figure id="figure-9"><img src="../../images/champbloc/filter_data.jpg" alt="Bilfot filter. " width="336" height="768" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Filter IVR for Bilfot</figcaption></figure>
 
   </blockquote>
   <p><strong>For your reports you need to download the ones you want. You won’t be able to vizualise them directly on Galaxy center panel !</strong></p>
@@ -1479,9 +1482,48 @@ Get the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/cb_di
 
   <p>The information is displayed in the central panel</p>
 
-  <figure id="figure-9"><img src="../../images/champbloc/fs_fi.png" alt="Dissim fs fi. " width="1839" height="895" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> face sup and inf dissimilarity</figcaption></figure>
+  <figure id="figure-10"><img src="../../images/champbloc/fs_fi.png" alt="Dissim fs fi. " width="1839" height="895" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> face sup and inf dissimilarity</figcaption></figure>
 
-  <figure id="figure-10"><img src="../../images/champbloc/bf_bm.png" alt="Dissim bf bm. " width="1853" height="891" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> bloc fixed and mobile dissimilarity</figcaption></figure>
+  <figure id="figure-11"><img src="../../images/champbloc/bf_bm.png" alt="Dissim bf bm. " width="1853" height="891" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> bloc fixed and mobile dissimilarity</figcaption></figure>
+
+  <ol>
+    <li>Download your results</li>
+  </ol>
+
+  <ul>
+    <li>Click on the output you are interested in</li>
+    <li>Click on <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> (download)</li>
+  </ul>
+
+</blockquote>
+
+<h2 id="diversity-indicators">Diversity indicators</h2>
+<p>Taking as input cleaned data from the Dissimilarity step tocompute diversity indicators.
+Get the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/cb_div/cb_div/0.0.0" title="Diversity indicators tool"><strong>Diversity indicators</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/cb_div/cb_div/0.0.0</span></span>  tool</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-calculate-diversity-indicators"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Calculate diversity indicators</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/cb_div/cb_div/0.0.0" title="Diversity indicators tool"><strong>Diversity indicators</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/cb_div/cb_div/0.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input clean data”</em>: <code class="language-plaintext highlighter-rouge">input</code> (Clean Rdata)</li>
+      </ul>
+    </li>
+    <li>
+      <p>Press <strong>Execute</strong></p>
+    </li>
+    <li>View graphs
+      <ul>
+        <li>Once it’s green, click on type of plot you want to see</li>
+        <li>Then, click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of your output in the history panel.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>The information is displayed in the central panel</p>
+
+  <figure id="figure-12"><img src="../../images/champbloc/simpson.jpg" alt="Div . " width="984" height="695" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Simpson indicator</figcaption></figure>
 
   <ol>
     <li>Download your results</li>
@@ -1495,7 +1537,7 @@ Get the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/cb_di
 </blockquote>
 
 <h1 id="conclusion">Conclusion</h1>
-<p>Here you have finished your study on your champs blocs biodiversity state.</p>
+<p>Here you have finished your study on your boulder fields biodiversity state.</p>
 
                 </section>
 
@@ -1509,6 +1551,9 @@ Get the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/cb_di
 </li>
                         
                         <li><p>Champs Blocs</p>
+</li>
+                        
+                        <li><p>Boulder Fields</p>
 </li>
                         
                     </ul>
