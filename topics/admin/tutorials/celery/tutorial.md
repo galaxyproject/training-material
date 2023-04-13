@@ -10,10 +10,14 @@ objectives:
   - Configure and start Celery workers
   - Install Flower to the Galaxy venv and configure it
   - Use an Ansible playbook for all of the above.
+  - Monitor a Celery task using the Flower dashboard
 time_estimation: "1h"
 key_points:
-contributors:
+contributions:
+  authorship:
   - mira-miracoli
+  editing:
+  - hexylena
 requirements:
   - type: "internal"
     topic_name: admin
@@ -378,6 +382,15 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >     {% endraw %}
 >     ```
 >     {: data-commit="Add celery-redis" data-ref="add-req"}
+> 5. We are done with the changes and you can enter the command to run your playbook:
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true" data-ref="playbook-run"}
+>    {: .code-in}
+>    This should also restart Galaxy and spawn the amount of Celery workers, that we defined in the Gravity configuration.
+>
 {: .hands_on}
 
 # Test Celery
