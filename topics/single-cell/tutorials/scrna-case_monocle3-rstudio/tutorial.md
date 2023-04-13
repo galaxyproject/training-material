@@ -59,8 +59,8 @@ notebook:
   snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md
 ---
 
-## Setting the environment and files upload
-Once the installation is done, we should load the needed packages into our notebook.
+## Setting up the environment and file upload
+Once the installation is done, we should load the needed packages into our notebook. Navigate back to your `notebook`. If you are using our prepopulated notebook, you can follow the tutorial from there. Otherwise, input the following into your fresh notebook.
 
 ```r
 install.packages("Rcpp")    # needed for reduce_dimension to avoid AnnoyAngular error; library(Rcpp) might work as well depending on the version
@@ -88,7 +88,7 @@ Then we have to read in this h5ad file:
 ```r
 ann <- anndata::read_h5ad('AnnData.h5ad')
 ```
-Now we store all the information we need in AnnData object. However, Monocle uses *cell_data_set class* to hold expression data,which requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. Therefore, we have to somehow 'transfer' that information from our AnnData object to Monocle's cell_data_set (cds). AnnData stores a data matrix `X` together with annotations of observations `obs` and variables `var`, so we can extract those parameters and use them for further analysis.
+Now we store all the information we need in AnnData object. However, Monocle uses *cell_data_set class* to hold expression data, which requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. Therefore, we have to somehow 'transfer' that information from our AnnData object to Monocle's cell_data_set (cds). AnnData stores a data matrix `X` together with annotations of observations `obs` and variables `var`, so we can extract those parameters and use them for further analysis.
 
 ```r
 expression_matrix <- ann$X
@@ -98,7 +98,7 @@ gene_metadata <- ann$var
 
 > <tip-title>Uploading files from your computer is also an option!</tip-title>
 >
-> If you already have files containing the expression matrix, genes and cells metadata, you can upload them to JupyLab and generate cds file from them! For example, if you first downloaded the files from Galaxy your files will have `.tabular` extension. In this case, we will use `read.delim()` function to read them in. In this function, the first argument is the file path - in our case, the files are in the same folder as the notebook, so the file path is the same as the file name. You can always check that by right-clicking on the file and choosing `Copy path`. The second argument, `row.names=1` takes the column number of the data file from which to take the row names.
+> If you already have files containing the expression matrix, genes and cells metadata, you can upload them to JupyLab and generate a cds file from them instaed. For example, if you first downloaded the files from Galaxy, your files will have the `.tabular` extension. In this case, we will use the `read.delim()` function to read them in. In this function, the first argument is the file path - in our case, the files are in the same folder as the notebook, so the file path is the same as the file name. You can always check that by right-clicking on the file and choosing `Copy path`. The second argument, `row.names=1` takes the column number of the data file from which to take the row names.
 > ```r
 > # read in the files
 > cell_metadata <- read.delim('cells.tabular', row.names=1)
@@ -112,7 +112,7 @@ gene_metadata <- ann$var
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > This allows us to ensure that the expression value matrix has the same number of columns as the `cell_metadata` has rows and the same number of rows as the `gene_metadata` has rows. Importantly, row names of the `cell_metadata` object should match the column names of the expression matrix and row names of the `gene_metadata` object should match row names of the expression matrix.
+> > > This allows us to ensure that the expression value matrix has the same number of columns as the `cell_metadata` has rows and the same number of rows as the `gene_metadata` has rows. Importantly, the row names of the `cell_metadata` object should match the column names of the expression matrix and the row names of the `gene_metadata` object should match the row names of the expression matrix.
 > > >
 > > {: .solution}
 > {: .question}
@@ -147,9 +147,9 @@ gene_metadata <- ann$var
 {: .tip}
 
 
-According to [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/), `expression_matrix` should have genes as rows and cells as columns. Let's check if that's the case here.
+According to the [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/), the `expression_matrix` should have genes as rows and cells as columns. Let's check if that's the case here.
 ```r
-expression_matrix           # preview the content of the file by calling its name
+head(expression_matrix,c(5, 5))           # preview the content of the file by calling its the first 5 rows by 5 columns
 ```
 We can see that in our matrix rows are cells and genes are columns, so we have to transpose the matrix simply using function `t()`. But before doing so, we will change its type from dataframe to matrix - this is Monocle's requirement to generate cell_data_set afterwards.
 ```r
