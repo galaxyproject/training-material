@@ -1,15 +1,11 @@
 ---
-layout: learning-path
+layout: learning-pathway
 type: use
 
 title: Introduction to Galaxy and -Omics analysis
 description: |
   This learning path aims to teach you the basics of Galaxy and -omics data analysis
   (e.g. genomics, transcriptomics, proteomics)
-
-requirements:
-  - type: "internal"
-    topic_name: introduction
 
 pathway:
   - section: "Module 1: Introduction to Galaxy"

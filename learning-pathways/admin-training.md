@@ -1,5 +1,5 @@
 ---
-layout: learning-path
+layout: learning-pathway
 title: Admin Training Course
 description: |
   This learning path covers all the topics usually taught during the regular 5-day admin
