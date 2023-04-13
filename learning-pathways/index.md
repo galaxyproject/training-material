@@ -21,7 +21,11 @@ Learning pathways are sets of tutorials curated for you by community experts to 
  </div>
  <div class="row no-gutters">
   <div class="col-sm-5">
+   {% if path.cover-image %}
+   <img class="card-img pathwaycover" src="{{site.baseurl}}/{{path.cover-image}}" alt="{{ path.cover-image-alt }}" loading="lazy">
+   {% else %}
    <img class="card-img pathwaycover" src="{{site.baseurl}}{{coverimage}}" alt="{{ coverimagealt }}" loading="lazy">
+   {% endif %}
   </div>
   <div class="col-sm-7">
    <div class="card-body">

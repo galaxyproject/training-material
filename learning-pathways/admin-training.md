@@ -6,6 +6,9 @@ description: |
   will guide you through all the steps required to setup your own Galaxy server with Ansible,
   configuring it, and making it production ready.
 
+cover-image: assets/images/gat.png
+cover-image-alt: GTN Logo on a spiral galaxy background with text galaxy admin training
+
 tags: [Galaxy administrators, 5-day course]
 
 pathway:

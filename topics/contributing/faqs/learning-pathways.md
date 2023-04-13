@@ -19,7 +19,9 @@ description: |
   Make this as thorough as possible, 1-2 paragraphs. This appears on the index page that
   lists all the learning paths, and at the top of the pathway page
 tags: [some, keywords, here ]
-priority: 2
+
+cover-image: path/to/image.png # optional cover image, defaults to GTN logo
+cover-image-alt: alt text for this image
 
 pathway:
   - section: "Module 1: Title"
