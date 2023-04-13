@@ -67,11 +67,11 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    +
 >    +[beacon]
 >    +[beacon:children]
->    +beacon-import
->    +beacon-server
->    +[beacon-server]
+>    +beacon_import
+>    +beacon_server
+>    +[beacon_server]
 >    +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
->    +[beacon-import]
+>    +[beacon_import]
 >    +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
 >    {% endraw %}
 >    ```
@@ -81,9 +81,9 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    > Here we use some of the more advanced features of Ansible's Inventory system.
 >    > We declare a host group called 'beacon' with no hosts of its own.
 >    > 
->    > Then we declare that this beacon group has two children: beacon-import, and beacon server. We can then define host groups for those two entries with as many different hosts as we need. This makes it very easy to scale up configuration.
+>    > Then we declare that this beacon group has two children: beacon_import, and beacon_server. We can then define host groups for those two entries with as many different hosts as we need. This makes it very easy to scale up configuration.
 >    > 
->    > Here we will be using that feature to declare some 'beacon variables', which will be shared between the beacon-server and beacon-importer. Because they're children of 'beacon', they'll inherit any group variables defined for `group_vars/beacon.yml`.
+>    > Here we will be using that feature to declare some 'beacon variables', which will be shared between the beacon_server and beacon_importer. Because they're children of 'beacon', they'll inherit any group variables defined for `group_vars/beacon.yml`.
 >    {: .tip}
 >
 > 1. Setup the requirements
@@ -129,7 +129,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    +postgres_external_binding: "{{ beacon_db_port }}"
 >    +# Database Configuration
 >    +beacon_db_user: beacon
->    +beacon_db_host: "{{ groups['beacon-server'][0] }}"
+>    +beacon_db_host: "{{ groups['beacon_server'][0] }}"
 >    +beacon_db_password: "{{ vault_beacon_db_password }}"
 >    +beacon_db_port: 9001
 >    +#galaxy_api_key: This we will set in secrets.
@@ -137,7 +137,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    +beacon_info_title: GA4GH Beacon
 >    +beacon_info_beacon_id: your.galaxy.beacon
 >    +beacon_info_description: Beacon service hosting datasets from all over the Galaxy
->    +beacon_info_url: https://{{ groups['beacon-server'][0] }}/beacon/
+>    +beacon_info_url: https://{{ groups['beacon_server'][0] }}/beacon/
 >    +beacon_info_service_group: galaxy-eu
 >    +beacon_info_org_id: usegalaxy.aq
 >    +beacon_info_org_name: Some Galaxy
@@ -156,7 +156,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    {: data-commit="Add relevant group variables"}
 >
 >    > <tip-title>groups?</tip-title>
->    > Here we again use some advanced features of Ansible's inventory system. Ansible knows the name of every hostname in the inventory. Now that we want to point the beacon configuration, either at the database which should be on `beacon-server`, or at Galaxy in `galaxyservers`, we ask the `groups` variable for what the inventory looks like. We use `[0]` to pull out the first hostname we find for both of those groups.
+>    > Here we again use some advanced features of Ansible's inventory system. Ansible knows the name of every hostname in the inventory. Now that we want to point the beacon configuration, either at the database which should be on `beacon_server`, or at Galaxy in `galaxyservers`, we ask the `groups` variable for what the inventory looks like. We use `[0]` to pull out the first hostname we find for both of those groups.
 >    {: .tip}
 >
 > 3. Add the beacon-server playbook
@@ -168,7 +168,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    @@ -0,0 +1,9 @@
 >    +---
 >    +- name: Beacon Server
->    +  hosts: beacon-server
+>    +  hosts: beacon_server
 >    +  become: true
 >    +  become_user: root
 >    +  vars_files:
@@ -207,7 +207,7 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    @@ -0,0 +1,9 @@
 >    +---
 >    +- name: Beacon Importer
->    +  hosts: beacon-import
+>    +  hosts: beacon_import
 >    +  become: true
 >    +  become_user: root
 >    +  vars_files:
@@ -311,7 +311,7 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >          }
 >    +
 >    +    location /beacon {
->    +        proxy_pass http://{{ groups['beacon-server'][0] }}:5050;
+>    +        proxy_pass http://{{ groups['beacon_server'][0] }}:5050;
 >    +        proxy_http_version 1.1;
 >    +        proxy_set_header Upgrade $http_upgrade;
 >    +        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
