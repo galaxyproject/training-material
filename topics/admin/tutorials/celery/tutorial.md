@@ -130,9 +130,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    +- name: geerlingguy.redis
 >    +  version: 1.8.0
 >    +- name: usegalaxy_eu.flower
->    +  version: 1.0.1
->    +- name: usegalaxy_eu.galaxy_systemd
->    +  version: 2.1.0
+>    +  version: 1.0.2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
@@ -242,7 +240,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >        -->
 >
->        This is going in the vault as they are secrets we need to set. Both of our services, Galaxy and Pulsar, need these variables, so we'll need to make sure they're in both playbooks. Both Galaxy in the job configuration, and Pulsar in its configuration.
+>        This is going in the vault as they are secrets we need to set. Flower needs it's own RabbitMQ user with admin access and we want a different vhost for galaxy and celery.
 >
 >        Replace both with long random (or not) string.  
 >        Now add new users to the RabbitMQ configuration:
@@ -370,6 +368,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >            url_prefix: /reports
 >            bind: "unix:{{ galaxy_mutable_config_dir }}/reports.sock"
 >            config_file: "{{ galaxy_config_dir }}/reports.yml"
+>     +    amqp_internal_connection: "pyamqp://galaxy:{{ vault_rabbitmq_password_galaxy }}@localhost:5671/galaxy?ssl=1"
 >     +    celery_conf:
 >     +      result_backend: "redis://localhost:6379/0"
 >     +      enable_celery_tasks: true
