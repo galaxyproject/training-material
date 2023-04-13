@@ -534,7 +534,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    @@ -100,6 +100,9 @@ galaxy_config:
 >         celery_conf:
 >           result_backend: "redis://localhost:6379/0"
->           enable_celery_tasks: true
+>         enable_celery_tasks: true
 >    +    # Monitoring
 >    +    statsd_host: localhost
 >    +    statsd_influxdb: true

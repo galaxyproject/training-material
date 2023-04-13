@@ -358,7 +358,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >     +    amqp_internal_connection: "pyamqp://galaxy:{{ vault_rabbitmq_password_galaxy }}@localhost:5671/galaxy?ssl=1"
 >     +    celery_conf:
 >     +      result_backend: "redis://localhost:6379/0"
->     +      enable_celery_tasks: true
+>     +    enable_celery_tasks: true
 >        gravity:
 >          process_manager: systemd
 >          galaxy_root: "{{ galaxy_root }}/server"
