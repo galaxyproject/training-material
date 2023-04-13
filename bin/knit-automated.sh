@@ -101,6 +101,19 @@ elif [[ "$op" == "roundtrip" ]]; then
 		git am -3 -C2 -- *.patch
 	cd -
 	bash $0 import
+elif [[ "$op" == "check-offsets" ]]; then
+	for idx in "${!tutorials[@]}"; do
+		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
+		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
+		n2=$(( idx + 1 ))
+		echo $idx $folder $tuto = $n2 
+		grep "snippet topics/admin/faqs/missed-something.md step=$n2" topics/${folder}/tutorials/${tuto}/tutorial.md -q
+		if (( $? != 0 )); then
+			echo "Error, topics/${folder}/tutorials/${tuto}/tutorial.md is missing a snippet for step $n2"
+			exit 1
+		fi
+		#vim topics/${folder}/tutorials/${tuto}/tutorial.md
+	done
 else
 	echo "$0 <import|export|deploy|roundtrip>"
 	exit 1;

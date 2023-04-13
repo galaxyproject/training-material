@@ -603,7 +603,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
-{% snippet topics/admin/faqs/missed-something.md step=5 %}
+{% snippet topics/admin/faqs/missed-something.md step=4 %}
 
 # Common Production Questions
 

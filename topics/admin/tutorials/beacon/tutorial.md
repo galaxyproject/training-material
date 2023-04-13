@@ -335,3 +335,5 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 {: .hands_on}
 
 Congratulations, you've set up a Beacon v1 for Galaxy! Go check it out at `/beacon/` on your server.
+
+{% snippet topics/admin/faqs/missed-something.md step=16 %}
