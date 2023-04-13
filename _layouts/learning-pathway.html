@@ -21,8 +21,16 @@ layout: base
 
 <section>
 <h3> GTN Learning Pathway </h3>
-<p> We recommend you follow the tutorials in the order presented on this page. They have been selected to fit together and build up your knowledge step by step. If a lesson has both slides and a tutorial, we recommend you start with the slides, then proceed with the tutorial.</p>
+<div>
+  <div style="display:inline-block;vertical-align:top;width:10%">
+   <img src="{{site.baseurl}}/assets/images/learning-pathway.png" />
+   </div>
+   <div  style="display:inline-block; margin-left: 2em; width:70%">
+      We recommend you follow the tutorials in the order presented on this page. They have been selected to fit together and build up your knowledge step by step. If a lesson has both slides and a tutorial, we recommend you start with the slides, then proceed with the tutorial.
+   </div>
+</div>
 </section>
+
 
 <section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
     <h1>{{ pathway.title }}</h1>
@@ -47,7 +55,7 @@ layout: base
 
         {% assign material_list = "" | split: "" %}
         {% for tut in section.tutorials %}
-          <!-- TODO: make more efficient!-->
+          <!-- TODO: make more efficient -->
           {% assign topic_material = site | topic_filter:tut.topic %}
           {% assign m = topic_material | where: "tutorial_name", tut.name %}
           {% assign material_list = material_list | concat: m %}
