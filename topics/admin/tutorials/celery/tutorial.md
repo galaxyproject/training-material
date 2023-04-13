@@ -34,7 +34,7 @@ tags:
 # Overview
 
 
-Celery is a distributed task queue written in Python that can spawn multiple workers and enables asynchronous task processing on multiple nodes. It supports scheduling, but can be used for real-time operations.
+Celery is a distributed task queue written in Python that can spawn multiple workers and enables asynchronous task processing on multiple nodes. It supports scheduling, but focuses more on real-time operations.
 
 From the Celery website:
 
@@ -84,9 +84,7 @@ To proceed from here it is expected that:
 >    - 22 for SSH, this can be a different port or via VPN or similar.
 >    - 80 for HTTP, this needs to be available to the world if you want to follow the LetsEncrypt portion of the tutorial.
 >    - 443 for HTTPs, this needs to be available to the world if you want to follow the LetsEncrypt portion of the tutorial.
->    - 5555 for the Flower dashboard
 >    - 5671 for AMQP for Pulsar, needed if you plan to setup Pulsar for remote job running.
->    - 6379 for Redis
 >
 {: .comment}
 
