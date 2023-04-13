@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Jekyll::APIGenerator - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Generator
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-generate">#generate</a>
+    
+    <li ><a href="#method-i-get_contributors">#get_contributors</a>
+    
+    <li ><a href="#method-i-mapContributor">#mapContributor</a>
+    
+    <li ><a href="#method-i-markdownify">#markdownify</a>
+    
+    <li ><a href="#method-i-visitAndMarkdownify">#visitAndMarkdownify</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Jekyll::APIGenerator">
+  <h1 id="class-Jekyll::APIGenerator" class="class">
+    class Jekyll::APIGenerator
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-generate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate</span><span
+            class="method-args">(site)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="generate-source">
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
+
+  <span class="ruby-comment"># Full Bibliography</span>
+  <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Scholar</span>.<span class="ruby-identifier">load_bib</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/API] Bibliography&quot;</span>
+  <span class="ruby-identifier">page3</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-string">&quot;gtn.bib&quot;</span>)
+  <span class="ruby-identifier">page3</span>.<span class="ruby-identifier">content</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;cached_global_bib&#39;</span>].<span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">page3</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page3</span>
+
+  <span class="ruby-comment"># Metrics endpoint, /metrics</span>
+  <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;metrics&quot;</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-string">&quot;{% raw %}\n&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Metrics</span>.<span class="ruby-identifier">generate_metrics</span>(<span class="ruby-identifier">site</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;{% endraw %}&quot;</span>
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">markdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">text</span>)
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">find_converter_instance</span>(
+      <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span><span class="ruby-operator">::</span><span class="ruby-constant">Markdown</span>
+    ).<span class="ruby-identifier">convert</span>(<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_s</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">f</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+          <span class="ruby-identifier">f</span>.<span class="ruby-identifier">map!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>)}
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+          <span class="ruby-identifier">f</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+              [<span class="ruby-identifier">k</span>, <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">v</span>)]
+          }.<span class="ruby-identifier">to_h</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+          <span class="ruby-identifier">f</span> = <span class="ruby-identifier">markdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">f</span>).<span class="ruby-identifier">strip</span>().<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&lt;p&gt;/</span>, <span class="ruby-string">&quot;&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&lt;\/p&gt;/</span>, <span class="ruby-string">&quot;&quot;</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">f</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
+    <span class="ruby-identifier">x</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
+      .<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">c</span>, {})
+      .<span class="ruby-identifier">merge</span>({
+        <span class="ruby-string">&quot;id&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">c</span>,
+        <span class="ruby-string">&quot;url&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/api/contributors/#{c}.json&quot;</span>,
+        <span class="ruby-string">&quot;page&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/hall-of-fame/#{c}/&quot;</span>,
+      })
+    <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Contributors</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/API] Contributors&quot;</span>
+  <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-string">&quot;contributors.json&quot;</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span>, <span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)})
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span>, <span class="ruby-identifier">_</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">page4</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-node">&quot;contributors/#{c}.json&quot;</span>)
+    <span class="ruby-identifier">page4</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>))
+    <span class="ruby-identifier">page4</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page4</span>
+  }
+
+  <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-string">&quot;contributors.geojson&quot;</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>({
+    <span class="ruby-string">&quot;type&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;FeatureCollection&quot;</span>,
+    <span class="ruby-string">&quot;features&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
+      .<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-string">&#39;location&#39;</span> }
+      .<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+        {
+          <span class="ruby-string">&quot;type&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Feature&quot;</span>,
+          <span class="ruby-string">&quot;geometry&quot;</span> <span class="ruby-operator">=&gt;</span> {<span class="ruby-string">&quot;type&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Point&quot;</span>, <span class="ruby-string">&quot;coordinates&quot;</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;lon&#39;</span>], <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;lat&#39;</span>]]},
+          <span class="ruby-string">&quot;properties&quot;</span> <span class="ruby-operator">=&gt;</span> {
+            <span class="ruby-string">&quot;name&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;name&#39;</span>, <span class="ruby-identifier">k</span>),
+            <span class="ruby-string">&quot;url&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;https://training.galaxyproject.org/training-material/hall-of-fame/#{k}/&quot;</span>,
+            <span class="ruby-string">&quot;joined&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;joined&#39;</span>],
+            <span class="ruby-string">&quot;orcid&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;orcid&#39;</span>],
+            <span class="ruby-string">&quot;id&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">k</span>,
+            <span class="ruby-string">&quot;contact_for_training&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;contact_for_training&#39;</span>, <span class="ruby-keyword">false</span>),
+          }
+        }
+      }
+  })
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+
+  <span class="ruby-comment"># Trigger the topic cache to generate if it hasn&#39;t already</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/API] Tutorials&quot;</span>
+  <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">topic_filter</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;does-not-matter&#39;</span>)
+  <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_topics</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">topic</span><span class="ruby-operator">|</span>
+
+    <span class="ruby-identifier">out</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic</span>].<span class="ruby-identifier">dup</span>
+    <span class="ruby-identifier">out</span>[<span class="ruby-string">&#39;materials&#39;</span>] = <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">topic_filter</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">q</span> = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">q</span>[<span class="ruby-string">&#39;contributors&#39;</span>] = <span class="ruby-identifier">get_contributors</span>(<span class="ruby-identifier">q</span>).<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)}
+
+      <span class="ruby-identifier">q</span>[<span class="ruby-string">&#39;urls&#39;</span>] = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">q</span>[<span class="ruby-string">&#39;hands_on&#39;</span>].<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">q</span>[<span class="ruby-string">&#39;urls&#39;</span>][<span class="ruby-string">&#39;hands_on&#39;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/api/topics/#{q[&#39;url&#39;][7..-6]}.json&quot;</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">q</span>[<span class="ruby-string">&#39;slides&#39;</span>].<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">q</span>[<span class="ruby-string">&#39;urls&#39;</span>][<span class="ruby-string">&#39;slides&#39;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/api/topics/#{q[&#39;url&#39;][7..-6]}.json&quot;</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-comment"># Write out the individual page</span>
+      <span class="ruby-identifier">page6</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/topics/&quot;</span>, <span class="ruby-node">&quot;#{q[&#39;url&#39;][7..-6]}.json&quot;</span>)
+      <span class="ruby-identifier">page6</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">q</span>)
+      <span class="ruby-identifier">page6</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page6</span>
+
+      <span class="ruby-identifier">q</span>
+    }
+    <span class="ruby-identifier">out</span>[<span class="ruby-string">&#39;maintainers&#39;</span>] = <span class="ruby-identifier">out</span>[<span class="ruby-string">&#39;maintainers&#39;</span>].<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)}
+
+    <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/topics/&quot;</span>, <span class="ruby-node">&quot;#{topic}.json&quot;</span>)
+    <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">out</span>)
+    <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+  }
+
+  <span class="ruby-identifier">topics</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/API] Topics&quot;</span>
+  <span class="ruby-comment"># Individual Topic Indexes</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">each_pair</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;type&#39;</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;maintainers&#39;</span>)
+
+      <span class="ruby-identifier">topics</span>[<span class="ruby-identifier">k</span>] = {
+        <span class="ruby-string">&quot;name&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;name&#39;</span>],
+        <span class="ruby-string">&quot;title&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;title&#39;</span>],
+        <span class="ruby-string">&quot;summary&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;summary&#39;</span>],
+        <span class="ruby-string">&quot;url&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/api/topics/#{k}.json&quot;</span>,
+        <span class="ruby-string">&quot;maintainers&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;maintainers&#39;</span>].<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>) }
+      }
+    <span class="ruby-keyword">end</span>
+  }
+
+  <span class="ruby-comment"># Overall topic index</span>
+  <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-string">&quot;topics.json&quot;</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">topics</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/API] Tutorial and Slide pages&quot;</span>
+
+  <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_all_materials</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">material</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">directory</span> = <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;dir&#39;</span>]
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;slides&#39;</span>]
+      <span class="ruby-identifier">page5</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-node">&quot;#{directory}/slides.json&quot;</span>)
+      <span class="ruby-identifier">p</span> = <span class="ruby-identifier">material</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;contributors&#39;</span>] = <span class="ruby-identifier">get_contributors</span>(<span class="ruby-identifier">p</span>).<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)}
+
+      <span class="ruby-comment"># Here we un-do the tutorial metadata priority, and overwrite with</span>
+      <span class="ruby-comment"># slides metadata when available.</span>
+      <span class="ruby-identifier">slides_data</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">url</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">directory</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;/slides.html&quot;</span>}[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">slides_data</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">slides_data</span>.<span class="ruby-identifier">data</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">slides_data</span>.<span class="ruby-identifier">data</span>)
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">page5</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">p</span>)
+      <span class="ruby-identifier">page5</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page5</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;hands_on&#39;</span>]
+      <span class="ruby-identifier">page5</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/topics/&quot;</span>, <span class="ruby-node">&quot;#{directory}/tutorial.json&quot;</span>)
+      <span class="ruby-identifier">p</span> = <span class="ruby-identifier">material</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;contributors&#39;</span>] = <span class="ruby-identifier">get_contributors</span>(<span class="ruby-identifier">p</span>).<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)}
+      <span class="ruby-identifier">page5</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">p</span>)
+      <span class="ruby-identifier">page5</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page5</span>
+    <span class="ruby-keyword">end</span>
+  }
+
+  <span class="ruby-comment"># Deploy the feedback file as well</span>
+  <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-string">&quot;feedback.json&quot;</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;feedback&#39;</span>])
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+
+  <span class="ruby-comment"># Top Tools</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/API] Top Tools&quot;</span>
+  <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-string">&quot;top-tools.json&quot;</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_materials_by_tool</span>(<span class="ruby-identifier">site</span>))
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+
+  <span class="ruby-comment"># Not really an API</span>
+  <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_materials_by_tool</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tool</span>, <span class="ruby-identifier">tutorials</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;by-tool/&quot;</span>, <span class="ruby-node">&quot;#{tool.gsub(&#39;%20&#39;, &#39; &#39;)}.html&quot;</span>)
+    <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-string">&quot;by_tool&quot;</span>
+    <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;short_tool&quot;</span>] = <span class="ruby-identifier">tool</span>
+    <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;observed_tool_ids&quot;</span>] = <span class="ruby-identifier">tutorials</span>[<span class="ruby-string">&quot;tool_id&quot;</span>]
+    <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;tutorial_list&quot;</span>] = <span class="ruby-identifier">tutorials</span>[<span class="ruby-string">&quot;tutorials&quot;</span>]
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># GA4GH TRS Endpoint</span>
+  <span class="ruby-comment"># Please note that this is all a fun hack</span>
+  <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_all_materials</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;workflows&#39;</span>]}.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">material</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;workflows&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">workflow</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">wfid</span> = <span class="ruby-identifier">workflow</span>[<span class="ruby-string">&#39;wfid&#39;</span>]
+      <span class="ruby-identifier">wfname</span> = <span class="ruby-identifier">workflow</span>[<span class="ruby-string">&#39;wfname&#39;</span>]
+
+      <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-node">&quot;api/ga4gh/trs/v2/tools/#{wfid}/versions/&quot;</span>, <span class="ruby-node">&quot;#{wfname}.json&quot;</span>)
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>({
+        <span class="ruby-string">&quot;id&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">wfname</span>,
+        <span class="ruby-string">&quot;url&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&quot;url&quot;</span>],
+        <span class="ruby-string">&quot;name&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;v1&quot;</span>,
+        <span class="ruby-string">&quot;author&quot;</span> <span class="ruby-operator">=&gt;</span> [],
+        <span class="ruby-string">&quot;descriptor_type&quot;</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&quot;GALAXY&quot;</span>],
+      })
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+
+      <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-node">&quot;api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}/GALAXY&quot;</span>, <span class="ruby-string">&quot;descriptor.json&quot;</span>)
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>({
+        <span class="ruby-string">&quot;content&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;dir&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/workflows/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">workflow</span>[<span class="ruby-string">&#39;workflow&#39;</span>]).<span class="ruby-identifier">read</span>,
+        <span class="ruby-string">&quot;checksum&quot;</span> <span class="ruby-operator">=&gt;</span> [],
+        <span class="ruby-string">&quot;url&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">nil</span>,
+      })
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_contributors" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_contributors</span><span
+            class="method-args">(data)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_contributors-source">
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_contributors</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>].<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>][<span class="ruby-identifier">k</span>]}.<span class="ruby-identifier">flatten</span>()
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-mapContributor" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">mapContributor</span><span
+            class="method-args">(site, c)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="mapContributor-source">
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
+  <span class="ruby-identifier">x</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
+    .<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">c</span>, {})
+    .<span class="ruby-identifier">merge</span>({
+      <span class="ruby-string">&quot;id&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">c</span>,
+      <span class="ruby-string">&quot;url&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/api/contributors/#{c}.json&quot;</span>,
+      <span class="ruby-string">&quot;page&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/hall-of-fame/#{c}/&quot;</span>,
+    })
+  <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-markdownify" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">markdownify</span><span
+            class="method-args">(site, text)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="markdownify-source">
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">markdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">text</span>)
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">find_converter_instance</span>(
+    <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span><span class="ruby-operator">::</span><span class="ruby-constant">Markdown</span>
+  ).<span class="ruby-identifier">convert</span>(<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_s</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-visitAndMarkdownify" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">visitAndMarkdownify</span><span
+            class="method-args">(site, f)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="visitAndMarkdownify-source">
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">f</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+        <span class="ruby-identifier">f</span>.<span class="ruby-identifier">map!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>)}
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+        <span class="ruby-identifier">f</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+            [<span class="ruby-identifier">k</span>, <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">v</span>)]
+        }.<span class="ruby-identifier">to_h</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+        <span class="ruby-identifier">f</span> = <span class="ruby-identifier">markdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">f</span>).<span class="ruby-identifier">strip</span>().<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&lt;p&gt;/</span>, <span class="ruby-string">&quot;&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&lt;\/p&gt;/</span>, <span class="ruby-string">&quot;&quot;</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">f</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

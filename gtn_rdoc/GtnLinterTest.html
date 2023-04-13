@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class GtnLinterTest - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Test::Unit::TestCase
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="GtnLinter.html">GtnLinter</a>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-test_doi">#test_doi</a>
+    
+    <li ><a href="#method-i-test_external_gtn_link">#test_external_gtn_link</a>
+    
+    <li ><a href="#method-i-test_external_gtn_link_slides">#test_external_gtn_link_slides</a>
+    
+    <li ><a href="#method-i-test_fix_broken_link">#test_fix_broken_link</a>
+    
+    <li ><a href="#method-i-test_fix_notoc">#test_fix_notoc</a>
+    
+    <li ><a href="#method-i-test_youtube">#test_youtube</a>
+    
+    <li ><a href="#method-i-testnew_title_">#testnew_title_</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-GtnLinterTest">
+  <h1 id="class-GtnLinterTest" class="class">
+    class GtnLinterTest
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-test_doi" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_doi</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_doi-source">
+            <pre><span class="ruby-comment"># File bin/lint-test.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_doi</span>
+    <span class="ruby-identifier">text</span> = <span class="ruby-string">&quot;a\nfrom [Pedro Larrañaga, 2006](https://doi.org/10.1093/bib/bbk007).\nasdf&quot;</span>.<span class="ruby-identifier">split</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-comment">#          123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">GtnLinter</span>.<span class="ruby-identifier">check_dois</span>(<span class="ruby-identifier">text</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">6</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">64</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>) <span class="ruby-comment"># Inexplicable.</span>
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;text&#39;</span>], <span class="ruby-string">&quot;{% cite ... %}&quot;</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">6</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">64</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>)
+
+    <span class="ruby-identifier">text</span> = <span class="ruby-string">&quot;a\nfrom [Pedro Larrañaga, 2006](https://doi.org/10.5281/zenodo.10238184212).\nasdf&quot;</span>.<span class="ruby-identifier">split</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-comment">#          123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">GtnLinter</span>.<span class="ruby-identifier">check_dois</span>(<span class="ruby-identifier">text</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">length</span>, <span class="ruby-value">0</span>)
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_external_gtn_link" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_external_gtn_link</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_external_gtn_link-source">
+            <pre><span class="ruby-comment"># File bin/lint-test.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_external_gtn_link</span>
+    <span class="ruby-identifier">url</span> = <span class="ruby-string">&quot;https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html&quot;</span>
+    <span class="ruby-identifier">text</span> = <span class="ruby-node">&quot;a\na[test](#{url})b\nasdf&quot;</span>.<span class="ruby-identifier">split</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-comment">#          1234567890</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">GtnLinter</span>.<span class="ruby-identifier">link_gtn_tutorial_external</span>(<span class="ruby-identifier">text</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">9</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">9</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">length</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;text&#39;</span>], <span class="ruby-string">&quot;{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}&quot;</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">9</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">9</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">length</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_external_gtn_link_slides" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_external_gtn_link_slides</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_external_gtn_link_slides-source">
+            <pre><span class="ruby-comment"># File bin/lint-test.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_external_gtn_link_slides</span>
+    <span class="ruby-identifier">url</span> = <span class="ruby-string">&quot;https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/slides.html&quot;</span>
+    <span class="ruby-identifier">text</span> = <span class="ruby-node">&quot;a\na[test](#{url})b\nasdf&quot;</span>.<span class="ruby-identifier">split</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-comment">#          1234567890</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">GtnLinter</span>.<span class="ruby-identifier">link_gtn_slides_external</span>(<span class="ruby-identifier">text</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">9</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">9</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">length</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;text&#39;</span>], <span class="ruby-string">&quot;{% link topics/admin/tutorials/ansible-galaxy/slides.html %}&quot;</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">9</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">9</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">length</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_fix_broken_link" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_fix_broken_link</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_fix_broken_link-source">
+            <pre><span class="ruby-comment"># File bin/lint-test.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_fix_broken_link</span>
+    <span class="ruby-identifier">text</span> = <span class="ruby-string">&quot;a\n{% link does-not-exist.md %}\nasdf&quot;</span>.<span class="ruby-identifier">split</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-comment">#          123456789</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">GtnLinter</span>.<span class="ruby-identifier">check_bad_link</span>(<span class="ruby-identifier">text</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;message&#39;</span>], <span class="ruby-string">&quot;The linked file (`does-not-exist.md`) could not be found.&quot;</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">1</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">28</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_fix_notoc" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_fix_notoc</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_fix_notoc-source">
+            <pre><span class="ruby-comment"># File bin/lint-test.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_fix_notoc</span>
+    <span class="ruby-identifier">text</span> = <span class="ruby-string">&quot;a\n{: .no_toc}\nasdf&quot;</span>.<span class="ruby-identifier">split</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">GtnLinter</span>.<span class="ruby-identifier">fix_notoc</span>(<span class="ruby-identifier">text</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">1</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">3</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">1</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-test_youtube" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_youtube</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_youtube-source">
+            <pre><span class="ruby-comment"># File bin/lint-test.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_youtube</span>
+    <span class="ruby-identifier">text</span> = <span class="ruby-string">&quot;a\n&lt;iframe .. youtube.com ... &lt;/iframe&gt;x\nasdf&quot;</span>.<span class="ruby-identifier">split</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">GtnLinter</span>.<span class="ruby-identifier">youtube_bad</span>(<span class="ruby-identifier">text</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">1</span>)
+
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-identifier">text</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">length</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-testnew_title_" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">testnew_title_</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="testnew_title_-source">
+            <pre><span class="ruby-comment"># File bin/lint-test.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">testnew_title_</span>
+    [
+        [ <span class="ruby-string">&#39;tip&#39;</span>, <span class="ruby-string">&#39;Tip&#39;</span> ],
+        [<span class="ruby-string">&#39;details&#39;</span>, <span class="ruby-string">&#39;Details&#39;</span>],
+        [ <span class="ruby-string">&#39;hands_on&#39;</span>, <span class="ruby-string">&#39;Hands-on&#39;</span> ],
+    ].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">key_text</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">text</span> = <span class="ruby-node">&quot;a\n&gt; ### {% icon #{key} %} #{key_text}: Blah\n&gt; #{key_text} text\n{: .#{key}}&quot;</span>.<span class="ruby-identifier">split</span> <span class="ruby-string">&quot;\n&quot;</span>
+        <span class="ruby-comment">#          12345678901234567890123456789012345678901234567890</span>
+        <span class="ruby-identifier">result</span> = <span class="ruby-constant">GtnLinter</span>.<span class="ruby-identifier">new_more_accessible_boxes</span>(<span class="ruby-identifier">text</span>)
+
+        <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+        <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">3</span>)
+
+        <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>], <span class="ruby-value">2</span>)
+        <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>], <span class="ruby-value">24</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">key_text</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+
+        <span class="ruby-identifier">k2</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/_/</span>, <span class="ruby-string">&#39;-&#39;</span>)
+        <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">result</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;text&#39;</span>], <span class="ruby-node">&quot;&lt;#{k2}-title&gt;Blah&lt;/#{k2}-title&gt;&quot;</span>)
+
+    }
+    
+    <span class="ruby-comment"># assert_equal(result[0][&#39;suggestions&#39;][0][&#39;range&#39;][&#39;start&#39;][&#39;line&#39;], 2)</span>
+    <span class="ruby-comment"># assert_equal(result[0][&#39;suggestions&#39;][0][&#39;range&#39;][&#39;start&#39;][&#39;column&#39;], 9)</span>
+    <span class="ruby-comment"># assert_equal(result[0][&#39;suggestions&#39;][0][&#39;range&#39;][&#39;end&#39;][&#39;line&#39;], 2)</span>
+    <span class="ruby-comment"># assert_equal(result[0][&#39;suggestions&#39;][0][&#39;range&#39;][&#39;end&#39;][&#39;column&#39;], 9 + url.length)</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

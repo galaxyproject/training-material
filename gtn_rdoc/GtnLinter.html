@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module GtnLinter - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-bad_tool_links">::bad_tool_links</a>
+    
+    <li ><a href="#method-c-bib_missing_mandatory_fields">::bib_missing_mandatory_fields</a>
+    
+    <li ><a href="#method-c-check_bad_cite">::check_bad_cite</a>
+    
+    <li ><a href="#method-c-check_bad_heading_order">::check_bad_heading_order</a>
+    
+    <li ><a href="#method-c-check_bad_link">::check_bad_link</a>
+    
+    <li ><a href="#method-c-check_bad_link_text">::check_bad_link_text</a>
+    
+    <li ><a href="#method-c-check_bad_tag">::check_bad_tag</a>
+    
+    <li ><a href="#method-c-check_bolded_heading">::check_bolded_heading</a>
+    
+    <li ><a href="#method-c-check_dois">::check_dois</a>
+    
+    <li ><a href="#method-c-check_looks_like_heading">::check_looks_like_heading</a>
+    
+    <li ><a href="#method-c-check_pmids">::check_pmids</a>
+    
+    <li ><a href="#method-c-check_tool_link">::check_tool_link</a>
+    
+    <li ><a href="#method-c-check_useless_box_prefix">::check_useless_box_prefix</a>
+    
+    <li ><a href="#method-c-emit_results">::emit_results</a>
+    
+    <li ><a href="#method-c-enable_auto_fix">::enable_auto_fix</a>
+    
+    <li ><a href="#method-c-enumerate_lintable">::enumerate_lintable</a>
+    
+    <li ><a href="#method-c-enumerate_symlinks">::enumerate_symlinks</a>
+    
+    <li ><a href="#method-c-enumerate_type">::enumerate_type</a>
+    
+    <li ><a href="#method-c-filter_results">::filter_results</a>
+    
+    <li ><a href="#method-c-find_matching_texts">::find_matching_texts</a>
+    
+    <li ><a href="#method-c-fix_bib">::fix_bib</a>
+    
+    <li ><a href="#method-c-fix_file">::fix_file</a>
+    
+    <li ><a href="#method-c-fix_ga_wf">::fix_ga_wf</a>
+    
+    <li ><a href="#method-c-fix_md">::fix_md</a>
+    
+    <li ><a href="#method-c-fix_notoc">::fix_notoc</a>
+    
+    <li ><a href="#method-c-format_reviewdog_output">::format_reviewdog_output</a>
+    
+    <li ><a href="#method-c-get_citation_library">::get_citation_library</a>
+    
+    <li ><a href="#method-c-incorrect_calls">::incorrect_calls</a>
+    
+    <li ><a href="#method-c-link_gtn_slides_external">::link_gtn_slides_external</a>
+    
+    <li ><a href="#method-c-link_gtn_tutorial_external">::link_gtn_tutorial_external</a>
+    
+    <li ><a href="#method-c-new_more_accessible_boxes">::new_more_accessible_boxes</a>
+    
+    <li ><a href="#method-c-new_more_accessible_boxes_agenda">::new_more_accessible_boxes_agenda</a>
+    
+    <li ><a href="#method-c-no_target_blank">::no_target_blank</a>
+    
+    <li ><a href="#method-c-non_existent_snippet">::non_existent_snippet</a>
+    
+    <li ><a href="#method-c-run_linter_global">::run_linter_global</a>
+    
+    <li ><a href="#method-c-set_code_limits">::set_code_limits</a>
+    
+    <li ><a href="#method-c-set_plain_output">::set_plain_output</a>
+    
+    <li ><a href="#method-c-set_rdjson_output">::set_rdjson_output</a>
+    
+    <li ><a href="#method-c-should_ignore">::should_ignore</a>
+    
+    <li ><a href="#method-c-youtube_bad">::youtube_bad</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-GtnLinter">
+  <h1 id="module-GtnLinter" class="module">
+    module GtnLinter
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="ALLOWED_SHORT_IDS">ALLOWED_SHORT_IDS
+        
+        <dd>
+        
+      
+        <dt id="BOX_CLASSES">BOX_CLASSES
+        
+        <dd>
+        
+      
+        <dt id="KNOWN_TAGS">KNOWN_TAGS
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-bad_tool_links" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bad_tool_links</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="bad_tool_links-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 339</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">bad_tool_links</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-ivar">@BAD_TOOL_LINK</span>)
+      .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-node">&quot;{% tool #{selected[1]}(#{selected[2]}) %}&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;You have used the full tool URL to a specific server, here we only need the tool ID portion.&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:009&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-bib_missing_mandatory_fields" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bib_missing_mandatory_fields</span><span
+            class="method-args">(bib)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="bib_missing_mandatory_fields-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 666</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">bib_missing_mandatory_fields</span>(<span class="ruby-identifier">bib</span>)
+  <span class="ruby-identifier">results</span> = []
+  <span class="ruby-keyword">for</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">in</span> <span class="ruby-identifier">bib</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">doi</span> = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">doi</span>
+    <span class="ruby-keyword">rescue</span>
+      <span class="ruby-identifier">doi</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">url</span> = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">url</span>
+    <span class="ruby-keyword">rescue</span>
+      <span class="ruby-identifier">url</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">doi</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">results</span>.<span class="ruby-identifier">push</span>([<span class="ruby-identifier">x</span>.<span class="ruby-identifier">key</span>, <span class="ruby-string">&quot;Missing both a DOI and a URL. Please add one of the two.&quot;</span>])
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">x</span>.<span class="ruby-identifier">title</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">x</span>.<span class="ruby-identifier">title</span>
+        <span class="ruby-identifier">results</span>.<span class="ruby-identifier">push</span>([<span class="ruby-identifier">x</span>.<span class="ruby-identifier">key</span>, <span class="ruby-string">&quot;This entry is missing a title attribute. Please add it.&quot;</span>])
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">rescue</span>
+      <span class="ruby-identifier">results</span>.<span class="ruby-identifier">push</span>([<span class="ruby-identifier">x</span>.<span class="ruby-identifier">key</span>, <span class="ruby-string">&quot;This entry is missing a title attribute. Please add it.&quot;</span>])
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">results</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-check_bad_cite" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_bad_cite</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_bad_cite-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 303</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_bad_cite</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/{%\s*cite\s+([^%]*)\s*%}/i</span>)
+  .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">citation_key</span> = <span class="ruby-identifier">selected</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">strip</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_citation_library</span>[<span class="ruby-identifier">citation_key</span>].<span class="ruby-identifier">nil?</span>
+      <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+        <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+        <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+        <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>),
+        <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>),
+        <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+        <span class="ruby-value">message:</span> <span class="ruby-node">&quot;The citation (#{citation_key}) could not be found.&quot;</span>,
+        <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:007&quot;</span>,
+      )
+    <span class="ruby-keyword">end</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-check_bad_heading_order" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_bad_heading_order</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_bad_heading_order-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 602</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_bad_heading_order</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-identifier">depth</span> = <span class="ruby-value">1</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/^(?&lt;level&gt;#+)/</span>)
+  .<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">new_depth</span> = <span class="ruby-identifier">selected</span>[<span class="ruby-value">:level</span>].<span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">depth_change</span> = <span class="ruby-identifier">new_depth</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">depth</span>
+    <span class="ruby-identifier">depth</span> = <span class="ruby-identifier">new_depth</span>
+    [<span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span>, <span class="ruby-identifier">depth_change</span>, <span class="ruby-identifier">new_depth</span>]
+  }.<span class="ruby-identifier">select</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span>, <span class="ruby-identifier">depth_change</span>, <span class="ruby-identifier">new_depth</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">depth_change</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+  }.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span>, <span class="ruby-identifier">depth_change</span>, <span class="ruby-identifier">new_depth</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-string">&quot;#&quot;</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">new_depth</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">depth_change</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>),
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;You have skipped a heading level, please correct this.&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:028&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-check_bad_link" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_bad_link</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_bad_link-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 494</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_bad_link</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/{%\s*link\s+([^%]*)\s*%}/i</span>)
+  .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">path</span> = <span class="ruby-identifier">selected</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^\//</span>, <span class="ruby-string">&#39;&#39;</span>))
+      <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+        <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+        <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+        <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>),
+        <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>),
+        <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+        <span class="ruby-value">message:</span> <span class="ruby-node">&quot;The linked file (`#{selected[1].strip}`) could not be found.&quot;</span>,
+        <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:018&quot;</span>,
+      )
+    <span class="ruby-keyword">end</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-check_bad_link_text" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_bad_link_text</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_bad_link_text-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_bad_link_text</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/\[\s*(here|link)\s*\]/i</span>)
+      .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-string">&quot;[Something better here]&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Please do not use &#39;here&#39; as your link title, it is &quot;</span> <span class="ruby-operator">+</span>
+       <span class="ruby-string">&quot;[bad for accessibility](https://usability.yale.edu/web-accessibility/articles/links#link-text). &quot;</span> <span class="ruby-operator">+</span>
+       <span class="ruby-string">&quot;Instead try restructuring your sentence to have useful descriptive text in the link.&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:005&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-check_bad_tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_bad_tag</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_bad_tag-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 553</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_bad_tag</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/{%\s*(?&lt;tag&gt;[a-z]+)/</span>)
+  .<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-constant">KNOWN_TAGS</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">selected</span>[<span class="ruby-value">:tag</span>]}
+  .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">warning</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-node">&quot;We&#39;re not sure this tag is correct (#{selected[:tag]}), it isn&#39;t one of the known tags.&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:021&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-check_bolded_heading" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_bolded_heading</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_bolded_heading-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 625</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_bolded_heading</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/^#+ (?&lt;title&gt;\*\*.*\*\*)$/</span>)
+  .<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-identifier">selected</span>[<span class="ruby-value">:title</span>][<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">-3</span>],
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Please do not bold headings, it is unncessary and will potentially cause screen readers to shout them.&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:029&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-check_dois" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_dois</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_dois-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_dois</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/(\[[^\]]*\]\(https?:\/\/doi.org\/[^)]*\))/</span>)
+    .<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">selected</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/10.5281\/zenodo/</span>) } <span class="ruby-comment"># Ignoring zenodo</span>
+      .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">warning</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>) <span class="ruby-operator">+</span> <span class="ruby-value">2</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-string">&quot;{% cite ... %}&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This looks like a DOI which could be better served by using the built-in Citations mechanism. You can use https://doi2bib.org to convert your DOI into a .bib formatted entry, and add to your tutorial.md&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:004&quot;</span>
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-check_looks_like_heading" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_looks_like_heading</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_looks_like_heading-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 512</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_looks_like_heading</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-comment"># TODO: we should remove this someday, but, we need to have a good solution</span>
+  <span class="ruby-comment"># and we&#39;re still a ways from that.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># There&#39;s no clear way to say &quot;this subsection of the content has its own hierarchy&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@path</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/faq/</span>)
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/^\*\*(.*)\*\*$/</span>)
+  .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">warning</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-node">&quot;### #{selected[1]}&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This looks like a heading, but isn&#39;t. Please use proper semantic headings where possible. You should check the heading level of this suggestion, rather than accepting the change as-is.&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:020&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-check_pmids" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_pmids</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_pmids-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 198</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_pmids</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-comment"># https://www.ncbi.nlm.nih.gov/pubmed/24678044</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/(\[[^\]]*\]\(https?:\/\/www.ncbi.nlm.nih.gov\/pubmed\/\/[0-9]*\))/</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">warning</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>) <span class="ruby-operator">+</span> <span class="ruby-value">2</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-string">&quot;{% cite ... %}&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This looks like a PMID which could be better served by using the built-in Citations mechanism. You can use https://doi2bib.org to convert your PMID/PMCID into a .bib formatted entry, and add to your tutorial.md&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:004&quot;</span>
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-check_tool_link" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_tool_link</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_tool_link-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 382</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_tool_link</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/{%\s*tool \[([^\]]*)\]\(([^)]*)\)\s*%}/</span>)
+    .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">text</span> = <span class="ruby-identifier">selected</span>[<span class="ruby-value">1</span>]
+      <span class="ruby-identifier">link</span> = <span class="ruby-identifier">selected</span>[<span class="ruby-value">2</span>]
+
+      <span class="ruby-identifier">errs</span> = []
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/\//</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39;/&#39;</span>) <span class="ruby-operator">&lt;</span> <span class="ruby-value">5</span>
+          <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+            <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+            <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+            <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">2</span>),
+            <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">2</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+            <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+            <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This tool identifier looks incorrect, it doesn&#39;t have the right number of segments.&quot;</span>,
+            <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:009&quot;</span>,
+          ))
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/testtoolshed/</span>)
+          <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">warning</span>(
+            <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+            <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+            <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">2</span>),
+            <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">2</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+            <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+            <span class="ruby-value">message:</span> <span class="ruby-string">&quot;The GTN strongly avoids using testtoolshed tools in your tutorials or workflows&quot;</span>,
+            <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:009&quot;</span>,
+          ))
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/\+/</span>)
+          <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+            <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+            <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+            <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">2</span>),
+            <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">2</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+            <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+            <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Broken tool link, unnecessary +&quot;</span>,
+            <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:009&quot;</span>,
+          ))
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-constant">ALLOWED_SHORT_IDS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">link</span>) <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/^interactive_tool_/</span>) <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/__[A-Z_]+__/</span>)
+          <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/^{{.*}}$/</span>)
+            <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+              <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+              <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+              <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">2</span>),
+              <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">2</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+              <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+              <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Unknown short tool ID. Please use the full tool ID, or check bin/lint.rb if you believe this is correct.&quot;</span>,
+              <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:009&quot;</span>,
+            ))
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">errs</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-check_useless_box_prefix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_useless_box_prefix</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_useless_box_prefix-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 584</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_useless_box_prefix</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/&lt;(?&lt;tag&gt;[a-z_-]+)-title&gt;(?&lt;fw&gt;[a-zA-Z_-]+:?\s*)/</span>)
+  .<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">BOX_CLASSES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">selected</span>[<span class="ruby-value">:tag</span>]) <span class="ruby-keyword">and</span> <span class="ruby-identifier">selected</span>[<span class="ruby-value">:tag</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">selected</span>[<span class="ruby-value">:fw</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/:\s*$/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">downcase</span>
+  }
+  .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">warning</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">2</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">2</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-string">&quot;&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-node">&quot;It is no longer necessary to prefix your #{selected[:tag]} box titles with #{selected[:tag].capitalize}, this is done automatically.&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:022&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-emit_results" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">emit_results</span><span
+            class="method-args">(results)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="emit_results-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 833</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">emit_results</span>(<span class="ruby-identifier">results</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">results</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">results</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">results</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">r</span>.<span class="ruby-identifier">nil?</span> }.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">format_reviewdog_output</span>(<span class="ruby-identifier">r</span>) }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-enable_auto_fix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">enable_auto_fix</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="enable_auto_fix-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 772</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enable_auto_fix</span>
+  <span class="ruby-ivar">@AUTO_APPLY_FIXES</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-enumerate_lintable" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">enumerate_lintable</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="enumerate_lintable-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 966</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_lintable</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/bib$/</span>) <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/md$/</span>) <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/md$/</span>, <span class="ruby-value">root_dir:</span> <span class="ruby-string">&quot;faqs&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-enumerate_symlinks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">enumerate_symlinks</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="enumerate_symlinks-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 948</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_symlinks</span>
+  <span class="ruby-identifier">paths</span> = []
+  <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-string">&#39;./topics&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">FileTest</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;.&#39;</span>)
+        <span class="ruby-constant">Find</span>.<span class="ruby-identifier">prune</span>       <span class="ruby-comment"># Don&#39;t look any further into this directory.</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">next</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">symlink?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">paths</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-enumerate_type" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">enumerate_type</span><span
+            class="method-args">(filter, root_dir: &quot;topics&quot;)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="enumerate_type-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 930</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_type</span>(<span class="ruby-identifier">filter</span>, <span class="ruby-value">root_dir:</span> <span class="ruby-string">&quot;topics&quot;</span>)
+  <span class="ruby-identifier">paths</span> = []
+  <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-node">&quot;./#{root_dir}&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">FileTest</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;.&#39;</span>)
+        <span class="ruby-constant">Find</span>.<span class="ruby-identifier">prune</span>       <span class="ruby-comment"># Don&#39;t look any further into this directory.</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">next</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">filter</span>)
+        <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">paths</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-filter_results" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filter_results</span><span
+            class="method-args">(results, ignores)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="filter_results-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 843</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">filter_results</span>(<span class="ruby-identifier">results</span>, <span class="ruby-identifier">ignores</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">results</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-comment"># Remove any empty lists</span>
+    <span class="ruby-identifier">results</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">x</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> }.<span class="ruby-identifier">flatten</span>
+    <span class="ruby-comment"># Before ignoring anything matching GTN:IGNORE:###</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">ignores</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">results</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">results</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">results</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ignores</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;code&#39;</span>][<span class="ruby-string">&#39;value&#39;</span>]).<span class="ruby-identifier">nil?</span>}
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">results</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-find_matching_texts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_matching_texts</span><span
+            class="method-args">(contents, query)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="find_matching_texts-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-identifier">query</span>)
+  <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">map</span>.<span class="ruby-identifier">with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">text</span>, <span class="ruby-identifier">idx</span><span class="ruby-operator">|</span>
+    [<span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">text</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">query</span>)]
+  }.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span> <span class="ruby-identifier">selected</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-fix_bib" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fix_bib</span><span
+            class="method-args">(contents, bib)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="fix_bib-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 736</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fix_bib</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-identifier">bib</span>)
+  <span class="ruby-identifier">bad_keys</span> = <span class="ruby-identifier">bib_missing_mandatory_fields</span>(<span class="ruby-identifier">bib</span>)
+  <span class="ruby-identifier">results</span> = []
+  <span class="ruby-identifier">bad_keys</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">reason</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/^\s*@.*{#{key},/</span>)
+                   .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+        <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+        <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+        <span class="ruby-value">match_start:</span> <span class="ruby-value">0</span>,
+        <span class="ruby-value">match_end:</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">length</span>,
+        <span class="ruby-value">replacement:</span>  <span class="ruby-keyword">nil</span>,
+        <span class="ruby-value">message:</span> <span class="ruby-identifier">reason</span>,
+        <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:012&quot;</span>,
+      )
+    }
+  }
+  <span class="ruby-identifier">results</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-fix_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fix_file</span><span
+            class="method-args">(path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="fix_file-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 860</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fix_file</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/\s/</span>)
+    <span class="ruby-identifier">emit_results</span>([<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;There are spaces in this filename, that is forbidden.&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:014&quot;</span>)])
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/md$/</span>)
+    <span class="ruby-identifier">handle</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;r&#39;</span>)
+    <span class="ruby-identifier">contents</span> = <span class="ruby-identifier">handle</span>.<span class="ruby-identifier">read</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+    <span class="ruby-identifier">ignores</span> = <span class="ruby-identifier">should_ignore</span>(<span class="ruby-identifier">contents</span>)
+    <span class="ruby-identifier">results</span> = <span class="ruby-identifier">fix_md</span>(<span class="ruby-identifier">contents</span>)
+
+    <span class="ruby-identifier">results</span> = <span class="ruby-identifier">filter_results</span>(<span class="ruby-identifier">results</span>, <span class="ruby-identifier">ignores</span>)
+    <span class="ruby-identifier">emit_results</span>(<span class="ruby-identifier">results</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/.bib$/</span>)
+    <span class="ruby-identifier">handle</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;r&#39;</span>)
+    <span class="ruby-identifier">contents</span> = <span class="ruby-identifier">handle</span>.<span class="ruby-identifier">read</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+
+    <span class="ruby-identifier">bib</span> = <span class="ruby-constant">BibTeX</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>)
+    <span class="ruby-identifier">results</span> = <span class="ruby-identifier">fix_bib</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-identifier">bib</span>)
+
+    <span class="ruby-identifier">results</span> = <span class="ruby-identifier">filter_results</span>(<span class="ruby-identifier">results</span>, <span class="ruby-identifier">ignores</span>)
+    <span class="ruby-identifier">emit_results</span>(<span class="ruby-identifier">results</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/.ga$/</span>)
+    <span class="ruby-identifier">handle</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&#39;r&#39;</span>)
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">contents</span> = <span class="ruby-identifier">handle</span>.<span class="ruby-identifier">read</span>
+      <span class="ruby-identifier">data</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">contents</span>)
+      <span class="ruby-identifier">results</span> = []
+
+      <span class="ruby-comment"># Check if there&#39;s a missing workflow test</span>
+      <span class="ruby-identifier">folder</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-identifier">basename</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/.ga$/</span>, <span class="ruby-string">&#39;&#39;</span>)
+      <span class="ruby-identifier">possible_tests</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{folder}/#{basename}*ym*&quot;</span>)
+      <span class="ruby-identifier">possible_tests</span> = <span class="ruby-identifier">possible_tests</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/#{basename}[_-]tests?.ya?ml/</span>}
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">possible_tests</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> [
+          <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This workflow is missing a test, which is now mandatory. Please see [the FAQ on how to add tests to your workflows](https://training.galaxyproject.org/training-material/faqs/gtn/gtn_workflow_testing.html).&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:027&quot;</span>)
+        ]
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-comment"># Check if they use TS tools, we do this here because it&#39;s easier to look at the plain text.</span>
+      <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">each</span>.<span class="ruby-identifier">with_index</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">text</span>, <span class="ruby-identifier">linenumber</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/testtoolshed/</span>)
+          <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> [
+            <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+              <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+              <span class="ruby-value">idx:</span> <span class="ruby-identifier">linenumber</span>,
+              <span class="ruby-value">match_start:</span> <span class="ruby-value">0</span>,
+              <span class="ruby-value">match_end:</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">length</span>,
+              <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+              <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This step uses a tool from the testtoolshed. These are not permitted in GTN tutorials.&quot;</span>,
+              <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:017&quot;</span>,
+            )
+          ]
+        <span class="ruby-keyword">end</span>
+      }
+      <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">fix_ga_wf</span>(<span class="ruby-identifier">data</span>)
+
+      <span class="ruby-identifier">results</span> = <span class="ruby-identifier">filter_results</span>(<span class="ruby-identifier">results</span>, <span class="ruby-identifier">ignores</span>)
+      <span class="ruby-identifier">emit_results</span>(<span class="ruby-identifier">results</span>)
+    <span class="ruby-keyword">rescue</span>
+      <span class="ruby-identifier">emit_results</span>([<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Unparseable JSON in this workflow file.&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:019&quot;</span>)])
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">bib</span> = <span class="ruby-constant">BibTeX</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-fix_ga_wf" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fix_ga_wf</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="fix_ga_wf-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 697</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fix_ga_wf</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-identifier">results</span> = []
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;tags&quot;</span>)
+    <span class="ruby-identifier">topic</span> = <span class="ruby-ivar">@path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">1</span>]
+    <span class="ruby-identifier">results</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>, <span class="ruby-value">message:</span> <span class="ruby-node">&quot;This workflow is missing tags. Please add `\&quot;tags\&quot;: [\&quot;#{topic}\&quot;]`&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:015&quot;</span>))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;annotation&quot;</span>)
+    <span class="ruby-identifier">results</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This workflow is missing an annotation. Please add `\&quot;annotation\&quot;: \&quot;title of tutorial\&quot;`&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:016&quot;</span>))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;license&quot;</span>)
+    <span class="ruby-identifier">results</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This workflow is missing a license. Please select a valid OSI license. You can correct this in the Galaxy workflow editor.&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:026&quot;</span>))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;creator&quot;</span>)
+    <span class="ruby-identifier">results</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This workflow is missing a Creator. Please edit this workflow in Galaxy to add the correct creator entities&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:024&quot;</span>))
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">contents</span>[<span class="ruby-string">&#39;creator&#39;</span>]
+      .<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>[<span class="ruby-string">&quot;class&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;Person&quot;</span>}
+      .<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;identifier&quot;</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">p</span>[<span class="ruby-string">&quot;identifier&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
+          <span class="ruby-identifier">results</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(
+            <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This workflow has a creator but is missing an identifier for them. Please ensure all creators have valid ORCIDs.&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:025&quot;</span>))
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;name&quot;</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">p</span>[<span class="ruby-string">&quot;name&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
+          <span class="ruby-identifier">results</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(
+            <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This workflow has a creator but is a name, please add it.&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:025&quot;</span>))
+        <span class="ruby-keyword">end</span>
+      }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">results</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-fix_md" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fix_md</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="fix_md-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 640</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fix_md</span>(<span class="ruby-identifier">contents</span>)
+  [
+    <span class="ruby-operator">*</span><span class="ruby-identifier">fix_notoc</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">youtube_bad</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">link_gtn_slides_external</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">link_gtn_tutorial_external</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">check_dois</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">check_pmids</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">check_bad_link_text</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">incorrect_calls</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">check_bad_cite</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">non_existent_snippet</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">bad_tool_links</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">check_tool_link</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">new_more_accessible_boxes</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">new_more_accessible_boxes_agenda</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">no_target_blank</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">check_bad_link</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">check_looks_like_heading</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">check_bad_tag</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">check_useless_box_prefix</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">check_bad_heading_order</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">check_bolded_heading</span>(<span class="ruby-identifier">contents</span>),
+  ]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-fix_notoc" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fix_notoc</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="fix_notoc-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fix_notoc</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/{:\s*.no_toc\s*}/</span>)
+      .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">delete_text</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">text:</span> <span class="ruby-identifier">text</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Setting {: .no_toc} is discouraged, these headings provide useful places for readers to jump to.&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:001&quot;</span>,
+      <span class="ruby-value">full_line:</span> <span class="ruby-identifier">text</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-format_reviewdog_output" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">format_reviewdog_output</span><span
+            class="method-args">(message)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="format_reviewdog_output-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 776</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">format_reviewdog_output</span>(<span class="ruby-identifier">message</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@LIMIT_EMITTED_CODES</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@LIMIT_EMITTED_CODES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;code&#39;</span>][<span class="ruby-string">&#39;value&#39;</span>])
+      <span class="ruby-keyword">return</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">message</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">message</span> <span class="ruby-operator">!=</span> []
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@PLAIN_OUTPUT</span> <span class="ruby-comment"># $stdout.tty? or</span>
+      <span class="ruby-identifier">parts</span> = [
+        <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;path&#39;</span>],
+        <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>],
+        <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>],
+        <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>],
+        <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>],
+        <span class="ruby-node">&quot;#{message[&#39;code&#39;][&#39;value&#39;].gsub(/:/, &#39;&#39;)} #{message[&#39;message&#39;]}&quot;</span>
+      ]
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;:&quot;</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-identifier">message</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@AUTO_APPLY_FIXES</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;suggestions&#39;</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-comment">#{&quot;message&quot;:&quot;It is no longer necessary to prefix your hands-on box titles with Hands-on, this is done automatically.&quot;,&quot;location&quot;:{&quot;path&quot;:&quot;./topics/computational-chemistry/tutorials/zauberkugel/tutorial.md&quot;,&quot;range&quot;:{&quot;start&quot;:{&quot;line&quot;:186,&quot;column&quot;:4},&quot;end&quot;:{&quot;line&quot;:186,&quot;column&quot;:12}}},&quot;severity&quot;:&quot;WARNING&quot;,&quot;code&quot;:{&quot;value&quot;:&quot;GTN:022&quot;,&quot;url&quot;:&quot;https://github.com/galaxyproject/training-material/wiki/Error-Codes#gtn022&quot;},&quot;suggestions&quot;:[{&quot;text&quot;:&quot;&lt;hands-on-title&gt;&quot;,&quot;range&quot;:{&quot;start&quot;:{&quot;line&quot;:186,&quot;column&quot;:4},&quot;end&quot;:{&quot;line&quot;:186,&quot;column&quot;:12}}}]}</span>
+
+    <span class="ruby-identifier">start_line</span> = <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>]
+    <span class="ruby-identifier">start_coln</span> = <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;start&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>]
+    <span class="ruby-identifier">end_line</span> = <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;line&#39;</span>]
+    <span class="ruby-identifier">end_coln</span> = <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;range&#39;</span>][<span class="ruby-string">&#39;end&#39;</span>][<span class="ruby-string">&#39;column&#39;</span>]
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">start_line</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">end_line</span>
+      <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Cannot apply this suggestion sorry&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># We only really support single-line changes. This will probs fuck up</span>
+      <span class="ruby-identifier">lines</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;path&#39;</span>], <span class="ruby-string">&#39;r&#39;</span>).<span class="ruby-identifier">read</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+      <span class="ruby-identifier">original</span> = <span class="ruby-identifier">lines</span>[<span class="ruby-identifier">start_line</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>].<span class="ruby-identifier">dup</span>
+
+      <span class="ruby-identifier">repl</span> = <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;suggestions&#39;</span>][<span class="ruby-value">0</span>][<span class="ruby-string">&#39;text&#39;</span>]
+
+      <span class="ruby-comment">#puts &quot;orig #{original}&quot;</span>
+      <span class="ruby-comment">#puts &quot;before #{original[0..start_coln - 2]}&quot;</span>
+      <span class="ruby-comment">#puts &quot;selected &#39;#{original[start_coln-1..end_coln-2]}&#39;&quot;</span>
+      <span class="ruby-comment">#puts &quot;after #{original[end_coln-2..-1]}&quot;</span>
+      <span class="ruby-comment">#puts &quot;replace: #{repl}&quot;</span>
+
+      <span class="ruby-comment">#puts &quot;#{original[0..start_coln - 2]} + #{repl} + #{original[end_coln-1..-1]}&quot;</span>
+      <span class="ruby-identifier">fixed</span> = <span class="ruby-identifier">original</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">start_coln</span> <span class="ruby-operator">-</span> <span class="ruby-value">2</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">repl</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">original</span>[<span class="ruby-identifier">end_coln</span><span class="ruby-value">-1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+      <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Fixing #{original} to #{fixed}&quot;</span>
+      <span class="ruby-identifier">lines</span>[<span class="ruby-identifier">start_line</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>] = <span class="ruby-identifier">fixed</span>
+
+      <span class="ruby-comment"># Save our changes</span>
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;location&#39;</span>][<span class="ruby-string">&#39;path&#39;</span>], <span class="ruby-string">&#39;w&#39;</span>).<span class="ruby-identifier">write</span>((<span class="ruby-identifier">lines</span> <span class="ruby-operator">+</span> [<span class="ruby-string">&quot;&quot;</span>]).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-get_citation_library" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_citation_library</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_citation_library-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 286</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_citation_library</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@CITATION_LIBRARY</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">lib</span> = <span class="ruby-constant">BibTeX</span><span class="ruby-operator">::</span><span class="ruby-constant">Bibliography</span>.<span class="ruby-identifier">new</span>
+    (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/bib$/</span>) <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/bib$/</span>, <span class="ruby-value">root_dir:</span> <span class="ruby-string">&quot;faqs&quot;</span>)).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">b</span> = <span class="ruby-constant">BibTeX</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword">for</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">in</span> <span class="ruby-identifier">b</span>
+        <span class="ruby-comment"># Record the bib path.</span>
+        <span class="ruby-identifier">x</span>.<span class="ruby-identifier">_path</span> = <span class="ruby-identifier">path</span>
+        <span class="ruby-identifier">lib</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>
+      <span class="ruby-keyword">end</span>
+    }
+    <span class="ruby-ivar">@CITATION_LIBRARY</span> = <span class="ruby-identifier">lib</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@CITATION_LIBRARY</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-incorrect_calls" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">incorrect_calls</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="incorrect_calls-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 230</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">incorrect_calls</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/([^{]|^)(%\s*[^%]*%})/i</span>)
+          .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">2</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">2</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-node">&quot;{#{selected[2]}&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;It looks like you might be missing the opening { of a jekyll function&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:006&quot;</span>,
+    )
+  }
+  <span class="ruby-identifier">b</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/{([^%]\s*[^%]* %})/i</span>)
+          .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-node">&quot;%#{selected[1]}&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;It looks like you might be missing the opening % of a jekyll function&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:006&quot;</span>,
+    )
+  }
+
+  <span class="ruby-identifier">c</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/({%\s*[^%]*%)([^}]|$)/i</span>)
+          .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">2</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-node">&quot;#{selected[1]}}#{selected[2]}&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;It looks like you might be missing the closing } of a jekyll function&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:006&quot;</span>,
+    )
+  }
+
+  <span class="ruby-identifier">d</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/({%\s*[^}]*[^%])}/i</span>)
+          .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-node">&quot;#{selected[1]}%&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;It looks like you might be missing the closing % of a jekyll function&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:006&quot;</span>,
+    )
+  }
+  <span class="ruby-identifier">a</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">d</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-link_gtn_slides_external" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">link_gtn_slides_external</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="link_gtn_slides_external-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">link_gtn_slides_external</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(
+    <span class="ruby-identifier">contents</span>,
+    <span class="ruby-regexp">/\((https?:\/\/(training.galaxyproject.org|galaxyproject.github.io)\/training-material\/(.*slides.html))\)/</span>
+  )
+  .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span><span class="ruby-node">&quot;{% link #{selected[3]} %}&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Please use the link function to link to other pages within the GTN. It helps us ensure that all links are correct&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:003&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-link_gtn_tutorial_external" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">link_gtn_tutorial_external</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="link_gtn_tutorial_external-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">link_gtn_tutorial_external</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(
+    <span class="ruby-identifier">contents</span>,
+    <span class="ruby-regexp">/\((https?:\/\/(training.galaxyproject.org|galaxyproject.github.io)\/training-material\/(.*tutorial).html)\)/</span>
+  )
+  .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-comment"># We wrap the entire URL (inside the explicit () in a matching group to make it easy to select/replace)</span>
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-node">&quot;{% link #{selected[3]}.md %}&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Please use the link function to link to other pages within the GTN. It helps us ensure that all links are correct&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:003&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-new_more_accessible_boxes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new_more_accessible_boxes</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new_more_accessible_boxes-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 446</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new_more_accessible_boxes</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-comment">#  \#\#\#</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/&gt; (### {%\s*icon ([^%]*)\s*%}[^:]*:?(.*))/</span>)
+      .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">key</span> = <span class="ruby-identifier">selected</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/_/</span>, <span class="ruby-string">&#39;-&#39;</span>)
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-node">&quot;&lt;#{key}-title&gt;#{selected[3].strip}&lt;/#{key}-title&gt;&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;We have developed a new syntax for box titles, please consider using this instead.&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:010&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-new_more_accessible_boxes_agenda" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new_more_accessible_boxes_agenda</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new_more_accessible_boxes_agenda-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 463</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new_more_accessible_boxes_agenda</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-comment">#  \#\#\#</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/&gt; (###\s+Agenda\s*)/</span>)
+      .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-string">&quot;&lt;agenda-title&gt;&lt;/agenda-title&gt;&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;We have developed a new syntax for box titles, please consider using this instead.&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:010&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-no_target_blank" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">no_target_blank</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="no_target_blank-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 479</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">no_target_blank</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/target=(&quot;_blank&quot;|&#39;_blank&#39;)/</span>)
+      .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">warning</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>),
+      <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Please do not use `target=\&quot;_blank\&quot;`, [it is bad for accessibility.](https://www.a11yproject.com/checklist/#identify-links-that-open-in-a-new-tab-or-window)&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:011&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-non_existent_snippet" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">non_existent_snippet</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="non_existent_snippet-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 321</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">non_existent_snippet</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/{%\s*snippet\s+([^ ]*)/i</span>)
+      .<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">selected</span>[<span class="ruby-value">1</span>])
+  }
+      .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>),
+      <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-node">&quot;This snippet (`#{selected[1]}`) does not seem to exist&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:008&quot;</span>,
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-run_linter_global" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">run_linter_global</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="run_linter_global-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 970</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">run_linter_global</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">enumerate_symlinks</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">realpath</span>)
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format_reviewdog_output</span>(
+          <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This is a BAD symlink&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:013&quot;</span>)
+        )
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">rescue</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format_reviewdog_output</span>(
+          <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This is a BAD symlink&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:013&quot;</span>)
+        )
+    <span class="ruby-keyword">end</span>
+  }
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/data[_-]library.ya?ml/</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">-1</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;data-library.yaml&quot;</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format_reviewdog_output</span>(
+        <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;This file must be named data-library.yaml. Please rename it.&quot;</span>, <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:023&quot;</span>)
+      )
+    <span class="ruby-keyword">end</span>
+  }
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/\.ga$/</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fix_file</span>(<span class="ruby-identifier">path</span>)
+  }
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">enumerate_lintable</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fix_file</span>(<span class="ruby-identifier">path</span>)
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-set_code_limits" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_code_limits</span><span
+            class="method-args">(codes)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="set_code_limits-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 767</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">set_code_limits</span>(<span class="ruby-identifier">codes</span>)
+  <span class="ruby-ivar">@LIMIT_EMITTED_CODES</span> = <span class="ruby-identifier">codes</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-set_plain_output" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_plain_output</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="set_plain_output-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 758</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">set_plain_output</span>
+  <span class="ruby-ivar">@PLAIN_OUTPUT</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-set_rdjson_output" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_rdjson_output</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="set_rdjson_output-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 762</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">set_rdjson_output</span>
+  <span class="ruby-ivar">@PLAIN_OUTPUT</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-should_ignore" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">should_ignore</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="should_ignore-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 839</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">should_ignore</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/GTN:IGNORE:(\d\d\d)/</span>)}.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-string">&quot;GTN:&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/GTN:IGNORE:(\d\d\d)/</span>)[<span class="ruby-value">1</span>] }.<span class="ruby-identifier">uniq</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-youtube_bad" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">youtube_bad</span><span
+            class="method-args">(contents)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GTN:002 youtube discouraged</p>
+          
+          
+
+          
+          <div class="method-source-code" id="youtube_bad-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">youtube_bad</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/&lt;iframe.*youtu.?be.*&lt;\/iframe&gt;/</span>)
+      .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">warning</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-string">&quot;&quot;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Instead of embedding IFrames to YouTube contents, consider adding this video to the [GTN Video Library](https://github.com/gallantries/video-library/issues/) where it will be more visible for others.&quot;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:002&quot;</span>
+    )
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Gtn::Images - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-_get_image_dimensions">::_get_image_dimensions</a>
+    
+    <li ><a href="#method-c-cache">::cache</a>
+    
+    <li ><a href="#method-c-get_image_dimensions">::get_image_dimensions</a>
+    
+    <li ><a href="#method-c-html_image_dimensions">::html_image_dimensions</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Gtn::Images">
+  <h1 id="module-Gtn::Images" class="module">
+    module Gtn::Images
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-_get_image_dimensions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">_get_image_dimensions</span><span
+            class="method-args">(path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="_get_image_dimensions-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/images.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">_get_image_dimensions</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">getset</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-constant">FastImage</span>.<span class="ruby-identifier">size</span>(<span class="ruby-identifier">path</span>)
+    <span class="ruby-keyword">rescue</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Could not resolve size of #{path}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-cache" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cache</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="cache-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/images.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">cache</span>
+  <span class="ruby-identifier">@@cache</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Cache</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;ImageDimensions&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-get_image_dimensions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_image_dimensions</span><span
+            class="method-args">(tuto_dir, url)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_image_dimensions-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/images.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_image_dimensions</span>(<span class="ruby-identifier">tuto_dir</span>, <span class="ruby-identifier">url</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">match</span> = <span class="ruby-identifier">url</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/^{{\s*site.baseurl\s*}}\/(.*)/</span>)
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_get_image_dimensions</span>(<span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">strip</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">match</span> = <span class="ruby-identifier">url</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/{%\s*link\s*(.*)\s*%}/</span>)
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_get_image_dimensions</span>(<span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">strip</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/https?:\/\//</span>)
+    <span class="ruby-identifier">img_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">absolute_path</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">tuto_dir</span>, <span class="ruby-identifier">url</span>))
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">img_path</span>)
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_get_image_dimensions</span>(<span class="ruby-identifier">img_path</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_get_image_dimensions</span>(<span class="ruby-identifier">img_path</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-html_image_dimensions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">html_image_dimensions</span><span
+            class="method-args">(tuto_dir, url)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="html_image_dimensions-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/images.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">html_image_dimensions</span>(<span class="ruby-identifier">tuto_dir</span>, <span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">width</span>, <span class="ruby-identifier">height</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_image_dimensions</span>(<span class="ruby-identifier">tuto_dir</span>, <span class="ruby-identifier">url</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">width</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">height</span>
+    <span class="ruby-node">%Q(width=&quot;#{width}&quot; height=#{height})</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

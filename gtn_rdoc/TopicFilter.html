@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module TopicFilter - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-annotate_path">::annotate_path</a>
+    
+    <li ><a href="#method-c-collate_materials">::collate_materials</a>
+    
+    <li ><a href="#method-c-extract_workflow_tool_list">::extract_workflow_tool_list</a>
+    
+    <li ><a href="#method-c-fetch_tutorial_material">::fetch_tutorial_material</a>
+    
+    <li ><a href="#method-c-fill_cache">::fill_cache</a>
+    
+    <li ><a href="#method-c-filter_by_topic">::filter_by_topic</a>
+    
+    <li ><a href="#method-c-filter_by_topic_subtopic">::filter_by_topic_subtopic</a>
+    
+    <li ><a href="#method-c-get_contributors">::get_contributors</a>
+    
+    <li ><a href="#method-c-get_version">::get_version</a>
+    
+    <li ><a href="#method-c-identify_contributors">::identify_contributors</a>
+    
+    <li ><a href="#method-c-list_all_materials">::list_all_materials</a>
+    
+    <li ><a href="#method-c-list_all_tags">::list_all_tags</a>
+    
+    <li ><a href="#method-c-list_materials_by_tool">::list_materials_by_tool</a>
+    
+    <li ><a href="#method-c-list_materials_structured">::list_materials_structured</a>
+    
+    <li ><a href="#method-c-list_topics">::list_topics</a>
+    
+    <li ><a href="#method-c-process_pages">::process_pages</a>
+    
+    <li ><a href="#method-c-resolve_material">::resolve_material</a>
+    
+    <li ><a href="#method-c-short_tool">::short_tool</a>
+    
+    <li ><a href="#method-c-topic_filter">::topic_filter</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-TopicFilter">
+  <h1 id="module-TopicFilter" class="module">
+    module TopicFilter
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-annotate_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">annotate_path</span><span
+            class="method-args">(path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="annotate_path-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">annotate_path</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;.&#39;</span>
+    <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">shift</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;topics&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;tutorials&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">4</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">material</span> = {
+    <span class="ruby-string">&quot;topic&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">1</span>], <span class="ruby-comment"># Duplicate</span>
+    <span class="ruby-string">&quot;topic_name&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">1</span>],
+    <span class="ruby-string">&quot;material&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">3</span>],
+    <span class="ruby-string">&quot;tutorial_name&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">3</span>],
+    <span class="ruby-string">&quot;dir&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>),
+  }
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\/faqs\//</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/data[_-]library.yaml/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/data[_-]manager.yaml/</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;tools.yaml&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/tutorial.*\.md/</span>
+    <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;tutorial&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/slides.*\.html/</span>
+    <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;slides&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/ipynb$/</span>
+    <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;ipynb&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/Rmd$/</span>
+    <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;rmd&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;workflows&#39;</span>
+    <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;workflow&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;tours&#39;</span>
+    <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;tour&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;index.md&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-comment"># material[&#39;type&#39;] = &#39;unknown&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">material</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-collate_materials" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">collate_materials</span><span
+            class="method-args">(pages)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="collate_materials-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 190</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">collate_materials</span>(<span class="ruby-identifier">pages</span>)
+  <span class="ruby-comment"># In order to speed up queries later, we&#39;ll store a set of &quot;interesting&quot;</span>
+  <span class="ruby-comment"># pages (i.e. things that are under `topic_name`)</span>
+  <span class="ruby-identifier">interesting</span> = {}
+  <span class="ruby-keyword">for</span> <span class="ruby-identifier">page</span> <span class="ruby-keyword">in</span> <span class="ruby-identifier">pages</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">page_parts</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">url</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)
+    <span class="ruby-comment"># Skip anything outside of topics.</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">url</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;/topics/&#39;</span>) <span class="ruby-keyword">then</span> <span class="ruby-keyword">next</span> <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Extract the material metadata based on the path</span>
+    <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;url&#39;</span>] = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">url</span>
+    <span class="ruby-identifier">material_meta</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">annotate_path</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span>)
+
+    <span class="ruby-comment"># If unannotated then we want to skip this material.</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">material_meta</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">then</span> <span class="ruby-keyword">next</span> <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">mk</span> = <span class="ruby-identifier">material_meta</span>[<span class="ruby-string">&#39;material&#39;</span>]
+
+    <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">interesting</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">mk</span>
+      <span class="ruby-identifier">interesting</span>[<span class="ruby-identifier">mk</span>] = <span class="ruby-identifier">material_meta</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">interesting</span>[<span class="ruby-identifier">mk</span>].<span class="ruby-identifier">delete</span>(<span class="ruby-string">&quot;type&quot;</span>) <span class="ruby-comment"># Remove the type since it&#39;s specific, not generic</span>
+      <span class="ruby-identifier">interesting</span>[<span class="ruby-identifier">mk</span>][<span class="ruby-string">&quot;resources&quot;</span>] = []
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;topic_name&#39;</span>] = <span class="ruby-identifier">material_meta</span>[<span class="ruby-string">&#39;topic_name&#39;</span>]
+    <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tutorial_name&#39;</span>] = <span class="ruby-identifier">material_meta</span>[<span class="ruby-string">&#39;tutorial_name&#39;</span>]
+    <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;dir&#39;</span>] = <span class="ruby-identifier">material_meta</span>[<span class="ruby-string">&#39;dir&#39;</span>]
+
+    <span class="ruby-identifier">interesting</span>[<span class="ruby-identifier">mk</span>][<span class="ruby-string">&quot;resources&quot;</span>].<span class="ruby-identifier">push</span>([<span class="ruby-identifier">material_meta</span>[<span class="ruby-string">&quot;type&quot;</span>], <span class="ruby-identifier">page</span>])
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">interesting</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-extract_workflow_tool_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">extract_workflow_tool_list</span><span
+            class="method-args">(data)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="extract_workflow_tool_list-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">extract_workflow_tool_list</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">out</span> = <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;steps&#39;</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;type&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;tool&quot;</span>}.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;tool_id&#39;</span>]}.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">nil?</span>}
+  <span class="ruby-identifier">out</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;steps&#39;</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;type&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;subworkflow&quot;</span>}.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">extract_workflow_tool_list</span>(<span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;subworkflow&#39;</span>])}
+  <span class="ruby-identifier">out</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-fetch_tutorial_material" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fetch_tutorial_material</span><span
+            class="method-args">(site, topic_name, tutorial_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="fetch_tutorial_material-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fetch_tutorial_material</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>, <span class="ruby-identifier">tutorial_name</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fill_cache</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;cache_topic_filter&#39;</span>][<span class="ruby-identifier">topic_name</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;tutorial_name&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">tutorial_name</span>}[<span class="ruby-value">0</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-fill_cache" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fill_cache</span><span
+            class="method-args">(site)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="fill_cache-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fill_cache</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;cache_topic_filter&#39;</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/TopicFilter] Begin Cache Prefill&quot;</span>
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;cache_topic_filter&#39;</span>] = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+
+    <span class="ruby-comment"># For each topic</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">list_topics</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">topic</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;cache_topic_filter&#39;</span>][<span class="ruby-identifier">topic</span>] = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filter_by_topic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic</span>)
+    }
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/TopicFilter] End Cache Prefill&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-filter_by_topic" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filter_by_topic</span><span
+            class="method-args">(site, topic_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="filter_by_topic-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 407</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">filter_by_topic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>)
+  <span class="ruby-comment"># Here we make a (cached) call to load materials into memory and sort them</span>
+  <span class="ruby-comment"># properly.</span>
+  <span class="ruby-identifier">materials</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">process_pages</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>)
+
+  <span class="ruby-comment"># Select out the materials by topic:</span>
+  <span class="ruby-identifier">resource_pages</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;topic_name&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">topic_name</span>}
+
+  <span class="ruby-comment"># If there is nothing with that topic name, try generating it by tags.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resource_pages</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">resource_pages</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tags&#39;</span>, []).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">topic_name</span>)}
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># The complete resources we&#39;ll return is the introduction slides first</span>
+  <span class="ruby-comment"># (EDIT: not anymore, we rely on prioritisation!)</span>
+  <span class="ruby-comment"># and then the rest of the pages.</span>
+  <span class="ruby-identifier">resource_pages</span> = <span class="ruby-identifier">resource_pages</span>.<span class="ruby-identifier">sort_by</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;priority&#39;</span>, <span class="ruby-value">1</span>)}
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resource_pages</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Error? Could not find any relevant pages for #{topic_name}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">resource_pages</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-filter_by_topic_subtopic" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filter_by_topic_subtopic</span><span
+            class="method-args">(site, topic_name, subtopic_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="filter_by_topic_subtopic-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 432</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">filter_by_topic_subtopic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>, <span class="ruby-identifier">subtopic_id</span>)
+  <span class="ruby-identifier">resource_pages</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filter_by_topic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>)
+
+  <span class="ruby-comment"># Select out materials with the correct subtopic</span>
+  <span class="ruby-identifier">resource_pages</span> = <span class="ruby-identifier">resource_pages</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;subtopic&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">subtopic_id</span> }
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resource_pages</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Error? Could not find any relevant pages for #{topic_name} / #{subtopic_id}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">resource_pages</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-get_contributors" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_contributors</span><span
+            class="method-args">(material)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_contributors-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 445</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_contributors</span>(<span class="ruby-identifier">material</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;contributors&quot;</span>)
+    <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;contributions&#39;</span>].<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>}.<span class="ruby-identifier">flatten</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-get_version" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_version</span><span
+            class="method-args">(tool)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_version-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 459</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_version</span>(<span class="ruby-identifier">tool</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39;/&#39;</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">-1</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">tool</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-identify_contributors" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">identify_contributors</span><span
+            class="method-args">(materials)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="identify_contributors-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 453</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">identify_contributors</span>(<span class="ruby-identifier">materials</span>)
+  <span class="ruby-identifier">materials</span>
+    .<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;materials&#39;</span>]}.<span class="ruby-identifier">flatten</span> <span class="ruby-comment"># Not 100% sure why this flatten is needed? Probably due to the map over hash</span>
+    .<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">mat</span><span class="ruby-operator">|</span> <span class="ruby-identifier">get_contributors</span>(<span class="ruby-identifier">mat</span>) }.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">shuffle</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-list_all_materials" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_all_materials</span><span
+            class="method-args">(site)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="list_all_materials-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 398</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_all_materials</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">process_pages</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-list_all_tags" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_all_tags</span><span
+            class="method-args">(site)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="list_all_tags-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 402</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_all_tags</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">materials</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">process_pages</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>)
+  <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tags&#39;</span>, [])}.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-list_materials_by_tool" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_materials_by_tool</span><span
+            class="method-args">(site)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="list_materials_by_tool-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 476</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_materials_by_tool</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">tool_map</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">list_all_materials</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">m</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tools&#39;</span>, []).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tool</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">sid</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">short_tool</span>(<span class="ruby-identifier">tool</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">tool_map</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">sid</span>)
+        <span class="ruby-identifier">tool_map</span>[<span class="ruby-identifier">sid</span>] = {<span class="ruby-string">&quot;tool_id&quot;</span> <span class="ruby-operator">=&gt;</span> [], <span class="ruby-string">&quot;tutorials&quot;</span> <span class="ruby-operator">=&gt;</span> []}
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">tool_map</span>[<span class="ruby-identifier">sid</span>][<span class="ruby-string">&quot;tool_id&quot;</span>].<span class="ruby-identifier">push</span>([<span class="ruby-identifier">tool</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_version</span>(<span class="ruby-identifier">tool</span>)])
+      <span class="ruby-identifier">tool_map</span>[<span class="ruby-identifier">sid</span>][<span class="ruby-string">&quot;tutorials&quot;</span>].<span class="ruby-identifier">push</span>([
+        <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;title&#39;</span>], <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;topic_name&#39;</span>]][<span class="ruby-string">&#39;title&#39;</span>], <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;url&#39;</span>]
+      ])
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Uniqueify/sort</span>
+  <span class="ruby-identifier">t</span> = <span class="ruby-identifier">tool_map</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> 
+    <span class="ruby-identifier">v</span>[<span class="ruby-string">&quot;tool_id&quot;</span>].<span class="ruby-identifier">uniq!</span>
+    <span class="ruby-identifier">v</span>[<span class="ruby-string">&quot;tool_id&quot;</span>].<span class="ruby-identifier">sort_by!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>[<span class="ruby-value">1</span>]}
+    <span class="ruby-identifier">v</span>[<span class="ruby-string">&quot;tool_id&quot;</span>].<span class="ruby-identifier">reverse!</span>
+
+    <span class="ruby-identifier">v</span>[<span class="ruby-string">&quot;tutorials&quot;</span>].<span class="ruby-identifier">uniq!</span>
+    <span class="ruby-identifier">v</span>[<span class="ruby-string">&quot;tutorials&quot;</span>].<span class="ruby-identifier">sort!</span>
+    [<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>]
+  }.<span class="ruby-identifier">to_h</span>
+
+  <span class="ruby-comment"># Order by most popular tool</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">sort_by</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&quot;tutorials&quot;</span>].<span class="ruby-identifier">length</span>}.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">to_h</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-list_materials_structured" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_materials_structured</span><span
+            class="method-args">(site, topic_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="list_materials_structured-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_materials_structured</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>)
+  <span class="ruby-comment"># This method is built with the idea to replace the &quot;topic_filter&quot; command,</span>
+  <span class="ruby-comment"># and instead of returning semi-structured data, we will immediately return</span>
+  <span class="ruby-comment"># fully structured data for a specific &quot;topic_name&quot; query, like, &quot;admin&quot;</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># Instead of returning a flat list of tutorials, instead we&#39;ll structure</span>
+  <span class="ruby-comment"># them properly in subtopics (if they exist) or return the flat list</span>
+  <span class="ruby-comment"># otherwise.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># This will let us generate new &quot;views&quot; into the tutorial lists, having</span>
+  <span class="ruby-comment"># them arranged in new and exciting ways.</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fill_cache</span>(<span class="ruby-identifier">site</span>)
+
+  <span class="ruby-comment"># Here we want to either return data structured around subtopics</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic_name</span>].<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;subtopics&quot;</span>)
+    <span class="ruby-comment"># We&#39;ll construct a new hash of subtopic =&gt; tutorials</span>
+    <span class="ruby-identifier">out</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">seen_ids</span> = []
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic_name</span>][<span class="ruby-string">&#39;subtopics&#39;</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">subtopic</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">specific_resources</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filter_by_topic_subtopic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>, <span class="ruby-identifier">subtopic</span>[<span class="ruby-string">&#39;id&#39;</span>])
+      <span class="ruby-identifier">out</span>[<span class="ruby-identifier">subtopic</span>[<span class="ruby-string">&#39;id&#39;</span>]] = {
+        <span class="ruby-string">&quot;subtopic&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">subtopic</span>,
+        <span class="ruby-string">&quot;materials&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">specific_resources</span>
+      }
+      <span class="ruby-identifier">seen_ids</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">specific_resources</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;id&#39;</span>] }
+    }
+
+    <span class="ruby-comment"># And we&#39;ll have this __OTHER__ subtopic for any tutorials that weren&#39;t</span>
+    <span class="ruby-comment"># in a subtopic.</span>
+    <span class="ruby-identifier">all_topics_for_tutorial</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filter_by_topic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>)
+    <span class="ruby-identifier">out</span>[<span class="ruby-string">&quot;__OTHER__&quot;</span>] = {
+      <span class="ruby-string">&quot;subtopic&quot;</span> <span class="ruby-operator">=&gt;</span> {<span class="ruby-string">&quot;title&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Other&quot;</span>, <span class="ruby-string">&quot;description&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Assorted Tutorials&quot;</span>, <span class="ruby-string">&quot;id&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;other&quot;</span>},
+      <span class="ruby-string">&quot;materials&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">all_topics_for_tutorial</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">seen_ids</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;id&#39;</span>]) }
+    }
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic_name</span>][<span class="ruby-string">&#39;tag_based&#39;</span>] <span class="ruby-keyword">and</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic_name</span>][<span class="ruby-string">&#39;custom_ordering&#39;</span>]
+    <span class="ruby-comment"># TODO</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;UNIMPLEMENTED&quot;</span>
+    <span class="ruby-identifier">out</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic_name</span>][<span class="ruby-string">&#39;tag_based&#39;</span>] <span class="ruby-comment"># Tag based Topic</span>
+    <span class="ruby-comment"># We&#39;ll construct a new hash of subtopic(parent topic) =&gt; tutorials</span>
+    <span class="ruby-identifier">out</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">seen_ids</span> = []
+
+    <span class="ruby-identifier">materials</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filter_by_topic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>)
+
+    <span class="ruby-comment"># Which topics are represented in those materials?</span>
+    <span class="ruby-identifier">seen_topics</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;topic_name&#39;</span>]}.<span class="ruby-identifier">sort</span>
+
+    <span class="ruby-comment"># Treat them like subtopics, but fake subtopics.</span>
+    <span class="ruby-identifier">seen_topics</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">parent_topic</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">specific_resources</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;topic_name&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">parent_topic</span>}
+      <span class="ruby-identifier">out</span>[<span class="ruby-identifier">parent_topic</span>] = {
+        <span class="ruby-string">&quot;subtopic&quot;</span> <span class="ruby-operator">=&gt;</span> {<span class="ruby-string">&quot;id&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">parent_topic</span>, <span class="ruby-string">&quot;title&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">parent_topic</span>][<span class="ruby-string">&#39;title&#39;</span>], <span class="ruby-string">&quot;description&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">nil</span>},
+        <span class="ruby-string">&quot;materials&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">specific_resources</span>
+      }
+      <span class="ruby-identifier">seen_ids</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">specific_resources</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;id&#39;</span>] }
+    }
+
+    <span class="ruby-comment"># And we&#39;ll have this __OTHER__ subtopic for any tutorials that weren&#39;t</span>
+    <span class="ruby-comment"># in a subtopic.</span>
+    <span class="ruby-identifier">all_topics_for_tutorial</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filter_by_topic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>)
+    <span class="ruby-identifier">out</span>[<span class="ruby-string">&quot;__OTHER__&quot;</span>] = {
+      <span class="ruby-string">&quot;subtopic&quot;</span> <span class="ruby-operator">=&gt;</span> {<span class="ruby-string">&quot;title&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Other&quot;</span>, <span class="ruby-string">&quot;description&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Assorted Tutorials&quot;</span>, <span class="ruby-string">&quot;id&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;other&quot;</span>},
+      <span class="ruby-string">&quot;materials&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">all_topics_for_tutorial</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">seen_ids</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;id&#39;</span>]) }
+    }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># Or just the list (Jury is still out on this one, should it really be a</span>
+    <span class="ruby-comment"># flat list? Or in this identical structure.)</span>
+    <span class="ruby-identifier">out</span> = {
+      <span class="ruby-string">&quot;__FLAT__&quot;</span> <span class="ruby-operator">=&gt;</span> {
+        <span class="ruby-string">&quot;subtopic&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">nil</span>,
+        <span class="ruby-string">&quot;materials&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filter_by_topic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>)
+      }
+    }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Cleanup empty sections</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">out</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;__OTHER__&quot;</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">out</span>[<span class="ruby-string">&quot;__OTHER__&quot;</span>][<span class="ruby-string">&quot;materials&quot;</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">out</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&quot;__OTHER__&quot;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">out</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;materials&#39;</span>].<span class="ruby-identifier">sort_by!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">m</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;priority&#39;</span>, <span class="ruby-value">1</span>), <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;title&#39;</span>]] }
+  }
+
+  <span class="ruby-identifier">out</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-list_topics" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_topics</span><span
+            class="method-args">(site)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="list_topics-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_topics</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;maintainers&#39;</span>)}.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>}
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-process_pages" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">process_pages</span><span
+            class="method-args">(site, pages)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="process_pages-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 385</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">process_pages</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">pages</span>)
+  <span class="ruby-comment"># eww.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;cache_processed_pages&#39;</span>) <span class="ruby-keyword">then</span> 
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;cache_processed_pages&#39;</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">materials</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collate_materials</span>(<span class="ruby-identifier">pages</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resolve_material</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">v</span>) }
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/TopicFilter] Filling Materials Cache&quot;</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;cache_processed_pages&#39;</span>] = <span class="ruby-identifier">materials</span>
+
+  <span class="ruby-identifier">materials</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-resolve_material" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">resolve_material</span><span
+            class="method-args">(site, material)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="resolve_material-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 224</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">resolve_material</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">material</span>)
+  <span class="ruby-comment"># We&#39;ve already</span>
+  <span class="ruby-comment"># looked in every /topic/*/tutorials/* folder, and turn these disparate</span>
+  <span class="ruby-comment"># resources into a page_obj as well. Most variables are copied directly,</span>
+  <span class="ruby-comment"># either from a tutorial, or a slides (if no tutorial is available.) This</span>
+  <span class="ruby-comment"># means we do not (cannot) support external_slides AND external_handson.</span>
+  <span class="ruby-comment"># This is probably a sub-optimal situation we&#39;ll end up fixing someday.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-identifier">tutorials</span> = <span class="ruby-identifier">material</span>[<span class="ruby-string">&quot;resources&quot;</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;tutorial&#39;</span>}
+  <span class="ruby-identifier">slides</span>    = <span class="ruby-identifier">material</span>[<span class="ruby-string">&quot;resources&quot;</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;slides&#39;</span>}
+  <span class="ruby-identifier">tours</span>     = <span class="ruby-identifier">material</span>[<span class="ruby-string">&quot;resources&quot;</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;tours&#39;</span>}
+
+  <span class="ruby-comment"># Our final &quot;page&quot; object (a &quot;material&quot;)</span>
+  <span class="ruby-identifier">page</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-identifier">slide_has_video</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">slide_translations</span> = []
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">slides</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">page</span> = <span class="ruby-identifier">slides</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">path</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">path</span>}[<span class="ruby-value">0</span>][<span class="ruby-value">1</span>]
+    <span class="ruby-identifier">slide_has_video</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;video&#39;</span>, <span class="ruby-keyword">false</span>)
+    <span class="ruby-identifier">slide_translations</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;translations&#39;</span>, [])
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># No matter if there were slides, we override with tutorials if present.</span>
+  <span class="ruby-identifier">tutorial_translations</span> = []
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tutorials</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">page</span> = <span class="ruby-identifier">tutorials</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">path</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">path</span>}[<span class="ruby-value">0</span>][<span class="ruby-value">1</span>]
+    <span class="ruby-identifier">tutorial_translations</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;translations&#39;</span>, [])
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/TopicFilter] Could not process material&quot;</span>
+    <span class="ruby-keyword">return</span> {}
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Otherwise clone the metadata from it which works well enough.</span>
+  <span class="ruby-identifier">page_obj</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;id&#39;</span>] = <span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;topic_name&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;tutorial_name&#39;</span>]
+
+  <span class="ruby-identifier">id</span> = <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;id&#39;</span>]
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>] = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;video-library&quot;</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>][<span class="ruby-string">&quot;tutorial&quot;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;video-library&#39;</span>][<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;/tutorial&quot;</span>]
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>][<span class="ruby-string">&quot;slides&quot;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;video-library&#39;</span>][<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;/slides&quot;</span>]
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>][<span class="ruby-string">&quot;demo&quot;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;video-library&#39;</span>][<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;/demo&quot;</span>]
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>][<span class="ruby-string">&quot;both&quot;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;video-library&#39;</span>][<span class="ruby-identifier">id</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;session-library&quot;</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>][<span class="ruby-string">&quot;session&quot;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;session-library&#39;</span>][<span class="ruby-identifier">id</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Sometimes `hands_on` is set to something like `external`, in which</span>
+  <span class="ruby-comment"># case it is important to not override it. So we only do that if the</span>
+  <span class="ruby-comment"># key isn&#39;t already set. Then we choose to set it to a test for the</span>
+  <span class="ruby-comment"># tutorial being present. We probably don&#39;t need to test both, but it</span>
+  <span class="ruby-comment"># is hard to follow which keys are which and safer to test for both in</span>
+  <span class="ruby-comment"># case someone edits the code later. If either of these exist, we can</span>
+  <span class="ruby-comment"># automatically set `hands_on: true`</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">page_obj</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;hands_on&quot;</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;hands_on&#39;</span>] = <span class="ruby-identifier">tutorials</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Same for slides, if there&#39;s a resource by that name, we can</span>
+  <span class="ruby-comment"># automatically set `slides: true`</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">page_obj</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;slides&quot;</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;slides&#39;</span>] = <span class="ruby-identifier">slides</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">folder</span> = <span class="ruby-identifier">material</span>[<span class="ruby-string">&quot;dir&quot;</span>]
+
+  <span class="ruby-identifier">ymls</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{folder}/quiz/*.yml&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{folder}/quiz/*.yaml&quot;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">ymls</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">quizzes</span> = <span class="ruby-identifier">ymls</span>.<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">-1</span>] }
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;quiz&#39;</span>] = <span class="ruby-identifier">quizzes</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">quiz_data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-node">&quot;#{folder}/quiz/#{q}&quot;</span>)
+      {
+        <span class="ruby-string">&quot;id&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">q</span>,
+        <span class="ruby-string">&quot;path&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;#{folder}/quiz/#{q}&quot;</span>,
+        <span class="ruby-string">&quot;title&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">quiz_data</span>[<span class="ruby-string">&#39;title&#39;</span>],
+        <span class="ruby-string">&quot;contributors&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">quiz_data</span>[<span class="ruby-string">&#39;contributors&#39;</span>],
+      }
+    }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># In dev configuration, this breaks for me. Not sure why config isn&#39;t available.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-string">&quot;url&quot;</span>
+    <span class="ruby-identifier">domain</span> = <span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.config[&#39;baseurl&#39;]}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">domain</span> = <span class="ruby-string">&quot;/training-material/&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Similar as above.</span>
+  <span class="ruby-identifier">workflows</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{folder}/workflows/*.ga&quot;</span>) <span class="ruby-comment"># TODO: support gxformat2</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">workflows</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">workflow_names</span> = <span class="ruby-identifier">workflows</span>.<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">-1</span>] }
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;workflows&#39;</span>] = <span class="ruby-identifier">workflow_names</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">wf</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">wfid</span> = <span class="ruby-node">&quot;#{page[&#39;topic_name&#39;]}-#{page[&#39;tutorial_name&#39;]}&quot;</span>
+      <span class="ruby-identifier">wfname</span> = <span class="ruby-identifier">wf</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/.ga/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">downcase</span>
+      <span class="ruby-identifier">trs</span> = <span class="ruby-node">&quot;api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}&quot;</span>
+      <span class="ruby-identifier">wf_path</span> = <span class="ruby-node">&quot;#{folder}/workflows/#{wf}&quot;</span>
+      <span class="ruby-identifier">wf_json</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">wf_path</span>).<span class="ruby-identifier">read</span>)
+      <span class="ruby-identifier">license</span> = <span class="ruby-identifier">wf_json</span>[<span class="ruby-string">&#39;license&#39;</span>]
+      <span class="ruby-identifier">creators</span> = <span class="ruby-identifier">wf_json</span>[<span class="ruby-string">&#39;creator&#39;</span>] <span class="ruby-operator">||</span> []
+
+      {
+        <span class="ruby-string">&quot;workflow&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">wf</span>,
+        <span class="ruby-string">&quot;tests&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{folder}/workflows/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">wf</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/.ga/</span>, <span class="ruby-string">&#39;-test*&#39;</span>)).<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
+        <span class="ruby-string">&quot;url&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;#{domain}/#{folder}/workflows/#{wf}&quot;</span>,
+        <span class="ruby-string">&quot;path&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">wf_path</span>,
+        <span class="ruby-string">&quot;wfid&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">wfid</span>,
+        <span class="ruby-string">&quot;wfname&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">wfname</span>,
+        <span class="ruby-string">&quot;trs_endpoint&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;#{domain}/#{trs}&quot;</span>,
+        <span class="ruby-string">&quot;license&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">license</span>,
+        <span class="ruby-string">&quot;creators&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">creators</span>,
+      }
+    }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Tool List</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># This is exposed in the GTN API to help admins/devs easily get the tool</span>
+  <span class="ruby-comment"># list for installation.</span>
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tools&#39;</span>] = []
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;hands_on&#39;</span>]
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tools&#39;</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/{% tool \[[^\]]*\]\(([^)]*)\)\s*%}/</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;workflows&#39;</span>]
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;workflows&#39;</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">wf</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">wf_path</span> = <span class="ruby-node">&quot;#{folder}/workflows/#{wf[&#39;workflow&#39;]}&quot;</span>
+
+      <span class="ruby-identifier">wf_data</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">wf_path</span>).<span class="ruby-identifier">read</span>)
+      <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tools&#39;</span>] <span class="ruby-operator">+=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">extract_workflow_tool_list</span>(<span class="ruby-identifier">wf_data</span>)
+    }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tools&#39;</span>] = <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tools&#39;</span>].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tours&#39;</span>] = <span class="ruby-identifier">tours</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video&#39;</span>] = <span class="ruby-identifier">slide_has_video</span>
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;translations&#39;</span>] = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;translations&#39;</span>][<span class="ruby-string">&quot;tutorial&quot;</span>] = <span class="ruby-identifier">tutorial_translations</span>
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;translations&#39;</span>][<span class="ruby-string">&quot;slides&quot;</span>] = <span class="ruby-identifier">slide_translations</span>
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;translations&#39;</span>][<span class="ruby-string">&#39;video&#39;</span>] = <span class="ruby-identifier">slide_has_video</span> <span class="ruby-comment"># Just demand it?</span>
+  <span class="ruby-comment"># I feel less certain about this override, but it works well enough in</span>
+  <span class="ruby-comment"># practice, and I did not find any examples of `type: &lt;anything other</span>
+  <span class="ruby-comment"># than tutorial&gt;` in topics/*/tutorials/*/tutorial.md but that doesn&#39;t</span>
+  <span class="ruby-comment"># make it future proof.</span>
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;tutorial&#39;</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">page_obj</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;draft&quot;</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;draft&#39;</span>] <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">page_obj</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-string">&#39;tags&#39;</span>
+      <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tags&#39;</span>] = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tags&#39;</span>].<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;work-in-progress&#39;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">page_obj</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-short_tool" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">short_tool</span><span
+            class="method-args">(tool)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="short_tool-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 467</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">short_tool</span>(<span class="ruby-identifier">tool</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39;/&#39;</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">short_tool</span> = <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">2</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">4</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">short_tool</span> = <span class="ruby-identifier">tool</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">short_tool</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-topic_filter" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">topic_filter</span><span
+            class="method-args">(site, topic_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="topic_filter-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">topic_filter</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fill_cache</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;cache_topic_filter&#39;</span>][<span class="ruby-identifier">topic_name</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

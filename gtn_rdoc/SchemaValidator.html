@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module SchemaValidator - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-is_slide">::is_slide</a>
+    
+    <li ><a href="#method-c-is_tutorial">::is_tutorial</a>
+    
+    <li ><a href="#method-c-lint_faq_file">::lint_faq_file</a>
+    
+    <li ><a href="#method-c-lint_file">::lint_file</a>
+    
+    <li ><a href="#method-c-lint_quiz_file">::lint_quiz_file</a>
+    
+    <li ><a href="#method-c-run">::run</a>
+    
+    <li ><a href="#method-c-validate_document">::validate_document</a>
+    
+    <li ><a href="#method-c-validate_non_empty_key_value">::validate_non_empty_key_value</a>
+    
+    <li ><a href="#method-c-validate_requirements">::validate_requirements</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-SchemaValidator">
+  <h1 id="module-SchemaValidator" class="module">
+    module SchemaValidator
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-is_slide" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_slide</span><span
+            class="method-args">(fn)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="is_slide-source">
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">is_slide</span>(<span class="ruby-identifier">fn</span>)
+  <span class="ruby-identifier">fn</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;slides.html&#39;</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">fn</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/slides_[A-Z]{2,}.html/</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-is_tutorial" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_tutorial</span><span
+            class="method-args">(fn)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="is_tutorial-source">
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">is_tutorial</span>(<span class="ruby-identifier">fn</span>)
+  <span class="ruby-identifier">fn</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;tutorial.md&#39;</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">fn</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/tutorial_[A-Z]{2,}.md/</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-lint_faq_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">lint_faq_file</span><span
+            class="method-args">(fn)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="lint_faq_file-source">
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_faq_file</span>(<span class="ruby-identifier">fn</span>)
+  <span class="ruby-identifier">errs</span> = []
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">fn</span>)
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Skipping #{fn}&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Check this is something we actually want to process</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Skipping #{fn}&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_document</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">$faq_validator</span>))
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">errs</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-lint_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">lint_file</span><span
+            class="method-args">(fn)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="lint_file-source">
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_file</span>(<span class="ruby-identifier">fn</span>)
+  <span class="ruby-comment"># Any error messages</span>
+  <span class="ruby-identifier">errs</span> = []
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">fn</span>)
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Skipping #{fn}&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Check this is something we actually want to process</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Skipping #{fn}&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">fn</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;metadata.yaml&#39;</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># Load topic metadata for this file</span>
+    <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">fn</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">2</span>]
+    <span class="ruby-identifier">topic_metadata</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-node">&quot;topics/#{topic}/metadata.yaml&quot;</span>)
+
+    <span class="ruby-comment"># Load subtopic titles</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;subtopic&#39;</span>) <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">subtopic_ids</span> = []
+      <span class="ruby-identifier">topic_metadata</span>[<span class="ruby-string">&#39;subtopics&#39;</span>].<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">subtopic_ids</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;id&#39;</span>])
+      }
+
+      <span class="ruby-ivar">@TUTORIAL_SCHEMA</span>[<span class="ruby-string">&#39;mapping&#39;</span>][<span class="ruby-string">&#39;subtopic&#39;</span>][<span class="ruby-string">&#39;enum&#39;</span>] = <span class="ruby-identifier">subtopic_ids</span>
+      <span class="ruby-ivar">@SLIDES_SCHEMA</span>[<span class="ruby-string">&#39;mapping&#39;</span>][<span class="ruby-string">&#39;subtopic&#39;</span>][<span class="ruby-string">&#39;enum&#39;</span>] = <span class="ruby-identifier">subtopic_ids</span>
+    <span class="ruby-identifier">$tutorial_validator</span> = <span class="ruby-constant">Kwalify</span><span class="ruby-operator">::</span><span class="ruby-constant">Validator</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@TUTORIAL_SCHEMA</span>)
+    <span class="ruby-identifier">$slides_validator</span> = <span class="ruby-constant">Kwalify</span><span class="ruby-operator">::</span><span class="ruby-constant">Validator</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@SLIDES_SCHEMA</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Generic error handling:</span>
+  <span class="ruby-comment">## Check requirements</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;requirements&#39;</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_requirements</span>(<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;requirements&#39;</span>]))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment">## Check follow ups</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;follow_up_training&#39;</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_requirements</span>(<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;follow_up_training&#39;</span>]))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Custom error handling:</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_tutorial</span>(<span class="ruby-identifier">fn</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_document</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">$tutorial_validator</span>))
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">fn</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;metadata.yaml&#39;</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_document</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">$topic_validator</span>))
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">is_slide</span>(<span class="ruby-identifier">fn</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_document</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">$slides_validator</span>))
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment">#errs.push(&quot;No validation available for this type of file&quot;)</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Check contributors OR contributions</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_slide</span>(<span class="ruby-identifier">fn</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">is_tutorial</span>(<span class="ruby-identifier">fn</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> (<span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>))
+      <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&quot;Document lacks EITHER contributors OR contributions key&quot;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># If we had no errors, validated successfully</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">errs</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-lint_quiz_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">lint_quiz_file</span><span
+            class="method-args">(fn)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="lint_quiz_file-source">
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_quiz_file</span>(<span class="ruby-identifier">fn</span>)
+  <span class="ruby-identifier">errs</span> = []
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">fn</span>)
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Skipping #{fn}&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Skipping #{fn}&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;questions&#39;</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span> <span class="ruby-identifier">q</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-string">&quot;correct&quot;</span>}.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">q</span>[<span class="ruby-string">&quot;correct&quot;</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>) <span class="ruby-keyword">then</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">q</span>[<span class="ruby-string">&quot;type&quot;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;choose-many&quot;</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;There are multiple answers for this question, but it is not a choose-many #{q[&#39;title&#39;]}&quot;</span>)
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">q</span>[<span class="ruby-string">&quot;correct&quot;</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">q</span>[<span class="ruby-string">&quot;answers&quot;</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">c</span>)
+          <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;Answer #{c} not included in options for question #{q[&#39;title&#39;]}&quot;</span>)
+        <span class="ruby-keyword">end</span>
+      }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">q</span>[<span class="ruby-string">&quot;type&quot;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;choose-1&quot;</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;There is only a single textual answer, it must be a list for a choose-many question #{q[&#39;title&#39;]}&quot;</span>)
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">q</span>[<span class="ruby-string">&quot;answers&quot;</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">q</span>[<span class="ruby-string">&quot;correct&quot;</span>])
+        <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;Answer #{q[&quot;correct&quot;]} not included in options for question #{q[&#39;title&#39;]}&quot;</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  }
+
+  <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_document</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">$quiz_validator</span>))
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">errs</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-run" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">run</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="run-source">
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 238</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">run</span>
+  <span class="ruby-identifier">errors</span> = []
+  <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-string">&#39;./topics&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">FileTest</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;.&#39;</span>)
+        <span class="ruby-constant">Find</span>.<span class="ruby-identifier">prune</span>       <span class="ruby-comment"># Don&#39;t look any further into this directory.</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">next</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">last_component</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">-1</span>]
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/slides.*html$/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/tutorial.*md/</span>  <span class="ruby-operator">||</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/metadata.ya?ml/</span>  <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">errs</span> = <span class="ruby-identifier">lint_file</span>(<span class="ruby-identifier">path</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+          <span class="ruby-identifier">errors</span> <span class="ruby-operator">+=</span> [ [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">errs</span>] ]
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+
+  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-string">&quot;**/faqs/**/*.md&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">FileTest</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;.&#39;</span>)
+        <span class="ruby-constant">Find</span>.<span class="ruby-identifier">prune</span>       <span class="ruby-comment"># Don&#39;t look any further into this directory.</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">next</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">last_component</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">-1</span>]
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/aaaa_dontquestionthislinkitisthegluethatholdstogetherthegalaxy.md/</span>
+        <span class="ruby-keyword">next</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/.*.md/</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-keyword">unless</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/index.md$/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/README.md/</span>  <span class="ruby-keyword">then</span>
+          <span class="ruby-identifier">errs</span> = <span class="ruby-identifier">lint_faq_file</span>(<span class="ruby-identifier">path</span>)
+          <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+            <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{path}: #{errs}&quot;</span>
+            <span class="ruby-identifier">errors</span> <span class="ruby-operator">+=</span> [ [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">errs</span>] ]
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-string">&quot;./topics/**/quiz/*&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">FileTest</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;.&#39;</span>)
+        <span class="ruby-constant">Find</span>.<span class="ruby-identifier">prune</span>       <span class="ruby-comment"># Don&#39;t look any further into this directory.</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">next</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">last_component</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">-1</span>]
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/ya?ml/</span>  <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">errors</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">lint_quiz_file</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">errors</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-validate_document" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validate_document</span><span
+            class="method-args">(document, validator)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="validate_document-source">
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">validate_document</span>(<span class="ruby-identifier">document</span>, <span class="ruby-identifier">validator</span>)
+  <span class="ruby-identifier">errors</span> = <span class="ruby-identifier">validator</span>.<span class="ruby-identifier">validate</span>(<span class="ruby-identifier">document</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">errors</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">errors</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-validate_non_empty_key_value" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validate_non_empty_key_value</span><span
+            class="method-args">(map, key)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="validate_non_empty_key_value-source">
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">validate_non_empty_key_value</span>(<span class="ruby-identifier">map</span>, <span class="ruby-identifier">key</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">map</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>) <span class="ruby-keyword">then</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">map</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-keyword">return</span> [<span class="ruby-node">&quot;Empty #{key} for requirement&quot;</span>]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">return</span> [<span class="ruby-node">&quot;Missing #{key} for requirement&quot;</span>]
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">return</span> []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-validate_requirements" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validate_requirements</span><span
+            class="method-args">(requirements)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="validate_requirements-source">
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">validate_requirements</span>(<span class="ruby-identifier">requirements</span>)
+  <span class="ruby-identifier">errs</span> = []
+  <span class="ruby-comment"># Exit early if no requirements</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">requirements</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">requirements</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-keyword">return</span> []
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Otherwise check each</span>
+  <span class="ruby-keyword">for</span> <span class="ruby-identifier">requirement</span> <span class="ruby-keyword">in</span> <span class="ruby-identifier">requirements</span>
+    <span class="ruby-comment"># For external links, they need a link that is non-empty</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">requirement</span>[<span class="ruby-string">&#39;type&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;external&#39;</span>
+      <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_document</span>(<span class="ruby-identifier">requirement</span>, <span class="ruby-identifier">$requirement_external_validator</span>))
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">requirement</span>[<span class="ruby-string">&#39;type&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;internal&#39;</span>
+      <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_document</span>(<span class="ruby-identifier">requirement</span>, <span class="ruby-identifier">$requirement_internal_validator</span>))
+
+      <span class="ruby-comment"># For the internal requirements, test that they point at something real.</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">requirement</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;tutorials&#39;</span>) <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">requirement</span>[<span class="ruby-string">&#39;tutorials&#39;</span>].<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">tutorial</span><span class="ruby-operator">|</span>
+          <span class="ruby-comment"># For each listed tutorial check that a directory with that name exists</span>
+          <span class="ruby-identifier">pn</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;topics/#{requirement[&#39;topic_name&#39;]}/tutorials/#{tutorial}&quot;</span>)
+
+          <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">directory?</span>
+            <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;Internal requirement to topics/#{requirement[&#39;topic_name&#39;]}/tutorials/#{tutorial} does not exist&quot;</span>)
+          <span class="ruby-keyword">end</span>
+        }
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-comment">#</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">requirement</span>[<span class="ruby-string">&#39;type&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;none&#39;</span>
+      <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_non_empty_key_value</span>(<span class="ruby-identifier">requirement</span>, <span class="ruby-string">&#39;title&#39;</span>))
+
+      <span class="ruby-identifier">requirement</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> [<span class="ruby-string">&#39;title&#39;</span>, <span class="ruby-string">&#39;type&#39;</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">x</span>) <span class="ruby-keyword">then</span>
+          <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;Unknown key #{x}&quot;</span>)
+        <span class="ruby-keyword">end</span>
+      }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;Unknown requirement type #{requirement[&#39;type&#39;]}&quot;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">errs</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

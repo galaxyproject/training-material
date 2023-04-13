@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Jekyll::AuthorPageGenerator - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Generator
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-generate">#generate</a>
+    
+    <li ><a href="#method-i-pusher">#pusher</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Jekyll::AuthorPageGenerator">
+  <h1 id="class-Jekyll::AuthorPageGenerator" class="class">
+    class Jekyll::AuthorPageGenerator
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-generate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate</span><span
+            class="method-args">(site)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="generate-source">
+            <pre><span class="ruby-comment"># File _plugins/author-page.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">layouts</span>.<span class="ruby-identifier">key?</span> <span class="ruby-string">&#39;contributor_index&#39;</span>
+    <span class="ruby-identifier">dir</span> = <span class="ruby-string">&#39;hall-of-fame&#39;</span>
+
+    <span class="ruby-comment"># pre-calculating this hash saves about 4.9 seconds off the previous</span>
+    <span class="ruby-comment"># build time of 5 seconds.</span>
+    <span class="ruby-identifier">tutorials_by_author</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span>, <span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>] = [] }
+    <span class="ruby-identifier">slides_by_author</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span>, <span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>] = [] }
+    <span class="ruby-identifier">news_by_author</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span>, <span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>] = [] }
+    <span class="ruby-identifier">has_philosophy</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-keyword">false</span> }
+
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># Tutorials</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;tutorial_hands_on&#39;</span>
+        <span class="ruby-identifier">pusher</span>(<span class="ruby-identifier">t</span>, <span class="ruby-identifier">tutorials_by_author</span>, <span class="ruby-keyword">false</span>)
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-comment"># Slides</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> [<span class="ruby-string">&#39;base_slides&#39;</span>, <span class="ruby-string">&#39;introduction_slides&#39;</span>, <span class="ruby-string">&#39;tutorial_slides&#39;</span>].<span class="ruby-identifier">index</span>(<span class="ruby-identifier">t</span>[<span class="ruby-string">&#39;layout&#39;</span>]).<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">pusher</span>(<span class="ruby-identifier">t</span>, <span class="ruby-identifier">slides_by_author</span>, <span class="ruby-keyword">false</span>)
+      <span class="ruby-keyword">end</span>
+
+
+      <span class="ruby-comment"># Philosophies</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;training_philosophy&#39;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;username&#39;</span>].<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">has_philosophy</span>[<span class="ruby-identifier">t</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;username&#39;</span>]] = <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">end</span>
+    }
+
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">posts</span>.<span class="ruby-identifier">docs</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># News</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;news&#39;</span>
+        <span class="ruby-identifier">pusher</span>(<span class="ruby-identifier">t</span>, <span class="ruby-identifier">news_by_author</span>, <span class="ruby-keyword">true</span>)
+      <span class="ruby-keyword">end</span>
+
+    }
+
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>[<span class="ruby-string">&#39;halloffame&#39;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;no&quot;</span>}.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">contributor</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># Using PageWithoutAFile instead of a custom class which reads files</span>
+      <span class="ruby-comment"># from disk each time, saves some time, but it is unclear how much</span>
+      <span class="ruby-comment"># due to how the previous was accounted. But assuming 0.040s per page * 193 should be about 8 seconds.</span>
+      <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">contributor</span>), <span class="ruby-string">&quot;index.html&quot;</span>)
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">name</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>][<span class="ruby-identifier">contributor</span>].<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;name&#39;</span>, <span class="ruby-identifier">contributor</span>)
+
+      <span class="ruby-comment"># Their tutorials</span>
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;contributor&quot;</span>] = <span class="ruby-identifier">contributor</span>
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;personname&#39;</span>] = <span class="ruby-identifier">name</span>
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;title&#39;</span>] = <span class="ruby-node">&quot;GTN Contributor: #{name}&quot;</span>
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-string">&quot;contributor_index&quot;</span>
+
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;tutorials&quot;</span>] = <span class="ruby-identifier">tutorials_by_author</span>[<span class="ruby-identifier">contributor</span>]
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;slides&quot;</span>] = <span class="ruby-identifier">slides_by_author</span>[<span class="ruby-identifier">contributor</span>]
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;news&quot;</span>] = <span class="ruby-identifier">news_by_author</span>[<span class="ruby-identifier">contributor</span>]
+
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;tutorials_count&quot;</span>] = <span class="ruby-identifier">tutorials_by_author</span>[<span class="ruby-identifier">contributor</span>].<span class="ruby-identifier">length</span>
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;slides_count&quot;</span>] = <span class="ruby-identifier">slides_by_author</span>[<span class="ruby-identifier">contributor</span>].<span class="ruby-identifier">length</span>
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;news_count&quot;</span>] = <span class="ruby-identifier">news_by_author</span>[<span class="ruby-identifier">contributor</span>].<span class="ruby-identifier">length</span>
+
+      <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;has_philosophy&quot;</span>] = <span class="ruby-identifier">has_philosophy</span>[<span class="ruby-identifier">contributor</span>]
+
+      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-pusher" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pusher</span><span
+            class="method-args">(t, datastructure, flat)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="pusher-source">
+            <pre><span class="ruby-comment"># File _plugins/author-page.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pusher</span>(<span class="ruby-identifier">t</span>, <span class="ruby-identifier">datastructure</span>, <span class="ruby-identifier">flat</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">flat</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">datastructure</span>[<span class="ruby-identifier">c</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">t</span>) }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">datastructure</span>[<span class="ruby-identifier">c</span>].<span class="ruby-identifier">push</span>([<span class="ruby-identifier">t</span>, <span class="ruby-keyword">nil</span>]) }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>)
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">contribution_type</span>, <span class="ruby-identifier">contributor</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">contributor</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">flat</span>
+          <span class="ruby-identifier">datastructure</span>[<span class="ruby-identifier">c</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">t</span>)
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">datastructure</span>[<span class="ruby-identifier">c</span>].<span class="ruby-identifier">push</span>([<span class="ruby-identifier">t</span>, <span class="ruby-identifier">contribution_type</span>])
+        <span class="ruby-keyword">end</span>
+      }
+    }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">datastructure</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
