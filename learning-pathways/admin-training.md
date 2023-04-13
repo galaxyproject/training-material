@@ -21,67 +21,55 @@ pathway:
         topic: admin
       - name: ansible-galaxy
         topic: admin
-      - name: database
-        topic: admin
-      - name: uwsgi
-        topic: admin
-      - name: systemd-supervisor
-        topic: admin
-      - name: production
-        topic: admin
-      - name: toolshed
-        topic: admin
-      - name: management
-        topic: admin
 
   - section: "Module 2: Making the server useful"
     description: |
       Here we pivot to focus on making our server useful; adding tools and data,
       configuring quotas and authentication
     tutorials:
-      - name: users-groups-quotas
-        topic: admin
-      - name: external-auth
-        topic: admin
+      #- name: backup-cleanup
+      #  topic: admin
       - name: cvmfs
         topic: admin
+      - name: reference-genomes
+        topic: admin
+      - name: singularity
+        topic: admin
+      - name: tool-management
+        topic: admin
+      - name: user-groups-quotas
+        topic: admin
+      - name: data-libraries
+        topic: admin
+      - name: bioblend-api
+        topic: dev
+
+  - section: "Module 3: Clusters"
+    description: blabla
+    tutorials:
       - name: connect-to-compute-cluster
         topic: admin
       - name: job_conf.xml
         external: true
         link: "https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/job_conf.xml.sample_advanced"
         #type: slides ## hands_on
-
-  - section: "Module 3 "
-    description: blabla
-    tutorials:
-      - name: bioblend-api
-        topic: dev
+      - name: job-destinations
+        topic: admin
       - name: heterogeneous-compute
         topic: admin
-      - name: object-store
+
+  - section: "Module 4"
+    description: ""
+    tutorials:
+      #- name: celery
+      #  topic: admin
+      - name: tiaas
         topic: admin
       - name: reports
         topic: admin
       - name: gxadmin
         topic: admin
       - name: monitoring
-        topic: admin
-
-  - section: "Module 4"
-    description: ""
-    tutorials:
-      - name: maintenance
-        topic: admin
-      - name: tiaas
-        topic: admin
-      - name: job-metrics
-        topic: admin
-      - name: interactive-tools
-        topic: admin
-      - name: jenkins
-        topic: admin
-      - name: advanced-galaxy-customisation
         topic: admin
 
   - section: "Module 5: Grab bag"
@@ -99,6 +87,8 @@ pathway:
         topic: galaxy-interface
       - name: create-new-tutorial
         topic: contributing
+      - name: interactive-tools
+        topic: admin
 
 ---
 
