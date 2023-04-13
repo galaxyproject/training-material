@@ -45,7 +45,7 @@ First, we need to retrieve the appropriate data. We will continue to work on the
 
 ## Launching JupyterLab
 
-{% icon warning %} Please note: this is only currently available on the [usegalaxy.eu](https://usegalaxy.eu) and [usegalaxy.org](https://usegalaxy.org) sites.
+{% icon warning %} Please note: this is only currently available on the [usegalaxy.eu](https://usegalaxy.eu) site.
 
 > <warning-title>Data uploads & JupyterLab</warning-title>
 > There are a few ways of importing and uploading data into JupyterLab. You might find yourself accidentally doing this differently than the tutorial, and that's ok. There are a few key steps where you will call files from a location - if these don't work from you, check that the file location is correct and change accordingly!
