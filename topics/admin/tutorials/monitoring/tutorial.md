@@ -504,7 +504,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -279,3 +279,12 @@ flower_ui_users:
->         password: "{{ vault_flower_user_password}}"
+>     
 >     flower_environment_variables:
 >       GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
 >    +

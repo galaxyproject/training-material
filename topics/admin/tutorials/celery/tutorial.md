@@ -112,7 +112,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -30,3 +30,7 @@
->       version: 1.4.1
+>       version: 1.4.2
 >     - src: galaxyproject.pulsar
 >       version: 1.0.10
 >    +- name: geerlingguy.redis
@@ -291,15 +291,15 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        +flower_venv_dir: "{{ galaxy_venv_dir }}"
 >        +flower_app_name: galaxy.celery
 >        +flower_db_file: "{{ galaxy_root }}/var/flower.db"
->        +
 >        +flower_persistent: true
->        +
 >        +flower_broker_api: "https://flower:{{ vault_rabbitmq_password_flower }}@localhost:5671/api/"
 >        +flower_broker_url: "amqp://flower:{{ vault_rabbitmq_password_flower }}@localhost:5671/galaxy?ssl=true"
+>        +flower_proxy_prefix: /flower
 >        +
 >        +flower_ui_users:
 >        +  - name: admin
 >        +    password: "{{ vault_flower_user_password}}"
+>        +
 >        +flower_environment_variables:
 >        +  GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
 >        {% endraw %}
