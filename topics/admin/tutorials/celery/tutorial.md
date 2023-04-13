@@ -341,7 +341,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >     +      enable: true
 >     +      queues: celery,galaxy.internal,galaxy.external
 >     +      pool: threads
->     +      memory_limit: 2G
+>     +      memory_limit: 2
 >            loglevel: DEBUG
 >          handlers:
 >            handler:
