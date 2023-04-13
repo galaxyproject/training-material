@@ -65,8 +65,9 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +++ b/requirements.yml
 >    @@ -40,3 +40,5 @@
 >       version: 0.14.2
->     - src: dj-wasabi.telegraf
->       version: 0.12.0
+>     - name: dj-wasabi.telegraf
+>       src: https://github.com/dj-wasabi/ansible-telegraf
+>       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
 >    +- src: galaxyproject.tiaas2
 >    +  version: 2.1.3
 >    {% endraw %}
