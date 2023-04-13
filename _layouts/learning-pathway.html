@@ -53,14 +53,7 @@ layout: base
         <h3 id="st-{{ section.section | slugify }}">{{ section.section }}</h3>
         <p>{{ section.description }}</p>
 
-        {% assign material_list = "" | split: "" %}
-        {% for tut in section.tutorials %}
-          <!-- TODO: make more efficient -->
-          {% assign topic_material = site | topic_filter:tut.topic %}
-          {% assign m = topic_material | where: "tutorial_name", tut.name %}
-          {% assign material_list = material_list | concat: m %}
-
-        {% endfor %}
-        {% include _includes/tutorial_list.html sub=material_list %}
+        {% assign material_list = site | convert_to_material_list: section.tutorials %}
+	{% include _includes/tutorial_list.html sub=material_list %}
     {% endfor %}
-
+</section>

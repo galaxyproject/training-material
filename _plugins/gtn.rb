@@ -4,6 +4,7 @@ require './_plugins/gtn/images'
 require './_plugins/gtn/synthetic'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
+require './_plugins/jekyll-topic-filter'
 
 
 puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
@@ -146,6 +147,23 @@ module Jekyll
       return str.sub(regex, value_replace)
     end
 
+    def convert_to_material_list(site, materials)
+      # [{"name"=>"introduction", "topic"=>"admin"}, {"name"=>"ansible", "topic"=>"admin"}, {"name"=>"ansible-galaxy", "topic"=>"admin"}, {"name"=>"database", "topic"=>"admin"}, {"name"=>"uwsgi", "topic"=>"admin"}, {"name"=>"systemd-supervisor", "topic"=>"admin"}, {"name"=>"production", "topic"=>"admin"}, {"name"=>"toolshed", "topic"=>"admin"}, {"name"=>"management", "topic"=>"admin"}]
+      ret = materials.map{|m|
+        if m.key?("name") && m.key?("topic")
+          found = TopicFilter.fetch_tutorial_material(site, m["topic"], m["name"])
+          if found.nil?
+            Jekyll.logger.warn  "Could not find material #{m["topic"]}/#{m["name"]} in the site data"
+          end
+
+          found
+        else
+        end
+      }
+
+
+    end
+
     def convert_workflow_path_to_trs(str)
       # Input: topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga
       # Output /api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control
@@ -161,6 +179,9 @@ module Jekyll
     end
 
     def get_default_link(material)
+      if material.nil?
+        return "NO LINK"
+      end
       url = nil
 
       if material['slides']
