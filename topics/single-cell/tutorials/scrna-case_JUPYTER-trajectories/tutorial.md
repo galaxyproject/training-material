@@ -49,7 +49,7 @@ contributions:
 notebook:
   language: python
   snippet: topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/preamble.md
-  
+
 ---
 
 # Run the tutorial!
@@ -95,7 +95,7 @@ adata = sc.read_h5ad(thymusobject)
 
 ## Draw force-directed graph
 
-First, we will calculate a [force-directed graph](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.draw_graph.html), as an alternate to tSNE, which will likely work better for trajectory analysis. 
+First, we will calculate a [force-directed graph](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.draw_graph.html), as an alternate to tSNE, which will likely work better for trajectory analysis.
 
 ```python
 sc.tl.draw_graph(adata)
@@ -133,7 +133,7 @@ sc.pl.draw_graph(adata, color='cell_type', legend_loc='on data', save = 'Plot2.p
 ![Diffusion Map](../../images/scrna-casestudy/draw_graph_faPlot2.png "Diffusion Map")
 
 
-Oh dear! This doesn't look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn't seem right. Saying that, this spreads out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you've changed the neighborhood graph on which the clusterisation depends). You could use this: 
+Oh dear! This doesn't look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn't seem right. Saying that, this spreads out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you've changed the neighborhood graph on which the clusterisation depends). You could use this:
 `sc.tl.louvain(adata, resolution=0.6)`
 However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let's stick with our known cell types and move from there.
 
@@ -149,7 +149,7 @@ If you are working in a group, you can now divide up a decision here with one *c
         `sc.pp.neighbors(adata, n_neighbors=15, use_rep='X_pca')`
         `sc.tl.draw_graph(adata)`
    - you could also change the number of neighbors used in the pp.neighbors step (this is the same as the Galaxy tool **Scanpy ComputeGraph**
-   
+
 - Everyone else: You will want to compare FREQUENTLY with your control team member.
 
 ## PAGA
@@ -161,7 +161,7 @@ If you are working in a group, you can now divide up a decision here with one *c
 sc.tl.paga(adata, groups='cell_type')
 ```
 
-Now we want to plot our PAGA, but we might also be interested in colouring our plot by genes as well. In this case, remembering that we are dutifully counting our genes by their EnsemblIDs rather than Symbols (which do not exist for all EnsemblIDs), we have to look up our gene of interest (CD4, CD8a) and plot the corresponding IDs. 
+Now we want to plot our PAGA, but we might also be interested in colouring our plot by genes as well. In this case, remembering that we are dutifully counting our genes by their EnsemblIDs rather than Symbols (which do not exist for all EnsemblIDs), we have to look up our gene of interest (CD4, CD8a) and plot the corresponding IDs.
 
 
 ```python
