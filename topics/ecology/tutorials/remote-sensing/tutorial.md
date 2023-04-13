@@ -13,7 +13,7 @@ objectives:
 - Comparing with in-situ data
 time_estimation: 48H
 key_points:
-- Remote sensing data can be usefull to find hotspot of biodiversity.
+- Remote sensing data can be useful to find hotspots of biodiversity.
 - Spectral indices are of key importance to asset vegetation well-being.
 - Always keep in mind that remote sensing and in-situ data are complementary.
 tags:
