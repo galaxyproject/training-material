@@ -45,7 +45,7 @@ pathway:
         topic: dev
 
   - section: "Module 3: Clusters"
-    description: blabla
+    description:
     tutorials:
       - name: connect-to-compute-cluster
         topic: admin
