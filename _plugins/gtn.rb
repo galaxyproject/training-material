@@ -4,6 +4,7 @@ require './_plugins/gtn/images'
 require './_plugins/gtn/synthetic'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
+require './_plugins/jekyll-topic-filter'
 
 
 puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
@@ -141,9 +142,38 @@ module Jekyll
       return str.gsub(regex, value_replace)
     end
 
+    ##
+    # This method does a single regex replacement
+    #
+    # = Example
+    #
+    #   {{ content | regex_replace: '<hr>', '' }}
     def regex_replace_once(str, regex_search, value_replace)
       regex = /#{regex_search}/m
       return str.sub(regex, value_replace)
+    end
+
+    def convert_to_material_list(site, materials)
+      # [{"name"=>"introduction", "topic"=>"admin"}]
+      materials.map{|m|
+        if m.key?("name") && m.key?("topic")
+          found = TopicFilter.fetch_tutorial_material(site, m["topic"], m["name"])
+          if found.nil?
+            Jekyll.logger.warn  "Could not find material #{m["topic"]}/#{m["name"]} in the site data"
+          end
+          found
+        elsif m.key?("external") && m['external']
+          {
+            "layout" => "tutorial_hands_on",
+            "name" => m["name"],
+            "title" => m["name"],
+            "hands_on" => "external",
+            "hands_on_url" => m["link"],
+          }
+        else
+          Jekyll.logger.warn  "[GTN] Unsure how to render #{m}"
+        end
+      }
     end
 
     def convert_workflow_path_to_trs(str)
@@ -161,6 +191,9 @@ module Jekyll
     end
 
     def get_default_link(material)
+      if material.nil?
+        return "NO LINK"
+      end
       url = nil
 
       if material['slides']

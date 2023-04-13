@@ -18,7 +18,7 @@
   </thead>
   <tbody class="list">
 
-  {% assign subtopic_materials = include.sub[1].materials %}
+  {% assign subtopic_materials = include.sub[1].materials | default: include.sub %}
   {% for material in subtopic_materials %}
         <!-- MAT: {{ material.id }} -->
       {% if material.draft != true or jekyll.environment != "production" %}
