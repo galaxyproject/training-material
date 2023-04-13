@@ -32,6 +32,11 @@ pathway:
         topic: assembly
       - name: chloroplast-assembly
         topic: assembly
+      - name: "My non-GTN session"
+        external: true
+        link: "https://example.com"
+        type: hands_on  # or 'slides'
+
 
 # you can make as many sections as you want, with as many tutorials as you want
 
