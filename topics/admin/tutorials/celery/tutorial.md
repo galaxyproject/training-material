@@ -385,7 +385,7 @@ Now that everything is running, we want to test celery and watch it processing t
 We can simply do that by starting an upload to our Galaxy.
 
 > <hands-on-title>Test Celery and monitor tasks with Flower</hands-on-title>
-> 1. First, open a new tab and type `localhost:5555` then log in with `username: admin` and you password.
+> 1. First, open a new tab and enter your machines hostname followed by `/flower/dashboard` then log in with `username: admin` and you password.
 >    You should see an overview with active workers.  
 >    Keep that tab open
 > 2. In split view, open a second browser window and open you Galaxy page.
