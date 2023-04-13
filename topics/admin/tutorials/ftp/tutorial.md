@@ -85,8 +85,8 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -42,3 +42,5 @@
->       version: 0.12.0
+>    @@ -43,3 +43,5 @@
+>       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
 >     - src: galaxyproject.tiaas2
 >       version: 2.1.5
 >    +- src: galaxyproject.proftpd
@@ -110,7 +110,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -157,11 +157,13 @@ certbot_environment: staging
+>    @@ -168,11 +168,13 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -136,7 +136,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -98,6 +98,9 @@ galaxy_config:
+>    @@ -103,6 +103,9 @@ galaxy_config:
 >         # Monitoring
 >         statsd_host: localhost
 >         statsd_influxdb: true
@@ -158,7 +158,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -315,3 +315,24 @@ telegraf_plugins_extra:
+>    @@ -326,3 +326,24 @@ telegraf_plugins_extra:
 >     tiaas_dir: /srv/tiaas
 >     tiaas_admin_user: admin
 >     tiaas_admin_pass: changeme

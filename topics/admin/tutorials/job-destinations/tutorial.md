@@ -272,10 +272,11 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -123,6 +104,10 @@ galaxy_config:
+>    @@ -123,6 +104,11 @@ galaxy_config:
 >     galaxy_dirs:
 >       - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
->     
+>     galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
+>    +
 >    +galaxy_config_files:
 >    +  - src: files/galaxy/config/tpv_rules_local.yml
 >    +    dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
@@ -616,7 +617,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -110,6 +116,8 @@ galaxy_config_files:
+>    @@ -111,6 +117,8 @@ galaxy_config_files:
 >         dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
 >     
 >     galaxy_config_templates:

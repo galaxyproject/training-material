@@ -82,7 +82,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    @@ -34,3 +34,5 @@
 >       version: 1.8.0
 >     - name: usegalaxy_eu.flower
->       version: 1.0.1
+>       version: 1.0.2
 >    +- src: usegalaxy_eu.influxdb
 >    +  version: v6.0.7
 >    {% endraw %}
@@ -205,7 +205,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -36,3 +36,5 @@
->       version: 1.0.1
+>       version: 1.0.2
 >     - src: usegalaxy_eu.influxdb
 >       version: v6.0.7
 >    +- src: cloudalchemy.grafana
@@ -415,7 +415,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -38,3 +38,5 @@
+>    @@ -38,3 +38,6 @@
 >       version: v6.0.7
 >     - src: cloudalchemy.grafana
 >       version: 0.14.2
@@ -504,7 +504,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -279,3 +279,12 @@ flower_ui_users:
+>    @@ -290,3 +290,12 @@ flower_ui_users:
 >     
 >     flower_environment_variables:
 >       GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
@@ -531,10 +531,10 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -95,6 +95,9 @@ galaxy_config:
->         # Data Library Directories
->         library_import_dir: /libraries/admin
->         user_library_import_dir: /libraries/user
+>    @@ -100,6 +100,9 @@ galaxy_config:
+>         celery_conf:
+>           result_backend: "redis://localhost:6379/0"
+>           enable_celery_tasks: true
 >    +    # Monitoring
 >    +    statsd_host: localhost
 >    +    statsd_influxdb: true
@@ -796,7 +796,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -291,3 +291,10 @@ telegraf_plugins_extra:
+>    @@ -302,3 +302,10 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000

@@ -111,7 +111,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -30,3 +30,7 @@
->       version: 1.4.2
+>       version: 1.4.3
 >     - src: galaxyproject.pulsar
 >       version: 1.0.10
 >    +- name: geerlingguy.redis
@@ -227,7 +227,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -230,6 +230,7 @@ rabbitmq_config:
+>        @@ -231,6 +231,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
 >           - /pulsar/pulsar_au
@@ -235,7 +235,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -239,6 +240,13 @@ rabbitmq_users:
+>        @@ -240,6 +241,13 @@ rabbitmq_users:
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -278,7 +278,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -260,3 +260,22 @@ tusd_instances:
+>        @@ -261,3 +261,22 @@ tusd_instances:
 >               - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
 >               - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
 >               - "-hooks-http-forward-headers=X-Api-Key,Cookie"
@@ -329,7 +329,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >     ```diff
 >     --- a/group_vars/galaxyservers.yml
 >     +++ b/group_vars/galaxyservers.yml
->     @@ -174,6 +174,11 @@ galaxy_config:
+>     @@ -110,6 +110,11 @@ galaxy_config:
 >            preload: true
 >          celery:
 >            concurrency: 2
@@ -340,7 +340,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >     +      memory_limit: 2G
 >            loglevel: DEBUG
 >          handlers:
->            handler
+>            handler:
 >     {% endraw %}
 >     ```
 >     {: data-commit="Add celery" data-ref="add-req"}
@@ -350,17 +350,18 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >     ```diff
 >     --- a/group_vars/galaxyservers.yml
 >     +++ b/group_vars/galaxyservers.yml
->     @@ -191,6 +191,9 @@ galaxy_config:
->            url_prefix: /reports
->            bind: "unix:{{ galaxy_mutable_config_dir }}/reports.sock"
->            config_file: "{{ galaxy_config_dir }}/reports.yml"
+>     @@ -95,6 +95,11 @@ galaxy_config:
+>          # Data Library Directories
+>          library_import_dir: /libraries/admin
+>          user_library_import_dir: /libraries/user
+>     +    # Celery
 >     +    amqp_internal_connection: "pyamqp://galaxy:{{ vault_rabbitmq_password_galaxy }}@localhost:5671/galaxy?ssl=1"
 >     +    celery_conf:
 >     +      result_backend: "redis://localhost:6379/0"
 >     +      enable_celery_tasks: true
->      
->      galaxy_config_templates:
->        - src: templates/galaxy/config/container_resolvers_conf.yml.j2
+>        gravity:
+>          process_manager: systemd
+>          galaxy_root: "{{ galaxy_root }}/server"
 >     {% endraw %}
 >     ```
 >     {: data-commit="Add celery-redis" data-ref="add-req"}

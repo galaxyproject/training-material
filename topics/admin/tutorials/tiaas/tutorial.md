@@ -63,8 +63,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -40,3 +40,5 @@
->       version: 0.14.2
+>    @@ -41,3 +41,5 @@
 >     - name: dj-wasabi.telegraf
 >       src: https://github.com/dj-wasabi/ansible-telegraf
 >       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
@@ -91,7 +90,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -298,3 +298,8 @@ telegraf_plugins_extra:
+>    @@ -309,3 +309,8 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"

@@ -92,7 +92,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -44,3 +44,7 @@
+>    @@ -45,3 +45,7 @@
 >       version: 2.1.5
 >     - src: galaxyproject.proftpd
 >       version: 0.3.1
