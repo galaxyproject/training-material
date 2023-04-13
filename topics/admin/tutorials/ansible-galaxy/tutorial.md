@@ -559,7 +559,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > >     ├── galaxyproject.postgresql_objects
 >    > > >     └── usegalaxy_eu.certbot
 >    > > >
->    > > > 9 directories, 5 files
+>    > > > 8 directories, 6 files
 >    > > > ```
 >    > > {: .code-out.code-max-300}
 >    > >
@@ -1629,13 +1629,14 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > ```ini
 >    > > /srv/galaxy/
 >    > > ├── config
+>    > > ├── datasets
 >    > > ├── jobs
 >    > > ├── local_tools
 >    > > ├── server
 >    > > ├── var
 >    > > └── venv
 >    > >
->    > > 6 directories, 0 files
+>    > > 7 directories, 0 files
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
@@ -2210,7 +2211,7 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 
 > <hands-on-title>Job Conf</hands-on-title>
 >
-> 1. Add a new `job_config` section to the `galaxy` section of `galaxy_config` in `group_Vars/galaxyservers.yml`. Note: placement and whitespace is important here - `job_config` should be a child of `galaxy_config.galaxy`, at the same level as other options like `id_secret`.
+> 1. Add a new `job_config` section to the `galaxy` section of `galaxy_config` in `group_vars/galaxyservers.yml`. Note: placement and whitespace is important here - `job_config` should be a child of `galaxy_config.galaxy`, at the same level as other options like `id_secret`.
 >
 >    {% raw %}
 >    ```diff
