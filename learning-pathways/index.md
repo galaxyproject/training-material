@@ -2,7 +2,7 @@
 layout: page
 ---
 
-{% assign pathways = site.pages | where: "layout", "learning-pathway" %}
+{% assign pathways = site.pages | where: "layout", "learning-pathway" | sort: "priority", "last" %}
 
 
 # Learning Pathways
@@ -25,6 +25,7 @@ Learning pathways are sets of tutorials curated for you by community experts to 
   </div>
   <div class="col-sm-7">
    <div class="card-body">
+   <p></p>
    {% for tag in path.tags %}
    <span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag  }}</span>
     {% endfor %}

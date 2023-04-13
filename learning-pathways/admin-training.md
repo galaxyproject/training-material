@@ -2,8 +2,11 @@
 layout: learning-pathway
 title: Admin Training Course
 description: |
-  This learning path covers all the topics usually taught during the regular 5-day admin
-  training workshops. Each module represents what is usually roughly taught in one day during the events.
+  Learn how to setup, configure, and maintain your own Galaxy server. This learning pathway
+  will guide you through all the steps required to setup your own Galaxy server with Ansible,
+  configuring it, and making it production ready.
+
+tags: [Galaxy administrators, 5-day course]
 
 pathway:
   - section: "Module 1: Setting up Galaxy with Ansible"
@@ -92,3 +95,6 @@ pathway:
 
 ---
 
+This learning path covers all the topics usually taught during the regular 5-day admin
+training workshops. Each module represents what is usually roughly taught in one day during
+the events.
