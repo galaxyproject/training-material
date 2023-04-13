@@ -142,6 +142,12 @@ module Jekyll
       return str.gsub(regex, value_replace)
     end
 
+    ##
+    # This method does a single regex replacement
+    #
+    # = Example
+    #
+    #   {{ content | regex_replace: '<hr>', '' }}
     def regex_replace_once(str, regex_search, value_replace)
       regex = /#{regex_search}/m
       return str.sub(regex, value_replace)
