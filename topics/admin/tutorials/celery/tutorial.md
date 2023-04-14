@@ -124,7 +124,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
 >
-> 2. Install the role with:
+> 2. Install the roles with:
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -144,7 +144,21 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        | `redis_conf_path`      | string  | The path where your redis configuration will be stored. Default: /etc/redis |
 >
 >        Luckily we can leave them all on default and don't need to change anything for Redis in the vars.  
->        Let's add the role to our playbook then:
+>     2. We only need to add Redis' Python package in the `group_vars/galaxyservers.yml`:
+>        {% raw %}
+>        ```diff
+>        --- a/group_vars/galaxyservers.yml
+>        +++ b/group_vars/galaxyservers.yml
+>        @@ -235,6 +235,7 @@
+>        +#Redis
+>        +galaxy_additional_venv_packages:
+>        +  - redis
+>        +
+>        {% endraw %}
+>        ```
+>        {: data-commit="Configure rabbitmq users"}
+>        
+>     3. Let's add the role to our playbook then:
 >        {% raw %}
 >        ```diff
 >        --- a/galaxy.yml
@@ -161,7 +175,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```
 >        {: data-commit="Add requirement" data-ref="add-req"}
 >
->     2. Since Flower needs it's own RabbitMQ user, we should add that to the respective part of our vars
+>     4. Because Flower needs it's own RabbitMQ user, we should add that to the respective part of our vars
 >        Edit your `group_vars/secret.yml` and define some random passwords:
 >
 >        ><code-in-title>Bash</code-in-title>
@@ -239,7 +253,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -244,6 +245,13 @@ rabbitmq_users:
+>        @@ -244,6 +245,13 @@
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -256,7 +270,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        {% endraw %}
 >        ```
 >        {: data-commit="Configure rabbitmq users"}
->>     2. Flower
+>     5. Flower
 >        Flower has a few variables, too, for example, we need to point it to our virtual environment:
 >
 >        | Variable             | Type          | Description                                                                                                                                                                    |
@@ -308,69 +322,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        {% endraw %}
 >        ```
 >        {: data-commit="Configure flower"}
->
-> 1. Now we can add the Flower Role to our Playbook:
->
->        {% raw %}
->        ```diff
->        --- a/galaxy.yml
->        +++ b/galaxy.yml
->        @@ -46,6 +46,7 @@
->               become: true
->               become_user: "{{ galaxy_user_name }}"
->             - geerlingguy.redis
->        +    - usegalaxy_eu.flower
->             - galaxyproject.nginx
->             - geerlingguy.docker
->             - usegalaxy_eu.rabbitmqserver
->        {% endraw %}
->        ```
->        {: data-commit="Add flower role" data-ref="add-req"}
->
-> 4. Now it is time to change the `group_vars/galaxyservers.yml` and enable celery in galaxy.gravity config.
->    Add the following lines to your file:
->     {% raw %}
->     ```diff
->     --- a/group_vars/galaxyservers.yml
->     +++ b/group_vars/galaxyservers.yml
->     @@ -110,6 +110,11 @@ galaxy_config:
->            preload: true
->          celery:
->            concurrency: 2
->     +      enable_celery_beat: true
->     +      enable: true
->     +      queues: celery,galaxy.internal,galaxy.external
->     +      pool: threads
->     +      memory_limit: 2
->            loglevel: DEBUG
->          handlers:
->            handler:
->     {% endraw %}
->     ```
->     {: data-commit="Add celery" data-ref="add-req"}
->
->     Now add the second part, Galaxy's Celery configuration:
->     {% raw %}
->     ```diff
->     --- a/group_vars/galaxyservers.yml
->     +++ b/group_vars/galaxyservers.yml
->     @@ -95,6 +95,11 @@ galaxy_config:
->          # Data Library Directories
->          library_import_dir: /libraries/admin
->          user_library_import_dir: /libraries/user
->     +    # Celery
->     +    amqp_internal_connection: "pyamqp://galaxy:{{ vault_rabbitmq_password_galaxy }}@localhost:5671/galaxy_internal?ssl=1"
->     +    celery_conf:
->     +      result_backend: "redis://localhost:6379/0"
->     +    enable_celery_tasks: true
->        gravity:
->          process_manager: systemd
->          galaxy_root: "{{ galaxy_root }}/server"
->     {% endraw %}
->     ```
->     {: data-commit="Add celery-redis" data-ref="add-req"}
->
-> 1. And finally expose it via nginx:
+>     6. It has a dashboard, so we need to expose that via nginx:
 >
 >        {% raw %}
 >        ```diff
@@ -394,7 +346,69 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```
 >        {: data-commit="Add nginx routes"}
 >
-> 5. We are done with the changes and you can enter the command to run your playbook:
+>     7. Now we can add the Flower Role to our Playbook:
+>    
+>        {% raw %}
+>        ```diff
+>        --- a/galaxy.yml
+>        +++ b/galaxy.yml
+>        @@ -46,6 +46,7 @@
+>               become: true
+>               become_user: "{{ galaxy_user_name }}"
+>             - geerlingguy.redis
+>        +    - usegalaxy_eu.flower
+>             - galaxyproject.nginx
+>             - geerlingguy.docker
+>             - usegalaxy_eu.rabbitmqserver
+>        {% endraw %}
+>        ```
+>        {: data-commit="Add flower role" data-ref="add-req"}
+>
+> 4. Now it is time to change the `group_vars/galaxyservers.yml` and enable celery in galaxy.gravity config.
+>    Add the following lines to your file:
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -110,6 +110,11 @@ galaxy_config:
+>           preload: true
+>         celery:
+>           concurrency: 2
+>    +      enable_celery_beat: true
+>    +      enable: true
+>    +      queues: celery,galaxy.internal,galaxy.external
+>    +      pool: threads
+>    +      memory_limit: 2
+>           loglevel: DEBUG
+>         handlers:
+>           handler:
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add celery" data-ref="add-req"}
+>
+>    Now add the second part, Galaxy's Celery configuration:
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -95,6 +95,11 @@ galaxy_config:
+>         # Data Library Directories
+>         library_import_dir: /libraries/admin
+>         user_library_import_dir: /libraries/user
+>    +    # Celery
+>    +    amqp_internal_connection: "pyamqp://galaxy:{{ vault_rabbitmq_password_galaxy }}@localhost:5671/galaxy_internal?ssl=1"
+>    +    celery_conf:
+>    +      result_backend: "redis://localhost:6379/0"
+>    +    enable_celery_tasks: true
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add celery-redis" data-ref="add-req"}
+>
+>
+> 6. We are done with the changes and you can enter the command to run your playbook:
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
