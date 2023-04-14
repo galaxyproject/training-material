@@ -80,13 +80,16 @@ The [assembly](https://genomeark.s3.amazonaws.com/species/Eschrichtius_robustus/
 
 # Get data
 
-As a first step we will get the data from zenodo.
+As a first step we will get the data from Zenodo.
 
-> <hands-on-title> Data Upload </hands-on-title>
+> <hands-on-title>Upload data</hands-on-title>
 >
-> ##### Case 1: ***Chondrosia reniformis***: 
-> 1. Create a new history for the sponge (Chondrosia reniformis)
-> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link6 }}) and [Zenodo]({{ page.zenodo_link5 }}) and [Zenodo]({{ page.zenodo_link1 }})
+> 1. Create a new history for allocating temporally all the datasets. This history can be named as `Datasets history`
+>
+> {% snippet faqs/galaxy/histories_rename.md %}
+>
+>
+> 2. Import the Pacbio HiFi files from [Zenodo]({{ page.zenodo_link_3 }})
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on **Rule-based** tab
@@ -94,7 +97,15 @@ As a first step we will get the data from zenodo.
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >    ```
->   dataset_01   https://zenodo.org/record/7786773/files/hifi.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
+>   dataset_01   https://zenodo.org/record/7786773/files/hifi.fastq.gz   fastq.gz    HiFi    CReniformis_Pacbio
+>   dataset_01   https://zenodo.org/record/7784764/files/m64055_210602_211608.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
+>   dataset_02   https://zenodo.org/record/7784764/files/m54306Ue_211020_191957.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
+>   dataset_03   https://zenodo.org/record/7784764/files/m54306Ue_211016_070813.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
+>   dataset_04   https://zenodo.org/record/7786773/files/m54306U_210529_225553.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
+>   dataset_01   https://zenodo.org/record/7781236/files/m54306Ue_220411_220734.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
+>   dataset_02   https://zenodo.org/record/7781236/files/m54306Ue_220520_051743.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
+>   dataset_03   https://zenodo.org/record/7781236/files/m64055e_220615_033108.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
+>   dataset_04   https://zenodo.org/record/7786773/files/m64055e_220603_182128.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
 >    ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -105,7 +116,7 @@ As a first step we will get the data from zenodo.
 >       - Click `Add Definition` button and select `Collection Name`: column `E`
 >    - Click `Apply` and press <kbd>Upload</kbd>
 >
-> 3. Import the Hi-C datasets from [Zenodo]({{ page.zenodo_link_3 }})
+> 3. Import the remainig datasets from [Zenodo]({{ page.zenodo_link_3 }})
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on **Rule-based** tab
@@ -113,8 +124,17 @@ As a first step we will get the data from zenodo.
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >       ```
->   Hi-C_dataset_F   https://zenodo.org/record/7786773/files/hiC_1.fastq.gz?download=1   fastq.gz    Hi-C
->   Hi-C_dataset_R   https://zenodo.org/record/7786773/files/hiC_2.fastq.gz?download=1   fastq.gz    Hi-C
+>   CReformitis_assembly    https://zenodo.org/record/7781236/files/GCA_947172415.1.fasta.gz    fasta.gz    assembly
+>   CReformitis_metadata    https://zenodo.org/record/7781236/files/metadata_chon.yaml  yaml    metadata
+>   CReniformis_Hi-C_F   https://zenodo.org/record/7786773/files/hiC_1.fastq.gz   fastq.gz    Hi-C
+>   CReniformis_Hi-C_R   https://zenodo.org/record/7786773/files/hiC_2.fastq.gz   fastq.gz    Hi-C
+>   EReginata_assembly    https://zenodo.org/record/xxxxxx/files/GCA_947172415.1.fasta.gz    fasta.gz    assembly
+>   ERegina_metadata    https://zenodo.org/record/7781236/files/metadata_eryth.yaml  fasta.gz    metadata
+>   EReginae_Hi-C_F   https://zenodo.org/record/XXXXXX/files/hiC_1.fastq.gz   fastq.gz    Hi-C
+>   EReginae_Hi-C_R   https://zenodo.org/record/XXXXXX/files/hiC_1.fastq.gz   fastq.gz    Hi-C
+>   ERobustus_assembly  https://zenodo.org/record/7781236/files/mEscRob2.pri.cur.20221201.fasta.gz  fasta.gz    assembly
+>   ERobustus_metadata  https://zenodo.org/record/7781236/files/metadata_esch.yaml  yaml    metadata
+>   Taxonomy_data   https://zenodo.org/record/7781236/files/new_taxdump.tar.gz  gz  taxonomy
 >       ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -123,179 +143,29 @@ As a first step we will get the data from zenodo.
 >       - Click `Add Definition` button and select `Type`: column `C`
 >       - Click `Add Definition` button and select `Name Tag`: column `D`
 >    - Click `Apply` and press <kbd>Upload</kbd>
->
-> 4. Import the remaining data from [Zenodo]({{ page.zenodo_link_1 }})
->
->    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click on **Regular** tab
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: assembly
->    - Edit *Type* to fasta.gz
->    - Copy the first tabular data, paste it into the textbox
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: taxdump_directory
->    - Edit *Type* to gz
->    - Copy the second tabular data, paste it into the textbox
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: metadata
->    - Edit *Type* to yaml
->    - Copy the third tabular data, paste it into the textbox
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: diamondDB
->    - Copy the fourth tabular data, paste it into the textbox
->
->       ```
->   https://zenodo.org/record/7781236/files/GCA_947172415.1.fasta.gz?download=1
->       ```
->       ```
->   https://zenodo.org/record/7781236/files/new_taxdump.tar.gz?download=1
->       ```
->       ```
->   https://zenodo.org/record/7781236/files/metadata_chon.yaml?download=1
->       ```
->       ```
->   https://zenodo.org/record/7788734/files/Diamond_makedb.dmnd?download=1
->       ```
->
->
-> ##### Case 2: ***Erythrolamprus reginae***:
-> 1. Create a new history for the snake (Erythrolamprus reginae)
-> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link1 }}) and [Zenodo]({{ page.zenodo_link2 }}) and [Zenodo]({{ page.zenodo_link3 }}) and [Zenodo]({{ page.zenodo_link4 }}) and [Zenodo]({{ page.zenodo_link5 }}) and [Zenodo]({{ page.zenodo_link6 }})
->
->    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click on **Rule-based** tab
->    - *"Upload data as"*: `Collections`
->    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
->
->    ```
->   dataset_01   https://zenodo.org/record/7784764/files/m64055_210602_211608.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
->   dataset_02   https://zenodo.org/record/7784764/files/m54306Ue_211020_191957.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
->   dataset_03   https://zenodo.org/record/7784764/files/m54306Ue_211016_070813.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
->   dataset_04   https://zenodo.org/record/7786773/files/m54306U_210529_225553.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
->    ```
->
->    - From **Rules** menu select `Add / Modify Column Definitions`
->       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
->       - Click `Add Definition` button and select `URL`: column `B`
->       - Click `Add Definition` button and select `Type`: column `C`
->       - Click `Add Definition` button and select `Group Tag`: column `D`
->       - Click `Add Definition` button and select `Collection Name`: column `E`
->    - Click `Apply` and press <kbd>Upload</kbd>
->
-> 3. Import the Hi-C datasets from [Zenodo]({{ page.zenodo_link_4 }})
->
->    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click on **Rule-based** tab
->    - *"Upload data as"*: `Datasets`
->    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
->
->       ```
->   Hi-C_dataset_F   https://zenodo.org/record/7814950/files/rEryReg1_Royal_Ground_Snake_R1.fastq.zip.001?download=1   fastq.gz.zip    Hi-C
->   Hi-C_dataset_F   https://zenodo.org/record/7814950/files/rEryReg1_Royal_Ground_Snake_R1.fastq.zip.002?download=1   fastq.gz.zip    Hi-C
->   Hi-C_dataset_F   https://zenodo.org/record/7788734/files/rEryReg1_Royal_Ground_Snake_R1.fastq.zip.003?download=1   fastq.gz.zip    Hi-C
->   Hi-C_dataset_R   https://zenodo.org/record/7817734/files/rEryReg1_Royal_Ground_Snake_R2.fastq.zip.001?download=1   fastq.gz.zip    Hi-C
->   Hi-C_dataset_R   https://zenodo.org/record/7817734/files/rEryReg1_Royal_Ground_Snake_R2.fastq.zip.002?download=1   fastq.gz.zip    Hi-C
->   Hi-C_dataset_R   https://zenodo.org/record/7788734/files/rEryReg1_Royal_Ground_Snake_R2.fastq.zip.003?download=1   fastq.gz.zip    Hi-C
->       ```
->
->    - From **Rules** menu select `Add / Modify Column Definitions`
->       - Click `Add Definition` button and select `Name`: column `A`
->       - Click `Add Definition` button and select `URL`: column `B`
->       - Click `Add Definition` button and select `Type`: column `C`
->       - Click `Add Definition` button and select `Name Tag`: column `D`
->    - Click `Apply` and press <kbd>Upload</kbd>
->
-> 4. Import the remaining data from [Zenodo]({{ page.zenodo_link_1 }}) and [Zenodo]({{ page.zenodo_link_4 }})
->
->    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click on **Regular** tab
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: assembly
->    - Edit *Type* to fasta.gz
->    - Copy the first tabular data, paste it into the textbox
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: taxdump_directory
->    - Edit *Type* to gz
->    - Copy the second tabular data, paste it into the textbox
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: metadata
->    - Edit *Type* to yaml
->    - Copy the third tabular data, paste it into the textbox
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: diamondDB
->    - Copy the fourth tabular data, paste it into the textbox
->
->       ```
->   https://zenodo.org/record/7788734/files/rEryReg1.pri.cur.20230105.fasta.gz?download=1
->       ```
->       ```
->   https://zenodo.org/record/7781236/files/new_taxdump.tar.gz?download=1
->       ```
->       ```
->   https://zenodo.org/record/7781236/files/metadata_eryth.yaml?download=1
->       ```
->       ```
->   https://zenodo.org/record/7788734/files/Diamond_makedb.dmnd?download=1
->       ```
->
-> ##### Case 3: ***Eschrichtius robustus***:
-> 1. Create a new history for the whale (Eschrichtius robustus)
-> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link1 }}) and [Zenodo]({{ page.zenodo_link5 }}) and [Zenodo]({{ page.zenodo_link6 }})
->
->    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click on **Rule-based** tab
->    - *"Upload data as"*: `Collections`
->    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
->
->    ```
->   dataset_01   https://zenodo.org/record/7781236/files/m54306Ue_220411_220734.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
->   dataset_02   https://zenodo.org/record/7781236/files/m54306Ue_220520_051743.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
->   dataset_03   https://zenodo.org/record/7781236/files/m64055e_220615_033108.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
->   dataset_04   https://zenodo.org/record/7786773/files/m64055e_220603_182128.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
->    ```
->
->    - From **Rules** menu select `Add / Modify Column Definitions`
->       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
->       - Click `Add Definition` button and select `URL`: column `B`
->       - Click `Add Definition` button and select `Type`: column `C`
->       - Click `Add Definition` button and select `Group Tag`: column `D`
->       - Click `Add Definition` button and select `Collection Name`: column `E`
->    - Click `Apply` and press <kbd>Upload</kbd>
->
-> 3. Import the remaining data from [Zenodo]({{ page.zenodo_link_1 }})
->
->    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click on **Regular** tab
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: assembly
->    - Edit *Type* to fasta.gz
->    - Copy the first tabular data, paste it into the textbox
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: taxdump_directory
->    - Edit *Type* to gz
->    - Copy the second tabular data, paste it into the textbox
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: metadata
->    - Edit *Type* to yaml
->    - Copy the third tabular data, paste it into the textbox
->    - Click on **Paste/Fetch data**
->    - Edit *New File* name to: diamondDB
->    - Copy the fourth tabular data, paste it into the textbox
->
->       ```
->   https://zenodo.org/record/7781236/files/mEscRob2.pri.cur.20221201.fasta.gz?download=1
->       ```
->       ```
->   https://zenodo.org/record/7781236/files/new_taxdump.tar.gz?download=1
->       ```
->       ```
->   https://zenodo.org/record/7781236/files/metadata_esch.yaml?download=1
->       ```
->       ```
->   https://zenodo.org/record/7788734/files/Diamond_makedb.dmnd?download=1
->       ```
 >
 {: .hands_on}
+
+Once we have imported all the datasets, we will move each one to its correspondent history. 
+
+> <hands-on-title>Upload data</hands-on-title>
+>
+> 1. Create three new empty histories, one for each specie.
+> 2. Rename the histories as  `Case 1: *Chondrosia reniformis*`, `Case 2: *Erythrolamprus reginae*` and  `Case 3: *Eschrichtius robustus*`.
+> 3. Click in **History options** and select `Show Histories Side-by-Side`
+> 4. Click in `Select histories`, and include the histories corresponding to the three species.
+> 5. Move the datasets to its correspondent history.
+>
+>    > <comment-title>Non-unique datasets</comment-title>
+>    > Both the **Taxonomic_data** and the **Diamond_database** should be included all of them.
+>    {: .details}
+>
+{: .hands_on}
+
+Once all the datasets have been copied to their correspondent history, we should obtain something similar to this:
+
+![Figure 1: Distribution of data](../../images/post-assembly-QC/histories_side_by_side.png "Histories corresponding to the three cases of study.")
+
 
 # Genome assembly ovierwiew with Blobtoolkit
 
@@ -308,7 +178,7 @@ In this tutorial, we will use Blobtoolkit in order to integrate the following da
 - Sequence similarity data: Sequence similarity data can be used to identify potential misassemblies or contaminants in the genome assembly. BlobToolKit can use BLAST/DIAMOND searches to compare the genome assembly to reference databases and identify regions that may be problematic.
 - BUSCO reports: BlobToolKit can use BUSCO data to provide additional information about the quality of a genome assembly. It can generate plots of the number of complete and partial BUSCO genes in the genome assembly, as well as the number of missing and fragmented genes.
 
-> <comment-title>Why should be evaluate contaminants?</comment-title>
+> <comment-title>Why should we evaluate contaminants?</comment-title>
 >
 > A significant proportion of the genome sequences in both GenBank and RefSeq (0.54% and 0.34% of entries, respectively) include sequences from contaminants; the contamination primarily exists in the form of short contigs, flanking regions on longer contigs, or areas of larger scaffolds that are flanked by Ns, although a few longer sequences with contamination were also detected ({% cite Steinegger2020 %}).
 >
@@ -332,6 +202,32 @@ In this tutorial we will use HISAT2 for generation the coverage data. This tool 
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `output` (Input dataset collection)
+>
+{: .hands_on}
+
+
+## Generate sequence similarity data with DIAMOND
+
+DIAMOND is a sequence alignment tool that utilizes a more efficient algorithm compared to BLAST, allowing for much faster searches of large sequence databases. Specifically, DIAMOND uses a sensitive seed-extension approach that compares a set of small segments (seeds) from the query sequence to a database, and then extends the alignments based on the highest-scoring hits. This approach allows DIAMOND to perform up to 20,000 times faster than BLAST, with comparable or improved sensitivity and accuracy ({% cite Buchfink2014 %}).
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Diamond](toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0) %} with the following parameters:
+>    - *"Alignment mode"*: `DNA query sequences (blastx)`
+>        - *"Allow for frameshifts?"*: `yes`
+>            - *"restrict hit culling to overlapping query ranges"*: `Yes`
+>            - *"frame shift penalty"*: `15`
+>    - {% icon param-file %} *"Input query file in FASTA or FASTQ format"*: `output` (Input dataset)
+>    - *"Will you select a reference database from your history or use a built-in index?"*: `Use one from the history`
+>        - {% icon param-file %} *"Select the reference database"*: `output` (Input dataset)
+>    - *"Restrict search taxonomically?"*: `No`
+>    - *"Sensitivity Mode"*: `Fast (--fast)`
+>        - *"Block size in billions of sequence letters to be processed at a time"*: `10.0`
+>    - *"Method to filter?"*: `Maximum e-value to report alignments`
+>    - *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
+>    - In *"Output options"*:
+>        - *"Format of output file"*: `BLAST tabular`
+>            - *"Tabular fields"*: ``
 >
 {: .hands_on}
 
@@ -362,9 +258,6 @@ In this tutorial we will use HISAT2 for generation the coverage data. This tool 
 >
 {: .hands_on}
 
-## Generate sequence similarity data with DIAMOND
-
-DIAMOND is a sequence alignment tool that utilizes a more efficient algorithm compared to BLAST, allowing for much faster searches of large sequence databases. Specifically, DIAMOND uses a sensitive seed-extension approach that compares a set of small segments (seeds) from the query sequence to a database, and then extends the alignments based on the highest-scoring hits. This approach allows DIAMOND to perform up to 20,000 times faster than BLAST, with comparable or improved sensitivity and accuracy ({% cite Buchfink2014 %}).
 
 ## Generate **BUSCO** report
 
@@ -427,24 +320,9 @@ To get a more meaningful analysis and therefore more useful information about ou
 >        - {% icon param-file %} *"BAM/SAM/CRAM read alignment file"*: `output_alignments` (output of **HISAT2** {% icon tool %})
 >        - *"Genetic text file"*: `Disabled`
 >
->    > <comment-title> BUSCO </comment-title>
->    >
->    > 
->    {: .comment}
->
->    > <comment-title> Coverage </comment-title>
->    >
->    > 
->    {: .comment}
->
 > 3. {% tool [Interactive BlobToolKit](interactive_tool_blobtoolkit) %} with the following parameters:
 >    - {% icon param-file %} *"Blobdir file"*: `blobdir` (output of **BlobToolKit** {% icon tool %})
 >
->
->    > <comment-title> short description </comment-title>
->    >
->    > Using the interactive tool of BlobToolKit allows one to view the created BlobDir dataset as plots. Thus we can analyse and evaluate the genome assembly.
->    {: .comment}
 >
 {: .hands_on}
 
@@ -457,21 +335,6 @@ To get a more meaningful analysis and therefore more useful information about ou
 
 It is common to analyse assemblies with the help of k-mer counting. During the assembling process, the DNA fragments are broken down into k-mers. Then they are compared to identify regions of overlap. By aligning overlapping k-mers it's possible to piece the original DNA sequence together and generate a complete genome.
 K-mers are also useful for genome analysis. The frequency and distribution of k-mers can be used to estimate the genome size, rate of heterozygosity and to identify repetitive sequences. K-mer counting can also be used to detect and correct errors and it can point out possible contaminations in genome assemblies. ({% cite Manekar2018 %})
-
-
-> <comment-title> k-mers </comment-title>
->
-> K-mers are contiguous substrings of DNA sequences of length k.
-> Example:
-> The sequence ACGT has four monomers (A, C, G, T), three 2-mers (AC, CG, GT), two 3-mers (ACG, CGT) and one 4-mer (ACGT)
->
-{: .comment}
->
-> <comment-title> Counting k-mers </comment-title>
->
-> Given the length L of a sequence and the number n of all possible monomers, there are n^k total possible k-mers and L-k+1 k-mers.
->
-{: .comment}
 
 
 ## Generating k-mer profile with **Meryl**
@@ -526,30 +389,21 @@ Genomescope is used for analysing genomes with the help of k-mer profile analysi
 >
 {: .hands_on}
 
-Lete's have a look at the plots of the three species. Genomescope only uses k-mers generated by the raw sequencing data.
+Lete's have a look at the plots of the three species. Genomescope only uses k-mers generated by raw sequencing data.
 
-![Figure 4: Genomescope plot](../../images/post-assembly-QC/Chondrosia-reniformis-Linear_plot.png "Genomescope 21-mer profile of Chondrosia reniformis, linear plot. Error rate: 0.641%, unique sequences 32.5%, heterozygous level 1.83%, kcov=44")
+![Figure 4: Genomescope plot](../../images/post-assembly-QC/Chondrosia-reniformis-Linear_plot.png "Genomescope 21-mer profile (k:21) of Chondrosia reniformis, diploid (p:2). The plot includes estimations about the genome length (len:124,167,659bp), unique sequences (uniq:61.5%), homozygous portion (aa: 98.7%), heterozygous portions (ab:1.32%), mean k-mer coverage for heterozygous bases (kcov:35.4), read error rate (err:0.752%) and average rate of read duplications (dup:0.378).")
 
-The error rate is high with 0.641%. This is because the sponge does have an abundance of symbiotic organisms. When extracting DNA from the sponge, DNA from these organisms get into the sequencing data causing errors in the assembly process. This is also why the value of unique sequences is that low.
-Having a high first peak indicates high heterozygosity (at coverage 44).
-
-Genome size should be 117.39 Mbp. Estimated genome size is relatively much larger: 294.72 Mbp.
-
-![Figure 5: Genomescope plot ](../../images/post-assembly-QC/Eschrichtius-robustus-Linear_plot.png "Genomescope 21-mer profile of Eschrichtius robustus, linear plot. Error rate: 0.13%, unique sequences 67.6%, heterozygous level 0.308%, kcov=15.1")
+Figure 4 corresponds to the k-mer profile of the Sponge (Chondrosia reniformis). Presumably, the large gene number in the sponge genome is due to regional gene duplication; so far evidence for a transposition in sponges has been presented. Data indicate that only 0.25 % of the total sponge genome comprises CA/TG microsatellites, and until now also no SINEs/transposable elements have been identified. The estimated genome size around 124,Mbp is relatively close to Chondrosia reniformis genome size (117,39Mbp). 
 
 
-The error rate is not high with 0.13%. There are also many unique sequences.
-The first peak is at 15.1 coverage and is tiny in comparison to the second peak at 29.61 coverage.
-This means that the whale has a high homozygous level of k-mers. The result can be described by the fact that this species is inbreeding. Autozygosity and low genetic diversity can be concluded by that.
+![Figure 5: Genomescope plot ](../../images/post-assembly-QC/Eschrichtius-robustus-Linear_plot.png "Genomescope 21-mer profile (k:21) of Eschrichtius robustus, diploid (p:2). The plot includes estimations about the genome length (len:2,729,218,268bp), unique sequences (uniq:67.6%), homozygous portion (aa: 99.7%), heterozygous portions (ab:0.308%), mean k-mer coverage for heterozygous bases (kcov:15.1), read error rate (err:0.13%) and average rate of read duplications (dup:0.363). ")
 
-Genome size should be 2.87 Gbp. Estimated genome size is relatively close: 2.73 Gbp.
+Figure 5 corresponds to the k-mer profile of the Whale (Eschrichtius robustus). As expected from the high grade of inbreeding, the k-mer distribution shows a highly homozygous diploid genome (first peak at 15.1 coverage is tiny in comparison to the second peak at 29.61 coverage). It is possible to appreciate around 60x a small tail, corresponding with duplicated genes. The estimated genome size around 2,73Gbp is relatively close to Eschrichtius robustus genome size (2,87Gbp).
 
-![Figure 6: Genomescope plot ](../../images/post-assembly-QC/Erythrolamprus-reginae-linear-ploidy3.png "Genomescope 21-mer profile of Erythrolamprus reginae, linear plot. Error rate: 0.173%, unique sequences 51.6%, heterozygous level 3.74% + 0.422%, kcov=15.1")
 
-The error rate is not high with 0.173%. But there are only 51.6% unique sequences. In this case the low value is attributed to the parthenogenesis and the polyploidy of this snake which causes tandem duplications and higher DNA replication among the other things.
-The first peak at 11.1 coverage the highest. Therefore high heterozygosity is inferred.
+![Figure 6: Genomescope plot ](../../images/post-assembly-QC/Erythrolamprus-reginae-linear-ploidy3.png "Genomescope 21-mer profile (k:21) of Erythrolamprus reginae, triploid(p:3). The plot includes estimations about the genome length (len:1,908,066,061bp), unique sequences (uniq:51.6%), homozygous portion (aaa: 95.8%), heterozygous portions (aab:3.74%, abc:0,422), mean k-mer coverage for heterozygous bases (kcov:11.1), read error rate (err:0.173%) and average rate of read duplications (dup:0.239).")
 
-Genome size should be 1.97 Gbp. Estimated genome size is relatively close: 1.91 Gbp.
+Figure 6 corresponds to the k-mer profile of the Snake (Erythrolamprus reginae). There are only 51.6% estimated unique sequences. The low value is probably attributed to the parthenogenesis and the polyploidy of this snake which causes tandem duplications and higher DNA replication as a result of the triploid-diploid cycles. As expected those properties also result in a highly heterozygous distribution (peak at 11.1 coverage). The estimated genome size around 1,91Gbp is relatively close to Erythrolamprus reginae genome size (1,97Gbp).
 
 
 ## K-mer profile evaluation with **Merqury**
@@ -582,15 +436,20 @@ Let's have a closer look at the copy number plots for each of the three species.
 
 ![Figure 7: Merqury plot](../../images/post-assembly-QC/Chondrosia-reniformis.spectra-cn.fl.png "Merqury copy numbers plot of Chondrosia reniformis. The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set.")
 
-The large black area indicates that there is a high amount of k-mers in the reads set, which are not used in the assembly. This can indicate a high amount of contamination or sequencing errors in the read set. It could also mean that there are missing sequences in the assembly. The red area represents the one-copy k-mers in the genome (heterozygous part). This plot indicates a sequencing coverage at ~90x.
+
 
 ![Figure 8: Merqury plot](../../images/post-assembly-QC/Eschrichtius-robustus.spectra-cn.fl.png "Merqury copy numbers plot of Eschrichtius robustus. The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set.")
 
-The small black area indicates that most of the k-mers found in the reads set are also found in the assembly (but not all). This plot indicates a sequencing coverage at ~30x.
 
 ![Figure 9: Merqury plot](../../images/post-assembly-QC/Erythrolamprus-reginae.spectra-cn.fl.png "Merqury copy numbers plot of Erythrolamprus reginae. The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set.")
 
-As before with chondrosia reniformis here the large black area can indicate the same: a high amount of k-mers in the reads set is not used in the assembly. This can indicate a high amount of contamination or sequencing errors in the read set. It could also mean that there are missing sequences in the assembly. This plot indicates a sequencing coverage at ~23x.
+
+
+A. The large black area indicates that there is a high amount of k-mers in the reads set, which are not used in the assembly. This can indicate a high amount of contamination or sequencing errors in the read set. It could also mean that there are missing sequences in the assembly. The red area represents the one-copy k-mers in the genome (heterozygous part). This plot indicates a sequencing coverage at ~90x.
+
+B. The small black area indicates that most of the k-mers found in the reads set are also found in the assembly (but not all). This plot indicates a sequencing coverage at ~30x.
+
+C. As before with chondrosia reniformis here the large black area can indicate the same: a high amount of k-mers in the reads set is not used in the assembly. This can indicate a high amount of contamination or sequencing errors in the read set. It could also mean that there are missing sequences in the assembly. This plot indicates a sequencing coverage at ~23x.
 
 
 ## Providing assembly statistics with **gfastats**
@@ -640,6 +499,97 @@ gfastats is a tool for providing summary statistics and genome file manipulation
 
 
 ![Figure 10: gfastats tabular](../../images/post-assembly-QC/gfastats-combined.png "cutout of the gfastats tabular outputs. Statistics to three species next to each other")
+
+
+# Re-map Hi-C data
+
+To understand how chromosomes are arranged in their three-dimensional structure in the nucleus, high resolution and high throughput imaging techniques have been developed. Hi-C is a high throughput method to measure pairwise contacts between pairs of genomic loci. 
+It is based on cross-linking the DNA in the nucleus and its histones(proteins). However the DNA gets cut and marked and afterwards the cutted parts get ligated together. Then the DNA gets fragmented and sequenced forwards and backwards generating paired reads. The resulting information can be used to assemble the reads to the corresponding chromosome.
+({% cite Pal2018 %})
+
+## Sub-step with **BWA-MEM2**
+
+
+> <comment-title> Chromatin </comment-title>
+>    
+> Chromatin is the DNA with its functional and structural proteins(histones). Chromatin forms the chromosome after going through further condensations.        
+>
+{: .comment}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
+>    - *"Single or Paired-end reads"*: `Single`
+>        - {% icon param-file %} *"Select fastq dataset"*: `output` (output of **Collapse Collection** {% icon tool %})
+>    - *"Set read groups information?"*: `Do not set`
+>    - *"Select analysis mode"*: `1.Simple Illumina mode`
+>    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
+>
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Sub-step with **PretextMap**
+
+PretextMap converts BAM/SAM files into genome contact maps. With those contact maps it is possible to analyse the 3D organisation of chromosomes. The resulting map will be used for visualisation and editing contigs/scaffolds. ({% cite Kumar2017 %})
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
+>    - *"Sort by"*: `Don't sort`
+>
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Sub-step with **Pretext Snapshot**
+
+Generates an image of the genome contact map.
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** {% icon tool %})
+>    - *"Output image format"*: `PNG`
+>    - *"Show grid?"*: `Yes`
+>
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+# Sub-step with **Bandage Image**
+
+Bandage is a tool to visualise de novo assembly graphs with connections. ({% cite Wick2015 %})
+
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4) %} with the following parameters:
+>    - {% icon param-file %} *"Graphical Fragment Assembly"*: `output` (output of **gfastats** {% icon tool %})
+>
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
 
 
 # Conclusion
