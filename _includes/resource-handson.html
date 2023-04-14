@@ -1,11 +1,15 @@
 {% if include.material.hands_on == "external" %}
-<a class="topic-icon" href="{{ include.material.hands_on_url }}" title="Link to external materials">
-    {% icon tutorial aria=false %}
+<div class="btn-group">
+<a class="btn btn-default" href="{{ include.material.hands_on_url }}" title="Link to external materials">
+    {% icon external-link aria=false %}
 </a>
+</div>
 {% elsif include.material.hands_on == "github" %}
-<a href="{{ site.github_repository }}/tree/main/topics/{{ include.material.topic_name }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md" title="Materials on github">
-    {% icon tutorial aria=false %}
+<div class="btn-group">
+<a class="btn btn-default" href="{{ site.github_repository }}/tree/main/topics/{{ include.material.topic_name }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md" title="Materials on github">
+    {% icon github aria=false %}
 </a>
+</div>
 {% elsif include.material.hands_on %}
     <div class="btn-group">
         <a href="{{ site.baseurl }}/topics/{{ include.material.topic_name }}/tutorials/{{ include.material.tutorial_name }}/tutorial.html" class="btn btn-default" title="Follow the tutorial">

@@ -30,6 +30,10 @@
             <a href="{{ site.baseurl }}/{{ default_resource_url }}">
                 {{ material.title }}
             </a>
+            {% else if material.hands_on == 'external' %}
+            <a href="{{ material.hands_on_url }}">
+                {{ material.title }} {% icon external-link %}
+            </a>
             {% else %}
                 {{ material.title }}
             {% endif %}
