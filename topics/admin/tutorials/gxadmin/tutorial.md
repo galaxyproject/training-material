@@ -157,14 +157,16 @@ Meta          | `meta`              | More miscellaneous commands, and a built-i
 {: .code-in}
 
 > <code-out-title></code-out-title>
+>
 > id  |        update-time         | user-id | email |           name           | published | deleted | purged | hid-counter
 > --- | -------------------------- | ------- | ----- | ------------------------ | --------- | ------- | ------ | ------------
-> 361 | 2013-02-24 16:27:29.197572 |     xxx | xxxx  | Unnamed history          | f         | f       | f      |           6
-> 362 | 2013-02-24 15:31:05.804747 |     xxx | xxxx  | Unnamed history          | f         | f       | f      |           1
-> 347 | 2013-02-22 15:59:12.044169 |     xxx | xxxx  | Unnamed history          | f         | f       | f      |          19
-> 324 | 2013-02-22 15:57:54.500637 |     xxx | xxxx  | Exercise 5               | f         | f       | f      |          64
-> 315 | 2013-02-22 15:50:51.398894 |     xxx | xxxx  | day5 practical           | f         | f       | f      |          90
-> 314 | 2013-02-22 15:45:47.75967  |     xxx | xxxx  | 5. Tag Galaxy-Kurs       | f         | f       | f      |          78
+> 361 | 2013-02-24 16:27:29.197572 |     xxx | xxxx  | Unnamed history          | f         | f       | f      | 6
+> 362 | 2013-02-24 15:31:05.804747 |     xxx | xxxx  | Unnamed history          | f         | f       | f      | 1
+> 347 | 2013-02-22 15:59:12.044169 |     xxx | xxxx  | Unnamed history          | f         | f       | f      | 19
+> 324 | 2013-02-22 15:57:54.500637 |     xxx | xxxx  | Exercise 5               | f         | f       | f      | 64
+> 315 | 2013-02-22 15:50:51.398894 |     xxx | xxxx  | day5 practical           | f         | f       | f      | 90
+> 314 | 2013-02-22 15:45:47.75967  |     xxx | xxxx  | 5. Tag Galaxy-Kurs       | f         | f       | f      | 78
+>
 {: .code-out}
 
 **@natefoo's favourite**: `gxadmin query job-inputs`. He contributed this function which helps him debug jobs which are not running and should be.
@@ -175,13 +177,11 @@ Meta          | `meta`              | More miscellaneous commands, and a built-i
 > ```
 {: .code-in}
 
-> <code-out-title></code-out-title>
-> hda-id   | hda-state | hda-deleted | hda-purged |  d-id   | d-state | d-deleted | d-purged | object-store-id
-> -------- | --------- | ----------- | ---------- | ------- | ------- | --------- | -------- | ----------------
-> 8638197  |           | f           | f          | 8246854 | running | f         | f        | files9
-> 8638195  |           | f           | f          | 8246852 | running | f         | f        | files9
-> 8638195  |           | f           | f          | 8246852 | running | f         | f        | files9
-{: .code-out}
+hda-id   | hda-state | hda-deleted | hda-purged |  d-id   | d-state | d-deleted | d-purged | object-store-id
+-------- | --------- | ----------- | ---------- | ------- | ------- | --------- | -------- | ----------------
+8638197  |           | f           | f          | 8246854 | running | f         | f        | files9
+8638195  |           | f           | f          | 8246852 | running | f         | f        | files9
+8638195  |           | f           | f          | 8246852 | running | f         | f        | files9
 
 **@bgruening's favourite**: `gxadmin query latest-users` let's us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven't registered for [training infrastructure as a service](https://galaxyproject.eu/tiaas) which helps us coordinate infrastructure for them so they don't have bad experiences.
 
@@ -191,15 +191,13 @@ Meta          | `meta`              | More miscellaneous commands, and a built-i
 > ```
 {: .code-in}
 
-> <code-out-title></code-out-title>
-> id    |        create_time         | disk_usage | username | email | groups | active
-> ----- | -------------------------- | ---------- | -------- | ----- | ------ | -------
-> 3937  | 2019-01-27 14:11:12.636399 | 291 MB     | xxxx     | xxxx  |        | t
-> 3936  | 2019-01-27 10:41:07.76126  | 1416 MB    | xxxx     | xxxx  |        | t
-> 3935  | 2019-01-27 10:13:01.499094 | 2072 kB    | xxxx     | xxxx  |        | t
-> 3934  | 2019-01-27 10:06:40.973938 | 0 bytes    | xxxx     | xxxx  |        | f
-> 3933  | 2019-01-27 10:01:22.562782 |            | xxxx     | xxxx  |        | f
-{: .code-out}
+id    |        create_time         | disk_usage | username | email | groups | active
+----- | -------------------------- | ---------- | -------- | ----- | ------ | -------
+3937  | 2019-01-27 14:11:12.636399 | 291 MB     | xxxx     | xxxx  |        | t
+3936  | 2019-01-27 10:41:07.76126  | 1416 MB    | xxxx     | xxxx  |        | t
+3935  | 2019-01-27 10:13:01.499094 | 2072 kB    | xxxx     | xxxx  |        | t
+3934  | 2019-01-27 10:06:40.973938 | 0 bytes    | xxxx     | xxxx  |        | f
+3933  | 2019-01-27 10:01:22.562782 |            | xxxx     | xxxx  |        | f
 
 **@hexylena's favourite** `gxadmin report job-info`. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.
 
@@ -284,12 +282,10 @@ Meta          | `meta`              | More miscellaneous commands, and a built-i
 > ```
 {: .code-in}
 
-> <code-out-title></code-out-title>
-> job_id    |     create_time     |     update_time     | user_id | state |                            tool_id                            |    handler     | destination  | external_id 
-> --------- | ------------------- | ------------------- | ------- | ----- | ------------------------------------------------------------- | -------------- | ------------ | ------------
-> 58483488  | 2023-04-04 18:42:40 | 2023-04-04 18:43:30 |         | error | toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy8 | handler_sn06_5 | 1cores_10.0G | 42071736
-> 58483208  | 2023-04-04 18:36:24 | 2023-04-04 18:40:43 |         | error | toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy9 | handler_sn06_3 | 1cores_10.0G | 42071486
-{: .code-out}
+job_id    |     create_time     |     update_time     | user_id | state |                            tool_id                            |    handler     | destination  | external_id 
+--------- | ------------------- | ------------------- | ------- | ----- | ------------------------------------------------------------- | -------------- | ------------ | ------------
+58483488  | 2023-04-04 18:42:40 | 2023-04-04 18:43:30 |         | error | toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy8 | handler_sn06_5 | 1cores_10.0G | 42071736
+58483208  | 2023-04-04 18:36:24 | 2023-04-04 18:40:43 |         | error | toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy9 | handler_sn06_3 | 1cores_10.0G | 42071486
 
 or to see recent jobs from a specific user (e.g. to help answer their email queries when they just send you a screenshot rather than a proper bug report)
 
@@ -300,12 +296,10 @@ or to see recent jobs from a specific user (e.g. to help answer their email quer
 > ```
 {: .code-in}
 
-> <code-out-title></code-out-title>
-> job_id    |     create_time     |     update_time     | user_id | state |                                     tool_id                                      |    handler     | destination | external_id 
-> --------- | ------------------- | ------------------- | ------- | ----- | -------------------------------------------------------------------------------- | -------------- | ----------- | ------------
-> 58277473  | 2023-03-31 09:53:36 | 2023-03-31 09:53:36 |     580 | ok    | __TAG_FROM_FILE__                                                                | _default_      |             | 
-> 58277410  | 2023-03-31 09:47:16 | 2023-03-31 09:51:26 |     580 | ok    | toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4 | handler_sn06_0 | 1cores_4.0G | 41859564
-{: .code-out}
+job_id    |     create_time     |     update_time     | user_id | state |                                     tool_id                                      |    handler     | destination | external_id 
+--------- | ------------------- | ------------------- | ------- | ----- | -------------------------------------------------------------------------------- | -------------- | ----------- | ------------
+58277473  | 2023-03-31 09:53:36 | 2023-03-31 09:53:36 |     580 | ok    | __TAG_FROM_FILE__                                                                | _default_      |             | 
+58277410  | 2023-03-31 09:47:16 | 2023-03-31 09:51:26 |     580 | ok    | toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4 | handler_sn06_0 | 1cores_4.0G | 41859564
 
 ## `gxadmin` for Monitoring
 
@@ -319,18 +313,16 @@ So running `gxadmin query queue-overview` normally shows something like:
 > ```
 {: .code-in}
 
-> <code-out-title></code-out-title>
-> tool_id                                                                                |  tool_version  |    destination_id    |     handler     |  state  | job_runner_name | count
-> -------------------------------------------------------------------------------------- | -------------- | -------------------- | --------------- | ------- | --------------- | ------
-> toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0                           | 0.4.6.0        | 12cores_180G_special | handler_main_4  | running | condor          |     1
-> toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0                           | 0.4.6.0        | 12cores_180G_special | handler_main_5  | running | condor          |     1
-> toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0                    | 1.1.0.46-0     | 12cores_12G          | handler_main_3  | running | condor          |     2
-> toolshed.g2.bx.psu.edu/repos/iuc/qiime_extract_barcodes/qiime_extract_barcodes/1.9.1.0 | 1.9.1.0        | 4G_memory            | handler_main_1  | running | condor          |     1
-> toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy3                           | 2.1.0+galaxy3  | 8cores_20G           | handler_main_11 | running | condor          |     1
-> toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72                                | 0.72           | 20G_memory           | handler_main_11 | running | condor          |     4
-> ebi_sra_main                                                                           | 1.0.1          | 4G_memory            | handler_main_3  | running | condor          |     2
-> ebi_sra_main                                                                           | 1.0.1          | 4G_memory            | handler_main_4  | running | condor          |     3
-{: .code-out}
+tool_id                                                                                |  tool_version  |    destination_id    |     handler     |  state  | job_runner_name | count
+-------------------------------------------------------------------------------------- | -------------- | -------------------- | --------------- | ------- | --------------- | ------
+toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0                           | 0.4.6.0        | 12cores_180G_special | handler_main_4  | running | condor          |     1
+toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0                           | 0.4.6.0        | 12cores_180G_special | handler_main_5  | running | condor          |     1
+toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0                    | 1.1.0.46-0     | 12cores_12G          | handler_main_3  | running | condor          |     2
+toolshed.g2.bx.psu.edu/repos/iuc/qiime_extract_barcodes/qiime_extract_barcodes/1.9.1.0 | 1.9.1.0        | 4G_memory            | handler_main_1  | running | condor          |     1
+toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy3                           | 2.1.0+galaxy3  | 8cores_20G           | handler_main_11 | running | condor          |     1
+toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72                                | 0.72           | 20G_memory           | handler_main_11 | running | condor          |     4
+ebi_sra_main                                                                           | 1.0.1          | 4G_memory            | handler_main_3  | running | condor          |     2
+ebi_sra_main                                                                           | 1.0.1          | 4G_memory            | handler_main_4  | running | condor          |     3
 
 
 The `gxadmin iquery queue-overview` is run by our Telegraf monitor on a regular basis, allowing us to consume the data:
@@ -396,3 +388,5 @@ There are a lot of queries, all tailored to specific use cases, some of these ma
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
 {% snippet topics/admin/faqs/missed-something.md step=10 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="gxadmin" %}
