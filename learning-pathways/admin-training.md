@@ -27,13 +27,13 @@ pathway:
       Here we pivot to focus on making our server useful; adding tools and data,
       configuring quotas and authentication
     tutorials:
-      #- name: backup-cleanup
-      #  topic: admin
+      - name: backup-cleanup
+        topic: admin
       - name: cvmfs
         topic: admin
       - name: reference-genomes
         topic: admin
-      - name: singularity
+      - name: apptainer
         topic: admin
       - name: tool-management
         topic: admin
@@ -61,8 +61,8 @@ pathway:
   - section: "Module 4"
     description: ""
     tutorials:
-      #- name: celery
-      #  topic: admin
+      - name: celery
+        topic: admin
       - name: tiaas
         topic: admin
       - name: reports
