@@ -336,7 +336,26 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > RabbitMQ depends on specific Erlang versions. If the Erlang version has been updated, you may need to change the value of `rabbitmq_version:` in the configuration above. [Information on the RabbitMQ Erlag version requirements.](https://www.rabbitmq.com/which-erlang.html)
 >    {: .tip}
 >
-> 3. Update the Galaxy playbook to include the *usegalaxy_eu.rabbitmq* role.
+> 3. RabbitMQ has a fancy dashboard, so we should  make that accessible with our NGINX:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/templates/nginx/galaxy.j2
+>    +++ b/templates/nginx/galaxy.j2
+>    @@ -46,6 +46,8 @@    
+>    +   location ~* /rabbitmq/(.*) {
+>    +   rewrite ^/rabbitmq/(.*)$ /$1 break;
+>    +   proxy_pass http://127.0.0.1:15672;
+>    +   proxy_buffering                    off;
+>    +   proxy_set_header Host              $http_host;
+>    +   proxy_set_header X-Real-IP         $remote_addr;
+>    +   proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+>    +   proxy_set_header X-Forwarded-Proto $scheme;
+>    +}
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add proxy"}
+> 4. Update the Galaxy playbook to include the *usegalaxy_eu.rabbitmq* role.
 >
 >    {% raw %}
 >    ```diff
@@ -375,7 +394,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    >
 >    {: .tip}
 >
-> 4. Run the playbook.
+> 5. Run the playbook.
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -384,7 +403,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 5. The rabbitmq server daemon will have been installed on your Galaxy VM. Check that it's running now:
+> 6. The rabbitmq server daemon will have been installed on your Galaxy VM. Check that it's running now:
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -400,7 +419,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > ```
 >    {: .code-out.code-max-300}
 >
-> 6. But this doesn't tell the whole story, so run the diagnostics command to
+> 7. But this doesn't tell the whole story, so run the diagnostics command to
 >    check that the interfaces are setup and listening. RabbitMQ has a bad
 >    habit of silently failing when processing the configuration, without any
 >    logging information If RabbitMQ has any problem reading the configuration
@@ -428,7 +447,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    >
 >    {: .code-out.code-max-300}
 >
-> 7. Since we enabled metrics, let's check if the api works:
+> 8. Since we enabled metrics, let's check if the api works:
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > Make sure to replace \<password\> with the one from your vault.
@@ -499,6 +518,10 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > 2. Check that the configuration looks correct (ssl private key path looks valid)
 >    > 3. Check that the private key is shared correctly with the rabbitmq user
 >    {: .code-out.code-max-300}
+> 9. Now we can take a look at the RabbitMQ dashboard.  
+>    Open a new tab in your browser and enter your VM's hostname followed by `/rabbitmq/`.  
+>    A login window should appear. Use the admin credentials you defined earlier in this tutorial.
+>    Click on connections and you can see how connections will be established and appear there during the next parts of the tutorial.
 {: .hands_on}
 
 
