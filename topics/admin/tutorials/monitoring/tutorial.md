@@ -281,7 +281,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -93,4 +93,10 @@ server {
+>    @@ -103,4 +103,10 @@ server {
 >             proxy_set_header Upgrade $http_upgrade;
 >             proxy_set_header Connection "upgrade";
 >         }

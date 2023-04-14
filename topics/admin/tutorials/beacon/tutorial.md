@@ -311,7 +311,7 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -104,4 +104,14 @@ server {
+>    @@ -114,4 +114,14 @@ server {
 >          location /reports/ {
 >              proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
 >          }

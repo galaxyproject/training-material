@@ -187,7 +187,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -99,4 +99,5 @@ server {
+>    @@ -109,4 +109,5 @@ server {
 >             proxy_set_header Host $http_host;
 >         }
 >     

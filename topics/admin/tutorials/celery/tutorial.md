@@ -327,11 +327,10 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/templates/nginx/galaxy.j2
 >        +++ b/templates/nginx/galaxy.j2
->        @@ -84,4 +84,13 @@ server {
->             location /training-material/ {
->                 proxy_pass https://training.galaxyproject.org/training-material/;
+>        @@ -95,4 +95,12 @@ server {
+>                 proxy_set_header X-Forwarded-Proto $scheme;
 >             }
->        +
+>         
 >        +    location /flower {
 >        +        proxy_pass http://localhost:5555;
 >        +        proxy_set_header Host $host;
