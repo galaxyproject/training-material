@@ -434,3 +434,5 @@ We can simply do that by starting an upload to our Galaxy.
 {: .hands_on}
 
 {% snippet topics/admin/faqs/missed-something.md step=12 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="celery" %}

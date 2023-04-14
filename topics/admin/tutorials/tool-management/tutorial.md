@@ -329,3 +329,5 @@ If running ephemeris directly is not your preference, there is an Ansible [role]
 <!--
 {% snippet topics/admin/faqs/missed-something.md step=7 %}
 -->
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tool-management" %}

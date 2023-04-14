@@ -365,3 +365,5 @@ You can even offer several options, to allow users to switch to the default if t
 {: .hands_on}
 
 {% snippet topics/admin/faqs/missed-something.md step=3 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="customization" %}

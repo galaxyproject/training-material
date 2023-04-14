@@ -676,3 +676,5 @@ You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblen
 - [PSNC slurm-drmaa](http://apps.man.poznan.pl/trac/slurm-drmaa)'s page includes documentation and the SVN repository, which has a few minor fixes since the last released version. PSNC also wrote the initial implementations of the DRMAA libraries for PBSPro and LSF, so all three are similar.
 - [Our own fork of slurm-drmaa](http://github.com/natefoo/slurm-drmaa) includes support for Slurms `-M`/`--clusters` multi-cluster functionality and newer versions of Slurm.
 - [Slurm Accounting documentation](http://slurm.schedmd.com/accounting.html) explains how to set up SlurmDBD.
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="connect-to-compute-cluster" %}

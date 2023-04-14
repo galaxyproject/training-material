@@ -336,30 +336,6 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > RabbitMQ depends on specific Erlang versions. If the Erlang version has been updated, you may need to change the value of `rabbitmq_version:` in the configuration above. [Information on the RabbitMQ Erlag version requirements.](https://www.rabbitmq.com/which-erlang.html)
 >    {: .tip}
 >
-> 3. RabbitMQ has a fancy dashboard, so we should  make that accessible with our NGINX:
->
->    {% raw %}
->    ```diff
->    --- a/templates/nginx/galaxy.j2
->    +++ b/templates/nginx/galaxy.j2
->    @@ -84,4 +84,14 @@ server {
->     	location /training-material/ {
->     		proxy_pass https://training.galaxyproject.org/training-material/;
->     	}
->    +
->    +	location ~* /rabbitmq/(.*) {
->    +		rewrite ^/rabbitmq/(.*)$ /$1 break;
->    +		proxy_pass http://127.0.0.1:15672;
->    +		proxy_buffering                    off;
->    +		proxy_set_header Host              $http_host;
->    +		proxy_set_header X-Real-IP         $remote_addr;
->    +		proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
->    +		proxy_set_header X-Forwarded-Proto $scheme;
->    +	}
->     }
->    {% endraw %}
->    ```
->    {: data-commit="Add proxy"}
 > 4. Update the Galaxy playbook to include the *usegalaxy_eu.rabbitmq* role.
 >
 >    {% raw %}
@@ -523,12 +499,45 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > 2. Check that the configuration looks correct (ssl private key path looks valid)
 >    > 3. Check that the private key is shared correctly with the rabbitmq user
 >    {: .code-out.code-max-300}
-> 9. Now we can take a look at the RabbitMQ dashboard.  
->    Open a new tab in your browser and enter your VM's hostname followed by `/rabbitmq/`.  
->    A login window should appear. Use the admin credentials you defined earlier in this tutorial.
->    Click on connections and you can see how connections will be established and appear there during the next parts of the tutorial.
+>
 {: .hands_on}
 
+By this point you should have a functional RabbitMQ! Let's check out the dashboard:
+
+> <hands-on-title>Accessing the RabbitMQ Dashbaord</hands-on-title>
+>
+> 1. RabbitMQ has a fancy dashboard, so we should make that accessible with our NGINX:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/templates/nginx/galaxy.j2
+>    +++ b/templates/nginx/galaxy.j2
+>    @@ -84,4 +84,14 @@ server {
+>     	location /training-material/ {
+>     		proxy_pass https://training.galaxyproject.org/training-material/;
+>     	}
+>    +
+>    +	location ~* /rabbitmq/(.*) {
+>    +		rewrite ^/rabbitmq/(.*)$ /$1 break;
+>    +		proxy_pass http://127.0.0.1:15672;
+>    +		proxy_buffering                    off;
+>    +		proxy_set_header Host              $http_host;
+>    +		proxy_set_header X-Real-IP         $remote_addr;
+>    +		proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+>    +		proxy_set_header X-Forwarded-Proto $scheme;
+>    +	}
+>     }
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add proxy"}
+>
+> 1. Now we can take a look at the RabbitMQ dashboard.
+>
+>    1. Open a new tab in your browser and enter your server's hostname followed by `/rabbitmq/`
+>    1. A login window should appear. Use the admin credentials you defined earlier in this tutorial.
+>    1. Click on connections and you can see how connections will be established and appear there during the next parts of the tutorial.
+>
+{: .hands_on}
 
 ## Installing and configuring Pulsar on a remote machine
 
@@ -950,3 +959,5 @@ The main purpose of this network is to support the workload of the UseGalaxy.eu 
 ## Conclusion
 
 You're ready to ship your Galaxy jobs around the world! Now wherever you have compute space, you know how to setup a Pulsar node and connect it to Galaxy. Let us know if you come up with creative places to run your Galaxy jobs (coworker's laptops, your IoT fridge, the sky is the limit if it's x86 and has python)
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="pulsar" %}

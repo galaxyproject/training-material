@@ -204,3 +204,5 @@ Congratulations, you've set up TUS for Galaxy.
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
 {% snippet topics/admin/faqs/missed-something.md step=4 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tus" %}

@@ -40,21 +40,21 @@ In this tutorial you will learn how to configure Galaxy to run jobs using [Appta
 
 Apptainer is an alternative to Docker that is much friendlier for HPCs
 
-> <tip-title>Apptainer, Singularity, SingularityCE?</tip-title>
+> <comment-title>Apptainer, Singularity, SingularityCE?</comment-title>
 >
-> Name                  |  Singularity                                         |      SingularityCE    | Apptainer
-> --------------------- |:----------------------------------------------------:|:---------------------:|:----------------:
-> Origin                |   Original name,<br />used by the project until 2021 | Name of Synlabs' Fork<br />(CE for <u>C</u>ommunity <u>E</u>dition) | Name change when<br />the project joined<br />the Linux Foundation
-> Status                |  renamed in 2021                                     | currently active      | currently active
-> RPM Package available | discontinued                                         |          ❌           |         ✅
-> CLI name              | `singularity`                                        | `singularity`         | `apptainer` or `singularity`
+> Name                  | Singularity                                          | SingularityCE                                                  | Apptainer
+> --------------------- | ---------------------------------------------------- | ---------------------                                          | ----------------
+> Origin                | Original name, used by the project until 2021        | Name of Synlabs' Fork (CE for <b>C</b>ommunity <b>E</b>dition) | Name change when the project joined the Linux Foundation
+> Status                | renamed in 2021                                      | currently active                                               | currently active
+> RPM Package available | discontinued                                         | ❌                                                             | ✅
+> CLI name              | `singularity`                                        | `singularity`                                                  | `apptainer` or `singularity`
 >
 > Many people still know Apptainer under it's former name Singularity.
 > Singularity was the project's former name until it joined the Linux Foundation was renamed to Apptainer in 2021.
 > However the Synlabs' fork 'SingularityCE' (for <u>C</u>ommunity <u>E</u>dition) is free and open source, too.
 >
 > We will use the Name Apptainer for our training material, because most rpm packages are now named Apptainer.
-{: .tip}
+{: .comment}
 
 > Apptainer is a container platform. It allows you to create and run containers that package up pieces of software in a way that is portable and reproducible.
 >
@@ -439,3 +439,5 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
 {% snippet topics/admin/faqs/missed-something.md step=6 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="apptainer" %}

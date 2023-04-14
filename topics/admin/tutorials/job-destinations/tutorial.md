@@ -38,6 +38,8 @@ requirements:
     topic_name: admin
     tutorials:
       - connect-to-compute-cluster
+abbreviations:
+  TPV: Total Perspective Vortex
 ---
 
 
@@ -62,7 +64,7 @@ must be routed to a resource manager like SLURM, HTCondor, or Pulsar. Some tools
 Sometimes, your available resources are spread out across multiple locations and resource managers. In such cases, you need a way to route your jobs to the appropriate location. Galaxy offers several methods for
 routing jobs, ranging from simple static mappings to custom Python functions via [dynamic job destinations](https://docs.galaxyproject.org/en/latest/admin/jobs.html#dynamic-destination-mapping).
 
-Recently, the Galaxy project has introduced a library named [Total-Perspective-Vortex (TPV)](https://total-perspective-vortex.readthedocs.io/) to simplify this process. TPV provides a admin-friendly YAML configuration that works for most scenarios.
+Recently, the Galaxy project has introduced a library named [{TPV}](https://total-perspective-vortex.readthedocs.io/) to simplify this process. {TPV} provides a admin-friendly YAML configuration that works for most scenarios.
 For more complex cases, TPV also allows you to embed Python code into the configuration YAML file and implement fine-grained control over jobs. 
 
 Lastly, TPV offers a shared global database of default resource requirements (more below). By leveraging this database, admins don't have to figure out the requirements for each tool
@@ -70,7 +72,7 @@ separately.
 
 ## Writing a testing tool
 
-To demonstrate a real-life scenario and TPV's role in it, let's plan on setting up a configuration where the VM designated for training jobs doesn't run real jobs and hence doesn't get overloaded. To start, we'll create a "testing" tool that we'll use in our configuration. This testing tool can run quickly, and without overloading our small machines.
+To demonstrate a real-life scenario and {TPV}'s role in it, let's plan on setting up a configuration where the VM designated for training jobs doesn't run real jobs and hence doesn't get overloaded. To start, we'll create a "testing" tool that we'll use in our configuration. This testing tool can run quickly, and without overloading our small machines.
 
 > <hands-on-title>Deploying a Tool</hands-on-title>
 >
@@ -154,7 +156,11 @@ Of course, this tool doesn't actually *use* the allocated number of cores. In a 
 
 ## Safeguard: TPV Linting
 
-If we want to change something in production, it is always a good idea to have a safeguard in place. In our case, we would like to check the TPV configuration files for syntax errors, so nothing will break when we deploy broken yaml files or change them quickly on the server. TPV-lint-and-copy works with two separated locations, one where you can safely edit your files and the actual production config directory that galaxy reads. Once you are done with your changes, you can run the script and it will automatically lint and copy over the files, if they are correct and mentioned in your job_conf.yml file.  
+If we want to change something in production, it is always a good idea to have a safeguard in place. In our case, we would like to check the {TPV} configuration files for syntax errors, so nothing will break when we deploy broken yaml files or change them quickly on the server. TPV-lint-and-copy works with two separate locations:
+- one where you can safely edit your files
+- and the actual production config directory that galaxy reads.
+
+Once you are done with your changes, you can run the script and it will automatically lint and copy over the files, if they are correct *and* mentioned in your job_conf.yml file.
 And of course, Galaxy has an Ansible Role for that.
 
 ><hands-on-title>Adding automated TPV-lind-and-copy-script</hands-on-title>
@@ -416,9 +422,9 @@ Now that we've configured the resource requirements for a single tool, let's see
 >    ```
 >    {: data-commit="Add TPV default inherits"}
 >
-> We have defined a `global` section specifying that all tools and destinations should inherit from a specified `default`. We have then defined a tool named `default`, whose properties
-> are implicitly inherited by all tools at runtime. This means that our `testing` tool will also inherit from this default tool, but it explicitly overrides cores
-> We can also explicitly specify an `inherits` clause if we wish to extend a specific tool or destination, as previously shown in the destinations section.
+>    We have defined a `global` section specifying that all tools and destinations should inherit from a specified `default`. We have then defined a tool named `default`, whose properties
+>    are implicitly inherited by all tools at runtime. This means that our `testing` tool will also inherit from this default tool, but it explicitly overrides cores
+>    We can also explicitly specify an `inherits` clause if we wish to extend a specific tool or destination, as previously shown in the destinations section.
 >
 > 2. Run the Galaxy playbook. When the new `tpv_rules_local.yml` is copied, TPV will automatically pickup the changes without requiring a restart of Galaxy.
 >
@@ -429,6 +435,7 @@ Now that we've configured the resource requirements for a single tool, let's see
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
+{: .hands_on}
 
 ### TPV reference documentation
 
@@ -460,11 +467,10 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    ```
 >    {: data-commit="Importing TPV shared database via job conf"}
 >
->
-> Note how TPV allows the file to be imported directly via its http url. As many local and remote rule files as necessary can be combined, with rule files specified later overriding
-> any previously specified rule files. The TPV shared database does not define destinations, only cores and mem settings, as well as any required environment vars.
-> Take a look at the shared database of rules and note that some tools have very large recommended memory settings, which may or may not be available within your local cluster.
-> Nevertheless, you may still wish to execute these tools with memory adjusted to suit your cluster's capabilities. 
+>    Note how TPV allows the file to be imported directly via its http url. As many local and remote rule files as necessary can be combined, with rule files specified later overriding
+>    any previously specified rule files. The TPV shared database does not define destinations, only cores and mem settings, as well as any required environment vars.
+>    Take a look at the shared database of rules and note that some tools have very large recommended memory settings, which may or may not be available within your local cluster.
+>    Nevertheless, you may still wish to execute these tools with memory adjusted to suit your cluster's capabilities. 
 >
 > 2. Edit your `files/galaxy/config/tpv_rules_local.yml` and make the following changes.
 >
@@ -487,15 +493,15 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    ```
 >    {: data-commit="TPV clamp max cores and mem"}
 >
-> These changes indicate that the destination will accept jobs that are up to `max_accepted_cores: 24` and `max_accepted_mem: 256`. If the tool requests resources that exceed these limits, the tool will be rejected
-> by the destination. However, once accepted, the resources will be forcibly clamped down to 16 and 128 at most because of the `max_cores` and `max_mem` clauses. (E.g. a tool requesting 24 cores would only be submitted with 16 cores at maximum.) Therefore, a trick that can be used here to support
-> job resource requirements in the shared database that are much larger than your destination can actually support, is to combine `max_accepted_cores/mem/gpus with `max_cores/mem/gpus` to accept the job and then
-> clamp it down to a supported range. This allows even the largest resource requirement in the shared database to be accomodated.
+>    These changes indicate that the destination will accept jobs that are up to `max_accepted_cores: 24` and `max_accepted_mem: 256`. If the tool requests resources that exceed these limits, the tool will be rejected
+>    by the destination. However, once accepted, the resources will be forcibly clamped down to 16 and 128 at most because of the `max_cores` and `max_mem` clauses. (E.g. a tool requesting 24 cores would only be submitted with 16 cores at maximum.) Therefore, a trick that can be used here to support
+>    job resource requirements in the shared database that are much larger than your destination can actually support, is to combine `max_accepted_cores/mem/gpus with `max_cores/mem/gpus` to accept the job and then
+>    clamp it down to a supported range. This allows even the largest resource requirement in the shared database to be accomodated.
 >
-> > <comment-title>Clamping in practice</comment-title>
-> > For the purposes of this tutorial, we've clamped down from 16 cores to 2 cores, and mem from 256 to 8, which is unlikely to work in practice. In production, you will probably need to manually test
-> > any tools that exceed your cluster's capabilities, and decide whether you want those tools to run in the first place.
-> {: .comment}
+>    > <comment-title>Clamping in practice</comment-title>
+>    > For the purposes of this tutorial, we've clamped down from 16 cores to 2 cores, and mem from 256 to 8, which is unlikely to work in practice. In production, you will probably need to manually test
+>    > any tools that exceed your cluster's capabilities, and decide whether you want those tools to run in the first place.
+>    {: .comment}
 >
 > 3. Run the Galaxy playbook.
 >
@@ -506,9 +512,11 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
+{: .hands_on}
+
 # Basic access controls
 
-You may wish to apply some basic restrictions on which users are allowed to run specific tools. TPV accomodates user and role specific rules. In addition, TPV supports tagging of tools, users, roles and destinations. These tags
+You may wish to apply some basic restrictions on which users are allowed to run specific tools. {TPV} accomodates user and role specific rules. In addition, TPV supports tagging of tools, users, roles and destinations. These tags
 can be matched up so that only desired combinations are compatible with each other. While these mechanisms are detailed in the TPV documentation, we will choose a different problem that highlights some other capabilities
 - restricting a tool so that only an admin can execute that tool.
 
@@ -701,13 +709,11 @@ Lastly, we need to write a rule in TPV that will read the value of the job resou
 >
 >    Finally, we pass the walltime as part of the native specification.
 >
-> <comment-title>Rules for TPV code evaluation</comment-title>
->
-> Notice how the `walltime` parameter is wrapped in braces, whereas the `cores` value isn't, yet they are both expressions. The reason for this difference is that when TPV evaluates an expression, all string fields (e.g. env, params) are evaluated as Python f-strings,
-> while all non-string fields (integer fields like `cores` and `gpus`, float fields like `mem`, boolean fields like `if`) are evaluated as Python code-blocks. This rule enables the YAML file to be much more readable, but requires you to keep this simple rule in mind.
-> Note also that Python code-blocks can be multi-line, and that the final line must evaluate to a value that can be assigned to the field.
->
-> {: .comment}
+>    > <comment-title>Rules for TPV code evaluation</comment-title>
+>    > Notice how the `walltime` parameter is wrapped in braces, whereas the `cores` value isn't, yet they are both expressions. The reason for this difference is that when TPV evaluates an expression, all string fields (e.g. env, params) are evaluated as Python f-strings,
+>    > while all non-string fields (integer fields like `cores` and `gpus`, float fields like `mem`, boolean fields like `if`) are evaluated as Python code-blocks. This rule enables the YAML file to be much more readable, but requires you to keep this simple rule in mind.
+>    > Note also that Python code-blocks can be multi-line, and that the final line must evaluate to a value that can be assigned to the field.
+>    {: .comment}
 >
 > 2. Run the Galaxy playbook to update the TPV rules.
 >
@@ -789,3 +795,5 @@ These features are covered in detail in the [TPV documentation](https://total-pe
 - Job resource parameters are not as well documented as they could be, but the [sample configuration file](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/test/files/galaxy/config/job_resource_params_conf.xml) shows some of the possibilities.
 - [usegalaxy.org's job_conf.yml](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/common/templates/galaxy/config/job_conf.yml.j2) is publicly available for reference.
 - [usegalaxy.eu's job_conf.xml](https://github.com/usegalaxy-eu/infrastructure-playbook/search?l=YAML&q=galaxy_jobconf) is likewise (see the `group_vars/galaxy.yml` result)
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="job-destinations" %}

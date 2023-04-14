@@ -318,3 +318,5 @@ Users can then choose from datasets in their history, or browse through the data
 Here users can see every file accessible to them in the data library to begin analysing.
 
 ![Same popup as previous image, but the file listing now shows the contents of the data library we created during the hands-on step with Mouse data](../../images/data/select-from-lib2.png)
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="data-library" %}

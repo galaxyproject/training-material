@@ -396,3 +396,5 @@ Congratulations! Let your users know this is an option, many of them will prefer
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
 {% snippet topics/admin/faqs/missed-something.md step=16 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="ftp" %}

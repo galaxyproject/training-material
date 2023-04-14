@@ -140,3 +140,5 @@ The reports application is included with the Galaxy codebase and this tutorial a
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
 {% snippet topics/admin/faqs/missed-something.md step=15 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="reports" %}

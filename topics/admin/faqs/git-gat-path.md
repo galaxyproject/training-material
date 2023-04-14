@@ -8,18 +8,23 @@ contributors: [hexylena]
 
 The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.
 
-{% assign tutorials = "ansible-galaxy backup-cleanup tus cvmfs apptainer tool-management data-library connect-to-compute-cluster job-destinations pulsar celery gxadmin monitoring tiaas reports ftp beacon" | split: " " %}
+{% assign tutorials = "admin/ansible-galaxy admin/backup-cleanup admin/customization admin/tus admin/cvmfs admin/apptainer admin/tool-management admin/data-library dev/bioblend-api admin/connect-to-compute-cluster admin/job-destinations admin/pulsar admin/celery admin/gxadmin admin/monitoring admin/tiaas admin/reports admin/ftp admin/beacon" | split: " " %}
+
 
 {% assign seen_tuto = 0 %}
 <ol id="git-gat-timeline">
-{% for tutorial in tutorials %}
-    <li class="{% if include.tutorial == tutorial %}active{% elsif seen_tuto == 0 %}disabled{% endif %}">
-        <a href="{{ site.baseurl }}/topics/admin/tutorials/{{ tutorial }}/tutorial.html">
+{% for tutorial_id in tutorials %}
+    {% assign parts = tutorial_id | split: "/" %}
+    {% assign tp_topic = parts[0] %}
+    {% assign tp_tutorial = parts[1] %}
+
+    <li class="{% if include.tutorial == tp_tutorial %}active{% elsif seen_tuto == 0 %}disabled{% endif %}">
+        <a href="{{ site.baseurl }}/topics/{{ tp_topic }}/tutorials/{{ tp_tutorial }}/tutorial.html">
             <div>Step {{ forloop.index }}</div>
-            <div>{{ tutorial }}</div>
+            <div>{% if tp_topic != "admin" %}{{ tp_topic }}/{% endif %}{{ tp_tutorial }}</div>
         </a>
     </li>
-    {% if include.tutorial == tutorial %}{% assign seen_tuto = 1 %}{% endif %}
+    {% if include.tutorial == tp_tutorial %}{% assign seen_tuto = 1 %}{% endif %}
     {% unless forloop.last %}
     <span aria-hidden="true">
         <i class="fas fa-arrow-right" aria-hidden="true"></i>

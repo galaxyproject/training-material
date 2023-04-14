@@ -129,8 +129,16 @@ elif [[ "$op" == "fix-offsets" ]]; then
 		fi
 		#vim topics/${folder}/tutorials/${tuto}/tutorial.md
 	done
+elif [[ "$op" == "edit" ]]; then
+	files=""
+	for idx in "${!tutorials[@]}"; do
+		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
+		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
+		files="$files topics/${folder}/tutorials/${tuto}/tutorial.md"
+	done
+	$EDITOR $files
 else
-	echo "$0 <import|export|deploy|roundtrip|check-offsets>"
+	echo "$0 <import|export|deploy|roundtrip|check-offsets|fix-offsets|edit>"
 	exit 1;
 fi
 

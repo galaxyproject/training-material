@@ -356,3 +356,5 @@ shed-tools install -g https://galaxy.example.org -a <api-key> -t our_tools.yml
 ## Restoring User Data
 
 This should simply be `rsync`ing your data from the backup location back into `/data/galaxy`.
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="backup-cleanup" %}
