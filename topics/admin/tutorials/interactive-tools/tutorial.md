@@ -36,7 +36,7 @@ requirements:
 subtopic: features
 ---
 
-> <warning-title>Evolving Topic</warning-title>
+> <warning-title>Evolving Topic, Not Updated for 23.0 + Gravity</warning-title>
 > Galaxy Interactive Tools are a **new feature** and there are some rough edges. Work to improve the experience of deploying and using them is ongoing.
 {: .warning}
 
