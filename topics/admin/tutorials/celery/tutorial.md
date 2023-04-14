@@ -359,7 +359,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >          library_import_dir: /libraries/admin
 >          user_library_import_dir: /libraries/user
 >     +    # Celery
->     +    amqp_internal_connection: "pyamqp://galaxy:{{ vault_rabbitmq_password_galaxy }}@localhost:5671/galaxy?ssl=1"
+>     +    amqp_internal_connection: "pyamqp://galaxy:{{ vault_rabbitmq_password_galaxy }}@localhost:5671/galaxy_internal?ssl=1"
 >     +    celery_conf:
 >     +      result_backend: "redis://localhost:6379/0"
 >     +    enable_celery_tasks: true
