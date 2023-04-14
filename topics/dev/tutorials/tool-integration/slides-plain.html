@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Tool development and integration into Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-14 09:01:14 +0000">
+<meta name="DC.date" content="2023-04-14 15:45:05 +0000">
 <meta name="DC.creator" content="Saskia Hiltemann">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Anthony Bretaudeau">
@@ -323,6 +323,41 @@
 <h2 id="tool-xml">Tool XML</h2>
 
 <p>Galaxy tool XML format is formally defined in a XML Schema Definition (XSD), used to generate the corresponding <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html">online documentation</a></p>
+
+<hr />
+
+<h2 id="xml-editor">XML Editor</h2>
+
+<p>You are free to use your prefered code editor to write Galaxy tools.</p>
+
+<p>If you use Visual Studio Code (or Codium), we recommend to install the <a href="https://marketplace.visualstudio.com/items?itemName=davelopez.galaxy-tools">dedicated extension</a>.</p>
+
+<p>It provides XML validation, tags and attributes completion, help/documentation on hover, and other smart features to assist in following best practices.</p>
+
+<p><img src="../../images/vscode_tool.gif" alt="An animation showing someone writing a tool XML file, while being assisted by the VSCode extension." /></p>
+
+<hr />
+
+<h2 id="tool"><code class="language-plaintext highlighter-rouge">tool</code></h2>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"graphlan"</span> <span class="na">name=</span><span class="s">"GraPhlAn"</span> <span class="na">version=</span><span class="s">"1.1.3+galaxy2"</span> <span class="na">profile=</span><span class="s">"22.05"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: unique identifier of your tool, should contain only <code class="language-plaintext highlighter-rouge">[a-z0-9_-]</code></li>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: shown to the user, displayed in the tool box</li>
+  <li><code class="language-plaintext highlighter-rouge">version</code>: the version of the wrapped tool, followed by a <code class="language-plaintext highlighter-rouge">+galaxyX</code> suffix for wrapper version</li>
+  <li><code class="language-plaintext highlighter-rouge">profile</code>: minimum Galaxy version that should be required to run this tool (IUC recommends not older than 1 year)</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The top level <code class="language-plaintext highlighter-rouge">tool</code> tag defines the tool naming and version</li>
+  <li>The <code class="language-plaintext highlighter-rouge">id</code> attribute is the unique identifier of your tool, it should contain only letters, digits, underscores or dashes</li>
+  <li>The <code class="language-plaintext highlighter-rouge">name</code> attribute is shown to the user and displayed in the tool box</li>
+  <li>The <code class="language-plaintext highlighter-rouge">version</code> attribute contains the version of the wrapped tool, followed by a <code class="language-plaintext highlighter-rouge">+galaxyX</code> suffix for wrapper version</li>
+  <li>The <code class="language-plaintext highlighter-rouge">profile</code> attribute should be set to the minimum Galaxy version that should be required to run this tool (IUC recommends not older than 1 year)</li>
+</ul>
 
 <hr />
 
@@ -701,6 +736,8 @@ echo "Yeah it worked!"
 
 <p><small>The job will exit on the first error encountered.</small></p>
 
+<p><small>You can use <code class="language-plaintext highlighter-rouge">&amp;&amp;</code> or <code class="language-plaintext highlighter-rouge">;</code> if using a <code class="language-plaintext highlighter-rouge">profile</code> &gt;= 20.09 (the <code class="language-plaintext highlighter-rouge">set -e</code> shell directive is now used by default).</small></p>
+
 <hr />
 
 <h2 id="param-argument">Param argument</h2>
@@ -781,14 +818,10 @@ echo "Yeah it worked!"
 
 <p>##.image-25[<img src="../../images/planemo-logo.png" alt="planemo logo again" />]</p>
 
-<p><code class="language-plaintext highlighter-rouge">planemo lint</code></p>
-
-<p>Checks the syntax of a tool</p>
+<p><code class="language-plaintext highlighter-rouge">planemo lint</code>: Checks the syntax of a tool</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>planemo lint
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Linting tool /opt/galaxy/tools/seqtk_seq.xml
+Linting tool /opt/galaxy/tools/seqtk_seq.xml
 Applying linter tests... CHECK
 .. CHECK: 1 <span class="nb">test</span><span class="o">(</span>s<span class="o">)</span> found.
 Applying linter output... CHECK
@@ -985,7 +1018,7 @@ Applying linter citations... CHECK
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>planemo <span class="nb">test</span>
 </code></pre></div></div>
 
-<p>An HTML report is automatically created with logs in case of failing test</p>
+<p>An HTML report (<code class="language-plaintext highlighter-rouge">tool_test_output.html</code>) is automatically created with logs in case of failing test</p>
 
 <hr />
 
@@ -1166,10 +1199,11 @@ blastn -query '$query' @THREADS@ [...]
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;macros&gt;</span>
     <span class="nt">&lt;token</span> <span class="na">name=</span><span class="s">"@TOOL_VERSION@"</span><span class="nt">&gt;</span>1.2<span class="nt">&lt;/token&gt;</span>
+    <span class="nt">&lt;token</span> <span class="na">name=</span><span class="s">"@VERSION_SUFFIX@"</span><span class="nt">&gt;</span>3<span class="nt">&lt;/token&gt;</span>
 <span class="nt">&lt;/macros&gt;</span>
 </code></pre></div></div>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"seqtk_seq"</span> <span class="na">name=</span><span class="s">"Convert to FASTA (seqtk)"</span> <span class="na">version=</span><span class="s">"@TOOL_VERSION@+galaxy3"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"seqtk_seq"</span> <span class="na">name=</span><span class="s">"Convert to FASTA"</span> <span class="na">version=</span><span class="s">"@TOOL_VERSION@+galaxy@VERSION_SUFFIX@"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;requirements&gt;</span>
         <span class="nt">&lt;requirement</span> <span class="na">type=</span><span class="s">"package"</span> <span class="na">version=</span><span class="s">"@TOOL_VERSION@"</span><span class="nt">&gt;</span>seqtk<span class="nt">&lt;/requirement&gt;</span>
     <span class="nt">&lt;/requirements&gt;</span>
@@ -1296,7 +1330,7 @@ echo '$__app__.config.user_library_import_dir'
 
 <h2 id="dataset-collections-as-input">Dataset collections as input</h2>
 
-<p>Mapping over:</p>
+<p>Mapping over (1 job per collection element):</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"inputs"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">format=</span><span class="s">"bam"</span> <span class="na">label=</span><span class="s">"Input BAM(s)"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
@@ -1305,16 +1339,15 @@ echo '$__app__.config.user_library_import_dir'
 
 <p>Single execution:</p>
 <ul>
-  <li>accepted with <code class="language-plaintext highlighter-rouge">multiple="true"</code></li>
-  <li>or accept only collections:</li>
+  <li>accepted with <code class="language-plaintext highlighter-rouge">multiple="true"</code> as described in previous slides</li>
+  <li>or you can accept only collections:</li>
 </ul>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"inputs"</span> <span class="na">type=</span><span class="s">"data_collection"</span> <span class="na">collection_type=</span><span class="s">"list|paired|list:paired|..."</span>
     <span class="na">format=</span><span class="s">"bam"</span> <span class="na">label=</span><span class="s">"Input BAM(s)"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[
-...
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[ ...
 #for $input in $inputs
     --input '$input'
     --sample_name '$input.element_identifier'
@@ -1348,7 +1381,7 @@ echo '$__app__.config.user_library_import_dir'
 
 <hr />
 
-<h2 id="use-multiple-cpus">Use multiple CPUs</h2>
+<h2 id="using-multiple-cpus">Using multiple CPUs</h2>
 
 <p><img src="../../images/job_conf.xml_2.png" alt="Screenshot of two xml files. In the top is the jb_conf.xml where a command line job submission specification indicates that it will be submitted with 4 threads. A single tool, ncbi blastn wrapper is assigned to that destination. In the second xml file the blastn command uses the GALAXY_SLOTS variable to control how many threads are supplied to the tool." /></p>
 
@@ -1445,8 +1478,8 @@ echo '$__app__.config.user_library_import_dir'
 
 <ul>
   <li>Reasons: ownership, specific practices, exotic tools</li>
-  <li>Follow the same structure</li>
-  <li>Use <code class="language-plaintext highlighter-rouge">.travis.yml</code> to automate tests and publishing</li>
+  <li>Follow the same structure as IUC</li>
+  <li>Automate tests and ToolShed publishing by reusing <code class="language-plaintext highlighter-rouge">.github/</code> configuration</li>
 </ul>
 
 <hr />
@@ -1458,6 +1491,7 @@ echo '$__app__.config.user_library_import_dir'
 <ul>
   <li>Ok for few tools</li>
   <li>Makes contributing harder</li>
+  <li>Not recommended</li>
 </ul>
 
 <p><a href="/training-material/topics/dev/tutorials/toolshed/slides.html">Check out our tutorial to publish to the ToolShed using Planemo</a></p>
@@ -1467,8 +1501,6 @@ echo '$__app__.config.user_library_import_dir'
 <h2 id="continuous-integration">Continuous Integration</h2>
 
 <p>.image-50[<img src="../../images/github_logo.png" alt="Github logo" />]</p>
-
-<p>.image-50[<img src="../../images/travis_ci_logo.png" alt="Travis CI logo" />]</p>
 
 <p>.image-50[<img src="../../images/planemo-logo.png" alt="Planemo logo" />]</p>
 
@@ -1480,23 +1512,38 @@ echo '$__app__.config.user_library_import_dir'
 
 <ul>
   <li>Create a Pull Request on a GitHub repository</li>
-  <li>Tests are automatically run on Travis</li>
+  <li>Tests are automatically run on GitHub Actions</li>
   <li>Other contributors review your tool</li>
-  <li>The Pull Request is accepted when all lights are green</li>
+  <li>The Pull Request is accepted when all the lights are green</li>
   <li>The tool is automatically uploaded to the ToolShed</li>
 </ul>
 
 <hr />
 
-<h2 id="github-side">GitHub side</h2>
+<h2 id="github-actions-configuration">GitHub Actions configuration</h2>
 
-<p><img src="../../images/github_travis_github.png" alt="Screenshot of a .travis.yml file with badges and logos over it. It runs several planemo commands during before install, install, and script portions." /></p>
+<p>GitHub Actions configured in the <code class="language-plaintext highlighter-rouge">.github/</code> directory</p>
+
+<p><img src="../../images/github_actions_iuc.png" alt="Screenshot of a CI configuration file. It runs several planemo commands during before install, install, and script portions." /></p>
+
+<p>Uses a standard GitHub Action developed on https://github.com/galaxyproject/planemo-ci-action</p>
 
 <hr />
 
-<h2 id="travis-ci-side">Travis CI side</h2>
+<h2 id="github-actions-execution">GitHub Actions execution</h2>
 
-<p><img src="../../images/github_travis_travis.png" alt="Screenshot of travis CI shown a tool test passing." /></p>
+<p><img src="../../images/github_actions_executed1.png" alt="Screenshot of a CI execution showing a tool test passing." />
+<img src="../../images/github_actions_executed2.png" alt="Screenshot of a CI execution showing details of test logs." /></p>
+
+<hr />
+
+<h2 id="github-actions-test-reports">GitHub Actions: test reports</h2>
+
+<p>Downloadable HTML report, open it with a web browser to see the details</p>
+
+<p>.pull-left[<img src="../../images/github_actions_artifacts.png" alt="Screenshot of a CI execution artifacts, with a link to download an HTML report of the tests." />]</p>
+
+<p>.pull-right[<img src="../../images/github_actions_artifacts2.png" alt="Screenshot of an example of HTML report of the tests." />]</p>
 
 <hr />
 
@@ -1566,7 +1613,7 @@ Applying linter readme... CHECK
 
 <hr />
 
-<p>.image-50[<img src="../../../../shared/images/ansible_logo.png" alt="Ansible logo" />]</p>
+<p>.image-25[<img src="../../../../shared/images/ansible_logo.png" alt="Ansible logo" />]</p>
 
 <p>.image-50[<img src="../../../../shared/images/conda_logo.png" alt="Conda logo" />]</p>
 
@@ -1651,7 +1698,7 @@ Applying linter readme... CHECK
 
 <li>Use GitHub</li>
 
-<li>Use Travis</li>
+<li>Use GitHub Actions</li>
 
 <li>No more excuse to develop crappy Galaxy tools</li>
 
@@ -1707,7 +1754,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/1a8678745e3ce7b551f0231d6789be9dd9516b3a">1a8678745e3ce7b551f0231d6789be9dd9516b3a</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/9a13c43c9f869b5045a587d435ffc81096ee272c">9a13c43c9f869b5045a587d435ffc81096ee272c</a></p>
     </div>
 </footer>
 

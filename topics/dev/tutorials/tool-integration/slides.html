@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Tool development and integration into Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2021-07-10 14:34:40 +0000">
+<meta name="DC.date" content="2023-04-14 14:21:55 +0000">
 <meta name="DC.creator" content="Saskia Hiltemann">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Anthony Bretaudeau">
@@ -68,7 +68,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-07-10 14:34:40 +0000",
+  "dateModified": "2023-04-14 14:21:55 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Tool development and integration into Galaxy",
   "interactivityType": "mixed",
@@ -653,6 +653,38 @@ Galaxy tool XML format is formally defined in a XML Schema Definition (XSD), use
 
 ---
 
+## XML Editor
+
+You are free to use your prefered code editor to write Galaxy tools.
+
+If you use Visual Studio Code (or Codium), we recommend to install the [dedicated extension](https://marketplace.visualstudio.com/items?itemName=davelopez.galaxy-tools).
+
+It provides XML validation, tags and attributes completion, help/documentation on hover, and other smart features to assist in following best practices.
+
+![An animation showing someone writing a tool XML file, while being assisted by the VSCode extension.](../../images/vscode_tool.gif)
+
+---
+
+## `tool`
+
+```xml
+&lt;tool id=&quot;graphlan&quot; name=&quot;GraPhlAn&quot; version=&quot;1.1.3+galaxy2&quot; profile=&quot;22.05&quot;&gt;
+```
+- `id`: unique identifier of your tool, should contain only `[a-z0-9_-]`
+- `name`: shown to the user, displayed in the tool box
+- `version`: the version of the wrapped tool, followed by a `+galaxyX` suffix for wrapper version
+- `profile`: minimum Galaxy version that should be required to run this tool (IUC recommends not older than 1 year)
+
+???
+
+- The top level `tool` tag defines the tool naming and version
+- The `id` attribute is the unique identifier of your tool, it should contain only letters, digits, underscores or dashes
+- The `name` attribute is shown to the user and displayed in the tool box
+- The `version` attribute contains the version of the wrapped tool, followed by a `+galaxyX` suffix for wrapper version
+- The `profile` attribute should be set to the minimum Galaxy version that should be required to run this tool (IUC recommends not older than 1 year)
+
+---
+
 ## `command`
 
 How to invoke the tool?
@@ -1040,6 +1072,8 @@ echo &quot;Yeah it worked!&quot;
 
 &lt;small&gt;The job will exit on the first error encountered.&lt;/small&gt;
 
+&lt;small&gt;You can use `&amp;&amp;` or `;` if using a `profile` &gt;= 20.09 (the `set -e` shell directive is now used by default).&lt;/small&gt;
+
 ---
 
 ## Param argument
@@ -1118,15 +1152,10 @@ class: packed
 
 ##.image-25[![planemo logo again](../../images/planemo-logo.png)]
 
-`planemo lint`
-
-Checks the syntax of a tool
+`planemo lint`: Checks the syntax of a tool
 
 ```bash
 $ planemo lint
-```
-
-```bash
 Linting tool /opt/galaxy/tools/seqtk_seq.xml
 Applying linter tests... CHECK
 .. CHECK: 1 test(s) found.
@@ -1330,7 +1359,7 @@ Runs all functional tests
 $ planemo test
 ```
 
-An HTML report is automatically created with logs in case of failing test
+An HTML report (`tool_test_output.html`) is automatically created with logs in case of failing test
 
 ---
 
@@ -1517,11 +1546,12 @@ trinity.xml
 ```xml
 &lt;macros&gt;
     &lt;token name=&quot;@TOOL_VERSION@&quot;&gt;1.2&lt;/token&gt;
+    &lt;token name=&quot;@VERSION_SUFFIX@&quot;&gt;3&lt;/token&gt;
 &lt;/macros&gt;
 ```
 
 ```xml
-&lt;tool id=&quot;seqtk_seq&quot; name=&quot;Convert to FASTA (seqtk)&quot; version=&quot;@TOOL_VERSION@+galaxy3&quot;&gt;
+&lt;tool id=&quot;seqtk_seq&quot; name=&quot;Convert to FASTA&quot; version=&quot;@TOOL_VERSION@+galaxy@VERSION_SUFFIX@&quot;&gt;
     &lt;requirements&gt;
         &lt;requirement type=&quot;package&quot; version=&quot;@TOOL_VERSION@&quot;&gt;seqtk&lt;/requirement&gt;
     &lt;/requirements&gt;
@@ -1643,7 +1673,7 @@ Usage
 
 ## Dataset collections as input
 
-Mapping over:
+Mapping over (1 job per collection element):
 
 ```xml
 &lt;param name=&quot;inputs&quot; type=&quot;data&quot; format=&quot;bam&quot; label=&quot;Input BAM(s)&quot; /&gt;
@@ -1652,8 +1682,8 @@ Mapping over:
 ![The normal file selector is shown however now the collection input is clicked.](../../images/input_data_collection.png)
 
 Single execution:
-- accepted with `multiple=&quot;true&quot;`
-- or accept only collections:
+- accepted with `multiple=&quot;true&quot;` as described in previous slides
+- or you can accept only collections:
 
 ```xml
 &lt;param name=&quot;inputs&quot; type=&quot;data_collection&quot; collection_type=&quot;list|paired|list:paired|...&quot;
@@ -1661,8 +1691,7 @@ Single execution:
 ```
 
 ```xml
-&lt;command&gt;&lt;![CDATA[
-...
+&lt;command&gt;&lt;![CDATA[ ...
 #for $input in $inputs
     --input '$input'
     --sample_name '$input.element_identifier'
@@ -1697,7 +1726,7 @@ Unknown number of files:
 
 ---
 
-## Use multiple CPUs
+## Using multiple CPUs
 
 ![Screenshot of two xml files. In the top is the jb_conf.xml where a command line job submission specification indicates that it will be submitted with 4 threads. A single tool, ncbi blastn wrapper is assigned to that destination. In the second xml file the blastn command uses the GALAXY_SLOTS variable to control how many threads are supplied to the tool.](../../images/job_conf.xml_2.png)
 
@@ -1781,8 +1810,8 @@ Adding to an existing GitHub repository (IUC, GalaxyP, ...)
 Using your own GitHub repository
 
 - Reasons: ownership, specific practices, exotic tools
-- Follow the same structure
-- Use `.travis.yml` to automate tests and publishing
+- Follow the same structure as IUC
+- Automate tests and ToolShed publishing by reusing `.github/` configuration
 
 ---
 
@@ -1792,6 +1821,7 @@ Using planemo by hand
 
 - Ok for few tools
 - Makes contributing harder
+- Not recommended
 
 [Check out our tutorial to publish to the ToolShed using Planemo](/training-material/topics/dev/tutorials/toolshed/slides.html)
 
@@ -1800,8 +1830,6 @@ Using planemo by hand
 ## Continuous Integration
 
 .image-50[![Github logo](../../images/github_logo.png)]
-
-.image-50[![Travis CI logo](../../images/travis_ci_logo.png)]
 
 .image-50[![Planemo logo](../../images/planemo-logo.png)]
 
@@ -1812,22 +1840,37 @@ Using planemo by hand
 ## Continuous Integration
 
 - Create a Pull Request on a GitHub repository
-- Tests are automatically run on Travis
+- Tests are automatically run on GitHub Actions
 - Other contributors review your tool
-- The Pull Request is accepted when all lights are green
+- The Pull Request is accepted when all the lights are green
 - The tool is automatically uploaded to the ToolShed
 
 ---
 
-## GitHub side
+## GitHub Actions configuration
 
-![Screenshot of a .travis.yml file with badges and logos over it. It runs several planemo commands during before install, install, and script portions.](../../images/github_travis_github.png)
+GitHub Actions configured in the `.github/` directory
+
+![Screenshot of a CI configuration file. It runs several planemo commands during before install, install, and script portions.](../../images/github_actions_iuc.png)
+
+Uses a standard GitHub Action developed on https://github.com/galaxyproject/planemo-ci-action
 
 ---
 
-## Travis CI side
+## GitHub Actions execution
 
-![Screenshot of travis CI shown a tool test passing.](../../images/github_travis_travis.png)
+![Screenshot of a CI execution showing a tool test passing.](../../images/github_actions_executed1.png)
+![Screenshot of a CI execution showing details of test logs.](../../images/github_actions_executed2.png)
+
+---
+
+## GitHub Actions: test reports
+
+Downloadable HTML report, open it with a web browser to see the details
+
+.pull-left[![Screenshot of a CI execution artifacts, with a link to download an HTML report of the tests.](../../images/github_actions_artifacts.png)]
+
+.pull-right[![Screenshot of an example of HTML report of the tests.](../../images/github_actions_artifacts2.png)]
 
 ---
 
@@ -1900,7 +1943,7 @@ Applying linter readme... CHECK
 
 ---
 
-.image-50[![Ansible logo](../../../../shared/images/ansible_logo.png)]
+.image-25[![Ansible logo](../../../../shared/images/ansible_logo.png)]
 
 .image-50[![Conda logo](../../../../shared/images/conda_logo.png)]
 
@@ -1987,7 +2030,7 @@ docker run -d -p 8080:80 galaxy-deeptools
 
 - Use GitHub
 
-- Use Travis
+- Use GitHub Actions
 
 - No more excuse to develop crappy Galaxy tools
 
