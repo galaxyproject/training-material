@@ -9,16 +9,16 @@ zenodo_link4: 'https://zenodo.org/record/7817734#.ZDWIsI5BwgY'
 zenodo_link5: 'https://zenodo.org/record/7788734#.ZDWIXY5BwgY'
 zenodo_link6: 'https://zenodo.org/record/7786773#.ZDWLoI5BwgY'
 questions:
-- what combination of tools can assess the quality of an initial assembly?
-- what metrics can help to analyse the quality?
-- how to evaluate the outputs?
+- "what combination of tools can assess the quality of an post-assembly?"
+- "what metrics can help to analyse the quality?"
+- "how to evaluate the outputs?"
 objectives:
-- apply the post-assembly-QC-workflow using the necessary tools
-- analyse and evaluate the results of the workflow
+- "apply the post-assembly-QC-workflow using the necessary tools"
+- "analyse and evaluate the results of the workflow"
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- "The ERGA post-assembly pipeline allows to assess and improve the quality of genome assemblies"
+- "The ERGA post-assembly pipeline contains of three main steps: Genome assembly decontamination and overview with BlobToolKit, providing analysis information and statistics and Hi-C scaffolding."
 contributors:
 - GitFab93
 - gallardoalba
@@ -128,7 +128,7 @@ As a first step we will get the data from Zenodo.
 >   CReformitis_metadata    https://zenodo.org/record/7781236/files/metadata_chon.yaml  yaml    metadata
 >   CReniformis_Hi-C_F   https://zenodo.org/record/7786773/files/hiC_1.fastq.gz   fastq.gz    Hi-C
 >   CReniformis_Hi-C_R   https://zenodo.org/record/7786773/files/hiC_2.fastq.gz   fastq.gz    Hi-C
->   EReginata_assembly    https://zenodo.org/record/xxxxxx/files/GCA_947172415.1.fasta.gz    fasta.gz    assembly
+>   EReginata_assembly    https://zenodo.org/record/7788734/files/rEryReg1.pri.cur.20230105.fasta.gz    fasta.gz    assembly
 >   ERegina_metadata    https://zenodo.org/record/7781236/files/metadata_eryth.yaml  fasta.gz    metadata
 >   EReginae_Hi-C_F   https://zenodo.org/record/XXXXXX/files/hiC_1.fastq.gz   fastq.gz    Hi-C
 >   EReginae_Hi-C_R   https://zenodo.org/record/XXXXXX/files/hiC_1.fastq.gz   fastq.gz    Hi-C
@@ -167,11 +167,11 @@ Once all the datasets have been copied to their correspondent history, we should
 ![Figure 1: Distribution of data](../../images/post-assembly-QC/histories_side_by_side.png "Histories corresponding to the three cases of study.")
 
 
-# Genome assembly ovierwiew with Blobtoolkit
+# Genome assembly ovierwiew with BlobToolKit
 
 BlobToolKit is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, gene expression, and taxonomic annotations to generate a comprehensive overview of genome assembly data ({% cite Challis2020 %}). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data.
 
-In this tutorial, we will use Blobtoolkit in order to integrate the following data:
+In this tutorial, we will use BlobToolKit in order to integrate the following data:
 
 - Read coverage data: BlobToolKit can use read coverage information to identify potential errors or gaps in the genome assembly. By comparing the depth of coverage across the genome, it can highlight regions that may be overrepresented or underrepresented, which can indicate potential issues with the assembly.
 - Taxonomic annotations: BlobToolKit can use taxonomic information to identify potential contaminants or foreign DNA in the genome assembly. It does this by comparing the taxonomic profile of the genome assembly to a reference database of known organisms.
@@ -184,13 +184,13 @@ In this tutorial, we will use Blobtoolkit in order to integrate the following da
 >
 {: .comment}
 
-In the next steps, we will generate the data required for generating the visualization plots with Blobtoolkit.
+In the next steps, we will generate the data required for generating the visualization plots with BlobToolKit.
 
 ## Generate read coverage data with **HISAT2**
 
 Read coverage is an essential metric for evaluating the quality of genome assemblies, and it provides valuable information for identifying regions of high and low quality, detecting misassemblies, and identifying potential contaminants. Thus, for example, unexpected regions of low coverage suggests potential errors, such as misassemblies, gaps, or low complexity regions ({% cite Koren2017 %}).
 
-In this tutorial we will use HISAT2 for generation the coverage data. This tool uses a indexing scheme based on the Burrows-Wheeler transform (BWT) and the Ferragina-Manzini (FM) index, which enables efficient and accurate alignment ({% cite Zhang2021 %}). It then provides the alignment output in BAM file format which we will then use as an input for Blobtoolkit.
+In this tutorial we will use HISAT2 for generation the coverage data. This tool uses a indexing scheme based on the Burrows-Wheeler transform (BWT) and the Ferragina-Manzini (FM) index, which enables efficient and accurate alignment ({% cite Zhang2021 %}). It then provides the alignment output in BAM file format which we will then use as an input for BlobToolKit.
 
 > <comment-title>How is coverage information encoded in the BAM file?</comment-title>
 >
@@ -202,6 +202,13 @@ In this tutorial we will use HISAT2 for generation the coverage data. This tool 
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `output` (Input dataset collection)
+>
+>
+> 2. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} with the following parameters:
+>    - *"Source for the reference genome"*: `Use a genome from history`
+>        - {% icon param-file %} *"Select the reference genome"*: `output` (Input dataset)
+>    - *"Is this a single or paired library"*: `Single-end`
+>        - {% icon param-file %} *"FASTA/Q file"*: `output` (output of **Collapse Collection** {% icon tool %})
 >
 {: .hands_on}
 
@@ -250,11 +257,7 @@ DIAMOND is a sequence alignment tool that utilizes a more efficient algorithm co
 >    > Before performing the mapping, it is necessary to collapse all the sequencing datasets into a single one, in order to generate a single BAM file.
 >    {: .comment}
 >
-> 2. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} with the following parameters:
->    - *"Source for the reference genome"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: `output` (Input dataset)
->    - *"Is this a single or paired library"*: `Single-end`
->        - {% icon param-file %} *"FASTA/Q file"*: `output` (output of **Collapse Collection** {% icon tool %})
+> 
 >
 {: .hands_on}
 
@@ -271,7 +274,27 @@ BUSCO(Benchmarking Universal Single-Copy Orthologs) is a tool that will assess g
 
 > <hands-on-title> Estimate single copy gene representation completeness </hands-on-title>
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.4+galaxy0) %} with the following parameters:
+>    > <comment-title> pre-processing </comment-title>
+>    > 
+>    > BUSCO takes an FASTA file with the following properties:
+>    > 1. uncompressed and
+>    > 2. without containing the following character: "|"
+>    > 
+>    {: .comment}
+>
+> 1. {% tool [Convert compressed file to uncompressed.](CONVERTER_gz_to_uncompressed) %} with the following parameters:
+>    - {% icon param-file %} *"Choose compressed file"*: `output` (Input dataset)
+>
+> 2. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `output` (Input dataset)
+>    - In *"Find and Replace"*:
+>        - {% icon param-repeat %} *"Insert Find and Replace"*
+>            - *"Find pattern"*: `|`
+>            - *"Replace with"*: `_`
+>            - *"Replace all occurences of the pattern"*: `Yes`
+>            - *"Find and Replace text in"*: `entire line`
+>
+> 3. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `outfile` (output of **Replace** {% icon tool %})
 >    - *"Mode"*: `Genome assemblies (DNA)`
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
@@ -301,13 +324,11 @@ BUSCO(Benchmarking Universal Single-Copy Orthologs) is a tool that will assess g
 {: .hands_on}
 
 
-
-
 ## Generate interactive plots with **BlobToolKit**
 
 BlobToolKit is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, gene expression, and taxonomic annotations to generate a comprehensive overview of genome assembly data ({% cite Challis2020 %}). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data. 
 
-To work with Blobtoolkit we need to create a new dataset structure called BlobDir. Therefore the minimum requirement is a fasta file which contains the sequence of our assembly. A list of sequence identifiers and some statistics like length, GC proportion and undefined bases will then be generated.
+To work with BlobToolKit we need to create a new dataset structure called BlobDir. Therefore the minimum requirement is a fasta file which contains the sequence of our assembly. A list of sequence identifiers and some statistics like length, GC proportion and undefined bases will then be generated.
 To get a more meaningful analysis and therefore more useful information about our assembly, it is better to provide as much data as we can get. In our case we will also provide a Metadata file if possible, NCBI taxonomy ID and the NCBI taxdump directory. ({% cite Challis2020 %})
 
 > <hands-on-title> Creating the BlobDir dataset </hands-on-title>
@@ -565,7 +586,7 @@ PretextMap converts BAM/SAM files into genome contact maps. With those contact m
 ![Figure 11: Contact Map Sponge](../../images/post-assembly-QC/pretext_sponge.png "")
 
 
-# Assembly graph**
+# Assembly graph
 
 Bandage is a tool to visualise de novo assembly graphs with connections. ({% cite Wick2015 %})
 
@@ -591,10 +612,16 @@ Bandage is a tool to visualise de novo assembly graphs with connections. ({% cit
 >
 {: .hands_on}
 
+![Figure 12: Assembly Graph Snake](../../images/post-assembly-QC/bandage_snake.jpg "")
+
+![Figure 13: Assembly Graph Sponge](../../images/post-assembly-QC/bandage_sponge.jpg "")
+
+![Figure 14: Assembly Graph Whale](../../images/post-assembly-QC/bandage_whale.jpg "")
+
 
 # Conclusion
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
 
-![Figure 11:  evaluation tabular](../../images/post-assembly-QC/ "This table contains 10 indicators for quality evaluation of three different organisms: Chondrosia reniformis, Eschrichtius robustus and Erythrolamprus reginae.")
+![Figure 15:  evaluation tabular](../../images/post-assembly-QC/ "This table contains 10 indicators for quality evaluation of three different organisms: Chondrosia reniformis, Eschrichtius robustus and Erythrolamprus reginae.")
