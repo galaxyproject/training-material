@@ -270,7 +270,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -150,8 +150,11 @@ certbot_environment: staging
+>    @@ -151,8 +151,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -282,7 +282,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -201,6 +204,45 @@ slurm_config:
+>    @@ -202,6 +205,45 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -886,7 +886,7 @@ How awesome is that? Pulsar in another continent with reference data automatical
 
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
-{% snippet topics/admin/faqs/missed-something.md step=10 %}
+{% snippet topics/admin/faqs/missed-something.md step=11 %}
 
 ## Retries of the staging actions
 

@@ -135,6 +135,22 @@ This page can be used to communicate what your instance is about, and share news
 >    +        <p>The only Galaxy instance on mars.</p>
 >    +    </body>
 >    +</html>
+>    diff --git a/group_vars/galaxyservers.yml b/group_vars/galaxyservers.yml
+>    index 3d7fd0e..8d8bd40 100644
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -86,10 +86,9 @@ galaxy_config:
+>               - job-handlers
+>               - workflow-schedulers
+>     
+>    -galaxy_config_files:
+>    +galaxy_config_files_public:
+>       - src: files/galaxy/welcome.html
+>         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
+>    -    mode: "0755"
+>     
+>     # Certbot
+>     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the template"}
@@ -198,15 +214,17 @@ You can even offer several options, to allow users to switch to the default if t
 >         # Main Configuration
 >         admin_users:
 >         - admin@example.org
->    @@ -90,6 +91,8 @@ galaxy_config_files:
+>    @@ -90,6 +91,10 @@ galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->         mode: "0755"
+>     
+>    +galaxy_config_files:
 >    +  - src: files/galaxy/themes.yml
 >    +    dest: "{{ galaxy_config.galaxy.themes_config_file }}"
->     
+>    +
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+>     certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add brand"}
@@ -345,3 +363,5 @@ You can even offer several options, to allow users to switch to the default if t
 >
 > 4. You can also try logging in, and changing your theme under `Preferences`
 {: .hands_on}
+
+{% snippet topics/admin/faqs/missed-something.md step=3 %}

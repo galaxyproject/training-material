@@ -82,7 +82,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >     
 >     galaxy_extra_dirs:
 >       - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
->    @@ -158,6 +163,8 @@ galaxy_config_templates:
+>    @@ -159,6 +164,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >       - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
@@ -139,4 +139,4 @@ The reports application is included with the Galaxy codebase and this tutorial a
 
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
-{% snippet topics/admin/faqs/missed-something.md step=14 %}
+{% snippet topics/admin/faqs/missed-something.md step=15 %}

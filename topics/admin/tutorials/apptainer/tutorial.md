@@ -188,7 +188,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -98,6 +101,12 @@ galaxy_config_files:
+>    @@ -99,6 +102,12 @@ galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >     
@@ -438,4 +438,4 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
-{% snippet topics/admin/faqs/missed-something.md step=5 %}
+{% snippet topics/admin/faqs/missed-something.md step=6 %}

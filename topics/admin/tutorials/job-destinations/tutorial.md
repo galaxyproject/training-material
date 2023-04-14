@@ -104,7 +104,7 @@ To demonstrate a real-life scenario and TPV's role in it, let's plan on setting 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -136,6 +136,9 @@ galaxy_config_templates:
+>    @@ -137,6 +137,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -190,7 +190,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    +
 >    +galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
 >    +
->     galaxy_config_files:
+>     galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
 >    {% endraw %}
@@ -277,8 +277,8 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -137,6 +118,8 @@ galaxy_config_files:
->         mode: "0755"
+>    @@ -138,6 +119,8 @@ galaxy_config_files_public:
+>     galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >    +  - src: files/galaxy/config/tpv_rules_local.yml
@@ -619,7 +619,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -127,6 +133,8 @@ galaxy_config_templates:
+>    @@ -128,6 +134,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
@@ -768,7 +768,7 @@ The cores parameter can be verified from the output of the tool. The walltime ca
 > ```
 {: .code-out}
 
-{% snippet topics/admin/faqs/missed-something.md step=9 %}
+{% snippet topics/admin/faqs/missed-something.md step=10 %}
 
 
 # More on TPV

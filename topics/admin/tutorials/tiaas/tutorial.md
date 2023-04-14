@@ -90,7 +90,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -321,3 +321,8 @@ telegraf_plugins_extra:
+>    @@ -322,3 +322,8 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"
@@ -376,4 +376,4 @@ Congratulations! you have now set up {TIaaS} on your Galaxy server.
 
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
-{% snippet topics/admin/faqs/missed-something.md step=13 %}
+{% snippet topics/admin/faqs/missed-something.md step=14 %}

@@ -327,5 +327,5 @@ If running ephemeris directly is not your preference, there is an Ansible [role]
 {: .tip}
 
 <!--
-{% snippet topics/admin/faqs/missed-something.md step=6 %}
+{% snippet topics/admin/faqs/missed-something.md step=7 %}
 -->

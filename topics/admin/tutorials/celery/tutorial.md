@@ -433,4 +433,4 @@ We can simply do that by starting an upload to our Galaxy.
 >    You should see all its details here and the info that is was successful.
 {: .hands_on}
 
-{% snippet topics/admin/faqs/missed-something.md step=11 %}
+{% snippet topics/admin/faqs/missed-something.md step=12 %}

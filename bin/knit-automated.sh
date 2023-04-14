@@ -110,12 +110,27 @@ elif [[ "$op" == "check-offsets" ]]; then
 		grep "snippet topics/admin/faqs/missed-something.md step=$n2" topics/${folder}/tutorials/${tuto}/tutorial.md -q
 		if (( $? != 0 )); then
 			echo "Error, topics/${folder}/tutorials/${tuto}/tutorial.md is missing a snippet for step $n2"
-			exit 1
+			#exit 1
+		fi
+		#vim topics/${folder}/tutorials/${tuto}/tutorial.md
+	done
+elif [[ "$op" == "fix-offsets" ]]; then
+	for idx in "${!tutorials[@]}"; do
+		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
+		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
+		n2=$(( idx + 1 ))
+		echo -n "$folder/$tuto should be $n2 "
+		grep "snippet topics/admin/faqs/missed-something.md step=$n2" topics/${folder}/tutorials/${tuto}/tutorial.md -q
+		if (( $? != 0 )); then
+			echo "Fixed!"
+			sed -i -r 's|topics/admin/faqs/missed-something.md step=[0-9]+|topics/admin/faqs/missed-something.md step='$n2'|' topics/${folder}/tutorials/${tuto}/tutorial.md
+		else
+			echo "Already correct"
 		fi
 		#vim topics/${folder}/tutorials/${tuto}/tutorial.md
 	done
 else
-	echo "$0 <import|export|deploy|roundtrip>"
+	echo "$0 <import|export|deploy|roundtrip|check-offsets>"
 	exit 1;
 fi
 
