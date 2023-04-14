@@ -677,6 +677,43 @@ Lets go back to the gallery and choose the **bubble chart**. Here, you can find 
 
 Once you are done with Phinch, you should delete it in your history so the corresponding job is killed.
 
+# MetaPhlAn 
+xxx introduction
+
+> <hands-on-title>Assign taxonomic labels with MetaPhlAn</hands-on-title>
+>
+> 1. {% tool [MetaPhlAn]([https://toolshed.g2.bx.psu.edu/repos/george-weingart/metaphlan]) %} with the following parameters:
+>    - *"Fasta/FastQ file(s) with microbiota reads"*: `Paired-end files`
+>      - *"Forward paired-end Fasta/FastQ file with microbiota reads"*: JP4D/JC1A_R1
+>      - *"Reverse paired-end Fasta/FastQ file with microbiota reads"*: JP4D/JC1A_R2
+>
+>    - In *"Outputs"*:
+>        - *"Output for Krona?"*: `Yes`
+
+{: .hands_on}
+
+**MetaPhlAn** will create five outputs for each dataset:
+
+   - Predicted taxon relative abundances
+   - Bowtie2 output
+   - SAM file
+   - BIOM file
+   - Predicted taxon relative abundances for Krona
+
+
+Let's now run **Krona**
+
+> <hands-on-title>Generate Krona visualisation</hands-on-title>
+> 1. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1) %} with the following parameters:
+>    - *"Type of input data"*: `tabular`
+>    - {% icon param-collection %} *"Input file"*: Krona output of **Metaphlan**
+>
+> 2. Inspect the generated file
+{: .hands_on}
+
+<iframe id="krona" src="krona.html" frameBorder="0" width="100%" height="900px"> ![Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species)](./images/metaphlan-kraken.png) </iframe>
+
+
 
 # Choosing the right tool
 
