@@ -684,8 +684,8 @@ xxx introduction
 >
 > 1. {% tool [MetaPhlAn]([https://toolshed.g2.bx.psu.edu/repos/george-weingart/metaphlan]) %} with the following parameters:
 >    - *"Fasta/FastQ file(s) with microbiota reads"*: `Paired-end files`
->      - *"Forward paired-end Fasta/FastQ file with microbiota reads"*: JP4D/JC1A_R1
->      - *"Reverse paired-end Fasta/FastQ file with microbiota reads"*: JP4D/JC1A_R2
+>      - *"Forward paired-end Fasta/FastQ file with microbiota reads"*: JP4D_R1
+>      - *"Reverse paired-end Fasta/FastQ file with microbiota reads"*: JP4D_R2
 >
 >    - In *"Outputs"*:
 >        - *"Output for Krona?"*: `Yes`
@@ -711,7 +711,21 @@ Let's now run **Krona**
 > 2. Inspect the generated file
 {: .hands_on}
 
-<iframe id="krona" src="krona.html" frameBorder="0" width="100%" height="900px"> ![Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species)](./images/metaphlan-kraken.png) </iframe>
+<iframe id="krona" src="krona.html" frameBorder="0" width="100%" height="900px"> ![Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species)](./images/krona-metaphlan.png) </iframe>
+
+
+> > <question-title></question-title>
+>
+> As you can see, there is barely any assignment. What might be the reason for this?
+>
+> > <solution-title></solution-title>
+> >
+> > Probably, the reference database is not complete enough yet to identify all taxons.
+> 
+>
+> {: .solution}
+>
+{: .question}
 
 
 
