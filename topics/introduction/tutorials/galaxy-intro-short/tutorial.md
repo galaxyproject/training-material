@@ -75,7 +75,7 @@ The Galaxy homepage is divided into three panels:
 * Viewing panel in the middle
 * History of analysis and files on the right
 
-![Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right.](../../images/galaxy_interface.png)
+![Screenshot of the Galaxy interface with aforementioned structure](../../images/galaxy_interface.png)
 
 The first time you use Galaxy, there will be no files in your history panel.
 
@@ -89,7 +89,7 @@ Your "History" is in the panel at the right.
 > 1. Go to the **History** panel (on the right)
 > 2. Click on {% icon galaxy-pencil %} (**Edit**) next to the history name (which by default is "Unnamed history")
 >
->    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value.](../../../../shared/images/rename_history.png){:width="250px"}
+>    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value. An input box is below it.](../../../../shared/images/rename_history.png){:width="250px"}
 >
 >    > <comment-title></comment-title>
 >    >
@@ -113,18 +113,18 @@ Your "Tools" are in the panel at the left.
 > <hands-on-title>Upload a file from URL</hands-on-title>
 > 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload**
 >
->    ![upload data button](../../images/upload-data.png)
+>    ![upload data button shown in the galaxy interface](../../images/upload-data.png)
 >
 >    This brings up a box:
 >
->    ![filebox](../../images/upload-box.png){:width="500px"}
+>    ![the complicated galaxy upload dialog, the 'regular' tab is active with a large textarea to paste subsequent URL](../../images/upload-box.png)
 >
 > 3. Click **Paste/Fetch data**
 > 4. Paste in the address of a file:
 >
 >    ```
 >    https://zenodo.org/record/582600/files/mutant_R1.fastq
->    ````
+>    ```
 >
 > 5. Click **Start**
 > 6. Click **Close**
@@ -155,14 +155,14 @@ What is this file?
 > <hands-on-title>View the dataset content</hands-on-title>
 > 1. Click on the {% icon galaxy-eye %} (eye) icon next to the dataset name, to look at the file content
 >
->    ![eye icon with dropdown titled View Data](../../images/eye-icon.png){:width="320px"}
+>    ![galaxy history view showing a single dataset mutant_r1.fastq. Display link is being hovered.](../../images/eye-icon.png){:width="320px"}
 {: .hands_on}
 
 The contents of the file will be displayed in the central Galaxy panel.
 
 This file contains DNA sequencing reads from a bacteria, in FASTQ format:
 
-   ![fastq](../../images/fastq.png){:width="620px"}
+   ![preview of a fastq file showing the 4 line structure described in fig caption. 3 reads are shown.](../../images/fastq.png "A FastQ file of course has four lines per record: the record identifier (`@mutant-no_snps.gff-24960/`), the sequence (`AATG…`), the plus character (`+`), and then the quality scores for the sequence (`5??A…`)."){:width="620px"}
 
 ## Use a tool
 
@@ -199,7 +199,7 @@ We will now look at the output dataset called *FastQC on data 1: Webpage*.
 >
 >    The information is displayed in the central panel
 >
->    ![fastqc-out](../../images/fastqc-out.png){:width="620px"}
+>    ![Graph from fastqc's report. fastqc's images themselves are inaccessible, but this graph shows overall mostly green (good) sequences scores across the length of the read.](../../images/fastqc-out.png){:width="620px"}
 {: .hands_on}
 
 This tool has summarised information about all of the reads in our FASTQ file.
@@ -245,7 +245,7 @@ We could click on the eye icon to view the contents of this output file, but it 
 >
 >    This expands the information about the file.
 >
->    ![filter1 with 3 arrows click on filename to expand, click filter settings and how many reads were filtered out](../../images/filter-fastq1.png)
+>    ![Diagram of how to locate the information. As above, clicking on the name expands the dataset, and an info section is shown with the filter settings. 1786 (14%) discarded.](../../images/filter-fastq1.png)
 >
 {: .hands_on}
 
@@ -265,7 +265,7 @@ We can now try to filter our input reads to an even higher standard, and see how
 > <hands-on-title>Re-run the tool</hands-on-title>
 > 1. Click on the {% icon galaxy-refresh %} icon (**Run this job again**) for the output dataset of **Filter by quality** {% icon tool %}
 >
->    ![rerun the job](../../images/rerun.png)
+>    ![A dataset is expanded showing the Run Job Again button highlighted](../../images/rerun.png)
 >
 >    This brings up the tool interface in the central panel with the parameters set to the values used previously to generate this dataset.
 >
@@ -314,11 +314,11 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 > 2. Click on {% icon galaxy-history-options %} (**History options**) at the top of your history panel and select **Extract workflow**.
 >
->    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>    !['Extract Workflow' entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
 >    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 >
->    ![Selection of steps for `Extract Workflow` from history](../../images/intro_short_workflow_extract.png)
+>    ![Selection of steps for Extract Workflow from history. All three of fastqc, filter by quality, and the second filter by quality are selected.](../../images/intro_short_workflow_extract.png)
 >
 > 3. Replace the **Workflow name** to something more descriptive, for example: `QC and filtering`.
 >
@@ -358,13 +358,7 @@ Where is your first history, called "My Analysis"?
 > <hands-on-title>View histories</hands-on-title>
 > 1. Click on {% icon galaxy-history-options %} (**History options**) and then click on the {% icon galaxy-columns %} **Show Histories side-by-side**
 >
->    ![view all histories](../../images/galaxy_interface_history_switch.png){:width="320px"}
->
->    > <comment-title></comment-title>
->    >
->    > In some previous version of Galaxy, you need to lick on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
->    > ![view all histories](../../images/galaxy_interface_history_switch_old.png){:width="320px"}
->    {: .comment}
+>    ![History options menu dropdown showing you have 163 histories, and a show histories side-by-side button.](../../images/galaxy_interface_history_switch.png){:width="320px"}
 >
 >    A new page will appear with all your histories displayed here.
 >
@@ -372,7 +366,7 @@ Where is your first history, called "My Analysis"?
 >    1. Click on the FASTQ dataset in "My Analysis" history
 >    2. Drag it into the "Next Analysis" history
 >
-> ![Copy a dataset between histories](../../images/copy-dataset.gif "Copy a dataset between histories by dragging it")
+>    ![Gif of copying datasets between histories in the side-by-side history view. For now this feature is not keyboard accessible, it is a known issue.](../../images/copy-dataset.gif "Copy a dataset between histories by dragging it")
 >
 >    This makes a copy of the dataset in the new history (without actually using additional disk space).
 >
@@ -396,7 +390,7 @@ Now that we have built our workflow, let's use it to re-create our small analysi
 >    Here you have a list of all your workflows.
 >    Your newly created workflow should be listed at the top:
 >
->    ![`Your workflows` list](../../images/intro_short_workflow_list.png)
+>    ![Workflow list page showing a single workflow named QC and filtering.](../../images/intro_short_workflow_list.png)
 >
 >    If you click on a workflow name, you can see all available actions for the workflow, e.g. edit, copy, rename, delete.
 >
@@ -404,13 +398,7 @@ Now that we have built our workflow, let's use it to re-create our small analysi
 >
 >    The central panel will change to allow you to configure and launch the workflow.
 >
->    ![Run workflow form](../../images/intro_short_run_workflow.png)
->
->    > <comment-title></comment-title>
->    >
->    > In previous versions of Galaxy, it might look like:
->    > ![Run workflow form](../../images/intro_short_run_workflow_old.png)
->    {: .comment}
+>    ![Run workflow form with a single input: FASTQ reads. mutant_r1.fastq is selected as the input dataset for that parameter.](../../images/intro_short_run_workflow.png)
 >
 > 3. Check that the *"FASTQ reads"* input is set to the FASTQ dataset we have copied to the new history.
 >

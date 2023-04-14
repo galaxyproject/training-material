@@ -335,7 +335,7 @@ a car, the goal is to learn a model such that given an individual's attributes, 
 purchasing a car. We then evaluate the trained FNN on the test dataset and plot various graphs to assess the model's performance. Our training
 dataset has 723 training examples, and our test dataset has 242 test examples. Input features have been scaled to be in 0 to 1 range.
 
-### **Create a deep learning model architecture**
+## Create a deep learning model architecture
 
 > <hands-on-title>Model config</hands-on-title>
 >
@@ -362,7 +362,7 @@ Input has 5 attributes: age, gender, average miles driven per day, personal debt
 three layers are fully connected. The last layer has a single neuron with a linear activation function, used in regression problems. Prior
 layers use ReLU activation function. The model config can be downloaded as a JSON file.
 
-### **Create a deep learning model**
+## Create a deep learning model
 
 > <hands-on-title>Model builder (Optimizer, loss function, and fit parameters)</hands-on-title>
 >
@@ -387,7 +387,7 @@ after all the training data is fed to the network, the training will be slow (as
 To speed up the training, we present only a subset of the training examples to the network, after which we update the weights/biases.
 batch_size decides the size of this subset (which we set to 50). The model builder can be downloaded as a zip file.
 
-### **Deep learning training and evaluation**
+## Deep learning training and evaluation
 
 > <hands-on-title>Training the model</hands-on-title>
 >
@@ -409,7 +409,7 @@ batch_size decides the size of this subset (which we set to 50). The model build
 The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 3) the trained
 model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step.
 
-### **Model Prediction**
+## Model Prediction
 
 > <hands-on-title>Testing the model</hands-on-title>
 >
@@ -427,7 +427,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 The prediction step generates 1 dataset. It's a file that has the predicted car purchase price for every row in the test dataset.
 
-### **Plot actual vs predicted curves and residual plots**
+## Plot actual vs predicted curves and residual plots
 
 > <hands-on-title>Check and visualize the predictions</hands-on-title>
 >
