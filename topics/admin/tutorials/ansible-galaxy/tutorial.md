@@ -1971,18 +1971,18 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    +++ b/templates/nginx/redirect-ssl.j2
 >    @@ -0,0 +1,14 @@
 >    +server {
->    +    listen 80 default_server;
->    +    listen [::]:80 default_server;
+>    +	listen 80 default_server;
+>    +	listen [::]:80 default_server;
 >    +
->    +    server_name "{{ inventory_hostname }}";
+>    +	server_name "{{ inventory_hostname }}";
 >    +
->    +    location /.well-known/ {
->    +        root {{ certbot_well_known_root }};
->    +    }
+>    +	location /.well-known/ {
+>    +		root {{ certbot_well_known_root }};
+>    +	}
 >    +
->    +    location / {
->    +        return 302 https://$host$request_uri;
->    +    }
+>    +	location / {
+>    +		return 302 https://$host$request_uri;
+>    +	}
 >    +}
 >    {% endraw %}
 >    ```
