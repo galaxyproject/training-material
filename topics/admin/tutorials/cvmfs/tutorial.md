@@ -506,7 +506,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -65,6 +65,8 @@ galaxy_config:
+>    @@ -66,6 +66,8 @@ galaxy_config:
 >         outputs_to_working_directory: true
 >         # TUS
 >         tus_upload_store: /data/tus

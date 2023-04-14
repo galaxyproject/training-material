@@ -59,15 +59,16 @@ It is an easy way to set your instance apart, and make it more identifiable.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -32,6 +32,8 @@ galaxy_job_config:
+>    @@ -32,6 +32,9 @@ galaxy_job_config:
 >     
 >     galaxy_config:
 >       galaxy:
+>    +    # Branding
 >    +    brand: Mars 🚀
->    +    logo_src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Curiosity_Self-Portrait_at_%27Big_Sky%27_Drilling_Site.jpg/390px-Curiosity_Self-Portrait_at_%27Big_Sky%27_Drilling_Site.jpg"
->         admin_users: admin@example.org
->         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->         file_path: /data
+>    +    logo_src: "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/images/logo.png"
+>         # Main Configuration
+>         admin_users:
+>         - admin@example.org
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add brand"}
@@ -81,7 +82,7 @@ It is an easy way to set your instance apart, and make it more identifiable.
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    ![screenshot of fictional "Galaxy Mars" start page, with the brand text set to "Mars"](images/galaxy-mars-brand.png "Your Galaxy start page should now look like this")
+>    ![screenshot of fictional "Galaxy Mars" start page, with the brand text set to "Mars"](images/galaxy-mars-brand.png "Your Galaxy start page should now look something like this")
 {: .hands_on}
 
 ## Custom Welcome Page
@@ -100,13 +101,14 @@ This page can be used to communicate what your instance is about, and share news
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -85,6 +85,10 @@ galaxy_config:
+>    @@ -86,6 +86,11 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
 >    +galaxy_config_files:
 >    +  - src: files/galaxy/welcome.html
->    +    dest: "{{ galaxy_mutable_config_dir }}/static/welcome.html"
+>    +    dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
+>    +    mode: "0755"
 >    +
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -153,7 +155,7 @@ This page can be used to communicate what your instance is about, and share news
 >     	# production, this step is skipped, so we will manually alias that.
 >     	location /static/welcome.html {
 >    -		alias {{ galaxy_server_dir }}/static/welcome.html.sample;
->    +		alias {{ galaxy_mutable_config_dir }}/static/welcome.html;
+>    +		alias {{ galaxy_mutable_config_dir }}/welcome.html;
 >     		expires 24h;
 >     	}
 >     
@@ -188,18 +190,18 @@ You can even offer several options, to allow users to switch to the default if t
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -34,6 +34,7 @@ galaxy_config:
->       galaxy:
+>    @@ -35,6 +35,7 @@ galaxy_config:
+>         # Branding
 >         brand: Mars 🚀
->         logo_src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Curiosity_Self-Portrait_at_%27Big_Sky%27_Drilling_Site.jpg/390px-Curiosity_Self-Portrait_at_%27Big_Sky%27_Drilling_Site.jpg"
+>         logo_src: "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/images/logo.png"
 >    +    themes_config_file: "{{ galaxy_config_dir }}/themes.yml"
->         admin_users: admin@example.org
->         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->         file_path: /data
->    @@ -88,6 +89,8 @@ galaxy_config:
->     galaxy_config_files:
+>         # Main Configuration
+>         admin_users:
+>         - admin@example.org
+>    @@ -90,6 +91,8 @@ galaxy_config_files:
 >       - src: files/galaxy/welcome.html
->         dest: "{{ galaxy_mutable_config_dir }}/static/welcome.html"
+>         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
+>         mode: "0755"
 >    +  - src: files/galaxy/themes.yml
 >    +    dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >     

@@ -104,7 +104,7 @@ To demonstrate a real-life scenario and TPV's role in it, let's plan on setting 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -134,6 +134,9 @@ galaxy_config_templates:
+>    @@ -136,6 +136,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -178,7 +178,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -122,6 +122,14 @@ galaxy_config:
+>    @@ -123,6 +123,14 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
@@ -192,7 +192,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    +
 >     galaxy_config_files:
 >       - src: files/galaxy/welcome.html
->         dest: "{{ galaxy_mutable_config_dir }}/static/welcome.html"
+>         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TPV config dir"}
@@ -277,8 +277,8 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -135,6 +116,8 @@ galaxy_config_files:
->         dest: "{{ galaxy_mutable_config_dir }}/static/welcome.html"
+>    @@ -137,6 +118,8 @@ galaxy_config_files:
+>         mode: "0755"
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >    +  - src: files/galaxy/config/tpv_rules_local.yml
@@ -611,23 +611,23 @@ Such form elements can be added to tools without modifying each tool's configura
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -50,6 +55,7 @@ galaxy_config:
->         object_store_store_by: uuid
->         id_secret: "{{ vault_id_secret }}"
+>    @@ -51,6 +56,7 @@ galaxy_config:
+>         file_path: /data
+>         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -121,6 +127,8 @@ galaxy_config_files:
->         dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
->     
->     galaxy_config_templates:
->    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
->    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
->       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
+>    @@ -127,6 +133,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
+>         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
+>    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
+>     
+>     galaxy_local_tools:
+>     - testing.xml
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}

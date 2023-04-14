@@ -953,12 +953,12 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +
 >    +galaxy_config:
 >    +  galaxy:
->    +    admin_users: admin@example.org
+>    +    # Main Configuration
+>    +    admin_users:
+>    +    - admin@example.org
 >    +    database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
 >    +    file_path: /data
 >    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
->    +    object_store_store_by: uuid
->    +    id_secret: "{{ vault_id_secret }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure galaxy config"}
@@ -1009,9 +1009,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -19,3 +19,25 @@ galaxy_config:
+>         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
+>         file_path: /data
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
->         object_store_store_by: uuid
->         id_secret: "{{ vault_id_secret }}"
 >    +  gravity:
 >    +    process_manager: systemd
 >    +    galaxy_root: "{{ galaxy_root }}/server"
@@ -2237,11 +2237,11 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >    +
 >     galaxy_config:
 >       galaxy:
->         admin_users: admin@example.org
+>         # Main Configuration
 >    @@ -19,6 +37,7 @@ galaxy_config:
+>         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
+>         file_path: /data
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
->         object_store_store_by: uuid
->         id_secret: "{{ vault_id_secret }}"
 >    +    job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >       gravity:
 >         process_manager: systemd
@@ -2294,8 +2294,8 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -38,6 +38,27 @@ galaxy_config:
->         object_store_store_by: uuid
->         id_secret: "{{ vault_id_secret }}"
+>         file_path: /data
+>         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    # SQL Performance
 >    +    slow_query_log_threshold: 5
