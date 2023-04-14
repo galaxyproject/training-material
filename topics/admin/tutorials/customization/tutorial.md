@@ -23,7 +23,7 @@ contributions:
 requirements: []
 tags:
 - git-gat
-subtopic: production
+subtopic: maintenance
 ---
 
 Customizing your Galaxy instance makes it more recognizable at a glance, and can help communicate it's purpose to it's users.

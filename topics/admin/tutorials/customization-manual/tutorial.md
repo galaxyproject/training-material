@@ -18,7 +18,7 @@ key_points:
 contributors:
   - ElectronicBlueberry
 requirements: []
-subtopic: production
+subtopic: maintenance
 ---
 
 # Customizing the look of Galaxy 
