@@ -148,11 +148,14 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -235,6 +235,7 @@
+>        @@ -266,3 +266,7 @@ tusd_instances:
+>               - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
+>               - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
+>               - "-hooks-http-forward-headers=X-Api-Key,Cookie"
+>        +
 >        +#Redis
 >        +galaxy_additional_venv_packages:
 >        +  - redis
->        +
 >        {% endraw %}
 >        ```
 >        {: data-commit="Configure rabbitmq users"}
@@ -244,7 +247,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -241,6 +241,7 @@ rabbitmq_config:
+>        @@ -244,6 +244,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
 >           - /pulsar/pulsar_au
@@ -252,7 +255,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -250,6 +251,13 @@ rabbitmq_users:
+>        @@ -253,6 +254,13 @@ rabbitmq_users:
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -295,10 +298,10 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -271,3 +271,22 @@ tusd_instances:
->               - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
->               - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
->               - "-hooks-http-forward-headers=X-Api-Key,Cookie"
+>        @@ -278,3 +278,22 @@ tusd_instances:
+>         #Redis
+>         galaxy_additional_venv_packages:
+>           - redis
 >        +
 >        +# Flower
 >        +flower_python_version: python3
@@ -369,7 +372,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -110,6 +110,11 @@ galaxy_config:
+>    @@ -113,6 +113,11 @@ galaxy_config:
 >           preload: true
 >         celery:
 >           concurrency: 2
@@ -390,7 +393,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -95,6 +95,11 @@ galaxy_config:
+>    @@ -98,6 +98,11 @@ galaxy_config:
 >         # Data Library Directories
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
