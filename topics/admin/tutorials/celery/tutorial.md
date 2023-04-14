@@ -252,7 +252,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -244,6 +245,13 @@
+>        @@ -244,6 +245,13 @@ rabbitmq_users:
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -405,7 +405,6 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add celery-redis" data-ref="add-req"}
->
 >
 > 6. We are done with the changes and you can enter the command to run your playbook:
 >

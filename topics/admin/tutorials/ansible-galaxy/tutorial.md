@@ -834,7 +834,6 @@ For a normal Galaxy instance there are a few configuration changes you make very
 
 - Changing the database connection
 - Configuring the admin user list
-- Changing the "brand"
 
 Additionally we'll go ahead and set up the production-ready [Gunicorn + Webless](https://docs.galaxyproject.org/en/master/admin/scaling.html#deployment-options) deployment, which separates Galaxy's web and job handling into separate processes. This is done by configuring Galaxy's process manager, [Gravity](https://gravity.readthedocs.io).
 
@@ -937,7 +936,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    Now you should set:
 >    1. `admin_users` to the email address you will use with this Galaxy.
->    2. `brand` to something fun! (E.g. 🧬🔬🚀)
 >    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`).
 >    4. `file_path` to a place to store data, `/data` is fine for this lesson which sets up a single-node Galaxy. If you have separate compute machines, this will normally need to be storage shared between the Galaxy node and compute nodes.
 >    5. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
@@ -948,14 +946,13 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -10,3 +10,13 @@ galaxy_force_checkout: true
+>    @@ -10,3 +10,12 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.12.0
 >     miniconda_channels: ['conda-forge', 'defaults']
 >    +
 >    +galaxy_config:
 >    +  galaxy:
->    +    brand: "🧬🔬🚀"
 >    +    admin_users: admin@example.org
 >    +    database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
 >    +    file_path: /data
@@ -1011,7 +1008,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -20,3 +20,25 @@ galaxy_config:
+>    @@ -19,3 +19,25 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -1678,7 +1675,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    > galaxy:
 >    >     admin_users: admin@example.org
->    >     brand: "\U0001F9EC\U0001F52C\U0001F680"
 >    >     builds_file_path: /srv/galaxy/server/tool-data/shared/ucsc/builds.txt.sample
 >    >     container_resolvers_config_file: ''
 >    >     data_dir: /srv/galaxy/var
@@ -1831,7 +1827,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -42,3 +42,55 @@ galaxy_config:
+>    @@ -41,3 +41,55 @@ galaxy_config:
 >             pools:
 >               - job-handlers
 >               - workflow-schedulers
@@ -2241,8 +2237,8 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >    +
 >     galaxy_config:
 >       galaxy:
->         brand: "🧬🔬🚀"
->    @@ -20,6 +38,7 @@ galaxy_config:
+>         admin_users: admin@example.org
+>    @@ -19,6 +37,7 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -2297,7 +2293,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -39,6 +39,27 @@ galaxy_config:
+>    @@ -38,6 +38,27 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above

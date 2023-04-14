@@ -104,7 +104,7 @@ To demonstrate a real-life scenario and TPV's role in it, let's plan on setting 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -126,6 +126,9 @@ galaxy_config_templates:
+>    @@ -134,6 +134,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -178,7 +178,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -120,6 +120,14 @@ galaxy_config:
+>    @@ -122,6 +122,14 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
@@ -190,9 +190,9 @@ And of course, Galaxy has an Ansible Role for that.
 >    +
 >    +galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
 >    +
->     galaxy_config_templates:
->       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
->         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
+>     galaxy_config_files:
+>       - src: files/galaxy/welcome.html
+>         dest: "{{ galaxy_mutable_config_dir }}/static/welcome.html"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TPV config dir"}
@@ -277,17 +277,15 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -128,6 +109,10 @@ galaxy_extra_privsep_dirs:
->     
->     galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
->     
->    +galaxy_config_files:
+>    @@ -135,6 +116,8 @@ galaxy_config_files:
+>         dest: "{{ galaxy_mutable_config_dir }}/static/welcome.html"
+>       - src: files/galaxy/themes.yml
+>         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >    +  - src: files/galaxy/config/tpv_rules_local.yml
 >    +    dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
->    +
+>     
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
->         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TPV to job config"}
@@ -613,7 +611,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -48,6 +53,7 @@ galaxy_config:
+>    @@ -50,6 +55,7 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -621,7 +619,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -115,6 +121,8 @@ galaxy_config_files:
+>    @@ -121,6 +127,8 @@ galaxy_config_files:
 >         dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
 >     
 >     galaxy_config_templates:
