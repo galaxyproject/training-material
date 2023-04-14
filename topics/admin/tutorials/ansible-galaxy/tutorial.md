@@ -1998,65 +1998,65 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -0,0 +1,61 @@
 >    +upstream galaxy {
->    +    server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock;
+>    +	server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock;
 >    +
->    +    # Or if you serve galaxy at a path like http(s)://fqdn/galaxy
->    +    # Remember to set galaxy_url_prefix in the galaxy.yml file.
->    +    # server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock:/galaxy;
+>    +	# Or if you serve galaxy at a path like http(s)://fqdn/galaxy
+>    +	# Remember to set galaxy_url_prefix in the galaxy.yml file.
+>    +	# server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock:/galaxy;
 >    +}
 >    +
 >    +server {
->    +    # Listen on port 443
->    +    listen        *:443 ssl default_server;
->    +    # The virtualhost is our domain name
->    +    server_name   "{{ inventory_hostname }}";
+>    +	# Listen on port 443
+>    +	listen        *:443 ssl default_server;
+>    +	# The virtualhost is our domain name
+>    +	server_name   "{{ inventory_hostname }}";
 >    +
->    +    # Our log files will go here.
->    +    access_log  syslog:server=unix:/dev/log;
->    +    error_log   syslog:server=unix:/dev/log;
+>    +	# Our log files will go here.
+>    +	access_log  syslog:server=unix:/dev/log;
+>    +	error_log   syslog:server=unix:/dev/log;
 >    +
->    +    # The most important location block, by default all requests are sent to gunicorn
->    +    # If you serve galaxy at a path like /galaxy, change that below (and all other locations!)
->    +    location / {
->    +        # This is the backend to send the requests to.
->    +        proxy_pass http://galaxy;
+>    +	# The most important location block, by default all requests are sent to gunicorn
+>    +	# If you serve galaxy at a path like /galaxy, change that below (and all other locations!)
+>    +	location / {
+>    +		# This is the backend to send the requests to.
+>    +		proxy_pass http://galaxy;
 >    +
->    +        proxy_set_header Host $http_host;
->    +        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
->    +        proxy_set_header X-Forwarded-Proto $scheme;
->    +        proxy_set_header Upgrade $http_upgrade;
->    +    }
+>    +		proxy_set_header Host $http_host;
+>    +		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+>    +		proxy_set_header X-Forwarded-Proto $scheme;
+>    +		proxy_set_header Upgrade $http_upgrade;
+>    +	}
 >    +
->    +    # Static files can be more efficiently served by Nginx. Why send the
->    +    # request to Gunicorn which should be spending its time doing more useful
->    +    # things like serving Galaxy!
->    +    location /static {
->    +        alias {{ galaxy_server_dir }}/static;
->    +        expires 24h;
->    +    }
+>    +	# Static files can be more efficiently served by Nginx. Why send the
+>    +	# request to Gunicorn which should be spending its time doing more useful
+>    +	# things like serving Galaxy!
+>    +	location /static {
+>    +		alias {{ galaxy_server_dir }}/static;
+>    +		expires 24h;
+>    +	}
 >    +
->    +    # In Galaxy instances started with run.sh, many config files are
->    +    # automatically copied around. The welcome page is one of them. In
->    +    # production, this step is skipped, so we will manually alias that.
->    +    location /static/welcome.html {
->    +        alias {{ galaxy_server_dir }}/static/welcome.html.sample;
->    +        expires 24h;
->    +    }
+>    +	# In Galaxy instances started with run.sh, many config files are
+>    +	# automatically copied around. The welcome page is one of them. In
+>    +	# production, this step is skipped, so we will manually alias that.
+>    +	location /static/welcome.html {
+>    +		alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+>    +		expires 24h;
+>    +	}
 >    +
->    +    # serve visualization and interactive environment plugin static content
->    +    location ~ ^/plugins/(?<plug_type>[^/]+?)/((?<vis_d>[^/_]*)_?)?(?<vis_name>[^/]*?)/static/(?<static_file>.*?)$ {
->    +        alias {{ galaxy_server_dir }}/config/plugins/$plug_type/;
->    +        try_files $vis_d/${vis_d}_${vis_name}/static/$static_file
->    +                  $vis_d/static/$static_file =404;
->    +    }
+>    +	# serve visualization and interactive environment plugin static content
+>    +	location ~ ^/plugins/(?<plug_type>[^/]+?)/((?<vis_d>[^/_]*)_?)?(?<vis_name>[^/]*?)/static/(?<static_file>.*?)$ {
+>    +		alias {{ galaxy_server_dir }}/config/plugins/$plug_type/;
+>    +		try_files $vis_d/${vis_d}_${vis_name}/static/$static_file
+>    +		          $vis_d/static/$static_file =404;
+>    +	}
 >    +
->    +    location /robots.txt {
->    +        alias {{ galaxy_server_dir }}/static/robots.txt;
->    +    }
+>    +	location /robots.txt {
+>    +		alias {{ galaxy_server_dir }}/static/robots.txt;
+>    +	}
 >    +
->    +    location /favicon.ico {
->    +        alias {{ galaxy_server_dir }}/static/favicon.ico;
->    +    }
+>    +	location /favicon.ico {
+>    +		alias {{ galaxy_server_dir }}/static/favicon.ico;
+>    +	}
 >    +}
 >    {% endraw %}
 >    ```
@@ -2346,19 +2346,19 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -58,4 +58,14 @@ server {
->         location /favicon.ico {
->             alias {{ galaxy_server_dir }}/static/favicon.ico;
->         }
+>     	location /favicon.ico {
+>     		alias {{ galaxy_server_dir }}/static/favicon.ico;
+>     	}
 >    +
->    +    location /_x_accel_redirect {
->    +        internal;
->    +        alias /;
->    +    }
+>    +	location /_x_accel_redirect {
+>    +		internal;
+>    +		alias /;
+>    +	}
 >    +
->    +    # Support click-to-run in the GTN-in-Galaxy Webhook
->    +    location /training-material/ {
->    +        proxy_pass https://training.galaxyproject.org/training-material/;
->    +    }
+>    +	# Support click-to-run in the GTN-in-Galaxy Webhook
+>    +	location /training-material/ {
+>    +		proxy_pass https://training.galaxyproject.org/training-material/;
+>    +	}
 >     }
 >    {% endraw %}
 >    ```

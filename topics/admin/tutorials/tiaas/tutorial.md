@@ -187,11 +187,12 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -109,4 +109,5 @@ server {
->             proxy_set_header Host $http_host;
->         }
->     
->    +    {{ tiaas_nginx_routes }}
+>    @@ -108,4 +108,6 @@ server {
+>     		proxy_pass http://127.0.0.1:3000/;
+>     		proxy_set_header Host $http_host;
+>     	}
+>    +
+>    +	{{ tiaas_nginx_routes }}
 >     }
 >    {% endraw %}
 >    ```

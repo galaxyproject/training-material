@@ -281,16 +281,15 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -103,4 +103,10 @@ server {
->             proxy_set_header Upgrade $http_upgrade;
->             proxy_set_header Connection "upgrade";
->         }
+>    @@ -103,4 +103,9 @@ server {
+>     		proxy_set_header Upgrade $http_upgrade;
+>     		proxy_set_header Connection "upgrade";
+>     	}
 >    +
->    +    location /grafana/ {
->    +        proxy_pass http://127.0.0.1:3000/;
->    +        proxy_set_header Host $http_host;
->    +    }
->    +
+>    +	location /grafana/ {
+>    +		proxy_pass http://127.0.0.1:3000/;
+>    +		proxy_set_header Host $http_host;
+>    +	}
 >     }
 >    {% endraw %}
 >    ```

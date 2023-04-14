@@ -312,19 +312,19 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -114,4 +114,14 @@ server {
->          location /reports/ {
->              proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
->          }
+>     	location /reports/ {
+>     		proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
+>     	}
 >    +
->    +    location /beacon {
->    +        proxy_pass http://{{ groups['beacon_server'][0] }}:5050;
->    +        proxy_http_version 1.1;
->    +        proxy_set_header Upgrade $http_upgrade;
->    +        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
->    +        proxy_set_header X-Real-IP $remote_addr;
->    +        proxy_set_header Connection $connection_upgrade;
->    +        proxy_set_header Host $host;
->    +    }
+>    +	location /beacon {
+>    +		proxy_pass http://{{ groups['beacon_server'][0] }}:5050;
+>    +		proxy_http_version 1.1;
+>    +		proxy_set_header Upgrade $http_upgrade;
+>    +		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+>    +		proxy_set_header X-Real-IP $remote_addr;
+>    +		proxy_set_header Connection $connection_upgrade;
+>    +		proxy_set_header Host $host;
+>    +	}
 >     }
 >    {% endraw %}
 >    ```

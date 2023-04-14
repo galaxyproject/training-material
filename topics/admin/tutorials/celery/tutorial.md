@@ -327,18 +327,19 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/templates/nginx/galaxy.j2
 >        +++ b/templates/nginx/galaxy.j2
->        @@ -95,4 +95,12 @@ server {
->                 proxy_set_header X-Forwarded-Proto $scheme;
->             }
->         
->        +    location /flower {
->        +        proxy_pass http://localhost:5555;
->        +        proxy_set_header Host $host;
->        +        proxy_redirect off;
->        +        proxy_http_version 1.1;
->        +        proxy_set_header Upgrade $http_upgrade;
->        +        proxy_set_header Connection "upgrade";
->        +    }
+>        @@ -94,4 +94,13 @@ server {
+>         		proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+>         		proxy_set_header X-Forwarded-Proto $scheme;
+>         	}
+>        +
+>        +	location /flower {
+>        +		proxy_pass http://localhost:5555;
+>        +		proxy_set_header Host $host;
+>        +		proxy_redirect off;
+>        +		proxy_http_version 1.1;
+>        +		proxy_set_header Upgrade $http_upgrade;
+>        +		proxy_set_header Connection "upgrade";
+>        +	}
 >         }
 >        {% endraw %}
 >        ```

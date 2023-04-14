@@ -116,28 +116,28 @@ To allow your user to upload via TUS, you will need to:
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -28,6 +28,22 @@ server {
->             proxy_set_header Upgrade $http_upgrade;
->         }
+>     		proxy_set_header Upgrade $http_upgrade;
+>     	}
 >     
->    +    location /api/upload/resumable_upload {
->    +        # Disable request and response buffering
->    +        proxy_request_buffering     off;
->    +        proxy_buffering             off;
->    +        proxy_http_version          1.1;
+>    +	location /api/upload/resumable_upload {
+>    +		# Disable request and response buffering
+>    +		proxy_request_buffering     off;
+>    +		proxy_buffering             off;
+>    +		proxy_http_version          1.1;
 >    +
->    +        # Add X-Forwarded-* headers
->    +        proxy_set_header X-Forwarded-Host   $host;
->    +        proxy_set_header X-Forwarded-Proto  $scheme;
+>    +		# Add X-Forwarded-* headers
+>    +		proxy_set_header X-Forwarded-Host   $host;
+>    +		proxy_set_header X-Forwarded-Proto  $scheme;
 >    +
->    +        proxy_set_header Upgrade            $http_upgrade;
->    +        proxy_set_header Connection         "upgrade";
->    +        client_max_body_size        0;
->    +        proxy_pass http://localhost:{{ galaxy_tusd_port }}/files;
->    +    }
+>    +		proxy_set_header Upgrade            $http_upgrade;
+>    +		proxy_set_header Connection         "upgrade";
+>    +		client_max_body_size        0;
+>    +		proxy_pass http://localhost:{{ galaxy_tusd_port }}/files;
+>    +	}
 >    +
->         # Static files can be more efficiently served by Nginx. Why send the
->         # request to Gunicorn which should be spending its time doing more useful
->         # things like serving Galaxy!
+>     	# Static files can be more efficiently served by Nginx. Why send the
+>     	# request to Gunicorn which should be spending its time doing more useful
+>     	# things like serving Galaxy!
 >    {% endraw %}
 >    ```
 >    {: data-commit="Proxy it via NGINX"}

@@ -103,13 +103,13 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -110,4 +110,8 @@ server {
->         }
+>     	}
 >     
->         {{ tiaas_nginx_routes }}
+>     	{{ tiaas_nginx_routes }}
 >    +
->    +     location /reports/ {
->    +         proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
->    +     }
+>    +	location /reports/ {
+>    +		proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
+>    +	}
 >     }
 >    {% endraw %}
 >    ```

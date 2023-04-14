@@ -342,21 +342,20 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -84,4 +84,15 @@ server {
->         location /training-material/ {
->             proxy_pass https://training.galaxyproject.org/training-material/;
->         }
+>    @@ -84,4 +84,14 @@ server {
+>     	location /training-material/ {
+>     		proxy_pass https://training.galaxyproject.org/training-material/;
+>     	}
 >    +
->    +    location ~* /rabbitmq/(.*) {
->    +        rewrite ^/rabbitmq/(.*)$ /$1 break;
->    +        proxy_pass http://127.0.0.1:15672;
->    +        proxy_buffering                    off;
->    +        proxy_set_header Host              $http_host;
->    +        proxy_set_header X-Real-IP         $remote_addr;
->    +        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
->    +        proxy_set_header X-Forwarded-Proto $scheme;
->    +    }
->    +
+>    +	location ~* /rabbitmq/(.*) {
+>    +		rewrite ^/rabbitmq/(.*)$ /$1 break;
+>    +		proxy_pass http://127.0.0.1:15672;
+>    +		proxy_buffering                    off;
+>    +		proxy_set_header Host              $http_host;
+>    +		proxy_set_header X-Real-IP         $remote_addr;
+>    +		proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+>    +		proxy_set_header X-Forwarded-Proto $scheme;
+>    +	}
 >     }
 >    {% endraw %}
 >    ```
