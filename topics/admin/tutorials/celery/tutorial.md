@@ -88,15 +88,14 @@ To proceed from here it is expected that:
 >    - 5671 for AMQP for Pulsar, needed if you plan to setup Pulsar for remote job running.
 >
 {: .comment}
+In order to run a production ready Celery setup, we need to discuss and install some other software that works together with Celery.  
+We already learned about RabbitMQ in the Pulsar tutorial. The RabbitMQ server you already installed there will be our broker for Celery.
+As a backend we are going to use Redis.  
+Redis is a very popular key-value-store database. It is very fast and easy to set up backend for Celery.
+If you want to learn more about Redis, visit their website: [https://redis.io/](https://redis.io/)
 
-Redis is a very popular key-value-store database. It is very fast and a good backend for Celery.
-If you want to learn more about Redis, visit their website: (https://redis.io/)[https://redis.io/]
-
-Good news: Celery is already installed in your Galaxy's virtual environment if you followed the last tutorials and completed the Galaxy installation successfully.  
-Also RabbitMQ should be up and running after you completed the Pulsar tutorial.
-Still we need to add a few things to out Playbooks:
- - Redis is a very popular key-value-store database. It is very fast and a good backend for Celery. If you want to learn more about Redis, visit their website: [https://redis.io/](https://redis.io/)
- - Flower is a powerful dashboard for Celery and can be installed in Galaxy's venv using our role.
+For monitoring and debugging Celery, we use the [Flower](https://github.com/mher/flower) dashboard.  
+Flower is lightweight and has a clear but powerful UI and can be installed in Galaxy's venv using our role.
 
 # Installing and Configuring
 
