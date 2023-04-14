@@ -15,12 +15,16 @@ key_points:
   - Set your Galaxy instance apart from others
   - Communicate what your Galaxy instance is about
   - Offer users more customization options using themes
-contributors:
+contributions:
+  authorship:
   - ElectronicBlueberry
+  editing:
+  - hexylena
 requirements: []
----
+tags:
+- git-gat
 
-# Customizing the look of Galaxy 
+---
 
 Customizing your Galaxy instance makes it more recognizable at a glance, and can help communicate it's purpose to it's users.
 This tutorial will teach you three basic customizations you can make to Galaxy:
@@ -39,7 +43,7 @@ Feel free to use the included material in the hands-on sections, or provide your
 >
 {: .agenda}
 
-## Custom Brand
+## Custom Branding
 
 The brand text in Galaxy refers to the text you can see in the masthead of some Galaxy instances.
 This text will appear in the masthead, as well as the sites title.
@@ -47,17 +51,35 @@ It is an easy way to set your instance apart, and make it more identifiable.
 
 ![screenshot of the start page of Galaxy Europe](images/galaxy-europe.png "Galaxy Europe uses the brand text \"Europe\"")
 
-> <hands-on-title>Setting a brand text</hands-on-title>
+> <hands-on-title>Customising the Branding</hands-on-title>
 > 
-> 1. Open your galaxy config file `config/galaxy.yml` and add the following option under `galaxy:`
+> 1. Open your `group_vars/galaxyserers.yml` and the following option under `galaxy_config.galaxy`:
 > 
->    ```yaml
->    brand: Mars
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -32,6 +32,8 @@ galaxy_job_config:
+>     
+>     galaxy_config:
+>       galaxy:
+>    +    brand: Mars 🚀
+>    +    logo_src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Curiosity_Self-Portrait_at_%27Big_Sky%27_Drilling_Site.jpg/390px-Curiosity_Self-Portrait_at_%27Big_Sky%27_Drilling_Site.jpg"
+>         admin_users: admin@example.org
+>         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
+>         file_path: /data
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add brand"}
 >
-> 2. Start your galaxy server using `sh run.sh`
+> 1. Run the playbook.
 >
-> 3. Navigate to `https://localhost:8080`
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 >    ![screenshot of fictional "Galaxy Mars" start page, with the brand text set to "Mars"](images/galaxy-mars-brand.png "Your Galaxy start page should now look like this")
 {: .hands_on}
@@ -70,41 +92,84 @@ This page can be used to communicate what your instance is about, and share news
 
 > <hands-on-title>Creating a custom welcome page</hands-on-title>
 >
-> 0. (optional) Set the location of your welcome page in `galaxy.yml`
+> 1. Set the location of your welcome page in `group_vars/galaxyservers.yml`
 > 
->    Under `galaxy:` add the following option:
+>    Under `galaxy_config.galaxy` specify the location of your welcome page
 >
->    ```yaml
->    welcome_url: /static/your-welcome-page.html
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -85,6 +85,10 @@ galaxy_config:
+>               - job-handlers
+>               - workflow-schedulers
+>     
+>    +galaxy_config_files:
+>    +  - src: files/galaxy/welcome.html
+>    +    dest: "{{ galaxy_mutable_config_dir }}/static/welcome.html"
+>    +
+>     # Certbot
+>     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+>     certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add welcome url to the config"}
 >
->    Not setting this will cause the url to default to `/static/welcome.html`
+> 2. Let's then develop the associated template, add a title and some text to our welcome page:
 >
-> 1. Open `/static/welcome.html`, or create a new html file at the location set in Step 0
->
->    It is advisable to keep a copy of the default `welcome.html`, as it can serve as a useful reference.
->
-> 2. Add some Content
->
->    Let's add a title and some text to our welcome page:
->
->    ```html
->    <!DOCTYPE html>
->    <html lang="en">
->        <head>
->            <meta charset="utf-8">
->        </head>
->        <body>
->            <h1>Welcome to the Galaxy Mars instance!</h1>
->            <p>The only Galaxy instance on mars.</p>
->        </body>
->    </html>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/files/galaxy/welcome.html
+>    @@ -0,0 +1,11 @@
+>    +<!DOCTYPE html>
+>    +<html lang="en">
+>    +    <head>
+>    +        <meta charset="utf-8">
+>    +        <link href="/static/dist/base.css" rel="stylesheet" type="text/css" />
+>    +    </head>
+>    +    <body>
+>    +        <h1>Welcome to the Galaxy Mars instance!</h1>
+>    +        <p>The only Galaxy instance on mars.</p>
+>    +    </body>
+>    +</html>
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add the template"}
 >
 >    This works the same as any other html page. You can add styles in the head, or import some scripts.
->    
+>
 >    Make sure your welcome page has exactly one `h1` element, which describes the page.
 >    This will act as the heading for your start-page, which can help assistive technologies.
+>
+> 1. Now that we have a proper welcome page, we'll also need to correct our nginx routes:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/templates/nginx/galaxy.j2
+>    +++ b/templates/nginx/galaxy.j2
+>    @@ -40,7 +40,7 @@ server {
+>     	# automatically copied around. The welcome page is one of them. In
+>     	# production, this step is skipped, so we will manually alias that.
+>     	location /static/welcome.html {
+>    -		alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+>    +		alias {{ galaxy_mutable_config_dir }}/static/welcome.html;
+>     		expires 24h;
+>     	}
+>     
+>    {% endraw %}
+>    ```
+>    {: data-commit="Fix the nginx routes for the welcome page"}
+>
+> 1. Run the playbook.
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 {: .hands_on}
 
 todo: add note about style/font
@@ -117,32 +182,126 @@ You can even offer several options, to allow users to switch to the default if t
 
 > <hands-on-title>Configuring Themes</hands-on-title>
 >
-> 0. (optional) Set the location of the themes configuration `galaxy.yml`
-> 
->    Under `galaxy:` add the following option:
+> 0. Set the location of the themes configuration in your `group_vars/galaxyservers.yml`
 >
->    ```yaml
->    themes_config_file: your-themes-file.yml
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -34,6 +34,7 @@ galaxy_config:
+>       galaxy:
+>         brand: Mars 🚀
+>         logo_src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Curiosity_Self-Portrait_at_%27Big_Sky%27_Drilling_Site.jpg/390px-Curiosity_Self-Portrait_at_%27Big_Sky%27_Drilling_Site.jpg"
+>    +    themes_config_file: "{{ galaxy_config_dir }}/themes.yml"
+>         admin_users: admin@example.org
+>         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
+>         file_path: /data
+>    @@ -88,6 +89,8 @@ galaxy_config:
+>     galaxy_config_files:
+>       - src: files/galaxy/welcome.html
+>         dest: "{{ galaxy_mutable_config_dir }}/static/welcome.html"
+>    +  - src: files/galaxy/themes.yml
+>    +    dest: "{{ galaxy_config.galaxy.themes_config_file }}"
+>     
+>     # Certbot
+>     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add brand"}
 >
->    This location is relative to the config directory.
->    If unset, the default file `themes_conf.yml` will be used, if present.
+> 1. Create you themes config file in `files/galaxy/themes.yml`:
 >
-> 1. Create you themes config file.
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/files/galaxy/themes.yml
+>    @@ -0,0 +1,76 @@
+>    +blue:
+>    +  masthead:
+>    +    color: "#2c3143"
+>    +    text:
+>    +      color: "#f8f9fa"
+>    +      hover: gold
+>    +      active: white
+>    +    link:
+>    +      color: transparent
+>    +      hover: transparent
+>    +      active: "#181a24"
+>    +    logo:
+>    +      img: "/static/favicon.svg"
+>    +      img-secondary: null
+>    +
+>    +lightblue:
+>    +  masthead:
+>    +    color: "#384E77"
+>    +    text:
+>    +      color: white
+>    +      hover: "#E6F9AF"
+>    +      active: white
+>    +    link:
+>    +      color: transparent
+>    +      hover: transparent
+>    +      active: "#18314F"
+>    +    logo:
+>    +      img: "/static/favicon.svg"
+>    +
+>    +pride:
+>    +  masthead:
+>    +      color: >
+>    +        linear-gradient(120deg,
+>    +          #3c476d 0px 130px,
+>    +          #fdda0f 131px 139px,
+>    +          #fff 140px 148px,
+>    +          #f4b0c9 149px 157px,
+>    +          #7ccee6 158px 166px,
+>    +          #93540c 167px 175px,
+>    +          #000 176px 184px,
+>    +          transparent 185px),
+>    +        linear-gradient(270deg,
+>    +          #3c476d 0px 110px,
+>    +          #3c476d00 110px),
+>    +        linear-gradient(180deg,
+>    +          #FE0000 16.66%,
+>    +          #FD8C00 16.66% 33.32%,
+>    +          #FFE500 33.32% 49.98%,
+>    +          #119F0B 49.98% 66.64%,
+>    +          #0644B3 66.64% 83.3%,
+>    +          #C22EDC 83.3%)
+>    +      text:
+>    +        color: white
+>    +        hover: gold
+>    +        active: white
+>    +      link:
+>    +        color: "#3c476d"
+>    +        hover: "#323a53"
+>    +        active: "#6170a6"
+>    +      logo:
+>    +        img: "/static/favicon.svg"
+>    +        img-secondary: null
+>    +
+>    +smoky:
+>    +  masthead:
+>    +    color: "#0C0F0A"
+>    +    text:
+>    +      color: white
+>    +      hover: "#FBFF12"
+>    +      active: white
+>    +    link:
+>    +      color: transparent
+>    +      hover: transparent
+>    +      active: "#FF206E"
+>    +    logo:
+>    +      img: "/static/favicon.svg"
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add themes file"}
 >
->    Open `themes_conf.yml.sample`, and copy it's contents into a new file, either called `themes_conf.yml`, or the custom path you set in step 0.
->    Do not copy the conf file and remove the ending, as this file is a symbolic link.
->    Copying it copies a reference to the source file, not it's contents.
+>    The themes file can contains themes for users to select in Galaxy.
 >
-> 2. Understanding Themes
->
->    The themes file can contain sever themes.
->    Each theme is identified by it's id, eg `blue`, and followed by a set of rules, which style the client.
->    The first theme in your theme file will be used as the default theme, which users see when visiting your instance,
+>    Each theme is identified by it's id, eg `blue`, and followed by a set of
+>    rules, which style the client. The first theme in your theme file will be
+>    used as the default theme, which users see when visiting your instance,
 >    and which users which haven't logged in will see.
->
->    At the time of writing, themes only support styling the masthead, but this is subject to change.
->    The first example theme should contain all available values you can change.
 >
 > 3. Creating our own Theme
 >
@@ -155,12 +314,32 @@ You can even offer several options, to allow users to switch to the default if t
 >    Your theme file should now begin with:
 >
 >    ```yaml
->    mars:
->      masthead:
->        color: "#e03e1d"
 >    ```
+>    {% raw %}
+>    ```diff
+>    --- a/files/galaxy/themes.yml
+>    +++ b/files/galaxy/themes.yml
+>    @@ -1,3 +1,8 @@
+>    +# Our Martian Theme
+>    +mars:
+>    +  masthead:
+>    +    color: "#e03e1d"
+>    +
+>     blue:
+>       masthead:
+>         color: "#2c3143"
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add new default theme"}
 >
->    Restart your instance, and look at the masthead. It should be colored red.
+> 3. Run the playbook
 >
->    You can also try logging in, and changing your theme under `Preferences`
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+> 4. You can also try logging in, and changing your theme under `Preferences`
 {: .hands_on}
