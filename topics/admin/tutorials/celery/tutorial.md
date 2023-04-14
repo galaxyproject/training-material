@@ -296,7 +296,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        +flower_db_file: "{{ galaxy_root }}/var/flower.db"
 >        +flower_persistent: true
 >        +flower_broker_api: "https://flower:{{ vault_rabbitmq_password_flower }}@localhost:5671/api/"
->        +flower_broker_url: "amqp://flower:{{ vault_rabbitmq_password_flower }}@localhost:5671/galaxy?ssl=true"
+>        +flower_broker_url: "amqp://flower:{{ vault_rabbitmq_password_flower }}@localhost:5671/galaxy_internal?ssl=true"
 >        +flower_proxy_prefix: /flower
 >        +
 >        +flower_ui_users:
