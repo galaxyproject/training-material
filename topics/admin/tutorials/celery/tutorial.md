@@ -109,10 +109,11 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -30,3 +30,7 @@
->       version: 1.4.3
+>    @@ -38,3 +38,8 @@
+>       version: 1.4.4
 >     - src: galaxyproject.pulsar
 >       version: 1.0.10
+>    +# Celery, Redis, and Flower (dashboard)
 >    +- name: geerlingguy.redis
 >    +  version: 1.8.0
 >    +- name: usegalaxy_eu.flower

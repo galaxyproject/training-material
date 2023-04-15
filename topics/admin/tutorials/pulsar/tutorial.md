@@ -141,14 +141,15 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -24,3 +24,9 @@
->       version: 1.0.2
+>    @@ -31,3 +31,10 @@
+>     # TPV Linting
 >     - name: usegalaxy_eu.tpv_auto_lint
 >       version: 0.4.0
+>    +# RabbitMQ for Pulsar
 >    +- src: geerlingguy.docker
 >    +  version: 6.1.0
 >    +- src: usegalaxy_eu.rabbitmqserver
->    +  version: 1.4.3
+>    +  version: 1.4.4
 >    +- src: galaxyproject.pulsar
 >    +  version: 1.0.10
 >    {% endraw %}

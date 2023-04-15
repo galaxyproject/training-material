@@ -63,10 +63,11 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -41,3 +41,5 @@
+>    @@ -51,3 +51,6 @@
 >     - name: dj-wasabi.telegraf
 >       src: https://github.com/dj-wasabi/ansible-telegraf
 >       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
+>    +# Training Infrastructure as a Service
 >    +- src: galaxyproject.tiaas2
 >    +  version: 2.1.5
 >    {% endraw %}

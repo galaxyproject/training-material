@@ -92,10 +92,11 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -45,3 +45,7 @@
->       version: 2.1.5
+>    @@ -57,3 +57,8 @@
+>     # Our FTP Server
 >     - src: galaxyproject.proftpd
 >       version: 0.3.1
+>    +# Beacon support
 >    +- name: paprikant.beacon
 >    +  src: https://github.com/Paprikant/ansible-role-beacon
 >    +- name: paprikant.beacon-importer

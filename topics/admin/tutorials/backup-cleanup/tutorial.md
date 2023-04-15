@@ -72,10 +72,11 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -10,3 +10,5 @@
+>    @@ -11,3 +11,6 @@
 >       version: 0.3.1
 >     - src: usegalaxy_eu.certbot
 >       version: 0.1.9
+>    +# gxadmin (used in cleanup, and later monitoring.)
 >    +- src: galaxyproject.gxadmin
 >    +  version: 0.0.12
 >    {% endraw %}

@@ -85,10 +85,11 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -43,3 +43,5 @@
->       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
+>    @@ -54,3 +54,6 @@
+>     # Training Infrastructure as a Service
 >     - src: galaxyproject.tiaas2
 >       version: 2.1.5
+>    +# Our FTP Server
 >    +- src: galaxyproject.proftpd
 >    +  version: 0.3.1
 >    {% endraw %}

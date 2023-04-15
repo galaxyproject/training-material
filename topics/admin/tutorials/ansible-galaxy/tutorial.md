@@ -268,9 +268,10 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    ```diff
 >    --- /dev/null
 >    +++ b/requirements.yml
->    @@ -0,0 +1,12 @@
+>    @@ -0,0 +1,13 @@
+>    +# Galaxy, Postgres, Nginx
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.13
+>    +  version: 0.10.14
 >    +- src: galaxyproject.nginx
 >    +  version: 0.7.1
 >    +- src: galaxyproject.postgresql

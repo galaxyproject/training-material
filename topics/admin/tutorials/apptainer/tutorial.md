@@ -82,8 +82,8 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -16,3 +16,5 @@
->       version: 0.0.1
+>    @@ -20,3 +20,5 @@
+>     # CVMFS Support
 >     - src: galaxyproject.cvmfs
 >       version: 0.2.21
 >    +- src: usegalaxy_eu.apptainer
