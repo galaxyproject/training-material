@@ -15,13 +15,14 @@ key_points:
   - Set your Galaxy instance apart from others
   - Communicate what your Galaxy instance is about
   - Offer users more customization options using themes
-contributors:
+contributions:
+  authorship:
   - ElectronicBlueberry
+  editing:
+  - hexylena
 requirements: []
 subtopic: maintenance
 ---
-
-# Customizing the look of Galaxy 
 
 Customizing your Galaxy instance makes it more recognizable at a glance, and can help communicate its purpose to its users.
 This tutorial will teach you three basic customizations you can make to Galaxy:
@@ -40,7 +41,7 @@ Feel free to use the included material in the hands-on sections, or provide your
 >
 {: .agenda}
 
-## Custom Brand
+## Custom Branding
 
 The brand text in Galaxy refers to the text you can see in the masthead of some Galaxy instances.
 This text will appear in the masthead, as well as the sites title.
@@ -48,12 +49,13 @@ It is an easy way to set your instance apart, and make it more identifiable.
 
 ![screenshot of the start page of Galaxy Europe](images/galaxy-europe.png "Galaxy Europe uses the brand text \"Europe\"")
 
-> <hands-on-title>Setting a brand text</hands-on-title>
+> <hands-on-title>Customising the Branding</hands-on-title>
 > 
 > 1. Open your galaxy config file `config/galaxy.yml` and add the following option under `galaxy:`
 > 
 >    ```yaml
 >    brand: Mars
+>    logo_src: "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/images/logo.png"
 >    ```
 >
 > 2. Start your galaxy server using `sh run.sh`
@@ -108,8 +110,22 @@ This page can be used to communicate what your instance is about, and share news
 >    This will act as the heading for your start-page, which can help assistive technologies.
 {: .hands_on}
 
-todo: add note about style/font
-(figure out how to first...)
+> <tip-title>Use an IFrame!</tip-title>
+> A lot of the UseGalaxy.* instances choose to use their `welcome.html` to display an IFrame to a different site,
+> e.g. the GalaxyProject.org site, or a sub-site thereof.
+>
+> This makes it easier for non-administrators to keep the homepage's contents
+> up to date. By embedding (for example) a Wordpress blog in the center,
+> non-technical contributors can still publish articles and announcements
+> without having to re-deploy Galaxy every time.
+{: .tip}
+
+> <tip-title>Styling your Welcome</tip-title>
+> As in our example welcome.html, we've loaded the default Galaxy CSS to keep
+> it consistent with the surrounding material. If you wish to load a different
+> CSS file, or set a different font for the main panel, you can easily do that
+> by adding whatever CSS you like.
+{: .tip}
 
 ## Custom Masthead Theme
 
@@ -163,5 +179,5 @@ You can even offer several options, to allow users to switch to the default if t
 >
 >    Restart your instance, and look at the masthead. It should be colored red.
 >
->    You can also try logging in, and changing your theme under `Preferences`
+> 4. You can also try logging in, and changing your theme under `Preferences`
 {: .hands_on}

@@ -244,7 +244,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
->    -    default: singularity
+>    -    default: slurm
 >    +    default: tpv_dispatcher
 >         environments:
 >    -      local_env:

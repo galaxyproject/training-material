@@ -150,7 +150,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    +# Script Configuration
 >    +galaxy_api_url: "https://{{ groups['galaxyservers'][0] }}"
 >    +script_user: beacon
->    +script-dir: /home/beacon/script
+>    +script_dir: /home/beacon/script
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add relevant group variables"}
@@ -322,7 +322,7 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    +		proxy_set_header Upgrade $http_upgrade;
 >    +		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 >    +		proxy_set_header X-Real-IP $remote_addr;
->    +		proxy_set_header Connection $connection_upgrade;
+>    +		proxy_set_header Connection "upgrade";
 >    +		proxy_set_header Host $host;
 >    +	}
 >     }

@@ -366,7 +366,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -18,6 +18,9 @@ galaxy_job_config:
+>    @@ -18,14 +18,27 @@ galaxy_job_config:
 >         local_runner:
 >           load: galaxy.jobs.runners.local:LocalJobRunner
 >           workers: 4
@@ -376,7 +376,9 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
->    @@ -26,6 +29,16 @@ galaxy_job_config:
+>    -    default: singularity
+>    +    default: slurm
+>         environments:
 >           local_env:
 >             runner: local_runner
 >             tmp_dir: true

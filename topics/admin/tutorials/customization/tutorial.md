@@ -190,8 +190,22 @@ This page can be used to communicate what your instance is about, and share news
 >
 {: .hands_on}
 
-todo: add note about style/font
-(figure out how to first...)
+> <tip-title>Use an IFrame!</tip-title>
+> A lot of the UseGalaxy.* instances choose to use their `welcome.html` to display an IFrame to a different site,
+> e.g. the GalaxyProject.org site, or a sub-site thereof.
+>
+> This makes it easier for non-administrators to keep the homepage's contents
+> up to date. By embedding (for example) a Wordpress blog in the center,
+> non-technical contributors can still publish articles and announcements
+> without having to re-deploy Galaxy every time.
+{: .tip}
+
+> <tip-title>Styling your Welcome</tip-title>
+> As in our example welcome.html, we've loaded the default Galaxy CSS to keep
+> it consistent with the surrounding material. If you wish to load a different
+> CSS file, or set a different font for the main panel, you can easily do that
+> by adding whatever CSS you like.
+{: .tip}
 
 ## Custom Masthead Theme
 

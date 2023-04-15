@@ -208,9 +208,11 @@ This will setup `tmpwatch` to cleanup a few folders:
 
 # Backups
 
-There are two important things to back up with your Ansible Galaxy:
+There are a few important things to back up with your Ansible Galaxy:
 
 - Galaxy
+	- The Galaxy-managed config files
+	- The playbooks
 - The Database
 - The Data
 
