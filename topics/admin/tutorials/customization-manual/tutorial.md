@@ -23,7 +23,7 @@ subtopic: maintenance
 
 # Customizing the look of Galaxy 
 
-Customizing your Galaxy instance makes it more recognizable at a glance, and can help communicate it's purpose to it's users.
+Customizing your Galaxy instance makes it more recognizable at a glance, and can help communicate its purpose to its users.
 This tutorial will teach you three basic customizations you can make to Galaxy:
 
   - Setting a brand text
@@ -129,18 +129,18 @@ You can even offer several options, to allow users to switch to the default if t
 >    This location is relative to the config directory.
 >    If unset, the default file `themes_conf.yml` will be used, if present.
 >
-> 1. Create you themes config file.
+> 1. Create your themes config file.
 >
->    Open `themes_conf.yml.sample`, and copy it's contents into a new file, either called `themes_conf.yml`, or the custom path you set in step 0.
+>    Open `themes_conf.yml.sample`, and copy its contents into a new file, either called `themes_conf.yml`, or the custom path you set in step 0.
 >    Do not copy the conf file and remove the ending, as this file is a symbolic link.
->    Copying it copies a reference to the source file, not it's contents.
+>    Copying it copies a reference to the source file, not its contents.
 >
 > 2. Understanding Themes
 >
->    The themes file can contain sever themes.
->    Each theme is identified by it's id, eg `blue`, and followed by a set of rules, which style the client.
+>    The themes file can contain several themes.
+>    Each theme is identified by its id, eg `blue`, and followed by a set of rules, which style the client.
 >    The first theme in your theme file will be used as the default theme, which users see when visiting your instance,
->    and which users which haven't logged in will see.
+>    and which users who haven't logged in will see.
 >
 >    At the time of writing, themes only support styling the masthead, but this is subject to change.
 >    The first example theme should contain all available values you can change.

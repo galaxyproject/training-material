@@ -26,7 +26,7 @@ tags:
 subtopic: maintenance
 ---
 
-Customizing your Galaxy instance makes it more recognizable at a glance, and can help communicate it's purpose to it's users.
+Customizing your Galaxy instance makes it more recognizable at a glance, and can help communicate its purpose to its users.
 This tutorial will teach you three basic customizations you can make to Galaxy:
 
   - Setting a brand text
@@ -229,7 +229,7 @@ You can even offer several options, to allow users to switch to the default if t
 >    ```
 >    {: data-commit="Add brand"}
 >
-> 1. Create you themes config file in `files/galaxy/themes.yml`:
+> 1. Create your themes config file in `files/galaxy/themes.yml`:
 >
 >    {% raw %}
 >    ```diff
@@ -318,10 +318,10 @@ You can even offer several options, to allow users to switch to the default if t
 >
 >    The themes file can contains themes for users to select in Galaxy.
 >
->    Each theme is identified by it's id, eg `blue`, and followed by a set of
+>    Each theme is identified by its id, eg `blue`, and followed by a set of
 >    rules, which style the client. The first theme in your theme file will be
 >    used as the default theme, which users see when visiting your instance,
->    and which users which haven't logged in will see.
+>    and which users who haven't logged in will see.
 >
 > 3. Creating our own Theme
 >

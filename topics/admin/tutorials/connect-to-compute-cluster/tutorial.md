@@ -360,7 +360,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 
 > <hands-on-title>Making Galaxy aware of DRMAA</hands-on-title>
 >
-> 3. First, we need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. Since we already have a good default destination that uses singularity, we will simply modify that to use the slurm runner. Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. <!-- Note that we also need to set a default destination now that more than one destination is defined. --> In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of a defined plugin:
+> 3. We need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have a unique name as its key, and a `load` attribute. Since we already have a good default destination that uses singularity, we will simply modify that to use the slurm runner. Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. <!-- Note that we also need to set a default destination now that more than one destination is defined. --> In a job environment, the key is a unique identifier for that environment and the `runner` attribute must match the key of a defined runner plugin:
 >
 >    {% raw %}
 >    ```diff

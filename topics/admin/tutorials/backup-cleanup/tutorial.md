@@ -61,7 +61,7 @@ then files Galaxy creates itself. Both of these can be cleaned to save space.
 
 ## User Created Files
 
-You can use `gxadmin` to cleanup user created files. `gxadmin` is covered in more detail in [it's own dedicated
+You can use `gxadmin` to cleanup user created files. `gxadmin` is covered in more detail in [its own dedicated
 tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 
 > <hands-on-title>Installing gxadmin with Ansible</hands-on-title>
@@ -341,7 +341,7 @@ If you encounter issues, we suggest reading [Lucille's log of her experiences re
 
 ## Restoring Galaxy
 
-Restore Galaxy is easy via Ansible (maybe ensuring users cannot login by disabling the routes in nginx)
+Restoring Galaxy is easy via Ansible (maybe ensuring users cannot login by disabling the routes in nginx)
 
 ```console
 ansible-playbook galaxy.yml
