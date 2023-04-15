@@ -29,7 +29,7 @@ But if you have graduated into using a more complex setup, perhaps with multiple
 ...
 ```
 
-Then it might be harder to figure ou what variables are being set, in full. This is where [`ansible-inventory`](https://docs.ansible.com/ansible/latest/cli/ansible-inventory.html) command can be useful.
+Then it might be harder to figure out what variables are being set, in full. This is where [`ansible-inventory`](https://docs.ansible.com/ansible/latest/cli/ansible-inventory.html) command can be useful.
 
 **Graph** shows you the structure of your host groups:
 
