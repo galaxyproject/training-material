@@ -300,7 +300,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >  Adding TPV as a runner will cause Galaxy to automatically install the `total-perspective-vortex` package on startup as a conditional dependency.
 >  Finally, we added a new config file named `tpv_rules_local.yml`, which we will create next.
 >
-> 2. Create a new file named `tpv_rules_local.yml` in the "files" folder of your ansible playbook, so that it is copied to the config folder on the target.
+> 2. Create a new file named `tpv_rules_local.yml` in the `files/galaxy/config/` folder of your ansible playbook, so that it is copied to the config folder on the target.
 >    The file should contain the following content:
 >
 >    {% raw %}
