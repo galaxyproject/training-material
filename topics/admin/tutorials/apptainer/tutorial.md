@@ -44,14 +44,14 @@ Apptainer is an alternative to Docker that is much friendlier for HPCs
 >
 > Name                  | Singularity                                          | SingularityCE                                                  | Apptainer
 > --------------------- | ---------------------------------------------------- | ---------------------                                          | ----------------
-> Origin                | Original name, used by the project until 2021        | Name of Synlabs' Fork (CE for <b>C</b>ommunity <b>E</b>dition) | Name change when the project joined the Linux Foundation
+> Origin                | Original name, used by the project until 2021        | Name of Sylabs' Fork (CE for <b>C</b>ommunity <b>E</b>dition) | Name change when the project joined the Linux Foundation
 > Status                | renamed in 2021                                      | currently active                                               | currently active
 > RPM Package available | discontinued                                         | ❌                                                             | ✅
 > CLI name              | `singularity`                                        | `singularity`                                                  | `apptainer` or `singularity`
 >
-> Many people still know Apptainer under it's former name Singularity.
-> Singularity was the project's former name until it joined the Linux Foundation was renamed to Apptainer in 2021.
-> However the Synlabs' fork 'SingularityCE' (for <u>C</u>ommunity <u>E</u>dition) is free and open source, too.
+> Many people still know Apptainer under its former name, Singularity.
+> Singularity was forked in 2021, with the non-commercial fork being renamed to Apptainer and joining the Linux Foundation.
+> Sylabs maintains their own free and open source fork, 'SingularityCE' (for <u>C</u>ommunity <u>E</u>dition), as well as a commercial version, 'SingularityPRO'.
 >
 > We will use the Name Apptainer for our training material, because most rpm packages are now named Apptainer.
 {: .comment}
@@ -326,7 +326,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >
 >    > <code-out-title></code-out-title>
 >    > ```
->    > gunicorn[1190010]: galaxy.tool_util.deps.containers INFO 2021-01-08 13:37:30,342 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Checking with container resolver [MulledApptainerContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0,type=singularity]]
+>    > gunicorn[1190010]: galaxy.tool_util.deps.containers INFO 2021-01-08 13:37:30,342 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Checking with container resolver [MulledSingularityContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0,type=singularity]]
 >    > gunicorn[1190010]: galaxy.jobs.command_factory INFO 2021-01-08 13:37:30,418 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Built script [/srv/galaxy/jobs/000/23/tool_script.sh] for tool command [minimap2 --version > /srv/galaxy/jobs/000/23/outputs/COMMAND_VERSION 2>&1; ln -f -s '/data/000/dataset_22.dat' reference.fa && minimap2           -t ${GALAXY_SLOTS:-4} reference.fa '/data/000/dataset_22.dat' -a | samtools sort -@${GALAXY_SLOTS:-2} -T "${TMPDIR:-.}" -O BAM -o '/data/000/dataset_23.dat' > '/data/000/dataset_23.dat']
 >    > gunicorn[1190010]: galaxy.jobs.runners DEBUG 2021-01-08 13:37:30,441 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] (23) command is: mkdir -p working outputs configs
 >    > gunicorn[1190010]: if [ -d _working ]; then

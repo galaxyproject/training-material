@@ -430,10 +430,10 @@ We can simply do that by starting an upload to our Galaxy.
 > 1. First, open a new tab and enter your machines hostname followed by `/flower/dashboard` then log in with `username: admin` and you password.
 >    You should see an overview with active workers.  
 >    Keep that tab open
-> 2. In split view, open a second browser window and open you Galaxy page.
+> 2. In split view, open a second browser window and open your Galaxy page.
 >    Click on {% icon galaxy-upload %} Upload Data, select a file from your computer and click `upload`.
 > 3. The Workers should now receive a new tasks. Click on `Succeeded` and then on the UUID of the last upload task.  
->    You should see all its details here and the info that is was successful.
+>    You should see all its details here and the info that it was successful.
 {: .hands_on}
 
 {% snippet topics/admin/faqs/missed-something.md step=12 %}
