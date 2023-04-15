@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Post Assembly Quality Control Workflow
-zenodo_link1: 'https://zenodo.org/record/7781236#.ZDWLcI5BwgY'
+zenodo_link1: 'https://zenodo.org/record/7831298#.ZDqNppFBwgY'
 zenodo_link2: 'https://zenodo.org/record/7784764#.ZDWLjY5BwgY'
 zenodo_link3: 'https://zenodo.org/record/7814950#.ZDWI445BwgY'
 zenodo_link4: 'https://zenodo.org/record/7817734#.ZDWIsI5BwgY'
@@ -124,7 +124,7 @@ As a first step we will get the data from Zenodo.
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >       ```
->   CReformitis_assembly    https://zenodo.org/record/7781236/files/GCA_947172415.1.fasta.gz    fasta.gz    assembly
+>   CReformitis_assembly    https://zenodo.org/record/7831298/files/assembly_sponge.fasta.gz    fasta.gz    assembly
 >   CReformitis_metadata    https://zenodo.org/record/7781236/files/metadata_chon.yaml  yaml    metadata
 >   CReniformis_Hi-C_F   https://zenodo.org/record/7786773/files/hiC_1.fastq.gz   fastq.gz    Hi-C
 >   CReniformis_Hi-C_R   https://zenodo.org/record/7786773/files/hiC_2.fastq.gz   fastq.gz    Hi-C
