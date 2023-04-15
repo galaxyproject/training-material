@@ -101,14 +101,13 @@ This page can be used to communicate what your instance is about, and share news
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -86,6 +86,11 @@ galaxy_config:
+>    @@ -86,6 +86,10 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
->    +galaxy_config_files:
+>    +galaxy_config_files_public:
 >    +  - src: files/galaxy/welcome.html
 >    +    dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->    +    mode: "0755"
 >    +
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -135,22 +134,6 @@ This page can be used to communicate what your instance is about, and share news
 >    +        <p>The only Galaxy instance on mars.</p>
 >    +    </body>
 >    +</html>
->    diff --git a/group_vars/galaxyservers.yml b/group_vars/galaxyservers.yml
->    index 3d7fd0e..8d8bd40 100644
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -86,10 +86,9 @@ galaxy_config:
->               - job-handlers
->               - workflow-schedulers
->     
->    -galaxy_config_files:
->    +galaxy_config_files_public:
->       - src: files/galaxy/welcome.html
->         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->    -    mode: "0755"
->     
->     # Certbot
->     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the template"}
