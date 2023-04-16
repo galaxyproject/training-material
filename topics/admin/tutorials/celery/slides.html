@@ -82,8 +82,8 @@ on a different node or even a whole cluster...
 
 ## How does the magic work?
 
- - Celery loads the Galaxy code from NFS when you start the workers.
- - Connects to the broker and fetches tasks from the queue
+ - Celery loads the Galaxy code from NFS when you start the workers
+ - Workers connect to the broker and fetch tasks from the queue
  - Since all the python modules are already loaded, it can execute the task directly, with almost no delay
  - Now it runs the code according to the task, for example a SQL update, or a file deletion on the NFS
  - Results are either sent directly back to the broker or stored e.g. in a Redis DB
