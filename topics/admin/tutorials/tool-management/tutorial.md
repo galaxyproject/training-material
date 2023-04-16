@@ -193,17 +193,7 @@ For that, you can install from a YAML file:
 
 Occasionally the tool installation may fail due to network issues; if it does, just re-run the `shed-tools` installation process until it succeeds. This is a known issue the developers are working on.
 
-> <tip-title>Opening a split screen in byobu</tip-title>
-> <kbd>Shift-F2</kbd>: Create a horizontal split
->
-> <kbd>Shift-Left/Right/Up/Down</kbd>: Move focus among splits
->
-> <kbd>Ctrl-F6</kbd>:  Close split in focus
->
-> <kbd>Ctrl-D</kbd>:  (Linux, Mac users) Close split in focus
->
-> There are more byobu commands described in this [gist](https://gist.github.com/devhero/7b9a7281db0ac4ba683f)
-{: .tip}
+{% snippet topics/admin/faqs/byobu-shortcuts.md %}
 
 > <tip-title>Can I install tools without restarting?</tip-title>
 > Yes. The default tool config (`config/tool_conf.xml.sample`, copy to `config/tool_conf.xml` to modify) has an option, `monitor="true"` set in the root `<toolbox>` tag. This instructs Galaxy to watch the tool files referenced in that config and load or reload them as necessary. It will also add any tools you have added.
@@ -335,3 +325,9 @@ If running ephemeris directly is not your preference, there is an Ansible [role]
 >
 > This will request the toolbox to reload and you can check after if it's discovered your newly installed tools.
 {: .tip}
+
+<!--
+{% snippet topics/admin/faqs/missed-something.md step=7 %}
+-->
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tool-management" %}

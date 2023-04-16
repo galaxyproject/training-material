@@ -3,16 +3,21 @@ require './_plugins/gtn.rb'
 
 module Jekyll
   class Boxify < Jekyll::Generator
-    def initialize(config)
+    def initialize(config) # :nodoc:
       @config = config['boxify'] ||= {}
     end
 
-    def generate(site)
+    def generate(site) # :nodoc:
       puts "[GTN/Boxify]"
       site.pages.each { |page| boxify page,site }
       site.posts.docs.each { |post| boxify post, site }
     end
 
+    ##
+    # This function adds boxes to the page content.
+    # Params:
+    # +page+:: The page to add boxes to
+    # +site+:: The +Jekyll::Site+ object
     def boxify(page, site)
       if page.content.nil?
         return

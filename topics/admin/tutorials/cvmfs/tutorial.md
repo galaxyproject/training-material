@@ -183,12 +183,13 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -14,3 +14,5 @@
->       version: 0.1.5
+>    @@ -17,3 +17,6 @@
+>     # TUS (uploads)
 >     - name: galaxyproject.tusd
 >       version: 0.0.1
+>    +# CVMFS Support
 >    +- src: galaxyproject.cvmfs
->    +  version: 0.2.13
+>    +  version: 0.2.21
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
@@ -271,9 +272,13 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    {% raw %}
 >    ```diff
->    --- /dev/null
+>    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -0,0 +1,4 @@
+>    @@ -6,3 +6,8 @@ certbot_virtualenv_package_name: python3-venv     # usegalaxy_eu.certbot
+>     # Common variables needed by all hosts
+>     galaxy_user_name: galaxy
+>     galaxy_db_name: galaxy
+>    +
 >    +# CVMFS vars
 >    +cvmfs_role: client
 >    +galaxy_cvmfs_repos_enabled: config-repo
@@ -305,11 +310,14 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -20,3 +20,4 @@
->           become_user: "{{ galaxy_user.name }}"
+>    @@ -37,6 +37,7 @@
 >         - galaxyproject.nginx
+>         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >    +    - galaxyproject.cvmfs
+>       post_tasks:
+>         - name: Setup gxadmin cleanup task
+>           ansible.builtin.cron:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook" data-ref="pb"}
@@ -499,14 +507,15 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
+>    @@ -66,6 +66,8 @@ galaxy_config:
+>         outputs_to_working_directory: true
+>         # TUS
+>         tus_upload_store: /data/tus
+>    +    # CVMFS
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->         brand: "🧬🔬🚀"
->         admin_users: admin@example.org
->         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tool_data_table_config_path to group variables" data-ref="gvconf"}
@@ -592,6 +601,8 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+{% snippet topics/admin/faqs/git-commit.md page=page %}
 
 {% snippet topics/admin/faqs/missed-something.md step=5 %}
 
@@ -713,3 +724,5 @@ If you are working with plants, you can find separate reference data here: [fred
 > hope you enjoyed it and hopefully I'll get to meet some of you in person one
 > day soon at a Galaxy conference. Thank you and goodbye.
 {: .spoken data-visual="gtn" data-target="#feedback"}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="cvmfs" %}

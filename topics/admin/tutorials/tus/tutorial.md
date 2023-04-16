@@ -52,10 +52,11 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -12,3 +12,5 @@
->       version: 0.3.0
->     - src: usegalaxy_eu.certbot
->       version: 0.1.5
+>    @@ -14,3 +14,6 @@
+>     # gxadmin (used in cleanup, and later monitoring.)
+>     - src: galaxyproject.gxadmin
+>       version: 0.0.12
+>    +# TUS (uploads)
 >    +- name: galaxyproject.tusd
 >    +  version: 0.0.1
 >    {% endraw %}
@@ -79,19 +80,19 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -60,6 +60,8 @@ galaxy_config:
+>    @@ -64,6 +64,8 @@ galaxy_config:
 >         allow_user_impersonation: true
 >         # Tool security
 >         outputs_to_working_directory: true
 >    +    # TUS
 >    +    tus_upload_store: /data/tus
 >       gravity:
+>         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->         app_server: gunicorn
->    @@ -139,3 +141,16 @@ nginx_conf_http:
+>    @@ -146,3 +148,16 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
->     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+>     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >    +
 >    +# TUS
 >    +galaxy_tusd_port: 1080
@@ -116,28 +117,28 @@ To allow your user to upload via TUS, you will need to:
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -28,6 +28,22 @@ server {
->             proxy_set_header Upgrade $http_upgrade;
->         }
+>     		proxy_set_header Upgrade $http_upgrade;
+>     	}
 >     
->    +    location /api/upload/resumable_upload {
->    +        # Disable request and response buffering
->    +        proxy_request_buffering     off;
->    +        proxy_buffering             off;
->    +        proxy_http_version          1.1;
+>    +	location /api/upload/resumable_upload {
+>    +		# Disable request and response buffering
+>    +		proxy_request_buffering     off;
+>    +		proxy_buffering             off;
+>    +		proxy_http_version          1.1;
 >    +
->    +        # Add X-Forwarded-* headers
->    +        proxy_set_header X-Forwarded-Host   $host;
->    +        proxy_set_header X-Forwarded-Proto  $scheme;
+>    +		# Add X-Forwarded-* headers
+>    +		proxy_set_header X-Forwarded-Host   $host;
+>    +		proxy_set_header X-Forwarded-Proto  $scheme;
 >    +
->    +        proxy_set_header Upgrade            $http_upgrade;
->    +        proxy_set_header Connection         "upgrade";
->    +        client_max_body_size        0;
->    +        proxy_pass http://localhost:{{ galaxy_tusd_port }}/files;
->    +    }
+>    +		proxy_set_header Upgrade            $http_upgrade;
+>    +		proxy_set_header Connection         "upgrade";
+>    +		client_max_body_size        0;
+>    +		proxy_pass http://localhost:{{ galaxy_tusd_port }}/files;
+>    +	}
 >    +
->         # Static files can be more efficiently served by Nginx. Why send the
->         # request to Gunicorn which should be spending its time doing more useful
->         # things like serving Galaxy!
+>     	# Static files can be more efficiently served by Nginx. Why send the
+>     	# request to Gunicorn which should be spending its time doing more useful
+>     	# things like serving Galaxy!
 >    {% endraw %}
 >    ```
 >    {: data-commit="Proxy it via NGINX"}
@@ -148,11 +149,14 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -19,3 +19,4 @@
->           become: true
->           become_user: "{{ galaxy_user.name }}"
+>    @@ -36,6 +36,7 @@
+>           become_user: "{{ galaxy_user_name }}"
 >         - galaxyproject.nginx
+>         - galaxyproject.gxadmin
 >    +    - galaxyproject.tusd
+>       post_tasks:
+>         - name: Setup gxadmin cleanup task
+>           ansible.builtin.cron:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the role to the playbook"}
@@ -198,4 +202,8 @@ Congratulations, you've set up TUS for Galaxy.
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=2 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=4 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tus" %}

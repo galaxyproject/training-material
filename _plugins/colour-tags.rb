@@ -2,6 +2,17 @@ require 'digest'
 require './_plugins/gtn/hsluv'
 
 module ColourTag
+
+  ##
+  # This function generates the CSS for a colour tag
+  # Params
+  # +contents+:: The contents of the tag
+  #
+  # Returns
+  # +String+:: The CSS for the tag
+  #
+  # Example
+  #  ColourTag.colour_tag("test") => "--color-primary: #f799ff; --color-darker: #f571ff; --color-dimmed: #f686ff;"
   def self.colour_tag(contents)
     d = (Digest::SHA256.hexdigest contents).to_i(16)
 
@@ -24,7 +35,7 @@ end
 
 
 
-module Jekyll
+module Jekyll # :nodoc:
   module ImplColourTag
     def cache
       @@cache ||= Jekyll::Cache.new("ColorTags")
