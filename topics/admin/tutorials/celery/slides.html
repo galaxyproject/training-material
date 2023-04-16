@@ -22,9 +22,9 @@ It consists of:
 - Your Application that sends tasks
 - To a broker with queues
 - Celery workers that execute the tasks
-- A Result backend to store the task results
+- A result backend to store the task results
 
-It's written in Python but supports multiple other languages via webhooks.
+It's written in Python, multiple other languages are supported.
 ]
 
 .pull-right[
@@ -49,7 +49,7 @@ It's written in Python but supports multiple other languages via webhooks.
 
 ---
 
-# How Celery Can Improve Galaxy?
+# How does Celery improve Galaxy?
 
 
 ---
@@ -58,9 +58,11 @@ It's written in Python but supports multiple other languages via webhooks.
 **The Problem**
 
 The Galaxy Server should respond quickly to every request.
-Without Celery, Gunicorn and the Galaxy handlers have to do many I/O bound side tasks.
-For example packing a zip for history export.
-
+While this is easily possible for small instances with few users,
+when scaling to thousands of users and millions of jobs,
+without Celery, Gunicorn and the job handlers spend much of their time on I/O bound side tasks,
+for example packing a zip for history export.
+This leads to slow responses and scheduling.
 **The Solution**
 
 Queue asynchronous tasks with Celery  
