@@ -176,7 +176,7 @@ And of course, Galaxy has an Ansible Role for that.
 >       version: 1.0.2
 >    +# TPV Linting
 >    +- name: usegalaxy_eu.tpv_auto_lint
->    +  version: 0.4.0
+>    +  version: 0.4.2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tpv-auto-lint to requirements"}

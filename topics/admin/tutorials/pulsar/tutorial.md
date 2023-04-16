@@ -144,7 +144,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >    @@ -31,3 +31,10 @@
 >     # TPV Linting
 >     - name: usegalaxy_eu.tpv_auto_lint
->       version: 0.4.0
+>       version: 0.4.2
 >    +# RabbitMQ for Pulsar
 >    +- src: geerlingguy.docker
 >    +  version: 6.1.0
