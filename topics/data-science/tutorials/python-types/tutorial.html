@@ -1019,55 +1019,55 @@
 
 <p>Check the type of values with the <a href="https://docs.python.org/3.8/library/functions.html#type"><code class="language-plaintext highlighter-rouge">type()</code></a> function:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="mi">52</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="mi">52</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>You can also check the types of variables</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fitness</span> <span class="o">=</span> <span class="s">'average'</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">fitness</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">fitness</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h3 id="methods">Methods</h3>
 
 <p>A value’s type determines what the program can do to it. Some operations may work</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>And some operations may not work:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'hello'</span> <span class="o">-</span> <span class="s">'h'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="s">'hello'</span> <span class="o">-</span> <span class="s">'h'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>For instance, you can use the <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">*</code> operators on strings.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">full_name</span> <span class="o">=</span> <span class="s">'Ahmed'</span> <span class="o">+</span> <span class="s">' '</span> <span class="o">+</span> <span class="s">'Walsh'</span>
-<span class="k">print</span><span class="p">(</span><span class="n">full_name</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">full_name</span><span class="p">)</span>
 <span class="n">separator</span> <span class="o">=</span> <span class="s">'='</span> <span class="o">*</span> <span class="mi">10</span>
-<span class="k">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Some methods only accept specific types, or only work on specific types.</p>
 
 <p>The built-in function <code class="language-plaintext highlighter-rouge">len</code> returns the length of your data. Which of the following would you expect to work? <code class="language-plaintext highlighter-rouge">len(string)</code>? <code class="language-plaintext highlighter-rouge">len(int)</code>?</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">full_name</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="mi">52</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">full_name</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="mi">52</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h3 id="matching-types">Matching Types</h3>
 
 <p>Not all types support all operations, adding an integer to a string doesn’t make much sense:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="s">'2'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="s">'2'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>This does not work because it’s ambiguous: should <code class="language-plaintext highlighter-rouge">1 + '2'</code> be <code class="language-plaintext highlighter-rouge">3</code> (a number) or <code class="language-plaintext highlighter-rouge">'12'</code> (a string)? Some types can be converted to other types by using the type name as a function.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="s">'2'</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">'2'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="s">'2'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">'2'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="operation-support">Operation Support</h3>
@@ -1111,8 +1111,8 @@
 
 <p>Integers and floating-point numbers can be mixed in arithmetic. Python 3 (which we use) automatically converts integers to floats as needed.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'half is </span><span class="si">{</span><span class="mi">1</span> <span class="o">/</span> <span class="mf">2.0</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'three squared is </span><span class="si">{</span><span class="mf">3.0</span> <span class="o">**</span> <span class="mi">2</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'half is </span><span class="si">{</span><span class="mi">1</span> <span class="o">/</span> <span class="mf">2.0</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'three squared is </span><span class="si">{</span><span class="mf">3.0</span> <span class="o">**</span> <span class="mi">2</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="variables-only-change-value-when-something-is-assigned-to-them">Variables only change value when something is assigned to them.</h2>
@@ -1123,7 +1123,7 @@ the former updates automatically. However, this does <strong>not</strong> happen
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">variable_one</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">variable_two</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">variable_one</span>
 <span class="n">variable_one</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'first is </span><span class="si">{</span><span class="n">variable_one</span><span class="si">}</span><span class="s"> and second is </span><span class="si">{</span><span class="n">variable_two</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'first is </span><span class="si">{</span><span class="n">variable_one</span><span class="si">}</span><span class="s"> and second is </span><span class="si">{</span><span class="n">variable_two</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The computer reads the value of <code class="language-plaintext highlighter-rouge">first</code> when doing the multiplication, creates
@@ -1212,9 +1212,9 @@ would you use to represent each of the following?  Try to come up with more than
   <p>In Python 3, the <code class="language-plaintext highlighter-rouge">//</code> operator performs integer (whole-number) floor division, the <code class="language-plaintext highlighter-rouge">/</code> operator performs floating-point
 division, and the <code class="language-plaintext highlighter-rouge">%</code> (or <em>modulo</em>) operator calculates and returns the remainder from integer division:</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 // 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">//</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 / 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 % 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">%</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 // 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">//</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 / 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 % 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">%</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div>  </div>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 // 3: 1
@@ -1465,7 +1465,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

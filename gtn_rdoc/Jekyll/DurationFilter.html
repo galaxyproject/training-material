@@ -115,13 +115,28 @@
 
         <div class="method-description">
           
-          
+          <p>This function converts a duration string into a human readable string. Params:</p>
+<dl class="rdoc-list note-list"><dt><code>duration</code>
+<dd>
+<p>The duration string to convert (e.g. 1H30M, RFC 3339 formatted minus the leading P/T)</p>
+</dd></dl>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>String</code>
+<dd>
+<p>The human readable string</p>
+</dd></dl>
+
+<p>Example:</p>
+
+<pre>{{ &quot;T1H30M&quot; | duration_to_human }}
+=&gt; &quot;1 hour 30 minutes&quot;</pre>
           
           
 
           
           <div class="method-source-code" id="duration_to_human-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-duration.rb, line 3</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-duration.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">duration_to_human</span>(<span class="ruby-identifier">duration</span>)
   <span class="ruby-comment"># Match the different parts of the string, must match entire string or it will fail.</span>
   <span class="ruby-identifier">match</span> = <span class="ruby-regexp">/^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">duration</span>)

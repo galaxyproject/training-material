@@ -706,26 +706,26 @@
         <span class="k">if</span> <span class="n">character</span> <span class="o">!=</span> <span class="n">prev</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">prev</span><span class="p">:</span>
                 <span class="n">entry</span> <span class="o">=</span> <span class="p">(</span><span class="n">prev</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
-                <span class="n">lst</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+                <span class="n">lst</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
             <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="n">prev</span> <span class="o">=</span> <span class="n">character</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="n">entry</span> <span class="o">=</span> <span class="p">(</span><span class="n">character</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
-    <span class="n">lst</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s">""</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">k</span><span class="si">}{</span><span class="n">v</span><span class="si">}</span><span class="s">"</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span>
+    <span class="n">lst</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">""</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">k</span><span class="si">}{</span><span class="n">v</span><span class="si">}</span><span class="s">"</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span>
 
 
 <span class="k">def</span> <span class="nf">rle_decode</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
     <span class="n">q</span> <span class="o">=</span> <span class="s">""</span>
-    <span class="k">for</span> <span class="n">character</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lst</span><span class="p">[::</span><span class="mi">2</span><span class="p">],</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]):</span>
-        <span class="n">q</span> <span class="o">+=</span> <span class="n">character</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">character</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">lst</span><span class="p">[::</span><span class="mi">2</span><span class="p">],</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]):</span>
+        <span class="n">q</span> <span class="o">+=</span> <span class="n">character</span> <span class="o">*</span> <span class="nf">int</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">q</span>
 </code></pre></div></div>
 
 <p>This is a simple run length encoding and decoding function. It does not handle a lot of corner cases or odd input, but it may do what we need: compressing long strings of repetitive texts. It could potentially provide good genomic data compression. (Spoilers, it generally doesn’t. There are better compression algorithms.)</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">rle_encode</span><span class="p">(</span><span class="s">"aaabbc"</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">rle_encode</span><span class="p">(</span><span class="s">"aaabbc"</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Let’s look at how we can test this cod.</p>
@@ -739,7 +739,7 @@
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_input</span> <span class="o">=</span> <span class="s">"abba"</span>
 <span class="n">test_output</span> <span class="o">=</span> <span class="s">"a1b2a1"</span>
 
-<span class="k">assert</span> <span class="n">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span> <span class="o">==</span> <span class="n">test_output</span>
+<span class="k">assert</span> <span class="nf">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span> <span class="o">==</span> <span class="n">test_output</span>
 </code></pre></div></div>
 
 <p>So we use the assert keyword - part of Python - to test that our calculated result is the same as our expected result. This function explicitly checks that the two values are the same, and throws an AssertionError if they are not.</p>
@@ -748,14 +748,14 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_input</span> <span class="o">=</span> <span class="s">"wwwwssssb"</span>
 <span class="n">test_output</span> <span class="o">=</span> <span class="s">"w5s4b1"</span>
-<span class="k">assert</span> <span class="n">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span> <span class="o">==</span> <span class="n">test_output</span>
+<span class="k">assert</span> <span class="nf">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span> <span class="o">==</span> <span class="n">test_output</span>
 
 <span class="n">test_round_trip</span> <span class="o">=</span> <span class="s">"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"</span>
-<span class="k">assert</span> <span class="n">test_round_trip</span> <span class="o">==</span> <span class="n">rle_decode</span><span class="p">(</span><span class="n">rle_encode</span><span class="p">(</span><span class="n">test_round_trip</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">test_round_trip</span> <span class="o">==</span> <span class="nf">rle_decode</span><span class="p">(</span><span class="nf">rle_encode</span><span class="p">(</span><span class="n">test_round_trip</span><span class="p">))</span>
 
 <span class="n">test_input</span> <span class="o">=</span> <span class="s">"baabaa"</span>
 <span class="n">test_output</span> <span class="o">=</span> <span class="s">"b1a2b1a2"</span>
-<span class="k">assert</span> <span class="n">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span> <span class="o">==</span> <span class="n">test_output</span>
+<span class="k">assert</span> <span class="nf">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span> <span class="o">==</span> <span class="n">test_output</span>
 </code></pre></div></div>
 
 <p>However, if we were to enter these in this order, we’ll find we get the following after the first test:</p>
@@ -777,7 +777,7 @@ AssertionError:
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_input</span> <span class="o">=</span> <span class="s">"wwwwssssb"</span>
 <span class="n">test_output</span> <span class="o">=</span> <span class="s">"w4s4b1"</span>
-<span class="k">assert</span> <span class="n">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span> <span class="o">==</span> <span class="n">test_output</span>
+<span class="k">assert</span> <span class="nf">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span> <span class="o">==</span> <span class="n">test_output</span>
 </code></pre></div></div>
 
 <p>Which highlights an important point: as well as making sure our code is returning correct answers, we also need to ensure the tests themselves are also correct. Otherwise, we may go on to fix our code only to return an incorrect result that <em>appears</em> to be correct. So a good rule is to make tests simple enough to understand so we can reason about both the correctness of our tests as well as our code. Otherwise, our tests hold little value.</p>
@@ -797,39 +797,39 @@ AssertionError:
 
 <p>Test results must also be reliable. If a testing tool says that code is working when it’s not, or reports problems when there actually aren’t any, people will lose faith in it and stop using it.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">main</span> <span class="kn">import</span> <span class="n">rle_encode</span><span class="p">,</span> <span class="n">rle_decode</span>
-<span class="kn">import</span> <span class="nn">unittest</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">main</span> <span class="kn">import</span> <span class="n">rle_encode</span><span class="p">,</span> <span class="n">rle_decode</span>
+<span class="kn">import</span> <span class="n">unittest</span>
 
 <span class="k">class</span> <span class="nc">TestRunLengthEncoding</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_encode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_encode</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
       <span class="n">i</span> <span class="o">=</span> <span class="s">"aaabbcccd"</span>
       <span class="n">expected</span> <span class="o">=</span> <span class="s">"a3b2c3d1"</span>
-      <span class="n">actual</span> <span class="o">=</span> <span class="n">rle_encode</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span>
+      <span class="n">actual</span> <span class="o">=</span> <span class="nf">rle_encode</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+      <span class="n">self</span><span class="p">.</span><span class="nf">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_decode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_decode</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="n">i</span> <span class="o">=</span> <span class="s">"a3b2c3d1"</span>
         <span class="n">expected</span> <span class="o">=</span> <span class="s">"aaabbcccd"</span>
-        <span class="n">actual</span> <span class="o">=</span> <span class="n">rle_decode</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="nf">rle_decode</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_empty</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="n">test_input</span> <span class="o">=</span> <span class="s">"wwwwssssb"</span>
         <span class="n">test_output</span> <span class="o">=</span> <span class="s">"w4s4b1"</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEqual</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_roundtrip_short</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_roundtrip_short</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="n">test_input</span> <span class="o">=</span> <span class="s">"bbb"</span>
-        <span class="n">test_output</span> <span class="o">=</span> <span class="n">rle_decode</span><span class="p">(</span><span class="n">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">))</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
+        <span class="n">test_output</span> <span class="o">=</span> <span class="nf">rle_decode</span><span class="p">(</span><span class="nf">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">))</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEqual</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_roundtrip_long</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_roundtrip_long</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="n">test_input</span> <span class="o">=</span> <span class="s">"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"</span>
-        <span class="n">test_output</span> <span class="o">=</span> <span class="n">rle_decode</span><span class="p">(</span><span class="n">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">))</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
+        <span class="n">test_output</span> <span class="o">=</span> <span class="nf">rle_decode</span><span class="p">(</span><span class="nf">rle_encode</span><span class="p">(</span><span class="n">test_input</span><span class="p">))</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEqual</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-    <span class="n">unittest</span><span class="p">.</span><span class="n">main</span><span class="p">()</span>
+    <span class="n">unittest</span><span class="p">.</span><span class="nf">main</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>So here, although we have specified our tests as separate functions in a class, they run the same assertions. Each of these test functions, in a general sense, are called <strong>test cases</strong> - these are a specification of:</p>
@@ -865,16 +865,16 @@ AssertionError:
 
 <p>There are some cases where seeing an error is actually the correct behaviour, and Python allows us to test for exceptions. Add this test in <code class="language-plaintext highlighter-rouge">tests/test_models.py</code>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">unittest</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">unittest</span>
 
 <span class="k">class</span> <span class="nc">ExpectedFailureCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
 
-    <span class="o">@</span><span class="n">unittest</span><span class="p">.</span><span class="n">expectedFailure</span>
+    <span class="nd">@unittest.expectedFailure</span>
     <span class="k">def</span> <span class="nf">test_bad_input</span><span class="p">():</span>
-        <span class="kn">from</span> <span class="nn">main</span> <span class="kn">import</span> <span class="n">rle_decode</span>
+        <span class="kn">from</span> <span class="n">main</span> <span class="kn">import</span> <span class="n">rle_decode</span>
 
         <span class="c1"># invalid input, we expect pairs of symbols and numbers.
-</span>        <span class="n">rle_decode</span><span class="p">(</span><span class="s">"a1b"</span><span class="p">)</span>
+</span>        <span class="nf">rle_decode</span><span class="p">(</span><span class="s">"a1b"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Run all your tests as before.</p>
@@ -1044,7 +1044,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

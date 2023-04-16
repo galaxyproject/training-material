@@ -1020,16 +1020,16 @@
 <p>Doing calculations with a hundred variables called <code class="language-plaintext highlighter-rouge">pressure_001</code>, <code class="language-plaintext highlighter-rouge">pressure_002</code>, etc. would be at least as slow as doing them by hand. Using a <em>list</em> to store many values together solves that problems. Lists are surrounded by square brackets: <code class="language-plaintext highlighter-rouge">[</code>, <code class="language-plaintext highlighter-rouge">]</code>, with values separated by commas:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pressures</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.273</span><span class="p">,</span> <span class="mf">0.275</span><span class="p">,</span> <span class="mf">0.277</span><span class="p">,</span> <span class="mf">0.275</span><span class="p">,</span> <span class="mf">0.276</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'pressures: </span><span class="si">{</span><span class="n">pressures</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pressures</span><span class="p">)</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'pressures: </span><span class="si">{</span><span class="n">pressures</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'length: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">pressures</span><span class="p">)</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="indexing">Indexing</h2>
 
 <p>You can use an item’s index to fetch it from a list.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'zeroth item of pressures: </span><span class="si">{</span><span class="n">pressures</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'fourth item of pressures: </span><span class="si">{</span><span class="n">pressures</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'zeroth item of pressures: </span><span class="si">{</span><span class="n">pressures</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'fourth item of pressures: </span><span class="si">{</span><span class="n">pressures</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="replacement">Replacement</h2>
@@ -1037,7 +1037,7 @@
 <p>Lists’ values can be changed or replaced by assigning a new value to the position in the list.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pressures</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.265</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'pressures is now: </span><span class="si">{</span><span class="n">pressures</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'pressures is now: </span><span class="si">{</span><span class="n">pressures</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Note how the first item has changed from <code class="language-plaintext highlighter-rouge">0.273</code></p>
@@ -1047,9 +1047,9 @@
 <p>Appending items to a list lengthens it. You can do <code class="language-plaintext highlighter-rouge">list_name.append()</code> to add items to the end of a list.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes is initially: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes has become: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes is initially: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes has become: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">.append()</code> is a <em>method</em> of lists. It’s like a function, but tied to a particular object. You use <code class="language-plaintext highlighter-rouge">object_name.method_name</code> to call methods, which deliberately resembles the way we refer to things in a library.</p>
@@ -1058,11 +1058,11 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">teen_primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">]</span>
 <span class="n">middle_aged_primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">37</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">47</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes is currently: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="n">primes</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">teen_primes</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes has now become: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">middle_aged_primes</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes has finally become: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes is currently: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">primes</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="n">teen_primes</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes has now become: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">middle_aged_primes</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes has finally become: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Note that while <code class="language-plaintext highlighter-rouge">extend</code> maintains the “flat” structure of the list, appending a list to a list makes the result two-dimensional - the last element in <code class="language-plaintext highlighter-rouge">primes</code> is a list, not an integer.</p>
@@ -1075,14 +1075,14 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Position  0         1          2            3           4
 </span><span class="n">weekdays</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Monday'</span><span class="p">,</span> <span class="s">'Tuesday'</span><span class="p">,</span> <span class="s">'Wednesday'</span><span class="p">,</span> <span class="s">'Thursday'</span><span class="p">,</span> <span class="s">'Friday'</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>But if you try an access a position that is outside of the list, you’ll get an error</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>returns a <code class="language-plaintext highlighter-rouge">IndexError: list index out of range</code>.</p>
@@ -1114,14 +1114,14 @@
 </span><span class="n">weekdays</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Monday'</span><span class="p">,</span> <span class="s">'Tuesday'</span><span class="p">,</span> <span class="s">'Wednesday'</span><span class="p">,</span> <span class="s">'Thursday'</span><span class="p">,</span> <span class="s">'Friday'</span><span class="p">]</span>
 <span class="c1"># Position  -5        -4         -3           -2          -1
 </span>
-<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">weekdays</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>If you wanted to find the last value in a list, you could also use <code class="language-plaintext highlighter-rouge">len(elements)</code> and then subtract back to find the index you want</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">elements</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">elements</span><span class="p">[</span><span class="nf">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </code></pre></div></div>
 
 <p>This is essentially how negative indexes work, except you don’t have to use <code class="language-plaintext highlighter-rouge">len(elements)</code>, that’s done for you automatically.</p>
@@ -1131,9 +1131,9 @@
 <p>You can use <code class="language-plaintext highlighter-rouge">del</code> to remove items from a list entirely. We use <code class="language-plaintext highlighter-rouge">del list_name[index]</code> to remove an element from a list (in the example, 9 is not a prime number) and thus shorten it. <code class="language-plaintext highlighter-rouge">del</code> is not a function or a method, but a statement in the language.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes before removing last item: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes before removing last item: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 <span class="k">del</span> <span class="n">primes</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes after removing last item: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'primes after removing last item: </span><span class="si">{</span><span class="n">primes</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="empty-lists">Empty Lists</h2>
@@ -1156,8 +1156,8 @@
 <p>Still, many of the operations you use on lists, can also be used on strings as well! Strings can be indexed like lists so you can get single elements from lists.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">element</span> <span class="o">=</span> <span class="s">'carbon'</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'zeroth character: </span><span class="si">{</span><span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'third character: </span><span class="si">{</span><span class="n">element</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'zeroth character: </span><span class="si">{</span><span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'third character: </span><span class="si">{</span><span class="n">element</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Strings, however, cannot be modified, you can’t change a single letter in a string. Things that cannot be modified after creation are called <em>immutable</em> or sometimes <em>frozen</em>, compared to things which can be modified which are called <em>mutable</em>.
@@ -1170,7 +1170,7 @@ Python considers the string to be a single value with parts, not a collection of
 
 <p>You cannot access values beyond the end of the list, this will result in an error. Python reports an <code class="language-plaintext highlighter-rouge">IndexError</code> if we attempt to access a value that doesn’t exist. This is a kind of <strong>runtime error</strong>, as it cannot be detected as the code is parsed. Imagine if you had a script which let you read in a file, depending on how many lines were in the file, whether index 90 was valid or invalid, would depend on how big your file was.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'99th element of element is: </span><span class="si">{</span><span class="n">element</span><span class="p">[</span><span class="mi">99</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'99th element of element is: </span><span class="si">{</span><span class="n">element</span><span class="p">[</span><span class="mi">99</span><span class="p">]</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="exercises">Exercises</h2>
@@ -1221,11 +1221,11 @@ Python considers the string to be a single value with parts, not a collection of
 </blockquote>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test answers here!
-</span><span class="k">print</span><span class="p">(</span><span class="s">"shout it out"</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"WHISPER THIS"</span><span class="p">)</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="s">"shout it out"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"WHISPER THIS"</span><span class="p">)</span>
 <span class="c1"># Fix this mess to be all capital
 </span><span class="n">terrible_sequence</span> <span class="o">=</span> <span class="s">"AcTGAGccGGTt"</span>
-<span class="k">print</span><span class="p">(</span><span class="n">terrible_sequence</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">terrible_sequence</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="question">
@@ -1256,21 +1256,21 @@ Python considers the string to be a single value with parts, not a collection of
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s">'H'</span><span class="p">,</span> <span class="s">'He'</span><span class="p">,</span> <span class="s">'Li'</span><span class="p">,</span> <span class="s">'Be'</span><span class="p">,</span> <span class="s">'B'</span><span class="p">,</span> <span class="s">'C'</span><span class="p">,</span> <span class="s">'N'</span><span class="p">,</span> <span class="s">'O'</span><span class="p">,</span> <span class="s">'F'</span><span class="p">]</span>
 <span class="c1"># Instead of accessing a single element
-</span><span class="k">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="c1"># We'll access a range
-</span><span class="k">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>Accessing only a portion of a list is commonly used, say if you have a list of FastQ files from paired end sequencing, perhaps you want two of them at a time. You could access those with <code class="language-plaintext highlighter-rouge">[0:2]</code>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># You don't need to start at 0
-</span><span class="k">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># But your end should be bigger than your start.
 # What do you think this will return?
 # Make a guess before you run it
-</span><span class="k">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>If you don’t supply an end value, Python will default to going to the end of the list. Likewise, if you don’t provide a start value, Python will use <code class="language-plaintext highlighter-rouge">0</code> as the start by default, until whatever end value you provide.</p>
@@ -1317,10 +1317,10 @@ elements[1.5:]
 <p>However, list slicing can be more complicated. You can additionally use a ‘stride’ parameter, which is how Python should strep through the list. To take every other element from a list:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># every other value
-</span><span class="k">print</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># every other value from the second value
-</span><span class="k">print</span><span class="p">(</span><span class="n">values</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># the start and end are optional
-</span><span class="k">print</span><span class="p">(</span><span class="n">values</span><span class="p">[::</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># every third value in the list.
+<span class="nf">print</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># every other value
+</span><span class="nf">print</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># every other value from the second value
+</span><span class="nf">print</span><span class="p">(</span><span class="n">values</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># the start and end are optional
+</span><span class="nf">print</span><span class="p">(</span><span class="n">values</span><span class="p">[::</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># every third value in the list.
 </span></code></pre></div></div>
 
 <p>So list slicing together is either <code class="language-plaintext highlighter-rouge">list[low:high]</code> or <code class="language-plaintext highlighter-rouge">list[low:high:stride]</code>, where low and high are optional if you just want to go to the end of the list.</p>
@@ -1339,8 +1339,8 @@ elements[1.5:]
     <span class="s">'王奕辰'</span><span class="p">,</span>
     <span class="s">'刘依诺'</span><span class="p">,</span>
 <span class="p">]</span>
-<span class="n">students</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>
+<span class="n">students</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
@@ -1362,13 +1362,13 @@ elements[1.5:]
 <p>Just list with converting <code class="language-plaintext highlighter-rouge">"1.5"</code> to an float with the <code class="language-plaintext highlighter-rouge">float()</code> function, or <code class="language-plaintext highlighter-rouge">3.1</code> to a string with <code class="language-plaintext highlighter-rouge">str()</code>, we can do the same with lists using the <code class="language-plaintext highlighter-rouge">list()</code> function, and sets with <code class="language-plaintext highlighter-rouge">set()</code>:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Convert text to a list
-</span><span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s">"sometext"</span><span class="p">))</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="s">"sometext"</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Converting a list back into text is likewise possible, but you need to use the special function <code class="language-plaintext highlighter-rouge">join</code>. Join is a function of a <code class="language-plaintext highlighter-rouge">str</code>, which accepts a list</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">word</span> <span class="o">=</span> <span class="p">[</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="s">"-"</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"-"</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>It takes the string you called it on, and uses that as a separator. Then for the list that you provide, it joins that together with the separator.</p>
@@ -1409,12 +1409,12 @@ print(f'second time: {values}')
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Fill in the blanks here!
 </span>
 <span class="n">values</span> <span class="o">=</span> <span class="n">____</span>
-<span class="n">values</span><span class="p">.</span><span class="n">____</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">values</span><span class="p">.</span><span class="n">____</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">values</span><span class="p">.</span><span class="n">____</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'first time: </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s">'</span><span class="p">)</span> <span class="c1"># Should print [1, 3, 5]
+<span class="n">values</span><span class="p">.</span><span class="nf">____</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">values</span><span class="p">.</span><span class="nf">____</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">values</span><span class="p">.</span><span class="nf">____</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'first time: </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s">'</span><span class="p">)</span> <span class="c1"># Should print [1, 3, 5]
 </span><span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">____</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'second time: </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s">'</span><span class="p">)</span> <span class="c1"># should print [3, 5]
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'second time: </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s">'</span><span class="p">)</span> <span class="c1"># should print [3, 5]
 </span></code></pre></div></div>
 
 <blockquote class="question">
@@ -1652,8 +1652,8 @@ The second statement returns an empty string, because the slice goes “out of b
 
 <p>You can access both the keys, and the values</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">.</span><span class="n">values</span><span class="p">())</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">populations</span><span class="p">.</span><span class="nf">keys</span><span class="p">())</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">populations</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p>These will print out two list-like objects. They will become more useful in the future when we talk about looping over dictionaries and processing all of the values within.</p>
@@ -1662,12 +1662,12 @@ The second statement returns an empty string, because the slice goes “out of b
 
 <p>Just like lists where you access by the position in the list</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">[</span><span class="s">"Namibia"</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">populations</span><span class="p">[</span><span class="s">"Namibia"</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>And just like lists, if you try an access a key that isn’t there or an index outside of the range of the list:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">[</span><span class="s">"Mars"</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">populations</span><span class="p">[</span><span class="s">"Mars"</span><span class="p">])</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
@@ -1686,26 +1686,26 @@ The second statement returns an empty string, because the slice goes “out of b
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># For lists we did
 </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s">'x'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">,</span> <span class="s">'z'</span><span class="p">]</span>
 <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">'a'</span>
-<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>For dictionaries, it’s essentially the same, we access the ‘place’ in the dictionary just like we did with a list, and set it to a value</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">populations</span><span class="p">[</span><span class="s">"Mars"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span> <span class="c1"># robots
-</span><span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">)</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="n">populations</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>And similarly, removing items is the same as it was for lists:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="k">del</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Removes the first item
-</span><span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>And with dictionaries you delete by specifying which position/key you want to remove</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">del</span> <span class="n">populations</span><span class="p">[</span><span class="s">'Australia'</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">populations</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">populations</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="exercises-1">Exercises</h2>
@@ -1735,7 +1735,7 @@ But when we’re working with DNA sequences in bioinformatics, we often only sto
 </span><span class="n">translation</span> <span class="o">=</span> <span class="p">{</span>
 
 <span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="question">
@@ -1785,14 +1785,14 @@ print(variants[‘B.1.617.2’]) # Should print 43486
   <span class="s">'B.1.351'</span><span class="p">:</span> <span class="mi">439</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="n">variants</span><span class="p">[</span><span class="n">_____</span><span class="p">]</span> <span class="o">=</span>  <span class="n">_____</span>
-<span class="k">print</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span> <span class="c1"># Should print {'B.1.1.7': 26267, 'B.1.351': 439, 'P.1': 384}
+<span class="nf">print</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span> <span class="c1"># Should print {'B.1.1.7': 26267, 'B.1.351': 439, 'P.1': 384}
 </span><span class="n">__________</span>
-<span class="k">print</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span> <span class="c1"># Should print {'B.1.1.7': 26267, 'B.1.351': 439, 'P.1': 384, 'B.1.617.2': 43486}
+<span class="nf">print</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span> <span class="c1"># Should print {'B.1.1.7': 26267, 'B.1.351': 439, 'P.1': 384, 'B.1.617.2': 43486}
 # Maybe we've exterminated B.1.1.7 and B.1.351, remove their numbers.
 </span><span class="k">del</span> <span class="n">_______</span>
 <span class="k">del</span> <span class="n">_______</span>
-<span class="k">print</span><span class="p">(</span><span class="n">variants</span><span class="p">[</span><span class="n">______</span><span class="p">])</span> <span class="c1"># Should print 384
-</span><span class="k">print</span><span class="p">(</span><span class="n">variants</span><span class="p">[</span><span class="n">______</span><span class="p">])</span> <span class="c1"># Should print 43486
+<span class="nf">print</span><span class="p">(</span><span class="n">variants</span><span class="p">[</span><span class="n">______</span><span class="p">])</span> <span class="c1"># Should print 384
+</span><span class="nf">print</span><span class="p">(</span><span class="n">variants</span><span class="p">[</span><span class="n">______</span><span class="p">])</span> <span class="c1"># Should print 43486
 </span></code></pre></div></div>
 
 <h1 id="choosing-the-right-data-type">Choosing the Right Data Type</h1>
@@ -2005,7 +2005,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

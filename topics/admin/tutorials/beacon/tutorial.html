@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Deploying a Beacon v1 in Galaxy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/beacon/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Deploying a Beacon v1 in Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-04-15 13:20:21 +0000">
+<meta name="DC.creator" content="Helena Rasche">
+
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Deploying a Beacon v1 in Galaxy">
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
+        
+        <meta property="og:image" content="/training-material/assets/images/gat.png">
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-04-15 13:20:21 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Deploying a Beacon v1 in Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Deploying a Beacon v1 in Galaxy' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/beacon/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "admin, ga4gh, beacon, git-gat",
+  "description": "The questions this  addresses are:\n - What is a Beacon?\n - How do I deploy it?\n - Is v1 the same as v2?\n\n\nThe objectives are:\n - Deploy a Beacon\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ]
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Galaxy Server administration
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/beacon/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/beacon/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-04-01/topics/admin/tutorials/beacon/tutorial.html" title="Version 2023-04-01">2023-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-03-01/topics/admin/tutorials/beacon/tutorial.html" title="Version 2023-03-01">2023-03-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-02-01/topics/admin/tutorials/beacon/tutorial.html" title="Version 2023-02-01">2023-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/admins'
+  };
+</script>
+
+
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-04-15 13:20:21 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Deploying a Beacon v1 in Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Deploying a Beacon v1 in Galaxy' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/beacon/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "admin, ga4gh, beacon, git-gat",
+  "description": "The questions this  addresses are:\n - What is a Beacon?\n - How do I deploy it?\n - Is v1 the same as v2?\n\n\nThe objectives are:\n - Deploy a Beacon\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-admin">
+    <h1 data-toc-skip>Deploying a Beacon v1 in Galaxy</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/shiltemann?s=27" alt="Avatar">Saskia Hiltemann</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is a Beacon?</p>
+</li>
+        
+        <li><p>How do I deploy it?</p>
+</li>
+        
+        <li><p>Is v1 the same as v2?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Deploy a Beacon</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Installation with Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 15, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>This tutorial will guide you through setting up a <a href="https://beacon-project.io/">GA4GH Beacon</a>!</p>
+
+<blockquote class="quote">
+  <p>The Beacon Project is developed under a Global Alliance for Genomics and Health (GA4GH) Iniciative for the federated discovery of genomic data in biomedical research and clinical applications.</p>
+</blockquote>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-beacon-v1"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Beacon v1</div>
+  <p>This deploys an older Beacon v1 which was a simpler system.
+The Beacon v1 is more or less deprecated, with users being pushed to Beacon v2 which gives much richer answers, and offers better querying syntax.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+<ol id="markdown-toc">
+  <li><a href="#installing-and-configuring" id="markdown-toc-installing-and-configuring">Installing and Configuring</a></li>
+  <li><a href="#setting-up-the-importer" id="markdown-toc-setting-up-the-importer">Setting up the Importer</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="installing-and-configuring">Installing and Configuring</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-setting-up-a-beacon-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setting up a Beacon with Ansible</div>
+
+  <ol>
+    <li>
+      <p>Setup the hosts</p>
+
+      <div data-commit="Add hosts" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/hosts
+</span><span class="gi">+++ b/hosts
+</span><span class="p">@@ -6,3 +6,12 @@</span> galaxyservers
+ gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
+ [monitoring]
+ gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+<span class="gi">+
++[beacon]
++[beacon:children]
++beacon_import
++beacon_server
++[beacon_server]
++gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
++[beacon_import]
++gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+</span>   
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-what-are-these-children"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-are-these-children" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: What are these :children?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>Here we use some of the more advanced features of Ansible’s Inventory system.
+We declare a host group called ‘beacon’ with no hosts of its own.</p>
+
+        <p>Then we declare that this beacon group has two children: beacon_import, and beacon_server. We can then define host groups for those two entries with as many different hosts as we need. This makes it very easy to scale up configuration.</p>
+
+        <p>Here we will be using that feature to declare some ‘beacon variables’, which will be shared between the beacon_server and beacon_importer. Because they’re children of ‘beacon’, they’ll inherit any group variables defined for <code class="language-plaintext highlighter-rouge">group_vars/beacon.yml</code>.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Setup the requirements</p>
+
+      <div data-commit="Add requirements" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -57,3 +57,8 @@</span>
+ # Our FTP Server
+ - src: galaxyproject.proftpd
+   version: 0.3.1
+<span class="gi">+# Beacon support
++- name: paprikant.beacon
++  src: https://github.com/Paprikant/ansible-role-beacon
++- name: paprikant.beacon-importer
++  src: https://github.com/Paprikant/ansible-role-beacon_importer
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Install the role with:</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Create the vars file</p>
+
+      <div data-commit="Add relevant group variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/group_vars/beacon.yml
+</span><span class="p">@@ -0,0 +1,31 @@</span>
+<span class="gi">+---
++postgres_data_dir: /data/beacon/postgresql/data
++postgres_init_dir: /data/beacon/postgresql/init
++bp_external_binding: 5050 # The default
++postgres_user: "{{ beacon_db_user }}"
++postgres_pass: "{{ beacon_db_password }}"
++postgres_external_binding: "{{ beacon_db_port }}"
++# Database Configuration
++beacon_db_user: beacon
++beacon_db_host: "{{ groups['beacon_server'][0] }}"
++beacon_db_password: "{{ vault_beacon_db_password }}"
++beacon_db_port: 9001
++#galaxy_api_key: This we will set in secrets.
++# Information about your beacon (consider filling this out.
++beacon_info_title: GA4GH Beacon
++beacon_info_beacon_id: your.galaxy.beacon
++beacon_info_description: Beacon service hosting datasets from all over the Galaxy
++beacon_info_url: https://{{ groups['beacon_server'][0] }}/beacon/
++beacon_info_service_group: galaxy-eu
++beacon_info_org_id: usegalaxy.aq
++beacon_info_org_name: Some Galaxy
++beacon_info_org_description: Galaxy community
++beacon_info_org_address: 123 Main Street, ZA
++beacon_info_org_welcome_url: https://galaxyproject.org/
++beacon_info_org_contact_url: https://galaxyproject.org/
++beacon_info_org_logo_url: https://galaxyproject.org/images/galaxy-logos/galaxy_project_logo_square.png
++beacon_info_org_info: More information about the organisation than just the description can go here.
++# Script Configuration
++galaxy_api_url: "https://{{ groups['galaxyservers'][0] }}"
++script_user: beacon
++script_dir: /home/beacon/script
+</span>   
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-groups"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-groups" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: groups?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>Here we again use some advanced features of Ansible’s inventory system. Ansible knows the name of every hostname in the inventory. Now that we want to point the beacon configuration, either at the database which should be on <code class="language-plaintext highlighter-rouge">beacon_server</code>, or at Galaxy in <code class="language-plaintext highlighter-rouge">galaxyservers</code>, we ask the <code class="language-plaintext highlighter-rouge">groups</code> variable for what the inventory looks like. We use <code class="language-plaintext highlighter-rouge">[0]</code> to pull out the first hostname we find for both of those groups.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add the beacon-server playbook</p>
+
+      <div data-commit="Add beacon server playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/beacon-server.yml
+</span><span class="p">@@ -0,0 +1,9 @@</span>
+<span class="gi">+---
++- name: Beacon Server
++  hosts: beacon_server
++  become: true
++  become_user: root
++  vars_files:
++    - group_vars/secret.yml
++  roles:
++    - paprikant.beacon
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook beacon-server.yml
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>TODO: Check that it works</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="setting-up-the-importer">Setting up the Importer</h2>
+
+<p>Now that our beacon is running, we need to get data from Galaxy to the Beacon</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-setting-up-the-beacon-importer"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setting up the Beacon Importer</div>
+
+  <ol>
+    <li>
+      <p>Add the beacon-import playbook</p>
+
+      <div data-commit="Add beacon importer playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/beacon-import.yml
+</span><span class="p">@@ -0,0 +1,9 @@</span>
+<span class="gi">+---
++- name: Beacon Importer
++  hosts: beacon_import
++  become: true
++  become_user: root
++  vars_files:
++    - group_vars/secret.yml
++  roles:
++    - paprikant.beacon-importer
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Edit your <code class="language-plaintext highlighter-rouge">group_vars/secret.yml</code> and define some random passwords:</p>
+
+      <ul>
+        <li>The API key for your account, which must be an admin</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-getting-your-api-key"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-getting-your-api-key" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Getting your API key<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Galaxy admin accounts are specified as a comma-separated email list in the <code class="language-plaintext highlighter-rouge">admin_users</code> directive of <code class="language-plaintext highlighter-rouge">galaxy.yml</code> . If you have set up your Galaxy server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial, this is set to <code class="language-plaintext highlighter-rouge">admin@example.org</code>.</p>   <ol>   <li>In your browser, open your Galaxy homepage</li>   <li>Log in, or register a new account, if it’s the first time you’re logging in</li>   <li>Go to <code class="language-plaintext highlighter-rouge">User -&gt; Preferences</code> in the top menu bar, then click on <code class="language-plaintext highlighter-rouge">Manage API key</code></li>   <li>If there is no current API key available, click on <code class="language-plaintext highlighter-rouge">Create a new key</code> to generate it</li>   <li>Copy your API key to somewhere convenient, you will need it throughout this tutorial</li> </ol> </blockquote>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-vault edit group_vars/secret.yml
+</code></pre></div>        </div>
+      </blockquote>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/secret.yml
+</span><span class="gi">+++ b/group_vars/secret.yml
+</span><span class="p">@@ -1,13 +1,15 @@</span>
+<span class="gi">+galaxy_api_key: your-galaxy-api-key
++vault_beacon_db_password: some-super-secret-password
+</span></code></pre></div>      </div>
+
+      <!-- Ignore this, just for the gat-automation. Vaults are ugly to work with :(
+
+   
+```diff
+--- a/group_vars/secret.yml
++++ b/group_vars/secret.yml
+@@ -1,22 +1,24 @@
+ $ANSIBLE_VAULT;1.1;AES256
+-66653366633665383231303635643739396466653465626163633662623230643534346666303434
+-3531356339646666623364383435306363373534373833370a333964306130653236373438373264
+-34366433396135303064643932313135643064373034323865363939333565623238386161333465
+-3932623162353034370a653663333363383938393936623663343639376430653366646662353830
+-34383964326161383966306361633162653366353162633564623738353137333936313232363764
+-38383962396637636136316366633936316365643038333030333932336365326335373737663834
+-39363639303764343430336435313663313762353335366562656232646334356438343535303032
+-35636131323163323036383163363964643237313137333131303737346662373233663562343031
+-39396531306539623661376166313534303462623532323334393736316634616262313633626637
+-37393066663239303564356232366466333334316565363631363230626665333039386133383933
+-31656234363064646334623938383637393534313638643635396662643163346633346237353664
+-34666161373764663166653737323736373261363565666633653831363833393264333666356633
+-30373062333638366666316132623736386336383933326539663065653538386363323766313664
+-63323737396264306439303366343834326164393763376663316366353766663131303966393039
+-61343732313865613761623733356465336263633963376161663931653864383162393839643834
+-34373239386461666462643162613536316166656135323332316163336635393035653164363138
+-34336265383033663436306436663536383238366665653239313661666431666339323364646633
+-64366361653034393962316562373835623631356339313062393933633634653735656636373031
+-65376162633866623733623961303664663931636130373936326461623465363932373165356563
+-36323838323865326464346337393164343765613333663830636234666663303535616532323936
+-3230
++61363961643266653432653235396631323161383837383731633663653338326237346235646430
++3539643136643962316565333662323830386433633561390a363037333434626238366261323838
++66396362396135653836613933646637316361636464333166353034323261646630363065323933
++6132346534646439310a323364646531396366343837656164353262303833623935363137663535
++35623063333065383164643566353961373265326438323466633166626162333139306665633266
++31623130636639393361386262306237336132386563366435366631343038633462656661396638
++36356661363763656433303039623631613738626234393366636433323534353662636534306262
++36306461366635313861303539303739343465313161356433616634386632353338326338336539
++33326565396636363037313838383863346231303131396634666338303036393666353766326361
++36656461336562383861373839356564356163396337633939373337386661343638336362323663
++61613761343736613235316630366263343038313636393636323739313135643161653533346263
++63623633316432393738616635366236643962653530333134643064326631366365306166343235
++31656466373235323466653437306637643339656539383236393732383534333463396465663635
++38646561643733646231373230313066306237636630353763373035373832643763306566353636
++33346461623137316135633737373639633166313735333964656435646461323332646466343066
++30363232626566613561333965396361386166356630643061623564633766666631643738643663
++30303662313530396261633639653164326166353636633631386230646339616166353162313665
++36333162366136303532333636666339353831613663656463323666353230643834646434626666
++31366231303664396532613630616233653562336337653430396337356637633230303034656530
++33356662613636616634376163616638666164633565643135306166363435633034623935323438
++31383066633166663733626235313739383237376630643965333939313033386566623963316339
++31333264333939613866613136653137326339326537363466643966353938616361313934633566
++336130653132346566616361333861306131
+   
+```
+{: data-commit="Add beacon/galaxy passwords to the vault"}
+
+-->
+    </li>
+    <li>
+      <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook beacon-importer.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add the nginx routes</p>
+
+      <div data-commit="Add beacon routes to nginx" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/galaxy.j2
+</span><span class="gi">+++ b/templates/nginx/galaxy.j2
+</span><span class="p">@@ -114,4 +114,14 @@</span> server {
+ 	location /reports/ {
+ 		proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
+ 	}
+<span class="gi">+
++	location /beacon {
++		proxy_pass http://{{ groups['beacon_server'][0] }}:5050;
++		proxy_http_version 1.1;
++		proxy_set_header Upgrade $http_upgrade;
++		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
++		proxy_set_header X-Real-IP $remote_addr;
++		proxy_set_header Connection "upgrade";
++		proxy_set_header Host $host;
++	}
+</span> }
+   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Congratulations, you’ve set up a Beacon v1 for Galaxy! Go check it out at <code class="language-plaintext highlighter-rouge">/beacon/</code> on your server.</p>
+
+<!--SNIPPET-->
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Got lost along the way?</div>   <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-17">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-16...step-17#files_bucket">the previous tutorial</a>.</p>   <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p> </blockquote>
+
+<!--SNIPPET-->
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">                    <li class="disabled">         <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">             <div>Step 1</div>             <div>ansible-galaxy</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html">             <div>Step 2</div>             <div>backup-cleanup</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/customization/tutorial.html">             <div>Step 3</div>             <div>customization</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">             <div>Step 4</div>             <div>tus</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">             <div>Step 5</div>             <div>cvmfs</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/apptainer/tutorial.html">             <div>Step 6</div>             <div>apptainer</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">             <div>Step 7</div>             <div>tool-management</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">             <div>Step 8</div>             <div>data-library</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/dev/tutorials/bioblend-api/tutorial.html">             <div>Step 9</div>             <div>dev/bioblend-api</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">             <div>Step 10</div>             <div>connect-to-compute-cluster</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">             <div>Step 11</div>             <div>job-destinations</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">             <div>Step 12</div>             <div>pulsar</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/celery/tutorial.html">             <div>Step 13</div>             <div>celery</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">             <div>Step 14</div>             <div>gxadmin</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">             <div>Step 15</div>             <div>monitoring</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">             <div>Step 16</div>             <div>tiaas</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">             <div>Step 17</div>             <div>reports</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">             <div>Step 18</div>             <div>ftp</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="active">         <a href="/training-material/topics/admin/tutorials/beacon/tutorial.html">             <div>Step 19</div>             <div>beacon</div>         </a>     </li>           </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #a8ffa8;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>While deprecated, Beacon v1 is easy to deploy</p>
+</li>
+                        
+                        <li><p>It can also tick some boxes for grants!</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/admin/faqs/">FAQ page for the Galaxy Server administration topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Deploying a Beacon v1 in Galaxy (Galaxy Server administration)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Helena Rasche,  <b>Deploying a Beacon v1 in Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/beacon/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/beacon/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{admin-beacon,
+author = "Helena Rasche",
+title = "Deploying a Beacon v1 in Galaxy (Galaxy Training Materials)",
+year = "",
+month = "",
+day = ""
+url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/beacon/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/CINECA-Project" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/CINECA-Project/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<p><a href="https://www.cineca-project.eu/">https://www.cineca-project.eu/</a></p>
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+var d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
+        var snippets=document.querySelectorAll('div.highlight');
+        [].forEach.call(snippets,function(snippet){
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+
+        var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+            target:function(trigger){return trigger.nextElementSibling;
+        }});
+        </script>
+        
+
+        <script type="text/javascript">
+            if(window.location.hostname === "galaxyproject.github.io") {
+                // Redirect
+                var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+                $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+                window.setTimeout(function(){
+                    window.location.href = redirect;
+                }, 5000)
+
+            }
+        </script>
+    </body>
+</html>

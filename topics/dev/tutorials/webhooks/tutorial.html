@@ -861,7 +861,7 @@ The key <code class="language-plaintext highlighter-rouge">activate</code> gives
    <span class="na">type</span><span class="pi">:</span>
      <span class="pi">-</span> <span class="s">tool</span>
      <span class="pi">-</span> <span class="s">workflow</span>
-   <span class="na">activate</span><span class="pi">:</span> <span class="no">true</span>
+   <span class="na">activate</span><span class="pi">:</span> <span class="kc">true</span>
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -881,14 +881,14 @@ calls an REST endpoint defined by use in the next step. The return value of this
     <li>
       <p>Create a file named <code class="language-plaintext highlighter-rouge">static/script.js</code> with the following content:</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nf">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 
         <span class="kd">var</span> <span class="nx">galaxyRoot</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">Galaxy</span> <span class="o">!=</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span> <span class="p">?</span> <span class="nx">Galaxy</span><span class="p">.</span><span class="nx">root</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">;</span>
 
-        <span class="kd">var</span> <span class="nx">PHDComicsAppView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+        <span class="kd">var</span> <span class="nx">PHDComicsAppView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
             <span class="na">el</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#phdcomics</span><span class="dl">'</span><span class="p">,</span>
 
-            <span class="na">appTemplate</span><span class="p">:</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span>
+            <span class="na">appTemplate</span><span class="p">:</span> <span class="nx">_</span><span class="p">.</span><span class="nf">template</span><span class="p">(</span>
                 <span class="dl">'</span><span class="s1">&lt;div id="phdcomics-header"&gt;</span><span class="dl">'</span> <span class="o">+</span>
                    <span class="dl">'</span><span class="s1">&lt;div id="phdcomics-name"&gt;PHD Comics&lt;/div&gt;</span><span class="dl">'</span> <span class="o">+</span>
                     <span class="dl">'</span><span class="s1">&lt;button id="phdcomics-random"&gt;Random&lt;/button&gt;</span><span class="dl">'</span> <span class="o">+</span>
@@ -896,20 +896,20 @@ calls an REST endpoint defined by use in the next step. The return value of this
                 <span class="dl">'</span><span class="s1">&lt;div id="phdcomics-img"&gt;&lt;/div&gt;</span><span class="dl">'</span>
             <span class="p">),</span>
 
-            <span class="na">imgTemplate</span><span class="p">:</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;img src="&lt;%= src %&gt;""&gt;</span><span class="dl">'</span><span class="p">),</span>
+            <span class="na">imgTemplate</span><span class="p">:</span> <span class="nx">_</span><span class="p">.</span><span class="nf">template</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;img src="&lt;%= src %&gt;""&gt;</span><span class="dl">'</span><span class="p">),</span>
 
             <span class="na">events</span><span class="p">:</span> <span class="p">{</span>
                 <span class="dl">'</span><span class="s1">click #phdcomics-random</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">getRandomComic</span><span class="dl">'</span>
             <span class="p">},</span>
 
             <span class="na">initialize</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+                <span class="k">this</span><span class="p">.</span><span class="nf">render</span><span class="p">();</span>
             <span class="p">},</span>
 
             <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">appTemplate</span><span class="p">());</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#phdcomics-img</span><span class="dl">'</span><span class="p">);</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">getRandomComic</span><span class="p">();</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nf">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">appTemplate</span><span class="p">());</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#phdcomics-img</span><span class="dl">'</span><span class="p">);</span>
+                <span class="k">this</span><span class="p">.</span><span class="nf">getRandomComic</span><span class="p">();</span>
                 <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
             <span class="p">},</span>
 
@@ -917,25 +917,25 @@ calls an REST endpoint defined by use in the next step. The return value of this
                 <span class="kd">var</span> <span class="nx">me</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
                     <span class="nx">url</span> <span class="o">=</span> <span class="nx">galaxyRoot</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">api/webhooks/phdcomics/get_data</span><span class="dl">'</span><span class="p">;</span>
 
-                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;div/&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span><span class="p">.</span><span class="nf">html</span><span class="p">(</span><span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;div/&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
                     <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">phdcomics-loader</span><span class="dl">'</span>
                 <span class="p">}));</span>
 
-                <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">me</span><span class="p">.</span><span class="nx">renderImg</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">src</span><span class="p">);</span>
+                <span class="nx">$</span><span class="p">.</span><span class="nf">getJSON</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nf">if </span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">me</span><span class="p">.</span><span class="nf">renderImg</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">src</span><span class="p">);</span>
                     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">[ERROR] "</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">":</span><span class="se">\n</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">[ERROR] "</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">":</span><span class="se">\n</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
                     <span class="p">}</span>
                 <span class="p">});</span>
             <span class="p">},</span>
 
             <span class="na">renderImg</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">imgTemplate</span><span class="p">({</span><span class="na">src</span><span class="p">:</span> <span class="nx">src</span><span class="p">}));</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span><span class="p">.</span><span class="nf">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">imgTemplate</span><span class="p">({</span><span class="na">src</span><span class="p">:</span> <span class="nx">src</span><span class="p">}));</span>
             <span class="p">}</span>
         <span class="p">});</span>
 
-        <span class="k">new</span> <span class="nx">PHDComicsAppView</span><span class="p">();</span>
+        <span class="k">new</span> <span class="nc">PHDComicsAppView</span><span class="p">();</span>
     <span class="p">});</span>
 </code></pre></div>      </div>
     </li>
@@ -954,12 +954,12 @@ entire user-object, including histories and datasets.</p>
     <li>
       <p>Create a file named <code class="language-plaintext highlighter-rouge">helper/__init__.py</code> with the following content:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">urllib</span>
+<span class="kn">import</span> <span class="n">re</span>
+<span class="kn">import</span> <span class="n">random</span>
+<span class="kn">import</span> <span class="n">logging</span>
 
-<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="p">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="p">.</span><span class="nf">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">webhook</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
@@ -969,37 +969,37 @@ entire user-object, including histories and datasets.</p>
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># Third-party dependencies
 </span>        <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+            <span class="kn">from</span> <span class="n">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
         <span class="k">except</span> <span class="nb">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">log</span><span class="p">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s">'success'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s">'error'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+            <span class="n">log</span><span class="p">.</span><span class="nf">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s">'success'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s">'error'</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
 
         <span class="c1"># Get latest id
-</span>        <span class="k">if</span> <span class="s">'latest_id'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">keys</span><span class="p">():</span>
+</span>        <span class="k">if</span> <span class="s">'latest_id'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="nf">keys</span><span class="p">():</span>
             <span class="n">url</span> <span class="o">=</span> <span class="s">'https://phdcomics.com/gradfeed.php'</span>
-            <span class="n">content</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
-            <span class="n">soap</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="nf">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="nf">read</span><span class="p">()</span>
+            <span class="n">soap</span> <span class="o">=</span> <span class="nc">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
             <span class="n">pattern</span> <span class="o">=</span> <span class="s">'(?:https://www\.phdcomics\.com/comics\.php\?f=)(\d+)'</span>
-            <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="s">'latest_id'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span>
-                <span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">link</span><span class="p">.</span><span class="n">text</span><span class="p">).</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-                <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">soap</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'link'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span>
+            <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="s">'latest_id'</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">([</span>
+                <span class="nf">int</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">link</span><span class="p">.</span><span class="n">text</span><span class="p">).</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">soap</span><span class="p">.</span><span class="nf">find_all</span><span class="p">(</span><span class="s">'link'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span>
             <span class="p">])</span>
 
-        <span class="n">random_id</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="s">'latest_id'</span><span class="p">])</span>
+        <span class="n">random_id</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="s">'latest_id'</span><span class="p">])</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s">'https://www.phdcomics.com/comics/archive.php?comicid=%d'</span> <span class="o">%</span> \
             <span class="n">random_id</span>
-        <span class="n">content</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
-        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
-        <span class="n">comic_img</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'img'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'comic2'</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="nf">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="nf">read</span><span class="p">()</span>
+        <span class="n">soup</span> <span class="o">=</span> <span class="nc">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+        <span class="n">comic_img</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="nf">find_all</span><span class="p">(</span><span class="s">'img'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'comic2'</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">comic_src</span> <span class="o">=</span> <span class="n">comic_img</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">attrs</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'src'</span><span class="p">)</span>
+            <span class="n">comic_src</span> <span class="o">=</span> <span class="n">comic_img</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">attrs</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s">'src'</span><span class="p">)</span>
         <span class="k">except</span> <span class="nb">IndexError</span><span class="p">:</span>
             <span class="n">pattern</span> <span class="o">=</span> <span class="s">'&lt;img id=comic2 name=comic2 src=([\w:\/\.]+)'</span>
-            <span class="n">comic_src</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">content</span><span class="p">).</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">comic_src</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">content</span><span class="p">).</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">error</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">{</span><span class="s">'success'</span><span class="p">:</span> <span class="ow">not</span> <span class="n">error</span><span class="p">,</span> <span class="s">'error'</span><span class="p">:</span> <span class="n">error</span><span class="p">,</span> <span class="s">'src'</span><span class="p">:</span> <span class="n">comic_src</span><span class="p">}</span>
 </code></pre></div>      </div>
@@ -1209,7 +1209,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

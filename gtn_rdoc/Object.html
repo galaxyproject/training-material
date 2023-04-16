@@ -189,6 +189,11 @@
         <dd>
         
       
+        <dt id="FASTIMAGE_AVAILABLE">FASTIMAGE_AVAILABLE
+        
+        <dd><p>The fastimage gem may not be installed, and that is OK, we will fall back to another method</p>
+        
+      
         <dt id="GTN_CACHE">GTN_CACHE
         
         <dd>
@@ -532,13 +537,23 @@
 
         <div class="method-description">
           
-          
+          <p>This function returns the authors of a material, if it has any. (via contributors or contribution) Params:</p>
+<dl class="rdoc-list note-list"><dt><code>material</code>
+<dd>
+<p>The material to get the authors of</p>
+</dd></dl>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>Array</code>
+<dd>
+<p>The authors of the material</p>
+</dd></dl>
           
           
 
           
           <div class="method-source-code" id="get_authors-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 17</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_authors</span>(<span class="ruby-identifier">material</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>) <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
@@ -604,13 +619,26 @@
 
         <div class="method-description">
           
-          
+          <p>This function returns the name of a user, if it is known. Otherwise, it returns the user name. Params:</p>
+<dl class="rdoc-list note-list"><dt><code>user</code>
+<dd>
+<p>The user to get the name of</p>
+</dd><dt><code>site</code>
+<dd>
+<p>The <code>Jekyll::Site</code> object</p>
+</dd></dl>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>String</code>
+<dd>
+<p>The name of the user</p>
+</dd></dl>
           
           
 
           
           <div class="method-source-code" id="lookup_name-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 27</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lookup_name</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">user</span>) <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>][<span class="ruby-identifier">user</span>].<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;name&#39;</span>, <span class="ruby-identifier">user</span>)

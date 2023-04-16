@@ -696,25 +696,25 @@
   <li>Generate an API key if needed, then copy the alphanumeric string and paste it as the value of the <code class="language-plaintext highlighter-rouge">api_key</code> variable below.</li>
 </ol>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urljoin</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">json</span>
+<span class="kn">from</span> <span class="n">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="n">urllib.parse</span> <span class="kn">import</span> <span class="n">urljoin</span>
 
-<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="n">requests</span>
 
 <span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="n">base_url</span> <span class="o">=</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="s">'api'</span><span class="p">)</span>
+<span class="n">base_url</span> <span class="o">=</span> <span class="nf">urljoin</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="s">'api'</span><span class="p">)</span>
 <span class="n">base_url</span>
 </code></pre></div></div>
 
 <p>We now make a GET request to retrieve all histories owned by a user:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span> <span class="s">"x-api-key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
-<span class="n">hists</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">hists</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">hists</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">hists</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>As you can see, GET requests in Galaxy API return JSON strings, which need to be <strong>deserialized</strong> into Python data structures. In particular, GETting a resource collection returns a list of dictionaries.</p>
@@ -728,15 +728,15 @@
 
 <p>There is no readily-available filtering capability, but it’s not difficult to filter histories <strong>by name</strong>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">([</span><span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">hists</span> <span class="k">if</span> <span class="n">_</span><span class="p">[</span><span class="s">'name'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'Unnamed history'</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pprint</span><span class="p">([</span><span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">hists</span> <span class="k">if</span> <span class="n">_</span><span class="p">[</span><span class="s">'name'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'Unnamed history'</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>If you are interested in more <strong>details</strong> about a given resource, you just need to append its <code class="language-plaintext highlighter-rouge">id</code> to the previous collection request, e.g. to the get more info for a history:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hist0_id</span> <span class="o">=</span> <span class="n">hists</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'id'</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">hist0_id</span><span class="p">)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">hist0_id</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">hist0_id</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">hist0_id</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p>As you can see, there are much more entries in the returned dictionary, e.g.:</p>
@@ -748,9 +748,9 @@
 
 <p>To get the list of <strong>datasets contained</strong> in a history, simply append <code class="language-plaintext highlighter-rouge">/contents</code> to the previous resource request.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">hist0_id</span> <span class="o">+</span> <span class="s">"/contents"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="n">hdas</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">hdas</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">hist0_id</span> <span class="o">+</span> <span class="s">"/contents"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">hdas</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">hdas</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The dictionaries returned when GETting the history content give basic info about each dataset, e.g.: <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">deleted</code>, <code class="language-plaintext highlighter-rouge">state</code>, <code class="language-plaintext highlighter-rouge">url</code>…</p>
@@ -758,9 +758,9 @@
 <p>To get the details about a specific dataset, you can use the <code class="language-plaintext highlighter-rouge">datasets</code> controller:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda0_id</span> <span class="o">=</span> <span class="n">hdas</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'id'</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/datasets/"</span> <span class="o">+</span> <span class="n">hda0_id</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/datasets/"</span> <span class="o">+</span> <span class="n">hda0_id</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p>Some of the interesting additional dictionary entries are:</p>
@@ -776,9 +776,9 @@
 <p><strong>New resources</strong> are created with POST requests. The uploaded <strong>data needs to be serialized</strong> in a JSON string. For example, to create a new history:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'New history'</span><span class="p">}</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="n">new_hist</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">new_hist</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The return value of a POST request is a dictionary with detailed info about the created resource.</p>
@@ -786,17 +786,17 @@
 <p>To <strong>update</strong> a resource, make a PUT request, e.g. to change the history name:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Updated history'</span><span class="p">}</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">status_code</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">put</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p>The return value of a PUT request is usually a dictionary with detailed info about the updated resource.</p>
 
 <p>Finally to <strong>delete</strong> a resource, make a DELETE request, e.g.:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">status_code</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">status_code</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="exercise-galaxy-api">Exercise: Galaxy API</h2>
@@ -808,15 +808,15 @@
   <p>First, define the connection parameters. What variables do you need?</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urljoin</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">json</span>
+<span class="kn">from</span> <span class="n">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="n">urllib.parse</span> <span class="kn">import</span> <span class="n">urljoin</span>
 
-<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="n">requests</span>
 
 <span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="n">base_url</span> <span class="o">=</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="s">'api'</span><span class="p">)</span>
+<span class="n">base_url</span> <span class="o">=</span> <span class="nf">urljoin</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="s">'api'</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </blockquote>
@@ -833,9 +833,9 @@
     <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span> <span class="s">"x-api-key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"New history"</span><span class="p">}</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="n">new_hist</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">new_hist</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </blockquote>
@@ -860,11 +860,11 @@
     <span class="s">"history_id"</span><span class="p">:</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span>
     <span class="s">"tool_id"</span><span class="p">:</span> <span class="s">"upload1"</span>
 <span class="p">}</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s">"files_0|file_data"</span><span class="p">:</span> <span class="n">f</span><span class="p">}</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/tools"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"x-api-key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
-<span class="n">ret</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/tools"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"x-api-key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </blockquote>
@@ -880,7 +880,7 @@
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s">'outputs'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </blockquote>
@@ -901,12 +901,12 @@
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">workflow_json</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">workflow_json</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'workflow'</span><span class="p">:</span> <span class="n">workflow_json</span><span class="p">}</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="n">wf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -920,9 +920,9 @@
   <p>View the details of the imported workflow by making a GET request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows/"</span> <span class="o">+</span> <span class="n">wf</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="n">wf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows/"</span> <span class="o">+</span> <span class="n">wf</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </blockquote>
@@ -942,8 +942,8 @@
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'history'</span><span class="p">:</span> <span class="s">'hist_id='</span> <span class="o">+</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span>
     <span class="s">'inputs'</span><span class="p">:</span> <span class="n">inputs</span><span class="p">}</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows/"</span> <span class="o">+</span> <span class="n">wf</span><span class="p">[</span><span class="s">"id"</span><span class="p">]</span> <span class="o">+</span> <span class="s">"/invocations"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows/"</span> <span class="o">+</span> <span class="n">wf</span><span class="p">[</span><span class="s">"id"</span><span class="p">]</span> <span class="o">+</span> <span class="s">"/invocations"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">())</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -969,19 +969,19 @@
 
 <p>The user interacts with a Galaxy server through a <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">import</span> <span class="nn">bioblend.galaxy</span>
+<span class="kn">import</span> <span class="n">bioblend.galaxy</span>
 
 <span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="n">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="nc">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object gives you access to the various controllers, i.e. the resources you are dealing with, like <code class="language-plaintext highlighter-rouge">histories</code>, <code class="language-plaintext highlighter-rouge">tools</code> and <code class="language-plaintext highlighter-rouge">workflows</code>.
 Therefore, method calls will have the format <code class="language-plaintext highlighter-rouge">gi.controller.method()</code>. For example, the call to retrieve all histories owned by the current user is:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get_histories</span><span class="p">())</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">get_histories</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p>As you can see, methods in BioBlend do not return JSON strings, but <strong>deserialize</strong> them into Python data structures. In particular, <code class="language-plaintext highlighter-rouge">get_</code> methods return a list of dictionaries.</p>
@@ -995,15 +995,15 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <p><strong>New resources</strong> are created with <code class="language-plaintext highlighter-rouge">create_</code> methods, e.g. the call to create a new history is:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create_history</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create_history</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">)</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>As you can see, to make POST requests in BioBlend it is <strong>not necessary to serialize data</strong>, you just pass them explicitly as parameters. The return value is a dictionary with detailed info about the created resource.</p>
 
 <p><code class="language-plaintext highlighter-rouge">get_</code> methods usually have <strong>filtering</strong> capabilities, e.g. it is possible to filter histories <strong>by name</strong>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get_histories</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">get_histories</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>To <strong>upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history, you can run the special upload tool by calling the <code class="language-plaintext highlighter-rouge">upload_file</code> method of the <code class="language-plaintext highlighter-rouge">tools</code> controller.</p>
@@ -1014,12 +1014,12 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hist_id</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">]</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">,</span> <span class="n">hist_id</span><span class="p">))</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="nf">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">,</span> <span class="n">hist_id</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>If you are interested in more <strong>details</strong> about a given resource for which you know the id, you can use the corresponding <code class="language-plaintext highlighter-rouge">show_</code> method. For example, to the get more info for the history we have just populated:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">show_history</span><span class="p">(</span><span class="n">history_id</span><span class="o">=</span><span class="n">hist_id</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">show_history</span><span class="p">(</span><span class="n">history_id</span><span class="o">=</span><span class="n">hist_id</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>As you can see, there are much more entries in the returned dictionary, e.g.:</p>
@@ -1031,8 +1031,8 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <p>To get the list of <strong>datasets contained</strong> in a history, simply add <code class="language-plaintext highlighter-rouge">contents=True</code> to the previous call.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hdas</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">show_history</span><span class="p">(</span><span class="n">history_id</span><span class="o">=</span><span class="n">hist_id</span><span class="p">,</span> <span class="n">contents</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">hdas</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hdas</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">show_history</span><span class="p">(</span><span class="n">history_id</span><span class="o">=</span><span class="n">hist_id</span><span class="p">,</span> <span class="n">contents</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">hdas</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The dictionaries returned when showing the history content give basic info about each dataset, e.g.: <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">deleted</code>, <code class="language-plaintext highlighter-rouge">state</code>, <code class="language-plaintext highlighter-rouge">url</code>…</p>
@@ -1040,8 +1040,8 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 <p>To get the details about a specific dataset, you can use the <code class="language-plaintext highlighter-rouge">datasets</code> controller:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda0_id</span> <span class="o">=</span> <span class="n">hdas</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'id'</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">datasets</span><span class="p">.</span><span class="n">show_dataset</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">)</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">datasets</span><span class="p">.</span><span class="nf">show_dataset</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Some of the interesting additional dictionary entries are:</p>
@@ -1056,14 +1056,14 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <p>To <strong>update</strong> a resource, use the <code class="language-plaintext highlighter-rouge">update_</code> method, e.g. to change the name of the new history:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">update_history</span><span class="p">(</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s">'Updated history'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">update_history</span><span class="p">(</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s">'Updated history'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>The return value of <code class="language-plaintext highlighter-rouge">update_</code> methods is usually a dictionary with detailed info about the updated resource.</p>
 
 <p>Finally to <strong>delete</strong> a resource, use the <code class="language-plaintext highlighter-rouge">delete_</code> method, e.g.:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">delete_history</span><span class="p">(</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">]))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">delete_history</span><span class="p">(</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">]))</span>
 </code></pre></div></div>
 
 <h2 id="exercise-bioblend">Exercise: BioBlend</h2>
@@ -1075,13 +1075,13 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <p>Create a <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">import</span> <span class="nn">bioblend.galaxy</span>
+<span class="kn">import</span> <span class="n">bioblend.galaxy</span>
 
 <span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="n">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="nc">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </blockquote>
@@ -1096,8 +1096,8 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <p>Create a new Galaxy history.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create_history</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create_history</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1116,8 +1116,8 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div>  </div>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">,</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">])</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="nf">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">,</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">])</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1132,7 +1132,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s">'outputs'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1151,8 +1151,8 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div>  </div>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">import_workflow_from_local_path</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">import_workflow_from_local_path</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">)</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1166,8 +1166,8 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <p>View the details of the imported workflow using <code class="language-plaintext highlighter-rouge">workflows.show_workflow()</code></p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">show_workflow</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">show_workflow</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1182,8 +1182,8 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:</span> <span class="n">hda</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="s">'src'</span><span class="p">:</span> <span class="s">'hda'</span><span class="p">}}</span>
-<span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">invoke_workflow</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">invoke_workflow</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1209,13 +1209,13 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <p>The user interacts with a Galaxy server through a <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">import</span> <span class="nn">bioblend.galaxy.objects</span>
+<span class="kn">import</span> <span class="n">bioblend.galaxy.objects</span>
 
 <span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="nc">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>All <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> method calls have the <code class="language-plaintext highlighter-rouge">client.method()</code> format, where <code class="language-plaintext highlighter-rouge">client</code> is the name of the resources you dealing with. There are 2 methods to get the list of resources:</p>
@@ -1227,12 +1227,12 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <p>For example, the call to retrieve previews of all histories owned by the current user is:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get_previews</span><span class="p">())</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">get_previews</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p><strong>New resources</strong> are created with <code class="language-plaintext highlighter-rouge">create()</code> methods, e.g. to create a new history:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">)</span>
 <span class="n">new_hist</span>
 </code></pre></div></div>
 
@@ -1240,7 +1240,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <p>Both <code class="language-plaintext highlighter-rouge">get_previews()</code> and <code class="language-plaintext highlighter-rouge">list()</code> methods usually have <strong>filtering</strong> capabilities, e.g. it is possible to filter histories <strong>by name</strong>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nb">list</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">list</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>To <strong>upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history, you can run the special upload tool by calling the <code class="language-plaintext highlighter-rouge">upload_file</code> method of the <code class="language-plaintext highlighter-rouge">History</code> object.</p>
@@ -1250,7 +1250,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="nf">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">)</span>
 <span class="n">hda</span>
 </code></pre></div></div>
 
@@ -1260,31 +1260,31 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <p>If you need to specify the unique <strong>id</strong> of the resource to retrieve, you can use the <code class="language-plaintext highlighter-rouge">get()</code> method, e.g. to get back the history we created before:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">new_hist</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">new_hist</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>To get the list of <strong>datasets contained</strong> in a history, simply look at the <code class="language-plaintext highlighter-rouge">content_infos</code> attribute of the <code class="language-plaintext highlighter-rouge">History</code> object.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">.</span><span class="n">content_infos</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">.</span><span class="n">content_infos</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>To get the details about one dataset, you can use the <code class="language-plaintext highlighter-rouge">get_dataset()</code> method of the <code class="language-plaintext highlighter-rouge">History</code> object:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span><span class="p">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="n">hda</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span><span class="p">.</span><span class="nf">get_dataset</span><span class="p">(</span><span class="n">hda</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>You can also filter history datasets by name using the <code class="language-plaintext highlighter-rouge">get_datasets()</code> method of <code class="language-plaintext highlighter-rouge">History</code> objects.</p>
 
 <p>To <strong>update</strong> a resource, use the <code class="language-plaintext highlighter-rouge">update()</code> method of its object, e.g. to change the history name:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'Updated history'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'Updated history'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The return value of <code class="language-plaintext highlighter-rouge">update()</code> methods is the updated object.</p>
 
 <p>Finally to <strong>delete</strong> a resource, you can use the <code class="language-plaintext highlighter-rouge">delete()</code> method of the object, e.g.:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span><span class="p">.</span><span class="n">delete</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span><span class="p">.</span><span class="nf">delete</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h2 id="exercise-bioblendobjects">Exercise: BioBlend.objects</h2>
@@ -1296,13 +1296,13 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <p>Create a <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">import</span> <span class="nn">bioblend.galaxy</span>
+<span class="kn">import</span> <span class="n">bioblend.galaxy</span>
 
 <span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="nc">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </blockquote>
@@ -1317,7 +1317,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <p>Create a new Galaxy history.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
 <span class="n">new_hist</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1337,7 +1337,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div>  </div>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="nf">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">)</span>
 <span class="n">hda</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1357,9 +1357,9 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div>  </div>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">wf_string</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">import_new</span><span class="p">(</span><span class="n">wf_string</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">wf_string</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">import_new</span><span class="p">(</span><span class="n">wf_string</span><span class="p">)</span>
 <span class="n">wf</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1388,7 +1388,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s">'0'</span><span class="p">:</span> <span class="n">hda</span><span class="p">}</span>
-<span class="n">wf</span><span class="p">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">new_hist</span><span class="p">)</span>
+<span class="n">wf</span><span class="p">.</span><span class="nf">invoke</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1517,7 +1517,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

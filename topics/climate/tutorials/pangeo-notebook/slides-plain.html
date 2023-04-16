@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="The Pangeo ecosystem">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-16 00:08:06 +0000">
+<meta name="DC.date" content="2023-04-16 09:08:33 +0000">
 <meta name="DC.creator" content="Basile Goussard">
 <meta name="DC.creator" content="Ryan Abernathey">
 <meta name="DC.creator" content="Anne Fouilloux">
@@ -501,19 +501,19 @@ challenges of big data, and these solutions should leverage the existing experti
 ]</p>
 
 <p>.pull-left[</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
-<span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="p">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">x</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="p">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">x</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div></div>
 <p>]</p>
 
 <p>.pull-right[</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">dask.array</span> <span class="k">as</span> <span class="n">da</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">dask.array</span> <span class="k">as</span> <span class="n">da</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">da</span><span class="p">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
-<span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="p">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">x</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">da</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="p">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">x</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div></div>
 <p>]</p>
 
@@ -536,19 +536,19 @@ challenges of big data, and these solutions should leverage the existing experti
 
 <p>.pull-left[</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"file.csv"</span><span class="p">)</span>
-<span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"x"</span><span class="p">).</span><span class="n">y</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="s">"file.csv"</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="s">"x"</span><span class="p">).</span><span class="n">y</span><span class="p">.</span><span class="nf">mean</span><span class="p">()</span>
 </code></pre></div></div>
 <p>]</p>
 
 <p>.pull-right[</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">dask.dataframe</span> <span class="k">as</span> <span class="n">dd</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">dask.dataframe</span> <span class="k">as</span> <span class="n">dd</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">dd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"s3://*.csv"</span><span class="p">)</span>
-<span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"x"</span><span class="p">).</span><span class="n">y</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">dd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="s">"s3://*.csv"</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="s">"x"</span><span class="p">).</span><span class="n">y</span><span class="p">.</span><span class="nf">mean</span><span class="p">()</span>
 </code></pre></div></div>
 <p>]</p>
 
@@ -571,19 +571,19 @@ challenges of big data, and these solutions should leverage the existing experti
 
 <p>.pull-left[</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scikit_learn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">scikit_learn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
 
-<span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
-<span class="n">lr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="nc">LogisticRegression</span><span class="p">()</span>
+<span class="n">lr</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
 </code></pre></div></div>
 <p>]</p>
 
 <p>.pull-right[</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dask_ml.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">dask_ml.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
 
-<span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
-<span class="n">lr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="nc">LogisticRegression</span><span class="p">()</span>
+<span class="n">lr</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
 </code></pre></div></div>
 <p>]</p>
 
@@ -1134,7 +1134,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/9a13c43c9f869b5045a587d435ffc81096ee272c">9a13c43c9f869b5045a587d435ffc81096ee272c</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/3b511d719891ee4a0c51722798d9108070537572">3b511d719891ee4a0c51722798d9108070537572</a></p>
     </div>
 </footer>
 

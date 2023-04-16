@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Deploying Wireguard for private mesh networking">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-09-28 14:49:10 +0000">
+<meta name="DC.date" content="2022-12-09 12:24:27 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 
         
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-09-28 14:49:10 +0000",
+  "dateModified": "2022-12-09 12:24:27 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Deploying Wireguard for private mesh networking",
   "interactivityType": "mixed",
@@ -374,7 +374,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-09-28 14:49:10 +0000",
+  "dateModified": "2022-12-09 12:24:27 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Deploying Wireguard for private mesh networking",
   "interactivityType": "mixed",
@@ -657,6 +657,12 @@
                     
                         
                     
+                        
+                    
+                        
+                    
+                        
+                    
                 
             </ul>
         
@@ -721,7 +727,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 9, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -832,7 +838,7 @@ despite the encryption, and is built directly into the kernel.</p>
   </ol>
 </blockquote>
 
-<p>Wireguard can use any of the <a href="https://en.wikipedia.org/wiki/Private_network">private network</a> blocks, here we use <code class="language-plaintext highlighter-rouge">192.168.0.0/16</code> for familiarity, Tailscale uses <code class="language-plaintext highlighter-rouge">10.0.0.0/8</code>.</p>
+<p>Wireguard can use any of the <a href="https://en.wikipedia.org/wiki/Private_network">private network</a> blocks, here we use <code class="language-plaintext highlighter-rouge">192.168.0.0/16</code> for familiarity, Tailscale uses <code class="language-plaintext highlighter-rouge">100.0.0.0/8</code>, which is the <a href="https://en.wikipedia.org/wiki/Carrier-grade_NAT">Carrier Grade NAT</a> range, and behaves somewhat differently to classic Private Network prefixes.</p>
 
 <h2 id="writing-the-playbook">Writing the playbook</h2>
 
@@ -1150,7 +1156,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

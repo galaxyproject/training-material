@@ -1199,7 +1199,7 @@
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">strip_control_characters</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="s">"""Strip unicode control characters from a string."""</span>
-    <span class="k">return</span> <span class="s">" "</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">unicodify</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">unicodedata</span><span class="p">.</span><span class="n">category</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="s">"Cc"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">" "</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nf">unicodify</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">unicodedata</span><span class="p">.</span><span class="nf">category</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="s">"Cc"</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>The function takes a string as input, and, in theory, returns a copy of that string with certain characters stripped away (it doesn’t really matter what characters are stripped away). However, from the test we see that the string is modified in a different way: spaces have been added between the characters.</p>
@@ -1209,7 +1209,7 @@
       <blockquote class="solution">
         <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>The genexp is evaluated and subsequently joined using a space as a delimiter. The space is, obviously, a typo: we don’t want to <em>add</em> anything to the string, so the delimiter should be the empty string instead:</p>
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="s">""</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">unicodify</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">unicodedata</span><span class="p">.</span><span class="n">category</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="s">"Cc"</span><span class="p">)</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="s">""</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nf">unicodify</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">unicodedata</span><span class="p">.</span><span class="nf">category</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="s">"Cc"</span><span class="p">)</span>
 </code></pre></div>        </div>
       </blockquote>
 
@@ -1278,11 +1278,11 @@ FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_licen
 
       <p>We can use either one of the failing tests to start debugging. Let’s use <code class="language-plaintext highlighter-rouge">test_get_license</code>. As with the unit test, first let’s take a look at the test function definition (located in <code class="language-plaintext highlighter-rouge">lib/galaxy_test/api/test_licenses.py</code>):</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_get_license</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_get_license</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
     <span class="n">licenseId</span> <span class="o">=</span> <span class="s">"Apache-2.0"</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s">"licenses/</span><span class="si">{</span><span class="n">licenseId</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">_assert_status_code_is</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">_assert_matches_license_id</span><span class="p">(</span><span class="n">licenseId</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="sa">f</span><span class="s">"licenses/</span><span class="si">{</span><span class="n">licenseId</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="nf">_assert_status_code_is</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="nf">_assert_matches_license_id</span><span class="p">(</span><span class="n">licenseId</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">())</span>
 </code></pre></div>      </div>
 
       <p>The important line here is line 3: it tells us what API endpoint is called: <code class="language-plaintext highlighter-rouge">licenses/{licenseId}</code>.</p>
@@ -1291,18 +1291,18 @@ FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_licen
 
       <p>If you look at the FastAPI controller, you’ll see the <code class="language-plaintext highlighter-rouge">get</code> method that is responsible for fetching the data in response to a <code class="language-plaintext highlighter-rouge">GET</code> HTTP request received at the <code class="language-plaintext highlighter-rouge">licenses/{licenseId}</code> endpoint:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">@</span><span class="n">router</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/api/licenses/{id}'</span><span class="p">,</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@router.get</span><span class="p">(</span><span class="s">'/api/licenses/{id}'</span><span class="p">,</span>
         <span class="n">summary</span><span class="o">=</span><span class="s">"Gets the SPDX license metadata associated with the short identifier"</span><span class="p">,</span>
         <span class="n">response_description</span><span class="o">=</span><span class="s">"SPDX license metadata"</span><span class="p">)</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">LicenseIdPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LicenseMetadataModel</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">LicenseIdPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LicenseMetadataModel</span><span class="p">:</span>
         <span class="s">"""Returns the license metadata associated with the given
         [SPDX license short ID](https://spdx.github.io/spdx-spec/appendix-I-SPDX-license-list/)."""</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">licenses_manager</span><span class="p">.</span><span class="n">get_license_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">licenses_manager</span><span class="p">.</span><span class="nf">get_license_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>The only thing in this method that matters to us is the last line:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">licenses_manager</span><span class="p">.</span><span class="n">get_license_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">licenses_manager</span><span class="p">.</span><span class="nf">get_license_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>Why? Because despite all this syntax, the method simply redirects the request to <code class="language-plaintext highlighter-rouge">self.licenses_manager</code>. If we read the code, we’ll quickly see that this variable holds an instance of <code class="language-plaintext highlighter-rouge">LicencesManager</code>, which (look at the import statements at the top of the file) is located in <code class="language-plaintext highlighter-rouge">lib/galaxy/managers/licenses.py</code>. Which is where we should look next.</p>
@@ -1312,9 +1312,9 @@ FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_licen
       <blockquote class="solution">
         <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>The <code class="language-plaintext highlighter-rouge">get_license_by_id()</code> method raises an <code class="language-plaintext highlighter-rouge">ObjectNotFound</code> error (which results in the 404 status code we see in the test result). This error is a direct result of the LicensesManager <code class="language-plaintext highlighter-rouge">get</code> method called on the previous line (<code class="language-plaintext highlighter-rouge">license = self.get(id)</code>) - take a look at that method:</p>
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">uri</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">_by_index</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_by_index</span><span class="p">[</span><span class="n">uri</span><span class="p">]</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">uri</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">_by_index</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_by_index</span><span class="p">[</span><span class="n">uri</span><span class="p">]</span>
             <span class="p">...</span>
 </code></pre></div>        </div>
         <p>Let’s rewrite the first clause in pseudo code to expose the problem:</p>
@@ -1669,10 +1669,10 @@ Exception: This should not happen!
 
       <p>Let’s head over to the <code class="language-plaintext highlighter-rouge">datasets'py</code> file, line 100:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="mi">97</span>         <span class="k">if</span> <span class="n">str_as_bool</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"show_datasets"</span><span class="p">,</span> <span class="s">"True"</span><span class="p">)):</span>
- <span class="mi">98</span>             <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">service</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">history_id</span><span class="p">,</span> <span class="n">serialization_params</span><span class="p">,</span> <span class="n">filter_query_params</span><span class="p">)</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="mi">97</span>         <span class="k">if</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"show_datasets"</span><span class="p">,</span> <span class="s">"True"</span><span class="p">)):</span>
+ <span class="mi">98</span>             <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">service</span><span class="p">.</span><span class="nf">index</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">history_id</span><span class="p">,</span> <span class="n">serialization_params</span><span class="p">,</span> <span class="n">filter_query_params</span><span class="p">)</span>
  <span class="mi">99</span>         <span class="k">else</span><span class="p">:</span>
-<span class="mi">100</span>             <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"This should not happen!"</span><span class="p">)</span>
+<span class="mi">100</span>             <span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="s">"This should not happen!"</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>The good news is that the error happens inside an <code class="language-plaintext highlighter-rouge">if/else</code> block, which narrows down our search to line 97: that line evaluates to <code class="language-plaintext highlighter-rouge">False</code>, causing the <code class="language-plaintext highlighter-rouge">else</code> clause to execute. The bad news is that we have no idea what causes that line to evaluate to <code class="language-plaintext highlighter-rouge">False</code>.</p>
@@ -1689,11 +1689,11 @@ Exception: This should not happen!
       <blockquote class="solution">
         <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">126</span>         <span class="n">breakpoint</span><span class="p">()</span>
- <span class="mi">97</span>         <span class="k">if</span> <span class="n">str_as_bool</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"show_datasets"</span><span class="p">,</span> <span class="s">"True"</span><span class="p">)):</span>
- <span class="mi">98</span>             <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">service</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">history_id</span><span class="p">,</span> <span class="n">serialization_params</span><span class="p">,</span> <span class="n">filter_query_params</span><span class="p">)</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">126</span>         <span class="nf">breakpoint</span><span class="p">()</span>
+ <span class="mi">97</span>         <span class="k">if</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"show_datasets"</span><span class="p">,</span> <span class="s">"True"</span><span class="p">)):</span>
+ <span class="mi">98</span>             <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">service</span><span class="p">.</span><span class="nf">index</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">history_id</span><span class="p">,</span> <span class="n">serialization_params</span><span class="p">,</span> <span class="n">filter_query_params</span><span class="p">)</span>
  <span class="mi">99</span>         <span class="k">else</span><span class="p">:</span>
-<span class="mi">100</span>             <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"This should not happen!"</span><span class="p">)</span>
+<span class="mi">100</span>             <span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="s">"This should not happen!"</span><span class="p">)</span>
 </code></pre></div>        </div>
 
       </blockquote>
@@ -1744,9 +1744,9 @@ Exception: This should not happen!
       <blockquote class="solution">
         <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">584</span>     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">584</span>     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 <span class="mi">585</span>         <span class="c1"># Warning: the value of self.config_dict['foo'] may be different from self.foo
-</span><span class="mi">586</span>         <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">config_dict</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+</span><span class="mi">586</span>         <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">config_dict</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
 </code></pre></div>        </div>
 
         <p>The argument <code class="language-plaintext highlighter-rouge">True</code> corresponds to the parameter <code class="language-plaintext highlighter-rouge">default</code>. In the method’s body, we see that this value will be passed to <code class="language-plaintext highlighter-rouge">self.config_dict.get()</code>; <code class="language-plaintext highlighter-rouge">self.config_dict</code> is a Python dictionary, so the second argument to <code class="language-plaintext highlighter-rouge">get()</code> is the default value that will be retuned if <code class="language-plaintext highlighter-rouge">key</code> is not in <code class="language-plaintext highlighter-rouge">self.config_dict</code>.</p>
@@ -1781,7 +1781,7 @@ Head over to the function’s definition (you can tell from the import statement
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">117</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
 <span class="mi">118</span>     <span class="s">"""This is for training only."""</span>
-<span class="mi">119</span>     <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="s">"true"</span><span class="p">,</span> <span class="s">"yes"</span><span class="p">,</span> <span class="s">"on"</span><span class="p">,</span> <span class="s">"1"</span><span class="p">):</span>
+<span class="mi">119</span>     <span class="k">if</span> <span class="nf">str</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="s">"true"</span><span class="p">,</span> <span class="s">"yes"</span><span class="p">,</span> <span class="s">"on"</span><span class="p">,</span> <span class="s">"1"</span><span class="p">):</span>
 <span class="mi">120</span>         <span class="k">return</span> <span class="bp">True</span>
 <span class="mi">121</span>     <span class="k">else</span><span class="p">:</span>
 <span class="mi">122</span>         <span class="k">return</span> <span class="bp">False</span>
@@ -1805,7 +1805,7 @@ Head over to the function’s definition (you can tell from the import statement
         <p>Your first step could be something like this:</p>
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_str_as_bool</span><span class="p">():</span>
-    <span class="k">assert</span> <span class="n">util</span><span class="p">.</span><span class="n">str_as_bool</span><span class="p">(</span><span class="s">'True'</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">util</span><span class="p">.</span><span class="nf">str_as_bool</span><span class="p">(</span><span class="s">'True'</span><span class="p">)</span>
 </code></pre></div>        </div>
 
         <p>However, keep in mind that there may be other cases of mixed or uppercase values. You should also test for lowercase values - to make sure that while fixing the bug you don’t break the current functionality. And remember to test for the <code class="language-plaintext highlighter-rouge">False</code> cases as well.</p>
@@ -1814,9 +1814,9 @@ Head over to the function’s definition (you can tell from the import statement
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_str_as_bool</span><span class="p">():</span>
     <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'true'</span><span class="p">,</span> <span class="s">'yes'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">,</span> <span class="s">'True'</span><span class="p">,</span> <span class="s">'Yes'</span><span class="p">,</span> <span class="s">'On'</span><span class="p">,</span><span class="s">'TRUE'</span><span class="p">,</span> <span class="s">'YES'</span><span class="p">,</span> <span class="s">'ON'</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">util</span><span class="p">.</span><span class="n">str_as_bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">util</span><span class="p">.</span><span class="nf">str_as_bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'false'</span><span class="p">,</span> <span class="s">'0'</span><span class="p">,</span> <span class="s">'something else'</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="ow">not</span> <span class="n">util</span><span class="p">.</span><span class="n">str_as_bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">util</span><span class="p">.</span><span class="nf">str_as_bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div>        </div>
 
       </blockquote>
@@ -1835,7 +1835,7 @@ Head over to the function’s definition (you can tell from the import statement
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">117</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
 <span class="mi">118</span>     <span class="s">"""This is for training only."""</span>
-<span class="mi">119</span>     <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">"true"</span><span class="p">,</span> <span class="s">"yes"</span><span class="p">,</span> <span class="s">"on"</span><span class="p">,</span> <span class="s">"1"</span><span class="p">):</span>
+<span class="mi">119</span>     <span class="k">if</span> <span class="nf">str</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="nf">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">"true"</span><span class="p">,</span> <span class="s">"yes"</span><span class="p">,</span> <span class="s">"on"</span><span class="p">,</span> <span class="s">"1"</span><span class="p">):</span>
 <span class="mi">120</span>         <span class="k">return</span> <span class="bp">True</span>
 <span class="mi">121</span>     <span class="k">else</span><span class="p">:</span>
 <span class="mi">122</span>         <span class="k">return</span> <span class="bp">False</span>
@@ -1856,7 +1856,7 @@ Head over to the function’s definition (you can tell from the import statement
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">117</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
 <span class="mi">118</span>     <span class="s">""" This is for training only."""</span>
-<span class="mi">119</span>     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'true'</span><span class="p">,</span> <span class="s">'yes'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
+<span class="mi">119</span>     <span class="k">return</span> <span class="nf">str</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="nf">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'true'</span><span class="p">,</span> <span class="s">'yes'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
 </code></pre></div>        </div>
 
         <p>Much better!</p>
@@ -1998,7 +1998,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

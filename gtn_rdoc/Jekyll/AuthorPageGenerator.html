@@ -92,6 +92,8 @@
 
   <section class="description">
     
+<p>This class generates the GTN&#39;s author pags</p>
+
   </section>
 
   
@@ -124,13 +126,17 @@
 
         <div class="method-description">
           
-          
+          <p>This generates the author pages Params</p>
+<dl class="rdoc-list note-list"><dt><code>site</code>
+<dd>
+<p>The site object</p>
+</dd></dl>
           
           
 
           
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File _plugins/author-page.rb, line 27</span>
+            <pre><span class="ruby-comment"># File _plugins/author-page.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">layouts</span>.<span class="ruby-identifier">key?</span> <span class="ruby-string">&#39;contributor_index&#39;</span>
     <span class="ruby-identifier">dir</span> = <span class="ruby-string">&#39;hall-of-fame&#39;</span>
@@ -219,13 +225,31 @@
 
         <div class="method-description">
           
-          
+          <p>This extracts the contributions and pushes them on to an existing datastructure, modifying it in the process. It&#39;s pretty gross.</p>
+
+<p>Params</p>
+<dl class="rdoc-list note-list"><dt><code>t</code>
+<dd>
+<p>The tutorial, slide, or news item</p>
+</dd><dt><code>datastructure</code>
+<dd>
+<p>The hash of contributors that the author information should be pushed onto</p>
+</dd><dt><code>flat</code>
+<dd>
+<p>Whether the datastructure is a flat array or a nested array</p>
+</dd></dl>
+
+<p>Returns</p>
+<dl class="rdoc-list note-list"><dt><code>datastructure</code>
+<dd>
+<p>The modified datastructure</p>
+</dd></dl>
           
           
 
           
           <div class="method-source-code" id="pusher-source">
-            <pre><span class="ruby-comment"># File _plugins/author-page.rb, line 5</span>
+            <pre><span class="ruby-comment"># File _plugins/author-page.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pusher</span>(<span class="ruby-identifier">t</span>, <span class="ruby-identifier">datastructure</span>, <span class="ruby-identifier">flat</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">flat</span>

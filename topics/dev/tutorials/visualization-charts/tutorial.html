@@ -1286,22 +1286,22 @@ Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a
 </code></pre></div>      </div>
     </li>
     <li>Lastly, replace the <code class="language-plaintext highlighter-rouge">load</code> function contents in the same entrypoint file with the following code that will set up the protein viewer:
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">var</span> <span class="nx">viewer</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">Viewer</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span> <span class="nx">options</span><span class="p">.</span><span class="nx">targets</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">),</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">var</span> <span class="nx">viewer</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nc">Viewer</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span> <span class="nx">options</span><span class="p">.</span><span class="nx">targets</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">),</span> <span class="p">{</span>
      <span class="na">width</span>       <span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
      <span class="na">height</span>      <span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
      <span class="na">antialias</span>   <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
      <span class="na">outline</span>     <span class="p">:</span> <span class="kc">true</span>
  <span class="p">});</span>
- <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span> <span class="p">{</span>
+ <span class="nx">$</span><span class="p">.</span><span class="nf">ajax</span><span class="p">(</span> <span class="p">{</span>
      <span class="na">url</span>     <span class="p">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">download_url</span><span class="p">,</span>
      <span class="na">success</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
-         <span class="kd">var</span> <span class="nx">structure</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">pdb</span><span class="p">(</span> <span class="nx">response</span> <span class="p">);</span>
-         <span class="nx">viewer</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
-         <span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
-         <span class="nx">viewer</span><span class="p">.</span><span class="nx">centerOn</span><span class="p">(</span> <span class="nx">structure</span> <span class="p">);</span>
-         <span class="nx">viewer</span><span class="p">.</span><span class="nx">autoZoom</span><span class="p">();</span>
-         <span class="nx">options</span><span class="p">.</span><span class="nx">chart</span><span class="p">.</span><span class="nx">state</span><span class="p">(</span><span class="dl">'</span><span class="s1">ok</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Chart drawn.</span><span class="dl">'</span><span class="p">);</span>
-         <span class="nx">options</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+         <span class="kd">var</span> <span class="nx">structure</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nf">pdb</span><span class="p">(</span> <span class="nx">response</span> <span class="p">);</span>
+         <span class="nx">viewer</span><span class="p">.</span><span class="nf">clear</span><span class="p">();</span>
+         <span class="nx">viewer</span><span class="p">.</span><span class="nf">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
+         <span class="nx">viewer</span><span class="p">.</span><span class="nf">centerOn</span><span class="p">(</span> <span class="nx">structure</span> <span class="p">);</span>
+         <span class="nx">viewer</span><span class="p">.</span><span class="nf">autoZoom</span><span class="p">();</span>
+         <span class="nx">options</span><span class="p">.</span><span class="nx">chart</span><span class="p">.</span><span class="nf">state</span><span class="p">(</span><span class="dl">'</span><span class="s1">ok</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Chart drawn.</span><span class="dl">'</span><span class="p">);</span>
+         <span class="nx">options</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nf">resolve</span><span class="p">();</span>
      <span class="p">}</span>
  <span class="p">});</span>
 </code></pre></div>      </div>
@@ -1434,12 +1434,12 @@ latter is provided in <em>JavaScript</em> and not as XML.</p>
 </code></pre></div>      </div>
     </li>
     <li>Change the following line in <code class="language-plaintext highlighter-rouge">script.js</code>:
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">viewer</span><span class="p">.</span><span class="nf">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
 </code></pre></div>      </div>
       <p>to</p>
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">chart</span><span class="p">.</span><span class="nx">settings</span><span class="p">;</span>
-<span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="nx">settings</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mode</span><span class="dl">'</span> <span class="p">),</span> <span class="p">{}</span> <span class="p">);</span>
+<span class="nx">viewer</span><span class="p">.</span><span class="nf">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="nx">settings</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mode</span><span class="dl">'</span> <span class="p">),</span> <span class="p">{}</span> <span class="p">);</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1563,7 +1563,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

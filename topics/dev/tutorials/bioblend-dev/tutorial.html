@@ -941,18 +941,18 @@ We use the <a href="https://git-scm.com">git</a> versioning tool to download the
 
   <p>Look at the following code:</p>
   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># classic BioBlend
-</span><span class="kn">from</span> <span class="nn">bioblend.galaxy</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">galaxy_url</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">galaxy_key</span><span class="p">)</span>
-<span class="n">workflows</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">get_workflows</span><span class="p">()</span>
+</span><span class="kn">from</span> <span class="n">bioblend.galaxy</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">galaxy_url</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">galaxy_key</span><span class="p">)</span>
+<span class="n">workflows</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">get_workflows</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">wf_dict</span> <span class="ow">in</span> <span class="n">workflows</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">wf_dict</span><span class="p">[</span><span class="s">'name'</span><span class="p">]</span><span class="si">}</span><span class="s"> : </span><span class="si">{</span><span class="n">wf_dict</span><span class="p">[</span><span class="s">'id'</span><span class="p">]</span><span class="si">}</span><span class="s">"</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">wf_dict</span><span class="p">[</span><span class="s">'name'</span><span class="p">]</span><span class="si">}</span><span class="s"> : </span><span class="si">{</span><span class="n">wf_dict</span><span class="p">[</span><span class="s">'id'</span><span class="p">]</span><span class="si">}</span><span class="s">"</span><span class="p">))</span>
 
 <span class="c1"># BioBlend.objects
-</span><span class="kn">from</span> <span class="nn">bioblend.galaxy.objects</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">GalaxyInstance</span><span class="p">(</span><span class="n">galaxy_url</span><span class="p">,</span> <span class="n">galaxy_key</span><span class="p">)</span>
-<span class="n">workflows</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">get_previews</span><span class="p">()</span>
+</span><span class="kn">from</span> <span class="n">bioblend.galaxy.objects</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="n">galaxy_url</span><span class="p">,</span> <span class="n">galaxy_key</span><span class="p">)</span>
+<span class="n">workflows</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">get_previews</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">wf</span> <span class="ow">in</span> <span class="n">workflows</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">wf</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> : </span><span class="si">{</span><span class="n">wf</span><span class="p">.</span><span class="nb">id</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">wf</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> : </span><span class="si">{</span><span class="n">wf</span><span class="p">.</span><span class="nb">id</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
 </code></pre></div>  </div>
   <p>It does the same thing (prints all available workflows) using both BioBlend and BioBlend.objects. What differences can you see?</p>
   <blockquote class="solution">
@@ -1018,19 +1018,19 @@ We use the <a href="https://git-scm.com">git</a> versioning tool to download the
 
       <p>BioBlend code:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">bioblend.galaxy</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">GalaxyInstance</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="n">key</span><span class="o">=&lt;</span><span class="n">API_KEY</span><span class="o">&gt;</span><span class="p">)</span>
-<span class="n">invs</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="n">get_invocations</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">invs</span><span class="p">)</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">bioblend.galaxy</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="n">key</span><span class="o">=&lt;</span><span class="n">API_KEY</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">invs</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="nf">get_invocations</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">invs</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>BioBlend.objects code:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">bioblend.galaxy.objects</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
-<span class="n">obj_gi</span> <span class="o">=</span> <span class="n">GalaxyInstance</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="n">key</span><span class="o">=&lt;</span><span class="n">API_KEY</span><span class="o">&gt;</span><span class="p">)</span>
-<span class="n">previews</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="n">get_previews</span><span class="p">()</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">bioblend.galaxy.objects</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
+<span class="n">obj_gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="n">key</span><span class="o">=&lt;</span><span class="n">API_KEY</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">previews</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="nf">get_previews</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">preview</span> <span class="ow">in</span> <span class="n">previews</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">preview</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">preview</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1056,14 +1056,14 @@ We use the <a href="https://git-scm.com">git</a> versioning tool to download the
       </blockquote>
 
       <p>BioBlend code:</p>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">invs</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="n">get_invocations</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">include_terminal</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">invs</span><span class="p">)</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">invs</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="nf">get_invocations</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">include_terminal</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">invs</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>BioBlend.objects code:</p>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">invs</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="nb">list</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">include_terminal</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">invs</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="nf">list</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">include_terminal</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">invocation</span> <span class="ow">in</span> <span class="n">invs</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">invocation</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">invocation</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1131,14 +1131,14 @@ We use the <a href="https://git-scm.com">git</a> versioning tool to download the
       </blockquote>
 
       <p>BioBlend code:</p>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create_history</span><span class="p">(</span><span class="s">'MyNewHistory'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create_history</span><span class="p">(</span><span class="s">'MyNewHistory'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>BioBlend.objects code:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="s">'MyNewHistory'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">history</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="s">'MyNewHistory'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">history</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -1246,7 +1246,7 @@ My name is curl
       <p>Let’s look at the signature of the endpoint method:</p>
 
       <p><strong>File <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/webapps/galaxy/api/tools.py#L293">api/tools.py</a>, line 291</strong>:</p>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">uninstall_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trans</span><span class="p">:</span> <span class="n">GalaxyWebTransaction</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">uninstall_dependencies</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">trans</span><span class="p">:</span> <span class="n">GalaxyWebTransaction</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
 </code></pre></div>      </div>
       <p>The <code class="language-plaintext highlighter-rouge">GalaxyWebTransaction</code> is an object which represents our API request. It is internal to the Galaxy server. We do not specify it as a parameter in BioBlend.</p>
 
@@ -1280,21 +1280,21 @@ parameters:
       <p>Here the tool API controller calls the <code class="language-plaintext highlighter-rouge">tool_requirements_status</code> property of the <code class="language-plaintext highlighter-rouge">Tool</code> class instance, which represents the tool corresponding to the <code class="language-plaintext highlighter-rouge">id</code> parameter. Let’s also check the definition of this property.</p>
 
       <p><strong>File <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/tools/__init__.py#L1833">tools/__init__.py</a>, line 1833</strong>:</p>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">tool_requirements_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">tool_requirements_status</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
     <span class="s">"""
     Return a list of dictionaries for all tool dependencies with their
     associated status
     """</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_view</span><span class="p">.</span><span class="n">get_requirements_status</span><span class="p">(</span>
-        <span class="p">{</span><span class="bp">self</span><span class="p">.</span><span class="nb">id</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">tool_requirements</span><span class="p">},</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">installed_tool_dependencies</span>
+    <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_view</span><span class="p">.</span><span class="nf">get_requirements_status</span><span class="p">(</span>
+        <span class="p">{</span><span class="n">self</span><span class="p">.</span><span class="nb">id</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">tool_requirements</span><span class="p">},</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">installed_tool_dependencies</span>
     <span class="p">)</span>
 </code></pre></div>      </div>
       <p>The documentation of this method mentions that it returns a list of dictionaries for all tool dependencies with their associated status. Now we know the return type of the endpoint method!</p>
 
       <p>Our BioBlend method will receive this list of dictionaries encoded as JSON in the server response. It will parse the JSON and return the list. Thus, the signature of our new <code class="language-plaintext highlighter-rouge">uninstall_dependencies()</code> method will be as follows:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">uninstall_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">uninstall_dependencies</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
 </code></pre></div>      </div>
 
       <p>The <code class="language-plaintext highlighter-rouge">self</code> parameter corresponds to the <code class="language-plaintext highlighter-rouge">ToolsClient</code> instance. The parameter <code class="language-plaintext highlighter-rouge">tool_id</code> corresponds to the encoded ID for a given tool. This ID will be substituted in place of <code class="language-plaintext highlighter-rouge">{tool_id}</code> in the request URL.</p>
@@ -1311,7 +1311,7 @@ Let’s recall that the endpoint expects a DELETE request at URL <code class="la
         <li>
           <p>We use the <code class="language-plaintext highlighter-rouge">self._make_url()</code> helper method to construct a valid URL with the supplied <code class="language-plaintext highlighter-rouge">tool_id</code> parameter. Finally, we need to append <code class="language-plaintext highlighter-rouge">'/dependencies'</code> for our endpoint.</p>
 
-          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_make_url</span><span class="p">(</span><span class="n">tool_id</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/dependencies'</span>
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">url</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_make_url</span><span class="p">(</span><span class="n">tool_id</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/dependencies'</span>
 </code></pre></div>          </div>
         </li>
         <li>
@@ -1321,7 +1321,7 @@ Let’s recall that the endpoint expects a DELETE request at URL <code class="la
 
       <p>The <code class="language-plaintext highlighter-rouge">_delete()</code> method also expects a <code class="language-plaintext highlighter-rouge">payload</code> argument. Our payload will be empty (<code class="language-plaintext highlighter-rouge">{}</code>), since we use <code class="language-plaintext highlighter-rouge">tool_id</code> only to construct the URL and there are no additional parameters to pass. This helper method automatically parses the JSON response into a Python object, so we can directly return its result.</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_delete</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="p">{},</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">_delete</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="p">{},</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1362,10 +1362,10 @@ Uninstall dependencies for a given tool via a resolver.
 
         <p><strong>Example</strong>:</p>
 
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">gi</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get_version</span><span class="p">()[</span><span class="s">'version_major'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s">'21.01'</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'Newer version of Galaxy!'</span><span class="p">)</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">gi</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="nf">get_version</span><span class="p">()[</span><span class="s">'version_major'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s">'21.01'</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">'Newer version of Galaxy!'</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'Older version of Galaxy!'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">'Older version of Galaxy!'</span><span class="p">)</span>
 </code></pre></div>        </div>
         <p>An example where this is useful is the <a href="https://github.com/galaxyproject/bioblend/blob/v0.16.0/bioblend/galaxy/dataset_collections/__init__.py#L125"><code class="language-plaintext highlighter-rouge">download_dataset_collection()</code></a> method. It downloads a dataset collection as an archive file. Early versions of Galaxy return a ‘tar.gz’ archive. Later versions return a ‘zip’ archive. The BioBlend method uses the Galaxy version to determine the archive type.</p>
       </blockquote>
@@ -1375,7 +1375,7 @@ Uninstall dependencies for a given tool via a resolver.
 
       <p>In the end, our new method should look something like this:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">uninstall_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">uninstall_dependencies</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
     <span class="s">"""
     Uninstall dependencies for a given tool via a resolver.
 
@@ -1385,8 +1385,8 @@ Uninstall dependencies for a given tool via a resolver.
     :rtype: list of dicts
     :return: Tool requirement statuses
     """</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_make_url</span><span class="p">(</span><span class="n">tool_id</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/dependencies'</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_delete</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="p">{},</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_make_url</span><span class="p">(</span><span class="n">tool_id</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/dependencies'</span>
+    <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">_delete</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="p">{},</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1396,11 +1396,11 @@ Uninstall dependencies for a given tool via a resolver.
 
       <p>Therefore, let’s check that, when run on a given tool ID, the returned status indicates that the dependencies are null. We can reuse a tool ID from an existent test method. Let’s take <code class="language-plaintext highlighter-rouge">CONVERTER_fasta_to_bowtie_color_index</code>, which has only one dependency.</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_tool_dependency_uninstall</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="n">statuses</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="n">uninstall_dependencies</span><span class="p">(</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_tool_dependency_uninstall</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="n">statuses</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="nf">uninstall_dependencies</span><span class="p">(</span>
          <span class="s">'CONVERTER_fasta_to_bowtie_color_index'</span>
     <span class="p">)</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">statuses</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'model_class'</span><span class="p">],</span> <span class="s">'NullDependency'</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="nf">assertEqual</span><span class="p">(</span><span class="n">statuses</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'model_class'</span><span class="p">],</span> <span class="s">'NullDependency'</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -1410,8 +1410,8 @@ Uninstall dependencies for a given tool via a resolver.
         <p>At the time of writing BioBlend supports Galaxy 17.09 and later. However, certain functionality might not be available in all these versions. For example, <code class="language-plaintext highlighter-rouge">download_dataset_collection</code> is only supported by Galaxy 18.01 and later. We don’t want to run tests specific to this functionality on earlier versions of Galaxy. They would simply fail. We can skip a test for specific versions of Galaxy by adding the <code class="language-plaintext highlighter-rouge">@test_util.skip_unless_galaxy</code> decorator above the test method in question.</p>
 
         <p><strong>Example</strong>:</p>
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">test_util</span><span class="p">.</span><span class="n">skip_unless_galaxy</span><span class="p">(</span><span class="s">'release_19.09'</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">test_some_functionality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@test_util.skip_unless_galaxy</span><span class="p">(</span><span class="s">'release_19.09'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_some_functionality</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
 </code></pre></div>        </div>
         <p>This test will only be run against Galaxy 19.09 and later.</p>
       </blockquote>
@@ -1431,7 +1431,7 @@ Uninstall dependencies for a given tool via a resolver.
 
   <p>In the histories API <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/webapps/galaxy/api/histories.py#L384"><code class="language-plaintext highlighter-rouge">delete()</code></a> endpoint method, the <code class="language-plaintext highlighter-rouge">id</code> parameter is specified explicitly.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwd</span><span class="p">):</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwd</span><span class="p">):</span>
 </code></pre></div>  </div>
 
   <h4 id="keyword-parameters">Keyword parameters</h4>
@@ -1800,7 +1800,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

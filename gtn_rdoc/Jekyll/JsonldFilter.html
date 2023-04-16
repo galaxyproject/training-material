@@ -144,13 +144,27 @@
 
         <div class="method-description">
           
-          
+          <p>Generate the Dublin Core metadata for a material. Parmaeters:</p>
+<dl class="rdoc-list note-list"><dt><code>material</code>
+<dd>
+<p>The material to generate the metadata for.</p>
+</dd><dt><code>site</code>
+<dd>
+<p>The site object.</p>
+</dd></dl>
+
+<p>Returns: A string containing the metadata.</p>
+
+<p>Example:</p>
+
+<pre>{{ material | generate_dublin_core: site }}
+=&gt; &lt;meta name=&quot;DC.identifier&quot; content=&quot;...&quot; /&gt;</pre>
           
           
 
           
           <div class="method-source-code" id="generate_dublin_core-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 24</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_dublin_core</span>(<span class="ruby-identifier">material</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;data&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;data&#39;</span>].<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;type&#39;</span>, <span class="ruby-string">&#39;none&#39;</span>) <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;tutorial_hands_on&quot;</span>
     <span class="ruby-keyword">return</span>
@@ -198,13 +212,26 @@
 
         <div class="method-description">
           
-          
+          <p>Generate the JSON-LD metadata for a news article (blog) Parameters:</p>
+<dl class="rdoc-list note-list"><dt><code>page</code>
+<dd>
+<p>The page object.</p>
+</dd><dt><code>site</code>
+<dd>
+<p>The <code>Jekyll::Site</code> site object.</p>
+</dd></dl>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>Hash</code>
+<dd>
+<p>The JSON-LD metadata.</p>
+</dd></dl>
           
           
 
           
           <div class="method-source-code" id="generate_news_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 88</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 150</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_news_jsonld</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">get_authors</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">to_h</span>).<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">generate_person_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;contributors&#39;</span>][<span class="ruby-identifier">x</span>], <span class="ruby-identifier">site</span>) }
 
@@ -259,13 +286,50 @@
 
         <div class="method-description">
           
-          
+          <p>Generate the JSON-LD metadata for a person Parameters:</p>
+<dl class="rdoc-list note-list"><dt><code>id</code>
+<dd>
+<p>The id of the person.</p>
+</dd><dt><code>contributor</code>
+<dd>
+<p>The contributor object from CONTRIBUTORS.yaml.</p>
+</dd><dt><code>site</code>
+<dd>
+<p>The site object.</p>
+</dd></dl>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>Hash</code>
+<dd>
+<p>The JSON-LD metadata.</p>
+</dd></dl>
+
+<p>Example:</p>
+
+<pre>generate_person_jsonld(&quot;hexylena&quot;, site[&#39;data&#39;][&#39;contributors&#39;][&#39;hexylena&#39;], site)
+=&gt; {
+  &quot;@context&quot;: &quot;https://schema.org&quot;,
+  &quot;@type&quot;: &quot;Person&quot;,
+  &quot;http://purl.org/dc/terms/conformsTo&quot;: {
+    # Bioschemas profile
+    &quot;@id&quot;: &quot;https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19&quot;,
+    &quot;@type&quot;: &quot;Person&quot;
+  },
+  &quot;url&quot;: &quot;https://training.galaxyproject.org/hall-of-fame/hexylena/&quot;,
+  &quot;mainEntityOfPage&quot;: &quot;https://training.galaxyproject.org/hall-of-fame/hexylena/&quot;,
+  &quot;name&quot;: &quot;hexylena&quot;,
+  &quot;image&quot;: &quot;https://avatars.githubusercontent.com/hexylena&quot;,
+  &quot;description&quot;: &quot;A contributor to the GTN project.&quot;,
+  &quot;memberOf&quot;: [...],
+  &quot;identifier&quot;: &quot;https://orcid.org/0000-0002-6601-2165&quot;,
+  &quot;orcid&quot;: &quot;https://orcid.org/0000-0002-6601-2165&quot;
+}</pre>
           
           
 
           
           <div class="method-source-code" id="generate_person_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 59</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_person_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">person</span> = {
     <span class="ruby-value">&quot;@context&quot;:</span> <span class="ruby-string">&quot;https://schema.org&quot;</span>,
@@ -313,13 +377,19 @@
 
         <div class="method-description">
           
-          
+          <p>Get the authors of a material. Time number 4 i&#39;ve seen this TODO(hexylena): make this a function in gtn.rb Parmeters:</p>
+<dl class="rdoc-list note-list"><dt><code>material</code>
+<dd>
+<p>The material to get the authors for.</p>
+</dd></dl>
+
+<p>Returns: An array of authors.</p>
           
           
 
           
           <div class="method-source-code" id="get_authors-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 49</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_authors</span>(<span class="ruby-identifier">material</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>) <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
@@ -352,13 +422,29 @@
 
         <div class="method-description">
           
-          
+          <p>Convert a material to JSON-LD. Parameters:</p>
+<dl class="rdoc-list note-list"><dt><code>material</code>
+<dd>
+<p>The material object.</p>
+</dd><dt><code>topic</code>
+<dd>
+<p>The topic object.</p>
+</dd><dt><code>site</code>
+<dd>
+<p>The <code>Jekyll::Site</code> site object.</p>
+</dd></dl>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>String</code>
+<dd>
+<p>The JSON-LD metadata.</p>
+</dd></dl>
           
           
 
           
           <div class="method-source-code" id="to_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 120</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 191</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_jsonld</span>(<span class="ruby-identifier">material</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">langCodeMap</span> = {
     <span class="ruby-value">&#39;en&#39;:</span> <span class="ruby-string">&quot;English&quot;</span>,
@@ -693,13 +779,29 @@
 
         <div class="method-description">
           
-          
+          <p>Generate the JSON-LD metadata for a person as JSON. Parameters:</p>
+<dl class="rdoc-list note-list"><dt><code>id</code>
+<dd>
+<p>The id of the person.</p>
+</dd><dt><code>contributor</code>
+<dd>
+<p>The contributor object from CONTRIBUTORS.yaml.</p>
+</dd><dt><code>site</code>
+<dd>
+<p>The site object.</p>
+</dd></dl>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>String</code>
+<dd>
+<p>The JSON-LD metadata.</p>
+</dd></dl>
           
           
 
           
           <div class="method-source-code" id="to_person_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 84</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_person_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">generate_person_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>))
 <span class="ruby-keyword">end</span></pre>

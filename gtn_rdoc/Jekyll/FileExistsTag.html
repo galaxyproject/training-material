@@ -75,8 +75,6 @@
 
   <ul class="link-list" role="directory">
     
-    <li class="calls-super" ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-render">#render</a>
     
   </ul>
@@ -92,6 +90,8 @@
 
   <section class="description">
     
+<p>This class adds a tag that checks if a file exists.</p>
+
   </section>
 
   
@@ -105,53 +105,6 @@
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(tag_name, path, tokens)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-            <div class="method-calls-super">
-              Calls superclass method
-              
-            </div>
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File _plugins/file_exists.rb, line 4</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">tag_name</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">tokens</span>)
-    <span class="ruby-keyword">super</span>
-    <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
@@ -171,23 +124,27 @@
 
         <div class="method-description">
           
-          
+          <p>Render the tag Params:</p>
+<dl class="rdoc-list note-list"><dt><code>context</code>
+<dd>
+<p>The context of the page</p>
+</dd></dl>
           
           
 
           
           <div class="method-source-code" id="render-source">
-            <pre><span class="ruby-comment"># File _plugins/file_exists.rb, line 9</span>
+            <pre><span class="ruby-comment"># File _plugins/file_exists.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render</span>(<span class="ruby-identifier">context</span>)
-    <span class="ruby-comment"># Pipe parameter through Liquid to make additional replacements possible</span>
-    <span class="ruby-identifier">url</span> = <span class="ruby-constant">Liquid</span><span class="ruby-operator">::</span><span class="ruby-constant">Template</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-ivar">@path</span>).<span class="ruby-identifier">render</span> <span class="ruby-identifier">context</span>
+  <span class="ruby-comment"># Pipe parameter through Liquid to make additional replacements possible</span>
+  <span class="ruby-identifier">url</span> = <span class="ruby-constant">Liquid</span><span class="ruby-operator">::</span><span class="ruby-constant">Template</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-ivar">@path</span>).<span class="ruby-identifier">render</span> <span class="ruby-identifier">context</span>
 
-    <span class="ruby-comment"># Adds the site source, so that it also works with a custom one</span>
-    <span class="ruby-identifier">site_source</span> = <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;source&#39;</span>]
-    <span class="ruby-identifier">file_path</span> = <span class="ruby-identifier">site_source</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">url</span>
+  <span class="ruby-comment"># Adds the site source, so that it also works with a custom one</span>
+  <span class="ruby-identifier">site_source</span> = <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;source&#39;</span>]
+  <span class="ruby-identifier">file_path</span> = <span class="ruby-identifier">site_source</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">url</span>
 
-    <span class="ruby-comment"># Check if file exists (returns true or false)</span>
-    <span class="ruby-node">&quot;#{File.exist?(file_path.strip!)}&quot;</span>
+  <span class="ruby-comment"># Check if file exists (returns true or false)</span>
+  <span class="ruby-node">&quot;#{File.exist?(file_path.strip!)}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

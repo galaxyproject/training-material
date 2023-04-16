@@ -157,7 +157,7 @@
 
 <p>#!/bin/bash DIR=/tmp/git-gat op=“$1”</p>
 
-<p>declare -a tutorials tutorials=(admin/ansible-galaxy admin/tus admin/cvmfs admin/singularity admin/tool-management admin/data-library admin/connect-to-compute-cluster admin/job-destinations admin/pulsar admin/gxadmin admin/monitoring admin/tiaas admin/reports admin/ftp) tutorials=(admin/wireguard-headscale) tutorials=(admin/wireguard)</p>
+<p>declare -a tutorials tutorials=(admin/ansible-galaxy admin/backup-cleanup admin/customization admin/tus admin/cvmfs admin/apptainer admin/tool-management admin/data-library admin/connect-to-compute-cluster admin/job-destinations admin/pulsar admin/celery admin/monitoring admin/tiaas admin/reports admin/ftp admin/beacon) tutorials=(admin/wireguard-headscale) tutorials=(admin/wireguard)</p>
 
 <p>echo “${<a href="0">tutorials</a>}” exit 1; if [[ “$op” == “export” ]]; then</p>
 
@@ -252,14 +252,56 @@ git init &amp;&amp; \
 <pre>rm -rf ${DIR}
 bash $0 export
 cd ${DIR} || exit
-git init &amp;&amp; \
+git init &amp;&amp; git config --local --add commit.gpgsign false &amp;&amp; \
         git am -3 -C2 -- *.patch
 cd -
 bash $0 import</pre>
 
+<p>elif [[ “$op” == “check-offsets” ]]; then</p>
+
+<pre>for idx in &quot;${!tutorials[@]}&quot;; do
+        folder=$(echo &quot;${tutorials[$idx]}&quot; | cut -d / -f 1)
+        tuto=$(echo &quot;${tutorials[$idx]}&quot; | cut -d / -f 2)
+        n2=$(( idx + 1 ))
+        echo $idx $folder $tuto = $n2 
+        grep &quot;snippet topics/admin/faqs/missed-something.md step=$n2&quot; topics/${folder}/tutorials/${tuto}/tutorial.md -q
+        if (( $? != 0 )); then
+                echo &quot;Error, topics/${folder}/tutorials/${tuto}/tutorial.md is missing a snippet for step $n2&quot;
+                #exit 1
+        fi
+        #vim topics/${folder}/tutorials/${tuto}/tutorial.md
+done</pre>
+
+<p>elif [[ “$op” == “fix-offsets” ]]; then</p>
+
+<pre>for idx in &quot;${!tutorials[@]}&quot;; do
+        folder=$(echo &quot;${tutorials[$idx]}&quot; | cut -d / -f 1)
+        tuto=$(echo &quot;${tutorials[$idx]}&quot; | cut -d / -f 2)
+        n2=$(( idx + 1 ))
+        echo -n &quot;$folder/$tuto should be $n2 &quot;
+        grep &quot;snippet topics/admin/faqs/missed-something.md step=$n2&quot; topics/${folder}/tutorials/${tuto}/tutorial.md -q
+        if (( $? != 0 )); then
+                echo &quot;Fixed!&quot;
+                sed -i -r &#39;s|topics/admin/faqs/missed-something.md step=[0-9]+|topics/admin/faqs/missed-something.md step=&#39;$n2&#39;|&#39; topics/${folder}/tutorials/${tuto}/tutorial.md
+        else
+                echo &quot;Already correct&quot;
+        fi
+        #vim topics/${folder}/tutorials/${tuto}/tutorial.md
+done</pre>
+
+<p>elif [[ “$op” == “edit” ]]; then</p>
+
+<pre>files=&quot;&quot;
+for idx in &quot;${!tutorials[@]}&quot;; do
+        folder=$(echo &quot;${tutorials[$idx]}&quot; | cut -d / -f 1)
+        tuto=$(echo &quot;${tutorials[$idx]}&quot; | cut -d / -f 2)
+        files=&quot;$files topics/${folder}/tutorials/${tuto}/tutorial.md&quot;
+done
+$EDITOR $files</pre>
+
 <p>else</p>
 
-<pre class="ruby"><span class="ruby-identifier">echo</span> <span class="ruby-string">&quot;$0 &lt;import|export|deploy|roundtrip&gt;&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">echo</span> <span class="ruby-string">&quot;$0 &lt;import|export|deploy|roundtrip|check-offsets|fix-offsets|edit&gt;&quot;</span>
 <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>;
 </pre>
 

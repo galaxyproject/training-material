@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Installation with Ansible">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-16 00:08:06 +0000">
+<meta name="DC.date" content="2023-04-16 09:08:32 +0000">
 <meta name="DC.creator" content="Simon Gladman">
 <meta name="DC.creator" content="Nate Coraor">
 
@@ -192,7 +192,36 @@
 <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge contributor-slugger70"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/slugger70?s=27" alt="Avatar">Simon Gladman</a><a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/natefoo?s=27" alt="Avatar">Nate Coraor</a>
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge contributor-slugger70"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/slugger70?s=27" alt="Avatar">Simon Gladman</a><a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/natefoo?s=27" alt="Avatar">Nate Coraor</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
 	</div>
 
 </div>
@@ -230,7 +259,7 @@
 
 	<h2 id="install-postgresql--galaxy-extensions">Install PostgreSQL &amp; Galaxy extensions</h2>
 
-<p><img src="../../images/ansible-galaxy-intro-0.png" alt="Graph showing a Postgres DB" /></p>
+<p><img src="../../images/ansible-galaxy-0.png" alt="Graph showing a Postgres DB in a minimal deployment (one node)" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -243,22 +272,32 @@
 
 <h2 id="install-galaxy--attach-storage">Install Galaxy &amp; Attach Storage</h2>
 
-<p><img src="../../images/ansible-galaxy-intro-1.png" alt="Galaxy is now attached to the DB. Gunicorn, storage, and compute are attached to Galaxy" /></p>
+<p><img src="../../images/ansible-galaxy-1.png" alt="Galaxy is now attached to the DB. Storage is connected to Galaxy" /></p>
 
 <p><span>Speaker Notes</span></p>
 
 <ul>
   <li>Galaxy is deployed, and attached to the database.</li>
+  <li>Storage must be available for Galaxy</li>
+</ul>
+
+<hr />
+
+<h2 id="setup-gunicorn">Setup Gunicorn</h2>
+
+<p><img src="../../images/ansible-galaxy-2.png" alt="Gunicorn is attached to Galaxy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
   <li>Next, Gunicorn is setup to run the Galaxy app.</li>
-  <li>Storage is attached to Galaxy for storing data.</li>
-  <li>And lastly compute is attached to Galaxy and the storage.</li>
 </ul>
 
 <hr />
 
 <h2 id="configure-nginx">Configure NGINX</h2>
 
-<p><img src="../../images/ansible-galaxy-intro-2.png" alt="NGINX is added to proxy Gunicorn" /></p>
+<p><img src="../../images/ansible-galaxy-3.png" alt="NGINX is added to proxy Gunicorn" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -268,26 +307,43 @@
 
 <hr />
 
+<h2 id="configure-backup">Configure Backup</h2>
+
+<p><img src="../../images/ansible-galaxy-4.png" alt="A backup location area is added, with a node DB backup inside connected to the PostgreSQL db" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>A backup location is a very important part of a Galaxy deployment.</li>
+  <li>We only backup the database, as the Galaxy configuration is stored in your playbooks</li>
+  <li>You probably also want to backup the user data storage.</li>
+</ul>
+
+<hr />
+
+<h2 id="configure-cvmfs">Configure CVMFS</h2>
+
+<p><img src="../../images/ansible-galaxy-5.png" alt="A cvmfs cache is added connected to Galaxy, next to storage" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>CVMFS provides reference data and can be attached to your storage.</li>
+  <li>Galaxy is configured to read data from CVMFS.</li>
+  <li>Compute is configured to access it as well for jobs that need reference data.</li>
+</ul>
+
+<hr />
+
 <h2 id="configure-job-handlers">Configure Job Handlers</h2>
 
-<p><img src="../../images/ansible-galaxy-intro-3.png" alt="Job Handlers are added, between Galaxy and the Compute" /></p>
+<p><img src="../../images/ansible-galaxy-6.png" alt="Job Handlers are added, connected to Galaxy. This connects to a Slurm deployment which is connected to a compute node which points to storage and cvmfs" /></p>
 
 <p><span>Speaker Notes</span></p>
 
 <ul>
   <li>Job handlers are configured and deployed with the app.</li>
   <li>These connect to the compute and manage jobs.</li>
-</ul>
-
-<hr />
-
-<h2 id="install--configure-slurm">Install &amp; Configure Slurm</h2>
-
-<p><img src="../../images/ansible-galaxy-intro-4.png" alt="Slurm is attached to the handlers" /></p>
-
-<p><span>Speaker Notes</span></p>
-
-<ul>
   <li>Slurm is a much more intelligent resource manager than Galaxy.</li>
   <li>The job handlers are configured to connect to Slurm.</li>
   <li>Slurm deployment is explained in a separate tutorial.</li>
@@ -295,23 +351,9 @@
 
 <hr />
 
-<h2 id="connect-cvmfs--reference-data">Connect CVMFS &amp; Reference Data</h2>
-
-<p><img src="../../images/ansible-galaxy-intro-5.png" alt="CVMFS is attached to storage + compute + galaxy" /></p>
-
-<p><span>Speaker Notes</span></p>
-
-<ul>
-  <li>CVMFS is deployed.</li>
-  <li>Galaxy is configured to read data from CVMFS.</li>
-  <li>Compute is configured to access it as well for jobs that need reference data.</li>
-</ul>
-
-<hr />
-
 <h2 id="setup-remote-compute">Setup Remote Compute</h2>
 
-<p><img src="../../images/ansible-galaxy-intro-6.png" alt="Remote compute site, with Pulsar and compute is attached to the job handlers" /></p>
+<p><img src="../../images/ansible-galaxy-7.png" alt="Remote compute site, with Pulsar and compute is attached to the job handlers" /></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -406,6 +448,20 @@
   <li>All of these best practices are built into the ansible role.</li>
 </ul>
 
+<hr />
+
+<h2 id="example-advanced-usegalaxy-deployment">Example “Advanced” UseGalaxy.* Deployment</h2>
+
+<p><img src="../../images/ansible-galaxy-usegalaxy.png" alt="The same deployment as before, but now they are segmented differently. Postgres and Rabbit MQ on their own hosts, storage on an NFS server, slurm and compute on a Cluster, and then nginx, gunicorn, galaxy, and job handlers on a Head Node" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Here we can see what a UseGalaxy.* deployment looks like</li>
+  <li>This is roughly representative of UseGalaxy.eu, but all Galaxies are slightly different.</li>
+  <li>For instance some Galaxies have multiple head nodes to balance the load.</li>
+</ul>
+
 
 	<hr />
 
@@ -443,6 +499,9 @@ This material is licensed under the <a rel="license" href="https://creativecommo
 
 
 
+
+
+
         </div>
         
             <footer>
@@ -456,7 +515,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/9a13c43c9f869b5045a587d435ffc81096ee272c">9a13c43c9f869b5045a587d435ffc81096ee272c</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/3b511d719891ee4a0c51722798d9108070537572">3b511d719891ee4a0c51722798d9108070537572</a></p>
     </div>
 </footer>
 

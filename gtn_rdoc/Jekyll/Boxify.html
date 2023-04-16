@@ -75,11 +75,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-boxify">#boxify</a>
-    
-    <li ><a href="#method-i-generate">#generate</a>
     
   </ul>
 </div>
@@ -107,47 +103,6 @@
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(config)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-boxify.rb, line 6</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">config</span>)
-  <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;boxify&#39;</span>] <span class="ruby-operator">||=</span> {}
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
@@ -167,13 +122,20 @@
 
         <div class="method-description">
           
-          
+          <p>This function adds boxes to the page content. Params:</p>
+<dl class="rdoc-list note-list"><dt><code>page</code>
+<dd>
+<p>The page to add boxes to</p>
+</dd><dt><code>site</code>
+<dd>
+<p>The <code>Jekyll::Site</code> object</p>
+</dd></dl>
           
           
 
           
           <div class="method-source-code" id="boxify-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-boxify.rb, line 16</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-boxify.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">boxify</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-keyword">return</span>
@@ -222,41 +184,6 @@
     <span class="ruby-comment">#box_type = $1</span>
     <span class="ruby-comment">#&quot;\n&lt;/div&gt;&lt;/div&gt;&lt;!--#{box_type}--&gt;&quot;</span>
   <span class="ruby-comment">#}</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-generate" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">generate</span><span
-            class="method-args">(site)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-boxify.rb, line 10</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
-  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/Boxify]&quot;</span>
-  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span> <span class="ruby-identifier">boxify</span> <span class="ruby-identifier">page</span>,<span class="ruby-identifier">site</span> }
-  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">posts</span>.<span class="ruby-identifier">docs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">post</span><span class="ruby-operator">|</span> <span class="ruby-identifier">boxify</span> <span class="ruby-identifier">post</span>, <span class="ruby-identifier">site</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
           

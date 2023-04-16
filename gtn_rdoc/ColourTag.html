@@ -115,13 +115,27 @@
 
         <div class="method-description">
           
-          
+          <p>This function generates the CSS for a colour tag Params</p>
+<dl class="rdoc-list note-list"><dt><code>contents</code>
+<dd>
+<p>The contents of the tag</p>
+</dd></dl>
+
+<p>Returns</p>
+<dl class="rdoc-list note-list"><dt><code>String</code>
+<dd>
+<p>The CSS for the tag</p>
+</dd></dl>
+
+<p>Example</p>
+
+<pre>ColourTag.colour_tag(&quot;test&quot;) =&gt; &quot;--color-primary: #f799ff; --color-darker: #f571ff; --color-dimmed: #f686ff;&quot;</pre>
           
           
 
           
           <div class="method-source-code" id="colour_tag-source">
-            <pre><span class="ruby-comment"># File _plugins/colour-tags.rb, line 5</span>
+            <pre><span class="ruby-comment"># File _plugins/colour-tags.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">colour_tag</span>(<span class="ruby-identifier">contents</span>)
   <span class="ruby-identifier">d</span> = (<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span> <span class="ruby-identifier">contents</span>).<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>)
 

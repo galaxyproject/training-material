@@ -917,21 +917,21 @@
 <p>For instance, returning to the <code class="language-plaintext highlighter-rouge">mean()</code> function example, what should <code class="language-plaintext highlighter-rouge">mean([])</code> return for a hypothetical mean function that calculates the average of a list of numbers. Should it return 0? It probably should return an error. Let’s look at some example code:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nf">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
 
-<span class="n">mean</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-<span class="n">mean</span><span class="p">([])</span>
+<span class="nf">mean</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="nf">mean</span><span class="p">([])</span>
 </code></pre></div></div>
 
 <p>This raises a <code class="language-plaintext highlighter-rouge">ZeroDivisionError</code>  but we can make this a more friendly error message by raising our own exception.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">numbers</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">"You are calculating the mean of an empty list, which is not possible."</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="s">"You are calculating the mean of an empty list, which is not possible."</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nf">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
 
-<span class="n">mean</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-<span class="n">mean</span><span class="p">([])</span>
+<span class="nf">mean</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="nf">mean</span><span class="p">([])</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
@@ -947,10 +947,10 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numbers</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Result is </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Result is </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
 <span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"We cannot calculate the mean"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"We cannot calculate the mean"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Here we use <code class="language-plaintext highlighter-rouge">try:</code> to setup a new block, and this code is <strong>tried</strong>, Python attempts to execute it. Below are one or more <code class="language-plaintext highlighter-rouge">except:</code> blocks which catch specific errors. Here we have specifically said we know a ValueError can happen, and decided to handle it.</p>
@@ -959,11 +959,11 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user_supplied_file</span> <span class="o">=</span> <span class="s">'does-not-exist.txt'</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="nb">open</span><span class="p">(</span><span class="n">user_supplied_file</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+    <span class="nf">open</span><span class="p">(</span><span class="n">user_supplied_file</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
 <span class="k">except</span> <span class="nb">FileNotFoundError</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"The path you supplied (</span><span class="si">{</span><span class="n">user_supplied_file</span><span class="si">}</span><span class="s">) doesn't exist, please double check it!"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"The path you supplied (</span><span class="si">{</span><span class="n">user_supplied_file</span><span class="si">}</span><span class="s">) doesn't exist, please double check it!"</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">PermissionError</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"You supplied a valid file, but it is unreadable. Try changing it's permissions with `chmod +r </span><span class="si">{</span><span class="n">user_supplied_file</span><span class="si">}</span><span class="s">`"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"You supplied a valid file, but it is unreadable. Try changing it's permissions with `chmod +r </span><span class="si">{</span><span class="n">user_supplied_file</span><span class="si">}</span><span class="s">`"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Failing to open a file raises a <code class="language-plaintext highlighter-rouge">FileNotFoundError</code> which indicates the file isn’t available, and <code class="language-plaintext highlighter-rouge">PermissionError</code> indicates that a file is unreadable. However in practice, sometimes you’ll see something like this:</p>
@@ -981,11 +981,11 @@ except:
 
 <p>The last portion of the <code class="language-plaintext highlighter-rouge">try:</code>/<code class="language-plaintext highlighter-rouge">except:</code> block is <code class="language-plaintext highlighter-rouge">finally:</code>, a third block which lets us do cleanup. It’s often very nice to your users that if your program fails halfway through, that you cleanup after yourself.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'gene_query.fa'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-        <span class="n">handle</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"&gt;some fasta sequence we want to search against a database"</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'gene_query.fa'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+        <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"&gt;some fasta sequence we want to search against a database"</span><span class="p">)</span>
 
     <span class="c1"># runQuery('gene_query.fa')
 </span>
@@ -993,12 +993,12 @@ except:
 </span>    <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="c1"># And now our results are invalid.
-</span>    <span class="k">print</span><span class="p">(</span><span class="s">"Something went wrong! Oh no! Check your inputs."</span><span class="p">)</span>
+</span>    <span class="nf">print</span><span class="p">(</span><span class="s">"Something went wrong! Oh no! Check your inputs."</span><span class="p">)</span>
 <span class="k">finally</span><span class="p">:</span>
     <span class="c1"># So we should cleanup this temporary file we created, so it doesn't cause
 </span>    <span class="c1"># problems or distract the user from the results file.
 </span>    <span class="c1"># This function will delete a file from your computer:
-</span>    <span class="n">os</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s">'gene_query.fa'</span><span class="p">)</span>
+</span>    <span class="n">os</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="s">'gene_query.fa'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="fallback">Fallback</h2>
@@ -1122,7 +1122,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

@@ -1047,16 +1047,16 @@ but the concepts are the same.</p>
 <p>Here’s a short Python program that selects latitudes and longitudes
 from an SQLite database stored in a file called <code class="language-plaintext highlighter-rouge">survey.db</code>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sqlite3</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"survey.db"</span><span class="p">)</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
-<span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT Site.lat, Site.long FROM Site;"</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"survey.db"</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="s">"SELECT Site.lat, Site.long FROM Site;"</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="nf">fetchall</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-<span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">connection</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="n">cursor</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+<span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>The program starts by importing the <code class="language-plaintext highlighter-rouge">sqlite3</code> library.
@@ -1105,21 +1105,21 @@ it’s normal to create one connection that stays open for the lifetime of the p
 For example,
 this function takes a user’s ID as a parameter and returns their name:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sqlite3</span>
 
 <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">person_id</span><span class="p">):</span>
     <span class="n">query</span> <span class="o">=</span> <span class="s">"SELECT personal || ' ' || family FROM Person WHERE id='"</span> <span class="o">+</span> <span class="n">person_id</span> <span class="o">+</span> <span class="s">"';"</span>
 
-    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
-    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">connection</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="nf">fetchall</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+    <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">"Full name for dyer:"</span><span class="p">,</span> <span class="n">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'dyer'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"Full name for dyer:"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'dyer'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>We use string concatenation on the first line of this function
@@ -1159,21 +1159,21 @@ We can do this by using a prepared statement
 instead of formatting our statements as strings.
 Here’s what our example program looks like if we do this:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sqlite3</span>
 
 <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">person_id</span><span class="p">):</span>
     <span class="n">query</span> <span class="o">=</span> <span class="s">"SELECT personal || ' ' || family FROM Person WHERE id=?;"</span>
 
-    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
-    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[</span><span class="n">person_id</span><span class="p">])</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">connection</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[</span><span class="n">person_id</span><span class="p">])</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="nf">fetchall</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+    <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">"Full name for dyer:"</span><span class="p">,</span> <span class="n">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'dyer'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"Full name for dyer:"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'dyer'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>The key changes are in the query string and the <code class="language-plaintext highlighter-rouge">execute</code> call.
@@ -1191,34 +1191,34 @@ so that they are safe to use.</p>
 such as inserting a new name.
 For instance, we can define a new function called <code class="language-plaintext highlighter-rouge">add_name</code> like so:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sqlite3</span>
 
 <span class="k">def</span> <span class="nf">add_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">new_person</span><span class="p">):</span>
     <span class="n">query</span> <span class="o">=</span> <span class="s">"INSERT INTO Person (id, personal, family) VALUES (?, ?, ?);"</span>
 
-    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
-    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">new_person</span><span class="p">))</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">connection</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nf">list</span><span class="p">(</span><span class="n">new_person</span><span class="p">))</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+    <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
 
 
 <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">person_id</span><span class="p">):</span>
     <span class="n">query</span> <span class="o">=</span> <span class="s">"SELECT personal || ' ' || family FROM Person WHERE id=?;"</span>
 
-    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
-    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[</span><span class="n">person_id</span><span class="p">])</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">connection</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[</span><span class="n">person_id</span><span class="p">])</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="nf">fetchall</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+    <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="c1"># Insert a new name
-</span><span class="n">add_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="p">(</span><span class="s">'barrett'</span><span class="p">,</span> <span class="s">'Mary'</span><span class="p">,</span> <span class="s">'Barrett'</span><span class="p">))</span>
+</span><span class="nf">add_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="p">(</span><span class="s">'barrett'</span><span class="p">,</span> <span class="s">'Mary'</span><span class="p">,</span> <span class="s">'Barrett'</span><span class="p">))</span>
 <span class="c1"># Check it exists
-</span><span class="k">print</span><span class="p">(</span><span class="s">"Full name for barrett:"</span><span class="p">,</span> <span class="n">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'barrett'</span><span class="p">))</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="s">"Full name for barrett:"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'barrett'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Note that in versions of sqlite3 &gt;= 2.5, the <code class="language-plaintext highlighter-rouge">get_name</code> function described
@@ -1228,35 +1228,35 @@ entry into the table using <code class="language-plaintext highlighter-rouge">ad
 This is because we must perform a <code class="language-plaintext highlighter-rouge">connection.commit()</code> before closing
 the connection, in order to save our changes to the database.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sqlite3</span>
 
 <span class="k">def</span> <span class="nf">add_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">new_person</span><span class="p">):</span>
     <span class="n">query</span> <span class="o">=</span> <span class="s">"INSERT INTO Person (id, personal, family) VALUES (?, ?, ?);"</span>
 
-    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
-    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">new_person</span><span class="p">))</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">connection</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>
-    <span class="n">connection</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nf">list</span><span class="p">(</span><span class="n">new_person</span><span class="p">))</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+    <span class="n">connection</span><span class="p">.</span><span class="nf">commit</span><span class="p">()</span>
+    <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
 
 
 <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">person_id</span><span class="p">):</span>
     <span class="n">query</span> <span class="o">=</span> <span class="s">"SELECT personal || ' ' || family FROM Person WHERE id=?;"</span>
 
-    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
-    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[</span><span class="n">person_id</span><span class="p">])</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>
-    <span class="n">cursor</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">connection</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">[</span><span class="n">person_id</span><span class="p">])</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="nf">fetchall</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+    <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="c1"># Insert a new name
-</span><span class="n">add_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="p">(</span><span class="s">'barrett'</span><span class="p">,</span> <span class="s">'Mary'</span><span class="p">,</span> <span class="s">'Barrett'</span><span class="p">))</span>
+</span><span class="nf">add_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="p">(</span><span class="s">'barrett'</span><span class="p">,</span> <span class="s">'Mary'</span><span class="p">,</span> <span class="s">'Barrett'</span><span class="p">))</span>
 <span class="c1"># Check it exists
-</span><span class="k">print</span><span class="p">(</span><span class="s">"Full name for barrett:"</span><span class="p">,</span> <span class="n">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'barrett'</span><span class="p">))</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="s">"Full name for barrett:"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'barrett'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <blockquote class="question">
@@ -1504,7 +1504,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

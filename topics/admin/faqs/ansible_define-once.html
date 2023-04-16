@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Define once, reference many times">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-06-07 09:38:12 +0000">
+<meta name="DC.date" content="2023-03-01 01:16:51 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Saskia Hiltemann">
 
@@ -236,15 +236,14 @@
   <span class="na">galaxy</span><span class="pi">:</span>
     <span class="c1"># Re-using the galaxy_config_dir variable saves time and ensures everything</span>
     <span class="c1"># is in sync!</span>
-    <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/datatypes_conf.xml"</span>
+    <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv"> </span><span class="s">}}/datatypes_conf.xml"</span>
 
-<span class="c1"># and now we can re-use ""</span>
+<span class="c1"># and now we can re-use "{{ galaxy_config.galaxy.datatypes_config_file }}"</span>
 <span class="c1"># in other places!</span>
-
 
 <span class="na">galaxy_config_templates</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/galaxy/config/datatypes_conf.xml</span>
-    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config.galaxy.datatypes_config_file</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div></div>
 
 <p>Practices like those shown above help to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as Galaxy is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.</p>
@@ -311,7 +310,7 @@ add a button, include configuration options:
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/9a13c43c9f869b5045a587d435ffc81096ee272c">9a13c43c9f869b5045a587d435ffc81096ee272c</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/3b511d719891ee4a0c51722798d9108070537572">3b511d719891ee4a0c51722798d9108070537572</a></p>
     </div>
 </footer>
 

@@ -242,7 +242,9 @@ if t2:
 
 <p>GITGAT = os.path.dirname(args.prefix) BASE = os.path.basename(args.prefix) BASE_PARTS = BASE.split(&#39;-&#39;)</p>
 
-<p>cmdhandle = open(f“{GITGAT}/.scripts/{BASE}-run.sh”, &#39;w&#39;) cmdhandle.write(“#!/bin/bashn”) cmdhandle.write(“set -exnn”) cmdhandle.write(“# Install dependencies before changing commitsn”) cmdhandle.write(f“find .scripts -name requirements.txt | xargs –no-run-if-empty -n 1 pip install -rn”) cmdhandle.write(“echo &#39;[galaxyservers]&#39; &gt; ~/.hostsn”) cmdhandle.write(&#39;echo “$(hostname -f) ansible_connection=local ansible_user=$(whoami)”  &gt;&gt; ~/.hostsn&#39;) cmdhandle.write(“echo &#39;[pulsarservers]&#39; &gt;&gt; ~/.hostsn”) cmdhandle.write(&#39;echo “$(hostname -f) ansible_connection=local ansible_user=$(whoami)”  &gt;&gt; ~/.hostsn&#39;) cmdhandle.write(&#39;export GALAXY_HOSTNAME=“$(hostname -f)”n&#39;) cmdhandle.write(&#39;export GALAXY_API_KEY=adminkeyn&#39;) cmdhandle.write(“## The students should use a random password, we override with &#39;password&#39; for reproducibilityn”) cmdhandle.write(“echo &#39;password&#39; &gt; ~/.vault-password.txt;n”) cmdhandle.write(“## And one in this directory, it can contain garbagen”) cmdhandle.write(“echo &#39;garbage&#39; &gt; ./.vault-password.txt;n”) # If it&#39;s after the ansible-galaxy tutorial if <a href="0">int(BASE_PARTS</a>) &gt; 10:</p>
+<p>cmdhandle = open(f“{GITGAT}/.scripts/{BASE}-run.sh”, &#39;w&#39;) cmdhandle.write(“#!/bin/bashn”) cmdhandle.write(“set -exnn”) cmdhandle.write(“# Install dependencies before changing commitsn”) cmdhandle.write(f“find .scripts -name requirements.txt | xargs –no-run-if-empty -n 1 pip install -rn”) cmdhandle.write(&#39;cat hosts | sed “s/^gat.*/$(hostname -f) ansible_connection=local ansible_user=$(whoami)/g” &gt; ~/.hostsn&#39;)</p>
+
+<p>cmdhandle.write(&#39;export GALAXY_HOSTNAME=“$(hostname -f)”n&#39;) cmdhandle.write(&#39;export GALAXY_API_KEY=adminkeyn&#39;) cmdhandle.write(“## The students should use a random password, we override with &#39;password&#39; for reproducibilityn”) cmdhandle.write(“echo &#39;password&#39; &gt; ~/.vault-password.txt;n”) cmdhandle.write(“## And one in this directory, it can contain garbagen”) cmdhandle.write(“echo &#39;garbage&#39; &gt; ./.vault-password.txt;n”) # If it&#39;s after the ansible-galaxy tutorial if <a href="0">int(BASE_PARTS</a>) &gt; 10:</p>
 
 <pre class="ruby"><span class="ruby-identifier">cmdhandle</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&quot;## Ensure the galaxy user is setup\n&quot;</span>)
 <span class="ruby-identifier">cmdhandle</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&quot;sudo -u galaxy /srv/galaxy/venv/bin/python /usr/bin/galaxy-create-user -c /srv/galaxy/config/galaxy.yml --user admin@example.org --password password --key adminkey --username admin\n&quot;</span>)
@@ -291,6 +293,7 @@ elif &#39;data-cmd&#39; in diff[-1]:
         else:
             line = line.strip()
             line = line.replace(&#39;https://your-galaxy&#39;, &#39;https://$(hostname -f)&#39;)
+            line = line.replace(&#39;https://galaxy.example.org&#39;, &#39;https://$(hostname -f)&#39;)
             line = line.replace(&#39;&lt;api-key&gt;&#39;, &#39;adminkey&#39;)
             cmdhandle.write(line + &quot;\n&quot;)
 elif &#39;data-test&#39; in diff[-1]:

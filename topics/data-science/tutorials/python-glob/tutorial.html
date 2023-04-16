@@ -897,18 +897,18 @@
 
 <p>We’ll start by creating some files for use in the rest of this tutorial</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+<span class="kn">import</span> <span class="n">subprocess</span>
 
 <span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'a/b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'c/e'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">'.'</span><span class="p">]</span>
 <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a.txt'</span><span class="p">,</span> <span class="s">'a.csv'</span><span class="p">,</span> <span class="s">'b.csv'</span><span class="p">,</span> <span class="s">'b.txt'</span><span class="p">,</span> <span class="s">'e.glm'</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
     <span class="c1"># Create some directories
-</span>    <span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span>    <span class="n">os</span><span class="p">.</span><span class="nf">makedirs</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="c1"># Create some files
 </span>    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-        <span class="n">subprocess</span><span class="p">.</span><span class="n">check_output</span><span class="p">([</span><span class="s">'touch'</span><span class="p">,</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="p">)])</span>
+        <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_output</span><span class="p">([</span><span class="s">'touch'</span><span class="p">,</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="p">)])</span>
 </code></pre></div></div>
 
 <p>Now we should have a pretty full folder!</p>
@@ -917,16 +917,16 @@
 
 <p>We can use the glob module to find files:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">glob</span>
-<span class="k">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="n">glob</span><span class="p">(</span><span class="s">'*.csv'</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="n">glob</span><span class="p">(</span><span class="s">'*.txt'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">glob</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'*.csv'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'*.txt'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Here we use an asterisk (<code class="language-plaintext highlighter-rouge">*</code>) as a wildcard, it matches any bit of text (but not into folders!) to all matching files. Here we list all matching <code class="language-plaintext highlighter-rouge">csv</code> or <code class="language-plaintext highlighter-rouge">txt</code> files. This is great to find files matching a pattern.</p>
 
 <p>We can also use asterisks anywhere in the glob, it doesn’t just have to be the filename portion:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="n">glob</span><span class="p">(</span><span class="s">'a*'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'a*'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Here we even see a third entry: the directory.</p>
@@ -937,12 +937,12 @@
 
 <p>Only need a single directory? Just include that!</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="n">glob</span><span class="p">(</span><span class="s">'a/*.csv'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'a/*.csv'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>But if you need more levels, or want to look in <em>all</em> folders, then you need the double wildcard! With two asterisks <code class="language-plaintext highlighter-rouge">**</code> we can search recursively through directories for files:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="n">glob</span><span class="p">(</span><span class="s">'**/a.csv'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'**/a.csv'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h1 id="exercise">Exercise</h1>
@@ -976,7 +976,7 @@
 
 <p>If you know your analyses are dependent on file ordering, then you can use <code class="language-plaintext highlighter-rouge">sorted()</code> to make sure the data is provided in a uniform way every time.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="n">glob</span><span class="p">(</span><span class="s">'**/a.csv'</span><span class="p">)))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'**/a.csv'</span><span class="p">)))</span>
 </code></pre></div></div>
 
 <p>If you’re not sure if your results will be dependent, you can try sorting anyway. Or better yet, randomising the list of inputs to make sure your code behaves properly in any scenario.</p>
@@ -1081,7 +1081,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

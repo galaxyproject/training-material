@@ -1034,6 +1034,12 @@
                         
                     
                         
+                    
+                        
+                    
+                        
+                    
+                        
                             
                             <li> Galaxy Installation on Kubernetes:
                             
@@ -1273,17 +1279,17 @@ full list from CVMFS.</p>
   <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static=/galaxy/server/static</span>
   <span class="na">static-map</span><span class="pi">:</span> <span class="s">/favicon.ico=/galaxy/server/static/favicon.ico</span>
   <span class="na">pythonpath</span><span class="pi">:</span> <span class="s">/galaxy/server/lib</span>
-  <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">manage-script-name</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">thunder-lock</span><span class="pi">:</span> <span class="kc">true</span>
+  <span class="na">manage-script-name</span><span class="pi">:</span> <span class="kc">true</span>
   <span class="na">mount</span><span class="pi">:</span> <span class="pi">{{</span><span class="nv">.Values.ingress.path</span><span class="pi">}}</span><span class="s">=galaxy.webapps.galaxy.buildapp:uwsgi_app()</span>
   <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
   <span class="na">offload-threads</span><span class="pi">:</span> <span class="m">2</span>
   <span class="na">threads</span><span class="pi">:</span> <span class="m">4</span>
-  <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">die-on-term</span><span class="pi">:</span> <span class="kc">true</span>
+  <span class="na">master</span><span class="pi">:</span> <span class="kc">true</span>
   <span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
-  <span class="na">enable-threads</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">enable-threads</span><span class="pi">:</span> <span class="kc">true</span>
+  <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="kc">true</span>
 <span class="na">galaxy</span><span class="pi">:</span>
   <span class="na">database_connection</span><span class="pi">:</span> <span class="s1">'</span><span class="s">postgresql://{{.Values.postgresql.galaxyDatabaseUser}}:{{.Values.postgresql.galaxyDatabasePassword}}@{{</span><span class="nv"> </span><span class="s">template</span><span class="nv"> </span><span class="s">"galaxy-postgresql.fullname"</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">}}/galaxy'</span>
   <span class="na">integrated_tool_panel_config</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/mutable/integrated_tool_panel.xml"</span>
@@ -1641,7 +1647,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

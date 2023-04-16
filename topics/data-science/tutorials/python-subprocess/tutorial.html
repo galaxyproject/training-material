@@ -903,17 +903,17 @@ Here we’ll give a quick tutorial on how to read and write files within Python.
 
 <p>The first step is importing the module</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">subprocess</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">subprocess</span>
 </code></pre></div></div>
 
 <p>You’ll primarily use two functions:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">help</span><span class="p">(</span><span class="n">subprocess</span><span class="p">.</span><span class="n">check_call</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">help</span><span class="p">(</span><span class="n">subprocess</span><span class="p">.</span><span class="n">check_call</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Which executes a command and checks if it was successful (or it raises an exception), and</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">help</span><span class="p">(</span><span class="n">subprocess</span><span class="p">.</span><span class="n">check_output</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">help</span><span class="p">(</span><span class="n">subprocess</span><span class="p">.</span><span class="n">check_output</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h1 id="check-call-downloading-files">Check Call: Downloading Files</h1>
@@ -927,8 +927,8 @@ Here we’ll give a quick tutorial on how to read and write files within Python.
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="s">"https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/836/945/GCF_000836945.1_ViralProj14044/GCF_000836945.1_ViralProj14044_genomic.fna.gz"</span>
 <span class="n">genome</span> <span class="o">=</span> <span class="s">'Escherichia virus T4.fna.gz'</span>
-<span class="n">subprocess</span><span class="p">.</span><span class="n">check_call</span><span class="p">([</span><span class="s">'wget'</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s">'-O'</span><span class="p">,</span> <span class="n">genome</span><span class="p">])</span>
-<span class="n">subprocess</span><span class="p">.</span><span class="n">check_call</span><span class="p">([</span><span class="s">'gzip'</span><span class="p">,</span> <span class="s">'-d'</span><span class="p">,</span> <span class="n">genome</span><span class="p">])</span>
+<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="s">'wget'</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s">'-O'</span><span class="p">,</span> <span class="n">genome</span><span class="p">])</span>
+<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="s">'gzip'</span><span class="p">,</span> <span class="s">'-d'</span><span class="p">,</span> <span class="n">genome</span><span class="p">])</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
@@ -989,15 +989,15 @@ Like exploit your system!</p>
 
 <h1 id="check-output-gene-calling-with-augustus">Check Output: Gene Calling with Augustus</h1>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gff3</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="n">check_output</span><span class="p">([</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gff3</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_output</span><span class="p">([</span>
     <span class="s">'augustus'</span><span class="p">,</span> <span class="c1"># Our command
 </span>    <span class="s">'--species=E_coli_K12'</span><span class="p">,</span> <span class="c1"># the first argument, the species, we're using a phage so we call genes  based on it's host organism
 </span>    <span class="s">'Escherichia virus T4.fna'</span><span class="p">,</span> <span class="c1"># The path to our genome file, without the .gz because we decompressed it.
 </span>    <span class="s">'--gff3=on'</span> <span class="c1"># We would like gff3 formatted output (it's easier to parse!)
 </span><span class="p">])</span>
 
-<span class="n">gff3</span> <span class="o">=</span> <span class="n">gff3</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
-<span class="n">gff3</span> <span class="o">=</span> <span class="n">gff3</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+<span class="n">gff3</span> <span class="o">=</span> <span class="n">gff3</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+<span class="n">gff3</span> <span class="o">=</span> <span class="n">gff3</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
@@ -1010,18 +1010,18 @@ Like exploit your system!</p>
 
 <p>Let’s look at the results!</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">gff3</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">gff3</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>It’s a lot of comment lines, starting with <code class="language-plaintext highlighter-rouge">#</code>. Let’s remove those</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cleaned_gff3</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">gff3</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">line</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'#'</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">line</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="s">'#'</span><span class="p">):</span>
         <span class="k">continue</span>
-    <span class="n">cleaned_gff3</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">cleaned_gff3</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">cleaned_gff3</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">cleaned_gff3</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>And now you’ve got a set of gff3 formatted gene calls! You can use all of your loop processing skills to slice and dice this data into something great!</p>
@@ -1042,8 +1042,8 @@ Like exploit your system!</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="s">"https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/721/125/GCF_001721125.1_ASM172112v1/GCF_001721125.1_ASM172112v1_cds_from_genomic.fna.gz"</span>
 <span class="n">cds</span> <span class="o">=</span> <span class="s">'E. Coli CDSs.fna.gz'</span>
-<span class="n">subprocess</span><span class="p">.</span><span class="n">check_call</span><span class="p">([</span><span class="s">'wget'</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s">'-O'</span><span class="p">,</span> <span class="n">cds</span><span class="p">])</span>
-<span class="n">subprocess</span><span class="p">.</span><span class="n">check_call</span><span class="p">([</span><span class="s">'gzip'</span><span class="p">,</span> <span class="s">'-d'</span><span class="p">,</span> <span class="n">cds</span><span class="p">])</span>
+<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="s">'wget'</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s">'-O'</span><span class="p">,</span> <span class="n">cds</span><span class="p">])</span>
+<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="s">'gzip'</span><span class="p">,</span> <span class="s">'-d'</span><span class="p">,</span> <span class="n">cds</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>With subprocesses, you can control the stdin, and stdout of the process by using file handles.</p>
@@ -1073,8 +1073,8 @@ build-icm test.icm &lt; seq.fa
 
 <p>We’ll do that now:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'E. Coli CDSs.fna'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-    <span class="n">subprocess</span><span class="p">.</span><span class="n">check_call</span><span class="p">([</span><span class="s">'build-icm'</span><span class="p">,</span> <span class="s">'test.icm'</span><span class="p">],</span> <span class="n">stdin</span><span class="o">=</span><span class="n">handle</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'E. Coli CDSs.fna'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+    <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="s">'build-icm'</span><span class="p">,</span> <span class="s">'test.icm'</span><span class="p">],</span> <span class="n">stdin</span><span class="o">=</span><span class="n">handle</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
@@ -1085,14 +1085,14 @@ build-icm test.icm &lt; seq.fa
 
 <p>Here we build a model, based on the sequences of <em>E. Coli</em> K-12, that Glimmer3 can use.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="n">check_output</span><span class="p">([</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_output</span><span class="p">([</span>
     <span class="s">'glimmer3'</span><span class="p">,</span> <span class="c1"># Our program
 </span>    <span class="s">'Escherichia virus T4.fna'</span><span class="p">,</span> <span class="c1"># The input genome
 </span>    <span class="s">'test.icm'</span><span class="p">,</span> <span class="c1"># The model we just built
 </span>    <span class="s">'t4-genes'</span>  <span class="c1"># The base name for output files. It'll produce t4-genes.detail and t4-genes.predict.
-</span><span class="p">]).</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span> <span class="c1"># And of course we decode as utf-8
+</span><span class="p">]).</span><span class="nf">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span> <span class="c1"># And of course we decode as utf-8
 </span>
-<span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
@@ -1103,14 +1103,14 @@ build-icm test.icm &lt; seq.fa
 
 <p><em>What happened here?</em> The output of the program was written to <code class="language-plaintext highlighter-rouge">stderr</code>, not <code class="language-plaintext highlighter-rouge">stdout</code>, so Python may print that out to your screen, but <code class="language-plaintext highlighter-rouge">output</code> will be empty. To solve this common problem we can re-run the program and collect both <code class="language-plaintext highlighter-rouge">stdout</code> and <code class="language-plaintext highlighter-rouge">stderr</code>.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="n">check_output</span><span class="p">([</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_output</span><span class="p">([</span>
     <span class="s">'glimmer3'</span><span class="p">,</span> <span class="c1"># Our program
 </span>    <span class="s">'Escherichia virus T4.fna'</span><span class="p">,</span> <span class="c1"># The input genome
 </span>    <span class="s">'test.icm'</span><span class="p">,</span> <span class="c1"># The model we just built
 </span>    <span class="s">'t4-genes'</span>  <span class="c1"># The base name for output files. It'll produce t4-genes.detail and t4-genes.predict.
-</span><span class="p">],</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">STDOUT</span><span class="p">).</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span> <span class="c1"># And of course we decode as utf-8
+</span><span class="p">],</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">STDOUT</span><span class="p">).</span><span class="nf">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span> <span class="c1"># And of course we decode as utf-8
 </span>
-<span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Here we’ve re-directed the <code class="language-plaintext highlighter-rouge">stderr</code> to <code class="language-plaintext highlighter-rouge">stdout</code> and mixed both of them together. This isn’t always what we want, but here the program produces no output, and we can do that safely, and now we can parse it or do any other computations we need with it! Our Glimmer3 gene calls are in <code class="language-plaintext highlighter-rouge">t4-genes.detail</code> and <code class="language-plaintext highlighter-rouge">t4-genes.predict</code> if we want to open and process those as well.</p>
@@ -1224,7 +1224,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

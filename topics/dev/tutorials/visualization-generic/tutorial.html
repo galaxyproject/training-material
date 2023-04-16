@@ -959,18 +959,18 @@ bam file and its index share the same prefix, as expected by samtools and pysam.
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Ensure BAI index is symlinked
 </span><span class="n">bai_target</span> <span class="o">=</span> <span class="n">hda</span><span class="p">.</span><span class="n">file_name</span><span class="o">+</span><span class="s">'.bai'</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="n">os</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">bai_target</span><span class="p">):</span>
-   <span class="n">os</span><span class="p">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">hda</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">bam_index</span><span class="p">.</span><span class="n">file_name</span><span class="p">,</span> <span class="n">bai_target</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">isfile</span><span class="p">(</span><span class="n">bai_target</span><span class="p">):</span>
+   <span class="n">os</span><span class="p">.</span><span class="nf">symlink</span><span class="p">(</span><span class="n">hda</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">bam_index</span><span class="p">.</span><span class="n">file_name</span><span class="p">,</span> <span class="n">bai_target</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Now the BAM file has a <code class="language-plaintext highlighter-rouge">.bai</code> file with the same prefix, and we can run the <code class="language-plaintext highlighter-rouge">idxstats</code>
 as follows:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Extract idxstats
-</span><span class="kn">import</span> <span class="nn">pysam</span>
-<span class="n">bam_idxstats_data</span> <span class="o">=</span> <span class="n">pysam</span><span class="p">.</span><span class="n">idxstats</span><span class="p">(</span><span class="n">hda</span><span class="p">.</span><span class="n">file_name</span><span class="p">)</span>
+</span><span class="kn">import</span> <span class="n">pysam</span>
+<span class="n">bam_idxstats_data</span> <span class="o">=</span> <span class="n">pysam</span><span class="p">.</span><span class="nf">idxstats</span><span class="p">(</span><span class="n">hda</span><span class="p">.</span><span class="n">file_name</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>With the lines of python code above, the idxstats data is parsed into the RAM of python
@@ -1089,15 +1089,15 @@ so getting the raw data into Javascript is rather easy:</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
   <span class="nx">bam_idxstats_data</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">bam_idxstats_data</span><span class="p">};</span>
-  <span class="kd">function</span> <span class="nx">parse_data</span><span class="p">(</span><span class="nx">bam_idxstats_data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">function</span> <span class="nf">parse_data</span><span class="p">(</span><span class="nx">bam_idxstats_data</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="p">{};</span>
 
     <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-      <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="se">\t</span><span class="dl">"</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="se">\t</span><span class="dl">"</span><span class="p">);</span>
 
-      <span class="k">if</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">_</span><span class="dl">"</span><span class="p">).</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// only if it does not contain underscore</span>
-        <span class="nx">output</span><span class="p">[</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+      <span class="nf">if</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">_</span><span class="dl">"</span><span class="p">).</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// only if it does not contain underscore</span>
+        <span class="nx">output</span><span class="p">[</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nf">parseInt</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
       <span class="p">}</span>
     <span class="p">}</span>
 
@@ -1461,7 +1461,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

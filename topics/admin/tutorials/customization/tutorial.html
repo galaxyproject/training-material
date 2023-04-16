@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Customizing the look of Galaxy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Customizing the look of Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-04-15 12:30:19 +0000">
+<meta name="DC.creator" content="Laila Los">
+
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Customizing the look of Galaxy">
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
+        
+        <meta property="og:image" content="/training-material/assets/images/gat.png">
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-04-15 12:30:19 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Customizing the look of Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Customizing the look of Galaxy' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/tutorial.html",
+  "timeRequired": "PT45M",
+  "keywords": "admin, git-gat",
+  "description": "The questions this  addresses are:\n - How do I change Galaxy's front page?\n - How do I set a custom brand text?\n - How can I configure theming?\n\n\nThe objectives are:\n - Set a brand text for your Galaxy instance\n - Add a custom welcome page to Galaxy\n - Activate and customize themes\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ]
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Galaxy Server administration
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/customization/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/customization/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-04-01/topics/admin/tutorials/customization/tutorial.html" title="Version 2023-04-01">2023-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-03-01/topics/admin/tutorials/customization/tutorial.html" title="Version 2023-03-01">2023-03-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-02-01/topics/admin/tutorials/customization/tutorial.html" title="Version 2023-02-01">2023-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/admins'
+  };
+</script>
+
+
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-04-15 12:30:19 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Customizing the look of Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Customizing the look of Galaxy' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/tutorial.html",
+  "timeRequired": "PT45M",
+  "keywords": "admin, git-gat",
+  "description": "The questions this  addresses are:\n - How do I change Galaxy's front page?\n - How do I set a custom brand text?\n - How can I configure theming?\n\n\nThe objectives are:\n - Set a brand text for your Galaxy instance\n - Add a custom welcome page to Galaxy\n - Activate and customize themes\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-admin">
+    <h1 data-toc-skip>Customizing the look of Galaxy</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/ElectronicBlueberry/" class="contributor-badge contributor-ElectronicBlueberry"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/ElectronicBlueberry?s=27" alt="Avatar">Laila Los</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How do I change Galaxy’s front page?</p>
+</li>
+        
+        <li><p>How do I set a custom brand text?</p>
+</li>
+        
+        <li><p>How can I configure theming?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Set a brand text for your Galaxy instance</p>
+</li>
+        
+        <li><p>Add a custom welcome page to Galaxy</p>
+</li>
+        
+        <li><p>Activate and customize themes</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 45 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 15, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Customizing your Galaxy instance makes it more recognizable at a glance, and can help communicate its purpose to its users.
+This tutorial will teach you three basic customizations you can make to Galaxy:</p>
+
+<ul>
+  <li>Setting a brand text</li>
+  <li>Adding a custom welcome page</li>
+  <li>Customizing the masthead using themes</li>
+</ul>
+
+<p>For this tutorial we will be setting up a fictional instance called “Galaxy Mars”.
+Feel free to use the included material in the hands-on sections, or provide your own.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+<ol id="markdown-toc">
+  <li><a href="#custom-branding" id="markdown-toc-custom-branding">Custom Branding</a></li>
+  <li><a href="#custom-welcome-page" id="markdown-toc-custom-welcome-page">Custom Welcome Page</a></li>
+  <li><a href="#custom-masthead-theme" id="markdown-toc-custom-masthead-theme">Custom Masthead Theme</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="custom-branding">Custom Branding</h2>
+
+<p>The brand text in Galaxy refers to the text you can see in the masthead of some Galaxy instances.
+This text will appear in the masthead, as well as the sites title.
+It is an easy way to set your instance apart, and make it more identifiable.</p>
+
+<figure id="figure-1"><img src="images/galaxy-europe.png" alt="screenshot of the start page of Galaxy Europe. " width="1450" height="687" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy Europe uses the brand text \"Europe\"</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-customising-the-branding"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Customising the Branding</div>
+
+  <ol>
+    <li>
+      <p>Open your <code class="language-plaintext highlighter-rouge">group_vars/galaxyserers.yml</code> and the following option under <code class="language-plaintext highlighter-rouge">galaxy_config.galaxy</code>:</p>
+
+      <div data-commit="Add brand" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
+</span><span class="p">@@ -32,6 +32,9 @@</span> galaxy_job_config:
+    
+ galaxy_config:
+   galaxy:
+<span class="gi">+    # Branding
++    brand: Mars 🚀
++    logo_src: "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/images/logo.png"
+</span>     # Main Configuration
+     admin_users:
+     - admin@example.org
+   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook.</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
+</code></pre></div>        </div>
+      </blockquote>
+
+      <figure id="figure-2"><img src="images/galaxy-mars-brand.png" alt="screenshot of fictional &quot;Galaxy Mars&quot; start page, with the brand text set to &quot;Mars&quot;. " width="1281" height="573" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Your Galaxy start page should now look something like this</figcaption></figure>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="custom-welcome-page">Custom Welcome Page</h2>
+
+<p>The welcome page is an html document embedded in Galaxy’s start page.
+It is what users see when first navigating to your instance.
+This page can be used to communicate what your instance is about, and share news and updates with your users.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-creating-a-custom-welcome-page"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating a custom welcome page</div>
+
+  <ol>
+    <li>
+      <p>Set the location of your welcome page in <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code></p>
+
+      <p>Under <code class="language-plaintext highlighter-rouge">galaxy_config.galaxy</code> specify the location of your welcome page</p>
+
+      <div data-commit="Add welcome url to the config" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
+</span><span class="p">@@ -86,6 +86,10 @@</span> galaxy_config:
+           - job-handlers
+           - workflow-schedulers
+    
+<span class="gi">+galaxy_config_files_public:
++  - src: files/galaxy/welcome.html
++    dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
++
+</span> # Certbot
+ certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+ certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Let’s then develop the associated template, add a title and some text to our welcome page:</p>
+
+      <div data-commit="Add the template" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/files/galaxy/welcome.html
+</span><span class="p">@@ -0,0 +1,11 @@</span>
+<span class="gi">+&lt;!DOCTYPE html&gt;
++&lt;html lang="en"&gt;
++    &lt;head&gt;
++        &lt;meta charset="utf-8"&gt;
++        &lt;link href="/static/dist/base.css" rel="stylesheet" type="text/css" /&gt;
++    &lt;/head&gt;
++    &lt;body&gt;
++        &lt;h1&gt;Welcome to the Galaxy Mars instance!&lt;/h1&gt;
++        &lt;p&gt;The only Galaxy instance on mars.&lt;/p&gt;
++    &lt;/body&gt;
++&lt;/html&gt;
+</span>   
+</code></pre></div>      </div>
+
+      <p>This works the same as any other html page. You can add styles in the head, or import some scripts.</p>
+
+      <p>Make sure your welcome page has exactly one <code class="language-plaintext highlighter-rouge">h1</code> element, which describes the page.
+This will act as the heading for your start-page, which can help assistive technologies.</p>
+    </li>
+    <li>
+      <p>Now that we have a proper welcome page, we’ll also need to correct our nginx routes:</p>
+
+      <div data-commit="Fix the nginx routes for the welcome page" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/galaxy.j2
+</span><span class="gi">+++ b/templates/nginx/galaxy.j2
+</span><span class="p">@@ -40,7 +40,7 @@</span> server {
+ 	# automatically copied around. The welcome page is one of them. In
+ 	# production, this step is skipped, so we will manually alias that.
+ 	location /static/welcome.html {
+<span class="gd">-		alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+</span><span class="gi">+		alias {{ galaxy_mutable_config_dir }}/welcome.html;
+</span> 		expires 24h;
+ 	}
+    
+   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook.</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-use-an-iframe"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-use-an-iframe" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Use an IFrame!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>A lot of the UseGalaxy.* instances choose to use their <code class="language-plaintext highlighter-rouge">welcome.html</code> to display an IFrame to a different site,
+e.g. the GalaxyProject.org site, or a sub-site thereof.</p>
+
+  <p>This makes it easier for non-administrators to keep the homepage’s contents
+up to date. By embedding (for example) a Wordpress blog in the center,
+non-technical contributors can still publish articles and announcements
+without having to re-deploy Galaxy every time.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-styling-your-welcome"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-styling-your-welcome" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Styling your Welcome<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>As in our example welcome.html, we’ve loaded the default Galaxy CSS to keep
+it consistent with the surrounding material. If you wish to load a different
+CSS file, or set a different font for the main panel, you can easily do that
+by adding whatever CSS you like.</p>
+</blockquote>
+
+<h2 id="custom-masthead-theme">Custom Masthead Theme</h2>
+
+<p>Galaxy’s theming system allows you to easily change the color of your Masthead, to give your instance an even more distinct look.
+You can even offer several options, to allow users to switch to the default if they prefer it, or another look all together.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-configuring-themes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configuring Themes</div>
+
+  <ol>
+    <li>
+      <p>Set the location of the themes configuration in your <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code></p>
+
+      <div data-commit="Add brand" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
+</span><span class="p">@@ -35,6 +35,7 @@</span> galaxy_config:
+     # Branding
+     brand: Mars 🚀
+     logo_src: "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/images/logo.png"
+<span class="gi">+    themes_config_file: "{{ galaxy_config_dir }}/themes.yml"
+</span>     # Main Configuration
+     admin_users:
+     - admin@example.org
+<span class="p">@@ -90,6 +91,10 @@</span> galaxy_config_files_public:
+   - src: files/galaxy/welcome.html
+     dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
+    
+<span class="gi">+galaxy_config_files:
++  - src: files/galaxy/themes.yml
++    dest: "{{ galaxy_config.galaxy.themes_config_file }}"
++
+</span> # Certbot
+ certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+ certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create your themes config file in <code class="language-plaintext highlighter-rouge">files/galaxy/themes.yml</code>:</p>
+
+      <div data-commit="Add themes file" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/files/galaxy/themes.yml
+</span><span class="p">@@ -0,0 +1,76 @@</span>
+<span class="gi">+blue:
++  masthead:
++    color: "#2c3143"
++    text:
++      color: "#f8f9fa"
++      hover: gold
++      active: white
++    link:
++      color: transparent
++      hover: transparent
++      active: "#181a24"
++    logo:
++      img: "/static/favicon.svg"
++      img-secondary: null
++
++lightblue:
++  masthead:
++    color: "#384E77"
++    text:
++      color: white
++      hover: "#E6F9AF"
++      active: white
++    link:
++      color: transparent
++      hover: transparent
++      active: "#18314F"
++    logo:
++      img: "/static/favicon.svg"
++
++pride:
++  masthead:
++      color: &gt;
++        linear-gradient(120deg,
++          #3c476d 0px 130px,
++          #fdda0f 131px 139px,
++          #fff 140px 148px,
++          #f4b0c9 149px 157px,
++          #7ccee6 158px 166px,
++          #93540c 167px 175px,
++          #000 176px 184px,
++          transparent 185px),
++        linear-gradient(270deg,
++          #3c476d 0px 110px,
++          #3c476d00 110px),
++        linear-gradient(180deg,
++          #FE0000 16.66%,
++          #FD8C00 16.66% 33.32%,
++          #FFE500 33.32% 49.98%,
++          #119F0B 49.98% 66.64%,
++          #0644B3 66.64% 83.3%,
++          #C22EDC 83.3%)
++      text:
++        color: white
++        hover: gold
++        active: white
++      link:
++        color: "#3c476d"
++        hover: "#323a53"
++        active: "#6170a6"
++      logo:
++        img: "/static/favicon.svg"
++        img-secondary: null
++
++smoky:
++  masthead:
++    color: "#0C0F0A"
++    text:
++      color: white
++      hover: "#FBFF12"
++      active: white
++    link:
++      color: transparent
++      hover: transparent
++      active: "#FF206E"
++    logo:
++      img: "/static/favicon.svg"
+</span>   
+</code></pre></div>      </div>
+
+      <p>The themes file can contains themes for users to select in Galaxy.</p>
+
+      <p>Each theme is identified by its id, eg <code class="language-plaintext highlighter-rouge">blue</code>, and followed by a set of
+rules, which style the client. The first theme in your theme file will be
+used as the default theme, which users see when visiting your instance,
+and which users who haven’t logged in will see.</p>
+    </li>
+    <li>
+      <p>Creating our own Theme</p>
+
+      <p>Let’s create a theme more fitting for our Mars instance.</p>
+
+      <p>Create a new theme, by adding <code class="language-plaintext highlighter-rouge">mars:</code> to the top of the themes config file.
+Now add <code class="language-plaintext highlighter-rouge">masthead:</code> underneath, and then <code class="language-plaintext highlighter-rouge">color:</code>.
+Set color to <code class="language-plaintext highlighter-rouge">"#e03e1d"</code>, a nice deep martian red.</p>
+
+      <p>Your theme file should now begin with:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div>      </div>
+
+      <div data-commit="Add new default theme" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/files/galaxy/themes.yml
+</span><span class="gi">+++ b/files/galaxy/themes.yml
+</span><span class="p">@@ -1,3 +1,8 @@</span>
+<span class="gi">+# Our Martian Theme
++mars:
++  masthead:
++    color: "#e03e1d"
++
+</span> blue:
+   masthead:
+     color: "#2c3143"
+   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>You can also try logging in, and changing your theme under <code class="language-plaintext highlighter-rouge">Preferences</code></p>
+    </li>
+  </ol>
+</blockquote>
+
+<!--SNIPPET-->
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Got lost along the way?</div>   <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-3">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-2...step-3#files_bucket">the previous tutorial</a>.</p>   <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p> </blockquote>
+
+<!--SNIPPET-->
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">                    <li class="disabled">         <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">             <div>Step 1</div>             <div>ansible-galaxy</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html">             <div>Step 2</div>             <div>backup-cleanup</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="active">         <a href="/training-material/topics/admin/tutorials/customization/tutorial.html">             <div>Step 3</div>             <div>customization</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">             <div>Step 4</div>             <div>tus</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">             <div>Step 5</div>             <div>cvmfs</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/apptainer/tutorial.html">             <div>Step 6</div>             <div>apptainer</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">             <div>Step 7</div>             <div>tool-management</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">             <div>Step 8</div>             <div>data-library</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/dev/tutorials/bioblend-api/tutorial.html">             <div>Step 9</div>             <div>dev/bioblend-api</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">             <div>Step 10</div>             <div>connect-to-compute-cluster</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">             <div>Step 11</div>             <div>job-destinations</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">             <div>Step 12</div>             <div>pulsar</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/celery/tutorial.html">             <div>Step 13</div>             <div>celery</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">             <div>Step 14</div>             <div>gxadmin</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">             <div>Step 15</div>             <div>monitoring</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">             <div>Step 16</div>             <div>tiaas</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">             <div>Step 17</div>             <div>reports</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">             <div>Step 18</div>             <div>ftp</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/beacon/tutorial.html">             <div>Step 19</div>             <div>beacon</div>         </a>     </li>           </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #a8ffa8;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Set your Galaxy instance apart from others</p>
+</li>
+                        
+                        <li><p>Communicate what your Galaxy instance is about</p>
+</li>
+                        
+                        <li><p>Offer users more customization options using themes</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/admin/faqs/">FAQ page for the Galaxy Server administration topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Customizing the look of Galaxy (Galaxy Server administration)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Laila Los,  <b>Customizing the look of Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{admin-customization,
+author = "Laila Los",
+title = "Customizing the look of Galaxy (Galaxy Training Materials)",
+year = "",
+month = "",
+day = ""
+url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+var d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
+        var snippets=document.querySelectorAll('div.highlight');
+        [].forEach.call(snippets,function(snippet){
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+
+        var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+            target:function(trigger){return trigger.nextElementSibling;
+        }});
+        </script>
+        
+
+        <script type="text/javascript">
+            if(window.location.hostname === "galaxyproject.github.io") {
+                // Redirect
+                var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+                $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+                window.setTimeout(function(){
+                    window.location.href = redirect;
+                }, 5000)
+
+            }
+        </script>
+    </body>
+</html>

@@ -675,10 +675,10 @@
 
 <p>or they can be relabeling of existing types, letting you create new types as needed to represent your internal data structures</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NewType</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">NewType</span>
 
-<span class="n">NameType</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s">"NameType"</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-<span class="n">Point2D</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s">"Point2D"</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span>
+<span class="n">NameType</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="s">"NameType"</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="n">Point2D</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="s">"Point2D"</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
@@ -691,12 +691,12 @@
 <p>Imagine for a minute you have a situation like the following, take a minute to read and understand the code:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Fetch the user and history list
-</span><span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span> <span class="o">=</span> <span class="n">GetUserAndCurrentHistory</span><span class="p">(</span><span class="s">"hexylena"</span><span class="p">)</span>
+</span><span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span> <span class="o">=</span> <span class="nc">GetUserAndCurrentHistory</span><span class="p">(</span><span class="s">"hexylena"</span><span class="p">)</span>
 
 <span class="c1"># And make sure all of the permissions are correct
-</span><span class="n">history</span> <span class="o">=</span> <span class="n">History</span><span class="p">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">history_id</span><span class="p">)</span>
-<span class="n">history</span><span class="p">.</span><span class="n">share_with</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-<span class="n">history</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+</span><span class="n">history</span> <span class="o">=</span> <span class="n">History</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="n">history_id</span><span class="p">)</span>
+<span class="n">history</span><span class="p">.</span><span class="nf">share_with</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+<span class="n">history</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span>
 </code></pre></div></div>
 
 <blockquote class="question">
@@ -751,18 +751,18 @@ won’t know.</li>
 
 <p>However, if we have type definitions for the <code class="language-plaintext highlighter-rouge">UserId</code> and <code class="language-plaintext highlighter-rouge">HistoryId</code> that declare them as their own types:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NewType</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">NewType</span>
 
-<span class="n">UserId</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s">"UserId"</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
-<span class="n">HistoryId</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s">"HistoryId"</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">UserId</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="s">"UserId"</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">HistoryId</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="s">"HistoryId"</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>And then defined on our function, e.g.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">GetUserAndCurrentHistory</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">UserId</span><span class="p">,</span> <span class="n">HistoryId</span><span class="p">]:</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">UserId</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Pretend this is fetching from the database
-</span>    <span class="n">y</span> <span class="o">=</span> <span class="n">HistoryId</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Likewise
-</span>    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nc">UserId</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Pretend this is fetching from the database
+</span>    <span class="n">y</span> <span class="o">=</span> <span class="nc">HistoryId</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Likewise
+</span>    <span class="nf">return </span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>we would be able to catch that, even if we call the variable <code class="language-plaintext highlighter-rouge">user_id</code>, it will still be typed checked.</p>
@@ -770,8 +770,8 @@ won’t know.</li>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history_id</span><span class="p">:</span> <span class="n">HistoryId</span>
 <span class="n">user_id</span><span class="p">:</span> <span class="n">UserId</span>
 
-<span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">history_id</span><span class="p">)</span> <span class="o">=</span> <span class="n">GetUserAndCurrentHistory</span><span class="p">(</span><span class="s">"hexylena"</span><span class="p">)</span>
-<span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span> <span class="o">=</span> <span class="n">GetUserAndCurrentHistory</span><span class="p">(</span><span class="s">"hexylena"</span><span class="p">)</span>
+<span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">history_id</span><span class="p">)</span> <span class="o">=</span> <span class="nc">GetUserAndCurrentHistory</span><span class="p">(</span><span class="s">"hexylena"</span><span class="p">)</span>
+<span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span> <span class="o">=</span> <span class="nc">GetUserAndCurrentHistory</span><span class="p">(</span><span class="s">"hexylena"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>If we’re using a code editor with typing hints, e.g. VSCode with PyLance, we’ll see something like:</p>
@@ -821,7 +821,7 @@ If you modified the line <code class="language-plaintext highlighter-rouge">y = 
 
 <p>But this is a very specific function, right? We can reverse lists with more than just integers. For this, you can use <code class="language-plaintext highlighter-rouge">Any</code>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 
 <span class="k">def</span> <span class="nf">reverse_list</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
     <span class="k">return</span> <span class="n">a</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -829,9 +829,9 @@ If you modified the line <code class="language-plaintext highlighter-rouge">y = 
 
 <p>But this will lose the type information from the start of the function to the end. You said it was a <code class="language-plaintext highlighter-rouge">list[Any]</code> so your editor might not provide any type hints there, even though you could know, that calling it with a <code class="language-plaintext highlighter-rouge">list[int]</code> would always return the same type. Instead you can do</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
 
-<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s">"T"</span><span class="p">)</span> <span class="c1"># Implicitly any
+<span class="n">T</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="s">"T"</span><span class="p">)</span> <span class="c1"># Implicitly any
 </span>
 <span class="k">def</span> <span class="nf">reverse_list</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
     <span class="k">return</span> <span class="n">a</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -840,12 +840,12 @@ If you modified the line <code class="language-plaintext highlighter-rouge">y = 
 <p>Now this will allow the function to accept a list of any type of value, int, float, etc. But it will also accept types you might not have intended:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">w</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]</span>
-<span class="n">reverse_list</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="nf">reverse_list</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>We can lock down what types we’ll accept by using a <code class="language-plaintext highlighter-rouge">Union</code> instead of <code class="language-plaintext highlighter-rouge">Any</code>. With a <code class="language-plaintext highlighter-rouge">Union</code>, we can define that a type in that position might be any one of a few more specific types. Say your function can only accept strings, integers, or floats:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 
 <span class="k">def</span> <span class="nf">reverse_list</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
     <span class="k">return</span> <span class="n">a</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -881,22 +881,22 @@ If you modified the line <code class="language-plaintext highlighter-rouge">y = 
 
 <p>Sometimes you have an argument to a function that is truly optional, maybe you have a different code path if it isn’t there, or you simply process things differently but still correctly. You can explicitly declare this by defining it as <code class="language-plaintext highlighter-rouge">Optional</code></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="k">def</span> <span class="nf">pretty</span><span class="p">(</span><span class="n">lines</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">padding</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">padding</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 
 
 <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">,</span> <span class="s">"你好"</span><span class="p">,</span> <span class="s">"世界"</span><span class="p">]</span>
 
 <span class="c1"># Without the optional argument
-</span><span class="n">pretty</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+</span><span class="nf">pretty</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 <span class="c1"># And with the optional
-</span><span class="n">pretty</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="s">"★"</span><span class="p">)</span>
+</span><span class="nf">pretty</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="s">"★"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>While this superficially <em>looks</em> like a keyword argument with a default value, however it’s subtly different. Here an explicit value of None is allowed, and we still know that it will either be a string, or it will be None. Not something that was possible with just a keyword argument.</p>
@@ -923,7 +923,7 @@ tmp.py:15: error: Incompatible types in assignment (expression has type "History
 
 <span class="k">def</span> <span class="nf">print_capitalized</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="s">"""Print x capitalized, and return x."""</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">capitalize</span><span class="p">())</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="nf">capitalize</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">x</span>
 
 
@@ -934,11 +934,11 @@ tmp.py:15: error: Incompatible types in assignment (expression has type "History
 
 <p>And here are some example invocations of that module, as found in <code class="language-plaintext highlighter-rouge">test.py</code></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">corp</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">corp</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">repeat</span><span class="p">(</span><span class="s">"A"</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># Should return ["A", "A", "A"]
-</span><span class="n">y</span> <span class="o">=</span> <span class="n">print_capitalized</span><span class="p">(</span><span class="s">"hElLo WorLd"</span><span class="p">)</span> <span class="c1"># Should print Hello World
-</span><span class="n">z</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">(</span><span class="s">"Hi"</span><span class="p">,</span> <span class="s">"Bob"</span><span class="p">)</span> <span class="c1"># HiBob
+<span class="n">x</span> <span class="o">=</span> <span class="nf">repeat</span><span class="p">(</span><span class="s">"A"</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># Should return ["A", "A", "A"]
+</span><span class="n">y</span> <span class="o">=</span> <span class="nf">print_capitalized</span><span class="p">(</span><span class="s">"hElLo WorLd"</span><span class="p">)</span> <span class="c1"># Should print Hello World
+</span><span class="n">z</span> <span class="o">=</span> <span class="nf">concatenate</span><span class="p">(</span><span class="s">"Hi"</span><span class="p">,</span> <span class="s">"Bob"</span><span class="p">)</span> <span class="c1"># HiBob
 </span></code></pre></div></div>
 
 <blockquote class="notranslate hands_on">
@@ -958,8 +958,8 @@ tmp.py:15: error: Incompatible types in assignment (expression has type "History
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="c1"># Or
-</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
-<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s">"T"</span><span class="p">)</span>
+</span><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
+<span class="n">T</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="s">"T"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
 
 <span class="k">def</span> <span class="nf">print_capitalized</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -1071,8 +1071,8 @@ add(1, 2)
       <li>
         <p>Here is a better type annotation</p>
 
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
-<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s">"T"</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
+<span class="n">T</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="s">"T"</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
    
 <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
@@ -1205,7 +1205,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

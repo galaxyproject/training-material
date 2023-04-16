@@ -595,9 +595,9 @@
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 
@@ -655,20 +655,20 @@ python run.py --help
     <blockquote class="solution">
       <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"no arguments were supplied"</span><span class="p">)</span>
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"no arguments were supplied"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="nf">float</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Could not parse </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Could not parse </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div>      </div>
     </blockquote>
   </blockquote>
@@ -686,12 +686,12 @@ python run.py --help
 
 <p>Argparse is used as follows. First we need to import it</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">argparse</span>
 </code></pre></div></div>
 
 <p>And then we can define a ‘parser’ which will parse our command line. Additionally we can provide a description field which tells people what our tool does:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="p">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">'Process some integers.'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="p">.</span><span class="nc">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">'Process some integers.'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>And finally we can define some arguments that are available. Just like we have arguments to functions, we have arguments to command lines. These come in two flavours:</p>
@@ -703,18 +703,18 @@ python run.py --help
 
 <p>Here we have an argument named ‘integers’, which validates that all input values are of the type <code class="language-plaintext highlighter-rouge">int</code>. <code class="language-plaintext highlighter-rouge">nargs</code> is the number of arguments, <code class="language-plaintext highlighter-rouge">+</code> means ‘1 or more’. And we have some help text as well:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'integer'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'an integer parameter'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'many_integers'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">'+'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'an integer parameter'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parser</span><span class="p">.</span><span class="nf">add_argument</span><span class="p">(</span><span class="s">'integer'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'an integer parameter'</span><span class="p">)</span>
+<span class="n">parser</span><span class="p">.</span><span class="nf">add_argument</span><span class="p">(</span><span class="s">'many_integers'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">'+'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'an integer parameter'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>We can also define an optional flag, here it’s called <code class="language-plaintext highlighter-rouge">--sum</code>. We use <code class="language-plaintext highlighter-rouge">store_true</code> which will set it as true if the flag is used , otherwise false.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--sum'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'Should we sum up the integers?'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parser</span><span class="p">.</span><span class="nf">add_argument</span><span class="p">(</span><span class="s">'--sum'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'Should we sum up the integers?'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Finally we parse the arguments, which reads <code class="language-plaintext highlighter-rouge">sys.argv</code> and processes it according to the above rules. The output is stored in <code class="language-plaintext highlighter-rouge">args</code>.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="n">parse_args</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="nf">parse_args</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>We have two main variables we can use now:</p>
@@ -735,20 +735,20 @@ args.sum # A boolean, True or False.
     <li>
       <p>Given the following script, replace the use of <code class="language-plaintext highlighter-rouge">argv</code> with argparse.</p>
 
-      <div class="language-python hands_on highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+      <div class="language-python hands_on highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"no arguments were supplied"</span><span class="p">)</span>
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"no arguments were supplied"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="nf">float</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Could not parse </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Could not parse </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>You should have one argument: numbers (type=float)</p>
@@ -760,14 +760,14 @@ args.sum # A boolean, True or False.
         <p>How does your final script look?</p>
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">argparse</span>
 
-<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="p">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">'Sum some numbers'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'integers'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">'+'</span><span class="p">,</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="p">.</span><span class="nc">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">'Sum some numbers'</span><span class="p">)</span>
+<span class="n">parser</span><span class="p">.</span><span class="nf">add_argument</span><span class="p">(</span><span class="s">'integers'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">'+'</span><span class="p">,</span>
                     <span class="n">help</span><span class="o">=</span><span class="s">'a number to sum up.'</span><span class="p">)</span>
-<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="nf">parse_args</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">integers</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">integers</span><span class="p">))</span>
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -821,14 +821,14 @@ python run.py <span class="nt">--help</span>
     <li>
       <p>Write out the python script to a file named <code class="language-plaintext highlighter-rouge">main.py</code></p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">argparse</span>
 
-<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="p">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">'Sum some numbers'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'integers'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">'+'</span><span class="p">,</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="p">.</span><span class="nc">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">'Sum some numbers'</span><span class="p">)</span>
+<span class="n">parser</span><span class="p">.</span><span class="nf">add_argument</span><span class="p">(</span><span class="s">'integers'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">'+'</span><span class="p">,</span>
                     <span class="n">help</span><span class="o">=</span><span class="s">'a number to sum up.'</span><span class="p">)</span>
-<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="nf">parse_args</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">integers</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">integers</span><span class="p">))</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1016,7 +1016,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

@@ -1115,7 +1115,7 @@
 <h3 id="variables-persist-between-cells">Variables Persist Between Cells</h3>
 <p>Be aware that it is the order of execution of cells that is important in a Jupyter notebook, not the order in which they appear. Python will remember all the code that was run previously, including any variables you have defined, irrespective of the order in the notebook. Therefore if you define variables lower down the notebook and then (re)run cells further up, those defined further down will still be present. As an example, create two cells with the following content, in this order:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">myval</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">myval</span><span class="p">)</span>
 <span class="n">myval</span> <span class="o">=</span> <span class="mi">1</span>
 </code></pre></div></div>
 <p>If you execute this in order, the first cell will give an error. However, if you run the first cell after the second cell, it will print out 1. To prevent confusion, it can be helpful to use the Kernel -&gt; Restart &amp; Run All option which clears the interpreter and runs everything from a clean slate going top to bottom.</p>
@@ -1184,14 +1184,14 @@ type(distance)
 <p>Lists are built into the language so we do not have to load a library to use them. We create a list by putting values inside square brackets and separating the values with commas:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">odds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'odds are:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'odds are:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>We can access elements of a list using indices – numbered positions of elements in the list. These positions are numbered starting at 0, so the first element has an index of 0.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'first element:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'last element:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'"-1" element:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="s">'first element:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'last element:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'"-1" element:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>Yes, we can use negative numbers as indices in Python. When we do so, the index <code class="language-plaintext highlighter-rouge">-1</code> gives us the last element in the list, <code class="language-plaintext highlighter-rouge">-2</code> the second to last, and so on. Because of this, <code class="language-plaintext highlighter-rouge">odds[3]</code> and <code class="language-plaintext highlighter-rouge">odds[-1]</code> point to the same element here.</p>
@@ -1199,9 +1199,9 @@ type(distance)
 <p>There is one important difference between lists and strings: we can change the values in a list, but we cannot change individual characters in a string. For example:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Curie'</span><span class="p">,</span> <span class="s">'Darwing'</span><span class="p">,</span> <span class="s">'Turing'</span><span class="p">]</span>  <span class="c1"># typo in Darwin's name
-</span><span class="k">print</span><span class="p">(</span><span class="s">'names is originally:'</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="s">'names is originally:'</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
 <span class="n">names</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">'Darwin'</span>  <span class="c1"># correct the name
-</span><span class="k">print</span><span class="p">(</span><span class="s">'final value of names:'</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="s">'final value of names:'</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>works, but the following does not:</p>
@@ -1219,21 +1219,21 @@ type(distance)
 
 <p>We can append new elements to a list</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">odds</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'odds after adding a value:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">odds</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'odds after adding a value:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>We can pop an element off the end of a list</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">removed_element</span> <span class="o">=</span> <span class="n">odds</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'odds after removing the first element:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'removed_element:'</span><span class="p">,</span> <span class="n">removed_element</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">removed_element</span> <span class="o">=</span> <span class="n">odds</span><span class="p">.</span><span class="nf">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'odds after removing the first element:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'removed_element:'</span><span class="p">,</span> <span class="n">removed_element</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Or we can reverse the list</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">odds</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'odds after reversing:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">odds</span><span class="p">.</span><span class="nf">reverse</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'odds after reversing:'</span><span class="p">,</span> <span class="n">odds</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="mutable-vs-immutable-data">Mutable vs Immutable data</h3>
@@ -1246,15 +1246,15 @@ type(distance)
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">salsa</span> <span class="o">=</span> <span class="p">[</span><span class="s">'peppers'</span><span class="p">,</span> <span class="s">'onions'</span><span class="p">,</span> <span class="s">'cilantro'</span><span class="p">,</span> <span class="s">'tomatoes'</span><span class="p">]</span>
 <span class="n">my_salsa</span> <span class="o">=</span> <span class="n">salsa</span>        <span class="c1"># &lt;-- my_salsa and salsa point to the *same* list data in memory
 </span><span class="n">salsa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">'hot peppers'</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'Ingredients in my salsa:'</span><span class="p">,</span> <span class="n">my_salsa</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'Ingredients in my salsa:'</span><span class="p">,</span> <span class="n">my_salsa</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>If you want variables with mutable values to be independent, you must make a copy of the value when you assign it.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">salsa</span> <span class="o">=</span> <span class="p">[</span><span class="s">'peppers'</span><span class="p">,</span> <span class="s">'onions'</span><span class="p">,</span> <span class="s">'cilantro'</span><span class="p">,</span> <span class="s">'tomatoes'</span><span class="p">]</span>
-<span class="n">my_salsa</span> <span class="o">=</span> <span class="n">salsa</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>        <span class="c1"># &lt;-- makes a *copy* of the list
+<span class="n">my_salsa</span> <span class="o">=</span> <span class="n">salsa</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>        <span class="c1"># &lt;-- makes a *copy* of the list
 </span><span class="n">salsa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">'hot peppers'</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'Ingredients in my salsa:'</span><span class="p">,</span> <span class="n">my_salsa</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'Ingredients in my salsa:'</span><span class="p">,</span> <span class="n">my_salsa</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Because of pitfalls like this, code which modifies data in place can be more difficult to understand. However, it is often far more efficient to modify a large data structure in place than to create a modified copy for every small change. You should consider both of these aspects when writing your code.</p>
@@ -1271,9 +1271,9 @@ type(distance)
 
 <p>Here is an example of how indexing a list of lists <code class="language-plaintext highlighter-rouge">x</code> works:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 </code></pre></div></div>
 
 <h3 id="slicing">Slicing</h3>
@@ -1281,9 +1281,9 @@ type(distance)
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">chromosomes</span> <span class="o">=</span> <span class="p">[</span><span class="s">'X'</span><span class="p">,</span> <span class="s">'Y'</span><span class="p">,</span> <span class="s">'2'</span><span class="p">,</span> <span class="s">'3'</span><span class="p">,</span> <span class="s">'4'</span><span class="p">]</span>
 <span class="n">autosomes</span> <span class="o">=</span> <span class="n">chromosomes</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'autosomes:'</span><span class="p">,</span> <span class="n">autosomes</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'autosomes:'</span><span class="p">,</span> <span class="n">autosomes</span><span class="p">)</span>
 <span class="n">last</span> <span class="o">=</span> <span class="n">chromosomes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'last:'</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'last:'</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="question">
@@ -1345,19 +1345,19 @@ print('subset', subset)
 <p>The characters (individual letters, numbers,and so on) in a string are ordered. For example, the string ‘AB’ is not the same as ‘BA’. Because of this ordering, we can treat the string as a list of characters. Each position in the string (first, second, etc.) is given a number. This number is called an index or sometimes a subscript. Indices are numbered from 0.You can use the position’s index in square brackets to get the character at that position.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">atom_name</span> <span class="o">=</span> <span class="s">'helium'</span>
-<span class="k">print</span><span class="p">(</span><span class="n">atom_name</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">atom_name</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </code></pre></div></div>
 
 <h3 id="use-a-slice-to-get-a-substring">Use a slice to get a substring.</h3>
 <p>A part of a string is called a substring. A substring can be as short as a single character. An item in a list is called an element. Whenever we treat a string as if it were a list, the string’s elements are its individual characters. A slice is a part of a string (or, more generally, any list-like thing). We take a slice by using [start:stop], where start is replaced with the index of the first element we want and stop is replaced with the index of the element just after the last element we want. Mathematically, you might say that a slice selects [start:stop). The difference between stop and start is the slice’s length. Taking a slice does not change the contents of the original string. Instead, the slice is a copy of part of the original string.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">atom_name</span> <span class="o">=</span> <span class="s">'sodium'</span>
-<span class="k">print</span><span class="p">(</span><span class="n">atom_name</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">atom_name</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>You can use the built-in function <code class="language-plaintext highlighter-rouge">len</code> to find the length of a string.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s">'helium'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="s">'helium'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Nested functions are evaluated from the inside out, like in mathematics.</p>
@@ -1396,7 +1396,7 @@ g. If a part of the slice is out of range, the operation does not fail. <code cl
 <p>“Adding” character strings concatenates them.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">full_name</span> <span class="o">=</span> <span class="s">'Ahmed'</span> <span class="o">+</span> <span class="s">' '</span> <span class="o">+</span> <span class="s">'Walsh'</span>
-<span class="k">print</span><span class="p">(</span><span class="n">full_name</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">full_name</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Multiplying a character string by an integer “N” creates a new string that consists of that character string repeated N times.</p>
@@ -1404,14 +1404,14 @@ g. If a part of the slice is out of range, the operation does not fail. <code cl
 <p>Since multiplication is repeated addition.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">separator</span> <span class="o">=</span> <span class="s">'='</span> <span class="o">*</span> <span class="mi">10</span>
-<span class="k">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The same rules apply for lists. Consider the following example:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">counts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 <span class="n">repeats</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">*</span> <span class="mi">2</span>
-<span class="k">print</span><span class="p">(</span><span class="n">repeats</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">repeats</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>It’s equivalent to:</p>
@@ -1421,12 +1421,12 @@ g. If a part of the slice is out of range, the operation does not fail. <code cl
 
 <p>Strings have a length (but numbers don’t).The built-in function <code class="language-plaintext highlighter-rouge">len</code> counts the number of characters in a string.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">full_name</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">full_name</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>But numbers don’t have a length (not even zero). For example, the following command returns an error message.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="mi">52</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="mi">52</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h2 id="type-conversion">Type conversion</h2>
@@ -1436,8 +1436,8 @@ It is not allowed to add numbers and strings. For example <code class="language-
 
 <p>Some types can be converted to other types by using the type name as a function.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="s">'2'</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">'2'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="s">'2'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">'2'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="question">
@@ -1586,58 +1586,58 @@ print(complex.imag)
 
 <p>To carry out common tasks with data and variables in Python, the language provides us with several built-in functions. To display information to the screen, we use the <code class="language-plaintext highlighter-rouge">print</code> function:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">weight_lb</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">patient_id</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">weight_lb</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">patient_id</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>When we want to make use of a function, referred to as calling the function, we follow its name by parentheses. The parentheses are important: if you leave them off, the function doesn’t actually run! Sometimes you will include values or variables inside the parentheses for the function to use. In the case of <code class="language-plaintext highlighter-rouge">print</code>, we use the parentheses to tell the function what value we want to display. <code class="language-plaintext highlighter-rouge">print</code> automatically puts a single space between outputs to separate them and wraps around to a new line at the end.</p>
 
 <p>We can display multiple things at once using only one <code class="language-plaintext highlighter-rouge">print</code> call:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">patient_id</span><span class="p">,</span> <span class="s">'weight in kilograms:'</span><span class="p">,</span> <span class="n">weight_kg</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">patient_id</span><span class="p">,</span> <span class="s">'weight in kilograms:'</span><span class="p">,</span> <span class="n">weight_kg</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>We can also call a function inside of another function call. For example, Python has a built-in function called <code class="language-plaintext highlighter-rouge">type</code> that tells you a value’s data type:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="mf">60.3</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">patient_id</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="mf">60.3</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">patient_id</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Moreover, we can do arithmetic with variables right inside the <code class="language-plaintext highlighter-rouge">print</code> function:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'weight in pounds:'</span><span class="p">,</span> <span class="mf">2.2</span> <span class="o">*</span> <span class="n">weight_kg</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="s">'weight in pounds:'</span><span class="p">,</span> <span class="mf">2.2</span> <span class="o">*</span> <span class="n">weight_kg</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The above command, however, did not change the value of <code class="language-plaintext highlighter-rouge">weight_kg</code>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">weight_kg</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">weight_kg</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>To change the value of the <code class="language-plaintext highlighter-rouge">weight_kg</code> variable, we have to assign <code class="language-plaintext highlighter-rouge">weight_kg</code> a new value using the equals <code class="language-plaintext highlighter-rouge">=</code> sign:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">weight_kg</span> <span class="o">=</span> <span class="mf">65.0</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'weight in kilograms is now:'</span><span class="p">,</span> <span class="n">weight_kg</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'weight in kilograms is now:'</span><span class="p">,</span> <span class="n">weight_kg</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>A function may take zero or more arguments.  An <em>argument</em> is a value passed into a function. You must always use parentheses, even if they’re empty, so that Python knows a function is being called.</p>
 
 <p>Every function call produces some result. If the function doesn’t have a useful result to return, it usually returns the special value <code class="language-plaintext highlighter-rouge">None</code>. <code class="language-plaintext highlighter-rouge">None</code> is a Python object that stands in anytime there is no value.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="k">print</span><span class="p">(</span><span class="s">'example'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'result of print is'</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="nf">print</span><span class="p">(</span><span class="s">'example'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'result of print is'</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Commonly-used built-in functions include <code class="language-plaintext highlighter-rouge">max</code>, <code class="language-plaintext highlighter-rouge">min</code>, and <code class="language-plaintext highlighter-rouge">round</code>. <code class="language-plaintext highlighter-rouge">max</code> and <code class="language-plaintext highlighter-rouge">min</code> work on character strings as well as numbers. From “larger” and “smaller”, they use the order: (0-9, A-Z, a-z) to compare letters.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'A'</span><span class="p">,</span> <span class="s">'0'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'A'</span><span class="p">,</span> <span class="s">'0'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Functions may have default values for some arguments. <code class="language-plaintext highlighter-rouge">round</code> will round off a floating-point number. By default, it rounds to zero decimal places.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">round</span><span class="p">(</span><span class="mf">3.712</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">round</span><span class="p">(</span><span class="mf">3.712</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>We can specify the number of decimal places we want.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">round</span><span class="p">(</span><span class="mf">3.712</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">round</span><span class="p">(</span><span class="mf">3.712</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="functions-attached-to-objects-are-called-methods">Functions attached to objects are called methods</h3>
@@ -1646,26 +1646,26 @@ print(complex.imag)
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_string</span> <span class="o">=</span> <span class="s">'Hello world!'</span>  <span class="c1"># creation of a string object
 </span>
-<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">my_string</span><span class="p">))</span>       <span class="c1"># the len function takes a string as an argument and returns the length of the string
+<span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">my_string</span><span class="p">))</span>       <span class="c1"># the len function takes a string as an argument and returns the length of the string
 </span>
-<span class="k">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="n">swapcase</span><span class="p">())</span> <span class="c1"># calling the swapcase method on the my_string object
+<span class="nf">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="nf">swapcase</span><span class="p">())</span> <span class="c1"># calling the swapcase method on the my_string object
 </span>
-<span class="k">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="n">__len__</span><span class="p">())</span>  <span class="c1"># calling the internal __len__ method on the my_string object, used by len(my_string)
+<span class="nf">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="nf">__len__</span><span class="p">())</span>  <span class="c1"># calling the internal __len__ method on the my_string object, used by len(my_string)
 </span></code></pre></div></div>
 
 <p>You might even see them chained together. They operate left to right.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="n">isupper</span><span class="p">())</span>          <span class="c1"># Not all the letters are uppercase
-</span><span class="k">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="n">upper</span><span class="p">())</span>            <span class="c1"># This capitalizes all the letters
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="nf">isupper</span><span class="p">())</span>          <span class="c1"># Not all the letters are uppercase
+</span><span class="nf">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="nf">upper</span><span class="p">())</span>            <span class="c1"># This capitalizes all the letters
 </span>
-<span class="k">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="n">upper</span><span class="p">().</span><span class="n">isupper</span><span class="p">())</span>  <span class="c1"># Now all the letters are uppercase
+<span class="nf">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="nf">upper</span><span class="p">().</span><span class="nf">isupper</span><span class="p">())</span>  <span class="c1"># Now all the letters are uppercase
 </span></code></pre></div></div>
 
 <h3 id="use-the-built-in-function-help-to-get-help-for-a-function">Use the built-in function <code class="language-plaintext highlighter-rouge">help</code> to get help for a function.</h3>
 
 <p>Every built-in function has online documentation.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">help</span><span class="p">(</span><span class="nb">round</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">help</span><span class="p">(</span><span class="nb">round</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="conditionals">Conditionals</h2>
@@ -1675,10 +1675,10 @@ The first line opens with if and ends with a colon and the block of code to be e
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">num</span> <span class="o">=</span> <span class="mi">37</span>
 <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'greater'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">'greater'</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'not greater'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'done'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">'not greater'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'done'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>If the expression that follows the if statement is true, the body of the <code class="language-plaintext highlighter-rouge">if</code> (i.e., the set of lines indented underneath it) is executed, and <code class="language-plaintext highlighter-rouge">“greater”</code> is printed. If it is false, the body of the <code class="language-plaintext highlighter-rouge">else</code> is executed instead, and <code class="language-plaintext highlighter-rouge">“not greater”</code> is printed. Only one or the other is ever executed before continuing on with program execution to print <code class="language-plaintext highlighter-rouge">“done”</code>:</p>
@@ -1688,10 +1688,10 @@ The first line opens with if and ends with a colon and the block of code to be e
 <p>Conditional statements don’t have to include an <code class="language-plaintext highlighter-rouge">else</code>.  If there isn’t one, Python simply does nothing if the expression is false:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">num</span> <span class="o">=</span> <span class="mi">53</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'before conditional...'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'before conditional...'</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s">'is greater than 100'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'...after conditional'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s">'is greater than 100'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'...after conditional'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>We can also chain several expressions together using <code class="language-plaintext highlighter-rouge">elif</code>, which is short for “else if”. The following Python code uses <code class="language-plaintext highlighter-rouge">elif</code> to print the sign of a number.</p>
@@ -1699,11 +1699,11 @@ The first line opens with if and ends with a colon and the block of code to be e
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">num</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
 
 <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s">'is positive'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s">'is positive'</span><span class="p">)</span>
 <span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s">'is zero'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s">'is zero'</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s">'is negative'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s">'is negative'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="comparison-operators-in-python">Comparison operators in Python</h3>
@@ -1721,16 +1721,16 @@ The first line opens with if and ends with a colon and the block of code to be e
 <h3 id="logical-operators-in-python">Logical operators in Python</h3>
 <p>We can also combine expressions using <code class="language-plaintext highlighter-rouge">and</code> and <code class="language-plaintext highlighter-rouge">or</code>. <code class="language-plaintext highlighter-rouge">and</code> is only true if both parts are true:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'both parts are true'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">if </span><span class="p">(</span><span class="mi">1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">'both parts are true'</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'at least one part is false'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">'at least one part is false'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>while <code class="language-plaintext highlighter-rouge">or</code> is true if at least one part is true:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'at least one test is true'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">if </span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">'at least one test is true'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="true-and-false">True and False</h3>
@@ -1781,12 +1781,12 @@ else:
 <p>Doing calculations on the values in a list one by one is very time consuming.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">odds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
 
 </code></pre></div></div>
 
@@ -1794,7 +1794,7 @@ else:
 “for each thing in this group, do these operations”. The for loop equivalent to the previous code is:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">odds</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
 </code></pre></div></div>
 <p>The improved version uses a for loop to repeat an operation — in this case, printing — once for each thing in a sequence. The general form of a loop is:</p>
 
@@ -1811,16 +1811,16 @@ else:
 
 <p>When looping through a list, the position index and corresponding value can be retrieved at the same time using the <code class="language-plaintext highlighter-rouge">enumerate()</code> function.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s">'tic'</span><span class="p">,</span> <span class="s">'tac'</span><span class="p">,</span> <span class="s">'toe'</span><span class="p">]):</span>
-<span class="p">...</span> <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">([</span><span class="s">'tic'</span><span class="p">,</span> <span class="s">'tac'</span><span class="p">,</span> <span class="s">'toe'</span><span class="p">]):</span>
+<span class="p">...</span> <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>To loop over two or more lists at the same time, the entries can be paired with the <code class="language-plaintext highlighter-rouge">zip()</code> function.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">questions</span> <span class="o">=</span> <span class="p">[</span><span class="s">'name'</span><span class="p">,</span> <span class="s">'quest'</span><span class="p">,</span> <span class="s">'favorite color'</span><span class="p">]</span>
 <span class="n">answers</span> <span class="o">=</span> <span class="p">[</span><span class="s">'lancelot'</span><span class="p">,</span> <span class="s">'the holy grail'</span><span class="p">,</span> <span class="s">'blue'</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span> <span class="n">answers</span><span class="p">):</span>
-   <span class="k">print</span><span class="p">(</span><span class="s">'What is your {0}?  It is {1}.'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span> <span class="n">answers</span><span class="p">):</span>
+   <span class="nf">print</span><span class="p">(</span><span class="s">'What is your {0}?  It is {1}.'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>We can choose any name we want for variables. It is a good idea to choose variable names that are meaningful, otherwise it would be more difficult to understand what the loop is doing.</p>
@@ -1831,8 +1831,8 @@ else:
 <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Curie'</span><span class="p">,</span> <span class="s">'Darwin'</span><span class="p">,</span> <span class="s">'Turing'</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
     <span class="n">length</span> <span class="o">=</span> <span class="n">length</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'There are'</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="s">'names in the list.'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'After the loop, name is'</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'There are'</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="s">'names in the list.'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'After the loop, name is'</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>It is worth tracing the execution of this little program step by step. Since there are three names in <code class="language-plaintext highlighter-rouge">names</code>, the statement on line 4 will be executed three times. The first time around, <code class="language-plaintext highlighter-rouge">length</code> is <code class="language-plaintext highlighter-rouge">0</code> (the value assigned to it on line 1) and <code class="language-plaintext highlighter-rouge">value</code> is <code class="language-plaintext highlighter-rouge">Curie</code>. The statement adds 1 to the old value of <code class="language-plaintext highlighter-rouge">length</code>, producing 1, and updates <code class="language-plaintext highlighter-rouge">length</code> to refer to that new value. The next time around, <code class="language-plaintext highlighter-rouge">value</code> is <code class="language-plaintext highlighter-rouge">Darwin</code> and <code class="language-plaintext highlighter-rouge">length</code> is <code class="language-plaintext highlighter-rouge">1</code>, so <code class="language-plaintext highlighter-rouge">length</code> is updated to be <code class="language-plaintext highlighter-rouge">2</code>. After one more update, <code class="language-plaintext highlighter-rouge">length</code> is <code class="language-plaintext highlighter-rouge">3</code>; since there is nothing left in <code class="language-plaintext highlighter-rouge">names</code> for Python to process, the loop finishes and the print function on line 5 tells us our final answer.</p>
@@ -1986,7 +1986,7 @@ for value in original:
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">odds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
 <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">while</span> <span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
   <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
 </code></pre></div></div>
 
@@ -1997,7 +1997,7 @@ for value in original:
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">odds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
 <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">while</span> <span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
   <span class="k">if</span> <span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
     <span class="k">break</span>
   <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
@@ -2011,7 +2011,7 @@ for value in original:
   <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
   <span class="k">if</span> <span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
     <span class="k">continue</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
 </code></pre></div></div>
 
@@ -2020,17 +2020,17 @@ for value in original:
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">odds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
 <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">while</span> <span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">odds</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
   <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="s">"condition is no longer True"</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"condition is no longer True"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="create-functions">Create Functions</h2>
 <p>Human beings can only keep a few items in working memory at a time. Breaking down larger/more complicated pieces of code in functions helps in understanding and using it. A function can be re-used. Write one time, use many times.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fahr_to_celsius</span><span class="p">(</span><span class="n">temp</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">((</span><span class="n">temp</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">9</span><span class="p">))</span>
+    <span class="nf">return </span><span class="p">((</span><span class="n">temp</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">9</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p><img src="../../images/python-basics/Figure7_Functions.png" alt="The above function fahr to celsius is shown except annotated. def is labelled &quot;def statement&quot;, fahr_to_celsius is noted as the function name. Inside parentheses is temp and an arrow shows it is called parameter names. The next line which is indented is annotated as the function body which has a return statement and the calculation from above." loading="lazy" /></p>
@@ -2041,9 +2041,9 @@ for value in original:
 
 <p>Let’s try running our function.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fahr_to_celsius</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'freezing point of water:'</span><span class="p">,</span> <span class="n">fahr_to_celsius</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="s">'C'</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'boiling point of water:'</span><span class="p">,</span> <span class="n">fahr_to_celsius</span><span class="p">(</span><span class="mi">212</span><span class="p">),</span> <span class="s">'C'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">fahr_to_celsius</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'freezing point of water:'</span><span class="p">,</span> <span class="nf">fahr_to_celsius</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="s">'C'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'boiling point of water:'</span><span class="p">,</span> <span class="nf">fahr_to_celsius</span><span class="p">(</span><span class="mi">212</span><span class="p">),</span> <span class="s">'C'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>We’ve successfully called the function that we defined, and we have access to the value that we returned.</p>
@@ -2053,17 +2053,17 @@ for value in original:
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">celsius_to_kelvin</span><span class="p">(</span><span class="n">temp_c</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">temp_c</span> <span class="o">+</span> <span class="mf">273.15</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">'freezing point of water in Kelvin:'</span><span class="p">,</span> <span class="n">celsius_to_kelvin</span><span class="p">(</span><span class="mf">0.</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'freezing point of water in Kelvin:'</span><span class="p">,</span> <span class="nf">celsius_to_kelvin</span><span class="p">(</span><span class="mf">0.</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>What about converting Fahrenheit to Kelvin? We could write out the formula, but we don’t need to. Instead, we can compose the two functions we have already created:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fahr_to_kelvin</span><span class="p">(</span><span class="n">temp_f</span><span class="p">):</span>
-    <span class="n">temp_c</span> <span class="o">=</span> <span class="n">fahr_to_celsius</span><span class="p">(</span><span class="n">temp_f</span><span class="p">)</span>
-    <span class="n">temp_k</span> <span class="o">=</span> <span class="n">celsius_to_kelvin</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span>
+    <span class="n">temp_c</span> <span class="o">=</span> <span class="nf">fahr_to_celsius</span><span class="p">(</span><span class="n">temp_f</span><span class="p">)</span>
+    <span class="n">temp_k</span> <span class="o">=</span> <span class="nf">celsius_to_kelvin</span><span class="p">(</span><span class="n">temp_c</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">temp_k</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">'boiling point of water in Kelvin:'</span><span class="p">,</span> <span class="n">fahr_to_kelvin</span><span class="p">(</span><span class="mf">212.0</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'boiling point of water in Kelvin:'</span><span class="p">,</span> <span class="nf">fahr_to_kelvin</span><span class="p">(</span><span class="mf">212.0</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>This is our first taste of how larger programs are built: we define basic operations, then combine them in ever-larger chunks to get the effect we want. Real-life functions will usually be larger than the ones shown here — typically half a dozen to a few dozen lines — but they shouldn’t ever be much longer than that, or the next person who reads it won’t be able to understand what’s going on.</p>
@@ -2071,33 +2071,33 @@ for value in original:
 <h3 id="variable-scope">Variable Scope</h3>
 <p>In composing our temperature conversion functions, we created variables inside of those functions, <code class="language-plaintext highlighter-rouge">temp</code>, <code class="language-plaintext highlighter-rouge">temp_c</code>, <code class="language-plaintext highlighter-rouge">temp_f</code>, and <code class="language-plaintext highlighter-rouge">temp_k</code>. We refer to these variables as local variables because they no longer exist once the function is done executing. If we try to access their values outside of the function, we will encounter an error:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'Again, temperature in Kelvin was:'</span><span class="p">,</span> <span class="n">temp_k</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="s">'Again, temperature in Kelvin was:'</span><span class="p">,</span> <span class="n">temp_k</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>If you want to reuse the temperature in Kelvin after you have calculated it with fahr_to_kelvin, you can store the result of the function call in a variable:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">temp_kelvin</span> <span class="o">=</span> <span class="n">fahr_to_kelvin</span><span class="p">(</span><span class="mf">212.0</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'temperature in Kelvin was:'</span><span class="p">,</span> <span class="n">temp_kelvin</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">temp_kelvin</span> <span class="o">=</span> <span class="nf">fahr_to_kelvin</span><span class="p">(</span><span class="mf">212.0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'temperature in Kelvin was:'</span><span class="p">,</span> <span class="n">temp_kelvin</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="defining-default-parameters">Defining Default parameters</h3>
 <p>If we usually want a function to work one way, but occasionally need it to do something else, we can allow people to pass a parameter when they need to but provide a default to make the normal case easier. The example below shows how Python matches values to parameters:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'a:'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s">'b:'</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s">'c:'</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">'a:'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s">'b:'</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s">'c:'</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">'no parameters:'</span><span class="p">)</span>
-<span class="n">display</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'one parameter:'</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'two parameters:'</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mi">66</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'no parameters:'</span><span class="p">)</span>
+<span class="nf">display</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'one parameter:'</span><span class="p">)</span>
+<span class="nf">display</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'two parameters:'</span><span class="p">)</span>
+<span class="nf">display</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mi">66</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>As this example shows, parameters are matched up from left to right, and any that haven’t been given a value explicitly get their default value. We can override this behavior by naming the value as we pass it in:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'only setting the value of c'</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mi">77</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="s">'only setting the value of c'</span><span class="p">)</span>
+<span class="nf">display</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mi">77</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="question">
@@ -2142,27 +2142,27 @@ print(k)
 <h3 id="a-program-must-import-a-library-module-before-using-it">A program must import a library module before using it.</h3>
 <p>You can use <code class="language-plaintext highlighter-rouge">import</code> to load a library module into a program’s memory, then refer to things from the <code class="language-plaintext highlighter-rouge">module as module_name.thing_name</code>. Python uses <code class="language-plaintext highlighter-rouge">.</code> to mean “part of”. For example, using <code class="language-plaintext highlighter-rouge">math</code>, one of the modules in the standard library:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">'pi is'</span><span class="p">,</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'cos(pi) is'</span><span class="p">,</span> <span class="n">math</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'pi is'</span><span class="p">,</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'cos(pi) is'</span><span class="p">,</span> <span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>You can use <code class="language-plaintext highlighter-rouge">help</code> to learn about the contents of a library module. it works just like help for a function.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">help</span><span class="p">(</span><span class="n">math</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">help</span><span class="p">(</span><span class="n">math</span><span class="p">)</span>
 </code></pre></div></div>
 <p>You can import specific items from a library module to shorten programs. You can use <code class="language-plaintext highlighter-rouge">from ... import ...</code> to load only specific items from a library module. Then refer to them directly without library name as prefix.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">cos</span><span class="p">,</span> <span class="n">pi</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">math</span> <span class="kn">import</span> <span class="n">cos</span><span class="p">,</span> <span class="n">pi</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">'cos(pi) is'</span><span class="p">,</span> <span class="n">cos</span><span class="p">(</span><span class="n">pi</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'cos(pi) is'</span><span class="p">,</span> <span class="nf">cos</span><span class="p">(</span><span class="n">pi</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>You can create an alias for a library module when importing it to shorten programs. Use <code class="language-plaintext highlighter-rouge">import ... as ...</code> to give a library a short alias while importing it. Then refer to items in the library using that shortened name.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span> <span class="k">as</span> <span class="n">m</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span> <span class="k">as</span> <span class="n">m</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">'cos(pi) is'</span><span class="p">,</span> <span class="n">m</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">pi</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">'cos(pi) is'</span><span class="p">,</span> <span class="n">m</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">pi</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h1 id="programming-style">Programming style</h1>
@@ -2289,7 +2289,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

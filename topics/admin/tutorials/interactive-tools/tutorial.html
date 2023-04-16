@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Interactive Tools">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-12-01 08:15:38 +0000">
+<meta name="DC.date" content="2023-04-14 13:44:27 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Simon Gladman">
 <meta name="DC.creator" content="Helena Rasche">
@@ -67,7 +67,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-12-01 08:15:38 +0000",
+  "dateModified": "2023-04-14 13:44:27 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Interactive Tools",
   "interactivityType": "mixed",
@@ -222,8 +222,8 @@
       "@context": "http://schema.org",
       "@type": "LearningResource",
       "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html",
-      "name": "Mapping Jobs to Destinations",
-      "description": "Hands-on for 'Mapping Jobs to Destinations' tutorial",
+      "name": "Mapping Jobs to Destinations using TPV",
+      "description": "Hands-on for 'Mapping Jobs to Destinations using TPV' tutorial",
       "learningResourceType": "hands-on tutorial",
       "interactivityType": "expositive",
       "provider": {
@@ -639,7 +639,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-12-01 08:15:38 +0000",
+  "dateModified": "2023-04-14 13:44:27 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Interactive Tools",
   "interactivityType": "mixed",
@@ -794,8 +794,8 @@
       "@context": "http://schema.org",
       "@type": "LearningResource",
       "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html",
-      "name": "Mapping Jobs to Destinations",
-      "description": "Hands-on for 'Mapping Jobs to Destinations' tutorial",
+      "name": "Mapping Jobs to Destinations using TPV",
+      "description": "Hands-on for 'Mapping Jobs to Destinations using TPV' tutorial",
       "learningResourceType": "hands-on tutorial",
       "interactivityType": "expositive",
       "provider": {
@@ -1167,6 +1167,12 @@
                     
                         
                     
+                        
+                    
+                        
+                    
+                        
+                    
                 
                     
                         
@@ -1216,6 +1222,12 @@
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -1373,6 +1385,12 @@
                     
                         
                     
+                        
+                    
+                        
+                    
+                        
+                    
                 
                     
                         
@@ -1454,8 +1472,10 @@
                         
                     
                         
+                    
+                        
                             
-                            <li> Mapping Jobs to Destinations:
+                            <li> Mapping Jobs to Destinations using TPV:
                             
                             
                                 
@@ -1463,6 +1483,10 @@
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -1569,7 +1593,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 1, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 14, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1590,7 +1614,7 @@
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-evolving-topic"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Evolving Topic</div>
+  <div class="box-title warning-title" id="warning-evolving-topic-not-updated-for-23-0-gravity"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Evolving Topic, Not Updated for 23.0 + Gravity</div>
   <p>Galaxy Interactive Tools are a <strong>new feature</strong> and there are some rough edges. Work to improve the experience of deploying and using them is ongoing.</p>
 </blockquote>
 
@@ -1650,7 +1674,10 @@
 
 <p>If the terms “Ansible,” “role,” and “playbook” mean nothing to you, please checkout <a href="/training-material/topics/admin/tutorials/ansible/slides.html">the Ansible introduction slides</a> and <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html">the Ansible introduction tutorial</a>.</p>
 
-<p><strong>This section of the tutorial builds upon the work in the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial, please ensure that you have completed that tutorial first.</strong></p>
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-uses-ansible"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Uses Ansible!</div>
+  <p>This section of the tutorial builds upon the work in the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial, please ensure that you have completed that tutorial first.</p>
+</blockquote>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-ansible-best-practices"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Ansible Best Practices</div>
@@ -1735,7 +1762,7 @@
       <p>Add the following lines to your <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code> file:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Interactive Tools</span>
-<span class="na">docker_install_compose</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">docker_install_compose</span><span class="pi">:</span> <span class="kc">false</span>
 <span class="na">docker_users</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_user.name</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
@@ -1758,7 +1785,7 @@
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">galaxyservers</span>
-  <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">become</span><span class="pi">:</span> <span class="kc">true</span>
   <span class="na">roles</span><span class="pi">:</span>
     <span class="c1"># ... existing roles ...</span>
     <span class="pi">-</span> <span class="s">geerlingguy.docker</span>
@@ -1875,7 +1902,7 @@
       <p>Add the new role to <code class="language-plaintext highlighter-rouge">galaxy.yml</code>:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">galaxyservers</span>
-  <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">become</span><span class="pi">:</span> <span class="kc">true</span>
   <span class="na">roles</span><span class="pi">:</span>
     <span class="c1"># ... existing roles ...</span>
     <span class="pi">-</span> <span class="s">geerlingguy.docker</span>
@@ -2329,7 +2356,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
   <span class="na">galaxy</span><span class="pi">:</span>
     <span class="c1"># ... existing configuration options in the `galaxy` section ...</span>
     <span class="na">job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv"> </span><span class="s">}}/job_conf.xml"</span>
-    <span class="na">interactivetools_enable</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">interactivetools_enable</span><span class="pi">:</span> <span class="kc">true</span>
     <span class="na">interactivetools_map</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">gie_proxy_sessions_path</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
 
@@ -2669,7 +2696,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

@@ -1124,10 +1124,10 @@ for the first time):</p>
 
 <p>and four <code class="language-plaintext highlighter-rouge">Column</code> attributes that correspond to table columns with the same names:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">job_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">"job.id"</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">))</span>
-<span class="n">value</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">TEXT</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">job_id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="nc">ForeignKey</span><span class="p">(</span><span class="s">"job.id"</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">name</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="nc">String</span><span class="p">(</span><span class="mi">255</span><span class="p">))</span>
+<span class="n">value</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="n">TEXT</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Associations between objects are usually defined with the <code class="language-plaintext highlighter-rouge">relationship</code> construct. For example, the <code class="language-plaintext highlighter-rouge">UserAddress</code> model has an association with the <code class="language-plaintext highlighter-rouge">User</code> model and is defined with the <code class="language-plaintext highlighter-rouge">relationship</code> construct as the <code class="language-plaintext highlighter-rouge">user</code> attribute.</p>
@@ -1165,30 +1165,30 @@ for the first time):</p>
 
 <p>To define a regular <code class="language-plaintext highlighter-rouge">Column</code> attribute you must include the datatype:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">foo</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">foo</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>To define an attribute that is the primary key, you need to include the <code class="language-plaintext highlighter-rouge">primary_key</code> argument:
 (a primary key is one or more columns that uniquely identify a row in a database table)</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>To define an attribute that is a foreign key, you need to reference the associated table + its primary key column using the <code class="language-plaintext highlighter-rouge">ForeignKey</code> construct (the datatype will be derived from that column, so you don’t have to include it):</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bar_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">"bar.id"</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bar_id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="nc">ForeignKey</span><span class="p">(</span><span class="s">"bar.id"</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>To define a relationship between tables, you need to set it on <em>both</em> tables:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Order</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="err">…</span>
-    <span class="n">items</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">"Item"</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s">"order"</span><span class="p">)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="nf">relationship</span><span class="p">(</span><span class="s">"Item"</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s">"order"</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Item</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="err">…</span>
-    <span class="n">order_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">"order.id"</span><span class="p">)</span>
-    <span class="n">awesome_order</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">"Order"</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s">"items"</span><span class="p">)</span>
+    <span class="n">order_id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="nc">ForeignKey</span><span class="p">(</span><span class="s">"order.id"</span><span class="p">)</span>
+    <span class="n">awesome_order</span> <span class="o">=</span> <span class="nf">relationship</span><span class="p">(</span><span class="s">"Order"</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s">"items"</span><span class="p">)</span>
     <span class="c1"># relationship not named "order" to avoid confusion: this is NOT the table name for Order
 </span></code></pre></div></div>
 
@@ -2041,7 +2041,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

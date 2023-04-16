@@ -908,13 +908,13 @@
 
 <p>For this tutorial, we assume you’re working in a notebook (Jupyter, CoCalc, etc) so we’ll run a quick “setup” step to download some CSV data:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">urllib.request</span>
 <span class="c1"># Download a copy of Hamlet.
-</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s">"https://gutenberg.org/cache/epub/1524/pg1524.txt"</span><span class="p">,</span> <span class="s">"hamlet.txt"</span><span class="p">)</span>
+</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nf">urlretrieve</span><span class="p">(</span><span class="s">"https://gutenberg.org/cache/epub/1524/pg1524.txt"</span><span class="p">,</span> <span class="s">"hamlet.txt"</span><span class="p">)</span>
 <span class="c1"># Download some COVID data for Europe
-</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s">"https://opendata.ecdc.europa.eu/covid19/vaccine_tracker/csv/data.csv"</span><span class="p">,</span> <span class="s">"vaccinations.csv"</span><span class="p">)</span>
+</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nf">urlretrieve</span><span class="p">(</span><span class="s">"https://opendata.ecdc.europa.eu/covid19/vaccine_tracker/csv/data.csv"</span><span class="p">,</span> <span class="s">"vaccinations.csv"</span><span class="p">)</span>
 <span class="c1"># And a fastq file
-</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s">"https://gist.github.com/hexylena/7d249607f8f763301f06c78a48c3bf6f/raw/a100e278cee1c94035a3a644b16863deee0ba2c0/example.fastq"</span><span class="p">,</span> <span class="s">"example.fastq"</span><span class="p">)</span>
+</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nf">urlretrieve</span><span class="p">(</span><span class="s">"https://gist.github.com/hexylena/7d249607f8f763301f06c78a48c3bf6f/raw/a100e278cee1c94035a3a644b16863deee0ba2c0/example.fastq"</span><span class="p">,</span> <span class="s">"example.fastq"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>And now we’re ready to get started learning about files!</p>
@@ -948,9 +948,9 @@
 
 <p>You will mostly use <code class="language-plaintext highlighter-rouge">r</code> and <code class="language-plaintext highlighter-rouge">w</code>, <code class="language-plaintext highlighter-rouge">a</code> is especially useful for writing to program logs where you don’t really care what was written before, you just want to add your new logs to the end of the file.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'hamlet.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'hamlet.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="c1"># readlines reads every line of a file into a giant list!
-</span>    <span class="n">lines</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+</span>    <span class="n">lines</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Here we introduce a new bit of syntax, the <code class="language-plaintext highlighter-rouge">with</code> block. Technically <code class="language-plaintext highlighter-rouge">with</code> begins a “context manager” which allows python to setup some things before the block, run some contents in the block, and automatically handle cleanup of this block. When you open a file, you <em>must</em> close it when you’re done with it (otherwise bad things can happen!) and <code class="language-plaintext highlighter-rouge">with</code> prevents most of those issues.</p>
@@ -975,22 +975,22 @@ handle.close() # Important!
 
 <p>Let’s see what’s in our file. `</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>Notice how it prints out a blank line afterwards! This is due to a <code class="language-plaintext highlighter-rouge">\n</code>, a newline. A newline just tells the computer “please put content on the next line”. We can see it by using the <code class="language-plaintext highlighter-rouge">repr()</code> function:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">repr</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 </code></pre></div></div>
 
 <p>Every line that’s read in ends in a newline currently. This is done because if we wanted to write it back out, we would need to preserve those newlines, or all of the content would be on one giant line. Let’s try writing out a file, it’s <em>just</em> like reading in a file!</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'hamlet-copy.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'hamlet-copy.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="c1"># readlines reads every line of a file into a giant list!
 </span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-        <span class="n">handle</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Check this file in your folder, does it look right? Is it identical in size to the original?</p>
@@ -1008,9 +1008,9 @@ HAMLET. O, but she’ll keep her word.
 
 <p>So let’s count up how many times each character speaks! (Roughly)</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'hamlet.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'hamlet.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="c1"># readlines reads every line of a file into a giant list!
-</span>    <span class="n">lines</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+</span>    <span class="n">lines</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
 
 <span class="n">speakers</span> <span class="o">=</span> <span class="p">{}</span>
 </code></pre></div></div>
@@ -1018,7 +1018,7 @@ HAMLET. O, but she’ll keep her word.
 <p>Here we’ve initialised the <code class="language-plaintext highlighter-rouge">lines</code> variable with the contents of the text, and setup <code class="language-plaintext highlighter-rouge">speakers</code> as a dictionary that will let us track how many times each character speaks. Next let’s define a function to check if a character is speaking on that line. It is if it meets two conditions: the first word is all caps, and it ends with a <code class="language-plaintext highlighter-rouge">.</code>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">is_speaker</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">word</span> <span class="o">==</span> <span class="n">word</span><span class="p">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">and</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">'.'</span>
+    <span class="k">return</span> <span class="n">word</span> <span class="o">==</span> <span class="n">word</span><span class="p">.</span><span class="nf">upper</span><span class="p">()</span> <span class="ow">and</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">'.'</span>
 </code></pre></div></div>
 
 <p>We can use that function later to check if a line starts with a speaker</p>
@@ -1026,16 +1026,16 @@ HAMLET. O, but she’ll keep her word.
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Loop over every line we read in
 </span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
     <span class="c1"># Split by default splits on whitespace.
-</span>    <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="n">split</span><span class="p">()</span>
+</span>    <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="nf">split</span><span class="p">()</span>
 
     <span class="c1"># Are there words on this line? We can't access the first word if we
 </span>    <span class="c1"># haven't any words.
-</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span>    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">continue</span>
 
     <span class="c1"># Check if the first word is uppercase, and the last character is a `.`,
 </span>    <span class="c1"># then it's a character speaking.
-</span>    <span class="k">if</span> <span class="n">is_speaker</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+</span>    <span class="k">if</span> <span class="nf">is_speaker</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="c1"># Give this an easier to remember and understand name.
 </span>        <span class="n">speaker</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -1058,15 +1058,15 @@ HAMLET. O, but she’ll keep her word.
 
 <p>Let’s see who was the most chatty:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">speakers</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">speakers</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>We’ve clearly caught a number of values that aren’t expected, some section headers (the numeric values, and some rare values we don’t expect.)</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">speakers</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">speakers</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
     <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Hamlet, the titular character, has the vast majority of turns speaking throughout the play:</p>
@@ -1106,12 +1106,12 @@ HAMLET. O, but she’ll keep her word.
 
 <p>Writing a file out is exactly like reading a file, we just use the different file mode <code class="language-plaintext highlighter-rouge">w</code> to indicate we wish to write to a file:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'hello.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'hello.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="c1"># Let's write it out a few times
-</span>    <span class="n">handle</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
-    <span class="n">handle</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
-    <span class="n">handle</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
-    <span class="n">handle</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
+</span>    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
+    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
+    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
+    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Check the file’s contents in your folder, does it look like you expect? Remember your <code class="language-plaintext highlighter-rouge">\n</code>s!</p>
@@ -1161,18 +1161,18 @@ GTGCCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCCGAGCCCACGAGACCGAAGAACATCTCGTAT
 
 <p>In the setup portion we downloaded a FASTQ file, now let’s extract all of the sequences from this file, and write them out as a FASTA file. Why would you want to do this? Sometimes after sequencing a sample (especially metagenomics), you want to blast the sequences to figure out which organisms they belong to. A common way to do that is BLAST which accepts fasta formatted sequences. So we’ll write something to convert these formats, removing the <code class="language-plaintext highlighter-rouge">+</code> and quality score lines.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'example.fastq'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'example.fastq'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
 
 <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'example-converted.fasta'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'example-converted.fasta'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
         <span class="c1"># Since fastq files have groups of 4 lines, we can use that to extract
 </span>        <span class="c1"># specific lines of every read:
 </span>        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">handle</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"&gt;"</span> <span class="o">+</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"&gt;"</span> <span class="o">+</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">handle</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
 </code></pre></div></div>
 
@@ -1195,10 +1195,10 @@ Try out this code to see how it works:</p>
 <p>If you’re reading data from a comma separated value (CSV) or tab separated value (TSV) file, you should use the built in <code class="language-plaintext highlighter-rouge">csv</code> module to do this. You might ask yourself “Why, csv parsing is easy” and that is a common thought! It would be so simple to do something like</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Please don't do this :)
-</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'vaccinations.csv'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-    <span class="n">first_lines</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="n">readlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'vaccinations.csv'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+    <span class="n">first_lines</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">first_lines</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">))</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">','</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>But you would be wrong! This code has a subtle bug that you might not see until someone generates data that specifically affects it, with “quoted” columns. If you have a table like</p>
@@ -1245,47 +1245,47 @@ Patient,Location,Disease Indications
 Helena,"Den Haag, the Netherlands",Z87.890
 Bob,"Little Rock, Arkansas, USA",Z72.53
 Jane,"London, UK",Z86.16
-"""</span><span class="p">.</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+"""</span><span class="p">.</span><span class="nf">strip</span><span class="p">().</span><span class="nf">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
 
 <span class="c1"># Please don't do this :)
 </span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">csv_data</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">','</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Does that look right? Maybe not. Instead we can use the <code class="language-plaintext highlighter-rouge">csv</code> module to work around this and properly process CSV files:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">csv</span>
 
 <span class="n">csv_data</span> <span class="o">=</span> <span class="s">"""
 Patient,Location,Disease Indications
 Helena,"Den Haag, the Netherlands",Z87.890
 Bob,"Little Rock, Arkansas, USA",Z72.53
 Jane,"London, UK",Z86.16
-"""</span><span class="p">.</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+"""</span><span class="p">.</span><span class="nf">strip</span><span class="p">().</span><span class="nf">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
 
 <span class="c1"># Please DO this :)
-</span><span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csv_data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">","</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s">'"'</span><span class="p">)</span>
+</span><span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="nf">reader</span><span class="p">(</span><span class="n">csv_data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">","</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s">'"'</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>That looks a lot better! Now we’ve properly handled the quoted columns that contain one or more <code class="language-plaintext highlighter-rouge">,</code> in the middle of our file. This is actually one of the motivating factors in using the TSV format, the <kbd>tab</kbd> character is much more rare in data than <kbd>,</kbd>. There is less chance for confusion with poorly written software.</p>
 
 <p>Let’s read in some statistics about vaccinations:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">csv</span>
 
 <span class="n">vax</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'vaccinations.csv'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-    <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">reader</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">","</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s">'"'</span><span class="p">)</span>
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'vaccinations.csv'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+    <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="nf">reader</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">","</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s">'"'</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>
         <span class="c1"># Skip our header row
 </span>        <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'YearWeekISO'</span><span class="p">:</span>
             <span class="k">continue</span>
         <span class="c1"># Otherwise load in the data
-</span>        <span class="n">vax</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</span>        <span class="n">vax</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">vax</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">vax</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>Here we have a 2 dimensional array, a list of lists. Each row is an entry in the main list, and each column is an entry in each of those children.</p>
@@ -1367,8 +1367,8 @@ Jane,"London, UK",Z86.16
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">vax</span><span class="p">:</span>
     <span class="c1"># Here we select for a country
 </span>    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">country</span><span class="p">:</span>
-        <span class="n">subset</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+        <span class="n">subset</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>That should be easier to work with, now we only have one country’s data. Let’s do some exercises with this data:</p>
@@ -1384,8 +1384,8 @@ Jane,"London, UK",Z86.16
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vaccines</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
-    <span class="n">vaccines</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">vaccines</span><span class="p">))</span>
+    <span class="n">vaccines</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">set</span><span class="p">(</span><span class="n">vaccines</span><span class="p">))</span>
 </code></pre></div>    </div>
 
     <p>We can use the <code class="language-plaintext highlighter-rouge">set</code> function to convert the list to a set, and show only the unique values.</p>
@@ -1410,8 +1410,8 @@ Jane,"London, UK",Z86.16
     <span class="n">brand</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">brand</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">doses</span><span class="p">:</span>
         <span class="n">doses</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">doses</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">=</span> <span class="n">doses</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">doses</span><span class="p">)</span>
+    <span class="n">doses</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">=</span> <span class="n">doses</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">doses</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1438,11 +1438,11 @@ Jane,"London, UK",Z86.16
     <span class="k">if</span> <span class="n">brand</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">received</span><span class="p">:</span>
         <span class="n">received</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
-        <span class="n">export</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">=</span> <span class="n">export</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+        <span class="n">export</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">=</span> <span class="n">export</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
-        <span class="n">received</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">=</span> <span class="n">received</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">export</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">received</span><span class="p">)</span>
+        <span class="n">received</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">=</span> <span class="n">received</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">export</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">received</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1458,8 +1458,8 @@ Jane,"London, UK",Z86.16
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"On </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s"> doses of </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="si">}</span><span class="s"> were given"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="ow">and</span> <span class="nf">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"On </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s"> doses of </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="si">}</span><span class="s"> were given"</span><span class="p">)</span>
         <span class="k">break</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1488,8 +1488,8 @@ Jane,"London, UK",Z86.16
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">!=</span> <span class="s">'ALL'</span><span class="p">:</span>
         <span class="k">continue</span>
-    <span class="n">total_doses</span> <span class="o">=</span> <span class="n">total_doses</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
-    <span class="n">percent_vaccinated_per_week</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_doses</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">13</span><span class="p">]))</span>
+    <span class="n">total_doses</span> <span class="o">=</span> <span class="n">total_doses</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+    <span class="n">percent_vaccinated_per_week</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">total_doses</span> <span class="o">/</span> <span class="nf">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">13</span><span class="p">]))</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1504,10 +1504,10 @@ Jane,"London, UK",Z86.16
 <span class="c1"># When you're done, you should have a 'results' variable
 # You may need to `pip install matplotlib`
 </span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">percent_vaccinated_per_week</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Week'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Percent Vaccinated'</span><span class="p">)</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">percent_vaccinated_per_week</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'Week'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'Percent Vaccinated'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="question">
@@ -1641,7 +1641,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

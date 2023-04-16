@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Data Libraries">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-01-23 14:28:11 +0000">
+<meta name="DC.date" content="2023-04-14 13:42:56 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Saskia Hiltemann">
 
@@ -65,7 +65,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-23 14:28:11 +0000",
+  "dateModified": "2023-04-14 13:42:56 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Data Libraries",
   "interactivityType": "mixed",
@@ -530,7 +530,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-23 14:28:11 +0000",
+  "dateModified": "2023-04-14 13:42:56 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Data Libraries",
   "interactivityType": "mixed",
@@ -954,6 +954,12 @@
                     
                         
                     
+                        
+                    
+                        
+                    
+                        
+                    
                 
                     
                         
@@ -1003,6 +1009,12 @@
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -1160,6 +1172,12 @@
                     
                         
                     
+                        
+                    
+                        
+                    
+                        
+                    
                 
             </ul>
         
@@ -1256,7 +1274,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 14, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1294,7 +1312,10 @@ of a sequencing run or similar project to a group of users on the servers.</p>
       <li><a href="#from-import-directory-admins-only" id="markdown-toc-from-import-directory-admins-only">from import Directory (Admins only)</a></li>
     </ol>
   </li>
-  <li><a href="#automatically-populating-a-data-library" id="markdown-toc-automatically-populating-a-data-library">Automatically Populating a Data Library</a></li>
+  <li><a href="#automatically-populating-a-data-library" id="markdown-toc-automatically-populating-a-data-library">Automatically Populating a Data Library</a>    <ol>
+      <li><a href="#--legacy" id="markdown-toc---legacy"><code class="language-plaintext highlighter-rouge">--legacy</code></a></li>
+    </ol>
+  </li>
   <li><a href="#gtn-data" id="markdown-toc-gtn-data">GTN Data</a></li>
   <li><a href="#using-data-from-libraries" id="markdown-toc-using-data-from-libraries">Using Data from Libraries</a></li>
 </ol>
@@ -1302,7 +1323,7 @@ of a sequencing run or similar project to a group of users on the servers.</p>
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">     <li class="disabled">         <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">             <div>Step 1</div>             <div>ansible-galaxy</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">             <div>Step 2</div>             <div>tus</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">             <div>Step 3</div>             <div>cvmfs</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">             <div>Step 4</div>             <div>singularity</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">             <div>Step 5</div>             <div>tool-management</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="active">         <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">             <div>Step 6</div>             <div>data-library</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">             <div>Step 7</div>             <div>connect-to-compute-cluster</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">             <div>Step 8</div>             <div>job-destinations</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">             <div>Step 9</div>             <div>pulsar</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">             <div>Step 10</div>             <div>gxadmin</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">             <div>Step 11</div>             <div>monitoring</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">             <div>Step 12</div>             <div>tiaas</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">             <div>Step 13</div>             <div>reports</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <li class="">         <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">             <div>Step 14</div>             <div>ftp</div>         </a>     </li>           </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #a8ffa8;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">                    <li class="disabled">         <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">             <div>Step 1</div>             <div>ansible-galaxy</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html">             <div>Step 2</div>             <div>backup-cleanup</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/customization/tutorial.html">             <div>Step 3</div>             <div>customization</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">             <div>Step 4</div>             <div>tus</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">             <div>Step 5</div>             <div>cvmfs</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/apptainer/tutorial.html">             <div>Step 6</div>             <div>apptainer</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">             <div>Step 7</div>             <div>tool-management</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="active">         <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">             <div>Step 8</div>             <div>data-library</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/dev/tutorials/bioblend-api/tutorial.html">             <div>Step 9</div>             <div>dev/bioblend-api</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">             <div>Step 10</div>             <div>connect-to-compute-cluster</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">             <div>Step 11</div>             <div>job-destinations</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">             <div>Step 12</div>             <div>pulsar</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/celery/tutorial.html">             <div>Step 13</div>             <div>celery</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">             <div>Step 14</div>             <div>gxadmin</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">             <div>Step 15</div>             <div>monitoring</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">             <div>Step 16</div>             <div>tiaas</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">             <div>Step 17</div>             <div>reports</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">             <div>Step 18</div>             <div>ftp</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/beacon/tutorial.html">             <div>Step 19</div>             <div>beacon</div>         </a>     </li>           </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #a8ffa8;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
 
 <h1 id="setup">Setup</h1>
 
@@ -1317,16 +1338,16 @@ of a sequencing run or similar project to a group of users on the servers.</p>
 
       <div data-commit="Add the git repository to the pre-tasks" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/galaxy.yml
 </span><span class="gi">+++ b/galaxy.yml
-</span><span class="p">@@ -8,6 +8,9 @@</span>
-     - name: Install Dependencies
+</span><span class="p">@@ -29,6 +29,9 @@</span>
        package:
-         name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+         name: ['tmpreaper']
+       when: ansible_os_family == 'Debian'
 <span class="gi">+    - git:
 +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 +        dest: /libraries/
 </span>   roles:
-     - galaxyproject.postgresql
-     - role: galaxyproject.postgresql_objects
+     - usegalaxy_eu.apptainer
+     - galaxyproject.galaxy
    
 </code></pre></div>      </div>
 
@@ -1341,15 +1362,16 @@ of a sequencing run or similar project to a group of users on the servers.</p>
 
       <div data-commit="Configure the library import directories" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -29,6 +29,8 @@</span> miniconda_manage_dependencies: false
-    
- galaxy_config:
-   galaxy:
-<span class="gi">+    library_import_dir: /libraries/admin
+</span><span class="p">@@ -84,6 +84,9 @@</span> galaxy_config:
+     # Tool Dependencies
+     dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+     containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
+<span class="gi">+    # Data Library Directories
++    library_import_dir: /libraries/admin
 +    user_library_import_dir: /libraries/user
-</span>     dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
-     containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
-     tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+</span>   gravity:
+     process_manager: systemd
+     galaxy_root: "{{ galaxy_root }}/server"
    
 </code></pre></div>      </div>
 
@@ -1548,11 +1570,17 @@ library already exists! <span class="nb">id</span>: f597429621d6eb2b
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Got lost along the way?</div>   <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-6">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-5...step-6#files_bucket">the previous tutorial</a>.</p>   <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-library-permission-issues"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-library-permission-issues" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Library Permission Issues<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When running <code class="language-plaintext highlighter-rouge">setup-data-libraries</code> it imports the library with the permissions rather locked down to the account that handled the importing.</p>   <p>Due to how data libraries have been implemented, it isn’t sufficient to share the folder with another user, instead you must also share individual items within this folder. This is an unfortunate issue with Galaxy that we hope to fix someday.</p>   <p>Until then, we can recommend you install the latest version of Ephemeris which includes the <code class="language-plaintext highlighter-rouge">set-library-permissions</code> command which let’s you recursively correct the permissions on a data library. Simply run:</p>   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set-library-permissions -g https://galaxy.example.com -a $API_KEY LIBRARY --roles ROLES role1,role2,role3<br /></code></pre></div></div>   <p>Where <code class="language-plaintext highlighter-rouge">LIBRARY</code> is the id of the library you wish to correct.</p> </blockquote>
+
+<!--SNIPPET-->
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-time-to-git-commit"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Time to git commit</div>   <p>It’s time to commit your work! Check the status with</p>   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status<br /></code></pre></div></div>   <p>Add your changed files with</p>   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add ... # any files you see that are changed<br /></code></pre></div></div>   <p>And then commit it!</p>   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit -m 'Finished Data Libraries'<br /></code></pre></div></div> </blockquote>
+
+<!--SNIPPET-->
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Got lost along the way?</div>   <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-8">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-7...step-8#files_bucket">the previous tutorial</a>.</p>   <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p> </blockquote>
 
 <p>Note that we’ve used some special flags here, <code class="language-plaintext highlighter-rouge">--training</code> and <code class="language-plaintext highlighter-rouge">--legacy</code>. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)</p>
 
-<h3 id="--legacy"><code class="language-plaintext highlighter-rouge">--legacy</code></h3>
+<h2 id="--legacy"><code class="language-plaintext highlighter-rouge">--legacy</code></h2>
 
 <p>This enables the use of legacy APIs even for newer Galaxies that should have a batch upload API enabled. Unfortunately the new batch upload API is not able to update existing data libraries in place and will always create new libraries with the same name. So currently <code class="language-plaintext highlighter-rouge">--legacy</code> is quite useful for maintaining a YAML file, and running <code class="language-plaintext highlighter-rouge">setup-data-libraries</code> regularly whenever that file has updates.</p>
 
@@ -1579,6 +1607,9 @@ library already exists! <span class="nb">id</span>: f597429621d6eb2b
 <p>Here users can see every file accessible to them in the data library to begin analysing.</p>
 
 <p><img src="../../images/data/select-from-lib2.png" alt="Same popup as previous image, but the file listing now shows the contents of the data library we created during the hands-on step with Mouse data. " loading="lazy" /></p>
+
+<!--SNIPPET-->
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">                    <li class="disabled">         <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">             <div>Step 1</div>             <div>ansible-galaxy</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html">             <div>Step 2</div>             <div>backup-cleanup</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/customization/tutorial.html">             <div>Step 3</div>             <div>customization</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">             <div>Step 4</div>             <div>tus</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">             <div>Step 5</div>             <div>cvmfs</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/apptainer/tutorial.html">             <div>Step 6</div>             <div>apptainer</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">             <div>Step 7</div>             <div>tool-management</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="active">         <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">             <div>Step 8</div>             <div>data-library</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/dev/tutorials/bioblend-api/tutorial.html">             <div>Step 9</div>             <div>dev/bioblend-api</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">             <div>Step 10</div>             <div>connect-to-compute-cluster</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">             <div>Step 11</div>             <div>job-destinations</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">             <div>Step 12</div>             <div>pulsar</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/celery/tutorial.html">             <div>Step 13</div>             <div>celery</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">             <div>Step 14</div>             <div>gxadmin</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">             <div>Step 15</div>             <div>monitoring</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">             <div>Step 16</div>             <div>tiaas</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">             <div>Step 17</div>             <div>reports</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">             <div>Step 18</div>             <div>ftp</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/beacon/tutorial.html">             <div>Step 19</div>             <div>beacon</div>         </a>     </li>           </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #a8ffa8;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
 
                 </section>
 
@@ -1677,7 +1708,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

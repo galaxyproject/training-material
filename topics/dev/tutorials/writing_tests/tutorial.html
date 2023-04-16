@@ -1029,15 +1029,15 @@
 
   <p>Example of a basic API test.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
 
 
 <span class="k">class</span> <span class="nc">MyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">test_version_is_current</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"version"</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">test_version_is_current</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"version"</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
         <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="s">"version_major"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"22.09"</span>  <span class="c1"># Assuming you are on the "dev" branch
 </span></code></pre></div>  </div>
 </blockquote>
@@ -1074,8 +1074,8 @@
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">RoleDefinitionModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">RoleNameField</span>
     <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">RoleDescriptionField</span>
-    <span class="n">user_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">EncodedDatabaseIdField</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"User IDs"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
-    <span class="n">group_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">EncodedDatabaseIdField</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"Group IDs"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">user_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">EncodedDatabaseIdField</span><span class="p">]]</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"User IDs"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">group_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">EncodedDatabaseIdField</span><span class="p">]]</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"Group IDs"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
 </code></pre></div></div>
 
 <p>Thus, we need to provide a name and a description, both of which are string values (the other members are optional), formatted as JSON. (For more details on how the API works, see <a href="https://fastapi.tiangolo.com/tutorial/">FastAPI’s excellent documentation</a>.)</p>
@@ -1089,7 +1089,7 @@
 
   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">test_create_role</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_create_role</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="c1"># prepare new role
 </span>        <span class="n">name</span> <span class="o">=</span> <span class="s">"cool role"</span>
         <span class="n">description</span> <span class="o">=</span> <span class="s">"description of this cool role"</span>
@@ -1098,9 +1098,9 @@
             <span class="s">"description"</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="c1"># add new role and verify
-</span>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_post</span><span class="p">(</span><span class="s">"roles"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="n">role</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_post</span><span class="p">(</span><span class="s">"roles"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+        <span class="n">role</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
         <span class="k">assert</span> <span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span>
         <span class="k">assert</span> <span class="n">role</span><span class="p">[</span><span class="s">"description"</span><span class="p">]</span> <span class="o">==</span> <span class="n">description</span>
 </code></pre></div>  </div>
@@ -1110,13 +1110,13 @@
 
 <p>Can we do better? We can verify that the new object has been added by using another endpoint to retrieve that object from the database. Here’s a first take:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_create_role_WRONG</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_create_role_WRONG</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
     <span class="n">ROLE_COUNT</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="c1"># verify no roles except one built-in role for test user
-</span>    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
-    <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="n">ROLE_COUNT</span>
+</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
+    <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="n">ROLE_COUNT</span>
 
     <span class="c1"># create role
 </span>    <span class="n">name</span> <span class="o">=</span> <span class="s">'my cool name'</span>
@@ -1125,17 +1125,17 @@
         <span class="s">"name"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
         <span class="s">"description"</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
     <span class="p">}</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_post</span><span class="p">(</span><span class="s">"roles"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-    <span class="n">role</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_post</span><span class="p">(</span><span class="s">"roles"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+    <span class="n">role</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
     <span class="k">assert</span> <span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span>
     <span class="k">assert</span> <span class="n">role</span><span class="p">[</span><span class="s">"description"</span><span class="p">]</span> <span class="o">==</span> <span class="n">description</span>
 
     <span class="c1"># verify role has been added
-</span>    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
-    <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="n">ROLE_COUNT</span> <span class="o">+</span> <span class="mi">1</span>
+</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
+    <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="n">ROLE_COUNT</span> <span class="o">+</span> <span class="mi">1</span>
 </code></pre></div></div>
 
 <p>Everything is straightforward: we verify that there is only n=1 role currently present (a built-in for the test user), we add the role, then retrieve all roles and verify that the new total is n + 1. Unfortunately, <strong><em>this is the wrong approach</em></strong>. Try running this together with the previous version of the test - you’ll get an assertion error: there’s an extra role in the database!</p>
@@ -1154,21 +1154,21 @@
 
   <p>Alternative test for creating an object. Note the <code class="language-plaintext highlighter-rouge">setUp</code> method and the new import.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy_test.base.populators</span> <span class="kn">import</span> <span class="n">DatasetPopulator</span>
-<span class="kn">from</span> <span class="nn">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy_test.base.populators</span> <span class="kn">import</span> <span class="n">DatasetPopulator</span>
+<span class="kn">from</span> <span class="n">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
 
 
 <span class="k">class</span> <span class="nc">MyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">().</span><span class="n">setUp</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span> <span class="o">=</span> <span class="n">DatasetPopulator</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">galaxy_interactor</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">setUp</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span> <span class="o">=</span> <span class="nc">DatasetPopulator</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">galaxy_interactor</span><span class="p">)</span>
 
 <span class="c1"># [code omitted]
 </span>
-    <span class="k">def</span> <span class="nf">test_create_role2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_create_role2</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="c1"># prepare new role
-</span>        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="n">get_random_name</span><span class="p">()</span>
+</span>        <span class="n">name</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">get_random_name</span><span class="p">()</span>
         <span class="n">description</span> <span class="o">=</span> <span class="s">'description of this cool role'</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s">"name"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
@@ -1176,23 +1176,23 @@
         <span class="p">}</span>
 
         <span class="c1"># verify new role does not exist
-</span>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="nf">any</span><span class="p">(</span><span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
 
         <span class="c1"># add new role
-</span>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_post</span><span class="p">(</span><span class="s">"roles"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="n">role</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_post</span><span class="p">(</span><span class="s">"roles"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+        <span class="n">role</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
         <span class="k">assert</span> <span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span>
         <span class="k">assert</span> <span class="n">role</span><span class="p">[</span><span class="s">"description"</span><span class="p">]</span> <span class="o">==</span> <span class="n">description</span>
 
         <span class="c1"># verify role has been added
-</span>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="nb">any</span><span class="p">(</span><span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="nf">any</span><span class="p">(</span><span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1215,23 +1215,23 @@
 
   <p>Using populators.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">test_search_dataset_by_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">history1_id</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="n">new_history</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">history2_id</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="n">new_history</span><span class="p">()</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">test_search_dataset_by_history</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">history1_id</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_history</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">history2_id</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_history</span><span class="p">()</span>
 
         <span class="n">history1_datasets</span><span class="p">,</span> <span class="n">history2_datasets</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">history1_datasets</span><span class="p">):</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="n">new_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">history1_id</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">history2_datasets</span><span class="p">):</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="n">new_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">history2_id</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">history1_datasets</span><span class="p">):</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_dataset</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">history1_id</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">history2_datasets</span><span class="p">):</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_dataset</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">history2_id</span><span class="p">)</span>
 
-        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"history_id"</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">history1_id</span><span class="p">,</span> <span class="p">}</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"datasets"</span><span class="p">,</span> <span class="n">payload</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">==</span> <span class="n">history1_datasets</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"history_id"</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">history1_id</span><span class="p">,</span> <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"datasets"</span><span class="p">,</span> <span class="n">payload</span><span class="p">).</span><span class="nf">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="nf">len</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">==</span> <span class="n">history1_datasets</span>
 
-        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"history_id"</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">history2_id</span><span class="p">,</span> <span class="p">}</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"datasets"</span><span class="p">,</span> <span class="n">payload</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">==</span> <span class="n">history2_datasets</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"history_id"</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">history2_id</span><span class="p">,</span> <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"datasets"</span><span class="p">,</span> <span class="n">payload</span><span class="p">).</span><span class="nf">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="nf">len</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">==</span> <span class="n">history2_datasets</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1244,40 +1244,40 @@
 
   <p>Final code.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy_test.base.populators</span> <span class="kn">import</span> <span class="n">DatasetPopulator</span>
-<span class="kn">from</span> <span class="nn">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy_test.base.populators</span> <span class="kn">import</span> <span class="n">DatasetPopulator</span>
+<span class="kn">from</span> <span class="n">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
 
 
 <span class="k">class</span> <span class="nc">MyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">().</span><span class="n">setUp</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span> <span class="o">=</span> <span class="n">DatasetPopulator</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">galaxy_interactor</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">setUp</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span> <span class="o">=</span> <span class="nc">DatasetPopulator</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">galaxy_interactor</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_version_is_current</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"version"</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">test_version_is_current</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"version"</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
         <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="s">"version_major"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"22.09"</span>
 
-    <span class="k">def</span> <span class="nf">test_create_role</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_create_role</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="c1"># prepare new role
-</span>        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="n">get_random_name</span><span class="p">()</span>
+</span>        <span class="n">name</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">get_random_name</span><span class="p">()</span>
         <span class="n">description</span> <span class="o">=</span> <span class="s">'description of this cool role'</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s">"name"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
             <span class="s">"description"</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="c1"># add new role and verify
-</span>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_post</span><span class="p">(</span><span class="s">"roles"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="n">role</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_post</span><span class="p">(</span><span class="s">"roles"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+        <span class="n">role</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
         <span class="k">assert</span> <span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span>
         <span class="k">assert</span> <span class="n">role</span><span class="p">[</span><span class="s">"description"</span><span class="p">]</span> <span class="o">==</span> <span class="n">description</span>
 
-    <span class="k">def</span> <span class="nf">test_create_role2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_create_role2</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="c1"># prepare new role
-</span>        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="n">get_random_name</span><span class="p">()</span>
+</span>        <span class="n">name</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">get_random_name</span><span class="p">()</span>
         <span class="n">description</span> <span class="o">=</span> <span class="s">'description of this cool role'</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s">"name"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
@@ -1285,41 +1285,41 @@
         <span class="p">}</span>
 
         <span class="c1"># verify new role does not exist
-</span>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="nf">any</span><span class="p">(</span><span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
 
         <span class="c1"># add new role
-</span>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_post</span><span class="p">(</span><span class="s">"roles"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="n">role</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_post</span><span class="p">(</span><span class="s">"roles"</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+        <span class="n">role</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
         <span class="k">assert</span> <span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span>
         <span class="k">assert</span> <span class="n">role</span><span class="p">[</span><span class="s">"description"</span><span class="p">]</span> <span class="o">==</span> <span class="n">description</span>
 
         <span class="c1"># verify role has been added
-</span>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="nb">any</span><span class="p">(</span><span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"roles"</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="nf">any</span><span class="p">(</span><span class="n">role</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_search_dataset_by_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">history1_id</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="n">new_history</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">history2_id</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="n">new_history</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">test_search_dataset_by_history</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">history1_id</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_history</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">history2_id</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_history</span><span class="p">()</span>
 
         <span class="n">history1_datasets</span><span class="p">,</span> <span class="n">history2_datasets</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">history1_datasets</span><span class="p">):</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="n">new_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">history1_id</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">history2_datasets</span><span class="p">):</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="n">new_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">history2_id</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">history1_datasets</span><span class="p">):</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_dataset</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">history1_id</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">history2_datasets</span><span class="p">):</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_dataset</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">history2_id</span><span class="p">)</span>
 
-        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"history_id"</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">history1_id</span><span class="p">,</span> <span class="p">}</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"datasets"</span><span class="p">,</span> <span class="n">payload</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">==</span> <span class="n">history1_datasets</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"history_id"</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">history1_id</span><span class="p">,</span> <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"datasets"</span><span class="p">,</span> <span class="n">payload</span><span class="p">).</span><span class="nf">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="nf">len</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">==</span> <span class="n">history1_datasets</span>
 
-        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"history_id"</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">history2_id</span><span class="p">,</span> <span class="p">}</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"datasets"</span><span class="p">,</span> <span class="n">payload</span><span class="p">).</span><span class="n">json</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">==</span> <span class="n">history2_datasets</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="s">"history_id"</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">history2_id</span><span class="p">,</span> <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="s">"datasets"</span><span class="p">,</span> <span class="n">payload</span><span class="p">).</span><span class="nf">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="nf">len</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">==</span> <span class="n">history2_datasets</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1340,22 +1340,22 @@
 
   <p>Example of tests for the <code class="language-plaintext highlighter-rouge">parse_bytesize</code> function:</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy.util.bytesize</span> <span class="kn">import</span> <span class="n">ByteSize</span><span class="p">,</span> <span class="n">parse_bytesize</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy.util.bytesize</span> <span class="kn">import</span> <span class="n">ByteSize</span><span class="p">,</span> <span class="n">parse_bytesize</span>
 
 
 <span class="k">def</span> <span class="nf">test_parse_bytesize_int_or_float</span><span class="p">():</span>
-    <span class="k">assert</span> <span class="n">parse_bytesize</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="o">==</span> <span class="mi">42</span>
-    <span class="k">assert</span> <span class="n">parse_bytesize</span><span class="p">(</span><span class="mf">42.5</span><span class="p">)</span> <span class="o">==</span> <span class="mf">42.5</span>
+    <span class="k">assert</span> <span class="nf">parse_bytesize</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="o">==</span> <span class="mi">42</span>
+    <span class="k">assert</span> <span class="nf">parse_bytesize</span><span class="p">(</span><span class="mf">42.5</span><span class="p">)</span> <span class="o">==</span> <span class="mf">42.5</span>
 
 
 <span class="k">def</span> <span class="nf">test_parse_bytesize_str_no_suffix</span><span class="p">():</span>
-    <span class="k">assert</span> <span class="n">parse_bytesize</span><span class="p">(</span><span class="s">'42'</span><span class="p">)</span> <span class="o">==</span> <span class="mi">42</span>
-    <span class="k">assert</span> <span class="n">parse_bytesize</span><span class="p">(</span><span class="s">'42.5'</span><span class="p">)</span> <span class="o">==</span> <span class="mf">42.5</span>
+    <span class="k">assert</span> <span class="nf">parse_bytesize</span><span class="p">(</span><span class="s">'42'</span><span class="p">)</span> <span class="o">==</span> <span class="mi">42</span>
+    <span class="k">assert</span> <span class="nf">parse_bytesize</span><span class="p">(</span><span class="s">'42.5'</span><span class="p">)</span> <span class="o">==</span> <span class="mf">42.5</span>
 
 
 <span class="k">def</span> <span class="nf">test_parse_bytesize_str_suffix</span><span class="p">():</span>
-    <span class="k">assert</span> <span class="n">parse_bytesize</span><span class="p">(</span><span class="s">'10K'</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10000</span>
-    <span class="k">assert</span> <span class="n">parse_bytesize</span><span class="p">(</span><span class="s">'10 KI'</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10240</span>
+    <span class="k">assert</span> <span class="nf">parse_bytesize</span><span class="p">(</span><span class="s">'10K'</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10000</span>
+    <span class="k">assert</span> <span class="nf">parse_bytesize</span><span class="p">(</span><span class="s">'10 KI'</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10240</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1376,15 +1376,15 @@
 
   <p>Example of a test verifying a raised exception. Make sure you add the <code class="language-plaintext highlighter-rouge">pytest</code> import.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
 
 <span class="c1"># [code omitted]
 </span>
 <span class="k">def</span> <span class="nf">test_parse_bytesize_str_invalid</span><span class="p">():</span>
-    <span class="k">with</span> <span class="n">pytest</span><span class="p">.</span><span class="n">raises</span><span class="p">(</span><span class="nb">ValueError</span><span class="p">):</span>
-        <span class="n">parse_bytesize</span><span class="p">(</span><span class="s">'10 invalid-suffix'</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">pytest</span><span class="p">.</span><span class="n">raises</span><span class="p">(</span><span class="nb">ValueError</span><span class="p">):</span>
-        <span class="n">parse_bytesize</span><span class="p">(</span><span class="s">'invalid-value'</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="p">.</span><span class="nf">raises</span><span class="p">(</span><span class="nb">ValueError</span><span class="p">):</span>
+        <span class="nf">parse_bytesize</span><span class="p">(</span><span class="s">'10 invalid-suffix'</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="p">.</span><span class="nf">raises</span><span class="p">(</span><span class="nb">ValueError</span><span class="p">):</span>
+        <span class="nf">parse_bytesize</span><span class="p">(</span><span class="s">'invalid-value'</span><span class="p">)</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1400,34 +1400,34 @@
   <p>Example of tests for the <code class="language-plaintext highlighter-rouge">ByteSize.to_unit</code> method:</p>
 
   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_bytesize_to_unit</span><span class="p">():</span>
-    <span class="n">bytesize</span> <span class="o">=</span> <span class="n">ByteSize</span><span class="p">(</span><span class="mi">1_000_000_000_000_000</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'k'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000000K'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'m'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000M'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'g'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000G'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'t'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000T'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'p'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1P'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'e'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0E'</span>
+    <span class="n">bytesize</span> <span class="o">=</span> <span class="nc">ByteSize</span><span class="p">(</span><span class="mi">1_000_000_000_000_000</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'k'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000000K'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'m'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000M'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'g'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000G'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'t'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000T'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'p'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1P'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'e'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0E'</span>
 
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'ki'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'976562500000KI'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'mi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'953674316MI'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'gi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'931322GI'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'ti'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'909TI'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'pi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0PI'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'ei'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0EI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'ki'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'976562500000KI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'mi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'953674316MI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'gi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'931322GI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'ti'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'909TI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'pi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0PI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'ei'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0EI'</span>
 
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">()</span> <span class="o">==</span> <span class="s">'1000000000000000'</span>  <span class="c1"># no unit
-</span>    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'K'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000000K'</span>  <span class="c1"># uppercase unit
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">()</span> <span class="o">==</span> <span class="s">'1000000000000000'</span>  <span class="c1"># no unit
+</span>    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'K'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000000K'</span>  <span class="c1"># uppercase unit
 </span>
 
 <span class="k">def</span> <span class="nf">test_bytesize_to_unit_as_str</span><span class="p">():</span>
-    <span class="n">bytesize</span> <span class="o">=</span> <span class="n">ByteSize</span><span class="p">(</span><span class="mi">1_000_000_000_000_000</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'k'</span><span class="p">,</span> <span class="n">as_string</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1000000000000</span>  <span class="c1"># not to_string
+    <span class="n">bytesize</span> <span class="o">=</span> <span class="nc">ByteSize</span><span class="p">(</span><span class="mi">1_000_000_000_000_000</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'k'</span><span class="p">,</span> <span class="n">as_string</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1000000000000</span>  <span class="c1"># not to_string
 </span>
 
 <span class="k">def</span> <span class="nf">test_bytesize_to_unit_invalid</span><span class="p">():</span>
-    <span class="n">bytesize</span> <span class="o">=</span> <span class="n">ByteSize</span><span class="p">(</span><span class="mi">1_000_000_000_000_000</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">pytest</span><span class="p">.</span><span class="n">raises</span><span class="p">(</span><span class="nb">KeyError</span><span class="p">):</span>
-        <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'invalid'</span><span class="p">)</span>
+    <span class="n">bytesize</span> <span class="o">=</span> <span class="nc">ByteSize</span><span class="p">(</span><span class="mi">1_000_000_000_000_000</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="p">.</span><span class="nf">raises</span><span class="p">(</span><span class="nb">KeyError</span><span class="p">):</span>
+        <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'invalid'</span><span class="p">)</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1443,37 +1443,37 @@
   <p>Factoring out code into a fixture: we declare a fixture using pytest’s built-in <code class="language-plaintext highlighter-rouge">fixture</code> decorator,
 and then simply pass it as an argument to our tests.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">fixture</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@pytest.fixture</span>
 <span class="k">def</span> <span class="nf">bytesize</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">ByteSize</span><span class="p">(</span><span class="mi">1_000_000_000_000_000</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nc">ByteSize</span><span class="p">(</span><span class="mi">1_000_000_000_000_000</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">test_bytesize_to_unit</span><span class="p">(</span><span class="n">bytesize</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'k'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000000K'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'m'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000M'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'g'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000G'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'t'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000T'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'p'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1P'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'e'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0E'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'k'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000000K'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'m'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000M'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'g'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000G'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'t'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000T'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'p'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1P'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'e'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0E'</span>
 
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'ki'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'976562500000KI'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'mi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'953674316MI'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'gi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'931322GI'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'ti'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'909TI'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'pi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0PI'</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'ei'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0EI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'ki'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'976562500000KI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'mi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'953674316MI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'gi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'931322GI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'ti'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'909TI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'pi'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0PI'</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'ei'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0EI'</span>
 
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">()</span> <span class="o">==</span> <span class="s">'1000000000000000'</span>  <span class="c1"># no unit
-</span>    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'K'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000000K'</span>  <span class="c1"># uppercase unit
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">()</span> <span class="o">==</span> <span class="s">'1000000000000000'</span>  <span class="c1"># no unit
+</span>    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'K'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'1000000000000K'</span>  <span class="c1"># uppercase unit
 </span>
 
 <span class="k">def</span> <span class="nf">test_bytesize_to_unit_as_str</span><span class="p">(</span><span class="n">bytesize</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'k'</span><span class="p">,</span> <span class="n">as_string</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1000000000000</span>  <span class="c1"># not to_string
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'k'</span><span class="p">,</span> <span class="n">as_string</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1000000000000</span>  <span class="c1"># not to_string
 </span>
 
 <span class="k">def</span> <span class="nf">test_bytesize_to_unit_invalid</span><span class="p">(</span><span class="n">bytesize</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">pytest</span><span class="p">.</span><span class="n">raises</span><span class="p">(</span><span class="nb">KeyError</span><span class="p">):</span>
-        <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="s">'invalid'</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="p">.</span><span class="nf">raises</span><span class="p">(</span><span class="nb">KeyError</span><span class="p">):</span>
+        <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="s">'invalid'</span><span class="p">)</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1489,7 +1489,7 @@ and then simply pass it as an argument to our tests.</p>
   <p>Example of parametrizing a test. Replace the previous version of <code class="language-plaintext highlighter-rouge">test_bytesize_to_unit</code> with the
 following. Note that the test function takes 2 additional arguments.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">mark</span><span class="p">.</span><span class="n">parametrize</span><span class="p">(</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@pytest.mark.parametrize</span><span class="p">(</span>
     <span class="s">"unit, expected_value"</span><span class="p">,</span>
     <span class="p">[</span>
         <span class="p">(</span><span class="s">'k'</span><span class="p">,</span> <span class="s">'1000000000000K'</span><span class="p">),</span>
@@ -1509,7 +1509,7 @@ following. Note that the test function takes 2 additional arguments.</p>
     <span class="p">]</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_bytesize_to_unit</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">expected_value</span><span class="p">,</span> <span class="n">bytesize</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="n">to_unit</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_value</span>
+    <span class="k">assert</span> <span class="n">bytesize</span><span class="p">.</span><span class="nf">to_unit</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected_value</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1534,7 +1534,7 @@ following. Note that the test function takes 2 additional arguments.</p>
 
   <p>Example of replacing an object with a test double:</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy.security.validate_user_input</span> <span class="kn">import</span> <span class="p">(</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy.security.validate_user_input</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">extract_domain</span><span class="p">,</span>
     <span class="n">validate_domain_resolves</span><span class="p">,</span>
     <span class="n">validate_email</span><span class="p">,</span>  <span class="c1"># we've added this import
@@ -1548,13 +1548,13 @@ following. Note that the test function takes 2 additional arguments.</p>
 
 
 <span class="k">def</span> <span class="nf">test_email_is_empty</span><span class="p">():</span>
-    <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">allow_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+    <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">allow_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
 
 <span class="k">def</span> <span class="nf">test_email_is_user_email</span><span class="p">():</span>
     <span class="n">my_email</span> <span class="o">=</span> <span class="s">"foo"</span>
-    <span class="n">my_user</span> <span class="o">=</span> <span class="n">MockUser</span><span class="p">()</span>
+    <span class="n">my_user</span> <span class="o">=</span> <span class="nc">MockUser</span><span class="p">()</span>
     <span class="n">my_user</span><span class="p">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">my_email</span>
-    <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">my_email</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">my_user</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+    <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">my_email</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">my_user</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1588,32 +1588,32 @@ following. Note that the test function takes 2 additional arguments.</p>
     <span class="s">"""
     Validates the email format, also checks whether the domain is blocklisted in the disposable domains configuration.
     """</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="o">==</span> <span class="n">email</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">email</span> <span class="o">==</span> <span class="s">""</span> <span class="ow">and</span> <span class="n">allow_empty</span><span class="p">):</span>
+    <span class="nf">if </span><span class="p">(</span><span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="o">==</span> <span class="n">email</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">email</span> <span class="o">==</span> <span class="s">""</span> <span class="ow">and</span> <span class="n">allow_empty</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">""</span>
-    <span class="n">message</span> <span class="o">=</span> <span class="n">validate_email_str</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="nf">validate_email_str</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">validate_domain</span><span class="p">:</span>
-        <span class="n">domain</span> <span class="o">=</span> <span class="n">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="n">validate_domain_resolves</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="nf">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="nf">validate_domain_resolves</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
 
     <span class="c1"># Code to be refactored
-</span>    <span class="k">if</span> <span class="p">(</span>
+</span>    <span class="nf">if </span><span class="p">(</span>
         <span class="ow">not</span> <span class="n">message</span>
         <span class="ow">and</span> <span class="n">check_dup</span>
-        <span class="ow">and</span> <span class="n">trans</span><span class="p">.</span><span class="n">sa_session</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">)</span>
-        <span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="n">lower</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">table</span><span class="p">.</span><span class="n">c</span><span class="p">.</span><span class="n">email</span><span class="p">)</span> <span class="o">==</span> <span class="n">email</span><span class="p">.</span><span class="n">lower</span><span class="p">())</span>
-        <span class="p">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="ow">and</span> <span class="n">trans</span><span class="p">.</span><span class="n">sa_session</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="nf">lower</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">table</span><span class="p">.</span><span class="n">c</span><span class="p">.</span><span class="n">email</span><span class="p">)</span> <span class="o">==</span> <span class="n">email</span><span class="p">.</span><span class="nf">lower</span><span class="p">())</span>
+        <span class="p">.</span><span class="nf">first</span><span class="p">()</span>
     <span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"User with email '</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s">' already exists."</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span><span class="p">:</span>
         <span class="c1"># If the allowlist is not empty filter out any domain not in the list and ignore blocklist.
 </span>        <span class="k">if</span> <span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">email_domain_allowlist_content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">domain</span> <span class="o">=</span> <span class="n">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="nf">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">domain</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">email_domain_allowlist_content</span><span class="p">:</span>
                 <span class="n">message</span> <span class="o">=</span> <span class="s">"Please enter an allowed domain email address for this server."</span>
         <span class="c1"># If the blocklist is not empty filter out the disposable domains.
 </span>        <span class="k">elif</span> <span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">email_domain_blocklist_content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">domain</span> <span class="o">=</span> <span class="n">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">base_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="nf">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">base_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">domain</span> <span class="ow">in</span> <span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">email_domain_blocklist_content</span><span class="p">:</span>
                 <span class="n">message</span> <span class="o">=</span> <span class="s">"Please enter your permanent email address."</span>
 
@@ -1623,37 +1623,37 @@ following. Note that the test function takes 2 additional arguments.</p>
   <p>Refactored version:</p>
 
   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_for_existing_email</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
-    <span class="n">user_record</span> <span class="o">=</span> <span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">sa_session</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">)</span>
-        <span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="n">lower</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">table</span><span class="p">.</span><span class="n">c</span><span class="p">.</span><span class="n">email</span><span class="p">)</span> <span class="o">==</span> <span class="n">email</span><span class="p">.</span><span class="n">lower</span><span class="p">())</span>
-        <span class="p">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="n">user_record</span> <span class="o">=</span> <span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">sa_session</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="nf">lower</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">table</span><span class="p">.</span><span class="n">c</span><span class="p">.</span><span class="n">email</span><span class="p">)</span> <span class="o">==</span> <span class="n">email</span><span class="p">.</span><span class="nf">lower</span><span class="p">())</span>
+        <span class="p">.</span><span class="nf">first</span><span class="p">()</span>
     <span class="p">)</span>
-    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">user_record</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nf">bool</span><span class="p">(</span><span class="n">user_record</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">validate_email</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">check_dup</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">allow_empty</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">validate_domain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="s">"""
     Validates the email format, also checks whether the domain is blocklisted in the disposable domains configuration.
     """</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="o">==</span> <span class="n">email</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">email</span> <span class="o">==</span> <span class="s">""</span> <span class="ow">and</span> <span class="n">allow_empty</span><span class="p">):</span>
+    <span class="nf">if </span><span class="p">(</span><span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="o">==</span> <span class="n">email</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">email</span> <span class="o">==</span> <span class="s">""</span> <span class="ow">and</span> <span class="n">allow_empty</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">""</span>
-    <span class="n">message</span> <span class="o">=</span> <span class="n">validate_email_str</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="nf">validate_email_str</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">validate_domain</span><span class="p">:</span>
-        <span class="n">domain</span> <span class="o">=</span> <span class="n">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="n">validate_domain_resolves</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="nf">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="nf">validate_domain_resolves</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
 
     <span class="c1"># Refactored code
-</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">check_dup</span> <span class="ow">and</span> <span class="n">check_for_existing_email</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">check_dup</span> <span class="ow">and</span> <span class="nf">check_for_existing_email</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"User with email '</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s">' already exists."</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span><span class="p">:</span>
         <span class="c1"># If the allowlist is not empty filter out any domain not in the list and ignore blocklist.
 </span>        <span class="k">if</span> <span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">email_domain_allowlist_content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">domain</span> <span class="o">=</span> <span class="n">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="nf">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">domain</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">email_domain_allowlist_content</span><span class="p">:</span>
                 <span class="n">message</span> <span class="o">=</span> <span class="s">"Please enter an allowed domain email address for this server."</span>
         <span class="c1"># If the blocklist is not empty filter out the disposable domains.
 </span>        <span class="k">elif</span> <span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">email_domain_blocklist_content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">domain</span> <span class="o">=</span> <span class="n">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">base_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="nf">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">base_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">domain</span> <span class="ow">in</span> <span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">email_domain_blocklist_content</span><span class="p">:</span>
                 <span class="n">message</span> <span class="o">=</span> <span class="s">"Please enter your permanent email address."</span>
 
@@ -1670,17 +1670,17 @@ following. Note that the test function takes 2 additional arguments.</p>
 
   <p>Monkeypatching the factored out function. Note the added import.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy.security</span> <span class="kn">import</span> <span class="n">validate_user_input</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy.security</span> <span class="kn">import</span> <span class="n">validate_user_input</span>
 
 <span class="c1"># [code omitted]
 </span>
 <span class="k">def</span> <span class="nf">test_check_for_existing_email</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">True</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"duplicate_email@example.com"</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"duplicate_email@example.com"</span><span class="p">)</span>
     <span class="k">assert</span> <span class="s">"exists"</span> <span class="ow">in</span> <span class="n">result</span>
 
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"unique_email@example.com"</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"unique_email@example.com"</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="s">""</span>
 </code></pre></div>  </div>
 </blockquote>
@@ -1714,28 +1714,28 @@ local variables.</li>
     <span class="s">"""
     Validates the email format, also checks whether the domain is blocklisted in the disposable domains configuration.
     """</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="o">==</span> <span class="n">email</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">email</span> <span class="o">==</span> <span class="s">""</span> <span class="ow">and</span> <span class="n">allow_empty</span><span class="p">):</span>
+    <span class="nf">if </span><span class="p">(</span><span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="o">==</span> <span class="n">email</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">email</span> <span class="o">==</span> <span class="s">""</span> <span class="ow">and</span> <span class="n">allow_empty</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">""</span>
-    <span class="n">message</span> <span class="o">=</span> <span class="n">validate_email_str</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="nf">validate_email_str</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">validate_domain</span><span class="p">:</span>
-        <span class="n">domain</span> <span class="o">=</span> <span class="n">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
-        <span class="n">message</span> <span class="o">=</span> <span class="n">validate_domain_resolves</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="nf">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="nf">validate_domain_resolves</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">check_dup</span> <span class="ow">and</span> <span class="n">check_for_existing_email</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">check_dup</span> <span class="ow">and</span> <span class="nf">check_for_existing_email</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"User with email '</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s">' already exists."</span>
 
-    <span class="n">email_domain_allowlist_content</span> <span class="o">=</span> <span class="n">get_email_domain_allowlist_content</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
-    <span class="n">email_domain_blocklist_content</span> <span class="o">=</span> <span class="n">get_email_domain_blocklist_content</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
+    <span class="n">email_domain_allowlist_content</span> <span class="o">=</span> <span class="nf">get_email_domain_allowlist_content</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
+    <span class="n">email_domain_blocklist_content</span> <span class="o">=</span> <span class="nf">get_email_domain_blocklist_content</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span><span class="p">:</span>
         <span class="c1"># If the allowlist is not empty filter out any domain not in the list and ignore blocklist.
 </span>        <span class="k">if</span> <span class="n">email_domain_allowlist_content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">domain</span> <span class="o">=</span> <span class="n">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="nf">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">domain</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">email_domain_allowlist_content</span><span class="p">:</span>
                 <span class="n">message</span> <span class="o">=</span> <span class="s">"Please enter an allowed domain email address for this server."</span>
         <span class="c1"># If the blocklist is not empty filter out the disposable domains.
 </span>        <span class="k">elif</span> <span class="n">email_domain_blocklist_content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">domain</span> <span class="o">=</span> <span class="n">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">base_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="nf">extract_domain</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">base_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">domain</span> <span class="ow">in</span> <span class="n">email_domain_blocklist_content</span><span class="p">:</span>
                 <span class="n">message</span> <span class="o">=</span> <span class="s">"Please enter your permanent email address."</span>
 
@@ -1753,15 +1753,15 @@ local variables.</li>
   <p>Monkeypatch the email lists: return <code class="language-plaintext highlighter-rouge">None</code> for both, then override as needed:</p>
 
   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_check_for_existing_email</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
 
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">True</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"duplicate_email@example.com"</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"duplicate_email@example.com"</span><span class="p">)</span>
     <span class="k">assert</span> <span class="s">"exists"</span> <span class="ow">in</span> <span class="n">result</span>
 
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"unique_email@example.com"</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"unique_email@example.com"</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="s">""</span>
 </code></pre></div>  </div>
 </blockquote>
@@ -1779,12 +1779,12 @@ local variables.</li>
 
   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_validate_email_allowlist_not_empty</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
     <span class="n">allowlist</span> <span class="o">=</span> <span class="p">[</span><span class="s">'good_domain.com'</span><span class="p">]</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
 
-    <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@good_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
-    <span class="k">assert</span> <span class="s">"enter an allowed domain"</span> <span class="ow">in</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@good_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+    <span class="k">assert</span> <span class="s">"enter an allowed domain"</span> <span class="ow">in</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1797,52 +1797,52 @@ local variables.</li>
 
   <p>Factor out all common monkeypatching into fixtures. Note the <code class="language-plaintext highlighter-rouge">pytest</code> import.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pytest</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
 
 <span class="c1"># [code omitted]
 </span>
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">fixture</span>
+<span class="nd">@pytest.fixture</span>
 <span class="k">def</span> <span class="nf">patch_allowlist</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
 
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">fixture</span>
+<span class="nd">@pytest.fixture</span>
 <span class="k">def</span> <span class="nf">patch_blocklist</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
 
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">fixture</span>
+<span class="nd">@pytest.fixture</span>
 <span class="k">def</span> <span class="nf">patch_check_existing</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">test_email_is_empty</span><span class="p">():</span>
-    <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">allow_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+    <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">allow_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
 
 
 <span class="k">def</span> <span class="nf">test_email_is_user_email</span><span class="p">():</span>
     <span class="n">my_email</span> <span class="o">=</span> <span class="s">"foo"</span>
-    <span class="n">my_user</span> <span class="o">=</span> <span class="n">MockUser</span><span class="p">()</span>
+    <span class="n">my_user</span> <span class="o">=</span> <span class="nc">MockUser</span><span class="p">()</span>
     <span class="n">my_user</span><span class="p">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">my_email</span>
-    <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">my_email</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">my_user</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+    <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">my_email</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">my_user</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
 
 
 <span class="k">def</span> <span class="nf">test_check_for_existing_email</span><span class="p">(</span><span class="n">patch_allowlist</span><span class="p">,</span> <span class="n">patch_blocklist</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">):</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">True</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"duplicate_email@example.com"</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"duplicate_email@example.com"</span><span class="p">)</span>
     <span class="k">assert</span> <span class="s">"exists"</span> <span class="ow">in</span> <span class="n">result</span>
 
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"unique_email@example.com"</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"unique_email@example.com"</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="s">""</span>
 
 
 <span class="k">def</span> <span class="nf">test_validate_email_allowlist_not_empty</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">,</span> <span class="n">patch_blocklist</span><span class="p">):</span>
     <span class="n">allowlist</span> <span class="o">=</span> <span class="p">[</span><span class="s">'good_domain.com'</span><span class="p">]</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
 
-    <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@good_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
-    <span class="k">assert</span> <span class="s">"enter an allowed domain"</span> <span class="ow">in</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@good_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+    <span class="k">assert</span> <span class="s">"enter an allowed domain"</span> <span class="ow">in</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1864,30 +1864,30 @@ the fixtures outside the class body, so that they can be reused by other test co
     <span class="k">class</span> <span class="nc">MockUser</span><span class="p">:</span>
         <span class="k">pass</span>
     
-    <span class="k">def</span> <span class="nf">test_email_is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">allow_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+    <span class="k">def</span> <span class="nf">test_email_is_empty</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">allow_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
     
-    <span class="k">def</span> <span class="nf">test_email_is_user_email</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_email_is_user_email</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="n">my_email</span> <span class="o">=</span> <span class="s">"foo"</span>
-        <span class="n">my_user</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">MockUser</span><span class="p">()</span>
+        <span class="n">my_user</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nc">MockUser</span><span class="p">()</span>
         <span class="n">my_user</span><span class="p">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">my_email</span>
-        <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">my_email</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">my_user</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+        <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">my_email</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">my_user</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
     
-    <span class="k">def</span> <span class="nf">test_check_for_existing_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patch_allowlist</span><span class="p">,</span> <span class="n">patch_blocklist</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">):</span>
-        <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">True</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"duplicate_email@example.com"</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_check_for_existing_email</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">patch_allowlist</span><span class="p">,</span> <span class="n">patch_blocklist</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">):</span>
+        <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"duplicate_email@example.com"</span><span class="p">)</span>
         <span class="k">assert</span> <span class="s">"exists"</span> <span class="ow">in</span> <span class="n">result</span>
     
-        <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"unique_email@example.com"</span><span class="p">)</span>
+        <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"unique_email@example.com"</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="s">""</span>
     
-    <span class="k">def</span> <span class="nf">test_validate_email_allowlist_not_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">,</span> <span class="n">patch_blocklist</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_validate_email_allowlist_not_empty</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">,</span> <span class="n">patch_blocklist</span><span class="p">):</span>
         <span class="n">allowlist</span> <span class="o">=</span> <span class="p">[</span><span class="s">'good_domain.com'</span><span class="p">]</span>
-        <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
+        <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
     
-        <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@good_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
-        <span class="k">assert</span> <span class="s">"enter an allowed domain"</span> <span class="ow">in</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@good_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+        <span class="k">assert</span> <span class="s">"enter an allowed domain"</span> <span class="ow">in</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1902,15 +1902,15 @@ the fixtures outside the class body, so that they can be reused by other test co
 
   <p>Testing ignoring the blocklist.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_ignore_blocklist_if_allowlist_not_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">):</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_ignore_blocklist_if_allowlist_not_empty</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">):</span>
     <span class="n">allowlist</span> <span class="o">=</span> <span class="p">[</span><span class="s">'my_domain.com'</span><span class="p">]</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
 
     <span class="c1"># but add that domain to blocklist too!
 </span>    <span class="n">blocklist</span> <span class="o">=</span> <span class="p">[</span><span class="s">'my_domain.com'</span><span class="p">]</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
 
-    <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@my_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>  <span class="c1"># we expect blocklist to be ignored
+    <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@my_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>  <span class="c1"># we expect blocklist to be ignored
 </span></code></pre></div>  </div>
 </blockquote>
 
@@ -1923,10 +1923,10 @@ the fixtures outside the class body, so that they can be reused by other test co
 
   <p>Testing the blocklist.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_blocklist_when_allowlist_is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_allowlist</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">):</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_blocklist_when_allowlist_is_empty</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_allowlist</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">):</span>
     <span class="n">blocklist</span> <span class="o">=</span> <span class="p">[</span><span class="s">'bad_domain.com'</span><span class="p">]</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validation_module</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="s">"enter your permanent email"</span> <span class="ow">in</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validation_module</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="s">"enter your permanent email"</span> <span class="ow">in</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1939,17 +1939,17 @@ the fixtures outside the class body, so that they can be reused by other test co
 
   <p>Final code listing (excluding the 2 added imports).</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">fixture</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@pytest.fixture</span>
 <span class="k">def</span> <span class="nf">patch_allowlist</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">fixture</span>
+<span class="nd">@pytest.fixture</span>
 <span class="k">def</span> <span class="nf">patch_blocklist</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
 
-<span class="o">@</span><span class="n">pytest</span><span class="p">.</span><span class="n">fixture</span>
+<span class="nd">@pytest.fixture</span>
 <span class="k">def</span> <span class="nf">patch_check_existing</span><span class="p">(</span><span class="n">monkeypatch</span><span class="p">):</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">TestValidateEmail</span><span class="p">:</span>
@@ -1957,45 +1957,45 @@ the fixtures outside the class body, so that they can be reused by other test co
     <span class="k">class</span> <span class="nc">MockUser</span><span class="p">:</span>
         <span class="k">pass</span>
     
-    <span class="k">def</span> <span class="nf">test_email_is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">allow_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+    <span class="k">def</span> <span class="nf">test_email_is_empty</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">allow_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
     
-    <span class="k">def</span> <span class="nf">test_email_is_user_email</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_email_is_user_email</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="n">my_email</span> <span class="o">=</span> <span class="s">"foo"</span>
-        <span class="n">my_user</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">MockUser</span><span class="p">()</span>
+        <span class="n">my_user</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nc">MockUser</span><span class="p">()</span>
         <span class="n">my_user</span><span class="p">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">my_email</span>
-        <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">my_email</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">my_user</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+        <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">my_email</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">my_user</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
     
-    <span class="k">def</span> <span class="nf">test_check_for_existing_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patch_allowlist</span><span class="p">,</span> <span class="n">patch_blocklist</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">):</span>
-        <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">True</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"duplicate_email@example.com"</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_check_for_existing_email</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">patch_allowlist</span><span class="p">,</span> <span class="n">patch_blocklist</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">):</span>
+        <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"duplicate_email@example.com"</span><span class="p">)</span>
         <span class="k">assert</span> <span class="s">"exists"</span> <span class="ow">in</span> <span class="n">result</span>
     
-        <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"unique_email@example.com"</span><span class="p">)</span>
+        <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"check_for_existing_email"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"unique_email@example.com"</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="s">""</span>
     
-    <span class="k">def</span> <span class="nf">test_validate_email_allowlist_not_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">,</span> <span class="n">patch_blocklist</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_validate_email_allowlist_not_empty</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">,</span> <span class="n">patch_blocklist</span><span class="p">):</span>
         <span class="n">allowlist</span> <span class="o">=</span> <span class="p">[</span><span class="s">'good_domain.com'</span><span class="p">]</span>
-        <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
+        <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
     
-        <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@good_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
-        <span class="k">assert</span> <span class="s">"enter an allowed domain"</span> <span class="ow">in</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@good_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>
+        <span class="k">assert</span> <span class="s">"enter an allowed domain"</span> <span class="ow">in</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_ignore_blocklist_if_allowlist_not_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_ignore_blocklist_if_allowlist_not_empty</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">):</span>
         <span class="n">allowlist</span> <span class="o">=</span> <span class="p">[</span><span class="s">'my_domain.com'</span><span class="p">]</span>
-        <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
+        <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_allowlist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">allowlist</span><span class="p">)</span>
 
         <span class="c1"># but add that domain to blocklist too!
 </span>        <span class="n">blocklist</span> <span class="o">=</span> <span class="p">[</span><span class="s">'my_domain.com'</span><span class="p">]</span>
-        <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
+        <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
 
-        <span class="k">assert</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@my_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>  <span class="c1"># we expect blocklist to be ignored
+        <span class="k">assert</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@my_domain.com"</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span>  <span class="c1"># we expect blocklist to be ignored
 </span>
-    <span class="k">def</span> <span class="nf">test_blocklist_when_allowlist_is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_allowlist</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_blocklist_when_allowlist_is_empty</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_allowlist</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">):</span>
         <span class="n">blocklist</span> <span class="o">=</span> <span class="p">[</span><span class="s">'bad_domain.com'</span><span class="p">]</span>
-        <span class="n">monkeypatch</span><span class="p">.</span><span class="nb">setattr</span><span class="p">(</span><span class="n">validation_module</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="s">"enter your permanent email"</span> <span class="ow">in</span> <span class="n">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
+        <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validation_module</span><span class="p">,</span> <span class="s">"get_email_domain_blocklist_content"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="s">"enter your permanent email"</span> <span class="ow">in</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"email@bad_domain.com"</span><span class="p">)</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -2118,7 +2118,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>

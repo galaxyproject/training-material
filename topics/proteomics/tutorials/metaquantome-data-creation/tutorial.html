@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="metaQuantome 1: Data creation">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-03-28 09:26:18 +0000">
+<meta name="DC.date" content="2023-04-11 16:13:24 +0000">
 <meta name="DC.creator" content="Subina Mehta">
 <meta name="DC.creator" content="Timothy J. Griffin">
 <meta name="DC.creator" content="Pratik Jagtap">
@@ -68,7 +68,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-28 09:26:18 +0000",
+  "dateModified": "2023-04-11 16:13:24 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "metaQuantome 1: Data creation",
   "interactivityType": "mixed",
@@ -594,7 +594,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-28 09:26:18 +0000",
+  "dateModified": "2023-04-11 16:13:24 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "metaQuantome 1: Data creation",
   "interactivityType": "mixed",
@@ -1106,8 +1106,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -1200,6 +1198,12 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
     
         
         <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
@@ -1223,7 +1227,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 28, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 11, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1246,7 +1250,7 @@
                 <h1 id="introduction">Introduction</h1>
 
 <p>Metaproteomics <span class="citation"><a href="#Metaproteomics_video">“<b>Metaproteomics video</b>”</a></span> involves characterization of community level expression of microbial proteins from an environmental
-or clinical sample. Metaproteomics data <span class="citation"><a href="#Metaproteomics_community_effort">“<b>Metaproteomics community effort</b>”</a></span> <span class="citation"><a href="#Jagtap2015">Jagtap <i>et al.</i> 2015</a></span> is primarily used to determine the functional status of the microbiome under study along with its taxonomic composition. The <a href="http://galaxyp.org/">Galaxy-P</a> <span class="citation"><a href="#Galaxy-P_Metaproteomics">Metaproteomics</a></span> team published a software suite named metaQuantome { % cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional,
+or clinical sample. Metaproteomics data <span class="citation"><a href="#Metaproteomics_community_effort">“<b>Metaproteomics community effort</b>”</a></span> <span class="citation"><a href="#Jagtap2015">Jagtap <i>et al.</i> 2015</a></span> is primarily used to determine the functional status of the microbiome under study along with its taxonomic composition. The <a href="http://galaxyp.org/">Galaxy-P</a> <span class="citation"><a href="#Galaxy-P_Metaproteomics">Metaproteomics</a></span> team published a software suite named metaQuantome <span class="citation"><a href="#Easterly2019">Easterly <i>et al.</i> 2019</a></span> to enable quantitative and statistical analysis and visualization of functional,
 taxonomic expression as well as functional and taxonomy interaction. metaQuantome leverages peptide level quantitative information to analyze the taxonomic, functional expression within the microbial community in different conditions.</p>
 
 <p><img src="../../images/microbiome.png" alt="Microbiome. " width="75%" loading="lazy" /></p>
@@ -1274,45 +1278,47 @@ spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For t
 
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
-  <li><a href="#pretreatments" id="markdown-toc-pretreatments"><strong>Pretreatments</strong></a>    <ol>
-      <li><a href="#get-data" id="markdown-toc-get-data"><em>Get data</em></a></li>
+  <li><a href="#pretreatments" id="markdown-toc-pretreatments">Pretreatments</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
     </ol>
   </li>
-  <li><a href="#match-peptide-sequences" id="markdown-toc-match-peptide-sequences"><strong>Match peptide sequences</strong></a>    <ol>
+  <li><a href="#match-peptide-sequences" id="markdown-toc-match-peptide-sequences">Match peptide sequences</a>    <ol>
+      <li><a href="#convert-mzml-to-mgf-with-msconvert" id="markdown-toc-convert-mzml-to-mgf-with-msconvert">Convert mzml to MGF with msconvert</a></li>
       <li><a href="#search-gui" id="markdown-toc-search-gui"><em>Search GUI</em></a></li>
       <li><a href="#peptide-shaker" id="markdown-toc-peptide-shaker"><em>Peptide Shaker</em></a></li>
       <li><a href="#removing-contaminants" id="markdown-toc-removing-contaminants"><em>Removing Contaminants</em></a></li>
-      <li><a href="#removing-file-extensions-for-quantification" id="markdown-toc-removing-file-extensions-for-quantification"><em>Removing file extensions for Quantification</em></a></li>
-      <li><a href="#extracting-peptide-list" id="markdown-toc-extracting-peptide-list"><em>Extracting Peptide list</em></a></li>
+      <li><a href="#removing-file-extensions-for-quantification" id="markdown-toc-removing-file-extensions-for-quantification">Removing file extensions for Quantification</a></li>
+      <li><a href="#extracting-peptide-list" id="markdown-toc-extracting-peptide-list">Extracting Peptide list</a></li>
     </ol>
   </li>
-  <li><a href="#peptide-quantification" id="markdown-toc-peptide-quantification"><strong>Peptide Quantification</strong></a>    <ol>
-      <li><a href="#filtering-peptides-that-are-less-than-50-amino-acids" id="markdown-toc-filtering-peptides-that-are-less-than-50-amino-acids"><em>Filtering peptides that are less than 50 amino acids</em></a></li>
-      <li><a href="#manipulating-text-for-metaquantome" id="markdown-toc-manipulating-text-for-metaquantome"><em>Manipulating text for metaQuantome</em></a></li>
+  <li><a href="#peptide-quantification" id="markdown-toc-peptide-quantification">Peptide Quantification</a>    <ol>
+      <li><a href="#flashlfq" id="markdown-toc-flashlfq">FlashLFQ</a></li>
+      <li><a href="#filtering-peptides-that-are-less-than-50-amino-acids" id="markdown-toc-filtering-peptides-that-are-less-than-50-amino-acids">Filtering peptides that are less than 50 amino acids</a></li>
+      <li><a href="#manipulating-text-for-metaquantome" id="markdown-toc-manipulating-text-for-metaquantome">Manipulating text for metaQuantome</a></li>
     </ol>
   </li>
-  <li><a href="#functional-and-taxonomy-annotation" id="markdown-toc-functional-and-taxonomy-annotation"><strong>Functional and Taxonomy annotation</strong></a>    <ol>
-      <li><a href="#unipept-for-taxonomy-annotation" id="markdown-toc-unipept-for-taxonomy-annotation"><em>Unipept</em> for taxonomy annotation</a></li>
-      <li><a href="#unipept-for-functional-annotation" id="markdown-toc-unipept-for-functional-annotation"><em>Unipept</em> for Functional annotation</a></li>
-      <li><a href="#extracting-ec-values" id="markdown-toc-extracting-ec-values"><em>Extracting EC values</em></a></li>
-      <li><a href="#filtering-confident-peptides" id="markdown-toc-filtering-confident-peptides"><em>Filtering confident peptides</em></a></li>
-      <li><a href="#removing-hashtag-from-output" id="markdown-toc-removing-hashtag-from-output"><em>Removing Hashtag from output</em></a></li>
-      <li><a href="#filter---ec-values" id="markdown-toc-filter---ec-values"><em>Filter</em> - EC values</a></li>
-      <li><a href="#filter---biological-functions" id="markdown-toc-filter---biological-functions"><em>Filter</em> - Biological Functions</a></li>
-      <li><a href="#filter---cellular-components" id="markdown-toc-filter---cellular-components"><em>Filter</em> - Cellular components</a></li>
-      <li><a href="#filter---molecular-function" id="markdown-toc-filter---molecular-function"><em>Filter</em> - Molecular Function</a></li>
+  <li><a href="#functional-and-taxonomy-annotation" id="markdown-toc-functional-and-taxonomy-annotation">Functional and Taxonomy annotation</a>    <ol>
+      <li><a href="#unipept-for-taxonomy-annotation" id="markdown-toc-unipept-for-taxonomy-annotation">Unipept for taxonomy annotation</a></li>
+      <li><a href="#unipept-for-functional-annotation" id="markdown-toc-unipept-for-functional-annotation">Unipept for Functional annotation</a></li>
+      <li><a href="#extracting-ec-values" id="markdown-toc-extracting-ec-values">Extracting EC values</a></li>
+      <li><a href="#filtering-confident-peptides" id="markdown-toc-filtering-confident-peptides">Filtering confident peptides</a></li>
+      <li><a href="#removing-hashtag-from-output" id="markdown-toc-removing-hashtag-from-output">Removing Hashtag from output</a></li>
+      <li><a href="#filter---ec-values" id="markdown-toc-filter---ec-values">Filter - EC values</a></li>
+      <li><a href="#filter---biological-functions" id="markdown-toc-filter---biological-functions">Filter - Biological Functions</a></li>
+      <li><a href="#filter---cellular-components" id="markdown-toc-filter---cellular-components">Filter - Cellular components</a></li>
+      <li><a href="#filter---molecular-function" id="markdown-toc-filter---molecular-function">Filter - Molecular Function</a></li>
     </ol>
   </li>
-  <li><a href="#conclusion" id="markdown-toc-conclusion"><strong>Conclusion</strong></a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
 </blockquote>
 
-<h1 id="pretreatments"><strong>Pretreatments</strong></h1>
+<h1 id="pretreatments">Pretreatments</h1>
 
 <p>The first step in a tutorial is to get the data from the zenodo link provided and making sure that it is in the correct format.</p>
 
-<h2 id="get-data"><em>Get data</em></h2>
+<h2 id="get-data">Get data</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
@@ -1395,12 +1401,12 @@ https://zenodo.org/record/4037137/files/T7B_1.mzml
 
 </blockquote>
 
-<h1 id="match-peptide-sequences"><strong>Match peptide sequences</strong></h1>
+<h1 id="match-peptide-sequences">Match peptide sequences</h1>
 
 <p>For this, the sequence database-searching program called <a href="https://compomics.github.io/projects/searchgui.html">SearchGUI</a> will be used.
 The created dataset collection of the four <em>MZML files</em> in the history has to be first converted to MGF to be used as the MS/MS input.</p>
 
-<h3 id="convert-mzml-to-mgf-with-msconvert"><em>Convert mzml to MGF with msconvert</em></h3>
+<h2 id="convert-mzml-to-mgf-with-msconvert">Convert mzml to MGF with msconvert</h2>
 
 <p>msconvert is used in order to convert the input file type, a mzml data collection, to a mgf file type.
 The mgf file type can then be used as the Input Peak Lists when running SearchGUI.</p>
@@ -1667,7 +1673,7 @@ drawn from statistical analyses. Thus, this selection tool helps us remove the c
 
 </blockquote>
 
-<h2 id="removing-file-extensions-for-quantification"><em>Removing file extensions for Quantification</em></h2>
+<h2 id="removing-file-extensions-for-quantification">Removing file extensions for Quantification</h2>
 <p>This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extension from the PSM report so that it can be used as an input for FlashLFQ.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1703,7 +1709,7 @@ This tool is removing the extensions (.raw,.mzml,.mgf) in the spectral file colu
 
 </blockquote>
 
-<h2 id="extracting-peptide-list"><em>Extracting Peptide list</em></h2>
+<h2 id="extracting-peptide-list">Extracting Peptide list</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-selecting-peptide-list"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Selecting peptide list</div>
@@ -1720,11 +1726,11 @@ This tool is removing the extensions (.raw,.mzml,.mgf) in the spectral file colu
   </ol>
 </blockquote>
 
-<h1 id="peptide-quantification"><strong>Peptide Quantification</strong></h1>
+<h1 id="peptide-quantification">Peptide Quantification</h1>
 
 <p>In this tutorial, we are using FlashLFQ as the quantitation tool. The user can choose to work with other quantitation tools, e.g. moFF and MaxQuant are available in Galaxy.</p>
 
-<h3 id="flashlfq"><em>FlashLFQ</em></h3>
+<h2 id="flashlfq">FlashLFQ</h2>
 <p><a href="https://github.com/smith-chem-wisc/FlashLFQ">FlashLFQ</a> can quantify MS peaks in order to find the abundances of peptides. FlashLFQ is a fast label-free quantification algorithm. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1793,7 +1799,7 @@ The Experimental Design file should be a tabular file with a “File”, “Cond
 
 </blockquote>
 
-<h2 id="filtering-peptides-that-are-less-than-50-amino-acids"><em>Filtering peptides that are less than 50 amino acids</em></h2>
+<h2 id="filtering-peptides-that-are-less-than-50-amino-acids">Filtering peptides that are less than 50 amino acids</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-extracting-peptides-50-amino-acids"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extracting peptides&lt;50 amino acids</div>
@@ -1820,7 +1826,7 @@ The Experimental Design file should be a tabular file with a “File”, “Cond
 
 </blockquote>
 
-<h2 id="manipulating-text-for-metaquantome"><em>Manipulating text for metaQuantome</em></h2>
+<h2 id="manipulating-text-for-metaquantome">Manipulating text for metaQuantome</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-text-manipulation-for-metaquantome-intensity-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Text manipulation for metaQuantome intensity file</div>
@@ -1864,9 +1870,9 @@ The Experimental Design file should be a tabular file with a “File”, “Cond
 
 </blockquote>
 
-<h1 id="functional-and-taxonomy-annotation"><strong>Functional and Taxonomy annotation</strong></h1>
+<h1 id="functional-and-taxonomy-annotation">Functional and Taxonomy annotation</h1>
 
-<h2 id="unipept-for-taxonomy-annotation"><em>Unipept</em> for taxonomy annotation</h2>
+<h2 id="unipept-for-taxonomy-annotation">Unipept for taxonomy annotation</h2>
 
 <p>Unipept <span class="citation"><a href="#Mesuere2018">Mesuere <i>et al.</i> 2018</a></span> is used again to match tryptic peptides and find the taxonomy and lowest common ancestor of each peptide.</p>
 
@@ -1929,7 +1935,7 @@ The Experimental Design file should be a tabular file with a “File”, “Cond
 
 <p><img src="../../images/UnipeptJSONoutput.png" alt="Output. " width="75%" loading="lazy" /></p>
 
-<h2 id="unipept-for-functional-annotation"><em>Unipept</em> for Functional annotation</h2>
+<h2 id="unipept-for-functional-annotation">Unipept for Functional annotation</h2>
 
 <p>Unipept is used to match tryptic peptides and find the taxonomy and Functional annotation of the peptides. Unipept is used to match sample tryptic peptides to proteins using a fast-matching algorithm. Although Unipept can be accessed and used through the web page, the use of Unipept on Galaxy allows the production of output datasets including the peptide information to be used in sequential steps. Unipept requires a list containing the peptide sequences which was generated by Query Tabular.</p>
 
@@ -1968,7 +1974,7 @@ The Experimental Design file should be a tabular file with a “File”, “Cond
 
 </blockquote>
 
-<h2 id="extracting-ec-values"><em>Extracting EC values</em></h2>
+<h2 id="extracting-ec-values">Extracting EC values</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-extract-ec-numbers"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract EC numbers</div>
@@ -1985,7 +1991,7 @@ The Experimental Design file should be a tabular file with a “File”, “Cond
   </ol>
 </blockquote>
 
-<h2 id="filtering-confident-peptides"><em>Filtering confident peptides</em></h2>
+<h2 id="filtering-confident-peptides">Filtering confident peptides</h2>
 
 <p>Query Tabular is a tool that can load tabular data into a SQLite database. This step precedes UniPept, as a list containing the peptide sequences must be generated. In this step a list of gene ontology (GO) terms is being generated.</p>
 
@@ -2032,7 +2038,7 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) &gt;= 0.05
 
 </blockquote>
 
-<h2 id="removing-hashtag-from-output"><em>Removing Hashtag from output</em></h2>
+<h2 id="removing-hashtag-from-output">Removing Hashtag from output</h2>
 
 <p>This step is to remove the hashtag from the Peptide header in the Unipept output.</p>
 
@@ -2058,7 +2064,7 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) &gt;= 0.05
   </ol>
 </blockquote>
 
-<h2 id="filter---ec-values"><em>Filter</em> - EC values</h2>
+<h2 id="filter---ec-values">Filter - EC values</h2>
 
 <p>We are using this Query tabular to rename the output that we obtained from the Cut column tool.</p>
 
@@ -2095,7 +2101,7 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) &gt;= 0.05
   </ol>
 </blockquote>
 
-<h2 id="filter---biological-functions"><em>Filter</em> - Biological Functions</h2>
+<h2 id="filter---biological-functions">Filter - Biological Functions</h2>
 
 <p>The filter tool allows restriction of the dataset using simple conditional statements. This step is used to filter out the GO terms with biological processes and the corresponding number of peptides associated with these terms.</p>
 
@@ -2116,7 +2122,7 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) &gt;= 0.05
 
 <p><img src="../../images/biologicalprocess.png" alt="Biological Processes. " width="60%" loading="lazy" /></p>
 
-<h2 id="filter---cellular-components"><em>Filter</em> - Cellular components</h2>
+<h2 id="filter---cellular-components">Filter - Cellular components</h2>
 
 <p>This step is used to filter out the GO terms with cellular components and the corresponding number of peptides associated with these terms.</p>
 
@@ -2137,7 +2143,7 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) &gt;= 0.05
 
 <p><img src="../../images/cellularcomponent.png" alt="Cellular-Component. " width="60%" loading="lazy" /></p>
 
-<h2 id="filter---molecular-function"><em>Filter</em> - Molecular Function</h2>
+<h2 id="filter---molecular-function">Filter - Molecular Function</h2>
 
 <p>This step is used to filter out the GO terms with molecular function and the corresponding number of peptides associated with these terms.</p>
 
@@ -2158,7 +2164,7 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) &gt;= 0.05
 
 <p><img src="../../images/molecularfunction.png" alt="Molecular-Function. " width="60%" loading="lazy" /></p>
 
-<h1 id="conclusion"><strong>Conclusion</strong></h1>
+<h1 id="conclusion">Conclusion</h1>
 
 <p>This completes the walkthrough of the metaQuantome data creation workflow. This tutorial is a guide to have datasets that are metaQuantome ready/compatible and can be used for metaproteomics research. We have incorporated only two conditions in this workflow but users can use as many as they want. Researchers can use this workflow with their data also, please note that the tool parameters and the workflow will be needed to be modified accordingly.</p>
 
@@ -2205,6 +2211,7 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) &gt;= 0.05
 <li id="Metaproteomics_community_effort"><b>Metaproteomics community effort</b>. <a href="https://z.umn.edu/gcc2017mporal">https://z.umn.edu/gcc2017mporal</a></li>
 <li id="Jagtap2015">Jagtap, P. D., A. Blakely, K. Murray, S. Stewart, J. Kooren <i>et al.</i>, 2015 <b>Metaproteomic analysis using the Galaxy framework</b>. PROTEOMICS 15: 3553–3565. <a href="https://doi.org/10.1002/pmic.201500074">10.1002/pmic.201500074</a></li>
 <li id="Mesuere2018">Mesuere, B., F. V. der Jeugt, T. Willems, T. Naessens, B. Devreese <i>et al.</i>, 2018 <b>High-throughput metaproteomics data analysis with Unipept: A tutorial</b>. Journal of Proteomics 171: 11–22. <a href="https://doi.org/10.1016/j.jprot.2017.05.022">10.1016/j.jprot.2017.05.022</a></li>
+<li id="Easterly2019">Easterly, C. W., R. Sajulga, S. Mehta, J. Johnson, P. Kumar <i>et al.</i>, 2019 <b>metaQuantome: An Integrated,  Quantitative Metaproteomics Approach Reveals Connections Between Taxonomy and Protein Function in Complex Microbiomes</b>. Molecular &amp; Cellular Proteomics 18: S82–S91. <a href="https://doi.org/10.1074/mcp.ra118.001240">10.1074/mcp.ra118.001240</a></li>
 <li id="Galaxy-P_Metaproteomics">Metaproteomics, G.-P. <b>Galaxy-P Metaproteomics instance</b>. <a href="https://proteomics.usegalaxy.eu/">https://proteomics.usegalaxy.eu/</a></li></ol>
                 
 
@@ -2278,7 +2285,7 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-d = new Date();
+var d = new Date();
 document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
