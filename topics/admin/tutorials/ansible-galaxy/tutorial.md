@@ -2546,7 +2546,6 @@ If you've been following along you should have a production-ready Galaxy, secure
 > 1. Check your `git log -p` and see how the Vault changes look (you can type `/vault` to search). Notice that they're just changed encoded content.
 > 1. Create the file `.gitattributes` in the same folder as your `galaxy.yml` playbook, with the following contents:
 > 
->    ```
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
