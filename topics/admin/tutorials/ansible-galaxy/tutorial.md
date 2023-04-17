@@ -1088,7 +1088,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    This will open the editor. Within that file, define your `vault_id_secret` to be a long random value.
 >
 >    ```
->    vault_id_secret: BxI6zlQVhoHLPVf3gqQ
+>    vault_id_secret: secret # CHANGE ME NOW!!!
 >    ```
 >    > <tip-title>How to get a good random value?</tip-title>
 >    > You can use the same command we ran before: `openssl rand -base64 24` to get a good, secure `id_secret` for your Galaxy
