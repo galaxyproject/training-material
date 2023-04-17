@@ -377,7 +377,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >           preload: true
 >         celery:
 >           concurrency: 2
->    +      enable_celery_beat: true
+>    +      enable_beat: true
 >    +      enable: true
 >    +      queues: celery,galaxy.internal,galaxy.external
 >    +      pool: threads
