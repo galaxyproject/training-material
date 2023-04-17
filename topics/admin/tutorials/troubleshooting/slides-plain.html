@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Troubleshooting">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-17 15:13:29 +0000">
+<meta name="DC.date" content="2023-04-17 15:41:39 +0000">
 <meta name="DC.creator" content="Martin Čech">
 <meta name="DC.creator" content="Nate Coraor">
 
@@ -861,7 +861,7 @@ galaxy.model.metadata DEBUG 2019-02-01 14:30:51,850 [p:6593,w:0,m:1] [SlurmRunne
 <ul>
   <li>If using single process or mules
     <ul>
-      <li>Ensure no <code class="language-plaintext highlighter-rouge">&lt;handlers&gt;</code> in <code class="language-plaintext highlighter-rouge">job_conf.xml</code></li>
+      <li>Ensure no <code class="language-plaintext highlighter-rouge">handlers</code> in job conf</li>
       <li>Check handler logs</li>
     </ul>
   </li>
@@ -875,7 +875,7 @@ galaxy.model.metadata DEBUG 2019-02-01 14:30:51,850 [p:6593,w:0,m:1] [SlurmRunne
   </li>
   <li>If using <code class="language-plaintext highlighter-rouge">assign_with="db-preassign"</code>
     <ul>
-      <li>Ensure that handler ID(s) in <code class="language-plaintext highlighter-rouge">job_conf.xml</code> match <code class="language-plaintext highlighter-rouge">server_name</code>(s)</li>
+      <li>Ensure that handler ID(s) in the job conf match <code class="language-plaintext highlighter-rouge">server_name</code>(s)</li>
       <li>Ensure <code class="language-plaintext highlighter-rouge">handler</code> column of <code class="language-plaintext highlighter-rouge">job</code> table is being set to valid handler ID</li>
     </ul>
   </li>
@@ -905,7 +905,7 @@ id  | tool_id | state |    handler        | username |        create_time       
   <li>db-preassign: <code class="language-plaintext highlighter-rouge">handlerN</code></li>
 </ul>
 
-<p>In this case, <code class="language-plaintext highlighter-rouge">job_handler_0</code> is not <code class="language-plaintext highlighter-rouge">handler0</code> or <code class="language-plaintext highlighter-rouge">handler1</code> (probably due to a misconfiguration in <code class="language-plaintext highlighter-rouge">&lt;handlers&gt;</code> section of <code class="language-plaintext highlighter-rouge">job_conf.xml</code>), so no handler will find this job.</p>
+<p>In this case, <code class="language-plaintext highlighter-rouge">job_handler_0</code> is not <code class="language-plaintext highlighter-rouge">handler0</code> or <code class="language-plaintext highlighter-rouge">handler1</code> (probably due to a misconfiguration in <code class="language-plaintext highlighter-rouge">handlers</code> section of job conf), so no handler will find this job.</p>
 
 <hr />
 <h1 id="an-aside---unruly-log-files">An aside - unruly log files</h1>
@@ -928,7 +928,7 @@ id  | tool_id | state |    handler        | username |        create_time       
 
 <p>A handler has seen this job</p>
 
-<p>.left[Verify concurrency limits unmet in <code class="language-plaintext highlighter-rouge">job_conf.xml</code>:]</p>
+<p>.left[Verify concurrency limits unmet in job conf:]</p>
 <ul>
   <li>Local jobs: value of plugin <code class="language-plaintext highlighter-rouge">workers</code> attribute (default: 4)</li>
   <li>All jobs: Entire <code class="language-plaintext highlighter-rouge">&lt;limits&gt;</code> section</li>
@@ -1200,7 +1200,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/2de7d79a195ccf94c08a84742f8a8f5c831c1908">2de7d79a195ccf94c08a84742f8a8f5c831c1908</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/2048fb856b4507b4dfe70b7b32322f13517f1c2f">2048fb856b4507b4dfe70b7b32322f13517f1c2f</a></p>
     </div>
 </footer>
 

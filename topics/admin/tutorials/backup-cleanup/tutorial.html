@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Server Maintenance: Cleanup, Backup, and Restoration">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-15 13:20:21 +0000">
+<meta name="DC.date" content="2023-04-17 12:02:46 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Lucille Delisle">
 <meta name="DC.creator" content="Nate Coraor">
@@ -66,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-15 13:20:21 +0000",
+  "dateModified": "2023-04-17 12:02:46 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Server Maintenance: Cleanup, Backup, and Restoration",
   "interactivityType": "mixed",
@@ -376,7 +376,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-15 13:20:21 +0000",
+  "dateModified": "2023-04-17 12:02:46 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Server Maintenance: Cleanup, Backup, and Restoration",
   "interactivityType": "mixed",
@@ -753,7 +753,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 15, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -829,7 +829,7 @@ tutorial</a>.</p>
 </span><span class="p">@@ -11,3 +11,6 @@</span>
    version: 0.3.1
  - src: usegalaxy_eu.certbot
-   version: 0.1.9
+   version: 0.1.11
 <span class="gi">+# gxadmin (used in cleanup, and later monitoring.)
 +- src: galaxyproject.gxadmin
 +  version: 0.0.12
@@ -911,7 +911,7 @@ tutorial</a>.</p>
 </span><span class="p">@@ -21,6 +21,14 @@</span>
      - name: Install Dependencies
        package:
-         name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-venv', 'python3-setuptools']
+         name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-setuptools']
 <span class="gi">+    - name: Install RHEL/CentOS/Rocky specific dependencies
 +      package:
 +        name: ['tmpwatch']
@@ -932,9 +932,9 @@ tutorial</a>.</p>
       <div data-commit="Configure automated cleanup" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -2,6 +2,7 @@</span>
- galaxy_create_user: true
- galaxy_separate_privileges: true
- galaxy_manage_paths: true
+ galaxy_create_user: true # False by default, as e.g. you might have a 'galaxy' user provided by LDAP or AD.
+ galaxy_separate_privileges: true # Best practices for security, configuration is owned by 'root' (or a different user) than the processes
+ galaxy_manage_paths: true # False by default as your administrator might e.g. have root_squash enabled on NFS. Here we can create the directories so it's fine.
 <span class="gi">+galaxy_manage_cleanup: true
 </span> galaxy_layout: root-dir
  galaxy_root: /srv/galaxy

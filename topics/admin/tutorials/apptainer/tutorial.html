@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Use Apptainer containers for running Galaxy jobs">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-15 13:20:21 +0000">
+<meta name="DC.date" content="2023-04-17 13:02:03 +0000">
 <meta name="DC.creator" content="Torfinn Nome">
 <meta name="DC.creator" content="Marius van den Beek">
 <meta name="DC.creator" content="Matthias Bernt">
@@ -68,7 +68,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-15 13:20:21 +0000",
+  "dateModified": "2023-04-17 13:02:03 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Use Apptainer containers for running Galaxy jobs",
   "interactivityType": "mixed",
@@ -633,7 +633,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-15 13:20:21 +0000",
+  "dateModified": "2023-04-17 13:02:03 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Use Apptainer containers for running Galaxy jobs",
   "interactivityType": "mixed",
@@ -1317,7 +1317,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 15, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1531,7 +1531,7 @@ This message shows that your installation appears to be working correctly.
 
       <div data-commit="Configure the container and dependency resolvers" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -68,6 +68,9 @@</span> galaxy_config:
+</span><span class="p">@@ -69,6 +69,9 @@</span> galaxy_config:
      tus_upload_store: /data/tus
      # CVMFS
      tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
@@ -1541,7 +1541,7 @@ This message shows that your installation appears to be working correctly.
 </span>   gravity:
      process_manager: systemd
      galaxy_root: "{{ galaxy_root }}/server"
-<span class="p">@@ -99,6 +102,12 @@</span> galaxy_config_files:
+<span class="p">@@ -104,6 +107,12 @@</span> galaxy_config_files:
    - src: files/galaxy/themes.yml
      dest: "{{ galaxy_config.galaxy.themes_config_file }}"
     
@@ -1551,9 +1551,9 @@ This message shows that your installation appears to be working correctly.
 +  - src: templates/galaxy/config/dependency_resolvers_conf.xml
 +    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 +
-</span> # Certbot
- certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
- certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+</span> galaxy_extra_dirs:
+   - /data
+    
    
 </code></pre></div>      </div>
     </li>
@@ -1598,9 +1598,9 @@ This message shows that your installation appears to be working correctly.
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Now, we want to make Galaxy run jobs using Apptainer. Modify the file <code class="language-plaintext highlighter-rouge">templates/galaxy/config/job_conf.yml.j2</code>, by adding the <code class="language-plaintext highlighter-rouge">singularity_enabled</code> parameter:</p>
+      <p>Now, we want to make Galaxy run jobs using Apptainer. Modify the file <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>, by adding the <code class="language-plaintext highlighter-rouge">singularity_enabled</code> parameter:</p>
 
-      <div data-commit="Update the job_conf.yml with singularity destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+      <div data-commit="Update the job_conf with singularity destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -21,11 +21,24 @@</span> galaxy_job_config:
    handling:
@@ -1620,10 +1620,10 @@ This message shows that your installation appears to be working correctly.
 +        - name: LC_ALL
 +          value: C
 +        # The cache directory holds the docker containers that get converted
-+        - name: SINGULARITY_CACHEDIR
++        - name: APPTAINER_CACHEDIR
 +          value: /tmp/singularity
 +        # Apptainer uses a temporary directory to build the squashfs filesystem
-+        - name: SINGULARITY_TMPDIR
++        - name: APPTAINER_TMPDIR
 +          value: /tmp
 </span>   tools:
      - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
@@ -1750,7 +1750,7 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 > <div class="box-title hands-on-title" id="hands-on-optional-configure-galaxy-to-use-apptainer-containers-from-cvmfs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Optional: Configure Galaxy to use Apptainer containers from CVMFS</div>
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add `containers_resolvers_config_file` and `galaxy_singularity_images_cvmfs_path`:
->
+>    
 >    ```yaml
 >    galaxy_singularity_images_cvmfs_path: "/cvmfs/singularity.galaxyproject.org/all/"
 >    galaxy_config:
@@ -1758,26 +1758,26 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 >        ...
 >        containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    ```
->
+>    
 >
 > 2. Also in `group_vars/galaxyservers.yml`, add a `galaxy_config_templates` entry:
->
+>    
 >    ```yaml
 >    galaxy_config_templates:
 >      - src: templates/galaxy/config/container_resolvers_conf.yml.j2
 >        dest: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    ```
->
+>    
 >
 > 3. Create the new file `templates/galaxy/config/container_resolvers_conf.yml.j2`:
->
+>    
 >    ```xml
 >    <containers_resolvers>
 >        <explicit_singularity />
 >        <cached_mulled_singularity cache_directory="{{ galaxy_singularity_images_cvmfs_path }}"/>
 >    </containers_resolvers>
 >    ```
->
+>    
 >
 > 4. Re-run the playbook (`ansible-playbook galaxy.yml`)
 >

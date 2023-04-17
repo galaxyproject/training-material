@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Reference Data with CVMFS">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-15 13:20:21 +0000">
+<meta name="DC.date" content="2023-04-17 12:02:46 +0000">
 <meta name="DC.creator" content="Simon Gladman">
 <meta name="DC.creator" content="Helena Rasche">
 
@@ -65,7 +65,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-15 13:20:21 +0000",
+  "dateModified": "2023-04-17 12:02:46 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Reference Data with CVMFS",
   "interactivityType": "mixed",
@@ -500,7 +500,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-15 13:20:21 +0000",
+  "dateModified": "2023-04-17 12:02:46 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Reference Data with CVMFS",
   "interactivityType": "mixed",
@@ -1106,7 +1106,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 15, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1463,7 +1463,7 @@ a remote machine to run Pulsar.</p>
 
       <div data-commit="Configure CVMFS variables" data-ref="vars-all" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/all.yml
 </span><span class="gi">+++ b/group_vars/all.yml
-</span><span class="p">@@ -6,3 +6,8 @@</span> certbot_virtualenv_package_name: python3-venv     # usegalaxy_eu.certbot
+</span><span class="p">@@ -5,3 +5,8 @@</span> pip_virtualenv_command: /usr/bin/python3 -m venv  # usegalaxy_eu.certbot, usegal
  # Common variables needed by all hosts
  galaxy_user_name: galaxy
  galaxy_db_name: galaxy
@@ -1739,8 +1739,8 @@ able to use all of the data contained within this repository.</p>
 
       <div data-commit="Add tool_data_table_config_path to group variables" data-ref="gvconf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -66,6 +66,8 @@</span> galaxy_config:
-     outputs_to_working_directory: true
+</span><span class="p">@@ -67,6 +67,8 @@</span> galaxy_config:
+     new_user_dataset_access_role_default_private: true # Make datasets private by default
      # TUS
      tus_upload_store: /data/tus
 <span class="gi">+    # CVMFS

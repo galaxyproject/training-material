@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Connecting Galaxy to a compute cluster">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2021-04-06 11:50:17 +0000">
+<meta name="DC.date" content="2023-04-17 12:26:56 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nicola Soranzo">
@@ -66,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2021-04-06 11:50:17 +0000",
+  "dateModified": "2023-04-17 12:26:56 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Connecting Galaxy to a compute cluster",
   "interactivityType": "mixed",
@@ -119,7 +119,7 @@
   "name": "Slides for 'Connecting Galaxy to a compute cluster' tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/slides.html",
   "keywords": "admin, features",
-  "description": "The questions this  addresses are:\n - How to connect Galaxy to a compute cluster?\n - How can I configure job dependent resources, like cores, memory for my DRM?\n\n\nThe objectives are:\n - Understand all components of the Galaxy job running stack\n - Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem\n - Know how to map tools to job destinations\n - The various ways in which tools can be mapped to destinations, both statically and dynamically\n\n",
+  "description": "The questions this  addresses are:\n - How to connect Galaxy to a compute cluster?\n - How can I configure job dependent resources, like cores, memory for my DRM?\n\n\nThe objectives are:\n - Understand all components of the Galaxy job running stack\n - Understand how the job conf controls Galaxy's jobs subsystem\n - Know how to map tools to job destinations\n - The various ways in which tools can be mapped to destinations, both statically and dynamically\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -428,7 +428,7 @@ Useful when presenting.
 
 - Understand all components of the Galaxy job running stack
 
-- Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem
+- Understand how the job conf controls Galaxy's jobs subsystem
 
 - Know how to map tools to job destinations
 
@@ -440,7 +440,7 @@ Useful when presenting.
 
 # Galaxy Job Configuration
 
-- Configured in `config/job_conf.xml`
+- Configured in `config/job_conf.xml`, `group_vars/galaxyservers.yml`, and `files/galaxy/config/tpv*.yml`
 - XML format with macro support
 - Major components:
   - **Plugins**: distributed resource manager (DRM) modules to load
@@ -452,8 +452,8 @@ Useful when presenting.
 
 ???
 
-- The job_conf file is a very powerul galaxy configuration piece critical to smooth cluster operation.
-- Written in XML it connects your server with the available cluster resources.
+- The job_conf file is a very powerful galaxy configuration piece critical to smooth cluster operation.
+- Written in XML or YML it connects your server with the available cluster resources.
 - You can configure it in myriad ways.
 - Study the advanced sample provided with codebase once you get a basic understanding.
 - There are several major components of the job conf file.
@@ -523,7 +523,6 @@ Define which Galaxy processes are job handlers
 - `id` attribute should match the `--server-name` param value of a process
 - Dedicated handlers can be reserved, e.g. for small, high throughput jobs
 - The list of plugins that are loaded by a job handler can be limited using `&lt;plugin&gt;` subelements (e.g. when the DRMAA plugin needs to be loaded with different library paths)
-- Not defined in `job_conf.xml` when using *job handler mules*
 - Defines how jobs are assigned to individual processes (use `db-skip-locked` !)
 
 ???
@@ -556,17 +555,18 @@ Define *how* jobs should be run
 
 # The default job configuration
 
-.left[`config/job_conf.xml.sample_basic`:]
-```xml
-&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;job_conf&gt;
-    &lt;plugins&gt;
-        &lt;plugin id=&quot;local&quot; type=&quot;runner&quot; load=&quot;galaxy.jobs.runners.local:LocalJobRunner&quot; workers=&quot;4&quot;/&gt;
-    &lt;/plugins&gt;
-    &lt;destinations&gt;
-        &lt;destination id=&quot;local&quot; runner=&quot;local&quot;/&gt;
-    &lt;/destinations&gt;
-&lt;/job_conf&gt;
+.left[`config/job_conf.yml.sample_basic`:]
+```yml
+runners:
+  local:
+    load: galaxy.jobs.runners.local:LocalJobRunner
+    workers: 4
+
+execution:
+  default: local
+  environments:
+    local:
+      runner: local
 ```
 
 ???
@@ -710,10 +710,12 @@ For **Slurm only**, Galaxy will set `$GALAXY_MEMORY_MB` and `$GALAXY_MEMORY_MB_P
 
 For Java tools, be sure to set `-Xmx`, e.g.:
 
-```xml
-&lt;destination id=&quot;foo&quot; ...&gt;
-    &lt;env id=&quot;_JAVA_OPTIONS&quot;&gt;-Xmx4096m&lt;/env&gt;
-&lt;/destination&gt;
+```yml
+    java_cluster:
+      runner: drmaa
+      env:
+        - name: '_JAVA_OPTIONS'
+          value: '-Xmx6G'
 ```
 
 ???
@@ -757,16 +759,19 @@ Problem: Tool A uses single core, Tool B uses multiple
 
 Solution:
 
-```xml
-    &lt;destinations default=&quot;single&quot;&gt;
-        &lt;destination id=&quot;single&quot; runner=&quot;slurm&quot; /&gt;
-        &lt;destination id=&quot;multi&quot; runner=&quot;slurm&quot;&gt;
-            &lt;param id=&quot;nativeSpecification&quot;&gt;--ntasks=4&lt;/param&gt;
-        &lt;/destination&gt;
-    &lt;/destinations&gt;
-    &lt;tools&gt;
-        &lt;tool id=&quot;hisat2&quot; destination=&quot;multi&quot;/&gt;
-    &lt;/tools&gt;
+```yml
+execution:
+  default: local
+  environments:
+    singlecore_slurm:
+      runner: slurm
+
+    multicore_slurm:
+      runner: slurm
+      native_specification: '--ntasks=4'
+tools:
+- id: hisat2
+  handler: multicore_slurm
 ```
 
 ???

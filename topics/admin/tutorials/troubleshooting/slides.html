@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Troubleshooting">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-07-20 14:07:14 +0000">
+<meta name="DC.date" content="2023-04-17 12:26:56 +0000">
 <meta name="DC.creator" content="Martin Čech">
 <meta name="DC.creator" content="Nate Coraor">
 
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-07-20 14:07:14 +0000",
+  "dateModified": "2023-04-17 12:26:56 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Troubleshooting",
   "interactivityType": "mixed",
@@ -907,7 +907,7 @@ Troubleshooting depends on your job handler configuration
 
 Solutions:
 - If using single process or mules
-  - Ensure no `&lt;handlers&gt;` in `job_conf.xml`
+  - Ensure no `handlers` in job conf
   - Check handler logs
 - If using `assign_with=&quot;db-skip-locked&quot;`
   - Ensure no `default` attribute in `&lt;handlers&gt;`
@@ -915,7 +915,7 @@ Solutions:
   - Ensure `handler` column of `job` table is being set to `_default_`
   - Ensure handlers started with `--attach-to-pool=job-handlers`
 - If using `assign_with=&quot;db-preassign&quot;`
-  - Ensure that handler ID(s) in `job_conf.xml` match `server_name`(s)
+  - Ensure that handler ID(s) in the job conf match `server_name`(s)
   - Ensure `handler` column of `job` table is being set to valid handler ID
 
 ---
@@ -941,7 +941,7 @@ The correct value of the `handler` column in the database varies by job handler 
 - db-skip-locked: `_default_` then `handlerN` (where `handlerN` is the value of one of your handlers' `--server-name`)
 - db-preassign: `handlerN`
 
-In this case, `job_handler_0` is not `handler0` or `handler1` (probably due to a misconfiguration in `&lt;handlers&gt;` section of `job_conf.xml`), so no handler will find this job.
+In this case, `job_handler_0` is not `handler0` or `handler1` (probably due to a misconfiguration in `handlers` section of job conf), so no handler will find this job.
 
 ---
 # An aside - unruly log files
@@ -965,7 +965,7 @@ Corresponds to `job.state = 'queued'` in database
 
 A handler has seen this job
 
-.left[Verify concurrency limits unmet in `job_conf.xml`:]
+.left[Verify concurrency limits unmet in job conf:]
 - Local jobs: value of plugin `workers` attribute (default: 4)
 - All jobs: Entire `&lt;limits&gt;` section
 

@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Monitoring with Reports">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-14 13:42:56 +0000">
+<meta name="DC.date" content="2023-04-17 13:02:03 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Simon Gladman">
@@ -67,7 +67,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-14 13:42:56 +0000",
+  "dateModified": "2023-04-17 13:02:03 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Monitoring with Reports",
   "interactivityType": "mixed",
@@ -594,7 +594,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-14 13:42:56 +0000",
+  "dateModified": "2023-04-17 13:02:03 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Monitoring with Reports",
   "interactivityType": "mixed",
@@ -1243,7 +1243,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 14, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1306,7 +1306,7 @@
 
       <div data-commit="Enable gravity to manage reports" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -133,6 +133,11 @@</span> galaxy_config:
+</span><span class="p">@@ -138,6 +138,11 @@</span> galaxy_config:
          pools:
            - job-handlers
            - workflow-schedulers
@@ -1316,17 +1316,17 @@
 +      bind: "unix:{{ galaxy_mutable_config_dir }}/reports.sock"
 +      config_file: "{{ galaxy_config_dir }}/reports.yml"
 </span>    
- galaxy_extra_dirs:
-   - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
-<span class="p">@@ -159,6 +164,8 @@</span> galaxy_config_templates:
+ galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
+    
+<span class="p">@@ -158,6 +163,8 @@</span> galaxy_config_templates:
      dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
    - src: templates/galaxy/config/job_resource_params_conf.xml.j2
      dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
 <span class="gi">+  - src: templates/galaxy/config/reports.yml
 +    dest: "{{ galaxy_config.gravity.reports.config_file }}"
 </span>    
- galaxy_local_tools:
- - testing.xml
+ galaxy_extra_dirs:
+   - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
    
 </code></pre></div>      </div>
     </li>

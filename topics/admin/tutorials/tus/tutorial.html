@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Performant Uploads with TUS">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-15 13:20:21 +0000">
+<meta name="DC.date" content="2023-04-17 13:02:03 +0000">
 <meta name="DC.creator" content="Marius van den Beek">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Lucille Delisle">
@@ -66,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-15 13:20:21 +0000",
+  "dateModified": "2023-04-17 13:02:03 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Performant Uploads with TUS",
   "interactivityType": "mixed",
@@ -543,7 +543,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-15 13:20:21 +0000",
+  "dateModified": "2023-04-17 13:02:03 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Performant Uploads with TUS",
   "interactivityType": "mixed",
@@ -1166,7 +1166,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 15, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1252,16 +1252,16 @@
 
       <div data-commit="Configure TUS in your group variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -64,6 +64,8 @@</span> galaxy_config:
-     allow_user_impersonation: true
+</span><span class="p">@@ -65,6 +65,8 @@</span> galaxy_config:
      # Tool security
      outputs_to_working_directory: true
+     new_user_dataset_access_role_default_private: true # Make datasets private by default
 <span class="gi">+    # TUS
 +    tus_upload_store: /data/tus
 </span>   gravity:
      process_manager: systemd
      galaxy_root: "{{ galaxy_root }}/server"
-<span class="p">@@ -146,3 +148,16 @@</span> nginx_conf_http:
+<span class="p">@@ -154,3 +156,16 @@</span> nginx_conf_http:
  nginx_ssl_role: usegalaxy_eu.certbot
  nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
  nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem

@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Connecting Galaxy to a compute cluster">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-17 15:13:29 +0000">
+<meta name="DC.date" content="2023-04-17 15:41:39 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nicola Soranzo">
@@ -220,7 +220,7 @@
 		<li><p>Understand all components of the Galaxy job running stack</p>
 </li>
 		
-		<li><p>Understand how the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file controls Galaxy’s jobs subsystem</p>
+		<li><p>Understand how the job conf controls Galaxy’s jobs subsystem</p>
 </li>
 		
 		<li><p>Know how to map tools to job destinations</p>
@@ -242,7 +242,7 @@
 	<h1 id="galaxy-job-configuration">Galaxy Job Configuration</h1>
 
 <ul>
-  <li>Configured in <code class="language-plaintext highlighter-rouge">config/job_conf.xml</code></li>
+  <li>Configured in <code class="language-plaintext highlighter-rouge">config/job_conf.xml</code>, <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>, and <code class="language-plaintext highlighter-rouge">files/galaxy/config/tpv*.yml</code></li>
   <li>XML format with macro support</li>
   <li>Major components:
     <ul>
@@ -259,8 +259,8 @@
 <p><span>Speaker Notes</span></p>
 
 <ul>
-  <li>The job_conf file is a very powerul galaxy configuration piece critical to smooth cluster operation.</li>
-  <li>Written in XML it connects your server with the available cluster resources.</li>
+  <li>The job_conf file is a very powerful galaxy configuration piece critical to smooth cluster operation.</li>
+  <li>Written in XML or YML it connects your server with the available cluster resources.</li>
   <li>You can configure it in myriad ways.</li>
   <li>Study the advanced sample provided with codebase once you get a basic understanding.</li>
   <li>There are several major components of the job conf file.</li>
@@ -340,7 +340,6 @@
   <li><code class="language-plaintext highlighter-rouge">id</code> attribute should match the <code class="language-plaintext highlighter-rouge">--server-name</code> param value of a process</li>
   <li>Dedicated handlers can be reserved, e.g. for small, high throughput jobs</li>
   <li>The list of plugins that are loaded by a job handler can be limited using <code class="language-plaintext highlighter-rouge">&lt;plugin&gt;</code> subelements (e.g. when the DRMAA plugin needs to be loaded with different library paths)</li>
-  <li>Not defined in <code class="language-plaintext highlighter-rouge">job_conf.xml</code> when using <em>job handler mules</em></li>
   <li>Defines how jobs are assigned to individual processes (use <code class="language-plaintext highlighter-rouge">db-skip-locked</code> !)</li>
 </ul>
 
@@ -380,16 +379,17 @@
 
 <h1 id="the-default-job-configuration">The default job configuration</h1>
 
-<p>.left[<code class="language-plaintext highlighter-rouge">config/job_conf.xml.sample_basic</code>:]</p>
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
-<span class="nt">&lt;job_conf&gt;</span>
-    <span class="nt">&lt;plugins&gt;</span>
-        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"galaxy.jobs.runners.local:LocalJobRunner"</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/plugins&gt;</span>
-    <span class="nt">&lt;destinations&gt;</span>
-        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">runner=</span><span class="s">"local"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/destinations&gt;</span>
-<span class="nt">&lt;/job_conf&gt;</span>
+<p>.left[<code class="language-plaintext highlighter-rouge">config/job_conf.yml.sample_basic</code>:]</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">runners</span><span class="pi">:</span>
+  <span class="na">local</span><span class="pi">:</span>
+    <span class="na">load</span><span class="pi">:</span> <span class="s">galaxy.jobs.runners.local:LocalJobRunner</span>
+    <span class="na">workers</span><span class="pi">:</span> <span class="m">4</span>
+
+<span class="na">execution</span><span class="pi">:</span>
+  <span class="na">default</span><span class="pi">:</span> <span class="s">local</span>
+  <span class="na">environments</span><span class="pi">:</span>
+    <span class="na">local</span><span class="pi">:</span>
+      <span class="na">runner</span><span class="pi">:</span> <span class="s">local</span>
 </code></pre></div></div>
 
 <p><span>Speaker Notes</span></p>
@@ -582,9 +582,11 @@
 
 <p>For Java tools, be sure to set <code class="language-plaintext highlighter-rouge">-Xmx</code>, e.g.:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"foo"</span> <span class="err">...</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;env</span> <span class="na">id=</span><span class="s">"_JAVA_OPTIONS"</span><span class="nt">&gt;</span>-Xmx4096m<span class="nt">&lt;/env&gt;</span>
-<span class="nt">&lt;/destination&gt;</span>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">java_cluster</span><span class="pi">:</span>
+      <span class="na">runner</span><span class="pi">:</span> <span class="s">drmaa</span>
+      <span class="na">env</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">_JAVA_OPTIONS'</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">-Xmx6G'</span>
 </code></pre></div></div>
 
 <p><span>Speaker Notes</span></p>
@@ -638,15 +640,18 @@
 
 <p>Solution:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"single"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"single"</span> <span class="na">runner=</span><span class="s">"slurm"</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"multi"</span> <span class="na">runner=</span><span class="s">"slurm"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"nativeSpecification"</span><span class="nt">&gt;</span>--ntasks=4<span class="nt">&lt;/param&gt;</span>
-        <span class="nt">&lt;/destination&gt;</span>
-    <span class="nt">&lt;/destinations&gt;</span>
-    <span class="nt">&lt;tools&gt;</span>
-        <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"hisat2"</span> <span class="na">destination=</span><span class="s">"multi"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/tools&gt;</span>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">execution</span><span class="pi">:</span>
+  <span class="na">default</span><span class="pi">:</span> <span class="s">local</span>
+  <span class="na">environments</span><span class="pi">:</span>
+    <span class="na">singlecore_slurm</span><span class="pi">:</span>
+      <span class="na">runner</span><span class="pi">:</span> <span class="s">slurm</span>
+
+    <span class="na">multicore_slurm</span><span class="pi">:</span>
+      <span class="na">runner</span><span class="pi">:</span> <span class="s">slurm</span>
+      <span class="na">native_specification</span><span class="pi">:</span> <span class="s1">'</span><span class="s">--ntasks=4'</span>
+<span class="na">tools</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">hisat2</span>
+  <span class="na">handler</span><span class="pi">:</span> <span class="s">multicore_slurm</span>
 </code></pre></div></div>
 
 <p><span>Speaker Notes</span></p>
@@ -805,7 +810,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/2de7d79a195ccf94c08a84742f8a8f5c831c1908">2de7d79a195ccf94c08a84742f8a8f5c831c1908</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/2048fb856b4507b4dfe70b7b32322f13517f1c2f">2048fb856b4507b4dfe70b7b32322f13517f1c2f</a></p>
     </div>
 </footer>
 

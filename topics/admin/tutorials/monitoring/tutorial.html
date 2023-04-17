@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Monitoring with Telegraf and Grafana">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-15 13:20:21 +0000">
+<meta name="DC.date" content="2023-04-17 12:02:46 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 
         
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-15 13:20:21 +0000",
+  "dateModified": "2023-04-17 12:02:46 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Monitoring with Telegraf and Grafana",
   "interactivityType": "mixed",
@@ -483,7 +483,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-15 13:20:21 +0000",
+  "dateModified": "2023-04-17 12:02:46 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Monitoring with Telegraf and Grafana",
   "interactivityType": "mixed",
@@ -1194,7 +1194,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 15, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1637,7 +1637,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Setup telegraf's variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/all.yml
 </span><span class="gi">+++ b/group_vars/all.yml
-</span><span class="p">@@ -21,3 +21,28 @@</span> galaxy_job_metrics_plugins:
+</span><span class="p">@@ -20,3 +20,28 @@</span> galaxy_job_metrics_plugins:
    - type: env
    - type: cgroup
    - type: hostname
@@ -1680,7 +1680,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -307,3 +307,12 @@</span> flower_ui_users:
+</span><span class="p">@@ -314,3 +314,12 @@</span> flower_ui_users:
     
  flower_environment_variables:
    GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
@@ -1705,7 +1705,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -103,6 +103,9 @@</span> galaxy_config:
+</span><span class="p">@@ -104,6 +104,9 @@</span> galaxy_config:
      celery_conf:
        result_backend: "redis://localhost:6379/0"
      enable_celery_tasks: true
@@ -2060,7 +2060,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -319,3 +319,10 @@</span> telegraf_plugins_extra:
+</span><span class="p">@@ -326,3 +326,10 @@</span> telegraf_plugins_extra:
        - service_address = ":8125"
        - metric_separator = "."
        - allowed_pending_messages = 10000

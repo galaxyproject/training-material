@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mapping Jobs to Destinations using TPV">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-16 21:17:42 +0000">
+<meta name="DC.date" content="2023-04-17 13:02:03 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nuwan Goonasekera">
@@ -67,7 +67,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-16 21:17:42 +0000",
+  "dateModified": "2023-04-17 13:02:03 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mapping Jobs to Destinations using TPV",
   "interactivityType": "mixed",
@@ -376,7 +376,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-16 21:17:42 +0000",
+  "dateModified": "2023-04-17 13:02:03 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mapping Jobs to Destinations using TPV",
   "interactivityType": "mixed",
@@ -783,7 +783,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 16, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -884,9 +884,9 @@ separately.</p>
 
       <div data-commit="Deploy testing tool" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -137,6 +137,9 @@</span> galaxy_config_templates:
-   - src: templates/galaxy/config/dependency_resolvers_conf.xml
-     dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+</span><span class="p">@@ -145,6 +145,9 @@</span> galaxy_config_templates:
+ galaxy_extra_dirs:
+   - /data
     
 <span class="gi">+galaxy_local_tools:
 +- testing.xml
@@ -942,7 +942,7 @@ separately.</p>
   <li>and the actual production config directory that galaxy reads.</li>
 </ul>
 
-<p>Once you are done with your changes, you can run the script and it will automatically lint and copy over the files, if they are correct <em>and</em> mentioned in your job_conf.yml file.
+<p>Once you are done with your changes, you can run the script and it will automatically lint and copy over the files, if they are correct <em>and</em> mentioned in your job_conf.yml file, or in your <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code> inline <code class="language-plaintext highlighter-rouge">job_conf</code>.
 And of course, Galaxy has an Ansible Role for that.</p>
 
 <blockquote class="notranslate hands_on">
@@ -969,21 +969,27 @@ And of course, Galaxy has an Ansible Role for that.</p>
 
       <div data-commit="Add TPV config dir" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -123,6 +123,14 @@</span> galaxy_config:
+</span><span class="p">@@ -128,6 +128,8 @@</span> galaxy_config:
            - job-handlers
            - workflow-schedulers
     
-<span class="gi">+galaxy_extra_dirs:
-+  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
-+
-+galaxy_extra_privsep_dirs:
-+  - "{{ tpv_mutable_dir }}"
-+
-+galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
+<span class="gi">+galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
 +
 </span> galaxy_config_files_public:
    - src: files/galaxy/welcome.html
      dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
+<span class="p">@@ -143,7 +145,10 @@</span> galaxy_config_templates:
+     dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+    
+ galaxy_extra_dirs:
+<span class="gd">-  - /data
+</span><span class="gi">+  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
++
++galaxy_extra_privsep_dirs:
++  - "{{ tpv_mutable_dir }}"
+</span>    
+ galaxy_local_tools:
+ - testing.xml
    
 </code></pre></div>      </div>
     </li>
@@ -1004,7 +1010,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the Galaxy playbook. Because we modified <code class="language-plaintext highlighter-rouge">job_conf.yml</code>, Galaxy will be restarted to reread its config files.</p>
+      <p>Run the Galaxy playbook. Because we modified the job configuration, Galaxy will be restarted to reread its config files.</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
@@ -1056,10 +1062,10 @@ And of course, Galaxy has an Ansible Role for that.</p>
 -        - name: LC_ALL
 -          value: C
 -        # The cache directory holds the docker containers that get converted
--        - name: SINGULARITY_CACHEDIR
+-        - name: APPTAINER_CACHEDIR
 -          value: /tmp/singularity
 -        # Apptainer uses a temporary directory to build the squashfs filesystem
--        - name: SINGULARITY_TMPDIR
+-        - name: APPTAINER_TMPDIR
 -          value: /tmp
 </span><span class="gi">+      tpv_dispatcher:
 +        runner: dynamic
@@ -1071,7 +1077,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 </span>   tools:
      - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
        environment: local_env
-<span class="p">@@ -138,6 +119,8 @@</span> galaxy_config_files_public:
+<span class="p">@@ -137,6 +118,8 @@</span> galaxy_config_files_public:
  galaxy_config_files:
    - src: files/galaxy/themes.yml
      dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -1134,7 +1140,7 @@ The file should contain the following content:</p>
 Note that the tool id is matched via a regular expression against the full tool id. For example, a full tool id for hisat may look like: <code class="language-plaintext highlighter-rouge">toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy7</code>
 This enables complex matching, including matching against specific versions of tools.</p>
 
-      <p>Destinations must also be defined in TPV itself. Importantly, note that any destinations defined in job_conf.yml are ignored by TPV. Therefore, we have moved all destinations from job_conf to TPV. In addition, we have removed some
+      <p>Destinations must also be defined in TPV itself. Importantly, note that any destinations defined in the job conf are ignored by TPV. Therefore, we have moved all destinations from the job conf to TPV. In addition, we have removed some
 redundancy by using the “inherits” clause in the <code class="language-plaintext highlighter-rouge">slurm</code> destination. This means that slurm will inherit all of the settings defined for singularity, but selectively override some settings. We have additionally
 defined the <code class="language-plaintext highlighter-rouge">native_specification</code> param for SLURM, which is what SLURM uses to allocate resources per job. Note the use of the <code class="language-plaintext highlighter-rouge">{cores}</code>
 parameter within the native specification, which TPV will replace at runtime with the value of cores assigned to the tool.</p>
@@ -1143,7 +1149,7 @@ parameter within the native specification, which TPV will replace at runtime wit
 destination is able to accept jobs greater than 1 core, TPV will automatically route the job to the best matching destination, in this case, slurm.</p>
     </li>
     <li>
-      <p>Run the Galaxy playbook. Because we modified <code class="language-plaintext highlighter-rouge">job_conf.yml</code>, Galaxy will be restarted to reread its config files.</p>
+      <p>Run the Galaxy playbook.</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
@@ -1417,22 +1423,22 @@ This of course assumes that your users are well behaved enough not to choose the
      - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
        environment: local_env
 <span class="p">@@ -51,6 +56,7 @@</span> galaxy_config:
-     file_path: /data
-     tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+     file_path: /data/datasets
+     job_working_directory: /data/jobs
      job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 <span class="gi">+    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
 </span>     # SQL Performance
      slow_query_log_threshold: 5
      enable_per_request_sql_debugging: true
-<span class="p">@@ -128,6 +134,8 @@</span> galaxy_config_templates:
+<span class="p">@@ -127,6 +133,8 @@</span> galaxy_config_templates:
      dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
    - src: templates/galaxy/config/dependency_resolvers_conf.xml
      dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 <span class="gi">+  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
 </span>    
- galaxy_local_tools:
- - testing.xml
+ galaxy_extra_dirs:
+   - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
    
 </code></pre></div>      </div>
 

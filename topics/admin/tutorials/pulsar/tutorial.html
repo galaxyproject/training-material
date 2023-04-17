@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Running Jobs on Remote Resources with Pulsar">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-17 09:01:02 +0000">
+<meta name="DC.date" content="2023-04-17 12:26:56 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Simon Gladman">
 <meta name="DC.creator" content="Marius van den Beek">
@@ -69,7 +69,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-17 09:01:02 +0000",
+  "dateModified": "2023-04-17 12:26:56 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Running Jobs on Remote Resources with Pulsar",
   "interactivityType": "mixed",
@@ -760,7 +760,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-17 09:01:02 +0000",
+  "dateModified": "2023-04-17 12:26:56 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Running Jobs on Remote Resources with Pulsar",
   "interactivityType": "mixed",
@@ -1990,7 +1990,7 @@
 
 <p>Transport of data, tool information and other metadata can be configured as a web application via a RESTful interface or using a message passing system such as RabbitMQ.</p>
 
-<p>At the Galaxy end, it is configured within the <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file and uses one of two special Galaxy job runners.</p>
+<p>At the Galaxy end, it is configured within the job configuraiton, and uses one of two special Galaxy job runners.</p>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">galaxy.jobs.runners.pulsar:PulsarRESTJobRunner</code> for the RESTful interface</li>
   <li><code class="language-plaintext highlighter-rouge">galaxy.jobs.runners.pulsar:PulsarMQJobRunner</code> for the message passing interface.</li>
@@ -2263,7 +2263,7 @@
 
       <div data-commit="Configure RabbitMQ" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -151,8 +151,11 @@</span> certbot_environment: staging
+</span><span class="p">@@ -156,8 +156,11 @@</span> certbot_environment: staging
  certbot_well_known_root: /srv/nginx/_well-known_root
  certbot_share_key_users:
    - www-data
@@ -2275,7 +2275,7 @@
 </span> certbot_domains:
   - "{{ inventory_hostname }}"
  certbot_agree_tos: --agree-tos
-<span class="p">@@ -202,6 +205,47 @@</span> slurm_config:
+<span class="p">@@ -207,6 +210,47 @@</span> slurm_config:
    SelectType: select/cons_res
    SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
     
@@ -2810,7 +2810,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 
 <p>Now we have a Pulsar server up and running, we need to tell our Galaxy about it.</p>
 
-<p>Galaxy talks to the Pulsar server via it’s <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file. We need to let Galaxy know about Pulsar there and make sure Galaxy has loaded the requisite job runner, and has a destination set up.</p>
+<p>Galaxy talks to the Pulsar server via it’s job configuration file. We need to let Galaxy know about Pulsar there and make sure Galaxy has loaded the requisite job runner, and has a destination set up.</p>
 
 <p>There are three things we need to do here:</p>
 
@@ -2827,7 +2827,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 
   <ol>
     <li>
-      <p>In your <code class="language-plaintext highlighter-rouge">templates/galaxy/config/job_conf.yml.j2</code> file add the following job runner to the <code class="language-plaintext highlighter-rouge">&lt;plugins&gt;</code> section:</p>
+      <p>In your <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code> file add the following job runner to the <code class="language-plaintext highlighter-rouge">&lt;plugins&gt;</code> section:</p>
 
       <div data-commit="Add pulsar plugin" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
@@ -2851,7 +2851,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
    
 </code></pre></div>      </div>
 
-      <p>Add the following to the <code class="language-plaintext highlighter-rouge">&lt;destinations&gt;</code> section of your <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file:</p>
+      <p>Add the following to the <code class="language-plaintext highlighter-rouge">&lt;destinations&gt;</code> section of your job conf file:</p>
 
       <div data-commit="Add pulsar destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/files/galaxy/config/tpv_rules_local.yml
 </span><span class="gi">+++ b/files/galaxy/config/tpv_rules_local.yml
@@ -2888,9 +2888,9 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-install-tools-via-the-admin-ui"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-install-tools-via-the-admin-ui" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Install tools via the Admin UI<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open Galaxy in your browser and type <code class="language-plaintext highlighter-rouge">bwa</code> in the tool search box on the left. If “Map with BWA-MEM” is among the search results, you can skip the following steps.</li>   <li>Access the Admin menu from the top bar (you need to be logged-in with an email specified in the <code class="language-plaintext highlighter-rouge">admin_users</code> setting)</li>   <li>Click “Install and Uninstall”, which can be found on the left, under “Tool Management”</li>   <li>Enter <code class="language-plaintext highlighter-rouge">bwa</code> in the search interface</li>   <li>Click on the first hit, having <code class="language-plaintext highlighter-rouge">devteam</code> as owner</li>   <li>Click the “Install” button for the latest revision</li>   <li>Enter “Mapping” as the target section and click “OK”.</li> </ol> </blockquote>
     </li>
     <li>
-      <p>We now need to tell Galaxy to send BWA and BWA-MEM jobs to the <code class="language-plaintext highlighter-rouge">pulsar</code> destination. We specify this in the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section of the <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file.</p>
+      <p>We now need to tell Galaxy to send BWA and BWA-MEM jobs to the <code class="language-plaintext highlighter-rouge">pulsar</code> destination. We specify this in the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section of your job conf.</p>
 
-      <p>Add the following to the end of the <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file (inside the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section if it exists or create it if it doesn’t.)</p>
+      <p>Add the following to the end of the TPV rules file (inside the <code class="language-plaintext highlighter-rouge">tools:</code> section if it exists or create it if it doesn’t.)</p>
 
       <div data-commit="Send bwa and bwa-mem to pulsar" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/files/galaxy/config/tpv_rules_local.yml
 </span><span class="gi">+++ b/files/galaxy/config/tpv_rules_local.yml
@@ -3027,7 +3027,7 @@ The aim of these parameters is to control the retrying of staging actions in the
       <li>A user - configured with a password and the new vhost</li>
     </ul>
   </li>
-  <li>In the Galaxy job_conf.yml:
+  <li>In the Galaxy job configuration
     <ul>
       <li>A new job runner with the new connection string</li>
       <li>A new destination or multiple destinations for the new runner.</li>
@@ -3035,7 +3035,7 @@ The aim of these parameters is to control the retrying of staging actions in the
   </li>
 </ol>
 
-<p>Pulsar servers can be the head node of a cluster. You can create a cluster and use your favourite job scheduler such as Slurm or PBS to schedule jobs. You can have many destinations in your Galaxy job_conf.yml file that change the number of cpus, amount of RAM etc. It can get quite complex and flexible if you like.</p>
+<p>Pulsar servers can be the head node of a cluster. You can create a cluster and use your favourite job scheduler such as Slurm or PBS to schedule jobs. You can have many destinations in your Galaxy job conf file that change the number of cpus, amount of RAM etc. It can get quite complex and flexible if you like.</p>
 
 <h3 id="australia">Australia</h3>
 

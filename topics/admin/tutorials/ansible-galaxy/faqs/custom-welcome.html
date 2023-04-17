@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Customising the welcome page">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-06-14 12:04:29 +0000">
+<meta name="DC.date" content="2023-04-17 12:34:11 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 
         
@@ -227,51 +227,7 @@
 
            
 
-<p>Customising the <code class="language-plaintext highlighter-rouge">welcome.html</code> page is very easy!</p>
-
-<ol>
-  <li>
-    <p>Create a custom <code class="language-plaintext highlighter-rouge">welcome.html</code> in <code class="language-plaintext highlighter-rouge">templates/galaxy/config/</code> with whatever content you want, e.g.</p>
-
-    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>Welcome to Galaxy<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">"https://galaxyproject.org/#"</span> <span class="na">width=</span><span class="s">"100%"</span> <span class="na">height=</span><span class="s">"500px"</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Add it to your deployed configuration</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/group_vars/galaxyservers.yml
-+++ b/group_vars/galaxyservers.yml
-@@ <span class="nt">-83</span>,12 +83,7 @@ certbot_agree_tos: <span class="nt">--agree-tos</span>
- galaxy_config_templates:
- - src: templates/galaxy/config/job_conf.yml.j2
-   dest: <span class="s2">"{{ galaxy_config.galaxy.job_config_file }}"</span>
- - src: templates/galaxy/config/reports.yml
-   dest: <span class="s2">"{{ galaxy_reports_path }}"</span>
-+- src: templates/galaxy/config/welcome.html
-+  dest: <span class="s2">"{{ galaxy_config_dir }}"</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Update the <code class="language-plaintext highlighter-rouge">templates/nginx/galaxy.j2</code> to point to the new location</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/templates/nginx/galaxy.j2
-+++ b/templates/nginx/galaxy.j2
-@@ <span class="nt">-83</span>,12 +83,7 @@
- location config/welcome.html <span class="o">{</span>
--    <span class="nb">alias</span> <span class="o">{{</span> galaxy_server_dir <span class="o">}}</span>/static/welcome.html.sample<span class="p">;</span>
-+    <span class="nb">alias</span> <span class="o">{{</span> galaxy_config_dir <span class="o">}}</span>/welcome.html<span class="p">;</span>
-     expires 24h<span class="p">;</span>
- <span class="o">}</span>
-</code></pre></div>    </div>
-  </li>
-  <li>Run the playbook</li>
-  <li>Done! You might need to refresh / clear your cache before the changes are visible.</li>
-</ol>
+<p>Customising the <code class="language-plaintext highlighter-rouge">welcome.html</code> page is very easy. Simply follow the <a href="/training-material/topics/admin/tutorials/customization/tutorial.html">Customising Galaxy Tutorial</a>!</p>
 
         </div>
         <div class="col-md-4">
@@ -335,7 +291,7 @@ add a button, include configuration options:
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/2de7d79a195ccf94c08a84742f8a8f5c831c1908">2de7d79a195ccf94c08a84742f8a8f5c831c1908</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/2048fb856b4507b4dfe70b7b32322f13517f1c2f">2048fb856b4507b4dfe70b7b32322f13517f1c2f</a></p>
     </div>
 </footer>
 
