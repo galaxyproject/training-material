@@ -255,7 +255,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -30,11 +30,24 @@ galaxy_job_config:
+>    @@ -21,11 +21,24 @@ galaxy_job_config:
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
@@ -280,7 +280,8 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    +          value: /tmp
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->           environment: local_env>    {% endraw %}
+>           environment: local_env
+>    {% endraw %}
 >    ```
 >    {: data-commit="Update the job_conf.yml with singularity destination"}
 >
@@ -392,7 +393,7 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 > <hands-on-title>Optional: Configure Galaxy to use Apptainer containers from CVMFS</hands-on-title>
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add `containers_resolvers_config_file` and `galaxy_singularity_images_cvmfs_path`:
->{% raw %}
+>    {% raw %}
 >    ```yaml
 >    galaxy_singularity_images_cvmfs_path: "/cvmfs/singularity.galaxyproject.org/all/"
 >    galaxy_config:
@@ -400,26 +401,26 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 >        ...
 >        containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    ```
->{% endraw %}
+>    {% endraw %}
 >
 > 2. Also in `group_vars/galaxyservers.yml`, add a `galaxy_config_templates` entry:
->{% raw %}
+>    {% raw %}
 >    ```yaml
 >    galaxy_config_templates:
 >      - src: templates/galaxy/config/container_resolvers_conf.yml.j2
 >        dest: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    ```
->{% endraw %}
+>    {% endraw %}
 >
 > 3. Create the new file `templates/galaxy/config/container_resolvers_conf.yml.j2`:
->{% raw %}
+>    {% raw %}
 >    ```xml
 >    <containers_resolvers>
 >        <explicit_singularity />
 >        <cached_mulled_singularity cache_directory="{{ galaxy_singularity_images_cvmfs_path }}"/>
 >    </containers_resolvers>
 >    ```
->{% endraw %}
+>    {% endraw %}
 >
 > 4. Re-run the playbook (`ansible-playbook galaxy.yml`)
 >
