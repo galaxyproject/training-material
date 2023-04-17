@@ -1024,7 +1024,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +      # performance options
 >    +      workers: 2
 >    +      # Other options that will be passed to gunicorn
+>    +      # This permits setting of 'secure' headers like REMOTE_USER (and friends)
+>    +      # https://docs.gunicorn.org/en/stable/settings.html#forwarded-allow-ips
 >    +      extra_args: '--forwarded-allow-ips="*"'
+>    +      # This lets Gunicorn start Galaxy completely before forking which is faster.
+>    +      # https://docs.gunicorn.org/en/stable/settings.html#preload-app
 >    +      preload: true
 >    +    celery:
 >    +      concurrency: 2
