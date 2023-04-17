@@ -283,7 +283,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -202,6 +205,45 @@ slurm_config:
+>    @@ -202,6 +205,47 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -312,6 +312,8 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +    fail_if_no_peer_cert: 'false'
 >    +  management_agent:
 >    +    disable_metrics_collector: "false"
+>    +  management:
+>    +    disable_stats: 'false'
 >    +  consumer_timeout: 21600000 # 6 hours in milliseconds
 >    +
 >    +rabbitmq_vhosts:
