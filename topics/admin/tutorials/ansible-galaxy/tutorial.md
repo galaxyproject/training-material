@@ -430,7 +430,6 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > > +---
 >    > > +# Python 3 support
 >    > > +pip_virtualenv_command: /usr/bin/python3 -m venv  # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
->    > > +certbot_virtualenv_package_name: python3-venv     # usegalaxy_eu.certbot
 >    > > +
 >    > > +# Common variables needed by all hosts
 >    > > +galaxy_user_name: galaxy
