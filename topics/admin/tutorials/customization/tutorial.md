@@ -330,8 +330,6 @@ You can even offer several options, to allow users to switch to the default if t
 >
 >    Your theme file should now begin with:
 >
->    ```yaml
->    ```
 >    {% raw %}
 >    ```diff
 >    --- a/files/galaxy/themes.yml
