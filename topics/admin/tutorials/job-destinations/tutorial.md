@@ -106,7 +106,7 @@ To demonstrate a real-life scenario and {TPV}'s role in it, let's plan on settin
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -137,6 +137,9 @@ galaxy_config_templates:
+>    @@ -142,6 +142,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -185,7 +185,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -123,6 +123,14 @@ galaxy_config:
+>    @@ -128,6 +128,14 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
@@ -284,7 +284,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -138,6 +119,8 @@ galaxy_config_files_public:
+>    @@ -143,6 +124,8 @@ galaxy_config_files_public:
 >     galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -621,14 +621,14 @@ Such form elements can be added to tools without modifying each tool's configura
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
 >    @@ -51,6 +56,7 @@ galaxy_config:
->         file_path: /data
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         file_path: /data/datasets
+>         job_working_directory: /data/jobs
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -128,6 +134,8 @@ galaxy_config_templates:
+>    @@ -133,6 +139,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"

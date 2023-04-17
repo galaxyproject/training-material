@@ -101,7 +101,7 @@ This page can be used to communicate what your instance is about, and share news
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -86,6 +86,10 @@ galaxy_config:
+>    @@ -91,6 +91,10 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
@@ -211,7 +211,7 @@ You can even offer several options, to allow users to switch to the default if t
 >         # Main Configuration
 >         admin_users:
 >         - admin@example.org
->    @@ -90,6 +91,10 @@ galaxy_config_files_public:
+>    @@ -95,6 +96,10 @@ galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
 >     

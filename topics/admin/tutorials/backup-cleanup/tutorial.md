@@ -75,7 +75,7 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    @@ -11,3 +11,6 @@
 >       version: 0.3.1
 >     - src: usegalaxy_eu.certbot
->       version: 0.1.9
+>       version: 0.1.11
 >    +# gxadmin (used in cleanup, and later monitoring.)
 >    +- src: galaxyproject.gxadmin
 >    +  version: 0.0.12
@@ -158,7 +158,7 @@ Before we begin backing up our Galaxy data, let's set up automated cleanups to e
 >    @@ -21,6 +21,14 @@
 >         - name: Install Dependencies
 >           package:
->             name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-venv', 'python3-setuptools']
+>             name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-setuptools']
 >    +    - name: Install RHEL/CentOS/Rocky specific dependencies
 >    +      package:
 >    +        name: ['tmpwatch']
@@ -180,9 +180,9 @@ Before we begin backing up our Galaxy data, let's set up automated cleanups to e
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -2,6 +2,7 @@
->     galaxy_create_user: true
->     galaxy_separate_privileges: true
->     galaxy_manage_paths: true
+>     galaxy_create_user: true # False by default, as e.g. you might have a 'galaxy' user provided by LDAP or AD.
+>     galaxy_separate_privileges: true # Best practices for security, configuration is owned by 'root' (or a different user) than the processes
+>     galaxy_manage_paths: true # False by default as your administrator might e.g. have root_squash enabled on NFS. Here we can create the directories so it's fine.
 >    +galaxy_manage_cleanup: true
 >     galaxy_layout: root-dir
 >     galaxy_root: /srv/galaxy

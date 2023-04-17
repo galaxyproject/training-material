@@ -426,7 +426,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > > ```diff
 >    > > --- /dev/null
 >    > > +++ b/group_vars/all.yml
->    > > @@ -0,0 +1,8 @@
+>    > > @@ -0,0 +1,7 @@
 >    > > +---
 >    > > +# Python 3 support
 >    > > +pip_virtualenv_command: /usr/bin/python3 -m venv  # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
@@ -959,7 +959,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
 >    +    file_path: /data/datasets
 >    +    job_working_directory: /data/jobs
->    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure galaxy config"}
@@ -1009,10 +1008,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -19,3 +19,25 @@ galaxy_config:
+>    @@ -19,3 +19,29 @@ galaxy_config:
 >         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->         file_path: /data
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         file_path: /data/datasets
+>         job_working_directory: /data/jobs
 >    +  gravity:
 >    +    process_manager: systemd
 >    +    galaxy_root: "{{ galaxy_root }}/server"
@@ -1832,7 +1831,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -41,3 +41,55 @@ galaxy_config:
+>    @@ -45,3 +45,55 @@ galaxy_config:
 >             pools:
 >               - job-handlers
 >               - workflow-schedulers
@@ -2245,8 +2244,8 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >         # Main Configuration
 >    @@ -19,6 +37,7 @@ galaxy_config:
 >         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->         file_path: /data
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         file_path: /data/datasets
+>         job_working_directory: /data/jobs
 >    +    job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >       gravity:
 >         process_manager: systemd
@@ -2298,9 +2297,9 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -38,6 +38,27 @@ galaxy_config:
->         file_path: /data
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    @@ -38,6 +38,28 @@ galaxy_config:
+>         file_path: /data/datasets
+>         job_working_directory: /data/jobs
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    # SQL Performance
 >    +    slow_query_log_threshold: 5

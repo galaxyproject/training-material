@@ -128,7 +128,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -176,6 +176,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -181,6 +181,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >     
@@ -590,7 +590,7 @@ These include very basic submission parameters. We want more information!
 >    ```diff
 >    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -11,3 +11,13 @@ galaxy_db_name: galaxy
+>    @@ -10,3 +10,13 @@ galaxy_db_name: galaxy
 >     cvmfs_role: client
 >     galaxy_cvmfs_repos_enabled: config-repo
 >     cvmfs_quota_limit: 500
