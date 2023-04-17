@@ -25,7 +25,6 @@ contributions:
   - martenson
   - jmchilton
   - davebx
-  - nsoranzo
   - lecorguille
   - abretaud
   - lldelisle
