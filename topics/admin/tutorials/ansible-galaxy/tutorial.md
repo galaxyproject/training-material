@@ -957,7 +957,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    admin_users:
 >    +    - admin@example.org
 >    +    database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->    +    file_path: /data
+>    +    file_path: /data/datasets
+>    +    job_working_directory: /data/jobs
 >    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >    {% endraw %}
 >    ```
