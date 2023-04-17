@@ -46,11 +46,11 @@ When you assemble a new genome, you get its full sequence in FASTA format, in th
 - Tandem repeats: small sequences (<60 base pairs) repeated next to each other, found in many places in the genome, in particular centromeres and telomeres
 - Interspersed repeats: sequences repeated in distant positions, including transposons, {SINEs} or {LINEs}
 
-These repeats are interesting on their own: they can originate from transposons or viral insertions, and they can have direct effects on the expression of genes. But they are also the source of a lot of trouble when you work on genomics data. First when sequencing a genome, assembly tools often have problems reconstructing the genome sequence in regions containing repeats (in particular when repeats are longer than the read size). Then, when you have a good assembly, you want to annotate it to find the location of genes. Unfortunately annotation tools have trouble identifying gene locations in regions rich in repeats.
+These repeats are interesting on their own: they can originate from transposons or viral insertions, and they can have direct effects on the expression of genes. But they are also the source of a lot of trouble when you work on genomics data. First when sequencing a genome, assembly tools often have problems reconstructing the genome sequence in regions containing repeats (in particular when repeats are longer than the read size). Then, when you have a good assembly, you want to annotate it to find the location of genes. Unfortunately many annotation tools have trouble identifying gene locations in regions rich in repeats.
 
 The aim of repeat masking is to identify the location of all repeated elements along a genome sequence. Other tools (like annotation pipelines) can then take this information into account when producing their results.
 
-The output of repeat masking tools is most often composed of a fasta file (with sometimes a GFF file containing the position of each repeat). There is two types of masking, producing slightly different fasta output:
+The output of repeat masking tools is most often composed of a fasta file (with sometimes a BED or GFF file containing the position of each repeat). There is two types of masking, producing slightly different fasta output:
 
 - Soft-masking: repeat elements are written in lower case
 - Hard-masking: repeat elements are replaced by stretches of the letter N
@@ -163,12 +163,12 @@ Let's run RepeatMasker, by selected the input assembly in fasta format. We selec
 > <hands-on-title></hands-on-title>
 >
 > 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1) %} with the following parameters:
->   - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)
->   - *"Repeat library source"*: `DFam (curated only, bundled with RepeatMasker)`
->     - *"Select species name from a list?"*: `Yes`
->       - *"Species"*: `Human (Homo sapiens)`
->   - *"Output annotation of repeats in GFF format"*: `Yes`
->   - *"Perform soft-masking instead of hard-masking"*: `Yes`
+>    - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)
+>    - *"Repeat library source"*: `DFam (curated only, bundled with RepeatMasker)`
+>    - *"Select species name from a list?"*: `Yes`
+>        - *"Species"*: `Human (Homo sapiens)`
+>    - *"Output annotation of repeats in GFF format"*: `Yes`
+>    - *"Perform soft-masking instead of hard-masking"*: `Yes`
 >
 {: .hands_on}
 
@@ -193,21 +193,33 @@ RepeatMasker produces 5 output files:
 
 As we have used a generic species (Human), we only identified the most common and simple repeats, not very specific to this species. If you compare with Red results, your are missing at least ~28% of repeated content in the genome. However, RepeatMasker gives interesting information about repeat classification which could be interesting for future analysis.
 
-To boost RepeatMasker performance, we need a tailored repeat library for *Mucor mucedo*. This step can take from a few hours to a few days and a large number of tools could be used. We pre-computed two librairies :
+To boost RepeatMasker performance, we need a tailored repeat library for *Mucor mucedo*. This step can take from a few hours to a few days and a large number of tools could be used. We pre-computed two librairies:
 
 - `Muco_library_RM2.fasta` using RepeatModeler ({% cite Flynn_2020 %})
 - `Muco_library_EDTA.fasta` using EDTA ({% cite Ou_2019 %})
 
+> <details-title>Preparing a library</details-title>
+>
+> You can prepare your own repeat library, specific to the genome you're using, by running RepeatModeler in Galaxy (it will take several hours to run):
+>
+> > <hands-on-title>Building a repeat library with RepeatModeler</hands-on-title>
+> >
+> > 1. {% tool [RepeatModeler](toolshed.g2.bx.psu.edu/repos/csbl/repeatmodeler/repeatmodeler/2.0.3+galaxy0) %} with the following parameters:
+> >    - {% icon param-file %} *"Input genome fasta"*: `genome_raw.fasta` (Input dataset)
+> {: .hands_on}
+>
+> The library is in the "consensus sequences" output dataset.
+{: .details}
 
 > <hands-on-title></hands-on-title>
 >
 > 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1) %} with the following parameters:
->   - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)
->   - *"Repeat library source"*: `Custom library of repeats`
->     - *"Custom library of repeats"*
->       - *"One of the two pre-computed libraires"*: `Muco_library_RM2.fasta` or `Muco_library_EDTA.fasta`
->   - *"Output annotation of repeats in GFF format"*: `Yes`
->   - *"Perform soft-masking instead of hard-masking"*: `Yes`
+>    - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)
+>    - *"Repeat library source"*: `Custom library of repeats`
+>    - *"Custom library of repeats"*
+>        - *"One of the two pre-computed libraires"*: `Muco_library_RM2.fasta` or `Muco_library_EDTA.fasta`
+>    - *"Output annotation of repeats in GFF format"*: `Yes`
+>    - *"Perform soft-masking instead of hard-masking"*: `Yes`
 {: .hands_on}
 
 > <question-title></question-title>
