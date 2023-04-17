@@ -487,7 +487,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```yaml
 >    > postgresql_objects_users:
 >    >   - name: galaxy
->    >     password: super-secret-password-that-should-be-in-vault
+>    >     password: "{{ vault_postgres_galaxy_password }}"
 >    > ```
 >    {: .tip}
 >
