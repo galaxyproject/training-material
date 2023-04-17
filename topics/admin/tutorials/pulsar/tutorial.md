@@ -52,7 +52,7 @@ More details on Pulsar can be found at:
 
 Transport of data, tool information and other metadata can be configured as a web application via a RESTful interface or using a message passing system such as RabbitMQ.
 
-At the Galaxy end, it is configured within the `job_conf.yml` file and uses one of two special Galaxy job runners.
+At the Galaxy end, it is configured within the job configuraiton, and uses one of two special Galaxy job runners.
 * `galaxy.jobs.runners.pulsar:PulsarRESTJobRunner` for the RESTful interface
 * `galaxy.jobs.runners.pulsar:PulsarMQJobRunner` for the message passing interface.
 
@@ -271,7 +271,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -151,8 +151,11 @@ certbot_environment: staging
+>    @@ -156,8 +156,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -283,7 +283,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -202,6 +205,47 @@ slurm_config:
+>    @@ -207,6 +210,47 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -729,7 +729,7 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 
 Now we have a Pulsar server up and running, we need to tell our Galaxy about it.
 
-Galaxy talks to the Pulsar server via it's `job_conf.yml` file. We need to let Galaxy know about Pulsar there and make sure Galaxy has loaded the requisite job runner, and has a destination set up.
+Galaxy talks to the Pulsar server via it's job configuration file. We need to let Galaxy know about Pulsar there and make sure Galaxy has loaded the requisite job runner, and has a destination set up.
 
 There are three things we need to do here:
 
@@ -741,7 +741,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 
 > <hands-on-title>Configure Galaxy</hands-on-title>
 >
-> 1. In your `templates/galaxy/config/job_conf.yml.j2` file add the following job runner to the `<plugins>` section:
+> 1. In your `group_vars/galaxyservers.yml` file add the following job runner to the `<plugins>` section:
 >
 >    {% raw %}
 >    ```diff
@@ -768,7 +768,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```
 >    {: data-commit="Add pulsar plugin"}
 >
->    Add the following to the `<destinations>` section of your `job_conf.yml` file:
+>    Add the following to the `<destinations>` section of your job conf file:
 >
 >    {% raw %}
 >    ```diff
@@ -805,9 +805,9 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 >    {% snippet topics/admin/faqs/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
 >
-> 3. We now need to tell Galaxy to send BWA and BWA-MEM jobs to the `pulsar` destination. We specify this in the `<tools>` section of the `job_conf.yml` file.
+> 3. We now need to tell Galaxy to send BWA and BWA-MEM jobs to the `pulsar` destination. We specify this in the `<tools>` section of your job conf.
 >
->    Add the following to the end of the `job_conf.yml` file (inside the `<tools>` section if it exists or create it if it doesn't.)
+>    Add the following to the end of the TPV rules file (inside the `tools:` section if it exists or create it if it doesn't.)
 >
 >    {% raw %}
 >    ```diff
@@ -939,11 +939,11 @@ For each new Pulsar server, you will need to add:
   1. In the RabbitMQ config:
       * A vhost
       * A user - configured with a password and the new vhost
-  2. In the Galaxy job_conf.yml:
+  2. In the Galaxy job configuration
       * A new job runner with the new connection string
       * A new destination or multiple destinations for the new runner.
 
-Pulsar servers can be the head node of a cluster. You can create a cluster and use your favourite job scheduler such as Slurm or PBS to schedule jobs. You can have many destinations in your Galaxy job_conf.yml file that change the number of cpus, amount of RAM etc. It can get quite complex and flexible if you like.
+Pulsar servers can be the head node of a cluster. You can create a cluster and use your favourite job scheduler such as Slurm or PBS to schedule jobs. You can have many destinations in your Galaxy job conf file that change the number of cpus, amount of RAM etc. It can get quite complex and flexible if you like.
 
 ### Australia
 

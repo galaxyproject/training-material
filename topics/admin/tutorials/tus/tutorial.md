@@ -80,16 +80,16 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -64,6 +64,8 @@ galaxy_config:
->         allow_user_impersonation: true
+>    @@ -65,6 +65,8 @@ galaxy_config:
 >         # Tool security
 >         outputs_to_working_directory: true
+>         new_user_dataset_access_role_default_private: true # Make datasets private by default
 >    +    # TUS
 >    +    tus_upload_store: /data/tus
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -146,3 +148,16 @@ nginx_conf_http:
+>    @@ -154,3 +156,16 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem

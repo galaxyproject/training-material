@@ -274,7 +274,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -6,3 +6,8 @@ certbot_virtualenv_package_name: python3-venv     # usegalaxy_eu.certbot
+>    @@ -5,3 +5,8 @@ pip_virtualenv_command: /usr/bin/python3 -m venv  # usegalaxy_eu.certbot, usegal
 >     # Common variables needed by all hosts
 >     galaxy_user_name: galaxy
 >     galaxy_db_name: galaxy
@@ -507,8 +507,8 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -66,6 +66,8 @@ galaxy_config:
->         outputs_to_working_directory: true
+>    @@ -67,6 +67,8 @@ galaxy_config:
+>         new_user_dataset_access_role_default_private: true # Make datasets private by default
 >         # TUS
 >         tus_upload_store: /data/tus
 >    +    # CVMFS

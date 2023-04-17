@@ -155,7 +155,7 @@ $ tree
     ├── galaxy
     │   └── config
     │       ├── container_resolvers_conf.xml.j2
-    │       ├── job_conf.xml.j2
+    │       ├── job_conf.yml.j2
     │       └── job_resource_params_conf.xml.j2
     └── nginx
         ├── galaxy.j2
