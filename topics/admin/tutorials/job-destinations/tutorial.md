@@ -160,7 +160,7 @@ If we want to change something in production, it is always a good idea to have a
 - one where you can safely edit your files
 - and the actual production config directory that galaxy reads.
 
-Once you are done with your changes, you can run the script and it will automatically lint and copy over the files, if they are correct *and* mentioned in your job_conf.yml file.
+Once you are done with your changes, you can run the script and it will automatically lint and copy over the files, if they are correct *and* mentioned in your job_conf.yml file, or in your `group_vars/galaxyservers.yml` inline `job_conf`.
 And of course, Galaxy has an Ansible Role for that.
 
 ><hands-on-title>Adding automated TPV-lind-and-copy-script</hands-on-title>
@@ -219,7 +219,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tpv-auto-lint role"}
-> 4. Run the Galaxy playbook. Because we modified `job_conf.yml`, Galaxy will be restarted to reread its config files.
+> 4. Run the Galaxy playbook. Because we modified the job configuration, Galaxy will be restarted to reread its config files.
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -347,7 +347,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    Note that the tool id is matched via a regular expression against the full tool id. For example, a full tool id for hisat may look like: `toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy7`
 >    This enables complex matching, including matching against specific versions of tools.
 >
->    Destinations must also be defined in TPV itself. Importantly, note that any destinations defined in job_conf.yml are ignored by TPV. Therefore, we have moved all destinations from job_conf to TPV. In addition, we have removed some
+>    Destinations must also be defined in TPV itself. Importantly, note that any destinations defined in the job conf are ignored by TPV. Therefore, we have moved all destinations from the job conf to TPV. In addition, we have removed some
 >    redundancy by using the "inherits" clause in the `slurm` destination. This means that slurm will inherit all of the settings defined for singularity, but selectively override some settings. We have additionally
 >    defined the `native_specification` param for SLURM, which is what SLURM uses to allocate resources per job. Note the use of the `{cores}`
 >    parameter within the native specification, which TPV will replace at runtime with the value of cores assigned to the tool.
@@ -355,7 +355,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    Finally, we have also defined a new property named `max_accepted_cores`, which is the maximum amount of cores this destination will accept. Since the testing tool requests 2 cores, but only the `slurm`
 >    destination is able to accept jobs greater than 1 core, TPV will automatically route the job to the best matching destination, in this case, slurm.
 >
-> 3. Run the Galaxy playbook. Because we modified `job_conf.yml`, Galaxy will be restarted to reread its config files.
+> 3. Run the Galaxy playbook.
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash

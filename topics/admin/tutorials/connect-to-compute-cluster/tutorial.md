@@ -12,7 +12,7 @@ questions:
 objectives:
   - Be familiar with the basics of installing, configuring, and using Slurm
   - Understand all components of the Galaxy job running stack
-  - Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem
+  - Understand how the job conf controls Galaxy's jobs subsystem
   - Have a strong understanding of Galaxy job destinations
   - Understand the purpose and function of Galaxy job metrics
 time_estimation: "1h"
@@ -676,7 +676,7 @@ You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblen
 ## Further Reading
 
 - [Galaxy's cluster documentation](https://docs.galaxyproject.org/en/latest/admin/cluster.html) describes in detail alternative cluster configurations.
-- [The job_conf.xml documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html) fully describes the syntax of the job configuration file.
+- [The job_conf documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html) fully describes the syntax of the job configuration file.
 - The [Distributed Resource Management Application API (DRMAA)](https://www.drmaa.org/) page contains the DRMAA specification as well as documentation for various implementations. It also includes a list of DRMs supporting DRMAA.
 - The [Slurm documentation](http://slurm.schedmd.com/) is extensive and covers all the features and myriad of ways in which you can configure slurm.
 - [PSNC slurm-drmaa](http://apps.man.poznan.pl/trac/slurm-drmaa)'s page includes documentation and the SVN repository, which has a few minor fixes since the last released version. PSNC also wrote the initial implementations of the DRMAA libraries for PBSPro and LSF, so all three are similar.

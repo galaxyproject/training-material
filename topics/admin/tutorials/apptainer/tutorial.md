@@ -283,7 +283,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >           environment: local_env
 >    {% endraw %}
 >    ```
->    {: data-commit="Update the job_conf.yml with singularity destination"}
+>    {: data-commit="Update the job_conf with singularity destination"}
 >
 > 4. Re-run the playbook
 >
