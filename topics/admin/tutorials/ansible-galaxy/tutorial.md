@@ -118,7 +118,7 @@ The [static configuration setup](https://github.com/galaxyproject/ansible-galaxy
 1. The directories for Galaxy configuration data and for the shed tools are created
 2. Any config files are copied over
 3. Any templates are copied over
-4. The `galaxy.yml` (or `.ini`) is deployed
+4. The `galaxy.yml` is deployed
 
 The setup for deploying extra Galaxy configuration templates and files is a little bit non-standard by Ansible best practices. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.
 
