@@ -124,7 +124,7 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    +        user: galaxy # Run as the Galaxy user
 >    +        minute: "0"
 >    +        hour: "0"
->    +        job: "GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server /usr/bin/gxadmin galaxy cleanup 60"
+>    +        job: "GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server /usr/local/bin/gxadmin galaxy cleanup 60"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure gxadmin to cleanup data"}
