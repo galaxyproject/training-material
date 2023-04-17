@@ -2079,8 +2079,6 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    >
 >    {: .details}
 >
->    {% snippet topics/admin/tutorials/ansible-galaxy/faqs/custom-welcome.md %}
->
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
 >    > > <code-in-title>Bash</code-in-title>
