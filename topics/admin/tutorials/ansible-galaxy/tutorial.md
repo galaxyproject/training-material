@@ -906,9 +906,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -0,0 +1,12 @@
 >    +# Galaxy
->    +galaxy_create_user: true
->    +galaxy_separate_privileges: true
->    +galaxy_manage_paths: true
+>    +galaxy_create_user: true # False by default, as e.g. you might have a 'galaxy' user provided by LDAP or AD.
+>    +galaxy_separate_privileges: true # Best practices for security, configuration is owned by 'root' (or a different user) than the processes
+>    +galaxy_manage_paths: true # False by default as your administrator might e.g. have root_squash enabled on NFS. Here we can create the directories so it's fine.
 >    +galaxy_layout: root-dir
 >    +galaxy_root: /srv/galaxy
 >    +galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
