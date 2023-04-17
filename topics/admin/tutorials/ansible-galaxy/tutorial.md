@@ -2011,7 +2011,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    +	# The virtualhost is our domain name
 >    +	server_name   "{{ inventory_hostname }}";
 >    +
->    +	# Our log files will go here.
+>    +	# Our log files will go to journalctl
 >    +	access_log  syslog:server=unix:/dev/log;
 >    +	error_log   syslog:server=unix:/dev/log;
 >    +
