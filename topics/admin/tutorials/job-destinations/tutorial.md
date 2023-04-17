@@ -106,9 +106,9 @@ To demonstrate a real-life scenario and {TPV}'s role in it, let's plan on settin
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -142,6 +142,9 @@ galaxy_config_templates:
->       - src: templates/galaxy/config/dependency_resolvers_conf.xml
->         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>    @@ -145,6 +145,9 @@ galaxy_config_templates:
+>     galaxy_extra_dirs:
+>       - /data
 >     
 >    +galaxy_local_tools:
 >    +- testing.xml
@@ -185,21 +185,27 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -128,6 +128,14 @@ galaxy_config:
+>    @@ -128,6 +128,8 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
->    +galaxy_extra_dirs:
->    +  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
->    +
->    +galaxy_extra_privsep_dirs:
->    +  - "{{ tpv_mutable_dir }}"
->    +
 >    +galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
 >    +
 >     galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
+>    @@ -143,7 +145,10 @@ galaxy_config_templates:
+>         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>     
+>     galaxy_extra_dirs:
+>    -  - /data
+>    +  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
+>    +
+>    +galaxy_extra_privsep_dirs:
+>    +  - "{{ tpv_mutable_dir }}"
+>     
+>     galaxy_local_tools:
+>     - testing.xml
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TPV config dir"}
@@ -284,7 +290,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -143,6 +124,8 @@ galaxy_config_files_public:
+>    @@ -137,6 +118,8 @@ galaxy_config_files_public:
 >     galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -628,15 +634,15 @@ Such form elements can be added to tools without modifying each tool's configura
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -133,6 +139,8 @@ galaxy_config_templates:
+>    @@ -127,6 +133,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
 >     
->     galaxy_local_tools:
->     - testing.xml
+>     galaxy_extra_dirs:
+>       - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}

@@ -946,7 +946,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -10,3 +10,12 @@ galaxy_force_checkout: true
+>    @@ -10,3 +10,15 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.12.0
 >     miniconda_channels: ['conda-forge', 'defaults']
@@ -959,6 +959,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
 >    +    file_path: /data/datasets
 >    +    job_working_directory: /data/jobs
+>    +
+>    +galaxy_extra_dirs:
+>    +  - /data
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure galaxy config"}
@@ -1008,7 +1011,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -19,3 +19,29 @@ galaxy_config:
+>    @@ -19,6 +19,32 @@ galaxy_config:
 >         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
 >         file_path: /data/datasets
 >         job_working_directory: /data/jobs
@@ -1038,6 +1041,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +        pools:
 >    +          - job-handlers
 >    +          - workflow-schedulers
+>     
+>     galaxy_extra_dirs:
+>       - /data
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure gravity"}
@@ -1831,10 +1837,10 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -45,3 +45,55 @@ galaxy_config:
->             pools:
->               - job-handlers
->               - workflow-schedulers
+>    @@ -48,3 +48,55 @@ galaxy_config:
+>     
+>     galaxy_extra_dirs:
+>       - /data
 >    +
 >    +# Certbot
 >    +certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"

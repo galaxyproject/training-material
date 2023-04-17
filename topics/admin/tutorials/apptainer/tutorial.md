@@ -198,9 +198,9 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    +  - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >    +    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    +
->     # Certbot
->     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
->     certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+>     galaxy_extra_dirs:
+>       - /data
+>     
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container and dependency resolvers"}

@@ -109,9 +109,9 @@ This page can be used to communicate what your instance is about, and share news
 >    +  - src: files/galaxy/welcome.html
 >    +    dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
 >    +
->     # Certbot
->     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
->     certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+>     galaxy_extra_dirs:
+>       - /data
+>     
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add welcome url to the config"}
@@ -219,9 +219,9 @@ You can even offer several options, to allow users to switch to the default if t
 >    +  - src: files/galaxy/themes.yml
 >    +    dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >    +
->     # Certbot
->     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
->     certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+>     galaxy_extra_dirs:
+>       - /data
+>     
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add brand"}
