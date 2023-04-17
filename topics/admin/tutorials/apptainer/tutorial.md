@@ -249,13 +249,13 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    ```
 >    {: data-commit="Configure the container resolver"}
 >
-> 3. Now, we want to make Galaxy run jobs using Apptainer. Modify the file `templates/galaxy/config/job_conf.yml.j2`, by adding the `singularity_enabled` parameter:
+> 3. Now, we want to make Galaxy run jobs using Apptainer. Modify the file `group_vars/galaxyservers.yml`, by adding the `singularity_enabled` parameter:
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -21,11 +21,24 @@ galaxy_job_config:
+>    @@ -30,11 +30,24 @@ galaxy_job_config:
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
@@ -273,15 +273,14 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    +        - name: LC_ALL
 >    +          value: C
 >    +        # The cache directory holds the docker containers that get converted
->    +        - name: SINGULARITY_CACHEDIR
+>    +        - name: APPTAINER_CACHEDIR
 >    +          value: /tmp/singularity
 >    +        # Apptainer uses a temporary directory to build the squashfs filesystem
->    +        - name: SINGULARITY_TMPDIR
+>    +        - name: APPTAINER_TMPDIR
 >    +          value: /tmp
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->           environment: local_env
->    {% endraw %}
+>           environment: local_env>    {% endraw %}
 >    ```
 >    {: data-commit="Update the job_conf.yml with singularity destination"}
 >
