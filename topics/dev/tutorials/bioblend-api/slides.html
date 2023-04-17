@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Scripting Galaxy using the API and BioBlend">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-07-14 01:30:28 +0000">
+<meta name="DC.date" content="2023-04-17 13:15:53 +0000">
 <meta name="DC.creator" content="Olivia Doppelt-Azeroual">
 <meta name="DC.creator" content="Fabien Mareuil">
 <meta name="DC.creator" content="Nicola Soranzo">
@@ -66,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-07-14 01:30:28 +0000",
+  "dateModified": "2023-04-17 13:15:53 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Scripting Galaxy using the API and BioBlend",
   "interactivityType": "mixed",
@@ -490,7 +490,7 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 - Admins can also manage:
   - data libraries
-  - Tool Shed repositories
+  - tools and dependencies
   - users, quotas, roles...
 
 - Source code lives at https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/webapps/galaxy/api/
@@ -622,7 +622,7 @@ Before diving into this slide deck, we recommend you to have a look at:
   - [RESTClient](https://addons.mozilla.org/firefox/addon/restclient/) add-on for Firefox
   - [Advanced REST Client](https://advancedrestclient.com/)
 - Software libraries:
-  - General HTTP libraries (e.g. *requests* for Python)
+  - General HTTP libraries (e.g. [requests](https://requests.readthedocs.io/) for Python)
   - Service-specific libraries (e.g. *BioBlend* to access Galaxy using Python)
 
 ???
@@ -676,14 +676,16 @@ Before diving into this slide deck, we recommend you to have a look at:
   # if you need to bootstrap Galaxy, in particular to create a real
   # admin user account via API. You should probably not set this on a
   # production server.
-  master_api_key: MASTERLOCK
+  bootstrap_admin_api_key: MASTERLOCK
   ```
+
+  This option was called ``master_api_key`` in Galaxy 22.05 and earlier.
 
 ???
 
 - There are 2 options in the Galaxy configuration file that are relevant for the API.
 - api_allow_run_as allows the specified user to impersonate any other user on the Galaxy instance.
-- master_api_key instead is an optional special API key that can be used to bootstrap a Galaxy instance, in particular to create an initial admin account.
+- bootstrap_admin_api_key instead is an optional special API key that can be used to bootstrap a Galaxy instance, in particular to create an initial admin account.
 
 ---
 
@@ -696,8 +698,7 @@ Before diving into this slide deck, we recommend you to have a look at:
   - Subscriptions via [websockets](https://fastapi.tiangolo.com/advanced/websockets/)
   - Integrated [OpenAPI](https://spec.openapis.org/oas/v3.1.0) interactive documentation, e.g. https://usegalaxy.org/api/docs
   - Reduce maintenance burden
-- Challenges:
-  - Need to refactor over 200 endpoints
+  - Simplify client code generation
 
 ???
 

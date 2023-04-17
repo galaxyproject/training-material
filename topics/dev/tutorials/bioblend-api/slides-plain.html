@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Scripting Galaxy using the API and BioBlend">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-17 09:22:06 +0000">
+<meta name="DC.date" content="2023-04-17 15:13:30 +0000">
 <meta name="DC.creator" content="Olivia Doppelt-Azeroual">
 <meta name="DC.creator" content="Fabien Mareuil">
 <meta name="DC.creator" content="Nicola Soranzo">
@@ -308,7 +308,7 @@
   <li>Admins can also manage:
     <ul>
       <li>data libraries</li>
-      <li>Tool Shed repositories</li>
+      <li>tools and dependencies</li>
       <li>users, quotas, roles…</li>
     </ul>
   </li>
@@ -488,7 +488,7 @@ https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml</li>
   </li>
   <li>Software libraries:
     <ul>
-      <li>General HTTP libraries (e.g. <em>requests</em> for Python)</li>
+      <li>General HTTP libraries (e.g. <a href="https://requests.readthedocs.io/">requests</a> for Python)</li>
       <li>Service-specific libraries (e.g. <em>BioBlend</em> to access Galaxy using Python)</li>
     </ul>
   </li>
@@ -557,8 +557,10 @@ Keep it secure, it’s the same as a username+password!</li>
 <span class="c1"># if you need to bootstrap Galaxy, in particular to create a real</span>
 <span class="c1"># admin user account via API. You should probably not set this on a</span>
 <span class="c1"># production server.</span>
-<span class="na">master_api_key</span><span class="pi">:</span> <span class="s">MASTERLOCK</span>
+<span class="na">bootstrap_admin_api_key</span><span class="pi">:</span> <span class="s">MASTERLOCK</span>
 </code></pre></div>    </div>
+
+    <p>This option was called <code class="language-plaintext highlighter-rouge">master_api_key</code> in Galaxy 22.05 and earlier.</p>
   </li>
 </ul>
 
@@ -567,7 +569,7 @@ Keep it secure, it’s the same as a username+password!</li>
 <ul>
   <li>There are 2 options in the Galaxy configuration file that are relevant for the API.</li>
   <li>api_allow_run_as allows the specified user to impersonate any other user on the Galaxy instance.</li>
-  <li>master_api_key instead is an optional special API key that can be used to bootstrap a Galaxy instance, in particular to create an initial admin account.</li>
+  <li>bootstrap_admin_api_key instead is an optional special API key that can be used to bootstrap a Galaxy instance, in particular to create an initial admin account.</li>
 </ul>
 
 <hr />
@@ -583,11 +585,7 @@ Keep it secure, it’s the same as a username+password!</li>
       <li>Subscriptions via <a href="https://fastapi.tiangolo.com/advanced/websockets/">websockets</a></li>
       <li>Integrated <a href="https://spec.openapis.org/oas/v3.1.0">OpenAPI</a> interactive documentation, e.g. https://usegalaxy.org/api/docs</li>
       <li>Reduce maintenance burden</li>
-    </ul>
-  </li>
-  <li>Challenges:
-    <ul>
-      <li>Need to refactor over 200 endpoints</li>
+      <li>Simplify client code generation</li>
     </ul>
   </li>
 </ul>
@@ -796,7 +794,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/3d36be8045d5ed2738b19221587524994fbed307">3d36be8045d5ed2738b19221587524994fbed307</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/2de7d79a195ccf94c08a84742f8a8f5c831c1908">2de7d79a195ccf94c08a84742f8a8f5c831c1908</a></p>
     </div>
 </footer>
 
