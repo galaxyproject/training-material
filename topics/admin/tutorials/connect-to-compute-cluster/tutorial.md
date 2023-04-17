@@ -109,10 +109,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -33,6 +33,8 @@
->             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
+>    @@ -34,6 +34,8 @@
 >             dest: /libraries/
 >       roles:
+>         - galaxyproject.tusd
 >    +    - galaxyproject.repos
 >    +    - galaxyproject.slurm
 >         - usegalaxy_eu.apptainer
@@ -128,7 +128,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -184,6 +184,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -189,6 +189,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >     
@@ -144,7 +144,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    +
 >     # TUS
 >     galaxy_tusd_port: 1080
->     tusd_instances:
+>     galaxy_tus_upload_store: /data/tus
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add slurm configuration"}
@@ -338,8 +338,8 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    +      package:
 >    +        name: slurm-drmaa1
 >       roles:
+>         - galaxyproject.tusd
 >         - galaxyproject.repos
->         - galaxyproject.slurm
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add post task to install slurm-drmaa"}

@@ -271,7 +271,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -156,8 +156,11 @@ certbot_environment: staging
+>    @@ -161,8 +161,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -283,7 +283,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -207,6 +210,47 @@ slurm_config:
+>    @@ -212,6 +215,47 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -330,7 +330,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +
 >     # TUS
 >     galaxy_tusd_port: 1080
->     tusd_instances:
+>     galaxy_tus_upload_store: /data/tus
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure RabbitMQ"}
@@ -345,15 +345,15 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -46,6 +46,8 @@
+>    @@ -47,6 +47,8 @@
 >           become: true
 >           become_user: "{{ galaxy_user_name }}"
 >         - galaxyproject.nginx
 >    +    - geerlingguy.docker
 >    +    - usegalaxy_eu.rabbitmqserver
 >         - galaxyproject.gxadmin
->         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
+>       post_tasks:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role"}

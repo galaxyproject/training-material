@@ -109,10 +109,10 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -30,6 +30,7 @@
->             name: ['tmpreaper']
+>    @@ -31,6 +31,7 @@
 >           when: ansible_os_family == 'Debian'
 >       roles:
+>         - galaxyproject.tusd
 >    +    - usegalaxy_eu.apptainer
 >         - galaxyproject.galaxy
 >         - role: galaxyproject.miniconda
@@ -178,8 +178,8 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -69,6 +69,9 @@ galaxy_config:
->         tus_upload_store: /data/tus
+>    @@ -70,6 +70,9 @@ galaxy_config:
+>         tus_upload_store: "{{ galaxy_tus_upload_store }}"
 >         # CVMFS
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >    +    # Tool Dependencies
@@ -188,7 +188,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -104,6 +107,12 @@ galaxy_config_files:
+>    @@ -109,6 +112,12 @@ galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >     
