@@ -269,10 +269,10 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    -        - name: LC_ALL
 >    -          value: C
 >    -        # The cache directory holds the docker containers that get converted
->    -        - name: SINGULARITY_CACHEDIR
+>    -        - name: APPTAINER_CACHEDIR
 >    -          value: /tmp/singularity
 >    -        # Apptainer uses a temporary directory to build the squashfs filesystem
->    -        - name: SINGULARITY_TMPDIR
+>    -        - name: APPTAINER_TMPDIR
 >    -          value: /tmp
 >    +      tpv_dispatcher:
 >    +        runner: dynamic
