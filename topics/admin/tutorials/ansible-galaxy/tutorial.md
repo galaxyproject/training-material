@@ -864,7 +864,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +  pre_tasks:
 >    +    - name: Install Dependencies
 >    +      package:
->    +        name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-venv', 'python3-setuptools']
+>    +        name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-setuptools']
 >    +  roles:
 >    +    - galaxyproject.galaxy
 >    +    - role: galaxyproject.miniconda
