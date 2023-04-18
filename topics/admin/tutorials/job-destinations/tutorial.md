@@ -543,7 +543,7 @@ can be matched up so that only desired combinations are compatible with each oth
 >    +      - id: admin_only_testing_tool
 >    +        if: |
 >    +          # Only allow the tool to be executed if the user is an admin
->    +          admin_users = app.config.get( "admin_users", "" ).split( "," )
+>    +          admin_users = app.config.admin_users
 >    +          # last line in block must evaluate to a value - which determines whether the TPV if conditional matches or not
 >    +          not user or user.email not in admin_users
 >    +        fail: Unauthorized. Only admins can execute this tool.
