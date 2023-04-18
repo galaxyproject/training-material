@@ -495,19 +495,15 @@ install the latest revision of the tool.
 
 ## Test tools
 
-Tools can be tested using the `galaxy-tool-test` utility in the [galaxy-tool-util](https://pypi.org/project/galaxy-tool-util/) package.
-
 ```console
-galaxy-tool-test [-h] [-u GALAXY_URL] [-k KEY] [-a ADMIN_KEY] [--force_path_paste] [-t TOOL_ID]
-  [--tool-version TOOL_VERSION] [-i TEST_INDEX] [-o OUTPUT] [--append]
-  [--skip-previously-executed | --skip-previously-successful] [-j OUTPUT_JSON] [--verbose]
-  [-c CLIENT_TEST_CONFIG] [--suite-name SUITE_NAME] [--with-reference-data]
-  [--skip-with-reference-data]
-  [--history-per-suite | --history-per-test-case | --history-name HISTORY_NAME]
-  [--no-history-reuse] [--no-history-cleanup] [--publish-history]
-  [--parallel-tests PARALLEL_TESTS] [--retries RETRIES] [--page-size PAGE_SIZE]
-  [--page-number PAGE_NUMBER] [--download-attempts DOWNLOAD_ATTEMPTS]
-  [--download-sleep DOWNLOAD_SLEEP] [--test-data TEST_DATA]
+shed-tools test [-h] [-v] [--log_file LOG_FILE] [-g GALAXY] [-u USER]
+  [-p PASSWORD] [-a API_KEY] [-t TOOL_LIST_FILE]
+  [-y TOOL_YAML] [--name NAME] [--owner OWNER]
+  [--revisions [REVISIONS [REVISIONS ...]]]
+  [--toolshed TOOL_SHED_URL] [--test_json TEST_JSON]
+  [--test_user_api_key TEST_USER_API_KEY]
+  [--test_user TEST_USER]
+  [--parallel_tests PARALLEL_TESTS]
 ```
 
 ???
@@ -531,7 +527,7 @@ can be used to generate test reports from `tool_test_output.json`
 
 ???
 
-Running tool tests with galaxy-tool-test will yield
+Running tool tests with ephemeris will yield
 - a list of tool tests that have passed and failed and
 - a more detailed file of data from the test jobs that is useful for debugging.
 
