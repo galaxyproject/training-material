@@ -68,10 +68,11 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -48,3 +48,5 @@
->       src: https://github.com/Paprikant/ansible-role-beacon
->     - name: paprikant.beacon-importer
->       src: https://github.com/Paprikant/ansible-role-beacon_importer
+>    @@ -54,3 +54,6 @@
+>     # Training Infrastructure as a Service
+>     - src: galaxyproject.tiaas2
+>       version: 2.1.5
+>    +# Sentry
 >    +- name: mvdbeek.sentry_selfhosted
 >    +  src: https://github.com/mvdbeek/ansible-role-sentry/archive/main.tar.gz
 >    {% endraw %}
@@ -115,9 +116,9 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    ```diff
 >    --- a/hosts
 >    +++ b/hosts
->    @@ -15,3 +15,6 @@ beacon_server
->     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
->     [beacon_import]
+>    @@ -6,3 +6,6 @@ galaxyservers
+>     gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
+>     [monitoring]
 >     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
 >    +
 >    +[sentryservers]
@@ -136,7 +137,7 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    ```diff
 >    --- /dev/null
 >    +++ b/group_vars/sentryservers.yml
->    @@ -0,0 +1,7 @@
+>    @@ -0,0 +1,6 @@
 >    +sentry_version: 23.3.1
 >    +sentry_url: "https://{{ sentry_domain }}"
 >    +sentry_docker_compose_project_folder: /srv/sentry
@@ -151,36 +152,45 @@ First we need to add our new Ansible role to `requirements.yml`:
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/nginx/galaxy.j2
->    +++ b/templates/nginx/galaxy.j2
->    @@ -125,3 +125,24 @@ server {
->                    proxy_set_header Host $host;
->            }
->     }
->    +
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -196,6 +196,7 @@ nginx_servers:
+>       - redirect-ssl
+>     nginx_ssl_servers:
+>       - galaxy
+>    +  - sentry
+>     nginx_enable_default_server: false
+>     nginx_conf_http:
+>       client_max_body_size: 1g
+>    diff --git a/templates/nginx/sentry.j2 b/templates/nginx/sentry.j2
+>    new file mode 100644
+>    index 0000000..560edb8
+>    --- /dev/null
+>    +++ b/templates/nginx/sentry.j2
+>    @@ -0,0 +1,20 @@
 >    +server {
->    + # Listen on port 443
->    + listen        *:443 ssl;
->    + # The virtualhost is our domain name
->    + server_name   "{{ sentry_domain }}";
+>    +	# Listen on port 443
+>    +	listen        *:443 ssl;
+>    +	# The virtualhost is our domain name
+>    +	server_name   "{{ sentry_domain }}";
 >    +
->    + # Our log files will go here.
->    + access_log  syslog:server=unix:/dev/log;
->    + error_log   syslog:server=unix:/dev/log;
+>    +	# Our log files will go here.
+>    +	access_log  syslog:server=unix:/dev/log;
+>    +	error_log   syslog:server=unix:/dev/log;
 >    +
->    + location / {
->    +     # This is the backend to send the requests to.
->    +     proxy_pass "http://localhost:9000";
+>    +	location / {
+>    +		# This is the backend to send the requests to.
+>    +		proxy_pass "http://localhost:9000";
 >    +
->    +     proxy_set_header Host $http_host;
->    +     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
->    +     proxy_set_header X-Forwarded-Proto $scheme;
->    +     proxy_set_header Upgrade $http_upgrade;
->    +  }
+>    +		proxy_set_header Host $http_host;
+>    +		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+>    +		proxy_set_header X-Forwarded-Proto $scheme;
+>    +		proxy_set_header Upgrade $http_upgrade;
+>    +	}
 >    +}
 >    {% endraw %}
 >    ```
->    {: data-commit="Add nginx server "}
+>    {: data-commit="Add nginx server"}
 >
 > 7. Run the sentry playbook.
 >

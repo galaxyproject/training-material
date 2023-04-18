@@ -60,9 +60,9 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    ```diff
 >    --- a/hosts
 >    +++ b/hosts
->    @@ -6,3 +6,12 @@ galaxyservers
->     gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
->     [monitoring]
+>    @@ -9,3 +9,12 @@ gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>     
+>     [sentryservers]
 >     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
 >    +
 >    +[beacon]
@@ -92,7 +92,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -57,3 +57,8 @@
+>    @@ -60,3 +60,8 @@
 >     # Our FTP Server
 >     - src: galaxyproject.proftpd
 >       version: 0.3.1

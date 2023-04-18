@@ -85,10 +85,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -54,3 +54,6 @@
->     # Training Infrastructure as a Service
->     - src: galaxyproject.tiaas2
->       version: 2.1.5
+>    @@ -57,3 +57,6 @@
+>     # Sentry
+>     - name: mvdbeek.sentry_selfhosted
+>       src: https://github.com/mvdbeek/ansible-role-sentry/archive/main.tar.gz
 >    +# Our FTP Server
 >    +- src: galaxyproject.proftpd
 >    +  version: 0.3.1
@@ -159,7 +159,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -343,3 +343,24 @@ telegraf_plugins_extra:
+>    @@ -344,3 +344,24 @@ telegraf_plugins_extra:
 >     tiaas_dir: /srv/tiaas
 >     tiaas_admin_user: admin
 >     tiaas_admin_pass: changeme
