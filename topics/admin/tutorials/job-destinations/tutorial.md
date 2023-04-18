@@ -255,9 +255,9 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    -    default: slurm
 >    +    default: tpv_dispatcher
 >         environments:
->    -      local_env:
->    -        runner: local_runner
->    -        tmp_dir: true
+>           local_env:
+>             runner: local_runner
+>             tmp_dir: true
 >    -      slurm:
 >    -        runner: slurm
 >    -        singularity_enabled: true
