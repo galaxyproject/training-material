@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Scripting Galaxy using the API and BioBlend">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-03-14 17:13:00 +0000">
+<meta name="DC.date" content="2023-04-18 01:09:15 +0000">
 <meta name="DC.creator" content="Nicola Soranzo">
 
         
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-14 17:13:00 +0000",
+  "dateModified": "2023-04-18 01:09:15 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Scripting Galaxy using the API and BioBlend",
   "interactivityType": "mixed",
@@ -349,7 +349,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-14 17:13:00 +0000",
+  "dateModified": "2023-04-18 01:09:15 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Scripting Galaxy using the API and BioBlend",
   "interactivityType": "mixed",
@@ -605,7 +605,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 14, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 18, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -847,7 +847,7 @@
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-upload-a-dataset"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Upload a dataset</div>
-  <p><strong>Upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history. You need to run the special <code class="language-plaintext highlighter-rouge">upload1</code> tool by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/tools</code>. You don’t need to pass any inputs to it apart from attaching the file as <code class="language-plaintext highlighter-rouge">files_0|file_data</code>. Also, note that when attaching a file you need to drop <code class="language-plaintext highlighter-rouge">Content-Type</code> from the request headers.</p>
+  <p><strong>Upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history. You need to run the special <code class="language-plaintext highlighter-rouge">upload1</code> tool by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/tools</code>. You don’t need to pass any inputs to it apart from attaching the file as <code class="language-plaintext highlighter-rouge">files_0|file_data</code>. Also, note that when attaching a file the payload should <strong>not</strong> be serialized to a JSON string and you need to drop <code class="language-plaintext highlighter-rouge">Content-Type</code> from the request headers.</p>
 
   <p>You can obtain the <code class="language-plaintext highlighter-rouge">1.txt</code> file from the following URL, you’ll need to download it first.</p>
 
@@ -892,7 +892,7 @@
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-import-a-workflow"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Import a workflow</div>
-  <p><strong>Import a workflow</strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>. The only needed data is <code class="language-plaintext highlighter-rouge">workflow</code>, which must be a deserialized JSON representation of the workflow.</p>
+  <p><strong>Import a workflow</strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>. The only needed data is <code class="language-plaintext highlighter-rouge">workflow</code>, which must be a deserialized JSON representation of the workflow <code class="language-plaintext highlighter-rouge">.ga</code> file.</p>
 
   <p>You can obtain the <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> file from the following URL, you’ll need to download it first.</p>
 
@@ -902,8 +902,8 @@
     <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">workflow_json</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'workflow'</span><span class="p">:</span> <span class="n">workflow_json</span><span class="p">}</span>
+    <span class="n">workflow_dict</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"workflow"</span><span class="p">:</span> <span class="n">workflow_dict</span><span class="p">}</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="n">wf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
 <span class="nf">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
@@ -958,6 +958,13 @@
 </blockquote>
 
 <h1 id="interacting-with-histories-in-bioblend">Interacting with histories in BioBlend</h1>
+
+<p>If you need to install BioBlend into your Jupyter environment, you can execute:</p>
+
+<p><code class="language-plaintext highlighter-rouge">python
+import sys
+!{sys.executable} -m pip install bioblend
+</code></p>
 
 <p><strong>You need to insert the API key for your Galaxy server in the cell below</strong>:</p>
 <ol>
@@ -1233,7 +1240,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 <p><strong>New resources</strong> are created with <code class="language-plaintext highlighter-rouge">create()</code> methods, e.g. to create a new history:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">)</span>
-<span class="n">new_hist</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>As you can see, the <code class="language-plaintext highlighter-rouge">create()</code> methods in BioBlend.objects returns an object, not a dictionary.</p>
@@ -1251,7 +1258,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="nf">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">)</span>
-<span class="n">hda</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Please note that with BioBlend.objects there is no need to find the upload dataset, since <code class="language-plaintext highlighter-rouge">upload_file()</code> already returns a <code class="language-plaintext highlighter-rouge">HistoryDatasetAssociation</code> object.</p>
@@ -1318,7 +1325,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
-<span class="n">new_hist</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1338,7 +1345,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="nf">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">)</span>
-<span class="n">hda</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1360,7 +1367,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">wf_string</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
 <span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">import_new</span><span class="p">(</span><span class="n">wf_string</span><span class="p">)</span>
-<span class="n">wf</span>
+<span class="nf">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1373,7 +1380,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div class="box-title question-title" id="question-view-the-workflow-inputs"><i class="far fa-question-circle" aria-hidden="true"></i> Question: View the workflow inputs</div>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span><span class="p">.</span><span class="n">inputs</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">.</span><span class="n">inputs</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
