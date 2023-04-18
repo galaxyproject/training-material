@@ -142,7 +142,7 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    +sentry_docker_compose_project_folder: /srv/sentry
 >    +sentry_superusers:
 >    +  - email:  admin@example.com
->    +    password: gat2023
+>    +    password: "{{ vault_sentry_password }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure Sentry"}
@@ -179,6 +179,8 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    +  }
 >    +}
 >    {% endraw %}
+>    ```
+>    {: data-commit="Add nginx server "}
 >
 > 7. Run the sentry playbook.
 >
@@ -192,21 +194,22 @@ First we need to add our new Ansible role to `requirements.yml`:
 > 8. Generate a project for Galaxy in Sentry
 >  Go to the domain you configured for your Sentry instance. You need to log in with the username and admin you've set up in `group_vars/sentryservers.yml`. Click "continue" on the next page. Click "Projects", "Create Project", "Python", select "I'll create my own alerts later", and set "galaxy" as the Project Name. You'll see your project dsn that will look like `https://b0022427ee5345a8ad4cb072c73e62f4@sentry.gat-N.eu.galaxy.training/2`. We will need this string to let Galaxy know where to send data to. To avoid requesting an additional certificate for communication between Galaxy and Sentry we've set up communication via localhost:9000, so you can manually change the @ portion to localhost:9000.
 >
-> 9. We will add the project dsn to the vault
->        Edit your `group_vars/secret.yml` and add the sentry dsn.
+> 9. We will add the project dsn to the vault. Edit your `group_vars/secret.yml` and add the sentry dsn.
 >
->        ><code-in-title>Bash</code-in-title>
->        > ```
->        > ansible-vault edit group_vars/secret.yml
->        > ```
->        {: .code-in}
+>    ><code-in-title>Bash</code-in-title>
+>    > ```
+>    > ansible-vault edit group_vars/secret.yml
+>    > ```
+>    {: .code-in}
 >
->        ```yaml
->        vault_sentry_dsn: 'https://b0022427ee5345a8ad4cb072c73e62f4@localhost:9000/2'
->        ```
+>    ```yaml
+>    vault_sentry_dsn: 'https://b0022427ee5345a8ad4cb072c73e62f4@localhost:9000/2'
+>    ```
+>
 > 9. Edit `group_vars/galaxyservers.yml` to reference the new vault secret:
 >
-> This will let Galaxy know that captured logs should be sent to our Sentry instance.
+>    This will let Galaxy know that captured logs should be sent to our Sentry instance.
+>
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
@@ -221,6 +224,8 @@ First we need to add our new Ansible role to `requirements.yml`:
 >         ftp_upload_site: "{{ inventory_hostname }}"
 >     ```
 >    {% endraw %}
+>    {: data-commit="Configure Galaxy to report to Sentry"}
+>
 > 10. Run the galaxy playbook.
 >
 >    > <code-in-title>Bash</code-in-title>
