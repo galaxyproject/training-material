@@ -144,7 +144,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >    @@ -31,3 +31,10 @@
 >     # TPV Linting
 >     - name: usegalaxy_eu.tpv_auto_lint
->       version: 0.4.2
+>       version: 0.4.3
 >    +# RabbitMQ for Pulsar
 >    +- src: geerlingguy.docker
 >    +  version: 6.1.0
@@ -271,7 +271,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -161,8 +161,11 @@ certbot_environment: staging
+>    @@ -162,8 +162,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -283,7 +283,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -212,6 +215,47 @@ slurm_config:
+>    @@ -213,6 +216,47 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     

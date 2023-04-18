@@ -504,7 +504,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -310,3 +310,12 @@ flower_ui_users:
+>    @@ -311,3 +311,12 @@ flower_ui_users:
 >     
 >     flower_environment_variables:
 >       GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
@@ -796,7 +796,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -322,3 +322,10 @@ telegraf_plugins_extra:
+>    @@ -323,3 +323,10 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000
