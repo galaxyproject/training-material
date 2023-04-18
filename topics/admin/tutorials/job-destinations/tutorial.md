@@ -248,7 +248,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -24,34 +24,15 @@ galaxy_job_config:
+>    @@ -24,34 +24,18 @@ galaxy_job_config:
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
@@ -291,7 +291,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -144,6 +125,8 @@ galaxy_config_files_public:
+>    @@ -144,6 +128,8 @@ galaxy_config_files_public:
 >     galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -463,7 +463,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -32,6 +32,7 @@ galaxy_job_config:
+>    @@ -35,6 +35,7 @@ galaxy_job_config:
 >             function: map_tool_to_destination
 >             rules_module: tpv.rules
 >             tpv_config_files:
@@ -615,7 +615,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -34,6 +34,11 @@ galaxy_job_config:
+>    @@ -37,6 +37,11 @@ galaxy_job_config:
 >             tpv_config_files:
 >               - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
 >               - "{{ tpv_config_dir }}/tpv_rules_local.yml"
@@ -627,7 +627,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -53,6 +58,7 @@ galaxy_config:
+>    @@ -56,6 +61,7 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -635,7 +635,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -134,6 +140,8 @@ galaxy_config_templates:
+>    @@ -137,6 +143,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
