@@ -167,7 +167,7 @@ For that, you can install from a YAML file:
 
 > <hands-on-title>Installing tools from a tool list</hands-on-title>
 >
-> 1. (optional) Watch the installation proceed by running `journalctl -f -u galaxy` in a separate remote shell.
+> 1. (optional) Watch the installation proceed by running `journalctl -f` in a separate remote shell.
 >
 > 2. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to install all of the tools from the `workflow_tools.yml` file on your Galaxy.
 >
