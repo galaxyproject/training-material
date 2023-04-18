@@ -176,7 +176,7 @@ And of course, Galaxy has an Ansible Role for that.
 >       version: 1.0.2
 >    +# TPV Linting
 >    +- name: usegalaxy_eu.tpv_auto_lint
->    +  version: 0.4.2
+>    +  version: 0.4.3
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tpv-auto-lint to requirements"}
@@ -194,7 +194,7 @@ And of course, Galaxy has an Ansible Role for that.
 >     galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->    @@ -148,7 +150,10 @@ galaxy_config_templates:
+>    @@ -148,7 +150,11 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
 >     galaxy_extra_dirs:
@@ -203,6 +203,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    +
 >    +galaxy_extra_privsep_dirs:
 >    +  - "{{ tpv_mutable_dir }}"
+>    +tpv_privsep: true
 >     
 >     galaxy_local_tools:
 >     - testing.xml
@@ -543,7 +544,7 @@ can be matched up so that only desired combinations are compatible with each oth
 >    +      - id: admin_only_testing_tool
 >    +        if: |
 >    +          # Only allow the tool to be executed if the user is an admin
->    +          admin_users = app.config.get( "admin_users", "" ).split( "," )
+>    +          admin_users = app.config.admin_users
 >    +          # last line in block must evaluate to a value - which determines whether the TPV if conditional matches or not
 >    +          not user or user.email not in admin_users
 >    +        fail: Unauthorized. Only admins can execute this tool.

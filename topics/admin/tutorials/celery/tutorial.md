@@ -149,7 +149,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -269,3 +269,7 @@ rabbitmq_users:
+>        @@ -270,3 +270,7 @@ rabbitmq_users:
 >         # TUS
 >         galaxy_tusd_port: 1080
 >         galaxy_tus_upload_store: /data/tus
@@ -248,7 +248,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -256,6 +256,7 @@ rabbitmq_config:
+>        @@ -257,6 +257,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
 >           - /pulsar/pulsar_au
@@ -256,7 +256,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -265,6 +266,13 @@ rabbitmq_users:
+>        @@ -266,6 +267,13 @@ rabbitmq_users:
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -299,7 +299,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -281,3 +281,22 @@ galaxy_tus_upload_store: /data/tus
+>        @@ -282,3 +282,22 @@ galaxy_tus_upload_store: /data/tus
 >         #Redis
 >         galaxy_additional_venv_packages:
 >           - redis
