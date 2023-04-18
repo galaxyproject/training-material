@@ -47,7 +47,7 @@ You are an administrator of a Galaxy server. A colleague has approached you with
 
 To run this tutorial, you will need to [install Ephemeris](https://ephemeris.readthedocs.io/en/latest/installation.html). You would normally install it on your workstation, but during training courses we recommend to install it on the same virtual machine used for the Galaxy server.
 
-> <tip-title>Installing Ephemeris in a Python virtual environment</tip-title>
+> <hands-on-title>Installing Ephemeris in a Python virtual environment</hands-on-title>
 >
 > 1. Install the Python `venv` package if it is not already available. On Ubuntu this can be done with `sudo apt install python3-venv`
 > 2. Create a virtual environment just for ephemeris, activate it and install ephemeris inside it:
@@ -56,8 +56,7 @@ To run this tutorial, you will need to [install Ephemeris](https://ephemeris.rea
 >    . ~/ephemeris_venv/bin/activate
 >    pip install ephemeris
 >    ```
-{: .tip}
-
+{: .hands_on}
 
 # Extracting Tools
 
