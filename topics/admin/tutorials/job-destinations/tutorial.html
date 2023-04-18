@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mapping Jobs to Destinations using TPV">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-18 15:24:36 +0000">
+<meta name="DC.date" content="2023-04-18 16:26:53 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nuwan Goonasekera">
@@ -67,7 +67,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-18 15:24:36 +0000",
+  "dateModified": "2023-04-18 16:26:53 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mapping Jobs to Destinations using TPV",
   "interactivityType": "mixed",
@@ -380,7 +380,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-18 15:24:36 +0000",
+  "dateModified": "2023-04-18 16:26:53 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mapping Jobs to Destinations using TPV",
   "interactivityType": "mixed",
@@ -1042,17 +1042,17 @@ And of course, Galaxy has an Ansible Role for that.</p>
 
       <div data-commit="Add TPV to job config" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -24,34 +24,15 @@</span> galaxy_job_config:
+</span><span class="p">@@ -24,34 +24,18 @@</span> galaxy_job_config:
    handling:
      assign: ['db-skip-locked']
    execution:
 <span class="gd">-    default: slurm
 </span><span class="gi">+    default: tpv_dispatcher
 </span>     environments:
-<span class="gd">-      local_env:
--        runner: local_runner
--        tmp_dir: true
--      slurm:
+       local_env:
+         runner: local_runner
+         tmp_dir: true
+<span class="gd">-      slurm:
 -        runner: slurm
 -        singularity_enabled: true
 -        env:
@@ -1085,7 +1085,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 </span>   tools:
      - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
        environment: local_env
-<span class="p">@@ -144,6 +125,8 @@</span> galaxy_config_files_public:
+<span class="p">@@ -144,6 +128,8 @@</span> galaxy_config_files_public:
  galaxy_config_files:
    - src: files/galaxy/themes.yml
      dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -1260,7 +1260,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 
       <div data-commit="Importing TPV shared database via job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -32,6 +32,7 @@</span> galaxy_job_config:
+</span><span class="p">@@ -35,6 +35,7 @@</span> galaxy_job_config:
          function: map_tool_to_destination
          rules_module: tpv.rules
          tpv_config_files:
@@ -1418,7 +1418,7 @@ This of course assumes that your users are well behaved enough not to choose the
 
       <div data-commit="Configure resources in job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -34,6 +34,11 @@</span> galaxy_job_config:
+</span><span class="p">@@ -37,6 +37,11 @@</span> galaxy_job_config:
          tpv_config_files:
            - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
            - "{{ tpv_config_dir }}/tpv_rules_local.yml"
@@ -1430,7 +1430,7 @@ This of course assumes that your users are well behaved enough not to choose the
 </span>   tools:
      - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
        environment: local_env
-<span class="p">@@ -53,6 +58,7 @@</span> galaxy_config:
+<span class="p">@@ -56,6 +61,7 @@</span> galaxy_config:
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
      job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -1438,7 +1438,7 @@ This of course assumes that your users are well behaved enough not to choose the
 </span>     # SQL Performance
      slow_query_log_threshold: 5
      enable_per_request_sql_debugging: true
-<span class="p">@@ -134,6 +140,8 @@</span> galaxy_config_templates:
+<span class="p">@@ -137,6 +143,8 @@</span> galaxy_config_templates:
      dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
    - src: templates/galaxy/config/dependency_resolvers_conf.xml
      dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
