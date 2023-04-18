@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mapping Jobs to Destinations using TPV">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-17 13:02:03 +0000">
+<meta name="DC.date" content="2023-04-17 16:58:28 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nuwan Goonasekera">
@@ -67,7 +67,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-17 13:02:03 +0000",
+  "dateModified": "2023-04-17 16:58:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mapping Jobs to Destinations using TPV",
   "interactivityType": "mixed",
@@ -376,7 +376,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-17 13:02:03 +0000",
+  "dateModified": "2023-04-17 16:58:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mapping Jobs to Destinations using TPV",
   "interactivityType": "mixed",
@@ -884,7 +884,7 @@ separately.</p>
 
       <div data-commit="Deploy testing tool" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -145,6 +145,9 @@</span> galaxy_config_templates:
+</span><span class="p">@@ -150,6 +150,9 @@</span> galaxy_config_templates:
  galaxy_extra_dirs:
    - /data
     
@@ -969,7 +969,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 
       <div data-commit="Add TPV config dir" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -128,6 +128,8 @@</span> galaxy_config:
+</span><span class="p">@@ -133,6 +133,8 @@</span> galaxy_config:
            - job-handlers
            - workflow-schedulers
     
@@ -978,7 +978,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 </span> galaxy_config_files_public:
    - src: files/galaxy/welcome.html
      dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
-<span class="p">@@ -143,7 +145,10 @@</span> galaxy_config_templates:
+<span class="p">@@ -148,7 +150,10 @@</span> galaxy_config_templates:
      dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
     
  galaxy_extra_dirs:
@@ -998,7 +998,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 
       <div data-commit="Add tpv-auto-lint role" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/galaxy.yml
 </span><span class="gi">+++ b/galaxy.yml
-</span><span class="p">@@ -41,6 +41,7 @@</span>
+</span><span class="p">@@ -42,6 +42,7 @@</span>
      - galaxyproject.slurm
      - usegalaxy_eu.apptainer
      - galaxyproject.galaxy
@@ -1077,7 +1077,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 </span>   tools:
      - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
        environment: local_env
-<span class="p">@@ -137,6 +118,8 @@</span> galaxy_config_files_public:
+<span class="p">@@ -142,6 +123,8 @@</span> galaxy_config_files_public:
  galaxy_config_files:
    - src: files/galaxy/themes.yml
      dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -1430,7 +1430,7 @@ This of course assumes that your users are well behaved enough not to choose the
 </span>     # SQL Performance
      slow_query_log_threshold: 5
      enable_per_request_sql_debugging: true
-<span class="p">@@ -127,6 +133,8 @@</span> galaxy_config_templates:
+<span class="p">@@ -132,6 +138,8 @@</span> galaxy_config_templates:
      dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
    - src: templates/galaxy/config/dependency_resolvers_conf.xml
      dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"

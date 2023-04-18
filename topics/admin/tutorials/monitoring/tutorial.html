@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Monitoring with Telegraf and Grafana">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-17 12:02:46 +0000">
+<meta name="DC.date" content="2023-04-17 16:58:28 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 
         
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-17 12:02:46 +0000",
+  "dateModified": "2023-04-17 16:58:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Monitoring with Telegraf and Grafana",
   "interactivityType": "mixed",
@@ -483,7 +483,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-17 12:02:46 +0000",
+  "dateModified": "2023-04-17 16:58:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Monitoring with Telegraf and Grafana",
   "interactivityType": "mixed",
@@ -1622,8 +1622,8 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
       <div data-commit="Add telegraf to the monitoring playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/galaxy.yml
 </span><span class="gi">+++ b/galaxy.yml
 </span><span class="p">@@ -53,6 +53,7 @@</span>
+     - usegalaxy_eu.rabbitmqserver
      - galaxyproject.gxadmin
-     - galaxyproject.tusd
      - galaxyproject.cvmfs
 <span class="gi">+    - dj-wasabi.telegraf
 </span>   post_tasks:
@@ -1680,7 +1680,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -314,3 +314,12 @@</span> flower_ui_users:
+</span><span class="p">@@ -310,3 +310,12 @@</span> flower_ui_users:
     
  flower_environment_variables:
    GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
@@ -1705,7 +1705,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -104,6 +104,9 @@</span> galaxy_config:
+</span><span class="p">@@ -105,6 +105,9 @@</span> galaxy_config:
      celery_conf:
        result_backend: "redis://localhost:6379/0"
      enable_celery_tasks: true
@@ -2060,7 +2060,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -326,3 +326,10 @@</span> telegraf_plugins_extra:
+</span><span class="p">@@ -322,3 +322,10 @@</span> telegraf_plugins_extra:
        - service_address = ":8125"
        - metric_separator = "."
        - allowed_pending_messages = 10000

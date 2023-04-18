@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Performant Uploads with TUS">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-17 13:02:03 +0000">
+<meta name="DC.date" content="2023-04-17 16:58:28 +0000">
 <meta name="DC.creator" content="Marius van den Beek">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Lucille Delisle">
@@ -66,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-17 13:02:03 +0000",
+  "dateModified": "2023-04-17 16:58:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Performant Uploads with TUS",
   "interactivityType": "mixed",
@@ -543,7 +543,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-17 13:02:03 +0000",
+  "dateModified": "2023-04-17 16:58:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Performant Uploads with TUS",
   "interactivityType": "mixed",
@@ -1252,32 +1252,35 @@
 
       <div data-commit="Configure TUS in your group variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -65,6 +65,8 @@</span> galaxy_config:
+</span><span class="p">@@ -65,6 +65,9 @@</span> galaxy_config:
      # Tool security
      outputs_to_working_directory: true
      new_user_dataset_access_role_default_private: true # Make datasets private by default
 <span class="gi">+    # TUS
-+    tus_upload_store: /data/tus
++    galaxy_infrastructure_url: "https://{{ inventory_hostname }}"
++    tus_upload_store: "{{ galaxy_tus_upload_store }}"
 </span>   gravity:
      process_manager: systemd
      galaxy_root: "{{ galaxy_root }}/server"
-<span class="p">@@ -154,3 +156,16 @@</span> nginx_conf_http:
+<span class="p">@@ -85,6 +88,10 @@</span> galaxy_config:
+     celery:
+       concurrency: 2
+       loglevel: DEBUG
+<span class="gi">+    tusd:
++      enable: true
++      tusd_path: /usr/local/sbin/tusd
++      upload_dir: "{{ galaxy_tus_upload_store }}"
+</span>     handlers:
+       handler:
+         processes: 2
+<span class="p">@@ -154,3 +161,7 @@</span> nginx_conf_http:
  nginx_ssl_role: usegalaxy_eu.certbot
  nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
  nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 <span class="gi">+
 +# TUS
 +galaxy_tusd_port: 1080
-+tusd_instances:
-+  - name: main
-+    user: "{{ galaxy_user.name }}"
-+    group: "galaxy"
-+    args:
-+      - "-host=localhost"
-+      - "-port={{ galaxy_tusd_port }}"
-+      - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
-+      - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
-+      - "-hooks-http-forward-headers=X-Api-Key,Cookie"
++galaxy_tus_upload_store: /data/tus
 </span>   
 </code></pre></div>      </div>
     </li>
@@ -1317,14 +1320,14 @@
 
       <div data-commit="Add the role to the playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/galaxy.yml
 </span><span class="gi">+++ b/galaxy.yml
-</span><span class="p">@@ -36,6 +36,7 @@</span>
-       become_user: "{{ galaxy_user_name }}"
-     - galaxyproject.nginx
-     - galaxyproject.gxadmin
+</span><span class="p">@@ -30,6 +30,7 @@</span>
+         name: ['tmpreaper']
+       when: ansible_os_family == 'Debian'
+   roles:
 <span class="gi">+    - galaxyproject.tusd
-</span>   post_tasks:
-     - name: Setup gxadmin cleanup task
-       ansible.builtin.cron:
+</span>     - galaxyproject.galaxy
+     - role: galaxyproject.miniconda
+       become: true
    
 </code></pre></div>      </div>
     </li>

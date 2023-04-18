@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Connecting Galaxy to a compute cluster">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-17 13:02:03 +0000">
+<meta name="DC.date" content="2023-04-17 16:58:28 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Helena Rasche">
@@ -66,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-17 13:02:03 +0000",
+  "dateModified": "2023-04-17 16:58:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Connecting Galaxy to a compute cluster",
   "interactivityType": "mixed",
@@ -547,7 +547,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-17 13:02:03 +0000",
+  "dateModified": "2023-04-17 16:58:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Connecting Galaxy to a compute cluster",
   "interactivityType": "mixed",
@@ -1283,10 +1283,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
       <div data-commit="Add the repos and slurm roles" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/galaxy.yml
 </span><span class="gi">+++ b/galaxy.yml
-</span><span class="p">@@ -33,6 +33,8 @@</span>
-         repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
+</span><span class="p">@@ -34,6 +34,8 @@</span>
          dest: /libraries/
    roles:
+     - galaxyproject.tusd
 <span class="gi">+    - galaxyproject.repos
 +    - galaxyproject.slurm
 </span>     - usegalaxy_eu.apptainer
@@ -1300,7 +1300,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
       <div data-commit="Add slurm configuration" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -184,6 +184,16 @@</span> nginx_ssl_role: usegalaxy_eu.certbot
+</span><span class="p">@@ -189,6 +189,16 @@</span> nginx_ssl_role: usegalaxy_eu.certbot
  nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
  nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
     
@@ -1316,7 +1316,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 +
 </span> # TUS
  galaxy_tusd_port: 1080
- tusd_instances:
+ galaxy_tus_upload_store: /data/tus
    
 </code></pre></div>      </div>
     </li>
@@ -1526,8 +1526,8 @@ sleep </span>30
 +      package:
 +        name: slurm-drmaa1
 </span>   roles:
+     - galaxyproject.tusd
      - galaxyproject.repos
-     - galaxyproject.slurm
    
 </code></pre></div>      </div>
     </li>
