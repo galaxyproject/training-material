@@ -149,7 +149,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -274,3 +274,7 @@ tusd_instances:
+>        @@ -275,3 +275,7 @@ tusd_instances:
 >               - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
 >               - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
 >               - "-hooks-http-forward-headers=X-Api-Key,Cookie"
@@ -248,7 +248,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -252,6 +252,7 @@ rabbitmq_config:
+>        @@ -253,6 +253,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
 >           - /pulsar/pulsar_au
@@ -256,7 +256,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -261,6 +262,13 @@ rabbitmq_users:
+>        @@ -262,6 +263,13 @@ rabbitmq_users:
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -299,7 +299,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -286,3 +286,22 @@ tusd_instances:
+>        @@ -287,3 +287,22 @@ tusd_instances:
 >         #Redis
 >         galaxy_additional_venv_packages:
 >           - redis
@@ -373,7 +373,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -119,6 +119,11 @@ galaxy_config:
+>    @@ -120,6 +120,11 @@ galaxy_config:
 >           preload: true
 >         celery:
 >           concurrency: 2
@@ -394,7 +394,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -100,6 +100,11 @@ galaxy_config:
+>    @@ -101,6 +101,11 @@ galaxy_config:
 >         # Data Library Directories
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
