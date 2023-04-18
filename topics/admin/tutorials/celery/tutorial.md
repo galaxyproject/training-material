@@ -149,10 +149,10 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -269,3 +269,7 @@ rabbitmq_users:
->         # TUS
->         galaxy_tusd_port: 1080
->         galaxy_tus_upload_store: /data/tus
+>        @@ -275,3 +275,7 @@ tusd_instances:
+>               - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
+>               - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
+>               - "-hooks-http-forward-headers=X-Api-Key,Cookie"
 >        +
 >        +#Redis
 >        +galaxy_additional_venv_packages:
@@ -248,7 +248,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -256,6 +256,7 @@ rabbitmq_config:
+>        @@ -253,6 +253,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
 >           - /pulsar/pulsar_au

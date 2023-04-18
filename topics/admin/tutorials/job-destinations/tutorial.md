@@ -185,7 +185,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -133,6 +133,8 @@ galaxy_config:
+>    @@ -130,6 +130,8 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
@@ -194,7 +194,7 @@ And of course, Galaxy has an Ansible Role for that.
 >     galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->    @@ -148,7 +150,10 @@ galaxy_config_templates:
+>    @@ -145,7 +147,10 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
 >     galaxy_extra_dirs:
@@ -290,7 +290,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -142,6 +123,8 @@ galaxy_config_files_public:
+>    @@ -139,6 +120,8 @@ galaxy_config_files_public:
 >     galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -626,9 +626,9 @@ Such form elements can be added to tools without modifying each tool's configura
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -51,6 +56,7 @@ galaxy_config:
->         file_path: /data/datasets
->         job_working_directory: /data/jobs
+>    @@ -53,6 +58,7 @@ galaxy_config:
+>         object_store_store_by: uuid
+>         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
 >         # SQL Performance

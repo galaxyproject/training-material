@@ -80,7 +80,7 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -65,6 +65,9 @@ galaxy_config:
+>    @@ -67,6 +67,8 @@ galaxy_config:
 >         # Tool security
 >         outputs_to_working_directory: true
 >         new_user_dataset_access_role_default_private: true # Make datasets private by default
