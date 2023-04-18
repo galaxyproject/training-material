@@ -958,7 +958,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
 >    +    file_path: /data/datasets
 >    +    job_working_directory: /data/jobs
->    +    object_store_store_by: /data/jobs
+>    +    object_store_store_by: uuid
+>    +    id_secret: "{{ vault_id_secret }}"
 >    +
 >    +galaxy_extra_dirs:
 >    +  - /data
