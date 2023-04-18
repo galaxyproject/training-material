@@ -47,7 +47,7 @@ You are an administrator of a Galaxy server. A colleague has approached you with
 
 To run this tutorial, you will need to [install Ephemeris](https://ephemeris.readthedocs.io/en/latest/installation.html). You would normally install it on your workstation, but during training courses we recommend to install it on the same virtual machine used for the Galaxy server.
 
-> <tip-title>Installing Ephemeris in a Python virtual environment</tip-title>
+> <hands-on-title>Installing Ephemeris in a Python virtual environment</hands-on-title>
 >
 > 1. Install the Python `venv` package if it is not already available. On Ubuntu this can be done with `sudo apt install python3-venv`
 > 2. Create a virtual environment just for ephemeris, activate it and install ephemeris inside it:
@@ -56,8 +56,7 @@ To run this tutorial, you will need to [install Ephemeris](https://ephemeris.rea
 >    . ~/ephemeris_venv/bin/activate
 >    pip install ephemeris
 >    ```
-{: .tip}
-
+{: .hands_on}
 
 # Extracting Tools
 
@@ -99,7 +98,7 @@ Ephemeris can take care of this process. Let's practice this on a real workflow.
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 2. Use the Ephemeris [`workflow-to-tools`](https://ephemeris.readthedocs.io/en/latest/commands/workflow-to-tools.html) command to extract the tool list from this workflow into a file named `workflow_tools.yml`.
+> 2. Use the Ephemeris [`workflow-to-tools`](https://ephemeris.readthedocs.io/en/latest/commands/workflow-to-tools.html) command to extract the tool list from this workflow into a file named `workflow_tools.yml` in the folder `tools`.
 >
 >    > <question-title></question-title>
 >    > What did your command look like?
@@ -107,9 +106,60 @@ Ephemeris can take care of this process. Let's practice this on a real workflow.
 >    > > <solution-title></solution-title>
 >    > > > <code-in-title>Bash</code-in-title>
 >    > > > ```bash
->    > > > workflow-to-tools -w mapping.ga -o workflow_tools.yml -l Mapping
+>    > > > workflow-to-tools -w mapping.ga -o tools/workflow_tools.yml -l Mapping
 >    > > > ```
 >    > > > {: data-cmd="true"}
+>    > > >
+>    > > > Or as a diff:
+>    > > > {% raw %}
+>    > > > ```diff
+>    > > > --- /dev/null
+>    > > > +++ b/tools/workflow_tools.yml
+>    > > > @@ -0,0 +1,41 @@
+>    > > > +install_tool_dependencies: True
+>    > > > +install_repository_dependencies: True
+>    > > > +install_resolver_dependencies: True
+>    > > > +
+>    > > > +tools:
+>    > > > +- name: fastqc
+>    > > > +  owner: devteam
+>    > > > +  revisions:
+>    > > > +  - e7b2202befea
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > +- name: trim_galore
+>    > > > +  owner: bgruening
+>    > > > +  revisions:
+>    > > > +  - 949f01671246
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > +- name: multiqc
+>    > > > +  owner: iuc
+>    > > > +  revisions:
+>    > > > +  - f7985e0479b9
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > +- name: bowtie2
+>    > > > +  owner: devteam
+>    > > > +  revisions:
+>    > > > +  - 09b2cdb7ace5
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > +- name: samtools_stats
+>    > > > +  owner: devteam
+>    > > > +  revisions:
+>    > > > +  - 24c5d43cb545
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > +- name: bamtools_filter
+>    > > > +  owner: devteam
+>    > > > +  revisions:
+>    > > > +  - cb20f99fd45b
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > {% endraw %}
+>    > > > ```
+>    > > > {: data-commit="Add a tool list to install"}
 >    > > {: .code-in}
 >    > {: .solution }
 >    {: .question}
@@ -148,7 +198,7 @@ There are two ways to install tools, depending on how you specify the tools to i
 >
 {: .hands_on}
 
-> <tip-title>Certificate issues</tip-title>
+> <tip-title>Certificate issues (GAT, uncommon)</tip-title>
 >
 > If your Galaxy instance is served via the HTTPS protocol (as it should be!), ephemeris will use the [requests](https://requests.readthedocs.io) Python library to encrypt the communication with Galaxy. Therefore, if your Galaxy uses a self-signed SSL certificate, `shed-tools` may fail with a `CERTIFICATE_VERIFY_FAILED` error.
 >

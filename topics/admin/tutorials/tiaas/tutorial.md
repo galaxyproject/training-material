@@ -91,7 +91,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -330,3 +330,8 @@ telegraf_plugins_extra:
+>    @@ -332,3 +332,8 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"
@@ -170,7 +170,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -51,6 +51,7 @@
+>    @@ -47,6 +47,7 @@
 >         - galaxyproject.nginx
 >         - geerlingguy.docker
 >         - usegalaxy_eu.rabbitmqserver

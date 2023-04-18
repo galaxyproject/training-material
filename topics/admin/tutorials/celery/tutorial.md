@@ -149,7 +149,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -270,3 +270,7 @@ rabbitmq_users:
+>        @@ -272,3 +272,7 @@ rabbitmq_users:
 >         # TUS
 >         galaxy_tusd_port: 1080
 >         galaxy_tus_upload_store: /data/tus
@@ -166,7 +166,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/galaxy.yml
 >        +++ b/galaxy.yml
->        @@ -46,6 +46,7 @@
+>        @@ -42,6 +42,7 @@
 >             - role: galaxyproject.miniconda
 >               become: true
 >               become_user: "{{ galaxy_user_name }}"
@@ -248,7 +248,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -257,6 +257,7 @@ rabbitmq_config:
+>        @@ -259,6 +259,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
 >           - /pulsar/pulsar_au
@@ -256,7 +256,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -266,6 +267,13 @@ rabbitmq_users:
+>        @@ -268,6 +269,13 @@ rabbitmq_users:
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -299,7 +299,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -282,3 +282,22 @@ galaxy_tus_upload_store: /data/tus
+>        @@ -284,3 +284,22 @@ galaxy_tus_upload_store: /data/tus
 >         #Redis
 >         galaxy_additional_venv_packages:
 >           - redis
@@ -355,7 +355,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/galaxy.yml
 >        +++ b/galaxy.yml
->        @@ -47,6 +47,7 @@
+>        @@ -43,6 +43,7 @@
 >               become: true
 >               become_user: "{{ galaxy_user_name }}"
 >             - geerlingguy.redis
@@ -373,7 +373,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -119,6 +119,11 @@ galaxy_config:
+>    @@ -121,6 +121,11 @@ galaxy_config:
 >           preload: true
 >         celery:
 >           concurrency: 2
@@ -394,7 +394,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -100,6 +100,11 @@ galaxy_config:
+>    @@ -102,6 +102,11 @@ galaxy_config:
 >         # Data Library Directories
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user

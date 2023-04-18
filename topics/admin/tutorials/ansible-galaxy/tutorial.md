@@ -375,7 +375,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 > 2. Create the `hosts` inventory file if you have not done so yet, defining a `[galaxyservers]` group with the address of the host where you want to install Galaxy. If you are running Ansible on the same machine where Galaxy will be installed to, you should set the `ansible_connection=local` variable. Lastly, you should explicitly set the `ansible_user` variable to the username to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not `ansible_user` is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.
 >
->    You shouuld also define a `[dbservers]` group for the hosts that will run Galaxy's database. In many cases (and in the case of the Galaxy Admin Training), these will be the same host, but the tutorial is designed to support either scenario, and helps to strengthen understanding of the purpose of host groupings in Ansible for more advanced real-world deployments. Here however we suggest using `[dbservers:children]` and adding `galaxyservers` as the child of that.
+>    You should also define a `[dbservers]` group for the hosts that will run Galaxy's database. In many cases (and in the case of the Galaxy Admin Training), these will be the same host, but the tutorial is designed to support either scenario, and helps to strengthen understanding of the purpose of host groupings in Ansible for more advanced real-world deployments. Here however we suggest using `[dbservers:children]` and adding `galaxyservers` as the child of that.
 >
 >    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
@@ -945,7 +945,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -10,3 +10,15 @@ galaxy_force_checkout: true
+>    @@ -10,3 +10,17 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.12.0
 >     miniconda_channels: ['conda-forge', 'defaults']
@@ -958,6 +958,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
 >    +    file_path: /data/datasets
 >    +    job_working_directory: /data/jobs
+>    +    object_store_store_by: uuid
+>    +    id_secret: "{{ vault_id_secret }}"
 >    +
 >    +galaxy_extra_dirs:
 >    +  - /data
@@ -1010,10 +1012,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -19,6 +19,32 @@ galaxy_config:
->         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->         file_path: /data/datasets
+>    @@ -21,6 +21,32 @@ galaxy_config:
 >         job_working_directory: /data/jobs
+>         object_store_store_by: uuid
+>         id_secret: "{{ vault_id_secret }}"
 >    +  gravity:
 >    +    process_manager: systemd
 >    +    galaxy_root: "{{ galaxy_root }}/server"
@@ -1836,7 +1838,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -48,3 +48,55 @@ galaxy_config:
+>    @@ -50,3 +50,55 @@ galaxy_config:
 >     
 >     galaxy_extra_dirs:
 >       - /data
@@ -2245,10 +2247,10 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >     galaxy_config:
 >       galaxy:
 >         # Main Configuration
->    @@ -19,6 +37,7 @@ galaxy_config:
->         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->         file_path: /data/datasets
+>    @@ -21,6 +39,7 @@ galaxy_config:
 >         job_working_directory: /data/jobs
+>         object_store_store_by: uuid
+>         id_secret: "{{ vault_id_secret }}"
 >    +    job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >       gravity:
 >         process_manager: systemd
@@ -2300,9 +2302,9 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -38,6 +38,28 @@ galaxy_config:
->         file_path: /data/datasets
->         job_working_directory: /data/jobs
+>    @@ -40,6 +40,28 @@ galaxy_config:
+>         object_store_store_by: uuid
+>         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    # SQL Performance
 >    +    slow_query_log_threshold: 5
