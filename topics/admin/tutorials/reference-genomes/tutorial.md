@@ -63,7 +63,7 @@ For more background details on data managers, check out:
 >
 {: .agenda}
 
-{% snippet topics/admin/faqs/git-gat-path.md tutorial="reference-data" %}
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="reference-genomes" %}
 
 # Galaxy Reference Data Components
 
@@ -671,4 +671,4 @@ Finally, we will verify that the BWA tool can see the new genome indexes.
 
 How cool is that? No editing `.loc` files, no making sure you've got TABs instead of spaces. Fully auto!
 
-{% snippet topics/admin/faqs/git-gat-path.md tutorial="reference-data" %}
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="reference-genomes" %}
