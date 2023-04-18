@@ -194,7 +194,7 @@ And of course, Galaxy has an Ansible Role for that.
 >     galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->    @@ -141,7 +150,11 @@ galaxy_config_templates:
+>    @@ -150,7 +152,11 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
 >     galaxy_extra_dirs:
