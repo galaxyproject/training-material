@@ -214,7 +214,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -42,6 +42,7 @@
+>    @@ -38,6 +38,7 @@
 >         - galaxyproject.slurm
 >         - usegalaxy_eu.apptainer
 >         - galaxyproject.galaxy
