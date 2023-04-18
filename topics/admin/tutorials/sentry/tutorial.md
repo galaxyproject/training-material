@@ -316,6 +316,15 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
+{: .hands_on}
+
+## Generate an Error
+
+Just visit:
+
+```
+https://galaxy.example.org/error
+```
 
 # Monitor Sentry for Errors
 
