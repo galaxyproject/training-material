@@ -183,7 +183,7 @@ Congratulations, you've set up TUS for Galaxy.
 >
 > 1. SSH into your machine
 >
-> 2. Check the active status of tusd by `systemctl status tusd-main`.
+> 2. Check the active status of tusd by `systemctl status galaxy-tusd`.
 >
 > 3. Upload a small file! (Pasted text will not pass via TUS)
 >
