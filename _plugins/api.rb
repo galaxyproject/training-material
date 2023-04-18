@@ -150,6 +150,8 @@ module Jekyll
 
           # Write out the individual page
           page6 = PageWithoutAFile.new(site, "", "api/topics/", "#{q['url'][7..-6]}.json")
+          # Delete the ref to avoid including it by accident
+          q.delete('ref')
           page6.content = JSON.pretty_generate(q)
           page6.data["layout"] = nil
           site.pages << page6
@@ -194,6 +196,7 @@ module Jekyll
         if material['slides']
           page5 = PageWithoutAFile.new(site, "", "api/", "#{directory}/slides.json")
           p = material.dup
+          p.delete('ref')
           p['contributors'] = get_contributors(p).dup.map{|c| mapContributor(site, c)}
 
           # Here we un-do the tutorial metadata priority, and overwrite with
@@ -209,8 +212,9 @@ module Jekyll
         end
 
         if material['hands_on']
-          page5 = PageWithoutAFile.new(site, "", "api/topics/", "#{directory}/tutorial.json")
+          page5 = PageWithoutAFile.new(site, "", "api/", "#{directory}/tutorial.json")
           p = material.dup
+          p.delete('ref')
           p['contributors'] = get_contributors(p).dup.map{|c| mapContributor(site, c)}
           page5.content = JSON.pretty_generate(p)
           page5.data["layout"] = nil

@@ -329,17 +329,13 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -32,6 +32,10 @@
->         - git:
->             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
->             dest: /libraries/
->    +  post_tasks:
+>    @@ -52,3 +52,6 @@
+>             minute: "0"
+>             hour: "0"
+>             job: "GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server /usr/local/bin/gxadmin galaxy cleanup 60"
 >    +    - name: Install slurm-drmaa
 >    +      package:
 >    +        name: slurm-drmaa1
->       roles:
->         - galaxyproject.tusd
->         - galaxyproject.repos
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add post task to install slurm-drmaa"}

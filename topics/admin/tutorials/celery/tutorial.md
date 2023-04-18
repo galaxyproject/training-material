@@ -166,7 +166,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/galaxy.yml
 >        +++ b/galaxy.yml
->        @@ -46,6 +46,7 @@
+>        @@ -42,6 +42,7 @@
 >             - role: galaxyproject.miniconda
 >               become: true
 >               become_user: "{{ galaxy_user_name }}"
@@ -355,7 +355,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/galaxy.yml
 >        +++ b/galaxy.yml
->        @@ -47,6 +47,7 @@
+>        @@ -43,6 +43,7 @@
 >               become: true
 >               become_user: "{{ galaxy_user_name }}"
 >             - geerlingguy.redis

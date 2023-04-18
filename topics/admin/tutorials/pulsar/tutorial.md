@@ -345,7 +345,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -47,6 +47,8 @@
+>    @@ -43,6 +43,8 @@
 >           become: true
 >           become_user: "{{ galaxy_user_name }}"
 >         - galaxyproject.nginx
@@ -671,7 +671,7 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >    ```diff
 >    --- /dev/null
 >    +++ b/pulsar.yml
->    @@ -0,0 +1,20 @@
+>    @@ -0,0 +1,21 @@
 >    +- hosts: pulsarservers
 >    +  vars_files:
 >    +    - group_vars/secret.yml
@@ -685,6 +685,7 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >    +          - libcurl4-openssl-dev
 >    +          - libssl-dev
 >    +          - virtualenv
+>    +          - python3-venv
 >    +        state: present
 >    +        update_cache: yes
 >    +      become: yes
