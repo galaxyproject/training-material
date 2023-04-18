@@ -70,7 +70,7 @@ layout: base
 
 				{% if contributors[page.contributor].fediverse %}
 				<div class="contact-items">
-					<a href="{{ contributors[page.contributor].fediverse | fedi2link }}">
+					<a href="{{ contributors[page.contributor].fediverse }}" rel="me">
 						<span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> {{ contributors[page.contributor].fediverse }}
 					</a>
 				</div>
@@ -196,9 +196,9 @@ layout: base
                 {% endfor %}
                 </div>
 				{% endif %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+<script src="{% link assets/js/Chart.bundle.js %}"></script>
 
-<script type="text/javascript">
+<script>
 const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
 if(isReduced){
     Chart.defaults.global.animation.duration = 0;

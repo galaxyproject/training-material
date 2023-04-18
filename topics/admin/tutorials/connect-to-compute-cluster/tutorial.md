@@ -12,7 +12,7 @@ questions:
 objectives:
   - Be familiar with the basics of installing, configuring, and using Slurm
   - Understand all components of the Galaxy job running stack
-  - Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem
+  - Understand how the job conf controls Galaxy's jobs subsystem
   - Have a strong understanding of Galaxy job destinations
   - Understand the purpose and function of Galaxy job metrics
 time_estimation: "1h"
@@ -74,14 +74,18 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -20,3 +20,7 @@
->       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
->     - src: gantsign.golang
->       version: 2.6.3
+>    @@ -20,5 +20,11 @@
+>     # CVMFS Support
+>     - src: galaxyproject.cvmfs
+>       version: 0.2.21
+>    +# Singularity
+>     - src: usegalaxy_eu.apptainer
+>       version: 0.0.1
+>    +# SLURM as our DRM
 >    +- src: galaxyproject.repos
->    +  version: 0.0.2
+>    +  version: 0.0.3
 >    +- src: galaxyproject.slurm
->    +  version: 0.1.3
+>    +  version: 1.0.2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
@@ -105,15 +109,15 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -12,6 +12,8 @@
->             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
+>    @@ -34,6 +34,8 @@
 >             dest: /libraries/
 >       roles:
+>         - galaxyproject.tusd
 >    +    - galaxyproject.repos
 >    +    - galaxyproject.slurm
->         - galaxyproject.postgresql
->         - role: galaxyproject.postgresql_objects
->           become: true
+>         - usegalaxy_eu.apptainer
+>         - galaxyproject.galaxy
+>         - role: galaxyproject.miniconda
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the repos and slurm roles"}
@@ -124,9 +128,9 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -157,6 +157,16 @@ golang_gopath: '/opt/workspace-go'
->     singularity_version: "3.7.4"
->     singularity_go_path: "{{ golang_install_dir }}"
+>    @@ -189,6 +189,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
+>     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >     
 >    +# Slurm
 >    +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
@@ -140,7 +144,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    +
 >     # TUS
 >     galaxy_tusd_port: 1080
->     tusd_instances:
+>     galaxy_tus_upload_store: /data/tus
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add slurm configuration"}
@@ -325,7 +329,7 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -11,6 +11,10 @@
+>    @@ -32,6 +32,10 @@
 >         - git:
 >             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >             dest: /libraries/
@@ -334,8 +338,8 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    +      package:
 >    +        name: slurm-drmaa1
 >       roles:
+>         - galaxyproject.tusd
 >         - galaxyproject.repos
->         - galaxyproject.slurm
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add post task to install slurm-drmaa"}
@@ -360,58 +364,41 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 
 > <hands-on-title>Making Galaxy aware of DRMAA</hands-on-title>
 >
-> 1. Open your group variables and add the environment variable:
+> 3. We need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have a unique name as its key, and a `load` attribute. Since we already have a good default destination that uses singularity, we will simply modify that to use the slurm runner. Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. <!-- Note that we also need to set a default destination now that more than one destination is defined. --> In a job environment, the key is a unique identifier for that environment and the `runner` attribute must match the key of a defined runner plugin:
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -98,6 +98,7 @@ galaxy_config_templates:
->     
->     # systemd
->     galaxy_manage_systemd: true
->    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
->     
->     # Certbot
->     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
->    {% endraw %}
->    ```
->    {: data-commit="Configure DRMAA_LIBRARY_PATH"}
->
->    This environment variable will then be supplied to any web process (zerglings or mules).
->
-> 3. Next, we need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. Since we already have a good default destination that uses singularity, we will simply modify that to use the slurm runner. Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. <!-- Note that we also need to set a default destination now that more than one destination is defined. --> In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of a defined plugin:
->
->    {% raw %}
->    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -2,12 +2,24 @@ runners:
->       local_runner:
->         load: galaxy.jobs.runners.local:LocalJobRunner
->         workers: 4
->    +  slurm:
->    +    load: galaxy.jobs.runners.slurm:SlurmJobRunner
->     
->     execution:
->    -  default: singularity
->    +  default: slurm
->       environments:
->         local_dest:
->           runner: local_runner
+>    @@ -18,14 +18,27 @@ galaxy_job_config:
+>         local_runner:
+>           load: galaxy.jobs.runners.local:LocalJobRunner
+>           workers: 4
 >    +    slurm:
->    +      runner: slurm
->    +      singularity_enabled: true
->    +      env:
->    +      - name: LC_ALL
->    +        value: C
->    +      - name: SINGULARITY_CACHEDIR
->    +        value: /tmp/singularity
->    +      - name: SINGULARITY_TMPDIR
->    +        value: /tmp
->         singularity:
->           runner: local_runner
->           singularity_enabled: true
+>    +      load: galaxy.jobs.runners.slurm:SlurmJobRunner
+>    +      drmaa_library_path: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
+>       handling:
+>         assign: ['db-skip-locked']
+>       execution:
+>    -    default: singularity
+>    +    default: slurm
+>         environments:
+>           local_env:
+>             runner: local_runner
+>             tmp_dir: true
+>    +      slurm:
+>    +        runner: slurm
+>    +        singularity_enabled: true
+>    +        env:
+>    +        - name: LC_ALL
+>    +          value: C
+>    +        - name: SINGULARITY_CACHEDIR
+>    +          value: /tmp/singularity
+>    +        - name: SINGULARITY_TMPDIR
+>    +          value: /tmp
+>           singularity:
+>             runner: local_runner
+>             singularity_enabled: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure slurm destination"}
@@ -603,7 +590,7 @@ These include very basic submission parameters. We want more information!
 >    ```diff
 >    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -2,3 +2,13 @@
+>    @@ -10,3 +10,13 @@ galaxy_db_name: galaxy
 >     cvmfs_role: client
 >     galaxy_cvmfs_repos_enabled: config-repo
 >     cvmfs_quota_limit: 500
@@ -682,14 +669,18 @@ There is not a good rule we can tell you, just choose what you think is useful o
 You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)), or via SQL with [`gxadmin`](https://usegalaxy-eu.github.io/gxadmin/#/README.query?id=query-tool-metrics).
 
 
-{% snippet topics/admin/faqs/missed-something.md step=7 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=9 %}
 
 ## Further Reading
 
 - [Galaxy's cluster documentation](https://docs.galaxyproject.org/en/latest/admin/cluster.html) describes in detail alternative cluster configurations.
-- [The job_conf.xml documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html) fully describes the syntax of the job configuration file.
+- [The job_conf documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html) fully describes the syntax of the job configuration file.
 - The [Distributed Resource Management Application API (DRMAA)](https://www.drmaa.org/) page contains the DRMAA specification as well as documentation for various implementations. It also includes a list of DRMs supporting DRMAA.
 - The [Slurm documentation](http://slurm.schedmd.com/) is extensive and covers all the features and myriad of ways in which you can configure slurm.
 - [PSNC slurm-drmaa](http://apps.man.poznan.pl/trac/slurm-drmaa)'s page includes documentation and the SVN repository, which has a few minor fixes since the last released version. PSNC also wrote the initial implementations of the DRMAA libraries for PBSPro and LSF, so all three are similar.
 - [Our own fork of slurm-drmaa](http://github.com/natefoo/slurm-drmaa) includes support for Slurms `-M`/`--clusters` multi-cluster functionality and newer versions of Slurm.
 - [Slurm Accounting documentation](http://slurm.schedmd.com/accounting.html) explains how to set up SlurmDBD.
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="connect-to-compute-cluster" %}

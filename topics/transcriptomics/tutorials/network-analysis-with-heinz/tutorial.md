@@ -18,7 +18,7 @@ key_points:
     - "Heinz helps narrow down the scope to find the key pathways"
     - "Multiple CPUs will accelerate the computation especially for the complex datasets"
 contributors:
-    - cicozhang
+    - ChaoZhang123
 ---
 
 # Overview

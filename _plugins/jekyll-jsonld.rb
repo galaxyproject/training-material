@@ -20,7 +20,17 @@ module Jekyll
       "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
     }
 
-
+    ##
+    # Generate the Dublin Core metadata for a material.
+    # Parmaeters:
+    # +material+:: The material to generate the metadata for.
+    # +site+:: The site object.
+    # Returns:
+    # A string containing the metadata.
+    #
+    # Example:
+    #  {{ material | generate_dublin_core: site }}
+    #  => <meta name="DC.identifier" content="..." />
     def generate_dublin_core(material, site)
       if material.key?('data') && material['data'].fetch('type', 'none') != "tutorial_hands_on"
         return
@@ -43,9 +53,17 @@ module Jekyll
         end
       }
 
-      return attributes.map{|a, b| "<meta name=\"#{a}\" content=\"#{b}\" />" }.join("\n")
+      return attributes.map{|a, b| "<meta name=\"#{a}\" content=\"#{b}\">" }.join("\n")
     end
 
+    ##
+    # Get the authors of a material.
+    # Time number 4 i've seen this
+    # TODO(hexylena): make this a function in gtn.rb
+    # Parmeters:
+    # +material+:: The material to get the authors for.
+    # Returns:
+    # An array of authors.
     def get_authors(material)
       if material.key?('contributors') then
         material['contributors']
@@ -56,6 +74,35 @@ module Jekyll
       end
     end
 
+    ##
+    # Generate the JSON-LD metadata for a person
+    # Parameters:
+    # +id+:: The id of the person.
+    # +contributor+:: The contributor object from CONTRIBUTORS.yaml.
+    # +site+:: The site object.
+    # Returns:
+    # +Hash+:: The JSON-LD metadata.
+    #
+    # Example:
+    #  generate_person_jsonld("hexylena", site['data']['contributors']['hexylena'], site)
+    #  => {
+    #    "@context": "https://schema.org",
+    #    "@type": "Person",
+    #    "http://purl.org/dc/terms/conformsTo": {
+    #      # Bioschemas profile
+    #      "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+    #      "@type": "Person"
+    #    },
+    #    "url": "https://training.galaxyproject.org/hall-of-fame/hexylena/",
+    #    "mainEntityOfPage": "https://training.galaxyproject.org/hall-of-fame/hexylena/",
+    #    "name": "hexylena",
+    #    "image": "https://avatars.githubusercontent.com/hexylena",
+    #    "description": "A contributor to the GTN project.",
+    #    "memberOf": [...],
+    #    "identifier": "https://orcid.org/0000-0002-6601-2165",
+    #    "orcid": "https://orcid.org/0000-0002-6601-2165"
+    #  }
+    #
     def generate_person_jsonld(id, contributor, site)
       person = {
         "@context": "https://schema.org",
@@ -81,10 +128,25 @@ module Jekyll
       person
     end
 
+    ##
+    # Generate the JSON-LD metadata for a person as JSON.
+    # Parameters:
+    # +id+:: The id of the person.
+    # +contributor+:: The contributor object from CONTRIBUTORS.yaml.
+    # +site+:: The site object.
+    # Returns:
+    # +String+:: The JSON-LD metadata.
     def to_person_jsonld(id, contributor, site)
       JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
     end
 
+    ##
+    # Generate the JSON-LD metadata for a news article (blog)
+    # Parameters:
+    # +page+:: The page object.
+    # +site+:: The +Jekyll::Site+ site object.
+    # Returns:
+    # +Hash+:: The JSON-LD metadata.
     def generate_news_jsonld(page, site)
       authors = get_authors(page.to_h).map{ |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
 
@@ -117,6 +179,15 @@ module Jekyll
       JSON.pretty_generate(data)
     end
 
+    ##
+    # Convert a material to JSON-LD.
+    # Parameters:
+    # +material+:: The material object.
+    # +topic+:: The topic object.
+    # +site+:: The +Jekyll::Site+ site object.
+    #
+    # Returns:
+    # +String+:: The JSON-LD metadata.
     def to_jsonld(material, topic, site)
       langCodeMap = {
         'en': "English",

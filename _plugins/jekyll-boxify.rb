@@ -3,16 +3,21 @@ require './_plugins/gtn.rb'
 
 module Jekyll
   class Boxify < Jekyll::Generator
-    def initialize(config)
+    def initialize(config) # :nodoc:
       @config = config['boxify'] ||= {}
     end
 
-    def generate(site)
+    def generate(site) # :nodoc:
       puts "[GTN/Boxify]"
       site.pages.each { |page| boxify page,site }
       site.posts.docs.each { |post| boxify post, site }
     end
 
+    ##
+    # This function adds boxes to the page content.
+    # Params:
+    # +page+:: The page to add boxes to
+    # +site+:: The +Jekyll::Site+ object
     def boxify(page, site)
       if page.content.nil?
         return
@@ -32,7 +37,7 @@ module Jekyll
           title = Gtn::Boxify.safe_title(title)
           title = Gtn::Boxify.format_box_title(title, box_type, lang=lang)
           icon = Gtn::Boxify.get_icon(box_type, emoji: true)
-          box = "<div class=\"box-title\" aria-label=\"#{box_type} box: #{title}\" style=\"font-size: 150%\">#{icon} #{title}</div>"
+          box = "<div class=\"box-title\" aria-description=\"#{box_type} box: #{title}\" style=\"font-size: 150%\">#{icon} #{title}</div>"
           box.gsub!(/\\&quot/, '&quot')
           box.gsub!(/([^\\])"/, '\1\\"')
         else

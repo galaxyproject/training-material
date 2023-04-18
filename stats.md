@@ -25,9 +25,9 @@ layout: base
 
 
 <!-- use chart.js for graphs -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+<script src="{% link assets/js/Chart.bundle.js %}"></script>
 <!-- plugin for adding data labels to charts -->
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+<script src="{% link assets/js/chartjs-plugin-datalabels@0.7.0.js %}"></script>
 
 
 <style type="text/css" media="all">

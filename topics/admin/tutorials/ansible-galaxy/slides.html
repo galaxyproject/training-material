@@ -12,14 +12,17 @@ objectives:
 key_points:
   - Everything can be accomplished with Ansible roles from Galaxy
   - You can easily deploy a base Galaxy, or one with more features.
-contributors:
+contributions:
+  authorship:
   - slugger70
   - natefoo
+  editing:
+  - hexylena
 ---
 
 ## Install PostgreSQL & Galaxy extensions
 
-![Graph showing a Postgres DB](../../images/ansible-galaxy-intro-0.png)
+![Graph showing a Postgres DB in a minimal deployment (one node)](../../images/ansible-galaxy-0.png)
 
 ???
 
@@ -30,20 +33,28 @@ contributors:
 
 ## Install Galaxy & Attach Storage
 
-![Galaxy is now attached to the DB. Gunicorn, storage, and compute are attached to Galaxy](../../images/ansible-galaxy-intro-1.png)
+![Galaxy is now attached to the DB. Storage is connected to Galaxy](../../images/ansible-galaxy-1.png)
 
 ???
 
 - Galaxy is deployed, and attached to the database.
+- Storage must be available for Galaxy
+
+---
+
+## Setup Gunicorn
+
+![Gunicorn is attached to Galaxy](../../images/ansible-galaxy-2.png)
+
+???
+
 - Next, Gunicorn is setup to run the Galaxy app.
-- Storage is attached to Galaxy for storing data.
-- And lastly compute is attached to Galaxy and the storage.
 
 ---
 
 ## Configure NGINX
 
-![NGINX is added to proxy Gunicorn](../../images/ansible-galaxy-intro-2.png)
+![NGINX is added to proxy Gunicorn](../../images/ansible-galaxy-3.png)
 
 ???
 
@@ -51,44 +62,47 @@ contributors:
 
 ---
 
+## Configure Backup
+
+![A backup location area is added, with a node DB backup inside connected to the PostgreSQL db](../../images/ansible-galaxy-4.png)
+
+???
+
+- A backup location is a very important part of a Galaxy deployment.
+- We only backup the database, as the Galaxy configuration is stored in your playbooks
+- You probably also want to backup the user data storage.
+
+---
+
+## Configure CVMFS
+
+![A cvmfs cache is added connected to Galaxy, next to storage](../../images/ansible-galaxy-5.png)
+
+???
+
+- CVMFS provides reference data and can be attached to your storage.
+- Galaxy is configured to read data from CVMFS.
+- Compute is configured to access it as well for jobs that need reference data.
+
+---
+
 ## Configure Job Handlers
 
-![Job Handlers are added, between Galaxy and the Compute](../../images/ansible-galaxy-intro-3.png)
+![Job Handlers are added, connected to Galaxy. This connects to a Slurm deployment which is connected to a compute node which points to storage and cvmfs](../../images/ansible-galaxy-6.png)
 
 ???
 
 - Job handlers are configured and deployed with the app.
 - These connect to the compute and manage jobs.
-
----
-
-## Install & Configure Slurm
-
-![Slurm is attached to the handlers](../../images/ansible-galaxy-intro-4.png)
-
-???
-
 - Slurm is a much more intelligent resource manager than Galaxy.
 - The job handlers are configured to connect to Slurm.
 - Slurm deployment is explained in a separate tutorial.
 
 ---
 
-## Connect CVMFS & Reference Data
-
-![CVMFS is attached to storage + compute + galaxy](../../images/ansible-galaxy-intro-5.png)
-
-???
-
-- CVMFS is deployed.
-- Galaxy is configured to read data from CVMFS.
-- Compute is configured to access it as well for jobs that need reference data.
-
----
-
 ## Setup Remote Compute
 
-![Remote compute site, with Pulsar and compute is attached to the job handlers](../../images/ansible-galaxy-intro-6.png)
+![Remote compute site, with Pulsar and compute is attached to the job handlers](../../images/ansible-galaxy-7.png)
 
 ???
 
@@ -163,3 +177,15 @@ contributors:
 - Ensure the code and configuration are separate.
 - If someone manages to act as the galaxy user, this will prevent them from changing galaxy's behaviour.
 - All of these best practices are built into the ansible role.
+
+---
+
+## Example "Advanced" UseGalaxy.* Deployment
+
+![The same deployment as before, but now they are segmented differently. Postgres and Rabbit MQ on their own hosts, storage on an NFS server, slurm and compute on a Cluster, and then nginx, gunicorn, galaxy, and job handlers on a Head Node](../../images/ansible-galaxy-usegalaxy.png)
+
+???
+
+- Here we can see what a UseGalaxy.* deployment looks like
+- This is roughly representative of UseGalaxy.eu, but all Galaxies are slightly different.
+- For instance some Galaxies have multiple head nodes to balance the load.

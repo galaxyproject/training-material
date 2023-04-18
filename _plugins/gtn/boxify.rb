@@ -97,17 +97,24 @@ module Gtn
       @@TITLE_CLASSES
     end
 
-    def self.get_icon(icon_cls, emoji: false)
+    def self.get_icon(icon_cls, emoji: false, a11y: false)
       if emoji
         return @@ICONS_EMOJI.fetch(icon_cls, '')
       end
 
       icon = @@ICONS[icon_cls]
+
+      # We support announcing the proper label of the box, e.g. 'hands on box',
+      # but default to hiding this, as the icons are *mostly* decorative.
+      icon_a11y_title = icon_cls.gsub(/[-_]/, ' ')
+      icon_aria_label = a11y ? "title=\"#{icon_a11y_title} box\"" : ""
+      accessible_addition = a11y ? %Q(<span class="sr-only">#{icon_a11y_title} box</span>) : ""
+
       if !icon.nil?
        if icon.start_with?("fa")
-        %Q(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+        %Q(<i class="#{icon}" aria-hidden=\"true\" #{icon_aria_label}></i>#{accessible_addition})
        elsif icon.start_with?("ai")
-        %Q(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+        %Q(<i class="ai #{icon}" aria-hidden=\"true\" #{icon_aria_label}></i>#{accessible_addition})
        end
       else
         %Q(<span class="visually-hidden"></span>)
@@ -136,14 +143,16 @@ module Gtn
       "#{@@BOX_TITLES[lang][box_type]}#{title_fmted}"
     end
 
-    def self.generate_collapsible_title(box_type, title, lang="en", key)
+    def self.generate_collapsible_title(box_type, title, lang="en", key, contents: false)
       box_id = self.get_id(box_type, title, key)
       box_title = self.format_box_title(title, box_type, lang=lang)
+      refers_to_contents = contents ? "-contents": ""
+      # These are all collapsed by default, details, tip, and solution.
       return [box_id, %Q(
         <div class="box-title #{box_type}-title" id="#{box_id}">
-        <button class="gtn-boxify-button #{box_type}" type="button" aria-controls="#{box_id}-contents" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
+        <button class="gtn-boxify-button #{box_type}" type="button" aria-controls="#{box_id}#{refers_to_contents}" aria-expanded="true">
           #{self.get_icon(box_type)} #{box_title}
-          <span role="button" class="fold-unfold fa fa-minus-square"></span>
+          <span class="fold-unfold fa fa-minus-square"></span>
         </button>
         </div>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip]
@@ -158,7 +167,7 @@ module Gtn
       end
 
       return [box_id, %Q(
-        <div class="box-title #{box_type}-title" id="#{box_id}" aria-label="#{box_type} box: #{title}">
+        <div class="box-title #{box_type}-title" id="#{box_id}">
           #{self.get_icon(box_type)} #{box_title}
         </div>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip]
@@ -173,10 +182,10 @@ module Gtn
       title
     end
 
-    def self.generate_title(box_type, title, lang="en", key)
+    def self.generate_title(box_type, title, lang="en", key, contents: false)
       title = self.safe_title(title)
       if @@COLLAPSIBLE_BOXES.include?(box_type)
-        self.generate_collapsible_title(box_type, title, lang, key)
+        self.generate_collapsible_title(box_type, title, lang, key, contents: contents)
       else
         self.generate_static_title(box_type, title, lang, key)
       end
@@ -184,7 +193,7 @@ module Gtn
 
     def self.generate_box(box_type, title, lang="en", key)
       title = self.safe_title(title)
-      box_id, box_title = generate_title(box_type, title, lang, key)
+      box_id, box_title = generate_title(box_type, title, lang, key, contents: true)
       return %Q(
         <div class="box #{box_type}" markdown=0>
         #{box_title}

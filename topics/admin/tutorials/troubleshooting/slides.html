@@ -601,7 +601,7 @@ Troubleshooting depends on your job handler configuration
 
 Solutions:
 - If using single process or mules
-  - Ensure no `<handlers>` in `job_conf.xml`
+  - Ensure no `handlers` in job conf
   - Check handler logs
 - If using `assign_with="db-skip-locked"`
   - Ensure no `default` attribute in `<handlers>`
@@ -609,7 +609,7 @@ Solutions:
   - Ensure `handler` column of `job` table is being set to `_default_`
   - Ensure handlers started with `--attach-to-pool=job-handlers`
 - If using `assign_with="db-preassign"`
-  - Ensure that handler ID(s) in `job_conf.xml` match `server_name`(s)
+  - Ensure that handler ID(s) in the job conf match `server_name`(s)
   - Ensure `handler` column of `job` table is being set to valid handler ID
 
 ---
@@ -635,7 +635,7 @@ The correct value of the `handler` column in the database varies by job handler 
 - db-skip-locked: `_default_` then `handlerN` (where `handlerN` is the value of one of your handlers' `--server-name`)
 - db-preassign: `handlerN`
 
-In this case, `job_handler_0` is not `handler0` or `handler1` (probably due to a misconfiguration in `<handlers>` section of `job_conf.xml`), so no handler will find this job.
+In this case, `job_handler_0` is not `handler0` or `handler1` (probably due to a misconfiguration in `handlers` section of job conf), so no handler will find this job.
 
 ---
 # An aside - unruly log files
@@ -659,7 +659,7 @@ Corresponds to `job.state = 'queued'` in database
 
 A handler has seen this job
 
-.left[Verify concurrency limits unmet in `job_conf.xml`:]
+.left[Verify concurrency limits unmet in job conf:]
 - Local jobs: value of plugin `workers` attribute (default: 4)
 - All jobs: Entire `<limits>` section
 
