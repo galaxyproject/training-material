@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Storage Management">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-18 08:35:42 +0000">
+<meta name="DC.date" content="2023-04-18 11:12:54 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Martin Čech">
 <meta name="DC.creator" content="Helena Rasche">
@@ -313,8 +313,8 @@
     <ul>
       <li>From history</li>
       <li>From user directory</li>
-      <li>From import directory (admins only)</li>
-      <li>From remote source</li>
+      <li>From import directory and/or path (admins only)</li>
+      <li>From remote source (via API/BioBlend/ephemeris)</li>
     </ul>
   </li>
 </ul>
@@ -325,8 +325,8 @@
 
 <ul>
   <li>Galaxy provides many options for importing data.</li>
-  <li>You can import data from a history, or from disk.</li>
-  <li>Importing data on disk is convenient, as Galaxy can recreate the folder structure that is on disk.</li>
+  <li>You can import data from a history, or from a server directory.</li>
+  <li>Importing data from a server directory is convenient, as Galaxy can recreate the folder structure that is on disk.</li>
   <li>Additionally Galaxy can store library data as a symlink.</li>
   <li>This prevents needing to copy large shared datasets into Galaxy’s own data store.</li>
 </ul>
@@ -345,6 +345,11 @@
       <li>Works well in combination with <code class="language-plaintext highlighter-rouge">ftp_upload_dir</code>.</li>
     </ul>
   </li>
+  <li><code class="language-plaintext highlighter-rouge">library_import_dir</code>
+    <ul>
+      <li>Allows administrators to upload a directory of files.</li>
+    </ul>
+  </li>
   <li><code class="language-plaintext highlighter-rouge">allow_path_paste</code>
     <ul>
       <li>Admin-only, allows importing from any path that the Galaxy’s user has access to.</li>
@@ -355,8 +360,8 @@
 <p><span>Speaker Notes</span></p>
 
 <ul>
-  <li>If you use old library interface you can also set library_import_dir.</li>
-  <li>It specifies which folder admins may browse and import from.</li>
+  <li>The path of the server directories that users and admins can use to import files can be configured in galaxy.yml .</li>
+  <li>For admins, it is also possible to enable import from any server path.</li>
 </ul>
 
 
@@ -409,7 +414,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/7c470b5670551b6a12e15be7aef2bc985d2db6b5">7c470b5670551b6a12e15be7aef2bc985d2db6b5</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/63b92f50b927fbff75250067b5bb6d82d59cab37">63b92f50b927fbff75250067b5bb6d82d59cab37</a></p>
     </div>
 </footer>
 
