@@ -495,15 +495,19 @@ install the latest revision of the tool.
 
 ## Test tools
 
+Tools can be tested using the `galaxy-tool-test` utility in the [galaxy-tool-util](https://pypi.org/project/galaxy-tool-util/) package.
+
 ```console
-shed-tools test [-h] [-v] [--log_file LOG_FILE] [-g GALAXY] [-u USER]
-  [-p PASSWORD] [-a API_KEY] [-t TOOL_LIST_FILE]
-  [-y TOOL_YAML] [--name NAME] [--owner OWNER]
-  [--revisions [REVISIONS [REVISIONS ...]]]
-  [--toolshed TOOL_SHED_URL] [--test_json TEST_JSON]
-  [--test_user_api_key TEST_USER_API_KEY]
-  [--test_user TEST_USER]
-  [--parallel_tests PARALLEL_TESTS]
+galaxy-tool-test [-h] [-u GALAXY_URL] [-k KEY] [-a ADMIN_KEY] [--force_path_paste] [-t TOOL_ID]
+  [--tool-version TOOL_VERSION] [-i TEST_INDEX] [-o OUTPUT] [--append]
+  [--skip-previously-executed | --skip-previously-successful] [-j OUTPUT_JSON] [--verbose]
+  [-c CLIENT_TEST_CONFIG] [--suite-name SUITE_NAME] [--with-reference-data]
+  [--skip-with-reference-data]
+  [--history-per-suite | --history-per-test-case | --history-name HISTORY_NAME]
+  [--no-history-reuse] [--no-history-cleanup] [--publish-history]
+  [--parallel-tests PARALLEL_TESTS] [--retries RETRIES] [--page-size PAGE_SIZE]
+  [--page-number PAGE_NUMBER] [--download-attempts DOWNLOAD_ATTEMPTS]
+  [--download-sleep DOWNLOAD_SLEEP] [--test-data TEST_DATA]
 ```
 
 ???
@@ -527,7 +531,7 @@ can be used to generate test reports from `tool_test_output.json`
 
 ???
 
-Running tool tests with ephemeris will yield
+Running tool tests with galaxy-tool-test will yield
 - a list of tool tests that have passed and failed and
 - a more detailed file of data from the test jobs that is useful for debugging.
 
@@ -775,59 +779,12 @@ Installing samtools_suite will result in all of these samtools repositories bein
 
 ---
 
-## Tool dependency resolution
+## Resolving Galaxy Tool Dependencies
 
-* We aim to make Galaxy resolver-independent, with a preference for [conda](https://conda.io/) and containers
-* What resolver is going to be used for the tool dependencies is determined at runtime
-according to the order specified in `dependency_resolvers_conf.xml`.
-
-```xml
-<dependency_resolvers>
-  <tool_shed_packages />
-  <galaxy_packages />
-  <conda />
-  <galaxy_packages versionless="true" />
-  <conda versionless="true" />
-<!-- other resolvers
-  <lmod />
-  <lmod versionless="true" />
-  <modules modulecmd="/opt/Modules/3.2.9/bin/modulecmd" />
-  <modules modulecmd="/opt/Modules/3.2.9/bin/modulecmd" versionless="true" default_indicator="default" />
-  <tool_shed_tap />
-  <homebrew />
--->
-</dependency_resolvers>
-```
-
-[Full documentation](https://docs.galaxyproject.org/en/master/admin/dependency_resolvers.html)
-
-???
-
-Without going into detail, at run-time Galaxy will look for installed dependencies
-in an order determined by the dependency_resolvers.conf.xml file.
-
-The file shown on this slide is the default configuration.
-
-Given a set of requirements, Galaxy will look first for an installed toolshed package that meets those requirements.
-
-If galaxy finds this it will source the package and look no further.
-
-If galaxy does not find this it will look for
-- a galaxy package with the required version,
-- followed by a conda package with the required version,
-- followed by a galaxy package of any version,
-- followed by a conda package of any version.
-
-Typically the packages to run the tool will be conda packages.
-
----
-
-## Using containers for Tool Dependencies
-
-- Galaxy can also use **Docker** or **Singularity** containers to resolve dependencies
+- The recommended method for resolving tool dependencies is with containers: **Apptainer/Singularity** or **Docker**
+- It is also possible to use **Conda** to resolve dependencies.
 - You can read more about this in the [Tool Dependencies and Containers slides](../../../dev/tutorials/containers/slides.html)
 
 ???
 
-A more recent development in Galaxy is the use of Docker or Singularity containers to resolve dependencies
-and there is some further reading on this.
+The preferred method for resolving tool dependencies is through containers. Apptainer particularly works well in the context of cluster jobs. It is also possible to use non-container dependency resolution methods. There is further reading available on this topic.
