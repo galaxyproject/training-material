@@ -25,7 +25,6 @@ contributions:
   - martenson
   - jmchilton
   - davebx
-  - nsoranzo
   - lecorguille
   - abretaud
   - lldelisle
@@ -118,7 +117,7 @@ The [static configuration setup](https://github.com/galaxyproject/ansible-galaxy
 1. The directories for Galaxy configuration data and for the shed tools are created
 2. Any config files are copied over
 3. Any templates are copied over
-4. The `galaxy.yml` (or `.ini`) is deployed
+4. The `galaxy.yml` is deployed
 
 The setup for deploying extra Galaxy configuration templates and files is a little bit non-standard by Ansible best practices. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.
 
@@ -281,7 +280,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +- src: galaxyproject.miniconda
 >    +  version: 0.3.1
 >    +- src: usegalaxy_eu.certbot
->    +  version: 0.1.9
+>    +  version: 0.1.11
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
@@ -376,7 +375,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 > 2. Create the `hosts` inventory file if you have not done so yet, defining a `[galaxyservers]` group with the address of the host where you want to install Galaxy. If you are running Ansible on the same machine where Galaxy will be installed to, you should set the `ansible_connection=local` variable. Lastly, you should explicitly set the `ansible_user` variable to the username to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not `ansible_user` is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.
 >
->    You shouuld also define a `[dbservers]` group for the hosts that will run Galaxy's database. In many cases (and in the case of the Galaxy Admin Training), these will be the same host, but the tutorial is designed to support either scenario, and helps to strengthen understanding of the purpose of host groupings in Ansible for more advanced real-world deployments.
+>    You shouuld also define a `[dbservers]` group for the hosts that will run Galaxy's database. In many cases (and in the case of the Galaxy Admin Training), these will be the same host, but the tutorial is designed to support either scenario, and helps to strengthen understanding of the purpose of host groupings in Ansible for more advanced real-world deployments. Here however we suggest using `[dbservers:children]` and adding `galaxyservers` as the child of that.
 >
 >    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
@@ -426,11 +425,10 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > > ```diff
 >    > > --- /dev/null
 >    > > +++ b/group_vars/all.yml
->    > > @@ -0,0 +1,8 @@
+>    > > @@ -0,0 +1,7 @@
 >    > > +---
 >    > > +# Python 3 support
 >    > > +pip_virtualenv_command: /usr/bin/python3 -m venv  # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
->    > > +certbot_virtualenv_package_name: python3-venv     # usegalaxy_eu.certbot
 >    > > +
 >    > > +# Common variables needed by all hosts
 >    > > +galaxy_user_name: galaxy
@@ -487,7 +485,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```yaml
 >    > postgresql_objects_users:
 >    >   - name: galaxy
->    >     password: super-secret-password-that-should-be-in-vault
+>    >     password: "{{ vault_postgres_galaxy_password }}"
 >    > ```
 >    {: .tip}
 >
@@ -907,9 +905,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -0,0 +1,12 @@
 >    +# Galaxy
->    +galaxy_create_user: true
->    +galaxy_separate_privileges: true
->    +galaxy_manage_paths: true
+>    +galaxy_create_user: true # False by default, as e.g. you might have a 'galaxy' user provided by LDAP or AD.
+>    +galaxy_separate_privileges: true # Best practices for security, configuration is owned by 'root' (or a different user) than the processes
+>    +galaxy_manage_paths: true # False by default as your administrator might e.g. have root_squash enabled on NFS. Here we can create the directories so it's fine.
 >    +galaxy_layout: root-dir
 >    +galaxy_root: /srv/galaxy
 >    +galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
@@ -947,7 +945,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -10,3 +10,12 @@ galaxy_force_checkout: true
+>    @@ -10,3 +10,15 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.12.0
 >     miniconda_channels: ['conda-forge', 'defaults']
@@ -958,8 +956,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    admin_users:
 >    +    - admin@example.org
 >    +    database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->    +    file_path: /data
->    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    +    file_path: /data/datasets
+>    +    job_working_directory: /data/jobs
+>    +
+>    +galaxy_extra_dirs:
+>    +  - /data
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure galaxy config"}
@@ -1009,10 +1010,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -19,3 +19,25 @@ galaxy_config:
+>    @@ -19,6 +19,32 @@ galaxy_config:
 >         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->         file_path: /data
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         file_path: /data/datasets
+>         job_working_directory: /data/jobs
 >    +  gravity:
 >    +    process_manager: systemd
 >    +    galaxy_root: "{{ galaxy_root }}/server"
@@ -1024,7 +1025,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +      # performance options
 >    +      workers: 2
 >    +      # Other options that will be passed to gunicorn
+>    +      # This permits setting of 'secure' headers like REMOTE_USER (and friends)
+>    +      # https://docs.gunicorn.org/en/stable/settings.html#forwarded-allow-ips
 >    +      extra_args: '--forwarded-allow-ips="*"'
+>    +      # This lets Gunicorn start Galaxy completely before forking which is faster.
+>    +      # https://docs.gunicorn.org/en/stable/settings.html#preload-app
 >    +      preload: true
 >    +    celery:
 >    +      concurrency: 2
@@ -1035,6 +1040,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +        pools:
 >    +          - job-handlers
 >    +          - workflow-schedulers
+>     
+>     galaxy_extra_dirs:
+>       - /data
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure gravity"}
@@ -1084,7 +1092,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    This will open the editor. Within that file, define your `vault_id_secret` to be a long random value.
 >
 >    ```
->    vault_id_secret: BxI6zlQVhoHLPVf3gqQ
+>    vault_id_secret: secret # CHANGE ME NOW!!!
 >    ```
 >    > <tip-title>How to get a good random value?</tip-title>
 >    > You can use the same command we ran before: `openssl rand -base64 24` to get a good, secure `id_secret` for your Galaxy
@@ -1828,10 +1836,10 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -41,3 +41,55 @@ galaxy_config:
->             pools:
->               - job-handlers
->               - workflow-schedulers
+>    @@ -48,3 +48,55 @@ galaxy_config:
+>     
+>     galaxy_extra_dirs:
+>       - /data
 >    +
 >    +# Certbot
 >    +certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -2008,7 +2016,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    +	# The virtualhost is our domain name
 >    +	server_name   "{{ inventory_hostname }}";
 >    +
->    +	# Our log files will go here.
+>    +	# Our log files will go to journalctl
 >    +	access_log  syslog:server=unix:/dev/log;
 >    +	error_log   syslog:server=unix:/dev/log;
 >    +
@@ -2075,8 +2083,6 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    > {% endraw %}
 >    >
 >    {: .details}
->
->    {% snippet topics/admin/tutorials/ansible-galaxy/faqs/custom-welcome.md %}
 >
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
@@ -2241,8 +2247,8 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >         # Main Configuration
 >    @@ -19,6 +37,7 @@ galaxy_config:
 >         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->         file_path: /data
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         file_path: /data/datasets
+>         job_working_directory: /data/jobs
 >    +    job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >       gravity:
 >         process_manager: systemd
@@ -2294,9 +2300,9 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -38,6 +38,27 @@ galaxy_config:
->         file_path: /data
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    @@ -38,6 +38,28 @@ galaxy_config:
+>         file_path: /data/datasets
+>         job_working_directory: /data/jobs
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    # SQL Performance
 >    +    slow_query_log_threshold: 5
@@ -2319,6 +2325,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    allow_user_impersonation: true
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
+>    +    new_user_dataset_access_role_default_private: true # Make datasets private by default
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
@@ -2546,7 +2553,6 @@ If you've been following along you should have a production-ready Galaxy, secure
 > 1. Check your `git log -p` and see how the Vault changes look (you can type `/vault` to search). Notice that they're just changed encoded content.
 > 1. Create the file `.gitattributes` in the same folder as your `galaxy.yml` playbook, with the following contents:
 > 
->    ```
 >    {% raw %}
 >    ```diff
 >    --- /dev/null

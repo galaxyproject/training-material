@@ -274,7 +274,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -6,3 +6,8 @@ certbot_virtualenv_package_name: python3-venv     # usegalaxy_eu.certbot
+>    @@ -5,3 +5,8 @@ pip_virtualenv_command: /usr/bin/python3 -m venv  # usegalaxy_eu.certbot, usegal
 >     # Common variables needed by all hosts
 >     galaxy_user_name: galaxy
 >     galaxy_db_name: galaxy
@@ -311,9 +311,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
 >    @@ -37,6 +37,7 @@
+>           become_user: "{{ galaxy_user_name }}"
 >         - galaxyproject.nginx
 >         - galaxyproject.gxadmin
->         - galaxyproject.tusd
 >    +    - galaxyproject.cvmfs
 >       post_tasks:
 >         - name: Setup gxadmin cleanup task
@@ -507,10 +507,10 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -66,6 +66,8 @@ galaxy_config:
->         outputs_to_working_directory: true
+>    @@ -68,6 +68,8 @@ galaxy_config:
 >         # TUS
->         tus_upload_store: /data/tus
+>         galaxy_infrastructure_url: "https://{{ inventory_hostname }}"
+>         tus_upload_store: "{{ galaxy_tus_upload_store }}"
 >    +    # CVMFS
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >       gravity:

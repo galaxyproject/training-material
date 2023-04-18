@@ -12,7 +12,7 @@ questions:
 objectives:
   - Be familiar with the basics of installing, configuring, and using Slurm
   - Understand all components of the Galaxy job running stack
-  - Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem
+  - Understand how the job conf controls Galaxy's jobs subsystem
   - Have a strong understanding of Galaxy job destinations
   - Understand the purpose and function of Galaxy job metrics
 time_estimation: "1h"
@@ -109,10 +109,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -33,6 +33,8 @@
->             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
+>    @@ -34,6 +34,8 @@
 >             dest: /libraries/
 >       roles:
+>         - galaxyproject.tusd
 >    +    - galaxyproject.repos
 >    +    - galaxyproject.slurm
 >         - usegalaxy_eu.apptainer
@@ -128,7 +128,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -176,6 +176,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -189,6 +189,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >     
@@ -144,7 +144,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    +
 >     # TUS
 >     galaxy_tusd_port: 1080
->     tusd_instances:
+>     galaxy_tus_upload_store: /data/tus
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add slurm configuration"}
@@ -338,8 +338,8 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    +      package:
 >    +        name: slurm-drmaa1
 >       roles:
+>         - galaxyproject.tusd
 >         - galaxyproject.repos
->         - galaxyproject.slurm
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add post task to install slurm-drmaa"}
@@ -590,7 +590,7 @@ These include very basic submission parameters. We want more information!
 >    ```diff
 >    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -11,3 +11,13 @@ galaxy_db_name: galaxy
+>    @@ -10,3 +10,13 @@ galaxy_db_name: galaxy
 >     cvmfs_role: client
 >     galaxy_cvmfs_repos_enabled: config-repo
 >     cvmfs_quota_limit: 500
@@ -676,7 +676,7 @@ You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblen
 ## Further Reading
 
 - [Galaxy's cluster documentation](https://docs.galaxyproject.org/en/latest/admin/cluster.html) describes in detail alternative cluster configurations.
-- [The job_conf.xml documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html) fully describes the syntax of the job configuration file.
+- [The job_conf documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html) fully describes the syntax of the job configuration file.
 - The [Distributed Resource Management Application API (DRMAA)](https://www.drmaa.org/) page contains the DRMAA specification as well as documentation for various implementations. It also includes a list of DRMs supporting DRMAA.
 - The [Slurm documentation](http://slurm.schedmd.com/) is extensive and covers all the features and myriad of ways in which you can configure slurm.
 - [PSNC slurm-drmaa](http://apps.man.poznan.pl/trac/slurm-drmaa)'s page includes documentation and the SVN repository, which has a few minor fixes since the last released version. PSNC also wrote the initial implementations of the DRMAA libraries for PBSPro and LSF, so all three are similar.

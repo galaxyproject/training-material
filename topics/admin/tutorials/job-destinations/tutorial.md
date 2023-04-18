@@ -106,9 +106,9 @@ To demonstrate a real-life scenario and {TPV}'s role in it, let's plan on settin
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -137,6 +137,9 @@ galaxy_config_templates:
->       - src: templates/galaxy/config/dependency_resolvers_conf.xml
->         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>    @@ -150,6 +150,9 @@ galaxy_config_templates:
+>     galaxy_extra_dirs:
+>       - /data
 >     
 >    +galaxy_local_tools:
 >    +- testing.xml
@@ -160,7 +160,7 @@ If we want to change something in production, it is always a good idea to have a
 - one where you can safely edit your files
 - and the actual production config directory that galaxy reads.
 
-Once you are done with your changes, you can run the script and it will automatically lint and copy over the files, if they are correct *and* mentioned in your job_conf.yml file.
+Once you are done with your changes, you can run the script and it will automatically lint and copy over the files, if they are correct *and* mentioned in your job_conf.yml file, or in your `group_vars/galaxyservers.yml` inline `job_conf`.
 And of course, Galaxy has an Ansible Role for that.
 
 ><hands-on-title>Adding automated TPV-lind-and-copy-script</hands-on-title>
@@ -176,7 +176,7 @@ And of course, Galaxy has an Ansible Role for that.
 >       version: 1.0.2
 >    +# TPV Linting
 >    +- name: usegalaxy_eu.tpv_auto_lint
->    +  version: 0.4.0
+>    +  version: 0.4.2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tpv-auto-lint to requirements"}
@@ -185,21 +185,27 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -123,6 +123,14 @@ galaxy_config:
+>    @@ -133,6 +133,8 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
->    +galaxy_extra_dirs:
->    +  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
->    +
->    +galaxy_extra_privsep_dirs:
->    +  - "{{ tpv_mutable_dir }}"
->    +
 >    +galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
 >    +
 >     galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
+>    @@ -148,7 +150,10 @@ galaxy_config_templates:
+>         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>     
+>     galaxy_extra_dirs:
+>    -  - /data
+>    +  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
+>    +
+>    +galaxy_extra_privsep_dirs:
+>    +  - "{{ tpv_mutable_dir }}"
+>     
+>     galaxy_local_tools:
+>     - testing.xml
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TPV config dir"}
@@ -208,7 +214,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -41,6 +41,7 @@
+>    @@ -42,6 +42,7 @@
 >         - galaxyproject.slurm
 >         - usegalaxy_eu.apptainer
 >         - galaxyproject.galaxy
@@ -219,7 +225,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tpv-auto-lint role"}
-> 4. Run the Galaxy playbook. Because we modified `job_conf.yml`, Galaxy will be restarted to reread its config files.
+> 4. Run the Galaxy playbook. Because we modified the job configuration, Galaxy will be restarted to reread its config files.
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -269,10 +275,10 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    -        - name: LC_ALL
 >    -          value: C
 >    -        # The cache directory holds the docker containers that get converted
->    -        - name: SINGULARITY_CACHEDIR
+>    -        - name: APPTAINER_CACHEDIR
 >    -          value: /tmp/singularity
 >    -        # Apptainer uses a temporary directory to build the squashfs filesystem
->    -        - name: SINGULARITY_TMPDIR
+>    -        - name: APPTAINER_TMPDIR
 >    -          value: /tmp
 >    +      tpv_dispatcher:
 >    +        runner: dynamic
@@ -284,7 +290,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -138,6 +119,8 @@ galaxy_config_files_public:
+>    @@ -142,6 +123,8 @@ galaxy_config_files_public:
 >     galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -347,7 +353,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    Note that the tool id is matched via a regular expression against the full tool id. For example, a full tool id for hisat may look like: `toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy7`
 >    This enables complex matching, including matching against specific versions of tools.
 >
->    Destinations must also be defined in TPV itself. Importantly, note that any destinations defined in job_conf.yml are ignored by TPV. Therefore, we have moved all destinations from job_conf to TPV. In addition, we have removed some
+>    Destinations must also be defined in TPV itself. Importantly, note that any destinations defined in the job conf are ignored by TPV. Therefore, we have moved all destinations from the job conf to TPV. In addition, we have removed some
 >    redundancy by using the "inherits" clause in the `slurm` destination. This means that slurm will inherit all of the settings defined for singularity, but selectively override some settings. We have additionally
 >    defined the `native_specification` param for SLURM, which is what SLURM uses to allocate resources per job. Note the use of the `{cores}`
 >    parameter within the native specification, which TPV will replace at runtime with the value of cores assigned to the tool.
@@ -355,7 +361,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    Finally, we have also defined a new property named `max_accepted_cores`, which is the maximum amount of cores this destination will accept. Since the testing tool requests 2 cores, but only the `slurm`
 >    destination is able to accept jobs greater than 1 core, TPV will automatically route the job to the best matching destination, in this case, slurm.
 >
-> 3. Run the Galaxy playbook. Because we modified `job_conf.yml`, Galaxy will be restarted to reread its config files.
+> 3. Run the Galaxy playbook.
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -621,22 +627,22 @@ Such form elements can be added to tools without modifying each tool's configura
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
 >    @@ -51,6 +56,7 @@ galaxy_config:
->         file_path: /data
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         file_path: /data/datasets
+>         job_working_directory: /data/jobs
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -128,6 +134,8 @@ galaxy_config_templates:
+>    @@ -132,6 +138,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
 >     
->     galaxy_local_tools:
->     - testing.xml
+>     galaxy_extra_dirs:
+>       - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}

@@ -91,7 +91,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -326,3 +326,8 @@ telegraf_plugins_extra:
+>    @@ -329,3 +329,8 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"
@@ -170,14 +170,14 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -50,6 +50,7 @@
+>    @@ -51,6 +51,7 @@
 >         - galaxyproject.nginx
 >         - geerlingguy.docker
 >         - usegalaxy_eu.rabbitmqserver
 >    +    - galaxyproject.tiaas2
 >         - galaxyproject.gxadmin
->         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
+>         - dj-wasabi.telegraf
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TIaaS role to the Galaxy playbook"}

@@ -80,32 +80,35 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -64,6 +64,8 @@ galaxy_config:
->         allow_user_impersonation: true
+>    @@ -65,6 +65,9 @@ galaxy_config:
 >         # Tool security
 >         outputs_to_working_directory: true
+>         new_user_dataset_access_role_default_private: true # Make datasets private by default
 >    +    # TUS
->    +    tus_upload_store: /data/tus
+>    +    galaxy_infrastructure_url: "https://{{ inventory_hostname }}"
+>    +    tus_upload_store: "{{ galaxy_tus_upload_store }}"
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -146,3 +148,16 @@ nginx_conf_http:
+>    @@ -85,6 +88,10 @@ galaxy_config:
+>         celery:
+>           concurrency: 2
+>           loglevel: DEBUG
+>    +    tusd:
+>    +      enable: true
+>    +      tusd_path: /usr/local/sbin/tusd
+>    +      upload_dir: "{{ galaxy_tus_upload_store }}"
+>         handlers:
+>           handler:
+>             processes: 2
+>    @@ -154,3 +161,7 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >    +
 >    +# TUS
 >    +galaxy_tusd_port: 1080
->    +tusd_instances:
->    +  - name: main
->    +    user: "{{ galaxy_user.name }}"
->    +    group: "galaxy"
->    +    args:
->    +      - "-host=localhost"
->    +      - "-port={{ galaxy_tusd_port }}"
->    +      - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
->    +      - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
->    +      - "-hooks-http-forward-headers=X-Api-Key,Cookie"
+>    +galaxy_tus_upload_store: /data/tus
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure TUS in your group variables"}
@@ -149,14 +152,14 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -36,6 +36,7 @@
->           become_user: "{{ galaxy_user_name }}"
->         - galaxyproject.nginx
->         - galaxyproject.gxadmin
+>    @@ -30,6 +30,7 @@
+>             name: ['tmpreaper']
+>           when: ansible_os_family == 'Debian'
+>       roles:
 >    +    - galaxyproject.tusd
->       post_tasks:
->         - name: Setup gxadmin cleanup task
->           ansible.builtin.cron:
+>         - galaxyproject.galaxy
+>         - role: galaxyproject.miniconda
+>           become: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the role to the playbook"}

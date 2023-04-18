@@ -149,10 +149,10 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -266,3 +266,7 @@ tusd_instances:
->               - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
->               - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
->               - "-hooks-http-forward-headers=X-Api-Key,Cookie"
+>        @@ -269,3 +269,7 @@ rabbitmq_users:
+>         # TUS
+>         galaxy_tusd_port: 1080
+>         galaxy_tus_upload_store: /data/tus
 >        +
 >        +#Redis
 >        +galaxy_additional_venv_packages:
@@ -166,7 +166,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/galaxy.yml
 >        +++ b/galaxy.yml
->        @@ -45,6 +45,7 @@
+>        @@ -46,6 +46,7 @@
 >             - role: galaxyproject.miniconda
 >               become: true
 >               become_user: "{{ galaxy_user_name }}"
@@ -248,7 +248,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -244,6 +244,7 @@ rabbitmq_config:
+>        @@ -256,6 +256,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
 >           - /pulsar/pulsar_au
@@ -256,7 +256,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -253,6 +254,13 @@ rabbitmq_users:
+>        @@ -265,6 +266,13 @@ rabbitmq_users:
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -299,7 +299,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -278,3 +278,22 @@ tusd_instances:
+>        @@ -281,3 +281,22 @@ galaxy_tus_upload_store: /data/tus
 >         #Redis
 >         galaxy_additional_venv_packages:
 >           - redis
@@ -355,7 +355,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/galaxy.yml
 >        +++ b/galaxy.yml
->        @@ -46,6 +46,7 @@
+>        @@ -47,6 +47,7 @@
 >               become: true
 >               become_user: "{{ galaxy_user_name }}"
 >             - geerlingguy.redis
@@ -373,18 +373,18 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -113,6 +113,11 @@ galaxy_config:
+>    @@ -119,6 +119,11 @@ galaxy_config:
 >           preload: true
 >         celery:
 >           concurrency: 2
->    +      enable_celery_beat: true
+>    +      enable_beat: true
 >    +      enable: true
 >    +      queues: celery,galaxy.internal,galaxy.external
 >    +      pool: threads
 >    +      memory_limit: 2
 >           loglevel: DEBUG
->         handlers:
->           handler:
+>         tusd:
+>           enable: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add celery" data-ref="add-req"}
@@ -394,7 +394,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -98,6 +98,11 @@ galaxy_config:
+>    @@ -100,6 +100,11 @@ galaxy_config:
 >         # Data Library Directories
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
