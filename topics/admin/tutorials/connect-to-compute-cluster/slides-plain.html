@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Connecting Galaxy to a compute cluster">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-18 12:27:15 +0000">
+<meta name="DC.date" content="2023-04-18 13:55:00 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nicola Soranzo">
@@ -242,13 +242,12 @@
 	<h1 id="galaxy-job-configuration">Galaxy Job Configuration</h1>
 
 <ul>
-  <li>Configured in <code class="language-plaintext highlighter-rouge">config/job_conf.xml</code>, <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>, and <code class="language-plaintext highlighter-rouge">files/galaxy/config/tpv*.yml</code></li>
-  <li>XML format with macro support</li>
+  <li>Configured in <code class="language-plaintext highlighter-rouge">job_config</code> in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>, <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>, and <code class="language-plaintext highlighter-rouge">files/galaxy/config/tpv*.yml</code></li>
   <li>Major components:
     <ul>
-      <li><strong>Plugins</strong>: distributed resource manager (DRM) modules to load</li>
-      <li><strong>Handlers</strong>: job handler processes managing the lifecycle of jobs</li>
-      <li><strong>Destinations</strong>: where to send jobs, and what parameters to run those jobs with</li>
+      <li><strong>Runners</strong>: distributed resource manager (DRM) modules to load</li>
+      <li><strong>Handlers</strong>: dedicated Galaxy server processes managing the lifecycle of jobs</li>
+      <li><strong>Environments</strong> (aka “destinations”): where to send jobs, and what parameters to run those jobs with</li>
       <li><strong>Tool</strong> to destination/handler mappings</li>
       <li><strong>Resource</strong> selection mappings: give users job execution options on the tool form</li>
       <li><strong>Limits</strong>: job runtime limits, e.g. the max number of concurrent jobs</li>
@@ -260,11 +259,11 @@
 
 <ul>
   <li>The job_conf file is a very powerful galaxy configuration piece critical to smooth cluster operation.</li>
-  <li>Written in XML or YML it connects your server with the available cluster resources.</li>
+  <li>Written in YML, it connects your server with the available cluster resources.</li>
   <li>You can configure it in myriad ways.</li>
   <li>Study the advanced sample provided with codebase once you get a basic understanding.</li>
   <li>There are several major components of the job conf file.</li>
-  <li>Plugins, handlers, destinations, tools, resources, and limits.</li>
+  <li>Plugins, handlers, environments (destinations), tools, resources, and limits.</li>
   <li>We’ll go into detail on each of these in the tutorial.</li>
 </ul>
 
@@ -288,7 +287,7 @@
 
 <hr />
 
-<h1 id="plugins">Plugins</h1>
+<h1 id="runners">Runners</h1>
 
 <p>Correspond to job runner plugins in <a href="https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/jobs/runners">lib/galaxy/jobs/runners</a></p>
 
@@ -334,14 +333,9 @@
 
 <h1 id="handlers">Handlers</h1>
 
-<p>Define which Galaxy processes are job handlers</p>
+<p>Control how jobs are assigned to handlers (use <code class="language-plaintext highlighter-rouge">db-skip-locked</code>)</p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">id</code> attribute should match the <code class="language-plaintext highlighter-rouge">--server-name</code> param value of a process</li>
-  <li>Dedicated handlers can be reserved, e.g. for small, high throughput jobs</li>
-  <li>The list of plugins that are loaded by a job handler can be limited using <code class="language-plaintext highlighter-rouge">&lt;plugin&gt;</code> subelements (e.g. when the DRMAA plugin needs to be loaded with different library paths)</li>
-  <li>Defines how jobs are assigned to individual processes (use <code class="language-plaintext highlighter-rouge">db-skip-locked</code> !)</li>
-</ul>
+<p>Can statically define handler configuration (uncommon)</p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -355,7 +349,9 @@
 
 <hr />
 
-<h1 id="destinations">Destinations</h1>
+<h1 id="environments">Environments</h1>
+
+<p>Formerly “Destinations”</p>
 
 <p>Define <em>how</em> jobs should be run</p>
 
@@ -369,7 +365,7 @@
 <p><span>Speaker Notes</span></p>
 
 <ul>
-  <li>The destination section of the job configuration file is a map that defines which jobs go where.</li>
+  <li>The environments section of the job configuration is a map that defines which jobs go where.</li>
   <li>Jobs from any destination, can be processed by any plugin.</li>
   <li>Every job will find a path through this configuration and eventually get dispatched to the matching runner.</li>
   <li>These destinations can specify things like environment variables or resource requirements.</li>
@@ -379,7 +375,6 @@
 
 <h1 id="the-default-job-configuration">The default job configuration</h1>
 
-<p>.left[<code class="language-plaintext highlighter-rouge">config/job_conf.yml.sample_basic</code>:]</p>
 <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">runners</span><span class="pi">:</span>
   <span class="na">local</span><span class="pi">:</span>
     <span class="na">load</span><span class="pi">:</span> <span class="s">galaxy.jobs.runners.local:LocalJobRunner</span>
@@ -404,45 +399,46 @@
 
 <h1 id="job-config---tags">Job Config - Tags</h1>
 
-<p>Both destinations and handlers can be grouped by <strong>tags</strong></p>
+<p>Both environments and handlers can be grouped by <strong>tags</strong></p>
 
 <ul>
   <li>Allows random selection from multiple resources</li>
-  <li>Allows concurrency limits at the destination group level</li>
+  <li>Allows concurrency limits at the environment group level</li>
 </ul>
 
 <p><span>Speaker Notes</span></p>
 
 <ul>
-  <li>Tags can be applied to both destinations and handlers.</li>
-  <li>This permits selecting randomly amongst the handlers or destinations.</li>
+  <li>Tags can be applied to both environments and handlers.</li>
+  <li>This permits selecting randomly amongst the handlers or environments.</li>
   <li>Tags can help the load distribution.</li>
+  <li>Tags can also be used for concurrency limits that apply across multiple environments.</li>
 </ul>
 
 <hr />
 
 <h1 id="job-environment">Job Environment</h1>
 
-<p><code class="language-plaintext highlighter-rouge">&lt;env&gt;</code> tag in destinations: configure the job exec environment</p>
+<p><code class="language-plaintext highlighter-rouge">env</code> key in environments: configure the job execution environment</p>
 
 <table>
   <thead>
     <tr>
-      <th>tag syntax</th>
+      <th>syntax</th>
       <th>function</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">&lt;env id="NAME"&gt;VALUE&lt;/env&gt;</code></td>
+      <td><code class="language-plaintext highlighter-rouge">- {name: NAME, value: VALUE}</code></td>
       <td>Set <code class="language-plaintext highlighter-rouge">$NAME</code> to <code class="language-plaintext highlighter-rouge">VALUE</code></td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">&lt;env file="/path/to/file" /&gt;</code></td>
+      <td><code class="language-plaintext highlighter-rouge">- {file: /path/to/file}</code></td>
       <td>Source shell file at <code class="language-plaintext highlighter-rouge">/path/to/file</code></td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">&lt;env exec="CMD" /&gt;</code></td>
+      <td><code class="language-plaintext highlighter-rouge">- {execute: CMD}</code></td>
       <td>Execute <code class="language-plaintext highlighter-rouge">CMD</code></td>
     </tr>
   </tbody>
@@ -487,8 +483,8 @@
 <ul>
   <li>Number of active jobs per registered user</li>
   <li>Number of active jobs per unregistered user</li>
-  <li>Number of active jobs per registered user in a specified destination or destination tag</li>
-  <li>Number of total active jobs in a specified destination or destination tag</li>
+  <li>Number of active jobs per registered user in a specified environment or environment tag</li>
+  <li>Number of total active jobs in a specified environment or environment tag</li>
 </ul>
 
 <p><span>Speaker Notes</span></p>
@@ -505,7 +501,7 @@
 
 <p>Most job plugins require a <strong>shared filesystem</strong> between the Galaxy server and compute.</p>
 
-<p>The exception is <strong>Pulsar</strong>. More on this in <em>Using heterogeneous compute resources</em></p>
+<p>The exception is <strong>Pulsar</strong>. More on this in <em>Running Jobs on Remote Resources with Pulsar</em>.</p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -535,7 +531,7 @@
   </li>
 </ol>
 
-<p>The first can be worked around with symlinks or Pulsar embedded (later)</p>
+<p>The first can be worked around with symlinks, copies, or Pulsar embedded</p>
 
 <p>The second can be worked around with Pulsar REST/MQ (with a performance/throughput penalty)</p>
 
@@ -576,7 +572,7 @@
 
 <h1 id="memory-requirements">Memory requirements</h1>
 
-<p>For <strong>Slurm only</strong>, Galaxy will set <code class="language-plaintext highlighter-rouge">$GALAXY_MEMORY_MB</code> and <code class="language-plaintext highlighter-rouge">$GALAXY_MEMORY_MB_PER_SLOT</code> as integers.</p>
+<p>For <strong>Slurm and Gridengine only</strong>, Galaxy will set <code class="language-plaintext highlighter-rouge">$GALAXY_MEMORY_MB</code> and <code class="language-plaintext highlighter-rouge">$GALAXY_MEMORY_MB_PER_SLOT</code> as integers.</p>
 
 <p><strong>Other DRMs:</strong> Please PR the <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/jobs/runners/util/job_script/MEMORY_STATEMENT.sh">appropriate code</a>.</p>
 
@@ -619,7 +615,7 @@
 
 <hr />
 
-<h2 id="job-config---mapping-tools-to-destinations">Job Config - Mapping Tools to Destinations</h2>
+<h2 id="job-config---mapping-tools-to-environments">Job Config - Mapping Tools to Environments</h2>
 
 <p>Problem: Tool A uses single core, Tool B uses multiple</p>
 <ul>
@@ -630,13 +626,13 @@
 <p><span>Speaker Notes</span></p>
 
 <ul>
-  <li>Mapping tools to destinations is the heart of the job configuration.</li>
+  <li>Mapping tools to environments is the heart of the job configuration.</li>
   <li>This permits you to define which tools go to which destinations, and what resources they need.</li>
 </ul>
 
 <hr />
 
-<h2 id="job-config---mapping-tools-to-destinations-1">Job Config - Mapping Tools to Destinations</h2>
+<h2 id="job-config---mapping-tools-to-environments-1">Job Config - Mapping Tools to Environments</h2>
 
 <p>Solution:</p>
 
@@ -657,15 +653,15 @@
 <p><span>Speaker Notes</span></p>
 
 <ul>
-  <li>Here is an example mapping the hisat2 tool to a definition named multi.</li>
-  <li>The multi destination specifies that 4 cores should be allocated for each job, and uses the slurm plugin.</li>
+  <li>Here is an example mapping the hisat2 tool to an environment named multicore_slurm.</li>
+  <li>The multicore environment specifies that 4 cores should be allocated for each job, and uses the slurm plugin.</li>
 </ul>
 
 <hr />
 
 <h1 id="the-dynamic-job-runner">The Dynamic Job Runner</h1>
 
-<p>For when basic tool-to-destination mapping isn’t enough</p>
+<p>For when basic tool-to-environment mapping isn’t enough</p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -685,8 +681,8 @@
 
 <p>.left[Two types:]</p>
 <ul>
-  <li>Dynamic Tool Destinations</li>
-  <li>Python function</li>
+  <li>Total Perspective Vortex (TPV)</li>
+  <li>Arbitrary Python function</li>
 </ul>
 
 <p>See: <a href="https://docs.galaxyproject.org/en/master/admin/jobs.html#dynamic-destination-mapping">Dynamic Destination Mapping</a></p>
@@ -694,34 +690,18 @@
 <p><span>Speaker Notes</span></p>
 
 <ul>
-  <li>There are two built in ways to do this: dynamic tool destinations, and custom Python functions.</li>
-  <li>We will cover both of these in the tutorial.</li>
+  <li>There are two built in ways to do this: TPV and custom Python functions.</li>
 </ul>
 
 <hr />
 
-<h2 id="dynamic-tool-destinations">Dynamic Tool Destinations</h2>
+<h2 id="total-perspective-vortex-tpv">Total Perspective Vortex (TPV)</h2>
 
-<p>.left[Configurable mappings without programming:]</p>
-<ul>
-  <li>YAML format config file <code class="language-plaintext highlighter-rouge">tool_destinations.yml</code></li>
-  <li>Map based on tool ID plus:
-    <ul>
-      <li>Input dataset size(s)</li>
-      <li>Input dataset number of records</li>
-      <li>User</li>
-    </ul>
-  </li>
-  <li>Maps to static destinations defined in job config</li>
-</ul>
+<p>Powerful, fully dynamic tool-to-environment mapping based on tool, user, resource requirements, tags, and more.</p>
 
-<p><span>Speaker Notes</span></p>
+<p>Discussed in detail in <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html">its own tutorial</a>.</p>
 
-<ul>
-  <li>The Dynamic Tool Destinations are written as a yaml file.</li>
-  <li>You can easily write rules based on file input sizes or number of inputs or user information.</li>
-  <li>This can be used to determine memory and cpu allocations.</li>
-</ul>
+<p>See also: <a href="https://total-perspective-vortex.readthedocs.io/">TPV Documentation</a>.</p>
 
 <hr />
 
@@ -751,7 +731,6 @@
 <p><span>Speaker Notes</span></p>
 
 <ul>
-  <li>If Dynamic Tool Destinations are insufficiently flexible, then custom Python functions can be written.</li>
   <li>These can use any arbitrary information you want.</li>
   <li>They have full access to submitter information, job parameters, and any other resource you might want.</li>
   <li>They can dynamically modify destination parameters during runtime.</li>
@@ -810,7 +789,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/16b3541e79d18c908da0cb8aa38d10c2121c519d">16b3541e79d18c908da0cb8aa38d10c2121c519d</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/92a6ccef0a93d07bf56df365da6de3c22316d2c2">92a6ccef0a93d07bf56df365da6de3c22316d2c2</a></p>
     </div>
 </footer>
 
