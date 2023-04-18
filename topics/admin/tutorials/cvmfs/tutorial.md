@@ -507,7 +507,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -67,6 +67,8 @@ galaxy_config:
+>    @@ -68,6 +68,8 @@ galaxy_config:
 >         new_user_dataset_access_role_default_private: true # Make datasets private by default
 >         # TUS
 >         tus_upload_store: /data/tus

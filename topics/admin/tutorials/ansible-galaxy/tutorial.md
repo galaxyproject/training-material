@@ -945,7 +945,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -10,3 +10,15 @@ galaxy_force_checkout: true
+>    @@ -10,3 +10,16 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.12.0
 >     miniconda_channels: ['conda-forge', 'defaults']
@@ -958,6 +958,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
 >    +    file_path: /data/datasets
 >    +    job_working_directory: /data/jobs
+>    +    object_store_store_by: /data/jobs
 >    +
 >    +galaxy_extra_dirs:
 >    +  - /data
@@ -1010,10 +1011,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -19,6 +19,32 @@ galaxy_config:
->         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
+>    @@ -20,6 +20,32 @@ galaxy_config:
 >         file_path: /data/datasets
 >         job_working_directory: /data/jobs
+>         object_store_store_by: /data/jobs
 >    +  gravity:
 >    +    process_manager: systemd
 >    +    galaxy_root: "{{ galaxy_root }}/server"
@@ -1836,7 +1837,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -48,3 +48,55 @@ galaxy_config:
+>    @@ -49,3 +49,55 @@ galaxy_config:
 >     
 >     galaxy_extra_dirs:
 >       - /data
@@ -2245,10 +2246,10 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >     galaxy_config:
 >       galaxy:
 >         # Main Configuration
->    @@ -19,6 +37,7 @@ galaxy_config:
->         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
+>    @@ -20,6 +38,7 @@ galaxy_config:
 >         file_path: /data/datasets
 >         job_working_directory: /data/jobs
+>         object_store_store_by: /data/jobs
 >    +    job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >       gravity:
 >         process_manager: systemd
@@ -2300,9 +2301,9 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -38,6 +38,28 @@ galaxy_config:
->         file_path: /data/datasets
+>    @@ -39,6 +39,28 @@ galaxy_config:
 >         job_working_directory: /data/jobs
+>         object_store_store_by: /data/jobs
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    # SQL Performance
 >    +    slow_query_log_threshold: 5
