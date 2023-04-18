@@ -685,6 +685,7 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >    +          - libcurl4-openssl-dev
 >    +          - libssl-dev
 >    +          - virtualenv
+>    +          - python3-venv
 >    +        state: present
 >    +        update_cache: yes
 >    +      become: yes
