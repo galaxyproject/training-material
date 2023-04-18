@@ -741,8 +741,9 @@
       <span class="ruby-identifier">source</span> = <span class="ruby-identifier">source</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/ `([^`]*)`([^`])/</span>, <span class="ruby-string">&#39; &lt;code&gt;\1&lt;/code&gt;\2&#39;</span>)
         .<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/([^`])`([^`]*)` /</span>, <span class="ruby-string">&#39;\1&lt;code&gt;\2&lt;/code&gt; &#39;</span>)
 
-      <span class="ruby-comment"># Strip out includes</span>
-      <span class="ruby-identifier">source</span> = <span class="ruby-identifier">source</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/{% include .* %}/</span>, <span class="ruby-string">&#39;&#39;</span>)
+      <span class="ruby-comment"># Strip out includes, snippets</span>
+      <span class="ruby-identifier">source</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/{% include .* %}/</span>, <span class="ruby-string">&#39;&#39;</span>)
+      <span class="ruby-identifier">source</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/{% snippet .* %}/</span>, <span class="ruby-string">&#39;&#39;</span>)
 
       <span class="ruby-comment"># Replace all the broken icons that can&#39;t render, because we don&#39;t</span>
       <span class="ruby-comment"># have access to the full render pipeline.</span>

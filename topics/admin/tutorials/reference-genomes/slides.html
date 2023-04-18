@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Reference Genomes in Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-03-01 12:21:57 +0000">
+<meta name="DC.date" content="2023-04-18 08:38:18 +0000">
 <meta name="DC.creator" content="Daniel Blankenberg">
 <meta name="DC.creator" content="Simon Gladman">
 
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-03-01 12:21:57 +0000",
+  "dateModified": "2023-04-18 08:38:18 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Reference Genomes in Galaxy",
   "interactivityType": "mixed",
@@ -455,25 +455,44 @@ mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 
 # Typical conversation
 
-.middle[![ref-problem-1.png](../../images/Ref-problem-1.png)]
+&gt; Hi,
+&gt; We have a local install of galaxy andI'm trying to add the reference index files for bwa using the information provided in the following link:
+&gt;
+&gt; ...
+&gt;
+&gt; I have modified the bwa_index.loc file present in the ../tool-data directory by adding the path to where the index is on our server (Also attached). However, even after restarting the server, the ference genome does not show when choosing the &quot;use a built in index option&quot;. I'm not sure whether the loc file is correctly created, and whether any other configuration file needs to be changed/updated. Help in the matter greatly appreciated
+&gt;
+&gt; Thanks,
+&gt; Aarti
 
 ---
 
 # Typical conversation
 
-.middle[![ref-problem-2.png](../../images/Ref-problem-2.png)]
+&gt; Hi Aarti,
+&gt; Check the name of your rf file. If it is hg19.fa, then modified the loc file as
+&gt; &quot;hg19  hg19  HG19_BWA  /root/Ref_INDEX/HG19BWAIndex/base/hg19.fa&quot;
+&gt;
+&gt; Avik Datta
 
 ---
 
 # Typical conversation
 
-.middle[![ref-problem-3.png](../../images/Ref-problem-3.png)]
+&gt; Also make sure you are using TABs to separate the fields in the .loc file, this has bitten me several times in the past. My vim config places 4 spaces instead of TAB, to deactivate this optin you can do &quot;:set noexpandtab&quot;
+&gt;
+&gt; Hope it helps,
+&gt; Carlos
 
 ---
 
 # Typical conversation
 
-.middle[![ref-problem-4.png](../../images/Ref-problem-4.png)]
+&gt; Hello Carlos,
+&gt; Thanks a lot for the tip. The tab trick has fixed the problem.
+&gt;
+&gt; Regards,
+&gt; Aarti
 
 ---
 

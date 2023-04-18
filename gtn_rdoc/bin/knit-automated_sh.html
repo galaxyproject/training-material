@@ -222,14 +222,12 @@ cd &quot;${CURRENT_DIR}&quot; || exit
 
 # Import all of the patches
 for idx in &quot;${!tutorials[@]}&quot;; do
-        if [[ &quot;${tutorials[$idx]}&quot; != &quot;admin/tool-management&quot; ]]; then
         folder=$(echo &quot;${tutorials[$idx]}&quot; | cut -d / -f 1)
         tuto=$(echo &quot;${tutorials[$idx]}&quot; | cut -d / -f 2)
 
         python3 bin/knit.py \
                 topics/${folder}/tutorials/${tuto}/tutorial.md \
                 --patches ${DIR}/*${folder}-${tuto}*.patch
-        fi
 done</pre>
 
 <p>elif [[ “$op” == “deploy” ]]; then</p>
