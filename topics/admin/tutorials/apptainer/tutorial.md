@@ -172,7 +172,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_templates` entry:
 >
-> 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_templates` entry:
+> 1. Edit the `group_vars/galaxyservers.yml` file and add a `container_resolvers_config_file` entry and a corresponding `galaxy_config_templates` entry:
 >
 >    {% raw %}
 >    ```diff
