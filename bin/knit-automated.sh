@@ -71,14 +71,12 @@ elif [[ "$op" == "import" ]]; then
 
 	# Import all of the patches
 	for idx in "${!tutorials[@]}"; do
-		if [[ "${tutorials[$idx]}" != "admin/tool-management" ]]; then
 		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
 		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
 
 		python3 bin/knit.py \
 			topics/${folder}/tutorials/${tuto}/tutorial.md \
 			--patches ${DIR}/*${folder}-${tuto}*.patch
-		fi
 	done
 elif [[ "$op" == "deploy" ]]; then
 	if [[ ! -d "${DIR}" ]]; then

@@ -116,6 +116,7 @@ Ephemeris can take care of this process. Let's practice this on a real workflow.
 >    > > > ```diff
 >    > > > --- /dev/null
 >    > > > +++ b/tools/workflow_tools.yml
+>    > > > @@ -0,0 +1,41 @@
 >    > > > +install_tool_dependencies: True
 >    > > > +install_repository_dependencies: True
 >    > > > +install_resolver_dependencies: True
