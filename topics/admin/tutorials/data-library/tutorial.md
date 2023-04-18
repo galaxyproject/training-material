@@ -68,8 +68,8 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >    +        dest: /libraries/
 >       roles:
+>         - galaxyproject.tusd
 >         - usegalaxy_eu.apptainer
->         - galaxyproject.galaxy
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the git repository to the pre-tasks"}
@@ -84,7 +84,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -85,6 +85,9 @@ galaxy_config:
+>    @@ -86,6 +86,9 @@ galaxy_config:
 >         # Tool Dependencies
 >         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
 >         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"

@@ -124,7 +124,7 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    +        user: galaxy # Run as the Galaxy user
 >    +        minute: "0"
 >    +        hour: "0"
->    +        job: "GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server /usr/bin/gxadmin galaxy cleanup 60"
+>    +        job: "GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server /usr/local/bin/gxadmin galaxy cleanup 60"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure gxadmin to cleanup data"}
@@ -158,7 +158,7 @@ Before we begin backing up our Galaxy data, let's set up automated cleanups to e
 >    @@ -21,6 +21,14 @@
 >         - name: Install Dependencies
 >           package:
->             name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-setuptools']
+>             name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-venv', 'python3-setuptools']
 >    +    - name: Install RHEL/CentOS/Rocky specific dependencies
 >    +      package:
 >    +        name: ['tmpwatch']
