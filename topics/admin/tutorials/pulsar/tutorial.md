@@ -766,7 +766,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```
 >    {: data-commit="Add pulsar plugin"}
 >
->    Add the following to the `<destinations>` section of your job conf file:
+>    Add the following to the `destinations:` section of your job conf file:
 >
 >    {% raw %}
 >    ```diff
