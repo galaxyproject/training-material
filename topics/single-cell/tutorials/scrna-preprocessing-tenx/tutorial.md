@@ -250,14 +250,14 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 > <comment-title></comment-title>
 >
-> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.10b+galaxy3) %} consumes a large amount of memory. During the Smörgåsbord training please use `Human (Homo Sapiens): hg19 chrX` as the reference genome if you follow this tutorial on [usegalaxy.org](https://usegalaxy.org). This performs the mapping only against chromosome X. The full output dataset is available at [zenodo](https://zenodo.org/record/3581213/files/matrix.mtx) and will be the starting point for the next tutorial.
+> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a) %} consumes a large amount of memory. During the Smörgåsbord training please use `Human (Homo Sapiens): hg19 chrX` as the reference genome if you follow this tutorial on [usegalaxy.org](https://usegalaxy.org). This performs the mapping only against chromosome X. The full output dataset is available at [zenodo](https://zenodo.org/record/3581213/files/matrix.mtx) and will be the starting point for the next tutorial.
 {: .comment}
 
 > <hands-on-title></hands-on-title>
 >
-> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.10b+galaxy3) %}  with the following parameters:
+> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a) %}  with the following parameters:
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
->        - *"Reference genome with annotation"*: `use genome reference without builtin gene-model`
+>        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
 >            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full` or `Human (Homo Sapiens): hg19 chrX`
 >            - *"Gene model (gff3,gtf) file for splice junctions"*: `Homo_sapiens.GRCh37.75.gtf`
 >            - *"Length of genomic sequence around annotated junctions"*: `100`
@@ -266,13 +266,13 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: Multi-select `L001_R1_001` and `L002_R1_001` using the Ctrl key.
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: Multi-select `L001_R2_001` and `L002_R2_001` using the Ctrl key.
 >        - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
->        - *"Configure Chemistry Options"*: `Chromium chemistry v3`
+>        - *"Configure Chemistry Options"*: `Cell Ranger v3`
 >        - *"UMI deduplication (collapsing) algorithm"*: `CellRanger2-4 algorithm`
->        - *"Type of UMI filtering"*: `Remove UMIs with N and homopolymers (similar to CellRanger 2.2.0)`
->        - *"Matching the Cell Barcodes to the WhiteList"*: `Multiple matches (CellRanger 2, 1MM_multi)`
+>        - *"Matching the Cell Barcodes to the WhiteList"*: `Multiple matches (CellRanger 2)`
 >    - Under *"Advanced Settings"*:
->        - *"Strandedness of Library"*: `Read strand same as the original RNA molecule`
+>        - *"Strandedness of Library"*: `Forward`
 >        - *"Collect UMI counts for these genomic features"*: `Gene: Count reads matching the Gene Transcript`
+>        - *"Type of UMI filtering"*: `Remove UMIs with N and homopolymers (similar to CellRanger 2.2.0)`
 >        - *"Cell filter type and parameters"*: `Do not filter`
 >        - *"Field 3 in the Genes output"*: `Gene Expression`
 >
@@ -303,11 +303,10 @@ Let us investigate the output log. This type of quality control is essential in 
 
 > <hands-on-title></hands-on-title>
 >
-> {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
+> {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
 >      - In *"1:Results"*:
 >        - *"Which tool was used generate logs?"*: `STAR`
->        - Insert Results
 >        - In *"STAR output"*:
 >          - In *"1:STAR output"*:
 >            - *"Type of STAR output?"*: `Log`
@@ -416,7 +415,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 
 > <hands-on-title>Default Method</hands-on-title>
 >
-> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %}  with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
@@ -475,7 +474,7 @@ A useful diagnostic for droplet-based data is the barcode rank plot, which shows
 
 > <hands-on-title>Rank Barcodes</hands-on-title>
 >
-> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %}  with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
@@ -506,7 +505,7 @@ On large 10x datasets we can use these thresholds as metrics to utilise in our o
 
 > <hands-on-title>Custom Filtering</hands-on-title>
 >
-> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %}  with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
