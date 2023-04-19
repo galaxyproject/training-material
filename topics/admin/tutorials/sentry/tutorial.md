@@ -328,12 +328,7 @@ First we need to add our new Ansible role to `requirements.yml`:
 ## Generate an error
 
 Galaxy has a built in route that intentionally generates and error.
-Just visit:
-
-```
-https://galaxy.example.org/error
-```
-
+Just visit: [/error](https://my.gat.galaxy.training/?path=/error)
 
 > <hands-on-title>Open the Galaxy Project in Sentry</hands-on-title>
 > 1. Go to your Sentry instance and click on issues. You should see a couple of issues,
