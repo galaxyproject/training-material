@@ -338,7 +338,6 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    When you run `git status` you'll notice that the `roles/` folder is not listed among the other "Untracked files".
 >
 >    Now you can do `git add .` to add all of the files in the current directory to your repository, and not worry about committing these files and directories by mistake!
->    {: .tip}
 {: .hands_on}
 
 > <hands-on-title>Configuration files</hands-on-title>
