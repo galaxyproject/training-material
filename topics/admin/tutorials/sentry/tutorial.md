@@ -464,7 +464,7 @@ In addition to sending logging errors to Sentry you can also collect failing too
 >    ```
 >    {: data-commit="Deploy files, error reporting"}
 >
-> > 4. Run the galaxy playbook.
+> 4. Run the galaxy playbook.
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
