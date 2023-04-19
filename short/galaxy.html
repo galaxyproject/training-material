@@ -25,7 +25,7 @@ Configure My Galaxy Instance by entering your preferred Galaxy Server (e.g. useg
 document.addEventListener("DOMContentLoaded", function(event) {
 	// Get the path from the URL parameter named 'path'
 	let params = new URLSearchParams(window.location.search);
-	let path = params.get('path');
+	let path = params.get('path') || '/';
 	var url = localStorage.getItem('gxy-url');
 
 	function setUrl(url, path) {
