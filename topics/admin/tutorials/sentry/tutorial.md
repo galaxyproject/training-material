@@ -301,15 +301,15 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -106,6 +106,8 @@ galaxy_config:
+>    @@ -113,6 +113,8 @@ galaxy_config:
 >         # Monitoring
 >         statsd_host: localhost
 >         statsd_influxdb: true
 >    +    sentry_dsn: "{{ vault_galaxy_sentry_dsn }}"
 >    +    sentry_traces_sample_rate: 0.5
->         # FTP
->         ftp_upload_dir: /data/uploads
->         ftp_upload_site: "{{ inventory_hostname }}"
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure Galaxy to report to Sentry"}
@@ -364,7 +364,7 @@ In addition to sending logging errors to Sentry you can also collect failing too
 >    ```diff
 >    --- /dev/null
 >    +++ b/files/galaxy/tools/job_properties.xml
->    @@ -0,0 +1,76 @@
+>    @@ -0,0 +1,65 @@
 >    +<tool id="job_properties" name="Test Job Properties" version="1.0.0">
 >    +    <stdio>
 >    +        <exit_code range="127" level="fatal" description="Failing exit code." />
@@ -435,35 +435,36 @@ In addition to sending logging errors to Sentry you can also collect failing too
 >    {: data-commit="Configure a tool"}
 >
 > 3. Edit `group_vars/galaxyservers.yml` to reference the `error_reports.yml` file and the new testing tool.
+>
 >    {% raw %}
->     ```diff
->     --- a/group_vars/galaxyservers.yml
->     +++ b/group_vars/galaxyservers.yml
->     @@ -110,6 +110,7 @@ galaxy_config:
->          # FTP
->          ftp_upload_dir: /data/uploads
->          ftp_upload_site: "{{ inventory_hostname }}"
->     +    error_report_file: "{{ galaxy_config_dir }}/error_reports_file.yml"
->        gravity:
->          process_manager: systemd
->          galaxy_root: "{{ galaxy_root }}/server"
->     @@ -160,6 +161,8 @@ galaxy_config_files:
->          dest: "{{ galaxy_config.galaxy.themes_config_file }}"
->        - src: files/galaxy/config/tpv_rules_local.yml
->          dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
->     +  - src: files/galaxy/config/error_reports.yml
->     +    dest: "{{ galaxy_config.galaxy.error_report_file }}"
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -115,6 +115,7 @@ galaxy_config:
+>         statsd_influxdb: true
+>         sentry_dsn: "{{ vault_galaxy_sentry_dsn }}"
+>         sentry_traces_sample_rate: 0.5
+>    +    error_report_file: "{{ galaxy_config_dir }}/error_reports_file.yml"
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
+>    @@ -167,6 +168,8 @@ galaxy_config_files:
+>         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
+>       - src: files/galaxy/config/tpv_rules_local.yml
+>         dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
+>    +  - src: files/galaxy/config/error_reports.yml
+>    +    dest: "{{ galaxy_config.galaxy.error_report_file }}"
 >     
->      galaxy_config_templates:
->        - src: templates/galaxy/config/container_resolvers_conf.yml.j2
->     @@ -173,6 +176,7 @@ galaxy_config_templates:
+>     galaxy_config_templates:
+>       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
+>    @@ -187,6 +190,7 @@ tpv_privsep: true
 >     
->      galaxy_local_tools:
->      - testing.xml
->     +- job_properties.xml
+>     galaxy_local_tools:
+>     - testing.xml
+>    +- job_properties.xml
 >     
->      # Certbot
->      certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+>     # Certbot
+>     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy files, error reporting"}
@@ -515,7 +516,7 @@ It is also possible to report errors from the Pulsar server. You can either use 
 >             auto_init: true
 >             auto_install: true
 >    +  sentry_dsn: "{{ vault_pulsar_sentry_dsn }}"
->    
+>     
 >     # Pulsar should use the same job metrics plugins as Galaxy. This will automatically set `job_metrics_config_file` in
 >     # `pulsar_yaml_config` and create `{{ pulsar_config_dir }}/job_metrics_conf.yml`.
 >    {% endraw %}
