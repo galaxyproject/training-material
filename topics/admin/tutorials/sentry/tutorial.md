@@ -23,7 +23,7 @@ requirements:
       - ansible
       - ansible-galaxy
       - pulsar
-subtopic: data
+subtopic: monitoring
 tags:
   - ansible
   - git-gat
