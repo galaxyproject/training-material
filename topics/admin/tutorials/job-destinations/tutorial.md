@@ -625,7 +625,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -37,6 +37,11 @@ galaxy_job_config:
+>    @@ -37,9 +37,17 @@ galaxy_job_config:
 >             tpv_config_files:
 >               - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
 >               - "{{ tpv_config_dir }}/tpv_rules_local.yml"
@@ -637,7 +637,13 @@ Such form elements can be added to tools without modifying each tool's configura
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -56,6 +61,7 @@ galaxy_config:
+>    +    - id: testing
+>    +      environment: tpv_dispatcher
+>    +      resources: testing
+>     
+>     galaxy_config:
+>       galaxy:
+>    @@ -56,6 +64,7 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -645,7 +651,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -137,6 +143,8 @@ galaxy_config_templates:
+>    @@ -137,6 +146,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
