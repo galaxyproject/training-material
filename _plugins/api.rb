@@ -90,11 +90,25 @@ module Jekyll
     end
 
     ##
+    # Generates /api/version.json
+    # Params:
+    # +site+:: +Jekyll::Site+ object
+    # Returns:
+    # nil
+    def generateVersion(site)
+      page2 = PageWithoutAFile.new(site, "", "api/", "version.json")
+      page2.content = JSON.pretty_generate(Gtn::Git.discover)
+      page2.data["layout"] = nil
+      site.pages << page2
+    end
+
+    ##
     # Runs the generation process
     # Params:
     # +site+:: +Jekyll::Site+ object
     def generate(site)
       generateConfiguration(site)
+      generateVersion(site)
 
       # Full Bibliography
       Gtn::Scholar.load_bib(site)
