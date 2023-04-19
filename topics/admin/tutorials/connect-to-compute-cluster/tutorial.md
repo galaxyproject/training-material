@@ -74,11 +74,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -20,5 +20,11 @@
->     # CVMFS Support
->     - src: galaxyproject.cvmfs
->       version: 0.2.21
->    +# Singularity
+>    @@ -23,3 +23,8 @@
+>     # Singularity/Apptainer
 >     - src: usegalaxy_eu.apptainer
 >       version: 0.0.1
 >    +# SLURM as our DRM
