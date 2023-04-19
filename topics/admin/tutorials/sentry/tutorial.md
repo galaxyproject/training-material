@@ -268,11 +268,11 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    ```
 >    {: data-commit="Deploy nginx server"}
 >
-> 7. Run the sentry playbook.
+> 7. Run the sentry playbook to deploy sentry and the galaxy playbook to update the nginx configuration.
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
->    > ansible-playbook sentry.yml
+>    > ansible-playbook sentry.yml galaxy.yml
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
