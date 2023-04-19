@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Installation with Ansible">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-18 08:44:07 +0000">
+<meta name="DC.date" content="2023-04-19 13:50:25 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Simon Gladman">
@@ -66,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-18 08:44:07 +0000",
+  "dateModified": "2023-04-19 13:50:25 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Installation with Ansible",
   "interactivityType": "mixed",
@@ -380,7 +380,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-18 08:44:07 +0000",
+  "dateModified": "2023-04-19 13:50:25 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Installation with Ansible",
   "interactivityType": "mixed",
@@ -785,7 +785,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 18, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 19, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1160,26 +1160,28 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
       </blockquote>
 
       <p>This will install all of the required modules for this training into the <code class="language-plaintext highlighter-rouge">roles/</code> folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.</p>
-
-      <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-using-git"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-git" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Using `git`?<span class="fold-unfold fa fa-minus-square"></span></button></div>
-        <p>If you’re using git, it can make sense to tell git to ignore the <code class="language-plaintext highlighter-rouge">roles</code>
-directory, as all of that data can be perfectly recreated from our
-variables in the requirements.yml file.</p>
-
-        <p>Simply create a file <code class="language-plaintext highlighter-rouge">.gitignore</code> with the following content:</p>
-
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">roles/
-.vault-password.txt
-</span></code></pre></div>        </div>
-
-        <p>When you run <code class="language-plaintext highlighter-rouge">git status</code> you’ll notice that the <code class="language-plaintext highlighter-rouge">roles/</code> folder is not listed among the other “Untracked files”. We’re adding the <code class="language-plaintext highlighter-rouge">.vault-password.txt</code> file as well, ahead of time, because this should <em>never</em> ever be committed to the repository.</p>
-
-        <p>Now you can do <code class="language-plaintext highlighter-rouge">git add .</code> to add all of the files in the current directory, and not worry about committing generated artifacts!</p>
-      </blockquote>
     </li>
     <li>
-      <p>Inspect the contents of the newly created <code class="language-plaintext highlighter-rouge">roles</code> directory in your working directory.</p>
+      <p>Inspect the contents of the newly created <code class="language-plaintext highlighter-rouge">roles/</code> directory in your working directory.</p>
+    </li>
+    <li>
+      <p>It’s good practice to put your playbooks and configuration files under version control (usually in a git repository), but there is no need to keep track of the content of the <code class="language-plaintext highlighter-rouge">roles/</code> directory, as all of that data can be perfectly recreated from the <code class="language-plaintext highlighter-rouge">requirements.yml</code> file.</p>
+
+      <p>If you plan to put this git repository online (e.g. on GitHub), any file containing clear-text passwords should <em>never</em> ever be committed to the repository, even if the repository is private. For this reason, we should tell git, ahead of time, to ignore one such file, <code class="language-plaintext highlighter-rouge">.vault-password.txt</code> , which will use later on in this lesson.</p>
+
+      <p>To configure git to ignore certain files and directories, they need to be listed in a file called <code class="language-plaintext highlighter-rouge">.gitignore</code> , which should be instead tracked as part of your git repository. You can now create the <code class="language-plaintext highlighter-rouge">.gitignore</code> file with the following content:</p>
+
+      <div data-commit="Add .gitignore" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/.gitignore
+</span><span class="p">@@ -0,0 +1,2 @@</span>
+<span class="gi">+roles/
++.vault-password.txt
+</span>   
+</code></pre></div>      </div>
+
+      <p>When you run <code class="language-plaintext highlighter-rouge">git status</code> you’ll notice that the <code class="language-plaintext highlighter-rouge">roles/</code> folder is not listed among the other “Untracked files”.</p>
+
+      <p>Now you can do <code class="language-plaintext highlighter-rouge">git add .</code> to add all of the files in the current directory to your repository, and not worry about committing these files and directories by mistake!</p>
     </li>
   </ol>
 </blockquote>
@@ -2041,7 +2043,7 @@ So it is not always easy to tell what variables will be set, or what their final
 </code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-using-git-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-git-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Using `git`?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-using-git"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-git" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Using `git`?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>If you’re using git, and storing all of these steps in your git history,
 you’ll find that working with Vault secrets can be rather annoying as
 the opaque blobs are impossible to read. There’s a way to make this
@@ -3544,12 +3546,12 @@ Additionally you can automatically send failing job error reports, even if users
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-using-git-with-ansible-vaults"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Using Git with Ansible Vaults</div>
   <p>When looking at <code class="language-plaintext highlighter-rouge">git log</code> to see what you changed, you cannot easily look into
-Ansible Vault changes: you just see the changes in the encrypted versions which
+Ansible Vault changes: you just see the changes in the encrypted versions, which
 is unpleasant to read.</p>
 
-  <p>Instead we can use <a href="https://www.git-scm.com/docs/gitattributes"><code class="language-plaintext highlighter-rouge">.gitattributes</code></a> to tell <code class="language-plaintext highlighter-rouge">git</code> that we want to use a
-different program to visualise differences between two versions of a file,
-namely <code class="language-plaintext highlighter-rouge">ansible-vault</code>.</p>
+  <p>Instead we can use <a href="https://www.git-scm.com/docs/gitattributes"><code class="language-plaintext highlighter-rouge">.gitattributes</code></a> to tell <code class="language-plaintext highlighter-rouge">git</code> that we want to use a certain
+program to convert some files before calculating their diffs,
+in this case <code class="language-plaintext highlighter-rouge">ansible-vault view</code>.</p>
 
   <ol>
     <li>Check your <code class="language-plaintext highlighter-rouge">git log -p</code> and see how the Vault changes look (you can type <code class="language-plaintext highlighter-rouge">/vault</code> to search). Notice that they’re just changed encoded content.</li>
@@ -3562,6 +3564,18 @@ namely <code class="language-plaintext highlighter-rouge">ansible-vault</code>.<
 <span class="gi">+group_vars/secret.yml diff=ansible-vault merge=binary
 </span>   
 </code></pre></div>      </div>
+
+      <p>This set the <code class="language-plaintext highlighter-rouge">diff</code> attribute to <code class="language-plaintext highlighter-rouge">ansible-vault</code> for the <code class="language-plaintext highlighter-rouge">group_vars/secret.yml</code> file.
+Additionally, the <code class="language-plaintext highlighter-rouge">merge=binary</code> option tells git not to attempt to do a three-way merge of this file.</p>
+    </li>
+    <li>
+      <p>Run the following command to configure git to convert the files having the <code class="language-plaintext highlighter-rouge">diff</code> attribute set to <code class="language-plaintext highlighter-rouge">ansible-vault</code>, using the <code class="language-plaintext highlighter-rouge">ansible-vault view</code> command, before diffing them:</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-19"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="nt">--global</span> diff.ansible-vault.textconv <span class="s2">"ansible-vault view"</span>
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>Try again to <code class="language-plaintext highlighter-rouge">git log -p</code> and look for the vault changes. Note that you can now see the decrypted content! Very useful.</li>
   </ol>
