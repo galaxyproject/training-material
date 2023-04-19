@@ -410,8 +410,10 @@ We will perform steps from 1 to 3 in this tutorial a bit later while steps 4 - 8
 
 In summary, this tutorial shows a step-by-step on how to bin metagenomic contigs using MetaBAT2.
 
-Generally, metagenomics binning tools vary in their strengths, limitations, and suitability for different types of metagenomic data, so it is important to choose the most appropriate tool for a given analysis. Additionally, it is often beneficial to compare the results of multiple binning methods to improve the accuracy of genome binning.
+It is critical to select the appropriate binning tool for a specific metagenomics study, as different binning methods may have different strengths and limitations depending on the type of metagenomic data being analyzed. By comparing the outcomes of several binning techniques, researchers can increase the precision and accuracy of genome binning.
 
-Metagenomic data can be assembled to, ideally, obtain the genomes of the species that are represented within the input data. But metagenomic assembly is **complex** and there are
-- **different approaches**: ????
-- **different tools** : ?????
+There are various binning methods available for metagenomic data, including reference-based, clustering-based, and hybrid approaches. Each method has its advantages and disadvantages, and the selection of the appropriate method depends on the research question and the characteristics of the data.
+
+Comparing the outcomes of multiple binning methods can help to identify the most accurate and reliable method for a specific study. This can be done by evaluating the quality of the resulting bins in terms of completeness, contamination, and strain heterogeneity, as well as by comparing the composition and functional profiles of the identified genomes.
+
+Overall, by carefully selecting and comparing binning methods, researchers can improve the quality and reliability of genome bins, which can ultimately lead to a better understanding of the functional and ecological roles of microbial communities in various environments.
