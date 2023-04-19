@@ -2,6 +2,7 @@ require 'json'
 require './_plugins/jekyll-topic-filter.rb'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
+require './_plugins/gtn'
 
 module Jekyll
   ##

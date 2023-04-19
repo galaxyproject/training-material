@@ -163,7 +163,7 @@ If we want to change something in production, it is always a good idea to have a
 Once you are done with your changes, you can run the script and it will automatically lint and copy over the files, if they are correct *and* mentioned in your job_conf.yml file, or in your `group_vars/galaxyservers.yml` inline `job_conf`.
 And of course, Galaxy has an Ansible Role for that.
 
-><hands-on-title>Adding automated TPV-lind-and-copy-script</hands-on-title>
+> <hands-on-title>Adding automated TPV-lind-and-copy-script</hands-on-title>
 >
 > 1. Add the role to your `requirements.yml`.
 >    {% raw %}
@@ -180,7 +180,18 @@ And of course, Galaxy has an Ansible Role for that.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tpv-auto-lint to requirements"}
+>
+> 1. Install the missing role
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 > 2. Change your `group_vars/galaxyservers.yml`. We need to create a new directory where the TPV configs will be stored after linting, and add that directory name as variable for the role. The default name is 'TPV_DO_NOT_TOUCH' for extra safety 😉. If you want a different name, you need to change the `tpv_config_dir_name` variable, too. We also need to create a directory, `tpv_mutable_dir` (a role default variable), where TPV configs are copied before linting.
+>
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
@@ -194,11 +205,10 @@ And of course, Galaxy has an Ansible Role for that.
 >     galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->    @@ -150,7 +152,11 @@ galaxy_config_templates:
->         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>    @@ -151,6 +153,11 @@ galaxy_config_templates:
 >     
 >     galaxy_extra_dirs:
->    -  - /data
+>       - /data
 >    +  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
 >    +
 >    +galaxy_extra_privsep_dirs:
@@ -643,7 +653,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
 >     
 >     galaxy_extra_dirs:
->       - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
+>       - /data
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}

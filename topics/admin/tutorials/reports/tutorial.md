@@ -90,7 +90,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    +    dest: "{{ galaxy_config.gravity.reports.config_file }}"
 >     
 >     galaxy_extra_dirs:
->       - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
+>       - /data
 >    {% endraw %}
 >    ```
 >    {: data-commit="Enable gravity to manage reports"}
