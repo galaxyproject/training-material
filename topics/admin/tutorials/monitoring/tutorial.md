@@ -126,9 +126,9 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    @@ -4,3 +4,5 @@ gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
 >     galaxyservers
 >     [pulsarservers]
->     gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
+>     gat-0.oz.galaxy.training ansible_user=ubuntu
 >    +[monitoring]
->    +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    +gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the monitoring host"}

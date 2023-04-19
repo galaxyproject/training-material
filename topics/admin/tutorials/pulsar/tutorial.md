@@ -649,7 +649,7 @@ Some of the other options we will be using are:
 >     [dbservers:children]
 >     galaxyservers
 >    +[pulsarservers]
->    +gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
+>    +gat-0.oz.galaxy.training ansible_user=ubuntu
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar host"}

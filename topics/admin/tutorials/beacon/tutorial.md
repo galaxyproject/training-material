@@ -70,9 +70,9 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    +beacon_import
 >    +beacon_server
 >    +[beacon_server]
->    +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    +gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
 >    +[beacon_import]
->    +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    +gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add hosts"}
