@@ -435,8 +435,9 @@ module GTNNotebooks
         source = source.gsub(/ `([^`]*)`([^`])/, ' <code>\1</code>\2')
           .gsub(/([^`])`([^`]*)` /, '\1<code>\2</code> ')
 
-        # Strip out includes
-        source = source.gsub(/{% include .* %}/, '')
+        # Strip out includes, snippets
+        source.gsub!(/{% include .* %}/, '')
+        source.gsub!(/{% snippet .* %}/, '')
 
         # Replace all the broken icons that can't render, because we don't
         # have access to the full render pipeline.

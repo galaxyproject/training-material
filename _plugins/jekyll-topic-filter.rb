@@ -344,10 +344,12 @@ module TopicFilter
 
     slide_has_video = false
     slide_translations = []
+    page_ref = nil
     if slides.length > 0 then
       page = slides.sort{|a, b| a[1].path <=> b[1].path}[0][1]
       slide_has_video = page.data.fetch('video', false)
       slide_translations = page.data.fetch('translations', [])
+      page_ref = page
     end
 
     # No matter if there were slides, we override with tutorials if present.
@@ -355,6 +357,7 @@ module TopicFilter
     if tutorials.length > 0 then
       page = tutorials.sort{|a, b| a[1].path <=> b[1].path}[0][1]
       tutorial_translations = page.data.fetch('translations', [])
+      page_ref = page
     end
 
     if page.nil? then
@@ -365,6 +368,7 @@ module TopicFilter
     # Otherwise clone the metadata from it which works well enough.
     page_obj = page.data.dup
     page_obj['id'] = page['topic_name'] + '/' + page['tutorial_name']
+    page_obj['ref'] = page_ref
 
     id = page_obj['id']
     page_obj['video_library'] = Hash.new
@@ -489,13 +493,49 @@ module TopicFilter
 
   def self.process_pages(site, pages)
     # eww.
-    if site.data.has_key?('cache_processed_pages') then 
+    if site.data.has_key?('cache_processed_pages') then
       return site.data['cache_processed_pages']
     end
 
     materials = self.collate_materials(pages).map{|k, v| self.resolve_material(site, v) }
     puts "[GTN/TopicFilter] Filling Materials Cache"
     site.data['cache_processed_pages'] = materials
+
+    # Prepare short URLs
+    shortlinks = site.data['shortlinks']
+    shortlinks_reversed = shortlinks['id'].invert
+    mappings = Hash.new{|h, k| h[k] = Array.new}
+
+    shortlinks.keys.each{|kp|
+      shortlinks[kp].each{|k, v|
+        mappings[v].push("/short/#{k}")
+      }
+    }
+    # Update the materials with their short IDs + redirects
+    pages.select{|p| mappings.keys.include? p.url }.each{|p|
+      # Set the short id on the material
+      #
+      begin
+        p['short_id'] = shortlinks_reversed[p.url]
+      rescue
+        p.data['short_id'] = shortlinks_reversed[p.url]
+      end
+      if p['ref']
+        # Initialise redirects if it wasn't set
+        if ! p['ref'].data.has_key?("redirect_from")
+          p['ref'].data['redirect_from'] = []
+        end
+        p['ref'].data['redirect_from'].push(*mappings[p.url])
+        p['ref'].data['redirect_from'].uniq!
+      else
+        if ! p.data.has_key?("redirect_from")
+          p.data['redirect_from'] = []
+        end
+
+        p.data['redirect_from'].push(*mappings[p.url])
+        p.data['redirect_from'].uniq!
+      end
+    }
 
     materials
   end

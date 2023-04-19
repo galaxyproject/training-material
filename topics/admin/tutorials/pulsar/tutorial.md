@@ -144,7 +144,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >    @@ -31,3 +31,10 @@
 >     # TPV Linting
 >     - name: usegalaxy_eu.tpv_auto_lint
->       version: 0.4.2
+>       version: 0.4.3
 >    +# RabbitMQ for Pulsar
 >    +- src: geerlingguy.docker
 >    +  version: 6.1.0
@@ -271,7 +271,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -161,8 +161,11 @@ certbot_environment: staging
+>    @@ -167,8 +167,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -283,7 +283,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -212,6 +215,47 @@ slurm_config:
+>    @@ -218,6 +221,47 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -345,7 +345,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -47,6 +47,8 @@
+>    @@ -43,6 +43,8 @@
 >           become: true
 >           become_user: "{{ galaxy_user_name }}"
 >         - galaxyproject.nginx
@@ -671,7 +671,7 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >    ```diff
 >    --- /dev/null
 >    +++ b/pulsar.yml
->    @@ -0,0 +1,20 @@
+>    @@ -0,0 +1,21 @@
 >    +- hosts: pulsarservers
 >    +  vars_files:
 >    +    - group_vars/secret.yml
@@ -685,6 +685,7 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >    +          - libcurl4-openssl-dev
 >    +          - libssl-dev
 >    +          - virtualenv
+>    +          - python3-venv
 >    +        state: present
 >    +        update_cache: yes
 >    +      become: yes

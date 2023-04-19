@@ -80,7 +80,7 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -65,6 +65,9 @@ galaxy_config:
+>    @@ -67,6 +67,9 @@ galaxy_config:
 >         # Tool security
 >         outputs_to_working_directory: true
 >         new_user_dataset_access_role_default_private: true # Make datasets private by default
@@ -90,7 +90,7 @@ To allow your user to upload via TUS, you will need to:
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -85,6 +88,10 @@ galaxy_config:
+>    @@ -87,6 +90,10 @@ galaxy_config:
 >         celery:
 >           concurrency: 2
 >           loglevel: DEBUG
@@ -101,7 +101,7 @@ To allow your user to upload via TUS, you will need to:
 >         handlers:
 >           handler:
 >             processes: 2
->    @@ -154,3 +161,7 @@ nginx_conf_http:
+>    @@ -156,3 +163,7 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
@@ -183,7 +183,7 @@ Congratulations, you've set up TUS for Galaxy.
 >
 > 1. SSH into your machine
 >
-> 2. Check the active status of tusd by `systemctl status tusd-main`.
+> 2. Check the active status of tusd by `systemctl status galaxy-tusd`.
 >
 > 3. Upload a small file! (Pasted text will not pass via TUS)
 >

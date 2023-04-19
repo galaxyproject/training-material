@@ -106,7 +106,7 @@ To demonstrate a real-life scenario and {TPV}'s role in it, let's plan on settin
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -150,6 +150,9 @@ galaxy_config_templates:
+>    @@ -152,6 +152,9 @@ galaxy_config_templates:
 >     galaxy_extra_dirs:
 >       - /data
 >     
@@ -176,7 +176,7 @@ And of course, Galaxy has an Ansible Role for that.
 >       version: 1.0.2
 >    +# TPV Linting
 >    +- name: usegalaxy_eu.tpv_auto_lint
->    +  version: 0.4.2
+>    +  version: 0.4.3
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tpv-auto-lint to requirements"}
@@ -185,7 +185,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -133,6 +133,8 @@ galaxy_config:
+>    @@ -135,6 +135,8 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
@@ -194,7 +194,7 @@ And of course, Galaxy has an Ansible Role for that.
 >     galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->    @@ -148,7 +150,10 @@ galaxy_config_templates:
+>    @@ -150,7 +152,11 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
 >     galaxy_extra_dirs:
@@ -203,6 +203,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    +
 >    +galaxy_extra_privsep_dirs:
 >    +  - "{{ tpv_mutable_dir }}"
+>    +tpv_privsep: true
 >     
 >     galaxy_local_tools:
 >     - testing.xml
@@ -214,7 +215,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -42,6 +42,7 @@
+>    @@ -38,6 +38,7 @@
 >         - galaxyproject.slurm
 >         - usegalaxy_eu.apptainer
 >         - galaxyproject.galaxy
@@ -247,16 +248,16 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -24,34 +24,15 @@ galaxy_job_config:
+>    @@ -24,34 +24,18 @@ galaxy_job_config:
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
 >    -    default: slurm
 >    +    default: tpv_dispatcher
 >         environments:
->    -      local_env:
->    -        runner: local_runner
->    -        tmp_dir: true
+>           local_env:
+>             runner: local_runner
+>             tmp_dir: true
 >    -      slurm:
 >    -        runner: slurm
 >    -        singularity_enabled: true
@@ -290,7 +291,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -142,6 +123,8 @@ galaxy_config_files_public:
+>    @@ -144,6 +128,8 @@ galaxy_config_files_public:
 >     galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -462,7 +463,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -32,6 +32,7 @@ galaxy_job_config:
+>    @@ -35,6 +35,7 @@ galaxy_job_config:
 >             function: map_tool_to_destination
 >             rules_module: tpv.rules
 >             tpv_config_files:
@@ -543,7 +544,7 @@ can be matched up so that only desired combinations are compatible with each oth
 >    +      - id: admin_only_testing_tool
 >    +        if: |
 >    +          # Only allow the tool to be executed if the user is an admin
->    +          admin_users = app.config.get( "admin_users", "" ).split( "," )
+>    +          admin_users = app.config.admin_users
 >    +          # last line in block must evaluate to a value - which determines whether the TPV if conditional matches or not
 >    +          not user or user.email not in admin_users
 >    +        fail: Unauthorized. Only admins can execute this tool.
@@ -614,7 +615,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -34,6 +34,11 @@ galaxy_job_config:
+>    @@ -37,6 +37,11 @@ galaxy_job_config:
 >             tpv_config_files:
 >               - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
 >               - "{{ tpv_config_dir }}/tpv_rules_local.yml"
@@ -626,15 +627,15 @@ Such form elements can be added to tools without modifying each tool's configura
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -51,6 +56,7 @@ galaxy_config:
->         file_path: /data/datasets
->         job_working_directory: /data/jobs
+>    @@ -56,6 +61,7 @@ galaxy_config:
+>         object_store_store_by: uuid
+>         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -132,6 +138,8 @@ galaxy_config_templates:
+>    @@ -137,6 +143,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
