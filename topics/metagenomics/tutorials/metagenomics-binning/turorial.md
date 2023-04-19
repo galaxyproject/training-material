@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Binning of metagenomic sequencing data"
-# zenodo_link: "https://zenodo.org/record/7468921"
+zenodo_link: "https://zenodo.org/record/7818827"
 level: Introductory
 # questions:
 #   - "Why metagenomic data should be assembled?"
@@ -266,14 +266,14 @@ Based on the previous analysis we will use **CheckM lineage_wf**: *Assessing the
 
 `CheckM lineage_wf` is a specific workflow within the CheckM software tool that is used for taxonomic classification of genome bins based on their marker gene content. This workflow uses a reference database of marker genes and taxonomic information to classify the genome bins at different taxonomic levels, from domain to species.
 
-> <hands-on-title>Evaluation assembly quality with metaQUAST</hands-on-title>
+<!-- > <hands-on-title>Evaluation assembly quality with metaQUAST</hands-on-title>
 >
 > 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0) %} with parameters:
 >    - *"Data structure for bins"*: `In collection`
 >    - *"Bins "*: `Bins produced by MetaBAT2`
 >
 > 2. Inspect produced table
-{: .hands_on}
+{: .hands_on} -->
 
 <!-- > <comment-title></comment-title>
 >
