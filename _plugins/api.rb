@@ -108,7 +108,8 @@ module Jekyll
     # +site+:: +Jekyll::Site+ object
     def generate(site)
       generateConfiguration(site)
-      generateVersion(site)
+      # For some reason the templating isn't working right here.
+      #generateVersion(site)
 
       # Full Bibliography
       Gtn::Scholar.load_bib(site)
