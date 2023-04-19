@@ -387,7 +387,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    +          value: C
 >    +        - name: SINGULARITY_CACHEDIR
 >    +          value: /tmp/singularity
->    +        - name: SINGULARITY_TMPDIR
+>    +        - name: APPTAINER_TMPDIR
 >    +          value: /tmp
 >           singularity:
 >             runner: local_runner

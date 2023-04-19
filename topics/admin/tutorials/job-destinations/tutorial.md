@@ -266,7 +266,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    -          value: C
 >    -        - name: SINGULARITY_CACHEDIR
 >    -          value: /tmp/singularity
->    -        - name: SINGULARITY_TMPDIR
+>    -        - name: APPTAINER_TMPDIR
 >    -          value: /tmp
 >    -      singularity:
 >    -        runner: local_runner
@@ -338,7 +338,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +      # The cache directory holds the docker containers that get converted
 >    +      SINGULARITY_CACHEDIR: /tmp/singularity
 >    +      # Singularity uses a temporary directory to build the squashfs filesystem
->    +      SINGULARITY_TMPDIR: /tmp
+>    +      APPTAINER_TMPDIR: /tmp
 >    +  slurm:
 >    +    inherits: singularity
 >    +    runner: slurm
