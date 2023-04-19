@@ -111,7 +111,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -197,11 +197,13 @@ certbot_environment: staging
+>    @@ -192,11 +192,13 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -137,10 +137,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -113,6 +113,9 @@ galaxy_config:
->         # Monitoring
+>    @@ -109,6 +109,9 @@ galaxy_config:
 >         statsd_host: localhost
 >         statsd_influxdb: true
+>         sentry_dsn: "{{ vault_sentry_dsn }}"
 >    +    # FTP
 >    +    ftp_upload_dir: /data/uploads
 >    +    ftp_upload_site: "{{ inventory_hostname }}"
@@ -159,8 +159,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -352,3 +352,24 @@ telegraf_plugins_extra:
+>    @@ -348,3 +348,24 @@ telegraf_plugins_extra:
 >     tiaas_dir: /srv/tiaas
+:xa
 >     tiaas_admin_user: admin
 >     tiaas_admin_pass: changeme
 >    +

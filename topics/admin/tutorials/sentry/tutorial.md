@@ -223,19 +223,6 @@ First we need to add our new Ansible role to `requirements.yml`:
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -196,6 +196,7 @@ nginx_servers:
->       - redirect-ssl
->     nginx_ssl_servers:
->       - galaxy
->    +  - sentry
->     nginx_enable_default_server: false
->     nginx_conf_http:
->       client_max_body_size: 1g
->    diff --git a/templates/nginx/sentry.j2 b/templates/nginx/sentry.j2
->    new file mode 100644
->    index 0000000..560edb8
 >    --- /dev/null
 >    +++ b/templates/nginx/sentry.j2
 >    @@ -0,0 +1,20 @@
@@ -262,6 +249,24 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add nginx server"}
+>
+> 6. And make sure the sentry nginx configuration is deployed
+>
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -206,6 +206,7 @@ nginx_servers:
+>       - redirect-ssl
+>     nginx_ssl_servers:
+>       - galaxy
+>    +  - sentry
+>     nginx_enable_default_server: false
+>     nginx_conf_http:
+>       client_max_body_size: 1g
+>    {% endraw %}
+>    ```
+>    {: data-commit="Deploy nginx server"}
 >
 > 7. Run the sentry playbook.
 >
@@ -307,6 +312,7 @@ First we need to add our new Ansible role to `requirements.yml`:
 >         ftp_upload_site: "{{ inventory_hostname }}"
 >     ```
 >    {% endraw %}
+>    ```
 >    {: data-commit="Configure Galaxy to report to Sentry"}
 >
 > 10. Run the galaxy playbook.
