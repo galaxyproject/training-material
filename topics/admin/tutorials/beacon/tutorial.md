@@ -60,7 +60,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    ```diff
 >    --- a/hosts
 >    +++ b/hosts
->    @@ -9,3 +9,12 @@ gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    @@ -9,3 +9,12 @@ gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
 >     
 >     [sentryservers]
 >     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
