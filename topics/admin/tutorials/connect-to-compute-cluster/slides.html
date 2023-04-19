@@ -14,9 +14,9 @@ objectives:
   - The various ways in which tools can be mapped to destinations, both statically and dynamically
 key_points:
   - Galaxy supports a variety of different DRMs.
-  - Dynamic Tool Destinations are a convenient way to map
-  - Job resource parameters can allow you to give your users control over job resource requirements, if they are knowledgeable about the tools and compute resources available to them.
-contributors:
+  - Total Perspective Vortex is a convenient way to map
+contributions:
+  authorship:
   - natefoo
   - bgruening
   - nsoranzo
@@ -71,7 +71,11 @@ Correspond to job runner plugins in [lib/galaxy/jobs/runners](https://github.com
 .left[Plugins for:]
 - local
 - Slurm (DRMAA subclass)
-- DRMAA: SGE, PBS Pro, LSF, Torque
+- DRMAA (Distributed Resource Management Application API)
+  - SGE
+  - PBS Pro
+  - LSF
+  - Torque
 - HTCondor
 - Torque: Using the `pbs_python` library
 - Pulsar: Galaxy's own remote job management system
@@ -346,7 +350,7 @@ Solution:
 
 ```yml
 execution:
-  default: local
+  default: singlecore_slurm
   environments:
     singlecore_slurm:
       runner: slurm
