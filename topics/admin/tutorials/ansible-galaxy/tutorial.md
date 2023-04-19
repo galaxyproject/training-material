@@ -2550,12 +2550,12 @@ If you've been following along you should have a production-ready Galaxy, secure
 
 > <hands-on-title>Using Git with Ansible Vaults</hands-on-title>
 > When looking at `git log` to see what you changed, you cannot easily look into
-> Ansible Vault changes: you just see the changes in the encrypted versions which
+> Ansible Vault changes: you just see the changes in the encrypted versions, which
 > is unpleasant to read.
 > 
-> Instead we can use [`.gitattributes`](https://www.git-scm.com/docs/gitattributes) to tell `git` that we want to use a
-> different program to visualise differences between two versions of a file,
-> namely `ansible-vault`.
+> Instead we can use [`.gitattributes`](https://www.git-scm.com/docs/gitattributes) to tell `git` that we want to use a certain
+> program to convert some files before calculating their diffs,
+> in this case `ansible-vault view`.
 > 
 > 1. Check your `git log -p` and see how the Vault changes look (you can type `/vault` to search). Notice that they're just changed encoded content.
 > 1. Create the file `.gitattributes` in the same folder as your `galaxy.yml` playbook, with the following contents:
@@ -2569,7 +2569,19 @@ If you've been following along you should have a production-ready Galaxy, secure
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add git attributes"}
+>
+>    This set the `diff` attribute to `ansible-vault` for the `group_vars/secret.yml` file.
+>    Additionally, the `merge=binary` option tells git not to attempt to do a three-way merge of this file.
 > 
+> 1. Run the following command to configure git to convert the files having the `diff` attribute set to `ansible-vault`, using the `ansible-vault view` command, before diffing them:
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > git config --global diff.ansible-vault.textconv "ansible-vault view"
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 > 1. Try again to `git log -p` and look for the vault changes. Note that you can now see the decrypted content! Very useful.
 {: .hands_on}
 
