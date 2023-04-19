@@ -437,7 +437,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > Make sure to replace \<password\> with the one from your vault.
 >    > If you don't have jq installed, just leave that part with the pipe out, it just makes it prettier.
 >    > ```bash
->    > curl -s -u admin:<password> https://localhost:15672/api/whoami | jq
+>    > curl --silent -s -u admin:<password> http://localhost:15672/api/whoami | jq
 >    > ```
 >    {: .code-in}
 >
@@ -446,16 +446,12 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > This should report the following response:
 >    >
 >    > ```console
->    >  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
->    >                                 Dload  Upload   Total   Spent    Left  Speed
->    >100    44  100    44    0     0  22000      0 --:--:-- --:--:-- --:--:-- 22000
->    >{
->    >  "name": "admin",
->    >  "tags": [
->    >    "administrator"
->    >  ]
->    >}
->    > 
+>    > {
+>    >   "name": "admin",
+>    >   "tags": [
+>    >     "administrator"
+>    >   ]
+>    > }
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -465,6 +461,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > ```bash
 >    > curl http://localhost:5672
 >    > ```
+>    > (the non-encrypted port)
 >    {: .code-in}
 >
 >    > <code-out-title>Bash</code-out-title>
@@ -484,7 +481,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
->    > curl -k https://localhost:5671 --output - && printf "\n"
+>    > curl -k --http0.9 https://localhost:5671 --output - && printf "\n"
 >    > ```
 >    {: .code-in}
 >
