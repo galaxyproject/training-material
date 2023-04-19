@@ -687,7 +687,7 @@ Lastly, we need to write a rule in TPV that will read the value of the job resou
 
 > <hands-on-title>Processing job resource parameters in TPV</hands-on-title>
 >
-> 1. Create and edit `files/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
+> 1. Create and edit `files/galaxy/config/tpv_rules_local.yml`. Create it with the following contents:
 >
 >    {% raw %}
 >    ```diff
