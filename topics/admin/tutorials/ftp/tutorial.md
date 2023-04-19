@@ -85,10 +85,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -54,3 +54,6 @@
->     # Training Infrastructure as a Service
->     - src: galaxyproject.tiaas2
->       version: 2.1.5
+>    @@ -57,3 +57,6 @@
+>     # Sentry
+>     - name: mvdbeek.sentry_selfhosted
+>       src: https://github.com/mvdbeek/ansible-role-sentry/archive/main.tar.gz
 >    +# Our FTP Server
 >    +- src: galaxyproject.proftpd
 >    +  version: 0.3.1
@@ -111,7 +111,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -197,11 +197,13 @@ certbot_environment: staging
+>    @@ -203,11 +203,13 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -137,10 +137,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -113,6 +113,9 @@ galaxy_config:
->         # Monitoring
->         statsd_host: localhost
->         statsd_influxdb: true
+>    @@ -116,6 +116,9 @@ galaxy_config:
+>         sentry_dsn: "{{ vault_galaxy_sentry_dsn }}"
+>         sentry_traces_sample_rate: 0.5
+>         error_report_file: "{{ galaxy_config_dir }}/error_reports_file.yml"
 >    +    # FTP
 >    +    ftp_upload_dir: /data/uploads
 >    +    ftp_upload_site: "{{ inventory_hostname }}"
@@ -159,7 +159,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -352,3 +352,24 @@ telegraf_plugins_extra:
+>    @@ -359,3 +359,24 @@ telegraf_plugins_extra:
 >     tiaas_dir: /srv/tiaas
 >     tiaas_admin_user: admin
 >     tiaas_admin_pass: changeme

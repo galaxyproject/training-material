@@ -115,7 +115,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    ```
 >    {: data-commit="Setup the monitoring playbook"}
 >
->    During this tutorial we will install everything on the same host, but often one keeps the monitoring infrastructure (Grafana, InfluxDB) on a separate host.
+>    During this tutorial we will install everything on the same host, but often one keeps the monitoring infrastructure (Grafana, InfluxDB, Sentry) on a separate host.
 >
 > 4. Edit the inventory file (`hosts`) an add a group for monitoring like:
 >
