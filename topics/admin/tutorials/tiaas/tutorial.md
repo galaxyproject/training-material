@@ -309,7 +309,7 @@ In order to achieve this, we first need some way to sort the jobs of the trainin
 >    ```diff
 >    --- a/files/galaxy/config/tpv_rules_local.yml
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -35,6 +35,17 @@ tools:
+>    @@ -35,6 +35,15 @@ tools:
 >           require:
 >             - pulsar
 >     
@@ -325,10 +325,10 @@ In order to achieve this, we first need some way to sort the jobs of the trainin
 >     destinations:
 >       local_env:
 >         runner: local_runner
->    @@ -63,6 +74,20 @@ destinations:
+>    @@ -62,6 +71,19 @@ destinations:
+>         max_mem: 8
 >         params:
 >           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
->     
 >    +  slurm-training:
 >    +    inherits: singularity
 >    +    runner: slurm
@@ -342,10 +342,9 @@ In order to achieve this, we first need some way to sort the jobs of the trainin
 >    +      require:
 >    +        - slurm
 >    +        - training
->    +
+>     
 >       pulsar:
 >         runner: pulsar_runner
->         params:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}

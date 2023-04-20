@@ -525,7 +525,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -108,4 +108,9 @@ server {
->     		proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
+>     		proxy_pass http://{{ galaxy_config.gravity.reports.bind }}:/;
 >     	}
 >     
 >    +	location /grafana/ {
