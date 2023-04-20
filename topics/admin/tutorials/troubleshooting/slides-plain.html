@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Troubleshooting">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-20 16:19:46 +0000">
+<meta name="DC.date" content="2023-04-20 16:47:52 +0000">
 <meta name="DC.creator" content="Martin Čech">
 <meta name="DC.creator" content="Nate Coraor">
 
@@ -213,6 +213,7 @@
 <h1 id="everything-always-goes-wrong">Everything always goes wrong</h1>
 
 <hr />
+
 <h1 id="when-things-go-wrong-where-do-you-begin">When things go wrong, where do you begin?</h1>
 
 <p>–</p>
@@ -247,6 +248,7 @@
 </ul>
 
 <hr />
+
 <h1 id="startup-problems">Startup problems</h1>
 
 <p>–</p>
@@ -264,8 +266,10 @@
 <h1 id="database-migration">Database migration</h1>
 
 <p>.reduce90[</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Exception: Your database has version '144' but this code expects version '165'. Please
-backup your database and then migrate the database schema by running 'sh manage_db.sh upgrade'.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.model.migrations.OutdatedDatabaseError: Your galaxy database has version e0e3bb173ee6, but
+this code expects version caa7742f7bca. To upgrade your database, run `manage_db.sh upgrade`. For
+more options (e.g. upgrading/downgrading to a specific version) see instructions in that file.
+Please remember to backup your database before migrating.
 </code></pre></div></div>
 <p>]</p>
 
@@ -275,17 +279,19 @@ backup your database and then migrate the database schema by running 'sh manage_
 
 <p>.left[If you believe this message is in error, you can:]</p>
 <ul>
-  <li>Check DB table <code class="language-plaintext highlighter-rouge">migrate_version</code>, column <code class="language-plaintext highlighter-rouge">version</code>.</li>
-  <li>Check folder <code class="language-plaintext highlighter-rouge">lib/galaxy/model/migrate/versions/</code> - the latest migration should match the DB.</li>
+  <li>Check DB table <code class="language-plaintext highlighter-rouge">alembic_version</code>, column <code class="language-plaintext highlighter-rouge">version</code>.</li>
+  <li>Check folder <code class="language-plaintext highlighter-rouge">lib/galaxy/model/migrations/alembic/versions_gxy/</code> - the latest migration should match the DB.</li>
   <li>Clean the <code class="language-plaintext highlighter-rouge">*.pyc</code> files in migrate versions folder to make sure there is no remnant from other code revisions.
     <ul>
       <li>See <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/files/makepyc.py">makepyc.py in galaxyproject.galaxy</a>.</li>
+      <li>Ansible role does this for you.</li>
     </ul>
   </li>
 </ul>
 
 <hr />
 <p>class: left</p>
+
 <h1 id="database-migration-1">Database migration</h1>
 
 <p><strong>Downgrading</strong> - Perform in this order:</p>
@@ -296,18 +302,24 @@ backup your database and then migrate the database schema by running 'sh manage_
 </ol>
 
 <hr />
+
 <h1 id="stuck-in-a-restart-loop">Stuck in a restart loop</h1>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
-*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+<p>.reduce90[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Executing: PYTHONPATH=lib GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml VIRTUAL_ENV=/srv/galaxy/venv
+  /srv/galaxy/venv/bin/gunicorn 'galaxy.webapps.galaxy.fast_factory:factory()' --timeout 300 ...
+DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/galaxy/server/lib, ...
 ... bunch of stuff ...
-[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
-*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+Executing: PYTHONPATH=lib GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml VIRTUAL_ENV=/srv/galaxy/venv
+  /srv/galaxy/venv/bin/gunicorn 'galaxy.webapps.galaxy.fast_factory:factory()' --timeout 300 ...
+DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/galaxy/server/lib, ...
 ... bunch of stuff ...
-[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
-*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+Executing: PYTHONPATH=lib GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml VIRTUAL_ENV=/srv/galaxy/venv
+  /srv/galaxy/venv/bin/gunicorn 'galaxy.webapps.galaxy.fast_factory:factory()' --timeout 300 ...
+DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/galaxy/server/lib, ...
 ...
 </code></pre></div></div>
+<p>]</p>
 
 <ol>
   <li>Open the log <em>without</em> following</li>
@@ -321,13 +333,14 @@ backup your database and then migrate the database schema by running 'sh manage_
 
 <p>The reason that Galaxy is dying might not be in the log. If it’s not, then</p>
 
-<p>If using <strong>systemd</strong> then it should be in <code class="language-plaintext highlighter-rouge">journalctl -u galaxy</code></p>
+<p>If using <strong>systemd</strong> then it should be in <code class="language-plaintext highlighter-rouge">journalctl -eu galaxy-gunicorn</code></p>
 
 <p>If using something else, it’s wherever <code class="language-plaintext highlighter-rouge">stderr</code> is being redirected to (supervisor?)</p>
 
-<p>Or maybe the system is killing it… (<code class="language-plaintext highlighter-rouge">/var/log/{messages,syslog}</code>)</p>
+<p>Or maybe the system is killing it… (<code class="language-plaintext highlighter-rouge">/var/log/{messages,syslog,kern.log}</code>, <code class="language-plaintext highlighter-rouge">dmesg</code>)</p>
 
 <hr />
+
 <h1 id="webui-problems">Web/UI Problems</h1>
 
 <p>–</p>
@@ -338,67 +351,84 @@ backup your database and then migrate the database schema by running 'sh manage_
 
 <h2 id="logs-2">LOGS</h2>
 
-<p>Specifically: uWSGI, nginx, and browser console logs</p>
+<p>Specifically: gunicorn, nginx, and browser console logs</p>
 
 <hr />
+
 <h1 id="502-bad-gateway">502 Bad Gateway</h1>
 
 <p>Your reverse proxy has failed to connect to the Galaxy socket</p>
 
 <ul>
+  <li><code class="language-plaintext highlighter-rouge">systemctl status galaxy-gunicorn</code></li>
   <li>Check that Galaxy is running / not in a reboot loop</li>
-  <li>Check that your proxy and Galaxy/uWSGI socket options match</li>
-  <li>Check proxy server logs (e.g. <code class="language-plaintext highlighter-rouge">/var/log/nginx</code>)</li>
-  <li>Check uWSGI logs for <code class="language-plaintext highlighter-rouge">bind(): Address already in use [core/socket.c line 769]</code></li>
-  <li>Check that something is listening on the correct port (<code class="language-plaintext highlighter-rouge">sudo ss -tlpn 'sport = :port'</code> (demo!) or <code class="language-plaintext highlighter-rouge">sudo lsof -i :port</code> (demo!))
+  <li>Check that your proxy and Galaxy/gunicorn socket options match
     <ul>
-      <li>If it’s uWSGI, make sure it’s not an old one!</li>
+      <li>For UNIX domain sockets, ensure the web server user can r/w the socket</li>
+    </ul>
+  </li>
+  <li>Check proxy server logs (e.g. <code class="language-plaintext highlighter-rouge">/var/log/nginx</code>)</li>
+  <li>Check gunicorn logs for <code class="language-plaintext highlighter-rouge">[&lt;PID&gt;] [ERROR] Connection in use: ('localhost', 8080)</code>
+    <ul>
+      <li>Check that something is listening on the correct port (<code class="language-plaintext highlighter-rouge">sudo ss -tlpn 'sport = :port'</code> (demo!) or <code class="language-plaintext highlighter-rouge">sudo lsof -i :port</code> (demo!))</li>
+      <li>If the culprit is gunicorn, make sure it’s not an old one!</li>
     </ul>
   </li>
 </ul>
 
 <hr />
+
 <h1 id="504-gateway-timeout">504 Gateway Timeout</h1>
 
-<p>Or timeout messages in the Galaxy UI</p>
-
-<p>In uWSGI logs:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
-*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
-*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
-*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
-</code></pre></div></div>
-
-<p>Galaxy is not processing requests in a timely manner</p>
-
-<hr />
-<h1 id="504-gateway-timeout-1">504 Gateway Timeout</h1>
-
-<p>Use <code class="language-plaintext highlighter-rouge">uwsgitop</code> (demo!)</p>
+<p>Use <code class="language-plaintext highlighter-rouge">htop</code> (demo!) and <code class="language-plaintext highlighter-rouge">ps</code> (demo!)</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">uwsgitop</code> state busy?</li>
+  <li><code class="language-plaintext highlighter-rouge">htop</code> process state <strong>D</strong> (<em>kernel uninterruptable sleep</em>)?</li>
 </ul>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">uwsgi-2.0.17.1 - Fri Feb  1 17:13:59 2019 - req: 0 - RPS: 0 - lq: 0 - tx: 0
-node: localhost - cwd: /srv/galaxy/server - uid: 999 - gid: 999 - masterpid: 1925
- WID    %       PID     REQ     RPS     EXC     SIG     STATUS  AVG     RSS     VSZ     TX      ReSpwn  HC      RunT    LastSpwn
- 1      12.7    3453    59962   1       13      0       busy    89ms    0       0       536.0M  1       0       450m    09:35:36
+<p>.reduce90[</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>htop <span class="nt">-u</span> galaxy
+<span class="gp">    0[||                                           1.6%]   Tasks: 98, 244 thr;</span><span class="w"> </span>1 running
+<span class="go">    1[||                                           2.7%]   Load average: 105.04 102.08 91.04
+  Mem[||||||||||||||||||||||||||||||||||||||2.28G/15.6G]   Uptime: 3 days, 15:46:31
+  Swp[                                            0K/0K]
+
+    PID USER      PRI  NI  VIRT   RES   SHR S CPU%▽MEM%   TIME+  Command
+   3440 galaxy     20   0 2806M  297M 53364 D 17.2  5.2  3:11.40 python3 gunicorn ...
+</span><span class="c">...
 </span></code></pre></div></div>
+<p>]</p>
 
-<p>Process state <strong>D</strong>?</p>
+<hr />
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ...
+<h1 id="504-gateway-timeout-1">504 Gateway Timeout</h1>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ps</code> process state <strong>D</strong>?</li>
+</ul>
+
+<p>.reduce90[</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ps uwwU galaxy
+<span class="go">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+galaxy    3440 17.2  5.2 2873344 304128 ?      D    Nov10   3:11 python3 gunicorn ...
+</span><span class="c">...
 </span></code></pre></div></div>
+<p>]</p>
 
-<p>Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.</p>
+<hr />
+
+<h1 id="504-gateway-timeout-2">504 Gateway Timeout</h1>
+
+<p>Cycling state <strong>D</strong>/<strong>S</strong>/<strong>R</strong> is fine, but stuck on <strong>D</strong> is Very Bad™</p>
+
+<p>Probably IO - check filesystems, disks.</p>
 
 <p>Restart Galaxy</p>
 
 <p>.reduce70[.footnote[A later slide will cover how to investigate kernel uninterruptable sleep processes]]</p>
 
 <hr />
+
 <h1 id="504-gateway-timeout-or-slow-ui">504 Gateway Timeout or slow UI</h1>
 
 <p>Check load</p>
@@ -409,7 +439,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 
 <p>Averages are 1, 5, 15 minutes.</p>
 
-<p>Average should be &lt;= number of cores (<code class="language-plaintext highlighter-rouge">lscpu</code>, beware SMT)</p>
+<p>Average should be &lt;= number of cores (<code class="language-plaintext highlighter-rouge">lscpu</code>, (beware SMT) or just <code class="language-plaintext highlighter-rouge">htop</code>)</p>
 
 <p>More on troubleshooting load later</p>
 
@@ -439,15 +469,17 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 </ul>
 
 <hr />
+
 <h1 id="galaxy-ui-is-slow">Galaxy UI is slow</h1>
 
 <ul>
   <li><a href="https://docs.galaxyproject.org/en/master/dev/finding_and_improving_slow_code.html#profiling">Tutorial from @mvdbeek</a></li>
-  <li>Use Galaxy <a href="https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/galaxy.yml.sample#L1036">heartbeat</a> (demo!)</li>
-  <li>Use <code class="language-plaintext highlighter-rouge">py-spy</code></li>
+  <li>Use Galaxy <a href="https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/galaxy.yml.sample#L1036">heartbeat</a> (not super relevant anymore thanks to…)</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">py-spy</code> (demo later!)</li>
 </ul>
 
 <hr />
+
 <h1 id="blank-page-or-no-cssjavascript">Blank page or no CSS/JavaScript</h1>
 
 <p>Serving of static content is broken.</p>
@@ -460,6 +492,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 </ul>
 
 <hr />
+
 <h1 id="tool-failures">Tool failures</h1>
 
 <p>Tools can fail for a variety of reasons, some valid, some invalid.</p>
@@ -467,6 +500,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 <p>Some made up examples follow.</p>
 
 <hr />
+
 <h1 id="tool-missing-from-galaxy">Tool missing from Galaxy</h1>
 
 <ul>
@@ -492,6 +526,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 </ul>
 
 <hr />
+
 <h1 id="tool-errors">Tool errors</h1>
 
 <p>Tool stdout/stderr is available in UI under “i” icon on history dataset</p>
@@ -507,6 +542,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 <p>Familiarize yourself with the places Galaxy keeps things (demo?)</p>
 
 <hr />
+
 <h1 id="tool-errors---stderr">Tool errors - stderr</h1>
 
 <p><strong>Galaxy considers <em>any</em> output to standard error (stderr) to be an error when no tool profile version is set by a tool.</strong></p>
@@ -517,6 +553,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 
 <hr />
 <p>class: left</p>
+
 <h1 id="tool-errors-1">Tool errors</h1>
 
 <p>So what if tool stderr contains:</p>
@@ -533,6 +570,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 
 <hr />
 <p>class: left</p>
+
 <h1 id="tool-errors-2">Tool errors</h1>
 
 <p>Tool output contains:</p>
@@ -550,6 +588,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 
 <hr />
 <p>class: left</p>
+
 <h1 id="tool-errors---memory-errors">Tool errors - memory errors</h1>
 
 <p>Tool output contains one of:</p>
@@ -578,6 +617,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 
 <hr />
 <p>class: left</p>
+
 <h1 id="tool-errors---system-errors">Tool errors - system errors</h1>
 
 <p>Tool output contains:</p>
@@ -598,6 +638,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 
 <hr />
 <p>class: left</p>
+
 <h1 id="tool-errors---dependency-problems">Tool errors - dependency problems</h1>
 
 <p>Tool output contains:</p>
@@ -612,6 +653,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 </ul>
 
 <hr />
+
 <h1 id="manage-dependencies">Manage Dependencies</h1>
 
 <p>An incredibly useful feature to hit unruly tool dependencies with a large hammer.</p>
@@ -623,11 +665,12 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 <p>(demo!)</p>
 
 <hr />
+
 <h1 id="an-aside---dependency-problems-on-geriatric-galaxies">An aside - dependency problems on geriatric Galaxies</h1>
 
 <p>Galaxy Tool Shed dependencies are dead.<sup>1</sup> If you don’t know what Tool Shed dependencies are (lucky you) skip this slide.</p>
 
-<p>Don’t attempt to fix Galaxy Tool Shed dependencies, just update tool and reinstall with Conda.</p>
+<p>Don’t attempt to fix Galaxy Tool Shed dependencies, just update tool and use container (or Conda) deps.</p>
 
 <p>Put Conda first in <a href="https://github.com/galaxyproject/galaxy/blob/dev/config/dependency_resolvers_conf.xml.sample">dependency_resolvers_conf.xml</a> if you still need to support both.</p>
 
@@ -635,6 +678,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ..
 
 <hr />
 <p>class: left</p>
+
 <h1 id="tool-errors---dependency-problems-1">Tool errors - dependency problems</h1>
 
 <p>Tool output contains:</p>
@@ -661,6 +705,7 @@ Galaxy ensures that the correct version(s) of tool(s) immediate dependencies are
 
 <hr />
 <p>class: left</p>
+
 <h1 id="tool-errors---empty-green-history-item">Tool errors - Empty green history item</h1>
 
 <ol>
@@ -675,6 +720,7 @@ Galaxy ensures that the correct version(s) of tool(s) immediate dependencies are
 </ul>
 
 <hr />
+
 <h1 id="summary-of-types-of-tool-failures">Summary of types of tool failures</h1>
 
 <ul>
@@ -689,6 +735,7 @@ Galaxy ensures that the correct version(s) of tool(s) immediate dependencies are
 <p>Everything else: always the sysadmin’s problem</p>
 
 <hr />
+
 <h1 id="one-last-word-on-tool-errors">One last word on tool errors</h1>
 
 <p>All IUC/devteam tools in the Tool Shed have tests</p>
@@ -696,150 +743,167 @@ Galaxy ensures that the correct version(s) of tool(s) immediate dependencies are
 <p>Use these tests (automateable with <a href="https://github.com/galaxyproject/ephemeris">Ephemeris</a>!) to verify that the tool works in the basic case</p>
 
 <hr />
+
 <h1 id="job-execution-problems">Job execution problems</h1>
 
 <hr />
 <p>class: smaller</p>
+
 <h1 id="jobs-arent-running-always-gray">Jobs aren’t running: always gray</h1>
 
 <p>Corresponds to <code class="language-plaintext highlighter-rouge">job.state = 'new'</code> or <code class="language-plaintext highlighter-rouge">'queued'</code> in database</p>
 
 <p>.left[Check the Galaxy server log for errors. Successful job lifecycle:]</p>
 
-<p>.reduce50[</p>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.tools DEBUG 2019-02-01 14:30:20,469 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Validated and populated state for tool request (11.587 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,500 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Handled output named output1 for tool testing (2.334 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,507 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Added output datasets to history (6.210 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,513 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Setup for job Job[unflushed,tool_id=testing] complete, ready to flush (5.408 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,558 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Flushed transaction for job Job[id=21,tool_id=testing] (44.550 ms)
-galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Sending message to farm job-handlers: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
-galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Tool [testing] created job [21] (73.833 ms)
-galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,560 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Received message: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
-galaxy.tools.execute DEBUG 2019-02-01 14:30:20,562 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Executed 1 job(s) for tool testing request: (91.901 ms)
-galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Released lock
-galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6594,w:0,m:2] [UWSGIFarmMessageTransport.dispatcher_thread] Acquired message lock, waiting for new message
-galaxy.jobs.rules.map_resources INFO 2019-02-01 14:30:21,526 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] returning destination: slurm
-galaxy.jobs.mapper DEBUG 2019-02-01 14:30:21,527 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Mapped job to destination id: slurm
-galaxy.jobs.handler DEBUG 2019-02-01 14:30:21,532 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Dispatching to slurm runner
-galaxy.jobs DEBUG 2019-02-01 14:30:21,539 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Persisting job destination (destination id: slurm)
-galaxy.jobs DEBUG 2019-02-01 14:30:21,565 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Working directory for job is: /srv/galaxy/jobs/000/21
-galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,579 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] Job [21] queued (44.601 ms)
-galaxy.jobs.handler INFO 2019-02-01 14:30:21,585 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Job dispatched
-</span><span class="gp">galaxy.jobs.command_factory INFO 2019-02-01 14:30:21,714 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] Built script [/srv/galaxy/jobs/000/21/tool_script.sh] for tool command [echo "Running with '$</span><span class="o">{</span>GALAXY_SLOTS:-1<span class="o">}</span><span class="s1">' threads" &gt; "/data/000/dataset_21.dat"]
-</span><span class="gp">galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,791 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) command is: rm -rf working;</span><span class="w"> </span><span class="s1">mkdir -p working; cd working; /srv/galaxy/jobs/000/21/tool_script.sh; return_code=$?; cd '</span>/srv/galaxy/jobs/000/21<span class="s1">';
-</span><span class="gp">[ "$</span><span class="s1">GALAXY_VIRTUAL_ENV" = "None" ] &amp;&amp; GALAXY_VIRTUAL_ENV="$_GALAXY_VIRTUAL_ENV"; _galaxy_setup_environment True
-</span><span class="gp">python "/srv/galaxy/jobs/000/21/set_metadata_FVs2H3.py" "/srv/galaxy/jobs/000/21/registry.xml" "/srv/galaxy/jobs/000/21/working/galaxy.json" "/srv/galaxy/jobs/000/21/metadata_in_HistoryDatasetAssociation_21_LeYyR2,/srv/galaxy/jobs/000/21/metadata_kwds_HistoryDatasetAssociation_21_2yXqbX,/srv/galaxy/jobs/000/21/metadata_out_HistoryDatasetAssociation_21_WwKZCq,/srv/galaxy/jobs/000/21/metadata_results_HistoryDatasetAssociation_21_nfKGx4,/data/000/dataset_21.dat,/srv/galaxy/jobs/000/21/metadata_override_HistoryDatasetAssociation_21_xsOoSa" 5242880;</span><span class="w"> </span><span class="s1">sh -c "exit $return_code"
-</span><span class="go">galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:21,821 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) submitting file /srv/galaxy/jobs/000/21/galaxy_21.sh
-galaxy.jobs.runners.drmaa INFO 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) queued as 19
-galaxy.jobs DEBUG 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) Persisting job destination (destination id: slurm)
-galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:22,158 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is queued and active
-galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:23,171 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is running
-</span></code></pre></div></div>
-<p>]</p>
+<pre class="reduce50" style="text-align: left">
+galaxy.tools INFO 2023-04-20 13:51:20,736 [pN:main.1,p:273250,tN:WSGI_0] Validated and populated state for tool request (4.308 ms)
+galaxy.tools.actions INFO 2023-04-20 13:51:20,747 [pN:main.1,p:273250,tN:WSGI_0] Handled output named out_file1 for tool secure_hash_message_digest (0.756 ms)
+galaxy.tools.actions INFO 2023-04-20 13:51:20,759 [pN:main.1,p:273250,tN:WSGI_0] Added output datasets to history (12.102 ms)
+galaxy.tools.actions INFO 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Setup for job Job[unflushed,tool_id=secure_hash_message_digest] complete, ready to be enqueued (1.097 ms)
+galaxy.tools.execute DEBUG 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Tool secure_hash_message_digest created job None (21.968 ms)
+galaxy.web_stack.handlers INFO 2023-04-20 13:51:20,792 [pN:main.1,p:273250,tN:WSGI_0] (Job[id=2,tool_id=secure_hash_message_digest]) Handler '_default_' assigned using 'db-skip-locked' assignment method
+galaxy.tools.execute DEBUG 2023-04-20 13:51:20,797 [pN:main.1,p:273250,tN:WSGI_0] Created 1 job(s) for tool secure_hash_message_digest request (60.168 ms)
+galaxy.jobs.handler DEBUG 2023-04-20 13:51:20,879 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Grabbed Job(s): 2
+tpv.rules.gateway INFO 2023-04-20 13:51:20,920 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] loading tpv rules from: ['https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml', '/srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml']
+tpv.rules.gateway INFO 2023-04-20 13:51:21,266 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Watching for changes in file: /srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml
+galaxy.util.watcher DEBUG 2023-04-20 13:51:21,266 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Watching for changes to file: /srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml
+tpv.core.entities DEBUG 2023-04-20 13:51:21,354 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Ranking destinations: [runner=local_runner, ... (line truncated)
+galaxy.jobs.mapper DEBUG 2023-04-20 13:51:21,354 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Mapped job to destination id: local_env
+galaxy.jobs.handler DEBUG 2023-04-20 13:51:21,370 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Dispatching to local_runner runner
+galaxy.jobs DEBUG 2023-04-20 13:51:21,387 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Persisting job destination (destination id: local_env)
+galaxy.jobs DEBUG 2023-04-20 13:51:21,402 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Working directory for job is: /data/jobs/000/2
+galaxy.jobs.runners DEBUG 2023-04-20 13:51:21,412 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Job [2] queued (41.730 ms)
+galaxy.jobs.handler INFO 2023-04-20 13:51:21,423 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Job dispatched
+galaxy.jobs DEBUG 2023-04-20 13:51:21,500 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] Job wrapper for Job [2] prepared (70.012 ms)
+galaxy.jobs.command_factory INFO 2023-04-20 13:51:21,508 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] Built script [/data/jobs/000/2/tool_script.sh] for tool command [python '/srv/galaxy/server/tools/filters/secure_hash_message_digest.py' --input '/data/datasets/5/9/6/dataset_596da164-5b91-4003-8699-db43afd9f26d.dat' --output '/data/jobs/000/2/outputs/galaxy_dataset_bfc51e23-4d98-4968-b9f6-a7fc970fad28.dat' --algorithm "sha256"]
+galaxy.jobs.runners DEBUG 2023-04-20 13:51:21,554 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] (2) command is: (multi-line output trimmed)
+galaxy.jobs.runners.local DEBUG 2023-04-20 13:51:21,558 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] (2) executing job script: /data/jobs/000/2/galaxy_2.sh
+galaxy.jobs.runners.util.process_groups DEBUG 2023-04-20 13:51:25,191 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] check_pg(): No process found in process group 587010
+galaxy.jobs.runners.local DEBUG 2023-04-20 13:51:25,192 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] execution finished: /data/jobs/000/2/galaxy_2.sh
+galaxy.jobs DEBUG 2023-04-20 13:51:25,202 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] finish(): Moved /data/jobs/000/2/outputs/galaxy_dataset_bfc51e23-4d98-4968-b9f6-a7fc970fad28.dat to /data/datasets/b/f/c/dataset_bfc51e23-4d98-4968-b9f6-a7fc970fad28.dat
+galaxy.model.metadata DEBUG 2023-04-20 13:51:25,212 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] loading metadata from file for: HistoryDatasetAssociation 2
+galaxy.jobs INFO 2023-04-20 13:51:25,235 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] Collecting metrics for Job 2 in /data/jobs/000/2
+galaxy.jobs DEBUG 2023-04-20 13:51:25,250 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] job_wrapper.finish for job 2 executed (51.404 ms)
+</pre>
 
 <hr />
 <p>class: smaller, left</p>
+
 <h1 id="successful-job-lifecycle">Successful job lifecycle</h1>
 
-<p>Note <code class="language-plaintext highlighter-rouge">[p:PPPP,w:W,m:M]</code> in log messages:</p>
+<p>Note <code class="language-plaintext highlighter-rouge">[pN:NNNN,p:PPPP,tN:NNNN]</code> in log messages:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Tool [testing] created job [21] (73.833 ms)
-galaxy.jobs.mapper DEBUG 2019-02-01 14:30:21,527 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Mapped job to destination id: slurm
+<p>.reduce70[</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.tools.execute DEBUG 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Tool secure_hash_message_digest created job None (21.968 ms)
+galaxy.jobs.mapper DEBUG 2023-04-20 13:51:21,354 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Mapped job to destination id: local_env
 </span></code></pre></div></div>
+<p>]</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">[p:6590,w:1,m:0]</code>: PID 6590, web worker, not a mule (0)</li>
-  <li><code class="language-plaintext highlighter-rouge">[p:6593,w:0,m:1]</code>: PID 6593, not a web worker (0), mule 1</li>
+  <li><code class="language-plaintext highlighter-rouge">[pN:main.1,p:273250,tN:WSGI_0]</code>: PID 273250, web worker (not a job handler)</li>
+  <li><code class="language-plaintext highlighter-rouge">[pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread]</code>: PID 272701, job handler (not a web worker)</li>
 </ul>
 
 <hr />
 <p>class: smaller</p>
+
 <h1 id="successful-job-lifecycle-1">Successful job lifecycle</h1>
 
 <p>Dissecting the lifecycle messages</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.tools DEBUG 2019-02-01 14:30:20,469 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Validated and populated state for tool request (11.587 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,500 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Handled output named output1 for tool testing (2.334 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,507 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Added output datasets to history (6.210 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,513 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Setup for job Job[unflushed,tool_id=testing] complete, ready to flush (5.408 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,558 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Flushed transaction for job Job[id=21,tool_id=testing] (44.550 ms)
-galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Sending message to farm job-handlers: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
-galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Tool [testing] created job [21] (73.833 ms)
-galaxy.tools.execute DEBUG 2019-02-01 14:30:20,562 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Executed 1 job(s) for tool testing request: (91.901 ms)
+<p>.reduce70[</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.tools INFO 2023-04-20 13:51:20,736 [pN:main.1,p:273250,tN:WSGI_0] Validated and populated state for tool request (4.308 ms)
+galaxy.tools.actions INFO 2023-04-20 13:51:20,747 [pN:main.1,p:273250,tN:WSGI_0] Handled output named out_file1 for tool secure_hash_message_digest (0.756 ms)
+galaxy.tools.actions INFO 2023-04-20 13:51:20,759 [pN:main.1,p:273250,tN:WSGI_0] Added output datasets to history (12.102 ms)
+galaxy.tools.actions INFO 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Setup for job Job[unflushed,tool_id=secure_hash_message_digest] complete, ready to be enqueued (1.097 ms)
+galaxy.tools.execute DEBUG 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Tool secure_hash_message_digest created job None (21.968 ms)
+galaxy.web_stack.handlers INFO 2023-04-20 13:51:20,792 [pN:main.1,p:273250,tN:WSGI_0] (Job[id=2,tool_id=secure_hash_message_digest]) Handler '_default_' assigned using 'db-skip-locked' assignment method
+galaxy.tools.execute DEBUG 2023-04-20 13:51:20,797 [pN:main.1,p:273250,tN:WSGI_0] Created 1 job(s) for tool secure_hash_message_digest request (60.168 ms)
 </span></code></pre></div></div>
+<p>]</p>
 
 <ul>
-  <li>Job is assigned <strong>Galaxy</strong> job ID 21</li>
+  <li>Job is assigned <strong>Galaxy</strong> job ID 2</li>
   <li>“Executed” is misleading - the Job has been created in the <code class="language-plaintext highlighter-rouge">job</code> table of the database, but is not picked up by a job handler yet.</li>
   <li>All of this has occurred in the web worker.</li>
-  <li>If not using mules and “Executed” is the last message you see, verify job assigned to a valid handler.</li>
+  <li>If “Executed” is the last message you see, verify job assigned to a valid handler.</li>
 </ul>
 
 <hr />
 <p>class: smaller</p>
+
 <h1 id="successful-job-lifecycle-2">Successful job lifecycle</h1>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,560 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Received message: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
-galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Released lock
-galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6594,w:0,m:2] [UWSGIFarmMessageTransport.dispatcher_thread] Acquired message lock, waiting for new message
-</span></code></pre></div></div>
+<p>.reduce70[</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.jobs.handler DEBUG 2023-04-20 13:51:20,879 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Grabbed Job(s): 2
+tpv.rules.gateway INFO 2023-04-20 13:51:20,920 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] loading tpv rules from: ['https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml', '/srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml']
+tpv.rules.gateway INFO 2023-04-20 13:51:21,266 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Watching for changes in file: /srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml
+galaxy.util.watcher DEBUG 2023-04-20 13:51:21,266 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Watching for changes to file: /srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml
+</span><span class="gp">tpv.core.entities DEBUG 2023-04-20 13:51:21,354 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Ranking destinations: [runner=local_runner, dest_name=local_env, min_accepted_cores=None, min_accepted_mem=None, min_accepted_gpus=None, max_accepted_cores=1, max_accepted_mem=None, max_accepted_gpus=None, tpv_dest_tags=&lt;class 'tpv.core.entities.TagSetManager'&gt;</span><span class="w"> </span><span class="nv">tags</span><span class="o">=[]</span>, <span class="nv">handler_tags</span><span class="o">=</span>None&lt;class <span class="s1">'tpv.core.entities.Destination'</span><span class="o">&gt;</span> <span class="nb">id</span><span class="o">=</span>local_env, <span class="nv">abstract</span><span class="o">=</span>False, <span class="nv">cores</span><span class="o">=</span>None, <span class="nv">mem</span><span class="o">=</span>None, <span class="nv">gpus</span><span class="o">=</span>None, min_cores <span class="o">=</span> None, min_mem <span class="o">=</span> None, min_gpus <span class="o">=</span> None, max_cores <span class="o">=</span> None, max_mem <span class="o">=</span> None, max_gpus <span class="o">=</span> None, <span class="nb">env</span><span class="o">=</span>None, <span class="nv">params</span><span class="o">={</span><span class="s1">'tmp_dir'</span>: True<span class="o">}</span>, <span class="nv">resubmit</span><span class="o">=</span>None, <span class="nv">tags</span><span class="o">=</span>&lt;class <span class="s1">'tpv.core.entities.TagSetManager'</span><span class="o">&gt;</span> <span class="nv">tags</span><span class="o">=[]</span>, <span class="nv">rank</span><span class="o">=</span>, <span class="nv">inherits</span><span class="o">=</span>None, <span class="nv">context</span><span class="o">=</span>None, <span class="nv">rules</span><span class="o">={}</span>, <span class="nv">runner</span><span class="o">=</span>local_runner, <span class="nv">dest_name</span><span class="o">=</span>singularity, <span class="nv">min_accepted_cores</span><span class="o">=</span>None, <span class="nv">min_accepted_mem</span><span class="o">=</span>None, <span class="nv">min_accepted_gpus</span><span class="o">=</span>None, <span class="nv">max_accepted_cores</span><span class="o">=</span>1, <span class="nv">max_accepted_mem</span><span class="o">=</span>None, <span class="nv">max_accepted_gpus</span><span class="o">=</span>None, <span class="nv">tpv_dest_tags</span><span class="o">=</span>&lt;class <span class="s1">'tpv.core.entities.TagSetManager'</span><span class="o">&gt;</span> <span class="nv">tags</span><span class="o">=[]</span>, <span class="nv">handler_tags</span><span class="o">=</span>None&lt;class <span class="s1">'tpv.core.entities.Destination'</span><span class="o">&gt;</span> <span class="nb">id</span><span class="o">=</span>singularity, <span class="nv">abstract</span><span class="o">=</span>False, <span class="nv">cores</span><span class="o">=</span>None, <span class="nv">mem</span><span class="o">=</span>None, <span class="nv">gpus</span><span class="o">=</span>None, min_cores <span class="o">=</span> None, min_mem <span class="o">=</span> None, min_gpus <span class="o">=</span> None, max_cores <span class="o">=</span> None, max_mem <span class="o">=</span> None, max_gpus <span class="o">=</span> None, <span class="nb">env</span><span class="o">=[{</span><span class="s1">'name'</span>: <span class="s1">'LC_ALL'</span>, <span class="s1">'value'</span>: <span class="s1">'C'</span><span class="o">}</span>, <span class="o">{</span><span class="s1">'name'</span>: <span class="s1">'SINGULARITY_CACHEDIR'</span>, <span class="s1">'value'</span>: <span class="s1">'/tmp/singularity'</span><span class="o">}</span>, <span class="o">{</span><span class="s1">'name'</span>: <span class="s1">'SINGULARITY_TMPDIR'</span>, <span class="s1">'value'</span>: <span class="s1">'/tmp'</span><span class="o">}]</span>, <span class="nv">params</span><span class="o">={</span><span class="s1">'singularity_enabled'</span>: True<span class="o">}</span>, <span class="nv">resubmit</span><span class="o">=</span>None, <span class="nv">tags</span><span class="o">=</span>&lt;class <span class="s1">'tpv.core.entities.TagSetManager'</span><span class="o">&gt;</span> <span class="nv">tags</span><span class="o">=[]</span>, <span class="nv">rank</span><span class="o">=</span>, <span class="nv">inherits</span><span class="o">=</span>None, <span class="nv">context</span><span class="o">=</span>None, <span class="nv">rules</span><span class="o">={}</span>, <span class="nv">runner</span><span class="o">=</span>slurm, <span class="nv">dest_name</span><span class="o">=</span>slurm, <span class="nv">min_accepted_cores</span><span class="o">=</span>None, <span class="nv">min_accepted_mem</span><span class="o">=</span>None, <span class="nv">min_accepted_gpus</span><span class="o">=</span>None, <span class="nv">max_accepted_cores</span><span class="o">=</span>24, <span class="nv">max_accepted_mem</span><span class="o">=</span>256, <span class="nv">max_accepted_gpus</span><span class="o">=</span>None, <span class="nv">tpv_dest_tags</span><span class="o">=</span>&lt;class <span class="s1">'tpv.core.entities.TagSetManager'</span><span class="o">&gt;</span> <span class="nv">tags</span><span class="o">=[]</span>, <span class="nv">handler_tags</span><span class="o">=</span>None&lt;class <span class="s1">'tpv.core.entities.Destination'</span><span class="o">&gt;</span> <span class="nb">id</span><span class="o">=</span>slurm, <span class="nv">abstract</span><span class="o">=</span>False, <span class="nv">cores</span><span class="o">=</span>None, <span class="nv">mem</span><span class="o">=</span>None, <span class="nv">gpus</span><span class="o">=</span>None, min_cores <span class="o">=</span> None, min_mem <span class="o">=</span> None, min_gpus <span class="o">=</span> None, max_cores <span class="o">=</span> 2, max_mem <span class="o">=</span> 8, max_gpus <span class="o">=</span> None, <span class="nb">env</span><span class="o">=[{</span><span class="s1">'name'</span>: <span class="s1">'LC_ALL'</span>, <span class="s1">'value'</span>: <span class="s1">'C'</span><span class="o">}</span>, <span class="o">{</span><span class="s1">'name'</span>: <span class="s1">'SINGULARITY_CACHEDIR'</span>, <span class="s1">'value'</span>: <span class="s1">'/tmp/singularity'</span><span class="o">}</span>, <span class="o">{</span><span class="s1">'name'</span>: <span class="s1">'SINGULARITY_TMPDIR'</span>, <span class="s1">'value'</span>: <span class="s1">'/tmp'</span><span class="o">}]</span>, <span class="nv">params</span><span class="o">={</span><span class="s1">'singularity_enabled'</span>: True, <span class="s1">'native_specification'</span>: <span class="s2">"--nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00"</span><span class="o">}</span>, <span class="nv">resubmit</span><span class="o">={}</span>, <span class="nv">tags</span><span class="o">=</span>&lt;class <span class="s1">'tpv.core.entities.TagSetManager'</span><span class="o">&gt;</span> <span class="nv">tags</span><span class="o">=[]</span>, <span class="nv">rank</span><span class="o">=</span>, <span class="nv">inherits</span><span class="o">=</span>singularity, <span class="nv">context</span><span class="o">={}</span>, <span class="nv">rules</span><span class="o">={}]</span> <span class="k">for </span>entity: &lt;class <span class="s1">'tpv.core.entities.Tool'</span><span class="o">&gt;</span> <span class="nb">id</span><span class="o">=</span>default, <span class="nv">abstract</span><span class="o">=</span>False, <span class="nv">cores</span><span class="o">=</span>1, <span class="nv">mem</span><span class="o">=</span>4, <span class="nv">gpus</span><span class="o">=</span>None, min_cores <span class="o">=</span> None, min_mem <span class="o">=</span> None, min_gpus <span class="o">=</span> None, max_cores <span class="o">=</span> None, max_mem <span class="o">=</span> None, max_gpus <span class="o">=</span> None, <span class="nb">env</span><span class="o">=[]</span>, <span class="nv">params</span><span class="o">={</span><span class="s1">'walltime'</span>: 8<span class="o">}</span>, <span class="nv">resubmit</span><span class="o">={}</span>, <span class="nv">tags</span><span class="o">=</span>&lt;class <span class="s1">'tpv.core.entities.TagSetManager'</span><span class="o">&gt;</span> <span class="nv">tags</span><span class="o">=[</span>&lt;Tag: <span class="nv">name</span><span class="o">=</span>scheduling, <span class="nv">value</span><span class="o">=</span>offline, <span class="nb">type</span><span class="o">=</span>TagType.REJECT&gt;], <span class="nv">rank</span><span class="o">=</span>helpers.we, <span class="nv">inherits</span><span class="o">=</span>None, <span class="nv">context</span><span class="o">={}</span>, <span class="nv">rules</span><span class="o">={}</span> using custom <span class="k">function</span>
+</code></pre></div></div>
+<p>]</p>
 
 <ul>
-  <li>Mule 1 took the job and released the message interface lock after setting <code class="language-plaintext highlighter-rouge">job.handler</code> to its own <code class="language-plaintext highlighter-rouge">server_name</code></li>
-  <li>Mule 2 acquired the message interface lock and will take the next job.</li>
+  <li>handler_1 “grabbed” (pulled the job from the database and assigned itself) by setting <code class="language-plaintext highlighter-rouge">job.handler</code> to its own <code class="language-plaintext highlighter-rouge">server_name</code></li>
+  <li>The job is passed to TPV, which evaluates its rules and decides where to send the job</li>
 </ul>
 
 <hr />
 <p>class: smaller</p>
+
 <h1 id="successful-job-lifecycle-3">Successful job lifecycle</h1>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.jobs.rules.map_resources INFO 2019-02-01 14:30:21,526 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] returning destination: slurm
-galaxy.jobs.mapper DEBUG 2019-02-01 14:30:21,527 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Mapped job to destination id: slurm
-galaxy.jobs.handler DEBUG 2019-02-01 14:30:21,532 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Dispatching to slurm runner
-galaxy.jobs DEBUG 2019-02-01 14:30:21,539 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Persisting job destination (destination id: slurm)
-galaxy.jobs DEBUG 2019-02-01 14:30:21,565 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Working directory for job is: /srv/galaxy/jobs/000/21
-galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,579 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] Job [21] queued (44.601 ms)
-galaxy.jobs.handler INFO 2019-02-01 14:30:21,585 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Job dispatched
+<p>.reduce70[</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.jobs.mapper DEBUG 2023-04-20 13:51:21,354 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Mapped job to destination id: slurm_env
+galaxy.jobs.handler DEBUG 2023-04-20 13:51:21,370 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Dispatching to slurm_runner runner
+galaxy.jobs DEBUG 2023-04-20 13:51:21,387 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Persisting job destination (destination id: slurm_env)
+galaxy.jobs DEBUG 2023-04-20 13:51:21,402 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Working directory for job is: /data/jobs/000/2
+galaxy.jobs.runners DEBUG 2023-04-20 13:51:21,412 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Job [2] queued (41.730 ms)
+galaxy.jobs.handler INFO 2023-04-20 13:51:21,423 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Job dispatched
 </span></code></pre></div></div>
+<p>]</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">(21)</code> at beginning of job log messages is <strong>Galaxy</strong> job ID</li>
-  <li>Job is mapped to destination: <code class="language-plaintext highlighter-rouge">&lt;destination id="slurm"/&gt;</code></li>
-  <li>Job is dispatched to job runner plugin: <code class="language-plaintext highlighter-rouge">&lt;plugin id="slurm"/&gt;</code></li>
+  <li><code class="language-plaintext highlighter-rouge">(2)</code> at beginning of job log messages is <strong>Galaxy</strong> job ID</li>
+  <li>Job is mapped to job environment <code class="language-plaintext highlighter-rouge">slurm_env</code></li>
+  <li>Job is dispatched to job runner plugin <code class="language-plaintext highlighter-rouge">slurm_runner</code></li>
+  <li>The job working directory is created</li>
 </ul>
 
 <hr />
 <p>class: smaller</p>
+
 <h1 id="successful-job-lifecycle-4">Successful job lifecycle</h1>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">galaxy.jobs.command_factory INFO 2019-02-01 14:30:21,714 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] Built script [/srv/galaxy/jobs/000/21/tool_script.sh] for tool command [echo "Running with '$</span><span class="o">{</span>GALAXY_SLOTS:-1<span class="o">}</span><span class="s1">' threads" &gt; "/data/000/dataset_21.dat"]
-</span><span class="gp">galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,791 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) command is: rm -rf working;</span><span class="w"> </span><span class="s1">mkdir -p working; cd working; /srv/galaxy/jobs/000/21/tool_script.sh; return_code=$?; cd '</span>/srv/galaxy/jobs/000/21<span class="s1">';
-</span><span class="gp">[ "$</span><span class="s1">GALAXY_VIRTUAL_ENV" = "None" ] &amp;&amp; GALAXY_VIRTUAL_ENV="$_GALAXY_VIRTUAL_ENV"; _galaxy_setup_environment True
-</span><span class="gp">python "/srv/galaxy/jobs/000/21/set_metadata_FVs2H3.py" "/srv/galaxy/jobs/000/21/registry.xml" "/srv/galaxy/jobs/000/21/working/galaxy.json" "/srv/galaxy/jobs/000/21/metadata_in_HistoryDatasetAssociation_21_LeYyR2,/srv/galaxy/jobs/000/21/metadata_kwds_HistoryDatasetAssociation_21_2yXqbX,/srv/galaxy/jobs/000/21/metadata_out_HistoryDatasetAssociation_21_WwKZCq,/srv/galaxy/jobs/000/21/metadata_results_HistoryDatasetAssociation_21_nfKGx4,/data/000/dataset_21.dat,/srv/galaxy/jobs/000/21/metadata_override_HistoryDatasetAssociation_21_xsOoSa" 5242880;</span><span class="w"> </span><span class="s1">sh -c "exit $return_code"
-</span><span class="go">galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:21,821 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) submitting file /srv/galaxy/jobs/000/21/galaxy_21.sh
-galaxy.jobs.runners.drmaa INFO 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) queued as 19
-galaxy.jobs DEBUG 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) Persisting job destination (destination id: slurm)
+<p>.reduce70[</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.jobs DEBUG 2023-04-20 13:51:21,500 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] Job wrapper for Job [2] prepared (70.012 ms)
+galaxy.jobs.command_factory INFO 2023-04-20 13:51:21,508 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] Built script [/data/jobs/000/2/tool_script.sh] for tool command [python '/srv/galaxy/server/tools/filters/secure_hash_message_digest.py' --input '/data/datasets/5/9/6/dataset_596da164-5b91-4003-8699-db43afd9f26d.dat' --output '/data/jobs/000/2/outputs/galaxy_dataset_bfc51e23-4d98-4968-b9f6-a7fc970fad28.dat' --algorithm "sha256"]
+galaxy.jobs.runners DEBUG 2023-04-20 13:51:21,554 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] (2) command is: [command trimmed, see tool script (above), job script (below)]
+galaxy.jobs.runners.drmaa DEBUG 2023-04-20 13:51:21,821 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] (2) submitting file /srv/galaxy/jobs/000/2/galaxy_2.sh
+galaxy.jobs.runners.drmaa DEBUG 2023-04-20 13:51:21,843 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] (2) queued as 1
+galaxy.jobs.runners.drmaa DEBUG 2023-04-20 13:51:21,867 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] (2) Persisting job destination (destination id: slurm_env)
 </span></code></pre></div></div>
+<p>]</p>
 
 <ul>
-  <li>The job has been dispatched and has been assigned <strong>Slurm</strong> job ID 19</li>
+  <li>The job has been dispatched and has been assigned <strong>Slurm</strong> job ID 1</li>
 </ul>
 
 <hr />
 <p>class: smaller</p>
+
 <h1 id="successful-job-lifecycle-5">Successful job lifecycle</h1>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:22,158 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is queued and active
-galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:23,171 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is running
-galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:51,666 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job finished normally
-galaxy.model.metadata DEBUG 2019-02-01 14:30:51,778 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] loading metadata from file for: HistoryDatasetAssociation 21
-galaxy.jobs INFO 2019-02-01 14:30:51,836 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] Collecting metrics for Job 21
-galaxy.jobs DEBUG 2019-02-01 14:30:51,847 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] job 21 ended (finish() executed in (130.848 ms))
-galaxy.model.metadata DEBUG 2019-02-01 14:30:51,850 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] Cleaning up external metadata files
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.jobs.runners.drmaa DEBUG 2023-04-20 13:51:22,158 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] (2/1) state change: job is queued and active
+galaxy.jobs.runners.drmaa DEBUG 2023-04-20 13:51:23,171 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] (2/1) state change: job is running
+galaxy.jobs.runners.drmaa DEBUG 2023-04-20 13:51:51,666 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] (2/1) state change: job finished normally
+galaxy.model.metadata DEBUG 2023-04-20 13:51:25,212 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] loading metadata from file for: HistoryDatasetAssociation 2
+galaxy.jobs INFO 2023-04-20 13:51:25,235 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] Collecting metrics for Job 2 in /data/jobs/000/2
+galaxy.jobs DEBUG 2023-04-20 13:51:25,250 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] job_wrapper.finish for job 2 executed (51.404 ms)
 </span></code></pre></div></div>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">(21/19)</code> at beginning of job log messages now includes <strong>Slurm</strong> job ID</li>
+  <li><code class="language-plaintext highlighter-rouge">(2/1)</code> at beginning of job log messages now includes <strong>Slurm</strong> job ID</li>
   <li>The job is done</li>
   <li>Its <code class="language-plaintext highlighter-rouge">state</code> column and its output datasets’ <code class="language-plaintext highlighter-rouge">state</code> columns have been updated to <code class="language-plaintext highlighter-rouge">ok</code></li>
 </ul>
@@ -859,67 +923,77 @@ galaxy.model.metadata DEBUG 2019-02-01 14:30:51,850 [p:6593,w:0,m:1] [SlurmRunne
 
 <p>Solutions:</p>
 <ul>
-  <li>If using single process or mules
+  <li>If using single process
     <ul>
       <li>Ensure no <code class="language-plaintext highlighter-rouge">handlers</code> in job conf</li>
-      <li>Check handler logs</li>
+      <li>Check Galaxy logs</li>
     </ul>
   </li>
-  <li>If using <code class="language-plaintext highlighter-rouge">assign_with="db-skip-locked"</code>
+  <li>If using <code class="language-plaintext highlighter-rouge">assign: "db-skip-locked"</code>
     <ul>
-      <li>Ensure no <code class="language-plaintext highlighter-rouge">default</code> attribute in <code class="language-plaintext highlighter-rouge">&lt;handlers&gt;</code></li>
-      <li>Ensure no individual <code class="language-plaintext highlighter-rouge">&lt;handler&gt;</code>s defined</li>
+      <li>Ensure no <code class="language-plaintext highlighter-rouge">default</code> key in <code class="language-plaintext highlighter-rouge">handling:</code></li>
+      <li>Ensure no individual <code class="language-plaintext highlighter-rouge">handler:</code> defined</li>
       <li>Ensure <code class="language-plaintext highlighter-rouge">handler</code> column of <code class="language-plaintext highlighter-rouge">job</code> table is being set to <code class="language-plaintext highlighter-rouge">_default_</code></li>
       <li>Ensure handlers started with <code class="language-plaintext highlighter-rouge">--attach-to-pool=job-handlers</code></li>
-    </ul>
-  </li>
-  <li>If using <code class="language-plaintext highlighter-rouge">assign_with="db-preassign"</code>
-    <ul>
-      <li>Ensure that handler ID(s) in the job conf match <code class="language-plaintext highlighter-rouge">server_name</code>(s)</li>
-      <li>Ensure <code class="language-plaintext highlighter-rouge">handler</code> column of <code class="language-plaintext highlighter-rouge">job</code> table is being set to valid handler ID</li>
     </ul>
   </li>
 </ul>
 
 <hr />
 <p>class: left, reduce90</p>
+
 <h1 id="handler-id-to-server_name-match-check">Handler ID to server_name match check</h1>
 
 <p>Job handler assignment check:</p>
 
-<pre><code class="language-gxadmin">$ grep ' is running$' /path/to/galaxy*.log
-galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler0' is running
-galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler1' is running
-$ gxadmin query job-info 21
-</code></pre>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>journalctl <span class="nt">-g</span> <span class="s1">' is running$'</span> <span class="nt">-u</span> <span class="s1">'galaxy-handler*'</span>
+<span class="go">galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler_0' is running
+galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler_1' is running
+</span></code></pre></div></div>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gxadmin query job-info 2
+</code></pre></div></div>
 <p>.reduce70[
 id  | tool_id | state |    handler        | username |        create_time         | job_runner_name | job_runner_external_id
 — | ——- | —– | —————– | ——– | ————————– | ————— | ———————–
 21  | testing | new   | <strong>job_handler_0</strong> | admin    | 2019-02-01 14:30:20.540327 |                 |
 ]</p>
 
-<p>The correct value of the <code class="language-plaintext highlighter-rouge">handler</code> column in the database varies by job handler assignment method (<code class="language-plaintext highlighter-rouge">&lt;handlers assign_with=...&gt;</code>):</p>
-<ul>
-  <li>mules: <code class="language-plaintext highlighter-rouge">null</code> (empty) then <code class="language-plaintext highlighter-rouge">main.job-handlers.&lt;mule_id&gt;</code> after assignment</li>
-  <li>db-skip-locked: <code class="language-plaintext highlighter-rouge">_default_</code> then <code class="language-plaintext highlighter-rouge">handlerN</code> (where <code class="language-plaintext highlighter-rouge">handlerN</code> is the value of one of your handlers’ <code class="language-plaintext highlighter-rouge">--server-name</code>)</li>
-  <li>db-preassign: <code class="language-plaintext highlighter-rouge">handlerN</code></li>
-</ul>
-
-<p>In this case, <code class="language-plaintext highlighter-rouge">job_handler_0</code> is not <code class="language-plaintext highlighter-rouge">handler0</code> or <code class="language-plaintext highlighter-rouge">handler1</code> (probably due to a misconfiguration in <code class="language-plaintext highlighter-rouge">handlers</code> section of job conf), so no handler will find this job.</p>
+<p>In this case, <code class="language-plaintext highlighter-rouge">job_handler_0</code> is not <code class="language-plaintext highlighter-rouge">handler_0</code> or <code class="language-plaintext highlighter-rouge">handler_1</code> (probably due to a misconfiguration in <code class="language-plaintext highlighter-rouge">handlers</code> section of job conf), so no handler will find this job.</p>
 
 <hr />
-<h1 id="an-aside---unruly-log-files">An aside - unruly log files</h1>
 
-<p>By default, Galaxy web workers and mules all log to a single file. See <a href="https://docs.galaxyproject.org/en/master/admin/config_logging.html">advanced logging configuration</a> to split mules in to their own files.</p>
+<h1 id="an-aside---unruly-logs">An aside - unruly logs</h1>
 
-<p>tl;dr: add <a href="https://docs.galaxyproject.org/en/latest/admin/config_logging.html#yaml">the second blob ‘o YAML here</a> to your <code class="language-plaintext highlighter-rouge">galaxy.yml</code>. Most importantly:</p>
+<p><code class="language-plaintext highlighter-rouge">galaxyctl follow</code> or <code class="language-plaintext highlighter-rouge">journalctl -fu 'galaxy*'</code> follows <em>all</em> logs, which can make it hard to find what you’re lookng for when watching live logs.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">filename_template</span><span class="pi">:</span> <span class="s">galaxy_{pool_name}_{server_id}.log</span>
-</code></pre></div></div>
+<p>.left[Limit to specific services, e.g.:]</p>
 
-<p>Galaxy subtitutes <code class="language-plaintext highlighter-rouge">{pool_name}</code> with e.g. <code class="language-plaintext highlighter-rouge">job-handlers</code> and <code class="language-plaintext highlighter-rouge">{server_id}</code> with e.g. <code class="language-plaintext highlighter-rouge">1</code>. Full list of template vars in the docs.</p>
+<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">galaxyctl</code></th>
+      <th><code class="language-plaintext highlighter-rouge">systemctl</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">galaxyctl follow gunicorn</code></td>
+      <td><code class="language-plaintext highlighter-rouge">systemctl -fu galaxy-gunicorn</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">galaxyctl follow handler</code></td>
+      <td><code class="language-plaintext highlighter-rouge">systemctl -fu 'galaxy-handler*'</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">galaxyctl follow tusd</code></td>
+      <td><code class="language-plaintext highlighter-rouge">systemctl -fu 'galaxy-tusd'</code></td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
+
 <h1 id="jobs-arent-running-1">Jobs aren’t running</h1>
 
 <p><img src="../../images/troubleshooting/hda-queued.png" alt="Job in queued state" title="Job in queued state" /></p>
@@ -931,12 +1005,13 @@ id  | tool_id | state |    handler        | username |        create_time       
 <p>.left[Verify concurrency limits unmet in job conf:]</p>
 <ul>
   <li>Local jobs: value of plugin <code class="language-plaintext highlighter-rouge">workers</code> attribute (default: 4)</li>
-  <li>All jobs: Entire <code class="language-plaintext highlighter-rouge">&lt;limits&gt;</code> section</li>
+  <li>All jobs: Entire <code class="language-plaintext highlighter-rouge">limits:</code> section:</li>
 </ul>
 
 <p>Users are <em>not</em> informed when they have reached the job limits. Exceeding disk quota also pauses jobs, but users are notified of this.</p>
 
 <hr />
+
 <h1 id="jobs-arent-running-2">Jobs aren’t running</h1>
 
 <p>.left[Check database for:]</p>
@@ -950,6 +1025,7 @@ id  | tool_id | state |    handler        | username |        create_time       
 <p>If external ID is assigned, job is queued on a cluster. Use cluster queue status tool(s) to investigate further.</p>
 
 <hr />
+
 <h1 id="jobs-arent-finishing">Jobs aren’t finishing</h1>
 
 <p><img src="../../images/troubleshooting/hda-running.png" alt="Job in running state" title="Job in running state" /></p>
@@ -966,6 +1042,7 @@ id  | tool_id | state |    handler        | username |        create_time       
 </ul>
 
 <hr />
+
 <h1 id="overall-slow-processing-of-jobs">Overall slow processing of jobs</h1>
 
 <p>Process state <strong>D</strong>?</p>
@@ -979,6 +1056,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts
 <p>.reduce70[.footnote[A later slide will cover how to investigate kernel uninterruptable sleep processes]]</p>
 
 <hr />
+
 <h1 id="overall-slow-processing-of-jobs-1">Overall slow processing of jobs</h1>
 
 <p>Process state <em>not</em> <strong>D</strong>?</p>
@@ -989,9 +1067,11 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts
 </ul>
 
 <hr />
+
 <h1 id="general-performance-problems">General performance problems</h1>
 
 <hr />
+
 <h1 id="kernel-uninterruptable-sleep">Kernel uninterruptable sleep</h1>
 
 <p>Process state <strong>D</strong>?</p>
@@ -1010,6 +1090,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts
 <p>.reduce70[.footnote[This slide covers how to investigate kernel uninterruptable sleep processes]]</p>
 
 <hr />
+
 <h1 id="local-or-network-fs-slowdown">Local or Network FS slow/down</h1>
 
 <ul>
@@ -1022,18 +1103,20 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts
 <p><img src="../../images/troubleshooting/wireshark.png" alt="Packet capture in Wireshark" title="Packet capture in Wireshark" /></p>
 
 <hr />
+
 <h1 id="local-or-network-fs-slowdown-1">Local or Network FS slow/down</h1>
 
 <p>Solutions:</p>
 <ul>
   <li>Don’t put the Galaxy server in that FS. Local distribution, CVMFS, ??</li>
-  <li>Install Galaxy in two places and use <a href="https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/job_conf.xml.sample_advanced#L101">Pulsar Embedded Mode</a> with <a href="https://pulsar.readthedocs.io/en/latest/galaxy_conf.html#data-staging">file actions</a> to rewrite paths<sup>3</sup></li>
+  <li>Install Galaxy in two places and use <a href="https://github.com/galaxyproject/galaxy/blob/3a90b833d1169100b07ba64332886a817aebb55d/lib/galaxy/config/sample/job_conf.sample.yml#L319">Pulsar Embedded Mode</a> with <a href="https://pulsar.readthedocs.io/en/latest/galaxy_conf.html#data-staging">file actions</a> to rewrite paths<sup>3</sup></li>
   <li>Get a better network FS</li>
 </ul>
 
 <p>.reduce70[.footnote[<sup>3</sup> Ply @jmchilton with McDonalds hashbrowns for more Pulsar Embedded Mode documentation]]</p>
 
 <hr />
+
 <h1 id="nfs-caching-errors">NFS caching errors</h1>
 
 <p>Galaxy gets “No such file or directory” for files that exist. NFS attribute caching is to blame. Set:</p>
@@ -1045,30 +1128,7 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts
 <p><a href="https://github.com/galaxyproject/galaxy/blob/476b1948190436664581cfe56c8c1c1dcc0b2370/lib/galaxy/jobs/__init__.py#L1469">retry_job_output_collection</a></p>
 
 <hr />
-<p>class: left</p>
-<h1 id="pkill-considered-useful">pkill considered useful</h1>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>pkill <span class="nt">-INT</span> <span class="nt">-o</span> <span class="nt">-u</span> galaxy uwsgi
-</code></pre></div></div>
-
-<p>Note if you’re not using our default/suggested uWSGI config, <code class="language-plaintext highlighter-rouge">SIGINT</code> (<code class="language-plaintext highlighter-rouge">CTRL</code>+<code class="language-plaintext highlighter-rouge">c</code>) and <code class="language-plaintext highlighter-rouge">SIGTERM</code> (the <code class="language-plaintext highlighter-rouge">kill(1)</code> default) behave differently.</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">SIGKILL</code>: Brutally reload the application</li>
-  <li><code class="language-plaintext highlighter-rouge">SIGINT</code>: Brutally kill the application</li>
-</ul>
-
-<p>Our default/suggested uWSGI config includes:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
-<span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
-</code></pre></div></div>
-
-<p>This attempts to shut down gracefully, waiting for (by default) 60 seconds before killing.</p>
-
-<p>To alter the grace period, set the <a href="https://uwsgi-docs.readthedocs.io/en/latest/Options.html">*reload-mercy options</a>.</p>
-
-<hr />
 <h1 id="database-problems">Database problems</h1>
 
 <p>Slow queries, high load, etc.</p>
@@ -1087,17 +1147,20 @@ galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts
   <li><code class="language-plaintext highlighter-rouge">gxadmin query pg-*</code> commands</li>
 </ul>
 
-<p>Increase <code class="language-plaintext highlighter-rouge">shared_buffers</code>. 2GB on Main (16GB of memory on VM)</p>
+<p>Increase <code class="language-plaintext highlighter-rouge">shared_buffers</code>. 2GB on Main (16GB of memory on VM). Better: <a href="https://pgtune.leopard.in.ua/">Use PGTune!</a></p>
 
 <hr />
+
 <h1 id="other-stuff">Other stuff</h1>
 
 <hr />
+
 <h1 id="error-errno-32-broken-pipe">error: [Errno 32] Broken pipe</h1>
 
 <p>This error is not indicative of any kind of failure. It just means that the client closed a connection before the server finished sending a response.</p>
 
 <hr />
+
 <h1 id="installation-failures---python-dependencies">Installation failures - Python dependencies</h1>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>psutil/_psutil_linux.c:12:20: fatal error: Python.h: No such file or directory
@@ -1107,17 +1170,20 @@ error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
 
 <p>Find <code class="language-plaintext highlighter-rouge">Python.h</code> on <a href="http://packages.ubuntu.com/">packages.ubuntu.com</a> and install that package (hint: development package for Python 3)</p>
 
+<p>But also: a precompiled wheel for a Galaxy dependency is not available for your platform, please report.</p>
+
 <hr />
+
 <h1 id="other-stuff-1">Other stuff</h1>
 
 <ul>
   <li>Galaxy server process (not jobs): Run Galaxy in a cgroup with a memory limit</li>
-  <li>You can add mules without a hard restart: add <code class="language-plaintext highlighter-rouge">mule:</code>, adjust <code class="language-plaintext highlighter-rouge">farm:</code>, run <code class="language-plaintext highlighter-rouge">pkill -HUP -o -u galaxy uwsgi</code></li>
   <li><code class="language-plaintext highlighter-rouge">scripts/helper.py</code> and <code class="language-plaintext highlighter-rouge">scripts/secret_decoder_ring.py</code> can encode/decode IDs from UI</li>
   <li><code class="language-plaintext highlighter-rouge">scripts/helper.py</code> can also fail jobs with a notice to the user</li>
 </ul>
 
 <hr />
+
 <h1 id="job-failures">Job failures</h1>
 
 <p>“Unable to run job due to a misconfiguration of the Galaxy job running system.  Please contact a site administrator.”</p>
@@ -1125,6 +1191,7 @@ error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
 <p>There is a traceback in the Galaxy log. Go find it.</p>
 
 <hr />
+
 <h1 id="node-failures">Node failures</h1>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>sinfo <span class="nt">-Nel</span>
@@ -1139,6 +1206,7 @@ localhost      1    debug*        down    2    2:1:1      1        0      1   (n
 </code></pre></div></div>
 
 <hr />
+
 <h1 id="user-over-quota">User over quota</h1>
 
 <p>Instruct user (or use impersonate with consent) to check for <em>deleted</em> but not <em>purged</em> histories</p>
@@ -1148,15 +1216,16 @@ localhost      1    debug*        down    2    2:1:1      1        0      1   (n
 <p>There is also a command line version: <code class="language-plaintext highlighter-rouge">scripts/set_user_disk_usage.py</code></p>
 
 <hr />
+
 <h1 id="any-troubling-galaxy-situations-you-have">Any troubling Galaxy situations you have?</h1>
 
 <hr />
+
 <h1 id="where-to-get-help">Where to get help</h1>
 
 <ul>
-  <li><a href="https://gitter.im/galaxyproject/admins">Admins Chat</a></li>
+  <li><a href="https://matrix.to/#/#galaxyproject_admins:gitter.im">Admins Chat</a></li>
   <li><a href="https://help.galaxyproject.org/">Galaxy Help</a></li>
-  <li><a href="http://dev.list.galaxyproject.org/">galaxy-dev Mailing list</a></li>
   <li><a href="https://galaxyproject.org/support/">Hub Support page</a></li>
 </ul>
 
@@ -1200,7 +1269,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/901844dc107818a45a74730e07714603bcb1ed19">901844dc107818a45a74730e07714603bcb1ed19</a>. </p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/ec8e769c45ede1acb88fe76cbbc625c57bc682c0">ec8e769c45ede1acb88fe76cbbc625c57bc682c0</a>. </p>
     </div>
 </footer>
 
