@@ -285,10 +285,10 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -47,3 +47,7 @@
+>    @@ -45,3 +45,7 @@
+>       version: 1.0.2
+>     - src: usegalaxy_eu.influxdb
 >       version: v6.0.7
->     - src: cloudalchemy.grafana
->       version: 0.14.2
 >    +# Monitoring
 >    +- name: dj-wasabi.telegraf
 >    +  src: https://github.com/dj-wasabi/ansible-telegraf
@@ -375,7 +375,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -320,3 +320,12 @@ flower_ui_users:
+>    @@ -327,3 +327,12 @@ flower_ui_users:
 >     
 >     flower_environment_variables:
 >       GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
@@ -447,10 +447,10 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -45,3 +45,5 @@
->       version: 1.0.2
->     - src: usegalaxy_eu.influxdb
->       version: v6.0.7
+>    @@ -49,3 +49,5 @@
+>     - name: dj-wasabi.telegraf
+>       src: https://github.com/dj-wasabi/ansible-telegraf
+>       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
 >    +- src: cloudalchemy.grafana
 >    +  version: 0.14.2
 >    {% endraw %}
@@ -524,15 +524,15 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -103,4 +103,9 @@ server {
->     		proxy_set_header Upgrade $http_upgrade;
->     		proxy_set_header Connection "upgrade";
+>    @@ -108,4 +108,9 @@ server {
+>     		proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
 >     	}
->    +
+>     
 >    +	location /grafana/ {
 >    +		proxy_pass http://127.0.0.1:3000/;
 >    +		proxy_set_header Host $http_host;
 >    +	}
+>    +
 >     }
 >    {% endraw %}
 >    ```
@@ -798,7 +798,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -332,3 +332,10 @@ telegraf_plugins_extra:
+>    @@ -339,3 +339,10 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000

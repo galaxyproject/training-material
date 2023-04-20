@@ -64,9 +64,9 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -51,3 +51,6 @@
->     - name: dj-wasabi.telegraf
->       src: https://github.com/dj-wasabi/ansible-telegraf
 >       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
+>     - src: cloudalchemy.grafana
+>       version: 0.14.2
 >    +# Training Infrastructure as a Service
 >    +- src: galaxyproject.tiaas2
 >    +  version: 2.1.5
@@ -91,7 +91,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -339,3 +339,8 @@ telegraf_plugins_extra:
+>    @@ -346,3 +346,8 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"
@@ -188,12 +188,12 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -108,4 +108,6 @@ server {
->     		proxy_pass http://127.0.0.1:3000/;
+>    @@ -113,4 +113,6 @@ server {
 >     		proxy_set_header Host $http_host;
 >     	}
->    +
+>     
 >    +	{{ tiaas_nginx_routes }}
+>    +
 >     }
 >    {% endraw %}
 >    ```

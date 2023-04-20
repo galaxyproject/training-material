@@ -315,11 +315,10 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -114,4 +114,14 @@ server {
->     	location /reports/ {
->     		proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
->     	}
->    +
+>    @@ -115,4 +115,14 @@ server {
+>     
+>     	{{ tiaas_nginx_routes }}
+>     
 >    +	location /beacon {
 >    +		proxy_pass http://{{ groups['beacon_server'][0] }}:5050;
 >    +		proxy_http_version 1.1;
@@ -329,6 +328,7 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    +		proxy_set_header Connection "upgrade";
 >    +		proxy_set_header Host $host;
 >    +	}
+>    +
 >     }
 >    {% endraw %}
 >    ```
