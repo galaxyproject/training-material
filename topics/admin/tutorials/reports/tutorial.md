@@ -108,7 +108,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >     	}
 >    +
 >    +	location /reports/ {
->    +		proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
+>    +		proxy_pass http://{{ galaxy_config.gravity.reports.bind }}:/;
 >    +	}
 >    +
 >     }
