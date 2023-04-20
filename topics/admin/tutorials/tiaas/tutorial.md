@@ -315,14 +315,12 @@ In order to achieve this, we first need some way to sort the jobs of the trainin
 >     
 >    +roles:
 >    +  training.*:
->    +    rules:
->    +    - id: tiaas
->    +      max_cores: 2
->    +      max_mem: max_cores * 3.8  # TODO check multiplier
->    +      scheduling:
->    +        require:
->    +          - slurm
->    +          - training
+>    +    max_cores: 2
+>    +    max_mem: max_cores * 3.8  # TODO check multiplier
+>    +    scheduling:
+>    +      require:
+>    +        - slurm
+>    +        - training
 >    +
 >     destinations:
 >       local_env:
