@@ -56,7 +56,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    @@ -0,0 +1,4 @@
 >    +reports:
 >    +    database_connection: "{{ galaxy_config.galaxy.database_connection }}"
->    +    file_path: /data
+>    +    file_path: "{{ galaxy_config.galaxy.file_path }}"
 >    +    template_cache_path: "{{ galaxy_mutable_data_dir }}/compiled_templates/reports/"
 >    {% endraw %}
 >    ```
