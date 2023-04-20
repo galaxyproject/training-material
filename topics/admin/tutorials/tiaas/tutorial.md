@@ -220,14 +220,14 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 {TIaaS} should be available now! The following routes on your server are now configured (we will run through these in the next section)
 
 
-|URL | Use | Who |
-|:----|----|-----|
-|https://\<server\>/tiaas/new/ | Request a new TIaaS training | Instructors |
-|https://\<server\>/tiaas/admin/ | Approve and Manage requests | Admin |
-|https://\<server\>/tiaas/stats/ | Overall TIaaS statistics ([EU Stats](https://usegalaxy.eu/tiaas/stats/)) | Admins, Funding Agencies |
-|https://\<server\>/tiaas/calendar/ | Calendar of trainings ([EU Calendar](https://usegalaxy.eu/tiaas/calendar/))| Admins, Funding Agencies |
-|https://\<server\>/join-training/\<training-id\> | Join an TIaaS training | Participants |
-|https://\<server\>/join-training/\<training-id\>/status | Dashboard with job states of trainees.| Instructors|
+| URL                                                                                       | Use                                                                         | Audience                 |
+| :----                                                                                     | ----                                                                        | -----                    |
+| [/tiaas/new/](https://my.gat.galaxy.training/?path=/tiaas/new/)                           | Request a new TIaaS training                                                | Instructors              |
+| [/tiaas/admin/](https://my.gat.galaxy.training/?path=/tiaas/admin/)                       | Approve and Manage requests                                                 | Admin                    |
+| [/tiaas/stats/](https://my.gat.galaxy.training/?path=/tiaas/stats/)                       | Overall TIaaS statistics ([EU Stats](https://usegalaxy.eu/tiaas/stats/))    | Admins, Funding Agencies |
+| [/tiaas/calendar/](https://my.gat.galaxy.training/?path=/tiaas/calendar/)                 | Calendar of trainings ([EU Calendar](https://usegalaxy.eu/tiaas/calendar/)) | Admins, Funding Agencies |
+| [/join-training/ID](https://my.gat.galaxy.training/?path=/join-training/ID)               | Join an TIaaS training                                                      | Participants             |
+| [/join-training/ID/status](https://my.gat.galaxy.training/?path=/join-training/ID/status) | Dashboard with job states of trainees.                                      | Instructors              |
 
 
 Let's see it in action!
@@ -235,7 +235,7 @@ Let's see it in action!
 > <hands-on-title>Using TIaaS</hands-on-title>
 >
 > 1. **Create a new TIaaS request**
->    - Go to https://\<server\>/tiaas/new/
+>    - Go to [/tiaas/new](https://my.gat.galaxy.training/?path=/tiaas/new)
 >    - Here you will find the request form users will fill in to request TIaaS:
 >      ![TIaaS request form](../../images/tiaas/tiaas_request_form.png)
 >    - For *"Training Identifier"*, fill in `gat`
@@ -248,7 +248,7 @@ Let's see it in action!
 >
 > 2. **Approve TIaaS request**
 >    - Next, the request will have to be approved by an admin
->    - Go to https://\<server\>/tiaas/admin
+>    - Go to [/tiaas/admin](https://my.gat.galaxy.training/?path=/tiaas/admin)
 >    - **Log in** using the values you configured `tiaas_admin_user` and `tiaas_admin_pass` in your group variables file
 >      - Default values were `admin:changeme`
 >    - You should now see the admin panel:
@@ -265,13 +265,13 @@ Let's see it in action!
 > 3. **Join TIaaS Training**
 >    - Make sure you are logged in to Galaxy
 >    - On the day of the workshop, participants will visit a following URL to join the TIaaS group
->      - https://\<server\>/join-training/gat
+>      - [/join-training/gat](https://my.gat.galaxy.training/?path=/join-training/gat)
 >      - A confirmation dialog should appear if all went well:
 >        ![Join TIaaS](../../images/tiaas/tiaas_join_training.png)
 >
 > 4. **Monitor TIaaS status**
 >    - This is very useful for instructors to monitor the job state of their participants
->    - Go to https://\<server\>/join-training/gat/status
+>    - Go to [/join-training/gat](https://my.gat.galaxy.training/?path=/join-training/gat)
 >    - In the Dasboard you should see that one user (you) has joined the training \
 >    - Run some jobs to see the dashboard in action
 >      ![TIaaS dashboard](../../images/tiaas/tiaas_dashboard.png)
