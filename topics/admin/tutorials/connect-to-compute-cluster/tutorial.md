@@ -409,7 +409,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```
->    > journalctl -f -u galaxy
+>    > journalctl -f -u 'galaxy-*'
 >    > ```
 >    {: .code-in}
 >
@@ -426,7 +426,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 
 ## Running a Job
 
-You should now be able to run a Galaxy job through Slurm. The simplest way to test is using the upload tool to upload some text.
+You should now be able to run a Galaxy job through Slurm. The simplest way to test is using the digest tool to calculate an md5sum.
 
 > <hands-on-title>Testing a Slurm Job</hands-on-title>
 >
@@ -434,7 +434,7 @@ You should now be able to run a Galaxy job through Slurm. The simplest way to te
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```
->    > journalctl -f -u galaxy
+>    > journalctl -f -u 'galaxy-*'
 >    > ```
 >    {: .code-in}
 >
@@ -442,6 +442,7 @@ You should now be able to run a Galaxy job through Slurm. The simplest way to te
 > 3. In the resulting modal dialog, click the "Paste/Fetch data" button.
 > 4. Type some random characters into the text field that has just appeared.
 > 5. Click "Start" and then "Close"
+> 5. Open [*Secure Hash / Message Digest*](https://my.gat.galaxy.training/?path=/%3Ftool_id=secure_hash_message_digest) tool
 >
 >    > <code-out-title></code-out-title>
 >    > Your output may look slightly different. In your `journalctl` terminal window you should see the following messages:
