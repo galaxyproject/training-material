@@ -156,7 +156,7 @@ Your reverse proxy has failed to connect to the Galaxy socket
 - Check proxy server logs (e.g. `/var/log/nginx`)
 - Check gunicorn logs for `[<PID>] [ERROR] Connection in use: ('localhost', 8080)`
   - Check that something is listening on the correct port (`sudo ss -tlpn 'sport = :port'` (demo!) or `sudo lsof -i :port` (demo!))
-  - If the culprit gunicorn, make sure it's not an old one!
+  - If the culprit is gunicorn, make sure it's not an old one!
 
 ---
 
