@@ -504,7 +504,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 
 By this point you should have a functional RabbitMQ! Let's check out the dashboard:
 
-> <hands-on-title>Accessing the RabbitMQ Dashbaord</hands-on-title>
+> <hands-on-title>Accessing the RabbitMQ Dashboard</hands-on-title>
 >
 > 1. RabbitMQ has a fancy dashboard, so we should make that accessible with our NGINX:
 >
@@ -530,6 +530,15 @@ By this point you should have a functional RabbitMQ! Let's check out the dashboa
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add proxy"}
+>
+> 1. Run the playbook.
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 1. Now we can take a look at the RabbitMQ dashboard.
 >
@@ -766,7 +775,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```
 >    {: data-commit="Add pulsar plugin"}
 >
->    Add the following to the `destinations:` section of your job conf file:
+>    Add the following to the `destinations:` section of your `tpv_rules_local` file:
 >
 >    {% raw %}
 >    ```diff
