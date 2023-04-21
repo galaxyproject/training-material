@@ -331,7 +331,7 @@ Useful when presenting.
 ???
 
 - What is uWSGI?
-- It's a framework for writting web applications.
+- It&apos;s a framework for writting web applications.
 - uWSGI itself is written in C, but can run programs in different languages with a compatible interface.
 - It handles a lot of the scaling issues for us.
 
@@ -347,7 +347,7 @@ Useful when presenting.
 
 ???
 
-- We need uWSGI because Galaxy doesn't include a web server.
+- We need uWSGI because Galaxy doesn&apos;t include a web server.
 - So Galaxy implements the standard Python WSGI interface.
 - And another application can handle the web serving.
 
@@ -368,7 +368,7 @@ Useful when presenting.
 
 # Why uWSGI?
 
-Because Python can't multithread.
+Because Python can&apos;t multithread.
 
 ![Python GIL](../../images/gil.png)
 
@@ -408,7 +408,7 @@ Because Python can't multithread.
 
 ???
 
-- There are three main sections we'll cover: Configuration, wheels, and mules.
+- There are three main sections we&apos;ll cover: Configuration, wheels, and mules.
 - First, configuration.
 
 ---
@@ -438,12 +438,12 @@ Without a config file, the uWSGI command line is:
 
 ```sh-session
 $ /home/nate/galaxy/.venv/bin/python3 .venv/bin/uwsgi \
-    --module 'galaxy.webapps.galaxy.buildapp:uwsgi_app()' \
+    --module &apos;galaxy.webapps.galaxy.buildapp:uwsgi_app()&apos; \
     --virtualenv /home/nate/galaxy/.venv --pythonpath lib \
     --threads 4 --http localhost:8080 \
     --static-map /static=/home/nate/galaxy/static --die-on-term \
-    --hook-master-start 'unix_signal:2 gracefully_kill_them_all' \
-    --hook-master-start 'unix_signal:15 gracefully_kill_them_all' \
+    --hook-master-start &apos;unix_signal:2 gracefully_kill_them_all&apos; \
+    --hook-master-start &apos;unix_signal:15 gracefully_kill_them_all&apos; \
     --enable-threads --py-call-osafterfork
 ```
 
@@ -468,7 +468,7 @@ You can take &quot;full control&quot; over this process by skipping `run.sh` and
 
 ???
 
-- If you're using run.sh, it calls a python script to determine the command line.
+- If you&apos;re using run.sh, it calls a python script to determine the command line.
 - With Ansible this configuration is written in the galaxy yaml file.
 
 ---
@@ -482,7 +482,7 @@ A proxy server is not *required,* but its use is strongly encouraged for perform
 
 ???
 
-- uWSGI can speak either HTTP or it's own native protocol.
+- uWSGI can speak either HTTP or it&apos;s own native protocol.
 - While a proxy server is not required, it is strongly encouraged.
 - It can use this more efficient uWSGI protocol and provide additional performance.
 - A proxy server can proxy static files, freeing uWSGI to focus on computation.
@@ -500,7 +500,7 @@ Real YAML
 ```yaml
 uwsgi:
     # quoting forces string
-    socket: '127.0.0.1:8001'
+    socket: &apos;127.0.0.1:8001&apos;
     # proper YAML list
     mule:
       - lib/galaxy/main.py
@@ -513,7 +513,7 @@ uWSGI &quot;YAML&quot;
 ```yaml
 uwsgi:
     # quote chars read literally
-    socket: '127.0.0.1:8001'
+    socket: &apos;127.0.0.1:8001&apos;
     # a uWSGI YAML &quot;list&quot;:
     #  repeat keys
     mule: lib/galaxy/main.py
@@ -524,7 +524,7 @@ uwsgi:
 ???
 
 - uWSGI natively supports YAML configuration as well as a number of other formats.
-- However, uWSGI's YAML is not the same as real YAML.
+- However, uWSGI&apos;s YAML is not the same as real YAML.
 - It uses repeated keys for lists.
 
 ---
@@ -578,13 +578,13 @@ uwsgi:
 
 ## uWSGI Wheel
 
-Galaxy's uWSGI is not built like standard `pip install uwsgi`
+Galaxy&apos;s uWSGI is not built like standard `pip install uwsgi`
 
 A bit of technical minutiae that might help debugging
 
 ???
 
-- Galaxy's uWSGI is not a standard package.
+- Galaxy&apos;s uWSGI is not a standard package.
 - This is minutiae but it might help whenever you need to debug uWSGI issues.
 
 ---
@@ -592,9 +592,9 @@ A bit of technical minutiae that might help debugging
 ## uWSGI Wheel
 
 - The challenge:
-  - Unlike Galaxy's other framework dependencies, uWSGI is not a Python library
+  - Unlike Galaxy&apos;s other framework dependencies, uWSGI is not a Python library
   - uWSGI embeds the CPython interpreter
-  - Essentially uWSGI *is* Galaxy's CPython
+  - Essentially uWSGI *is* Galaxy&apos;s CPython
 
 ???
 
@@ -604,8 +604,8 @@ A bit of technical minutiae that might help debugging
 --
 
 - The goal: Provide a no-compilation-required, no-dependencies installation method for Galaxy that includes uWSGI that:
-  - Doesn't embed statically linked CPython
-  - Doesn't require system `libpythonX.Y.so`
+  - Doesn&apos;t embed statically linked CPython
+  - Doesn&apos;t require system `libpythonX.Y.so`
   - Uses system CPython
 
 ???
@@ -634,8 +634,8 @@ pyuwsgi wheel: the only way to precompile uWSGI in a way that does not require `
 ???
 
 - The uWSGI wheel is just built differently.
-- When it's built from source by pip, it comes as a single binary with CPython.
-- When it's usgin the wheel, it's built as a Python C extension.
+- When it&apos;s built from source by pip, it comes as a single binary with CPython.
+- When it&apos;s usgin the wheel, it&apos;s built as a Python C extension.
 - This is loaded by a stub uWSGI script.
 - This complex method was the only one to achieve our goals.
 
@@ -649,7 +649,7 @@ pyuwsgi wheel: the only way to precompile uWSGI in a way that does not require `
 
 ???
 
-- Lastly, we'll talk about job handling and mules.
+- Lastly, we&apos;ll talk about job handling and mules.
 
 ---
 class: top
@@ -748,11 +748,11 @@ uwsgi:
     farm: job-handlers:1,2
 ```
 
-That's it! This Galaxy instance will now start and use two job handler mules.
+That&apos;s it! This Galaxy instance will now start and use two job handler mules.
 
 ???
 
-- Mules can be defined by adding them to Galaxy's configuration in the uWSGI section.
+- Mules can be defined by adding them to Galaxy&apos;s configuration in the uWSGI section.
 - Farms collect groups of mules.
 
 ---
@@ -772,7 +772,7 @@ class: top
 
 ???
 
-- We'll go quickly through the entire lifecycle of a Galaxy process.
+- We&apos;ll go quickly through the entire lifecycle of a Galaxy process.
 - First, the master uWSGI process loads Galaxy
 
 --
@@ -833,7 +833,7 @@ class: top
 
 --
 
-9. The web worker uses uWSGI's `farm_msg()` function to notify the `job-handlers` farm that a new job is ready to run.
+9. The web worker uses uWSGI&apos;s `farm_msg()` function to notify the `job-handlers` farm that a new job is ready to run.
 
 ???
 

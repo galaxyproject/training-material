@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Connecting Galaxy to a compute cluster">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-21 00:08:06 +0000">
+<meta name="DC.date" content="2023-04-21 07:56:45 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nicola Soranzo">
@@ -194,7 +194,30 @@
 <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/natefoo?s=27" alt="Avatar">Nate Coraor</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bgruening?s=27" alt="Avatar">Björn Grüning</a><a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-nsoranzo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/nsoranzo?s=27" alt="Avatar">Nicola Soranzo</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/natefoo?s=27" alt="Avatar">Nate Coraor</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bgruening?s=27" alt="Avatar">Björn Grüning</a><a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-nsoranzo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/nsoranzo?s=27" alt="Avatar">Nicola Soranzo</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
 	</div>
 
 </div>
@@ -295,7 +318,14 @@
 <ul>
   <li>local</li>
   <li>Slurm (DRMAA subclass)</li>
-  <li>DRMAA: SGE, PBS Pro, LSF, Torque</li>
+  <li>DRMAA (Distributed Resource Management Application API)
+    <ul>
+      <li>SGE</li>
+      <li>PBS Pro</li>
+      <li>LSF</li>
+      <li>Torque</li>
+    </ul>
+  </li>
   <li>HTCondor</li>
   <li>Torque: Using the <code class="language-plaintext highlighter-rouge">pbs_python</code> library</li>
   <li>Pulsar: Galaxy’s own remote job management system</li>
@@ -637,7 +667,7 @@
 <p>Solution:</p>
 
 <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">execution</span><span class="pi">:</span>
-  <span class="na">default</span><span class="pi">:</span> <span class="s">local</span>
+  <span class="na">default</span><span class="pi">:</span> <span class="s">singlecore_slurm</span>
   <span class="na">environments</span><span class="pi">:</span>
     <span class="na">singlecore_slurm</span><span class="pi">:</span>
       <span class="na">runner</span><span class="pi">:</span> <span class="s">slurm</span>
@@ -747,9 +777,7 @@
 
 <li>Galaxy supports a variety of different DRMs.</li>
 
-<li>Dynamic Tool Destinations are a convenient way to map</li>
-
-<li>Job resource parameters can allow you to give your users control over job resource requirements, if they are knowledgeable about the tools and compute resources available to them.</li>
+<li>Total Perspective Vortex is a convenient way to map</li>
 
 </ul>
 
@@ -776,6 +804,9 @@ This material is licensed under the <a rel="license" href="https://creativecommo
 
 
 
+
+
+
         </div>
         
             <footer>
@@ -789,7 +820,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/ec8e769c45ede1acb88fe76cbbc625c57bc682c0">ec8e769c45ede1acb88fe76cbbc625c57bc682c0</a>. </p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/16f0a1aec4bda84438bf1d5876ea14baaaefa963">16f0a1aec4bda84438bf1d5876ea14baaaefa963</a>. </p>
     </div>
 </footer>
 

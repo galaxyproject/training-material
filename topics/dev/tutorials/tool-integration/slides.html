@@ -587,7 +587,7 @@ Useful when presenting.
 
 ## Tools in the Galaxy UI
 
-![Screenshot of galaxy with the three main panels labelled list of available tools on left, 'wrapper' in center, and history with results as datasets on right](../../images/galaxy_instance_detailed_screenshot.png)
+![Screenshot of galaxy with the three main panels labelled list of available tools on left, &apos;wrapper&apos; in center, and history with results as datasets on right](../../images/galaxy_instance_detailed_screenshot.png)
 
 ---
 
@@ -638,7 +638,7 @@ Link between the Galaxy UI and the underlying tool:
 
 ## Tool execution
 
-![The previous image, but the input parameter named 'mystring' is shown pointing to its place in the command block. Same for the output pointing to the command block. An overlay shows the Job Command Line /bin/echo Hello world you are amazing &gt; a/path.dat](../../images/wrapper_big_picture_2.png)
+![The previous image, but the input parameter named &apos;mystring&apos; is shown pointing to its place in the command block. Same for the output pointing to the command block. An overlay shows the Job Command Line /bin/echo Hello world you are amazing &gt; a/path.dat](../../images/wrapper_big_picture_2.png)
 
 ---
 
@@ -708,7 +708,7 @@ If the script is provided with the tool xml:
     &lt;requirement type=&quot;package&quot; version=&quot;2.7&quot;&gt;python&lt;/requirement&gt;
 &lt;/requirements&gt;
 &lt;command&gt;&lt;![CDATA[
-python '$__tool_directory__/graphlan.py'
+python &apos;$__tool_directory__/graphlan.py&apos;
 --format $format
 ...
 ]]&gt;&lt;/command&gt;
@@ -732,7 +732,7 @@ graphlan.py
 #if str($dpi):
     --dpi $dpi
 #end if
-'$input_tree'
+&apos;$input_tree&apos;
 ...
 ]]&gt;&lt;/command&gt;
 &lt;inputs&gt;
@@ -766,7 +766,7 @@ graphlan.py
 
 ## `inputs` &gt; `param` &gt; `integer` | `float`
 
-![Screenshot of the float input, it's just an input field set to 7.](../../images/input_integer.png)
+![Screenshot of the float input, it&apos;s just an input field set to 7.](../../images/input_integer.png)
 
 ```xml
 &lt;param name=&quot;...&quot; type=&quot;integer&quot; value=&quot;7&quot; label=&quot;...&quot; help=&quot;...&quot;/&gt;
@@ -862,10 +862,10 @@ class: reduce70
 
 ```xml
 &lt;command&gt;&lt;![CDATA[
-#if $fastq_input.selector == 'paired':
-    '$fastq_input.input1' '$fastq_input.input2'
+#if $fastq_input.selector == &apos;paired&apos;:
+    &apos;$fastq_input.input1&apos; &apos;$fastq_input.input2&apos;
 #else:
-    '$fastq_input.input'
+    &apos;$fastq_input.input&apos;
 #end if
 ]]&gt;&lt;/command&gt;
 &lt;inputs&gt;
@@ -1047,8 +1047,8 @@ Always quote `text` and `data` parameters and output `data` in `&lt;command&gt;`
 &lt;command&gt;&lt;![CDATA[
 graphlan.py
 ...
-'$input_tree'
-'$png_output_image'
+&apos;$input_tree&apos;
+&apos;$png_output_image&apos;
 ]]&gt;&lt;/command&gt;
 ```
 
@@ -1065,7 +1065,7 @@ Use `&amp;&amp;` to concatenate them
 ```xml
 &lt;command&gt;&lt;![CDATA[
 graphlan.py
---format '$format'
+--format &apos;$format&apos;
 &amp;&amp;
 echo &quot;Yeah it worked!&quot;
 ]]&gt;&lt;/command&gt;
@@ -1129,22 +1129,22 @@ Creates a skeleton of xml file
 ```bash
 $ mkdir new_tool
 $ cd new_tool
-$ planemo tool_init --id 'some_short_id' --name 'My super tool'
+$ planemo tool_init --id &apos;some_short_id&apos; --name &apos;My super tool&apos;
 ```
 
 Complicated version:
 
 ```bash
-$ planemo tool_init --id 'samtools_sort' --name 'Samtools sort' \
-          --description 'order of storing aligned sequences' \
-          --requirement 'samtools@1.3.1' \
-          --example_command &quot;samtools sort -o '1_sorted.bam' '1.bam'&quot; \
+$ planemo tool_init --id &apos;samtools_sort&apos; --name &apos;Samtools sort&apos; \
+          --description &apos;order of storing aligned sequences&apos; \
+          --requirement &apos;samtools@1.3.1&apos; \
+          --example_command &quot;samtools sort -o &apos;1_sorted.bam&apos; &apos;1.bam&apos;&quot; \
           --example_input 1.bam \
           --example_output 1_sorted.bam \
           --test_case \
-          --version_command 'samtools --version | head -1' \
-          --help_from_command 'samtools sort' \
-          --doi '10.1093/bioinformatics/btp352'
+          --version_command &apos;samtools --version | head -1&apos; \
+          --help_from_command &apos;samtools sort&apos; \
+          --doi &apos;10.1093/bioinformatics/btp352&apos;
 ```
 
 ---
@@ -1208,7 +1208,7 @@ Building Galaxy Tools
 ## Functional tests
 
 - Functional testing is a quality assurance (QA) process.
-- The tests comfort developers and users that the tools can run across different servers/architectures. And that the latest modifications don't break older features.
+- The tests comfort developers and users that the tools can run across different servers/architectures. And that the latest modifications don&apos;t break older features.
 - Tools are tested by feeding them inputs and parameters and verifying the outputs (typically a diff)
 
 ---
@@ -1285,7 +1285,7 @@ graphlan/
 
 - `diff` is the default
 - `ftype` also checks the output datatype
-- With `md5` the test output file doesn't need to be distributed (useful for big output files)
+- With `md5` the test output file doesn&apos;t need to be distributed (useful for big output files)
 - `lines_diff` is useful for tools that output version number, current date, ...
 - `sim_size` is useful for binary files that vary at each execution (e.g. PDF)
 
@@ -1511,7 +1511,7 @@ ncbi_blastn_wrapper.xml
 
 ```xml
 &lt;command&gt;
-blastn -query '$query' @THREADS@ [...]
+blastn -query &apos;$query&apos; @THREADS@ [...]
 &lt;/command&gt;
 ```
 
@@ -1569,18 +1569,18 @@ This means: the 3rd revision of the Galaxy tool for Seqtk 1.2 .
 ```xml
 &lt;command&gt;&lt;![CDATA[
 # Email’s numeric ID (id column of galaxy_user table in the database)
-echo '$__user_id__'
+echo &apos;$__user_id__&apos;
 
 # User’s email address
-echo '$__user_email__'
+echo &apos;$__user_email__&apos;
 
 # The galaxy.app.UniverseApplication instance, gives access to all other configuration file variables.
 # Should be used as a last resort, may go away in future releases.
-echo '$__app__.config.user_library_import_dir'
+echo &apos;$__app__.config.user_library_import_dir&apos;
 
 # Check a dataset type
-#if $input1.is_of_type('gff'):
-    echo 'input1 type is ${input1.datatype}'
+#if $input1.is_of_type(&apos;gff&apos;):
+    echo &apos;input1 type is ${input1.datatype}&apos;
 #end if
 ]]&gt;&lt;/command&gt;
 ```
@@ -1694,8 +1694,8 @@ Single execution:
 ```xml
 &lt;command&gt;&lt;![CDATA[ ...
 #for $input in $inputs
-    --input '$input'
-    --sample_name '$input.element_identifier'
+    --input &apos;$input&apos;
+    --sample_name &apos;$input.element_identifier&apos;
 #end for
 ]]&gt;&lt;/command&gt;
 ```
@@ -1996,14 +1996,14 @@ tools:
   tool_panel_section_id: cshl_library_information
   tool_shed_url: https://toolshed.g2.bx.psu.edu
   revisions:
-    - '8c650f7f76e9'  # v0.62
-    - 'd2cf2c0c8a11'  # v0.63
+    - &apos;8c650f7f76e9&apos;  # v0.62
+    - &apos;d2cf2c0c8a11&apos;  # v0.63
 - name: suite_deeptools
   owner: bgruening
-  tool_panel_section_label: 'deepTools'
+  tool_panel_section_label: &apos;deepTools&apos;
   tool_shed_url: https://toolshed.g2.bx.psu.edu
   revisions:
-    - '7f5562625ae2'
+    - &apos;7f5562625ae2&apos;
 ```
 
 ---

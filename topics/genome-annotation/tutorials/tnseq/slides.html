@@ -363,7 +363,7 @@ Identifying the impact of mutations on bacterial fitness allows to classify cert
 ### Data production
 
 
-.center[&lt;img name=&quot;method&quot; src=&quot;../../images/tnseq/principle_tnseq_part1.png&quot; width='80%' alt=&quot;Description of tnseq method&quot; &gt;
+.center[&lt;img name=&quot;method&quot; src=&quot;../../images/tnseq/principle_tnseq_part1.png&quot; width=&apos;80%&apos; alt=&quot;Description of tnseq method&quot; &gt;
 
 From [Chao et al.](http://www.doi.org/10.1038/nrmicro.2015.7)]
 
@@ -379,7 +379,7 @@ The initial population genomes are mutated so that the genome is saturated with 
 
 
 .center[
-&lt;img name=&quot;method&quot; src=&quot;../../images/tnseq/principle_tnseq_part2.png&quot; width='80%' alt=&quot;Description of tnseq method&quot; &gt;
+&lt;img name=&quot;method&quot; src=&quot;../../images/tnseq/principle_tnseq_part2.png&quot; width=&apos;80%&apos; alt=&quot;Description of tnseq method&quot; &gt;
 
 From [Chao et al.](http://www.doi.org/10.1038/nrmicro.2015.7)
 ]
@@ -477,7 +477,7 @@ The advantage of a target specific transposon, like the mariner, in opposition o
 ### Structure of the modified mariner transposon Himar1
 
 .center[
-&lt;img name=&quot;TranspStructure&quot; src=&quot;../../images/tnseq/tranposon_structure.png&quot; width='50%' alt=&quot;Structure of the transpson construct, containing several barcodes and adapters&quot; &gt;
+&lt;img name=&quot;TranspStructure&quot; src=&quot;../../images/tnseq/tranposon_structure.png&quot; width=&apos;50%&apos; alt=&quot;Structure of the transpson construct, containing several barcodes and adapters&quot; &gt;
 
 From [Santiago et al.](http://www.doi.org/10.1186/s12864-015-1361-3)
 ]
@@ -485,7 +485,7 @@ From [Santiago et al.](http://www.doi.org/10.1186/s12864-015-1361-3)
 ???
 
 - ITR junctions : Insertion sites.
-- Mme1 restriction site (cut 21 bp upstream from the restriction site) and NotI restriction sites are the 5' and 3' limits to the genomic DNA we want to sequence.
+- Mme1 restriction site (cut 21 bp upstream from the restriction site) and NotI restriction sites are the 5&apos; and 3&apos; limits to the genomic DNA we want to sequence.
 - **A. Sequence flanking genomic regions** After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream , where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing.
 -  **B. Removing incorrect fragments** An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been add in the backbone to create different length construct, that can later be filtrated (D).
 - **D.**  Different promoters are added to the construct along with an additional 3 bp barcode
@@ -511,7 +511,7 @@ With the count of insertions at every insertion site, there is several methods e
 ### Methods of Analysis
 
 .center[
-&lt;img name=&quot;AnalysesMethods&quot; src=&quot;../../images/tnseq/type_of_analyses.png&quot; width='70%'  alt=&quot;Different types of TnSeq Analyses methods&quot; &gt;
+&lt;img name=&quot;AnalysesMethods&quot; src=&quot;../../images/tnseq/type_of_analyses.png&quot; width=&apos;70%&apos;  alt=&quot;Different types of TnSeq Analyses methods&quot; &gt;
 
 From [Chao et al.](http://www.doi.org/10.1038/nrmicro.2015.7)
 ]
@@ -585,7 +585,7 @@ The re-sampling method is a comparative analysis the allows that can be used to 
 .left[#### 1. Data Structure]
 
 
-&lt;img src=&quot;../../images/tnseq/preprocessing.png&quot; width='90%' alt=&quot;Workflow for preprocessing the read before alignment&quot; &gt;
+&lt;img src=&quot;../../images/tnseq/preprocessing.png&quot; width=&apos;90%&apos; alt=&quot;Workflow for preprocessing the read before alignment&quot; &gt;
 
 ???
 
@@ -613,7 +613,7 @@ The pre-processing of the data will be done through several steps of Cutadapt so
  ```
 ]
 
- The '^' at the beginning of the sequence means we want to anchor the barcode at the beginning of the read. To know more about the symbols used by cutadapt, see cutadapt [manual](https://cutadapt.readthedocs.io/en/stable/guide.html#adapter-types)
+ The &apos;^&apos; at the beginning of the sequence means we want to anchor the barcode at the beginning of the read. To know more about the symbols used by cutadapt, see cutadapt [manual](https://cutadapt.readthedocs.io/en/stable/guide.html#adapter-types)
 
 ???
  The output is a collection of the different conditions dataset, here control and condition, and a report text file.
@@ -625,7 +625,7 @@ The pre-processing of the data will be done through several steps of Cutadapt so
 
 #### 3. Removing Adapter sequence
 
-- Trimming the tail containing the illumina adapter. To remove the adapter and everything downstream, we use the end adapter option of cutadapt and don't anchor the sequence anywhere.
+- Trimming the tail containing the illumina adapter. To remove the adapter and everything downstream, we use the end adapter option of cutadapt and don&apos;t anchor the sequence anywhere.
 - Filter the reads by size
 
 #### 4. Removing Adapter sequence
@@ -675,7 +675,7 @@ All these steps are performed with the Cutadapt tool
 
 
 .center[
-&lt;img name=&quot;method&quot; src=&quot;../../images/tnseq/Map_cov.png&quot; width='90%' alt=&quot;The read align to the genome with its 3' end covering half of the TA site&quot; &gt;
+&lt;img name=&quot;method&quot; src=&quot;../../images/tnseq/Map_cov.png&quot; width=&apos;90%&apos; alt=&quot;The read align to the genome with its 3&apos; end covering half of the TA site&quot; &gt;
 ]
 
 - We are using the tool BamCoverage with an offset of `-1`
@@ -684,7 +684,7 @@ All these steps are performed with the Cutadapt tool
 
 In our case, the reads cover the flanking region on one side of the TA site where the transposon inserted. That means we do not want to have the coverage across the whole reads, as it could cover several TA sites, but only the coverage at the end of the read.
 
-The sequenced read cover the 5' region flanking the site of insertion. To assign the read to its correct insertion, we need to compute the coverage at the 3' end of the read.
+The sequenced read cover the 5&apos; region flanking the site of insertion. To assign the read to its correct insertion, we need to compute the coverage at the 3&apos; end of the read.
 
 ---
 
@@ -700,17 +700,17 @@ The sequenced read cover the 5' region flanking the site of insertion. To assign
     - A report file
 
 - We use a succession of small operations using the Cut and Compute tools to extract two files :
-    - A file with the 5' coordinate of each TA site of the Forward Strand
-    - A file with the 5' coordinate of each TA site of the Reverse Strand
+    - A file with the 5&apos; coordinate of each TA site of the Forward Strand
+    - A file with the 5&apos; coordinate of each TA site of the Reverse Strand
 
 
 
 ???
 
 
-As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5' end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.
+As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5&apos; end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.
 
-In order to get the coverage on each TA site we need to prepare a file containing the position of each TA site. Depending on the direction of insertion the coverage will be counted on the leftmost position of the TA site or on the rightmost. As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5' end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.
+In order to get the coverage on each TA site we need to prepare a file containing the position of each TA site. Depending on the direction of insertion the coverage will be counted on the leftmost position of the TA site or on the rightmost. As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5&apos; end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.
 
 The coordinates provided by wordmatch are based on count 1. Meaning the first nucleotide is counted as number 1. However, bamCoverage count the first nucleotide as nucleotide number 0. To be able to compare the two results, we need to shift the TA site positions by 1.
 

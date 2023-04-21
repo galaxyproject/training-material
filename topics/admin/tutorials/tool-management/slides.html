@@ -647,12 +647,12 @@ It contains some metadata for each tool.
 
 ???
 
-The tool shed is Galaxy's app store.
+The tool shed is Galaxy&apos;s app store.
 
-It's a free service hosts repositories containing Galaxy tools
+It&apos;s a free service hosts repositories containing Galaxy tools
 and can be found at this URL.
 
-It's not a development platform: tools are usually maintained
+It&apos;s not a development platform: tools are usually maintained
 in open source github repos and uploaded to the toolshed.
 
 ---
@@ -691,7 +691,7 @@ Toolshed tools can be installed through the admin UI but using ephemeris is reco
 ## How to add tools manually
 
 - To add a local tool by hand:
-  - Add an entry to tool_conf.xml pointing to the local tool's xml file
+  - Add an entry to tool_conf.xml pointing to the local tool&apos;s xml file
   - if `tool_conf.xml` does not exist it can be copied from `tool_conf.xml.sample`
 - To add local tools with the [galaxyproject.galaxy Ansible role][galaxy-role]:
   - Set `galaxy_local_tools` to the local tool paths
@@ -707,7 +707,7 @@ Toolshed tools can be installed through the admin UI but using ephemeris is reco
 
 Tools can be added manually to the tool_conf.xml file.
 
-If this doesn't exist it can be copied from the default file tool_conf.xml.sample.
+If this doesn&apos;t exist it can be copied from the default file tool_conf.xml.sample.
 
 There is also a variable in the galaxy ansible role for adding these.
 
@@ -724,7 +724,7 @@ The dependecies need to be installed separately.
 ???
 
 An administrator can look up any tool from the main toolshed in the
-admin panel and click the 'Install' button.
+admin panel and click the &apos;Install&apos; button.
 
 ---
 
@@ -748,7 +748,7 @@ This is important for reproducibility.
 
 If you use a tool in an analysis on a public galaxy server it will be there forever.
 
-If you need to rerun your analysis in a year's time, the tool you have used will still
+If you need to rerun your analysis in a year&apos;s time, the tool you have used will still
 be there even if a is a newer revision of the tool has been installed.
 
 ---
@@ -788,7 +788,7 @@ commented out entry for the test toolshed.
 ## What happens when installing a repo from the Tool Shed
 
 * The repository is downloaded
-* If needed, the tool's dependencies are installed
+* If needed, the tool&apos;s dependencies are installed
 * If needed, reference data tables are installed
 * An entry for each tool is created in the Galaxy database
 * The tools are added to `shed_tool_conf.xml`
@@ -797,7 +797,7 @@ commented out entry for the test toolshed.
 
 The repository is downloaded
 
-The tool's dependencies are installed if needed (they may already be there)
+The tool&apos;s dependencies are installed if needed (they may already be there)
 
 If needed, reference data tables are installed
 
@@ -873,25 +873,25 @@ unless an admin API key is provided.
 
 ```yaml
 tools:
-- name: 'column_maker'
-  owner: 'devteam'
-  tool_panel_section_label: 'Text Manipulation'
+- name: &apos;column_maker&apos;
+  owner: &apos;devteam&apos;
+  tool_panel_section_label: &apos;Text Manipulation&apos;
   revisions:
-  - '464b9305180e'	# 1.2.0
-  tool_shed_url: 'toolshed.g2.bx.psu.edu'
-- name: 'bwa'
-  owner: 'devteam'
+  - &apos;464b9305180e&apos;	# 1.2.0
+  tool_shed_url: &apos;toolshed.g2.bx.psu.edu&apos;
+- name: &apos;bwa&apos;
+  owner: &apos;devteam&apos;
   revisions:
-  - '051eba708f43'  # 0.7.15.2
-  - '4d82cf59895e'  # 0.7.16.2
-  tool_panel_section_label: 'Mapping'
-  tool_shed_url: 'toolshed.g2.bx.psu.edu'
-- name: 'tabular_to_fasta'
-  owner: 'devteam'
+  - &apos;051eba708f43&apos;  # 0.7.15.2
+  - &apos;4d82cf59895e&apos;  # 0.7.16.2
+  tool_panel_section_label: &apos;Mapping&apos;
+  tool_shed_url: &apos;toolshed.g2.bx.psu.edu&apos;
+- name: &apos;tabular_to_fasta&apos;
+  owner: &apos;devteam&apos;
   revisions:
-  - '0b4e36026794'  # v1.1.0
-  tool_panel_section_label: 'Convert Formats'
-  tool_shed_url: 'toolshed.g2.bx.psu.edu'
+  - &apos;0b4e36026794&apos;  # v1.1.0
+  tool_panel_section_label: &apos;Convert Formats&apos;
+  tool_shed_url: &apos;toolshed.g2.bx.psu.edu&apos;
 ```
 
 ???
@@ -945,7 +945,7 @@ They can specify the name, owner and section label or provide a yaml list of too
 (1)
 ```yaml
 shed-tools install -g &lt;galaxy url&gt; -a &lt;api key&gt; \
-  --name circos --owner iuc --section_label 'Graph/Display Data'
+  --name circos --owner iuc --section_label &apos;Graph/Display Data&apos;
 ```
 
 (2)
@@ -972,10 +972,10 @@ These two examples are equivalent to each other.
 The advantage of the second approach is that many tools be listed
 in tools.yml to be installed at the same time
 
-The argument 'revisions' can also be provided to install a
+The argument &apos;revisions&apos; can also be provided to install a
 specific revision or more than one revision of the repository.
 
-In the absence of a 'revisions' argument, shed-tools will 
+In the absence of a &apos;revisions&apos; argument, shed-tools will 
 install the latest revision of the tool.
 
 ---
@@ -1087,7 +1087,7 @@ items:
 
 ???
 
-A yaml file describing two folders with one file each to upload to galaxy's shared data.
+A yaml file describing two folders with one file each to upload to galaxy&apos;s shared data.
 
 Contains instructions to download the file contents from public URLs
 
@@ -1098,17 +1098,17 @@ Contains instructions to download the file contents from public URLs
 
 ```console
 $ galaxy-wait -g http://localhost:8080 -v
-[00] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+[00] Galaxy not up yet... HTTPConnectionPool(host=&apos;localhost&apos;, port=8080):
 	 Max retries exceeded with url: /api/version (Caused
-[01] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+[01] Galaxy not up yet... HTTPConnectionPool(host=&apos;localhost&apos;, port=8080):
 	 Max retries exceeded with url: /api/version (Caused
-[02] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+[02] Galaxy not up yet... HTTPConnectionPool(host=&apos;localhost&apos;, port=8080):
 	 Max retries exceeded with url: /api/version (Caused
-[03] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+[03] Galaxy not up yet... HTTPConnectionPool(host=&apos;localhost&apos;, port=8080):
 	 Max retries exceeded with url: /api/version (Caused
-[04] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+[04] Galaxy not up yet... HTTPConnectionPool(host=&apos;localhost&apos;, port=8080):
 	 Max retries exceeded with url: /api/version (Caused
-[05] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+[05] Galaxy not up yet... HTTPConnectionPool(host=&apos;localhost&apos;, port=8080):
 	 Max retries exceeded with url: /api/version (Caused
 
 Galaxy Version: 17.05
@@ -1123,7 +1123,7 @@ If the server is ready it will return straight away.
 If not it will keep sending requests.
 
 This is useful if you want to run any of the other commands such as shed-tools
-install and you don't know whether Galaxy will be ready.
+install and you don&apos;t know whether Galaxy will be ready.
 
 ---
 
@@ -1154,14 +1154,14 @@ A tool shed repository containing one tool: remove_beginning.
 
 The repository contains
 - a perl script that is executed from code in the wrapper
-- test input and output for the tool's tests
+- test input and output for the tool&apos;s tests
 - a metadata file for the toolshed.
 
 ---
 class: normal
 ## `.shed.yml` file
 
-Contains repository's metadata.
+Contains repository&apos;s metadata.
 
 ```yaml
 categories:
@@ -1182,7 +1182,7 @@ The tool name and owner are set in the metadata file.
 
 The file also contains the development url for the tool. 
 
-The development URL is displayed in the toolshed as a link to the tool's files within its development environment.
+The development URL is displayed in the toolshed as a link to the tool&apos;s files within its development environment.
 
 This is the github repo you would go to raise an issue the the tool or make a pull request to improve the tool.
 
@@ -1245,8 +1245,8 @@ These can be run from the admin panel or using ephemeri
 ## Suite repositories
 
 - Suites can be used to split up a set of tools into multiple repositories
-  - A suite is a single repository that 'depends' on many others
-  - When you install the suite, all 'dependency repositories' will be installed too
+  - A suite is a single repository that &apos;depends&apos; on many others
+  - When you install the suite, all &apos;dependency repositories&apos; will be installed too
 - With a tweak to `.shed.yml`, [Planemo](https://planemo.readthedocs.io) can upload a directory of tools to the TS as a suite of separate tools
 - Examples: suite_samtools, suite_hicexplorer
 

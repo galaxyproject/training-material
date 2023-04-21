@@ -588,7 +588,7 @@ GIE for visualization? Check that it is the right choice for your project
 
 ### Development
 
-![schematic of GIE with a box on the left labelled ipython.mako being invoked by a launch ipython notebook call. This has boxes for running a docker container and then proxying authentication. These point to a docker container with a config.yaml containing the history id, api key and password, the ipython galaxy notebook, and the ipython webservice which loops while the connection is active. This proxies the connection and points to a cartoon of ipython in galaxy's center panel.](../../images/vis_IE_ipython_components.png)
+![schematic of GIE with a box on the left labelled ipython.mako being invoked by a launch ipython notebook call. This has boxes for running a docker container and then proxying authentication. These point to a docker container with a config.yaml containing the history id, api key and password, the ipython galaxy notebook, and the ipython webservice which loops while the connection is active. This proxies the connection and points to a cartoon of ipython in galaxy&apos;s center panel.](../../images/vis_IE_ipython_components.png)
 
 ---
 
@@ -619,7 +619,7 @@ Create GIE plugin XML file `config/helloworld.xml`
 ```xml
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE interactive_environment SYSTEM &quot;../../interactive_environments.dtd&quot;&gt;
-&lt;!-- This is the name which will show up in the User's Browser --&gt;
+&lt;!-- This is the name which will show up in the User&apos;s Browser --&gt;
 &lt;interactive_environment name=&quot;HelloWorld&quot;&gt;
   &lt;data_sources&gt;
     &lt;data_source&gt;
@@ -660,7 +660,7 @@ image = hello-ie
 #command_inject = --sig-proxy=true -e DEBUG=false
 
 # URL to access the Galaxy API with from the spawn Docker container, if empty
-# this falls back to galaxy.yml's galaxy_infrastructure_url and finally to the
+# this falls back to galaxy.yml&apos;s galaxy_infrastructure_url and finally to the
 # Docker host of the spawned container if that is also not set.
 #galaxy_url =
 
@@ -690,13 +690,13 @@ ie_request.load_deploy_config()
 # This is a useful way to provide access to large files in the container,
 # if the user knows ahead of time that they will need it.
 user_file = ie_request.volume(
-    hda.file_name, '/import/file.dat', how='ro')
+    hda.file_name, &apos;/import/file.dat&apos;, how=&apos;ro&apos;)
 
 # Launch the IE. This builds and runs the docker command in the background.
 ie_request.launch(
     volumes=[user_file],
     env_override={
-        'custom': '42'
+        &apos;custom&apos;: &apos;42&apos;
     }
 )
 [..]
@@ -709,8 +709,8 @@ ie_request.launch(
 ```mako
 [..]
 # Only once the container is launched can we template our URLs. The ie_request
-# doesn't have all of the information needed until the container is running.
-url = ie_request.url_template('${PROXY_URL}/helloworld/')
+# doesn&apos;t have all of the information needed until the container is running.
+url = ie_request.url_template(&apos;${PROXY_URL}/helloworld/&apos;)
 %&gt;
 
 &lt;html&gt;
@@ -720,9 +720,9 @@ ${ ie.load_default_js() }
 &lt;body&gt;
 &lt;script type=&quot;text/javascript&quot;&gt;
 ${ ie.default_javascript_variables() }
-var url = '${ url }';
+var url = &apos;${ url }&apos;;
 ${ ie.plugin_require_config() }
-requirejs(['interactive_environments', 'plugin/helloworld'], function(){
+requirejs([&apos;interactive_environments&apos;, &apos;plugin/helloworld&apos;], function(){
     load_notebook(url);
 });
 &lt;/script&gt;
@@ -778,7 +778,7 @@ RUN apt-get -qq update &amp;&amp; \
     apt-get install --no-install-recommends -y \
     wget procps nginx python python-pip net-tools nginx
 
-# Our very important scripts. Make sure you've run `chmod +x startup.sh
+# Our very important scripts. Make sure you&apos;ve run `chmod +x startup.sh
 # monitor_traffic.sh` outside of the container!
 ADD ./startup.sh /startup.sh
 ADD ./monitor_traffic.sh /monitor_traffic.sh
@@ -848,7 +848,7 @@ cd /import/ &amp;&amp; python -mSimpleHTTPServer &amp;
 /monitor_traffic.sh &amp;
 # And finally launch nginx in foreground mode. This will make debugging
 # easier as logs will be available from `docker logs ...`
-nginx -g 'daemon off;'
+nginx -g &apos;daemon off;&apos;
 ```
 
 ---
@@ -859,7 +859,7 @@ nginx -g 'daemon off;'
 #!/bin/bash
 while true; do
     sleep 60
-    if [ `netstat -t | grep -v CLOSE_WAIT | grep ':80' | wc -l` -lt 3 ]
+    if [ `netstat -t | grep -v CLOSE_WAIT | grep &apos;:80&apos; | wc -l` -lt 3 ]
     then
         pkill nginx
     fi

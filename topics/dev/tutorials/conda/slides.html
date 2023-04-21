@@ -522,15 +522,15 @@ From Planemo docs - the following example builds a tool for the `seqtk seq` comm
 
 ```sh
 $ planemo tool_init --force \
-                    --id 'seqtk_seq' \
-                    --name 'Convert to FASTA (seqtk)' \
+                    --id &apos;seqtk_seq&apos; \
+                    --name &apos;Convert to FASTA (seqtk)&apos; \
                     --requirement seqtk@1.2 \
-                    --example_command 'seqtk seq -a 2.fastq &gt; 2.fasta' \
+                    --example_command &apos;seqtk seq -a 2.fastq &gt; 2.fasta&apos; \
                     --example_input 2.fastq \
                     --example_output 2.fasta \
                     --test_case \
-                    --cite_url 'https://github.com/lh3/seqtk' \
-                    --help_from_command 'seqtk seq'
+                    --cite_url &apos;https://github.com/lh3/seqtk&apos; \
+                    --help_from_command &apos;seqtk seq&apos;
 ```
 
 Notice the `--requirement seqtk@1.2`.
@@ -707,7 +707,7 @@ Using Conda directly is generally package-centric, Planemo provides abstractions
 
 class: left, enlarge120
 
-The next few slides will use the seqtk example from Planemo's documentation - this can be downloaded to
+The next few slides will use the seqtk example from Planemo&apos;s documentation - this can be downloaded to
 follow along using the following command:
 
 ```bash
@@ -768,7 +768,7 @@ $ which seqtk
 seqtk not found
 ```]
 
-Notice seqtk hasn't been placed on the `PATH`, an environment has been setup that Galaxy (when
+Notice seqtk hasn&apos;t been placed on the `PATH`, an environment has been setup that Galaxy (when
 used through Planemo) can leverage.
 
 ---
@@ -791,7 +791,7 @@ Options: -q INT    mask bases with quality lower than INT [0]
          -n CHAR   masked bases converted to CHAR; 0 for lowercase [0]
          -l INT    number of residues per line; 0 for 2^32-1 [0]
 ...
-         -V        shift quality by '(-Q) - 33'
+         -V        shift quality by &apos;(-Q) - 33&apos;
          -U        convert all bases to uppercases
          -S        strip of white spaces in sequences
 (seqtk_seq) $ conda_env_deactivate
@@ -824,7 +824,7 @@ INFO  [galaxy.tools.actions] Flushed transaction for job Job[id=2,tool_id=seqtk_
 INFO  [galaxy.jobs.handler] (2) Job dispatched
 DEBUG [galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
 DEBUG [galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
-INFO  [galaxy.jobs.command_factory] Built script [/tmp/tmpLvKwta/job_working_directory/000/2/tool_script.sh] for tool command [[ &quot;$CONDA_DEFAULT_ENV&quot; = &quot;/Users/john/miniconda2/envs/__seqtk@1.2&quot; ] || . /Users/john/miniconda2/bin/activate '/Users/john/miniconda2/envs/__seqtk@1.2' &gt;conda_activate.log 2&gt;&amp;1 ; seqtk seq -a '/tmp/tmpLvKwta/files/000/dataset_1.dat' &gt; '/tmp/tmpLvKwta/files/000/dataset_2.dat']
+INFO  [galaxy.jobs.command_factory] Built script [/tmp/tmpLvKwta/job_working_directory/000/2/tool_script.sh] for tool command [[ &quot;$CONDA_DEFAULT_ENV&quot; = &quot;/Users/john/miniconda2/envs/__seqtk@1.2&quot; ] || . /Users/john/miniconda2/bin/activate &apos;/Users/john/miniconda2/envs/__seqtk@1.2&apos; &gt;conda_activate.log 2&gt;&amp;1 ; seqtk seq -a &apos;/tmp/tmpLvKwta/files/000/dataset_1.dat&apos; &gt; &apos;/tmp/tmpLvKwta/files/000/dataset_2.dat&apos;]
 DEBUG [galaxy.tools.deps] Using dependency samtools version None of type conda
 DEBUG [galaxy.tools.deps] Using dependency samtools version None of type conda
 ok
@@ -1020,7 +1020,7 @@ about:
 ```yaml
 requirements:
   build:
-    - {{ compiler('c') }}
+    - {{ compiler(&apos;c&apos;) }}
   host:
     - zlib
   run:
@@ -1074,13 +1074,13 @@ test:
 ```yaml
 test:
   commands:
-    - bwa 2&gt;&amp;1 | grep 'index sequences in the'
+    - bwa 2&gt;&amp;1 | grep &apos;index sequences in the&apos;
 ```
 
 ```yaml
 test:
   commands:
-    - '$R -e &quot;library(''xcms'')&quot;'
+    - &apos;$R -e &quot;library(&apos;&apos;xcms&apos;&apos;)&quot;&apos;
 ```
 
 Please note that the Conda tests run inside the runtime environment and not in the build environment.
@@ -1155,7 +1155,7 @@ $ $HOME/miniconda3/bin/conda build .
 5. (Provides the .tar.bz2 path)
 
 
-.footnote[If miniconda wasn't configured with `planemo conda_init`, you may have &lt;br/&gt; to run `conda install conda-build` before using the above command.]
+.footnote[If miniconda wasn&apos;t configured with `planemo conda_init`, you may have &lt;br/&gt; to run `conda install conda-build` before using the above command.]
 
 ---
 
@@ -1200,7 +1200,7 @@ $ $HOME/miniconda3/bin/conda build .
   ```
 
   ```bash
-  $ git commit -m 'my recipe description'
+  $ git commit -m &apos;my recipe description&apos;
   ```
 
   ```bash
@@ -1332,14 +1332,14 @@ conda skeleton pypi &lt;package_name&gt;
 
 ---
 
-## Python - pysam's `build.sh`
+## Python - pysam&apos;s `build.sh`
 
 ```sh
 #!/bin/bash
 # Remove gcc statements that do not work on older compilers for CentOS5
 # support
-sed -i'' -e 's/&quot;-Wno-error=declaration-after-statement&quot;,//g' setup.py
-sed -i'' -e 's/&quot;-Wno-error=declaration-after-statement&quot;//g' setup.py
+sed -i&apos;&apos; -e &apos;s/&quot;-Wno-error=declaration-after-statement&quot;,//g&apos; setup.py
+sed -i&apos;&apos; -e &apos;s/&quot;-Wno-error=declaration-after-statement&quot;//g&apos; setup.py
 # linking htslib, see:
 # https://pysam.readthedocs.org/en/latest/installation.html#external
 # https://github.com/pysam-developers/pysam/blob/v0.9.0/setup.py#L79
@@ -1354,7 +1354,7 @@ $PYTHON setup.py install
 
 ---
 
-## Python - pysam's `meta.yaml`
+## Python - pysam&apos;s `meta.yaml`
 
 .reduce50[
 ```yaml
@@ -1364,7 +1364,7 @@ $PYTHON setup.py install
 
 package:
   name: pysam
-  version: '{{ version }}'
+  version: &apos;{{ version }}&apos;
 
 source:
   url: https://github.com/pysam-developers/pysam/archive/v{{ version }}.tar.gz
@@ -1376,7 +1376,7 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - {{ compiler(&apos;c&apos;) }}
   host:
     - htslib
     - samtools {{ samtools_version }}
@@ -1430,7 +1430,7 @@ https://bioconda.github.io/guidelines.html#java
 
 ---
 
-## Java - PeptideShaker's `build.sh`
+## Java - PeptideShaker&apos;s `build.sh`
 
 ```sh
 #!/bin/bash
@@ -1450,7 +1450,7 @@ chmod 0755 &quot;${PREFIX}/bin/peptide-shaker&quot;
 
 class: reduce70
 
-## Java - PeptideShaker's `meta.yaml`
+## Java - PeptideShaker&apos;s `meta.yaml`
 
 
 ```yaml
@@ -1519,7 +1519,7 @@ requirements:
     # [...]
 
 test:
-  # Perl 'use' tests
+  # Perl &apos;use&apos; tests
   imports:
     - Module::Build
     - Module::Build::Base
@@ -1530,7 +1530,7 @@ test:
 about:
   home: https://metacpan.org/pod/Module::Build
   license: perl_5
-  summary: 'Build and install Perl modules
+  summary: &apos;Build and install Perl modules
 ```
 
 ---
@@ -1591,7 +1591,7 @@ $ circleci build
 
 - Conda and Bioconda are Galaxy best practices for connecting Galaxy tools to underlying applications and libraries.
 
-- Leveraging Conda allows easy installation of your tool's dependencies by Galaxy deployers.
+- Leveraging Conda allows easy installation of your tool&apos;s dependencies by Galaxy deployers.
 
 - The Planemo commands `conda_search`, `conda_init`, `conda_install`, `lint`, `test`, and `serve` make it easy to search and use existing Conda recipes when developing tools.
 

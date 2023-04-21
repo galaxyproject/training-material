@@ -360,7 +360,7 @@ An introduction to scRNA-seq data analysis
 
 
 ???
-- Let's start with what the differences are between Bulk RNA-seq and single cell RNA seq data.
+- Let&apos;s start with what the differences are between Bulk RNA-seq and single cell RNA seq data.
 - With Bulk RNA-seq we compare two tissues by looking at the average expression of each gene detected across each of the tissues.
 - Due to the number of RNA molecules being considered, the sequencing depth and the strength of the analysis is reasonably high.
 - The differential expression is then measured as the relative expression of a given gene between one tissue and another.
@@ -914,7 +914,7 @@ Edit distances guard against **sequencing errors.**
 .reduce90[
 *In what context are UMIs unique?*
   * UMIs are &quot;random salt&quot;
-    * 'Unique enough' at the transcript level
+    * &apos;Unique enough&apos; at the transcript level
 
   * We wish to count transcripts only
     * De-duplication of UMIs at transcript level
@@ -934,7 +934,7 @@ For Each Cell:
 ![Groups of GGG and TCT are added to two different cells to label them.](../../images/scrna-intro/scrna_pbb_barcodes_add.svg)
 
 ???
-So let's just recap what we've learned: First each cell has cell barcodes added to each RNA molecule in each cell.
+So let&apos;s just recap what we&apos;ve learned: First each cell has cell barcodes added to each RNA molecule in each cell.
 
 ---
 
@@ -1023,7 +1023,7 @@ $$DESeq(s,g) = \frac{X\_{sg}}{Med(R\_{s})}$$
 --
 
 .pull-right[
-Can't divide by zero!
+Can&apos;t divide by zero!
 ]
 
 ???
@@ -1237,7 +1237,7 @@ Note:
 
 ???
 - Once a distance matrix is generated, we can perform K-nearest neighbours upon the distance matrix where directed edges are generated between cells.
-- For each row of the distance matrix, K of the cells with the smallest distance values are selected representing the nearest neighbour that current row's cell has to the selected column cells.
+- For each row of the distance matrix, K of the cells with the smallest distance values are selected representing the nearest neighbour that current row&apos;s cell has to the selected column cells.
 - If the edges are mutually shared between neighbouring cells, then this is called a shared nearest neighbour approach.
 
 
@@ -1359,7 +1359,7 @@ We can also further derive the relationships between these clusters by computing
 
 .center[![The graph charts development time of reticulocytes as they pass through an intermediate or rare cell phase, into their final form: red blood cells.](../../images/scrna-intro/raceid_contpheno.svg)]
 .reduce90[
-* Cells aren't discrete, they transition
+* Cells aren&apos;t discrete, they transition
 * Continuously changing over time from a less mature type to more mature type
 ]
 
@@ -1410,7 +1410,7 @@ Soft clustering is to be expected, since although clustering is a statistical me
    1. Initialise *k* random positions
    1. Iteration Step:
       1. Calculate distance from each cell to each *k* position
-      1. Assign each cell to it's nearest *k*
+      1. Assign each cell to it&apos;s nearest *k*
       1. Set new *k* positions to the mean position of all cells in that group
 
 *K-medians*
@@ -1453,7 +1453,7 @@ Soft clustering is to be expected, since although clustering is a statistical me
 
 ## Community Clustering: Louvain
 
-.center[![A graph is shown with dots connected by lines. Below, those dots have expanded and pink touches orange and nearly touches purple. It asks pink by iteself? And notes 4 external links and 0 internal links. Two hypothetical options are shown, if pink absorbs purple, we see 5 external connections and 1 internal, so, it's added new connections. An X suggests this is wrong. Below is the pink absorbs orange option, where we see 3 external and 1 internal connection, so one connection has become internal, and no new nodes are connected. A check mark indicates this was right.](../../images/scrna-intro/commgraph1.svg)]
+.center[![A graph is shown with dots connected by lines. Below, those dots have expanded and pink touches orange and nearly touches purple. It asks pink by iteself? And notes 4 external links and 0 internal links. Two hypothetical options are shown, if pink absorbs purple, we see 5 external connections and 1 internal, so, it&apos;s added new connections. An X suggests this is wrong. Below is the pink absorbs orange option, where we see 3 external and 1 internal connection, so one connection has become internal, and no new nodes are connected. A check mark indicates this was right.](../../images/scrna-intro/commgraph1.svg)]
 
 .reduce90[
 Aim: Maximise internal links and minimise external links
@@ -1472,7 +1472,7 @@ Aim: Maximise internal links and minimise external links
 .center[![Same Graph as previously, but now there are more, larger clusters. Blue and purple were absorbed, yellow and red were absorbed, and we see a simplified 4 node graph.](../../images/scrna-intro/commgraph2.svg)]
 
 .reduce90[
-* Randomly pick a cell and try to place it in a neighbour's cluster
+* Randomly pick a cell and try to place it in a neighbour&apos;s cluster
   * Accept if Internal:External increases
   * Reject and pick another
 ]

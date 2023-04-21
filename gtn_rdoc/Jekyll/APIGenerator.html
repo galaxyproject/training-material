@@ -21,8 +21,6 @@
 <link href="../css/rdoc.css" rel="stylesheet">
 
 
-
-
 <body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
@@ -59,32 +57,28 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">Generator
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-i-generate">#generate</a>
-    
+    <li ><a href="#method-i-generateConfiguration">#generateConfiguration</a>
+    <li ><a href="#method-i-generateVersion">#generateVersion</a>
     <li ><a href="#method-i-get_contributors">#get_contributors</a>
-    
     <li ><a href="#method-i-mapContributor">#mapContributor</a>
-    
     <li ><a href="#method-i-markdownify">#markdownify</a>
-    
     <li ><a href="#method-i-visitAndMarkdownify">#visitAndMarkdownify</a>
-    
   </ul>
 </div>
 
@@ -102,48 +96,38 @@
 
   </section>
 
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-generate" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">generate</span><span
             class="method-args">(site)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Runs the generation process Params:</p>
 <dl class="rdoc-list note-list"><dt><code>site</code>
 <dd>
 <p><code>Jekyll::Site</code> object</p>
 </dd></dl>
-          
-          
 
-          
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 80</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">generateConfiguration</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-comment"># For some reason the templating isn&#39;t working right here.</span>
+  <span class="ruby-comment">#generateVersion(site)</span>
+
   <span class="ruby-comment"># Full Bibliography</span>
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Scholar</span>.<span class="ruby-identifier">load_bib</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/API] Bibliography&quot;</span>
@@ -344,28 +328,80 @@
 
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
+      <div id="method-i-generateConfiguration" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">generateConfiguration</span><span
+            class="method-args">(site)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Generates /api/configuration.json Params:</p>
+<dl class="rdoc-list note-list"><dt><code>site</code>
+<dd>
+<p><code>Jekyll::Site</code> object</p>
+</dd></dl>
+
+<p>Returns: nil</p>
+
+          <div class="method-source-code" id="generateConfiguration-source">
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generateConfiguration</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-string">&quot;configuration.json&quot;</span>)
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">update</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Git</span>.<span class="ruby-identifier">discover</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generateVersion" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">generateVersion</span><span
+            class="method-args">(site)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Generates /api/version.json Params:</p>
+<dl class="rdoc-list note-list"><dt><code>site</code>
+<dd>
+<p><code>Jekyll::Site</code> object</p>
+</dd></dl>
+
+<p>Returns: nil</p>
+
+          <div class="method-source-code" id="generateVersion-source">
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generateVersion</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-string">&quot;version.json&quot;</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Git</span>.<span class="ruby-identifier">discover</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
       <div id="method-i-get_contributors" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">get_contributors</span><span
             class="method-args">(data)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Returns contributors, regardless of whether they are &#39;contributor&#39; or &#39;contributions&#39; style Params:</p>
 <dl class="rdoc-list note-list"><dt><code>data</code>
 <dd>
@@ -373,12 +409,9 @@
 </dd></dl>
 
 <p>Returns: <code>Array</code> of contributor IDs</p>
-          
-          
 
-          
           <div class="method-source-code" id="get_contributors-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 17</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_contributors</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>)
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
@@ -387,28 +420,19 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-mapContributor" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">mapContributor</span><span
             class="method-args">(site, c)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Map a contributor ID to a JSON object which includes links to their profile page and API endpoint Params:</p>
 <dl class="rdoc-list note-list"><dt><code>site</code>
 <dd>
@@ -419,12 +443,9 @@
 </dd></dl>
 
 <p>Returns: <code>Hash</code> of contributor information</p>
-          
-          
 
-          
           <div class="method-source-code" id="mapContributor-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 65</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
   <span class="ruby-identifier">x</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
     .<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">c</span>, {})
@@ -436,28 +457,19 @@
   <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-markdownify" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">markdownify</span><span
             class="method-args">(site, text)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Use Jekyll&#39;s Markdown converter to convert text to HTML Params:</p>
 <dl class="rdoc-list note-list"><dt><code>site</code>
 <dd>
@@ -468,40 +480,28 @@
 </dd></dl>
 
 <p>Returns: <code>String</code> of markdown text</p>
-          
-          
 
-          
           <div class="method-source-code" id="markdownify-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 32</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">markdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">text</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">find_converter_instance</span>(
     <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span><span class="ruby-operator">::</span><span class="ruby-constant">Markdown</span>
   ).<span class="ruby-identifier">convert</span>(<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-visitAndMarkdownify" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">visitAndMarkdownify</span><span
             class="method-args">(site, f)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Recursively visit a hash and markdownify all strings inside Params:</p>
 <dl class="rdoc-list note-list"><dt><code>site</code>
 <dd>
@@ -512,12 +512,9 @@
 </dd></dl>
 
 <p>Returns: <code>Hash</code> with all strings markdownified</p>
-          
-          
 
-          
           <div class="method-source-code" id="visitAndMarkdownify-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 45</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">f</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
         <span class="ruby-identifier">f</span>.<span class="ruby-identifier">map!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>)}
@@ -531,25 +528,20 @@
     <span class="ruby-identifier">f</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
-  </section>
 
+  </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.3.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -376,11 +376,11 @@ From the given USB stick, please:
 
 ---
 
-## Galaxy's frontend
+## Galaxy&apos;s frontend
 
 JavaScript sources and CSS sources are in the `$GALAXY_ROOT/client` folder.
 
-Whenever you make changes there, you will need to re-build Galaxy's frontend with:
+Whenever you make changes there, you will need to re-build Galaxy&apos;s frontend with:
 
 ```console
 $ cd $GALAXY_ROOT
@@ -396,7 +396,7 @@ This requires [Node](https://nodejs.org/).
 The language for labels used in the JS source code is English, but can be wrapped in `l()` which makes it translatable.
 
 ```javascript
-_l( 'Help' )
+_l( &apos;Help&apos; )
 ```
 
 --
@@ -420,7 +420,7 @@ _l( 'Help' )
 
 ### Translation and localisation 2/2
 
-When a user's browser locale or language is set to a known translation, it will be used instead of the default. If a translation is not available for a string, it will appear in English.
+When a user&apos;s browser locale or language is set to a known translation, it will be used instead of the default. If a translation is not available for a string, it will appear in English.
 
 ---
 
@@ -430,17 +430,17 @@ Open the [client/galaxy/scripts/layout/menu.js](https://github.com/galaxyproject
 
 ```javascript
 var helpTab = {
-          id              : 'help',
-          title           : _l('Help'),
-          tooltip         : _l('Support, contact, and community'),
+          id              : &apos;help&apos;,
+          title           : _l(&apos;Help&apos;),
+          tooltip         : _l(&apos;Support, contact, and community&apos;),
           menu            : [{
-                  title   : _l('Support'),
+                  title   : _l(&apos;Support&apos;),
                   url     : options.support_url,
-                  target  : '_blank'
+                  target  : &apos;_blank&apos;
               },{
-                  title   : _l('Search'),
+                  title   : _l(&apos;Search&apos;),
                   url     : options.search_url,
-                  target  : '_blank'
+                  target  : &apos;_blank&apos;
 ```
 
 ---
@@ -454,7 +454,7 @@ Plenty of customisation can be achieved using settings in the main configuration
 ### Tool Panel configuration
 
 * How the tool panel looks like is decided in a file called `integrated_tool_panel.xml`.
-* By default it resides in Galaxy's root folder.
+* By default it resides in Galaxy&apos;s root folder.
 * If missing it is generated from all other tool config files during startup.
 * Modify it if you want to reorder tools or move sections.
 
@@ -558,7 +558,7 @@ brand: GenOuest
 # The URL linked by the &quot;Galaxy/brand&quot; text.
 logo_url: /
 
-# The URL of the page to display in Galaxy's middle pane when loaded.  This can
+# The URL of the page to display in Galaxy&apos;s middle pane when loaded.  This can
 # be an absolute or relative URL.
 welcome_url: /static/welcome.html
 ```
@@ -633,7 +633,7 @@ We use SCSS to build our CSS. Among other features it allows defining [variables
 &lt;/script&gt;
 &lt;!-- Load contents into div --&gt;
 &lt;script type=&quot;text/javascript&quot;&gt;
-	$('#test-rss').load('https://fqdn/category/dev/ #content');
+	$(&apos;#test-rss&apos;).load(&apos;https://fqdn/category/dev/ #content&apos;);
 &lt;/script&gt;
 ```
 
@@ -673,7 +673,7 @@ Used to control user disk usage.
 
 To turn on the use of quotas: In `galaxy.yml`:
 * `enable_quotas` Enable enforcement of quotas.  Quotas can be set from the Admin interface (under Data).
-* must create quotas in admin interface before any quota will be enforced, otherwise 'unlimited'
+* must create quotas in admin interface before any quota will be enforced, otherwise &apos;unlimited&apos;
 
 Amounts:
  - Examples: &quot;10000MB&quot;, &quot;99 gb&quot;, &quot;0.2T&quot;, &quot;unlimited&quot;

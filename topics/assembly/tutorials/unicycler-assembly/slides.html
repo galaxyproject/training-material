@@ -489,7 +489,7 @@ To start on Genome assembly you can read the previous assembly tutorials:
 
 Genome assembly is a difficult task. In trying to explain it we will be relying on two highly regarded sources:
 
-- [Ben Langmead's Teaching Materials](http://www.langmead-lab.org/teaching-materials/)
+- [Ben Langmead&apos;s Teaching Materials](http://www.langmead-lab.org/teaching-materials/)
 - [Pevzner and Compeau Bioinformatics Book](https://www.goodreads.com/book/show/22033056-bioinformatics-algorithms).
 
 
@@ -504,7 +504,7 @@ Genome assembly is a difficult task. In trying to explain it we will be relying 
 
 ## *k*-mer composition
 
-Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let's assume that all reads have the same length *k* and every *k*-mer is sequenced only once. We will relax these assumptions later in this lecture. Thus sequencing a genome generates a large list of *k*-mers.
+Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let&apos;s assume that all reads have the same length *k* and every *k*-mer is sequenced only once. We will relax these assumptions later in this lecture. Thus sequencing a genome generates a large list of *k*-mers.
 
 Suppose we are dealing with a *very* short genome `TATGGGGTGC`. Its *k*-mer composition (note the subscript) **Composition_k(Text)** is the collection of all *k*-mer substrings (including repeated ones). When *k* = 3 we get (basically we split sequence into windows of length 3 sliding window by 1 base every time):
 
@@ -527,11 +527,11 @@ Note that we have listed *k*-mers in lexicographic order (i.e., how they would a
 
 ## Assembly by overlap
 
-In the example above we know what the &quot;genome&quot; sequence is. In real life we don't know that and our goal is to determine genome sequence given a scrambled collection of *k*-mers. Let's consider the following collection of 3-mers representing a hypothetical genome:
+In the example above we know what the &quot;genome&quot; sequence is. In real life we don&apos;t know that and our goal is to determine genome sequence given a scrambled collection of *k*-mers. Let&apos;s consider the following collection of 3-mers representing a hypothetical genome:
 
 &lt;code&gt; AAT ATG GTT TAA TGT &lt;/code&gt;
 
-Let's &quot;tile&quot; k-mers if they overlap in k-1 nucleotides:
+Let&apos;s &quot;tile&quot; k-mers if they overlap in k-1 nucleotides:
 
 ```
 TAA
@@ -545,7 +545,7 @@ TAATGTT
 
 ---
 
-Now let's apply it to slightly longer &quot;genome&quot; with the following 3-mer composition sorted in a lexicographic order:
+Now let&apos;s apply it to slightly longer &quot;genome&quot; with the following 3-mer composition sorted in a lexicographic order:
 
 &lt;code&gt;
 AAT ATG ATG ATG CAT CCA GAT GCC GGA GGG GTT TAA TGC TGG TGT
@@ -566,7 +566,7 @@ There is nothing in the original 3-mer composition, which starts with `TT`.
 
 ---
 
-Let's track back and instead of `TGT` in step 4 insert `TGC`:
+Let&apos;s track back and instead of `TGT` in step 4 insert `TGC`:
 
 ```
  1 TAA
@@ -653,13 +653,13 @@ GGCGTCTATATCT
 ```
 &gt;    **The goal of assembly process**. Given sequencing reads reconstruct underlying genome sequence.
 
- We've seen that this can (in principle) be accomplished by finding overlaps. We also discussed the concept of the coverage.  We can now formulate the two first assembly laws.
+ We&apos;ve seen that this can (in principle) be accomplished by finding overlaps. We also discussed the concept of the coverage.  We can now formulate the two first assembly laws.
 
 ---
 
 ## The First Assembly Law: Overlaps imply co-location
 
-Let's define terms **Prefix** and **Suffix** using string &lt;code&gt;TAA&lt;/code&gt; as an example:
+Let&apos;s define terms **Prefix** and **Suffix** using string &lt;code&gt;TAA&lt;/code&gt; as an example:
 
  * &lt;code&gt;Prefix(TAA) = TA&lt;/code&gt;
  * &lt;code&gt;Suffix(TAA) = AA&lt;/code&gt;
@@ -766,7 +766,7 @@ can be represented as a following directed graph (or genome path):
 
 
 
-**However**, we do not know the actual genome! All we have in real life is a collection of reads. Let's first build an overlap graph by connecting two 3-mers if suffix of one is equal to the prefix of the other:
+**However**, we do not know the actual genome! All we have in real life is a collection of reads. Let&apos;s first build an overlap graph by connecting two 3-mers if suffix of one is equal to the prefix of the other:
 
 
 &gt;![Th above graph is expanded to include a lot more connections between any nodes that share 2 base overlap.](../../images/4.7.png)
@@ -845,7 +845,7 @@ Building an overlap graph with overlap of &lt;code&gt;length &gt;= 4&lt;/code&gt
 
 The problem of reconstructing genome using the overlap graph that we have just illustrated can be initially formulated as the *Shortest Common Superstring (SCS)* problem. It states: *given a collection of strings S, find SCS(S), which is the shortest string that contains all strings from the set S as substrings*.
 
-For simplicity let's suppose that we have the following set of strings &lt;code&gt;S&lt;/code&gt;:
+For simplicity let&apos;s suppose that we have the following set of strings &lt;code&gt;S&lt;/code&gt;:
 
 &lt;samp&gt;
 BAA AAB BBA ABA ABB BBB AAA BAB
@@ -872,7 +872,7 @@ It looks like finding SCS for a set of sequencing reads may just be what we need
 
 &gt;![A sequence of As and Bs in groups of 3s is labelled order 1. Below the sequence is written AAA, the current superstring.](../../images/scs1.png)
 
-&gt;Let's look at the first two strings. They can be &quot;reduced&quot; to `AAAB`:
+&gt;Let&apos;s look at the first two strings. They can be &quot;reduced&quot; to `AAAB`:
 &gt;
 &gt;![Now AAAB is written below the sequence because of the overlap in the first two groups.](../../images/scs2.png)
 &gt;
@@ -890,7 +890,7 @@ It looks like finding SCS for a set of sequencing reads may just be what we need
 &gt;
 &gt;![Order 1 produces a longish superstring](../../images/scs5.png)
 &gt;
-&gt;But `AAABABBAABABBABB` is the shortest only for this particular ordering. So let's reorder and try again:
+&gt;But `AAABABBAABABBABB` is the shortest only for this particular ordering. So let&apos;s reorder and try again:
 &gt;
 &gt;![Order 2, a new ordering of the same sequences, produces a shorter superstring.](../../images/scs6.png)
 &gt;
@@ -903,7 +903,7 @@ eight strings &lt;code&gt;8! = 40320&lt;/code&gt;. If we get, say, a 1,000,000 r
 
 ## Shortest common superstring: Greedy approach
 
-As we've seen it will be impossible to assemble the genome using SCS logic. There is a simplification called *Greedy* approach to SCS problem. Let's take the following set of &quot;reads&quot;:
+As we&apos;ve seen it will be impossible to assemble the genome using SCS logic. There is a simplification called *Greedy* approach to SCS problem. Let&apos;s take the following set of &quot;reads&quot;:
 
 &lt;samp&gt;
 AAA AAB ABB BBA BBB
@@ -919,7 +919,7 @@ and first build an overlap graph:
 
 Next, we start collapsing the nodes to maximize the overlap (and hence to decrease the length of the SCS we are trying to construct):
 
-&gt;In the graph below there are multiple ties: nodes with outgoing edges of identical weights (e.g., edges pointing from `ABB` to both `BBA` and `BBB` have weight of two. Remember, that the weight is the length of overlap between two nodes' labels). In this situation we will break ties by randomly picking an edge to traverse. Let's pick &lt;font color=&quot;red&quot;&gt;`AAA` &amp;#8594; `AAB`&lt;/font&gt;:
+&gt;In the graph below there are multiple ties: nodes with outgoing edges of identical weights (e.g., edges pointing from `ABB` to both `BBA` and `BBB` have weight of two. Remember, that the weight is the length of overlap between two nodes&apos; labels). In this situation we will break ties by randomly picking an edge to traverse. Let&apos;s pick &lt;font color=&quot;red&quot;&gt;`AAA` &amp;#8594; `AAB`&lt;/font&gt;:
 
 &gt;![The above graph however the node AAA -&gt; 2 -&gt; AAB is highlighted in red.](../../images/greedy2.png)
 
@@ -932,7 +932,7 @@ Next, we start collapsing the nodes to maximize the overlap (and hence to decrea
 ]
 --
 .pull-right[
-&gt;Now let's pick edge &lt;font color=&quot;red&quot;&gt;`ABB` &amp;#8594; `BBB`&lt;/font&gt;:
+&gt;Now let&apos;s pick edge &lt;font color=&quot;red&quot;&gt;`ABB` &amp;#8594; `BBB`&lt;/font&gt;:
 
 &gt;![Another edge scoring 2 is highlighted, ABB to BBB (2)](../../images/greedy4.png)
 ]
@@ -941,7 +941,7 @@ Next, we start collapsing the nodes to maximize the overlap (and hence to decrea
 .pull-left[
 &gt;Collapse the nodes:
 &gt;
-&gt;![They're collapsed, now with 3 nodes in the graph](../../images/greedy5.png)
+&gt;![They&apos;re collapsed, now with 3 nodes in the graph](../../images/greedy5.png)
 ]
 --
 .pull-right[
@@ -1019,7 +1019,7 @@ And the SCS of these two will be a concatenation `AAABBABBB` of length 9. Thus a
 
 # The Third Law of Assembly: Repeats are Evil!
 
-Let's again apply Greedy SCS to a different &quot;genome&quot;. Suppose we want to reconstruct the phrase:
+Let&apos;s again apply Greedy SCS to a different &quot;genome&quot;. Suppose we want to reconstruct the phrase:
 
 &lt;samp&gt;
 a_long_long_long_time
@@ -1048,7 +1048,7 @@ If we proceed with Greedy SCS we will follow the following trajectory through th
 
 ---
 
-To make things even clearer let's isolate the path:
+To make things even clearer let&apos;s isolate the path:
 
 ![Irrelevant edges are removed.](../../images/long_opt_focus.png)
 
@@ -1074,7 +1074,7 @@ a_long_long_time
 
 ---
 
-We are missing one instance of 'long' in this string. The following graph shows the path that would return the *correct* string:
+We are missing one instance of &apos;long&apos; in this string. The following graph shows the path that would return the *correct* string:
 
  &gt;![A less optimal path is shown that recovers the duplicated long](../../images/long_corr.png)
 
@@ -1102,13 +1102,13 @@ a_long_long_long_time
 
 ## Are we really looking for the shortest superstring?
 
-As we've seen above the shortest common superstring (SCS) is:
+As we&apos;ve seen above the shortest common superstring (SCS) is:
 
 1. **Difficult to obtain** as Greedy SCS algorithm does not guarantee finding it. So the answer we get may be longer than the real genome we are trying to assemble.
 
 2. **May be shorter than we want** because if the genome contains repeats that are longer than the reads we are using, Greedy SCS will collapse them and make assembly shorter that the genome we are trying to get.
 
-Let's talk about an alternative way to represent the relationship between *k*-mers that may give us a more efficient algorithm.
+Let&apos;s talk about an alternative way to represent the relationship between *k*-mers that may give us a more efficient algorithm.
 
 ---
 
@@ -1150,7 +1150,7 @@ Here the complexity of the graph is reduced by first gluing redundant &lt;font c
 
 ![Now the 3 TG nodes are highlighted](../../images/4.13c.png)
 
-![and collapsed into a single one, sharing the original's connections.](../../images/4.13d.png)
+![and collapsed into a single one, sharing the original&apos;s connections.](../../images/4.13d.png)
 
 ---
 
@@ -1172,7 +1172,7 @@ Because we now represent _k_-mers as edges (rather than nodes), our problem has 
 
 ---
 
-## Euler's Theorem
+## Euler&apos;s Theorem
 
 Some definitions:
 
@@ -1181,18 +1181,18 @@ Some definitions:
  * **Strongly connected graph** - any node can be reached from any other node
 
 
-**Euler's Theorem**:
+**Euler&apos;s Theorem**:
 
 &gt;Every balanced, strongly connected directed graph is Eulerian.
 
 ---
 
-Let's apply Euler's Theorem to a classical problem: The bridges of Königsberg problem. Here the question is: *Can you walk through all of Königsberg traversing every bridge exactly one time?* In other words: *Is there a Eulerian path through the city of Königsberg?*
+Let&apos;s apply Euler&apos;s Theorem to a classical problem: The bridges of Königsberg problem. Here the question is: *Can you walk through all of Königsberg traversing every bridge exactly one time?* In other words: *Is there a Eulerian path through the city of Königsberg?*
 
 
 &gt;![Old map of Königsberg with dots on land portions and links between them. This is reduced into the same coloured nodes and bridges representing edges.](../../images/koninsberg.png)
 &gt;
-&gt;**Königsberg and Euler's Theorem**. (a) A map of old Königsberg, in which each area of the city is labeled with a different color point. (b) The Königsberg Bridge graph, formed by representing each of four land areas as a node and each of the city's seven bridges as an edge. (From [Campeau:2011](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html#close))
+&gt;**Königsberg and Euler&apos;s Theorem**. (a) A map of old Königsberg, in which each area of the city is labeled with a different color point. (b) The Königsberg Bridge graph, formed by representing each of four land areas as a node and each of the city&apos;s seven bridges as an edge. (From [Campeau:2011](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html#close))
 
 By looking at this graph we can see that it is *unbalanced*. If one arrives to, say, the &lt;font color=&quot;orange&quot;&gt;orange&lt;/font&gt; node from the &lt;font color=&quot;blue&quot;&gt;blue&lt;/font&gt; node there are two ways to get out. Thus there is no way to see all of the city and traverse every bridge once!
 
@@ -1200,7 +1200,7 @@ By looking at this graph we can see that it is *unbalanced*. If one arrives to, 
 
 ## Repeats are still a challenge
 
-Let's look at the de Bruijn graph from above again. But this time let's drop edge numbering and pretend that the genome is now really known to us (as is usually the case in real life):
+Let&apos;s look at the de Bruijn graph from above again. But this time let&apos;s drop edge numbering and pretend that the genome is now really known to us (as is usually the case in real life):
 
 &gt;![Similar graph as above but now edges are only labelled by sequences, no more numbers.](../../images/dg1.png)
 &gt;
@@ -1210,7 +1210,7 @@ Let's look at the de Bruijn graph from above again. But this time let's drop edg
 
 In the original sequence `TAATGCCATGGGATGTT` *k*-mer &lt;font color=&quot;red&quot;&gt;`AT`&lt;/font&gt; is present 3 times and *k*-mer &lt;font color=&quot;blue&quot;&gt;`TG`&lt;/font&gt; is found twice. Thus *multiple* Eulerian walks are now possible like this:
 
-&gt;![Following a direct path from the one node without incoming connections, to TG node, choosing one of the three outgoing connections we go 'up'](../../images/dg2.png)
+&gt;![Following a direct path from the one node without incoming connections, to TG node, choosing one of the three outgoing connections we go &apos;up&apos;](../../images/dg2.png)
 &gt;
 &gt;**Possible path #1**. Here after we reach &lt;font color=&quot;blue&quot;&gt;`TG`&lt;/font&gt; node we turn **up**.
 
@@ -1319,7 +1319,7 @@ This is why technologies producing long sequencing reads stimulate so much enthu
 
 # Assembly in real life
 
-In this topic we've learned about two ways of representing the relationship between reads derived from a genome we are trying to assemble:
+In this topic we&apos;ve learned about two ways of representing the relationship between reads derived from a genome we are trying to assemble:
 
 1. **Overlap graphs** - nodes are reads, edges are overlaps between reads.
 2. **De Bruijn graphs** - nodes are overlaps, edges are reads.
@@ -1370,7 +1370,7 @@ As we discussed earlier humans are diploid and there are multiple differences be
 
 **Repeats**
 
-As we've seen the third law of assembly is unbeatable. As a result some regions of the genome simply cannot be resolved and are reported in segments called *contigs*:
+As we&apos;ve seen the third law of assembly is unbeatable. As a result some regions of the genome simply cannot be resolved and are reported in segments called *contigs*:
 
 &gt;![A sentence is represented &quot;to everything turn&quot;, &quot;turn&quot; (a repeat) and &quot;turn there is a season&quot;. The repeat makes the graph hard to solve into a single path.](../../images/t12_contigs.png)
 &gt;

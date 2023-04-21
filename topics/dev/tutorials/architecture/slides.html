@@ -340,7 +340,7 @@ Useful when presenting.
 
 - Understand the various top-level files and modules in Galaxy.
 
-- Understand how dependencies work in Galaxy's frontend and backend.
+- Understand how dependencies work in Galaxy&apos;s frontend and backend.
 
 
 ---
@@ -366,7 +366,7 @@ topic_name: Galaxy Architecture
 
 ### Please Interrupt!
 
-We're here to answer your questions about Galaxy architecture!
+We&apos;re here to answer your questions about Galaxy architecture!
 
 ---
 
@@ -386,7 +386,7 @@ class: enlarge200
 
 ???
 
-Too many to cover all but we'll cover some of the big ones in a few big
+Too many to cover all but we&apos;ll cover some of the big ones in a few big
 categories. User-facing applications, projects for Galaxy plugin developers,
 and projects for Galaxy administrators.
 
@@ -400,7 +400,7 @@ https://gitter.im/galaxyproject
 
 ---
 
-More links we'll mention as we go through the slides:
+More links we&apos;ll mention as we go through the slides:
 
 - https://matrix.to/#/#galaxyproject_Lobby:gitter.im
 - https://matrix.to/#/#galaxyproject_dev:gitter.im
@@ -536,18 +536,18 @@ Many older tools appearing on usegalaxy.org.
 
 Other repositories with high quality tools:
 
- * [Björn Grüning's repo](https://github.com/bgruening/galaxytools)
- * Peter Cock's repos:
+ * [Björn Grüning&apos;s repo](https://github.com/bgruening/galaxytools)
+ * Peter Cock&apos;s repos:
    * [blast repo](https://github.com/peterjc/galaxy_blast)
    * [pico repo](https://github.com/peterjc/pico_galaxy)
    * [mira repo](https://github.com/peterjc/galaxy_mira)
  * [ENCODE tools](https://github.com/modENCODE-DCC/Galaxy)
  * [Biopython repo](https://github.com/biopython/galaxy_packages)
  * [Galaxy Proteomics repo](https://github.com/galaxyproteomics/tools-galaxyp)
- * [Greg von Kuster's repo](https://github.com/gregvonkuster/galaxy-csg)
+ * [Greg von Kuster&apos;s repo](https://github.com/gregvonkuster/galaxy-csg)
  * [TGAC repo](https://github.com/TGAC/tgac-galaxytools)
  * [AAFC-MBB Canada repo](https://github.com/AAFC-MBB/Galaxy/tree/master/wrappers)
- * [Mark Einon's repo](https://gitlab.com/einonm/galaxy-tools)
+ * [Mark Einon&apos;s repo](https://gitlab.com/einonm/galaxy-tools)
 
 ---
 
@@ -630,7 +630,7 @@ class: enlarge150
 
 A process manager (supervisor) and management tools for Galaxy servers.
 
-`galaxyctl` which is used to manage the starting, stopping, and logging of Galaxy's various processes.
+`galaxyctl` which is used to manage the starting, stopping, and logging of Galaxy&apos;s various processes.
 
 `galaxy` which can be used to run a Galaxy server in the foreground.
 
@@ -839,7 +839,7 @@ The tags are described in detail in [issues.rst](https://github.com/galaxyprojec
 
 ![Galaxy CI](../../images/core_ci.png)
 
-If you get Red Xs - take a second to ponder whether they make sense and don't be afraid to ask, it is a complex system with a lot of noise!
+If you get Red Xs - take a second to ponder whether they make sense and don&apos;t be afraid to ask, it is a complex system with a lot of noise!
 
 ---
 
@@ -901,7 +901,7 @@ class: enlarge200
 
 ### Development Environments
 
-Galaxy developers use a wide range of IDEs and we don't offer any formal recommendation of one over another.
+Galaxy developers use a wide range of IDEs and we don&apos;t offer any formal recommendation of one over another.
 
 However, Marius has assembled some documentation on debugging the [Galaxy server](https://docs.galaxyproject.org/en/master/dev/debugging_galaxy.html) and [tests](https://docs.galaxyproject.org/en/master/dev/debugging_tests.html) using VS Code.
 
@@ -962,7 +962,7 @@ flexibility is paramount.
 
 ### A Plugin Driven Backend
 
-Galaxy's backend is in many ways driven by *pluggable interfaces* and
+Galaxy&apos;s backend is in many ways driven by *pluggable interfaces* and
 can be adapted to many different technologies.
 
 - SQLAlchemy allows using SQLite, PostgreSQL, or MySQL (sort of) for your database.
@@ -1129,8 +1129,8 @@ plumbing is just aliases for starlette ASGI handling.
 from starlette.responses import PlainTextResponse
 
 async def app(scope, receive, send):
-    assert scope['type'] == &quot;http&quot;
-    response = PlainTextResponse('Hello, world!')
+    assert scope[&apos;type&apos;] == &quot;http&quot;
+    response = PlainTextResponse(&apos;Hello, world!&apos;)
     await response(scope, receive, send)
 ```
 
@@ -1162,11 +1162,11 @@ from starlette.routing import Route
 
 
 async def homepage(request):
-    return JSONResponse({'hello': 'world'})
+    return JSONResponse({&apos;hello&apos;: &apos;world&apos;})
 
 
 app = Starlette(debug=True, routes=[
-    Route('/', homepage),
+    Route(&apos;/&apos;, homepage),
 ])
 ```
 
@@ -1216,7 +1216,7 @@ async def __call__(self, scope: Scope, receive: Receive, send: Send) -&gt; None:
         await super().__call__(scope, receive, send)  # pragma: no cover
 ```
 
-A light wrapper around Starlette's call entry point.
+A light wrapper around Starlette&apos;s call entry point.
 
 ---
 
@@ -1358,7 +1358,7 @@ https://www.starlette.io/routing/
 class: enlarge200
 
 In order to understand how the routing classes are setup within Galaxy,
-lets step back and look really quickly at how Galaxy's FastAPI
+lets step back and look really quickly at how Galaxy&apos;s FastAPI
 application (ASGI endpoint) is constructed.
 
 ---
@@ -1370,10 +1370,10 @@ application (ASGI endpoint) is constructed.
 ```python
 def factory():
     props = WebappSetupProps(
-        app_name='galaxy',
+        app_name=&apos;galaxy&apos;,
         default_section_name=DEFAULT_CONFIG_SECTION,
-        env_config_file='GALAXY_CONFIG_FILE',
-        env_config_section='GALAXY_CONFIG_SECTION',
+        env_config_file=&apos;GALAXY_CONFIG_FILE&apos;,
+        env_config_section=&apos;GALAXY_CONFIG_SECTION&apos;,
         check_galaxy_root=True
     )
     config_provider = WebappConfigResolver(props)
@@ -1402,9 +1402,9 @@ def initialize_fast_app(gx_webapp, gx_app):
     add_exception_handler(app)
     add_galaxy_middleware(app, gx_app)
     add_request_id_middleware(app)
-    include_all_package_routers(app, 'galaxy.webapps.galaxy.api')
+    include_all_package_routers(app, &apos;galaxy.webapps.galaxy.api&apos;)
     wsgi_handler = WSGIMiddleware(gx_webapp)
-    app.mount('/', wsgi_handler)
+    app.mount(&apos;/&apos;, wsgi_handler)
     return app
 ```
 
@@ -1414,7 +1414,7 @@ def initialize_fast_app(gx_webapp, gx_app):
 
 Following this line:
 
-`include_all_package_routers(app, 'galaxy.webapps.galaxy.api')`
+`include_all_package_routers(app, &apos;galaxy.webapps.galaxy.api&apos;)`
 
 to the file
 
@@ -1435,7 +1435,7 @@ class: reduce70
 ### Routing inside the Application
 
 ```python
-router = Router(tags=['tags'])
+router = Router(tags=[&apos;tags&apos;])
 
 
 @router.cbv
@@ -1443,7 +1443,7 @@ class FastAPITags:
     manager: TagsManager = depends(TagsManager)
 
     @router.put(
-        '/api/tags',
+        &apos;/api/tags&apos;,
         summary=&quot;Apply a new set of tags to an item.&quot;,
         status_code=status.HTTP_204_NO_CONTENT,
     )
@@ -1481,7 +1481,7 @@ Back to `initialize_fast_app`, two of the final lines were as follows:
 
 ```python
 wsgi_handler = WSGIMiddleware(gx_webapp)
-app.mount('/', wsgi_handler)
+app.mount(&apos;/&apos;, wsgi_handler)
 ```
 
 This effectively provides a fallback to our legacy WSGI application.
@@ -1518,7 +1518,7 @@ A WSGI function:
 
 template: left-aligned
 
-### Galaxy's WSGI Middleware
+### Galaxy&apos;s WSGI Middleware
 
 Middleware configured in `galaxy.webapps.galaxy.buildapp#wrap_in_middleware`.
 
@@ -1557,8 +1557,8 @@ Setup on `webapp` in `galaxy.webapps.galaxy.buildapp.py`.
 
 ```python
 webapp.add_route(
-    '/datasets/:dataset_id/display/{filename:.+?}',
-    controller='dataset', action='display',
+    &apos;/datasets/:dataset_id/display/{filename:.+?}&apos;,
+    controller=&apos;dataset&apos;, action=&apos;display&apos;,
     dataset_id=None, filename=None
 )
 ```
@@ -1579,20 +1579,20 @@ Simplified `handle_request` from `lib/galaxy/web/framework/base.py`.
 
 ```python
 def handle_request(self, environ, start_response):
-    path_info = environ.get( 'PATH_INFO', '' )
+    path_info = environ.get( &apos;PATH_INFO&apos;, &apos;&apos; )
     map = self.mapper.match( path_info, environ )
-    if path_info.startswith('/api'):
+    if path_info.startswith(&apos;/api&apos;):
         controllers = self.api_controllers
     else:
         controllers = self.controllers
 
     trans = self.transaction_factory( environ )
 
-    controller_name = map.pop( 'controller', None )
+    controller_name = map.pop( &apos;controller&apos;, None )
     controller = controllers.get( controller_name, None )
 
     # Resolve action method on controller
-    action = map.pop( 'action', 'index' )
+    action = map.pop( &apos;action&apos;, &apos;index&apos; )
     method = getattr( controller, action, None )
 
     kwargs = trans.request.params.mixed()
@@ -1641,12 +1641,12 @@ class: reduce70
 class FastAPIRoles:
     role_manager: RoleManager = depends(RoleManager)
 
-    @router.get('/api/roles')
+    @router.get(&apos;/api/roles&apos;)
     def index(self, trans: ProvidesUserContext = DependsOnTrans) -&gt; RoleListModel:
         roles = self.role_manager.list_displayable_roles(trans)
         return RoleListModel(__root__=[role_to_model(trans, r) for r in roles])
 
-    @router.get('/api/roles/{id}')
+    @router.get(&apos;/api/roles/{id}&apos;)
     def show(self, id: EncodedDatabaseIdField, trans: ProvidesUserContext = DependsOnTrans) -&gt; RoleModel:
         role_id = trans.app.security.decode_id(id)
         role = self.role_manager.get(trans, role_id)
@@ -1891,7 +1891,7 @@ class DatasetCollectionManager:
 - DatasetCollectionManager needs to know how to construct all the other managers it is using, not just their interface.
 - `app` has a instance of this class and `app` is used to construct and instance of this class - this circular dependency
   chain results in brittleness and complexity in how to construct `app`.
-- `app` is very big and we're depending on a lot of it but not a large percent it. This makes typing less than ideal.
+- `app` is very big and we&apos;re depending on a lot of it but not a large percent it. This makes typing less than ideal.
 
 ---
 
@@ -1917,7 +1917,7 @@ class DatasetCollectionManager:
 - Difficult to unit test properly
   - What parts of app are being used?
   - How do we construct a smaller app with just those pieces?
-  - How do we stub out classes cleanly when we're creating the dependent objects internally.
+  - How do we stub out classes cleanly when we&apos;re creating the dependent objects internally.
 
 ---
 
@@ -1947,7 +1947,7 @@ class DatasetCollectionManager:
         self.ldda_manager = ldda_manager
 ```]
 
-- We're no longer depending on `app`.
+- We&apos;re no longer depending on `app`.
 - The type signature very clearly delineates what dependencies are required.
 - Unit testing can inject precise dependencies supplying only the behavior needed.
 
@@ -2012,11 +2012,11 @@ class: enlarge150
 
 ### Picking a Library
 
-Many of the existing DI libraries for Python predate widespread Python 3 and don't readily infer things based on types.
+Many of the existing DI libraries for Python predate widespread Python 3 and don&apos;t readily infer things based on types.
 The benefits of typing and DI are both enhanced by the other - so it was important to pick one that could do type-based
 injection.
 
-We went with Lagom, but we've built abstractions that would make it very easy to switch.
+We went with Lagom, but we&apos;ve built abstractions that would make it very easy to switch.
 
 ---
 
@@ -2043,7 +2043,7 @@ class FastAPITags:
     ...
 ```
 
-Dependency injection allows for type checking but doesn't use type inference (requires factory functions, etc..)
+Dependency injection allows for type checking but doesn&apos;t use type inference (requires factory functions, etc..)
 
 https://fastapi.tiangolo.com/tutorial/dependencies/
 
@@ -2087,7 +2087,7 @@ class: reduce90
 +    manager: TagsManager = depends(TagsManager)
 
      @router.put(
-         '/api/tags',
+         &apos;/api/tags&apos;,
 @@ -58,11 +54,8 @@ def update(
          self.manager.update(trans, payload)
 
@@ -2140,10 +2140,10 @@ def purge_hda(hda_manager: HDAManager, hda_id):
 
 @celery_app.task
 @galaxy_task
-def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id, model_class='HistoryDatasetAssociation'):
-    if model_class == 'HistoryDatasetAssociation':
+def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id, model_class=&apos;HistoryDatasetAssociation&apos;):
+    if model_class == &apos;HistoryDatasetAssociation&apos;:
         dataset = hda_manager.by_id(dataset_id)
-    elif model_class == 'LibraryDatasetDatasetAssociation':
+    elif model_class == &apos;LibraryDatasetDatasetAssociation&apos;:
         dataset = ldda_manager.by_id(dataset_id)
     dataset.datatype.set_meta(dataset)
 ```
@@ -2159,7 +2159,7 @@ def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id,
 - Consume only the related components you need to avoid `app` when possible.
 - Annotate inputs to the component with Python types.
 - Use interface types to shield consumers from implementation details.
-- Rely on Galaxy's dependency injection to construct the component and provide it to consumers.
+- Rely on Galaxy&apos;s dependency injection to construct the component and provide it to consumers.
 
 ---
 
@@ -2221,11 +2221,11 @@ Creating or updating service gunicorn
 Creating or updating service celery
 Creating or updating service celery-beat
 celery: added process group
-2022-01-20 14:44:24,619 INFO spawned: 'celery' with pid 291651
+2022-01-20 14:44:24,619 INFO spawned: &apos;celery&apos; with pid 291651
 celery-beat: added process group
-2022-01-20 14:44:24,620 INFO spawned: 'celery-beat' with pid 291652
+2022-01-20 14:44:24,620 INFO spawned: &apos;celery-beat&apos; with pid 291652
 gunicorn: added process group
-2022-01-20 14:44:24,622 INFO spawned: 'gunicorn' with pid 291653
+2022-01-20 14:44:24,622 INFO spawned: &apos;gunicorn&apos; with pid 291653
 celery                           STARTING
 celery-beat                      STARTING
 gunicorn                         STARTING
@@ -2249,9 +2249,9 @@ class: enlarge150
 ### Declaring a Task
 
 - Placed in `galaxy.celery.tasks`.
-- We've placed a layer around Celery to mirror what we're with API endpoints.
+- We&apos;ve placed a layer around Celery to mirror what we&apos;re with API endpoints.
   - Typed functions with Pydantic inputs implicitly mapped.
-  - Implicit type based dependency injection from Galaxy's DI container (using Lagom)
+  - Implicit type based dependency injection from Galaxy&apos;s DI container (using Lagom)
   - Feels a lot like writing an API endpoint.
 
 ---
@@ -2290,9 +2290,9 @@ def export_history(
     model_store_manager.setup_history_export_job(request)
 ```]
 
-- `galaxy_task` is a wrapper around Celery's `task` decorator
+- `galaxy_task` is a wrapper around Celery&apos;s `task` decorator
 - Wrap a simple function to turn it into a task.
-- Ensure all inputs are JSON serializable or components in Galaxy's dependency injection container
+- Ensure all inputs are JSON serializable or components in Galaxy&apos;s dependency injection container
 
 ---
 
@@ -2512,7 +2512,7 @@ class: enlarge200
 
 ### Batch Operations
 
-Task-based operations enable the most expensive of the new history's batch operations.
+Task-based operations enable the most expensive of the new history&apos;s batch operations.
 
 - Changing datatypes
 - Purging datasets
@@ -2599,7 +2599,7 @@ in a manager instead of in the model.
 ### Galaxy Models
 
 - Database interactions powered by SQLAlchemy - https://www.sqlalchemy.org/.
-- Galaxy doesn't think in terms of &quot;rows&quot; but &quot;objects&quot;.
+- Galaxy doesn&apos;t think in terms of &quot;rows&quot; but &quot;objects&quot;.
 - Classes for Galaxy model objects defined in `lib/galaxy/model/__init__.py`.
 - Classes mapped to database objects in same module via &quot;declarative mapping&quot;.
   - Classes/attributes mapped to tables/columns
@@ -2630,7 +2630,7 @@ in a manager instead of in the model.
 - Great documentation in code README - `lib/galaxy/model/migrations/README.md`
   - Admin perspective on how to migrate databases forward and revert on problems.
   - Developer persepctive on how to add new revisions.
-- Galaxy's data model is split into the galaxy model and the legacy install model:
+- Galaxy&apos;s data model is split into the galaxy model and the legacy install model:
   - Persisted in one combined database or two separate databases
   - Represented by 2 migration branches: &quot;gxy&quot; and &quot;tsi&quot;
 - Schema changes defined in revision modules:
@@ -2731,7 +2731,7 @@ that execute a `ToolAction`.
 ### A Little About Jobs
 
 - Job is placed into the database and picked up by the job handler.
-- Job handler (`JobHandler`) watches the job and transitions job's state - common startup and finishing.
+- Job handler (`JobHandler`) watches the job and transitions job&apos;s state - common startup and finishing.
 - Job mapper (`JobRunnerMapper`) decides the &quot;destination&quot; for a job.
 - Job runner (e.g. `DrammaJobRunner`) actual runs the job and provides an interface for checking status.
 
@@ -2818,7 +2818,7 @@ Data providers process data before sending to browser - slice, filter, reformat,
 ### Object Store
 
 .strike[```python
-&gt;&gt;&gt; fh = open(dataset.file_path, 'w')
+&gt;&gt;&gt; fh = open(dataset.file_path, &apos;w&apos;)
 &gt;&gt;&gt; fh.write(‘foo’)
 &gt;&gt;&gt; fh.close()
 &gt;&gt;&gt; fh = open(dataset.file_path, ‘r’)
@@ -2907,13 +2907,13 @@ class ContainerRegistry(object):
         # ... other stuff here
 
     def __build_container_resolvers(self, app_info):
-        conf_file = getattr(app_info, 'containers_resolvers_config_file', None)
+        conf_file = getattr(app_info, &apos;containers_resolvers_config_file&apos;, None)
         plugin_source = plugin_config.plugin_source_from_path(conf_file)
         return self._parse_resolver_conf(plugin_source)
 
     def _parse_resolver_conf(self, plugin_source):
         extra_kwds = {
-            'app_info': self.app_info
+            &apos;app_info&apos;: self.app_info
         }
         return plugin_config.load_plugins(
             self.resolver_classes, plugin_source, extra_kwds
@@ -2923,7 +2923,7 @@ class ContainerRegistry(object):
         import galaxy.tool_util.deps.container_resolvers
         return plugin_config.plugins_dict(
             galaxy.tool_util.deps.container_resolvers,
-            'resolver_type'
+            &apos;resolver_type&apos;
         )
 ```
 
@@ -2969,7 +2969,7 @@ resolver_type = &quot;cached_mulled&quot;
 
 ## Client Architecture
 
-*The architecture of Galaxy's web user interface.*
+*The architecture of Galaxy&apos;s web user interface.*
 
 ---
 
@@ -3065,7 +3065,7 @@ class: white
 - SCSS is a high-level superset of CSS - https://sass-lang.com/documentation/syntax
 - `sass` is leveraged by webpack to convert these styles to native CSS at client build time
 - Rebuild style with `make style`
-- Galaxy's SCSS files can be found in `client/src/style/scss/`
+- Galaxy&apos;s SCSS files can be found in `client/src/style/scss/`
 
 ---
 
@@ -3191,7 +3191,7 @@ template: left-aligned
 
 `script/common_startup.sh` sets up a `virtualenv` with required dependencies in `$GALAXY_ROOT/.venv` (or `$GALAXY_VIRTUAL_ENV` if set).
 
-- Check for existing virtual environment, if it doesn't exist check for `virtualenv`.
+- Check for existing virtual environment, if it doesn&apos;t exist check for `virtualenv`.
 - If `virtualenv` exists, use it. Otherwise download it as a script and setup a virtual environment using it.
 - `. &quot;$GALAXY_VIRTUAL_ENV/bin/activate&quot;`
 - Upgrade to latest `pip` to allow use of binary wheels.
@@ -3217,7 +3217,7 @@ template: left-aligned
 
 ```bash
 $ git clone https://github.com/galaxyproject/galaxy.git galaxy
-Cloning into 'galaxy'...
+Cloning into &apos;galaxy&apos;...
 remote: Counting objects: 173809, done.
 remote: Total 173809 (delta 0), reused 0 (delta 0), pack-reused 173809
 Receiving objects: 100% (173809/173809), 55.18 MiB | 11.08 MiB/s, done.
@@ -3226,7 +3226,7 @@ Checking connectivity... done.
 $ cd galaxy
 $ git checkout -b master origin/master
 Branch master set up to track remote branch master from origin.
-Switched to a new branch 'master'
+Switched to a new branch &apos;master&apos;
 $ sh run.sh
 ```
 
@@ -3255,7 +3255,7 @@ Initializing static/welcome.html from welcome.html.sample
 ### Setting up `.venv` and `pip`
 
 ```
-Using real prefix '/usr'
+Using real prefix &apos;/usr&apos;
 New python executable in .venv/bin/python
 Installing setuptools, pip, wheel...done.
 Activating virtualenv at .venv
@@ -3289,7 +3289,7 @@ Collecting mercurial==3.7.3 (from -r requirements.txt (line 6))
 ...
 Building wheels for collected packages: repoze.lru
   Running setup.py bdist_wheel for repoze.lru: started
-  Running setup.py bdist_wheel for repoze.lru: finished with status 'done'
+  Running setup.py bdist_wheel for repoze.lru: finished with status &apos;done&apos;
   Stored in directory: /home/john/.cache/pip/wheels/b2/cd/b3/7e24400bff83325a01d492940eff6e9579f553f33348323d79
 Successfully built repoze.lru
 Installing collected packages: bx-python, MarkupSafe, PyYAML, SQLAlchemy, mercurial, numpy, pycrypto, six, Paste, PasteDeploy, docutils, wchartype, repoze.lru, Routes, WebOb, WebHelpers, Mako, pytz, Babel, Beaker, dictobj, nose, Parsley, Whoosh, Markdown, Cheetah, requests, boto, requests-toolbelt, bioblend, anyjson, amqp, kombu, psutil, PasteScript, pulsar-galaxy-lib, sqlparse, pbr, decorator, Tempita, sqlalchemy-migrate, pyparsing, svgwrite, ecdsa, paramiko, Fabric, pysam
@@ -3308,7 +3308,7 @@ DEBUG:galaxy.app:python path is: /home/john/workspace/galaxy-clean/scripts,
 /home/john/workspace/galaxy-clean/lib, /home/john/workspace/galaxy-clean/.venv/lib/python2.7,/home/john/workspace/galaxy-clean/.venv/lib/python2.7/plat-x86_64-linux-gnu,
 /home/john/workspace/galaxy-clean/.venv/lib/python2.7/lib-tk, /home/john/workspace/galaxy-clean/.venv/lib/python2.7/lib-old, /home/john/workspace/galaxy-clean/.venv/lib/python2.7/lib-dynload,
 /usr/lib/python2.7, /usr/lib/python2.7/plat-x86_64-linux-gnu, /usr/lib/python2.7/lib-tk, /home/john/workspace/galaxy-clean/.venv/local/lib/python2.7/site-packages
-INFO:galaxy.config:Logging at '10' level to 'stdout'
+INFO:galaxy.config:Logging at &apos;10&apos; level to &apos;stdout&apos;
 galaxy.queue_worker INFO 2016-06-23 19:11:51,925 Initializing main Galaxy Queue Worker on sqlalchemy+sqlite:///./database/control.sqlite?isolation_level=IMMEDIATE
 tool_shed.tool_shed_registry DEBUG 2016-06-23 19:11:51,951 Loading references to tool sheds from ./config/tool_sheds_conf.xml.sample
 tool_shed.tool_shed_registry DEBUG 2016-06-23 19:11:51,951 Loaded reference to tool shed: Galaxy Main Tool Shed
@@ -3370,7 +3370,7 @@ migrate.versioning.script.base DEBUG 2016-06-23 19:13:35,636 Script lib/tool_she
 migrate.versioning.script.base DEBUG 2016-06-23 19:13:35,637 Script lib/tool_shed/galaxy_install/migrate/versions/0012_tools.py loaded successfully
 migrate.versioning.repository DEBUG 2016-06-23 19:13:35,637 Repository lib/tool_shed/galaxy_install/migrate loaded successfully
 tool_shed.galaxy_install.migrate.check DEBUG 2016-06-23 19:13:35,660 The main Galaxy tool shed is not currently available, so skipped tool migration 1 until next server startup
-galaxy.config INFO 2016-06-23 19:13:35,679 Install database targetting Galaxy's database configuration.
+galaxy.config INFO 2016-06-23 19:13:35,679 Install database targetting Galaxy&apos;s database configuration.
 ```]
 
 ---
@@ -3406,43 +3406,43 @@ galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Retrieved datatype modul
 class: reduce70
 
 .code[```
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:Sabund'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:Otu'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:GroupAbund'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:SecondaryStructureMap'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:LowerTriangleDistanceMatrix'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:SquareDistanceMatrix'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.mothur:PairwiseDistanceMatrix'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.mothur:Oligos'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.mothur:Quantile'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.mothur:Frequency'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.mothur:LaneMask'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.mothur:RefTaxonomy'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.mothur:Axes'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.constructive_solid_geometry:PlyAscii'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.constructive_solid_geometry:PlyBinary'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.constructive_solid_geometry:VtkAscii'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.constructive_solid_geometry:VtkBinary'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.interval:ScIdx'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.tabular:Vcf'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,826 Loaded sniffer for datatype 'galaxy.datatypes.binary:TwoBit'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,826 Loaded sniffer for datatype 'galaxy.datatypes.binary:GeminiSQLite'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,826 Loaded sniffer for datatype 'galaxy.datatypes.binary:MzSQlite'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:Sabund&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:Otu&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:GroupAbund&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:SecondaryStructureMap&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:LowerTriangleDistanceMatrix&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:SquareDistanceMatrix&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:PairwiseDistanceMatrix&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:Oligos&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:Quantile&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:Frequency&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:LaneMask&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:RefTaxonomy&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.mothur:Axes&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.constructive_solid_geometry:PlyAscii&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.constructive_solid_geometry:PlyBinary&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.constructive_solid_geometry:VtkAscii&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.constructive_solid_geometry:VtkBinary&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.interval:ScIdx&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype &apos;galaxy.datatypes.tabular:Vcf&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,826 Loaded sniffer for datatype &apos;galaxy.datatypes.binary:TwoBit&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,826 Loaded sniffer for datatype &apos;galaxy.datatypes.binary:GeminiSQLite&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,826 Loaded sniffer for datatype &apos;galaxy.datatypes.binary:MzSQlite&apos;
 ...
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype 'galaxy.datatypes.images:Psd'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype 'galaxy.datatypes.images:Xbm'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype 'galaxy.datatypes.images:Rgb'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype 'galaxy.datatypes.images:Pbm'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype 'galaxy.datatypes.images:Pgm'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype 'galaxy.datatypes.images:Xpm'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype 'galaxy.datatypes.images:Eps'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype 'galaxy.datatypes.images:Rast'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype 'galaxy.datatypes.binary:OxliCountGraph'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype 'galaxy.datatypes.binary:OxliNodeGraph'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype 'galaxy.datatypes.binary:OxliTagSet'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype 'galaxy.datatypes.binary:OxliStopTags'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype 'galaxy.datatypes.binary:OxliSubset'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype 'galaxy.datatypes.binary:OxliGraphLabels'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype &apos;galaxy.datatypes.images:Psd&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype &apos;galaxy.datatypes.images:Xbm&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype &apos;galaxy.datatypes.images:Rgb&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype &apos;galaxy.datatypes.images:Pbm&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype &apos;galaxy.datatypes.images:Pgm&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,832 Loaded sniffer for datatype &apos;galaxy.datatypes.images:Xpm&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype &apos;galaxy.datatypes.images:Eps&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype &apos;galaxy.datatypes.images:Rast&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype &apos;galaxy.datatypes.binary:OxliCountGraph&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype &apos;galaxy.datatypes.binary:OxliNodeGraph&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype &apos;galaxy.datatypes.binary:OxliTagSet&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype &apos;galaxy.datatypes.binary:OxliStopTags&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype &apos;galaxy.datatypes.binary:OxliSubset&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype &apos;galaxy.datatypes.binary:OxliGraphLabels&apos;
 ```
 ]
 
@@ -3451,12 +3451,12 @@ galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datat
 class: reduce70
 
 .code[```
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded build site 'ucsc': tool-data/shared/ucsc/ucsc_build_sites.txt with display sites: main,test,archaea,ucla
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site 'gbrowse': tool-data/shared/gbrowse/gbrowse_build_sites.txt with display sites: modencode,sgd_yeast,tair,wormbase,wormbase_ws120,wormbase_ws140,wormbase_ws170,wormbase_ws180,wormbase_ws190,wormbase_ws200,wormbase_ws204,wormbase_ws210,wormbase_ws220,wormbase_ws225
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site 'ensembl': tool-data/shared/ensembl/ensembl_sites.txt
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site 'ensembl_data_url': tool-data/shared/ensembl/ensembl_sites_data_URL.txt
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site 'igv': tool-data/shared/igv/igv_build_sites.txt
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site 'rviewer': tool-data/shared/rviewer/rviewer_build_sites.txt
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded build site &apos;ucsc&apos;: tool-data/shared/ucsc/ucsc_build_sites.txt with display sites: main,test,archaea,ucla
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site &apos;gbrowse&apos;: tool-data/shared/gbrowse/gbrowse_build_sites.txt with display sites: modencode,sgd_yeast,tair,wormbase,wormbase_ws120,wormbase_ws140,wormbase_ws170,wormbase_ws180,wormbase_ws190,wormbase_ws200,wormbase_ws204,wormbase_ws210,wormbase_ws220,wormbase_ws225
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site &apos;ensembl&apos;: tool-data/shared/ensembl/ensembl_sites.txt
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site &apos;ensembl_data_url&apos;: tool-data/shared/ensembl/ensembl_sites_data_URL.txt
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site &apos;igv&apos;: tool-data/shared/igv/igv_build_sites.txt
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site &apos;rviewer&apos;: tool-data/shared/rviewer/rviewer_build_sites.txt
 ```]
 
 ---
@@ -3465,14 +3465,14 @@ class: reduce70
 
 .code[```
 galaxy.tools.data INFO 2016-06-23 19:13:35,871 Could not find tool data tool-data/all_fasta.loc, reading sample
-galaxy.tools.data DEBUG 2016-06-23 19:13:35,871 Loaded tool data table 'all_fasta'
+galaxy.tools.data DEBUG 2016-06-23 19:13:35,871 Loaded tool data table &apos;all_fasta&apos;
 galaxy.tools.data INFO 2016-06-23 19:13:35,871 Could not find tool data tool-data/bfast_indexes.loc, reading sample
-galaxy.tools.data DEBUG 2016-06-23 19:13:35,871 Loaded tool data table 'bfast_indexes'
-galaxy.tools.data WARNING 2016-06-23 19:13:35,871 Cannot find index file 'tool-data/blastdb_p.loc' for tool data table 'blastdb_p'
+galaxy.tools.data DEBUG 2016-06-23 19:13:35,871 Loaded tool data table &apos;bfast_indexes&apos;
+galaxy.tools.data WARNING 2016-06-23 19:13:35,871 Cannot find index file &apos;tool-data/blastdb_p.loc&apos; for tool data table &apos;blastdb_p&apos;
 ...
-galaxy.tools.data DEBUG 2016-06-23 19:13:36,210 Loaded tool data table 'vcf_iobio'
+galaxy.tools.data DEBUG 2016-06-23 19:13:36,210 Loaded tool data table &apos;vcf_iobio&apos;
 galaxy.tools.data INFO 2016-06-23 19:13:36,211 Could not find tool data tool-data/biom_simple_display.loc, reading sample
-galaxy.tools.data DEBUG 2016-06-23 19:13:36,211 Loaded tool data table 'biom_simple_display'
+galaxy.tools.data DEBUG 2016-06-23 19:13:36,211 Loaded tool data table &apos;biom_simple_display&apos;
 
 ```]
 
@@ -3514,9 +3514,9 @@ class: reduce90
 ### Tool Dependency Resolution and Indexing
 
 .code[```
-galaxy.tools.deps WARNING 2016-06-23 19:13:36,498 Path './database/dependencies' does not exist, ignoring
-galaxy.tools.deps WARNING 2016-06-23 19:13:36,498 Path './database/dependencies' is not directory, ignoring
-galaxy.tools.deps DEBUG 2016-06-23 19:13:36,503 Unable to find config file './dependency_resolvers_conf.xml'
+galaxy.tools.deps WARNING 2016-06-23 19:13:36,498 Path &apos;./database/dependencies&apos; does not exist, ignoring
+galaxy.tools.deps WARNING 2016-06-23 19:13:36,498 Path &apos;./database/dependencies&apos; is not directory, ignoring
+galaxy.tools.deps DEBUG 2016-06-23 19:13:36,503 Unable to find config file &apos;./dependency_resolvers_conf.xml&apos;
 galaxy.tools.search DEBUG 2016-06-23 19:13:36,560 Starting to build toolbox index.
 galaxy.tools.search DEBUG 2016-06-23 19:13:37,789 Toolbox index finished. It took: 0:00:01.229406
 ```]
@@ -3528,19 +3528,19 @@ class: reduce70
 ### Display Applications
 
 .code[```
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,795 Loaded display application 'ucsc_bam' for datatype 'bam', inherit=False.
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,797 Loaded display application 'ensembl_bam' for datatype 'bam', inherit=False.
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,833 Loaded display application 'igv_bam' for datatype 'bam', inherit=False.
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,834 Loaded display application 'igb_bam' for datatype 'bam', inherit=False.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,795 Loaded display application &apos;ucsc_bam&apos; for datatype &apos;bam&apos;, inherit=False.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,797 Loaded display application &apos;ensembl_bam&apos; for datatype &apos;bam&apos;, inherit=False.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,833 Loaded display application &apos;igv_bam&apos; for datatype &apos;bam&apos;, inherit=False.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,834 Loaded display application &apos;igb_bam&apos; for datatype &apos;bam&apos;, inherit=False.
 ...
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,002 Loaded display application 'igv_vcf' for datatype 'vcf_bgzip', inherit=False.
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,003 Loaded display application 'biom_simple' for datatype 'biom1', inherit=False.
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,003 Adding inherited display application 'ensembl_gff' to datatype 'gtf'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,004 Adding inherited display application 'igv_gff' to datatype 'gtf'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,002 Loaded display application &apos;igv_vcf&apos; for datatype &apos;vcf_bgzip&apos;, inherit=False.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,003 Loaded display application &apos;biom_simple&apos; for datatype &apos;biom1&apos;, inherit=False.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,003 Adding inherited display application &apos;ensembl_gff&apos; to datatype &apos;gtf&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,004 Adding inherited display application &apos;igv_gff&apos; to datatype &apos;gtf&apos;
 ...
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,007 Adding inherited display application 'gbrowse_interval_as_bed' to datatype 'bed6'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,007 Adding inherited display application 'rviewer_interval' to datatype 'bed6'
-galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,007 Adding inherited display application 'igv_interval_as_bed' to datatype 'bed6'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,007 Adding inherited display application &apos;gbrowse_interval_as_bed&apos; to datatype &apos;bed6&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,007 Adding inherited display application &apos;rviewer_interval&apos; to datatype &apos;bed6&apos;
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,007 Adding inherited display application &apos;igv_interval_as_bed&apos; to datatype &apos;bed6&apos;
 ```]
 
 ---
@@ -3598,9 +3598,9 @@ galaxy.web.base.pluginframework INFO 2016-06-23 19:13:38,114 VisualizationsRegis
 ### Tours
 
 .code[```
-galaxy.tours INFO 2016-06-23 19:13:38,125 Loaded tour 'core.scratchbook'
-galaxy.tours INFO 2016-06-23 19:13:38,158 Loaded tour 'core.galaxy_ui'
-galaxy.tours INFO 2016-06-23 19:13:38,183 Loaded tour 'core.history'
+galaxy.tours INFO 2016-06-23 19:13:38,125 Loaded tour &apos;core.scratchbook&apos;
+galaxy.tours INFO 2016-06-23 19:13:38,158 Loaded tour &apos;core.galaxy_ui&apos;
+galaxy.tours INFO 2016-06-23 19:13:38,183 Loaded tour &apos;core.history&apos;
 ```]
 
 ---
@@ -3611,11 +3611,11 @@ class: reduce90
 
 .code[```
 galaxy.jobs.manager DEBUG 2016-06-23 19:13:38,196 Starting job handler
-galaxy.jobs INFO 2016-06-23 19:13:38,196 Handler 'main' will load all configured runner plugins
-galaxy.jobs.runners.state_handler_factory DEBUG 2016-06-23 19:13:38,198 Loaded 'failure' state handler from module galaxy.jobs.runners.state_handlers.resubmit
+galaxy.jobs INFO 2016-06-23 19:13:38,196 Handler &apos;main&apos; will load all configured runner plugins
+galaxy.jobs.runners.state_handler_factory DEBUG 2016-06-23 19:13:38,198 Loaded &apos;failure&apos; state handler from module galaxy.jobs.runners.state_handlers.resubmit
 galaxy.jobs.runners DEBUG 2016-06-23 19:13:38,198 Starting 5 LocalRunner workers
-galaxy.jobs DEBUG 2016-06-23 19:13:38,200 Loaded job runner 'galaxy.jobs.runners.local:LocalJobRunner' as 'local'
-galaxy.jobs DEBUG 2016-06-23 19:13:38,200 Legacy destination with id 'local:///', url 'local:///' converted, got params:
+galaxy.jobs DEBUG 2016-06-23 19:13:38,200 Loaded job runner &apos;galaxy.jobs.runners.local:LocalJobRunner&apos; as &apos;local&apos;
+galaxy.jobs DEBUG 2016-06-23 19:13:38,200 Legacy destination with id &apos;local:///&apos;, url &apos;local:///&apos; converted, got params:
 galaxy.jobs.handler DEBUG 2016-06-23 19:13:38,200 Loaded job runners plugins: local
 galaxy.jobs.handler INFO 2016-06-23 19:13:38,200 job handler stop queue started
 galaxy.jobs.handler INFO 2016-06-23 19:13:38,222 job handler queue started
@@ -3649,16 +3649,16 @@ class: reduce90
 ### Controllers
 
 .code[```
-galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,347 Enabling 'external_service' controller, class: ExternalService
-galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,347 Enabling 'requests_common' controller, class: RequestsCommon
-galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,375 Enabling 'library_common' controller, class: LibraryCommon
-galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,390 Enabling 'visualization' controller, class: VisualizationController
-galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,398 Enabling 'page' controller, class: PageController
-galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,400 Enabling 'async' controller, class: ASync
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,347 Enabling &apos;external_service&apos; controller, class: ExternalService
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,347 Enabling &apos;requests_common&apos; controller, class: RequestsCommon
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,375 Enabling &apos;library_common&apos; controller, class: LibraryCommon
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,390 Enabling &apos;visualization&apos; controller, class: VisualizationController
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,398 Enabling &apos;page&apos; controller, class: PageController
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,400 Enabling &apos;async&apos; controller, class: ASync
 ...
-galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,728 Enabling 'history_content_tags' API controller, class: HistoryContentTagsController
-galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,728 Enabling 'history_tags' API controller, class: HistoryTagsController
-galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,728 Enabling 'workflow_tags' API controller, class: WorkflowTagsController
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,728 Enabling &apos;history_content_tags&apos; API controller, class: HistoryContentTagsController
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,728 Enabling &apos;history_tags&apos; API controller, class: HistoryTagsController
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,728 Enabling &apos;workflow_tags&apos; API controller, class: WorkflowTagsController
 ```]
 
 ---
@@ -3668,12 +3668,12 @@ class: reduce90
 ### Middleware
 
 .code[```
-galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,036 Enabling 'httpexceptions' middleware
-galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,037 Enabling 'recursive' middleware
-galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,042 Enabling 'error' middleware
-galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,043 Enabling 'trans logger' middleware
-galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,044 Enabling 'x-forwarded-host' middleware
-galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,044 Enabling 'Request ID' middleware
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,036 Enabling &apos;httpexceptions&apos; middleware
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,037 Enabling &apos;recursive&apos; middleware
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,042 Enabling &apos;error&apos; middleware
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,043 Enabling &apos;trans logger&apos; middleware
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,044 Enabling &apos;x-forwarded-host&apos; middleware
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,044 Enabling &apos;Request ID&apos; middleware
 ```]
 
 ---
@@ -3832,7 +3832,7 @@ class: enlarge150
 
 ### Why not just Django?
 
-We do build on many of the same standards, concepts, and libraries - the entire stack isn't custom code but there is a non-trivial web framework defined in &quot;Galaxy&quot;.
+We do build on many of the same standards, concepts, and libraries - the entire stack isn&apos;t custom code but there is a non-trivial web framework defined in &quot;Galaxy&quot;.
 
 The Galaxy community likes Django and uses it to build newer webapps, Galaxy simply predates it and has evolved its own framework.
 

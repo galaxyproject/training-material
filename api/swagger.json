@@ -91,6 +91,7 @@
             "name": "id",
             "in": "path",
             "description": "ID of user to return",
+            "example": "hexylena",
             "required": true,
             "schema": {
               "type": "string"
@@ -141,6 +142,7 @@
             "name": "topicId",
             "in": "path",
             "description": "ID of the topic",
+            "example": "metagenomics",
             "required": true,
             "schema": {
               "type": "string"
@@ -171,6 +173,7 @@
           {
             "name": "topicId",
             "in": "path",
+            "example": "metagenomics",
             "description": "ID of the topic",
             "required": true,
             "schema": {
@@ -181,6 +184,7 @@
             "name": "tutorialId",
             "in": "path",
             "description": "ID of the tutorial",
+            "example": "mothur-miseq-sop-short",
             "required": true,
             "schema": {
               "type": "string"
@@ -191,6 +195,7 @@
             "in": "path",
             "description": "'slides' or 'tutorial', whichever material you want to request.",
             "required": true,
+            "example": "tutorial",
             "schema": {
               "type": "string"
             }
@@ -247,6 +252,96 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/ga4gh/trs/v2/tools/{topicId}-{tutorialId}/versions/{workflowId}": {
+      "get": {
+        "tags": [
+          "ga4gh-trs"
+        ],
+        "summary": "Obtain a workflow's metadata",
+        "parameters": [
+          {
+            "name": "topicId",
+            "in": "path",
+            "description": "ID of the topic",
+            "required": true,
+            "example": "metagenomics",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tutorialId",
+            "in": "path",
+            "description": "ID of the tutorial",
+            "required": true,
+            "example": "mothur-miseq-sop-short",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workflowId",
+            "in": "path",
+            "description": "ID of the workflow",
+            "required": true,
+            "example": "workflow1_quality_control",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/ga4gh/trs/v2/tools/{topicId}-{tutorialId}/versions/{workflowId}/GALAXY/descriptor": {
+      "get": {
+        "tags": [
+          "ga4gh-trs"
+        ],
+        "summary": "Obtain a workflow's information",
+        "parameters": [
+          {
+            "name": "topicId",
+            "in": "path",
+            "description": "ID of the topic",
+            "required": true,
+            "example": "metagenomics",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tutorialId",
+            "in": "path",
+            "description": "ID of the tutorial",
+            "required": true,
+            "example": "mothur-miseq-sop-short",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workflowId",
+            "in": "path",
+            "description": "ID of the workflow",
+            "required": true,
+            "example": "workflow1_quality_control",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
           }
         }
       }

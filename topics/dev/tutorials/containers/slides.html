@@ -434,7 +434,7 @@ Also mention Galaxy KickStart as a way to run Galaxy itself in a container.
 
 We are going to discuss containerizing tool execution instead - executing just jobs in containers.
 
-Containers for the particular job's tool.
+Containers for the particular job&apos;s tool.
 
 However you deploy Galaxy, including in a container, tool execution can still be containerized.
 
@@ -537,7 +537,7 @@ Now run Planemo `test` and `serve` with the `--docker` flag and as a tool develo
 * &lt;i class=&quot;fa fa-check-square-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Instruct Galaxy where to find a container for the tool.
 * &lt;i class=&quot;fa fa-check-square-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Instruct Galaxy to run the tool in a container.
 
-We're done... right?
+We&apos;re done... right?
 
 ???
 
@@ -587,7 +587,7 @@ Applying linter biocontainer_registered... CHECK
 
 ???
 
-But we didn't do anything - where did this magic seqtk container come from.
+But we didn&apos;t do anything - where did this magic seqtk container come from.
 
 ---
 
@@ -618,7 +618,7 @@ $ planemo test --biocontainers seqtk_seq.xml
 [galaxy.tools.deps.containers] Checking with container resolver [ExplicitDockerContainerResolver[]] found description [None]
 [galaxy.tools.deps.containers] Checking with container resolver [CachedMulledDockerContainerResolver[namespace=None]] found description [None]
 [galaxy.tools.deps.containers] Checking with container resolver [MulledDockerContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--1,type=docker]]
-[galaxy.jobs.command_factory] Built script [/tmp/tmpw8_UQm/job_working_directory/000/2/tool_script.sh] for tool command [seqtk seq -a '/tmp/tmpw8_UQm/files/000/dataset_1.dat' &gt; '/tmp/tmpw8_UQm/files/000/dataset_2.dat']
+[galaxy.jobs.command_factory] Built script [/tmp/tmpw8_UQm/job_working_directory/000/2/tool_script.sh] for tool command [seqtk seq -a &apos;/tmp/tmpw8_UQm/files/000/dataset_1.dat&apos; &gt; &apos;/tmp/tmpw8_UQm/files/000/dataset_2.dat&apos;]
 ...
 ok
 
@@ -672,7 +672,7 @@ TODO: Zoom in on the image a bit more ideally.
 
 ### .image-05[![biocontainers logo](../../images/biocontainers.png)] BioContainers - On Demand Creation
 
-Galaxy can be configured to attempt to build containers on demand for containers that haven't
+Galaxy can be configured to attempt to build containers on demand for containers that haven&apos;t
 been published to the BioContainers namespace on quay.io.
 
 These containers will have same names as would be published to quay.io (e.g. `quay.io/biocontainers/seqtk:1.2--0`).
@@ -686,7 +686,7 @@ These containers will have same names as would be published to quay.io (e.g. `qu
 * &lt;i class=&quot;fa fa-check-square-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-check-square-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Instruct Galaxy where to find a container for the tool.
 * &lt;i class=&quot;fa fa-check-square-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Instruct Galaxy to run the tool in a container.
 
-We're done this time now right?
+We&apos;re done this time now right?
 
 ???
 
@@ -790,8 +790,8 @@ class: reduce70
 
 ```
 $ planemo mull bwa_and_samtools.xml
-/Users/john/.planemo/involucro -v=3 -f /Users/john/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.9.0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua -set CHANNELS='iuc,bioconda,r,defaults,conda-forge' -set TEST='true' -set TARGETS='samtools=1.3.1,bwa=0.7.15' -set REPO='quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820' -set BINDS='build/dist:/usr/local/' -set PREINSTALL='conda install --quiet --yes conda=4.3' build
-/Users/john/.planemo/involucro -v=3 -f /Users/john/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.9.0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua -set CHANNELS='iuc,bioconda,r,defaults,conda-forge' -set TEST='true' -set TARGETS='samtools=1.3.1,bwa=0.7.15' -set REPO='quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820' -set BINDS='build/dist:/usr/local/' -set PREINSTALL='conda install --quiet --yes conda=4.3' build
+/Users/john/.planemo/involucro -v=3 -f /Users/john/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.9.0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua -set CHANNELS=&apos;iuc,bioconda,r,defaults,conda-forge&apos; -set TEST=&apos;true&apos; -set TARGETS=&apos;samtools=1.3.1,bwa=0.7.15&apos; -set REPO=&apos;quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820&apos; -set BINDS=&apos;build/dist:/usr/local/&apos; -set PREINSTALL=&apos;conda install --quiet --yes conda=4.3&apos; build
+/Users/john/.planemo/involucro -v=3 -f /Users/john/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.9.0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua -set CHANNELS=&apos;iuc,bioconda,r,defaults,conda-forge&apos; -set TEST=&apos;true&apos; -set TARGETS=&apos;samtools=1.3.1,bwa=0.7.15&apos; -set REPO=&apos;quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820&apos; -set BINDS=&apos;build/dist:/usr/local/&apos; -set PREINSTALL=&apos;conda install --quiet --yes conda=4.3&apos; build
 DEBU Run file [/Users/john/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.9.0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua]
 STEP Run image [continuumio/miniconda:latest] with command [[rm -rf /data/dist]]
 DEBU Creating container [step-730a02d79e]
@@ -929,7 +929,7 @@ daily for package combinations to publish.
 
 - It is becoming easier, more advantageous, and more common for Galaxy admins to run all tools within their own container.
 
-- You can explicitly define a container for your tool - but it is easier and more reproducible to let Galaxy find or build one using your tool's best practice requirements.
+- You can explicitly define a container for your tool - but it is easier and more reproducible to let Galaxy find or build one using your tool&apos;s best practice requirements.
 
 - The Galaxy community will infrastructure to automatically build and/or publish containers for your tool as long as it defines best practice Conda dependencies.
 

@@ -407,15 +407,15 @@ class: left
 .reduce90[
 ```
 Executing: PYTHONPATH=lib GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml VIRTUAL_ENV=/srv/galaxy/venv
-  /srv/galaxy/venv/bin/gunicorn 'galaxy.webapps.galaxy.fast_factory:factory()' --timeout 300 ...
+  /srv/galaxy/venv/bin/gunicorn &apos;galaxy.webapps.galaxy.fast_factory:factory()&apos; --timeout 300 ...
 DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/galaxy/server/lib, ...
 ... bunch of stuff ...
 Executing: PYTHONPATH=lib GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml VIRTUAL_ENV=/srv/galaxy/venv
-  /srv/galaxy/venv/bin/gunicorn 'galaxy.webapps.galaxy.fast_factory:factory()' --timeout 300 ...
+  /srv/galaxy/venv/bin/gunicorn &apos;galaxy.webapps.galaxy.fast_factory:factory()&apos; --timeout 300 ...
 DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/galaxy/server/lib, ...
 ... bunch of stuff ...
 Executing: PYTHONPATH=lib GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml VIRTUAL_ENV=/srv/galaxy/venv
-  /srv/galaxy/venv/bin/gunicorn 'galaxy.webapps.galaxy.fast_factory:factory()' --timeout 300 ...
+  /srv/galaxy/venv/bin/gunicorn &apos;galaxy.webapps.galaxy.fast_factory:factory()&apos; --timeout 300 ...
 DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/galaxy/server/lib, ...
 ...
 ```
@@ -429,11 +429,11 @@ DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/
 ---
 # Stuck in a restart loop
 
-The reason that Galaxy is dying might not be in the log. If it's not, then
+The reason that Galaxy is dying might not be in the log. If it&apos;s not, then
 
 If using **systemd** then it should be in `journalctl -eu galaxy-gunicorn`
 
-If using something else, it's wherever `stderr` is being redirected to (supervisor?)
+If using something else, it&apos;s wherever `stderr` is being redirected to (supervisor?)
 
 Or maybe the system is killing it... (`/var/log/{messages,syslog,kern.log}`, `dmesg`)
 
@@ -462,9 +462,9 @@ Your reverse proxy has failed to connect to the Galaxy socket
 - Check that your proxy and Galaxy/gunicorn socket options match
   - For UNIX domain sockets, ensure the web server user can r/w the socket
 - Check proxy server logs (e.g. `/var/log/nginx`)
-- Check gunicorn logs for `[&lt;PID&gt;] [ERROR] Connection in use: ('localhost', 8080)`
-  - Check that something is listening on the correct port (`sudo ss -tlpn 'sport = :port'` (demo!) or `sudo lsof -i :port` (demo!))
-  - If the culprit is gunicorn, make sure it's not an old one!
+- Check gunicorn logs for `[&lt;PID&gt;] [ERROR] Connection in use: (&apos;localhost&apos;, 8080)`
+  - Check that something is listening on the correct port (`sudo ss -tlpn &apos;sport = :port&apos;` (demo!) or `sudo lsof -i :port` (demo!))
+  - If the culprit is gunicorn, make sure it&apos;s not an old one!
 
 ---
 
@@ -600,7 +600,7 @@ Loaded tool id: toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33, version: 1.
 &lt;/tool&gt;
 ```
 
-- Multiple job handlers? Sometimes they don't all get the update.
+- Multiple job handlers? Sometimes they don&apos;t all get the update.
 
 ---
 
@@ -729,9 +729,9 @@ An incredibly useful feature to hit unruly tool dependencies with a large hammer
 
 # An aside - dependency problems on geriatric Galaxies
 
-Galaxy Tool Shed dependencies are dead.&lt;sup&gt;1&lt;/sup&gt; If you don't know what Tool Shed dependencies are (lucky you) skip this slide.
+Galaxy Tool Shed dependencies are dead.&lt;sup&gt;1&lt;/sup&gt; If you don&apos;t know what Tool Shed dependencies are (lucky you) skip this slide.
 
-Don't attempt to fix Galaxy Tool Shed dependencies, just update tool and use container (or Conda) deps.
+Don&apos;t attempt to fix Galaxy Tool Shed dependencies, just update tool and use container (or Conda) deps.
 
 Put Conda first in [dependency_resolvers_conf.xml](https://github.com/galaxyproject/galaxy/blob/dev/config/dependency_resolvers_conf.xml.sample) if you still need to support both.
 
@@ -747,7 +747,7 @@ Tool output contains:
 foo: error while loading shared libraries: libdeepthought.so.42: cannot open shared object file: No such file or directory
 ```
 
-`foo` was compiled against `libdeepthought.so.42` but it's not on the runtime linker path
+`foo` was compiled against `libdeepthought.so.42` but it&apos;s not on the runtime linker path
 
 Solutions:
 - Reinstall tool dependencies (&quot;Admin &gt; Manage dependencies&quot;). If it still fails&lt;sup&gt;2&lt;/sup&gt;:
@@ -783,7 +783,7 @@ Solutions:
 
 --
 
-Everything else: always the sysadmin's problem
+Everything else: always the sysadmin&apos;s problem
 
 ---
 
@@ -800,9 +800,9 @@ Use these tests (automateable with [Ephemeris](https://github.com/galaxyproject/
 ---
 class: smaller
 
-# Jobs aren't running: always gray
+# Jobs aren&apos;t running: always gray
 
-Corresponds to `job.state = 'new'` or `'queued'` in database
+Corresponds to `job.state = &apos;new&apos;` or `&apos;queued&apos;` in database
 
 .left[Check the Galaxy server log for errors. Successful job lifecycle:]
 
@@ -812,10 +812,10 @@ galaxy.tools.actions INFO 2023-04-20 13:51:20,747 [pN:main.1,p:273250,tN:WSGI_0]
 galaxy.tools.actions INFO 2023-04-20 13:51:20,759 [pN:main.1,p:273250,tN:WSGI_0] Added output datasets to history (12.102 ms)
 galaxy.tools.actions INFO 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Setup for job Job[unflushed,tool_id=secure_hash_message_digest] complete, ready to be enqueued (1.097 ms)
 galaxy.tools.execute DEBUG 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Tool secure_hash_message_digest created job None (21.968 ms)
-galaxy.web_stack.handlers INFO 2023-04-20 13:51:20,792 [pN:main.1,p:273250,tN:WSGI_0] (Job[id=2,tool_id=secure_hash_message_digest]) Handler '_default_' assigned using 'db-skip-locked' assignment method
+galaxy.web_stack.handlers INFO 2023-04-20 13:51:20,792 [pN:main.1,p:273250,tN:WSGI_0] (Job[id=2,tool_id=secure_hash_message_digest]) Handler &apos;_default_&apos; assigned using &apos;db-skip-locked&apos; assignment method
 galaxy.tools.execute DEBUG 2023-04-20 13:51:20,797 [pN:main.1,p:273250,tN:WSGI_0] Created 1 job(s) for tool secure_hash_message_digest request (60.168 ms)
 galaxy.jobs.handler DEBUG 2023-04-20 13:51:20,879 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Grabbed Job(s): 2
-tpv.rules.gateway INFO 2023-04-20 13:51:20,920 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] loading tpv rules from: ['https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml', '/srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml']
+tpv.rules.gateway INFO 2023-04-20 13:51:20,920 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] loading tpv rules from: [&apos;https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml&apos;, &apos;/srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml&apos;]
 tpv.rules.gateway INFO 2023-04-20 13:51:21,266 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Watching for changes in file: /srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml
 galaxy.util.watcher DEBUG 2023-04-20 13:51:21,266 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Watching for changes to file: /srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml
 tpv.core.entities DEBUG 2023-04-20 13:51:21,354 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Ranking destinations: [runner=local_runner, ... (line truncated)
@@ -826,7 +826,7 @@ galaxy.jobs DEBUG 2023-04-20 13:51:21,402 [pN:handler_1,p:272701,tN:JobHandlerQu
 galaxy.jobs.runners DEBUG 2023-04-20 13:51:21,412 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Job [2] queued (41.730 ms)
 galaxy.jobs.handler INFO 2023-04-20 13:51:21,423 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Job dispatched
 galaxy.jobs DEBUG 2023-04-20 13:51:21,500 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] Job wrapper for Job [2] prepared (70.012 ms)
-galaxy.jobs.command_factory INFO 2023-04-20 13:51:21,508 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] Built script [/data/jobs/000/2/tool_script.sh] for tool command [python '/srv/galaxy/server/tools/filters/secure_hash_message_digest.py' --input '/data/datasets/5/9/6/dataset_596da164-5b91-4003-8699-db43afd9f26d.dat' --output '/data/jobs/000/2/outputs/galaxy_dataset_bfc51e23-4d98-4968-b9f6-a7fc970fad28.dat' --algorithm &quot;sha256&quot;]
+galaxy.jobs.command_factory INFO 2023-04-20 13:51:21,508 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] Built script [/data/jobs/000/2/tool_script.sh] for tool command [python &apos;/srv/galaxy/server/tools/filters/secure_hash_message_digest.py&apos; --input &apos;/data/datasets/5/9/6/dataset_596da164-5b91-4003-8699-db43afd9f26d.dat&apos; --output &apos;/data/jobs/000/2/outputs/galaxy_dataset_bfc51e23-4d98-4968-b9f6-a7fc970fad28.dat&apos; --algorithm &quot;sha256&quot;]
 galaxy.jobs.runners DEBUG 2023-04-20 13:51:21,554 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] (2) command is: (multi-line output trimmed)
 galaxy.jobs.runners.local DEBUG 2023-04-20 13:51:21,558 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] (2) executing job script: /data/jobs/000/2/galaxy_2.sh
 galaxy.jobs.runners.util.process_groups DEBUG 2023-04-20 13:51:25,191 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] check_pg(): No process found in process group 587010
@@ -868,7 +868,7 @@ galaxy.tools.actions INFO 2023-04-20 13:51:20,747 [pN:main.1,p:273250,tN:WSGI_0]
 galaxy.tools.actions INFO 2023-04-20 13:51:20,759 [pN:main.1,p:273250,tN:WSGI_0] Added output datasets to history (12.102 ms)
 galaxy.tools.actions INFO 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Setup for job Job[unflushed,tool_id=secure_hash_message_digest] complete, ready to be enqueued (1.097 ms)
 galaxy.tools.execute DEBUG 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Tool secure_hash_message_digest created job None (21.968 ms)
-galaxy.web_stack.handlers INFO 2023-04-20 13:51:20,792 [pN:main.1,p:273250,tN:WSGI_0] (Job[id=2,tool_id=secure_hash_message_digest]) Handler '_default_' assigned using 'db-skip-locked' assignment method
+galaxy.web_stack.handlers INFO 2023-04-20 13:51:20,792 [pN:main.1,p:273250,tN:WSGI_0] (Job[id=2,tool_id=secure_hash_message_digest]) Handler &apos;_default_&apos; assigned using &apos;db-skip-locked&apos; assignment method
 galaxy.tools.execute DEBUG 2023-04-20 13:51:20,797 [pN:main.1,p:273250,tN:WSGI_0] Created 1 job(s) for tool secure_hash_message_digest request (60.168 ms)
 ```
 ]
@@ -886,10 +886,10 @@ class: smaller
 .reduce70[
 ```console
 galaxy.jobs.handler DEBUG 2023-04-20 13:51:20,879 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Grabbed Job(s): 2
-tpv.rules.gateway INFO 2023-04-20 13:51:20,920 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] loading tpv rules from: ['https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml', '/srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml']
+tpv.rules.gateway INFO 2023-04-20 13:51:20,920 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] loading tpv rules from: [&apos;https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml&apos;, &apos;/srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml&apos;]
 tpv.rules.gateway INFO 2023-04-20 13:51:21,266 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Watching for changes in file: /srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml
 galaxy.util.watcher DEBUG 2023-04-20 13:51:21,266 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Watching for changes to file: /srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml
-tpv.core.entities DEBUG 2023-04-20 13:51:21,354 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Ranking destinations: [runner=local_runner, dest_name=local_env, min_accepted_cores=None, min_accepted_mem=None, min_accepted_gpus=None, max_accepted_cores=1, max_accepted_mem=None, max_accepted_gpus=None, tpv_dest_tags=&lt;class 'tpv.core.entities.TagSetManager'&gt; tags=[], handler_tags=None&lt;class 'tpv.core.entities.Destination'&gt; id=local_env, abstract=False, cores=None, mem=None, gpus=None, min_cores = None, min_mem = None, min_gpus = None, max_cores = None, max_mem = None, max_gpus = None, env=None, params={'tmp_dir': True}, resubmit=None, tags=&lt;class 'tpv.core.entities.TagSetManager'&gt; tags=[], rank=, inherits=None, context=None, rules={}, runner=local_runner, dest_name=singularity, min_accepted_cores=None, min_accepted_mem=None, min_accepted_gpus=None, max_accepted_cores=1, max_accepted_mem=None, max_accepted_gpus=None, tpv_dest_tags=&lt;class 'tpv.core.entities.TagSetManager'&gt; tags=[], handler_tags=None&lt;class 'tpv.core.entities.Destination'&gt; id=singularity, abstract=False, cores=None, mem=None, gpus=None, min_cores = None, min_mem = None, min_gpus = None, max_cores = None, max_mem = None, max_gpus = None, env=[{'name': 'LC_ALL', 'value': 'C'}, {'name': 'SINGULARITY_CACHEDIR', 'value': '/tmp/singularity'}, {'name': 'SINGULARITY_TMPDIR', 'value': '/tmp'}], params={'singularity_enabled': True}, resubmit=None, tags=&lt;class 'tpv.core.entities.TagSetManager'&gt; tags=[], rank=, inherits=None, context=None, rules={}, runner=slurm, dest_name=slurm, min_accepted_cores=None, min_accepted_mem=None, min_accepted_gpus=None, max_accepted_cores=24, max_accepted_mem=256, max_accepted_gpus=None, tpv_dest_tags=&lt;class 'tpv.core.entities.TagSetManager'&gt; tags=[], handler_tags=None&lt;class 'tpv.core.entities.Destination'&gt; id=slurm, abstract=False, cores=None, mem=None, gpus=None, min_cores = None, min_mem = None, min_gpus = None, max_cores = 2, max_mem = 8, max_gpus = None, env=[{'name': 'LC_ALL', 'value': 'C'}, {'name': 'SINGULARITY_CACHEDIR', 'value': '/tmp/singularity'}, {'name': 'SINGULARITY_TMPDIR', 'value': '/tmp'}], params={'singularity_enabled': True, 'native_specification': &quot;--nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00&quot;}, resubmit={}, tags=&lt;class 'tpv.core.entities.TagSetManager'&gt; tags=[], rank=, inherits=singularity, context={}, rules={}] for entity: &lt;class 'tpv.core.entities.Tool'&gt; id=default, abstract=False, cores=1, mem=4, gpus=None, min_cores = None, min_mem = None, min_gpus = None, max_cores = None, max_mem = None, max_gpus = None, env=[], params={'walltime': 8}, resubmit={}, tags=&lt;class 'tpv.core.entities.TagSetManager'&gt; tags=[&lt;Tag: name=scheduling, value=offline, type=TagType.REJECT&gt;], rank=helpers.we, inherits=None, context={}, rules={} using custom function
+tpv.core.entities DEBUG 2023-04-20 13:51:21,354 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Ranking destinations: [runner=local_runner, dest_name=local_env, min_accepted_cores=None, min_accepted_mem=None, min_accepted_gpus=None, max_accepted_cores=1, max_accepted_mem=None, max_accepted_gpus=None, tpv_dest_tags=&lt;class &apos;tpv.core.entities.TagSetManager&apos;&gt; tags=[], handler_tags=None&lt;class &apos;tpv.core.entities.Destination&apos;&gt; id=local_env, abstract=False, cores=None, mem=None, gpus=None, min_cores = None, min_mem = None, min_gpus = None, max_cores = None, max_mem = None, max_gpus = None, env=None, params={&apos;tmp_dir&apos;: True}, resubmit=None, tags=&lt;class &apos;tpv.core.entities.TagSetManager&apos;&gt; tags=[], rank=, inherits=None, context=None, rules={}, runner=local_runner, dest_name=singularity, min_accepted_cores=None, min_accepted_mem=None, min_accepted_gpus=None, max_accepted_cores=1, max_accepted_mem=None, max_accepted_gpus=None, tpv_dest_tags=&lt;class &apos;tpv.core.entities.TagSetManager&apos;&gt; tags=[], handler_tags=None&lt;class &apos;tpv.core.entities.Destination&apos;&gt; id=singularity, abstract=False, cores=None, mem=None, gpus=None, min_cores = None, min_mem = None, min_gpus = None, max_cores = None, max_mem = None, max_gpus = None, env=[{&apos;name&apos;: &apos;LC_ALL&apos;, &apos;value&apos;: &apos;C&apos;}, {&apos;name&apos;: &apos;SINGULARITY_CACHEDIR&apos;, &apos;value&apos;: &apos;/tmp/singularity&apos;}, {&apos;name&apos;: &apos;SINGULARITY_TMPDIR&apos;, &apos;value&apos;: &apos;/tmp&apos;}], params={&apos;singularity_enabled&apos;: True}, resubmit=None, tags=&lt;class &apos;tpv.core.entities.TagSetManager&apos;&gt; tags=[], rank=, inherits=None, context=None, rules={}, runner=slurm, dest_name=slurm, min_accepted_cores=None, min_accepted_mem=None, min_accepted_gpus=None, max_accepted_cores=24, max_accepted_mem=256, max_accepted_gpus=None, tpv_dest_tags=&lt;class &apos;tpv.core.entities.TagSetManager&apos;&gt; tags=[], handler_tags=None&lt;class &apos;tpv.core.entities.Destination&apos;&gt; id=slurm, abstract=False, cores=None, mem=None, gpus=None, min_cores = None, min_mem = None, min_gpus = None, max_cores = 2, max_mem = 8, max_gpus = None, env=[{&apos;name&apos;: &apos;LC_ALL&apos;, &apos;value&apos;: &apos;C&apos;}, {&apos;name&apos;: &apos;SINGULARITY_CACHEDIR&apos;, &apos;value&apos;: &apos;/tmp/singularity&apos;}, {&apos;name&apos;: &apos;SINGULARITY_TMPDIR&apos;, &apos;value&apos;: &apos;/tmp&apos;}], params={&apos;singularity_enabled&apos;: True, &apos;native_specification&apos;: &quot;--nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params[&apos;walltime&apos;]}:00:00&quot;}, resubmit={}, tags=&lt;class &apos;tpv.core.entities.TagSetManager&apos;&gt; tags=[], rank=, inherits=singularity, context={}, rules={}] for entity: &lt;class &apos;tpv.core.entities.Tool&apos;&gt; id=default, abstract=False, cores=1, mem=4, gpus=None, min_cores = None, min_mem = None, min_gpus = None, max_cores = None, max_mem = None, max_gpus = None, env=[], params={&apos;walltime&apos;: 8}, resubmit={}, tags=&lt;class &apos;tpv.core.entities.TagSetManager&apos;&gt; tags=[&lt;Tag: name=scheduling, value=offline, type=TagType.REJECT&gt;], rank=helpers.we, inherits=None, context={}, rules={} using custom function
 ```
 ]
 
@@ -925,7 +925,7 @@ class: smaller
 .reduce70[
 ```console
 galaxy.jobs DEBUG 2023-04-20 13:51:21,500 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] Job wrapper for Job [2] prepared (70.012 ms)
-galaxy.jobs.command_factory INFO 2023-04-20 13:51:21,508 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] Built script [/data/jobs/000/2/tool_script.sh] for tool command [python '/srv/galaxy/server/tools/filters/secure_hash_message_digest.py' --input '/data/datasets/5/9/6/dataset_596da164-5b91-4003-8699-db43afd9f26d.dat' --output '/data/jobs/000/2/outputs/galaxy_dataset_bfc51e23-4d98-4968-b9f6-a7fc970fad28.dat' --algorithm &quot;sha256&quot;]
+galaxy.jobs.command_factory INFO 2023-04-20 13:51:21,508 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] Built script [/data/jobs/000/2/tool_script.sh] for tool command [python &apos;/srv/galaxy/server/tools/filters/secure_hash_message_digest.py&apos; --input &apos;/data/datasets/5/9/6/dataset_596da164-5b91-4003-8699-db43afd9f26d.dat&apos; --output &apos;/data/jobs/000/2/outputs/galaxy_dataset_bfc51e23-4d98-4968-b9f6-a7fc970fad28.dat&apos; --algorithm &quot;sha256&quot;]
 galaxy.jobs.runners DEBUG 2023-04-20 13:51:21,554 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] (2) command is: [command trimmed, see tool script (above), job script (below)]
 galaxy.jobs.runners.drmaa DEBUG 2023-04-20 13:51:21,821 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] (2) submitting file /srv/galaxy/jobs/000/2/galaxy_2.sh
 galaxy.jobs.runners.drmaa DEBUG 2023-04-20 13:51:21,843 [pN:handler_1,p:272701,tN:SlurmRunner.work_thread-3] (2) queued as 1
@@ -951,14 +951,14 @@ galaxy.jobs DEBUG 2023-04-20 13:51:25,250 [pN:handler_1,p:272701,tN:SlurmRunner.
 
 - `(2/1)` at beginning of job log messages now includes **Slurm** job ID
 - The job is done
-- Its `state` column and its output datasets' `state` columns have been updated to `ok`
+- Its `state` column and its output datasets&apos; `state` columns have been updated to `ok`
 
 ---
-# Jobs aren't running
+# Jobs aren&apos;t running
 
 ![Job in new state](../../images/troubleshooting/hda-new.png &quot;Job in new state&quot;)
 
-Corresponds to `job.state = 'new'` in database
+Corresponds to `job.state = &apos;new&apos;` in database
 
 Not yet picked up by the Galaxy job handler subsystem
 
@@ -984,9 +984,9 @@ class: left, reduce90
 Job handler assignment check:
 
 ```console
-$ journalctl -g ' is running$' -u 'galaxy-handler*'
-galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler_0' is running
-galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler_1' is running
+$ journalctl -g &apos; is running$&apos; -u &apos;galaxy-handler*&apos;
+galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance &apos;handler_0&apos; is running
+galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance &apos;handler_1&apos; is running
 ```
 
 ```console
@@ -1004,23 +1004,23 @@ In this case, `job_handler_0` is not `handler_0` or `handler_1` (probably due to
 
 # An aside - unruly logs
 
-`galaxyctl follow` or `journalctl -fu 'galaxy*'` follows *all* logs, which can make it hard to find what you're lookng for when watching live logs.
+`galaxyctl follow` or `journalctl -fu &apos;galaxy*&apos;` follows *all* logs, which can make it hard to find what you&apos;re lookng for when watching live logs.
 
 .left[Limit to specific services, e.g.:]
 
 `galaxyctl` | `systemctl`
 --- | ---
 `galaxyctl follow gunicorn` | `systemctl -fu galaxy-gunicorn`
-`galaxyctl follow handler` | `systemctl -fu 'galaxy-handler*'`
-`galaxyctl follow tusd` | `systemctl -fu 'galaxy-tusd'`
+`galaxyctl follow handler` | `systemctl -fu &apos;galaxy-handler*&apos;`
+`galaxyctl follow tusd` | `systemctl -fu &apos;galaxy-tusd&apos;`
 
 ---
 
-# Jobs aren't running
+# Jobs aren&apos;t running
 
 ![Job in queued state](../../images/troubleshooting/hda-queued.png &quot;Job in queued state&quot;)
 
-Corresponds to `job.state = 'queued'` in database
+Corresponds to `job.state = &apos;queued&apos;` in database
 
 A handler has seen this job
 
@@ -1032,7 +1032,7 @@ Users are *not* informed when they have reached the job limits. Exceeding disk q
 
 ---
 
-# Jobs aren't running
+# Jobs aren&apos;t running
 
 .left[Check database for:]
 - Destination ID (`gxadmin query job-info`)
@@ -1044,11 +1044,11 @@ If external ID is assigned, job is queued on a cluster. Use cluster queue status
 
 ---
 
-# Jobs aren't finishing
+# Jobs aren&apos;t finishing
 
 ![Job in running state](../../images/troubleshooting/hda-running.png &quot;Job in running state&quot;)
 
-Corresponds to `job.state = 'running'` in database
+Corresponds to `job.state = &apos;running&apos;` in database
 
 Get job runner external (DRM) ID (`gxadmin query job-info`), use cluster queue status tool(s) to investigate further.
 
@@ -1119,7 +1119,7 @@ Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.
 # Local or Network FS slow/down
 
 Solutions:
-- Don't put the Galaxy server in that FS. Local distribution, CVMFS, ??
+- Don&apos;t put the Galaxy server in that FS. Local distribution, CVMFS, ??
 - Install Galaxy in two places and use [Pulsar Embedded Mode](https://github.com/galaxyproject/galaxy/blob/3a90b833d1169100b07ba64332886a817aebb55d/lib/galaxy/config/sample/job_conf.sample.yml#L319) with [file actions](https://pulsar.readthedocs.io/en/latest/galaxy_conf.html#data-staging) to rewrite paths&lt;sup&gt;3&lt;/sup&gt;
 - Get a better network FS
 
@@ -1172,7 +1172,7 @@ This error is not indicative of any kind of failure. It just means that the clie
 ```
 psutil/_psutil_linux.c:12:20: fatal error: Python.h: No such file or directory
 compilation terminated.
-error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+error: command &apos;x86_64-linux-gnu-gcc&apos; failed with exit status 1
 ```
 
 Find `Python.h` on [packages.ubuntu.com](http://packages.ubuntu.com/) and install that package (hint: development package for Python 3)

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>User, Role, Group and Quota managment</title>
+        <title>User, Role, Group, Quota, and Authentication managment</title>
         
             <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 
@@ -21,9 +21,9 @@
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="User, Role, Group and Quota managment">
+<meta name="DC.title" content="User, Role, Group, Quota, and Authentication managment">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-21 00:08:06 +0000">
+<meta name="DC.date" content="2023-04-21 07:56:45 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Helena Rasche">
@@ -34,7 +34,7 @@
         
         <meta name="description" content="Collection of tutorials developed and maintained by the w...">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: User, Role, Group and Quota managment">
+        <meta property="og:title" content="Galaxy Training: User, Role, Group, Quota, and Authentication managment">
         <meta property="og:description" content="Collection of tutorials developed and maintained by the w...">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
@@ -188,12 +188,35 @@
         <div class="container main-content" role="main">
         <section class="tutorial">
 	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/users-groups-quotas/slides.html">View markdown source on GitHub</a>
-	<h1>User, Role, Group and Quota managment</h1>
+	<h1>User, Role, Group, Quota, and Authentication managment</h1>
 		<h2>Contributors</h2>
 <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/natefoo?s=27" alt="Avatar">Nate Coraor</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bgruening?s=27" alt="Avatar">Björn Grüning</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/natefoo?s=27" alt="Avatar">Nate Coraor</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bgruening?s=27" alt="Avatar">Björn Grüning</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
 	</div>
 
 </div>
@@ -207,6 +230,18 @@
 </li>
 		
 		<li><p>How can I assign Quotas to specific users/groups?</p>
+</li>
+		
+		<li><p>How should I manage groups vs roles</p>
+</li>
+		
+		<li><p>What authentication methods are available?</p>
+</li>
+		
+		<li><p>How is dataset privacy managed?</p>
+</li>
+		
+		<li><p>Authentication Systems, what is available and how can I enable it?</p>
 </li>
 		
 		</ul>
@@ -232,38 +267,14 @@
 	<hr />
 
 
-	<h1 id="users-groups-and-quotas">Users, Groups, and Quotas</h1>
+	<h1 id="users">Users</h1>
 
 <p><span>Speaker Notes</span></p>
 
-<p>Users, Groups, and Quotas</p>
+<p>Users</p>
 
 <hr />
 
-<h2 id="overview">Overview</h2>
-
-<p>This section will cover handling of users, groups and quotas for Galaxy. We will look at the following in particular:</p>
-<ul>
-  <li>User Activation and Control</li>
-  <li>User Passwords and Session Policies</li>
-  <li>Setting Admin users and admin control of users</li>
-  <li>User Privacy</li>
-  <li>Roles and Groups</li>
-  <li>Setting permissions on Libraries and Datasets</li>
-  <li>Quotas</li>
-  <li>Introduction to alternate authentication</li>
-</ul>
-
-<p><span>Speaker Notes</span></p>
-
-<ul>
-  <li>There are a large number of topics related to users, groups and quotas</li>
-  <li>As an admin you have lots of control over this</li>
-  <li>Most of the configuration lives in the galaxy.yaml file</li>
-  <li>Some of the configuration must be done in the UI</li>
-</ul>
-
-<hr />
 <h2 id="user-control">User Control</h2>
 
 <table>
@@ -311,6 +322,7 @@
   <li>Are users able to register themselves?</li>
   <li>Are users able to purge datasets themselves?</li>
   <li>All of these are questions you will need to consider.</li>
+  <li>The API allow run as option can be useful if you have an external system submitting jobs to Galaxy on behalf of your users.</li>
 </ul>
 
 <hr />
@@ -354,37 +366,6 @@
   <li>Whenever a user registers, user activation settings control how this process happens</li>
   <li>If you want to require activation they cannot run tools until they receive the confirmation email</li>
   <li>If you want to prevent users registering from specific domains</li>
-</ul>
-
-<hr />
-<h2 id="password--session-policies">Password &amp; Session Policies</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>option</th>
-      <th>description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">password_expiration_period</code></td>
-      <td>Days before requiring a user to change password. (<a href="https://en.wikipedia.org/wiki/Password_policy#NIST_guidelines">NIST recommends not requiring password changes.</a>)</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">session_duration</code></td>
-      <td>Minutes before invaliding a user’s session, requiring re-login.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>.footnote[.center[options in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>]]</p>
-
-<p><span>Speaker Notes</span></p>
-
-<ul>
-  <li>Some options are related to IT security policies</li>
-  <li>Check with your local IT authority for best practices for your organisation</li>
 </ul>
 
 <hr />
@@ -471,9 +452,15 @@
 
 <hr />
 
-<h2 id="roles-and-groups">Roles and Groups</h2>
+<h1 id="roles-and-groups">Roles and Groups</h1>
 
-<h4 id="role-based-access-control-rbac">Role Based Access Control (RBAC)</h4>
+<p><span>Speaker Notes</span></p>
+
+<p>Roles and Groups</p>
+
+<hr />
+
+<h3 id="role-based-access-control-rbac">Role Based Access Control (RBAC)</h3>
 
 <p><strong>Admin</strong> can:</p>
 <ul>
@@ -559,7 +546,16 @@
 </ul>
 
 <hr />
-<h2 id="quotas">Quotas</h2>
+
+<h1 id="quotas">Quotas</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Quotas</p>
+
+<hr />
+
+<h2 id="quotas-1">Quotas</h2>
 
 <p>Used to control user disk usage.</p>
 
@@ -607,6 +603,7 @@
 
 <hr />
 <p>class: left</p>
+
 <h2 id="quota-details">Quota Details</h2>
 
 <ul>
@@ -630,6 +627,7 @@
 </ul>
 
 <hr />
+
 <h2 id="quota-automation">Quota Automation</h2>
 
 <ul>
@@ -644,6 +642,169 @@
 <ul>
   <li>Quotas can be managed through the API</li>
   <li>Some people want to automate this process, but it needs more work.</li>
+</ul>
+
+<hr />
+
+<h1 id="authentication-systems">Authentication Systems</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Authentication Systems</p>
+
+<hr />
+
+<h2 id="ldap--ad">LDAP / AD</h2>
+
+<ul>
+  <li>Galaxy can be configured to use LDAP or Active Directory for authentication</li>
+  <li>There is a config file named <code class="language-plaintext highlighter-rouge">config/auth_conf.xml</code></li>
+  <li>User login then triggers an LDAP search for the user
+    <ul>
+      <li>(optional) Galaxy binds with some bind credentials</li>
+      <li>Searches for the user DN</li>
+      <li>Re-binds with the user DN and password</li>
+      <li>If the user is found, they are logged in</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>LDAP and Active Directory can be used as an authentication method</li>
+  <li>This is done through the auth_conf.xml file</li>
+  <li>When the user logs in, the LDAP server is queried for the user</li>
+</ul>
+
+<hr />
+
+<h2 id="shibboleth-cas">Shibboleth, CAS</h2>
+
+<ul>
+  <li>Many alternative authentication systems are widely used at universities and organisations</li>
+  <li>Galaxy itself does not natively support these systems</li>
+  <li>However, you can use a proxy to authenticate users</li>
+  <li>nginx and apache have modules for both of these methods</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Shibboleth and CAS are commonly used at some universities</li>
+  <li>While Galaxy does not natively support these, you can use a proxy to authenticate users</li>
+  <li>Nginx and apache both support this</li>
+</ul>
+
+<hr />
+
+<h2 id="oidc">OIDC</h2>
+
+<ul>
+  <li>Galaxy can be configured to use OpenID Connect for authentication</li>
+  <li>There are two configuration files:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">config/oidc_backends_config.xml</code></li>
+      <li><code class="language-plaintext highlighter-rouge">config/oidc_config.xml</code></li>
+    </ul>
+  </li>
+  <li>Supports a variety of providers:
+    <ul>
+      <li>Google</li>
+      <li>Custos</li>
+      <li>Globus</li>
+      <li>ORCID</li>
+      <li>LS Login (Elixir AAI)</li>
+      <li>KeyCloack</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>OIDC is a common authentication method</li>
+  <li>There are two configuration files required for this</li>
+  <li>Galaxy supports a variety of providers</li>
+  <li>OIDC means you as an administrator don’t have to worry about validating the account, or storing passwords</li>
+</ul>
+
+<hr />
+
+<h2 id="built-in-authentication">Built in Authentication</h2>
+
+<ul>
+  <li>Galaxy has it’s own authentication system</li>
+  <li>Enabled by default</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">password_expiration_period</code></td>
+      <td>Days before requiring a user to change password. (<a href="https://en.wikipedia.org/wiki/Password_policy#NIST_guidelines">NIST recommends not requiring password changes.</a>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">session_duration</code></td>
+      <td>Minutes before invaliding a user’s session, requiring re-login.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.footnote[.center[options in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Galaxy has it’s own authentication system</li>
+  <li>There are some options are related to IT security policies</li>
+  <li>Check with your local IT authority for best practices for your organisation</li>
+  <li>Please consider not setting a password expiration period, as NIST recommends against it</li>
+</ul>
+
+<hr />
+
+<h2 id="others-remote_user">Others (<code class="language-plaintext highlighter-rouge">REMOTE_USER</code>)</h2>
+
+<ul>
+  <li>For all other authentication systems</li>
+  <li>If your authentication system provides a username in some secure way to the webserver</li>
+  <li>Then you can use it to authenticate users</li>
+  <li>The webserver must set the <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> header</li>
+  <li>Galaxy will <strong>trust</strong> this header</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>If you use a different authentication system than one previously mentioned</li>
+  <li>and your users are authenticated in some manner through your webserver/proxy</li>
+  <li>Then you can take advantage of <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> authentication</li>
+  <li>It is a very simple authentication method, the webserver sets a header, and galaxy implicitly trusts it.</li>
+</ul>
+
+<hr />
+
+<h3 id="remote-user-security">Remote User (Security)</h3>
+
+<ul>
+  <li>If you have local users on the Galaxy head node</li>
+  <li>Then please set <code class="language-plaintext highlighter-rouge">remote_user_secret</code></li>
+  <li>This will send an additional secret header to Galaxy that will be validated</li>
+  <li>Otherwise local users can <code class="language-plaintext highlighter-rouge">curl</code> your Galaxy server, and impersonate any user.</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>An important aspect for security is that if you have local users on the Galaxy head node</li>
+  <li>Then you should set the <code class="language-plaintext highlighter-rouge">remote_user_secret</code> option, to prevent them impersonating other users</li>
 </ul>
 
 
@@ -681,6 +842,9 @@ This material is licensed under the <a rel="license" href="https://creativecommo
 
 
 
+
+
+
         </div>
         
             <footer>
@@ -694,7 +858,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/ec8e769c45ede1acb88fe76cbbc625c57bc682c0">ec8e769c45ede1acb88fe76cbbc625c57bc682c0</a>. </p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/16f0a1aec4bda84438bf1d5876ea14baaaefa963">16f0a1aec4bda84438bf1d5876ea14baaaefa963</a>. </p>
     </div>
 </footer>
 

@@ -438,7 +438,7 @@ Useful when presenting.
 
 # Database Queries
 
-Sometimes it's the best way to get the exact data you need
+Sometimes it&apos;s the best way to get the exact data you need
 
 Can be very useful for:
 - Debugging
@@ -461,17 +461,17 @@ But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing y
 
 ```sql
 SELECT
-  date_trunc('month', j.create_time) AS month,
+  date_trunc(&apos;month&apos;, j.create_time) AS month,
   j.state,
   COUNT(j.state) AS job_count
 FROM job j
 LEFT OUTER JOIN galaxy_user u
   ON j.user_id = u.id
-WHERE u.email != 'monitor@bx.psu.edu'
+WHERE u.email != &apos;monitor@bx.psu.edu&apos;
 GROUP BY month,
          j.state
-HAVING date_trunc('month', j.create_time) &gt;= '2016-09-01'
-AND date_trunc('month', j.create_time) &lt; '2016-11-01'
+HAVING date_trunc(&apos;month&apos;, j.create_time) &gt;= &apos;2016-09-01&apos;
+AND date_trunc(&apos;month&apos;, j.create_time) &lt; &apos;2016-11-01&apos;
 ORDER BY month, j.state;
 ```
 
@@ -479,7 +479,7 @@ ORDER BY month, j.state;
 
 - We often get requests like how many jobs were run in a time period, and did they finish successfully.
 - So we write some SQL like this.
-- As an admin, you'll want to understand SQL.
+- As an admin, you&apos;ll want to understand SQL.
 
 ---
 # Database Queries
@@ -512,9 +512,9 @@ ORDER BY month, j.state;
 ---
 # gxadmin
 
-- It's unpleasant to write queries every time you need them.
+- It&apos;s unpleasant to write queries every time you need them.
 - So the community collects SQL in `gxadmin`.
-- It's a giant bash script full of SQL and some magic ✨
+- It&apos;s a giant bash script full of SQL and some magic ✨
 - [github.com/usegalaxy-eu/gxadmin](https://github.com/usegalaxy-eu/gxadmin)
 
 ???
@@ -552,7 +552,7 @@ LIMIT 12;
 - However, some of these queries we run over and over.
 - And those we include in gxadmin.
 - This way every admin has access to all of the interesting queries we run.
-- And we don't get repetitive strain injury typing SQL.
+- And we don&apos;t get repetitive strain injury typing SQL.
 
 ---
 # Database Queries
@@ -630,7 +630,7 @@ $ gxadmin query latest-users
 ```sql
 SELECT
 	id,
-	create_time AT TIME ZONE 'UTC' as create_time,
+	create_time AT TIME ZONE &apos;UTC&apos; as create_time,
 	pg_size_pretty(disk_usage) as disk_usage,
 	username,
 	email,
@@ -683,7 +683,7 @@ LIMIT 40
 Converting SQL query output to tabular and other formats
 
 ```SQL
-COPY (...) to STDOUT with CSV DELIMITER E'\t'
+COPY (...) to STDOUT with CSV DELIMITER E&apos;\t&apos;
 ```
 
 **or**

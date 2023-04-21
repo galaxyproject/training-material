@@ -451,7 +451,7 @@ tooltip: Show Username
 
 function: &gt;
   $.getJSON(&quot;/api/webhooks/trans_object/get_data&quot;, function(data) {
-    alert('Username: ' + data.username);
+    alert(&apos;Username: &apos; + data.username);
   });
 ```
 
@@ -477,8 +477,8 @@ def main(trans, webhook):
     if trans.user:
         user = trans.user.username
     else:
-        user = 'No user is logged in.'
-    return {'username': user}
+        user = &apos;No user is logged in.&apos;
+    return {&apos;username&apos;: user}
 ```
 
 The return value can be read with a call to `/api/webhooks/WEBHOOK_NAME/get_data`
@@ -529,7 +529,7 @@ The return value can be read with a call to `/api/webhooks/WEBHOOK_NAME/get_data
 
 - Right now there are 4 entry points: tool, workflow, masthead, history-menu
 
-- With a minimal amount of code you can extend Galaxy's user-interace.
+- With a minimal amount of code you can extend Galaxy&apos;s user-interace.
 
 
 
