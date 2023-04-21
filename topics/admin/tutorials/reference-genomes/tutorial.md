@@ -200,7 +200,7 @@ Next, we will install some reference data. Specifically, we will grab sacCer2 (v
 > <hands-on-title>Download and install sacCer2</hands-on-title>
 >
 > 1. Access the Admin menu from the top bar
-> 2. Click **Local Data**, which can be found on the left, under **Server**
+> 2. [Click **Local Data**](https://my.gat.galaxy.training/?path=/admin/data_manager), which can be found on the left, under **Server**
 >
 >    You should see something like this:
 >
@@ -208,7 +208,7 @@ Next, we will install some reference data. Specifically, we will grab sacCer2 (v
 >
 >    If you instead see the message "You do not currently have any Data Managers installed," you may need to restart your Galaxy server.
 >
-> 3. Click **all_fasta** under **View Tool Data Table Entries**
+> 3. [Click **all_fasta**](https://my.gat.galaxy.training/?path=/admin/data_manager/table/all_fasta) under **View Tool Data Table Entries**
 >
 >    You should see the current contents of `tool-data/all_fasta.loc`, which will be empty.
 >

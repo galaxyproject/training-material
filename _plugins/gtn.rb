@@ -5,6 +5,7 @@ require './_plugins/gtn/synthetic'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
 require './_plugins/jekyll-topic-filter'
+require 'time'
 
 
 puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"

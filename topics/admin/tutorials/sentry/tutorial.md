@@ -117,9 +117,9 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    --- a/hosts
 >    +++ b/hosts
 >    @@ -6,3 +6,6 @@ galaxyservers
->     gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
+>     gat-0.oz.galaxy.training ansible_user=ubuntu
 >     [monitoring]
->     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>     gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
 >    +
 >    +[sentryservers]
 >    +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
@@ -256,7 +256,7 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -212,6 +212,7 @@ nginx_servers:
+>    @@ -216,6 +216,7 @@ nginx_servers:
 >       - redirect-ssl
 >     nginx_ssl_servers:
 >       - galaxy
@@ -301,7 +301,7 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -113,6 +113,8 @@ galaxy_config:
+>    @@ -116,6 +116,8 @@ galaxy_config:
 >         # Monitoring
 >         statsd_host: localhost
 >         statsd_influxdb: true
@@ -435,7 +435,7 @@ In addition to sending logging errors to Sentry you can also collect failing too
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -115,6 +115,7 @@ galaxy_config:
+>    @@ -118,6 +118,7 @@ galaxy_config:
 >         statsd_influxdb: true
 >         sentry_dsn: "{{ vault_galaxy_sentry_dsn }}"
 >         sentry_traces_sample_rate: 0.5
@@ -443,7 +443,7 @@ In addition to sending logging errors to Sentry you can also collect failing too
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -167,6 +168,8 @@ galaxy_config_files:
+>    @@ -170,6 +171,8 @@ galaxy_config_files:
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >       - src: files/galaxy/config/tpv_rules_local.yml
 >         dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
@@ -452,7 +452,7 @@ In addition to sending logging errors to Sentry you can also collect failing too
 >     
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
->    @@ -187,6 +190,7 @@ tpv_privsep: true
+>    @@ -191,6 +194,7 @@ tpv_privsep: true
 >     
 >     galaxy_local_tools:
 >     - testing.xml

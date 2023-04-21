@@ -275,7 +275,7 @@ Let's try setting that up in our Galaxy!
 
 ![Screenshot of data libraries, we're in a library folder named "Mouse sequencing project" and a directory and single file are shown. The file has an ugly URL as its name](../../images/data/imported.png)
 
-That's it! You should be able to see your newly created data library in your Galaxy.
+That's it! You should be able to [see your newly created data library in your Galaxy.](https://my.gat.galaxy.training/?path=/libraries)
 
 > ```bash
 > 2.sh

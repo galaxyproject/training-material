@@ -163,7 +163,7 @@ If we want to change something in production, it is always a good idea to have a
 Once you are done with your changes, you can run the script and it will automatically lint and copy over the files, if they are correct *and* mentioned in your job_conf.yml file, or in your `group_vars/galaxyservers.yml` inline `job_conf`.
 And of course, Galaxy has an Ansible Role for that.
 
-><hands-on-title>Adding automated TPV-lind-and-copy-script</hands-on-title>
+> <hands-on-title>Adding automated TPV-lind-and-copy-script</hands-on-title>
 >
 > 1. Add the role to your `requirements.yml`.
 >    {% raw %}
@@ -180,7 +180,18 @@ And of course, Galaxy has an Ansible Role for that.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tpv-auto-lint to requirements"}
+>
+> 1. Install the missing role
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 > 2. Change your `group_vars/galaxyservers.yml`. We need to create a new directory where the TPV configs will be stored after linting, and add that directory name as variable for the role. The default name is 'TPV_DO_NOT_TOUCH' for extra safety 😉. If you want a different name, you need to change the `tpv_config_dir_name` variable, too. We also need to create a directory, `tpv_mutable_dir` (a role default variable), where TPV configs are copied before linting.
+>
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
@@ -194,11 +205,10 @@ And of course, Galaxy has an Ansible Role for that.
 >     galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->    @@ -150,7 +152,11 @@ galaxy_config_templates:
->         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>    @@ -151,6 +153,11 @@ galaxy_config_templates:
 >     
 >     galaxy_extra_dirs:
->    -  - /data
+>       - /data
 >    +  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
 >    +
 >    +galaxy_extra_privsep_dirs:
@@ -266,7 +276,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    -          value: C
 >    -        - name: SINGULARITY_CACHEDIR
 >    -          value: /tmp/singularity
->    -        - name: SINGULARITY_TMPDIR
+>    -        - name: APPTAINER_TMPDIR
 >    -          value: /tmp
 >    -      singularity:
 >    -        runner: local_runner
@@ -338,7 +348,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +      # The cache directory holds the docker containers that get converted
 >    +      SINGULARITY_CACHEDIR: /tmp/singularity
 >    +      # Singularity uses a temporary directory to build the squashfs filesystem
->    +      SINGULARITY_TMPDIR: /tmp
+>    +      APPTAINER_TMPDIR: /tmp
 >    +  slurm:
 >    +    inherits: singularity
 >    +    runner: slurm
@@ -615,7 +625,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -37,6 +37,11 @@ galaxy_job_config:
+>    @@ -37,9 +37,17 @@ galaxy_job_config:
 >             tpv_config_files:
 >               - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
 >               - "{{ tpv_config_dir }}/tpv_rules_local.yml"
@@ -627,7 +637,13 @@ Such form elements can be added to tools without modifying each tool's configura
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -56,6 +61,7 @@ galaxy_config:
+>    +    - id: testing
+>    +      environment: tpv_dispatcher
+>    +      resources: testing
+>     
+>     galaxy_config:
+>       galaxy:
+>    @@ -56,6 +64,7 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -635,7 +651,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -137,6 +143,8 @@ galaxy_config_templates:
+>    @@ -137,6 +146,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
@@ -643,7 +659,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
 >     
 >     galaxy_extra_dirs:
->       - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
+>       - /data
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}
@@ -671,7 +687,7 @@ Lastly, we need to write a rule in TPV that will read the value of the job resou
 
 > <hands-on-title>Processing job resource parameters in TPV</hands-on-title>
 >
-> 1. Create and edit `files/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
+> 1. Create and edit `files/galaxy/config/tpv_rules_local.yml`. Create it with the following contents:
 >
 >    {% raw %}
 >    ```diff

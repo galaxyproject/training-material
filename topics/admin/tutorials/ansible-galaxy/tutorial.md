@@ -2009,11 +2009,11 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -0,0 +1,61 @@
 >    +upstream galaxy {
->    +	server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock;
+>    +	server {{ galaxy_config.gravity.gunicorn.bind }};
 >    +
 >    +	# Or if you serve galaxy at a path like http(s)://fqdn/galaxy
 >    +	# Remember to set galaxy_url_prefix in the galaxy.yml file.
->    +	# server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock:/galaxy;
+>    +	# server {{ galaxy_config.gravity.gunicorn.bind }}:/galaxy;
 >    +}
 >    +
 >    +server {

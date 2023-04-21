@@ -2,6 +2,8 @@ require 'json'
 require './_plugins/jekyll-topic-filter.rb'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
+require './_plugins/gtn/git'
+require './_plugins/gtn'
 
 module Jekyll
   ##
@@ -74,10 +76,41 @@ module Jekyll
     end
 
     ##
+    # Generates /api/configuration.json
+    # Params:
+    # +site+:: +Jekyll::Site+ object
+    # Returns:
+    # nil
+    def generateConfiguration(site)
+      page2 = PageWithoutAFile.new(site, "", "api/", "configuration.json")
+      site.config.update(Gtn::Git.discover)
+      page2.content = JSON.pretty_generate(site.config)
+      page2.data["layout"] = nil
+      site.pages << page2
+    end
+
+    ##
+    # Generates /api/version.json
+    # Params:
+    # +site+:: +Jekyll::Site+ object
+    # Returns:
+    # nil
+    def generateVersion(site)
+      page2 = PageWithoutAFile.new(site, "", "api/", "version.json")
+      page2.content = JSON.pretty_generate(Gtn::Git.discover)
+      page2.data["layout"] = nil
+      site.pages << page2
+    end
+
+    ##
     # Runs the generation process
     # Params:
     # +site+:: +Jekyll::Site+ object
     def generate(site)
+      generateConfiguration(site)
+      # For some reason the templating isn't working right here.
+      #generateVersion(site)
+
       # Full Bibliography
       Gtn::Scholar.load_bib(site)
       puts "[GTN/API] Bibliography"

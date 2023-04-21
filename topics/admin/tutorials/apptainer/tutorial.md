@@ -82,10 +82,11 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -20,3 +20,5 @@
+>    @@ -20,3 +20,6 @@
 >     # CVMFS Support
 >     - src: galaxyproject.cvmfs
 >       version: 0.2.21
+>    +# Singularity/Apptainer
 >    +- src: usegalaxy_eu.apptainer
 >    +  version: 0.0.1
 >    {% endraw %}
