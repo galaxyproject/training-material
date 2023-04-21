@@ -9,7 +9,7 @@ The GTN has set up a very simple "redirection" service based on [my.home-assista
 
 So we have built a similar service for the GTN:
 
-1. You write a URL like https://my.galaxy.training/?path=/workflows/list
+1. You write a URL like [https://my.galaxy.training/?path=/workflows/list](https://my.galaxy.training/?path=/workflows/list)
 2. A user visits this URL
 3. They're asked for which Galaxy server is their 'home' server
 4. They will be redirected to that path, on that server, e.g. https://usegalaxy.eu/workflows/list
@@ -17,3 +17,8 @@ So we have built a similar service for the GTN:
 We will be using this to implement a 'button' that users can click to directly import a workflow on their home server, and as a fallback for the "Click to Run" tools enabled by Tutorial Mode.
 
 Additionally there is a `my.gat.galaxy.training` which provides the same service for the Galaxy Admin Training workshop series. There we will use this feature to link admins directly to the VM they are working on when they're working through the training and we need them to e.g. see something in their `/admin` page or in their tool data tables.
+
+Try them out today!
+
+- [my.galaxy.training](https://my.galaxy.training/)
+- [my.gat.galaxy.training](https://my.gat.galaxy.training/)
