@@ -63,7 +63,7 @@ Specifically, gravity/gunicorn and job handler logs.
 # Database migration
 
 .reduce90[
-```
+```console
 galaxy.model.migrations.OutdatedDatabaseError: Your galaxy database has version e0e3bb173ee6, but
 this code expects version caa7742f7bca. To upgrade your database, run `manage_db.sh upgrade`. For
 more options (e.g. upgrading/downgrading to a specific version) see instructions in that file.
@@ -97,7 +97,7 @@ class: left
 # Stuck in a restart loop
 
 .reduce90[
-```
+```console
 Executing: PYTHONPATH=lib GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml VIRTUAL_ENV=/srv/galaxy/venv
   /srv/galaxy/venv/bin/gunicorn 'galaxy.webapps.galaxy.fast_factory:factory()' --timeout 300 ...
 DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/galaxy/server/lib, ...
@@ -862,7 +862,7 @@ This error is not indicative of any kind of failure. It just means that the clie
 
 # Installation failures - Python dependencies
 
-```
+```console
 psutil/_psutil_linux.c:12:20: fatal error: Python.h: No such file or directory
 compilation terminated.
 error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
