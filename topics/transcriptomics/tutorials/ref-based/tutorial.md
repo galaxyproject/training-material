@@ -61,8 +61,6 @@ contributions:
 
 # Introduction
 
-
-
 In recent years, RNA sequencing (in short RNA-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all RNA molecules in one cell or a population of cells. One of the most common aims of RNA-Seq is the profiling of gene expression by identifying genes or molecular pathways that are differentially expressed (DE) between two or more biological conditions. This tutorial demonstrates a computational workflow for the detection of DE genes and pathways from RNA-Seq data by providing a complete analysis of an RNA-Seq experiment profiling *Drosophila* cells after the depletion of a regulatory gene.
 
 In the study of {% cite brooks2011conservation %}, the authors identified genes and pathways regulated by the *Pasilla* gene (the *Drosophila* homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins) using RNA-Seq data. They depleted the *Pasilla* (*PS*) gene in *Drosophila melanogaster* by RNA interference (RNAi). Total RNA was then isolated and used to prepare both single-end and paired-end RNA-Seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain RNA-Seq reads for each sample. The RNA-Seq data for the treated and the untreated samples can be compared to identify the effects of *Pasilla* gene depletion on gene expression.
@@ -245,7 +243,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 
 > <hands-on-title>Trimming FASTQs</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0) %} with the following parameters to trim low quality sequences:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1) %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
 >       - {% icon param-collection %} *"Paired Collection"*: `2 PE fastqs`
 >    - In *"Filter Options"*
@@ -257,9 +255,9 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 >
 >      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
 >
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the Cutadapt reports with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the Cutadapt reports with the following parameters:
 >    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
+>        - {% icon param-repeat %} *"Results"*
 >            - *"Which tool was used generate logs?"*: `Cutadapt/Trim Galore!`
 >               - {% icon param-collection %} *"Output of Cutadapt"*: `Cutadapt on collection N: Report` (output of **Cutadapt** {% icon tool %}) selected as **Dataset collection**
 >
@@ -332,10 +330,10 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 
 > <hands-on-title>Spliced mapping</hands-on-title>
 >
-> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the Shared Data library if available or from [Zenodo]({{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.gtf) into your current Galaxy history
+> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`) from the Shared Data library if available or from [Zenodo]({{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz) into your current Galaxy history
 >
 >    ```text
->    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.gtf
+>    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz
 >    ```
 >
 >    1. Rename the dataset if necessary
@@ -349,21 +347,25 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    >
 >    {: .comment}
 >
-> 2. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %} with the following parameters to map your reads on the reference genome:
+> 2. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters to map your reads on the reference genome:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
 >       - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: the `Cutadapt on collection N: Reads` (output of **Cutadapt** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
->       - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
+>       - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model but provide a gtf`
 >           - *"Select reference genome"*: `Fly (Drosophila melanogaster): dm6 Full`
->           - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.87.gtf`
+>           - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
 >           - *"Length of the genomic sequence around annotated junctions"*: `36`
 >
 >               This parameter should be length of reads - 1
 >    - *"Per gene/transcript output"*: `Per gene read counts (GeneCounts)`
+>    - *"Compute coverage"*:
+>       - `Yes in bedgraph format`
+>       - *"Generate a coverage for each strand (stranded coverage)"*: `Yes`
+>       - *"Normalize coverage to million of mapped reads (RPM)"*: `Yes`
 >
-> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the STAR logs with the following parameters:
+> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the STAR logs with the following parameters:
 >    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
+>        - *"Results"*
 >            - *"Which tool was used generate logs?"*: `STAR`
 >                - In *"STAR output"*:
 >                    - {% icon param-repeat %} *"Insert STAR output"*
@@ -483,12 +485,12 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > > <hands-on-title>Check duplicate reads</hands-on-title>
 > >
-> > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3) %} with the following parameters:
+> > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.4) %} with the following parameters:
 > >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 > >
-> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the MarkDuplicates logs with the following parameters:
+> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the MarkDuplicates logs with the following parameters:
 > >    - In *"Results"*:
-> >        - {% icon param-repeat %} *"Insert Results"*
+> >        - *"Results"*
 > >            - *"Which tool was used generate logs?"*: `Picard`
 > >                - In *"Picard output"*:
 > >                    - {% icon param-repeat %} *"Insert Picard output"*
@@ -517,9 +519,9 @@ The BAM file contains information for all our reads, making it difficult to insp
 > > 1. {% tool [Samtools idxstats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4) %} with the following parameters:
 > >    - {% icon param-collection %} *"BAM file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 > >
-> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the idxstats logs with the following parameters:
+> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the idxstats logs with the following parameters:
 > >    - In *"Results"*:
-> >        - {% icon param-repeat %} *"Insert Results"*
+> >        - *"Results"*
 > >            - *"Which tool was used generate logs?"*: `Samtools`
 > >                - In *"Samtools output"*:
 > >                    - {% icon param-repeat %} *"Insert Samtools output"*
@@ -551,7 +553,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > > <hands-on-title>Check gene body coverage</hands-on-title>
 > >
-> > 1. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.13+galaxy2) %} with the following parameters:
+> > 1. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0) %} with the following parameters:
 > >    - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
 > >    - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
 > >        - In *"Configure subsampling"*:
@@ -563,16 +565,16 @@ The BAM file contains information for all our reads, making it difficult to insp
 > >    - *"Use a reference sequence"*: `No`
 > >
 > > 2. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
-> >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+> >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.32.109.gtf.gz`
 > >
-> > 3. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %} with the following parameters:
+> > 3. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy2) %} with the following parameters:
 > >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
 > >        - {% icon param-collection %} *"Input .bam file"*: output of **Samtools view** {% icon tool %}
 > >    - {% icon param-file %} *"Reference gene model"*: `Convert GTF to BED12 on data N: BED12` (output of **Convert GTF to BED12** {% icon tool %})
 > >
-> > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the RSeQC results with the following parameters:
+> > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the RSeQC results with the following parameters:
 > >    - In *"Results"*:
-> >        - {% icon param-repeat %} *"Insert Results"*
+> >        - *"Results"*
 > >            - *"Which tool was used generate logs?"*: `RSeQC`
 > >                - In *"RSeQC output"*:
 > >                    - {% icon param-repeat %} *"Insert RSeQC output"*
@@ -600,13 +602,13 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > > <hands-on-title>Check the number of reads mapped to each chromosome</hands-on-title>
 > >
-> > 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1) %} with the following parameters:
+> > 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy2) %} with the following parameters:
 > >    - {% icon param-collection %} *"Input .bam/.sam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 > >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12** {% icon tool %})
 > >
-> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the Read Distribution results with the following parameters:
+> > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the Read Distribution results with the following parameters:
 > >    - In *"Results"*:
-> >        - {% icon param-repeat %} *"Insert Results"*
+> >        - *"Results"*
 > >            - *"Which tool was used generate logs?"*: `RSeQC`
 > >                - In *"RSeQC output"*:
 > >                    - {% icon param-repeat %} *"Insert RSeQC output"*
@@ -673,7 +675,7 @@ Therefore we offer a parallel tutorial for the 2 methods which give very similar
 
 {% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" %}
 
-In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to **featureCounts** or to the output of **STAR**, e.g. the strandness.
+In principle, the counting of reads overlapping with genomic features is a fairly simple task. But the strandness of the library needs to be determined. Indeed this is a parameter of **featureCounts**. On the contrary, **STAR** evaluate the counts into the three possible strandness but you still need this information to extract the counts which corresponds to your library.
 
 ## Estimation of the strandness
 
@@ -703,7 +705,7 @@ This information should be provided with your FASTQ files, ask your sequencing f
 
 ![How to estimate the strandness?](../../images/ref-based/strandness_cases.png "In a stranded forward library, reads map mostly on the same strand as the genes. With stranded reverse library, reads map mostly on the opposite strand. With unstranded library, reads map on genes on both strands independently of the orientation of the gene.")
 
-There are 3 ways to estimate strandness from **STAR** results (choose the one you prefer)
+There are 4 ways to estimate strandness from **STAR** results (choose the one you prefer)
 
 1. We can do a visual inspection of read strands on IGV (for Paired-end dataset it is less easy than with single read and when you have a lot of samples, this can be painful).
 
@@ -750,14 +752,66 @@ There are 3 ways to estimate strandness from **STAR** results (choose the one yo
     > {: .solution}
     {: .question}
 
+2. Alternatively, instead of using the BAM you can use the stranded coverage generated by **STAR**. Using **pyGenomeTracks** we will be able to visualize the coverage on each strand for each sample. This tool has a lot of parameters to customize your plots.
 
-2. You can use the output of **STAR** with the counts.
-
-    > <hands-on-title>Estimate strandness with STAR</hands-on-title>
+    > <hands-on-title>Estimate strandness with pyGenometracks from STAR coverage</hands-on-title>
     >
-    > 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the STAR logs with the following parameters:
+    > 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1) %}:
+    >    - *"Region of the genome to limit the operation"*: `chr4:540,000-560,000`
+    >    - In *"Include tracks in your plot"*:
+    >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+    >            - *"Choose style of the track"*: `Bedgraph track`
+    >                - *"Plot title"*: You need to leave this field empty so the title on the plot will be the sample name.
+    >                - {% icon param-collection %} *"Track file(s) bedgraph format"*: Select `RNA STAR on collection N: Coverage Uniquely mapped strand 1`.
+    >                - *"Color of track"*: Select a color of your choice for example blue
+    >                - *"Minimum value"*: `0`
+    >                - *"height"*: `3`
+    >                - *"Show visualization of data range"*: `Yes`
+    >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+    >            - *"Choose style of the track"*: `Bedgraph track`
+    >                - *"Plot title"*: You need to leave this field empty so the title on the plot will be the sample name.
+    >                - {% icon param-collection %} *"Track file(s) bedgraph format"*: Select `RNA STAR on collection N: Coverage Uniquely mapped strand 2`.
+    >                - *"Color of track"*: Select a color of your choice different from the first one for example red
+    >                - *"Minimum value"*: `0`
+    >                - *"height"*: `3`
+    >                - *"Show visualization of data range"*: `Yes`
+    >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+    >            - *"Choose style of the track"*: `Gene track / Bed track`
+    >                - *"Plot title"*: `Genes`
+    >                - {% icon param-dataset %} *"Track file(s) bed or gtf format"*: Select `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
+    {: .hands_on}
+
+    > <question-title></question-title>
+    >
+    > 1. Which gene are we looking at? Which strand it is?
+    > 2. What is the average coverage for each strand?
+    > 2. What is the strandness of the library?
+    >
+    > > <solution-title></solution-title>
+    > >
+    > > ![STAR Gene counts unstranded](../../images/ref-based/star_gene_counts_unstranded.png "Gene counts unstranded")
+    > >
+    > > 1. We see 3 transcripts called Thd1-RC, Thd1-RB and Thd1-RA of the gene Thd1. The gene is on the reverse strand.
+    > > 2. TODO
+    > > 3. We deduce that the library is unstranded.
+    > >
+    > > > <comment-title>How would it be if the library was stranded?</comment-title>
+    > > >
+    > > > ![STAR Gene counts unstranded USvsRS](../../images/ref-based/star_gene_counts_unstranded_USvsRS.png "Gene counts unstranded for unstranded and reverse stranded library")
+    > > > Note that the coverage on the strand 1 is very low while the gene is forward.
+    > > > This means that the library is reverse stranded.
+    > > {: .comment}
+    > {: .solution}
+    >
+    {: .question}
+
+3. You can use the output of **STAR** with the counts. Indeed as explained before, **STAR** evaluates the number of reads on genes for the three possible scenarios: unstranded library, stranded forward or stranded reverse. The condition which attributes more reads to gene must be the condition which matches your library.
+
+    > <hands-on-title>Estimate strandness with STAR counts</hands-on-title>
+    >
+    > 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the STAR logs with the following parameters:
     >    - In *"Results"*:
-    >        - {% icon param-repeat %} *"Insert Results"*
+    >        - *"Results"*
     >            - *"Which tool was used generate logs?"*: `STAR`
     >                - In *"STAR output"*:
     >                    - {% icon param-repeat %} *"Insert STAR output"*
@@ -785,25 +839,25 @@ There are 3 ways to estimate strandness from **STAR** results (choose the one yo
     > > > ![STAR Gene counts unstranded USvsRS](../../images/ref-based/star_gene_counts_unstranded_USvsRS.png "Gene counts unstranded for unstranded and reverse stranded library")
     > > > ![STAR Gene counts same stranded USvsRS](../../images/ref-based/star_gene_counts_same_USvsRS.png "Gene counts same stranded for unstranded and reverse stranded library")
     > > > ![STAR Gene counts reverse stranded USvsRS](../../images/ref-based/star_gene_counts_reverse_USvsRS.png "Gene counts reverse stranded for unstranded and reverse stranded library")
-    > > > Note thare there is very few reads attributed to genes for same stranded.
+    > > > Note that there is very few reads attributed to genes for same stranded.
     > > > The numbers are comparable between unstranded and reverse stranded because really few genes overlap on opposite strands but still it goes from 63.6% (unstranded) to 65% (reverse stranded).
     > > {: .comment}
     > {: .solution}
     >
     {: .question}
 
-3. Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite.
+4. Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite.
 
     This tool takes the BAM files from the mapping, selects a subsample of the reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded (forward or reverse).
 
     > <hands-on-title>Determining the library strandness using Infer Experiment</hands-on-title>
     >
     > 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
-    >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+    >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
     >
-    >    You may already have converted this `BED12` file from the `Drosophila_melanogaster.BDGP6.87.gtf` dataset earlier if you did the detailed part on quality checks. In this case, no need to redo it a second time
+    >    You may already have converted this `BED12` file from the `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz` dataset earlier if you did the detailed part on quality checks. In this case, no need to redo it a second time
     >
-    > 2. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} to determine the library strandness with the following parameters:
+    > 2. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2) %} to determine the library strandness with the following parameters:
     >    - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
     >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12** {% icon tool %})
     >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
@@ -890,25 +944,22 @@ As you chose to use the featureCounts flavor of the tutorial, we now run **featu
 
 > <hands-on-title>Counting the number of reads per annotated gene</hands-on-title>
 >
-> 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2) %} with the following parameters to count the number of reads per gene:
+> 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1) %} with the following parameters to count the number of reads per gene:
 >    - {% icon param-collection %} *"Alignment file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 >    - *"Specify strand information"*: `Unstranded`
 >    - *"Gene annotation file"*: `in your history`
->        - {% icon param-file %} *"Gene annotation file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+>        - {% icon param-file %} *"Gene annotation file"*: `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
+>    - *"GFF feature type filter"*: `exon`
+>    - *"GFF gene identifier"*: `gene_id`
 >    - *"Output format"*: `Gene-ID "\t" read-count (MultiQC/DESeq2/edgeR/limma-voom compatible)`
 >    - *"Create gene-length file"*: `Yes`
->    - In *"Options for paired-end reads"*:
->        - *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
+>    - *"Does the input have read pairs"*: `Yes, paired-end and count them as 1 single fragment`
 >    - In *"Read filtering options"*:
 >        - *"Minimum mapping quality per read"*: `10`
->    - In *"Advanced options"*:
->       - *"GFF feature type filter"*: `exon`
->       - *"GFF gene identifier"*: `gene_id`
->       - *"Allow reads to map to multiple features"*: `Disabled; reads that align to multiple features or overlapping features are excluded`
 >
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the reports with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the reports with the following parameters:
 >    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
+>        - *"Results"*
 >            - *"Which tool was used generate logs?"*: `featureCounts`
 >                - {% icon param-collection %} *"Output of FeatureCounts"*: `featureCounts on collection N: Summary` (output of **featureCounts** {% icon tool %})
 >
@@ -941,7 +992,7 @@ As you chose to use the STAR flavor of the tutorial, we will use **STAR** to cou
 
 As written above, during mapping, **STAR** counted reads for each gene provided in the gene annotation file (this was achieved by the option `Per gene read counts (GeneCounts)`). However, this output provides some statistics at the beginning and the counts for each gene depending on the library (unstranded is column 2, stranded forward is column 3 and stranded reverse is column 4).
 
-> <hands-on-title>Reformatting STAR output</hands-on-title>
+> <hands-on-title>Inspect STAR output</hands-on-title>
 >
 > 1. Inspect the counts from `GSM461177_untreat_paired` in the collection `RNA STAR on collection N: reads per gene`
 {: .hands_on}
@@ -956,7 +1007,7 @@ As written above, during mapping, **STAR** counted reads for each gene provided 
 > > <solution-title></solution-title>
 > >
 > > 1. There are 1,190,029 unmapped reads and 571,324 multi-mapped reads.
-> > 2. It starts at line 5 with the gene `FBgn0085804`.
+> > 2. It starts at line 5 with the gene `FBgn0250732`.
 > > 3. There are 4 columns:
 > >    1. Gene ID
 > >    2. Counts for unstranded RNA-seq
@@ -991,7 +1042,7 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 >
 > 1. {% tool [Gene length and GC content](toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2) %} with the following parameters:
 >    - *"Select a built-in GTF file or one from your history"*: `Use a GTF from history`
->      - {% icon param-file %} *"Select a GTF file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+>      - {% icon param-file %} *"Select a GTF file"*: `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
 >    - *"Analysis to perform"*: `gene lengths only`
 >
 >    > <warning-title>Check the version of the tool below</warning-title>
@@ -1086,7 +1137,7 @@ Here we counted reads mapped to genes for two samples. It is really interesting 
 > {{ page.zenodo_link }}/files/GSM461182.fastqsanger
 > ```
 >
-> For the single-end data, there is no need to flatten the collection before **FastQC**. The parameters of all tools are the same except **STAR** for which you can set `Length of the genomic sequence around annotated junctions` to 74 as one dataset has reads of 75bp (others are 44bp and 45bp).
+> For the single-end data, there is no need to flatten the collection before **FastQC**. The parameters of all tools are the same except **STAR** for which you can set `Length of the genomic sequence around annotated junctions` to 74 as one dataset has reads of 75bp (others are 44bp and 45bp) and **FeatureCount** were your data are not paired any more.
 {: .hands_on}
 
 # Analysis of the differential gene expression
@@ -1642,16 +1693,16 @@ The ID for each gene is something like FBgn0003360, which is an ID from the corr
 
 > <hands-on-title>Annotation of the differentially expressed genes</hands-on-title>
 >
-> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the previous history, or from the Shared Data library or from Zenodo:
+> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`) from the previous history, or from the Shared Data library or from Zenodo:
 >
 >    ```text
->    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.gtf
+>    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz
 >    ```
 >
 > 2. {% tool [Annotate DESeq2/DEXSeq output tables](toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0) %} with:
 >    - {% icon param-file %} *"Tabular output of DESeq2/edgeR/limma/DEXSeq"*: output of the last **Filter** {% icon tool %}
 >    - *"Input file type"*: `DESeq2/edgeR/limma`
->    - {% icon param-file %} *"Reference annotation in GFF/GTF format"*: imported gtf `Drosophila_melanogaster.BDGP6.87.gtf`
+>    - {% icon param-file %} *"Reference annotation in GFF/GTF format"*: imported gtf `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
 >
 {: .hands_on}
 
@@ -2137,7 +2188,7 @@ This step is similar to the step of [counting the number of reads per annotated 
 >
 > 1. {% tool [DEXSeq-Count](toolshed.g2.bx.psu.edu/repos/iuc/dexseq/dexseq_count/1.28.1.0) %}: Use the **DEXSeq-Count** to prepare the *Drosophila* annotations to extract only exons with corresponding gene ids
 >     - *"Mode of operation"*: `Prepare annotation`
->       - {% icon param-file %} *"GTF file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+>       - {% icon param-file %} *"GTF file"*: `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
 >
 >    The output is again a GTF file that is ready to be used for counting
 >
