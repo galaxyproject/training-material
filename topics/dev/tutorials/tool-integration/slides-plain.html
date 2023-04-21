@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Tool development and integration into Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-21 08:37:22 +0000">
+<meta name="DC.date" content="2023-04-21 10:37:23 +0000">
 <meta name="DC.creator" content="Saskia Hiltemann">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Anthony Bretaudeau">
@@ -262,7 +262,7 @@
 
 <p><img src="../../images/graphlan_screenshot.png" alt="Screenshot of tool interface in Galaxy for GraPhlAn showing a variety of input types like file selection, select, text, numbers." /></p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graphlan.py <span class="nt">--format</span> <span class="s2">"png"</span> <span class="nt">--size</span> 7 input_tree.txt png_image.png
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graphlan.py <span class="nt">--format</span> png <span class="nt">--size</span> 7 <span class="s1">'input_tree.txt'</span> <span class="s1">'png_image.png'</span>
 </code></pre></div></div>
 
 <hr />
@@ -398,7 +398,9 @@ python '$__tool_directory__/graphlan.py'
 
 <h2 id="inputs--param-to-command"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> to <code class="language-plaintext highlighter-rouge">command</code></h2>
 
-<p>Parameters are directly linked to variables in <code class="language-plaintext highlighter-rouge">&lt;command&gt;</code></p>
+<p>Parameters are directly linked to variables in <code class="language-plaintext highlighter-rouge">&lt;command&gt;</code> by the <code class="language-plaintext highlighter-rouge">name</code> or <code class="language-plaintext highlighter-rouge">argument</code> attribute</p>
+
+<p>Parameters can be optional or required.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[
 graphlan.py
@@ -424,8 +426,9 @@ graphlan.py
 <p><span>Speaker Notes</span></p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">name</code> or <code class="language-plaintext highlighter-rouge">argument</code> identifies a parameter (details of <code class="language-plaintext highlighter-rouge">argument</code> later)</li>
-  <li>Parameters can have different types (<code class="language-plaintext highlighter-rouge">data</code>, <code class="language-plaintext highlighter-rouge">data_collection</code>, <code class="language-plaintext highlighter-rouge">integer</code>, <code class="language-plaintext highlighter-rouge">float</code>, <code class="language-plaintext highlighter-rouge">text</code>, <code class="language-plaintext highlighter-rouge">select</code>, <code class="language-plaintext highlighter-rouge">boolean</code>, <code class="language-plaintext highlighter-rouge">color</code>, <code class="language-plaintext highlighter-rouge">data_column</code>,…)</li>
+  <li>The <code class="language-plaintext highlighter-rouge">name</code> or <code class="language-plaintext highlighter-rouge">argument</code> attribute identifies a parameter (details of <code class="language-plaintext highlighter-rouge">argument</code> later).</li>
+  <li>Parameters have different types (<code class="language-plaintext highlighter-rouge">data</code>, <code class="language-plaintext highlighter-rouge">data_collection</code>, <code class="language-plaintext highlighter-rouge">integer</code>, <code class="language-plaintext highlighter-rouge">float</code>, <code class="language-plaintext highlighter-rouge">text</code>, <code class="language-plaintext highlighter-rouge">select</code>, <code class="language-plaintext highlighter-rouge">boolean</code>, <code class="language-plaintext highlighter-rouge">color</code>, <code class="language-plaintext highlighter-rouge">data_column</code>,…)
+and can be optional.</li>
 </ul>
 
 <hr />
@@ -443,15 +446,14 @@ graphlan.py
 
 <h2 id="inputs--param--integer--float"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">integer</code> | <code class="language-plaintext highlighter-rouge">float</code></h2>
 
-<p><img src="../../images/input_integer.png" alt="Screenshot of the float input, it's just an input field set to 7." /></p>
+<p><img src="../../images/input_integer.png" alt="Screenshot of an integer input, it's just an input field set to 7." /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"integer"</span> <span class="na">value=</span><span class="s">"7"</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<p><img src="../../images/input_integer_range.png" alt="Screenshot of the float input again, but this time a slider appears due to addition of min and max" /></p>
+<p><img src="../../images/input_float_range.png" alt="Screenshot of a float input from the cd_hit tool. This time also a slider appears due to addition of min and max" /></p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"float"</span> <span class="na">min=</span><span class="s">"0"</span> <span class="na">max=</span><span class="s">"10"</span> <span class="na">value=</span><span class="s">"1"</span> <span class="na">label=</span><span class="s">"..."</span>
-    <span class="na">help=</span><span class="s">"..."</span><span class="nt">/&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"float"</span> <span class="na">min=</span><span class="s">"0.4"</span> <span class="na">max=</span><span class="s">"1.0"</span> <span class="na">value=</span><span class="s">"0.9"</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <p><span>Speaker Notes</span></p>
@@ -465,7 +467,7 @@ graphlan.py
 
 <h2 id="inputs--param--text"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">text</code></h2>
 
-<p><img src="../../images/input_text.png" alt="Screenshot of a textbox" /></p>
+<p><img src="../../images/input_text.png" alt="Screenshot of a textbox from the cd_hit tool." /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"..."</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
@@ -474,12 +476,10 @@ graphlan.py
 
 <h2 id="inputs--param--select"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">select</code></h2>
 
-<p><img src="../../images/input_select.png" alt="Screenshot of a select drop down with several image formats." /></p>
+<p><img src="../../images/input_select.png" alt="Screenshot of a select drop down with several image formats from the bedtools_bedtoigv tool." /></p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">label=</span><span class="s">"..."</span><span class="nt">&gt;</span>
     <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"png"</span> <span class="na">selected=</span><span class="s">"true"</span><span class="nt">&gt;</span>PNG<span class="nt">&lt;/option&gt;</span>
-    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"pdf"</span><span class="nt">&gt;</span>PDF<span class="nt">&lt;/option&gt;</span>
-    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"ps"</span><span class="nt">&gt;</span>PS<span class="nt">&lt;/option&gt;</span>
     <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"eps"</span><span class="nt">&gt;</span>EPS<span class="nt">&lt;/option&gt;</span>
     <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"svg"</span><span class="nt">&gt;</span>SVG<span class="nt">&lt;/option&gt;</span>
 <span class="nt">&lt;/param&gt;</span>
@@ -518,7 +518,7 @@ graphlan.py
 
 <h2 id="inputs--param--boolean"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">boolean</code></h2>
 
-<p><img src="../../images/input_boolean.png" alt="A yes/no box is shown" /></p>
+<p><img src="../../images/input_boolean.png" alt="A yes/no switch from the bg_sortmerna tool." /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"..."</span> <span class="na">type=</span><span class="s">"boolean"</span> <span class="na">checked=</span><span class="s">"false"</span> <span class="na">truevalue=</span><span class="s">"--log"</span> <span class="na">falsevalue=</span><span class="s">""</span>
     <span class="na">label=</span><span class="s">"..."</span> <span class="na">help=</span><span class="s">"..."</span> <span class="nt">/&gt;</span>
@@ -530,7 +530,10 @@ graphlan.py
 
 <h2 id="inputs--param--conditional"><code class="language-plaintext highlighter-rouge">inputs</code> &gt; <code class="language-plaintext highlighter-rouge">param</code> &gt; <code class="language-plaintext highlighter-rouge">conditional</code></h2>
 
-<p>.image-75[ <img src="../../images/input_conditional.png" alt="Two screenshots are shown side by side. In the left a select box is set to Paired and two file inputs appear below. On the right the same select box is set to single, and only a single file input appears below it." /> ]</p>
+<p>.pull-left[<img src="../../images/input_conditional.png" alt="Screenshot of a conditional select box set to Paired, and two file inputs appear below it." />]
+.pull-right[<img src="../../images/input_conditional_single.png" alt="Screenshot of a conditional select box set to Single, and only a single file input appears below it." />]</p>
+
+<p><br style="clear:left;" /></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[
 #if $fastq_input.selector == 'paired':
@@ -588,13 +591,7 @@ graphlan.py
 
 <h2 id="outputs"><code class="language-plaintext highlighter-rouge">outputs</code></h2>
 
-<p>Which files the tool will produce as output?</p>
-
-<p><img src="../../images/output.png" alt="Screenshot of a galaxy history with three outputs." /></p>
-
-<hr />
-
-<h2 id="outputs-1"><code class="language-plaintext highlighter-rouge">outputs</code></h2>
+<p>.image-25[<img src="../../images/output.png" alt="Screenshot of a galaxy history with two outputs." />]</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;outputs&gt;</span>
     <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"tree"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"${tool.name} on ${on_string}: Tree"</span> <span class="nt">/&gt;</span>
@@ -875,19 +872,6 @@ Applying linter citations... CHECK
   <li>The tests comfort developers and users that the tools can run across different servers/architectures. And that the latest modifications don’t break older features.</li>
   <li>Tools are tested by feeding them inputs and parameters and verifying the outputs (typically a diff)</li>
 </ul>
-
-<hr />
-
-<h2 id="good-practices">Good practices</h2>
-
-<ol>
-  <li>Build tests using inputs/parameters/outputs</li>
-  <li>Run the tests –&gt; Failed –&gt; Coffee</li>
-  <li>Develop</li>
-  <li>Run the tests –&gt; Failed –&gt; Coffee</li>
-  <li>Develop</li>
-  <li>Run the tests –&gt; Succeed –&gt; Beer</li>
-</ol>
 
 <hr />
 
@@ -1611,77 +1595,6 @@ Applying linter readme... CHECK
 <span class="o">[</span>…]
 </code></pre></div></div>
 
-<hr />
-
-<p>.image-25[<img src="../../../../shared/images/ansible_logo.png" alt="Ansible logo" />]</p>
-
-<p>.image-50[<img src="../../../../shared/images/conda_logo.png" alt="Conda logo" />]</p>
-
-<p>.image-50[<img src="../../../../shared/images/docker_logo.png" alt="Docker logo" />]</p>
-
-<hr />
-
-<h2 id="docker-galaxy-flavors">Docker Galaxy Flavors</h2>
-
-<p><img src="../../images/galaxydocker_logo.png" alt="Galaxy docker logo, the docker logo with several containers replaced by galaxy logos." /></p>
-
-<p>.footnote[<a href="https://github.com/bgruening/docker-galaxy-stable">Docker Galaxy Stable</a>]</p>
-
-<hr />
-
-<h2 id="docker-galaxy-flavors-1">Docker Galaxy Flavors</h2>
-
-<p>Dockerfile</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Galaxy - My own flavour</span>
-<span class="c1"># VERSION       0.1</span>
-
-<span class="s">FROM quay.io/bgruening/galaxy:16.07</span>
-
-<span class="s">MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com</span>
-
-<span class="s">ENV GALAXY_CONFIG_BRAND deepTools</span>
-
-<span class="c1"># Adding the tool definitions to the container</span>
-<span class="s">ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml</span>
-
-<span class="c1"># Install deepTools</span>
-<span class="s">RUN install-tools $GALAXY_ROOT/my_tool_list.yml</span>
-</code></pre></div></div>
-
-<hr />
-
-<h2 id="docker-galaxy-flavors-2">Docker Galaxy Flavors</h2>
-
-<p><code class="language-plaintext highlighter-rouge">tool_list.yml</code></p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">api_key</span><span class="pi">:</span> <span class="s">admin</span>
-<span class="na">galaxy_instance</span><span class="pi">:</span> <span class="s">http://127.0.0.1:8080/</span>
-<span class="na">tools</span><span class="pi">:</span>
-<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">fastqc</span>
-  <span class="na">owner</span><span class="pi">:</span> <span class="s">devteam</span>
-  <span class="na">tool_panel_section_id</span><span class="pi">:</span> <span class="s">cshl_library_information</span>
-  <span class="na">tool_shed_url</span><span class="pi">:</span> <span class="s">https://toolshed.g2.bx.psu.edu</span>
-  <span class="na">revisions</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s1">'</span><span class="s">8c650f7f76e9'</span>  <span class="c1"># v0.62</span>
-    <span class="pi">-</span> <span class="s1">'</span><span class="s">d2cf2c0c8a11'</span>  <span class="c1"># v0.63</span>
-<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">suite_deeptools</span>
-  <span class="na">owner</span><span class="pi">:</span> <span class="s">bgruening</span>
-  <span class="na">tool_panel_section_label</span><span class="pi">:</span> <span class="s1">'</span><span class="s">deepTools'</span>
-  <span class="na">tool_shed_url</span><span class="pi">:</span> <span class="s">https://toolshed.g2.bx.psu.edu</span>
-  <span class="na">revisions</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s1">'</span><span class="s">7f5562625ae2'</span>
-</code></pre></div></div>
-
-<hr />
-
-<h2 id="docker-galaxy-flavors-3">Docker Galaxy Flavors</h2>
-
-<p>RUN</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080:80 galaxy-deeptools
-</code></pre></div></div>
-
 
 	<hr />
 
@@ -1754,7 +1667,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/e407bd87b5072493ce5ffbf53dafcdd75611059b">e407bd87b5072493ce5ffbf53dafcdd75611059b</a>. </p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/cd5bf7caa80b8a113d6cb39efd0dfeeef514cb5b">cd5bf7caa80b8a113d6cb39efd0dfeeef514cb5b</a>. </p>
     </div>
 </footer>
 

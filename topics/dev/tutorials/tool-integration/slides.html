@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Tool development and integration into Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-14 14:21:55 +0000">
+<meta name="DC.date" content="2023-04-21 09:13:05 +0000">
 <meta name="DC.creator" content="Saskia Hiltemann">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Anthony Bretaudeau">
@@ -69,7 +69,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-14 14:21:55 +0000",
+  "dateModified": "2023-04-21 09:13:05 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Tool development and integration into Galaxy",
   "interactivityType": "mixed",
@@ -596,7 +596,7 @@ Useful when presenting.
 ![Screenshot of tool interface in Galaxy for GraPhlAn showing a variety of input types like file selection, select, text, numbers.](../../images/graphlan_screenshot.png)
 
 ```bash
-graphlan.py --format &quot;png&quot; --size 7 input_tree.txt png_image.png
+graphlan.py --format png --size 7 &apos;input_tree.txt&apos; &apos;png_image.png&apos;
 ```
 
 ---
@@ -723,7 +723,9 @@ python &apos;$__tool_directory__/graphlan.py&apos;
 
 ## `inputs` &gt; `param` to `command`
 
-Parameters are directly linked to variables in `&lt;command&gt;`
+Parameters are directly linked to variables in `&lt;command&gt;` by the `name` or `argument` attribute
+
+Parameters can be optional or required.
 
 ```xml
 &lt;command&gt;&lt;![CDATA[
@@ -747,8 +749,9 @@ graphlan.py
 
 ???
 
-- `name` or `argument` identifies a parameter (details of `argument` later)
-- Parameters can have different types (`data`, `data_collection`, `integer`, `float`, `text`, `select`, `boolean`, `color`, `data_column`,...)
+- The `name` or `argument` attribute identifies a parameter (details of `argument` later).
+- Parameters have different types (`data`, `data_collection`, `integer`, `float`, `text`, `select`, `boolean`, `color`, `data_column`,...)
+  and can be optional.
 
 ---
 
@@ -766,17 +769,16 @@ graphlan.py
 
 ## `inputs` &gt; `param` &gt; `integer` | `float`
 
-![Screenshot of the float input, it&apos;s just an input field set to 7.](../../images/input_integer.png)
+![Screenshot of an integer input, it&apos;s just an input field set to 7.](../../images/input_integer.png)
 
 ```xml
 &lt;param name=&quot;...&quot; type=&quot;integer&quot; value=&quot;7&quot; label=&quot;...&quot; help=&quot;...&quot;/&gt;
 ```
 
-![Screenshot of the float input again, but this time a slider appears due to addition of min and max](../../images/input_integer_range.png)
+![Screenshot of a float input from the cd_hit tool. This time also a slider appears due to addition of min and max](../../images/input_float_range.png)
 
 ```xml
-&lt;param name=&quot;...&quot; type=&quot;float&quot; min=&quot;0&quot; max=&quot;10&quot; value=&quot;1&quot; label=&quot;...&quot;
-    help=&quot;...&quot;/&gt;
+&lt;param name=&quot;...&quot; type=&quot;float&quot; min=&quot;0.4&quot; max=&quot;1.0&quot; value=&quot;0.9&quot; label=&quot;...&quot; help=&quot;...&quot;/&gt;
 ```
 
 ???
@@ -788,7 +790,7 @@ graphlan.py
 
 ## `inputs` &gt; `param` &gt; `text`
 
-![Screenshot of a textbox](../../images/input_text.png)
+![Screenshot of a textbox from the cd_hit tool.](../../images/input_text.png)
 
 ```xml
 &lt;param name=&quot;...&quot; type=&quot;text&quot; value=&quot;...&quot; label=&quot;...&quot; help=&quot;...&quot;/&gt;
@@ -798,13 +800,11 @@ graphlan.py
 
 ## `inputs` &gt; `param` &gt; `select`
 
-![Screenshot of a select drop down with several image formats.](../../images/input_select.png)
+![Screenshot of a select drop down with several image formats from the bedtools_bedtoigv tool.](../../images/input_select.png)
 
 ```xml
-&lt;param name=&quot;...&quot; type=&quot;select&quot; label=&quot;...&quot; help=&quot;...&quot;&gt;
+&lt;param name=&quot;...&quot; type=&quot;select&quot; label=&quot;...&quot;&gt;
     &lt;option value=&quot;png&quot; selected=&quot;true&quot;&gt;PNG&lt;/option&gt;
-    &lt;option value=&quot;pdf&quot;&gt;PDF&lt;/option&gt;
-    &lt;option value=&quot;ps&quot;&gt;PS&lt;/option&gt;
     &lt;option value=&quot;eps&quot;&gt;EPS&lt;/option&gt;
     &lt;option value=&quot;svg&quot;&gt;SVG&lt;/option&gt;
 &lt;/param&gt;
@@ -845,7 +845,7 @@ If no `option` has `selected=&quot;true&quot;`, the first one is selected by def
 
 ## `inputs` &gt; `param` &gt; `boolean`
 
-![A yes/no box is shown](../../images/input_boolean.png)
+![A yes/no switch from the bg_sortmerna tool.](../../images/input_boolean.png)
 
 ```xml
 &lt;param name=&quot;...&quot; type=&quot;boolean&quot; checked=&quot;false&quot; truevalue=&quot;--log&quot; falsevalue=&quot;&quot;
@@ -858,7 +858,10 @@ class: reduce70
 
 ## `inputs` &gt; `param` &gt; `conditional`
 
-.image-75[ ![Two screenshots are shown side by side. In the left a select box is set to Paired and two file inputs appear below. On the right the same select box is set to single, and only a single file input appears below it.](../../images/input_conditional.png) ]
+.pull-left[![Screenshot of a conditional select box set to Paired, and two file inputs appear below it.](../../images/input_conditional.png)]
+.pull-right[![Screenshot of a conditional select box set to Single, and only a single file input appears below it.](../../images/input_conditional_single.png)]
+
+&lt;br style=&quot;clear:left;&quot;/&gt;
 
 ```xml
 &lt;command&gt;&lt;![CDATA[
@@ -918,13 +921,7 @@ It makes sense to use a `&lt;repeat&gt;` block only if it contains multiple rela
 
 ## `outputs`
 
-Which files the tool will produce as output?
-
-![Screenshot of a galaxy history with three outputs.](../../images/output.png)
-
----
-
-## `outputs`
+.image-25[![Screenshot of a galaxy history with two outputs.](../../images/output.png)]
 
 ```xml
 &lt;outputs&gt;
@@ -1210,17 +1207,6 @@ Building Galaxy Tools
 - Functional testing is a quality assurance (QA) process.
 - The tests comfort developers and users that the tools can run across different servers/architectures. And that the latest modifications don&apos;t break older features.
 - Tools are tested by feeding them inputs and parameters and verifying the outputs (typically a diff)
-
----
-
-## Good practices
-
-1. Build tests using inputs/parameters/outputs
-2. Run the tests --&gt; Failed --&gt; Coffee
-3. Develop
-4. Run the tests --&gt; Failed --&gt; Coffee
-5. Develop
-6. Run the tests --&gt; Succeed --&gt; Beer
 
 ---
 
@@ -1940,80 +1926,6 @@ Applying linter readme... CHECK
 .. INFO: No README found skipping.
 +Linting tool […]/tandem_repeats_finder/tandem_repeats_finder_wrapper.xml
 […]
-```
-
----
-
-.image-25[![Ansible logo](../../../../shared/images/ansible_logo.png)]
-
-.image-50[![Conda logo](../../../../shared/images/conda_logo.png)]
-
-.image-50[![Docker logo](../../../../shared/images/docker_logo.png)]
-
----
-
-## Docker Galaxy Flavors
-
-![Galaxy docker logo, the docker logo with several containers replaced by galaxy logos.](../../images/galaxydocker_logo.png)
-
-.footnote[[Docker Galaxy Stable](https://github.com/bgruening/docker-galaxy-stable)]
-
----
-
-## Docker Galaxy Flavors
-
-Dockerfile
-
-```yaml
-# Galaxy - My own flavour
-# VERSION       0.1
-
-FROM quay.io/bgruening/galaxy:16.07
-
-MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
-
-ENV GALAXY_CONFIG_BRAND deepTools
-
-# Adding the tool definitions to the container
-ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml
-
-# Install deepTools
-RUN install-tools $GALAXY_ROOT/my_tool_list.yml
-```
-
----
-
-## Docker Galaxy Flavors
-
-`tool_list.yml`
-
-```yaml
-api_key: admin
-galaxy_instance: http://127.0.0.1:8080/
-tools:
-- name: fastqc
-  owner: devteam
-  tool_panel_section_id: cshl_library_information
-  tool_shed_url: https://toolshed.g2.bx.psu.edu
-  revisions:
-    - &apos;8c650f7f76e9&apos;  # v0.62
-    - &apos;d2cf2c0c8a11&apos;  # v0.63
-- name: suite_deeptools
-  owner: bgruening
-  tool_panel_section_label: &apos;deepTools&apos;
-  tool_shed_url: https://toolshed.g2.bx.psu.edu
-  revisions:
-    - &apos;7f5562625ae2&apos;
-```
-
----
-
-## Docker Galaxy Flavors
-
-RUN
-
-```bash
-docker run -d -p 8080:80 galaxy-deeptools
 ```
 
 
