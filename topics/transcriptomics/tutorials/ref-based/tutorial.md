@@ -180,11 +180,11 @@ We will first need to transform our the list of pairs to a simple list.
 >    >
 >    {: .question}
 >
->    As it is tidious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %}.
+>    As it is tidious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %}.
 >
-> 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} to aggregate the FastQC reports with the following parameters:
+> 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the FastQC reports with the following parameters:
 >    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
+>        - *"Results"*
 >            - *"Which tool was used generate logs?"*: `FastQC`
 >                - In *"FastQC output"*:
 >                    - {% icon param-repeat %} *"Insert FastQC output"*
@@ -360,8 +360,6 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    - *"Per gene/transcript output"*: `Per gene read counts (GeneCounts)`
 >    - *"Compute coverage"*:
 >       - `Yes in bedgraph format`
->       - *"Generate a coverage for each strand (stranded coverage)"*: `Yes`
->       - *"Normalize coverage to million of mapped reads (RPM)"*: `Yes`
 >
 > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the STAR logs with the following parameters:
 >    - In *"Results"*:
@@ -379,7 +377,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. More than 83% for `GSM461177_untreat_paired` and more than 79% for `GSM461180_treat_paired`. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination.
+>    > > 1. More than 83% for `GSM461177_untreat_paired` and 79% for `GSM461180_treat_paired`. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination.
 >    > > 2. We also have access to the number and percentage of reads that are mapped at several location, mapped at too many different location, not mapped because too short.
 >    > >
 >    > >    ![STAR Alignment Scores](../../images/ref-based/star_alignment_plot.png "Alignment scores")
@@ -390,7 +388,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    {: .question}
 {: .hands_on}
 
-According to the **MultiQC** report, about 80% of reads for both samples are mapped exactly once to the reference genome. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination. Both samples have a low (less than 10%) percentage of reads that mapped to multiple locations on the reference genome. This is in the normal range for Illumina short-read sequencing, but may be lower for newer long-read sequencing datasets that can span larger repeated regions in the reference genome.
+According to the **MultiQC** report, about 80% of reads for both samples are mapped exactly once to the reference genome. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination. Both samples have a low (less than 10%) percentage of reads that mapped to multiple locations on the reference genome. This is in the normal range for Illumina short-read sequencing, but may be lower for newer long-read sequencing datasets that can span larger repeated regions in the reference genome and will be higher for 3' end libraries.
 
 The main output of **STAR** is a BAM file.
 
@@ -407,7 +405,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 > 3. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 > 4. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
 > 5. Click on the {% icon galaxy-barchart %} visualize icon in the `GSM461177` file block.
-> 6. In the center panel click on the `local` in `display with IGV local D. melanogaster (dm6)`to load the reads into the IGV browser
+> 6. In the center panel click on the `local` in `display with IGV (local, D. melanogaster (dm6))`to load the reads into the IGV browser
 >    > <comment-title></comment-title>
 >    >
 >    > In order for this step to work, you will need to have either IGV or [Java Web Start](https://www.java.com/en/download/faq/java_webstart.xml)
@@ -778,28 +776,30 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
     >            - *"Choose style of the track"*: `Gene track / Bed track`
     >                - *"Plot title"*: `Genes`
+    >                - *"height"*: `5`
     >                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
     {: .hands_on}
 
     > <question-title></question-title>
     >
+    > ![pyGenomeTracks](../../images/ref-based/pyGenomeTracks.png "STAR coverage for strand 1 in blue and strand 2 in red")
+    >
     > 1. Which gene are we looking at? Which strand it is?
     > 2. What is the average coverage for each strand?
-    > 2. What is the strandness of the library?
+    > 3. What is the strandness of the library?
     >
     > > <solution-title></solution-title>
     > >
-    > > ![STAR Gene counts unstranded](../../images/ref-based/star_gene_counts_unstranded.png "Gene counts unstranded")
-    > >
     > > 1. We see 3 transcripts called Thd1-RC, Thd1-RB and Thd1-RA of the gene Thd1. The gene is on the reverse strand.
-    > > 2. TODO
+    > > 2. The scale goes to 1.5-2 in the 4 profiles. The average coverage should be around 1.2-1.5
     > > 3. We deduce that the library is unstranded.
     > >
     > > > <comment-title>How would it be if the library was stranded?</comment-title>
     > > >
-    > > > ![STAR Gene counts unstranded USvsRS](../../images/ref-based/star_gene_counts_unstranded_USvsRS.png "Gene counts unstranded for unstranded and reverse stranded library")
-    > > > Note that the coverage on the strand 1 is very low while the gene is forward.
-    > > > This means that the library is reverse stranded.
+    > > > ![pyGenomeTracks USvsRS](../../images/ref-based/pyGenomeTracks_USvsRS.png "STAR coverage for strand 1 in blue and strand 2 in red for unstranded and reverse stranded library")
+    > > > Note that the coverage on the strand 1 is very low for the stranded_PE sample while the gene is forward.
+    > > > This means that the library of stranded_PE is reverse stranded.
+    > > > On the contrary for unstranded_PE the scale is comparable for both strand.
     > > {: .comment}
     > {: .solution}
     >
@@ -831,7 +831,7 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     > > ![STAR Gene counts same stranded](../../images/ref-based/star_gene_counts_same.png "Gene counts same stranded")
     > > ![STAR Gene counts reverse stranded](../../images/ref-based/star_gene_counts_reverse.png "Gene counts reverse stranded")
     > >
-    > > 1. About 75% of reads are asigned to genes if the library is unstranded, while it is less than 40% in the other cases.
+    > > 1. About 75% of reads are asigned to genes if the library is unstranded, while it is around 40% in the other cases.
     > > 2. This suggests that the library is unstranded.
     > >
     > > > <comment-title>How would it be if the library was stranded?</comment-title>
@@ -889,12 +889,12 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     > >
     > >    ```text
     > >    This is PairEnd Data
-    > >    Fraction of reads failed to determine: 0.0963
-    > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
-    > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
+    > >    Fraction of reads failed to determine: 0.1013
+    > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4626
+    > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4360
     > >    ```
     > >
-    > >    so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.
+    > >    so 46.26% of the reads are assigned to the forward strand and 43.60% to the reverse strand.
     > >
     > > 2. Similar statistics are found for `GSM461180_treat_paired`, so the library seems to be of the type unstranded for both samples.
     > >
@@ -970,7 +970,7 @@ As you chose to use the featureCounts flavor of the tutorial, we now run **featu
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. Around 70% of the reads have been assigned to genes: this quantity is good enough.
+>    > > 1. Around 63% of the reads have been assigned to genes: this quantity is good enough.
 >    > >
 >    > >    ![featureCounts assignment](../../images/ref-based/featureCounts_assignment_plot.png "Assignments with featureCounts")
 >    > >
@@ -1076,7 +1076,7 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 > >
 > > 2. Inspect the result
 > >
-> >    The result of sorting the table on column 2 reveals that FBgn0000556 is the feature with the most counts (around 128,740 in `GSM461177_untreat_paired` and 127,400 in `GSM461180_treat_paired`).
+> >    The result of sorting the table on column 2 reveals that FBgn0284245 is the feature with the most counts (around 128,740 in `GSM461177_untreat_paired` and 127,400 in `GSM461180_treat_paired`).
 > >
 > >    Comparing different output files is easier if we can view more than one dataset simultaneously. The Scratchbook function allows us to build up a collection of datasets that will be shown on the screen together.
 > >
@@ -1094,17 +1094,11 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 > >    >
 > >    >    ![Scratchbook one dataset shown](../../images/ref-based/scratchbookOneDataset.png "Scratchbook showing one dataset overlay")
 > >    >
-> >    > 4. When a dataset is shown **click in the main interface** to prepare to select another dataset. The interface now shows that there is one saved view in the Scratchbook:
-> >    >
-> >    >    ![scratchbook one saved view](../../images/ref-based/scratchbookOneSavedView.png "Menu bar with one saved dataset view in Scratchbook")
-> >    >
-> >    > 5. Next click the {% icon galaxy-eye %} (eye) icon on the **second sorted counts** file. The two datasets can now be seen side by side:
+> >    > 4. Next click the {% icon galaxy-eye %} (eye) icon on the **second sorted counts** file. The second dataset goes over the first one but you can move the window in order to see the two datasets side by side:
 > >    >
 > >    >    ![Scratchbook two datasets shown](../../images/ref-based/scratchbookTwoDatasetsShown.png "Scratchbook showing two side by side datasets")
 > >    >
-> >    > 6. To **leave** Scratchbook selection mode, click on the **Scratchbook icon** again. Your saved view will still remain for future viewing:
-> >    >
-> >    >    ![Scratchbook disabled datasets saved](../../images/ref-based/scratchbookDisabledWithSavedDatasets.png "Scratchbook disabled with two datasets saved")
+> >    > 5. To **leave** Scratchbook selection mode, click on the **Scratchbook icon** again. You can decide to close the windows or to reduce them in order to display them later.
 > >    >
 > >    {: .hands_on}
 > >
@@ -2212,7 +2206,7 @@ DEXSeq generates a count table similar to the one generated by featureCounts, bu
 >
 > > <solution-title></solution-title>
 > >
-> > FBgn0000556:005 is the exon with the most reads mapped to it for both samples. It is part of FBgn0000556, the feature with the most reads mapped on it (from featureCounts).
+> > FBgn0284245:005 is the exon with the most reads mapped to it for both samples. It is part of FBgn0284245, the feature with the most reads mapped on it (from featureCounts).
 > >
 > {: .solution}
 >
