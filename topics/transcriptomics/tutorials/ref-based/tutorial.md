@@ -778,7 +778,7 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
     >            - *"Choose style of the track"*: `Gene track / Bed track`
     >                - *"Plot title"*: `Genes`
-    >                - {% icon param-dataset %} *"Track file(s) bed or gtf format"*: Select `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
+    >                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
     {: .hands_on}
 
     > <question-title></question-title>
