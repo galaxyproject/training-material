@@ -1,7 +1,15 @@
 {
     "a_galaxy_workflow": "true",
     "annotation": "",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-5192-126X",
+            "name": "Pavankumar Videm"
+        }
+    ],
     "format-version": "0.1",
+    "license": "CC-BY-4.0",
     "name": "scATAC-seq count matrix filtering",
     "steps": {
         "0": {
@@ -64,7 +72,7 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.binarize\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_version": "0.3.2+galaxy1",
             "type": "tool",
             "uuid": "fac0c4ed-5472-45c0-9140-91b5f76f0a3c",
             "when": null,
@@ -103,7 +111,7 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 1, \"filter\": {\"filter\": \"min_features\", \"__current_case__\": 2, \"min_features\": \"100\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_version": "0.3.2+galaxy1",
             "type": "tool",
             "uuid": "459a7f12-6598-4f95-a8b5-0683a1716ecd",
             "when": null,
@@ -142,7 +150,7 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_features\", \"__current_case__\": 2, \"filter\": {\"filter\": \"min_cells\", \"__current_case__\": 2, \"min_cells\": \"1\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_version": "0.3.2+galaxy1",
             "type": "tool",
             "uuid": "676f1dbe-4756-4f94-b643-88a14891df33",
             "when": null,
@@ -181,7 +189,7 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"nb_feat_log\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_version": "0.3.2+galaxy1",
             "type": "tool",
             "uuid": "9c190cce-0149-484c-99f9-e3823da84382",
             "when": null,
@@ -224,7 +232,7 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_cells\", \"__current_case__\": 4, \"binary\": true, \"log\": true, \"threshold\": \"1000.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_version": "0.3.2+galaxy1",
             "type": "tool",
             "uuid": "3c4eadf1-17d6-4112-a465-e9491fd9bea2",
             "when": null,
@@ -241,12 +249,7 @@
                     "output_name": "anndata_out"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Plot",
-                    "name": "adata"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Plot",
             "outputs": [
@@ -271,8 +274,8 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adata\": {\"__class__\": \"RuntimeValue\"}, \"advanced_common\": {\"show_log\": true}, \"format\": \"png\", \"method\": {\"method\": \"pl.violin\", \"__current_case__\": 3, \"key_variables\": {\"type\": \"custom\", \"__current_case__\": 2, \"keys\": \"nb_features, log_nb_features\"}, \"groupby\": \"\", \"log\": false, \"use_raw\": false, \"violin_plot\": {\"stripplot\": {\"stripplot\": \"True\", \"__current_case__\": 0, \"jitter\": {\"jitter\": \"True\", \"__current_case__\": 0, \"size\": \"1.0\"}}, \"multi_panel\": {\"multi_panel\": \"True\", \"__current_case__\": 0, \"width\": null, \"height\": null}, \"scale\": \"width\"}, \"xlabel\": \"\", \"rotation\": null, \"seaborn_violinplot\": {\"bw\": \"scott\", \"orient\": null, \"linewidth\": \"0.0\", \"color\": \"DarkCyan\", \"saturation\": \"0.75\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": true}, \"format\": \"png\", \"method\": {\"method\": \"pl.violin\", \"__current_case__\": 3, \"key_variables\": {\"type\": \"custom\", \"__current_case__\": 2, \"keys\": \"nb_features, log_nb_features\"}, \"groupby\": \"\", \"log\": false, \"use_raw\": false, \"violin_plot\": {\"stripplot\": {\"stripplot\": \"True\", \"__current_case__\": 0, \"jitter\": {\"jitter\": \"True\", \"__current_case__\": 0, \"size\": \"1.0\"}}, \"multi_panel\": {\"multi_panel\": \"True\", \"__current_case__\": 0, \"width\": null, \"height\": null}, \"scale\": \"width\"}, \"xlabel\": \"\", \"rotation\": null, \"seaborn_violinplot\": {\"bw\": \"scott\", \"orient\": null, \"linewidth\": \"0.0\", \"color\": \"DarkCyan\", \"saturation\": \"0.75\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.7.1+galaxy1",
             "type": "tool",
             "uuid": "08831680-c7be-4342-9cf7-96c7e79e142f",
             "when": null,
@@ -315,7 +318,7 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_cells\", \"__current_case__\": 4, \"binary\": true, \"log\": false, \"threshold\": \"1000.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_version": "0.3.2+galaxy1",
             "type": "tool",
             "uuid": "440fdd4b-df84-460a-9461-ac488026179a",
             "when": null,
@@ -358,7 +361,7 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_features\", \"__current_case__\": 5, \"binary\": true, \"log\": false, \"threshold\": \"5.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_version": "0.3.2+galaxy1",
             "type": "tool",
             "uuid": "d66ec44d-f6c6-4af2-b5d6-86d2aceb62d2",
             "when": null,
@@ -401,7 +404,7 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_features\", \"__current_case__\": 5, \"binary\": true, \"log\": true, \"threshold\": \"5.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_version": "0.3.2+galaxy1",
             "type": "tool",
             "uuid": "de4d93fa-b9e8-4601-8d50-e8f8d2f6889b",
             "when": null,
@@ -440,7 +443,7 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 1, \"filter\": {\"filter\": \"min_features\", \"__current_case__\": 2, \"min_features\": \"1000\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_version": "0.3.2+galaxy1",
             "type": "tool",
             "uuid": "cca4f6dd-4855-4aac-a8e7-bb35be1ba749",
             "when": null,
@@ -479,7 +482,7 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 1, \"filter\": {\"filter\": \"max_features\", \"__current_case__\": 3, \"max_features\": \"12500\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_version": "0.3.2+galaxy1",
             "type": "tool",
             "uuid": "5b38b480-ffb4-44db-91d5-e476061ae1cd",
             "when": null,
@@ -518,7 +521,7 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_features\", \"__current_case__\": 2, \"filter\": {\"filter\": \"min_cells\", \"__current_case__\": 2, \"min_cells\": \"5\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_version": "0.3.2+galaxy1",
             "type": "tool",
             "uuid": "3500236e-0e0b-42be-b1e2-d531967b9e9e",
             "when": null,
@@ -535,12 +538,7 @@
                     "output_name": "anndata_out"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Plot",
-                    "name": "adata"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Plot",
             "outputs": [
@@ -565,8 +563,8 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adata\": {\"__class__\": \"RuntimeValue\"}, \"advanced_common\": {\"show_log\": true}, \"format\": \"png\", \"method\": {\"method\": \"pl.violin\", \"__current_case__\": 3, \"key_variables\": {\"type\": \"custom\", \"__current_case__\": 2, \"keys\": \"nb_features, log_nb_features\"}, \"groupby\": \"\", \"log\": false, \"use_raw\": false, \"violin_plot\": {\"stripplot\": {\"stripplot\": \"True\", \"__current_case__\": 0, \"jitter\": {\"jitter\": \"True\", \"__current_case__\": 0, \"size\": \"1.0\"}}, \"multi_panel\": {\"multi_panel\": \"True\", \"__current_case__\": 0, \"width\": null, \"height\": null}, \"scale\": \"width\"}, \"xlabel\": \"\", \"rotation\": null, \"seaborn_violinplot\": {\"bw\": \"scott\", \"orient\": null, \"linewidth\": \"0.0\", \"color\": \"DarkCyan\", \"saturation\": \"0.75\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": null,
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": true}, \"format\": \"png\", \"method\": {\"method\": \"pl.violin\", \"__current_case__\": 3, \"key_variables\": {\"type\": \"custom\", \"__current_case__\": 2, \"keys\": \"nb_features, log_nb_features\"}, \"groupby\": \"\", \"log\": false, \"use_raw\": false, \"violin_plot\": {\"stripplot\": {\"stripplot\": \"True\", \"__current_case__\": 0, \"jitter\": {\"jitter\": \"True\", \"__current_case__\": 0, \"size\": \"1.0\"}}, \"multi_panel\": {\"multi_panel\": \"True\", \"__current_case__\": 0, \"width\": null, \"height\": null}, \"scale\": \"width\"}, \"xlabel\": \"\", \"rotation\": null, \"seaborn_violinplot\": {\"bw\": \"scott\", \"orient\": null, \"linewidth\": \"0.0\", \"color\": \"DarkCyan\", \"saturation\": \"0.75\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.7.1+galaxy1",
             "type": "tool",
             "uuid": "1092ffb8-ae19-42e7-9603-1b97998eb280",
             "when": null,
@@ -574,6 +572,6 @@
         }
     },
     "tags": [],
-    "uuid": "39372689-3b74-43ac-a06a-6afb06cd25b2",
-    "version": 12
+    "uuid": "671631f8-98a2-4b0c-837b-fe61a475b82d",
+    "version": 15
 }

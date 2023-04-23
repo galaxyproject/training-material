@@ -200,7 +200,7 @@ First things first. Let's do a basic FASTQ quality control using **FastQC**
 
 > <tip-title>Adapter trimming</tip-title>
 >
-> There is only a little amount of Nextera Transposase Sequence in the reads (see Adapter Content section of **FastQC** output). In this case, we skip the adapter trimming step and proceed to the mapping step. If your data has a significant amount of Nextera Transposase Sequences, then proceed to adapter trimming using either **cutadapt** or **Trim Galore!**. **Trim Galore** can automatically detect the adapter sequence. If you use **Cutadapt**, follow the bulk ATAC-Seq tutorial [Trimming Reads]({% link topics/epigenetics/tutorials/atac-seq/tutorial.md#trimming-reads %}) step.
+> There is only a little amount of Nextera Transposase Sequence in the reads (see Adapter Content section of **FastQC** output). In this case, we skip the adapter trimming step and proceed to the mapping step. If your data has a significant amount of Nextera Transposase Sequences, then proceed to adapter trimming using either **cutadapt** or **Trim Galore!**. **Trim Galore** can automatically detect the adapter sequence. If you use **Cutadapt**, follow the bulk ATAC-Seq tutorial [Trimming Reads]({% link topics/epigenetics/tutorials/atac-seq/tutorial.md %}) step.
 {: .tip}
 
 ## Mapping reads to a reference genome
@@ -505,7 +505,7 @@ Before starting with the analysis, we will *binarize* the count matrix. Normally
 >    - *"Annotated data matrix"*: `atac_v1_pbmc_1k.h5ad`
 >    - *"Method used for filtering"*: `Binarize count matrix, using 'pp.binarize'`
 > 1. Rename the dataset to `PBMC 1k`
-> > <tip-title>/tip-title>
+> > <tip-title></tip-title>
 > >
 > > Even if your count matrix was already binarized but you are not sure about it, you should binarize it. As binarization replaces all non-zero values to 1, it should result in the same matrix if it was already binarized.
 > {: .tip}
@@ -686,6 +686,6 @@ Based on the above QC plots, we will filter out all the cells with less than 100
 
 In this tutorial, we have learned how to map reads from 10X ATAC-seq data, identify open chromatin regions from aggregated cell data and generate a count matrix in *Anndata* format. We also performed quality control and filtered out empty and uninformative cells and features to generate a high-quality count matrix for downstream analysis. 
 
-A full pipeline that produces both an AnnData and tabular file for inspection is provided [in this workflow](workflows/scatac_tenx.ga).
+Galaxy workflows for generating [Annadata from FASTQ files](workflows/scatac-fastq_to_count_matrix.ga) and [quality filtering of raw count matrix](workflows/scatac-count_matrix_filtering.ga) are provided.scatac_tenx.ga).
 
 This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).
