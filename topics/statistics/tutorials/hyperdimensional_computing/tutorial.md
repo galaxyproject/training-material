@@ -26,7 +26,7 @@ contributors:
 
 # Introduction
 
-`chopin2` ({% cite Cumbo2020 %}) implements a domain-agnostic supervised classification method based on the hyperdimensional (HD) computing paradigm. It is ano open-source tool and its code is available on GitHub at [https://github.com/cumbof/chopin2](https://github.com/cumbof/chopin2).
+`chopin2` ({% cite Cumbo2020 %}) implements a domain-agnostic supervised classification method based on the hyperdimensional (HD) computing paradigm. It is an open-source tool and its code is available on GitHub at [https://github.com/cumbof/chopin2](https://github.com/cumbof/chopin2).
 
 In this tutorial, we are going to work on a dataset with microbial relative abundances (RA) and presence/absence information (BIN) computed on metagenomic samples collected from individual affected by the colorectal cancer (CRC) in a case/control scenario.
 The main goal is to build a supervised classification model over the RA profiles with `chopin2` in order to discriminate case and control samples with a high accuracy.
@@ -90,58 +90,69 @@ Finally, the permutation operation is: (i) invertible, (ii) it distributes over 
 
 The set of vectors and arithmetic operators used for combining vectors is called vector-symbolic architecture.
 
-`chopin2` implements a supervised classification model that works by encoding every observation in a dataset into high-dimensional vectors by combining values under their features. The model is built by collapsing the vector representation of the observations in the training set into a vector for each class of observations (e.g., in the case of the datasets retrieved in the previous step, classes are `CRC` and `control`). The classification model os then tested by computing the inner product between the vector representations of the observations in the test set against the two classes vectors. Vectors are thus classified based on their closeness to the classes.
+`chopin2` {% icon tool %} implements a supervised classification model that works by encoding every observation in a dataset into high-dimensional vectors by combining values under their features. The model is built by collapsing the vector representation of the observations in the training set into a vector for each class of observations (e.g., in the case of the datasets retrieved in the previous step, classes are `CRC` and `control`). The classification model os then tested by computing the inner product between the vector representations of the observations in the test set against the two classes vectors. Vectors are thus classified based on their closeness to the classes.
 
 > <hands-on-title>Build a classification model with `chopin2`</hands-on-title>
-> **chopin2** {% icon tool %}: Run **chopin2** with the following configuration:
->    * Select the `RA__ThomasAM__species.csv` dataset imported into the history during the **Get the data** step;
->    * Set a dimensionality of 10,000;
->    * Set 100 levels;
->    * Set 10 retraining iterations;
->    * Set the number of folds to 5 to cross-validate the model;
->    * Finally, disable the feature selection.
+> {% tool [chopin2](toolshed.g2.bx.psu.edu/repos/iuc/chopin2/chopin2/1.0.7+galaxy1) %} with the following configuration:
+>    * {% icon param-file %} *"Select a dataset"*: `RA__ThomasAM__species.csv`;
+>    * {% icon param-text %} *"Vector dimensionality"*: `10,000`;
+>    * {% icon param-text %} *"Levels"*: `100`;
+>    * {% icon param-text %} *"Model retraining iterations"*: `10`;
+>    * {% icon param-text %} *"Number of folds for cross-validation"*: `5`;
+>    * {% icon param-select %} *"Enable feature selection"*: `Disabled`
 >
-> The number of levels is the number of random vectors that `chopin2` generates for encoding encode data. This must be carefully selected since the accuracy of the resulting model is strictly correlated to this parameter ({% cite Cumbo2020 %}).
+> The number of levels is the number of random vectors that `chopin2` {% icon tool %} generates for encoding data. This must be carefully selected since the accuracy of the resulting model is strictly correlated to this parameter ({% cite Cumbo2020 %}).
 >
-> The tool will end up creating a `summary` file in your history containing a few basic information about the generated classification model and, more importantly, it's accuracy.
+> The tool will end up creating a `summary` file in your history containing a few basic information about the generated classification model and, more importantly, it's accuracy. You can open this file by clicking the {% icon galaxy-eye %} (eye) icon.
 >
 > We suggest you to repeat the same steps for building a classification model on the binary presence/absence profiles in `BIN__ThomasAM__species.csv`. In this case there is no need to use so many levels since the dataset contains only two possible values (i.e., 0 and 1). Thus, the number of levels must be changed to 2.
 >
 >    > <question-title></question-title>
 >    >
->    > Compare the `summary` files generate by `chopin2` as the result of building a classification model over the `RA__ThomasAM__species.csv` and `BIN__ThomasAM__species.csv` datasets.
+>    > Compare the `summary` files generate by `chopin2` {% icon tool %} as the result of building a classification model over the `RA__ThomasAM__species.csv` and `BIN__ThomasAM__species.csv` datasets.
 >    > 1. Is there a difference in the accuracy of the two models?
 >    > 2. Does the difference in the number of levels have an impact on the running time and the final accuracy of the models?
+>    >
+>    >    > <solution-title></solution-title>
+>    >    >
+>    >    > 1. The accuracy of the model built on the `BIN__ThomasAM__species.csv` dataset is over 80%, while the accuracy of the model built on the `RA__ThomasAM__species.csv` dataset is around 75%;
+>    >    > 2. The tool generates as many hyperdimensional vectors as the number of levels. In case of a high number of levels, the tool could take a while to generate all the hyperdimensional vectors initially, but it does not affect its speed in the generation of the classification model. However, it could heavily affect the memory consumption. Additionally, the number of levels has for sure an impact on the accuracy of the model. It is recommended to choose as many levels as the number of unique values in the datasets, by also taking into account the precision of the numerical values.
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
 # Feature selection
 
-`chopin2` also implements a feature selection method based on the backward variable elimination strategy. It means that the tool will produce a classification model starting with the whole set of features in the dataset and iteratively remove those features that do not contribute to the accuracy of the model.
+`chopin2` {% icon tool %} also implements a feature selection method based on the backward variable elimination strategy. It means that the tool will produce a classification model starting with the whole set of features in the dataset and iteratively remove those features that do not contribute to the accuracy of the model.
 
 Be aware that this specific type of feature selection method could lead to the generation of thousands of classification models in order to determine the best features and discard those ones that do not significantly contribute to a good accuracy. However, despite the huge amount of computational resources required to run the algorithm, it can easily handle datasets with massive amounts of features.
 
 > <hands-on-title>Identify the best features</hands-on-title>
-> **chopin2** {% icon tool %}: Run **chopin2** with the following configuration:
->    * Select the `BIN__ThomasAM__species.csv` dataset imported into the history during the **Get the data** step;
->    * Set a dimensionality of 10,000;
->    * Set 2 levels;
->    * Set 10 retraining iterations;
->    * Set the number of folds to 5 to cross-validate the model;
->    * Finally, enable the feature selection.
+> {% tool [chopin2](toolshed.g2.bx.psu.edu/repos/iuc/chopin2/chopin2/1.0.7+galaxy1) %} with the following configuration:
+>    * {% icon param-file %} *"Select a dataset"*: `BIN__ThomasAM__species.csv`;
+>    * {% icon param-text %} *"Vector dimensionality"*: `10,000`;
+>    * {% icon param-text %} *"Levels"*: `2`;
+>    * {% icon param-text %} *"Model retraining iterations"*: `10`;
+>    * {% icon param-text %} *"Number of folds for cross-validation"*: `5`;
+>    * {% icon param-select %} *"Enable feature selection"*: `Enabled`
 >
-> We are going to focus on the `BIN__ThomasAM__species.csv` dataset only this time since `chopin2` produced a classification model with a better accuracy compared to that of the model built over the `RA__ThomasAM__species.csv` dataset.
+> We are going to focus on the `BIN__ThomasAM__species.csv` dataset only this time since `chopin2` {% icon tool %} produced a classification model with a better accuracy compared to that of the model built over the `RA__ThomasAM__species.csv` dataset.
 >
-> The tool will end up creating a `summary` file in your history containing a line for each step of the backward variable elimination method. Every line corresponds to a classification model. Please note that the last column reports the features excluded in each step.
+> The tool will end up creating a `summary` file in your history (click on the {% icon galaxy-eye %} (eye) icon to check its content). It contains a line for each step of the backward variable elimination method. Every line corresponds to a classification model. Please note that the last column reports the features excluded in each step.
 >
-> A `selection` file will also appear in your history with the list of best features selected by `chopin2`.
+> A `selection` file will also appear in your history with the list of best features selected by `chopin2` {% icon tool %} (you can also inspect this file by clicking on the {% icon galaxy-eye %} (eye) icon). Some of them are well known to be actually linked in some way to the genesis and development of the CRC as a simple search on the [Disbiome](https://disbiome.ugent.be/) ({% cite janssens2018disbiome %}) database can confirm. However, these features have been selected because they all contribute to define the best accuracy according to the classification model and the feature selection technique implemented in `chopin2` {% icon tool %}, and they do not necessarily have a biological relevance. Thus, this is not enough for identifying possible biomarkers for the CRC, and further statistical analyses must be performed to validate and support these findings.
 >
 >    > <question-title></question-title>
 >    >
->    > Look at the list of microbial species (features) selected by `chopin2` reported in the `selection` file. Can you recognise any microbial species known to be linked in some way to the genesis and development of colorectal cancer?
+>    > Look at the list of microbial species (features) selected by `chopin2` {% icon tool %} reported in the `selection` file. Can you recognise any microbial species known to be linked in some way to the genesis and development of colorectal cancer?
+>    >
+>    >    > <solution-title></solution-title>
+>    >    >
+>    >    > _Clostridium symbiosum_, _Gemella morbillorum_, and _Parvimonas micra_, among the other selected species, are well known CRC-enriched bacteria. These species have all been proposed as biomarkers for an early detection of the disease ({% cite xie2017fecal %} {% cite yao2021new %} {% cite zhao2022parvimonas %}).
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
 > <details-title>Feature selection with Hyperdimensional Computing</details-title>
-> `chopin2` is the first tool that implements a feature selection method based on the hyperdimensional computing paradigm.
+> `chopin2` {% icon tool %} is the first tool that implements a feature selection method based on the hyperdimensional computing paradigm.
 {: .details}
