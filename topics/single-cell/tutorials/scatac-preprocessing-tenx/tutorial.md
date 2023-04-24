@@ -49,11 +49,11 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 Similar to bulk ATAC-Seq, single-cell ATAC-Seq (scATAC-seq) leverages the hyperactive Tn5 Transposase to profile open chromatin regions but at single-cell resolution. Thus helps in understanding cell type-specific chromatin accessibility from a heterogeneous cell population.
 
-### Era of 10x Genomics
+## Era of 10x Genomics
 
 10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level but has defined the standards of the field that many downstream analysis packages are now scrambling to accommodate. The gain in resolution reduces the granularity and noise issues that plagued the field of single-cell omics not long ago, where now individual clusters are much easier to decipher due to the added stability added by this gain in information.
 
-### Library Preparation
+## Library Preparation
 
 ![Library Preparation]({% link topics/single-cell/images/scatac-pre-processing/tenx_libprep_scatac.png %} "An overview of the 10x single-nuclei ATAC-seq library preparation")
 
@@ -62,7 +62,7 @@ The 10X barcoded gel beads consist of a pool of barcodes which are used to separ
 More information can be found in the [reagent kit documentation](https://www.10xgenomics.com/support/single-cell-atac/documentation/steps/library-prep/chromium-single-cell-atac-reagent-kits-user-guide-v-2-chemistry).
 
 
-### 10x Chemistries
+## 10x Chemistries
 
 There are two main reagent kits used during the library preparation. Below we can see the layout of the primers used in both chemistries. We can ignore most of these as they are not relevant, namely: the P5 and P7 Illumina primers are used in the Illumina [bridge amplification](https://en.wikipedia.org/wiki/Illumina_dye_sequencing#Bridge_amplification) process; the Sample Index is an 8bp primer which is related to the Chromium system that balances nucleotide bias and ensures that there is no sample overlap during the multiplexed sequencing. The primer of interest to us is the Cell Barcode (CB). Unlike scRNA-seq, Unique Molecular Identifiers (UMIs) are not used in scATAC-seq.
 
@@ -163,7 +163,7 @@ First, we will attach the barcodes from the barcodes FASTQ file to the ids of fo
 {: .hands_on}
 
 
-Now let's proceed with the next steps QC, mapping and peak calling as we do with the bulk ATAC-Seq data. For a thorough description of bulk ATAC-Seq analysis, please follow the bulk [ATAC-Seq data analysis tutorial]({% link topics/epigenetics/tutorials/atac-seq/tutorial.md %}). Here we use a slightly different workflow. Here we map reads using **BWA-MEM** instead of **Bowtie2**.
+Now let's proceed with the next steps QC, mapping and peak calling as we do with the bulk ATAC-Seq data. For a thorough description of bulk ATAC-Seq analysis, please follow the bulk [ATAC-Seq data analysis tutorial]({% link topics/epigenetics/tutorials/atac-seq/tutorial.md %}). Here we use a slightly different workflow. Here we map reads using **BWA-MEM** instead of **Bowtie2**, then create ATAC fragments file that also stores the cell barcode information and finally use **MACS2** for peak calling. Note that the workflow from bulk ATAC-seq tutorial should also result in similar set of peaks.
 
 ## FASTQ Quality control
 First things first. Let's do a basic FASTQ quality control using **FastQC**
@@ -445,7 +445,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    {: .question}
 >
 > 7. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Input 3k PBMC`
+>    - {% icon param-file %} *"Annotated data matrix"*: `PBMC 1k chr21 Anndata`
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >
 > 8. Inspect the generated file
@@ -477,7 +477,7 @@ We just created a count matrix with all detected peaks and non-empty barcodes. I
 The current matrix contains peaks from chromosome 21 only and is too small to carry out this type of analysis. From this step onwards we will use the full count matrix generated from the original FASTQ files. Please import the following anndata file to start:
 
 ```
-https://zenodo.org/record/7855968/files/atac_pbmc_1k_uniq_peaks.h5ad?download=1
+https://zenodo.org/record/7855968/files/atac_pbmc_1k_uniq_peaks.h5ad
 ```
 
 > <question-title></question-title>
@@ -494,29 +494,13 @@ https://zenodo.org/record/7855968/files/atac_pbmc_1k_uniq_peaks.h5ad?download=1
 > 
 {: .question}
 
-## Basic filtering to remove potential empty features and cells
-Before starting with the analysis, we will *binarize* the count matrix. Normally, each entry in a count matrix represents the abundance of a gene/feature in a cell. A binary count matrix entry contains a 0 if the original matrix entry is a 0 and contains 1 otherwise. It essentially represents whether a feature is present in a cell or not. It is a common practice to use the binary matrix in scATAC-seq analysis. It also makes perfect sense to work with such binary representation of scATAC-seq data because here the cells are clustered based on whether the chromatin is accessible (1) or not (0). In contrast, scRNA-seq clustering uses absolute counts representing gene expression. Hence the first step after creating a scATAC count matrix is to binarize it.
+## Initial filtering to remove potential empty features and cells
+First remove any potential empty features or barcodes. A non-empty cell should have a minimum number of non-empty features and a non-empty feature should be present in a minimum number of non-empty cells. Here we will different minimum thresholds for filtering cells and features.
 
-![BinaryMatrix]({% link topics/single-cell/images/scatac-pre-processing/binary_matrix.png %} "Binarization of count matrix")
-
-> <hands-on-title>Build count matrix with EpiScanpy</hands-on-title>
+> <hands-on-title>Initial filtering</hands-on-title>
 >
 > 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
->    - *"Annotated data matrix"*: `atac_v1_pbmc_1k.h5ad`
->    - *"Method used for filtering"*: `Binarize count matrix, using 'pp.binarize'`
-> 1. Rename the dataset to `PBMC 1k`
-> > <tip-title></tip-title>
-> >
-> > Even if your count matrix was already binarized but you are not sure about it, you should binarize it. As binarization replaces all non-zero values to 1, it should result in the same matrix if it was already binarized.
-> {: .tip}
-{: .hands_on}
-
-Now remove any potential empty features or barcodes. A non-empty cell should have a minimum number of non-empty features and a non-empty feature should be present in a minimum number of non-empty cells. Here we will different minimum thresholds for filtering cells and features.
-
-> <hands-on-title>Basic filtering</hands-on-title>
->
-> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
->    - *"Annotated data matrix"*: `Binary count matrix`
+>    - *"Annotated data matrix"*: `atac_pbmc_1k_uniq_peaks.h5ad`
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of features expressed, using 'pp.filter_cells'`
 >    - *"Filter"*: `Minimum number of features expressed`
 >    - *"Minimum features"*: `100`
@@ -549,9 +533,9 @@ We will first plot the number of features per cell. This information is stored a
 >    - *"Annotated data matrix""*: Output of previous (`pp.filter_features`) step
 >    - *"Method used for filtering"*: `Compute log10 of nb_features`
 > 2. Check if observations have an extra `log_nb_features` in addition to `nb_features` layer.
-> 3. Rename the resulting dataset to `PBMC 1k after basic filtering`
+> 3. Rename the resulting dataset to `PBMC 1k after initial filtering`
 > 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `PBMC 1k after basic filtering`
+>    - {% icon param-file %} *"Annotated data matrix"*: `PBMC 1k after initial filtering`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >      - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
 >        - *"Keys for accessing variables"*: `nb_features, log_nb_features`
@@ -568,7 +552,7 @@ We will first plot the number of features per cell. This information is stored a
 > > What trends of the data do you observe in the plots?
 > >
 > > > <solution-title></solution-title>
-> > > ![IntialViolin]({% link topics/single-cell/images/scatac-pre-processing/violin_after_basic_filtering.png %} "Violin plot of number of features per cell after basic filtering") 
+> > > ![IntialViolin]({% link topics/single-cell/images/scatac-pre-processing/violin_after_initial_filtering.png %} "Violin plot of number of features per cell after initial filtering") 
 > > > Both plots indicate that there are two distinct sets of cells: 
 > > >    1. Cells with an acceptable number of open chromatin regions.
 > > >    2. Cells with only a few detected peaks. These cells are uninformative and should be excluded.
@@ -583,14 +567,14 @@ To determine decent filtering thresholds, we will further look at some histogram
 > <hands-on-title>Coverage cells</hands-on-title>
 >
 > 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
->    - *"Annotated data matrix""*: `PBMC 1k after basic filtering`
+>    - *"Annotated data matrix""*: `PBMC 1k after initial filtering`
 >    - *"Method used for filtering"*: `Coverage cells: Histogram of the number of open features (in the case of ATAC-seq data) per cell, using 'pp.coverage_cells'`
->    - *"Binarized matrix?"*: `Yes`
+>    - *"Binarized matrix?"*: `No`
 >    - *"Minimum number of cells or minimum number of features to be indicated in the plot"*: `1000`
 > 2. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
->    - *"Annotated data matrix""*: `PBMC 1k after basic filtering`
+>    - *"Annotated data matrix""*: `PBMC 1k after initial filtering`
 >    - *"Method used for filtering"*: `Coverage cells: Histogram of the number of open features (in the case of ATAC-seq data) per cell, using 'pp.coverage_cells'`
->    - *"Binarized matrix?"*: `Yes`
+>    - *"Binarized matrix?"*: `No`
 >    - *"Log transform?"*: `Yes`
 >    - *"Minimum number of cells or minimum number of features to be indicated in the plot"*: `1000`
 > 3. Now observe the plots
@@ -614,14 +598,14 @@ To determine decent filtering thresholds, we will further look at some histogram
 > <hands-on-title>Coverage features</hands-on-title>
 >
 > 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
->    - *"Annotated data matrix""*: `PBMC 1k after basic filtering`
+>    - *"Annotated data matrix""*: `PBMC 1k after initial filtering`
 >    - *"Method used for filtering"*: `Coverage features: Distribution of the feature commonness in cells, using 'pp.coverage_features'`
->    - *"Binarized matrix?"*: `Yes`
+>    - *"Binarized matrix?"*: `No`
 >    - *"Minimum number of cells or minimum number of features to be indicated in the plot"*: `5`
 > 2. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
->    - *"Annotated data matrix""*: `PBMC 1k after basic filtering`
+>    - *"Annotated data matrix""*: `PBMC 1k after initial filtering`
 >    - *"Method used for filtering"*: `Coverage features: Distribution of the feature commonness in cells, using 'pp.coverage_features'`
->    - *"Binarized matrix?"*: `Yes`
+>    - *"Binarized matrix?"*: `No`
 >    - *"Log transform?"*: `Yes`
 >    - *"Minimum number of cells or minimum number of features to be indicated in the plot"*: `5`
 > 3. Now observe the plots
@@ -651,7 +635,7 @@ Based on the above QC plots, we will filter out all the cells with less than 100
 > <hands-on-title>Final filtering based on QC plots</hands-on-title>
 >
 > 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
->    - *"Annotated data matrix"*: `PBMC 1k after basic filtering`
+>    - *"Annotated data matrix"*: `PBMC 1k after initial filtering`
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of features expressed, using 'pp.filter_cells'`
 >    - *"Filter"*: `Minimum number of features expressed`
 >    - *"Minimum features"*: `1000`
