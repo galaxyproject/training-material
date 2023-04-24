@@ -1145,22 +1145,22 @@ To be able to identify differential gene expression induced by PS depletion, all
 > 1. Create a new empty history
 > 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library:
 >
->    - `GSM461176_untreat_single.counts`
->    - `GSM461177_untreat_paired.counts`
->    - `GSM461178_untreat_paired.counts`
->    - `GSM461179_treat_single.counts`
->    - `GSM461180_treat_paired.counts`
->    - `GSM461181_treat_paired.counts`
->    - `GSM461182_untreat_single.counts`
+>    - `GSM461176_untreat_single_featureCounts.counts`
+>    - `GSM461177_untreat_paired_featureCounts.counts`
+>    - `GSM461178_untreat_paired_featureCounts.counts`
+>    - `GSM461179_treat_single_featureCounts.counts`
+>    - `GSM461180_treat_paired_featureCounts.counts`
+>    - `GSM461181_treat_paired_featureCounts.counts`
+>    - `GSM461182_untreat_single_featureCounts.counts`
 >
 >    ```text
->    {{ page.zenodo_link }}/files/GSM461176_untreat_single.counts
->    {{ page.zenodo_link }}/files/GSM461177_untreat_paired.counts
->    {{ page.zenodo_link }}/files/GSM461178_untreat_paired.counts
->    {{ page.zenodo_link }}/files/GSM461179_treat_single.counts
->    {{ page.zenodo_link }}/files/GSM461180_treat_paired.counts
->    {{ page.zenodo_link }}/files/GSM461181_treat_paired.counts
->    {{ page.zenodo_link }}/files/GSM461182_untreat_single.counts
+>    {{ page.zenodo_link }}/files/GSM461176_untreat_single_featureCounts.counts
+>    {{ page.zenodo_link }}/files/GSM461177_untreat_paired_featureCounts.counts
+>    {{ page.zenodo_link }}/files/GSM461178_untreat_paired_featureCounts.counts
+>    {{ page.zenodo_link }}/files/GSM461179_treat_single_featureCounts.counts
+>    {{ page.zenodo_link }}/files/GSM461180_treat_paired_featureCounts.counts
+>    {{ page.zenodo_link }}/files/GSM461181_treat_paired_featureCounts.counts
+>    {{ page.zenodo_link }}/files/GSM461182_untreat_single_featureCounts.counts
 >    ```
 >
 > 3. Create a collection list with all these counts that you label `all counts`. Rename each item so it only has the GSM id, the treatment and the library, for example, `GSM461176_untreat_single`.
@@ -1168,13 +1168,6 @@ To be able to identify differential gene expression induced by PS depletion, all
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
-
-> <details-title>The counts obtained in the previous part may be different from the one imported</details-title>
->
-> The featureCounts tables you download from zenodo (or from the Data Library) were generated with the option "Count fragments instead of reads" set to "Disabled". This way you roughly get twice the number of counts as each each read (from a pair) is counted individually.
-> In addition, the single reads dataset were run with the option `Length of the genomic sequence around annotated junctions` to 36 instead of 74.
-> Finally the header was removed from the featureCounts tables available on Zenodo.
-{: .details}
 
 You might think we can just compare the count values in the files directly and calculate the extent of differential gene expression. However, it is not that simple.
 
@@ -1223,7 +1216,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    **Total reads** | 35 | 45 | 106
 >    **Scaling factor** | 3.5 | 4.5 | 10.6
 >
->    *Because of the small values in the example, we are scoring using a factor of 10.* <!-- confusing -->
+>    *Because of the small values in the example, we are using "per tens" instead of "per million" and therefore divide the sum by 10 instead of 1,000,000.*
 >
 > 2. Divide the read counts by the "per million" scaling factor
 >
@@ -1235,6 +1228,8 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    B (4kb) | 5.71 | 5.56 | 5.66
 >    C (1kb) | 1.43 | 1.78 | 1.43
 >    D (10kb) | 0 | 0 | 0.09
+>
+>    *In the example we use the "per tens" scaling factor and we get reads per tens*
 >
 > 3. Divide the RPM values by the length of the gene, in kilobases.
 >
@@ -1272,7 +1267,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    **Total RPK** | 15 | 20.25 | 45.1
 >    **Scaling factor** | 1.5 | 2.03 | 4.51
 >
->    *As above, because of the small values in the example, we are scoring using a factor of 10.*
+>    *As above, because of the small values in the example, we use "per tens" instead of "per million" and therefore divide the sum by 10 instead of 1,000,000.*
 >
 > 3. Divide the RPK values by the "per million" scaling factor
 >
@@ -1483,7 +1478,7 @@ We can now run DESeq2:
 
 > <hands-on-title>Determine differentially expressed features</hands-on-title>
 >
-> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy1) %} with the following parameters:
+> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy2) %} with the following parameters:
 >    - *"how"*: `Select group tags corresponding to levels`
 >        - {% icon param-collection %} *"Count file(s) collection"*: output of **Tag elements** {% icon tool %}
 >        - In *"Factor"*:
@@ -1505,7 +1500,7 @@ We can now run DESeq2:
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
 >                        - *"Select groups that correspond to this factor level"*: `Tags: single`
->    - *"Files have header?"*: `No`
+>    - *"Files have header?"*: `Yes`
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
 >    - In *"Output options"*:
 >        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
@@ -1611,7 +1606,7 @@ For more information about **DESeq2** and its outputs, you can have a look at th
 >
 > > <solution-title></solution-title>
 > >
-> > 1. FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value ($$4.0 \cdot 10^{-178} << 0.05$$). It is less expressed (`-` in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 ($$2^{log2FC} = 2^{2.99977727873544}$$).
+> > 1. FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value ($$2.8 \cdot 10^{-171} << 0.05$$). It is less expressed (`-` in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 ($$2^{log2FC} = 2^{2.99542318410271}$$).
 > >
 > > 2. You can manually check for the `FBgn0261552` in the first column or run {% tool [Filter data on any column using simple expressions](Filter1) %}
 > >   - {% icon param-file %} *"Filter"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
@@ -1632,60 +1627,11 @@ correction for the variability due to the 2nd factor. In our current case, treat
 > {: .solution}
 {: .question}
 
-
-## Extraction and annotation of differentially expressed genes
-
-Now we would like to extract the most differentially expressed genes due to the treatment with a fold change > 2 (or < 1/2).
-
-> <hands-on-title>Extract the most differentially expressed genes</hands-on-title>
->
-> 1. {% tool [Filter data on any column using simple expressions](Filter1) %} to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples:
->    - {% icon param-file %} *"Filter"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
->    - *"With following condition"*: `c7<0.05`
->
-> 2. Rename the output `Genes with significant adj p-value`.
->
->    > <question-title></question-title>
->    >
->    > How many genes have a significant change in gene expression between these conditions?
->    >
->    > > <solution-title></solution-title>
->    > >
->    > > We get 1,091 genes (6.21%) with a significant change in gene expression between treated and untreated samples.
->    > >
->    > {: .solution}
->    {: .question}
->    >
->    > <comment-title></comment-title>
->    >
->    > The file with the independently filtered results can be used for further downstream analysis as it excludes genes with only a few read counts, as these genes will not be considered as significantly differentially expressed.
->    {: .comment}
->
->    We will now select only the genes with a fold change (FC) > 2 or FC < 0.5. Note that the DESeq2 output file contains $$log_{2} FC$$, rather than FC itself, so we filter for $$abs(log_{2} FC) > 1$$ (which implies FC > 2 or FC < 0.5).
->
-> 3. {% tool [Filter](Filter1) %} to extract genes with an $$abs(log_{2} FC) > 1$$:
->    - {% icon param-file %} *"Filter"*: `Genes with significant adj p-value`
->    - *"With following condition"*: `abs(c3)>1`
->
->    > <question-title></question-title>
->    >
->    > 1. How many genes have been conserved?
->    > 2. Can the *Pasilla* gene (ps, FBgn0261552) be found in this table?
->    >
->    > > <solution-title></solution-title>
->    > >
->    > > 1. 130, or 11.92% of the significantly differentially expressed genes.
->    > > 2. The *Pasilla* gene can be found with a quick Search (or even using  {% tool [Filter data on any column using simple expressions](Filter1) %} )
->    > {: .solution}
->    {: .question}
->
-{: .hands_on}
-
-We now have a table with 130 lines corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its $$log_{2} FC$$ and other information.
+## Annotation of the DESeq2 results
 
 The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase ({% cite thurmond2018flybase %}). These IDs are unique but sometimes we prefer to have the gene names, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene names may hint already to a function or they help you to search for desired candidates. We would also like to display the location of these genes within the genome. We can extract such information from the annotation file which we used for mapping and counting.
 
-> <hands-on-title>Annotation of the differentially expressed genes</hands-on-title>
+> <hands-on-title>Annotation of the DESeq2 results</hands-on-title>
 >
 > 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`) from the previous history, or from the Shared Data library or from Zenodo:
 >
@@ -1694,7 +1640,7 @@ The ID for each gene is something like FBgn0003360, which is an ID from the corr
 >    ```
 >
 > 2. {% tool [Annotate DESeq2/DEXSeq output tables](toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0) %} with:
->    - {% icon param-file %} *"Tabular output of DESeq2/edgeR/limma/DEXSeq"*: output of the last **Filter** {% icon tool %}
+>    - {% icon param-file %} *"Tabular output of DESeq2/edgeR/limma/DEXSeq"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
 >    - *"Input file type"*: `DESeq2/edgeR/limma`
 >    - {% icon param-file %} *"Reference annotation in GFF/GTF format"*: imported gtf `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
 >
@@ -1748,8 +1694,62 @@ The annotated table contains no column names, which makes it difficult to read. 
 >       - Click on {% icon param-repeat %} *"Insert Dataset"*
 >         - {% icon param-file %} *"select"*: output of **Annotate** {% icon tool %}
 >
-> 3. Rename the output to `Genes with significant adj p-value & abs(log2(FC)) > 1`
+> 3. Rename the output to `Annotated DESeq2 results`
 {: .hands_on}
+
+## Extraction and annotation of differentially expressed genes
+
+Now we would like to extract the most differentially expressed genes due to the treatment with a fold change > 2 (or < 1/2).
+
+> <hands-on-title>Extract the most differentially expressed genes</hands-on-title>
+>
+> 1. {% tool [Filter data on any column using simple expressions](Filter1) %} to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples:
+>    - {% icon param-file %} *"Filter"*: `Annotated DESeq2 results`
+>    - *"With following condition"*: `c7<0.05`
+>    - *"Number of header lines to skip"*: `1`
+>
+> 2. Rename the output `Genes with significant adj p-value`.
+>
+>    > <question-title></question-title>
+>    >
+>    > How many genes have a significant change in gene expression between these conditions?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > We get 966 (967 lines including a header) genes (4.04%) with a significant change in gene expression between treated and untreated samples.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>    >
+>    > <comment-title></comment-title>
+>    >
+>    > The file with the independently filtered results can be used for further downstream analysis as it excludes genes with only a few read counts, as these genes will not be considered as significantly differentially expressed.
+>    {: .comment}
+>
+>    We will now select only the genes with a fold change (FC) > 2 or FC < 0.5. Note that the DESeq2 output file contains $$log_{2} FC$$, rather than FC itself, so we filter for $$abs(log_{2} FC) > 1$$ (which implies FC > 2 or FC < 0.5).
+>
+> 3. {% tool [Filter](Filter1) %} to extract genes with an $$abs(log_{2} FC) > 1$$:
+>    - {% icon param-file %} *"Filter"*: `Genes with significant adj p-value`
+>    - *"With following condition"*: `abs(c3)>1`
+>    - *"Number of header lines to skip"*: `1`
+>
+> 4. Rename the output `Genes with significant adj p-value & abs(log2(FC)) > 1`.
+>
+>    > <question-title></question-title>
+>    >
+>    > 1. How many genes have been conserved?
+>    > 2. Can the *Pasilla* gene (ps, FBgn0261552) be found in this table?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. 114, or 11.79% of the significantly differentially expressed genes.
+>    > > 2. The *Pasilla* gene can be found with a quick Search (or even using  {% tool [Filter data on any column using simple expressions](Filter1) %} )
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+We now have a table with 113 lines and a header corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its $$log_{2} FC$$ and other information including gene name and position.
 
 ## Visualization of the expression of the differentially expressed genes
 
@@ -1794,13 +1794,13 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 >
 {: .hands_on}
 
-We now have a table with 131 lines (the 130 most differentially expressed genes and a header) and the normalized counts for these genes across the 7 samples.
+We now have a table with 114 lines (the 113 most differentially expressed genes and a header) and the normalized counts for these genes across the 7 samples.
 
 > <hands-on-title>Plot the heatmap of the normalized counts of these genes for the samples</hands-on-title>
 >
-> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.1+galaxy1) %} to plot the heatmap:
+> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0) %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: `Normalized counts for the most differentially expressed genes`
->    - *"Data transformation"*: `Log2(value) transform my data`
+>    - *"Data transformation"*: `Log2(value+1) transform my data`
 >    - *"Enable data clustering"*: `Yes`
 >    - *"Labeling columns and rows"*: `Label columns and not rows`
 >    - *"Type of colormap to use"*: `Gradient with 2 colors`
@@ -1815,15 +1815,17 @@ You should obtain something similar to:
 >
 > 1. What does the X-axis of the heatmap represent? What about the Y axis?
 > 2. Do you observe anything in the clustering of the samples and the genes?
-> 3. What changes if you regenerate the heatmap, this time selecting `Plot the data as it is` in *"Advanced - log transformation"*/*"Data transformation"*?
-> 4. How could you generate a heatmap of normalized counts for all up-regulated genes with fold change > 2?
+> 3. What changes if you regenerate the heatmap, this time selecting `Plot the data as it is` in *"Data transformation"*?
+> 4. Why cannot we use `Log2(value) transform my data` in *"Data transformation"*?
+> 5. How could you generate a heatmap of normalized counts for all up-regulated genes with fold change > 2?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The X-axis shows the 7 samples, together with a dendrogram representing the similarity between their patterns of gene expression. The Y-axis shows the 130 differentially expressed genes, likewise with a dendrogram representing the similarity between the patterns of gene expression. <!-- hope this is correct -->
+> > 1. The X-axis shows the 7 samples, together with a dendrogram representing the similarity between their levels of gene expression. The Y-axis shows the 130 differentially expressed genes, likewise with a dendrogram representing the similarity between the levels of gene expression.
 > > 2. The samples are clustering by treatment.
-> > 3. The scale changes and the differences between the genes are not visible anymore.
-> > 4. Extract the genes with $$log_{2} FC$$ > 1 (filter for genes with `c3>1` on the summary of the differentially expressed genes) and run **heatmap2** {% icon tool %} on the generated table.
+> > 3. The scale changes and we only see few genes.
+> > 4. Because the normalized expression of the gene `FBgn0013688` in `GSM461180_treat_paired` is at `0`.
+> > 5. Extract the genes with $$log_{2} FC$$ > 1 (filter for genes with `c3>1` on the summary of the differentially expressed genes) and run **heatmap2** {% icon tool %} on the generated table.
 > {: .solution}
 {: .question}
 
@@ -1846,7 +1848,7 @@ The Z-score $$z_{i,j}$$ for a gene $$i$$ in a sample $$j$$ given the normalized 
 > >
 > > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters to >  first substract the mean values per row
 > >    - *"Input Single or Multiple Tables"*: `Single Table`
-> >      - {% icon param-file %} *"Table"*: `Normalized counts file on ...` (output of **DESeq2** {% icon tool %})
+> >      - {% icon param-file %} *"Table"*: `Normalized counts file on data ... and others` (output of **DESeq2** {% icon tool %})
 > >      - *"Type of table operation"*: `Perform a full table operation`
 > >        - *"Operation"*: `Custom`
 > >          - *"Custom expression on 'table', along 'axis' (0 or 1)"*: `table.sub(table.mean(1), 0)`
@@ -1855,8 +1857,9 @@ The Z-score $$z_{i,j}$$ for a gene $$i$$ in a sample $$j$$ given the normalized 
 > >
 > > 2. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
 > >    - *"Input Single or Multiple Tables"*: `Multiple Table`
+> >      - Click on {% icon param-repeat %} *"Insert Tables"*
 > >      - In *"1: Tables"*:
-> >        - {% icon param-file %} *"Table"*: `Normalized counts file on ...` (output of **DESeq2** {% icon tool %})
+> >        - {% icon param-file %} *"Table"*: `Normalized counts file on data ... and others` (output of **DESeq2** {% icon tool %})
 > >      - Click on {% icon param-repeat %} *"Insert Tables"*
 > >      - In *"2: Tables"*:
 > >        - {% icon param-file %} *"Table"*: output of the first **Table Compute** {% icon tool %}
@@ -1900,7 +1903,7 @@ We would like now to plot a heatmap for the Z-scores:
 
 > <hands-on-title>Plot the Z-score of the most differentially expressed genes</hands-on-title>
 >
-> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.1+galaxy1) %} to plot the heatmap:
+> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0) %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: `Normalized counts for the most differentially expressed genes`
 >    - *"Data transformation"*: `Plot the data as it is`
 >    - *"Compute z-scores prior to clustering"*: `Compute on rows`
@@ -2023,11 +2026,11 @@ We have now the two required input files for goseq.
     >
     > > <solution-title></solution-title>
     > >
-    > > 1. 31 GO terms (0.27%) are over-represented and 80 (0.70%) under-represented.
+    > > 1. 60 GO terms (0.50%) are over-represented and 7 (0.07%) under-represented.
     > >
     > >    {% tool [Filter](Filter1) %} on c8 (adjusted p-value for over-represented GO terms) and c9 (adjusted p-value for under-represented GO terms)
     > >
-    > > 2. For over-represented, 17 BP, 3 CC and 11 MF and for under-represented, 50 BP, 27 CC and 3 MF
+    > > 2. For over-represented, 50 BP, 5 CC and 5 MF and for under-represented, 5 BP, 2 CC and 0 MF
     > >
     > >    {% tool [Group data](Grouping1) %} on column 7 (category) and count on column 1 (IDs)
     > >
@@ -2092,10 +2095,10 @@ For example, the pathway `dme00010` represents the glycolysis process (conversio
     >
     > > <solution-title></solution-title>
     > >
-    > > 1. The file has 127 lines including an header, so 126 KEGG pathways have been identified.
-    > > 2. 2 KEGG pathways (1.57%) are over-represented, using **Filter** on c6 (adjusted p-value for over-represented KEGG pathways)
-    > > 3. The first 2 KEGG pathways are `01100` and `00010`. By searching on the [KEGG database](https://www.genome.jp/kegg/kegg2.html) for them, we can find more information about these pathways: `01100` corresponds to all metabolic pathways and `00010` to pathway for Glycolysis / Gluconeogenesis.
-    > > 4. 1 KEGG pathways (0.79%) is under-represented, using **Filter** on c7 (adjusted p-value for under-represented KEGG pathways): `03040`, Spliceosome
+    > > 1. The file has 128 lines including an header, so 127 KEGG pathways have been identified.
+    > > 2. 2 KEGG pathways (2.34%) are over-represented, using **Filter** on c6 (adjusted p-value for over-represented KEGG pathways)
+    > > 3. The 2 KEGG pathways over-represented are `01100` and `00010`. By searching on the [KEGG database](https://www.genome.jp/kegg/kegg2.html) for them, we can find more information about these pathways: `01100` corresponds to all metabolic pathways and `00010` to pathway for Glycolysis / Gluconeogenesis.
+    > > 4. No KEGG pathway is under-represented, using **Filter** on c7 (adjusted p-value for under-represented KEGG pathways)
     > {: .solution}
     {: .question}
 
@@ -2112,7 +2115,7 @@ This tool needs 2 main inputs:
 
     This can be for example a p-value or a fold change. This information will be added to the pathway plot: the node of the corresponding gene will be colored given the value. If there are different columns, the different information will be plotted side by side on the node.
 
-Here we would like to visualize the 2 KEGG pathways: the over-represented `00010` (Glycolysis / Gluconeogenesis) and the under-represented `03040` (Spliceosome). We would like the gene nodes to be colored by Log2 Fold Change for the differentially expressed genes because of the treatment.
+Here we would like to visualize the 2 KEGG pathways: the over-represented `00010` (Glycolysis / Gluconeogenesis) and the most under-represented (yet not significantly) `03040` (Spliceosome). We would like the gene nodes to be colored by Log2 Fold Change for the differentially expressed genes because of the treatment.
 
 > <hands-on-title>Overlay log2FC on KEGG pathway</hands-on-title>
 >
@@ -2132,14 +2135,14 @@ Here we would like to visualize the 2 KEGG pathways: the over-represented `00010
 >    03040
 >    ```
 >
-> 4. {% tool [Pathview](toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.24.0+galaxy0) %} with
+> 4. {% tool [Pathview](toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.34.0+galaxy0) %} with
 >    - *"Number of pathways to plot"*: `Multiple`
 >      - {% icon param-file %} *"KEGG pathways"*: `KEGG pathways to plot`
 >      - *"Does the file have header (a first line with column names)?"*: `No`
 >    - *"Species to use"*: `Fly`
 >    - *"Provide a gene data file?"*: `Yes`
 >      - {% icon param-file %} *"Gene data"*: `Genes with significant adj p-value and their Log2 FC`
->      - *"Does the file have header (a first line with column names)?"*: `No`
+>      - *"Does the file have header (a first line with column names)?"*: `Yes`
 >      - *"Format for gene data"*: `Ensembl Gene ID`
 >    - *"Provide a compound data file?"*: `No`
 >    - In *"Output Options"*
