@@ -162,7 +162,7 @@ Let's run RepeatMasker, by selected the input assembly in fasta format. We selec
 
 > <hands-on-title></hands-on-title>
 >
-> 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1) %} with the following parameters:
+> 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)
 >    - *"Repeat library source"*: `DFam (curated only, bundled with RepeatMasker)`
 >    - *"Select species name from a list?"*: `Yes`
@@ -204,7 +204,7 @@ To boost RepeatMasker performance, we need a tailored repeat library for *Mucor 
 >
 > > <hands-on-title>Building a repeat library with RepeatModeler</hands-on-title>
 > >
-> > 1. {% tool [RepeatModeler](toolshed.g2.bx.psu.edu/repos/csbl/repeatmodeler/repeatmodeler/2.0.3+galaxy0) %} with the following parameters:
+> > 1. {% tool [RepeatModeler](toolshed.g2.bx.psu.edu/repos/csbl/repeatmodeler/repeatmodeler/2.0.4+galaxy0) %} with the following parameters:
 > >    - {% icon param-file %} *"Input genome fasta"*: `genome_raw.fasta` (Input dataset)
 > {: .hands_on}
 >
@@ -213,7 +213,7 @@ To boost RepeatMasker performance, we need a tailored repeat library for *Mucor 
 
 > <hands-on-title></hands-on-title>
 >
-> 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1) %} with the following parameters:
+> 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)
 >    - *"Repeat library source"*: `Custom library of repeats`
 >    - *"Custom library of repeats"*
