@@ -35,7 +35,7 @@ contributors: [hexylena]
 8. Run the command to initialise a workflow test from the `workflows/` subdirectory - if it doesn't exist, you might need to create it first.
 
    ```
-   planemo workflow_test_init --from_invocation <INVOCATION ID> --galaxy_url <GALAXY SERVER URL> --galaxy_user_key" <GALAXY API KEY>
+   planemo workflow_test_init --from_invocation <INVOCATION ID> --galaxy_url <GALAXY SERVER URL> --galaxy_user_key <GALAXY API KEY>
    ```
 
    This will produce a folder of files, for example from a testing workflow:
