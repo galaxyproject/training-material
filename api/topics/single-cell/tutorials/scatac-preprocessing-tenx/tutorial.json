@@ -1,0 +1,138 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Pre-processing of 10X Single-Cell ATAC-seq Datasets",
+  "subtopic": "end-to-end",
+  "priority": 3,
+  "redirect_from": [
+    "/topics/transcriptomics/tutorials/satac-preprocessing-tenx/tutorial"
+  ],
+  "zenodo_link": "https://zenodo.org/record/7855968",
+  "tags": [
+    "single-cell",
+    "10x"
+  ],
+  "questions": [
+    "What is 10X?",
+    "What are single-cell ATAC fragments and MTX files?",
+    "What is an Anndata file, and why is it important?"
+  ],
+  "objectives": [
+    "Demultiplex single-cell FASTQ data from 10X Genomics",
+    "Learn about transparent matrix formats",
+    "Create a high-quality count matrix starting from scATAC-seq FASTQ files"
+  ],
+  "time_estimation": "1h",
+  "key_points": [
+    "Bulk ATAC-seq like mapping and peak calling",
+    "Creating a scATAC-seq count matrix requires positions of open chromatin regions"
+  ],
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "single-cell",
+      "tutorials": [
+        "scrna-preprocessing-tenx"
+      ]
+    }
+  ],
+  "follow_up_training": [
+    {
+      "type": "internal",
+      "topic_name": "single-cell",
+      "tutorials": [
+        "scrna-scanpy-pbmc3k"
+      ]
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Pavankumar Videm",
+      "joined": "2017-09",
+      "id": "pavanvidem",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/"
+    }
+  ],
+  "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+  "url": "/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html",
+  "topic_name": "single-cell",
+  "tutorial_name": "scatac-preprocessing-tenx",
+  "dir": "topics/single-cell/tutorials/scatac-preprocessing-tenx",
+  "id": "single-cell/scatac-preprocessing-tenx",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "scATAC-seq-Count-Matrix-Filtering.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-Count-Matrix-Filtering.ga",
+      "path": "topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-Count-Matrix-Filtering.ga",
+      "wfid": "single-cell-scatac-preprocessing-tenx",
+      "wfname": "scatac-seq-count-matrix-filtering",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-count-matrix-filtering",
+      "license": "CC-BY-4.0",
+      "creators": [
+        {
+          "class": "Person",
+          "identifier": "0000-0002-5192-126X",
+          "name": "Pavankumar Videm"
+        }
+      ]
+    },
+    {
+      "workflow": "scATAC-seq-FASTQ-to-Count-Matrix.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-FASTQ-to-Count-Matrix.ga",
+      "path": "topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-FASTQ-to-Count-Matrix.ga",
+      "wfid": "single-cell-scatac-preprocessing-tenx",
+      "wfname": "scatac-seq-fastq-to-count-matrix",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-fastq-to-count-matrix",
+      "license": "CC-BY-4.0",
+      "creators": [
+        {
+          "class": "Person",
+          "identifier": "0000-0002-5192-126X",
+          "name": "Pavankumar Videm"
+        }
+      ]
+    }
+  ],
+  "tools": [
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_build_matrix/episcanpy_build_matrix/0.3.2+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6",
+    "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/sinto/sinto_barcode/0.9.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/sinto/sinto_fragments/0.9.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/sinto_barcode/sinto_barcode/0.9.0+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/sinto_fragments/sinto_fragments/0.9.0+galaxy1"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}
