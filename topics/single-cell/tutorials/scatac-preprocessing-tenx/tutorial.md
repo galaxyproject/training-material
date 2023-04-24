@@ -325,7 +325,7 @@ For count matrix creation, we will use **Build count matrix** from **EpiScanpy**
 
 The most common format, called [`AnnData`](https://anndata.readthedocs.io/en/stable/), stores the matrix as well as gene and cell annotations in a concise, compressed and extremely readable manner:
 
-![Anndata format]({% link topics/single-cell/images/scrna-pre-processing/tenx_anndata.svg %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes/peaks/features) <code>var</code> and unstructured annotations <code>uns</code>.")
+![Anndata format]({% link topics/single-cell/images/scrna-pre-processing/tenx_anndata.png %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. peaks) <code>var</code> and unstructured annotations <code>uns</code>.")
 
 This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({% cite wolf2018scanpy %}) and [EpiScanpy](https://colomemaria.github.io/episcanpy_doc/index.html) ({% cite danese2021episcanpy %}) tool suits for analyzing single-cell omics data. So we need first to import the matrix and annotations of peaks and cells (present in fragments BED file) into an `AnnData` object.
 
@@ -670,6 +670,6 @@ Based on the above QC plots, we will filter out all the cells with less than 100
 
 In this tutorial, we have learned how to map reads from 10X ATAC-seq data, identify open chromatin regions from aggregated cell data and generate a count matrix in *Anndata* format. We also performed quality control and filtered out empty and uninformative cells and features to generate a high-quality count matrix for downstream analysis. 
 
-Galaxy workflows for generating [Annadata from FASTQ files](workflows/scatac-fastq_to_count_matrix.ga) and [quality filtering of raw count matrix](workflows/scatac-count_matrix_filtering.ga) are provided.scatac_tenx.ga).
+Galaxy workflows for generating [Annadata from FASTQ files](workflows/scATAC-seq-FASTQ-to-Count-Matrix.ga) and [quality filtering of raw count matrix](workflows/scATAC-seq-Count-Matrix-Filtering.ga) are provided.scatac_tenx.ga).
 
 This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).
