@@ -51,4 +51,16 @@ contributors: [hexylena]
    ```
 
 9. You will need to check the `-tests.yml` file, it has some automatically generated comparisons. Namely it tests that output data matches the test-data exactly, however, you might want to replace that with assertions that check for e.g. correct file size, or specific text content you expect to see.
-10. Contribute all of those files to the GTN in a PR.
+
+10. If the files in test-data are already uploaded to Zenodo, to save disk space, you should delete them from the `test-data` dir and use their URL in the `-tests.yml` file, as in this example:
+
+   ```
+   - doc: Test the M. Tuberculosis Variant Analysis workflow
+     job:
+        'Read 1':
+           location: https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
+           class: File
+           filetype: fastqsanger.gz
+   ```
+
+11. Contribute all of those files to the GTN in a PR.
