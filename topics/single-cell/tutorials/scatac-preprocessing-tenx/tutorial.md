@@ -143,12 +143,12 @@ First, we will attach the barcodes from the barcodes FASTQ file to the ids of fo
 
 > <comment-title></comment-title>
 >
-> {% tool [Sinto barcode](toolshed.g2.bx.psu.edu/repos/iuc/sinto/sinto_barcode/0.9.0) %}  consumes the barcode sequence from the `atac_pbmc_1k_nextgem_S1_R2_001_chr21.fastq.gz` file and uses `:` delimiter to prepend it to both the forward and reverse read ids. The tool expects the same number of reads in all three FASTQ files and should be present in the same order.
+> {% tool [Sinto barcode](toolshed.g2.bx.psu.edu/repos/iuc/sinto_barcode/sinto_barcode/0.9.0+galaxy1) %}  consumes the barcode sequence from the `atac_pbmc_1k_nextgem_S1_R2_001_chr21.fastq.gz` file and uses `:` delimiter to prepend it to both the forward and reverse read ids. The tool expects the same number of reads in all three FASTQ files and should be present in the same order.
 {: .comment}
 
 > <hands-on-title></hands-on-title>
 >
-> {% tool [Sinto barcode](toolshed.g2.bx.psu.edu/repos/iuc/sinto/sinto_barcode/0.9.0) %}  with the following parameters:
+> {% tool [Sinto barcode](toolshed.g2.bx.psu.edu/repos/iuc/sinto_barcode/sinto_barcode/0.9.0+galaxy1) %}  with the following parameters:
 >    - *"FASTQ file containing cell barcode sequences"*: `atac_pbmc_1k_nextgem_S1_R2_001_chr21.fastq.gz`
 >    - *"Single or Paired-end data"*: `Paired`
 >    - *"Forward reads FASTQ file"*: `atac_pbmc_1k_nextgem_S1_R1_001_chr21.fastq.gz`
@@ -237,7 +237,7 @@ An ATAC-seq fragment file is a BED file with Tn5 integration sites, the cell bar
 {: .comment}
 
 > <hands-on-title>Create scATAC fragments</hands-on-title>
-> 1. {% tool [Sinto fragments](toolshed.g2.bx.psu.edu/repos/iuc/sinto/sinto_fragments/0.9.0) %} with the following parameters:
+> 1. {% tool [Sinto fragments](toolshed.g2.bx.psu.edu/repos/iuc/sinto_fragments/sinto_fragments/0.9.0+galaxy1) %} with the following parameters:
 >    - *"Input BAM file"*: `mapped reads in BAM format` (output of **Map with BWA-MEM** {% icon tool%})`
 >    - *"Minimum MAPQ required to retain fragment"*: `30`
 >    - *"Regular expression used to extract cell barcode from read name"*: `[^:]*` (matches all characters up to the first colon)
@@ -331,7 +331,7 @@ This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.ht
 
 > <hands-on-title>Build count matrix with EpiScanpy</hands-on-title>
 >
-> 1. {% tool [Build count matrix with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy0) %} with the following parameters:
+> 1. {% tool [Build count matrix with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_build_matrix/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
 >    - *"ATAC fragments file"*: `sorted fragments`
 >    - *"Features file"*: output of **Unique** tool {% icon tool %}
 >    - *"Normalize peak sizes?"*: `Keep the peaks as they are`
@@ -499,13 +499,13 @@ First remove any potential empty features or barcodes. A non-empty cell should h
 
 > <hands-on-title>Initial filtering</hands-on-title>
 >
-> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
+> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix"*: `atac_pbmc_1k_uniq_peaks.h5ad`
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of features expressed, using 'pp.filter_cells'`
 >    - *"Filter"*: `Minimum number of features expressed`
 >    - *"Minimum features"*: `100`
 >
-> 2. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
+> 2. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix"*: Output of the previous (`pp.filter_cells`) step
 >    - *"Method used for filtering"*: `Filter features based on counts and numbers of features expressed, using 'pp.filter_features'`
 >    - *"Filter"*: `Minimum number of cells expressed`
@@ -529,7 +529,7 @@ We will first plot the number of features per cell. This information is stored a
 
 > <hands-on-title>Violing plots of number of features</hands-on-title>
 >
-> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
+> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix""*: Output of previous (`pp.filter_features`) step
 >    - *"Method used for filtering"*: `Compute log10 of nb_features`
 > 2. Check if observations have an extra `log_nb_features` in addition to `nb_features` layer.
@@ -566,12 +566,12 @@ To determine decent filtering thresholds, we will further look at some histogram
 
 > <hands-on-title>Coverage cells</hands-on-title>
 >
-> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
+> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix""*: `PBMC 1k after initial filtering`
 >    - *"Method used for filtering"*: `Coverage cells: Histogram of the number of open features (in the case of ATAC-seq data) per cell, using 'pp.coverage_cells'`
 >    - *"Binarized matrix?"*: `No`
 >    - *"Minimum number of cells or minimum number of features to be indicated in the plot"*: `1000`
-> 2. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
+> 2. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix""*: `PBMC 1k after initial filtering`
 >    - *"Method used for filtering"*: `Coverage cells: Histogram of the number of open features (in the case of ATAC-seq data) per cell, using 'pp.coverage_cells'`
 >    - *"Binarized matrix?"*: `No`
@@ -597,12 +597,12 @@ To determine decent filtering thresholds, we will further look at some histogram
 
 > <hands-on-title>Coverage features</hands-on-title>
 >
-> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
+> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix""*: `PBMC 1k after initial filtering`
 >    - *"Method used for filtering"*: `Coverage features: Distribution of the feature commonness in cells, using 'pp.coverage_features'`
 >    - *"Binarized matrix?"*: `No`
 >    - *"Minimum number of cells or minimum number of features to be indicated in the plot"*: `5`
-> 2. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
+> 2. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix""*: `PBMC 1k after initial filtering`
 >    - *"Method used for filtering"*: `Coverage features: Distribution of the feature commonness in cells, using 'pp.coverage_features'`
 >    - *"Binarized matrix?"*: `No`
@@ -634,19 +634,19 @@ Based on the above QC plots, we will filter out all the cells with less than 100
 
 > <hands-on-title>Final filtering based on QC plots</hands-on-title>
 >
-> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
+> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix"*: `PBMC 1k after initial filtering`
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of features expressed, using 'pp.filter_cells'`
 >    - *"Filter"*: `Minimum number of features expressed`
 >    - *"Minimum features"*: `1000`
 >
-> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
+> 1. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix"*: Output of previous (`pp.filter_cells`) step
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of features expressed, using 'pp.filter_cells'`
 >    - *"Filter"*: `Maximum number of features expressed`
 >    - *"Minimum features"*: `12500`
 >
-> 2. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy/episcanpy_build_matrix/0.3.2+galaxy1) %} with the following parameters:
+> 2. {% tool [scATAC-seq Preprocessing with EpiScanpy](toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1) %} with the following parameters:
 >    - *"Annotated data matrix"*: Output of previous (`pp.filter_cells`) step
 >    - *"Method used for filtering"*: `Filter features based on counts and numbers of features expressed, using 'pp.filter_features'`
 >    - *"Filter"*: `Minimum number of cells expressed`
