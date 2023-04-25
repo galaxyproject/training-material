@@ -387,6 +387,10 @@
                 {
                     "description": "runtime parameter for tool DESeq2",
                     "name": "batch_factors"
+                },
+                {
+                    "description": "runtime parameter for tool DESeq2",
+                    "name": "select_data"
                 }
             ],
             "label": "Differential Analysis",
@@ -417,12 +421,17 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"advanced_options\": {\"esf\": \"\", \"fit_type\": \"1\", \"outlier_replace_off\": false, \"outlier_filter_off\": false, \"auto_mean_filter_off\": false, \"prefilter_conditional\": {\"prefilter\": \"\", \"__current_case__\": 1}}, \"batch_factors\": {\"__class__\": \"RuntimeValue\"}, \"header\": true, \"output_options\": {\"output_selector\": [\"pdf\", \"normCounts\"], \"alpha_ma\": \"0.1\"}, \"select_data\": {\"how\": \"group_tags\", \"__current_case__\": 0, \"countsFile\": {\"__class__\": \"ConnectedValue\"}, \"rep_factorName\": [{\"__index__\": 0, \"factorName\": \"Treatment\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"treated\", \"groups\": \"treat\\n\"}, {\"__index__\": 1, \"factorLevel\": \"untreated\", \"groups\": \"untreat\\n\"}]}, {\"__index__\": 1, \"factorName\": \"Sequencing\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"PE\", \"groups\": \"paired\\n\"}, {\"__index__\": 1, \"factorLevel\": \"SE\", \"groups\": \"single\\n\"}]}]}, \"tximport\": {\"tximport_selector\": \"count\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"advanced_options\": {\"esf\": \"\", \"fit_type\": \"1\", \"outlier_replace_off\": false, \"outlier_filter_off\": false, \"auto_mean_filter_off\": false, \"prefilter_conditional\": {\"prefilter\": \"\", \"__current_case__\": 1}}, \"batch_factors\": {\"__class__\": \"RuntimeValue\"}, \"header\": true, \"output_options\": {\"output_selector\": [\"pdf\", \"normCounts\"], \"alpha_ma\": \"0.1\"}, \"select_data\": {\"how\": \"group_tags\", \"__current_case__\": 0, \"countsFile\": {\"__class__\": \"RuntimeValue\"}, \"rep_factorName\": [{\"__index__\": 0, \"factorName\": \"Treatment\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"treated\", \"groups\": [\"treat\"]}, {\"__index__\": 1, \"factorLevel\": \"untreated\", \"groups\": [\"untreat\"]}]}, {\"__index__\": 1, \"factorName\": \"Sequencing\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"PE\", \"groups\": [\"paired\"]}, {\"__index__\": 1, \"factorLevel\": \"SE\", \"groups\": [\"single\"]}]}]}, \"tximport\": {\"tximport_selector\": \"count\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.11.40.7+galaxy2",
             "type": "tool",
             "uuid": "45883538-b692-4e35-8dee-d08974682a9c",
             "when": null,
             "workflow_outputs": [
+                {
+                    "label": "deseq_out",
+                    "output_name": "deseq_out",
+                    "uuid": "0a62d2e1-43d8-448a-81d3-73b6333a7e40"
+                },
                 {
                     "label": null,
                     "output_name": "plots",
@@ -432,11 +441,6 @@
                     "label": null,
                     "output_name": "counts_out",
                     "uuid": "45c22139-7433-4593-ba79-6720330b2865"
-                },
-                {
-                    "label": "deseq_out",
-                    "output_name": "deseq_out",
-                    "uuid": "0a62d2e1-43d8-448a-81d3-73b6333a7e40"
                 }
             ]
         },
@@ -1197,7 +1201,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"cpd_data\": {\"cpd\": \"false\", \"__current_case__\": 1}, \"gene_data\": {\"gd\": \"true\", \"__current_case__\": 0, \"tabular\": {\"__class__\": \"ConnectedValue\"}, \"header\": false, \"idtype\": \"ensembl\"}, \"match_data\": true, \"multi_state\": true, \"out\": {\"kegg_native\": {\"out\": \"TRUE\", \"__current_case__\": 0, \"same_layer\": true, \"map_null\": true}}, \"pathway\": {\"nb\": \"multiple\", \"__current_case__\": 1, \"tabular\": {\"__class__\": \"ConnectedValue\"}, \"header\": false}, \"species\": \"dme\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"cpd_data\": {\"cpd\": \"false\", \"__current_case__\": 1}, \"gene_data\": {\"gd\": \"true\", \"__current_case__\": 0, \"tabular\": {\"__class__\": \"ConnectedValue\"}, \"header\": true, \"idtype\": \"ensembl\"}, \"match_data\": true, \"multi_state\": true, \"out\": {\"kegg_native\": {\"out\": \"TRUE\", \"__current_case__\": 0, \"same_layer\": true, \"map_null\": true}}, \"pathway\": {\"nb\": \"multiple\", \"__current_case__\": 1, \"tabular\": {\"__class__\": \"ConnectedValue\"}, \"header\": false}, \"species\": \"dme\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.34.0+galaxy0",
             "type": "tool",
             "uuid": "34fd25d1-0532-4061-a549-b4a9e61f4e0c",
@@ -1402,7 +1406,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/dm6.len\", \"cluster_cond\": {\"cluster\": \"yes\", \"__current_case__\": 0, \"cluster_cols_rows\": \"both\", \"distance\": \"euclidean\", \"clustering\": \"complete\"}, \"colorchoice\": {\"type\": \"two\", \"__current_case__\": 1, \"color1\": \"#ffffff\", \"color2\": \"#ff0000\"}, \"image_file_format\": \"pdf\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"key\": \"\", \"labels\": \"columns\", \"title\": \"\", \"transform\": \"log2\", \"zscore_cond\": {\"zscore\": \"none\", \"__current_case__\": 0, \"scale\": \"none\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/dm6.len\", \"cluster_cond\": {\"cluster\": \"yes\", \"__current_case__\": 0, \"cluster_cols_rows\": \"both\", \"distance\": \"euclidean\", \"clustering\": \"complete\"}, \"colorchoice\": {\"type\": \"two\", \"__current_case__\": 1, \"color1\": \"#ffffff\", \"color2\": \"#ff0000\"}, \"image_file_format\": \"pdf\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"key\": \"\", \"labels\": \"columns\", \"title\": \"\", \"transform\": \"log2plus1\", \"zscore_cond\": {\"zscore\": \"none\", \"__current_case__\": 0, \"scale\": \"none\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "3.1.3+galaxy0",
             "type": "tool",
             "uuid": "b8b1d4c3-d8bf-41e1-93ab-00c021d2896f",
@@ -1464,6 +1468,6 @@
     "tags": [
         "transcriptomics"
     ],
-    "uuid": "8deeffa2-6eea-4445-a7e3-2ee66c124feb",
-    "version": 5
+    "uuid": "5dbe57f0-252b-47d5-9de9-b3191a693054",
+    "version": 1
 }
