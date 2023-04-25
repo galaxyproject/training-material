@@ -1,7 +1,60 @@
 {
     "a_galaxy_workflow": "true",
     "annotation": "Reference-based RNA-Seq data analysis",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0001-9852-1987",
+            "name": "B\u00e9r\u00e9nice Batut"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-2949-3921",
+            "name": "Mallory Freeberg"
+        },
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": "Mo Heydarian"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-7427-6478",
+            "name": "Anika Erxleben"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-5192-126X",
+            "name": "Pavankumar Videm"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-1726-2256",
+            "name": "Clemens Blank"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-4847-8436",
+            "name": "Maria Doyle"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-3627-5340",
+            "name": "Nicola Soranzo"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0001-6553-5274",
+            "name": "Peter van Heusden"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-1964-4960",
+            "name": "Lucille Delisle"
+        }
+    ],
     "format-version": "0.1",
+    "license": "MIT",
     "name": "DEG Part - Ref Based RNA Seq - Transcriptomics - GTN",
     "steps": {
         "0": {
@@ -371,11 +424,6 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "deseq_out",
-                    "output_name": "deseq_out",
-                    "uuid": "0a62d2e1-43d8-448a-81d3-73b6333a7e40"
-                },
-                {
                     "label": null,
                     "output_name": "plots",
                     "uuid": "f71aae1f-b50f-4627-a2ad-90c64a416bb3"
@@ -384,6 +432,11 @@
                     "label": null,
                     "output_name": "counts_out",
                     "uuid": "45c22139-7433-4593-ba79-6720330b2865"
+                },
+                {
+                    "label": "deseq_out",
+                    "output_name": "deseq_out",
+                    "uuid": "0a62d2e1-43d8-448a-81d3-73b6333a7e40"
                 }
             ]
         },
@@ -721,12 +774,7 @@
                     "output_name": "out_file1"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Filter",
-                    "name": "input"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Filter",
             "outputs": [
@@ -741,7 +789,7 @@
             },
             "post_job_actions": {},
             "tool_id": "Filter1",
-            "tool_state": "{\"cond\": \"c7 < 0.05\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"cond\": \"c7 < 0.05\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
             "type": "tool",
             "uuid": "9cf4c012-7a52-4b47-bbec-4ad8275542ea",
@@ -806,13 +854,13 @@
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "top_plot",
-                    "uuid": "95e4edea-003b-467c-bcef-09365646019b"
+                    "output_name": "cat_genes_tab",
+                    "uuid": "a9cab5d3-a7ec-41b2-bffa-5ff5129c3d06"
                 },
                 {
                     "label": null,
-                    "output_name": "cat_genes_tab",
-                    "uuid": "a9cab5d3-a7ec-41b2-bffa-5ff5129c3d06"
+                    "output_name": "top_plot",
+                    "uuid": "95e4edea-003b-467c-bcef-09365646019b"
                 },
                 {
                     "label": "go_terms",
@@ -868,14 +916,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "kegg_pathways",
-                    "output_name": "wallenius_tab",
-                    "uuid": "8d0ac5be-ac7d-4f10-85ac-d3461f561a50"
-                },
-                {
                     "label": null,
                     "output_name": "cat_genes_tab",
                     "uuid": "ea7e39c3-ce69-458a-9ce3-a6732ce3cd74"
+                },
+                {
+                    "label": "kegg_pathways",
+                    "output_name": "wallenius_tab",
+                    "uuid": "8d0ac5be-ac7d-4f10-85ac-d3461f561a50"
                 }
             ]
         },
@@ -929,12 +977,7 @@
                     "output_name": "out_file1"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Filter",
-                    "name": "input"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Filter",
             "outputs": [
@@ -949,7 +992,7 @@
             },
             "post_job_actions": {},
             "tool_id": "Filter1",
-            "tool_state": "{\"cond\": \"abs(c3)>1\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"cond\": \"abs(c3)>1\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
             "type": "tool",
             "uuid": "1f787252-7a94-43b6-bb66-9624923ed05c",
@@ -1421,6 +1464,6 @@
     "tags": [
         "transcriptomics"
     ],
-    "uuid": "3408b519-4331-4814-bdec-e77132578b77",
-    "version": 2
+    "uuid": "e6b63cb2-0070-4939-a228-3a970390b57d",
+    "version": 3
 }
