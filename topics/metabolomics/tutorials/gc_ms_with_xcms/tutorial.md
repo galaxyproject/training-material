@@ -82,6 +82,8 @@ Before we can start with the actual analysis pipeline, we first need to download
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
+>    In the further steps, this dataset collection will be referred to as `input` (and we recommend naming this collection like that to avoid confusion).
+>
 > 4. Import the following extra files from [Zenodo]({{ page.zenodo_link }}):
 >
 >    ```
