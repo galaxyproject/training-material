@@ -95,6 +95,10 @@ Before we can start with the actual analysis pipeline, we first need to download
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+> 
+>    Please pay attention to the format of all uploaded files, and make sure they were correctly imported.
+>
+>    {% snippet faqs/galaxy/datatypes_understanding_datatypes.md %}
 >
 >    > <comment-title> The extra files </comment-title>
 >    >
