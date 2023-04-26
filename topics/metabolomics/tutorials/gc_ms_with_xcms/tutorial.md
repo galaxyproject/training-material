@@ -483,7 +483,7 @@ We then finally compare the deconvoluted spectra against the reference library u
 This workflow leverages the correlation of features across samples to improve the annotation performance, trying to capture even low abundant signals.
 It is suitable for both high- and low-resolution GC-MS data acquired in either profile or centroid mode by adapting the individual tool parameters or in-/excluding individual steps which are specific to a certain data format.
 
-Before further statistical analysis, the information from the scores excel sheet can be included in the library of deconvoluted spectra manually to add the putative identifications. The further processing can then leverage this information and the intensity information contained in the **SpecAbundance** output from **RAMclustR**.
+Before further statistical analysis, the information from the scores table can be included in the library of deconvoluted spectra manually to add the putative identifications. The further processing can then leverage this information and the intensity information contained in the **SpecAbundance** output from **RAMclustR**.
 
 Note that this tutorial doesn't cover all steps which are possible or compatible with this workflow. Other options include the {% tool [matchms filtering](toolshed.g2.bx.psu.edu/repos/recetox/matchms_filtering/matchms_filtering/0.17.0+galaxy0) %} tool with which you can normalize your spectra or remove low-abundant ions before matching.
 Another option for normalization outside of the built-in normalization tools of **RAMClustR** is the {% tool [WaveICA](toolshed.g2.bx.psu.edu/repos/recetox/waveica/waveica/0.2.0+galaxy2) %} tool for correction of batch effects.
