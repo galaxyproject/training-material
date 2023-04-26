@@ -16,7 +16,6 @@ questions:
 objectives:
 - Identify which operations are necessary to transform an AnnData object into the files needed for Monocle
 - Describe the Monocle3 functions in R
-- Execute tools and functions to switch between Galaxy and R fluently
 - Recognise steps that can be performed in R, but not with current Galaxy tools
 - Repeat the Monocle3 workflow and choose appropriate parameter values
 - Compare the outputs from Scanpy, Monocle in Galaxy and Monocle in R
