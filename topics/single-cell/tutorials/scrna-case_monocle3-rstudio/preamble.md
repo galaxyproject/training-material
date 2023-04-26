@@ -11,7 +11,7 @@ In the [Monocle3 in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-
 
 First, we need to retrieve the appropriate data. We will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). We will use the filtered AnnData object, before normalisation and annotation, generated in the [filtering tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) as step `20: Filtered Object`. However for this tutorial, you don't have to download any files on your computer or even import files to Galaxy! We will show you the whole analysis in R, starting from AnnData object. However, if you'd like to examine the datasets in a history, the instructions are below.
 
-> <hands-on-title>Optional: Data upload into Galaxy history</hands-on-title>
+> <hands-on-title>Optional data upload into Galaxy history</hands-on-title>
 >
 > You have three options for importing the input data into a Galaxy history.
 > 
@@ -100,11 +100,17 @@ If you followed the {% icon tip %} tip above, you should already have your Jupyt
 ><hands-on-title>Installing the packages</hands-on-title>
 >
 > 1. Navigate back to the `Terminal`
-> 2. In the Terminal tab open, write the following, preferably one line at a time:
+> 2. In the Terminal tab open, write the following, one line at a time:
 > ```
 >conda install -c conda-forge -c bioconda r-monocle3
+>```
+>```
 >conda install -c conda-forge -c bioconda anndata
+>```
+>```
 >conda install -c conda-forge r-viridislite
+>```
+>```
 >conda install -c conda-forge bioconductor-biomart
 >```
 > 3. If you are asked at any point `Proceed ([y]/n)?`, type `y` - surely we want to proceed!
