@@ -1,33 +1,24 @@
 # Introduction
 
-This tutorial is the next one in the [Single-cell RNA-seq: Case Study]({% link topics/single-cell/index.md %}) series. This tutorial focuses on trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/), similar to the [Monocle3 in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}). However, in this tutorial we will use the R programming language that hides behind the user-friendly Galaxy tools. Sometimes you might encounter limitations when working with Galaxy tools, or you might want to make a wee modification that has to be done manually. It is therefore useful to be able to switch between R and Galaxy smoothly. If you do not feel confident using R, [this tutorial]({% link topics/data-science/tutorials/r-basics/tutorial.md %}) is a good place to start. However, our tutorial is quite straightforward to follow and at the end you will feel like a programmer! On the other hand, if you are not confident with the biological or statistical theory behind trajectory analysis, check out the [slide deck]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html %}). With those resources (including the previous case study tutorials) you are well-equipped to go through this tutorial with ease. Let’s get started!
+This tutorial is the next one in the [Single-cell RNA-seq: Case Study]({% link topics/single-cell/index.md %}) series. This tutorial focuses on trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/), similar to the [Monocle3 in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}). However, in this tutorial we will use the R programming language that hides behind the user-friendly Galaxy tools. Sometimes you might encounter limitations when working with Galaxy tools, or you might want to make a wee modification that has to be done manually. It is therefore useful to be able to switch to R. If you do not feel confident using R, [this tutorial]({% link topics/data-science/tutorials/r-basics/tutorial.md %}) is a good place to start. However, our tutorial is quite straightforward to follow and at the end you will feel like a programmer! On the other hand, if you are not confident with the biological or statistical theory behind trajectory analysis, check out the [slide deck]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html %}). With those resources (including the previous case study tutorials) you are well-equipped to go through this tutorial with ease. Let’s get started!
 
 > <comment-title></comment-title>
 > This tutorial is significantly based on the [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/introduction/).
 {: .comment}
 
-## Get data
-In the [Monocle3 in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}), we showed that Monocle3 works great with annotated data, but what if your data is not annotated yet? Is it still possible to use Monocle? The answer is yes, Monocle can annotate cells according to their type, which you will perform in this tutorial.
+## Optional: Get data into a Galaxy history
+In the [Monocle3 in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}), we showed that Monocle3 works great with annotated data, but what if your data is not annotated yet? Is it still possible to use Monocle? The answer is yes, Monocle can annotate cells according to their type.
 
-First, we need to retrieve the appropriate data. We will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). We will use the filtered AnnData object, before normalisation and annotation, generated in the [filtering tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) as step `20: Filtered Object`. However for this tutorial, you don't have to download any files on your computer or even import files to Galaxy! We will show you the whole analysis in R, starting from AnnData object. If you wish, you can get this file to your Galaxy history, following the step below, but you can also jump directly into JupyLab.
+First, we need to retrieve the appropriate data. We will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). We will use the filtered AnnData object, before normalisation and annotation, generated in the [filtering tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) as step `20: Filtered Object`. However for this tutorial, you don't have to download any files on your computer or even import files to Galaxy! We will show you the whole analysis in R, starting from AnnData object. However, if you'd like to examine the datasets in a history, the instructions are below.
 
-> <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
+> <hands-on-title>Optional: Data upload into Galaxy history</hands-on-title>
 >
-> 1. Import history from: [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4trajectories--monocle3--rstudio---input)
->
+> You have three options for importing the input data into a Galaxy history.
+> 
+> 1. You can import a history from: [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4trajectories--monocle3--rstudio---input); Import the files from [Zenodo]({{ page.zenodo_link }}); or Import the files from the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
 >
 >    {% snippet faqs/galaxy/histories_import.md %}
->
-> 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
->
-{: .hands_on}
-
-> <hands-on-title>Option 2: Data upload - Add to history</hands-on-title>
->
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
 >
 >    ```
 >    {{ page.zenodo_link }}/files/AnnData_filtered.h5ad
@@ -36,9 +27,11 @@ First, we need to retrieve the appropriate data. We will continue to work on the
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. Check that the datatype is `h5ad`
+> 2. Check that the datatype is `h5ad`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
+>
+> 3. **Rename** {% icon galaxy-pencil %} the history to your name of choice.
 >
 {: .hands_on}
 
