@@ -296,12 +296,13 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 >
 {: .hands_on}
 
-The spectral data comes as an `.msp` file, which is a text file structured according to the **NIST MSSearch** spectra format. `.msp` is one of the generally accepted formats for mass spectral libraries (or collections of unidentified spectra, so called spectral archives), and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, etc.). Because `.msp` files are text-based, they can be viewed as simple `txt` files. You can use any text editor that you have on your computer or use Galaxy's built-in editor. In this tutorial, we use the Galaxy editor to check the contents of the file:
+The spectral data comes as an `.msp` file, which is a text file structured according to the **NIST MSSearch** spectra format. `.msp` is one of the generally accepted formats for mass spectral libraries (or collections of unidentified spectra, so called spectral archives), and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, etc.). Because `.msp` files are text-based, they can be viewed as simple `txt` files:
 
 > <hands-on-title> Data Exploration </hands-on-title>
 >
-> 1. Click *"Visualize this data"* {% icon galaxy-barchart %} icon next to the dataset in the Galaxy history
-> 2. Select the *"Editor"* {% icon galaxy-eye %} tool. The contents of the file would look like this:
+>    Click *"View data"* {% icon galaxy-eye %} icon next to the dataset in the Galaxy history. The contents of the file would look like this:
+>
+>    > {% snippet faqs/galaxy/datasets_icons.md %}
 >
 >    ```
 >     NAME:C001
