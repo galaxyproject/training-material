@@ -7,6 +7,10 @@ module Jekyll
       'tutorial_slides_ai4life'
     ]
 
+    ##
+    # Generate a plaintext version of the slides
+    # Params:
+    # +site+:: The +Jekyll::Site+ object
     def generate(site)
       # layout: tutorial_slides
       # layout: base_slides
