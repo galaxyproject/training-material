@@ -33,7 +33,7 @@ contributions:
 
 # Introduction
 
-The study of metabolites in biological samples is routinely defined as metabolomics. Metabolomics studies based on untargeted mass spectrometry provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables the detection of thousands of metabolites in hypothesis-generating studies and links previously unknown metabolites with biologically important roles {% cite Patti2012 %}. There are two major issues in contemporary mass spectrometry-based metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
+The study of metabolites in biological samples is routinely defined as metabolomics. Metabolomics' studies based on untargeted mass spectrometry provide the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables the detection of thousands of metabolites in hypothesis-generating studies and links previously unknown metabolites with biologically important roles {% cite Patti2012 %}. There are two major issues in contemporary mass spectrometry-based metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
 
 Many packages are available for the analysis of GC-MS or LC-MS data - for more details see the reviews by {% cite Stanstrup2019 %} and {% cite Misra2021 %}. In this tutorial, we focus on open-source solutions integrated within the Galaxy framework, namely **XCMS**, **RAMClustR**, **RIAssigner**, and **matchms**. In this tutorial, we will learn how to (1) extract features from the raw data using **XCMS** ({% cite Smith2006 %}), (2) deconvolute the detected features into spectra with **RAMClustR** ({% cite broeckling2014ramclust %}), (3) compute retention indices with **RIAssigner** ({% cite hecht2022riassigner %}), and (4) identify the present compounds leveraging spectra and retention indices using **matchms** ({% cite Huber2020 %}). For demonstration, we use three GC-[EI+] high-resolution mass spectrometry data files generated from quality control seminal plasma samples.
 
@@ -41,7 +41,7 @@ Many packages are available for the analysis of GC-MS or LC-MS data - for more d
 > <details-title> Seminal plasma samples </details-title>
 > 
 > The seminal plasma samples were analyzed according to the standard operating procedure [(SOP) for metabolite profiling of seminal plasma via GC Orbitrap](https://zenodo.org/record/5734331).
-> The 3 samples used in this training are pooled quality control (QC) samples coming from about 200 samples. The pooled samples were analyzed in a dilution series to test the system suitability and the quality of the assay.
+> The 3 samples used in this training are pooled quality control (QC) samples coming from about 200 samples. The pooled samples were analyzed in dilution series to test the system suitability and the quality of the assay.
 >
 {: .details}
 
@@ -136,7 +136,7 @@ The first part of data processing is using the **XCMS** tool to detect peaks in 
 > <hands-on-title> Create the **XCMS** object </hands-on-title>
 >
 > 1. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"File(s) from your history containing your chromatograms"*: `input.mzML` (output of **msconvert** {% icon tool %})
+>    - {% icon param-collection %} *"File(s) from your history containing your chromatograms"*: `input.mzML` (output of **msconvert** {% icon tool %})
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
@@ -157,7 +157,7 @@ The first step is to extract peaks from each of your data files independently. F
 > <hands-on-title> Peak picking </hands-on-title>
 >
 >  {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"RData file"*: `input.raw.RData` (output of **MSnbase readMSData** {% icon tool %})
+>    - {% icon param-collection %} *"RData file"*: `input.raw.RData` (output of **MSnbase readMSData** {% icon tool %})
 >    - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
 >        - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3.0`
 >        - *"Min,Max peak width in seconds"*: `1,30`
@@ -176,7 +176,7 @@ At this step, you obtain a dataset collection containing one `RData` file per sa
 > <hands-on-title> Merging files </hands-on-title>
 >
 >  {% tool [xcms findChromPeaks Merger](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"RData file"*: `input.raw.xset.RData` (output of **xcms findChromPeaks (xcmsSet)** {% icon tool %})
+>    - {% icon param-collection %} *"RData file"*: `input.raw.xset.RData` (output of **xcms findChromPeaks (xcmsSet)** {% icon tool %})
 >    - {% icon param-file %} *"Sample metadata file"*: `sample_metadata.tsv` (Input dataset)
 >
 >    You can leave the other parameters with their default values.
@@ -237,7 +237,7 @@ By applying retention time correction, the used retention time values were modif
 
 ## Integrating areas of missing peaks
 
-At this point, the peak list may contain `NA` values when peaks were not considered in only some of the samples in the first peak-picking step. In this step, we will integrate the signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no chromatographic peak for this ion was identified.
+At this point, the peak list may contain `NA` values when peaks were not considered in only some of the samples in the first peak-picking step. In this step, we will integrate the signal in the m/z-rt area of an ion (chromatographic peak group) for samples in which no chromatographic peak for this ion was identified.
 
 > <hands-on-title> Integrating areas of missing peaks </hands-on-title>
 >
@@ -442,7 +442,7 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 
 The output of the previous step is a `json` file. This format is very simple to read for our computers, but not so much for us. We can use the {% tool [matchms output formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.1.4) %} to convert the data to a tab-separated file with a scores matrix.
 
-The output table contains the scores and number of matched ions of the deconvoluted spectra with the spectra in the reference library. The raw output can be filtered to only contain the top matches (3 by default) and or to contain only pairs with a score and number of matched ions larger than provided thresholds.
+The output table contains the scores and number of matched ions of the deconvoluted spectra with the spectra in the reference library. The raw output can be filtered to only contain the top matches (3 by default) and/or to contain only pairs with a score and number of matched ions larger than provided thresholds.
 
 > <hands-on-title> Format the output </hands-on-title>
 >
