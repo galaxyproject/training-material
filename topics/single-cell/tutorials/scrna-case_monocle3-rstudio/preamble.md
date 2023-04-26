@@ -1,6 +1,6 @@
 # Introduction
 
-This tutorial is the next one in the [Single-cell RNA-seq: Case Study]({% link topics/single-cell/index.md %}) series. This tutorial focuses on trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/), similarly to the [Monocle3 in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}). However, in this tutorial we will use the R programming language that hides behind the user-friendly Galaxy tools. Sometimes you might encounter limitations when working with Galaxy tools, or you might want to make a wee modification that has to be done manually. It is therefore useful to be able to switch between R and Galaxy smoothly. If you do not feel confident using R, [this tutorial]({% link topics/data-science/tutorials/r-basics/tutorial.md %}) is a good place to start. However, our tutorial is quite straightforward to follow and at the end you will feel like a programmer! On the other hand, if you are not confident with the biological or statistical theory behind trajectory analysis, check out the [slide deck]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html %}). With those resources (including the previous case study tutorials) you are well-equipped to go through this tutorial with ease. Let’s get started!
+This tutorial is the next one in the [Single-cell RNA-seq: Case Study]({% link topics/single-cell/index.md %}) series. This tutorial focuses on trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/), similar to the [Monocle3 in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}). However, in this tutorial we will use the R programming language that hides behind the user-friendly Galaxy tools. Sometimes you might encounter limitations when working with Galaxy tools, or you might want to make a wee modification that has to be done manually. It is therefore useful to be able to switch between R and Galaxy smoothly. If you do not feel confident using R, [this tutorial]({% link topics/data-science/tutorials/r-basics/tutorial.md %}) is a good place to start. However, our tutorial is quite straightforward to follow and at the end you will feel like a programmer! On the other hand, if you are not confident with the biological or statistical theory behind trajectory analysis, check out the [slide deck]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html %}). With those resources (including the previous case study tutorials) you are well-equipped to go through this tutorial with ease. Let’s get started!
 
 > <comment-title></comment-title>
 > This tutorial is significantly based on the [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/introduction/).
@@ -33,6 +33,7 @@ First, we need to retrieve the appropriate data. We will continue to work on the
 >    {{ page.zenodo_link }}/files/AnnData_filtered.h5ad
 >    ```
 >
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Check that the datatype is `h5ad`
@@ -44,7 +45,7 @@ First, we need to retrieve the appropriate data. We will continue to work on the
 
 ## Launching JupyterLab
 
-{% icon warning %} Please note: this is only currently available on the [usegalaxy.eu](https://usegalaxy.eu) and [usegalaxy.org](https://usegalaxy.org) sites.
+{% icon warning %} Please note: this is only currently available on the [usegalaxy.eu](https://usegalaxy.eu) site.
 
 > <warning-title>Data uploads & JupyterLab</warning-title>
 > There are a few ways of importing and uploading data into JupyterLab. You might find yourself accidentally doing this differently than the tutorial, and that's ok. There are a few key steps where you will call files from a location - if these don't work from you, check that the file location is correct and change accordingly!
@@ -139,7 +140,7 @@ Installation will take a while, so in the meantime, when it's running, you can o
 >library(monocle3)
 >```
 > > <warning-title>Installation errors</warning-title>
-> > It may happen that you will encounter some problems with installation of monocle3 when using RStudio Galaxy instance or RStudio Cloud. It might be due to using older versions of R or required packages or lack of required dependencies. If it happens, you would need to carefully read the error messages and follow the suggestions. If you are facing any difficulties with installation process, it is recommended that you consult your problem with additional online resources. It is more likely that RStudio Cloud or Galaxy tool would fail rather than local RStudio. To make your analysis stress-free, you can follow the Jupyter Notebook instead, which should not give you installation issues.
+> > It may happen that you will encounter some problems with installation of monocle3 when using RStudio Galaxy instance or RStudio Cloud. It might be due to using older versions of R or required packages or lack of required dependencies. If it happens, you would need to carefully read the error messages and follow the suggestions. If you are facing any difficulties with installation process, it is recommended that you consult additional online resources. It is more likely that RStudio Cloud or Galaxy tool would fail rather than local RStudio. To make your analysis stress-free, you can follow the Jupyter Notebook instead, which should not give you installation issues.
 > {: .warning}
 >
 {: .tip}

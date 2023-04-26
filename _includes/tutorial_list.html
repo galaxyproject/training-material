@@ -18,7 +18,7 @@
   </thead>
   <tbody class="list">
 
-  {% assign subtopic_materials = include.sub[1].materials %}
+  {% assign subtopic_materials = include.sub[1].materials | default: include.sub %}
   {% for material in subtopic_materials %}
         <!-- MAT: {{ material.id }} -->
       {% if material.draft != true or jekyll.environment != "production" %}
@@ -29,6 +29,10 @@
             {% if default_resource_url %}
             <a href="{{ site.baseurl }}/{{ default_resource_url }}">
                 {{ material.title }}
+            </a>
+            {% else if material.hands_on == 'external' %}
+            <a href="{{ material.hands_on_url }}">
+                {{ material.title }} {% icon external-link %}
             </a>
             {% else %}
                 {{ material.title }}

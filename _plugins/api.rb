@@ -2,10 +2,20 @@ require 'json'
 require './_plugins/jekyll-topic-filter.rb'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
+require './_plugins/gtn/git'
+require './_plugins/gtn'
 
 module Jekyll
+  ##
+  # This class generates the GTN's "api" by writing out a folder full of JSON files.
   class APIGenerator < Generator
 
+    ##
+    # Returns contributors, regardless of whether they are 'contributor' or 'contributions' style
+    # Params:
+    # +data+:: +Hash+ of the YAML frontmatter from a material
+    # Returns:
+    # +Array+ of contributor IDs
     def get_contributors(data)
       if data.has_key?('contributors')
         return data['contributors']
@@ -14,7 +24,92 @@ module Jekyll
       end
     end
 
+    ## 
+    # Use Jekyll's Markdown converter to convert text to HTML
+    # Params:
+    # +site+:: +Jekyll::Site+ object
+    # +text+:: +String+ of text to convert
+    # Returns:
+    # +String+ of markdown text
+    def markdownify(site, text)
+      site.find_converter_instance(
+        Jekyll::Converters::Markdown
+      ).convert(text.to_s)
+    end
+
+    ##
+    # Recursively visit a hash and markdownify all strings inside
+    # Params:
+    # +site+:: +Jekyll::Site+ object
+    # +f+:: +Hash+ to visit
+    # Returns:
+    # +Hash+ with all strings markdownified
+    def visitAndMarkdownify(site, f)
+        if f.is_a?(Array)
+            f.map!{|x| visitAndMarkdownify(site, x)}
+        elsif f.is_a?(Hash)
+            f = f.map{|k, v|
+                [k, visitAndMarkdownify(site, v)]
+            }.to_h
+        elsif f.is_a?(String)
+            f = markdownify(site, f).strip().gsub(/<p>/, "").gsub(/<\/p>/, "")
+        end
+        f
+    end
+
+    ##
+    # Map a contributor ID to a JSON object which includes links to their profile page and API endpoint
+    # Params:
+    # +site+:: +Jekyll::Site+ object
+    # +c+:: +String+ of contributor ID
+    # Returns:
+    # +Hash+ of contributor information
+    def mapContributor(site, c)
+      x = site.data['contributors']
+        .fetch(c, {})
+        .merge({
+          "id" => c,
+          "url" => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json",
+          "page" => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
+        })
+      visitAndMarkdownify(site, x)
+    end
+
+    ##
+    # Generates /api/configuration.json
+    # Params:
+    # +site+:: +Jekyll::Site+ object
+    # Returns:
+    # nil
+    def generateConfiguration(site)
+      page2 = PageWithoutAFile.new(site, "", "api/", "configuration.json")
+      site.config.update(Gtn::Git.discover)
+      page2.content = JSON.pretty_generate(site.config)
+      page2.data["layout"] = nil
+      site.pages << page2
+    end
+
+    ##
+    # Generates /api/version.json
+    # Params:
+    # +site+:: +Jekyll::Site+ object
+    # Returns:
+    # nil
+    def generateVersion(site)
+      page2 = PageWithoutAFile.new(site, "", "api/", "version.json")
+      page2.content = JSON.pretty_generate(Gtn::Git.discover)
+      page2.data["layout"] = nil
+      site.pages << page2
+    end
+
+    ##
+    # Runs the generation process
+    # Params:
+    # +site+:: +Jekyll::Site+ object
     def generate(site)
+      generateConfiguration(site)
+      # For some reason the templating isn't working right here.
+      #generateVersion(site)
 
       # Full Bibliography
       Gtn::Scholar.load_bib(site)
@@ -29,36 +124,6 @@ module Jekyll
       page2.content = "{% raw %}\n" + Gtn::Metrics.generate_metrics(site) + "{% endraw %}"
       page2.data["layout"] = nil
       site.pages << page2
-
-      def markdownify(site, text)
-        site.find_converter_instance(
-          Jekyll::Converters::Markdown
-        ).convert(text.to_s)
-      end
-
-      def visitAndMarkdownify(site, f)
-          if f.is_a?(Array)
-              f.map!{|x| visitAndMarkdownify(site, x)}
-          elsif f.is_a?(Hash)
-              f = f.map{|k, v|
-                  [k, visitAndMarkdownify(site, v)]
-              }.to_h
-          elsif f.is_a?(String)
-              f = markdownify(site, f).strip().gsub(/<p>/, "").gsub(/<\/p>/, "")
-          end
-          f
-      end
-
-      def mapContributor(site, c)
-        x = site.data['contributors']
-          .fetch(c, {})
-          .merge({
-            "id" => c,
-            "url" => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json",
-            "page" => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
-          })
-        visitAndMarkdownify(site, x)
-      end
 
       # Contributors
       puts "[GTN/API] Contributors"
@@ -109,15 +174,17 @@ module Jekyll
           q['urls'] = Hash.new
 
           if ! q['hands_on'].nil?
-            q['urls']['hands_on'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][7..-6]}.json"
+            q['urls']['hands_on'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][8..-6]}.json"
           end
 
           if ! q['slides'].nil?
-            q['urls']['slides'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][7..-6]}.json"
+            q['urls']['slides'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][8..-6]}.json"
           end
 
           # Write out the individual page
           page6 = PageWithoutAFile.new(site, "", "api/topics/", "#{q['url'][7..-6]}.json")
+          # Delete the ref to avoid including it by accident
+          q.delete('ref')
           page6.content = JSON.pretty_generate(q)
           page6.data["layout"] = nil
           site.pages << page6
@@ -162,6 +229,7 @@ module Jekyll
         if material['slides']
           page5 = PageWithoutAFile.new(site, "", "api/", "#{directory}/slides.json")
           p = material.dup
+          p.delete('ref')
           p['contributors'] = get_contributors(p).dup.map{|c| mapContributor(site, c)}
 
           # Here we un-do the tutorial metadata priority, and overwrite with
@@ -177,8 +245,9 @@ module Jekyll
         end
 
         if material['hands_on']
-          page5 = PageWithoutAFile.new(site, "", "api/topics/", "#{directory}/tutorial.json")
+          page5 = PageWithoutAFile.new(site, "", "api/", "#{directory}/tutorial.json")
           p = material.dup
+          p.delete('ref')
           p['contributors'] = get_contributors(p).dup.map{|c| mapContributor(site, c)}
           page5.content = JSON.pretty_generate(p)
           page5.data["layout"] = nil

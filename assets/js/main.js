@@ -153,8 +153,8 @@ function fixDiffPresentation(codeBlock){
 }
 
 <!--  For admin training -->
-document.querySelectorAll("section.tutorial.topic-admin div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
-document.querySelectorAll("section.tutorial.topic-data-science div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
+document.querySelectorAll("article.topic-admin section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
+document.querySelectorAll("article.topic-data-science section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 
 $("#theme-selector button").click(function(evt){
 	var theme = $(evt.target).data('theme');

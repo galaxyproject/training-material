@@ -5,6 +5,14 @@ module Jekyll
   class SitemapGenerator < Generator
     safe true
 
+    ##
+    # Generate a sitemap.xml file
+    # We reimplement the default Jekyll sitemap generator, because we want to
+    # leverage the GTN::ModificationTimes class to obtain the last modification
+    # date of a page, in a more efficient way than the default Jekyll sitemap
+    #
+    # Params:
+    # +site+:: The +Jekyll::Site+ object
     def generate(site)
       puts "[GTN/Sitemap] Generating"
       result = '<?xml version="1.0" encoding="UTF-8"?>'

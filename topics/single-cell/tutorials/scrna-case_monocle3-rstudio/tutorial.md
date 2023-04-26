@@ -17,8 +17,8 @@ objectives:
 - Identify which operations are necessary to transform an AnnData object into the files needed for Monocle
 - Describe the Monocle3 functions in R
 - Execute tools and functions to switch between Galaxy and R fluently
-- Recognise steps that can only be performed in R, but not with Galaxy tools
-- Repeat the Monocle3 workflow and choose the right parameter values
+- Recognise steps that can be performed in R, but not with current Galaxy tools
+- Repeat the Monocle3 workflow and choose appropriate parameter values
 - Compare the outputs from Scanpy, Monocle in Galaxy and Monocle in R
 - Describe differential expression analysis methods
 
@@ -59,8 +59,8 @@ notebook:
   snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md
 ---
 
-## Setting the environment and files upload
-Once the installation is done, we should load the needed packages into our notebook.
+## Setting up the environment and file upload
+Once the installation is done, we should load the needed packages into our notebook. Navigate back to your `notebook`. If you are using our prepopulated notebook, you can follow the tutorial from there. Otherwise, input the following into your fresh notebook.
 
 ```r
 install.packages("Rcpp")    # needed for reduce_dimension to avoid AnnoyAngular error; library(Rcpp) might work as well depending on the version
@@ -88,7 +88,7 @@ Then we have to read in this h5ad file:
 ```r
 ann <- anndata::read_h5ad('AnnData.h5ad')
 ```
-Now we store all the information we need in AnnData object. However, Monocle uses *cell_data_set class* to hold expression data,which requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. Therefore, we have to somehow 'transfer' that information from our AnnData object to Monocle's cell_data_set (cds). AnnData stores a data matrix `X` together with annotations of observations `obs` and variables `var`, so we can extract those parameters and use them for further analysis.
+Now we store all the information we need in AnnData object. However, Monocle uses *cell_data_set class* to hold expression data, which requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. Therefore, we have to somehow 'transfer' that information from our AnnData object to Monocle's cell_data_set (cds). AnnData stores a data matrix `X` together with annotations of observations `obs` and variables `var`, so we can extract those parameters and use them for further analysis.
 
 ```r
 expression_matrix <- ann$X
@@ -98,7 +98,7 @@ gene_metadata <- ann$var
 
 > <tip-title>Uploading files from your computer is also an option!</tip-title>
 >
-> If you already have files containing the expression matrix, genes and cells metadata, you can upload them to JupyLab and generate cds file from them! For example, if you first downloaded the files from Galaxy your files will have `.tabular` extension. In this case, we will use `read.delim()` function to read them in. In this function, the first argument is the file path - in our case, the files are in the same folder as the notebook, so the file path is the same as the file name. You can always check that by right-clicking on the file and choosing `Copy path`. The second argument, `row.names=1` takes the column number of the data file from which to take the row names.
+> If you already have files containing the expression matrix, genes and cells metadata, you can upload them to JupyLab and generate a cds file from them instaed. For example, if you first downloaded the files from Galaxy, your files will have the `.tabular` extension. In this case, we will use the `read.delim()` function to read them in. In this function, the first argument is the file path - in our case, the files are in the same folder as the notebook, so the file path is the same as the file name. You can always check that by right-clicking on the file and choosing `Copy path`. The second argument, `row.names=1` takes the column number of the data file from which to take the row names.
 > ```r
 > # read in the files
 > cell_metadata <- read.delim('cells.tabular', row.names=1)
@@ -112,7 +112,7 @@ gene_metadata <- ann$var
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > This allows us to ensure that the expression value matrix has the same number of columns as the `cell_metadata` has rows and the same number of rows as the `gene_metadata` has rows. Importantly, row names of the `cell_metadata` object should match the column names of the expression matrix and row names of the `gene_metadata` object should match row names of the expression matrix.
+> > > This allows us to ensure that the expression value matrix has the same number of columns as the `cell_metadata` has rows and the same number of rows as the `gene_metadata` has rows. Importantly, the row names of the `cell_metadata` object should match the column names of the expression matrix and the row names of the `gene_metadata` object should match the row names of the expression matrix.
 > > >
 > > {: .solution}
 > {: .question}
@@ -147,18 +147,18 @@ gene_metadata <- ann$var
 {: .tip}
 
 
-According to [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/), `expression_matrix` should have genes as rows and cells as columns. Let's check if that's the case here.
+According to the [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/), the `expression_matrix` should have genes as rows and cells as columns. Let's check if that's the case here.
 ```r
-expression_matrix           # preview the content of the file by calling its name
+head(expression_matrix,c(5, 5))           # preview the content of the file by calling its the first 5 rows by 5 columns
 ```
 We can see that in our matrix rows are cells and genes are columns, so we have to transpose the matrix simply using function `t()`. But before doing so, we will change its type from dataframe to matrix - this is Monocle's requirement to generate cell_data_set afterwards.
 ```r
 expression_matrix <- as.matrix(expression_matrix)   # change the type to matrix
 expression_matrix <- t(expression_matrix)           # transpose the matrix
 ```
-Another condition we have to satisfy if that one of the columns of the `gene_metadata` should be named "gene_short_name", which represents the gene symbol for each gene. Some functions won't work without that. Do we have such a column? Let's check.
+Another condition we have to satisfy is that one of the columns of the `gene_metadata` should be named "gene_short_name", which represents the gene symbol for each gene. Some functions won't work without that. Do we have such a column? Let's check.
 ```r
-gene_metadata             # preview the content of the file to check the name of the column containing gene symbols
+head(gene_metadata)             # preview the top ten rows of the file to check the name of the column containing gene symbols
 ```
 
 The second column indeed contains gene symbols, but is called "Symbol" instead of "gene_short_name". That can be easily changed by a simple assignment, as long as we know the number of the column that we want to modify. In our case the gene symbols are stored in column 2. We can access the column names by `colnames()`.
@@ -320,7 +320,7 @@ plot_cells(cds_red_dim, color_cells_by="batch", label_cell_groups=FALSE)
 
 ![Left image showing dataset before batch correction: upper and lower right branches mostly consist of N705 and N706. Right image showing the dataset after batch correction: the cells from all the samples are evenly spread throughout the whole dataset.](../../images/scrna-casestudy-monocle/batch_correction.png "Comparison of the dataset before and after batch correction.")
 
-Do you see this? That’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using mutual nearest neighbor alignment, a technique introduced by John Marioni's lab ({% cite Haghverdi_2018 %}) and supported by Aaron Lun's package [batchelor](https://bioconductor.org/packages/release/bioc/html/batchelor.html). 
+Do you see this? That’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using mutual nearest neighbor alignment, a technique introduced by John Marioni's lab ({% cite Haghverdi_2018 %}) and supported by Aaron Lun's package [batchelor](https://bioconductor.org/packages/release/bioc/html/batchelor.html).
 Now we can move to the next step and perform dimensionality reduction.
 
 

@@ -233,6 +233,28 @@ pre.highlight {
     color: var(--code-foreground);
     border: 1px solid var(--text-color-muted);
     @include syntax-dark;
+
+	code > ::selection {
+		color: var(--code-background);
+		background: var(--code-foreground);
+	}
+}
+
+/* Make the @@ portions of diffs, which indicate area, much more visible */
+div.language-diff .p {
+	border-top: 1px solid #66d9ef;
+	border-bottom: 1px solid #66d9ef;
+
+	border-left: 5px solid #66d9ef;
+	border-right: 5px solid #66d9ef;
+
+	font-weight: 900;
+
+	line-height: 3em;
+
+	margin-right: 1em;
+	padding-left: 1em;
+	padding-right: 1em;
 }
 
 figure {
@@ -532,6 +554,39 @@ blockquote {
 	}
 }
 
+.pathway{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+
+    .pathwayitem {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border-light);
+      .card-header {
+	background: var(--brand-color);
+	border-bottom: 1px solid var(--border-light);
+      }
+    }
+    .pathwaycover {
+        width: 100%;
+        object-fit: cover;
+        margin-top: auto;
+        margin-bottom: auto;
+        background-color: white;
+        border-radius: 2rem;;
+        padding: 1rem;
+        -webkit-transition: border 0.2s ease-in-out;
+        -o-transition: border 0.2s ease-in-out;
+        transition: border 0.2s ease-in-out;
+    }
+    h3 {
+        margin-top: 0.25rem;
+    }
+
+}
 
 .newslist {
     display: flex;
