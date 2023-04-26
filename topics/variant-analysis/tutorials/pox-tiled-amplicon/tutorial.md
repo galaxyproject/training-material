@@ -380,7 +380,7 @@ As this is a complex task that would take a considerable amount of time to perfo
 >
 >           It would be boring to have the matched stretches of Ns written out again.
 >
->    > <question-title>Question</question-title>
+>    > <question-title></question-title>
 >    >
 >    > Inspect the two result datasets created by the tool and compare the regions of Ns reported in them to the primer scheme.
 >    > Did the correct regions get masked?
@@ -868,7 +868,7 @@ For a rather long MSA like this one, the second approach may be faster, but the 
 >
 >    With this information now scroll through the file and compare what's listed to the published figure.
 >
->    > <question-title>Question</question-title>
+>    > <question-title></question-title>
 >    >
 >    > Does the data fit the figure?
 >    >
