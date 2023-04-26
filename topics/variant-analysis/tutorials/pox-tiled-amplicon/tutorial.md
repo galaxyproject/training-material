@@ -83,7 +83,7 @@ This tutorial demonstrates how such data can be analyzed correctly with Galaxy.
 
 The following figure provides an overview of the wet lab data generation process described in {% cite Mathijs2022 %} and of the flow of the analysis that we will perform in this tutorial.
 
-![](../../images/pox-virus-tiled-amplicon/pox-tiled-amplicon-wf.png "Tiled-amplicon approach with mapping to half-genomes")
+![A schematic drawing of a pox virus genome with a central coding region flanked by inverted terminal repeat regions. Below the genome 23 tiled amplicons are drawn as numbered lines to show their approximate distribution across the genome. Below the amplicons, the main steps in their wet lab processing and of the bioinformatics analysis of their sequences is shown as a flowchart](../../images/pox-virus-tiled-amplicon/pox-tiled-amplicon-wf.png "Tiled-amplicon approach with mapping to half-genomes")
 
 On the wet lab side, the genome of a viral sample gets amplified in the form of 23 overlapping amplicons using a set of pan-genus primers suitable for all species of *capripoxvirus*.
 
