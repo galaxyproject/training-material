@@ -429,14 +429,16 @@ To do so, we are going to combine the reference sequences of all segments with t
 >      - {% icon param-repeat %} *"Insert Dataset"*
 >        - {% icon param-collection %} *"Select"*: collection of renamed consensus sequences; output of **Replace** on consensus sequences
 >
->    {% snippet faqs/galaxy/analysis_concatenate.md toolspec="#2" %}
+>    {% snippet faqs/galaxy/analysis_concatenate.md toolspec="#1" %}
+>
+>    The tool should produce a collection of eight multi-sequence fasta datasets, each of which has the generated consensus sequence for one segment concatenated to the INSAFlu reference sequences of that segment.
 >
 > 2. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0) %}
 >    - {% icon param-collection %} *"Sequences to align"*: collection of concatenated sequences; output of **Concatenate datasets**
 >    - *"Data type"*: `Nucleic Acids`
 >    - *"Matrix selection"*: `No matrix`
 >
->    The result is a collection of MSAs, each representing all reference sequences of one genome segment plus the consensus sequence we have obtained for that segment.
+>    The result is a collection of MSAs, each aligning all reference sequences of one genome segment plus the consensus sequence we have obtained for that segment against each other.
 >
 > 3. {% tool [IQ-TREE](toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2) %}
 >    - {% icon param-collection %} *"Specify input alignment file in PHYLIP, FASTA, NEXUS, CLUSTAL or MSF format."*: output of **MAFFT**
