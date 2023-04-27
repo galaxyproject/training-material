@@ -446,7 +446,7 @@ plot_cells(cds_partitions_extra, reduction_method = "UMAP", color_cells_by = 'pa
 There are two main approaches to assigning cell types to clusters that we’ve just identified – supervised and unsupervised, both based on gene expression in each cluster.
 
 ## Supervised approach
-Supervised approach relies on the fact that when having a reference, we know which cell types to expect and we can simply check the expression of marker genes specific to the expected cell types. Let’s then check the markers mentioned in the original paper {% cite Bacon2018 %}.
+The supervised approach relies on prior knowledge of which cell types to expect. We can simply check the expression of marker genes specific to the expected cell types. Let’s then check the markers mentioned in the original paper {% cite Bacon2018 %}.
 
 | Marker | Cell type |
 |--------------------|
@@ -471,6 +471,7 @@ plot_cells(cds_clustered, genes=c('Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','H
 >
 > > <solution-title></solution-title>
 > >
+> > Keep in mind that these results refer to our numbered clusters, while yours might be slightly different.
 > > - `Il2ra` (DN): mostly expressed in cluster 4
 > > - `Cd8b1, Cd8a` (DP middle): expressed in clusters 1, 6, and highly in cluster 2
 > > - `Cd4` (DP late): average expression in clusters 1, 6, 2 and high expression in cluster 5
@@ -483,7 +484,7 @@ If you remember, this gene was found to be expressed in the previous Scanpy tuto
 > {: .solution}
 {: .question}
 
-Having identified which cluster corresponds to a specific cell type, we can finally run some code to add the annotation to our CDS object. First, we will create a new column called `cell_type`  in `colData()` - this is where the information about the cells is stored (eg. batch, genotype, sex, etc) - and initialize it with the values of clusters. Then, we will get the `dplyr` package which will be used for clusters annotation.
+Having identified which cluster corresponds to a specific cell type, we can finally run some code to add the annotation to our CDS object. First, we will create a new column called `cell_type`  in `colData()` - this is where the information about the cells is stored (eg. batch, genotype, sex, etc) - and initialize it with the values of clusters. Then, we will get the `dplyr` package which will be used for cluster annotation.
 
 ```r
 # just to keep the objects tidy and not overwrite them so that you can come back to any point of the analysis
@@ -512,7 +513,7 @@ plot_cells(cds_annotated, color_cells_by="cell_type", label_cell_groups=FALSE)
 ![A plot showing the identified clusters, now each coloured by the assigned cell type.](../../images/scrna-casestudy-monocle/annotated.png "Our annotated dataset.")
 
 ## Unsupervised approach
-But what if we don’t have any reference that we can use to assign our clusters? In that case, we will turn to the mentioned unsupervised approach - we will check what are the specifically expressed genes for each cluster. Then we can identify the cell types by looking up what cell types the found genes are markers for. That’s a more tedious process, but sometimes can lead to exciting and unexpected results.
+But what if we don’t have any reference that we can use to assign our clusters? In that case, we will turn to the mentioned unsupervised approach - we will check what are the specifically expressed genes for each cluster. Then we can identify the cell types by looking up what cell types contain those genes. That’s a more tedious process, but sometimes can lead to exciting and unexpected results.
 We will use Monocle’s function `top_markers()` and store the information about specifically expressed genes for each cluster in the data frame `marker_test`.
 ```r
 # find top marker genes in each cluster
