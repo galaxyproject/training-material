@@ -267,7 +267,9 @@ Do you remember the Monocle workflow introduced in the previous tutorial? Here i
 ![Monocle workflow: scRNA-seq dataset, pre-process data (normalise, remove batch effects), non-linear dimensionality reduction (t-SNE, UMAP), cluster cells, compare clusters (identify top markers, targeted contrasts), trajectory analysis](../../images/scrna-casestudy-monocle/monocle3_new_workflow.png "Workflow provided by Monocle3 documentation")
 
 ## Pre-processing
-Let’s start with normalisation and pre-processing that can be performed using the function `preprocess_cds()`. The argument `num_dim` is the number of principal components that will be computed when using PCA during normalisation. Then you can check that you're using enough PCs to capture most of the variation in gene expression across all the cells in the data set. Note that “PCA” is the default method of pre-processing in Monocle3, so although we can specify this in our function, we don’t have to.
+Let’s start with normalisation and pre-processing that can be performed using the function `preprocess_cds()`. The argument `num_dim` is the number of principal components that will be used. You can check that you're using enough PCs to capture most of the variation in gene expression across all the cells in the data set. Note that “PCA” is the default method of pre-processing in Monocle3, so although we can specify this in our function, we don’t have to.
+
+Note that this step can take awhile - around 5 or so minutes due to the high number of PCs calculated. Feel free to use a `num_dim` value around 100 to accelerate preprocessing and compare the results.
 
 ```r
 # PCA pre-processing with 210 principal components
@@ -280,7 +282,7 @@ plot_pc_variance_explained(cds_preprocessing)
 
 ![Plot of variation in gene expression vs PCA components, decreasing exponentially.](../../images/scrna-casestudy-monocle/pca_plot.jpg " Plot of variation in gene expression vs PCA components.")
 
-The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to imagine how the `num_dim` actually affects the output. Therefore, for this demonstration we will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset. However, it will take quite some time to run this, and this is why generally smaller PCs are preferable, so feel free to use `num_dim` value around 100 to accelerate preprocessing and compare the results.
+The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to visualise how the `num_dim` actually affects the output. We will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset. 
 
 ![Six plots showing only the shaded shape of how the cells are clustered depending on the num_dim argument. The general trend is maintained though.](../../images/scrna-casestudy-monocle/num_dim.jpg "The "shape" of the plot showing how the cells are clustered depending on the 'num_dim' argument.")
 
