@@ -1,14 +1,22 @@
 require 'jekyll'
 
 module Jekyll
+  ##
+  # This class modifies the page contents to replace {abbr} with the associated
+  # abbreviation in a proper <abbr> tag. It's done as a generator because it's
+  # easier to operate once per page and be able to easily see if we've generated
+  # the abbreviation before.
+  #
+  # This could in theory operate as a simple tag, but I'm not sure how to keep
+  # track of "# of times seen per page" there.
   class Abbreviate < Jekyll::Generator
     safe true
 
-    def initialize(config)
+    def initialize(config) # :nodoc:
       @config = config['abbreviate'] ||= {}
     end
 
-    def generate(site)
+    def generate(site) # :nodoc:
       site.pages
         .select { |page| not skip_layout?(page.data['layout']) }
         .each { |page| abbreviate page }
@@ -19,7 +27,7 @@ module Jekyll
 
     private
 
-    def abbreviate(page)
+    def abbreviate(page) # :nodoc:
       if page.data.key?('abbreviations') then
         seen = Hash.new
         page.data['abbreviations'].each{|abbr, definition|

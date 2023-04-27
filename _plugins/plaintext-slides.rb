@@ -1,12 +1,21 @@
 module Jekyll
   class PlaintextSlidesGenerator < Generator
-    safe true
+    SLIDE_LAYOUTS = [
+      'tutorial_slides',
+      'base_slides',
+      'introduction_slides',
+      'tutorial_slides_ai4life'
+    ]
 
+    ##
+    # Generate a plaintext version of the slides
+    # Params:
+    # +site+:: The +Jekyll::Site+ object
     def generate(site)
       # layout: tutorial_slides
       # layout: base_slides
 
-      site.pages.select{|page| page.data['layout'] == 'tutorial_slides' or page.data['layout'] == 'base_slides' or page.data['layout'] == 'introduction_slides'}.each do |page|
+      site.pages.select{|page| SLIDE_LAYOUTS.include? page.data['layout'] }.each do |page|
         dir = File.dirname(File.join('.', page.url))
         page2 = Jekyll::Page.new(site, site.source, dir, page.name)
         page2.data['layout'] = 'slides-plain'

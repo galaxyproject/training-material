@@ -25,13 +25,34 @@ module Jekyll
           tool = m[2]
         end
 
-        %Q(<span class="tool" data-tool="#{tool}" title="Tested with #{tool}"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: #{tool}</span></span> )
+        %Q(<span class="tool" data-tool="#{tool}" title="#{m[1]} tool"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: #{tool}</span></span> )
       else
         %Q(<span><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> )
       end
 
     end
   end
+
+  class WorkflowTag < Liquid::Tag
+
+    def initialize(tag_name, text, tokens)
+      super
+      @text = text.strip
+    end
+
+    def render(context)
+      format = /\[(?<title>.*)\]\((?<url>.*)\)/
+      m = @text.match(format)
+      #puts "Found #{@text} => #{m[:title]}, #{m[:url]}"
+
+      # It MUST be this format:
+      # {% workflow [Main Workflow](topics/x/tutorials/y/material/workflows/main.ga) %}
+      %Q(<span class="workflow" data-workflow="#{m[:url]}"><strong>#{m[:title]}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> )
+
+    end
+  end
+
 end
 
 Liquid::Template.register_tag('tool', Jekyll::ToolTag)
+Liquid::Template.register_tag('workflow', Jekyll::WorkflowTag)

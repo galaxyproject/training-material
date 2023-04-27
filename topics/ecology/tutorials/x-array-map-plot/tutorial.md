@@ -116,7 +116,7 @@ After loading the required data, the following stage is to obtain the meta info 
 
 Follow the below steps:
 
-## **NetCDF xarray Metadata Info**
+## NetCDF xarray Metadata Info
 
 > <hands-on-title>netCDF dataset with xarray metadata Galaxy Tool</hands-on-title>
 >

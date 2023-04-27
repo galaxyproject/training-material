@@ -4,10 +4,23 @@ require './_plugins/gtn.rb'
 
 
 module TopicFilter
+
+  ##
+  # This function returns a list of all the topics that are available.
+  # Params:
+  # +site+:: The +Jekyll::Site+ object
+  # Returns:
+  # +Array+:: The list of topics
   def self.list_topics(site)
     site.data.select{|k, v| v.is_a?(Hash) && v.has_key?('maintainers')}.map{|k, v| k}
   end
 
+  ##
+  # Fill the cache with all the topics
+  # Params:
+  # +site+:: The +Jekyll::Site+ object
+  # Returns:
+  # +nil+
   def self.fill_cache(site)
     if not site.data.has_key?('cache_topic_filter')
       puts "[GTN/TopicFilter] Begin Cache Prefill"
@@ -21,11 +34,40 @@ module TopicFilter
     end
   end
 
+  ##
+  # This function returns a list of all the materials that are available for a specific topic.
+  # Params:
+  # +site+:: The +Jekyll::Site+ object
+  # +topic_name+:: The name of the topic
+  # Returns:
+  # +Array+:: The list of materials
   def self.topic_filter(site, topic_name)
     self.fill_cache(site)
     site.data['cache_topic_filter'][topic_name]
   end
 
+  ##
+  # This function returns a list of all the materials that are available for a
+  # specific topic, but this time in a structured manner
+  # Params:
+  # +site+:: The +Jekyll::Site+ object
+  # +topic_name+:: The name of the topic
+  # Returns:
+  # +Hash+:: The subtopics and their materials
+  #
+  # Example:
+  #  {
+  #   "intro" => {
+  #     "subtopic" => {"title" => "Introduction", "description" => "Introduction to the topic", "id" => "intro"},
+  #     "materials" => [
+  #       ...
+  #     ]
+  #   },
+  #   "__OTHER__" => {
+  #     "subtopic" => {"title" => "Other", "description" => "Other materials", "id" => "__OTHER__"},
+  #     "materials" => [.. ]
+  #   }
+  #  ]
   def self.list_materials_structured(site, topic_name)
     # This method is built with the idea to replace the "topic_filter" command,
     # and instead of returning semi-structured data, we will immediately return
@@ -115,17 +157,50 @@ module TopicFilter
     out
   end
 
+  ##
+  # Fetch a specific tutorial material by topic and tutorial name
+  # Params:
+  # +site+:: The +Jekyll::Site+ object
+  # +topic_name+:: The name of the topic
+  # +tutorial_name+:: The name of the tutorial
+  # Returns:
+  # +Hash+:: The tutorial material
   def self.fetch_tutorial_material(site, topic_name, tutorial_name)
     self.fill_cache(site)
     site.data['cache_topic_filter'][topic_name].select{|p| p['tutorial_name'] == tutorial_name}[0]
   end
 
+  ## 
+  # Extract the list of tools used in a workflow
+  # Params:
+  # +data+:: The workflow data
+  # Returns:
+  # +Array+:: The list of tool IDs
   def self.extract_workflow_tool_list(data)
     out = data['steps'].select{|k, v| v['type'] == "tool"}.map{|k, v| v['tool_id']}.select{|x| ! x.nil?}
     out += data['steps'].select{|k, v| v['type'] == "subworkflow"}.map{|k, v| self.extract_workflow_tool_list(v['subworkflow'])}
     out
   end
 
+  ##
+  # Annotation of a path with topic and tutorial information
+  # Params:
+  # +path+:: The path to annotate
+  # Returns:
+  # +Hash+:: The annotation
+  #
+  # This is a bit of a hack, but it works for now.
+  #
+  # Example:
+  #  /topics/assembly/tutorials/velvet-assembly/tutorial.md
+  #  => {
+  #    "topic" => "assembly",
+  #    "topic_name" => "assembly",
+  #    "material" => "assembly/velvet-assembly",
+  #    "tutorial_name" => "velvet-assembly",
+  #    "dir" => "topics/assembly/tutorials/velvet-assembly"
+  #    "type" => "tutorial"
+  #  }
   def self.annotate_path(path)
     parts = path.split('/')
     if parts[0] == '.'
@@ -187,6 +262,37 @@ module TopicFilter
 
   end
 
+  ##
+  # Collate the materials into a large hash
+  # Params:
+  # +pages+:: The list of pages to collate
+  # Returns:
+  # +Hash+:: The collated materials
+  #
+  # Example:
+  # collate_materials(pages)
+  # => {
+  # "assembly/velvet-assembly" => {
+  #  "topic" => "assembly",
+  #  "topic_name" => "assembly",
+  #  "material" => "assembly/velvet-assembly",
+  #  "tutorial_name" => "velvet-assembly",
+  #  "dir" => "topics/assembly/tutorials/velvet-assembly",
+  #  "resources" => [
+  #    {
+  #    "type" => "slides",
+  #    "url" => "/topics/assembly/tutorials/velvet-assembly/slides.html",
+  #    "title" => "Slides",
+  #    "priority" => 1
+  #    },
+  #    {
+  #    "type" => "tutorial",
+  #    "url" => "/topics/assembly/tutorials/velvet-assembly/tutorial.html",
+  #    "title" => "Tutorial",
+  #    "priority" => 2
+  #    }
+  #   ]
+  #  }
   def self.collate_materials(pages)
     # In order to speed up queries later, we'll store a set of "interesting"
     # pages (i.e. things that are under `topic_name`)
@@ -238,10 +344,12 @@ module TopicFilter
 
     slide_has_video = false
     slide_translations = []
+    page_ref = nil
     if slides.length > 0 then
       page = slides.sort{|a, b| a[1].path <=> b[1].path}[0][1]
       slide_has_video = page.data.fetch('video', false)
       slide_translations = page.data.fetch('translations', [])
+      page_ref = page
     end
 
     # No matter if there were slides, we override with tutorials if present.
@@ -249,6 +357,7 @@ module TopicFilter
     if tutorials.length > 0 then
       page = tutorials.sort{|a, b| a[1].path <=> b[1].path}[0][1]
       tutorial_translations = page.data.fetch('translations', [])
+      page_ref = page
     end
 
     if page.nil? then
@@ -259,6 +368,7 @@ module TopicFilter
     # Otherwise clone the metadata from it which works well enough.
     page_obj = page.data.dup
     page_obj['id'] = page['topic_name'] + '/' + page['tutorial_name']
+    page_obj['ref'] = page_ref
 
     id = page_obj['id']
     page_obj['video_library'] = Hash.new
@@ -307,17 +417,36 @@ module TopicFilter
       }
     end
 
+    # In dev configuration, this breaks for me. Not sure why config isn't available.
+    if not site.config.nil? and site.config.has_key? "url"
+      domain = "#{site.config['url']}#{site.config['baseurl']}"
+    else
+      domain = "/training-material/"
+    end
     # Similar as above.
     workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
     if workflows.length > 0
       workflow_names = workflows.map{ |a| a.split('/')[-1] }
       page_obj['workflows'] = workflow_names.map{|wf|
-        x = {
+        wfid = "#{page['topic_name']}-#{page['tutorial_name']}"
+        wfname = wf.gsub(/.ga/, '').downcase
+        trs = "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}"
+        wf_path = "#{folder}/workflows/#{wf}"
+        wf_json = JSON.parse(File.open(wf_path).read)
+        license = wf_json['license']
+        creators = wf_json['creator'] || []
+
+        {
           "workflow" => wf,
           "tests" => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
-          "url" => "#{site.config['url']}#{site.config['baseurl']}/#{folder}/workflows/#{wf}",
+          "url" => "#{domain}/#{folder}/workflows/#{wf}",
+          "path" => wf_path,
+          "wfid" => wfid,
+          "wfname" => wfname,
+          "trs_endpoint" => "#{domain}/#{trs}",
+          "license" => license,
+          "creators" => creators,
         }
-        x
       }
     end
 
@@ -364,7 +493,7 @@ module TopicFilter
 
   def self.process_pages(site, pages)
     # eww.
-    if site.data.has_key?('cache_processed_pages') then 
+    if site.data.has_key?('cache_processed_pages') then
       return site.data['cache_processed_pages']
     end
 
@@ -372,13 +501,60 @@ module TopicFilter
     puts "[GTN/TopicFilter] Filling Materials Cache"
     site.data['cache_processed_pages'] = materials
 
+    # Prepare short URLs
+    shortlinks = site.data['shortlinks']
+    shortlinks_reversed = shortlinks['id'].invert
+    mappings = Hash.new{|h, k| h[k] = Array.new}
+
+    shortlinks.keys.each{|kp|
+      shortlinks[kp].each{|k, v|
+        mappings[v].push("/short/#{k}")
+      }
+    }
+    # Update the materials with their short IDs + redirects
+    pages.select{|p| mappings.keys.include? p.url }.each{|p|
+      # Set the short id on the material
+      #
+      begin
+        p['short_id'] = shortlinks_reversed[p.url]
+      rescue
+        p.data['short_id'] = shortlinks_reversed[p.url]
+      end
+      if p['ref']
+        # Initialise redirects if it wasn't set
+        if ! p['ref'].data.has_key?("redirect_from")
+          p['ref'].data['redirect_from'] = []
+        end
+        p['ref'].data['redirect_from'].push(*mappings[p.url])
+        p['ref'].data['redirect_from'].uniq!
+      else
+        if ! p.data.has_key?("redirect_from")
+          p.data['redirect_from'] = []
+        end
+
+        p.data['redirect_from'].push(*mappings[p.url])
+        p.data['redirect_from'].uniq!
+      end
+    }
+
     materials
   end
 
+  ##
+  # This is a helper function to get all the materials in a site.
   def self.list_all_materials(site)
     self.process_pages(site, site.pages)
   end
 
+  ##
+  # List every tag used across all materials.
+  # This is used to generate the tag cloud.
+  #
+  # Parameters:
+  # +site+:: The +Jekyll::Site+ object, used to get the list of pages.
+  # Returns:
+  # +Array+:: An array of strings, each string is a tag. (sorted and unique)
+  #
   def self.list_all_tags(site)
     materials = self.process_pages(site, site.pages)
     materials.map{|x| x.fetch('tags', [])}.flatten.sort.uniq
@@ -409,6 +585,8 @@ module TopicFilter
     resource_pages
   end
 
+  ##
+  # Filter a list of materials by topic and subtopic.
   def self.filter_by_topic_subtopic(site, topic_name, subtopic_id)
     resource_pages = self.filter_by_topic(site, topic_name)
 
@@ -422,6 +600,15 @@ module TopicFilter
     resource_pages
   end
 
+  ##
+  # Get the contributors for a material.
+  # This is the third time I've seen this function.
+  # I should probably refactor it out
+  #
+  # Parameters:
+  # +material+:: A material object
+  # Returns:
+  # +Array+:: An array of contributors as strings.
   def self.get_contributors(material)
     if material.has_key?("contributors")
       material['contributors']
@@ -430,12 +617,27 @@ module TopicFilter
     end
   end
 
+  ##
+  # Get a list of contributors for a list of materials
+  # Parameters:
+  # +materials+:: An array of materials
+  # Returns:
+  # +Array+:: An array of contributors as strings.
   def self.identify_contributors(materials)
     materials
       .map{|k, v| v['materials']}.flatten # Not 100% sure why this flatten is needed? Probably due to the map over hash
       .map{|mat| get_contributors(mat) }.flatten.uniq.shuffle
   end
 
+  ##
+  # Get the version of a tool.
+  # Parameters:
+  # +tool+:: A tool string
+  # Returns:
+  # +String+:: The version of the tool.
+  #
+  # Examples:
+  # get_version("toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0") => "1.0.0"
   def self.get_version(tool)
     if tool.count('/') > 4 then
       tool.split('/')[-1]
@@ -444,6 +646,15 @@ module TopicFilter
     end
   end
 
+  ##
+  # Get a short version of a tool.
+  # Parameters:
+  # +tool+:: A tool string
+  # Returns:
+  # +String+:: The short version of the tool.
+  #
+  # Examples:
+  # short_tool("toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0") => "galaxyp/regex1"
   def self.short_tool(tool)
     if tool.count('/') > 4 then
       short_tool = tool.split('/')[2] + '/' + tool.split('/')[4]
@@ -453,6 +664,15 @@ module TopicFilter
     short_tool
   end
 
+  ##
+  # List materials by tool
+  # Parameters:
+  # +site+:: The +Jekyll::Site+ object, used to get the list of pages.
+  # Returns:
+  # +Hash+:: A hash of tool_id => {
+  #   "tool_id" => [tool_id, version],
+  #   "tutorials" => [tutorial_id, tutorial_title, topic_title, tutorial_url]
+  # }
   def self.list_materials_by_tool(site)
     tool_map = Hash.new
 
@@ -490,6 +710,23 @@ end
 module Jekyll
   module ImplTopicFilter
 
+    ##
+    # List the most recent contributors to the GTN.
+    # Parameters:
+    # +contributors+:: A hash of contributors
+    # +count+:: The number of contributors to return
+    # Returns:
+    # +Hash+:: A hash of contributors
+    #
+    # Example:
+    # most_recent_contributors(contributors, 5)
+    # => {
+    #  "hexylena" => {
+    #  "name" => "Hexylena",
+    #  "avatar" => "https://avatars.githubusercontent.com/u/458683?v=3",
+    #  ...
+    #  }
+    #}
     def most_recent_contributors(contributors, count)
       # Remove non-hof
       hof = contributors.select{ |k, v| v.fetch("halloffame", "yes") != "no" }
@@ -502,6 +739,14 @@ module Jekyll
       Hash[hof_k.slice(0, count).collect{|k| [k, hof[k]]}]
     end
 
+    ##
+    # Find the most recently modified tutorials
+    # Parameters:
+    # +site+:: The +Jekyll::Site+ object, used to get the list of pages.
+    # Returns:
+    # +Array+:: An array of the 10 most recently modified pages
+    # Example:
+    #  {% assign latest_tutorials = site | recently_modified_tutorials %}
     def recently_modified_tutorials(site)
       tutorials = site.pages.select{|page| page.data['layout'] == 'tutorial_hands_on' }
 
@@ -516,6 +761,17 @@ module Jekyll
       resources.length
     end
 
+    ##
+    # Fetch a tutorial material's metadata
+    # Parameters:
+    # +site+:: The +Jekyll::Site+ object, used to get the list of pages.
+    # +topic_name+:: The name of the topic
+    # +page_name+:: The name of the page
+    # Returns:
+    # +Hash+:: The metadata for the tutorial material
+    # 
+    # Example:
+    #  {% assign material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
     def fetch_tutorial_material(site, topic_name, page_name)
       TopicFilter.fetch_tutorial_material(site, topic_name, page_name)
     end

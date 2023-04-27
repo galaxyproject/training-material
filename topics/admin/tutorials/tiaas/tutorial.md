@@ -63,12 +63,13 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -36,3 +36,5 @@
+>    @@ -51,3 +51,6 @@
+>       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
+>     - src: cloudalchemy.grafana
 >       version: 0.14.2
->     - src: dj-wasabi.telegraf
->       version: 0.12.0
+>    +# Training Infrastructure as a Service
 >    +- src: galaxyproject.tiaas2
->    +  version: 2.1.3
+>    +  version: 2.1.5
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tiaas2 requirement"}
@@ -90,18 +91,15 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -234,6 +234,11 @@ telegraf_plugins_extra:
+>    @@ -346,3 +346,8 @@ telegraf_plugins_extra:
+>           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"
->     
+>    +
 >    +# TIaaS setup
 >    +tiaas_dir: /srv/tiaas
 >    +tiaas_admin_user: admin
 >    +tiaas_admin_pass: changeme
->    +
->     # TUS
->     galaxy_tusd_port: 1080
->     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure tiaas"}
@@ -110,20 +108,21 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -8,6 +8,7 @@ pip_package: python3-pip                               # geerlingguy.pip
+>    --- a/group_vars/dbservers.yml
+>    +++ b/group_vars/dbservers.yml
+>    @@ -3,6 +3,7 @@
 >     postgresql_objects_users:
->       - name: galaxy
+>       - name: "{{ galaxy_user_name }}"
 >       - name: telegraf
 >    +  - name: tiaas
 >     postgresql_objects_databases:
->       - name: galaxy
->         owner: galaxy
->    @@ -16,6 +17,27 @@ postgresql_objects_privileges:
+>       - name: "{{ galaxy_db_name }}"
+>         owner: "{{ galaxy_user_name }}"
+>    @@ -11,7 +12,26 @@ postgresql_objects_privileges:
 >         roles: telegraf
 >         privs: SELECT
 >         objs: ALL_IN_SCHEMA
+>    -
 >    +  - database: galaxy
 >    +    roles: tiaas
 >    +    objs: galaxy_user,galaxy_session,job,history,workflow,workflow_invocation
@@ -144,10 +143,9 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +    objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
 >    +    type: sequence
 >    +    privs: USAGE,SELECT
->    +
+>     
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
->     postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add database privileges for TIaaS"}
@@ -172,14 +170,14 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -30,6 +30,7 @@
->           become: true
->           become_user: "{{ galaxy_user.name }}"
->         - usegalaxy_eu.rabbitmq
->    +    - galaxyproject.tiaas2
+>    @@ -47,6 +47,7 @@
 >         - galaxyproject.nginx
->         - galaxyproject.tusd
+>         - geerlingguy.docker
+>         - usegalaxy_eu.rabbitmqserver
+>    +    - galaxyproject.tiaas2
+>         - galaxyproject.gxadmin
 >         - galaxyproject.cvmfs
+>         - dj-wasabi.telegraf
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TIaaS role to the Galaxy playbook"}
@@ -190,11 +188,12 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -90,4 +90,5 @@ server {
->             proxy_set_header Host $http_host;
->         }
+>    @@ -113,4 +113,6 @@ server {
+>     		proxy_set_header Host $http_host;
+>     	}
 >     
->    +    {{ tiaas_nginx_routes }}
+>    +	{{ tiaas_nginx_routes }}
+>    +
 >     }
 >    {% endraw %}
 >    ```
@@ -221,14 +220,14 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 {TIaaS} should be available now! The following routes on your server are now configured (we will run through these in the next section)
 
 
-|URL | Use | Who |
-|:----|----|-----|
-|https://\<server\>/tiaas/new/ | Request a new TIaaS training | Instructors |
-|https://\<server\>/tiaas/admin/ | Approve and Manage requests | Admin |
-|https://\<server\>/tiaas/stats/ | Overall TIaaS statistics ([EU Stats](https://usegalaxy.eu/tiaas/stats/)) | Admins, Funding Agencies |
-|https://\<server\>/tiaas/calendar/ | Calendar of trainings ([EU Calendar](https://usegalaxy.eu/tiaas/calendar/))| Admins, Funding Agencies |
-|https://\<server\>/join-training/\<training-id\> | Join an TIaaS training | Participants |
-|https://\<server\>/join-training/\<training-id\>/status | Dashboard with job states of trainees.| Instructors|
+| URL                                                                                       | Use                                                                         | Audience                 |
+| :----                                                                                     | ----                                                                        | -----                    |
+| [/tiaas/new/](https://my.gat.galaxy.training/?path=/tiaas/new/)                           | Request a new TIaaS training                                                | Instructors              |
+| [/tiaas/admin/](https://my.gat.galaxy.training/?path=/tiaas/admin/)                       | Approve and Manage requests                                                 | Admin                    |
+| [/tiaas/stats/](https://my.gat.galaxy.training/?path=/tiaas/stats/)                       | Overall TIaaS statistics ([EU Stats](https://usegalaxy.eu/tiaas/stats/))    | Admins, Funding Agencies |
+| [/tiaas/calendar/](https://my.gat.galaxy.training/?path=/tiaas/calendar/)                 | Calendar of trainings ([EU Calendar](https://usegalaxy.eu/tiaas/calendar/)) | Admins, Funding Agencies |
+| [/join-training/ID](https://my.gat.galaxy.training/?path=/join-training/ID)               | Join an TIaaS training                                                      | Participants             |
+| [/join-training/ID/status](https://my.gat.galaxy.training/?path=/join-training/ID/status) | Dashboard with job states of trainees.                                      | Instructors              |
 
 
 Let's see it in action!
@@ -236,10 +235,10 @@ Let's see it in action!
 > <hands-on-title>Using TIaaS</hands-on-title>
 >
 > 1. **Create a new TIaaS request**
->    - Go to https://\<server\>/tiaas/new/
+>    - Go to [/tiaas/new](https://my.gat.galaxy.training/?path=/tiaas/new)
 >    - Here you will find the request form users will fill in to request TIaaS:
 >      ![TIaaS request form](../../images/tiaas/tiaas_request_form.png)
->    - For *"Training Identifier"*, fill in `gryffindor` (or remember this value if you enter something different)
+>    - For *"Training Identifier"*, fill in `gat`
 >      - This is the `<training-id>` used in the URLs listed above used for:
 >        1. Workshop participants to join the tiaas group
 >        2. Workshop instructors to monitor the progress of their participants.
@@ -249,7 +248,7 @@ Let's see it in action!
 >
 > 2. **Approve TIaaS request**
 >    - Next, the request will have to be approved by an admin
->    - Go to https://\<server\>/tiaas/admin
+>    - Go to [/tiaas/admin](https://my.gat.galaxy.training/?path=/tiaas/admin)
 >    - **Log in** using the values you configured `tiaas_admin_user` and `tiaas_admin_pass` in your group variables file
 >      - Default values were `admin:changeme`
 >    - You should now see the admin panel:
@@ -266,13 +265,13 @@ Let's see it in action!
 > 3. **Join TIaaS Training**
 >    - Make sure you are logged in to Galaxy
 >    - On the day of the workshop, participants will visit a following URL to join the TIaaS group
->      - https://\<server\>/join-training/gryffindor
+>      - [/join-training/gat](https://my.gat.galaxy.training/?path=/join-training/gat)
 >      - A confirmation dialog should appear if all went well:
 >        ![Join TIaaS](../../images/tiaas/tiaas_join_training.png)
 >
 > 4. **Monitor TIaaS status**
 >    - This is very useful for instructors to monitor the job state of their participants
->    - Go to https://\<server\>/join-training/gryffindor/status
+>    - Go to [/join-training/gat](https://my.gat.galaxy.training/?path=/join-training/gat)
 >    - In the Dasboard you should see that one user (you) has joined the training \
 >    - Run some jobs to see the dashboard in action
 >      ![TIaaS dashboard](../../images/tiaas/tiaas_dashboard.png)
@@ -299,92 +298,56 @@ Let's see it in action!
 
 While observability for teachers or trainers is already a huge benefit, one of the primary benefits of {TIaaS} is that your jobs get sent to dedicated compute resources, which won't be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.
 
-In order to achieve this, we first need some way to *sort* the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *sorting hat* to figure out where jobs belong.
+In order to achieve this, we first need some way to sort the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *traffic controller* to figure out where jobs belong.
 
 
 > <hands-on-title>Writing a dynamic job destination</hands-on-title>
 >
-> 1. Create and open `templates/galaxy/dynamic_job_rules/hogwarts.py`
+> 1. This destination will check that the `user_email` is in a training group (role starting with `training-`).
 >
 >    {% raw %}
 >    ```diff
->    --- /dev/null
->    +++ b/templates/galaxy/dynamic_job_rules/hogwarts.py
->    @@ -0,0 +1,19 @@
->    +from galaxy.jobs import JobDestination
->    +from galaxy.jobs.mapper import JobMappingException
->    +import os
->    +
->    +def sorting_hat(app, user):
->    +    # Check that the user is not anonymous
->    +    if not user:
->    +        return app.job_config.get_destination('slurm')
->    +
->    +    # Collect the user's roles
->    +    user_roles = [role.name for role in user.all_roles() if not role.deleted]
->    +
->    +    # If any of these are prefixed with 'training-'
->    +    if any([role.startswith('training-') for role in user_roles]):
->    +        # Then they are a training user, we will send their jobs to pulsar,
->    +        # Or give them extra resources
->    +        return app.job_config.get_destination('slurm-2c') # or pulsar, if available
->    +
->    +    return app.job_config.get_destination('slurm')
->    {% endraw %}
->    ```
->    {: data-commit="Setup sorting hat for jobs"}
->
->    This destination will check that the `user_email` is in a training group (role starting with `training-`).
->
-> 2. As usual, we need to instruct Galaxy of where to find this file. Edit your group variables file and add the following:
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -137,6 +137,7 @@ galaxy_local_tools:
->     galaxy_dynamic_job_rules:
->     - my_rules.py
->     - map_resources.py
->    +- hogwarts.py
+>    --- a/files/galaxy/config/tpv_rules_local.yml
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -35,6 +35,15 @@ tools:
+>           require:
+>             - pulsar
 >     
->     # systemd
->     galaxy_manage_systemd: true
+>    +roles:
+>    +  training.*:
+>    +    max_cores: 2
+>    +    max_mem: max_cores * 3.8  # TODO check multiplier
+>    +    scheduling:
+>    +      require:
+>    +        - slurm
+>    +        - training
+>    +
+>     destinations:
+>       local_env:
+>         runner: local_runner
+>    @@ -62,6 +71,19 @@ destinations:
+>         max_mem: 8
+>         params:
+>           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
+>    +  slurm-training:
+>    +    inherits: singularity
+>    +    runner: slurm
+>    +    max_accepted_cores: 12
+>    +    max_accepted_mem: 120
+>    +    max_cores: 2 # Limit the cores
+>    +    max_mem: 8 # Limit the memory
+>    +    params:
+>    +      native_specification: --nodes=1 --ntasks=1 --mem={round(mem*1024)} --cpus-per-task={cores} --time=00:30:00
+>    +    scheduling:
+>    +      require:
+>    +        - slurm
+>    +        - training
+>     
+>       pulsar:
+>         runner: pulsar_runner
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}
->
-> 3. We next need to configure this plugin in our job configuration (`templates/galaxy/config/job_conf.yml.j2`):
->
->    {% raw %}
->    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -16,7 +16,7 @@ runners:
->         manager: _default_
->     
->     execution:
->    -  default: slurm
->    +  default: sorting_hat
->       environments:
->         local_dest:
->           runner: local_runner
->    @@ -73,6 +73,10 @@ execution:
->         dynamic_cores_time:
->           runner: dynamic
->           function: dynamic_cores_time
->    +    # Next year this will be replaced with the TPV.
->    +    sorting_hat:
->    +      runner: dynamic
->    +      function: sorting_hat
->     
->     resources:
->       default: default
->    {% endraw %}
->    ```
->    {: data-commit="Setup job conf"}
->
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.yml.j2`. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.
 >
 > 6. Run the playbook
 >
@@ -409,4 +372,8 @@ Congratulations! you have now set up {TIaaS} on your Galaxy server.
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=12 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=14 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tiaas" %}

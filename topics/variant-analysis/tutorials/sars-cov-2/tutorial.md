@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis"
+subtopic: one-health
 zenodo_link: 'http://zenodo.org/record/3906454'
 questions:
 - Learn how to get and use data from the Sequence Read Archive in Galaxy.
@@ -13,6 +14,7 @@ key_points:
 - Sequence data in the SRA can be directly imported into Galaxy
 tags:
   - covid19
+  - virology
 contributors:
 - mvdbeek
 - tnabtaf
@@ -53,7 +55,6 @@ At the completion of this tutorial you will know:
 	- Variant calling with `lofreq`
 	- Variant annotation
 - Using datasets collections
-- Importing data to Jupyter
 
 
 <!--
@@ -287,7 +288,7 @@ Galaxy can process all 2,000+ datasets but to make this tutorial bearable we nee
 > 1. In "*the pattern*" field enter the following expression &rarr; `SRR12733957|SRR11954102`. These are two accession we want to find separated by the pipe symbol `|`. The `|` means `or`: find lines containing `SRR12733957` **or** `SRR11954102`.
 > 1. Click `Run Tool` button.
 > 1. This will generate a file containing two lines (well ... one line is also used as the header, so it will appear the the file has three lines. It is OK.)
-> 1. Cut the first column from the file using {% icon tool %} "**Cut**" tool, which you will find in **Text Manipulation** section of the tool pane.
+> 1. Cut the first column from the file using {% icon tool %} "**Advanced Cut**" tool, which you will find in **Text Manipulation** section of the tool pane.
 > 1. Make sure the dataset produced by the previous step is selected in the "*File to cut*" field of the tool form.
 > 1. Change "*Delimited by*" to `Comma`
 > 1. In "*List of fields*" select `Column: 1`.
@@ -299,7 +300,7 @@ Galaxy can process all 2,000+ datasets but to make this tutorial bearable we nee
 >```
 {: .hands_on}
 
-Now that we have identifiers of datasets we want we need to download the actual sequencing data.
+Now that we have identifiers of datasets we want and we need to download the actual sequencing data.
 
 ## Download sequencing data with **Faster Download and Extract Reads in FASTQ**
 

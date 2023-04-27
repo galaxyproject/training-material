@@ -11,6 +11,22 @@ module Jekyll
       end
     end
 
+    ##
+    # This function renders the icon tag
+    # Params:
+    # +icon+:: The icon to render
+    # +@area+:: Whether to add aria-hidden
+    # +@text+:: The text to add to the icon
+    #
+    # Returns:
+    # The HTML for the icon
+    # Note: The icon text label is wrapped in a span with class "visually-hidden" to make it accessible to screen readers.
+    #
+    # Example:
+    #  {% icon fa fa-github %}
+    #  => <i class="fa fa-github" aria-hidden="true"></i>
+    #  {% icon fa fa-github aria=false %}
+    #  => <i class="fa fa-github"></i>
     def render_for_text(icon)
       if icon.empty?
         raise SyntaxError.new(
