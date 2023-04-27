@@ -376,13 +376,13 @@ plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster',
 
 
 ## Clustering: partitions
-OK, what about partitions? They were also created during the clustering step and it’s important to check them before learning the trajectory because it is performed only within one partition, so it is essential that all the cells that we want to analyse in pseudotime belong to the same partition.
+OK, what about partitions? They were also created during the clustering step and it’s important to check them before calculating the trajectory because it is performed only within one partition. It is essential that all the cells that we want to analyse in pseudotime belong to the same partition.
 ```r
 # see the partitions
 plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)
 ```
 
-We can see that there are 3 partitions identified in `cds_clustered` object. Ideally, we would like to combine partitions 1 and 2 to draw a trajectory through all those cells (we can ignore cells in partition 3). Sometimes using the default values might result in multiple partitions while you only need one. Then you would have to change the q-value cutoff in `partition_qval`. The default is 0.05 and by increasing this value you can increase the span of partitions, meaning that you would get fewer partitions. When trying different values of q-value, you also have to check if the clusters didn't change. It's all about finding a balance between the value of `resolution` and `partition_qval` so that both clusters and partitions are satisfactory enough for downstream analysis. Let's try that on our dataset.
+While your plot might be slightly different due to package updates, we can see that there are 3 partitions identified in `cds_clustered` object. Ideally, we would like to combine partitions 1 and 2 to draw a trajectory through all those cells (we can ignore cells in partition 3). Sometimes using the default values might result in multiple partitions while you only need one. Then you would have to change the q-value cutoff in `partition_qval`. The default is 0.05 and by increasing this value you can increase the span of partitions, meaning that you would get fewer partitions. When trying different values of q-value, you also have to check if the clusters didn't change. It's all about finding a balance between the value of `resolution` and `partition_qval` so that both clusters and partitions are satisfactory enough for downstream analysis. Let's try that on our dataset.
 ```r
 # changing the partition q-value
 cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resolution = 0.0002, partition_qval = 1)
@@ -395,7 +395,7 @@ plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition
 # check if clusters didn't change
 plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster', label_cell_groups=FALSE)
 ```
-Voila - it worked as expected! Now we have cells from partition 1 and 2 in one partition, we still have 7 clusters, so we can learn the trajectory. However, in some cases even this method might not be enough. Then, there is a last resort… assigning cells to a partition manually.
+Voila - it worked as expected! Now we have cells from partition 1 and 2 in one partition, we still have reasonable clusters, so now we can learn the trajectory. However, in some cases even this method might not be enough. Then, there is a last resort… assigning cells to a partition manually.
 
 ## Additional step: assigning cells to one partition
 > <warning-title>Additional step</warning-title>
