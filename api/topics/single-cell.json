@@ -256,34 +256,68 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Single-cell quality control with scater",
-      "subtopic": "tricks",
-      "priority": 1,
+      "title": "Bulk RNA Deconvolution with MuSiC",
+      "subtopic": "deconvo",
       "redirect_from": [
-        "/topics/transcriptomics/tutorials/scrna-scater-qc/tutorial",
-        "/short/single-cell/scrna-scater-qc",
-        "/short/T00255"
+        "/topics/transcriptomics/tutorials/bulk-music/tutorial",
+        "/short/single-cell/bulk-music",
+        "/short/T00240"
       ],
-      "zenodo_link": "https://zenodo.org/record/3386291",
+      "priority": 1,
+      "zenodo_link": "https://zenodo.org/record/5719228",
       "tags": [
-        "single-cell"
+        "single-cell",
+        "mouse",
+        "human",
+        "deconvolution",
+        "bulk",
+        "transcriptomics"
       ],
       "questions": [
-        "How to ensure the quality of single-cell RNA-seq data?",
-        "What are the confounding factors that may affect the interpretation of downstream analyses?"
+        "How do we infer cell type proportions from bulk RNA-seq data?",
+        "How are these cell types grouped together?"
       ],
       "objectives": [
-        "Examine scRNA-seq data for low-quality cells",
-        "Visualise data with various types of plots",
-        "Filtering low-quality cells with the appropriate approach"
+        "Construct Bulk and scRNA Expression Set Objects",
+        "Inspect these objects for various properties",
+        "Measure the abundance of certain cell type cluster markers compared to others"
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "Deconvolution tools show individual cell type proportions in bulk RNA-seq data",
+        "Bulk RNA-seq can be complimented by scRNA-seq data"
       ],
       "requirements": [
         {
           "type": "internal",
           "topic_name": "single-cell",
           "tutorials": [
-            "scrna-plates-batches-barcodes"
+            "scrna-intro"
           ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "elixir_node": "de",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
+        },
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi.bacon@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "gitter": "nomadscientist",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "orcid": "0000-0002-8170-8806",
+          "bio": "Lecturer at The Open University",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
         }
       ],
       "follow_up_training": [
@@ -291,44 +325,49 @@
           "type": "internal",
           "topic_name": "single-cell",
           "tutorials": [
-            "scrna-raceid"
+            "bulk-music-2-preparescref"
           ]
         }
       ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Single-cell RNA-seq data is often noisy",
-        "scater can be used to apply the visualise-filter-visualise paradigm of quality control"
-      ],
-      "contributors": [
-        {
-          "name": "Graham Etherington",
-          "orcid": "0000-0002-5003-1425",
-          "joined": "2019-10",
-          "id": "ethering",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/ethering.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/ethering/"
-        },
-        {
-          "name": "Nicola Soranzo",
-          "gitter": "nsoranzo",
-          "orcid": "0000-0003-3627-5340",
-          "twitter": "NicolaSoranzo",
-          "joined": "2017-09",
-          "elixir_node": "uk",
-          "id": "nsoranzo",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/"
-        }
-      ],
       "gitter": "Galaxy-Training-Network/galaxy-single-cell",
-      "url": "/topics/single-cell/tutorials/scrna-scater-qc/tutorial.html",
+      "url": "/topics/single-cell/tutorials/bulk-music/tutorial.html",
       "topic_name": "single-cell",
-      "tutorial_name": "scrna-scater-qc",
-      "dir": "topics/single-cell/tutorials/scrna-scater-qc",
-      "id": "single-cell/scrna-scater-qc",
+      "tutorial_name": "bulk-music",
+      "dir": "topics/single-cell/tutorials/bulk-music",
+      "id": "single-cell/bulk-music",
       "video_library": {
-        "tutorial": null,
+        "tutorial": {
+          "description": "Bulk RNA-seq data contains a mixture of transcript signatures from\nseveral types of cells. We wish to deconvolve this mixture to obtain\nestimates of the proportions of cell types within the bulk sample. To\ndo this, we can use single cell RNA-seq data as a reference for\nestimating the cell type proportions within the bulk data.\n\nIn this tutorial, we will use bulk and single-cell RNA-seq data, including\nmatrices of similar tissues from different sources, to illustrate how to infer\ncell type abundances from bulk RNA-seq.\n",
+          "materials": [
+            {
+              "link": "topics/single-cell/tutorials/bulk-music/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "transcriptomics",
+            "single-cell"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "mtekman",
+                "nomadscientist"
+              ],
+              "date": "2021-03-08",
+              "galaxy_version": "21.09",
+              "length": "20M",
+              "link": "nfAUXP3W-jM",
+              "speakers": [
+                "nomadscientist"
+              ]
+            }
+          ],
+          "gtn_id": "single-cell/bulk-music",
+          "title": "Bulk RNA Deconvolution with MuSiC",
+          "captioned": true
+        },
         "slides": null,
         "demo": null,
         "both": null,
@@ -340,11 +379,11 @@
         {
           "workflow": "main_workflow.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/workflows/main_workflow.ga",
-          "path": "topics/single-cell/tutorials/scrna-scater-qc/workflows/main_workflow.ga",
-          "wfid": "single-cell-scrna-scater-qc",
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/workflows/main_workflow.ga",
+          "path": "topics/single-cell/tutorials/bulk-music/workflows/main_workflow.ga",
+          "wfid": "single-cell-bulk-music",
           "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scater-qc/versions/main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music/versions/main_workflow",
           "license": null,
           "creators": [
 
@@ -352,10 +391,12 @@
         }
       ],
       "tools": [
-        "toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2"
+        "music_construct_eset",
+        "music_deconvolution",
+        "music_inspect_eset",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3"
       ],
       "tours": false,
       "video": false,
@@ -370,8 +411,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-scater-qc/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-scater-qc/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/bulk-music/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/bulk-music/tutorial.json"
       }
     },
     {
@@ -580,68 +621,34 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Bulk RNA Deconvolution with MuSiC",
-      "subtopic": "deconvo",
-      "redirect_from": [
-        "/topics/transcriptomics/tutorials/bulk-music/tutorial",
-        "/short/single-cell/bulk-music",
-        "/short/T00240"
-      ],
+      "title": "Single-cell quality control with scater",
+      "subtopic": "tricks",
       "priority": 1,
-      "zenodo_link": "https://zenodo.org/record/5719228",
+      "redirect_from": [
+        "/topics/transcriptomics/tutorials/scrna-scater-qc/tutorial",
+        "/short/single-cell/scrna-scater-qc",
+        "/short/T00255"
+      ],
+      "zenodo_link": "https://zenodo.org/record/3386291",
       "tags": [
-        "single-cell",
-        "mouse",
-        "human",
-        "deconvolution",
-        "bulk",
-        "transcriptomics"
+        "single-cell"
       ],
       "questions": [
-        "How do we infer cell type proportions from bulk RNA-seq data?",
-        "How are these cell types grouped together?"
+        "How to ensure the quality of single-cell RNA-seq data?",
+        "What are the confounding factors that may affect the interpretation of downstream analyses?"
       ],
       "objectives": [
-        "Construct Bulk and scRNA Expression Set Objects",
-        "Inspect these objects for various properties",
-        "Measure the abundance of certain cell type cluster markers compared to others"
-      ],
-      "time_estimation": "2h",
-      "key_points": [
-        "Deconvolution tools show individual cell type proportions in bulk RNA-seq data",
-        "Bulk RNA-seq can be complimented by scRNA-seq data"
+        "Examine scRNA-seq data for low-quality cells",
+        "Visualise data with various types of plots",
+        "Filtering low-quality cells with the appropriate approach"
       ],
       "requirements": [
         {
           "type": "internal",
           "topic_name": "single-cell",
           "tutorials": [
-            "scrna-intro"
+            "scrna-plates-batches-barcodes"
           ]
-        }
-      ],
-      "contributors": [
-        {
-          "name": "Mehmet Tekman",
-          "email": "mtekman89@gmail.com",
-          "joined": "2018-11",
-          "elixir_node": "de",
-          "id": "mtekman",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
-        },
-        {
-          "name": "Wendi Bacon",
-          "email": "wendi.bacon@open.ac.uk",
-          "twitter": "WendiBacon1",
-          "gitter": "nomadscientist",
-          "joined": "2020-03",
-          "elixir_node": "uk",
-          "orcid": "0000-0002-8170-8806",
-          "bio": "Lecturer at The Open University",
-          "id": "nomadscientist",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
         }
       ],
       "follow_up_training": [
@@ -649,49 +656,44 @@
           "type": "internal",
           "topic_name": "single-cell",
           "tutorials": [
-            "bulk-music-2-preparescref"
+            "scrna-raceid"
           ]
         }
       ],
-      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
-      "url": "/topics/single-cell/tutorials/bulk-music/tutorial.html",
-      "topic_name": "single-cell",
-      "tutorial_name": "bulk-music",
-      "dir": "topics/single-cell/tutorials/bulk-music",
-      "id": "single-cell/bulk-music",
-      "video_library": {
-        "tutorial": {
-          "description": "Bulk RNA-seq data contains a mixture of transcript signatures from\nseveral types of cells. We wish to deconvolve this mixture to obtain\nestimates of the proportions of cell types within the bulk sample. To\ndo this, we can use single cell RNA-seq data as a reference for\nestimating the cell type proportions within the bulk data.\n\nIn this tutorial, we will use bulk and single-cell RNA-seq data, including\nmatrices of similar tissues from different sources, to illustrate how to infer\ncell type abundances from bulk RNA-seq.\n",
-          "materials": [
-            {
-              "link": "topics/single-cell/tutorials/bulk-music/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "transcriptomics",
-            "single-cell"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "mtekman",
-                "nomadscientist"
-              ],
-              "date": "2021-03-08",
-              "galaxy_version": "21.09",
-              "length": "20M",
-              "link": "nfAUXP3W-jM",
-              "speakers": [
-                "nomadscientist"
-              ]
-            }
-          ],
-          "gtn_id": "single-cell/bulk-music",
-          "title": "Bulk RNA Deconvolution with MuSiC",
-          "captioned": true
+      "time_estimation": "1H",
+      "key_points": [
+        "Single-cell RNA-seq data is often noisy",
+        "scater can be used to apply the visualise-filter-visualise paradigm of quality control"
+      ],
+      "contributors": [
+        {
+          "name": "Graham Etherington",
+          "orcid": "0000-0002-5003-1425",
+          "joined": "2019-10",
+          "id": "ethering",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/ethering.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/ethering/"
         },
+        {
+          "name": "Nicola Soranzo",
+          "gitter": "nsoranzo",
+          "orcid": "0000-0003-3627-5340",
+          "twitter": "NicolaSoranzo",
+          "joined": "2017-09",
+          "elixir_node": "uk",
+          "id": "nsoranzo",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "url": "/topics/single-cell/tutorials/scrna-scater-qc/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "scrna-scater-qc",
+      "dir": "topics/single-cell/tutorials/scrna-scater-qc",
+      "id": "single-cell/scrna-scater-qc",
+      "video_library": {
+        "tutorial": null,
         "slides": null,
         "demo": null,
         "both": null,
@@ -703,11 +705,11 @@
         {
           "workflow": "main_workflow.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/workflows/main_workflow.ga",
-          "path": "topics/single-cell/tutorials/bulk-music/workflows/main_workflow.ga",
-          "wfid": "single-cell-bulk-music",
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/workflows/main_workflow.ga",
+          "path": "topics/single-cell/tutorials/scrna-scater-qc/workflows/main_workflow.ga",
+          "wfid": "single-cell-scrna-scater-qc",
           "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music/versions/main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scater-qc/versions/main_workflow",
           "license": null,
           "creators": [
 
@@ -715,12 +717,10 @@
         }
       ],
       "tools": [
-        "music_construct_eset",
-        "music_deconvolution",
-        "music_inspect_eset",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3"
+        "toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2"
       ],
       "tours": false,
       "video": false,
@@ -735,8 +735,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/bulk-music/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/bulk-music/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-scater-qc/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-scater-qc/tutorial.json"
       }
     },
     {
@@ -865,6 +865,277 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-intro/slides.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-intro/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Removing the effects of the cell cycle",
+      "zenodo_link": "https://zenodo.org/record/7311628/",
+      "subtopic": "tricks",
+      "priority": 2,
+      "questions": [
+        "How can I reduce the effects of the cell cycle on my scRNA-seq data?"
+      ],
+      "objectives": [
+        "Identify the cell cycle genes",
+        "Use the cell cycle genes to regress out the effects of the cell cycle",
+        "Create PCA plots to understand the impact of the regression"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "scrna-case_alevin",
+            "scrna-case_alevin-combine-datasets",
+            "scrna-case_basic-pipeline"
+          ]
+        }
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Cell cycle genes can conceal what is happening in your data if cells are grouping together according to their stage in the cycle",
+        "Identifying the cell cycle genes and using them to regress out the effects of the cell cycle can reveal underlying patterns in the data"
+      ],
+      "contributions": {
+        "authorship": [
+          "MarisaJL"
+        ],
+        "editing": [
+          "nomadscientist"
+        ],
+        "testing": [
+          "hrukkudyr"
+        ]
+      },
+      "url": "/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "scrna-case_cell-cycle",
+      "dir": "topics/single-cell/tutorials/scrna-case_cell-cycle",
+      "id": "single-cell/scrna-case_cell-cycle",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.ga",
+          "path": "topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.ga",
+          "wfid": "single-cell-scrna-case_cell-cycle",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_cell-cycle/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "cat1",
+        "sort1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_regress_variable/scanpy_regress_variable/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Marisa Loach",
+          "orcid": "0000-0001-6979-6930",
+          "twitter": "Marisa_Loach",
+          "email": "marisa.loach@open.ac.uk",
+          "joined": "2022-10",
+          "id": "MarisaJL",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/MarisaJL.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/"
+        },
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi.bacon@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "gitter": "nomadscientist",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "orcid": "0000-0002-8170-8806",
+          "bio": "Lecturer at The Open University",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
+        },
+        {
+          "name": "Graeme Tyson",
+          "email": "grt67@open.ac.uk",
+          "orcid": "0000-0002-1748-2806",
+          "joined": "2022-09",
+          "id": "hrukkudyr",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hrukkudyr.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hrukkudyr/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Downstream Single-cell RNA analysis with RaceID",
+      "subtopic": "end-to-end",
+      "priority": 2,
+      "redirect_from": [
+        "/topics/transcriptomics/tutorials/scrna-raceid/tutorial",
+        "/short/single-cell/scrna-raceid",
+        "/short/T00253"
+      ],
+      "zenodo_link": "https://zenodo.org/record/1511582",
+      "tags": [
+        "single-cell"
+      ],
+      "questions": [
+        "What is normalisation and why is it necessary?",
+        "How many types of unwanted variation are there?",
+        "How are biological phenotypes clustered?",
+        "What is the difference between PCA and tSNE?",
+        "What is the difference between cell trajectory and cell fate?"
+      ],
+      "objectives": [
+        "Filtering, normalising, and clustering cells in a matrix",
+        "Assessing the quality of individual clusters",
+        "Inferring cell type lineages",
+        "Examining gene expression",
+        "Determining the top most expressive genes per cluster",
+        "Correcting for unwanted variation"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "scrna-scater-qc"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "scrna-preprocessing-tenx"
+          ]
+        }
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "Clustering single-cell RNA-seq data is often noisy",
+        "RaceID can be used to cluster cells based on the their gene expression profiles",
+        "StemID describes a hierarchical relationship between clusters to find multipotent progenitor stem cells to provide an understanding of cell development",
+        "FateID predicts the potential lineages that cells within specific clusters are inclined towards"
+      ],
+      "contributors": [
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "elixir_node": "de",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
+        },
+        {
+          "name": "Alex Ostrovsky",
+          "email": "a.ostrovsky@mac.com",
+          "orcid": "0000-0002-7901-7109",
+          "joined": "2019-06",
+          "id": "astrovsky01",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "url": "/topics/single-cell/tutorials/scrna-raceid/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "scrna-raceid",
+      "dir": "topics/single-cell/tutorials/scrna-raceid",
+      "id": "single-cell/scrna-raceid",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.ga",
+          "path": "topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.ga",
+          "wfid": "single-cell-scrna-raceid",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-raceid/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "raceid_clustering",
+        "raceid_filtnormconf",
+        "raceid_inspectclusters",
+        "raceid_inspecttrajectory",
+        "raceid_trajectory",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/0.2.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/0.2.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/0.2.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/0.2.3+galaxy0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-raceid/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-raceid/tutorial.json"
       }
     },
     {
@@ -1068,140 +1339,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Removing the effects of the cell cycle",
-      "zenodo_link": "https://zenodo.org/record/7311628/",
-      "subtopic": "tricks",
-      "priority": 2,
-      "questions": [
-        "How can I reduce the effects of the cell cycle on my scRNA-seq data?"
-      ],
-      "objectives": [
-        "Identify the cell cycle genes",
-        "Use the cell cycle genes to regress out the effects of the cell cycle",
-        "Create PCA plots to understand the impact of the regression"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "scrna-case_alevin",
-            "scrna-case_alevin-combine-datasets",
-            "scrna-case_basic-pipeline"
-          ]
-        }
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Cell cycle genes can conceal what is happening in your data if cells are grouping together according to their stage in the cycle",
-        "Identifying the cell cycle genes and using them to regress out the effects of the cell cycle can reveal underlying patterns in the data"
-      ],
-      "contributions": {
-        "authorship": [
-          "MarisaJL"
-        ],
-        "editing": [
-          "nomadscientist"
-        ],
-        "testing": [
-          "hrukkudyr"
-        ]
-      },
-      "url": "/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html",
-      "topic_name": "single-cell",
-      "tutorial_name": "scrna-case_cell-cycle",
-      "dir": "topics/single-cell/tutorials/scrna-case_cell-cycle",
-      "id": "single-cell/scrna-case_cell-cycle",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.ga",
-          "path": "topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.ga",
-          "wfid": "single-cell-scrna-case_cell-cycle",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_cell-cycle/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "cat1",
-        "sort1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_regress_variable/scanpy_regress_variable/1.8.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Marisa Loach",
-          "orcid": "0000-0001-6979-6930",
-          "twitter": "Marisa_Loach",
-          "email": "marisa.loach@open.ac.uk",
-          "joined": "2022-10",
-          "id": "MarisaJL",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/MarisaJL.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/"
-        },
-        {
-          "name": "Wendi Bacon",
-          "email": "wendi.bacon@open.ac.uk",
-          "twitter": "WendiBacon1",
-          "gitter": "nomadscientist",
-          "joined": "2020-03",
-          "elixir_node": "uk",
-          "orcid": "0000-0002-8170-8806",
-          "bio": "Lecturer at The Open University",
-          "id": "nomadscientist",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
-        },
-        {
-          "name": "Graeme Tyson",
-          "email": "grt67@open.ac.uk",
-          "orcid": "0000-0002-1748-2806",
-          "joined": "2022-09",
-          "id": "hrukkudyr",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hrukkudyr.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hrukkudyr/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "subtopic": "deconvo",
       "priority": 2,
       "title": "Creating the single-cell RNA-seq reference dataset for deconvolution",
@@ -1387,143 +1524,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Downstream Single-cell RNA analysis with RaceID",
-      "subtopic": "end-to-end",
-      "priority": 2,
-      "redirect_from": [
-        "/topics/transcriptomics/tutorials/scrna-raceid/tutorial",
-        "/short/single-cell/scrna-raceid",
-        "/short/T00253"
-      ],
-      "zenodo_link": "https://zenodo.org/record/1511582",
-      "tags": [
-        "single-cell"
-      ],
-      "questions": [
-        "What is normalisation and why is it necessary?",
-        "How many types of unwanted variation are there?",
-        "How are biological phenotypes clustered?",
-        "What is the difference between PCA and tSNE?",
-        "What is the difference between cell trajectory and cell fate?"
-      ],
-      "objectives": [
-        "Filtering, normalising, and clustering cells in a matrix",
-        "Assessing the quality of individual clusters",
-        "Inferring cell type lineages",
-        "Examining gene expression",
-        "Determining the top most expressive genes per cluster",
-        "Correcting for unwanted variation"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "scrna-scater-qc"
-          ]
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "scrna-preprocessing-tenx"
-          ]
-        }
-      ],
-      "time_estimation": "3H",
-      "key_points": [
-        "Clustering single-cell RNA-seq data is often noisy",
-        "RaceID can be used to cluster cells based on the their gene expression profiles",
-        "StemID describes a hierarchical relationship between clusters to find multipotent progenitor stem cells to provide an understanding of cell development",
-        "FateID predicts the potential lineages that cells within specific clusters are inclined towards"
-      ],
-      "contributors": [
-        {
-          "name": "Mehmet Tekman",
-          "email": "mtekman89@gmail.com",
-          "joined": "2018-11",
-          "elixir_node": "de",
-          "id": "mtekman",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
-        },
-        {
-          "name": "Alex Ostrovsky",
-          "email": "a.ostrovsky@mac.com",
-          "orcid": "0000-0002-7901-7109",
-          "joined": "2019-06",
-          "id": "astrovsky01",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/"
-        }
-      ],
-      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
-      "url": "/topics/single-cell/tutorials/scrna-raceid/tutorial.html",
-      "topic_name": "single-cell",
-      "tutorial_name": "scrna-raceid",
-      "dir": "topics/single-cell/tutorials/scrna-raceid",
-      "id": "single-cell/scrna-raceid",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.ga",
-          "path": "topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.ga",
-          "wfid": "single-cell-scrna-raceid",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-raceid/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "raceid_clustering",
-        "raceid_filtnormconf",
-        "raceid_inspectclusters",
-        "raceid_inspecttrajectory",
-        "raceid_trajectory",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/0.2.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/0.2.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/0.2.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/0.2.3+galaxy0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-raceid/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-raceid/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Understanding Barcodes",
       "subtopic": "scintroduction",
       "priority": 2,
@@ -1626,144 +1626,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-umis/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-umis/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Pre-processing of 10X Single-Cell ATAC-seq Datasets",
-      "subtopic": "end-to-end",
-      "priority": 3,
-      "redirect_from": [
-        "/topics/transcriptomics/tutorials/satac-preprocessing-tenx/tutorial"
-      ],
-      "zenodo_link": "https://zenodo.org/record/7855968",
-      "tags": [
-        "single-cell",
-        "10x"
-      ],
-      "questions": [
-        "What is 10X?",
-        "What are single-cell ATAC fragments and MTX files?",
-        "What is an Anndata file, and why is it important?"
-      ],
-      "objectives": [
-        "Demultiplex single-cell FASTQ data from 10X Genomics",
-        "Learn about transparent matrix formats",
-        "Create a high-quality count matrix starting from scATAC-seq FASTQ files"
-      ],
-      "time_estimation": "1h",
-      "key_points": [
-        "Bulk ATAC-seq like mapping and peak calling",
-        "Creating a scATAC-seq count matrix requires positions of open chromatin regions"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "scrna-preprocessing-tenx"
-          ]
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "scrna-scanpy-pbmc3k"
-          ]
-        }
-      ],
-      "contributors": [
-        {
-          "name": "Pavankumar Videm",
-          "joined": "2017-09",
-          "id": "pavanvidem",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/"
-        }
-      ],
-      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
-      "url": "/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html",
-      "topic_name": "single-cell",
-      "tutorial_name": "scatac-preprocessing-tenx",
-      "dir": "topics/single-cell/tutorials/scatac-preprocessing-tenx",
-      "id": "single-cell/scatac-preprocessing-tenx",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "scATAC-seq-Count-Matrix-Filtering.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-Count-Matrix-Filtering.ga",
-          "path": "topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-Count-Matrix-Filtering.ga",
-          "wfid": "single-cell-scatac-preprocessing-tenx",
-          "wfname": "scatac-seq-count-matrix-filtering",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-count-matrix-filtering",
-          "license": "CC-BY-4.0",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "0000-0002-5192-126X",
-              "name": "Pavankumar Videm"
-            }
-          ]
-        },
-        {
-          "workflow": "scATAC-seq-FASTQ-to-Count-Matrix.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-FASTQ-to-Count-Matrix.ga",
-          "path": "topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-FASTQ-to-Count-Matrix.ga",
-          "wfid": "single-cell-scatac-preprocessing-tenx",
-          "wfname": "scatac-seq-fastq-to-count-matrix",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-fastq-to-count-matrix",
-          "license": "CC-BY-4.0",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "0000-0002-5192-126X",
-              "name": "Pavankumar Videm"
-            }
-          ]
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_build_matrix/episcanpy_build_matrix/0.3.2+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6",
-        "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/sinto_barcode/sinto_barcode/0.9.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/sinto_fragments/sinto_fragments/0.9.0+galaxy1"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.json"
       }
     },
     {
@@ -1922,6 +1784,328 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Pre-processing of 10X Single-Cell ATAC-seq Datasets",
+      "subtopic": "end-to-end",
+      "priority": 3,
+      "redirect_from": [
+        "/topics/transcriptomics/tutorials/satac-preprocessing-tenx/tutorial"
+      ],
+      "zenodo_link": "https://zenodo.org/record/7855968",
+      "tags": [
+        "single-cell",
+        "10x"
+      ],
+      "questions": [
+        "What is 10X?",
+        "What are single-cell ATAC fragments and MTX files?",
+        "What is an Anndata file, and why is it important?"
+      ],
+      "objectives": [
+        "Demultiplex single-cell FASTQ data from 10X Genomics",
+        "Learn about transparent matrix formats",
+        "Create a high-quality count matrix starting from scATAC-seq FASTQ files"
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "Bulk ATAC-seq like mapping and peak calling",
+        "Creating a scATAC-seq count matrix requires positions of open chromatin regions"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "scrna-preprocessing-tenx"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "scrna-scanpy-pbmc3k"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Pavankumar Videm",
+          "joined": "2017-09",
+          "id": "pavanvidem",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "url": "/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "scatac-preprocessing-tenx",
+      "dir": "topics/single-cell/tutorials/scatac-preprocessing-tenx",
+      "id": "single-cell/scatac-preprocessing-tenx",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "scATAC-seq-Count-Matrix-Filtering.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-Count-Matrix-Filtering.ga",
+          "path": "topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-Count-Matrix-Filtering.ga",
+          "wfid": "single-cell-scatac-preprocessing-tenx",
+          "wfname": "scatac-seq-count-matrix-filtering",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-count-matrix-filtering",
+          "license": "CC-BY-4.0",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0000-0002-5192-126X",
+              "name": "Pavankumar Videm"
+            }
+          ]
+        },
+        {
+          "workflow": "scATAC-seq-FASTQ-to-Count-Matrix.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-FASTQ-to-Count-Matrix.ga",
+          "path": "topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-FASTQ-to-Count-Matrix.ga",
+          "wfid": "single-cell-scatac-preprocessing-tenx",
+          "wfname": "scatac-seq-fastq-to-count-matrix",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-fastq-to-count-matrix",
+          "license": "CC-BY-4.0",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0000-0002-5192-126X",
+              "name": "Pavankumar Videm"
+            }
+          ]
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_build_matrix/episcanpy_build_matrix/0.3.2+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6",
+        "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/sinto_barcode/sinto_barcode/0.9.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/sinto_fragments/sinto_fragments/0.9.0+galaxy1"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Pre-processing of 10X Single-Cell RNA Datasets",
+      "subtopic": "end-to-end",
+      "priority": 3,
+      "redirect_from": [
+        "/topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial",
+        "/short/single-cell/scrna-preprocessing-tenx",
+        "/short/T00252"
+      ],
+      "zenodo_link": "https://zenodo.org/record/3457880",
+      "tags": [
+        "single-cell",
+        "10x"
+      ],
+      "questions": [
+        "What is 10X?",
+        "What is STARsolo and what is Cell Ranger?",
+        "What are BCL and MTX files?",
+        "What is an HDF5 file, and why is it important?"
+      ],
+      "objectives": [
+        "Demultiplex single-cell FASTQ data from 10X Genomics",
+        "Learn about transparent matrix formats",
+        "Understand the importance of high and low quality cells"
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "Barcode FASTQ Reads are used to parse cDNA sequencing Reads.",
+        "A raw matrix is too large to process alone, and need to be filtered into a high quality one for downstream analysis"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "scrna-preprocessing"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "scrna-scanpy-pbmc3k"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "elixir_node": "de",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
+        },
+        {
+          "name": "Hans-Rudolf Hotz",
+          "email": "hrhotz@googlemail.com",
+          "twitter": "hrhotz",
+          "gitter": "hrhotz",
+          "orcid": "0000-0002-2799-424X",
+          "linkedin": "hans-rudolf-hotz-542b31",
+          "joined": "2017-09",
+          "elixir_node": "ch",
+          "contact_for_training": true,
+          "location": {
+            "country": "CH",
+            "lat": 47.57,
+            "lon": 7.6
+          },
+          "id": "hrhotz",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hrhotz.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/"
+        },
+        {
+          "name": "Daniel Blankenberg",
+          "twitter": "dblankenberg",
+          "orcid": "0000-0002-6833-9049",
+          "joined": "2018-07",
+          "id": "blankenberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
+        },
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi.bacon@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "gitter": "nomadscientist",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "orcid": "0000-0002-8170-8806",
+          "bio": "Lecturer at The Open University",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "url": "/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "scrna-preprocessing-tenx",
+      "dir": "topics/single-cell/tutorials/scrna-preprocessing-tenx",
+      "id": "single-cell/scrna-preprocessing-tenx",
+      "video_library": {
+        "tutorial": {
+          "description": "10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level, but has defined the standards of the field that many downstream analysis packages are now scrambling to accommodate. Please work through the full tutorial yourself to get all the details.",
+          "materials": [
+            {
+              "link": "topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html",
+              "title": "Pre-processing of 10X Single-Cell RNA Datasets",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "transcriptomics",
+            "single-cell"
+          ],
+          "title": "Pre-processing of 10X Single-Cell RNA Datasets",
+          "type": "Demo",
+          "versions": [
+            {
+              "captions": [
+                "khanteymoori"
+              ],
+              "date": "2021-03-18",
+              "galaxy_version": "21.01",
+              "length": "5M",
+              "link": "vNBNFkF0L4U",
+              "speakers": [
+                "nomadscientist"
+              ]
+            }
+          ],
+          "gtn_id": "single-cell/scrna-preprocessing-tenx",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "scrna_tenx.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/workflows/scrna_tenx.ga",
+          "path": "topics/single-cell/tutorials/scrna-preprocessing-tenx/workflows/scrna_tenx.ga",
+          "wfid": "single-cell-scrna-preprocessing-tenx",
+          "wfname": "scrna_tenx",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-preprocessing-tenx/versions/scrna_tenx",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.json"
       }
     },
     {
@@ -2128,190 +2312,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Pre-processing of 10X Single-Cell RNA Datasets",
-      "subtopic": "end-to-end",
-      "priority": 3,
-      "redirect_from": [
-        "/topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial",
-        "/short/single-cell/scrna-preprocessing-tenx",
-        "/short/T00252"
-      ],
-      "zenodo_link": "https://zenodo.org/record/3457880",
-      "tags": [
-        "single-cell",
-        "10x"
-      ],
-      "questions": [
-        "What is 10X?",
-        "What is STARsolo and what is Cell Ranger?",
-        "What are BCL and MTX files?",
-        "What is an HDF5 file, and why is it important?"
-      ],
-      "objectives": [
-        "Demultiplex single-cell FASTQ data from 10X Genomics",
-        "Learn about transparent matrix formats",
-        "Understand the importance of high and low quality cells"
-      ],
-      "time_estimation": "1h",
-      "key_points": [
-        "Barcode FASTQ Reads are used to parse cDNA sequencing Reads.",
-        "A raw matrix is too large to process alone, and need to be filtered into a high quality one for downstream analysis"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "scrna-preprocessing"
-          ]
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "scrna-scanpy-pbmc3k"
-          ]
-        }
-      ],
-      "contributors": [
-        {
-          "name": "Mehmet Tekman",
-          "email": "mtekman89@gmail.com",
-          "joined": "2018-11",
-          "elixir_node": "de",
-          "id": "mtekman",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
-        },
-        {
-          "name": "Hans-Rudolf Hotz",
-          "email": "hrhotz@googlemail.com",
-          "twitter": "hrhotz",
-          "gitter": "hrhotz",
-          "orcid": "0000-0002-2799-424X",
-          "linkedin": "hans-rudolf-hotz-542b31",
-          "joined": "2017-09",
-          "elixir_node": "ch",
-          "contact_for_training": true,
-          "location": {
-            "country": "CH",
-            "lat": 47.57,
-            "lon": 7.6
-          },
-          "id": "hrhotz",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hrhotz.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/"
-        },
-        {
-          "name": "Daniel Blankenberg",
-          "twitter": "dblankenberg",
-          "orcid": "0000-0002-6833-9049",
-          "joined": "2018-07",
-          "id": "blankenberg",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
-        },
-        {
-          "name": "Wendi Bacon",
-          "email": "wendi.bacon@open.ac.uk",
-          "twitter": "WendiBacon1",
-          "gitter": "nomadscientist",
-          "joined": "2020-03",
-          "elixir_node": "uk",
-          "orcid": "0000-0002-8170-8806",
-          "bio": "Lecturer at The Open University",
-          "id": "nomadscientist",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
-        }
-      ],
-      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
-      "url": "/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html",
-      "topic_name": "single-cell",
-      "tutorial_name": "scrna-preprocessing-tenx",
-      "dir": "topics/single-cell/tutorials/scrna-preprocessing-tenx",
-      "id": "single-cell/scrna-preprocessing-tenx",
-      "video_library": {
-        "tutorial": {
-          "description": "10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level, but has defined the standards of the field that many downstream analysis packages are now scrambling to accommodate. Please work through the full tutorial yourself to get all the details.",
-          "materials": [
-            {
-              "link": "topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html",
-              "title": "Pre-processing of 10X Single-Cell RNA Datasets",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "transcriptomics",
-            "single-cell"
-          ],
-          "title": "Pre-processing of 10X Single-Cell RNA Datasets",
-          "type": "Demo",
-          "versions": [
-            {
-              "captions": [
-                "khanteymoori"
-              ],
-              "date": "2021-03-18",
-              "galaxy_version": "21.01",
-              "length": "5M",
-              "link": "vNBNFkF0L4U",
-              "speakers": [
-                "nomadscientist"
-              ]
-            }
-          ],
-          "gtn_id": "single-cell/scrna-preprocessing-tenx",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "scrna_tenx.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/workflows/scrna_tenx.ga",
-          "path": "topics/single-cell/tutorials/scrna-preprocessing-tenx/workflows/scrna_tenx.ga",
-          "wfid": "single-cell-scrna-preprocessing-tenx",
-          "wfname": "scrna_tenx",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-preprocessing-tenx/versions/scrna_tenx",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.json"
       }
     },
     {
