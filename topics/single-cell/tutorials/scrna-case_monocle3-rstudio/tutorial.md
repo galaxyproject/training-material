@@ -21,7 +21,7 @@ objectives:
 - Compare the outputs from Scanpy, Monocle in Galaxy and Monocle in R
 - Describe differential expression analysis methods
 
-time_estimation: 2H
+time_estimation: 3H
 
 key_points:
 - Being able to switch between Galaxy and R when using Monocle is useful, particularly when you need to modify the CDS object manually.
@@ -648,7 +648,8 @@ plot_cells(cds_trajectory,
 We have to tell Monocle where to start ordering the cells, ie. when we expect the analysed biological process to begin. Thanks to our biological knowledge, we know that the beginning of the trajectory should be at DN cluster.
 There are a couple of ways to specify the root cells:
 
-1. Use `root_pr_nodes` argument in `order_cells()` function.
+## Option 1: Root nodes
+Here, you will use `root_pr_nodes` argument in `order_cells()` function.
 
 To find the names of the principal points, you have to plot the learned trajectory again, specifying `label_principal_points = TRUE`
 ```r
@@ -694,7 +695,8 @@ DN_node_id      # check the node found
 cds_order_1_helper <- order_cells(cds_trajectory, root_pr_nodes = DN_node_id)
 ```
 
-2. Use `root_cells` argument in `order_cells()` function.
+## Option 2: Root cells
+Here, you will use `root_cells` argument in `order_cells()` function.
 
 Specify a vector of starting cell IDs. You can provide only one cell as well as all cells of a given type.
 
@@ -723,6 +725,8 @@ cds_order_2 <- order_cells(cds_trajectory, root_cells = DN_cells)
 >```
 >
 {: .tip}
+
+# Plotting in pseudotime
 
 You can use any `cds_order` object for the downstream analysis. Let’s pick one and assign it to an object with a shorter and more general name.
 ```r
