@@ -777,7 +777,7 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     >            - *"Choose style of the track"*: `Gene track / Bed track`
     >                - *"Plot title"*: `Genes`
     >                - *"height"*: `5`
-    >                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
+    >                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
     {: .hands_on}
 
     > <question-title></question-title>
@@ -853,9 +853,9 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     > <hands-on-title>Determining the library strandness using Infer Experiment</hands-on-title>
     >
     > 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
-    >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
+    >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
     >
-    >    You may already have converted this `BED12` file from the `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz` dataset earlier if you did the detailed part on quality checks. In this case, no need to redo it a second time
+    >    You may already have converted this `BED12` file from the `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz` dataset earlier if you did the detailed part on quality checks. In this case, no need to redo it a second time
     >
     > 2. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2) %} to determine the library strandness with the following parameters:
     >    - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
@@ -948,7 +948,7 @@ As you chose to use the featureCounts flavor of the tutorial, we now run **featu
 >    - {% icon param-collection %} *"Alignment file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 >    - *"Specify strand information"*: `Unstranded`
 >    - *"Gene annotation file"*: `in your history`
->        - {% icon param-file %} *"Gene annotation file"*: `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
+>        - {% icon param-file %} *"Gene annotation file"*: `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
 >    - *"GFF feature type filter"*: `exon`
 >    - *"GFF gene identifier"*: `gene_id`
 >    - *"Output format"*: `Gene-ID "\t" read-count (MultiQC/DESeq2/edgeR/limma-voom compatible)`
@@ -1042,7 +1042,7 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 >
 > 1. {% tool [Gene length and GC content](toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2) %} with the following parameters:
 >    - *"Select a built-in GTF file or one from your history"*: `Use a GTF from history`
->      - {% icon param-file %} *"Select a GTF file"*: `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
+>      - {% icon param-file %} *"Select a GTF file"*: `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
 >    - *"Analysis to perform"*: `gene lengths only`
 >
 >    > <warning-title>Check the version of the tool below</warning-title>
@@ -1633,16 +1633,16 @@ The ID for each gene is something like FBgn0003360, which is an ID from the corr
 
 > <hands-on-title>Annotation of the DESeq2 results</hands-on-title>
 >
-> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`) from the previous history, or from the Shared Data library or from Zenodo:
+> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`) from the previous history, or from the Shared Data library or from Zenodo:
 >
 >    ```text
->    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz
+>    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz
 >    ```
 >
 > 2. {% tool [Annotate DESeq2/DEXSeq output tables](toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0) %} with:
 >    - {% icon param-file %} *"Tabular output of DESeq2/edgeR/limma/DEXSeq"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
 >    - *"Input file type"*: `DESeq2/edgeR/limma`
->    - {% icon param-file %} *"Reference annotation in GFF/GTF format"*: imported gtf `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
+>    - {% icon param-file %} *"Reference annotation in GFF/GTF format"*: imported gtf `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
 >
 {: .hands_on}
 
@@ -2185,7 +2185,7 @@ This step is similar to the step of [counting the number of reads per annotated 
 >
 > 1. {% tool [DEXSeq-Count](toolshed.g2.bx.psu.edu/repos/iuc/dexseq/dexseq_count/1.28.1.0) %}: Use the **DEXSeq-Count** to prepare the *Drosophila* annotations to extract only exons with corresponding gene ids
 >     - *"Mode of operation"*: `Prepare annotation`
->       - {% icon param-file %} *"GTF file"*: `Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz`
+>       - {% icon param-file %} *"GTF file"*: `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
 >
 >    The output is again a GTF file that is ready to be used for counting
 >
