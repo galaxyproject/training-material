@@ -62,7 +62,7 @@ Importantly, the sequence diversity of HA and (again to a lesser extent) of NA s
 
 In this tutorial you are going to work on a single avian influenza sample sequenced in paired-end mode on the Illumina platform, *i.e.* we are going to download two datasets of sequenced reads for that sample.
 
-In addition, we are going to base the analysis on a small collection of multiple reference sequences for each influenza gene segment. We prepared this collection for you from public INSAFlu data.
+In addition, we are going to base the analysis on a small collection of multiple reference sequences for each influenza gene segment. We prepared this collection for you from public [INSAFlu](https://insaflu.insa.pt/dashboard/) [data](https://insaflu.readthedocs.io/en/latest/uploading_data.html?highlight=references#uploading-reference-data).
 
 If you have your own curated collection of reference sequences, you should be able to use it for following this tutorial without any problem. Note, however, that the analysis results referred to in many of the questions will be different if you are exchanging the reference collection.
 If you want to learn how you can create a Galaxy collection from your own references that is structured like the default we are suggesting here, you may want to follow the dedicated tutorial on [Using dataset collections]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
