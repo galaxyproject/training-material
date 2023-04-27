@@ -287,14 +287,14 @@ The plot shows that actually using more than ~100 PCs captures only a small amou
 ![Six plots showing only the shaded shape of how the cells are clustered depending on the num_dim argument. The general trend is maintained though.](../../images/scrna-casestudy-monocle/num_dim.jpg "The "shape" of the plot showing how the cells are clustered depending on the 'num_dim' argument.")
 
 ## Batch correction and Dimensionality reduction
-Our dataset actually comprises data from 7 samples, so there is a risk that the batch effects can be observed. Those are systematic differences in the transcriptome of cells measured in different experimental batches. However, we can use Monocle to deal with that!
-First, let’s check how our dataset looks like in terms of batch effects. We can do that by colouring the cells by batch.  This information is stored in our CDS object from `cell_metadata` file. Before asking Monocle to plot anything, let’s check the exact column name of the batch information column.
+Our dataset actually comprises data from 7 samples, so there is a risk that batch effects will impact analysis. Batch effects are systematic differences in the transcriptome of cells measured in different experimental batches. However, we can use Monocle to deal with that!
+First, let’s check how our dataset looks in terms of batch effects. We can do that by colouring the cells by batch.  This information is stored in our CDS object from the `cell_metadata` file. Before asking Monocle to plot anything, let’s check the exact column name of the batch information column.
 ```r
 colnames(colData(cds_preprocessing)) 	          # check column names
 ```
 In our case it’s indeed ‘batch’, but your data might have another name (eg. "plate", etc.), so make sure you put the correct argument value.
 
-Then, we have to reduce dimension before attempting to plot. The [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) introduced the methods of dimensionality reduction in Monocle. Of course you can replicate what we did in Galaxy to compare the output of dimensionality reduction using different methods, simply by changing the `reduction_method` argument. Options currently supported by Monocle are "UMAP", "tSNE", "PCA", "LSI", and "Aligned". However, as for now, let’s just recall that UMAP gave the best results, so we will use UMAP here as well.
+In order to plot our cells on a 2D graph, we need to reduce the numbers of dimensions. The [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) introduced the methods of dimensionality reduction in Monocle. You can replicate what we did in Galaxy to compare the output of dimensionality reduction using different methods, simply by changing the `reduction_method` argument. Options currently supported by Monocle are "UMAP", "tSNE", "PCA", "LSI", and "Aligned". However, as for now, let’s just recall that UMAP gave the best results, so we will use UMAP here as well.
 ```r
 # reduce dimension first
 cds_preprocessing_UMAP <- reduce_dimension(cds_preprocessing, reduction_method = "UMAP", preprocess_method = "PCA")
@@ -310,7 +310,7 @@ We can see that upper and lower right branches mostly consist of N705 and N706, 
 cds_batch <- align_cds(cds_preprocessing_UMAP, preprocess_method = "PCA", alignment_group = "batch")
 ```
 
-To see the changes, we have to run UMAP again, but this time on the aligned dataset, so we will specify that `preprocess_method ` is now "Aligned" and not “PCA”, however after having used `align_cds()` Monocle would use "Aligned" argument automatically if no `preprocess_method` was specified.
+To see the changes, we have to run UMAP again, but this time on the aligned dataset. We will specify that `preprocess_method ` as "Aligned" and not “PCA". Monocle would use the "Aligned" argument automatically if no `preprocess_method` was specified.
 ```r
 # dimensionality reduction after alignment
 cds_red_dim <- reduce_dimension(cds_batch, preprocess_method = "Aligned", reduction_method = "UMAP")  
@@ -322,7 +322,8 @@ plot_cells(cds_red_dim, color_cells_by="batch", label_cell_groups=FALSE)
 
 ![Left image showing dataset before batch correction: upper and lower right branches mostly consist of N705 and N706. Right image showing the dataset after batch correction: the cells from all the samples are evenly spread throughout the whole dataset.](../../images/scrna-casestudy-monocle/batch_correction.png "Comparison of the dataset before and after batch correction.")
 
-Do you see this? That’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using mutual nearest neighbor alignment, a technique introduced by John Marioni's lab ({% cite Haghverdi_2018 %}) and supported by Aaron Lun's package [batchelor](https://bioconductor.org/packages/release/bioc/html/batchelor.html).
+Do you see this? It’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using mutual nearest neighbor alignment, a technique introduced by John Marioni's lab ({% cite Haghverdi_2018 %}) and supported by Aaron Lun's package [batchelor](https://bioconductor.org/packages/release/bioc/html/batchelor.html). Also, due to the machine learning elements of the code of this technique - as well as the fact that packages are updated regularly - your plots may not look identical to the ones pictured here. Nevertheless, the interpretation should be the same - the batch corrected plot should show better batch distribution than the uncorrected one.
+
 Now we can move to the next step and perform dimensionality reduction.
 
 
