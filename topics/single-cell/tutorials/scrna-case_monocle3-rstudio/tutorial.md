@@ -24,7 +24,6 @@ objectives:
 time_estimation: 3H
 
 key_points:
-- Being able to switch between Galaxy and R when using Monocle is useful, particularly when you need to modify the CDS object manually.
 - Monocle3 in R gives more flexibility when it comes to differential expression analysis and plotting, but Galaxy offers great reproducibility and ease of analysis.
 - Comparing the output of several different methods applied on the same dataset might be useful to confirm the results, to ensure that the findings are reliable and even sometimes to find a new piece of information.
 
