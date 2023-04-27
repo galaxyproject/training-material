@@ -523,7 +523,7 @@ We will nevertheless proceed with your majestic annotated expression matrix of 3
 >
 {: .hands_on}
 
-{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history]() (if you used Alevin Galaxy Version 1.5.1+galaxy0, you can check the [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key) run with that version of the tool). You can also compare how the subsampled datasets you've generated compare with the [total sample](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---total-n701-answer-key) (using Alevin Galaxy Version 1.5.1+galaxy0).
+{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3) (if you used Alevin Galaxy Version 1.5.1+galaxy0, you can check the [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key) run with that version of the tool). You can also compare how the subsampled datasets you've generated compare with the [total sample](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---total-n701-answer-key) (using Alevin Galaxy Version 1.5.1+galaxy0).
 
 However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
 
