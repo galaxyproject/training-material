@@ -249,14 +249,14 @@ In order to improve the quality of our data, we will use two tools:
 
 > <hands-on-title>Improve the dataset quality</hands-on-title>
 >
-> 1. {% tool [Porechop](toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3) %} with the following parameters:
+> 1. {% tool [Porechop](toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input FASTA/FASTQ"*:  `Reads`
 >    - *"Output format for the reads"*: `fastq`
 >
 > 2. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Single-end`
->    - {% icon param-file %} *"Dataset collection"*: output of **Porechop**
->    - In *"Adapter Trimming Options"*:
+>      - {% icon param-file %} *"Input 1"*: output of **Porechop**
+>      - In *"Adapter Trimming Options"*:
 >        - *"Disable adapter trimming"*: `Yes`
 >    - In *"Filter Options"*:
 >        - In *"Quality filtering options"*:
@@ -329,13 +329,12 @@ Taxonomic assignment or classification is the process of assigning an **Operatio
 
 > <hands-on-title>Kraken2</hands-on-title>
 >
-> 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0) %} with the following parameters:
+> 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} with the following parameters:
 >    - *"Single or paired reads"*: `Single`
 >        - {% icon param-file %} *"Input sequences"*: Output of **fastp**
 >    - *"Print scientific names instead of just taxids"*: `Yes`
 >    - In *"Create Report"*:
 >        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
->        - *"Format report output like Kraken 1's kraken-mpa-report"*: `Yes`
 >    - *"Select a Kraken2 database"*: `Prebuilt Refseq indexes: PlusPF`
 >
 >      The database here contains reference sequences and taxonomies. We need to
@@ -344,78 +343,78 @@ Taxonomic assignment or classification is the process of assigning an **Operatio
 > 2. Inspect the report file
 {: .hands_on}
 
-The Kraken report in MPA format is a tabular file with 2 columns:
+The Kraken report is tabular files with one line per taxon and 6 columns or fields:
+
+1. Percentage of fragments covered by the clade rooted at this taxon
+2. Number of fragments covered by the clade rooted at this taxon
+3. Number of fragments assigned directly to this taxon
+4. A rank code, indicating
+    - (U)nclassified
+    - (R)oot
+    - (D)omain
+    - (K)ingdom
+    - (P)hylum
+    - (C)lass
+    - (O)rder
+    - (F)amily
+    - (G)enus, or
+    - (S)pecies
+
+    Taxa that are not at any of these 10 ranks have a rank code that is formed by using the rank code of the closest ancestor rank with a number indicating the distance from that rank. E.g., `G2` is a rank code indicating a taxon is between genus and species and the grandparent taxon is at the genus rank.
+
+5. NCBI taxonomic ID number
+6. Indented scientific name
+
 
 ```
-d__Eukaryota	756
-d__Eukaryota|k__Metazoa	402
-d__Eukaryota|k__Metazoa|p__Chordata	402
-d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia	402
-d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates	402
-d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae	402
-d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae|g__Homo	402
-d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae|g__Homo|s__Homo sapiens	402
-d__Eukaryota|k__Fungi	342
-d__Eukaryota|k__Fungi|p__Ascomycota	341
-d__Eukaryota|k__Fungi|p__Ascomycota|c__Saccharomycetes	336
-...
+Column 1	Column 2	Column 3	Column 4	Column 5	Column 6
+38.00 	513 	513 	U 	0 	unclassified
+62.00 	837 	1 	R 	1 	root
+61.93 	836 	27 	R1 	131567 	cellular organisms
+56.00 	756 	3 	D 	2759 	Eukaryota
+55.33 	747 	3 	D1 	33154 	Opisthokonta
+29.78 	402 	0 	K 	33208 	Metazoa
+29.78 	402 	0 	K1 	6072 	Eumetazoa
+29.78 	402 	0 	K2 	33213 	Bilateria
+29.78 	402 	0 	K3 	33511 	Deuterostomia
+29.78 	402 	0 	P 	7711 	Chordata
+29.78 	402 	0 	P1 	89593 	Craniata
+29.78 	402 	0 	P2 	7742 	Vertebrata
+29.78 	402 	0 	P3 	7776 	Gnathostomata
+29.78 	402 	0 	P4 	117570 	Teleostomi
+29.78 	402 	0 	P5 	117571 	Euteleostomi
+29.78 	402 	0 	P6 	8287 	Sarcopterygii
+29.78 	402 	0 	P7 	1338369 	Dipnotetrapodomorpha
+29.78 	402 	0 	P8 	32523 	Tetrapoda
+29.78 	402 	0 	P9 	32524 	Amniota
+29.78 	402 	0 	C 	40674 	Mammalia 
 ```
-
-1. The first column lists clades, ranging from taxonomic domains (Bacteria, Archaea, etc.) through species.
-
-    The taxonomic level of each clade is prefixed to indicate its level:
-    - Domain: `d__`
-    - Kingdom: `k__`
-    - Phylum: `p__`
-    - Class: `c__`
-    - Order: `o__`
-    - Family: `f__`
-    - Genus: `g__`
-    - Species: `s__`
-
-2. The second column gives the number of reads assigned to the clade rooted at that taxon
-
 
 > <question-title></question-title>
 >
 > 1. How many taxons have been identified?
-> 2. How many reads have been classified?
+> 2. How much reads have been classified?
 > 3. Which domains were found and with how many reads?
-> 4. Which yeasts have been identified? Are they the expected ones?
+> 4. How much reads have been assigned by fungi Kingdom?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The file contains 215 lines (*information visible when expanding the report
-> >    dataset in the history panel*). So 215 taxons have been identified.
+> > 1. The file contains 300 lines (*information visible when expanding the report dataset in the history panel*). So 300-2 = 298 taxons have been identified.
 > >
-> > 2. On the 1350 sequences in the input, 837 (62%) were classified (or identified as a taxon) and 513 unclassified (38%). *Information visible when expanding the report dataset in the history panel, and scrolling in the small box starting with "Loading database information" below the format information.*
+> > 2. On the 1350 sequences in the input, 837 (62%) were classified (or identified as a taxon) and 513 unclassified (38%). *Information visible when expanding the report dataset in the history panel, and scrolling in the small box starting with "Loading database information" below the format information, but also on the top of the report.*
 > >
-> > 3. The 3 domains were found:
-> >    - Eukaryota with 756 reads assigned to it
-> >    - Bacteria with 17 reads
-> >    - Archaea with 2 reads
+> > 3. The domains are identified by a `D` in colum 4. 
 > >
-> > 4. Yeasts do not form a single taxonomic group ({% cite kurtzman1994molecular %}). They are parts on fungi kingdom but belong two separate phyla: the Ascomycota and the Basidiomycota. [But the "true yeasts" are classified in the order Saccharomycetales](https://web.archive.org/web/20090226151906/http://www.yeastgenome.org/VL-what_are_yeast.html).
+> >    To get the domains (or other taxonomic level), we can use {% tool [Filter](Filter1) %} with the following parameters:
+> >    - {% icon param-file %} *"Filter"*: report outpout of **Kraken2**
+> >    - *"With following condition"*: `c4=='D'` 
 > >
-> >    In the data, 6 species from the Saccharomycetales order have been identified:
-> >    - Saccharomycetaceae family
-> >      - *Saccharomyces* genus
-> >        - *Saccharomyces cerevisiae* species, the most abundant identified yeast species with 293 reads and the one expected given the type of beers
-> >        - *Saccharomyces paradoxus* species, a wild yeast and the closest known species to *Saccharomyces cerevisiae*
+> >    The 3 domains were found:
+> >    - Eukaryota with 756 (56%) reads assigned to it
+> >    - Bacteria with 51 (3.78%) reads
+> >    - Archaea with 2 (0.15%) reads
 > >
-> >          These reads might have been misidentified to *Saccharomyces paradoxus* instead of *Saccharomyces cerevisiae* because of some errors in the sequences, as *Saccharomyces cerevisiae* and *Saccharomyces paradoxus* are close species and should share then a lot of similarity in their sequences.
-> >
-> >        - *Saccharomyces eubayanus* species, most likely the parent of the lager brewing yeast, *Saccharomyces pastorianus* ({% cite sampaio2018microbe %})
-> >
-> >          Similar to *Saccharomyces paradoxus*, these reads might have been misassigned.
-> >
-> >      - *Kluyveromyces* genus - *Kluyveromyces marxianus* species: only 1 read
-> >
-> >    - Trichomonascaceae family - *Sugiyamaella* genus - *Sugiyamaella lignohabitans* species: only 1 read
-> >    - Debaryomycetaceae family - *Candida* genus - *Candida dubliniensis* species: only 1 read
-> >
-> >    Everything except *Saccharomyces cerevisiae* are probably misindentified reads.
-> >
+> > 4. 342 (25.33%) reads are assigned to fungi.
 > {: .solution}
 >
 {: .question}
@@ -439,7 +438,7 @@ Other taxons than yeast have been identified. They could be contamination or mis
 > 2. What are the possible contaminations?
 >
 > > <solution-title></solution-title>
-> > 1. 27 lines are now in the file so $$215 - 27 = 188$$ taxons have been removed because low assignment rates.
+> > 1. 59 lines are now in the file so $$300 - 59 = 241$$ taxons have been removed because low assignment rates.
 > >
 > > 2. Most of the reads (402) were assigned to humans (*Homo sapiens*). This is likely a contamination either during the beer production or more likely during DNA extraction.
 > >
@@ -453,50 +452,31 @@ Once we have assigned the corresponding taxa to the sequences, the next step is 
 
 To do that, we will use the tool **Krona** ({% cite Ondov_2011 %}). But before that, we need to adjust the output from Kraken2 to the requirements of **Krona**. Indeed, **Krona** expects as input a table with the first column containing a count and the remaining columns describing the hierarchy. Currently, we have a report tabular file with the first column containing the taxonomy and the second column the number of reads. We will now use another tool, which also provides taxonomic classification, but it produces the exact formatting Krona needs.
 
-<!--
-So we need to work on the file by:
-1. Reversing the columns so the 1st column contains the number of reads and the second the taxon
-2. Splitting the taxonomy description into different columns, each being a different level. For that we replace the `|` with tabular (`\t` character)
-
 > <hands-on-title>Prepare dataset for Krona</hands-on-title>
 >
-> 1. {% tool [Reverse](toolshed.g2.bx.psu.edu/repos/iuc/datamash_reverse/datamash_reverse/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Input tabular dataset"*: output of **Filter** {% icon tool %})
->
-> 2. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `out_file` (output of **Reverse** {% icon tool %})
->    - In *"Replacement"*:
->        - {% icon param-repeat %} *"Insert Replacement"*
->            - *"Find pattern"*: `\|`
->            - *"Replace with:"*: `\t`
-> 3. Inspect the output file
->
->    > <question-title></question-title>
->    >
->    > How many columns are now in the file?
->    >
->    > > <solution-title></solution-title>
->    > > 9 columns: one with the number of reads and one for each of the 8 levels of taxonomy.
->    > {: .solution}
->    {: .question}
-{: .hands_on}
--->
-
-> <hands-on-title>Prepare dataset for Krona</hands-on-title>
->
-> 1. {% tool [Format MetaPhlAn2](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0) %} with the following parameters:
->    - {% icon param-file %} *"Input file (MetaPhlAN2 output)"*: report output of **Kraken2** {% icon tool %})
+> 1. {% tool [Krakentools: Convert kraken report file](toolshed.g2.bx.psu.edu/repos/iuc/krakentools_kreport2krona/krakentools_kreport2krona/1.2+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"Kraken report file"*: **Report** output of **Kraken**
 >
 > 2. Inspect the output file
 >
 >    > <question-title></question-title>
 >    >
->    > 1. How many columns are now in the file?
->    > 2. How many taxons were now found?
+>    > ```
+>    > Column 1	Column 2	Column 3	Column 4	Column 5	Column 6	Column 7	Column 8
+>    > 513 	Unclassified 						
+>    > 7 	k__Eukaryota 						
+>    > 0 	k__Eukaryota 	p__Chordata 					
+>    > 0 	k__Eukaryota 	p__Chordata 	c__Mammalia 				
+>    > 0 	k__Eukaryota 	p__Chordata 	c__Mammalia 	o__Primates 			
+>    > 0 	k__Eukaryota 	p__Chordata 	c__Mammalia 	o__Primates 	f__Hominidae 		
+>    > 0 	k__Eukaryota 	p__Chordata 	c__Mammalia 	o__Primates 	f__Hominidae 	g__Homo 	
+>    > 402 	k__Eukaryota 	p__Chordata 	c__Mammalia 	o__Primates 	f__Hominidae 	g__Homo 	s__Homo_sapiens					
+>    > ```
+>    >
+>    > 1. What are the columns in the file?
 >    >
 >    > > <solution-title></solution-title>
->    > > 1. 9 columns: one with the number of reads and one for each of the 8 levels of taxonomy.
->    > > 2. With this new formatting, each row represents 1 detected taxon (to the most precise level). So 55 lines mean 55 identified taxons.
+>    > > 1. 8 columns: one with the number of reads and one for each of the 7 levels of taxonomy.
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
@@ -505,9 +485,9 @@ We can now run **Krona**. This tool creates an interactive report that allows hi
 
 > <hands-on-title>Krona pie chart</hands-on-title>
 >
-> 1. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1) %} with the following parameters:
+> 1. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0) %} with the following parameters:
 >    - *"What is the type of your input data"*: `Tabular`
->        - {% icon param-file %} *"Input file"*:  output of **Replace Text** {% icon tool %}
+>        - {% icon param-file %} *"Input file"*:  output of **Krakentools** {% icon tool %}
 >
 > 2. Inspect the generated file
 {: .hands_on}
@@ -518,19 +498,55 @@ Let's take a look at the result.
 
 > <question-title></question-title>
 >
-> 1. What is the percentage of identified reads assigned to *Homo sapiens*? To Archaea?
+> 1. What is the percentage of reads assigned to *Homo sapiens*? 
+> 2. To Archaea?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. 30% of reads are assigned to *Homo sapiens*
+> > 2. 0.08% of Archaea
+> {: .solution}
+>
+{: .question}
+
+# Investigate the beer microbiome
+
+Let's come back to our original question: characterization of the beer microbiome, specially looking at the yeasts.
+
+Yeasts do not form a single taxonomic group ({% cite kurtzman1994molecular %}). They are parts on fungi kingdom but belong two separate phyla: the Ascomycota and the Basidiomycota. [But the "true yeasts" are classified in the order Saccharomycetales](https://web.archive.org/web/20090226151906/http://www.yeastgenome.org/VL-what_are_yeast.html).
+
+> <question-title></question-title>
+> 1. Click on `o__Saccharomycetales` in the graph. Which yeast species have been identified? Are they the expected in beer?
 > 2. Click on *Saccharomyces* in the graph. What are the percentages of identified reads assigned to *Saccharomyces* for different levels?
 > 3. Click a second time on *Saccharomyces* in the graph. What is the repartition between the different *Saccharomyces* species?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 52% of identified reads are assigned to *Homo sapiens*, and 0.3% of Archaea
+> > 1. 6 species from the Saccharomycetales order have been identified:
+> >    - Saccharomycetaceae family
+> >      - *Saccharomyces* genus
+> >        - *Saccharomyces cerevisiae* species, the most abundant identified yeast species with 293 reads and the one expected given the type of beers
+> >        - *Saccharomyces paradoxus* species, a wild yeast and the closest known species to *Saccharomyces cerevisiae*
+> >
+> >          These reads might have been misidentified to *Saccharomyces paradoxus* instead of *Saccharomyces cerevisiae* because of some errors in the sequences, as *Saccharomyces cerevisiae* and *Saccharomyces paradoxus* are close species and should share then a lot of similarity in their sequences.
+> >
+> >        - *Saccharomyces eubayanus* species, most likely the parent of the lager brewing yeast, *Saccharomyces pastorianus* ({% cite sampaio2018microbe %})
+> >
+> >          Similar to *Saccharomyces paradoxus*, these reads might have been misassigned.
+> >
+> >      - *Kluyveromyces* genus - *Kluyveromyces marxianus* species: only 1 read
+> >
+> >    - Trichomonascaceae family - *Sugiyamaella* genus - *Sugiyamaella lignohabitans* species: only 1 read
+> >    - Debaryomycetaceae family - *Candida* genus - *Candida dubliniensis* species: only 1 read
+> >
+> >    Everything except *Saccharomyces cerevisiae* are probably misindentified reads.
+> >
 > > 2. Reads are assigned to *Saccharomyces*
-> >    - 41% out of total identified reads (root)
-> >    - 43% out of identified reads for Eukaryota domain
-> >    - 98% out of identified reads for Ascomycota phylum
-> >    - 99% out of identified reads for Saccharomycetales order
-> >    - 100% out of identified reads for Saccharomycetaceae family
+> >    - 25% out of total reads (root)
+> >    - 44% out of identified reads for Eukaryota domain
+> >    - 96% out of identified reads for Ascomycota phylum
+> >    - 98% out of identified reads for Saccharomycetales order
+> >    - 99% out of identified reads for Saccharomycetaceae family
 > >
 > >    ![Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species). *Saccharomyces* is highligthed with on the right the percentages of identified reads assigned to *Saccharomyces* for the different taxonomic levels](./images/krona_saccharomyces_1.png)
 > >
@@ -541,11 +557,83 @@ Let's take a look at the result.
 >
 {: .question}
 
+Microbiome of several beers, including Chimay beers, have been previously investigated by targeting specifically the fungi, in which we can find yeasts ({% cite sobel2017beerdecoded %}):
+
+![Heatmap with rows being type of beers and columns fungi species. For the rows, the name of beers are on the right and clustering tree on the left side of the heatmap. For the columns, the name of the species are on the bottom and the clustering tree on the top. The fungi species are sorted from the least abundant on the left to the most abundant on the right.](./images/beerdecoded.gif "Heatmap of the number of reads per internal transcribed spacer (ITS) sequencing of fungal species per beer. Source {% cite sobel2017beerdecoded %}")
+
+The species identified for Chimay beers are (from the most abundant to the least one):
+- *Saccharomyces cerevisiae*
+- *Saccharomyces mikatea*: a species generally used in winemaking ({% cite bellon2013introducing %})
+- *Kazachstania martiniae*: *Kazachstania* is a genus from the family Saccharomycetaceaethe.
+
+- *Saccharomyces kudriavzevii*
+- *Brettanomyces bruxellensis*
+
+    *Brettanomyces* is a non-spore forming genus of yeast in the family Saccharomycetaceae, and is important to both the brewing and wine industries due to the sensory compounds it produces. 
+
+    *Brettanomyces bruxellensis* is typically used for the production of the Belgian beers.
+
+- *Saccharomyces paradoxus*: a wild yeast species closely related to *Saccharomyces cerevisiae*
+- *Kazachstania kunashirensis*
+- *Saccharomyces cariocanus*: a wild yeast species closely related to *Saccharomyces cerevisiae*
+- *Filobasidium magnum*
+- *Malasseria restricta*
+- *Pichia kudriavzevii*
+- *Aureobasidium pullulans*
+- *Sporidiobolus metaroseus*
+
+In a structured way:
+
+Phylum | Class | Order | Family | Genus | Species
+--- | --- | --- | --- | --- | ---
+Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Saccharomyces | *Saccharomyces cerevisiae*
+Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Saccharomyces | *Saccharomyces mikatea*
+Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Saccharomyces | *Saccharomyces kudriavzevii*
+Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Saccharomyces | *Saccharomyces paradoxus*
+Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Saccharomyces | *Saccharomyces cariocanus*
+Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Kazachstania | *Kazachstania martiniae*
+Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Kazachstania | *Kazachstania kunashirensis*
+Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Brettanomyces | *Brettanomyces bruxellensis*
+Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae |  | *Pichia kudriavzevii*
+Ascomycota | Dothideomycetes | Dothideales | Dothioraceae | Aureobasidium | *Aureobasidium pullulans*
+Basidiomycota | Tremellomycetes | Filobasidiales | Filobasidiaceae | Filobasidium | *Filobasidium magnum*
+Basidiomycota | Malasseziomycetes | Malasseziales | Malasseziaceae | Malassezia | *Malasseria restricta*
+Basidiomycota | Sporidiobolales | Sporidiobolales | Sporidiobolaceae | Sporidiobolus | *Sporidiobolus metaroseus*
+
+> <question-title></question-title>
+>
+> By looking at the output of **Krakentools**, which fungi species identified for the Chimay beers in {% cite sobel2017beerdecoded %} are also identified in our data? And vice versa?
+>
+> > <solution-title></solution-title>
+> >
+> > Phylum | Class | Order | Family | Genus | Species | {% cite sobel2017beerdecoded %} | Our data 
+> > --- | --- | --- | --- | --- | --- | --- | ---
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Saccharomyces | *Saccharomyces cerevisiae* | X | X
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Saccharomyces | *Saccharomyces mikatea* | X | 
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Saccharomyces | *Saccharomyces kudriavzevii* | X | 
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Saccharomyces | *Saccharomyces paradoxus* | X | X
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Saccharomyces | *Saccharomyces cariocanus* | X | 
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Saccharomyces | *Saccharomyces eubayanus* | | X
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Kazachstania | *Kazachstania martiniae* | X | 
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Kazachstania | *Kazachstania kunashirensis* | X | 
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Kluyveromyces | *Kluyveromyces marxianus* | | X
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae | Brettanomyces | *Brettanomyces bruxellensis* | X | 
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Saccharomycetaceae |  | *Pichia kudriavzevii* | X | 
+> > Ascomycota | Saccharomycetes | Saccharomycetales | Debaryomycetaceae  | Candida | *Candida dubliniensis* | | X 
+> > Ascomycota | Dothideomycetes | Dothideales | Dothioraceae | Aureobasidium | *Aureobasidium pullulans* | X | 
+> > Ascomycota | Sordariomycetes | Sordariales | Sordariaceae | Neurospora | *Neurospora crassa* | | X 
+> > Basidiomycota | Tremellomycetes | Filobasidiales | Filobasidiaceae | Filobasidium | *Filobasidium magnum* | X | 
+> > Basidiomycota | Malasseziomycetes | Malasseziales | Malasseziaceae | Malassezia | *Malasseria restricta* | X | 
+> > Basidiomycota | Sporidiobolales | Sporidiobolales | Sporidiobolaceae | Sporidiobolus | *Sporidiobolus metaroseus* | X | 
+> {: .solution}
+{: .question}
+
+Some interesting yeast have been found in  {% cite sobel2017beerdecoded %} and not in our data (e.g. *Brettanomyces bruxellensis*), and vice versa.
+
 # (Optional) Sharing your history
 
 One of the most important features of Galaxy comes at the end of an analysis: sharing your histories with others so they can review them.
 
 {% snippet faqs/galaxy/histories_sharing.md %}
 
-
-
+# Conclusion
