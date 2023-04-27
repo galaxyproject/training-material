@@ -102,16 +102,16 @@ If you followed the {% icon tip %} tip above, you should already have your Jupyt
 > 1. Navigate back to the `Terminal`
 > 2. In the Terminal tab open, write the following, one line at a time:
 > ```
->conda install -c conda-forge -c bioconda r-monocle3
+>conda install -y -c conda-forge -c bioconda r-monocle3
 >```
 >```
->conda install -c conda-forge -c bioconda anndata
+>conda install -y -c conda-forge -c bioconda anndata
 >```
 >```
->conda install -c conda-forge r-viridislite
+>conda install -y -c conda-forge r-viridislite
 >```
 >```
->conda install -c conda-forge bioconductor-biomart
+>conda install -y -c conda-forge bioconductor-biomart
 >```
 > 3. If you are asked at any point `Proceed ([y]/n)?`, type `y` - surely we want to proceed!
 >

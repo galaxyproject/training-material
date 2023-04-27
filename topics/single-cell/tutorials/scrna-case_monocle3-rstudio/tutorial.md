@@ -193,7 +193,7 @@ We are now ready to process our data!
 >
 {: .warning}
 
-If you remember the very first tutorial, we were starting with gene IDs and adding gene symbols based on the Ensembl GTF file.  
+If you remember the very first tutorial in the case study, we started with gene IDs and added gene symbols based on the Ensembl GTF file.  
 But what if we didn’t have the genes symbols in our CDS object and wanted to add them now? Of course - it's possible! We will also base this annotation on Ensembl - the genome database – with the use of the library BioMart. We will use the same archive as in the Alevin tutorial (Genome assembly GRCm38) to get the gene names. Please note that the updated version (GRCm39) is available, but some of the gene IDs are not in that EnsEMBL database. The code below is written in a way that it will work for the updated dataset too, but will produce ‘NA’ where the corresponding gene name couldn’t be found.
 ```r
 cds_extra <- cds                                        # assign our CDS to a new object for the demonstration purpose
