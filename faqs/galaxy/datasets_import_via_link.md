@@ -18,7 +18,7 @@ contributors: [bebatut,hexylena,mtekman,lecorguille,shiltemann,nomadscientist,ne
 * Click on **Collection Type** and select `{{ include.collection_type }}`
 {% endif %}
 * Select **Paste/Fetch Data**
-* Paste the link into the text field
+* Paste the link(s) into the text field
 {% if include.link %}
   `{{ include.link }}`
 {% endif %}
