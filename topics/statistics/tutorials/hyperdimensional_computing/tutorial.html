@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Supervised Learning with Hyperdimensional Computing</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/hyperdimensional_computing/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Supervised Learning with Hyperdimensional Computing">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-04-28 19:20:03 +0000">
+<meta name="DC.creator" content="Fabio Cumbo">
+
+        
+        
+        
+        
+        <meta name="description" content="Statistical Analyses for omics data and machine learning ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Supervised Learning with Hyperdimensional Computing">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-04-28 19:20:03 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Supervised Learning with Hyperdimensional Computing",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Supervised Learning with Hyperdimensional Computing' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/hyperdimensional_computing/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "statistics",
+  "description": "The questions this  addresses are:\n - How to encode data into vectors in a high-dimensional space?\n - What kind of operations can be performed on these vectors?\n - What is a vector-symbolic architecture?\n - How to build a classification model out of this architecture?\n\n\nThe objectives are:\n - Learn how to encode data into high-dimensional vectors\n - Build a vector-symbolic architecture\n - Use the architecture to build a classification model\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "name": "Fabio Cumbo",
+      "image": "https://avatars.githubusercontent.com/cumbof",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2920-5838",
+      "orcid": "https://orcid.org/0000-0003-2920-5838"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "name": "Fabio Cumbo",
+      "image": "https://avatars.githubusercontent.com/cumbof",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2920-5838",
+      "orcid": "https://orcid.org/0000-0003-2920-5838"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Intermediate"
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and machine learning
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/hyperdimensional_computing/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/hyperdimensional_computing/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-04-01/topics/statistics/tutorials/hyperdimensional_computing/tutorial.html" title="Version 2023-04-01">2023-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-03-01/topics/statistics/tutorials/hyperdimensional_computing/tutorial.html" title="Version 2023-03-01">2023-03-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-02-01/topics/statistics/tutorials/hyperdimensional_computing/tutorial.html" title="Version 2023-02-01">2023-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+
+
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-04-28 19:20:03 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Supervised Learning with Hyperdimensional Computing",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Supervised Learning with Hyperdimensional Computing' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/hyperdimensional_computing/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "statistics",
+  "description": "The questions this  addresses are:\n - How to encode data into vectors in a high-dimensional space?\n - What kind of operations can be performed on these vectors?\n - What is a vector-symbolic architecture?\n - How to build a classification model out of this architecture?\n\n\nThe objectives are:\n - Learn how to encode data into high-dimensional vectors\n - Build a vector-symbolic architecture\n - Use the architecture to build a classification model\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "name": "Fabio Cumbo",
+      "image": "https://avatars.githubusercontent.com/cumbof",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2920-5838",
+      "orcid": "https://orcid.org/0000-0003-2920-5838"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "name": "Fabio Cumbo",
+      "image": "https://avatars.githubusercontent.com/cumbof",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2920-5838",
+      "orcid": "https://orcid.org/0000-0003-2920-5838"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Intermediate"
+}
+</script>
+
+<article class="tutorial topic-statistics">
+    <h1 data-toc-skip>Supervised Learning with Hyperdimensional Computing</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/cumbof/" class="contributor-badge contributor-cumbof"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/cumbof?s=27" alt="Avatar">Fabio Cumbo</a>
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to encode data into vectors in a high-dimensional space?</p>
+</li>
+        
+        <li><p>What kind of operations can be performed on these vectors?</p>
+</li>
+        
+        <li><p>What is a vector-symbolic architecture?</p>
+</li>
+        
+        <li><p>How to build a classification model out of this architecture?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learn how to encode data into high-dimensional vectors</p>
+</li>
+        
+        <li><p>Build a vector-symbolic architecture</p>
+</li>
+        
+        <li><p>Use the architecture to build a classification model</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.6467875">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/hyperdimensional_computing/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/statistics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 28, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+        
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="introduction">Introduction</h1>
+
+<p><code class="language-plaintext highlighter-rouge">chopin2</code> (<span class="citation"><a href="#Cumbo2020">Cumbo <i>et al.</i> 2020</a></span>) implements a domain-agnostic supervised classification method based on the hyperdimensional (HD) computing paradigm. It is an open-source tool and its code is available on GitHub at <a href="https://github.com/cumbof/chopin2">https://github.com/cumbof/chopin2</a>.</p>
+
+<p>In this tutorial, we are going to work on a dataset with microbial relative abundances (RA) and presence/absence information (BIN) computed on metagenomic samples collected from individuals affected by colorectal cancer (CRC) in a case/control scenario.
+The main goal is to build a supervised classification model over the RA profiles with <code class="language-plaintext highlighter-rouge">chopin2</code> in order to discriminate case and control samples with a high accuracy.</p>
+
+<p>The dataset with RA profiles has been produced with <code class="language-plaintext highlighter-rouge">MetaPhlAn3</code> (<span class="citation"><a href="#beghini2021integrating">Beghini <i>et al.</i> 2021</a></span>) and it is available through the <code class="language-plaintext highlighter-rouge">curatedMetagenomicData</code> package for R (<span class="citation"><a href="#pasolli2017accessible">Pasolli <i>et al.</i> 2017</a></span>). The studies describing the analysis of the metagenomic samples are available in Nature Medicine (<span class="citation"><a href="#thomas2019metagenomic">Thomas <i>et al.</i> 2019</a></span> <span class="citation"><a href="#wirbel2019meta">Wirbel <i>et al.</i> 2019</a></span>).
+In particular, the dataset contains the profiles of 241 microbial species detected in 101 stool samples of patients affected by CRC, and 92 samples collected from the stool of healthy individuals.</p>
+
+<p>The data we use in this tutorial is also available on <a href="https://doi.org/10.5281/zenodo.6467875">Zenodo</a>.</p>
+
+<p>Please note that both the RA and BIN datasets in Zenodo have also been stratified according to the age category and sex of both case and control individuals. However, in this tutorial we are going to analyze the unstratified datasets, called <code class="language-plaintext highlighter-rouge">RA__ThomasAM__species.csv</code> and <code class="language-plaintext highlighter-rouge">BIN__ThomasAM__species.csv</code>.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>A <code class="language-plaintext highlighter-rouge">chopin2</code> analysis is composed of three steps:</p>
+
+  <ol>
+    <li><a href="#get-the-data">Get the data</a></li>
+    <li><a href="#build-a-classification-model">Build a classification model</a></li>
+    <li><a href="#feature-selection">Feature selection</a></li>
+  </ol>
+</blockquote>
+
+<h1 id="get-the-data">Get the data</h1>
+
+<p>The first step consists in importing the RA and BIN datasets into a Galaxy history. As previously mentioned, RA refers to the dataset with microbial relative abundance profiles computed with <code class="language-plaintext highlighter-rouge">MetaPhlAn3</code>, while BIN refers to the dataset with presence/absence information about microbes in samples.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the data</div>
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+    </li>
+    <li>Import datasets from <a href="https://zenodo.org/record/7806264">Zenodo</a>:
+      <ul>
+        <li>RA dataset (<code class="language-plaintext highlighter-rouge">RA__ThomasAM__species.csv</code>)</li>
+        <li>BIN dataset (<code class="language-plaintext highlighter-rouge">BIN__ThomasAM__species.csv</code>)</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7806264/files/RA__ThomasAM__species.csv
+https://zenodo.org/record/7806264/files/BIN__ThomasAM__species.csv
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+
+      <p>When uploading the datasets, set the <code class="language-plaintext highlighter-rouge">type</code> to csv. Both datasets contain samples in the columns and microbial species in the rows. The RA dataset contains relative abundance profiles, thus values ranging from 0.0 to 100.0, while the BIN dataset contains presence/absence (i.e., 0 or 1) information computed on the relative abundance. It means that the value of the cell <code class="language-plaintext highlighter-rouge">ij</code> in the BIN matrix is 1 if the relative abundance of the species <code class="language-plaintext highlighter-rouge">i</code> in the sample <code class="language-plaintext highlighter-rouge">j</code> is greater than 0.0 in the RA matrix. Otherwise, it is 0.</p>
+    </li>
+    <li>Edit history item attributes <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span>
+      <ul>
+        <li>Make sure dataset names are clear, like <code class="language-plaintext highlighter-rouge">RA__ThomasAM__species.csv</code> and <code class="language-plaintext highlighter-rouge">BIN__ThomasAM__species.csv</code>.</li>
+        <li>If you did not previously set the datatype to csv, you can do that now under the convert tab.</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="build-a-classification-model">Build a classification model</h1>
+
+<p>Hyperdimensional computing is an emerging brain-inspired computing paradigm that deals with vectors in a high-dimensional space. Every kind of information is thus encoded into random 10,000-length vectors (usually binary or bipolar) that are combined together to represent complex concepts. The length of the vectors is usually in the order of 10,000 to guarantee their quasi-orthogonality.</p>
+
+<p>There are usually three types of arithmetic operators that can be applied to combine vectors: bundling, binding, and permutation. They all have unique properties that must be taken into account when used (<span class="citation"><a href="#kanerva2009hyperdimensional">Kanerva 2009</a></span>).</p>
+
+<p>For what concerns the bundling operator: (i) the resulting vector is similar to the input vectors, (ii) the more vectors that are involved in bundling, the harder it is to determine the component vectors, (iii) if several copies of any vector are included in bundling, the resulting vector is closer to the dominant vector than to the other components.</p>
+
+<p>The binding operation is instead: (i) invertible (unbinding), (ii) it distributes over bundling, (iii) it preserves the distance, (iv) and the resulting vector is dissimilar to the input vectors.</p>
+
+<p>Finally, the permutation operation is: (i) invertible, (ii) it distributes over bundling and any elementwise operation, (iii) it preserves the distance, and (iv) the resulting vector is dissimilar to the input vectors.</p>
+
+<p>The set of vectors and arithmetic operators used for combining vectors is called vector-symbolic architecture.</p>
+
+<p><code class="language-plaintext highlighter-rouge">chopin2</code> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> implements a supervised classification model that works by encoding every observation in a dataset into high-dimensional vectors by combining values under their features. The model is built by collapsing the vector representation of the observations in the training set into a vector for each class of observations (e.g., in the case of the datasets retrieved in the previous step, classes are <code class="language-plaintext highlighter-rouge">CRC</code> and <code class="language-plaintext highlighter-rouge">control</code>). The classification model is then tested by computing the inner product between the vector representations of the observations in the test set against the two classes of vectors. Vectors are thus classified based on their closeness to the classes.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-build-a-classification-model-with-chopin2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Build a classification model with `chopin2`</div>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/chopin2/chopin2/1.0.7+galaxy1" title="chopin2 tool"><strong>chopin2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/chopin2/chopin2/1.0.7+galaxy1</span></span>  with the following configuration:</p>
+  <ul>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a dataset”</em>: <code class="language-plaintext highlighter-rouge">RA__ThomasAM__species.csv</code>;</li>
+    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Vector dimensionality”</em>: <code class="language-plaintext highlighter-rouge">10000</code>;</li>
+    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Levels”</em>: <code class="language-plaintext highlighter-rouge">100</code>;</li>
+    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Model retraining iterations”</em>: <code class="language-plaintext highlighter-rouge">10</code>;</li>
+    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of folds for cross-validation”</em>: <code class="language-plaintext highlighter-rouge">5</code>;</li>
+    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Enable feature selection”</em>: <code class="language-plaintext highlighter-rouge">Disabled</code></li>
+  </ul>
+
+  <p>The number of levels is the number of random vectors that <code class="language-plaintext highlighter-rouge">chopin2</code> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> generates for encoding data. This must be carefully selected since the accuracy of the resulting model is strictly correlated to this parameter (<span class="citation"><a href="#Cumbo2020">Cumbo <i>et al.</i> 2020</a></span>).</p>
+
+  <p>The tool will create a <code class="language-plaintext highlighter-rouge">summary</code> file in your history containing a few basic information about the generated classification model and, more importantly, its accuracy. You can open this file by clicking the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon.</p>
+
+  <p>We suggest that you repeat the same steps for building a classification model on the binary presence/absence profiles in <code class="language-plaintext highlighter-rouge">BIN__ThomasAM__species.csv</code>. In this case there is no need to use many levels, since the dataset contains only two possible values (i.e., 0 and 1). Thus, the number of levels must be changed to 2.</p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+    <p>Compare the <code class="language-plaintext highlighter-rouge">summary</code> files generated by <code class="language-plaintext highlighter-rouge">chopin2</code> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> as the result of building a classification model over the <code class="language-plaintext highlighter-rouge">RA__ThomasAM__species.csv</code> and <code class="language-plaintext highlighter-rouge">BIN__ThomasAM__species.csv</code> datasets.</p>
+    <ol class="solution">
+      <li>Is there a difference in the accuracy of the two models?</li>
+      <li>
+        <p>Does the difference in the number of levels have an impact on the running time and the final accuracy of the models?</p>
+
+        <blockquote>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ol>
+            <li>The accuracy of the model built on the <code class="language-plaintext highlighter-rouge">BIN__ThomasAM__species.csv</code> dataset is over 80%, while the accuracy of the model built on the <code class="language-plaintext highlighter-rouge">RA__ThomasAM__species.csv</code> dataset is around 75%.</li>
+            <li>The tool generates as many hyperdimensional vectors as the number of levels. In cases of a high number of levels, the tool could take a while to generate all the hyperdimensional vectors initially, but it does not affect its speed in the generation of the classification model. However, it could heavily affect the memory consumption. Additionally, the number of levels has an impact on the accuracy of the model. It is recommended to choose as many levels as the number of unique values in the datasets, by also taking into account the precision of the numerical values.</li>
+          </ol>
+        </blockquote>
+      </li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="feature-selection">Feature selection</h1>
+
+<p><code class="language-plaintext highlighter-rouge">chopin2</code> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> also implements a feature selection method based on the backward variable elimination strategy. It means that the tool will produce a classification model starting with the whole set of features in the dataset and iteratively remove those features that do not contribute to the accuracy of the model.</p>
+
+<p>Be aware that this specific type of feature selection method could lead to the generation of thousands of classification models in order to determine the best features and discard those ones that do not significantly contribute to a good accuracy. However, despite the huge amount of computational resources required to run the algorithm, it can easily handle datasets with massive amounts of features.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-identify-the-best-features"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Identify the best features</div>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/chopin2/chopin2/1.0.7+galaxy1" title="chopin2 tool"><strong>chopin2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/chopin2/chopin2/1.0.7+galaxy1</span></span>  with the following configuration:</p>
+  <ul>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a dataset”</em>: <code class="language-plaintext highlighter-rouge">BIN__ThomasAM__species.csv</code>;</li>
+    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Vector dimensionality”</em>: <code class="language-plaintext highlighter-rouge">10000</code>;</li>
+    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Levels”</em>: <code class="language-plaintext highlighter-rouge">2</code>;</li>
+    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Model retraining iterations”</em>: <code class="language-plaintext highlighter-rouge">10</code>;</li>
+    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of folds for cross-validation”</em>: <code class="language-plaintext highlighter-rouge">5</code>;</li>
+    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Enable feature selection”</em>: <code class="language-plaintext highlighter-rouge">Enabled</code></li>
+  </ul>
+
+  <p>We are going to focus on the <code class="language-plaintext highlighter-rouge">BIN__ThomasAM__species.csv</code> dataset only this time since <code class="language-plaintext highlighter-rouge">chopin2</code> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> produced a classification model with a better accuracy compared to that of the model built over the <code class="language-plaintext highlighter-rouge">RA__ThomasAM__species.csv</code> dataset.</p>
+
+  <p>The tool will end up creating a <code class="language-plaintext highlighter-rouge">summary</code> file in your history (click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon to check its content). It contains a line for each step of the backward variable elimination method. Every line corresponds to a classification model. Please note that the last column reports the features excluded in each step.</p>
+
+  <p>A <code class="language-plaintext highlighter-rouge">selection</code> file will also appear in your history with the list of best features selected by <code class="language-plaintext highlighter-rouge">chopin2</code> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (you can also inspect this file by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon). Some of them are well known to be actually linked in someway to the genesis and development of CRC as a simple search on the <a href="https://disbiome.ugent.be/">Disbiome</a> (<span class="citation"><a href="#janssens2018disbiome">Janssens <i>et al.</i> 2018</a></span>) database can confirm. However, these features have been selected because they all contribute to define the best accuracy according to the classification model and the feature selection technique implemented in <code class="language-plaintext highlighter-rouge">chopin2</code> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, and they do not necessarily have a biological relevance. Thus, this is not enough for identifying true possible biomarkers for CRC, and further statistical analyses must be performed to validate and support these findings.</p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+    <p>Look at the list of microbial species (features) selected by <code class="language-plaintext highlighter-rouge">chopin2</code> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> reported in the <code class="language-plaintext highlighter-rouge">selection</code> file. Can you recognize any microbial species known to be linked in some way to the genesis and development of colorectal cancer?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p><em>Clostridium symbiosum</em>, <em>Gemella morbillorum</em>, and <em>Parvimonas micra</em>, among the other selected species, are well known CRC-enriched bacteria. These species have all been proposed as biomarkers for an early detection of the disease (<span class="citation"><a href="#xie2017fecal">Xie <i>et al.</i> 2017</a></span> <span class="citation"><a href="#yao2021new">Yao <i>et al.</i> 2021</a></span> <span class="citation"><a href="#zhao2022parvimonas">Zhao <i>et al.</i> 2022</a></span>).</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-feature-selection-with-hyperdimensional-computing"><button class="gtn-boxify-button details" type="button" aria-controls="details-feature-selection-with-hyperdimensional-computing" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Feature selection with Hyperdimensional Computing<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p><code class="language-plaintext highlighter-rouge">chopin2</code> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is the first tool that implements a feature selection method based on the hyperdimensional computing paradigm.</p>
+</blockquote>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Every kind of data can be encoded into high-dimensional vectors</p>
+</li>
+                        
+                        <li><p>A vector-symbolic architecture is composed of vectors and a limited set of arithmetic operators</p>
+</li>
+                        
+                        <li><p>Classification models build according to the hyperdimensional computing paradigm can scale on datasets with massive amounts of features and data points</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/statistics/faqs/">FAQ page for the Statistics and machine learning topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="kanerva2009hyperdimensional">Kanerva, P., 2009 <b>Hyperdimensional computing: An introduction to computing in distributed representation with high-dimensional random vectors</b>. Cognitive computation 1: 139–159. <a href="https://doi.org/10.1007/s12559-009-9009-8">10.1007/s12559-009-9009-8</a></li>
+<li id="pasolli2017accessible">Pasolli, E., L. Schiffer, P. Manghi, A. Renson, V. Obenchain <i>et al.</i>, 2017 <b>Accessible, curated metagenomic data through ExperimentHub</b>. Nature methods 14: 1023–1024. <a href="https://doi.org/10.1038/nmeth.4468">10.1038/nmeth.4468</a></li>
+<li id="xie2017fecal">Xie, Y.-H., Q.-Y. Gao, G.-X. Cai, X.-M. Sun, T.-H. Zou <i>et al.</i>, 2017 <b>Fecal Clostridium symbiosum for noninvasive detection of early and advanced colorectal cancer: test and validation studies</b>. EBioMedicine 25: 32–40. <a href="https://doi.org/10.1016/j.ebiom.2017.10.005">10.1016/j.ebiom.2017.10.005</a></li>
+<li id="janssens2018disbiome">Janssens, Y., J. Nielandt, A. Bronselaer, N. Debunne, F. Verbeke <i>et al.</i>, 2018 <b>Disbiome database: linking the microbiome to disease</b>. BMC microbiology 18: 1–6. <a href="https://doi.org/10.1186/s12866-018-1197-5">10.1186/s12866-018-1197-5</a></li>
+<li id="thomas2019metagenomic">Thomas, A. M., P. Manghi, F. Asnicar, E. Pasolli, F. Armanini <i>et al.</i>, 2019 <b>Metagenomic analysis of colorectal cancer datasets identifies cross-cohort microbial diagnostic signatures and a link with choline degradation</b>. Nature medicine 25: 667–678. <a href="https://doi.org/10.1038/s41591-019-0405-7">10.1038/s41591-019-0405-7</a></li>
+<li id="wirbel2019meta">Wirbel, J., P. T. Pyl, E. Kartal, K. Zych, A. Kashani <i>et al.</i>, 2019 <b>Meta-analysis of fecal metagenomes reveals global microbial signatures that are specific for colorectal cancer</b>. Nature medicine 25: 679–689. <a href="https://doi.org/10.1038/s41591-019-0406-6">10.1038/s41591-019-0406-6</a></li>
+<li id="Cumbo2020">Cumbo, F., E. Cappelli, and E. Weitschek, 2020 <b>A brain-inspired hyperdimensional computing approach for classifying massive dna methylation data of cancer</b>. Algorithms 13: 233. <a href="https://doi.org/10.3390/a13090233">10.3390/a13090233</a></li>
+<li id="beghini2021integrating">Beghini, F., L. J. McIver, Blanco-Mı́guez Aitor, L. Dubois, F. Asnicar <i>et al.</i>, 2021 <b>Integrating taxonomic, functional, and strain-level profiling of diverse microbial communities with bioBakery 3</b>. elife 10: e65088. <a href="https://doi.org/10.7554/eLife.65088">10.7554/eLife.65088</a></li>
+<li id="yao2021new">Yao, Y., H. Ni, X. Wang, Q. Xu, J. Zhang <i>et al.</i>, 2021 <b>A new biomarker of fecal bacteria for non-invasive diagnosis of colorectal cancer</b>. Frontiers in Cellular and Infection Microbiology 11: 1262. <a href="https://doi.org/10.3389/fcimb.2021.744049">10.3389/fcimb.2021.744049</a></li>
+<li id="zhao2022parvimonas">Zhao, L., X. Zhang, Y. Zhou, K. Fu, H. C.-H. Lau <i>et al.</i>, 2022 <b>Parvimonas micra promotes colorectal tumorigenesis and is associated with prognosis of colorectal cancer patients</b>. Oncogene 41: 4200–4210. <a href="https://doi.org/10.1038/s41388-022-02395-7">10.1038/s41388-022-02395-7</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Supervised Learning with Hyperdimensional Computing (Statistics and machine learning)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Fabio Cumbo,  <b>Supervised Learning with Hyperdimensional Computing (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/hyperdimensional_computing/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/hyperdimensional_computing/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{statistics-hyperdimensional_computing,
+author = "Fabio Cumbo",
+title = "Supervised Learning with Hyperdimensional Computing (Galaxy Training Materials)",
+year = "",
+month = "",
+day = ""
+url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/hyperdimensional_computing/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+var d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
+        var snippets=document.querySelectorAll('div.highlight');
+        [].forEach.call(snippets,function(snippet){
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+
+        var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+            target:function(trigger){return trigger.nextElementSibling;
+        }});
+        </script>
+        
+
+        <script type="text/javascript">
+            if(window.location.hostname === "galaxyproject.github.io") {
+                // Redirect
+                var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+                $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+                window.setTimeout(function(){
+                    window.location.href = redirect;
+                }, 5000)
+
+            }
+        </script>
+    </body>
+</html>
