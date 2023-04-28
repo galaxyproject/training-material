@@ -816,7 +816,9 @@ This leaves us with the tasks of obtaining the sequence for parent P1 (accession
 >        - {% icon param-collection %} *"Select"*: collection of consensus sequences; output of **ivar consensus**
 >      - {% icon param-repeat %} *"Insert Dataset"*
 >        - {% icon param-files %} *"Select"*: the `LSDV reference`
-> 3. {% tool [MAFFT)](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0) %}
+>
+>    {% snippet faqs/galaxy/analysis_concatenate.md toolspec="#2" %}
+> 3. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0) %}
 >    - {% icon param-file %} *"Sequences to align"*: Multi-fasta dataset with four sequences; output of **Concatenate**
 >    - *"Data type"*: `Nucleic acids`
 >    - *"Matrix selection"*: `No matrix`
