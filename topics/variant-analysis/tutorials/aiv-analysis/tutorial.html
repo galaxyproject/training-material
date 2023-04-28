@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Avian influenza viral strain analysis from gene segment sequencing data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-03-05 09:19:48 +0000">
+<meta name="DC.date" content="2023-04-28 07:02:26 +0000">
 <meta name="DC.creator" content="Wolfgang Maier">
 
         
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-05 09:19:48 +0000",
+  "dateModified": "2023-04-28 07:02:26 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Avian influenza viral strain analysis from gene segment sequencing data",
   "interactivityType": "mixed",
@@ -478,7 +478,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-05 09:19:48 +0000",
+  "dateModified": "2023-04-28 07:02:26 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Avian influenza viral strain analysis from gene segment sequencing data",
   "interactivityType": "mixed",
@@ -893,7 +893,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 5, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 28, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -948,8 +948,9 @@
 
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
-  <li><a href="#prepare-analysis-history-and-data" id="markdown-toc-prepare-analysis-history-and-data">Prepare analysis history and data</a>    <ol>
-      <li><a href="#get-reference-and-sequenced-samples-data" id="markdown-toc-get-reference-and-sequenced-samples-data">Get reference and sequenced samples data</a></li>
+  <li><a href="#prepare-analysis-history-and-data" id="markdown-toc-prepare-analysis-history-and-data">Prepare analysis history and data</a></li>
+  <li><a href="#get-a-history-with-reference-data" id="markdown-toc-get-a-history-with-reference-data">Get a history with reference data</a>    <ol>
+      <li><a href="#get-the-sequencing-data" id="markdown-toc-get-the-sequencing-data">Get the sequencing data</a></li>
       <li><a href="#inspect-the-reference-data" id="markdown-toc-inspect-the-reference-data">Inspect the reference data</a></li>
     </ol>
   </li>
@@ -965,79 +966,63 @@
 
 <h1 id="prepare-analysis-history-and-data">Prepare analysis history and data</h1>
 
-<p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
+<p>In this tutorial you are going to work on a single avian influenza sample sequenced in paired-end mode on the Illumina platform, <em>i.e.</em> we are going to download two datasets of sequenced reads for that sample.</p>
+
+<p>In addition, we are going to base the analysis on a small collection of multiple reference sequences for each influenza gene segment. We prepared this collection for you from public <a href="https://insaflu.insa.pt/dashboard/">INSAFlu</a> <a href="https://insaflu.readthedocs.io/en/latest/uploading_data.html?highlight=references#uploading-reference-data">data</a>.</p>
+
+<p>If you have your own curated collection of reference sequences, you should be able to use it to follow this tutorial without any problem. Note, however, that the analysis results referred to in many of the questions will be different if you are exchanging the reference collection.
+If you want to learn how you can create a Galaxy collection from your own references that is structured like the default we are suggesting here, you may want to follow the dedicated tutorial on <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">Using dataset collections</a>.</p>
+
+<h1 id="get-a-history-with-reference-data">Get a history with reference data</h1>
+
+<p>Any analysis should get its own Galaxy history, but in this tutorial we <em>won’t</em> start with creating one.</p>
+
+<p>Instead, to save some time, you can copy an existing shared history on Galaxy Europe.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the Galaxy history</div>
 
   <ol>
     <li>
-      <p>Create a new history for this analysis</p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <p>Open the <a href="https://usegalaxy.eu/u/wolfgang-maier/h/influenza-resources">shared history</a> with pre-prepared INSAFlu reference data</p>
     </li>
     <li>
       <p>Rename the history</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name: <code class="language-plaintext highlighter-rouge">Avian influenza tutorial</code></li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name: <code class="language-plaintext highlighter-rouge">Avian influenza tutorial</code></li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="get-reference-and-sequenced-samples-data">Get reference and sequenced samples data</h2>
-
-<p>In this tutorial you are going to work on a single avian influenza sample sequenced in paired-end mode on the Illumina platform, <em>i.e.</em> we are going to download two datasets of sequenced reads for that sample.</p>
-
-<p>In addition, we are going to base the analysis on a small collection of multiple reference sequences for each influenza gene segment. We prepared this collection for you from public INSAFlu data.</p>
-
-<p>If you have your own curated collection of reference sequences, you should be able to use it for following this tutorial without any problem. Note, however, that the analysis results referred to in many of the questions will be different if you are exchanging the reference collection.
-If you want to learn how you can create a Galaxy collection from your own references that is structured like the default we are suggesting here, you may want to follow the dedicated tutorial on <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">Using dataset collections</a>.</p>
+<h2 id="get-the-sequencing-data">Get the sequencing data</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the data</div>
 
   <ol>
-    <li><span class="tool" data-tool="upload1" title="Upload tool"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  the forward and reverse reads of your sequenced sample to your history and turn them into a <em>Paired Collection</em>.
+    <li>
+      <p>Import the forward and reverse reads of the sequenced sample into your history and organize them into a <em>Paired Collection</em>.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://usegalaxy.eu/api/datasets/4838ba20a6d86765171e4f201205515c/display?to_ext=fastqsanger.gz
+https://usegalaxy.eu/api/datasets/4838ba20a6d867657d09280baae4e1ec/display?to_ext=fastqsanger.gz
+</code></pre></div>      </div>
+
       <ol>
-        <li>In the <em>“Download from web or upload from disk”</em> dialogue, switch to the <code class="language-plaintext highlighter-rouge">Collection</code> tab,
-then configure the drop-down select boxes on that tab like this:
+        <li>Copy the links above</li>
+        <li>Open the <span class="tool" data-tool="upload1" title="Upload tool"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  Manager</li>
+        <li>In the top row of tabs select <strong>Collection</strong></li>
+        <li>Configure the drop-down select boxes on that tab like this:
           <ul>
             <li><em>“Collection Type”</em>: <code class="language-plaintext highlighter-rouge">Pair</code></li>
             <li><em>“File Type”</em>: <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></li>
           </ul>
         </li>
-        <li>
-          <p>Click on <code class="language-plaintext highlighter-rouge">Paste/Fetch data</code> and copy the following links over to the empty text box</p>
-
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://usegalaxy.eu/api/datasets/4838ba20a6d86765171e4f201205515c/display?to_ext=fastqsanger.gz
-https://usegalaxy.eu/api/datasets/4838ba20a6d867657d09280baae4e1ec/display?to_ext=fastqsanger.gz
-</code></pre></div>          </div>
-
-          <p>and press <code class="language-plaintext highlighter-rouge">Start</code>.</p>
-        </li>
-        <li>Wait for the <code class="language-plaintext highlighter-rouge">Build</code> button to become enabled, click it, and, in the next dialogue, give a suitable <strong>Name</strong> to the new collection.</li>
-      </ol>
-    </li>
-    <li>Import the reference data collection into your history
-      <ol>
-        <li>Open the <a href="https://usegalaxy.eu/u/wolfgang-maier/h/influenza-resources">shared history</a> with the pre-prepared INSAFlu reference data</li>
-        <li>Click on <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>“Import”</em> in the upper right corner of the page</li>
-        <li>Choose a name for the new history (or go with the default), confirm by clicking Import and wait for the page to reload</li>
-        <li>In the history panel (which should now show the newly imported history),
-click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon in the bar just above the history’s datasets,
-select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, and wait for the center panel to refresh</li>
-        <li>In the center panel,
-          <ul>
-            <li>make sure the imported history is selected as the <em>“Source History”</em></li>
-            <li>select the history you created for this tutorial as the <em>“Destination History”</em></li>
-            <li>under <em>“Source History”</em> select the <code class="language-plaintext highlighter-rouge">References per segment (INSAFlu)</code> collection for copying</li>
-            <li>click <em>“Copy History Items”</em></li>
-          </ul>
-        </li>
-        <li>Switch to the tutorial history</li>
+        <li>Click on <strong>Paste/Fetch data</strong> and paste the links you copied into the empty text box</li>
+        <li>Press <strong>Start</strong></li>
+        <li>Wait for the <strong>Build</strong> button to become enabled, click it, and, in the next dialogue, give a suitable <strong>Name</strong>, like <code class="language-plaintext highlighter-rouge">Sequencing data</code>, to the new collection.</li>
+        <li>Click on <strong>Create collection</strong></li>
       </ol>
     </li>
   </ol>
@@ -1050,7 +1035,7 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
   <div class="box-title hands-on-title" id="hands-on-what-is-in-the-reference-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: What is in the reference collection?</div>
 
   <ol>
-    <li>Step inside the uploaded reference collection by clicking on it.</li>
+    <li>Step inside the imported reference collection by clicking on it.</li>
     <li>Expand individual elements of the collection by clicking on them to reveal more details about them.</li>
     <li>
       <p>View the content of any element by clicking its <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span>.</p>
@@ -1116,6 +1101,25 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
         </li>
       </ul>
 
+      <blockquote class="details">
+        <div class="box-title details-title" id="details-fastp-default-settings"><button class="gtn-boxify-button details" type="button" aria-controls="details-fastp-default-settings" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: fastp default settings<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>fastp comes with basic default settings for some of its many parameters.
+In particular, with no explicit parameter specifications, the tool will still remove reads that</p>
+        <ul>
+          <li>have base qualities &lt; 15 for more than 40% of their bases</li>
+          <li>have more than 5 Ns in their sequence</li>
+          <li>
+            <p>have a length &lt; 15 bases (after removing poly-G tails from Illumina reads)</p>
+
+            <p>Because our input data has far longer MiSeq-generated reads, we can increase this length threshold to 30 bases as done above.</p>
+          </li>
+        </ul>
+
+        <p>These are very relaxed criteria that will only remove the least usable reads, but still assure minimal
+quality standards that are good enough for many (including training) purposes.</p>
+      </blockquote>
+
       <p>Running the tool will result in two outputs. One is a new paired collection with the processed reads, the other one is a report of initial quality, the processing actions performed and their effect on key quality metrics.</p>
     </li>
     <li>
@@ -1136,7 +1140,8 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
           <ol>
             <li>The forward reads were of worse quality in particular near their 3’-ends than the reverse reads and, consequently, were affected more strongly by trimming (see the different “quality” plots in the report).</li>
             <li>Less than 2% of reads got discarded completely (the “Filtering result” section of the report says 98.03% of all reads were retained). In contrast, around 10% of all bases got discarded (compare total bases before and after filtering) so most reads got trimmed but not discarded.</li>
-            <li><strong>fastp</strong> is a tool with many hidden default actions in its various sections. Inside the <em>Filter Options</em> check <em>Quality filtering options</em> and the various defaults mentioned in the parameters help therein. One of these defaults is to discard reads with more than 5 Ns. These defaults are often reasonable, but it’s good to be aware of them.</li>
+            <li>As explained in the “fastp default settings” box above, <strong>fastp</strong> is a tool with many hidden default actions in its various sections.
+Inside the <em>Filter Options</em> inspect <em>Quality filtering options</em> and the various defaults mentioned in the parameters help therein. One of these defaults is to discard reads with more than 5 Ns. These defaults are often reasonable, but it’s good to be aware of them.</li>
           </ol>
 
         </blockquote>
@@ -1269,6 +1274,19 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
         </li>
       </ul>
     </li>
+    <li>
+      <p>Add a tag to the output dataset</p>
+
+      <p>This is the hybrid reference genome that we are going to use for mapping now.
+It is an important intermediate result, to which we will need to return later, and to make that easier we are going to add a tag to it now for extra visibility in the history.</p>
+
+      <ol>
+        <li>Click on the dataset to expand it</li>
+        <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>
+        <li>Enter a tag like <code class="language-plaintext highlighter-rouge">HybridRef</code> (tags have to consist of a single word)</li>
+        <li>Confirm your choice by pressing Enter on the keyboard or clicking on the new name.</li>
+      </ol>
+    </li>
   </ol>
 
 </blockquote>
@@ -1348,10 +1366,9 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
   <div class="box-title hands-on-title" id="hands-on-splitting-mapped-reads-by-genome-segment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Splitting mapped reads by genome segment</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.1+galaxy0" title="Split BAM by Reference tool"><strong>Split BAM by Reference</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.1+galaxy0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.2+galaxy1" title="Split BAM by Reference tool"><strong>Split BAM by Reference</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.2+galaxy1</span></span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM dataset to split by reference”</em>: filtered mapped reads; output of <strong>Samtools view</strong></li>
-        <li><em>“Select references (chromosomes and contigs) you would like to restrict bam to”</em>: <code class="language-plaintext highlighter-rouge">Unselect all</code></li>
       </ul>
     </li>
   </ol>
@@ -1366,7 +1383,11 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
   <ol>
     <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: the mapping reference; output of <strong>Replace</strong> in Mapping to a hybrid reference</li>
+        <li>
+          <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: the mapping reference; output of <strong>Replace</strong> in Mapping to a hybrid reference</p>
+
+          <p><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> This is the dataset you should have <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> tagged before. Lets hope you did!</p>
+        </li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">^&gt;.+</code></li>
       </ul>
@@ -1414,14 +1435,14 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
   <div class="box-title hands-on-title" id="hands-on-per-segment-consensus-construction"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Per-segment consensus construction</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.3.1+galaxy0" title="ivar consensus tool"><strong>ivar consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.3.1+galaxy0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0" title="ivar consensus tool"><strong>ivar consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0</span></span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Bam file”</em>: the relabeled collection of mapped reads; output of <strong>Relabel identifiers</strong></li>
         <li><em>“Minimum quality score threshold to count base”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
         <li><em>“Minimum frequency threshold”</em>: <code class="language-plaintext highlighter-rouge">0.7</code></li>
+        <li><em>“Minimum indel frequency threshold”</em>: <code class="language-plaintext highlighter-rouge">0.8</code></li>
         <li><em>“Minimum depth to call consensus”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
-        <li><em>“Exclude regions with smaller depth than the minimum threshold”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><em>“Use N instead of - for regions with less than minimum coverage”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“How to represent positions with coverage less than the minimum depth threshold”</em>: <code class="language-plaintext highlighter-rouge">Represent as N (-n N)</code></li>
       </ul>
 
       <p>The output is a consensus sequence in FASTA format, one per segment, with
@@ -1430,7 +1451,7 @@ the names just providing a bit too much detail for our purpose.</p>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace parts of text tool"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: consensus sequences; output of <strong>ivar consensus</strong></li>
-        <li>In <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1. Find and Replace”</em>:
+        <li>In <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1: Find and Replace”</em>:
           <ul>
             <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^&gt;Consensus_(.*)_threshold_.*</code></li>
             <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">&gt;$1</code></li>
@@ -1462,34 +1483,43 @@ the names just providing a bit too much detail for our purpose.</p>
 <h1 id="placing-segments-on-a-phylogenetic-tree">Placing segments on a phylogenetic tree</h1>
 
 <p>The next logical step after obtaining the consensus sequences of segments of our sample is to explore how those sequences are related to the sequences in our reference collection.
-To do so, we are going to build multiple sequence alignments (MSAs) per segment of all reference sequences, add our sample segments to those alignments, and build phylogenetic trees, one per segment. We are going to use two rather standard tools, <strong>MAFFT</strong> and <strong>IQTree</strong>, for generating MSAs and trees, respectively.</p>
+To do so, we are going to combine the reference sequences of all segments with their corresponding consensus sequence into one multi-sequence fasta dataset per segment. Then we build a multiple sequence alignment (MSA) from the sequences of each segment, and use these alignments to generate phylogenetic trees, again one per segment. We are going to use two rather standard tools, <strong>MAFFT</strong> and <strong>IQTree</strong>, for generating MSAs and trees, respectively.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-exploring-phylogeny"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Exploring phylogeny</div>
 
   <ol>
+    <li><span class="tool" data-tool="cat1" title="Concatenate datasets tool"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">References per segment (INSAFlu)</code></li>
+        <li>In <em>“Dataset”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Dataset”</em>
+              <ul>
+                <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select”</em>: collection of renamed consensus sequences; output of <strong>Replace</strong> on consensus sequences</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-pick-the-right-concatenate-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-pick-the-right-concatenate-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Pick the right Concatenate tool<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>On most Galaxy servers you will find two <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Concatenate datasets</strong> tools installed:</p>   <ol>   <li><strong>Concatenate datasets</strong> tail-to-head</li>   <li><strong>Concatenate datasets</strong> tail-to-head (cat)</li> </ol>   <p><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> The tool you want to use at this step is <code class="language-plaintext highlighter-rouge">#1</code>, but if you are interested in the details, here is why:</p>   <p>The two tools have nearly identical interfaces, but behave differently in certain situations, specifically:</p>   <ul>   <li>     <p>The second tool, the one with “(cat)” in its name, simply concatenates everything you give to it into a single output dataset.</p>     <p>Whether you give it multiple datasets or a collection as the first parameter, or some datasets as the first and some others as the second parameter, it will always concatenate them all. In fact, the only reason for having multiple parameters for this tool is that by providing inputs through multiple parameters, you can make sure they are concatenated in the order you pass them in.</p>   </li>   <li>     <p>The first tool, on the other hand, will only ever concatenate inputs provided through <em>different</em> parameters.</p>     <p>This tool allows you to specify an arbitrary number of <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> single datasets, but if you also want to use <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> multiple datasets or <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> a collection for some of the Dataset parameters, then all of these need to be of the same type (multiple datasets <em>or</em> collections) and have the same number of inputs.</p>     <p>Now depending on the inputs, one of the following behaviors will occur:</p>     <ul>       <li>If all the different inputs are <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> single datasets, the tool will concatenate them all and produce a single output dataset.</li>       <li>If all the different inputs are specified <em>either</em> as <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> multiple datasets <em>or</em> as <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span>, and all have the same number of datasets, then the tool will concatenate the first datasets of each input parameter, the second datasets of each input parameter, the third, etc., and produce an output collection with as many elements as there are inputs per Dataset parameter.</li>       <li>In extension of the above, if <em>some</em> additional inputs are provided as <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> single datasets, the content of these will be recycled and be reused in the concatenation of all the nth elements of the other parameters.</li>     </ul>   </li> </ul> </blockquote>
+
+      <p>The tool should produce a collection of eight multi-sequence fasta datasets, each of which has the generated consensus sequence for one segment concatenated to the INSAFlu reference sequences of that segment.</p>
+    </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0" title="MAFFT tool"><strong>MAFFT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0</span></span>
       <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sequences to align”</em>: <code class="language-plaintext highlighter-rouge">References per segment (INSAFlu)</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sequences to align”</em>: collection of concatenated sequences; output of <strong>Concatenate datasets</strong></li>
         <li><em>“Data type”</em>: <code class="language-plaintext highlighter-rouge">Nucleic Acids</code></li>
         <li><em>“Matrix selection”</em>: <code class="language-plaintext highlighter-rouge">No matrix</code></li>
       </ul>
 
-      <p>The result is a collection of MSAs, each representing all reference sequences of one genome segment.</p>
+      <p>The result is a collection of MSAs, each aligning all reference sequences of one genome segment plus the consensus sequence we have obtained for that segment against each other.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft_add/7.508+galaxy0" title="MAFFT add tool"><strong>MAFFT add</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft_add/7.508+galaxy0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2" title="IQ-TREE tool"><strong>IQ-TREE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2</span></span>
       <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sequences to add to the alignment”</em>: consensus sequences with simplified names; output of <strong>Replace</strong></li>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Alignment”</em>: collection of MSAs; output of MAFFT</li>
-        <li><em>“What do you want to add to the alignment”</em>: <code class="language-plaintext highlighter-rouge">A single sequence</code></li>
-        <li><em>“Keep alignment length”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-      </ul>
-
-      <p>The result is a new collection with each of our sample consensus sequences added to the respective segment MSA.</p>
-    </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2" title="IQTree tool"><strong>IQTree</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2</span></span>
-      <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Specify input alignment file in PHYLIP, FASTA, NEXUS, CLUSTAL or MSF format.”</em>: output of <strong>MAFFT add</strong></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Specify input alignment file in PHYLIP, FASTA, NEXUS, CLUSTAL or MSF format.”</em>: output of <strong>MAFFT</strong></li>
         <li><em>“Specify sequence type …“</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
       </ul>
     </li>
