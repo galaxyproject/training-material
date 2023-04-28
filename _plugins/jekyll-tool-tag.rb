@@ -25,7 +25,7 @@ module Jekyll
           tool = m[2]
         end
 
-        %Q(<span class="tool" data-tool="#{tool}" title="Tested with #{tool}"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: #{tool}</span></span> )
+        %Q(<span class="tool" data-tool="#{tool}" title="#{m[1]} tool"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: #{tool}</span></span> )
       else
         %Q(<span><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> )
       end

@@ -138,7 +138,6 @@ module Gtn
     end
 
     def self.generate_metrics(site)
-      generated_at = Time.now().to_i * 1000
       data =  self.collect_metrics(site)
       output = data.map{|k, v|
         out = "# HELP #{k} #{v[:help]}\n# TYPE #{k} #{v[:type]}\n"
@@ -146,11 +145,11 @@ module Gtn
         if v[:value].is_a?(Array)
           v[:value].each{|val|
             attrs = val.select{|k, v| k != :value}.to_h
-            out += "#{k}#{attrs.to_prometheus} #{val[:value]} #{generated_at}\n"
+            out += "#{k}#{attrs.to_prometheus} #{val[:value]}\n"
           }
         else
           attrs = v.select{|k, v| k != :value and k != :help and k != :type}.to_h
-          out += "#{k}#{attrs.to_prometheus} #{v[:value]} #{generated_at}\n"
+          out += "#{k}#{attrs.to_prometheus} #{v[:value]}\n"
         end
 
         out

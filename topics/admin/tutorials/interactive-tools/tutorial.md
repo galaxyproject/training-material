@@ -36,7 +36,7 @@ requirements:
 subtopic: features
 ---
 
-> <warning-title>Evolving Topic</warning-title>
+> <warning-title>Evolving Topic, Not Updated for 23.0 + Gravity</warning-title>
 > Galaxy Interactive Tools are a **new feature** and there are some rough edges. Work to improve the experience of deploying and using them is ongoing.
 {: .warning}
 
@@ -94,7 +94,9 @@ There are two sections to this exercise. The first shows you how to use Ansible 
 
 If the terms "Ansible," "role," and "playbook" mean nothing to you, please checkout [the Ansible introduction slides]({% link topics/admin/tutorials/ansible/slides.html %}) and [the Ansible introduction tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %}).
 
-**This section of the tutorial builds upon the work in the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, please ensure that you have completed that tutorial first.**
+> <warning-title>Uses Ansible!</warning-title>
+> This section of the tutorial builds upon the work in the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, please ensure that you have completed that tutorial first.
+{: .warning}
 
 > <comment-title>Ansible Best Practices</comment-title>
 > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a `galaxyservers` group in your inventory file, `hosts`, and placed your variables in `group_vars/galaxyservers.yml`. Although for the purposes of this tutorial, the Galaxy server and cluster node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the `galaxyservers` group for simplicity, but in your own deployment you should consider creating an additional group for cluster nodes.
