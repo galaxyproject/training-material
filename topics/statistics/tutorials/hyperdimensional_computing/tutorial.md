@@ -69,7 +69,7 @@ The first step consists in importing the RA and BIN datasets into a Galaxy histo
 >
 >    When uploading the datasets, set the `type` to csv. Both datasets contain samples in the columns and microbial species in the rows. The RA dataset contains relative abundance profiles, thus values ranging from 0.0 to 100.0, while the BIN dataset contains presence/absence (i.e., 0 or 1) information computed on the relative abundance. It means that the value of the cell `ij` in the BIN matrix is 1 if the relative abundance of the species `i` in the sample `j` is greater than 0.0 in the RA matrix. Otherwise, it is 0.
 >
-> 3. Rename the history items {% icon galaxy-pencil %}
+> 3. Edit history item attributes {% icon galaxy-pencil %}
 >    - Make sure dataset names are clear, like `RA__ThomasAM__species.csv` and `BIN__ThomasAM__species.csv`.
 >    - If you did not previously set the datatype to csv, you can do that now under the convert tab.
 >
