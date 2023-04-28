@@ -211,7 +211,15 @@
                 "left": 761.8526112307712,
                 "top": 976.2518186167031
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionlength": {
+                    "action_arguments": {
+                        "newname": "Gene IDs and length"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "length"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2",
             "tool_shed_repository": {
                 "changeset_revision": "e3ba567abdf5",
@@ -641,14 +649,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "featureCounts",
-                    "output_name": "output_short",
-                    "uuid": "53b5dfc9-2292-4a29-96e7-290be4f2c44e"
-                },
-                {
                     "label": "featureCounts_gene_length",
                     "output_name": "output_feature_lengths",
                     "uuid": "125bff08-2418-4b9c-8de8-2a5aa0328f75"
+                },
+                {
+                    "label": "featureCounts",
+                    "output_name": "output_short",
+                    "uuid": "53b5dfc9-2292-4a29-96e7-290be4f2c44e"
                 }
             ]
         },
@@ -734,7 +742,7 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "fastqc_star_counts",
+                    "label": "multiqc_star_counts_html",
                     "output_name": "html_report",
                     "uuid": "875e1cee-f00a-40bf-9fe4-22ea94e00a44"
                 }
@@ -999,7 +1007,15 @@
                 "left": 1306.682700968296,
                 "top": 788.7249585836246
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "FeatureCount-like files"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Cut1",
             "tool_state": "{\"columnList\": \"c1,c2\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.2",
@@ -1102,7 +1118,7 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "fastqc_featureCounts",
+                    "label": "multiqc_featureCounts_html",
                     "output_name": "html_report",
                     "uuid": "84cb16bb-ad92-4947-b73a-0f9ceccba2ea"
                 }
@@ -1151,7 +1167,7 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "fastqc_reads_per_chrom",
+                    "label": "multiqc_reads_per_chrom_html",
                     "output_name": "html_report",
                     "uuid": "0ed79e15-3f3c-41a8-b02b-2880a70d5d03"
                 }
@@ -1200,7 +1216,7 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "fastqc_dup",
+                    "label": "multiqc_dup_html",
                     "output_name": "html_report",
                     "uuid": "631e0adb-5366-464d-8117-5a51aaa7ae04"
                 }
@@ -1249,7 +1265,7 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "fastqc_gene_body_cov",
+                    "label": "multiqc_gene_body_cov_html",
                     "output_name": "html_report",
                     "uuid": "3d6db544-284e-4de4-881e-eef302fc6a2d"
                 }
@@ -1298,7 +1314,7 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "html_read_distrib",
+                    "label": "multiqc_read_distrib_html",
                     "output_name": "html_report",
                     "uuid": "a1d56cbf-4902-4165-86ce-28b8c5955807"
                 }
@@ -1353,6 +1369,6 @@
     "tags": [
         "transcriptomics"
     ],
-    "uuid": "16386e38-f392-46a9-a52d-32b6536f9f96",
-    "version": 2
+    "uuid": "d0f1fbe7-880f-492a-9631-b3438f6f5fe3",
+    "version": 3
 }

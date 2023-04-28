@@ -55,17 +55,17 @@
     ],
     "format-version": "0.1",
     "license": "MIT",
-    "name": "DEG Part - Ref Based RNA Seq - Transcriptomics - GTN (imported from uploaded file)",
+    "name": "DEG Part - Ref Based RNA Seq - Transcriptomics - GTN",
     "steps": {
         "0": {
-            "annotation": "",
+            "annotation": "Counts obtained by Feature counts",
             "content_id": null,
             "errors": null,
             "id": 0,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "Counts obtained by Feature counts",
                     "name": "Input Dataset Collection"
                 }
             ],
@@ -85,18 +85,18 @@
             "workflow_outputs": []
         },
         "1": {
-            "annotation": "",
+            "annotation": "gene annotation",
             "content_id": null,
             "errors": null,
             "id": 1,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
-                    "name": "Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz"
+                    "description": "gene annotation",
+                    "name": "Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz"
                 }
             ],
-            "label": "Drosophila_melanogaster.BDG6.32.109_UCSC.gtf.gz",
+            "label": "Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz",
             "name": "Input dataset",
             "outputs": [],
             "position": {
@@ -112,14 +112,14 @@
             "workflow_outputs": []
         },
         "2": {
-            "annotation": "",
+            "annotation": "header for annotated DESeq2 output",
             "content_id": null,
             "errors": null,
             "id": 2,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "header for annotated DESeq2 output",
                     "name": "header"
                 }
             ],
@@ -139,41 +139,14 @@
             "workflow_outputs": []
         },
         "3": {
-            "annotation": "",
+            "annotation": "selected KEGG pathways to plot",
             "content_id": null,
             "errors": null,
             "id": 3,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
-                    "name": "gene length"
-                }
-            ],
-            "label": "gene length",
-            "name": "Input dataset",
-            "outputs": [],
-            "position": {
-                "left": 1668.0312427122199,
-                "top": 7.999989523816464
-            },
-            "tool_id": null,
-            "tool_state": "{\"optional\": false, \"tag\": null}",
-            "tool_version": null,
-            "type": "data_input",
-            "uuid": "7e28ac8c-f297-4235-a42d-341e1d53b8e9",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "4": {
-            "annotation": "",
-            "content_id": null,
-            "errors": null,
-            "id": 4,
-            "input_connections": {},
-            "inputs": [
-                {
-                    "description": "",
+                    "description": "selected KEGG pathways to plot",
                     "name": "KEGG pathways to plot"
                 }
             ],
@@ -192,11 +165,11 @@
             "when": null,
             "workflow_outputs": []
         },
-        "5": {
+        "4": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2",
             "errors": null,
-            "id": 5,
+            "id": 4,
             "input_connections": {
                 "input_collection": {
                     "id": 0,
@@ -229,61 +202,63 @@
             "type": "tool",
             "uuid": "cd471d23-0d9e-4765-8b22-05d3ca227369",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output",
-                    "uuid": "1fa08f6c-89ac-4e78-b9a5-8f8a9ab82532"
-                }
-            ]
+            "workflow_outputs": []
         },
-        "6": {
+        "5": {
             "annotation": "",
-            "content_id": "ChangeCase",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2",
             "errors": null,
-            "id": 6,
+            "id": 5,
             "input_connections": {
-                "input": {
-                    "id": 3,
+                "gtf_file|gtf_history": {
+                    "id": 1,
                     "output_name": "output"
                 }
             },
             "inputs": [],
-            "label": null,
-            "name": "Change Case",
+            "label": "Compute gene length",
+            "name": "Gene length and GC content",
             "outputs": [
                 {
-                    "name": "out_file1",
+                    "name": "length",
                     "type": "tabular"
                 }
             ],
             "position": {
-                "left": 1946.0312572877797,
-                "top": 2.999991801247668
+                "left": 1398,
+                "top": 6
             },
-            "post_job_actions": {},
-            "tool_id": "ChangeCase",
-            "tool_state": "{\"__input_ext\": \"tabular\", \"casing\": \"up\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cols\": \"c1\", \"delimiter\": \"TAB\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.0.0",
-            "type": "tool",
-            "uuid": "a7e5643d-10a7-4f1b-b38d-311b6e93187e",
-            "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "a47d18a3-aa68-4f77-bc8a-913b82f3e8af"
+            "post_job_actions": {
+                "RenameDatasetActionlength": {
+                    "action_arguments": {
+                        "newname": "Gene IDs and length"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "length"
                 }
-            ]
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "e3ba567abdf5",
+                "name": "length_and_gc_content",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"analysis\": {\"analysis_select\": \"length\", \"__current_case__\": 2}, \"gtf_file\": {\"gtfSource\": \"history\", \"__current_case__\": 1, \"gtf_history\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.2",
+            "type": "tool",
+            "uuid": "6f5dc3b3-29fa-4826-a4ee-cc2eb3ee3543",
+            "when": null,
+            "workflow_outputs": []
         },
-        "7": {
+        "6": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
             "errors": null,
-            "id": 7,
+            "id": 6,
             "input_connections": {
                 "infile": {
-                    "id": 5,
+                    "id": 4,
                     "output_name": "output"
                 }
             },
@@ -321,13 +296,40 @@
             "type": "tool",
             "uuid": "42d65a53-4937-42d4-bfc5-49a7767da9b6",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "outfile",
-                    "uuid": "e77f76dc-5c9b-4863-b6ba-fe8a81ecee5b"
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "ChangeCase",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "length"
                 }
-            ]
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Change Case",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1946.0312572877797,
+                "top": 2.999991801247668
+            },
+            "post_job_actions": {},
+            "tool_id": "ChangeCase",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"casing\": \"up\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cols\": \"c1\", \"delimiter\": \"TAB\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "a7e5643d-10a7-4f1b-b38d-311b6e93187e",
+            "when": null,
+            "workflow_outputs": []
         },
         "8": {
             "annotation": "",
@@ -340,7 +342,7 @@
                     "output_name": "output"
                 },
                 "tags": {
-                    "id": 7,
+                    "id": 6,
                     "output_name": "outfile"
                 }
             },
@@ -364,13 +366,7 @@
             "type": "tool",
             "uuid": "c603fff0-d6b8-434e-a6a7-1303e2a26733",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": "input dataset(s) (Tagged)",
-                    "output_name": "output",
-                    "uuid": "ac3be7c6-775b-434c-9d44-6a572e56bcdc"
-                }
-            ]
+            "workflow_outputs": []
         },
         "9": {
             "annotation": "",
@@ -387,10 +383,6 @@
                 {
                     "description": "runtime parameter for tool DESeq2",
                     "name": "batch_factors"
-                },
-                {
-                    "description": "runtime parameter for tool DESeq2",
-                    "name": "select_data"
                 }
             ],
             "label": "Differential Analysis",
@@ -421,26 +413,21 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"advanced_options\": {\"esf\": \"\", \"fit_type\": \"1\", \"outlier_replace_off\": false, \"outlier_filter_off\": false, \"auto_mean_filter_off\": false, \"prefilter_conditional\": {\"prefilter\": \"\", \"__current_case__\": 1}}, \"batch_factors\": {\"__class__\": \"RuntimeValue\"}, \"header\": true, \"output_options\": {\"output_selector\": [\"pdf\", \"normCounts\"], \"alpha_ma\": \"0.1\"}, \"select_data\": {\"how\": \"group_tags\", \"__current_case__\": 0, \"countsFile\": {\"__class__\": \"RuntimeValue\"}, \"rep_factorName\": [{\"__index__\": 0, \"factorName\": \"Treatment\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"treated\", \"groups\": [\"treat\"]}, {\"__index__\": 1, \"factorLevel\": \"untreated\", \"groups\": [\"untreat\"]}]}, {\"__index__\": 1, \"factorName\": \"Sequencing\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"PE\", \"groups\": [\"paired\"]}, {\"__index__\": 1, \"factorLevel\": \"SE\", \"groups\": [\"single\"]}]}]}, \"tximport\": {\"tximport_selector\": \"count\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"advanced_options\": {\"esf\": \"\", \"fit_type\": \"1\", \"outlier_replace_off\": false, \"outlier_filter_off\": false, \"auto_mean_filter_off\": false, \"prefilter_conditional\": {\"prefilter\": \"\", \"__current_case__\": 1}}, \"batch_factors\": {\"__class__\": \"RuntimeValue\"}, \"header\": true, \"output_options\": {\"output_selector\": [\"pdf\", \"normCounts\"], \"alpha_ma\": \"0.1\"}, \"select_data\": {\"how\": \"group_tags\", \"__current_case__\": 0, \"countsFile\": {\"__class__\": \"ConnectedValue\"}, \"rep_factorName\": [{\"__index__\": 0, \"factorName\": \"Treatment\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"treated\", \"groups\": [\"treat\"]}, {\"__index__\": 1, \"factorLevel\": \"untreated\", \"groups\": [\"untreat\"]}]}, {\"__index__\": 1, \"factorName\": \"Sequencing\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"PE\", \"groups\": [\"paired\"]}, {\"__index__\": 1, \"factorLevel\": \"SE\", \"groups\": [\"single\"]}]}]}, \"tximport\": {\"tximport_selector\": \"count\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.11.40.7+galaxy2",
             "type": "tool",
             "uuid": "45883538-b692-4e35-8dee-d08974682a9c",
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "deseq_out",
-                    "output_name": "deseq_out",
-                    "uuid": "0a62d2e1-43d8-448a-81d3-73b6333a7e40"
-                },
-                {
-                    "label": null,
+                    "label": "DESeq2_plots",
                     "output_name": "plots",
-                    "uuid": "f71aae1f-b50f-4627-a2ad-90c64a416bb3"
+                    "uuid": "c1ff3e9a-46d3-4862-adb6-076ea951be26"
                 },
                 {
-                    "label": null,
+                    "label": "DESeq2_normalized_counts",
                     "output_name": "counts_out",
-                    "uuid": "45c22139-7433-4593-ba79-6720330b2865"
+                    "uuid": "b430e84e-cfa5-48e8-92a7-ef5630ced1e5"
                 }
             ]
         },
@@ -481,13 +468,7 @@
             "type": "tool",
             "uuid": "275d0da1-c552-4322-8308-04c14259ca12",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "14452e47-8216-4df4-b7c2-442a33f52146"
-                }
-            ]
+            "workflow_outputs": []
         },
         "11": {
             "annotation": "",
@@ -530,13 +511,7 @@
             "type": "tool",
             "uuid": "8c9667ec-283d-40d8-9fe0-a2c36d875d2b",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output",
-                    "uuid": "a52a2a8b-1d17-44bd-970d-d50ada8acee6"
-                }
-            ]
+            "workflow_outputs": []
         },
         "12": {
             "annotation": "",
@@ -575,13 +550,7 @@
             "type": "tool",
             "uuid": "d61d10ef-7dc9-477b-8fed-bd31a0b80d9e",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "table",
-                    "uuid": "68d12a55-1f51-4a92-8bb5-f88e6fbbc79d"
-                }
-            ]
+            "workflow_outputs": []
         },
         "13": {
             "annotation": "",
@@ -604,23 +573,25 @@
                 }
             ],
             "position": {
-                "left": 1668.0312427122199,
-                "top": 164.99999316770638
+                "left": 1667.0333251953125,
+                "top": 165
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Gene IDs and differential expression"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Cut1",
             "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/dm6.len\", \"columnList\": \"c1,c8\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.2",
             "type": "tool",
             "uuid": "711bdb93-d388-49fc-aab1-455095628805",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "ba41b252-c855-4621-8540-05e7b66ca42d"
-                }
-            ]
+            "workflow_outputs": []
         },
         "14": {
             "annotation": "",
@@ -657,6 +628,13 @@
                     },
                     "action_type": "ChangeDatatypeAction",
                     "output_name": "out_file1"
+                },
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Annotated DESeq2 results"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
                 }
             },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
@@ -673,9 +651,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "DESeq2_annotated_results_with_header",
                     "output_name": "out_file1",
-                    "uuid": "2f2dff65-5d79-46c1-b90f-b18975c97453"
+                    "uuid": "11f46837-7dbb-453b-962a-3c97cb0faad4"
                 }
             ]
         },
@@ -707,7 +685,15 @@
                 "left": 1668.0312427122199,
                 "top": 935.0000409937617
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActiontable": {
+                    "action_arguments": {
+                        "newname": "Z-scores"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "table"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "3bf5661c0280",
@@ -759,13 +745,7 @@
             "type": "tool",
             "uuid": "dbe396ed-f5f9-4310-a514-bac9d86ccf6d",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "95a60e4d-2e37-49f9-9e52-0faf399c9427"
-                }
-            ]
+            "workflow_outputs": []
         },
         "17": {
             "annotation": "",
@@ -791,20 +771,22 @@
                 "left": 1907.6814922366352,
                 "top": 620.5742003338758
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Genes with significant adj p-value"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Filter1",
             "tool_state": "{\"cond\": \"c7 < 0.05\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
             "type": "tool",
             "uuid": "9cf4c012-7a52-4b47-bbec-4ad8275542ea",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "855c9899-5fa0-4743-9a8d-64ca306fea9e"
-                }
-            ]
+            "workflow_outputs": []
         },
         "18": {
             "annotation": "",
@@ -817,7 +799,7 @@
                     "output_name": "out_file1"
                 },
                 "length_file": {
-                    "id": 6,
+                    "id": 7,
                     "output_name": "out_file1"
                 }
             },
@@ -842,7 +824,22 @@
                 "left": 2234.031381180037,
                 "top": 0
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActioncat_genes_tab": {
+                    "action_arguments": {
+                        "newname": "GO_genes_cat"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "cat_genes_tab"
+                },
+                "RenameDatasetActionwallenius_tab": {
+                    "action_arguments": {
+                        "newname": "goseq_results_go"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "wallenius_tab"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.50.0+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "602de62d995b",
@@ -862,14 +859,14 @@
                     "uuid": "c06c58d4-ab5d-49da-b481-baf668c6fc29"
                 },
                 {
-                    "label": null,
+                    "label": "go_genes",
                     "output_name": "cat_genes_tab",
-                    "uuid": "a9cab5d3-a7ec-41b2-bffa-5ff5129c3d06"
+                    "uuid": "a0dd7397-7262-4336-abd6-a915ab6be36a"
                 },
                 {
-                    "label": null,
+                    "label": "go_plot",
                     "output_name": "top_plot",
-                    "uuid": "95e4edea-003b-467c-bcef-09365646019b"
+                    "uuid": "659fec58-4ed5-4aee-9e50-7acce21113cb"
                 }
             ]
         },
@@ -884,7 +881,7 @@
                     "output_name": "out_file1"
                 },
                 "length_file": {
-                    "id": 6,
+                    "id": 7,
                     "output_name": "out_file1"
                 }
             },
@@ -905,7 +902,22 @@
                 "left": 2234.031381180037,
                 "top": 365.00000455486236
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActioncat_genes_tab": {
+                    "action_arguments": {
+                        "newname": "KEGG_genes_cat"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "cat_genes_tab"
+                },
+                "RenameDatasetActionwallenius_tab": {
+                    "action_arguments": {
+                        "newname": "goseq_results_kegg"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "wallenius_tab"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.50.0+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "602de62d995b",
@@ -920,14 +932,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
-                    "output_name": "cat_genes_tab",
-                    "uuid": "ea7e39c3-ce69-458a-9ce3-a6732ce3cd74"
-                },
-                {
                     "label": "kegg_pathways",
                     "output_name": "wallenius_tab",
                     "uuid": "8d0ac5be-ac7d-4f10-85ac-d3461f561a50"
+                },
+                {
+                    "label": "kegg_genes",
+                    "output_name": "cat_genes_tab",
+                    "uuid": "9872b017-9b39-4cd3-b232-a305979a782b"
                 }
             ]
         },
@@ -955,20 +967,22 @@
                 "left": 2195.778951161071,
                 "top": 606.6836658099311
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Genes with significant adj p-value and their Log2 FC"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Cut1",
             "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/dm6.len\", \"columnList\": \"c1,c3\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.2",
             "type": "tool",
             "uuid": "6c4d62a9-3f57-488d-8e8f-8809fdd12084",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "a6a66e45-28c9-4ad7-830f-90b510d6d39d"
-                }
-            ]
+            "workflow_outputs": []
         },
         "21": {
             "annotation": "",
@@ -994,20 +1008,22 @@
                 "left": 2195.778951161071,
                 "top": 747.4639410223756
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Genes with significant adj p-value & abs(log2(FC)) > 1"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Filter1",
             "tool_state": "{\"cond\": \"abs(c3)>1\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
             "type": "tool",
             "uuid": "1f787252-7a94-43b6-bb66-9624923ed05c",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "5ccb167a-5780-4a11-bd26-f0556fd3470d"
-                }
-            ]
+            "workflow_outputs": []
         },
         "22": {
             "annotation": "",
@@ -1033,7 +1049,15 @@
                 "left": 2512.0312135611007,
                 "top": 116.9999877018715
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "go_underrepresented"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Filter1",
             "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/dm6.len\", \"cond\": \"c9<0.05\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
@@ -1042,9 +1066,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "go_underrepresented",
                     "output_name": "out_file1",
-                    "uuid": "2b2945fc-806e-4ca8-9a62-7cae96c4d6ca"
+                    "uuid": "ae762394-0e90-4b9a-a7b4-7cffeccc80a7"
                 }
             ]
         },
@@ -1072,7 +1096,15 @@
                 "left": 2512.0312135611007,
                 "top": 247.99998269152283
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "go_overrepresented"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Filter1",
             "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/dm6.len\", \"cond\": \"c8<0.05\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
@@ -1081,9 +1113,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "go_overrepresented",
                     "output_name": "out_file1",
-                    "uuid": "76687574-0633-4343-aefc-1fcf3d527146"
+                    "uuid": "b788d5b7-119c-418a-a12b-a97ef7ea5bf2"
                 }
             ]
         },
@@ -1111,7 +1143,15 @@
                 "left": 2512.0312135611007,
                 "top": 454.99998633541276
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "kegg_underrepresented"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Filter1",
             "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/dm6.len\", \"cond\": \"c7<0.05\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
@@ -1120,9 +1160,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "kegg_underrepresented",
                     "output_name": "out_file1",
-                    "uuid": "873ebc7e-b235-45ae-9cd8-8236d4055d71"
+                    "uuid": "69f80c89-fc7d-4bea-836f-34e68615abcd"
                 }
             ]
         },
@@ -1150,7 +1190,15 @@
                 "left": 2512.0312135611007,
                 "top": 585.9999699379081
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "kegg_overrepresented"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Filter1",
             "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/dm6.len\", \"cond\": \"c6<0.05\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
@@ -1159,9 +1207,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "kegg_overrepresented",
                     "output_name": "out_file1",
-                    "uuid": "8bd52edd-0b2f-46d9-bc4b-eccaeb9404c9"
+                    "uuid": "930f1461-0ade-4744-a83d-843108c4b597"
                 }
             ]
         },
@@ -1176,7 +1224,7 @@
                     "output_name": "out_file1"
                 },
                 "pathway|tabular": {
-                    "id": 4,
+                    "id": 3,
                     "output_name": "output"
                 }
             },
@@ -1208,9 +1256,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "pathview_plot",
                     "output_name": "multiple_kegg_native",
-                    "uuid": "c0b3c1ac-ac46-4dc8-82ef-c85569f0e3cd"
+                    "uuid": "7cdd4475-6de3-4c02-be8d-d76e788980f6"
                 }
             ]
         },
@@ -1249,13 +1297,7 @@
             "type": "tool",
             "uuid": "672e150d-ae77-41ae-9b66-2c3bf55bc701",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "ef2470c8-9f9a-4d72-ae28-9a9c7b3321cc"
-                }
-            ]
+            "workflow_outputs": []
         },
         "28": {
             "annotation": "",
@@ -1290,9 +1332,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "go_underrepresented_categories",
                     "output_name": "out_file1",
-                    "uuid": "0708f726-e329-44bb-94d4-f557fab5bb88"
+                    "uuid": "d1ae921d-2e2b-46d8-95a2-4443f5a1b3b4"
                 }
             ]
         },
@@ -1329,9 +1371,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "go_overrepresented_categories",
                     "output_name": "out_file1",
-                    "uuid": "05decfaa-246c-46af-a23c-cb5541d02572"
+                    "uuid": "4d2d01eb-15d2-4863-a522-9462c15eb51c"
                 }
             ]
         },
@@ -1359,20 +1401,22 @@
                 "left": 2790.03122813666,
                 "top": 840.9999790476329
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Normalized counts for the most differentially expressed genes"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Cut1",
             "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/dm6.len\", \"columnList\": \"c1-c8\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.2",
             "type": "tool",
             "uuid": "699a7dd8-e3d0-42b9-bf2d-02e92d208c14",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "out_file1",
-                    "uuid": "a28f2cb1-2273-4b8f-9363-4d239253c430"
-                }
-            ]
+            "workflow_outputs": []
         },
         "31": {
             "annotation": "",
@@ -1413,9 +1457,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "heatmap_log",
                     "output_name": "output1",
-                    "uuid": "09d0b86c-9b64-49fd-9da1-b58dea18cac0"
+                    "uuid": "42cb6b68-4ed6-4b6e-9312-744b9e0c1442"
                 }
             ]
         },
@@ -1458,9 +1502,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "heatmap_zscore",
                     "output_name": "output1",
-                    "uuid": "67d70a98-193d-4d9c-8819-b188979f66cf"
+                    "uuid": "0ecef5aa-76ed-4fe7-9244-3b32d231e7f3"
                 }
             ]
         }
@@ -1468,6 +1512,6 @@
     "tags": [
         "transcriptomics"
     ],
-    "uuid": "5dbe57f0-252b-47d5-9de9-b3191a693054",
-    "version": 1
+    "uuid": "94c5bcd5-dcf1-4b73-94f0-4ea4193269d8",
+    "version": 5
 }
