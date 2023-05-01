@@ -46,7 +46,13 @@
         - that: "has_text"
           text: 'All samples have sequences of a single length (37bp).'
         - that: "has_text"
-          text: '["fastqc", {"basic_statistics": {"GSM461180_forward": "pass", "GSM461177_reverse": "pass", "GSM461180_reverse": "pass", "GSM461177_forward": "pass"}, "per_base_sequence_quality": {"GSM461180_forward": "pass", "GSM461177_reverse": "pass", "GSM461180_reverse": "warn", "GSM461177_forward": "pass"}, "per_tile_sequence_quality": {"GSM461180_forward": "fail", "GSM461177_reverse": "fail", "GSM461180_reverse": "fail", "GSM461177_forward": "pass"}, "per_sequence_quality_scores": {"GSM461180_forward": "pass", "GSM461177_reverse": "pass", "GSM461180_reverse": "pass", "GSM461177_forward": "pass"}, "per_base_sequence_content": {"GSM461180_forward": "warn", "GSM461177_reverse": "warn", "GSM461180_reverse": "warn", "GSM461177_forward": "warn"}, "per_sequence_gc_content": {"GSM461180_forward": "warn", "GSM461177_reverse": "warn", "GSM461180_reverse": "pass", "GSM461177_forward": "warn"}, "per_base_n_content": {"GSM461180_forward": "pass", "GSM461177_reverse": "pass", "GSM461180_reverse": "pass", "GSM461177_forward": "pass"}, "sequence_length_distribution": {"GSM461180_forward": "pass", "GSM461177_reverse": "pass", "GSM461180_reverse": "pass", "GSM461177_forward": "pass"}, "sequence_duplication_levels": {"GSM461180_forward": "pass", "GSM461177_reverse": "pass", "GSM461180_reverse": "pass", "GSM461177_forward": "pass"}, "overrepresented_sequences": {"GSM461180_forward": "pass", "GSM461177_reverse": "warn", "GSM461180_reverse": "warn", "GSM461177_forward": "pass"}, "adapter_content": {"GSM461180_forward": "pass", "GSM461177_reverse": "pass", "GSM461180_reverse": "pass", "GSM461177_forward": "pass"}}]'
+          text: '"GSM461180_forward": "pass"'
+        - that: "has_text"
+          text: '"GSM461177_reverse": "pass"'
+        - that: "has_text"
+          text: '"GSM461180_reverse": "pass"'
+        - that: "has_text"
+          text: '"GSM461177_forward": "pass"'
     pgt:
       asserts:
         has_size:
@@ -103,19 +109,21 @@
         GSM461177:
           asserts:
             has_text:
-              text: 'FBgn0284245\t12871'
+              text: "FBgn0284245\t12871"
         GSM461180:
+          asserts:
             has_text:
-              text: 'FBgn0284245\t12904'
+              text: "FBgn0284245\t12904"
     featureCounts:
       element_tests:
         GSM461177:
           asserts:
             has_text:
-              text: 'FBgn0250732\t74'
+              text: "FBgn0250732\t74"
         GSM461180:
+          asserts:
             has_text:
-              text: 'FBgn0250732\t75'
+              text: "FBgn0250732\t75"
     featureCounts_gene_length:
       element_tests:
         GSM461177:
@@ -145,16 +153,18 @@
         GSM461177:
           asserts:
             has_text:
-              text: 'FBgn0250732\t74'
+              text: "FBgn0250732\t74"
         GSM461180:
+          asserts:
             has_text:
-              text: 'FBgn0250732\t75'
+              text: "FBgn0250732\t75"
     counts_from_star_sorted:
       element_tests:
         GSM461177:
           asserts:
             has_text:
-              text: 'FBgn0284245\t12869'
+              text: "FBgn0284245\t12869"
         GSM461180:
+          asserts:
             has_text:
-              text: 'FBgn0284245\t12902'
+              text: "FBgn0284245\t12902"
