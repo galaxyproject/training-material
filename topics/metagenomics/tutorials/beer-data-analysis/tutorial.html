@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Identification of the micro-organisms in a beer using Nanopore sequencing">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-10-19 11:22:49 +0000">
+<meta name="DC.date" content="2023-04-27 12:12:18 +0000">
 <meta name="DC.creator" content="Polina Polunina">
 <meta name="DC.creator" content="Siyu Chen">
 <meta name="DC.creator" content="Bérénice Batut">
@@ -67,7 +67,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-19 11:22:49 +0000",
+  "dateModified": "2023-04-27 12:12:18 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Identification of the micro-organisms in a beer using Nanopore sequencing",
   "interactivityType": "mixed",
@@ -371,7 +371,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-19 11:22:49 +0000",
+  "dateModified": "2023-04-27 12:12:18 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Identification of the micro-organisms in a beer using Nanopore sequencing",
   "interactivityType": "mixed",
@@ -703,10 +703,6 @@
         
     
         
-        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
-            Galaxy@GenOuest
-        </a>
-        
     
         
     
@@ -777,10 +773,6 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
-            UseGalaxy.be
-        </a>
-        
     
         
         <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
@@ -791,17 +783,9 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
-            UseGalaxy.no
-        </a>
-        
     
         
     
-        
-        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
-            UseGalaxy.org.au
-        </a>
         
     
         
@@ -820,7 +804,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 19, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 27, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -957,7 +941,9 @@ of yeasts from a bottle of beer.</p>
   </li>
   <li><a href="#assign-taxonomic-classification" id="markdown-toc-assign-taxonomic-classification">Assign taxonomic classification</a></li>
   <li><a href="#visualize-the-community" id="markdown-toc-visualize-the-community">Visualize the community</a></li>
+  <li><a href="#investigate-the-beer-microbiome" id="markdown-toc-investigate-the-beer-microbiome">Investigate the beer microbiome</a></li>
   <li><a href="#optional-sharing-your-history" id="markdown-toc-optional-sharing-your-history">(Optional) Sharing your history</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
 </blockquote>
@@ -1127,7 +1113,7 @@ of yeasts from a bottle of beer.</p>
   <div class="box-title hands-on-title" id="hands-on-improve-the-dataset-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Improve the dataset quality</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3" title="Porechop tool"><strong>Porechop</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.4+galaxy0" title="Porechop tool"><strong>Porechop</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.4+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTA/FASTQ”</em>:  <code class="language-plaintext highlighter-rouge">Reads</code></li>
         <li><em>“Output format for the reads”</em>: <code class="language-plaintext highlighter-rouge">fastq</code></li>
@@ -1135,11 +1121,14 @@ of yeasts from a bottle of beer.</p>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0</span></span>  with the following parameters:
       <ul>
-        <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset collection”</em>: output of <strong>Porechop</strong></li>
-        <li>In <em>“Adapter Trimming Options”</em>:
+        <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
-            <li><em>“Disable adapter trimming”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input 1”</em>: output of <strong>Porechop</strong></li>
+            <li>In <em>“Adapter Trimming Options”</em>:
+              <ul>
+                <li><em>“Disable adapter trimming”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li>In <em>“Filter Options”</em>:
@@ -1274,7 +1263,7 @@ of yeasts from a bottle of beer.</p>
   <div class="box-title hands-on-title" id="hands-on-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Kraken2</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0" title="Kraken2 tool"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Kraken2 tool"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><em>“Single or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
           <ul>
@@ -1285,7 +1274,6 @@ of yeasts from a bottle of beer.</p>
         <li>In <em>“Create Report”</em>:
           <ul>
             <li><em>“Print a report with aggregrate counts/clade to file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-            <li><em>“Format report output like Kraken 1’s kraken-mpa-report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
         <li>
@@ -1300,51 +1288,63 @@ be sure it contains yeasts, i.e. fungi.</p>
   </ol>
 </blockquote>
 
-<p>The Kraken report in MPA format is a tabular file with 2 columns:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d__Eukaryota	756
-d__Eukaryota|k__Metazoa	402
-d__Eukaryota|k__Metazoa|p__Chordata	402
-d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia	402
-d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates	402
-d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae	402
-d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae|g__Homo	402
-d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae|g__Homo|s__Homo sapiens	402
-d__Eukaryota|k__Fungi	342
-d__Eukaryota|k__Fungi|p__Ascomycota	341
-d__Eukaryota|k__Fungi|p__Ascomycota|c__Saccharomycetes	336
-...
-</code></pre></div></div>
+<p>The Kraken report is tabular files with one line per taxon and 6 columns or fields:</p>
 
 <ol>
-  <li>
-    <p>The first column lists clades, ranging from taxonomic domains (Bacteria, Archaea, etc.) through species.</p>
-
-    <p>The taxonomic level of each clade is prefixed to indicate its level:</p>
+  <li>Percentage of fragments covered by the clade rooted at this taxon</li>
+  <li>Number of fragments covered by the clade rooted at this taxon</li>
+  <li>Number of fragments assigned directly to this taxon</li>
+  <li>A rank code, indicating
     <ul>
-      <li>Domain: <code class="language-plaintext highlighter-rouge">d__</code></li>
-      <li>Kingdom: <code class="language-plaintext highlighter-rouge">k__</code></li>
-      <li>Phylum: <code class="language-plaintext highlighter-rouge">p__</code></li>
-      <li>Class: <code class="language-plaintext highlighter-rouge">c__</code></li>
-      <li>Order: <code class="language-plaintext highlighter-rouge">o__</code></li>
-      <li>Family: <code class="language-plaintext highlighter-rouge">f__</code></li>
-      <li>Genus: <code class="language-plaintext highlighter-rouge">g__</code></li>
-      <li>Species: <code class="language-plaintext highlighter-rouge">s__</code></li>
+      <li>(U)nclassified</li>
+      <li>(R)oot</li>
+      <li>(D)omain</li>
+      <li>(K)ingdom</li>
+      <li>(P)hylum</li>
+      <li>(C)lass</li>
+      <li>(O)rder</li>
+      <li>(F)amily</li>
+      <li>(G)enus, or</li>
+      <li>(S)pecies</li>
     </ul>
+
+    <p>Taxa that are not at any of these 10 ranks have a rank code that is formed by using the rank code of the closest ancestor rank with a number indicating the distance from that rank. E.g., <code class="language-plaintext highlighter-rouge">G2</code> is a rank code indicating a taxon is between genus and species and the grandparent taxon is at the genus rank.</p>
   </li>
-  <li>
-    <p>The second column gives the number of reads assigned to the clade rooted at that taxon</p>
-  </li>
+  <li>NCBI taxonomic ID number</li>
+  <li>Indented scientific name</li>
 </ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Column 1	Column 2	Column 3	Column 4	Column 5	Column 6
+38.00 	513 	513 	U 	0 	unclassified
+62.00 	837 	1 	R 	1 	root
+61.93 	836 	27 	R1 	131567 	cellular organisms
+56.00 	756 	3 	D 	2759 	Eukaryota
+55.33 	747 	3 	D1 	33154 	Opisthokonta
+29.78 	402 	0 	K 	33208 	Metazoa
+29.78 	402 	0 	K1 	6072 	Eumetazoa
+29.78 	402 	0 	K2 	33213 	Bilateria
+29.78 	402 	0 	K3 	33511 	Deuterostomia
+29.78 	402 	0 	P 	7711 	Chordata
+29.78 	402 	0 	P1 	89593 	Craniata
+29.78 	402 	0 	P2 	7742 	Vertebrata
+29.78 	402 	0 	P3 	7776 	Gnathostomata
+29.78 	402 	0 	P4 	117570 	Teleostomi
+29.78 	402 	0 	P5 	117571 	Euteleostomi
+29.78 	402 	0 	P6 	8287 	Sarcopterygii
+29.78 	402 	0 	P7 	1338369 	Dipnotetrapodomorpha
+29.78 	402 	0 	P8 	32523 	Tetrapoda
+29.78 	402 	0 	P9 	32524 	Amniota
+29.78 	402 	0 	C 	40674 	Mammalia 
+</code></pre></div></div>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>How many taxons have been identified?</li>
-    <li>How many reads have been classified?</li>
+    <li>How much reads have been classified?</li>
     <li>Which domains were found and with how many reads?</li>
-    <li>Which yeasts have been identified? Are they the expected ones?</li>
+    <li>How much reads have been assigned by fungi Kingdom?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1352,52 +1352,31 @@ d__Eukaryota|k__Fungi|p__Ascomycota|c__Saccharomycetes	336
 
     <ol>
       <li>
-        <p>The file contains 215 lines (<em>information visible when expanding the report
-dataset in the history panel</em>). So 215 taxons have been identified.</p>
+        <p>The file contains 300 lines (<em>information visible when expanding the report dataset in the history panel</em>). So 300-2 = 298 taxons have been identified.</p>
       </li>
       <li>
-        <p>On the 1350 sequences in the input, 837 (62%) were classified (or identified as a taxon) and 513 unclassified (38%). <em>Information visible when expanding the report dataset in the history panel, and scrolling in the small box starting with “Loading database information” below the format information.</em></p>
+        <p>On the 1350 sequences in the input, 837 (62%) were classified (or identified as a taxon) and 513 unclassified (38%). <em>Information visible when expanding the report dataset in the history panel, and scrolling in the small box starting with “Loading database information” below the format information, but also on the top of the report.</em></p>
       </li>
-      <li>The 3 domains were found:
+      <li>
+        <p>The domains are identified by a <code class="language-plaintext highlighter-rouge">D</code> in colum 4.</p>
+
+        <p>To get the domains (or other taxonomic level), we can use <span class="tool" data-tool="Filter1" title="Filter tool"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:</p>
         <ul>
-          <li>Eukaryota with 756 reads assigned to it</li>
-          <li>Bacteria with 17 reads</li>
-          <li>Archaea with 2 reads</li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: report outpout of <strong>Kraken2</strong></li>
+          <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c4=='D'</code></li>
+        </ul>
+
+        <p>The 3 domains were found:</p>
+        <ul>
+          <li>Eukaryota with 756 (56%) reads assigned to it</li>
+          <li>Bacteria with 51 (3.78%) reads</li>
+          <li>Archaea with 2 (0.15%) reads</li>
         </ul>
       </li>
       <li>
-        <p>Yeasts do not form a single taxonomic group (<span class="citation"><a href="#kurtzman1994molecular">Kurtzman 1994</a></span>). They are parts on fungi kingdom but belong two separate phyla: the Ascomycota and the Basidiomycota. <a href="https://web.archive.org/web/20090226151906/http://www.yeastgenome.org/VL-what_are_yeast.html">But the “true yeasts” are classified in the order Saccharomycetales</a>.</p>
-
-        <p>In the data, 6 species from the Saccharomycetales order have been identified:</p>
-        <ul>
-          <li>Saccharomycetaceae family
-            <ul>
-              <li><em>Saccharomyces</em> genus
-                <ul>
-                  <li><em>Saccharomyces cerevisiae</em> species, the most abundant identified yeast species with 293 reads and the one expected given the type of beers</li>
-                  <li>
-                    <p><em>Saccharomyces paradoxus</em> species, a wild yeast and the closest known species to <em>Saccharomyces cerevisiae</em></p>
-
-                    <p>These reads might have been misidentified to <em>Saccharomyces paradoxus</em> instead of <em>Saccharomyces cerevisiae</em> because of some errors in the sequences, as <em>Saccharomyces cerevisiae</em> and <em>Saccharomyces paradoxus</em> are close species and should share then a lot of similarity in their sequences.</p>
-                  </li>
-                  <li>
-                    <p><em>Saccharomyces eubayanus</em> species, most likely the parent of the lager brewing yeast, <em>Saccharomyces pastorianus</em> (<span class="citation"><a href="#sampaio2018microbe">Sampaio 2018</a></span>)</p>
-
-                    <p>Similar to <em>Saccharomyces paradoxus</em>, these reads might have been misassigned.</p>
-                  </li>
-                </ul>
-              </li>
-              <li><em>Kluyveromyces</em> genus - <em>Kluyveromyces marxianus</em> species: only 1 read</li>
-            </ul>
-          </li>
-          <li>Trichomonascaceae family - <em>Sugiyamaella</em> genus - <em>Sugiyamaella lignohabitans</em> species: only 1 read</li>
-          <li>Debaryomycetaceae family - <em>Candida</em> genus - <em>Candida dubliniensis</em> species: only 1 read</li>
-        </ul>
-
-        <p>Everything except <em>Saccharomyces cerevisiae</em> are probably misindentified reads.</p>
+        <p>342 (25.33%) reads are assigned to fungi.</p>
       </li>
     </ol>
-
   </blockquote>
 
 </blockquote>
@@ -1434,7 +1413,7 @@ dataset in the history panel</em>). So 215 taxons have been identified.</p>
     <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>
-        <p>27 lines are now in the file so \(215 - 27 = 188\) taxons have been removed because low assignment rates.</p>
+        <p>59 lines are now in the file so \(300 - 59 = 241\) taxons have been removed because low assignment rates.</p>
       </li>
       <li>
         <p>Most of the reads (402) were assigned to humans (<em>Homo sapiens</em>). This is likely a contamination either during the beer production or more likely during DNA extraction.</p>
@@ -1451,60 +1430,40 @@ dataset in the history panel</em>). So 215 taxons have been identified.</p>
 
 <p>To do that, we will use the tool <strong>Krona</strong> (<span class="citation"><a href="#Ondov_2011">Ondov <i>et al.</i> 2011</a></span>). But before that, we need to adjust the output from Kraken2 to the requirements of <strong>Krona</strong>. Indeed, <strong>Krona</strong> expects as input a table with the first column containing a count and the remaining columns describing the hierarchy. Currently, we have a report tabular file with the first column containing the taxonomy and the second column the number of reads. We will now use another tool, which also provides taxonomic classification, but it produces the exact formatting Krona needs.</p>
 
-<!--
-So we need to work on the file by:
-1. Reversing the columns so the 1st column contains the number of reads and the second the taxon
-2. Splitting the taxonomy description into different columns, each being a different level. For that we replace the `|` with tabular (`\t` character)
-
-> <div class="box-title hands-on-title" id="hands-on-prepare-dataset-for-krona"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare dataset for Krona</div>
->
-> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_reverse/datamash_reverse/1.1.0" title="Reverse tool"><strong>Reverse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_reverse/datamash_reverse/1.1.0</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Input tabular dataset"*: output of **Filter** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->
-> 2. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text tool"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span>  with the following parameters:
->    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"File to process"*: `out_file` (output of **Reverse** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
->    - In *"Replacement"*:
->        - <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> *"Insert Replacement"*
->            - *"Find pattern"*: `\|`
->            - *"Replace with:"*: `\t`
-> 3. Inspect the output file
->
->    > <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
->    >
->    > How many columns are now in the file?
->    >
->    > > <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
->    > > 9 columns: one with the number of reads and one for each of the 8 levels of taxonomy.
->    > {: .solution}
->    {: .question}
-{: .hands_on}
--->
-
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-dataset-for-krona-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare dataset for Krona</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-dataset-for-krona"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare dataset for Krona</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0" title="Format MetaPhlAn2 tool"><strong>Format MetaPhlAn2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/krakentools_kreport2krona/krakentools_kreport2krona/1.2+galaxy0" title="Krakentools: Convert kraken report file tool"><strong>Krakentools: Convert kraken report file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/krakentools_kreport2krona/krakentools_kreport2krona/1.2+galaxy0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file (MetaPhlAN2 output)”</em>: report output of <strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Kraken report file”</em>: <strong>Report</strong> output of <strong>Kraken</strong></li>
       </ul>
     </li>
     <li>
       <p>Inspect the output file</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Column 1	Column 2	Column 3	Column 4	Column 5	Column 6	Column 7	Column 8
+513 	Unclassified 						
+7 	k__Eukaryota 						
+0 	k__Eukaryota 	p__Chordata 					
+0 	k__Eukaryota 	p__Chordata 	c__Mammalia 				
+0 	k__Eukaryota 	p__Chordata 	c__Mammalia 	o__Primates 			
+0 	k__Eukaryota 	p__Chordata 	c__Mammalia 	o__Primates 	f__Hominidae 		
+0 	k__Eukaryota 	p__Chordata 	c__Mammalia 	o__Primates 	f__Hominidae 	g__Homo 	
+402 	k__Eukaryota 	p__Chordata 	c__Mammalia 	o__Primates 	f__Hominidae 	g__Homo 	s__Homo_sapiens					
+</code></pre></div>        </div>
 
         <ol>
-          <li>How many columns are now in the file?</li>
-          <li>How many taxons were now found?</li>
+          <li>What are the columns in the file?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
-            <li>9 columns: one with the number of reads and one for each of the 8 levels of taxonomy.</li>
-            <li>With this new formatting, each row represents 1 detected taxon (to the most precise level). So 55 lines mean 55 identified taxons.</li>
+            <li>8 columns: one with the number of reads and one for each of the 7 levels of taxonomy.</li>
           </ol>
         </blockquote>
       </blockquote>
@@ -1518,11 +1477,11 @@ So we need to work on the file by:
   <div class="box-title hands-on-title" id="hands-on-krona-pie-chart"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Krona pie chart</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1" title="Krona pie chart tool"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Krona pie chart tool"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“What is the type of your input data”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>:  output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>:  output of <strong>Krakentools</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           </ul>
         </li>
       </ul>
@@ -1536,10 +1495,34 @@ So we need to work on the file by:
 <iframe id="krona" src="krona.html" frameborder="0" width="100%" height="900px"> <img src="./images/krona.png" alt="Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species). " loading="lazy" /> </iframe>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
-    <li>What is the percentage of identified reads assigned to <em>Homo sapiens</em>? To Archaea?</li>
+    <li>What is the percentage of reads assigned to <em>Homo sapiens</em>?</li>
+    <li>To Archaea?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>30% of reads are assigned to <em>Homo sapiens</em></li>
+      <li>0.08% of Archaea</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="investigate-the-beer-microbiome">Investigate the beer microbiome</h1>
+
+<p>Let’s come back to our original question: characterization of the beer microbiome, specially looking at the yeasts.</p>
+
+<p>Yeasts do not form a single taxonomic group (<span class="citation"><a href="#kurtzman1994molecular">Kurtzman 1994</a></span>). They are parts on fungi kingdom but belong two separate phyla: the Ascomycota and the Basidiomycota. <a href="https://web.archive.org/web/20090226151906/http://www.yeastgenome.org/VL-what_are_yeast.html">But the “true yeasts” are classified in the order Saccharomycetales</a>.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <ol>
+    <li>Click on <code class="language-plaintext highlighter-rouge">o__Saccharomycetales</code> in the graph. Which yeast species have been identified? Are they the expected in beer?</li>
     <li>Click on <em>Saccharomyces</em> in the graph. What are the percentages of identified reads assigned to <em>Saccharomyces</em> for different levels?</li>
     <li>Click a second time on <em>Saccharomyces</em> in the graph. What is the repartition between the different <em>Saccharomyces</em> species?</li>
   </ol>
@@ -1548,14 +1531,41 @@ So we need to work on the file by:
     <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>52% of identified reads are assigned to <em>Homo sapiens</em>, and 0.3% of Archaea</li>
+      <li>6 species from the Saccharomycetales order have been identified:
+        <ul>
+          <li>Saccharomycetaceae family
+            <ul>
+              <li><em>Saccharomyces</em> genus
+                <ul>
+                  <li><em>Saccharomyces cerevisiae</em> species, the most abundant identified yeast species with 293 reads and the one expected given the type of beers</li>
+                  <li>
+                    <p><em>Saccharomyces paradoxus</em> species, a wild yeast and the closest known species to <em>Saccharomyces cerevisiae</em></p>
+
+                    <p>These reads might have been misidentified to <em>Saccharomyces paradoxus</em> instead of <em>Saccharomyces cerevisiae</em> because of some errors in the sequences, as <em>Saccharomyces cerevisiae</em> and <em>Saccharomyces paradoxus</em> are close species and should share then a lot of similarity in their sequences.</p>
+                  </li>
+                  <li>
+                    <p><em>Saccharomyces eubayanus</em> species, most likely the parent of the lager brewing yeast, <em>Saccharomyces pastorianus</em> (<span class="citation"><a href="#sampaio2018microbe">Sampaio 2018</a></span>)</p>
+
+                    <p>Similar to <em>Saccharomyces paradoxus</em>, these reads might have been misassigned.</p>
+                  </li>
+                </ul>
+              </li>
+              <li><em>Kluyveromyces</em> genus - <em>Kluyveromyces marxianus</em> species: only 1 read</li>
+            </ul>
+          </li>
+          <li>Trichomonascaceae family - <em>Sugiyamaella</em> genus - <em>Sugiyamaella lignohabitans</em> species: only 1 read</li>
+          <li>Debaryomycetaceae family - <em>Candida</em> genus - <em>Candida dubliniensis</em> species: only 1 read</li>
+        </ul>
+
+        <p>Everything except <em>Saccharomyces cerevisiae</em> are probably misindentified reads.</p>
+      </li>
       <li>Reads are assigned to <em>Saccharomyces</em>
         <ul>
-          <li>41% out of total identified reads (root)</li>
-          <li>43% out of identified reads for Eukaryota domain</li>
-          <li>98% out of identified reads for Ascomycota phylum</li>
-          <li>99% out of identified reads for Saccharomycetales order</li>
-          <li>100% out of identified reads for Saccharomycetaceae family</li>
+          <li>25% out of total reads (root)</li>
+          <li>44% out of identified reads for Eukaryota domain</li>
+          <li>96% out of identified reads for Ascomycota phylum</li>
+          <li>98% out of identified reads for Saccharomycetales order</li>
+          <li>99% out of identified reads for Saccharomycetaceae family</li>
         </ul>
 
         <p><img src="./images/krona_saccharomyces_1.png" alt="Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species). *Saccharomyces* is highligthed with on the right the percentages of identified reads assigned to *Saccharomyces* for the different taxonomic levels. " loading="lazy" /></p>
@@ -1570,6 +1580,355 @@ So we need to work on the file by:
 
 </blockquote>
 
+<p>Microbiome of several beers, including Chimay beers, have been previously investigated by targeting specifically the fungi, in which we can find yeasts (<span class="citation"><a href="#sobel2017beerdecoded">Sobel <i>et al.</i> 2017</a></span>):</p>
+
+<figure id="figure-4"><img src="./images/beerdecoded.gif" alt="Heatmap with rows being type of beers and columns fungi species. For the rows, the name of beers are on the right and clustering tree on the left side of the heatmap. For the columns, the name of the species are on the bottom and the clustering tree on the top. The fungi species are sorted from the least abundant on the left to the most abundant on the right." width="1000" height="940" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Heatmap of the number of reads per internal transcribed spacer (ITS) sequencing of fungal species per beer. Source <span class="citation"><a href="#sobel2017beerdecoded">Sobel <i>et al.</i> 2017</a></span></figcaption></figure>
+
+<p>The species identified for Chimay beers are (from the most abundant to the least one):</p>
+<ul>
+  <li><em>Saccharomyces cerevisiae</em></li>
+  <li><em>Saccharomyces mikatea</em>: a species generally used in winemaking (<span class="citation"><a href="#bellon2013introducing">Bellon <i>et al.</i> 2013</a></span>)</li>
+  <li>
+    <p><em>Kazachstania martiniae</em>: <em>Kazachstania</em> is a genus from the family Saccharomycetaceaethe.</p>
+  </li>
+  <li><em>Saccharomyces kudriavzevii</em></li>
+  <li>
+    <p><em>Brettanomyces bruxellensis</em></p>
+
+    <p><em>Brettanomyces</em> is a non-spore forming genus of yeast in the family Saccharomycetaceae, and is important to both the brewing and wine industries due to the sensory compounds it produces.</p>
+
+    <p><em>Brettanomyces bruxellensis</em> is typically used for the production of the Belgian beers.</p>
+  </li>
+  <li><em>Saccharomyces paradoxus</em>: a wild yeast species closely related to <em>Saccharomyces cerevisiae</em></li>
+  <li><em>Kazachstania kunashirensis</em></li>
+  <li><em>Saccharomyces cariocanus</em>: a wild yeast species closely related to <em>Saccharomyces cerevisiae</em></li>
+  <li><em>Filobasidium magnum</em></li>
+  <li><em>Malasseria restricta</em></li>
+  <li><em>Pichia kudriavzevii</em></li>
+  <li><em>Aureobasidium pullulans</em></li>
+  <li><em>Sporidiobolus metaroseus</em></li>
+</ul>
+
+<p>In a structured way:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Phylum</th>
+      <th>Class</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genus</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ascomycota</td>
+      <td>Saccharomycetes</td>
+      <td>Saccharomycetales</td>
+      <td>Saccharomycetaceae</td>
+      <td>Saccharomyces</td>
+      <td><em>Saccharomyces cerevisiae</em></td>
+    </tr>
+    <tr>
+      <td>Ascomycota</td>
+      <td>Saccharomycetes</td>
+      <td>Saccharomycetales</td>
+      <td>Saccharomycetaceae</td>
+      <td>Saccharomyces</td>
+      <td><em>Saccharomyces mikatea</em></td>
+    </tr>
+    <tr>
+      <td>Ascomycota</td>
+      <td>Saccharomycetes</td>
+      <td>Saccharomycetales</td>
+      <td>Saccharomycetaceae</td>
+      <td>Saccharomyces</td>
+      <td><em>Saccharomyces kudriavzevii</em></td>
+    </tr>
+    <tr>
+      <td>Ascomycota</td>
+      <td>Saccharomycetes</td>
+      <td>Saccharomycetales</td>
+      <td>Saccharomycetaceae</td>
+      <td>Saccharomyces</td>
+      <td><em>Saccharomyces paradoxus</em></td>
+    </tr>
+    <tr>
+      <td>Ascomycota</td>
+      <td>Saccharomycetes</td>
+      <td>Saccharomycetales</td>
+      <td>Saccharomycetaceae</td>
+      <td>Saccharomyces</td>
+      <td><em>Saccharomyces cariocanus</em></td>
+    </tr>
+    <tr>
+      <td>Ascomycota</td>
+      <td>Saccharomycetes</td>
+      <td>Saccharomycetales</td>
+      <td>Saccharomycetaceae</td>
+      <td>Kazachstania</td>
+      <td><em>Kazachstania martiniae</em></td>
+    </tr>
+    <tr>
+      <td>Ascomycota</td>
+      <td>Saccharomycetes</td>
+      <td>Saccharomycetales</td>
+      <td>Saccharomycetaceae</td>
+      <td>Kazachstania</td>
+      <td><em>Kazachstania kunashirensis</em></td>
+    </tr>
+    <tr>
+      <td>Ascomycota</td>
+      <td>Saccharomycetes</td>
+      <td>Saccharomycetales</td>
+      <td>Saccharomycetaceae</td>
+      <td>Brettanomyces</td>
+      <td><em>Brettanomyces bruxellensis</em></td>
+    </tr>
+    <tr>
+      <td>Ascomycota</td>
+      <td>Saccharomycetes</td>
+      <td>Saccharomycetales</td>
+      <td>Saccharomycetaceae</td>
+      <td> </td>
+      <td><em>Pichia kudriavzevii</em></td>
+    </tr>
+    <tr>
+      <td>Ascomycota</td>
+      <td>Dothideomycetes</td>
+      <td>Dothideales</td>
+      <td>Dothioraceae</td>
+      <td>Aureobasidium</td>
+      <td><em>Aureobasidium pullulans</em></td>
+    </tr>
+    <tr>
+      <td>Basidiomycota</td>
+      <td>Tremellomycetes</td>
+      <td>Filobasidiales</td>
+      <td>Filobasidiaceae</td>
+      <td>Filobasidium</td>
+      <td><em>Filobasidium magnum</em></td>
+    </tr>
+    <tr>
+      <td>Basidiomycota</td>
+      <td>Malasseziomycetes</td>
+      <td>Malasseziales</td>
+      <td>Malasseziaceae</td>
+      <td>Malassezia</td>
+      <td><em>Malasseria restricta</em></td>
+    </tr>
+    <tr>
+      <td>Basidiomycota</td>
+      <td>Sporidiobolales</td>
+      <td>Sporidiobolales</td>
+      <td>Sporidiobolaceae</td>
+      <td>Sporidiobolus</td>
+      <td><em>Sporidiobolus metaroseus</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+  <p>By looking at the output of <strong>Krakentools</strong>, which fungi species identified for the Chimay beers in <span class="citation"><a href="#sobel2017beerdecoded">Sobel <i>et al.</i> 2017</a></span> are also identified in our data? And vice versa?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Phylum</th>
+          <th>Class</th>
+          <th>Order</th>
+          <th>Family</th>
+          <th>Genus</th>
+          <th>Species</th>
+          <th><span class="citation"><a href="#sobel2017beerdecoded">Sobel <i>et al.</i> 2017</a></span></th>
+          <th>Our data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Saccharomycetaceae</td>
+          <td>Saccharomyces</td>
+          <td><em>Saccharomyces cerevisiae</em></td>
+          <td>X</td>
+          <td>X</td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Saccharomycetaceae</td>
+          <td>Saccharomyces</td>
+          <td><em>Saccharomyces mikatea</em></td>
+          <td>X</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Saccharomycetaceae</td>
+          <td>Saccharomyces</td>
+          <td><em>Saccharomyces kudriavzevii</em></td>
+          <td>X</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Saccharomycetaceae</td>
+          <td>Saccharomyces</td>
+          <td><em>Saccharomyces paradoxus</em></td>
+          <td>X</td>
+          <td>X</td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Saccharomycetaceae</td>
+          <td>Saccharomyces</td>
+          <td><em>Saccharomyces cariocanus</em></td>
+          <td>X</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Saccharomycetaceae</td>
+          <td>Saccharomyces</td>
+          <td><em>Saccharomyces eubayanus</em></td>
+          <td> </td>
+          <td>X</td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Saccharomycetaceae</td>
+          <td>Kazachstania</td>
+          <td><em>Kazachstania martiniae</em></td>
+          <td>X</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Saccharomycetaceae</td>
+          <td>Kazachstania</td>
+          <td><em>Kazachstania kunashirensis</em></td>
+          <td>X</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Saccharomycetaceae</td>
+          <td>Kluyveromyces</td>
+          <td><em>Kluyveromyces marxianus</em></td>
+          <td> </td>
+          <td>X</td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Saccharomycetaceae</td>
+          <td>Brettanomyces</td>
+          <td><em>Brettanomyces bruxellensis</em></td>
+          <td>X</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Saccharomycetaceae</td>
+          <td> </td>
+          <td><em>Pichia kudriavzevii</em></td>
+          <td>X</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Saccharomycetes</td>
+          <td>Saccharomycetales</td>
+          <td>Debaryomycetaceae</td>
+          <td>Candida</td>
+          <td><em>Candida dubliniensis</em></td>
+          <td> </td>
+          <td>X</td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Dothideomycetes</td>
+          <td>Dothideales</td>
+          <td>Dothioraceae</td>
+          <td>Aureobasidium</td>
+          <td><em>Aureobasidium pullulans</em></td>
+          <td>X</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>Ascomycota</td>
+          <td>Sordariomycetes</td>
+          <td>Sordariales</td>
+          <td>Sordariaceae</td>
+          <td>Neurospora</td>
+          <td><em>Neurospora crassa</em></td>
+          <td> </td>
+          <td>X</td>
+        </tr>
+        <tr>
+          <td>Basidiomycota</td>
+          <td>Tremellomycetes</td>
+          <td>Filobasidiales</td>
+          <td>Filobasidiaceae</td>
+          <td>Filobasidium</td>
+          <td><em>Filobasidium magnum</em></td>
+          <td>X</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>Basidiomycota</td>
+          <td>Malasseziomycetes</td>
+          <td>Malasseziales</td>
+          <td>Malasseziaceae</td>
+          <td>Malassezia</td>
+          <td><em>Malasseria restricta</em></td>
+          <td>X</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>Basidiomycota</td>
+          <td>Sporidiobolales</td>
+          <td>Sporidiobolales</td>
+          <td>Sporidiobolaceae</td>
+          <td>Sporidiobolus</td>
+          <td><em>Sporidiobolus metaroseus</em></td>
+          <td>X</td>
+          <td> </td>
+        </tr>
+      </tbody>
+    </table>
+  </blockquote>
+</blockquote>
+
+<p>Some interesting yeast have been found in  <span class="citation"><a href="#sobel2017beerdecoded">Sobel <i>et al.</i> 2017</a></span> and not in our data (e.g. <em>Brettanomyces bruxellensis</em>), and vice versa.</p>
+
 <h1 id="optional-sharing-your-history">(Optional) Sharing your history</h1>
 
 <p>One of the most important features of Galaxy comes at the end of an analysis: sharing your histories with others so they can review them.</p>
@@ -1577,6 +1936,7 @@ So we need to work on the file by:
 <!--SNIPPET-->
 <blockquote class="tip">   <div class="box-title tip-title" id="tip-sharing-your-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-sharing-your-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Sharing your History<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Sharing your history allows others to import and access the datasets, parameters, and steps of your history.</p>   <ol>   <li><strong>Share via link</strong>     <ul>       <li>Open the <strong>History Options</strong> <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> menu (gear icon) at the top of your history panel         <ul>           <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">galaxy-toggle</span> <strong>Make History accessible</strong></li>           <li>A <strong>Share Link</strong> will appear that you give to others</li>         </ul>       </li>       <li>Anybody who has this link can view and copy your history</li>     </ul>   </li>   <li><strong>Publish your history</strong>     <ul>       <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">galaxy-toggle</span> <strong>Make History publicly available in Published Histories</strong></li>       <li>Anybody on this Galaxy server will see your history listed under the <em>Shared Data</em> menu</li>     </ul>   </li>   <li><strong>Share only with another user</strong>.     <ul>       <li>Click the <strong>Share with a user</strong> button at the bottom</li>       <li>Enter an email address for the user you want to share with</li>       <li>Your history will be shared only with this user.</li>     </ul>   </li>   <li><strong>Finding histories others have shared with me</strong>     <ul>       <li>Click on <strong>User</strong> menu on the top bar</li>       <li>Select <strong>Histories shared with me</strong></li>       <li>Here you will see all the histories others have shared with you directly</li>     </ul>   </li> </ol>   <p><strong>Note:</strong> If you want to make changes to your history without affecting the shared version, make a copy by going to <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <em>History options</em> icon in your history and clicking <em>Copy</em></p> </blockquote>
 
+<h1 id="conclusion">Conclusion</h1>
 
                 </section>
 
@@ -1617,14 +1977,16 @@ So we need to work on the file by:
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li id="kurtzman1994molecular">Kurtzman, C. P., 1994 <b>Molecular taxonomy of the yeasts</b>. Yeast 10: 1727–1740.</li>
+                <ol class="bibliography"><li id="kurtzman1994molecular">Kurtzman, C. P., 1994 <b>Molecular taxonomy of the yeasts</b>. Yeast 10: 1727–1740. <a href="https://doi.org/10.1002/yea.320101306">10.1002/yea.320101306</a></li>
 <li id="Ondov_2011">Ondov, B. D., N. H. Bergman, and A. M. Phillippy, 2011 <b>Interactive metagenomic visualization in a Web browser</b>. BMC Bioinformatics 12: <a href="https://doi.org/10.1186/1471-2105-12-385">10.1186/1471-2105-12-385</a></li>
+<li id="bellon2013introducing">Bellon, J. R., F. Schmid, D. L. Capone, B. L. Dunn, and P. J. Chambers, 2013 <b>Introducing a new breed of wine yeast: interspecific hybridisation between a commercial Saccharomyces cerevisiae wine yeast and Saccharomyces mikatae</b>. PLoS one 8: e62053. <a href="https://doi.org/10.1371/journal.pone.0062053">10.1371/journal.pone.0062053</a></li>
 <li id="Wood2014">Wood, D. E., and S. L. Salzberg, 2014 <b>Kraken: ultrafast metagenomic sequence classification using exact alignments</b>. Genome Biology 15: R46. <a href="https://doi.org/10.1186/gb-2014-15-3-r46">10.1186/gb-2014-15-3-r46</a></li>
+<li id="sobel2017beerdecoded">Sobel, J., L. Henry, N. Rotman, and G. Rando, 2017 <b>BeerDeCoded: the open beer metagenome project</b>. F1000Research 6: 1676. <a href="https://doi.org/10.12688/f1000research.12564.2">10.12688/f1000research.12564.2</a></li>
 <li id="rrwick2017">Wick, R., 2017 <b>Porechop</b>. <i>GitHub</i>. <a href="https://github.com/rrwick/Porechop">https://github.com/rrwick/Porechop</a></li>
 <li id="Chen_2018">Chen, S., Y. Zhou, Y. Chen, and J. Gu, 2018 <b>fastp: an ultra-fast all-in-one FASTQ preprocessor</b>. <a href="https://doi.org/10.1101/274100">10.1101/274100</a></li>
-<li id="sampaio2018microbe">Sampaio, J. P., 2018 <b>Microbe profile: Saccharomyces eubayanus, the missing link to lager beer yeasts</b>. Microbiology 164: 1069.</li>
-<li id="wood2019improved">Wood, D. E., J. Lu, and B. Langmead, 2019 <b>Improved metagenomic analysis with Kraken 2</b>. Genome biology 20: 1–13.</li>
-<li id="delahaye2021sequencing">Delahaye, C., and J. Nicolas, 2021 <b>Sequencing DNA with nanopores: Troubles and biases</b>. PLoS One 16: e0257521.</li></ol>
+<li id="sampaio2018microbe">Sampaio, J. P., 2018 <b>Microbe profile: Saccharomyces eubayanus, the missing link to lager beer yeasts</b>. Microbiology 164: 1069. <a href="https://doi.org/10.1099/mic.0.000677">10.1099/mic.0.000677</a></li>
+<li id="wood2019improved">Wood, D. E., J. Lu, and B. Langmead, 2019 <b>Improved metagenomic analysis with Kraken 2</b>. Genome biology 20: 1–13. <a href="https://doi.org/10.1186/s13059-019-1891-0">10.1186/s13059-019-1891-0</a></li>
+<li id="delahaye2021sequencing">Delahaye, C., and J. Nicolas, 2021 <b>Sequencing DNA with nanopores: Troubles and biases</b>. PLoS One 16: e0257521. <a href="https://doi.org/10.1371/journal.pone.0257521">10.1371/journal.pone.0257521</a></li></ol>
                 
 
                 
