@@ -1,37 +1,21 @@
 name: Monthly GTN Release
 
 on:
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0 4 1 * *'
   workflow_dispatch:
+    inputs:
+      selected_tag:
+        type: string
+        description: Target tag, this tag MUST ALREADY EXIST.
+        required: true
 
 jobs:
   setup:
     if: github.repository_owner == 'galaxyproject'
     runs-on: ubuntu-latest
     steps:
-      - name: Release Name
-        id: release_name
-        run: |
-          echo "release_title=$(LC_ALL=C date '+%Y %B %d')" >> $GITHUB_ENV
-          echo "release_tag=$(LC_ALL=C date -I)" >> $GITHUB_ENV
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.release_tag }}
-          commitish: main
-          release_name: Release ${{ env.release_title }}
-          body: "Monthly release of the GTN materials"
-          draft: false
-          prerelease: false
-
       - uses: actions/checkout@v2
         with:
+          ref: "${{ github.event.inputs.selected_tag }}"
           fetch-depth: 0
 
       # BEGIN Dependencies
@@ -88,7 +72,7 @@ jobs:
           curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
         env:
-          SOURCE_TAG: ${{ env.release_tag }}
+          SOURCE_TAG: ${{ github.event.inputs.selected_tag }}
           GTN_FORK: ${{ github.repository_owner }}
 
       - name: Deploy 🚀
@@ -96,4 +80,4 @@ jobs:
           pip install awscli
           ./bin/publish-archive
         env:
-          SOURCE_TAG: ${{ env.release_tag }}
+          SOURCE_TAG: ${{ github.event.inputs.selected_tag }}
