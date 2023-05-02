@@ -373,15 +373,32 @@ The blob plot is a two-dimensional scatter plot that helps in visualizing and an
 >
 {: .question}
 
-Finally, let's have a look at the accumulative plot, which shows the curves for subsets of scaffolds assigned to each phylum relative to the overall assembly. It is useful for evaluating the contribution of the contigs from contaminated reads to the final assembly. In that case, we will compare the plots from the pre-curated and post-curated *E. reginate assemblies (note: the pre-curated assembly is not used in this training).
+Finally, let's have a look at the accumulative plot, which shows the curves for subsets of scaffolds assigned to each phylum relative to the overall assembly. It is useful for evaluating the contribution of the contigs from contaminated reads to the final assembly. In that case, first we will evaluate all sequences together, and the we will remove those correspoding to chordata or not classified (not-hit) in order to be able to evaluate in detail each of the contaminants. So, let start with the accumulative plot corresponding to all sequences (fig. 9).
 
-![Figure 2: BlobToolKit cumulativ plot](../../images/post-assembly-QC/Blobdir.cumulative.c.png "Chondrosia reniformis")
+In this kind of plot, the x-axis represent the number of contigs (sorted by specie and length), and the y-axis correspond to the cumulative length in nucleotides. The gray line shows the cumulative length of all sequences. As we can appreciate, most sequences corespond to the taxa chordata (1.9Gb, distributed along 151 contigs). In addition, we can see that the final assembly includes 174 contigs of contigs corresponding to different taxa, or not classified at all. In order to be able to analyze the contribution of those sequences, we will filter the contigs corresponding to chordata.
+
+![Figure 2: BlobToolKit cumulativ plot](../../images/post-assembly-QC/Blobdir.cumulative.png "Cumulative sequence length for assembly Blobdir. The grey line shows cumulative length for all sequences. Coloured lines show cumulative lengths of sequences assigned to each phylum using the bestsum taxrule. Plot axes are scaled to the filtered assembly.")
+
+> <comment-title> How do I apply filters to a dataset? </comment-title>
+>
+> Datasets can be filtered based on any category or variable using the "Filters" menu. To filter based on a category, click the tab above any bar of the preview histogram to hide/show records assigned to this category. To filter variables, use the sliders at either end of the preview histogram to change the maximum and minimum values or enter the numbers directly into the text boxes above the histogram.
+>
+{: .comment}
+
+![Figure 2: BlobToolKit cumulativ plot](../../images/post-assembly-QC/Blobdir.cumulative_filtered.png " The grey line shows cumulative length for all sequences. Coloured lines show cumulative lengths of sequences assigned to each phylum using the bestsum taxrule and are stacked by cumulative value on the x-axis to show the proportion of each phylum in the overall assembly. The assembly has been filtered to exclude sequences with phylum matches Chordata. Plot axes are scaled to the filtered assembly.")
+
+In the figure 11 we can appreaciate clearly the relative contribution of each contaminant with respect to the total contamination. 
 
 
-# Genome profile analysis
+# K-mer based genome profiling and evaluation
 
-It is common to analyse assemblies with the help of k-mer counting. During the assembling process, the DNA fragments are broken down into k-mers. Then they are compared to identify regions of overlap. By aligning overlapping k-mers it's possible to piece the original DNA sequence together and generate a complete genome.
-K-mers are also useful for genome analysis. The frequency and distribution of k-mers can be used to estimate the genome size, rate of heterozygosity and to identify repetitive sequences. K-mer counting can also be used to detect and correct errors and it can point out possible contaminations in genome assemblies. ({% cite Manekar2018 %})
+k-mers can be utilized to infer genome characteristics such as length and heterozygosity by analyzing their frequency distribution in raw sequencing reads ({% cite Manekar2018 %}). In this tutorial we will make use of three different tools in order to perform the k-mer based genome profling and assembly evaluation.
+
+> <comment-title> Genome profiling details </comment-title>
+>
+> You can find more details about genome profiling [here](https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#genome-profile-analysis).
+>
+{: .comment}
 
 
 ## Generating k-mer profile with **Meryl**
@@ -456,7 +473,7 @@ Figure 4 corresponds to the k-mer profile of the Sponge (Chondrosia reniformis).
 
 
 
-## K-mer profile evaluation with **Merqury**
+## K-mer based assembly evaluation with **Merqury**
 
 Merqury is designed for evaluating the completeness and accuracy of long-read genome assemblies using short-read sequencing data. Thus the quality of assemblies which are generated by using third-generation sequencing technologies can be reviewed and assessed by the tool.
 Merqury works by comparing k-mers of an assembly to those from unassembled high-accuracy reads of the raw sequencing data. K-mer-based methods are also used to identify errors and missing sequences. ({% cite Rhie2020 %})
