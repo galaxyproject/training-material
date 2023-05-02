@@ -57,6 +57,7 @@ jobs:
       - name: Install dependencies
         run: |
           gem install bundler
+          pip install yaml
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
           npm install
@@ -72,7 +73,6 @@ jobs:
 
       - name: Build Site
         run: |
-          pip install yaml
           git tag -l
           git checkout ${SOURCE_TAG}
           gem install bundler
