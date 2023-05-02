@@ -73,7 +73,7 @@ In this tutorial, we will use data of beer microbiome generated via the
 > Beer is alive! It contains microorganisms, in particular **yeasts**.
 >
 > Indeed, grain and water create a sugary liquid (called wort). The beer brewer
-> adds yeasts to it. By eating the sugar, yeasts creates alcohol,
+> adds yeasts to it. By eating the sugar, yeast creates alcohol,
 > and other compounds (esters, phenols, etc.) that give beer its particular
 > flavor.
 >
@@ -93,8 +93,8 @@ In this tutorial, we will use data of beer microbiome generated via the
 > found, and cultivated, by Bavarian brewers a little over 200 years ago. It is
 > the most commonly used yeast in terms of the raw amount of beer produced around the world.
 >
-> But yeast is actually all around us. And we can actually brew spontaneously
-> fermented beer with wild yeast and souring microbiota floating through the air.
+> Since yeast is all around us, we can actually brew spontaneously
+> fermented beer by using wild yeasts and souring microbiota floating through the air.
 >
 {: .comment}
 
@@ -235,7 +235,7 @@ Before starting to work on our data, it is necessary to assess its quality. This
 
 **FastQC** provides information on various parameters, such as the range of quality values across all bases at each position:
 
-![FastQC Per base sequence quality with scores below 20](./images/fastqc_1.png "Per base sequence quality. X-axis: position in the reads (in base pair). Y-axis: quality score, between 0 and 40 - the higher the score, the better the base call. For each position, a boxplot is drawn with: the median value, represented by the central red line;the inter-quartile range (25-75%), represented by the yellow box; the 10% and 90% values in the upper and lower whiskers; and the mean quality, represented by the blue line. The background of the graph divides the y-axis into very good quality scores (green), scores of reasonable quality (orange), and reads of poor quality (red)")
+![FastQC Per base sequence quality with scores below 20](./images/fastqc_1.png "Per base sequence quality. X-axis: position in the reads (in base pair). Y-axis: quality score, between 0 and 40 - the higher the score, the better the base call. For each position, a boxplot is drawn with: the median value, represented by the central red line;the inter-quartile range (25-75%), represented by the yellow box; the 10% and 90% values in the upper and lower whiskers; and the mean quality, represented by the blue line. The background of the graph divides the y-axis into very good quality scores (green), scores of reasonable quality (orange), and reads of poor quality (red).")
 
 We can see that the quality of our sequencing data grows after the first few bases, stays around a score of 18 and then decreases again at the end of the sequences. MinION and Oxford Nanopore Technologies (ONT) are known to have a higher error rate compared to other sequencing techniques and platforms ({% cite delahaye2021sequencing %}).
 
@@ -284,14 +284,14 @@ In order to improve the quality of our data, we will use two tools:
 
 # Assign taxonomic classification
 
-One of the main aims in microbiome data analysis is to identify the organisms sequenced. For that we try to **identify the taxon** to which each individual reads belong.
+One of the main aims in microbiome data analysis is to identify the organisms sequenced. For that we try to **identify the taxon** to which each individual read belong.
 
 {% snippet topics/metagenomics/faqs/taxon.md %}
 
 > <question-title></question-title>
 >
 > 1. Which microorganisms do we expect to identify in our data?
-> 2. What is the taxonomy of main expected microorganism?
+> 2. What is the taxonomy of the main expected microorganism?
 >
 > > <solution-title></solution-title>
 > >
@@ -343,7 +343,7 @@ Taxonomic assignment or classification is the process of assigning an **Operatio
 > 2. Inspect the report file
 {: .hands_on}
 
-The Kraken report is tabular files with one line per taxon and 6 columns or fields:
+The Kraken report is a tabular files with one line per taxon and 6 columns or fields:
 
 1. Percentage of fragments covered by the clade rooted at this taxon
 2. Number of fragments covered by the clade rooted at this taxon
@@ -427,7 +427,7 @@ Other taxons than yeast have been identified. They could be contamination or mis
 >    - {% icon param-file %} *"Filter"*: report outpout of **Kraken2**
 >    - *"With following condition"*: `c2>5`
 >
->      We want to keep only taxons with the number of reads assigned, *i.e.* the value in the 2nd column, is higher than 5.
+>      We want to keep only taxons with more than 5 reads assigned, *i.e.* the value in the 2nd column, is higher than 5.
 >
 > 2. Inspect the output
 {: .hands_on}
@@ -513,10 +513,10 @@ Let's take a look at the result.
 
 Let's come back to our original question: characterization of the beer microbiome, specially looking at the yeasts.
 
-Yeasts do not form a single taxonomic group ({% cite kurtzman1994molecular %}). They are parts on fungi kingdom but belong two separate phyla: the Ascomycota and the Basidiomycota. [But the "true yeasts" are classified in the order Saccharomycetales](https://web.archive.org/web/20090226151906/http://www.yeastgenome.org/VL-what_are_yeast.html).
+Yeasts do not form a single taxonomic group ({% cite kurtzman1994molecular %}). They are parts of the fungi kingdom but belong two separate phyla: the Ascomycota and the Basidiomycota. [But the "true yeasts" are classified in the order Saccharomycetales](https://web.archive.org/web/20090226151906/http://www.yeastgenome.org/VL-what_are_yeast.html).
 
 > <question-title></question-title>
-> 1. Click on `o__Saccharomycetales` in the graph. Which yeast species have been identified? Are they the expected in beer?
+> 1. Click on `o__Saccharomycetales` in the graph (Krona pie chart). Which yeast species have been identified? Are they the expected in beer?
 > 2. Click on *Saccharomyces* in the graph. What are the percentages of identified reads assigned to *Saccharomyces* for different levels?
 > 3. Click a second time on *Saccharomyces* in the graph. What is the repartition between the different *Saccharomyces* species?
 >
