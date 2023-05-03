@@ -39,7 +39,7 @@ In this tutorial, we aim to perform a genome-wide analysis of the isoform switch
 
 # Background on data
 
-The datasets consist of ten FASTQ files, generated through the Illumina HiSeq 4000 sequencing system. The samples were obtaned by strand-specific RNA sequencing on hepatoblastoma paired samples. The procotol used for extracting the samples includes the depletion of rRNAs by subtractive hybridization, a general strategy for mRNA enrichment in RNA-seq samples. The original datasets are available in the NCBI SRA database, with the accession number [PRJNA416439](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA416439). For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.
+The datasets consist of twelve FASTQ files, generated through the Illumina NovaSeq 6000 sequencing system. The samples were obtaned by strand-specific RNA sequencing on hepatoblastoma paired samples. The procotol used for extracting the samples includes the depletion of rRNAs by subtractive hybridization, a general strategy for mRNA enrichment in RNA-seq samples. The original datasets are available in the NCBI SRA database, with the accession number [PRJNA542693](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA542693).
 
 ## Get data
 
@@ -56,26 +56,18 @@ The first step of our analysis consists of retrieving the RNA-seq datasets from 
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      SRR6263336	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263336_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR6263336	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263336_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR6263339	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263339_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR6263339	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263339_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR6263341	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263341_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR6263341	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263341_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR6263343	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263343_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR6263343	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263343_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR6263345	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263345_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR6263345	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263345_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR6263371	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263371_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR6263371	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263371_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR6263373	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263373_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR6263373	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263373_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR6263375	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263375_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR6263375	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263375_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR6263379	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263379_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR6263379	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263379_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR6263381	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263381_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR6263381	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263381_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050437F	Health tissue	https://zenodo.org/record/7656544/files/SRR9050437_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050437R	Health tissue	https://zenodo.org/record/7656544/files/SRR9050437_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050438F	Health tissue	https://zenodo.org/record/7656544/files/SRR9050438_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050438R	Health tissue	https://zenodo.org/record/7656544/files/SRR9050438_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050439F	Health tissue	https://zenodo.org/record/7656544/files/SRR9050439_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050439R	Health tissue	https://zenodo.org/record/7656544/files/SRR9050439_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050440F	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050440_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050440R	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050440_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050441F	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050441_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050441R	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050441_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050442F	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050442_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050442R	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050442_reverse.fastqsanger.gz	fastqsanger.gz	2
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -442,18 +434,21 @@ Stringtie generates six collection with three elements each one, but we will use
 {: .details}
 
 
-# Isoform expression analysis with **IsoformSwitchAnalyzeR**
+# Isoform analysis with **IsoformSwitchAnalyzeR**
 
-<!-- Needs to be edited! -->
+<!-- Needs to be modified -->
 
-IsoformSwitchAnalyzeR enables analysis of changes in genome-wide patterns of alternative splicing and isoform switch consequences.
+IsoformSwitchAnalyzeR enables to analyze  changes in genome-wide patterns of alternative splicing and isoform switch consequences.
 
 A genome-wide analysis is both useful for getting an overview of the extent of isoform switching as well as discovering general patterns. IsoformSwitchAnalyzeR supports this by providing four different summaries/analyses for both the analysis of alternative splicing and isoform switches with predicted consequences. All functions provide a visual overview as well as a data.frame with the summary statistics. The four analysis types supported are:
 
-- Global summary statistics, implemented in the extractConsequenceSummary() and extractSplicingSummary() functions, which summarizes the number of switches with predicted consequences and the number of splicing events occurring in the different comparisons, respectively.
-- Analysis of splicing/consequence enrichment, implemented in the extractConsequenceEnrichment() and extractSplicingEnrichment() functions, which analyzes whether a particular consequence/splice type occurs more frequently than the opposite event (e.g. domain loss vs domain gain) in a giving comparison (e.g. WT->KO1).
-- Comparison of enrichment, implemented in extractConsequenceEnrichmentComparison() and extractSplicingEnrichmentComparison() functions, which compares the enrichment of a particular consequence/splice type between comparisons (e.g. compares the changes in WT->KO1 vs WT->KO2)
-- Analysis of genome-wide changes in isoform usage, implemented in extractConsequenceGenomeWide() and extractSplicingGenomeWide() functions, which analyses the genome-wide changes in isoform usage for all isoforms with particular opposite pattern events. This type of analysis is particular interesting if the expected difference between conditions is large, since such effects could result in genome-wide changes. The analysis works by simultaneously analyzing all isoforms with a specific feature (e.g. intron retention) for changes in isoform usage.
+IsoformSwitchAnalyzeR is an easy-to-use R package that enables the user to import (novel) full-length derived isoforms from an RNA-seq experiment into R. If annotated transcripts are analyzed, IsoformSwitchAnalyzeR offers integration with the multi-layer information stored in a GTF file including the annotated coding sequences (CDS). If transcript structures are predicted (either de-novo or guided) IsoformSwitchAnalyzeR offers an accurate tool for identifying the dominant ORF of the isoforms. The knowledge of isoform positions for the CDS/ORF allows for prediction of sensitivity to Nonsense Mediated Decay (NMD) — the mRNA quality control machinery that degrades isoforms with pre-mature termination codons (PTC).
+
+![figX:Consequences isoform](../../images/differential_isoform/scheme.jpeg "IsoformSwitchAnalyzer scheme")
+
+IsoformSwitchAnalyzeR facilitates identification of isoform switches via newly developed statistical methods that tests each individual isoform for differential usage and thereby identifies the exact isoforms involved in an isoform switch.
+
+Since we know the exon structure of the full-length isoform, IsoformSwitchAnalyzeR can extract the underlying nucleotide sequence from a reference genome. This enables integration with the Coding Potential Assessment Tool (CPAT) which predicts the coding potential of an isoform and can be used to increase accuracy of ORF predictions. By combining the CDS/ORF isoform positions with the nucleotide sequence, we can extract the most likely amino acid sequence of the CDS/ORF. The amino acid sequence enables integration of analysis of protein domains (via Pfam) and signal peptides (via SignalP) — both supported by IsoformSwitchAnalyzeR. Lastly, since the structures of all expressed isoforms from a given gene are known, one can also annotate alternative splicing - including retentions - a functionality also implemented in IsoformSwitchAnalyzeR.
 
 ## Import data into **IsoformSwitchAnalyzeR**
 
@@ -593,6 +588,11 @@ These isoforms are then divided into the isoforms that increase their contributi
 >        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
 >
 {: .hands_on}
+
+- Global summary statistics, implemented in the extractConsequenceSummary() and extractSplicingSummary() functions, which summarizes the number of switches with predicted consequences and the number of splicing events occurring in the different comparisons, respectively.
+- Analysis of splicing/consequence enrichment, implemented in the extractConsequenceEnrichment() and extractSplicingEnrichment() functions, which analyzes whether a particular consequence/splice type occurs more frequently than the opposite event (e.g. domain loss vs domain gain) in a giving comparison (e.g. WT->KO1).
+- Comparison of enrichment, implemented in extractConsequenceEnrichmentComparison() and extractSplicingEnrichmentComparison() functions, which compares the enrichment of a particular consequence/splice type between comparisons (e.g. compares the changes in WT->KO1 vs WT->KO2)
+- Analysis of genome-wide changes in isoform usage, implemented in extractConsequenceGenomeWide() and extractSplicingGenomeWide() functions, which analyses the genome-wide changes in isoform usage for all isoforms with particular opposite pattern events. This type of analysis is particular interesting if the expected difference between conditions is large, since such effects could result in genome-wide changes. The analysis works by simultaneously analyzing all isoforms with a specific feature (e.g. intron retention) for changes in isoform usage.
 
 ![figX:Consequences isoform](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "Consequences isoform")
 
