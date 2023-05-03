@@ -264,13 +264,7 @@ One of the key steps in metagenomic data analysis is to identify the taxon to wh
 
 To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood2019 %}). This tool uses the minimizer method to sample the k-mers (all the read's subsequences of length _k_) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using __dustmasker__.
 
-
-> <comment-title></comment-title>
-> __Kraken2__ uses a compact hash table, a probabilistic data structure that allows for faster queries and lower memory requirements. It applies a spaced seed mask of _s_ spaces to the minimizer and calculates a compact hash code, which is then used as a search query in its compact hash table; the lowest common ancestor (LCA) taxon associated with the compact hash code is then assigned to the k-mer.
-> You can find more information about the __Kraken2__ algorithm in the paper [_Improved metagenomic analysis with Kraken 2_](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0).
-{: .comment}
-
-![Taxonomic classification](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kraken2 sequence classification algorithm. To classify a sequence, each l-mer is mapped to the lowest common ancestor (LCA) of the genomes that contain that l-mer in a database. In the classification tree, each node has a weight equal to the number of l-mers in the sequence associated with the node’s taxon. Image originally published in {% cite Wood2014 %}.")
+{% snippet topics/metagenomics/faqs/kraken.md %}
 
 For this tutorial, we will use the __SILVA database__ ({% cite Quast2012 %}). It includes over 3.2 million 16S rRNA sequences from the _Bacteria_, _Archaea_ and _Eukaryota_ domains.
 
