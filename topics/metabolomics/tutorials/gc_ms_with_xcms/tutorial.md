@@ -214,7 +214,6 @@ A deviation in retention time occurs from one sample to another, especially when
 >    - {% icon param-file %} *"RData file"*: `xset.merged.groupChromPeaks.RData` (output of **xcms groupChromPeaks (group)** {% icon tool %})
 >    - *"Method to use for retention time correction"*: `PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.`
 >        - *"Minimum required fraction of samples in which peaks for the peak group were identified"*: `0.7`
->        - *"Smooth method"*: `loess - non-linear alignment`
 >
 >    You can leave the other parameters with their default values.
 >
