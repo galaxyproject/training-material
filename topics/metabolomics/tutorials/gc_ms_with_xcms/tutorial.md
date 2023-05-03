@@ -199,7 +199,6 @@ Now we can proceed with the grouping and determining shared ions among samples. 
 >        - *"Bandwidth"*: `3.0`
 >        - *"Minimum fraction of samples"*: `0.9`
 >        - *"Width of overlapping m/z slices"*: `0.01`
->    - *"Get the Peak List"*: `Yes`
 >
 >    You can leave the other parameters with their default values.
 >
@@ -235,7 +234,7 @@ By applying retention time correction, the used retention time values were modif
 >        - *"Width of overlapping m/z slices"*: `0.01`
 >    - *"Get the Peak List"*: `Yes`
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
->        - *"If NA values remain, replace them by 0 in the dataMatrix"*: `Yes`
+>        - *"If NA values remain, replace them by 0 in the dataMatrix"*: `No`
 >
 >    You can leave the other parameters with their default values.
 >
@@ -287,7 +286,7 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 >            - {% icon param-file %} *"Input XCMS"*: `xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.fillChromPeaks.RData` (output of **xcms fillChromPeaks (fillPeaks)** {% icon tool %})
 >        - In *"General parameters"*:
 >            - *"Sigma r"*: `0.7`
->            - *"Maximum RT difference"*: `5.0`
+>            - *"Maximum RT difference"*: `10.0`
 >    - In *"Clustering"*:
 >        - *"Minimal cluster size"*: `5`
 >        - *"Maximal tree height"*: `0.9`
