@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="16S Microbial analysis with Nanopore data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-01-24 13:14:34 +0000">
+<meta name="DC.date" content="2023-05-02 14:33:51 +0000">
 <meta name="DC.creator" content="Cristóbal Gallardo">
 
         
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-24 13:14:34 +0000",
+  "dateModified": "2023-05-02 14:33:51 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "16S Microbial analysis with Nanopore data",
   "interactivityType": "mixed",
@@ -417,7 +417,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-24 13:14:34 +0000",
+  "dateModified": "2023-05-02 14:33:51 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "16S Microbial analysis with Nanopore data",
   "interactivityType": "mixed",
@@ -885,7 +885,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 2, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1249,13 +1249,8 @@
 
 <p>To perform the taxonomic classification we will use <strong>Kraken2</strong> (<span class="citation"><a href="#Wood2019">Wood <i>et al.</i> 2019</a></span>). This tool uses the minimizer method to sample the k-mers (all the read’s subsequences of length <em>k</em>) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using <strong>dustmasker</strong>.</p>
 
-<blockquote class="comment">
-  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
-  <p><strong>Kraken2</strong> uses a compact hash table, a probabilistic data structure that allows for faster queries and lower memory requirements. It applies a spaced seed mask of <em>s</em> spaces to the minimizer and calculates a compact hash code, which is then used as a search query in its compact hash table; the lowest common ancestor (LCA) taxon associated with the compact hash code is then assigned to the k-mer.
-You can find more information about the <strong>Kraken2</strong> algorithm in the paper <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0"><em>Improved metagenomic analysis with Kraken 2</em></a>.</p>
-</blockquote>
-
-<figure id="figure-7"><img src="../../images/metagenomics-nanopore/kmers-kraken.jpg" alt="Taxonomic classification. " width="735" height="437" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Kraken2 sequence classification algorithm. To classify a sequence, each l-mer is mapped to the lowest common ancestor (LCA) of the genomes that contain that l-mer in a database. In the classification tree, each node has a weight equal to the number of l-mers in the sequence associated with the node’s taxon. Image originally published in <span class="citation"><a href="#Wood2014">Wood and Salzberg 2014</a></span>.</figcaption></figure>
+<!--SNIPPET-->
+<blockquote class="details">   <div class="box-title details-title" id="details-kraken2-and-the-k-mer-approach-for-taxonomy-classification"><button class="gtn-boxify-button details" type="button" aria-controls="details-kraken2-and-the-k-mer-approach-for-taxonomy-classification" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Kraken2 and the k-mer approach for taxonomy classification<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>In the \(k\)-mer approach for taxonomy classification, we use a database containing DNA sequences of genomes whose taxonomy we already know. On a computer, the genome sequences are broken into short pieces of length \(k\) (called \(k\)-mers), usually 30bp.</p>   <p><strong>Kraken</strong> examines the \(k\)-mers within the query sequence, searches for them in the database, looks for where these are placed within the taxonomy tree inside the database, makes the classification with the most probable position, then maps \(k\)-mers to the lowest common ancestor (LCA) of all genomes known to contain the given \(k\)-mer.</p>   <p><img src="/training-material/topics/metagenomics/faqs/images/kmers-kraken.jpg" alt="Kraken2" title="Kraken sequence classification algorithm. To classify a sequence, each k-mer in the sequence is mapped to the lowest common ancestor (LCA, i.e. the lowest node) of the genomes that contain that k-mer in the database. The taxa associated with the sequence's k-mers, as well as the taxa's ancestors, form a pruned subtree of the general taxonomy tree, which is used for classification. In the classification tree, each node has a weight equal to the number of k-mers in the sequence associated with the node's taxon. Each root-to-leaf (RTL) path in the classification tree is scored by adding all weights in the path, and the maximal RTL path in the classification tree is the classification path (nodes highlighted in yellow). The leaf of this classification path (the orange, leftmost leaf in the classification tree) is the classification used for the query sequence. Source: &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;#Wood2014&quot;&gt;Wood and Salzberg 2014&lt;/a&gt;&lt;/span&gt;" /></p>   <p><strong>Kraken2</strong> uses a compact hash table, a probabilistic data structure that allows for faster queries and lower memory requirements. It applies a spaced seed mask of <em>s</em> spaces to the minimizer and calculates a compact hash code, which is then used as a search query in its compact hash table; the lowest common ancestor (LCA) taxon associated with the compact hash code is then assigned to the k-mer.</p>   <p>You can find more information about the <strong>Kraken2</strong> algorithm in the paper <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0"><em>Improved metagenomic analysis with Kraken 2</em></a>.</p> </blockquote>
 
 <p>For this tutorial, we will use the <strong>SILVA database</strong> (<span class="citation"><a href="#Quast2012">Quast <i>et al.</i> 2012</a></span>). It includes over 3.2 million 16S rRNA sequences from the <em>Bacteria</em>, <em>Archaea</em> and <em>Eukaryota</em> domains.</p>
 
@@ -1279,7 +1274,7 @@ You can find more information about the <strong>Kraken2</strong> algorithm in th
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
         <p>A confidence score of 0.1 means that at least 10% of the k-mers should match entries in the database. This value can be reduced if a less restrictive taxonomic assignation is desired.</p>
       </blockquote>
