@@ -268,7 +268,7 @@ For this tutorial, we will use the Standard (archaea, bacteria, viral, plasmid, 
    >
    {: .question}
 
-sGetting an overview of the assignation is not straightforward with the **Kraken2** outputs directly. We can use visualisation tools for that.
+Getting an overview of the assignation is not straightforward with the **Kraken2** outputs directly. We can use visualisation tools for that.
 
 A "simple and worthwile addition to Kraken for better abundance estimates" ({% cite Ye.2019 %}) is called __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken). Instead of only using proportions of classified reads, it takes a probabilistic approach to generate final abundance profiles. It works by re-distributing reads in the taxonomic tree: "Reads assigned to nodes above the species level are distributed down to the species nodes, while reads assigned at the strain level are re-distributed upward to their parent species" ({% cite Lu.2017 %}).
 
