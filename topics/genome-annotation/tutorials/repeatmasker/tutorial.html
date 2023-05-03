@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Masking repeats with RepeatMasker">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-03-15 14:29:53 +0000">
+<meta name="DC.date" content="2023-05-03 09:50:00 +0000">
 <meta name="DC.creator" content="Anthony Bretaudeau">
 <meta name="DC.creator" content="Alexandre Cormier">
 <meta name="DC.creator" content="Laura Leroi">
@@ -70,7 +70,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-15 14:29:53 +0000",
+  "dateModified": "2023-05-03 09:50:00 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Masking repeats with RepeatMasker",
   "interactivityType": "mixed",
@@ -696,7 +696,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-15 14:29:53 +0000",
+  "dateModified": "2023-05-03 09:50:00 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Masking repeats with RepeatMasker",
   "interactivityType": "mixed",
@@ -1346,17 +1346,11 @@
         
     
         
-        <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
-            Galaxy Test
-        </a>
-        
     
         
     
         
-        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
-            Galaxy@GenOuest
-        </a>
+    
         
     
         
@@ -1432,10 +1426,6 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
-            UseGalaxy.be
-        </a>
-        
     
         
         <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
@@ -1450,21 +1440,9 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
-            UseGalaxy.no
-        </a>
-        
     
         
-        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
-            UseGalaxy.org (Main)
-        </a>
-        
     
-        
-        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
-            UseGalaxy.org.au
-        </a>
         
     
         
@@ -1487,7 +1465,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 15, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 3, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1519,11 +1497,11 @@
   <li>Interspersed repeats: sequences repeated in distant positions, including transposons, Short Interspersed Nuclear Elements (SINEs) or Long Interspersed Nuclear Elements (LINEs)</li>
 </ul>
 
-<p>These repeats are interesting on their own: they can originate from transposons or viral insertions, and they can have direct effects on the expression of genes. But they are also the source of a lot of trouble when you work on genomics data. First when sequencing a genome, assembly tools often have problems reconstructing the genome sequence in regions containing repeats (in particular when repeats are longer than the read size). Then, when you have a good assembly, you want to annotate it to find the location of genes. Unfortunately annotation tools have trouble identifying gene locations in regions rich in repeats.</p>
+<p>These repeats are interesting on their own: they can originate from transposons or viral insertions, and they can have direct effects on the expression of genes. But they are also the source of a lot of trouble when you work on genomics data. First when sequencing a genome, assembly tools often have problems reconstructing the genome sequence in regions containing repeats (in particular when repeats are longer than the read size). Then, when you have a good assembly, you want to annotate it to find the location of genes. Unfortunately many annotation tools have trouble identifying gene locations in regions rich in repeats.</p>
 
 <p>The aim of repeat masking is to identify the location of all repeated elements along a genome sequence. Other tools (like annotation pipelines) can then take this information into account when producing their results.</p>
 
-<p>The output of repeat masking tools is most often composed of a fasta file (with sometimes a GFF file containing the position of each repeat). There is two types of masking, producing slightly different fasta output:</p>
+<p>The output of repeat masking tools is most often composed of a fasta file (with sometimes a BED or GFF file containing the position of each repeat). There is two types of masking, producing slightly different fasta output:</p>
 
 <ul>
   <li>Soft-masking: repeat elements are written in lower case</li>
@@ -1567,9 +1545,9 @@
 the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">genome-annotation</code>
  -&gt; <code class="language-plaintext highlighter-rouge">Masking repeats with RepeatMasker</code>):</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/genome_raw.fasta
- https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_RM2.fasta
- https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_EDTA.fasta
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/genome_raw.fasta
+https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_RM2.fasta
+https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_EDTA.fasta
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1672,19 +1650,17 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
   <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1" title="RepeatMasker tool"><strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0" title="RepeatMasker tool"><strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genomic DNA”</em>: <code class="language-plaintext highlighter-rouge">genome_raw.fasta</code> (Input dataset)</li>
         <li><em>“Repeat library source”</em>: <code class="language-plaintext highlighter-rouge">DFam (curated only, bundled with RepeatMasker)</code></li>
-      </ul>
-      <ul>
         <li><em>“Select species name from a list?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
-            <li><em>“Species”</em>: <code class="language-plaintext highlighter-rouge">Human (Homo sapiens)</code>
-    - <em>“Output annotation of repeats in GFF format”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
-    - <em>“Perform soft-masking instead of hard-masking”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Species”</em>: <code class="language-plaintext highlighter-rouge">Human (Homo sapiens)</code></li>
           </ul>
         </li>
+        <li><em>“Output annotation of repeats in GFF format”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Perform soft-masking instead of hard-masking”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -1716,30 +1692,48 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 
 <p>As we have used a generic species (Human), we only identified the most common and simple repeats, not very specific to this species. If you compare with Red results, your are missing at least ~28% of repeated content in the genome. However, RepeatMasker gives interesting information about repeat classification which could be interesting for future analysis.</p>
 
-<p>To boost RepeatMasker performance, we need a tailored repeat library for <em>Mucor mucedo</em>. This step can take from a few hours to a few days and a large number of tools could be used. We pre-computed two librairies :</p>
+<p>To boost RepeatMasker performance, we need a tailored repeat library for <em>Mucor mucedo</em>. This step can take from a few hours to a few days and a large number of tools could be used. We pre-computed two librairies:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">Muco_library_RM2.fasta</code> using RepeatModeler (<span class="citation"><a href="#Flynn_2020">Flynn <i>et al.</i> 2020</a></span>)</li>
   <li><code class="language-plaintext highlighter-rouge">Muco_library_EDTA.fasta</code> using EDTA (<span class="citation"><a href="#Ou_2019">Ou <i>et al.</i> 2019</a></span>)</li>
 </ul>
 
+<blockquote class="details">
+  <div class="box-title details-title" id="details-preparing-a-library"><button class="gtn-boxify-button details" type="button" aria-controls="details-preparing-a-library" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Preparing a library<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>You can prepare your own repeat library, specific to the genome you’re using, by running RepeatModeler in Galaxy (it will take several hours to run):</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-building-a-repeat-library-with-repeatmodeler"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Building a repeat library with RepeatModeler</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/csbl/repeatmodeler/repeatmodeler/2.0.4+galaxy1" title="RepeatModeler tool"><strong>RepeatModeler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/csbl/repeatmodeler/repeatmodeler/2.0.4+galaxy1</span></span>  with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input genome fasta”</em>: <code class="language-plaintext highlighter-rouge">genome_raw.fasta</code> (Input dataset)</li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+
+  <p>The library is in the “consensus sequences” output dataset.</p>
+</blockquote>
+
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1" title="RepeatMasker tool"><strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0" title="RepeatMasker tool"><strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genomic DNA”</em>: <code class="language-plaintext highlighter-rouge">genome_raw.fasta</code> (Input dataset)</li>
         <li><em>“Repeat library source”</em>: <code class="language-plaintext highlighter-rouge">Custom library of repeats</code></li>
-      </ul>
-      <ul>
         <li><em>“Custom library of repeats”</em>
           <ul>
-            <li><em>“One of the two pre-computed libraires”</em>: <code class="language-plaintext highlighter-rouge">Muco_library_RM2.fasta</code> or <code class="language-plaintext highlighter-rouge">Muco_library_EDTA.fasta</code>
-    - <em>“Output annotation of repeats in GFF format”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
-    - <em>“Perform soft-masking instead of hard-masking”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“One of the two pre-computed libraires”</em>: <code class="language-plaintext highlighter-rouge">Muco_library_RM2.fasta</code> or <code class="language-plaintext highlighter-rouge">Muco_library_EDTA.fasta</code></li>
           </ul>
         </li>
+        <li><em>“Output annotation of repeats in GFF format”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Perform soft-masking instead of hard-masking”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>

@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Adding workflow tests with Planemo">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-02-16 09:12:58 +0000">
+<meta name="DC.date" content="2023-04-24 15:36:26 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 
         
@@ -246,7 +246,7 @@ pip install planemo
   <li>
     <p>Run the command to initialise a workflow test from the <code class="language-plaintext highlighter-rouge">workflows/</code> subdirectory - if it doesn’t exist, you might need to create it first.</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo workflow_test_init --from_invocation &lt;INVOCATION ID&gt; --galaxy_url &lt;GALAXY SERVER URL&gt; --galaxy_user_key" &lt;GALAXY API KEY&gt;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo workflow_test_init --from_invocation &lt;INVOCATION ID&gt; --galaxy_url &lt;GALAXY SERVER URL&gt; --galaxy_user_key &lt;GALAXY API KEY&gt;
 </code></pre></div>    </div>
 
     <p>This will produce a folder of files, for example from a testing workflow:</p>
@@ -260,7 +260,21 @@ pip install planemo
 └── testing-openlayer-tests.yml
 </code></pre></div>    </div>
   </li>
-  <li>You will need to check the <code class="language-plaintext highlighter-rouge">-tests.yml</code> file, it has some automatically generated comparisons. Namely it tests that output data matches the test-data exactly, however, you might want to replace that with assertions that check for e.g. correct file size, or specific text content you expect to see.</li>
+  <li>
+    <p>You will need to check the <code class="language-plaintext highlighter-rouge">-tests.yml</code> file, it has some automatically generated comparisons. Namely it tests that output data matches the test-data exactly, however, you might want to replace that with assertions that check for e.g. correct file size, or specific text content you expect to see.</p>
+  </li>
+  <li>If the files in test-data are already uploaded to Zenodo, to save disk space, you should delete them from the <code class="language-plaintext highlighter-rouge">test-data</code> dir and use their URL in the <code class="language-plaintext highlighter-rouge">-tests.yml</code> file, as in this example:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   - doc: Test the M. Tuberculosis Variant Analysis workflow
+     job:
+        'Read 1':
+           location: https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
+           class: File
+           filetype: fastqsanger.gz
+</code></pre></div></div>
+
+<ol>
   <li>Contribute all of those files to the GTN in a PR.</li>
 </ol>
 
@@ -333,7 +347,7 @@ add a button, include configuration options:
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/79710432759253210565549305e5e8945c6f7a86">79710432759253210565549305e5e8945c6f7a86</a>. This page has a shortlink, and will always be accessible via <a href="https://gxy.io/GTN:F00162">https://gxy.io/GTN:F00162</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/f6cb02d21634778351637bb4937472c74943e067">f6cb02d21634778351637bb4937472c74943e067</a>. This page has a shortlink, and will always be accessible via <a href="https://gxy.io/GTN:F00162">https://gxy.io/GTN:F00162</a></p>
     </div>
 </footer>
 
