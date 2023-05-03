@@ -184,7 +184,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > > $ cutadapt /import/2 /import/3_reverse_file_of_2 -o /trimmedData/GSM461177_R1 -p /trimmedData/GSM461177_R2
 > > ```
 > {: .code-in}
-> The same trimming procedure should take place for the second pair of reads (forwarld and reverse as above). After that, the files we are going to work with are the ones located in the **trimmedData** folder (4 in our case). 
+> The same trimming procedure should take place for the second pair of reads (forward and reverse as above). After that, the files we are going to work with are the ones located in the **trimmedData** folder (4 in our case). 
+
 {: .hands_on}
 
 > <hands-on-title>FastQC on trimmed data</hands-on-title>
