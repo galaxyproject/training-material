@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Mass spectrometry: GC-MS data processing (with XCMS, RAMClustR, RIAssigner, and matchms)'
-zenodo_link: 'https://zenodo.org/record/7701862'
+zenodo_link: 'https://zenodo.org/record/7890956'
 level: Intermediate
 questions:
 - What are the main steps of gas chromatography-mass spectrometry (GC-MS) data processing for metabolomic analysis?
@@ -47,6 +47,34 @@ Many packages are available for the analysis of GC-MS or LC-MS data - for more d
 
 To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition (centroid and profile) or resolution (from low to high resolution), including FT-MS data coupled with a different kind of chromatography (liquid or gas). We use it to detect chromatographic peaks within our samples. Once we have detected them, they need to be deconvoluted into spectra representing chemical compounds. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of deconvoluted spectra in our sample, we compute the retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to a well-defined list of reference compound (commonly alkanes) analyzed on the same GC column. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using **matchms** ({% cite Huber2020 %}), resulting in a table of identified compounds weighted by a matching score.
 
+> <details-title> Skip data preprocessing and peak detection using XCMS </details-title>
+> 
+> Since the following two steps, data preprocessing and peak detection using **XCMS**, are already covered in a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html), it is possible to skip them. Instead, you can start with [Peak detection using XCMS]({{ site.baseurl }}/topics/metabolomics/tutorials/gc_ms_with_xcms/tutorial.html#peak-detection-using-xcms) step using a preprocessed **XCMS** object file prepared for you.
+>
+> > <hands-on-title> Upload data </hands-on-title>
+> >
+> > 1. Create a new history for this tutorial
+> >
+> >    {% snippet faqs/galaxy/histories_create_new.md %}
+> >
+> > 2. Import the following files from [Zenodo]({{ page.zenodo_link }}):
+> >
+> >    ```
+> >    https://zenodo.org/record/7890956/files/XCMS_object.rdata.xcms.fillpeaks
+> >    https://zenodo.org/record/7890956/files/reference_alkanes.csv
+> >    https://zenodo.org/record/7890956/files/reference_spectral_library.msp
+> >    ```
+> >
+> >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+> >
+> >    Please pay attention to the format of all uploaded files, and make sure they were correctly imported. The format of **XCMS** object is `rdata.xcms.fillpeaks`.
+> >
+> >    {% snippet faqs/galaxy/datatypes_understanding_datatypes.md %}
+> >
+> {: .hands_on}
+>
+{: .details}
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -71,9 +99,9 @@ Before we can start with the actual analysis pipeline, we first need to download
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) into a collection:
 >
 >    ```
->    https://zenodo.org/record/7701862/files/8_qc_no_dil_milliq.raw
->    https://zenodo.org/record/7701862/files/21_qc_no_dil_milliq.raw
->    https://zenodo.org/record/7701862/files/29_qc_no_dil_milliq.raw
+>    https://zenodo.org/record/7890956/files/8_qc_no_dil_milliq.raw
+>    https://zenodo.org/record/7890956/files/21_qc_no_dil_milliq.raw
+>    https://zenodo.org/record/7890956/files/29_qc_no_dil_milliq.raw
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true format="mzml" collection_name="input" renaming=false %}
@@ -87,9 +115,9 @@ Before we can start with the actual analysis pipeline, we first need to download
 > 4. Import the following extra files from [Zenodo]({{ page.zenodo_link }}):
 >
 >    ```
->    https://zenodo.org/record/7701862/files/reference_alkanes.csv
->    https://zenodo.org/record/7701862/files/reference_spectral_library.msp
->    https://zenodo.org/record/7701862/files/sample_metadata.tsv
+>    https://zenodo.org/record/7890956/files/reference_alkanes.csv
+>    https://zenodo.org/record/7890956/files/reference_spectral_library.msp
+>    https://zenodo.org/record/7890956/files/sample_metadata.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
