@@ -75,7 +75,7 @@ After this theoretical introduction, let's now get hands on analyzing an actual 
 
 ## Background on data
 
-The dataset we will use for this tutorial comes from an oasis in the mexican desert called Cuatro Ciénegas ({% cite Okie.2020 %}). The researchers were interested in genomic traits that affect the rates and costs of biochemical information processing within cells. They performed a whole-ecosystem experiment, thus fertilizing the pond to achieve nutrient enriched conditions.
+The dataset we will use for this tutorial comes from an oasis in the Mexican desert called Cuatro Ciénegas ({% cite Okie.2020 %}). The researchers were interested in genomic traits that affect the rates and costs of biochemical information processing within cells. They performed a whole-ecosystem experiment, thus fertilizing the pond to achieve nutrient enriched conditions.
 
 Here we will use 2 datasets:
 - `JP4D`: a microbiome sample collected from the Lagunita Fertilized Pond
