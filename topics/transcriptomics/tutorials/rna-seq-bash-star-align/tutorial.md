@@ -222,7 +222,8 @@ The alignment process consists of two steps:
 > <hands-on-title>Index the reference genome</hands-on-title>
 > Our first step is to index the reference genome for use by STAR. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 >
-> > <code-in-title>Indexing with `bwa`</code-in-title>
+> > <code-in-title>Indexing with `STAR`</code-in-title>
+
 > > ```bash
 > > $ mkdir index
 > > $ STAR --runThreadN 16 --runMode genomeGenerate --genomeDir ~/index --genomeFastaFiles /import/14 --sjdbGTFfile /import/15 --sjdbOverhang 100 --genomeSAindexNbases 12
