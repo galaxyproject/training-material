@@ -96,11 +96,11 @@ The "Data Upload" process is the only one in this tutorial that takes place dire
 >
 >    >Change the datatype from `fastqsanger` to `fastq`.
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastq.gz" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastq" %}
 >
 >
 >    We also need to import two more files, essential for the alignment operation (and basically every alignment procedure): the organism's reference genome (here *D. melanogaster*) and the organism's gene annotation.
->    Those can be aquired directly through data library as described above. For this tutorial we are going to use the files [dm3.fa](https://usegalaxy.eu/libraries/folders/Fdf740ff7e86f2efb/dataset/8ab324b9329be9fc) and [Drosophila_melanogaster.BDGP6.87.gtf (dm6)](https://usegalaxy.eu/libraries/folders/F30cab321d898d2fb/dataset/02c5f7fcdb6bf41f).
+>    Those can be aquired directly through data library as described above. For this tutorial we are going to use the files [dm3.fa](https://usegalaxy.eu/libraries/folders/Fdf740ff7e86f2efb/dataset/8ab324b9329be9fc) and [Drosophila_melanogaster.BDGP5.78.gtf (dm3)](https://usegalaxy.eu/libraries/folders/F30cab321d898d2fb/dataset/d8e875803390fe20).
 > 
 {: .hands_on}
 
@@ -291,7 +291,7 @@ have time to go into detail about the features of the SAM format, the paper by
 
 **The compressed binary version of SAM is called a BAM file.** We use this version to reduce size and to allow for *indexing*, which enables efficient random access of the data contained within the file.
 
-The file begins with a **header**, which is optional. The header is used to describe the source of data, reference sequence, method of
+The file begins with a **header**, which is optional for SAM files. The header is used to describe the source of data, reference sequence, method of
 alignment, etc., this will change depending on the aligner being used. Following the header is the **alignment section**. Each line
 that follows corresponds to alignment information for a single read. Each alignment line has **11 mandatory fields** for essential
 mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is
