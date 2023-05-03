@@ -204,7 +204,7 @@ To boost RepeatMasker performance, we need a tailored repeat library for *Mucor 
 >
 > > <hands-on-title>Building a repeat library with RepeatModeler</hands-on-title>
 > >
-> > 1. {% tool [RepeatModeler](toolshed.g2.bx.psu.edu/repos/csbl/repeatmodeler/repeatmodeler/2.0.4+galaxy0) %} with the following parameters:
+> > 1. {% tool [RepeatModeler](toolshed.g2.bx.psu.edu/repos/csbl/repeatmodeler/repeatmodeler/2.0.4+galaxy1) %} with the following parameters:
 > >    - {% icon param-file %} *"Input genome fasta"*: `genome_raw.fasta` (Input dataset)
 > {: .hands_on}
 >
