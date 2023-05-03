@@ -673,7 +673,7 @@ Therefore we offer a parallel tutorial for the 2 methods which give very similar
 
 {% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" %}
 
-In principle, the counting of reads overlapping with genomic features is a fairly simple task. But the strandness of the library needs to be determined. Indeed this is a parameter of **featureCounts**. On the contrary, **STAR** evaluate the counts into the three possible strandness but you still need this information to extract the counts which corresponds to your library.
+In principle, the counting of reads overlapping with genomic features is a fairly simple task. But the strandness of the library needs to be determined. Indeed this is a parameter of **featureCounts**. On the contrary, **STAR** evaluates the counts into the three possible strandnesses but you still need this information to extract the counts which corresponds to your library.
 
 ## Estimation of the strandness
 
