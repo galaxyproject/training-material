@@ -196,7 +196,7 @@ If you remember the very first tutorial in the case study, we started with gene 
 But what if we didn’t have the genes symbols in our CDS object and wanted to add them now? Of course - it's possible! We will also base this annotation on Ensembl - the genome database – with the use of the library BioMart. We will use the same archive as in the Alevin tutorial (Genome assembly GRCm38) to get the gene names. Please note that the updated version (GRCm39) is available, but some of the gene IDs are not in that EnsEMBL database. The code below is written in a way that it will work for the updated dataset too, but will produce ‘NA’ where the corresponding gene name couldn’t be found.
 ```r
 cds_extra <- cds                                        # assign our CDS to a new object for the demonstration purpose
-rownames(fData(cds_extra))                              # preview of the gene IDs as rownames
+head(rownames(fData(cds_extra)))                        # preview of the gene IDs as rownames
 ```
 ```r
 # get relevant gene names
@@ -222,7 +222,7 @@ genes <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
 ```
 ```r
 # see the resulting data
-genes                             
+head(genes)                          
 ```
 ```r
 # replace IDs for gene names
@@ -321,6 +321,18 @@ plot_cells(cds_red_dim, color_cells_by="batch", label_cell_groups=FALSE)
 
 ![Left image showing dataset before batch correction: upper and lower right branches mostly consist of N705 and N706. Right image showing the dataset after batch correction: the cells from all the samples are evenly spread throughout the whole dataset.](../../images/scrna-casestudy-monocle/batch_correction.png "Comparison of the dataset before and after batch correction.")
 
+> <question-title></question-title>
+>
+> Does your plot look the same as the one in the Figure?
+>
+> > <solution-title></solution-title>
+> >
+> > Your plot might be slightly different to the one shown in the Figure but this is fine, as long as you see analogical patterns. Some libraries that you're using might have been updated, giving non-identical output. However, the principle behind the analysis is still the same, so you can peacefully follow the tutorial. Just keep your eyes open and... THINK!
+> >
+> {: .solution}
+>
+{: .question}
+
 Do you see this? It’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using mutual nearest neighbor alignment, a technique introduced by John Marioni's lab ({% cite Haghverdi_2018 %}) and supported by Aaron Lun's package [batchelor](https://bioconductor.org/packages/release/bioc/html/batchelor.html). Also, due to the machine learning elements of the code of this technique - as well as the fact that packages are updated regularly - your plots may not look identical to the ones pictured here. Nevertheless, the interpretation should be the same - the batch corrected plot should show better batch distribution than the uncorrected one.
 
 Now we can move to the next step and perform dimensionality reduction.
@@ -381,7 +393,8 @@ OK, what about partitions? They were also created during the clustering step and
 plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)
 ```
 
-While your plot might be slightly different due to package updates, we can see that there are 3 partitions identified in `cds_clustered` object. Ideally, we would like to combine partitions 1 and 2 to draw a trajectory through all those cells (we can ignore cells in partition 3). Sometimes using the default values might result in multiple partitions while you only need one. Then you would have to change the q-value cutoff in `partition_qval`. The default is 0.05 and by increasing this value you can increase the span of partitions, meaning that you would get fewer partitions. When trying different values of q-value, you also have to check if the clusters didn't change. It's all about finding a balance between the value of `resolution` and `partition_qval` so that both clusters and partitions are satisfactory enough for downstream analysis. Let's try that on our dataset.
+While your plot might be slightly different due to package updates, we can see that there are 3 partitions identified in `cds_clustered` object. Ideally, we would like to combine partitions 1 and 2 to draw a trajectory through all those cells (we can ignore cells in outlier partition). Sometimes using the default values might result in multiple partitions while you only need one. Then you would have to change the q-value cutoff in `partition_qval`. The default is 0.05 and by increasing this value you can increase the span of partitions, meaning that you would get fewer partitions. When trying different values of q-value, you also have to check if the clusters didn't change. It's all about finding a balance between the value of `resolution` and `partition_qval` so that both clusters and partitions are satisfactory enough for downstream analysis. Let's try that on our dataset.
+
 ```r
 # changing the partition q-value
 cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resolution = 0.0002, partition_qval = 1)
@@ -394,7 +407,20 @@ plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition
 # check if clusters didn't change
 plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster', label_cell_groups=FALSE)
 ```
-Voila - it worked as expected! Now we have cells from partition 1 and 2 in one partition, we still have reasonable clusters, so now we can learn the trajectory. However, in some cases even this method might not be enough. Then, there is a last resort… assigning cells to a partition manually.
+
+> <question-title></question-title>
+>
+> Have the clusters change after changing the partition q-value?
+>
+> > <solution-title></solution-title>
+> >
+> > It might be the case that after changing partition q-value, you will notice that additional clusters appeared. In that situation, you might either play around the `resolution` and `partition_qval` values, go forward with the current clustering (adjusting the parameters accordingly), or check the other method of assigning cells to one partition given below.
+> >
+> {: .solution}
+>
+{: .question}
+
+Now we have cells of interest in one partition, we still have reasonable clusters, so now we can learn the trajectory. However, in some cases even this method might not be enough. Then, there is a last resort… assigning cells to a partition manually.
 
 ## Additional step: assigning cells to one partition
 > <warning-title>Additional step</warning-title>
@@ -503,6 +529,7 @@ colData(cds_annotated)$cell_type <- dplyr::recode(colData(cds_annotated)$cell_ty
                                                        '5'='DP-L',	  # double positive – late middle T-cell
                                                        '6'='DP-M3',	  # double positive – middle T-cell (3rd cluster)
                                                        '7'='Unknown') # no info for now, so call it ‘Unknown’
+                                                       '8'='Unknown') # no info for now, so call it ‘Unknown’
 ```
 ```r
 # check the annotation
@@ -542,14 +569,14 @@ You can group the cells by any categorical variable in `colData(cds_clustered)`.
 >
 {: .question}
 
-We can now use data in `marker_test` to rank the cells based on one of the specificity metrics and take the top gene(s) for each cluster. We will filter the expressing cells that constitute more than 10% of the cell group and we will take 2 genes in each cluster with the highest `pseudo_R2` value (you can of course modify this value and choose more genes to be selected).
+We can now use data in `marker_test` to rank the cells based on one of the specificity metrics and take the top gene(s) for each cluster. We will filter the expressing cells that constitute more than 10% of the cell group and we will take one gene in each cluster with the highest `pseudo_R2` value (you can of course modify this value and choose more genes to be selected).
 
 ```r
 # filter the ‘marker_test’ data frame
 top_specific_markers <- marker_test %>%
-                            dplyr::filter(fraction_expressing >= 0.10) %>%
-                            dplyr::group_by(cell_group) %>%
-                            dplyr::top_n(2, pseudo_R2)
+                            dplyr::filter(fraction_expressing >= 0.10) %>%       # set the fraction of expressing cells
+                            dplyr::group_by(cell_group) %>%                      # set a group to which the cells belong
+                            dplyr::top_n(1, pseudo_R2)                           # set the number of top genes and the variable from 'marker_test' to rank by
 ```
 ```r
 # store the names of the marker genes
@@ -566,12 +593,25 @@ plot_genes_by_group(cds_clustered,                    # our CDS object
                     ordering_type="maximal_on_diag")  # how to order the genes / groups on the dot plot
 ```
 
-![A dot plot showing the expression of genes and fraction of cells that express found markers in each group. On the diagonal there are two genes corresponding to each cluster with the highest pseudo_R2 score in their group.](../../images/scrna-casestudy-monocle/gene_group.png "A plot of the expression and fraction of cells that express found markers in each group.")
+> <tip-title>Unexpectedly too many genes on y-axis?</tip-title>
+>
+>  If you notice that on your dot plot any cluster has more genes than you specified (here we set one gene per cluster `top_n(1, pseudo_R2)`), go back to the code and create a new cell, right after assigning `top_specific_markers` object and just before `top_marker_names`. In the new cell, paste and execute the following:
+>  
+> ```r
+> top_specific_markers <- top_specific_markers %>%
+>                            dplyr::distinct(pseudo_R2, .keep_all=TRUE)     # select only one row if there are multiple rows with the same value in 'pseudo_R2' column
+> ```
+> Then you can execute `top_marker_names` again and see how the plot looks like now. Better, right? 
+> This problem may arise when several genes in one cluster have the same values of specific variable from 'marker_test' (in our case we chose `pseudo_R2`). It might likely happen in small and quite unsignificant clusters.
+{: .tip}
+
+
+![A dot plot showing the expression of genes and fraction of cells that express found markers in each group. On the diagonal there are two genes corresponding to each cluster with the highest pseudo_R2 score in their group.](../../images/scrna-casestudy-monocle/gene_group.png "A plot of the expression and fraction of cells that express found markers in each group. Here, the two top genes from each cluster were plotted on diagonal beased on the highest pseudo_R2 score. Shown is the result of changing the value from 1 to 2 in "top_n(1, pseudo_R2)" in the code above.")
 
 Look at this – we have identified some more marker genes specific to each cluster! However, sometimes it happens that the found genes are not as specific as one would expect, and they appear across the whole sample. Therefore, it is a good idea to plot all those marker genes and check how they appear in the bigger picture.
 
 ```r
-# plot all the identified genes to check their expression
+# plot the identified genes to check their expression
 plot_cells(cds_clustered, genes=c('Pcdhgc4','Pcdhga5','Gm5559','Gm10359','Ccr9','Cd8b1','Plac8', 'Il2ra', 'Cd52', 'Tmsb10', 'Mki67', 'Hmgb2', 'Pclaf', 'Npm1'), reduction_method = "UMAP")
 ```
 
@@ -859,6 +899,19 @@ pheatmap::pheatmap(agg_mat, cluster_rows=TRUE, cluster_cols=TRUE,
 ![A heatmap showing modules of co-regulated genes across the clusters. Modules listed vertically while clusters horizontally. Some modules are highly specific to certain partitions of cells, while others are shared across multiple partitions.](../../images/scrna-casestudy-monocle/heatmap.png "Heatmap showing modules of co-regulated genes across the clusters.")
 
 You can also visualise the modules using `plot_cells()` function. We've chosen some modules to see how the differences on a heatmap correlate with the expression shown on our starting plot.
+
+> <question-title></question-title>
+>
+> Which modules to plot?
+>
+> > <solution-title></solution-title>
+> >
+> > This is totally up to you! It might be the case that you got different numbering of modules, so then using the numbers specified in the code below won't make much sense. Just look at your heatmap, compare the differences between modules and think which ones would be the most interesing to visualise. 
+> >
+> {: .solution}
+>
+{: .question}
+
 ```r
 # see the chosen modules across the whole sample
 plot_cells(cds_order,
@@ -867,7 +920,7 @@ plot_cells(cds_order,
            color_cells_by="cluster",
            show_trajectory_graph=FALSE)
 ```
-![Plots showing expression of the genes belonging to specified modules across whole sample. Module 19 highly expressed in cluster 2 but also low expression thtoughout the sample, module 38 low expression but throughout the sample, module 41 highly expressed in cluster 5 only, module 42 almost no expression, except cluster 6.](../../images/scrna-casestudy-monocle/modules_plot.png "Plots of expression of the genes belonging to specified modules across whole sample.")
+![Plots showing expression of the genes belonging to specified modules across whole sample.](../../images/scrna-casestudy-monocle/modules_plot.png "Plots of expression of the genes belonging to specified modules across whole sample.")
 
 With the visualisation methods above, you can now come back to the generated data frame `gene_module_df`, filter genes that belong to the module of interest and check their functions to get some more evidence for the correct biological interpretation.
 
@@ -884,6 +937,73 @@ cds_3d <- reduce_dimension(cds_order, preprocess_method = 'Aligned', max_compone
 # see the resulting 3D plot
 plot_cells_3d(cds_3d, color_cells_by="cell_type")
 ```
+
+# Export your data, figures, and notebook
+
+Don’t forget to save and export your data! First, we will get Jupyter to see those as files. 
+
+## Export plots
+If you want to export your plot, you have to make sure that you assigned it to an object. For example, if you want to save the plot of cells in pseudotime, simply assign the function you used to generate this plot to an object. Here we call this object `plot_pseudotime`, like so:
+
+```r
+plot_pseudotime <- plot_cells(cds_order,
+           color_cells_by = "pseudotime",
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE)
+```
+
+Then, if you want to save the plot as PDF:
+
+```r
+pdf("plot_pseudotime.pdf")             # open the graphical device and specify the directory and the name of the output pdf file 
+plot_pseudotime                        # specify the object that your plot is assigned to
+dev.off()                              # close the graphical device
+```
+
+The procedure is very similar if you want to export the file as PNG (or analogically JPEG – just replace png with jpeg):
+```r
+png("plot_pseudotime.png",            # open the graphical device and specify the directory and the name of the output png file 
+width=600, height=400)                # optionally you can specify the width and height of the final plot
+plot_pseudotime                       # specify the object that your plot is assigned to
+dev.off()                             # close the graphical device
+```
+
+However, it often happens that the quality of the exported PNG and JPEG files is not perfect. For best results, we recommend exporting to SVG:
+```r
+svg("plot_pseudotime.svg")             # open the graphical device and specify the directory and the name of the output svg file 
+plot_pseudotime                        # specify the object that your plot is assigned to
+dev.off()                              # close the graphical device
+```
+
+You can do the same with any plot that you want to save! You will find the saved figures in the left panel of your JupyterLab. You can right-click on them and download directly onto your computer. You can also push them into your Galaxy history. To do so, you have to change Kernel to Python3 (either click on `Kernel` -> `Change Kernel...` in the upper left corner of your JupyterLab or click on the displayed current kernel in the upper right corner and change it). 
+![Figure showing the JupyterLab interface with an arrow pointing to the left corner, showing the option `Kernel` -> `Change Kernel...` and another arrow pointing to the right corner, showing the icon of the current kernel. The pop-up window asks which kernel should be chosen instead.](../../images/scrna-casestudy-monocle/switch_kernel.jpg "Two ways of switching kernel.")
+
+Check in the upper right corner that selected kernel is Python3, and run the following:
+```python
+put("marker_file.txt")
+put("plot_pseudotime.pdf")
+put("plot_pseudotime.png")
+```
+
+In this way you can push all the files you've saved into your Galaxy history. You can also do the same with this notebook. The cell below will only work if you haven’t changed the name of the notebook. If you renamed it, simply type its new name in the parenthesis.
+```python
+put("single-cell-scrna-case_monocle3-rstudio.ipynb") 
+```
+
+Now you can go check your Galaxy history to make sure your files have all made it back into your Galaxy history. 
+
+
+# After Jupyter
+
+Congratulations! You've made it through Jupyter!
+
+> <hands-on-title>Closing JupyterLab</hands-on-title>
+> 1. Click **User**: **Active Interactive Tools**
+> 2. Tick the box of your Jupyter Interactive Tool, and click **Stop**
+{: .hands_on}
+
+If you want to run this notebook again, or share it with others, it now exists in your history. You can use this 'finished' version just the same way as you downloaded the directions file and uploaded it into the Jupyter environment.
 
 
 # Conclusion
