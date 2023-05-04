@@ -1210,14 +1210,14 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <li>filtered FASTA</li>
 </ul>
 
-<p>We can now run Alevin. In some public instances, Alevin won’t show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you’ll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It’s often a good idea to check your tool versions. In this case the tutorial was built with Alevin Galaxy Version 1.5.1+galaxy0. To identify which version of a tool you are using. Select <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> ‘Versions’ and choose the appropriate version.</p>
+<p>We can now run Alevin. In some public instances, Alevin won’t show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you’ll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It’s often a good idea to check your tool versions. To identify which version of a tool you are using, select <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> ‘Versions’ and choose the appropriate version. In this case the tutorial was built with Alevin Galaxy Version 1.9.0+galaxy2.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-running-alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Running Alevin</div>
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0" title="Alevin tool"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0</span></span></p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2" title="Alevin tool"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2</span></span></p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1240,16 +1240,23 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
             </li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Transcripts FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Filtered FASTA</code></li>
             <li><em>“Single or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code></li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“file1”</em>: <code class="language-plaintext highlighter-rouge">N701-Read1</code></li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“file2”</em>: <code class="language-plaintext highlighter-rouge">N701-Read2</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Mate pair 1”</em>: <code class="language-plaintext highlighter-rouge">N701-Read1</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Mate pair 2”</em>: <code class="language-plaintext highlighter-rouge">N701-Read2</code></li>
             <li><em>“Specify the strandedness of the reads”</em>: <code class="language-plaintext highlighter-rouge">Infer automatically (A)</code></li>
-            <li><em>“Protocol”</em>: <code class="language-plaintext highlighter-rouge">DropSeq Single Cell protocol</code></li>
+            <li><em>“Type of single-cell protocol”</em>: <code class="language-plaintext highlighter-rouge">DropSeq Single Cell protocol</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Transcript to gene map file”</em>: <code class="language-plaintext highlighter-rouge">Map</code></li>
-            <li><em>“Retrieve all output files”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-            <li>In <em>“Optional commands”</em>:
+            <li>In <em>“Extra output files”</em>:
               <ul>
-                <li><em>“dumpFeatures”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-                <li><em>“dumpMTX”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Salmon Quant log file</code></li>
+                <li>
+                  <p><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Features used by the CB classification and their counts at each cell level (--dumpFeatures)</code></p>
+                </li>
+                <li>Of course you are welcome to select more options and explore the output files (<i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> warning: <em>“Per cell level parsimonious Umi graph (–dumpUmiGraph)”</em> will generate over 2 thousand single files), but for this tutorial you will only need to select those specified.</li>
+              </ul>
+            </li>
+            <li>In <em>“Advanced options”</em>:
+              <ul>
+                <li><em>“Dump cell v transcripts count matrix in MTX format”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">galaxy-toggle</span> <code class="language-plaintext highlighter-rouge">Yes</code></li>
               </ul>
             </li>
           </ul>
@@ -1265,15 +1272,19 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <p>The main parameter that needs changing for a 10X Chromium sample is the ‘Protocol’ parameter of Alevin. Just select the correct 10x Chemistry there instead.</p>
 </blockquote>
 
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-alevin-file-names"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Alevin file names</div>
+
+  <p>You will notice that the names of the output files of Alevin are written in a certain convention, mentioning which tool was used and on which files, for example: <em>“Alevin on data X, data Y, and others: whitelist”</em>. Remember that you can always rename the files if you wish! For simplicity, when we refer to those files in the tutorial, we skip the information about tool and only use the second part of the name - in this case it would be simply <em>“whitelist”</em>.</p>
+</blockquote>
+
 <p>This tool will take a while to run. Alevin produces many file outputs, not all of which we’ll use. You can refer to the <a href="https://salmon.readthedocs.io/en/latest/alevin.html">Alevin documentation</a> if you’re curious what they all are, but we’re most interested in is:</p>
 
 <ul>
-  <li>the matrix itself (quants_mat.mtx.gz - the count by gene and cell)</li>
-  <li>the row (cell/ barcode) identifiers (quants_mat_rows.txt) and</li>
-  <li>the column (gene) labels (quants_mat_cols.txt).</li>
+  <li>the matrix itself (<em>per-cell gene-count matrix (MTX)</em> - the count by gene and cell)</li>
+  <li>the row (cell/ barcode) identifiers (<em>row index (CB-ids)</em>) and</li>
+  <li>the column (gene) labels (<em>column headers (gene-ids)</em>).</li>
 </ul>
-
-<p>This is the matrix market (MTX) format.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1288,8 +1299,8 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the file <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> meta_info.json. You can see the mapping rate is a paltry <code class="language-plaintext highlighter-rouge">25.45%</code>. This is a terrible mapping rate. Why might this be? Remember this was downsampled, and specifically by taking only the last 400,000 reads of the FASTQ file. The overall mapping rate of the file is more like 50%, which is still quite poor, but for early Drop-Seq samples and single-cell data in general, you might expect a slightly poorer mapping rate. 10x samples are much better these days! This is real data, not test data, after all!</li>
-      <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the file <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> ‘quants_mat_rows.txt’, and you can see it has <code class="language-plaintext highlighter-rouge">2163</code> lines. The rows refer to the cells in the cell x gene matrix. According to this (rough) estimate, your sample has 2163 cells in it!</li>
+      <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the file <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Salmon log file</em>. You can see the mapping rate is a paltry <code class="language-plaintext highlighter-rouge">25.45%</code>. This is a terrible mapping rate. Why might this be? Remember this was downsampled, and specifically by taking only the last 400,000 reads of the FASTQ file. The overall mapping rate of the file is more like 50%, which is still quite poor, but for early Drop-Seq samples and single-cell data in general, you might expect a slightly poorer mapping rate. 10x samples are much better these days! This is real data, not test data, after all!</li>
+      <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the file <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>row index (CB-ids)</em>, and you can see it has <code class="language-plaintext highlighter-rouge">2163</code> lines. The rows refer to the cells in the cell x gene matrix. According to this (rough) estimate, your sample has 2163 cells in it!</li>
     </ol>
 
   </blockquote>
@@ -1298,7 +1309,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
 <blockquote class="warning">
   <div class="box-title warning-title" id="warning-choose-the-appropriate-input-going-forward"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Choose the appropriate input going forward!</div>
-  <p>Make certain to use <strong>quants_mat.mtx.gz</strong>  and NOT <strong>quants_tier.mtx.gz</strong> going forward.</p>
+  <p>Make certain to use <strong>per-cell gene-count matrix (MTX)</strong> file going forward.</p>
 </blockquote>
 
 <p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations - you’ve made an expression matrix! We could almost stop here. But it’s sensible to do some basic QC, and one of the things we can do is look at a barcode rank plot.</p>
@@ -1314,7 +1325,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Droplet barcode rank plot tool"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><em>“Input MTX-format matrix?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A two-column tab-delimited file, with barcodes in the first column and frequencies in the second”</em>: <code class="language-plaintext highlighter-rouge">raw_cb_frequencies.txt</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A two-column tab-delimited file, with barcodes in the first column and frequencies in the second”</em>: Output of Alevin <code class="language-plaintext highlighter-rouge">raw CB classification frequencies</code></li>
         <li><em>“Label to place in plot title”</em>: <code class="language-plaintext highlighter-rouge">Barcode rank plot (raw barcode frequencies)</code></li>
       </ul>
     </li>
@@ -1343,7 +1354,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Droplet barcode rank plot tool"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><em>“Input MTX-format matrix?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><em>“Matrix-market format matrix file, with cells by column (overrides –barcode-frequencies if supplied)”</em>: <code class="language-plaintext highlighter-rouge">quants_mat.mtx</code></li>
+        <li><em>“Matrix-market format matrix file, with cells by column (overrides –barcode-frequencies if supplied)”</em>: <code class="language-plaintext highlighter-rouge">per-cell gene-count matrix (MTX)</code></li>
         <li><em>“For use with –mtx-matrix: force interpretation of matrix to assume cells are by row, rather than by column (default)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Label to place in plot title”</em>: <code class="language-plaintext highlighter-rouge">Barcode rank plot (Alevin-processed)</code></li>
       </ul>
@@ -1373,11 +1384,11 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-stopping-alevin-from-thresholding"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Stopping Alevin from thresholding</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0" title="Alevin tool"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0</span></span>  (Click re-run on the last Alevin output)
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2" title="Alevin tool"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2</span></span>  (Click re-run on the last Alevin output)
       <ul>
-        <li><em>“Optional commands”</em></li>
-        <li><em>“keepCBFraction”</em>: ‘1’ - i.e. keep them all!</li>
-        <li><em>“freqThreshold”</em>: ‘3’ - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes</li>
+        <li><em>“Advanced options”</em></li>
+        <li><em>“Fraction of cellular barcodes to keep”</em>: ‘1’ - i.e. keep them all!</li>
+        <li><em>“Minimum frequency for a barcode to be considered”</em>: ‘3’ - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes</li>
       </ul>
     </li>
   </ol>
@@ -1415,9 +1426,9 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6" title="salmonKallistoMtxTo10x tool"><strong>salmonKallistoMtxTo10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“.mtx-format matrix”</em>: <code class="language-plaintext highlighter-rouge">quants_mat.mtx.gz</code> (output of <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited genes file”</em>: <code class="language-plaintext highlighter-rouge">quants_mat_cols.txt</code> (output of <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited barcodes file”</em>: <code class="language-plaintext highlighter-rouge">quants_mat_rows.txt</code> (output of <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“.mtx-format matrix”</em>: <code class="language-plaintext highlighter-rouge">per-cell gene-count matrix (MTX)</code> (output of <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited genes file”</em>: <code class="language-plaintext highlighter-rouge">column headers (gene-ids)</code> (output of <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited barcodes file”</em>: <code class="language-plaintext highlighter-rouge">row index (CB-ids)</code> (output of <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> ‘salmonKallistoMtxTo10x….:genes’ to <code class="language-plaintext highlighter-rouge">Gene table</code></li>
@@ -1590,13 +1601,13 @@ Consider…is this a complete set of data?</p>
 
 </blockquote>
 
-<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key">example history</a>, or compare how the subsampled datasets you’ve generated compare with the <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---total-n701-answer-key">total sample</a></p>
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the <a href="https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3">example history</a> (if you used Alevin Galaxy Version 1.5.1+galaxy0, you can check the <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key">example history</a> run with that version of the tool). You can also compare how the subsampled datasets you’ve generated compare with the <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---total-n701-answer-key">total sample</a> (using Alevin Galaxy Version 1.5.1+galaxy0).</p>
 
 <p>However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files…</p>
 
 <h1 id="analysing-multiple-fastq-files">Analysing multiple FASTQ files</h1>
 
-<p>This sample was originally one of seven. So to run the other <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k">12 downsampled FASTQ files</a>, you can use a <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/cs1generating-a-single-cell-matrix-using-alevin">workflow</a> and run them all at once! All these samples are going to take a while, so go and have several cups of tea… Or, better yet, I have <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1generating-a-single-cell-matrix-using-alevin---all-downsample-fastq-processed-to-anndata">run them myself</a>. To combine the resultant files into a single matrix, you can look at the next tutorial in this case study: <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">Combining datasets after pre-processing</a></p>
+<p>This sample was originally one of seven. So to run the other <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k">12 downsampled FASTQ files</a>, you can use a <a href="https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-alevin-15">workflow</a> and run them all at once! All these samples are going to take a while, so go and have several cups of tea… Or, better yet, I have <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1generating-a-single-cell-matrix-using-alevin---all-downsample-fastq-processed-to-anndata">run them myself</a>. To combine the resultant files into a single matrix, you can look at the next tutorial in this case study: <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">Combining datasets after pre-processing</a></p>
 
 <h1 id="mitochondrial-flagging">Mitochondrial flagging</h1>
 
