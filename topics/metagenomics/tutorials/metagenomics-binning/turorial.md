@@ -44,10 +44,6 @@ There are two main types of metagenomics binning: *reference-based* and *de novo
 
 Both methods have their strengths and limitations, and researchers often use a combination of approaches to improve the accuracy of their binning results. Metagenomics binning is an important tool for understanding the functional potential of microbial communities in various environments and has applications in fields such as biotechnology, environmental science, and human health.
 
-<!-- > <comment-title></comment-title>
->
-> Do you want to learn more about the principles behind single genome assembly? Follow our [tutorials]({% link topics/assembly/index.md %}).
-{: .comment} -->
 
 **Metagenomics binning is a complex process that involves many steps and can be challenging due to several problems that can occur during the process**. Some of the most common problems encountered in metagenomics binning include:
 
