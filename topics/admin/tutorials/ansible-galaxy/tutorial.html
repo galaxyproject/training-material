@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Installation with Ansible">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-20 15:16:53 +0000">
+<meta name="DC.date" content="2023-05-04 07:04:07 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Simon Gladman">
@@ -66,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-20 15:16:53 +0000",
+  "dateModified": "2023-05-04 07:04:07 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Installation with Ansible",
   "interactivityType": "mixed",
@@ -380,7 +380,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-20 15:16:53 +0000",
+  "dateModified": "2023-05-04 07:04:07 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Installation with Ansible",
   "interactivityType": "mixed",
@@ -785,7 +785,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 20, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 4, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -2709,7 +2709,7 @@ Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Failed with result 'exi
 Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Consumed 3.381s CPU time.
 </span></code></pre></div>        </div>
 
-        <p>Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect.</p>
+        <p>Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect. You might observe a warning that <code class="language-plaintext highlighter-rouge">Dynamic handlers are configured in Gravity but Galaxy is not configured to assign jobs to handlers dynamically</code>. We will address this <a href="#job-configuration">below</a>, and you can disregard it for now.</p>
       </blockquote>
     </li>
     <li>
@@ -2751,7 +2751,7 @@ Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Consumed 3.381s CPU tim
   <li>Galaxy running (managed by Gravity + systemd)</li>
 </ul>
 
-<p>Although Gunicorn can server HTTP for us directly, a reverse proxy in front of Gunicorn can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="language-plaintext highlighter-rouge">/</code> and Galaxy at <code class="language-plaintext highlighter-rouge">/galaxy</code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">External Authentication</a> tutorial.</p>
+<p>Although Gunicorn can serve HTTP for us directly, a reverse proxy in front of Gunicorn can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="language-plaintext highlighter-rouge">/</code> and Galaxy at <code class="language-plaintext highlighter-rouge">/galaxy</code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">External Authentication</a> tutorial.</p>
 
 <p>For this, we will use NGINX (pronounced “engine X” /ˌɛndʒɪnˈɛks/ EN-jin-EKS). It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.</p>
 
