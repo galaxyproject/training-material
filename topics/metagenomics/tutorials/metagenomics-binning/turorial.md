@@ -81,7 +81,7 @@ Based on the 6 original dataset of the coffee fermentation system, we generated 
 
 # Prepare analysis history and data
 
-To run assembly, we first need to get the data into Galaxy. Any analysis should get its own Galaxy history. So let's start by creating a new one:
+To run binning, we first need to get the data into Galaxy. Any analysis should get its own Galaxy history. So let's start by creating a new one:
 
 > <hands-on-title>Prepare the Galaxy history</hands-on-title>
 >
