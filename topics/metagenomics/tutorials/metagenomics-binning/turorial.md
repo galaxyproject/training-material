@@ -150,7 +150,7 @@ In this tutorial we will learn how to use **MetaBAT2** tool through Galaxy:
 We will use the uploaded assembled fasta files as input to the algorithm (For simplicity reasons all other parameters will be preserved with their default values).
 
 > <hands-on-title>Individual assembly of short-reads with MEGAHIT</hands-on-title>
-> 1.  {% tool [ MetaBAT2](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
+> 1.  {% tool [MetaBAT2](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
 >     - *"Fasta file containing contigs"*: `assembly fasta files`
 >     - In *Advanced options*
 >       - *"Percentage of good contigs considered for binning decided by connection among contigs"*: `default 95`
