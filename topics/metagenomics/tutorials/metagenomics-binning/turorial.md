@@ -55,16 +55,6 @@ Both methods have their strengths and limitations, and researchers often use a c
 - **Chimeric sequences**: Sequences that are the result of sequencing errors or contamination can lead to chimeric sequences, which can make it difficult to accurately bin reads.
 - **Strain variation**: Organisms within a species can exhibit significant genetic variation, which can make it difficult to distinguish between different strains in a metagenomic sample.
 
-<!-- > <details-title>Strategies for assembly</details-title>
-> For assembly, there are 3 main strategies:
-> 1. Greedy extension
-> 2. Overlap Layout Consensus
-> 3. De Bruijn graphs. The following figure illustrates these strategies in brief.
->
-> ![Image shows greedy extention, overlap layout consensus, and de Brujin graphs assembly algorithms](./images/assembly-algorithms.png "Assembly algorithms. Image from {% cite carpentries %}"){:width="70%"}
->
-> The nice paper {% cite miller2010 %} on assemblers based on these algorithms will help you to better understand how they work.
-{: .details} -->
 
 There are plenty of computational tools to perform metafenomics binning. Some of the most widely used include:
 
