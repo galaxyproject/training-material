@@ -515,7 +515,7 @@ As we use Let's Encrypt in staging mode, the wildcard certificates generated wit
 >      #certbot_auth_method: --webroot
 >      ```
 >
->        Although this is not explicitly required (setting `cerbot_dns_provider` as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the "webroot" method for Let's Encrypt WEB-01 challenges is no longer in use for this server.
+>        Although this is not explicitly required (setting `certbot_dns_provider` as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the "webroot" method for Let's Encrypt WEB-01 challenges is no longer in use for this server.
 >
 >    - Add the following lines to your `group_vars/galaxyservers.yml` file:
 >
