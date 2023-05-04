@@ -409,7 +409,7 @@ As we use Let's Encrypt in staging mode, the wildcard certificates generated wit
 >      #certbot_auth_method: --webroot
 >      ```
 >
->        Although this is not explicitly required (setting `cerbot_dns_provider` as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the "webroot" method for Let's Encrypt WEB-01 challenges is no longer in use for this server.
+>        Although this is not explicitly required (setting `certbot_dns_provider` as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the "webroot" method for Let's Encrypt WEB-01 challenges is no longer in use for this server.
 >
 >    - Add the following lines to your `group_vars/galaxyservers.yml` file:
 >
@@ -586,7 +586,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >    </toolbox>
 >    ```
 >
-> 2. We need to modify `job_conf.xml` to instruct Galaxy on how run Interactive Tools (and specifically, how to run them in Docker). We will begin with a basic job conf:
+> 2. We need to modify `job_conf.xml` to instruct Galaxy on how to run Interactive Tools (and specifically, how to run them in Docker). We will begin with a basic job conf:
 >
 >    Create `templates/galaxy/config/job_conf.xml.j2` with the following contents:
 >
