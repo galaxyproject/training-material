@@ -217,18 +217,6 @@ These output files can be further analyzed and used for downstream applications 
 >
 {: .question}
 
-<!-- > <details-title>Co-assembly with MetaSPAdes</details-title>
->
-> > <hands-on-title>Assembly with MetaSPAdes</hands-on-title>
-> >
-> > 1. {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2) %} with following parameters
-> >    - *"Pair-end reads input format"*: `Paired-end: list of dataset pairs`
-> >        - {% icon param-collection %} *"FASTQ file(s): collection"*: `Raw reads`
-> >     - *"Select k-mer detection option"*: `User specific`
-> >        - *"K-mer size values"*: `21,33,55,77`
-> {: .hands_on}
-{: .details} -->
-
 # Checking the quality of the bins
 
 Once binning is done, it is important to check its quality.
