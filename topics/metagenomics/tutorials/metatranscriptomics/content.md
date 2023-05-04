@@ -1032,9 +1032,9 @@ The GO term with their id are quite cryptic. We can rename them and then split t
 > > <solution-title></solution-title>
 > >
 > > 1. After running {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.6.0+galaxy0) %} on the 3 outputs, we found:
-> >   - 414 BP GO terms
-> >   - 689 MF GO terms
-> >   - 59 CC GO terms
+> >   - 411 BP GO terms
+> >   - 696 MF GO terms
+> >   - 58 CC GO terms
 > >
 > > 2. The GO terms in the `[MF] GO terms and their abundance` file are not sorted by abundance:
 > >
@@ -1068,11 +1068,35 @@ With **MetaPhlAn** and **HUMAnN**, we investigated "Which micro-organims are pre
 
 Although gene families and pathways, and their abundance may be related to a species, in the **HUMAnN** output, relative abundance of the species is not indicated. Therefore, for each gene family/pathway and the corresponding taxonomic stratification, we will now extract the relative abundance of this gene family/pathway and the relative abundance of the corresponding species and genus.
 
+> <comment-title>Disagreemnet between MetaPhlAn and HUMAnN database</comment-title>
+> When updating this tutorial we found, that in the combined table we can only find 
+> the specis `Coprothermobacter_proteolyticus`, although 
+> we know from the **HUMAnN** output that most gene families are associated to the species
+> of `Hungateiclostridium_thermocellum`. An inspection of the [uniprot](https://www.uniprot.org/taxonomy/1515) 
+> entry showed, that the scientific name 
+> of *Hungateiclostridium thermocellum* is *Acetivibrio thermocellus*, which is 
+> the most abundant species found by **MetaPhlAn**. It can therefore be assumed, 
+> that the databases for **HUMAnN** and **MetaPhlAn** are not yet synchronized 
+> for all updates of taxonomic names. Hence, the gene family abundancy of the species
+> `Hungateiclostridium_thermocellum` from the **HUMAnN** output cannot be combined
+> with the species abundancy of the **MetaPhlAn** output due to different 
+> naming conventions.
+> To overcome this discrepancy, the naming of `Hungateiclostridium_thermocellum` must be changed in the 
+> **HUMAnN** output, this can be done with: 
+> 1. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %}
+> with the following parameters:
+>   - {% icon param-file %} *"File to process"*: `Normalized gene families`
+>   - *"Find and Replace"*: 
+>      - *"Find pattern"*: `g__Hungateiclostridium.s__Hungateiclostridium_thermocellum`
+>      - *"Replace with"*: `g__Acetivibrio.s__Acetivibrio_thermocellus`
+> 2. **Rename** {% icon galaxy-pencil %} the generated file `Normalized gene families adapted taxon`
+{: .comment}
+
 > <hands-on-title>Combine taxonomic and functional information</hands-on-title>
 >
 > 1. {% tool [Combine MetaPhlAn2 and HUMAnN2 outputs](toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0) %}  with the following parameters:
 >   - {% icon param-file %} *"Input file corresponding to MetaPhlAN output"*: `Cut predicted taxon relative abundances table`
->   - {% icon param-file %} *"Input file corresponding HUMAnN output"*: `Normalized gene families`
+>   - {% icon param-file %} *"Input file corresponding HUMAnN output"*: `Normalized gene families adapted taxon`
 >   - *"Type of characteristics in HUMAnN file"*: `Gene families`
 >
 > 2. Inspect the generated file
@@ -1089,27 +1113,15 @@ The generated file is a table with 7 columns:
 
 ```
 genus	genus_abundance	species	species_abundance		gene_families_id	gene_families_name	gene_families_abundance
+Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DCI4		6.230825634035571
+Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DCB9		5.797925937370119
+Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DC67		4.897416568360634
+Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DBR3		3.410207610453895
+Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DI60		2.939107940555317
+Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_G2JC59		2.652548141348914
+Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DEF8		1.2968890912646296
 Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y8J9		0.9513533333829162
-Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y7J1		0.7200784954381197
-Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y935		0.36033774750989994
-Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y742		0.35049375440762515
-Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y980		0.2523338231886814
-Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y964		0.24995582485495435
 ```
-
-> <comment-title>Disagreemnet between MetaPhlAn2 and HUMAnN2 database</comment-title>
-> In the combined table we can only find the specis `Coprothermobacter_proteolyticus`, although 
-> we know from the **HUMAnN2** output that most gene families are associated to the species
-> of `Hungateiclostridium_thermocellum`. An inspection of the [uniprot](https://www.uniprot.org/taxonomy/1515) 
-> entry showed, that the scientific name 
-> of *Hungateiclostridium thermocellum* is *Acetivibrio thermocellus*, which is 
-> the most abundant species found by **MetaPhlAn**. It can therefore be assumed, 
-> that the databases for **HUMAnN2** and **MetaPhlAn** are not yet synchronized 
-> for all updates of taxonomic names. Hence, the gene family abundancy of the species
-> `Hungateiclostridium_thermocellum` from the **HUMAnN2** output cannot be combined
-> with the species abundancy of the **MetaPhlAn** output due to different 
-> naming conventions.
-{: .comment}
 
 > <question-title></question-title>
 >
@@ -1132,9 +1144,9 @@ Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y
 > >    >        - *"On column"*: `Column:5`
 > >    {: .hands_on}
 > >
-> >    With **MetaPhlAn**, we identified 3 genus (Coprothermobacter, Methanothermobacter, Hungateiclostridium). But in the output of **Combine MetaPhlAn2 and HUMAnN2 outputs**, we have only gene families for Coprothermobacter and Hungateiclostridium. The abundance of Methanothermobacter is probably too low to correctly identify correctly some gene families.
+> >    With **MetaPhlAn**, we identified 2 genus (Coprothermobacter and Acetivibrio). Both can be found in the combined output.
 > >
-> > 2. 1,889 gene families are associated to Hungateiclostridium and 528 to Coprothermobacter and 202 to Methanothermobacter.
+> > 2. 1,890 gene families are associated to Hungateiclostridium and 351 to Coprothermobacter.
 > >
 > > 3. For this question, we should group on the 3rd column:
 > >
@@ -1148,9 +1160,9 @@ Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y
 > >    >        - *"On column"*: `Column:5`
 > >    {: .hands_on}
 > >
-> >    Only 2 species (Coprothermobacter_proteolyticus and Hungateiclostridium thermocellum) identified by **MetaPhlAn** are associated to gene families.
+> >    Similarely to the genus, 2 species (Coprothermobacter_proteolyticus and Hungateiclostridium_thermocellum) identified by **MetaPhlAn** are associated to gene families.
 > >
-> > 4. As the species found derived directly from the genus (not 2 species for the same genus here), the number of gene families identified are the sames: 528 for Coprothermobacter proteolyticus and 1,889 for Hungateiclostridium thermocellum.
+> > 4. As the species found derived directly from the genus (not 2 species for the same genus here), the number of gene families identified are the sames: 351 for Coprothermobacter proteolyticus and 1,890 for Hungateiclostridium thermocellum.
 > >
 > {: .solution}
 {: .question}
