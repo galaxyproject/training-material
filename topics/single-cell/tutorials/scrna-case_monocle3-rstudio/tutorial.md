@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Trajectory Analysis: Monocle3 in R'
+title: 'Inferring Trajectories using Monocle3 (R)'
 subtopic: single-cell-CS
 priority: 6
 zenodo_link: 'https://zenodo.org/record/7455590'
@@ -16,16 +16,14 @@ questions:
 objectives:
 - Identify which operations are necessary to transform an AnnData object into the files needed for Monocle
 - Describe the Monocle3 functions in R
-- Execute tools and functions to switch between Galaxy and R fluently
-- Recognise steps that can only be performed in R, but not with Galaxy tools
-- Repeat the Monocle3 workflow and choose the right parameter values
+- Recognise steps that can be performed in R, but not with current Galaxy tools
+- Repeat the Monocle3 workflow and choose appropriate parameter values
 - Compare the outputs from Scanpy, Monocle in Galaxy and Monocle in R
 - Describe differential expression analysis methods
 
-time_estimation: 2H
+time_estimation: 3H
 
 key_points:
-- Being able to switch between Galaxy and R when using Monocle is useful, particularly when you need to modify the CDS object manually.
 - Monocle3 in R gives more flexibility when it comes to differential expression analysis and plotting, but Galaxy offers great reproducibility and ease of analysis.
 - Comparing the output of several different methods applied on the same dataset might be useful to confirm the results, to ensure that the findings are reliable and even sometimes to find a new piece of information.
 
@@ -59,8 +57,8 @@ notebook:
   snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md
 ---
 
-## Setting the environment and files upload
-Once the installation is done, we should load the needed packages into our notebook.
+## Setting up the environment and file upload
+Once the installation is done, we should load the needed packages into our notebook. Navigate back to your `notebook`. If you are using our prepopulated notebook, you can follow the tutorial from there. Otherwise, input the following into your fresh notebook.
 
 ```r
 install.packages("Rcpp")    # needed for reduce_dimension to avoid AnnoyAngular error; library(Rcpp) might work as well depending on the version
@@ -70,6 +68,7 @@ install.packages("Rcpp")    # needed for reduce_dimension to avoid AnnoyAngular 
 library(monocle3)
 library(biomaRt)
 library(magrittr)     # needed for %>%
+library(viridisLite)
 ```
 
 ```r
@@ -88,7 +87,7 @@ Then we have to read in this h5ad file:
 ```r
 ann <- anndata::read_h5ad('AnnData.h5ad')
 ```
-Now we store all the information we need in AnnData object. However, Monocle uses *cell_data_set class* to hold expression data,which requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. Therefore, we have to somehow 'transfer' that information from our AnnData object to Monocle's cell_data_set (cds). AnnData stores a data matrix `X` together with annotations of observations `obs` and variables `var`, so we can extract those parameters and use them for further analysis.
+Now we store all the information we need in AnnData object. However, Monocle uses *cell_data_set class* to hold expression data, which requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. Therefore, we have to somehow 'transfer' that information from our AnnData object to Monocle's cell_data_set (cds). AnnData stores a data matrix `X` together with annotations of observations `obs` and variables `var`, so we can extract those parameters and use them for further analysis.
 
 ```r
 expression_matrix <- ann$X
@@ -98,7 +97,7 @@ gene_metadata <- ann$var
 
 > <tip-title>Uploading files from your computer is also an option!</tip-title>
 >
-> If you already have files containing the expression matrix, genes and cells metadata, you can upload them to JupyLab and generate cds file from them! For example, if you first downloaded the files from Galaxy your files will have `.tabular` extension. In this case, we will use `read.delim()` function to read them in. In this function, the first argument is the file path - in our case, the files are in the same folder as the notebook, so the file path is the same as the file name. You can always check that by right-clicking on the file and choosing `Copy path`. The second argument, `row.names=1` takes the column number of the data file from which to take the row names.
+> If you already have files containing the expression matrix, genes and cells metadata, you can upload them to JupyLab and generate a cds file from them instead. For example, if you first downloaded the files from Galaxy, your files will have the `.tabular` extension. In this case, we will use the `read.delim()` function to read them in. In this function, the first argument is the file path - in our case, the files are in the same folder as the notebook, so the file path is the same as the file name. You can always check that by right-clicking on the file and choosing `Copy path`. The second argument, `row.names=1` takes the column number of the data file from which to take the row names.
 > ```r
 > # read in the files
 > cell_metadata <- read.delim('cells.tabular', row.names=1)
@@ -112,7 +111,7 @@ gene_metadata <- ann$var
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > This allows us to ensure that the expression value matrix has the same number of columns as the `cell_metadata` has rows and the same number of rows as the `gene_metadata` has rows. Importantly, row names of the `cell_metadata` object should match the column names of the expression matrix and row names of the `gene_metadata` object should match row names of the expression matrix.
+> > > This allows us to ensure that the expression value matrix has the same number of columns as the `cell_metadata` has rows and the same number of rows as the `gene_metadata` has rows. Importantly, the row names of the `cell_metadata` object should match the column names of the expression matrix and the row names of the `gene_metadata` object should match the row names of the expression matrix.
 > > >
 > > {: .solution}
 > {: .question}
@@ -147,18 +146,18 @@ gene_metadata <- ann$var
 {: .tip}
 
 
-According to [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/), `expression_matrix` should have genes as rows and cells as columns. Let's check if that's the case here.
+According to the [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/), the `expression_matrix` should have genes as rows and cells as columns. Let's check if that's the case here.
 ```r
-expression_matrix           # preview the content of the file by calling its name
+head(expression_matrix,c(5, 5))           # preview the content of the file by calling its the first 5 rows by 5 columns
 ```
 We can see that in our matrix rows are cells and genes are columns, so we have to transpose the matrix simply using function `t()`. But before doing so, we will change its type from dataframe to matrix - this is Monocle's requirement to generate cell_data_set afterwards.
 ```r
 expression_matrix <- as.matrix(expression_matrix)   # change the type to matrix
 expression_matrix <- t(expression_matrix)           # transpose the matrix
 ```
-Another condition we have to satisfy if that one of the columns of the `gene_metadata` should be named "gene_short_name", which represents the gene symbol for each gene. Some functions won't work without that. Do we have such a column? Let's check.
+Another condition we have to satisfy is that one of the columns of the `gene_metadata` should be named "gene_short_name", which represents the gene symbol for each gene. Some functions won't work without that. Do we have such a column? Let's check.
 ```r
-gene_metadata             # preview the content of the file to check the name of the column containing gene symbols
+head(gene_metadata)             # preview the top ten rows of the file to check the name of the column containing gene symbols
 ```
 
 The second column indeed contains gene symbols, but is called "Symbol" instead of "gene_short_name". That can be easily changed by a simple assignment, as long as we know the number of the column that we want to modify. In our case the gene symbols are stored in column 2. We can access the column names by `colnames()`.
@@ -168,7 +167,7 @@ colnames(gene_metadata)                             # see the changes
 ```
 
 ## Generating CDS object
-Now let’s store our files in one object – the cell_data_set. This is the main class used by Monocle to hold single cell expression data. The class is derived from the Bioconductor SingleCellExperiment class. It's similar to Python's AnnData storing a data matrix together with annotations of observations and variables. There are three ways of creating CDS object in monocle:
+Now let’s store our files in one object – the `cell_data_set`. This is the main class used by Monocle to hold single cell expression data. The class is derived from the Bioconductor SingleCellExperiment class. Similar to Python's AnnData, the cell_data_set stores a data matrix together with annotations of observations and variables. There are three ways of creating CDS object in monocle:
 -	Using ```new_cell_data_set() ``` function with three data frames as arguments (not their paths!): expression matrix (can also be a sparseMatrix), cell metadata and gene metadata
 -	Using ```load_cellranger_data() ``` function providing the path to the folder containing 10X Genomics Cell Ranger output files. This function takes an argument `umi_cutoff` that determines how many reads a cell must have to be included
 -	Using ```load_mm_data() ``` function providing the paths to matrix file and two metadata files (features and cell information).
@@ -182,7 +181,7 @@ We are now ready to process our data!
 
 > <details-title>Format conversion</details-title>
 >
->  Since Monocle’s CDS object is analogous to Python's AnnData, why don’t we use some kind of conversion between those two formats? There is indeed a package called `sceasy` that helps easy conversion of different single-cell data formats to each other. However, when we tested this conversion on our dataset and then used Monocle to plot the expression of genes, the plots were not correct – the expression was shown to be ideantical throughout the sample. For comparison, Seurat did well when plotting gene expression of the same converted object! Although conversion functions are very handy, you have to be aware that their output might be interpreted differently by certain packages. Therefore, to make sure that the analysis is reliable, we decided to generate CDS object directly using Monocle’s function.
+>  Since Monocle’s CDS object is analogous to Python's AnnData, why don’t we use some kind of conversion between those two formats? There is indeed a package called `sceasy` that helps easy conversion of different single-cell data formats to each other. However, when we tested this conversion on our dataset and then used Monocle to plot the expression of genes, the plots were not correct – the expression was shown to be identical throughout the sample. For comparison, Seurat did well when plotting gene expression of the same converted object! Although conversion functions are very handy, you have to be aware that their output might be interpreted differently by certain packages. Therefore, to make sure that the analysis is reliable, we decided to generate CDS object directly using Monocle’s function.
 > ![Comparison between plots of gene expression generated by Monocle and Seurat using the CDS object that was converted from AnnData using SCEasy tool. Gene expression in Monocle plots is identical throughout the sample, while the expression of the same genes plotted by Seurat is noticeable only in specific clusters.](../../images/scrna-casestudy-monocle/monocle_seurat.png "Comparison between plots of gene expression generated by Monocle and Seurat using the CDS object that was converted from AnnData using SCEasy tool.")
 >
 {: .details}
@@ -193,7 +192,7 @@ We are now ready to process our data!
 >
 {: .warning}
 
-If you remember the very first tutorial, we were starting with gene IDs and adding gene symbols based on the Ensembl GTF file.  
+If you remember the very first tutorial in the case study, we started with gene IDs and added gene symbols based on the Ensembl GTF file.  
 But what if we didn’t have the genes symbols in our CDS object and wanted to add them now? Of course - it's possible! We will also base this annotation on Ensembl - the genome database – with the use of the library BioMart. We will use the same archive as in the Alevin tutorial (Genome assembly GRCm38) to get the gene names. Please note that the updated version (GRCm39) is available, but some of the gene IDs are not in that EnsEMBL database. The code below is written in a way that it will work for the updated dataset too, but will produce ‘NA’ where the corresponding gene name couldn’t be found.
 ```r
 cds_extra <- cds                                        # assign our CDS to a new object for the demonstration purpose
@@ -267,7 +266,9 @@ Do you remember the Monocle workflow introduced in the previous tutorial? Here i
 ![Monocle workflow: scRNA-seq dataset, pre-process data (normalise, remove batch effects), non-linear dimensionality reduction (t-SNE, UMAP), cluster cells, compare clusters (identify top markers, targeted contrasts), trajectory analysis](../../images/scrna-casestudy-monocle/monocle3_new_workflow.png "Workflow provided by Monocle3 documentation")
 
 ## Pre-processing
-Let’s start with normalisation and pre-processing that can be performed using the function `preprocess_cds()`. The argument `num_dim` is the number of principal components that will be computed when using PCA during normalisation. Then you can check that you're using enough PCs to capture most of the variation in gene expression across all the cells in the data set. Note that “PCA” is the default method of pre-processing in Monocle3, so although we can specify this in our function, we don’t have to.
+Let’s start with normalisation and pre-processing that can be performed using the function `preprocess_cds()`. The argument `num_dim` is the number of principal components that will be used. You can check that you're using enough PCs to capture most of the variation in gene expression across all the cells in the data set. Note that “PCA” is the default method of pre-processing in Monocle3, so although we can specify this in our function, we don’t have to.
+
+Note that this step can take awhile - around 5 or so minutes due to the high number of PCs calculated. Feel free to use a `num_dim` value around 100 to accelerate preprocessing and compare the results.
 
 ```r
 # PCA pre-processing with 210 principal components
@@ -280,19 +281,19 @@ plot_pc_variance_explained(cds_preprocessing)
 
 ![Plot of variation in gene expression vs PCA components, decreasing exponentially.](../../images/scrna-casestudy-monocle/pca_plot.jpg " Plot of variation in gene expression vs PCA components.")
 
-The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to imagine how the `num_dim` actually affects the output. Therefore, for this demonstration we will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset. However, it will take quite some time to run this, and this is why generally smaller PCs are preferable, so feel free to use `num_dim` value around 100 to accelerate preprocessing and compare the results.
+The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to visualise how the `num_dim` actually affects the output. We will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset. 
 
 ![Six plots showing only the shaded shape of how the cells are clustered depending on the num_dim argument. The general trend is maintained though.](../../images/scrna-casestudy-monocle/num_dim.jpg "The "shape" of the plot showing how the cells are clustered depending on the 'num_dim' argument.")
 
 ## Batch correction and Dimensionality reduction
-Our dataset actually comprises data from 7 samples, so there is a risk that the batch effects can be observed. Those are systematic differences in the transcriptome of cells measured in different experimental batches. However, we can use Monocle to deal with that!
-First, let’s check how our dataset looks like in terms of batch effects. We can do that by colouring the cells by batch.  This information is stored in our CDS object from `cell_metadata` file. Before asking Monocle to plot anything, let’s check the exact column name of the batch information column.
+Our dataset actually comprises data from 7 samples, so there is a risk that batch effects will impact analysis. Batch effects are systematic differences in the transcriptome of cells measured in different experimental batches. However, we can use Monocle to deal with that!
+First, let’s check how our dataset looks in terms of batch effects. We can do that by colouring the cells by batch.  This information is stored in our CDS object from the `cell_metadata` file. Before asking Monocle to plot anything, let’s check the exact column name of the batch information column.
 ```r
 colnames(colData(cds_preprocessing)) 	          # check column names
 ```
 In our case it’s indeed ‘batch’, but your data might have another name (eg. "plate", etc.), so make sure you put the correct argument value.
 
-Then, we have to reduce dimension before attempting to plot. The [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) introduced the methods of dimensionality reduction in Monocle. Of course you can replicate what we did in Galaxy to compare the output of dimensionality reduction using different methods, simply by changing the `reduction_method` argument. Options currently supported by Monocle are "UMAP", "tSNE", "PCA", "LSI", and "Aligned". However, as for now, let’s just recall that UMAP gave the best results, so we will use UMAP here as well.
+In order to plot our cells on a 2D graph, we need to reduce the numbers of dimensions. The [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) introduced the methods of dimensionality reduction in Monocle. You can replicate what we did in Galaxy to compare the output of dimensionality reduction using different methods, simply by changing the `reduction_method` argument. Options currently supported by Monocle are "UMAP", "tSNE", "PCA", "LSI", and "Aligned". However, as for now, let’s just recall that UMAP gave the best results, so we will use UMAP here as well.
 ```r
 # reduce dimension first
 cds_preprocessing_UMAP <- reduce_dimension(cds_preprocessing, reduction_method = "UMAP", preprocess_method = "PCA")
@@ -308,7 +309,7 @@ We can see that upper and lower right branches mostly consist of N705 and N706, 
 cds_batch <- align_cds(cds_preprocessing_UMAP, preprocess_method = "PCA", alignment_group = "batch")
 ```
 
-To see the changes, we have to run UMAP again, but this time on the aligned dataset, so we will specify that `preprocess_method ` is now "Aligned" and not “PCA”, however after having used `align_cds()` Monocle would use "Aligned" argument automatically if no `preprocess_method` was specified.
+To see the changes, we have to run UMAP again, but this time on the aligned dataset. We will specify that `preprocess_method ` as "Aligned" and not “PCA". Monocle would use the "Aligned" argument automatically if no `preprocess_method` was specified.
 ```r
 # dimensionality reduction after alignment
 cds_red_dim <- reduce_dimension(cds_batch, preprocess_method = "Aligned", reduction_method = "UMAP")  
@@ -320,7 +321,8 @@ plot_cells(cds_red_dim, color_cells_by="batch", label_cell_groups=FALSE)
 
 ![Left image showing dataset before batch correction: upper and lower right branches mostly consist of N705 and N706. Right image showing the dataset after batch correction: the cells from all the samples are evenly spread throughout the whole dataset.](../../images/scrna-casestudy-monocle/batch_correction.png "Comparison of the dataset before and after batch correction.")
 
-Do you see this? That’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using mutual nearest neighbor alignment, a technique introduced by John Marioni's lab ({% cite Haghverdi_2018 %}) and supported by Aaron Lun's package [batchelor](https://bioconductor.org/packages/release/bioc/html/batchelor.html). 
+Do you see this? It’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using mutual nearest neighbor alignment, a technique introduced by John Marioni's lab ({% cite Haghverdi_2018 %}) and supported by Aaron Lun's package [batchelor](https://bioconductor.org/packages/release/bioc/html/batchelor.html). Also, due to the machine learning elements of the code of this technique - as well as the fact that packages are updated regularly - your plots may not look identical to the ones pictured here. Nevertheless, the interpretation should be the same - the batch corrected plot should show better batch distribution than the uncorrected one.
+
 Now we can move to the next step and perform dimensionality reduction.
 
 
@@ -373,13 +375,13 @@ plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster',
 
 
 ## Clustering: partitions
-OK, what about partitions? They were also created during the clustering step and it’s important to check them before learning the trajectory because it is performed only within one partition, so it is essential that all the cells that we want to analyse in pseudotime belong to the same partition.
+OK, what about partitions? They were also created during the clustering step and it’s important to check them before calculating the trajectory because it is performed only within one partition. It is essential that all the cells that we want to analyse in pseudotime belong to the same partition.
 ```r
 # see the partitions
 plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)
 ```
 
-We can see that there are 3 partitions identified in `cds_clustered` object. Ideally, we would like to combine partitions 1 and 2 to draw a trajectory through all those cells (we can ignore cells in partition 3). Sometimes using the default values might result in multiple partitions while you only need one. Then you would have to change the q-value cutoff in `partition_qval`. The default is 0.05 and by increasing this value you can increase the span of partitions, meaning that you would get fewer partitions. When trying different values of q-value, you also have to check if the clusters didn't change. It's all about finding a balance between the value of `resolution` and `partition_qval` so that both clusters and partitions are satisfactory enough for downstream analysis. Let's try that on our dataset.
+While your plot might be slightly different due to package updates, we can see that there are 3 partitions identified in `cds_clustered` object. Ideally, we would like to combine partitions 1 and 2 to draw a trajectory through all those cells (we can ignore cells in partition 3). Sometimes using the default values might result in multiple partitions while you only need one. Then you would have to change the q-value cutoff in `partition_qval`. The default is 0.05 and by increasing this value you can increase the span of partitions, meaning that you would get fewer partitions. When trying different values of q-value, you also have to check if the clusters didn't change. It's all about finding a balance between the value of `resolution` and `partition_qval` so that both clusters and partitions are satisfactory enough for downstream analysis. Let's try that on our dataset.
 ```r
 # changing the partition q-value
 cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resolution = 0.0002, partition_qval = 1)
@@ -392,7 +394,7 @@ plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition
 # check if clusters didn't change
 plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster', label_cell_groups=FALSE)
 ```
-Voila - it worked as expected! Now we have cells from partition 1 and 2 in one partition, we still have 7 clusters, so we can learn the trajectory. However, in some cases even this method might not be enough. Then, there is a last resort… assigning cells to a partition manually.
+Voila - it worked as expected! Now we have cells from partition 1 and 2 in one partition, we still have reasonable clusters, so now we can learn the trajectory. However, in some cases even this method might not be enough. Then, there is a last resort… assigning cells to a partition manually.
 
 ## Additional step: assigning cells to one partition
 > <warning-title>Additional step</warning-title>
@@ -443,7 +445,7 @@ plot_cells(cds_partitions_extra, reduction_method = "UMAP", color_cells_by = 'pa
 There are two main approaches to assigning cell types to clusters that we’ve just identified – supervised and unsupervised, both based on gene expression in each cluster.
 
 ## Supervised approach
-Supervised approach relies on the fact that when having a reference, we know which cell types to expect and we can simply check the expression of marker genes specific to the expected cell types. Let’s then check the markers mentioned in the original paper {% cite Bacon2018 %}.
+The supervised approach relies on prior knowledge of which cell types to expect. We can simply check the expression of marker genes specific to the expected cell types. Let’s then check the markers mentioned in the original paper {% cite Bacon2018 %}.
 
 | Marker | Cell type |
 |--------------------|
@@ -468,6 +470,7 @@ plot_cells(cds_clustered, genes=c('Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','H
 >
 > > <solution-title></solution-title>
 > >
+> > Keep in mind that these results refer to our numbered clusters, while yours might be slightly different.
 > > - `Il2ra` (DN): mostly expressed in cluster 4
 > > - `Cd8b1, Cd8a` (DP middle): expressed in clusters 1, 6, and highly in cluster 2
 > > - `Cd4` (DP late): average expression in clusters 1, 6, 2 and high expression in cluster 5
@@ -480,7 +483,7 @@ If you remember, this gene was found to be expressed in the previous Scanpy tuto
 > {: .solution}
 {: .question}
 
-Having identified which cluster corresponds to a specific cell type, we can finally run some code to add the annotation to our CDS object. First, we will create a new column called `cell_type`  in `colData()` - this is where the information about the cells is stored (eg. batch, genotype, sex, etc) - and initialize it with the values of clusters. Then, we will get the `dplyr` package which will be used for clusters annotation.
+Having identified which cluster corresponds to a specific cell type, we can finally run some code to add the annotation to our CDS object. First, we will create a new column called `cell_type`  in `colData()` - this is where the information about the cells is stored (eg. batch, genotype, sex, etc) - and initialize it with the values of clusters. Then, we will get the `dplyr` package which will be used for cluster annotation.
 
 ```r
 # just to keep the objects tidy and not overwrite them so that you can come back to any point of the analysis
@@ -509,7 +512,7 @@ plot_cells(cds_annotated, color_cells_by="cell_type", label_cell_groups=FALSE)
 ![A plot showing the identified clusters, now each coloured by the assigned cell type.](../../images/scrna-casestudy-monocle/annotated.png "Our annotated dataset.")
 
 ## Unsupervised approach
-But what if we don’t have any reference that we can use to assign our clusters? In that case, we will turn to the mentioned unsupervised approach - we will check what are the specifically expressed genes for each cluster. Then we can identify the cell types by looking up what cell types the found genes are markers for. That’s a more tedious process, but sometimes can lead to exciting and unexpected results.
+But what if we don’t have any reference that we can use to assign our clusters? In that case, we will turn to the mentioned unsupervised approach - we will check what are the specifically expressed genes for each cluster. Then we can identify the cell types by looking up what cell types contain those genes. That’s a more tedious process, but sometimes can lead to exciting and unexpected results.
 We will use Monocle’s function `top_markers()` and store the information about specifically expressed genes for each cluster in the data frame `marker_test`.
 ```r
 # find top marker genes in each cluster
@@ -644,7 +647,8 @@ plot_cells(cds_trajectory,
 We have to tell Monocle where to start ordering the cells, ie. when we expect the analysed biological process to begin. Thanks to our biological knowledge, we know that the beginning of the trajectory should be at DN cluster.
 There are a couple of ways to specify the root cells:
 
-1. Use `root_pr_nodes` argument in `order_cells()` function.
+## Option 1: Root nodes
+Here, you will use `root_pr_nodes` argument in `order_cells()` function.
 
 To find the names of the principal points, you have to plot the learned trajectory again, specifying `label_principal_points = TRUE`
 ```r
@@ -690,7 +694,8 @@ DN_node_id      # check the node found
 cds_order_1_helper <- order_cells(cds_trajectory, root_pr_nodes = DN_node_id)
 ```
 
-2. Use `root_cells` argument in `order_cells()` function.
+## Option 2: Root cells
+Here, you will use `root_cells` argument in `order_cells()` function.
 
 Specify a vector of starting cell IDs. You can provide only one cell as well as all cells of a given type.
 
@@ -719,6 +724,8 @@ cds_order_2 <- order_cells(cds_trajectory, root_cells = DN_cells)
 >```
 >
 {: .tip}
+
+# Plotting in pseudotime
 
 You can use any `cds_order` object for the downstream analysis. Let’s pick one and assign it to an object with a shorter and more general name.
 ```r

@@ -11,7 +11,7 @@ contributors: [annefou,shiltemann,nomadscientist]
 >
 > > <hands-on-title>Run JupyterLab</hands-on-title>
 > >
-> > 1. {% tool [Interactive Jupyter Notebook](interactive_tool_jupyter_notebook) %}:
+> > 1. {% tool [Interactive Jupyter Notebook](interactive_tool_jupyter_notebook) %}. Note that on some Galaxies this is called {% tool [Interactive JupyTool and notebook](interactive_tool_jupyter_notebook) %}:
 > > 2. Click Run Tool
 > > 3. The tool will start running and will stay running permanently
 > >
