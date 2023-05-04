@@ -64,6 +64,21 @@ This tutorial will teach you how to obtain, run and combine these workflows appr
 
 # Prepare Galaxy and data
 
+The suggested input for this tutorial is a special batch of data that is of particular interest as it represents a turning point in the COVID-19 pandemic.
+It is a subset (16 samples) of the first sequencing data reported from South Africa at the end of November 2021 for the then novel, fast-spreading SARS-CoV-2 variant that would later be named Omicron.
+This data has been Illumina paired-end sequenced after amplification with the ARTIC v4 set of tiled-amplicon primers.
+
+Alternatively, you can also follow this tutorial using your own SARS-CoV-2 sequencing data (you need at least two samples) as long as it is of one of the following types:
+
+- Single-end data derived from Illumina-based whole-genome RNAseq experiments
+- Paired-end data derived from Illumina-based whole-genome RNAseq experiments
+- Paired-end data generated with Illumina-based tiled-amplicon (e.g. ARTIC) protocols
+- ONT FASTQ files generated with Oxford nanopore (ONT)-based tiled-amplicon (e.g. ARTIC) protocols
+
+If you are using your own *tiled-amplicon* data, you are also expected to know the primer scheme used at the amplification step.
+
+## Prepare a new Galaxy history
+
 Any analysis should get its own Galaxy history. So let's start by creating a new one:
 
 > <hands-on-title>Prepare the Galaxy history</hands-on-title>
@@ -80,137 +95,84 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 
 ## Get sequencing data
 
-Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ files with the sequenced viral RNA from different patients infected with SARS-CoV-2. Several types of data are possible:
+If you are going to use your own sequencing data, there are several possibilities to upload the data depending on how many datasets you have and what their origin is:
 
-- Single-end data derived from Illumina-based RNAseq experiments
-- Paired-end data derived from Illumina-based RNAseq experiments
-- Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols
-- ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
-
-We encourage you to use your own data here (with at least 2 samples). If you do not have any datasets available, we provide some example datasets (paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols) from [COG-UK](https://www.cogconsortium.uk/), the COVID-19 Genomics UK Consortium.
-
-There are several possibilities to upload the data depending on how many datasets you have and what their origin is:
-
-- Import datasets
+- You can import data
 
   - from your local file system,
   - from a given URL or
   - from a shared data library on the Galaxy server you are working on
 
-  and organize the imported data as a dataset collection.
+  In all of these cases you will also have to organize the imported data into a dataset collection.
 
-  > <comment-title>Collections</comment-title>
+- Alternatively, if your data is available from the [NCBI's Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra), you can import it with the help of a dedicated tool, which will organize the data into collections for you.
+
+  > <comment-title>Getting data from SRA</comment-title>
   >
-  > A dataset collection is a way to represent an arbitrarily large collection of samples as a singular entity within a user's workspace. For an in-depth introduction to the concept you can follow this [dedicated tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
+  > The simpler [SARS-CoV-2 sequencing data analysis tutorial]({% link topics/variant-analysis/tutorials/sars-cov-2/tutorial.md %}) uses and explains this alternative way of importing.
   >
   {: .comment}
 
-- Import from [NCBI's Sequence Read Archive (SRA) at NCBI](https://www.ncbi.nlm.nih.gov/sra) with the help of a dedicated tool, which will organize the data into collections for you.
+For the suggested batch of early Omicron data we suggest downloading it via URLs from the
+[European Nucleotide Archive (ENA)](https://www.ebi.ac.uk/ena/browser/home). In case your Galaxy server offers that same data through a shared data library, this represents a faster (data is already on the server) alternative, so you'll find instructions for this scenario as well below.
 
-   > <comment-title>Getting data from SRA</comment-title>
-   >
-   > [A dedicated tutorial is available to explain how to find and import SARS-CoV-2 data from SRA]({% link topics/variant-analysis/tutorials/sars-cov-2/tutorial.md %}).
-   >
-   {: .comment}
-
-> <hands-on-title>Import datasets</hands-on-title>
+> <hands-on-title>Import the sequencing data</hands-on-title>
 >
-> 1. Import the datasets
+> - Option 1: Import from the ENA
 >
->    - Option 1 [{% icon video %}](https://youtu.be/FFCDx1rMGAQ): Your own local data using **Upload Data** (recommended for 1-10 datasets). 
+>   ```
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/002/SRR17054502/SRR17054502_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/002/SRR17054502/SRR17054502_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/003/SRR17054503/SRR17054503_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/003/SRR17054503/SRR17054503_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/004/SRR17054504/SRR17054504_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/004/SRR17054504/SRR17054504_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/005/SRR17054505/SRR17054505_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/005/SRR17054505/SRR17054505_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/006/SRR17054506/SRR17054506_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/006/SRR17054506/SRR17054506_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/007/SRR17054507/SRR17054507_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/007/SRR17054507/SRR17054507_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/008/SRR17054508/SRR17054508_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/008/SRR17054508/SRR17054508_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/009/SRR17054509/SRR17054509_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/009/SRR17054509/SRR17054509_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/010/SRR17054510/SRR17054510_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/010/SRR17054510/SRR17054510_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/033/SRR17051933/SRR17051933_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/033/SRR17051933/SRR17051933_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/034/SRR17051934/SRR17051934_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/034/SRR17051934/SRR17051934_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/035/SRR17051935/SRR17051935_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/035/SRR17051935/SRR17051935_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/036/SRR17051936/SRR17051936_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/036/SRR17051936/SRR17051936_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/037/SRR17051937/SRR17051937_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/037/SRR17051937/SRR17051937_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/038/SRR17051938/SRR17051938_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/038/SRR17051938/SRR17051938_2.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_1.fastq.gz
+>   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_2.fastq.gz
+>   ```
 >
->      {% snippet faqs/galaxy/datasets_upload.md %}
+>   1. Copy the links above
+>   2. Open the {% tool [Upload](upload1) %} Manager
+>   3. In the top row of tabs select **Collection**
+>   4. Configure the drop-down select boxes on that tab like this:
+>      - *"Collection Type"*: `Pair`
+>      - *"File Type"*: `fastqsanger.gz`
+>   5. Click on **Paste/Fetch data** and paste the links you copied into the empty text box
+>   6. Press **Start**
+>   7. Wait for the **Build** button to become enabled, click it, and, in the next dialogue, give a suitable **Name**, like `Sequencing data`, to the new collection.
+>   8. Click on **Create collection**
 >
->    - Option 2 [{% icon video %}](https://youtu.be/hC8KSuT_OP8): Your own local data using **FTP** (recommended for >10 datasets)
+> - Option 2: Import from a shared data library
 >
->      {% snippet faqs/galaxy/datasets_upload_ftp.md %}
->
->    - Option 3: From the shared data library
->
->      {% snippet faqs/galaxy/datasets_import_from_data_library.md path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" %}
->
->    - Option 4: From an external server via URL
->
->      {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->      For our example datasets, the datasets are stored on [Zenodo]({{ page.zenodo_link }}) and can be retrieved using the following URLs:
->
->      ```
->      {{ page.zenodo_link }}/files/ERR5931005_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931005_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931006_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931006_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931007_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931007_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931008_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931008_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949456_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949456_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949457_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949457_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949458_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949458_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949459_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949459_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949460_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949460_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949461_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949461_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949462_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949462_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949463_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949463_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949464_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949464_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949465_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949465_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949466_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949466_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949467_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949467_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949468_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949468_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949469_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949469_2.fastqsanger.gz
->      ```
->
-> 2. Create a collection to organize the data
->
->    - Option 1 [{% icon video %}](https://youtu.be/6ZU9hFjnRDo): Single-end data (Illumina or ONT data)
->
->      {% snippet faqs/galaxy/collections_build_list.md %}
->
->    - Option 2 [{% icon video %}](https://youtu.be/6toVj35q1r0): Paired-end data (Illumina data)
->
->      {% snippet faqs/galaxy/collections_build_list_paired.md %}
->
->      For the example datasets:
->      - Since the datasets carry `_1` and `_2` in their names, Galaxy may already have detected a possible pairing scheme for the data, in which case the datasets will appear in green in the lower half (the paired section) of the dialog.
->
->        You could accept this default pairing, but as shown in the middle column of the paired section, this would include the `.fastqsanger` suffix in the pair names (even with `Remove file extensions?` checked Galaxy would only remove the last suffix, `.gz`, from the dataset names.
->
->        It is better to undo the default pairing and specify exactly what we want:
->        - at the top of the *paired section*: click `Unpair all`
->
->          This will move all input datasets into the *unpaired section* in the upper half of the dialog.
->        - set the text of *unpaired forward* to: `_1.fastqsanger.gz`
->        - set the text of *unpaired reverse* to: `_2.fastqsanger.gz`
->        - click: `Auto-pair`
->
->        All datasets should be moved to the *paired section* again, but the middle column should now show that only the sample accession numbers will be used as the pair names.
->
->      - Make sure *Hide original elements* is checked to obtain a cleaned-up history after building the collection.
->      - Click *Create Collection*
+>   {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" collection_type="List of Pairs" collection_name="Sequencing data" tohistory="the history you created for this tutorial" path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" %}
 >
 {: .hands_on}
 
-> <comment-title>Learning to build collections automatically</comment-title>
->
-> It is possible to build collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc., directly during upload of the data. [A dedicated tutorial is available to explain the different possibilities]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}).
->
-{: .comment}
-
-## Import auxiliary datasets
+## Import reference sequence and auxiliary datasets
 
 Besides the sequenced reads data, we need at least two additional datasets for calling variants and annotating them:
 
@@ -218,92 +180,133 @@ Besides the sequenced reads data, we need at least two additional datasets for c
 
 - a tabular dataset defining aliases for viral gene product names, which will let us translate NCBI RefSeq Protein identifiers (used by the SnpEff annotation tool) to the commonly used names of coronavirus proteins and cleavage products.
 
+> <hands-on-title>Get reference sequence and feature mappings</hands-on-title>
+>
+> 1. Get the SARS-CoV-2 reference sequence
+>
+>    A convenient public download link for this sequence is best obtained from the ENA again, where the sequence is known under its [INSDC](https://www.insdc.org/) alias [MN908947.3](https://www.ebi.ac.uk/ena/browser/view/MN908947.3):
+>    ```
+>    https://www.ebi.ac.uk/ena/browser/api/fasta/MN908947.3?download=true
+>    ```
+>
+>    1. {% tool [Upload](upload1) %} the reference to your history via the link above and make sure the dataset format is set to `fasta`.
+>
+>       {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
+>    2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) in entire line %} to simplify the reference sequence name
+>       - {% icon param-file %} *"File to process"*: the uploaded reference sequence from the ENA
+>       - In {% icon param-repeat %} *"1. Replacement"*:
+>         - *"Find pattern"*: `^>.+`
+>         - *"Replace with"*: `>NC_045512.2`
+>
+>       While the identifiers `MN908947.3` and `NC_045512.2` really refer to the same sequence, one of the tools we are going to use during the analysis (SnpEff) requires the NCBI RefSeq identifier.
+>    3. When the Replace Text tool run is finished, **rename** the output dataset to make it clear that this is the SARS-CoV-2 reference dataset to use in the analysis.
+>
+>       {% snippet faqs/galaxy/datasets_rename.md name="SARS-CoV-2 reference" format="fasta" %}
+> 2. {% tool [Upload](upload1) %} the mapping for translation product identifiers in tabular format
+>
+>    This mapping really consists of just a few lines of text. Each line lists the NCBI Protein Refseq identifier of a SARS-CoV-2 translation product (which the tool SnpEff knows about and will use for annotating mutation effects), followed by a more commonly used name for that product (which we would like to see in final mutation reports). The last line specifies a "mapping" for the **.** annotation, which SnpEff uses for mutations that do not affect any viral open-reading frame. We do not have a better name for it so we specify that we want to retain this annotation unaltered in reports.
+>
+>    ```
+>    YP_009725297.1    leader
+>    YP_009725298.1    nsp2
+>    YP_009725299.1    nsp3
+>    YP_009725300.1    nsp4
+>    YP_009725301.1    3Cpro
+>    YP_009725302.1    nsp6
+>    YP_009725303.1    nsp7
+>    YP_009725304.1    nsp8
+>    YP_009725305.1    nsp9
+>    YP_009725306.1    nsp10
+>    YP_009725307.1    RdRp
+>    YP_009725308.1    helicase
+>    YP_009725309.1    ExoN
+>    YP_009725310.1    endoR
+>    YP_009725311.1    MethTr
+>    YP_009725312.1    nsp11
+>    GU280_gp02        S
+>    GU280_gp03        orf3a
+>    GU280_gp04        E
+>    GU280_gp05        M
+>    GU280_gp06        orf6
+>    GU280_gp07        orf7a
+>    GU280_gp08        orf7b
+>    GU280_gp09        orf8
+>    GU280_gp10        N
+>    GU280_gp11        orf10
+>    .                 .
+>    ```
+>
+>    Two remarks on this content:
+>    - Since the feature mapping dataset is expected to be in tabular format, but the above display uses spaces to separate columns, please make sure, you have **Convert spaces to tabs** checked when creating the dataset from the copied content!
+>    - If you prefer other names for certain translation products than the ones defined above (*e.g.* you might be used to call the first peptide *nsp1* instead of *leader*), you are, of course, free to change those names in the pasted content before uploading it to Galaxy. What needs to be kept is only the Refseq identifiers in the first column as these are fixed by the SnpEff tool.
+>
+>    {% snippet faqs/galaxy/datasets_create_new_file.md name="SARS-CoV-2 feature mapping" format="tabular" convertspaces="true" %}
+>
+{: .hands_on}
+
 Another two datasets are needed only for the analysis of ampliconic, e.g. ARTIC-amplified, input data:
 
 - a BED file specifying the primers used during amplification and their binding sites on the viral genome
 - a custom tabular file describing the amplicon grouping of the primers
 
+> <details-title>Using your own tiled-amplicon data? Provide the correct primer scheme and amplicon info.</details-title>
+>
+> The instructions below assume that you are going to analyze viral samples amplified using **version 4 of the ARTIC network's SARS-CoV-2 set of primers**, which is the case for the suggested Omicron batch of data.
+>
+> If you have decided to analyze your own tiled-amplicon sequencing data in this tutorial, and if your samples have been amplified with a **different** set of primers, you are supposed, at the following step, to upload a primer scheme file and corresponding amplicon information that describes this set of primers.
+>
+> The Galaxy Project maintains a collection of such files for some commonly used sets of primers at [Zenodo](https://doi.org/10.5281/zenodo.4555734).
+> If the files describing your set of primers are part of this collection, you can simply upload them using their Zenodo download URLs (analogous to what is shown for the ARTIC v4 primers below).
+>
+> For sets of primers *not* included in the collection, you will have to create those files yourself (or obtain them from other sources).
+> The expected format for the primer scheme file is 6-column BED format, while the amplicon info file is a simple tabular format that lists all primer names (which must be identical to the ones used in the primer scheme file) that contribute to formation of the same amplicon on a single tab-separated line.
+> If in doubt, download the ARTIC v4 files through the URLs provided below, and use them as a template for your own custom files.
+>
+{: .details}
 
-> <hands-on-title>Import auxiliary datasets</hands-on-title>
+> <hands-on-title>Get primer scheme and amplicon info</hands-on-title>
 >
-> 1. Import the auxiliary datasets:
->    - the SARS-CoV-2 reference (`NC_045512.2_reference.fasta`)
->    - gene product name aliases (`NC_045512.2_feature_mapping.tsv`)
->    - ARTIC v3 primer scheme (`ARTIC_nCoV-2019_v3.bed`)
->    - ARTIC v3 primer amplicon grouping info (`ARTIC_amplicon_info_v3.tsv`)
+> 2. Get ARTIC v4 primer files
 >
->    > <details-title>Not using ARTIC v3 amplified sequencing data?</details-title>
->    >
->    > The instructions here assume you will be analyzing the example samples
->    > suggested above, which have been amplified using version 3 of the ARTIC
->    > network's SARS-CoV-2 primer set. If you have decided to work through
->    > this tutorial using your own samples of interest, and if those samples
->    > have been amplified with a different primer set, you will have to upload
->    > your own datasets with primer and amplicon information at this point.
->    > If the primer set is from the ARTIC network, just not version 3, you
->    > should be able to obtain the primer BED file from
->    > [their SARS-CoV-2 github repo](https://github.com/artic-network/artic-ncov2019/tree/master/primer_schemes/nCoV-2019).
->    > Look for a 6-column BED file structured like the version 3 one we suggest below.
->    > For the tabular amplicon info file, you only need to combine all primer names from
->    > the BED file that contribute to the same amplicon on a single tab-separated line.
->    > The result should look similar to the ARTIC v3 amplicon grouping info file we
->    >suggest to upload.
->    {: .details}
+>    ```
+>    https://zenodo.org/record/5888324/files/ARTIC_nCoV-2019_v4.bed
+>    https://zenodo.org/record/5888324/files/ARTIC_amplicon_info_v4.tsv
+>    ```
 >
->    Several options exist to import these datasets:
->
->    - Option 1: From the shared data library
->
->      {% snippet faqs/galaxy/datasets_import_from_data_library.md path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" %}
->
->    - Option 2: From [Zenodo](https://zenodo.org/record/4555735)
->
->      ```
->      https://zenodo.org/record/4555735/files/NC_045512.2_reference.fasta
->      https://zenodo.org/record/4555735/files/NC_045512.2_feature_mapping.tsv
->      https://zenodo.org/record/4555735/files/ARTIC_nCoV-2019_v3.bed
->      https://zenodo.org/record/4555735/files/ARTIC_amplicon_info_v3.tsv
->      ```
->
->      {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    - Option 3: From a shared history:
->      - On [usegalaxy.org](https://usegalaxy.org/u/aun1/h/artic-v3)
->      - On [usegalaxy.eu](https://usegalaxy.eu/u/nekrut/h/artic-v3)
->      - On [usegalaxy.org.au](https://usegalaxy.org.au/u/nekrut/h/artic-v3)
->
->      {% snippet faqs/galaxy/histories_import.md %}
->
->    For the example datasets, you will need to import all 4 auxiliary datasets.
->
-> 2. Check and manually correct assigned datatypes
->
->    If you have imported the auxiliary datasets via their Zenodo links, Galaxy
->    will have tried to autodetect the format of each imported dataset, but
->    will not always be right with its guess. It's your task now to check and
->    possibly correct the format assignments for each of the datasets!
->
->    - Expand the view of each of the uploaded auxiliary datasets and see if
->      Galaxy shows the following `format` values:
->      - for `NC_045512.2_reference.fasta`: `fasta`
->      - for `NC_045512.2_feature_mapping.tabular`: `tabular`
->      - for `ARTIC_nCoV-2019_v3.bed6`: `bed6` or `bed`
->      - for `ARTIC_amplicon_info_v3.tabular`: `tabular`
->
->    - If any of the above assignments are not what they should be, then change
->      the datatype of the corresponding dataset now to the intended format.
->
->      {% snippet faqs/galaxy/datasets_change_datatype.md %}
->
->    If you have imported the auxiliary datasets into your history from a
->    shared data library or history, then the above steps are not necessary
->    (though checking the datatypes of imported data is good practice in
->    general) because the shared datasets have their format configured
->    correctly already.
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
-# From FASTQ to annotated allelic variants
+At this point you should have the following items in your history:
+
+1. A collection of sequenced reads for all samples to be analyzed
+   - This collection should be organized as a list with one element per sample that you are planning to analyze.
+
+     If you are going to analyze the suggested batch of Omicron data, the list should have 16 elements.
+
+   - Each of the list elements should itself be a paired collection of a *forward* and a *reverse* reads dataset, each in *fastqsanger.gz* format.
+
+2. The SARS-CoV-2 reference as a single *fasta* dataset
+3. The SARS-CoV-2 feature mappings as a single *tabular* dataset
+4. Only required if you are analyzing *tiled-amplicon* data (which is the case for the suggested batch):
+   - a primer scheme as a single *bed* or *bed6* dataset
+   - amplicon information as a single *tabular* dataset
+
+If any of these items are still missing, head back to the corresponding section(s) and upload them now.
+
+If any of these items have not been assigned the correct format (expand the view of each dataset to reveal the format Galaxy has recorded for it), please fix them now.
+
+{% snippet faqs/galaxy/datasets_change_datatype.md %}
+
+If everything looks fine, you are ready to start the actual data analysis.
+
+# Analysis
+
+> The workflows default to requiring an AF ≥ 0.05 and AV-supporting reads of ≥ 10 (these and all other parameters can be easily changed by the user). For an AV to be listed in the reports, it must surpass these thresholds in at least one sample of the respective dataset. We estimate that for AV calls with an AF ≥ 0.05, our analyses have a false-positive rate of < 15% for both Illumina RNAseq and Illumina ARTIC data, while the true-positive rate of calling such low-frequency AVs is ~80% and approaches 100% for AVs with an AF ≥ 0.15. This estimate is based on an initial application of the Illumina RNAseq and Illumina ARTIC workflows to two samples for which data of both types had been obtained at the virology department of the University of Freiburg and the assumption that AVs supported by both sets of sequencing data are true AVs. The second threshold of 10 AV-supporting reads is applied to ensure that calculated AFs are sufficiently precise for all AVs.
+>
+> More details about the workflows can be found on the [Covid-19 project pages](https://galaxyproject.org/projects/covid19/workflows/) of the [Galaxy Community Hub](https://galaxyproject.org/)
+
+## From FASTQ to annotated allelic variants
 
 To identify the SARS-CoV-2 allelic variants (AVs), a first workflow converts the FASTQ files to annotated AVs through a series of steps that include quality control, trimming, mapping, deduplication, AV calling, and filtering.
 
@@ -324,54 +327,40 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 >
 > All four workflows use **SnpEff**, specifically its 4.5covid19 version, for AV annotation.
 >
-> Workflows default to requiring an AF ≥ 0.05 and AV-supporting reads of ≥ 10 (these and all other parameters can be easily changed by the user). For an AV to be listed in the reports, it must surpass these thresholds in at least one sample of the respective dataset. We estimate that for AV calls with an AF ≥ 0.05, our analyses have a false-positive rate of < 15% for both Illumina RNAseq and Illumina ARTIC data, while the true-positive rate of calling such low-frequency AVs is ~80% and approaches 100% for AVs with an AF ≥ 0.15. This estimate is based on an initial application of the Illumina RNAseq and Illumina ARTIC workflows to two samples for which data of both types had been obtained at the virology department of the University of Freiburg and the assumption that AVs supported by both sets of sequencing data are true AVs. The second threshold of 10 AV-supporting reads is applied to ensure that calculated AFs are sufficiently precise for all AVs.
->
-> More details about the workflows, including benchmarking of the tools, can be found on [covid19.galaxyproject.org](https://covid19.galaxyproject.org/genomics/global_platform/#methods)
 {: .details}
 
 > <hands-on-title>From FASTQ to annotated AVs</hands-on-title>
 >
 > 1. **Get the workflow** for your data into Galaxy 
 >
->    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
+>    All workflows developed as part of the Galaxy Covid-19 project can be retrieved via the two popular workflow registries [Dockstore](https://dockstore.org/) and [WorkflowHub](https://workflowhub.eu/), and Galaxy makes this process really easy for you.
 >
->      Please note that this option currently works *only* with usegalaxy.eu!
+>    {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' box_type="none" %}
 >
->      - Open the workflow page on the WorkflowHub
->        - [Illumina ARTIC PE](https://workflowhub.eu/workflows/110) - The one to use for example datasets
->        - [Illumina RNAseq SE](https://workflowhub.eu/workflows/112)
->        - [Illumina RNAseq PE](https://workflowhub.eu/workflows/113)
->        - [ONT ARTIC](https://workflowhub.eu/workflows/111)
+>    *IWC* (the intergalactic workflow commission) is the organization that the Galaxy Covid-19 project uses to publish its workflows, and the name restriction makes sure we are only getting workflows from that organization that deal with SARS-CoV-2 data analysis.
 >
->      - Click on `Run on usegalaxy.eu` at the top right of the page
->      
->        The browser will open a new tab with Galaxy's workflow invocation interface.
+>    Depending on your input data you will need to select the appropriate workflow from the list of hits returned by the workflow registry server.
+>    This would be:
+>    - **sars-cov-2-pe-illumina-artic-variant-calling/COVID-19-PE-ARTIC-ILLUMINA**
 >
->    - Option 2: Import the workflow from [Dockstore](https://dockstore.org/) using Galaxy's workflow search
+>      if you are working with the suggested batch of samples for this tutorial, or if your own data is tiled-amplicon data sequenced on the Illumina platform in paired-end mode
+>    - **sars-cov-2-ont-artic-variant-calling/COVID-19-ARTIC-ONT**
 >
->      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' %}
+>      if you are working with tiled-amplicon data sequenced on the ONT platform
+>    - **sars-cov-2-pe-illumina-wgs-variant-calling/COVID-19-PE-WGS-ILLUMINA**
 >
->      For the example dataset: `sars-cov-2-pe-illumina-artic-variant-calling/COVID-19-PE-ARTIC-ILLUMINA`
+>      if you are working with WGS data obtained on the Illumina platform in paired-end mode
+>    - **sars-cov-2-se-illumina-wgs-variant-calling/COVID-19-SE-WGS-ILLUMINA**
 >
->    - Option 3: Import the workflow via its github link
->
->      - Open the GitHub repository of your workflow
->        - [Illumina ARTIC PE](https://github.com/iwc-workflows/sars-cov-2-pe-illumina-artic-variant-calling) - The one to use for example datasets
->        - [Illumina RNAseq SE](https://github.com/iwc-workflows/sars-cov-2-se-illumina-wgs-variant-calling)
->        - [Illumina RNAseq PE](https://github.com/iwc-workflows/sars-cov-2-pe-illumina-wgs-variant-calling)
->        - [ONT ARTIC](https://github.com/iwc-workflows/sars-cov-2-ont-artic-variant-calling)
->      - Open the `.ga` file
->      - Click on `Raw` at the top right of the file view
->      - Save the file or Copy the URL of the file
->      - Import the workflow to Galaxy
->
->        {% snippet faqs/galaxy/workflows_import.md %}
+>      if you are working with WGS data obtained on the Illumina platform in single-end mode
 >
 > 2. Run **COVID-19: variation analysis on ...** {% icon workflow %} using the following parameters:
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
->    - *"Send results to a new history"*: `No`
+>    Note: the {% icon galaxy-gear %} icon next to **Run Workflow** offers the option to *Send results to a new history*.
+>    This is very useful if you are planning to analyze the data in your current history in multiple different ways, and you would like to have each analysis end up in its own dedicated history.
+>    Here, however, we only want to do one analysis of our batch of data so we are fine with results of the workflow run getting added to the current history.
 >
 >    - For **Illumina ARTIC PE** workflow (named **COVID-19: variation analysis on ARTIC PE data**),  *to use for example datasets*
 >      - {% icon param-file %} *"1: ARTIC primers to amplicon assignments"*: `ARTIC_amplicon_info_v3.tsv` or `ARTIC amplicon info v3`
@@ -395,7 +384,7 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 
 The execution of the workflow takes some time. It is possible to launch the next step even if it is not done, as long as all steps are successfully scheduled.
 
-# From annotated AVs per sample to AV summary
+## From annotated AVs per sample to AV summary
 
 Once the jobs of previous workflows are done, we identified AVs for each sample. We can run a "Reporting workflow" on them to generate a final AV summary.
 
@@ -601,7 +590,7 @@ The three key results datasets produced by the Reporting workflow are:
 
    In the example datasets, the samples are clustered in 3 clusters (as we defined when running the workflow), that may represent different SARS-CoV-2 lineages as the AVs profiles are different.
 
-# From AVs to consensus sequences
+## From AVs to consensus sequences
 
 For the variant calls, we can now run a workflow which generates reliable consensus sequences according to transparent criteria that capture at least some of the complexity of variant calling:
 
@@ -690,11 +679,11 @@ The main outputs of the workflow are:
 
 The last one can be used as input for tools like **Pangolin** or **Nextclade**.
 
-# From consensus sequences to clade/lineage assignments
+## From consensus sequences to clade/lineage assignments
 
 To assign lineages to the different samples from their consensus sequences, two tools are available: **Pangolin** and **Nextclade**.
 
-## With Pangolin
+### With Pangolin
 
 Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used to assign a SARS-CoV-2 genome sequence the most likely lineage based on the PANGO nomenclature system.
 
@@ -747,7 +736,7 @@ Column | Field | Meaning
 > {: .solution}
 {: .question}
 
-## With Nextclade
+### With Nextclade
 
 Nextclade assigns clades, calls mutations and performs sequence quality checks on SARS-CoV-2 genomes.
 
@@ -808,7 +797,7 @@ Column | Field | Meaning
 > 
 > How many different lineages have been found? How many samples for each lineage?
 >
-> ![Illustration of phylogenetic relationship of clades, as used in Nextclade](../../images/sars-cov-2-variant-discovery/ncov_clades.png "Illustration of phylogenetic relationship of clades, as used in Nextclade (Source: <a href="https://clades.nextstrain.org/">Nextclade</a>)")
+> ![Illustration of phylogenetic relationship of clades, as used in Nextclade](../../images/sars-cov-2-variant-discovery/clades.svg "Illustration of phylogenetic relationship of clades, as used in Nextclade (Source: <a href="https://github.com/nextstrain/ncov-clades-schema/#ncov-clade-schema">Nextstrain</a>)")
 >
 > > <solution-title></solution-title>
 > >
@@ -829,7 +818,7 @@ Column | Field | Meaning
 > {: .solution}
 {: .question}
 
-## Comparison between Pangolin and Nextclade clade assignments
+### Comparison between Pangolin and Nextclade clade assignments
 
 We can compare **Pangolin** and **Nextclade** clade assignments by extracting interesting columns and joining them into a single dataset using sample ids.
 
