@@ -40,7 +40,9 @@ Metagenomics is the study of genetic material recovered directly from environmen
 
 The goal of metagenomics binning is to assign the DNA sequences to the organisms or taxonomic groups that they originate from, allowing for a better understanding of the diversity and functions of the microbial communities present in the sample. This is typically achieved through computational methods that use sequence similarity, composition, and other features to group the sequences into bins.
 
-There are two main types of metagenomics binning: *reference-based* and *de novo*. *Reference-based binning* involves aligning the sequences to a database of known genomes or reference sequences, while *de novo binning* involves clustering the sequences based on similarity without prior knowledge of the organisms or reference sequences present in the sample.
+There are two main types of metagenomics binning:
+- **Reference-based binning** involves aligning the sequences to a database of known genomes or reference sequences
+- **de novo binning** involves clustering the sequences based on similarity without prior knowledge of the organisms or reference sequences present in the sample.
 
 Both methods have their strengths and limitations, and researchers often use a combination of approaches to improve the accuracy of their binning results. Metagenomics binning is an important tool for understanding the functional potential of microbial communities in various environments and has applications in fields such as biotechnology, environmental science, and human health.
 
