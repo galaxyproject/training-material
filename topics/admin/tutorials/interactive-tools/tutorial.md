@@ -112,7 +112,7 @@ We will use several Ansible roles for this tutorial. In order to avoid repetetiv
 >
 >    ```yaml
 >    - src: geerlingguy.docker
->      version: 2.6.0
+>      version: 6.1.0
 >    - src: usegalaxy_eu.gie_proxy
 >      version: 0.0.2
 >    ```
@@ -644,7 +644,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >    ```
 >    {% endraw %}
 >
->    Next, inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside, that GxITs should be enabled, and where the GxIT map database can be found:
+>    Next, inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside, that GxITs should be enabled, and where the GxIT map database can be found. Watch for other conflicting configurations from previous tutorials (e.g. `job_config: ...`):
 >
 >    {% raw %}
 >    ```yaml
