@@ -6,8 +6,7 @@ title: Introduction to Galaxy and Ecological data analysis
 description: |
   This learning path aims to teach you the basics of Galaxy and analysis of ecological data.
   You will learn how to use Galaxy for analysis, and will be guided through the common
-  steps of biodiversity data analysis; download, check and filter GBIF data and analyze abundance data through modeling
-  sequences.
+  steps of biodiversity data analysis: download, check, filter and explore biodiversity data and analyze abundance data through modeling.
 
 priority: 1
 
@@ -31,8 +30,7 @@ pathway:
         topic: ecology
       - name: gbif_cleaning
         topic: ecology
-      - name: PAMPA-toolsuite-tutorial
-        topic: ecology
+
 
   - section: "Module 3: Basics of Biodiversity abundance data analysis"
     description: Working on abundance data, you often want to analyze it through modeling to compute and analyze biodiversity metrics.
