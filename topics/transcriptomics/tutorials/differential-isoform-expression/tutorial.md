@@ -23,9 +23,9 @@ Epigenetic profile analysis indicates HB tumors are characterized by genome-wide
 
 ![figX:Isoform usage](../../images/differential_isoform/isoformSwitcher_splicing_patterns.png "Splicing patterns. The observed splice patterns (left colum) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).")
 
-Discovered over 40 years ago, alternative splicing formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes  ({% cite Alt1980 %}). The majority of eukaryote genes have multiple transcriptional isoforms, and recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average ({% cite Piovesan2016 %}). In humans,  approximately 95% of multi-exon genes show evidence of alternative splicing (AS) and approximately 60% of genes have at least one alternative transcription start site, some of which exert antagonistic functions ({% cite Carninci2006 %}, {% cite Miura2012 %}). AS regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes ({% cite Wang2008 %}, {% cite Kalsotra2011 %}). Differential usage of isoforms in different conditions, often referred to as isoform switching, can have substantial biological impact, caused by the difference in the functional potential of the two isoforms ({% cite VittingSeerup2017 %}). Isoform switches are implicated in many diseases and are especially prominent in cancer; this fact has  has motivated genome-wide screens for isoform switches with predicted functional consequences ({% cite VittingSeerup2019 %}).
+Discovered over 40 years ago, alternative splicing formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes  ({% cite Alt1980 %}). The majority of eukaryote genes have multiple transcriptional isoforms, and recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average ({% cite Piovesan2016 %}). In humans,  approximately 95% of multi-exon genes show evidence of alternative splicing (AS) and approximately 60% of genes have at least one alternative transcription start site, some of which exert antagonistic functions ({% cite Carninci2006 %}, {% cite Miura2012 %}). AS regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes ({% cite Wang2008 %}, {% cite Kalsotra2011 %}). Differential usage of isoforms in different conditions, often referred to as isoform switching (IS), can have substantial biological impact, caused by the difference in the functional potential of the two isoforms ({% cite VittingSeerup2017 %}). Isoform switches are implicated in many diseases and are especially prominent in cancer; this fact has  has motivated genome-wide screens for isoform switches with predicted functional consequences ({% cite VittingSeerup2019 %}).
 
-In this tutorial, we aim to perform a genome-wide analysis of the isoform switching phaenomena in hepatoblasmoma, which offers improved resolution over gene expression, with the objective of identify genes of clinical relevance.
+In this tutorial, we aim to perform a genome-wide analysis of the IS phaenomena in hepatoblasmoma, which offers improved resolution over gene expression, with the objective of identify genes of clinical relevance.
 
 > <agenda-title></agenda-title>
 >
@@ -224,7 +224,7 @@ The choice of **RNA STAR** as mapper is also determined by the sequencing techno
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy1) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
->        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA paired reads"*: `output_paired_coll` (output of **fastp** {% icon tool %})
+>        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `output_paired_coll` (output of **fastp** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
 >        - {% icon param-file %} *"Select a reference genome"*: `output` (Input dataset)
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
@@ -413,8 +413,6 @@ Despite in this training we make us of RNA STAR as mapping tool, it is possible 
 >
 {: .hands_on}
 
-
-
 Stringtie generates six collection with three elements each one, but we will use only the **transcript-level expression measurements** dataset collection.
 
 > <details-title>Transcription-level expression measurements file</details-title>
@@ -436,22 +434,35 @@ Stringtie generates six collection with three elements each one, but we will use
 
 # Isoform analysis with **IsoformSwitchAnalyzeR**
 
-<!-- Needs to be modified -->
+IsoformSwitchAnalyzeR is a open-source R package that enables both  analyze changes in genome-wide patterns of alternative splicing and specific gene isoforms switch consequences. An advantage of IsoformSwitchANalyzeR over other approaches such as DEXSeq is that it allows allows to integrate multiple layes of information, such as previously annotatated coding sequences, de-novo coding potential predictions, protein domains and signal peptides. In addition, IsoformSwitchAnalyzeR facilitates identification of IS by making use of a new statistical methods that tests each individual isoform for differential usage, identifying the exact isoforms involved in an isoform switch ({% cite isoformswitchanalyzer %})
 
-IsoformSwitchAnalyzeR enables to analyze  changes in genome-wide patterns of alternative splicing and isoform switch consequences.
+> <comment-title>Nonsense mediated decay</comment-title>
+>
+> If transcript structures are predicted (either de-novo or guided) IsoformSwitchAnalyzeR offers an accurate tool for identifying the dominant ORF of the isoforms. The knowledge of isoform positions for the CDS/ORF allows for prediction of sensitivity to Nonsense Mediated Decay (NMD) — the mRNA quality control machinery that degrades isoforms with pre-mature termination codons (PTC).
+>
+{: .comment}
 
-A genome-wide analysis is both useful for getting an overview of the extent of isoform switching as well as discovering general patterns. IsoformSwitchAnalyzeR supports this by providing four different summaries/analyses for both the analysis of alternative splicing and isoform switches with predicted consequences. All functions provide a visual overview as well as a data.frame with the summary statistics. The four analysis types supported are:
+In this training, the IsoformSwitchAnalyzeR stage is divided in four steps:
 
-IsoformSwitchAnalyzeR is an easy-to-use R package that enables the user to import (novel) full-length derived isoforms from an RNA-seq experiment into R. If annotated transcripts are analyzed, IsoformSwitchAnalyzeR offers integration with the multi-layer information stored in a GTF file including the annotated coding sequences (CDS). If transcript structures are predicted (either de-novo or guided) IsoformSwitchAnalyzeR offers an accurate tool for identifying the dominant ORF of the isoforms. The knowledge of isoform positions for the CDS/ORF allows for prediction of sensitivity to Nonsense Mediated Decay (NMD) — the mRNA quality control machinery that degrades isoforms with pre-mature termination codons (PTC).
+1. Data import: import into IsoformSwitchAnalyzer the transcription-level expression measurement dataset generated by Stringtie. This step also requires to import the GTF annotation file and the transcriptome.
+2. Pre-processing and differential isoform usage analysis: non-informative gene/isoforms are removed from the datasets and differentially isoform usage analysis with DEXSeq. Once the IS have been found, the corresponding nucleotide and aminoacid sequences are extracted.
+3. Outward sequence analysis: The sequences obtained in the previous step are used in order to evaluate their coding potential and the motifs that they contain by using two different tools: **PfamScan** and **CPAT**.
+4. Isoform switching analysis: The final step involves importing and incorporating the results of the external sequence analysis, identifying intron retention, predicting functional consequences and generating the reports.
 
-![figX:Consequences isoform](../../images/differential_isoform/scheme.jpeg "IsoformSwitchAnalyzer scheme")
 
-IsoformSwitchAnalyzeR facilitates identification of isoform switches via newly developed statistical methods that tests each individual isoform for differential usage and thereby identifies the exact isoforms involved in an isoform switch.
+![figX:Consequences isoform](../../images/differential_isoform/scheme.jpeg "IsoformSwitchAnalyzeR workflow scheme. The individual steps are indicated by arrows. Please note the boxes marked with “outward sequence analysi” requires to run a set of different tools. Adapted from IsoformSwitchAnalyzeR viggette.")
 
-Since we know the exon structure of the full-length isoform, IsoformSwitchAnalyzeR can extract the underlying nucleotide sequence from a reference genome. This enables integration with the Coding Potential Assessment Tool (CPAT) which predicts the coding potential of an isoform and can be used to increase accuracy of ORF predictions. By combining the CDS/ORF isoform positions with the nucleotide sequence, we can extract the most likely amino acid sequence of the CDS/ORF. The amino acid sequence enables integration of analysis of protein domains (via Pfam) and signal peptides (via SignalP) — both supported by IsoformSwitchAnalyzeR. Lastly, since the structures of all expressed isoforms from a given gene are known, one can also annotate alternative splicing - including retentions - a functionality also implemented in IsoformSwitchAnalyzeR.
+Now, we can start with the isoform switch analysis.
 
 ## Import data into **IsoformSwitchAnalyzeR**
 
+The first step of the IsoformSwitchAnalyzeR pipeline is to import the required datasets.
+
+> <comment-title>Salmon as source of transcript-expression data</comment-title>
+>
+> In addition of Stringtie, it is possible to import dada from **SALMON**. The main advantage of Salmon over StringTie for isoform differential expression analysis is its speed and computational efficiency, while achieving similar accuracies when analyzing known transcripts. However, **StringTie** is considered a better alternative if we are interested in novel transcript features.
+>
+{: .comment}
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -459,43 +470,29 @@ Since we know the exon structure of the full-length isoform, IsoformSwitchAnalyz
 >    - *"Tool function mode"*: `Import data`
 >        - In *"1: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Cancer`
->            - {% icon param-file %} *"Transcript-level expression measurements"*: `transcript_expression` (output of **StringTie** {% icon tool %})
+>            - {% icon param-collection %} *"Transcript-level expression measurements"*: `transcript-level expression measurements` (output of **StringTie** {% icon tool %})
 >        - In *"2: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Health`
->            - {% icon param-file %} *"Transcript-level expression measurements"*: `transcript_expression` (output of **StringTie** {% icon tool %})
+>            - {% icon param-collection %} *"Transcript-level expression measurements"*: `transcript-level expression measurements` collection (output of **StringTie** {% icon tool %})
 >        - *"Quantification data source"*: `StringTie`
 >            - *"Average read length"*: `140`
->        - {% icon param-file %} *"Genome annotation (GTF)"*: `output` (Input dataset)
->        - {% icon param-file %} *"Transcriptome"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Genome annotation (GTF)"*: `gencode.v43.annotation.gtf.gz`
+>        - {% icon param-file %} *"Transcriptome"*: `gencode.v43.transcripts.fa.gz`
 >
 {: .hands_on}
 
 
-## Filtering and isoform switching identification
+## Pre-processing and differential isoform usage analysis
 
-<!-- Needs to be edited! -->
+Once the datasets have been imported into a RData file, we can start with the pre-processing step. In order to enhace the reliability of the downstream analysis, it is important to remove the non-informative genes/isoforms (e.g. single isoform genes and non-expressed isoforms). 
 
-Once you have a switchAnalyzeRlist, there is a good chance that it contains a lot of genes/isoforms that are irrelevant for an analysis of isoform switches. Examples of such could be single isoform genes or non-expressed isoforms. These extra genes/isoforms will make the downstream analysis take (much) longer than necessary. Therefore we have implemented a pre-filtering step to remove these features before continuing with the analysis. Importantly, filtering can enhance the reliability of the downstream analysis as described in detail below.
+After the pre-processing, IsoformSwitchAnalyzieR performs the differential isoform usage analysis by using **DESXSeq**, which despite originally designed for testing differential exon usage, it has demonstrated to perform exceptionally well for differential isoform usage. DEXSeq uses generalized linear models to assess the significance of observed differences in isoform usage values between conditions, taking into account the biological variation between replicates ({% cite dexseq %}).
 
-By using preFilter() it is possible to remove genes and isoforms from all aspects of the switchAnalyzeRlist by filtering on:
-
-- Multi-isoform genes
-- Gene expression
-- Isoform expression
-- Isoform Fraction (isoform usage)
-- Unwanted isoform classes
-- Unwanted gene biotypes
-- Genes without differential isoform usage
-- Removal of single isoform genes is the default setting in preFilter() since these genes, per definition, cannot have changes in isoform usage.
-
-Filtering on isoform expression allows removal of non-used isoforms that only appear in the switchAnalyzeRlist because they were in the isoform/gene annotation used. Furthermore, the expression filtering allows removal of lowly expressed isoforms where the expression levels might be untrustworthy. 
-
-
-<!-- Needs to be edited! -->
-
-Two major challenges in testing differential isoform usage have been controlling false discovery rates (FDR) and applying effect size cutoffs in experimental setups with confounding effects. Recent studies such as Love at al highlights DEXSeq (developed by Anders et al., see What To Cite — please remember to cite it) as being a good solution as it controls FDR quite well. We have therefore implemented a DEXSeq based test as the default in IsoformSwitchAnalyzeR. This test furthermore utilizes limma to produce effect sizes corrected for confounding effects.
-
-An important argument in isoformSwitchTestDEXSeq is the ‘reduceToSwitchingGenes’. When TRUE this argument will cause the function to reduce/subset the switchAnalyzeRlist to the genes which each contains at least one differential used isoform, as indicated by the alpha and dIFcutoff cutoffs. This option ensures the rest of the workflow runs significantly faster since isoforms from genes without isoform switching are not analyzed.
+> <comment-title>Reduce to switch genes option</comment-title>
+>
+> An important argument is the 'Reduce to switch genes' optin. When enabled, it will reduce/subset  of genes to those which each contains at least one differential used isoform, as indicated by the alpha and dIFcutoff cutoffs. This option ensures the rest of the workflow runs significantly faster since isoforms from genes without IS are not analyzed.
+>
+{: .comment}
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -505,74 +502,124 @@ An important argument in isoformSwitchTestDEXSeq is the ‘reduceToSwitchingGene
 >
 {: .hands_on}
 
-### Importing external sequence analysis and genome-wide analysis
+
+**INCLUDE INFORMATION FROM FAQ**
+
+https://bioconductor.org/packages/release/bioc/vignettes/IsoformSwitchAnalyzeR/inst/doc/IsoformSwitchAnalyzeR.html#what-quantification-tools-should-i-use
+
+## Outward sequence analysis
+
+The next step is to use to use generated FASTA files corresponding to the aminoacid and nucleotide sequences to perform the external analysis tools. In that case, we will use **PfamScan** for predicting protein domains and **CPAT** predicting the coding potential. This informatin will be integrated in the downstream analysis.
+
+> <comment-title>Additional sequence analysis tools</comment-title>
+>
+> Note that **IsoformSwitchAnalyzeR** allows to integrate additional sources, such as prediction of signal peptides (SignalP) and intrinsically disordered regions (IUPred2AIUPred2A or NetSurfP-2). However, those tools are not currenly available in Galaxy, so for this reason we will not make use of them. You can find more information in the [IsoformSwitchAnalyzeR viggette](https://bioconductor.org/packages/release/bioc/vignettes/IsoformSwitchAnalyzeR/inst/doc/IsoformSwitchAnalyzeR.html#advice-for-running-external-sequence-analysis-tools-and-downloading-results).
+>
+{: .comment}
 
 ### Protein domain identification with **PfamScan**
 
-<!-- Needs to be edited! -->
+PfamScan is an open-source tool developed by the EMBL-EBI for identifying protein motifs. It allows to search FASTA sequences against Pfam HMM libraries. This tool requires three input datasets:
 
-PfamScan is used to search a FASTA sequence against a library of Pfam HMM.
+- Pfam-A HMMs in an HMM library searchable with the hmmscan program: Pfam-A.hmm.gz
+- Pfam-A HMM Stockholm file associated with each HMM required for PfamScan: Pfam-A.hmm.dat.gz
+- Active sites datase: active_sites.dat.gz
 
-Pfam is a database of protein families and domains that is widely used to analyse novel genomes, metagenomes and to guide experimental work on particular proteins and systems (1,2). Each Pfam family has a seed alignment that contains a representative set of sequences for the entry. A profile hidden Markov model (HMM) is automatically built from the seed alignment and searched against a sequence database called pfamseq using the HMMER software (http://hmmer.org/). All sequence regions that satisfy a family-specific curated threshold, also known as the gathering threshold, are aligned to the profile HMM to create the full alignment {% cite Mistry2020 %}.
+> <comment-title>Pfam database</comment-title>
+>
+> Pfam is a collection of multiple sequence alignments and profile hidden Markov models (HMMs). Each Pfam profile HMM represents a protein family or domain.  Pfam families are divided into two categories, Pfam-A and Pfam-B. 
+>
+> Pfam-A is a collection of manually curated protein families based on seed alignments, and it is the primary set of families in the Pfam database. Pfam-B is an automatically generated supplement to Pfam-A, containing additional protein families not covered by Pfam-A, derived from clusters produced by MMSeqs2. For most applications, Pfam-A is likely to provide more accurate and interpretable results, but using Pfam-B can be helpful when no Pfam-A matches are found.
+>
+{: .comment}
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Domain identification with PfamScan </hands-on-title>
 >
 > 1. {% tool [PfamScan](toolshed.g2.bx.psu.edu/repos/bgruening/pfamscan/pfamscan/1.6+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Protein sequences FASTA file"*: `isoformAA` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
->    - {% icon param-file %} *"Pfam-A HMM library"*: `output` (Input dataset)
->    - {% icon param-file %} *"Pfam-A HMM Stockholm file"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Pfam-A HMM library"*: `Pfam-A.hmm.gz`
+>    - {% icon param-file %} *"Pfam-A HMM Stockholm file"*: `Pfam-A.hmm.dat.gz`
 >    - *"Predict active site residues"*: `Enabled`
->        - {% icon param-file %} *"Active sites file"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Active sites file"*: `active_sites.dat.gz`
+>
+> 2. Rename the output as `Pfam_domains.tab`.
 >
 {: .hands_on}
 
-### RNA coding probablity prediction with **CPAT**
+### Coding probablity prediction with **CPAT**
 
-<!-- Needs to be edited! -->
+CPAT (Coding-Potential Assessment Tool ) is an open-source alignment-free tool, which uses logistic regression to distinguish between coding and noncoding transcripts on the basis of four sequence features. To achieve this goal, CPAT computes the following four metrics: maximum length of the open reading frame (ORF), ORF coverage, Fickett TESTCODE and Hexamer usage bias.
 
-CPAT is a bioinformatics tool to predict RNA’s coding probability based on the RNA sequence characteristics. To achieve this goal, CPAT calculates scores of these 4 linguistic features from a set of known protein-coding genes and another set of non-coding genes.
+Each of those metrics is computed from a set of known protein-coding genes and another set of non-coding genes. CPAT will then builds a logistic regression model using theses as predictor variables and the “protein-coding status” as the response variable. After evaluating the performance and determining the probability cutoff, the model can be used to predict new RNA sequences.
 
-- ORF size
-- ORF coverage
-- Fickett TESTCODE
-- Hexamer usage bias
+> <details-title>CPAT scores in detail</details-title>
+>
+> CPAT makes use of for predictior variables for performing the coding-potential analysis. The figure 10 shows the scoring distribution between coding and noncoding transcripts for the four metrics.
+>
+> ![figX:CPAT predictor score distributions](../../images/differential_isoform/CPAT_distributions.jpg "Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. (A) ORF size. (B) ORF coverage. (C) Fickett score (TESTCODE statistic). (D) Hexamer usage bias measured by log-likelihood ratio.")
+> 
+> The maximum length of the ORF (figure 10,A) is one of the most fundamental features used to distinguish ncRNA from messenger RNA because a long putative ORF is unlikely to be observed by random chance in noncoding sequences.
+>
+> The ORF coverage (figure 10, B)  is the ratio of ORF to transcript lengths. This feature has demonstrated to have good classification power, and it is highly complementary to, and independent of, the ORF length (some large ncRNAs may contain putative long ORFs by random chance, but usually have much lower ORF coverage than protein-coding RNAs).
+>
+> The Fickett TESTCODE (figure 10, C) distinguishes protein-coding RNA and ncRNA according to the combinational effect of nucleotide composition and codon usage bias. It is independent of the ORF, and when the test region is ≥200 nt in length (which includes most lncRNA), this feature alone can achieve 94% sensitivity and 97% specificity.
+>
+> Finally, the fourth metric is the hexamer usage bias (figure 10, D), determines the relative degree of hexamer usage bias in a particular sequence. Positive values indicate a coding sequence, whereas negative values indicate a noncoding sequence.
+>
+{: .details}
 
-CPAT will then builds a logistic regression model using these 4 features as predictor variables and the “protein-coding status” as the response variable. After evaluating the performance and determining the probability cutoff, the model can be used to predict new RNA sequences.
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [CPAT](toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Query nucletide sequences"*: `isoformNT` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
->    - {% icon param-file %} *"Reference genome"*: `output` (Input dataset)
->    - {% icon param-file %} *"Coding sequences file"*: `output` (Input dataset)
->    - {% icon param-file %} *"Non coding sequeces file"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Reference genome"*: `GRCh38.p13.genome.fa.gz`
+>    - {% icon param-file %} *"Coding sequences file"*: `gencode.v42.pc_transcripts.fa.gz`
+>    - {% icon param-file %} *"Non coding sequeces file"*: `gencode.v42.lncRNA_transcripts.fa.gz`
+> 
 >
 {: .hands_on}
+
+CPAT generates four files:
+
+- No ORF: Sequence IDs or BED entries with no ORF found. Should be considered as non-coding.
+- ORF probabilities (TSV): ORF information (strand, frame, start, end, size, Fickett TESTCODE score, Hexamer score) and coding probability.
+- ORF best probabilities (TSV): The information of the best ORF. This file is a subset of the previous one.
+- ORF sequences (FASTA): The top ORF sequences (at least 75 nucleotides long) in FASTA format.
+
+For the downstream analysis, we will use only the `ORF best probabilities`, but it will require some minor modifications in order to be used as input to **IsoformSwitchAnalyzeR**.
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Remove beginning](https://usegalaxy.eu/root?tool_id=Remove beginning1) %} with the following parameters:
 >    - *"Remove first"*: `1`
->    - {% icon param-file %} *"From"*: `CPAT on data...`
+>    - {% icon param-file %} *"From"*: `ORF best probabilities (TSV)` (output of **CPAT** {% icon tool %})
 >
 > 2. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `Remove beginning on data...`
+>    - {% icon param-file %} *"File to process"*: output of **Remove beginning**
 >    - *"AWK Program"*: `{print i++"\t"$1"\t"$3"\t"$8"\t"$9"\t"$10"\t"$11"\t""-"}`
 >
 > 3. {% tool [Concatenate datasets](https://usegalaxy.eu/root?tool_id=cat1) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: `CPAT_header.tab`
 >    - In *"Dataset"*:
 >       - Click in "*Insert Dataset*"
->    - In *"1: Dataset"*:
->       - {% icon param-file %} *"Select"*: `Text reformatting on...`
+>           - In *"1: Dataset"*:
+>               - {% icon param-file %} *"Select"*: output of **Text reformatting**
 >
 {: .hands_on}
+
+## Isoform switching analysis
 
 If an isoform has a significant change in its contribution to gene expression, there must per definition be reciprocal changes in one (or more) isoforms in the opposite direction, compensating for the change in the first isoform. We utilize this by extracting the isoforms that are significantly differentially used and compare them to the isoforms that are compensating. Using all the information gathered through the workflow described above, the annotation of the isoform(s) used more (positive dIF) can be compared to the isoform(s) used less (negative dIF) and by systematically identify differences annotation we can identify potential function consequences of the isoform switch.
 
 Specifically, IsoformSwitchAnalyzeR contains a function analyzeSwitchConsequences() which extracts the isoforms with significant changes in their isoform usage (defined by the alpha and dIFcutoff parameters, see Identifying Isoform Switches for details) and the isoform, with a large opposite change in isoform usage (also controlled via the dIFcutoff parameters) that compensate for the changes. Note that if an isoform-level test was not used, the gene is require to be significant (defined by the alpha parameter); but, isoforms are then selected purely based on their changes in dIF values.
 
 These isoforms are then divided into the isoforms that increase their contribution to gene expression (positive dIF values larger than dIFcutoff) and the isoforms that decrease their contribution (negative dIF values smaller than -dIFcutoff). The isoforms with increased contribution are then (in a pairwise manner) compared to the isoform with decreasing contribution. In each of these comparisons the isoforms compared are analyzed for differences in their annotation (controlled by the consequencesToAnalyze parameter). Currently 22 different features of the isoforms can be compared, which include features such as intron retention, coding potential, NMD status, protein domains and the sequence similarity of the amino acid sequence of the annotated ORFs. 
+
+### IsoformSwitchAnalyzer genome-wide analysis
+
+A genome-wide analysis is both useful for getting an overview of the extent of isoform switching as well as discovering general patterns. 
+
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -589,22 +636,52 @@ These isoforms are then divided into the isoforms that increase their contributi
 >
 {: .hands_on}
 
-- Global summary statistics, implemented in the extractConsequenceSummary() and extractSplicingSummary() functions, which summarizes the number of switches with predicted consequences and the number of splicing events occurring in the different comparisons, respectively.
-- Analysis of splicing/consequence enrichment, implemented in the extractConsequenceEnrichment() and extractSplicingEnrichment() functions, which analyzes whether a particular consequence/splice type occurs more frequently than the opposite event (e.g. domain loss vs domain gain) in a giving comparison (e.g. WT->KO1).
-- Comparison of enrichment, implemented in extractConsequenceEnrichmentComparison() and extractSplicingEnrichmentComparison() functions, which compares the enrichment of a particular consequence/splice type between comparisons (e.g. compares the changes in WT->KO1 vs WT->KO2)
-- Analysis of genome-wide changes in isoform usage, implemented in extractConsequenceGenomeWide() and extractSplicingGenomeWide() functions, which analyses the genome-wide changes in isoform usage for all isoforms with particular opposite pattern events. This type of analysis is particular interesting if the expected difference between conditions is large, since such effects could result in genome-wide changes. The analysis works by simultaneously analyzing all isoforms with a specific feature (e.g. intron retention) for changes in isoform usage.
+IsoformSwitchAnalyzeR supports this by providing four different summaries/analyses for both the analysis of alternative splicing and isoform switches with predicted consequences. All functions provide a visual overview as well as a data.frame with the summary statistics. The four analysis types supported are:
 
-![figX:Consequences isoform](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "Consequences isoform")
+This functions analyzes the genome wide enrichment of specific consequences by for each set of opposing consequences (e.g.. domain gain vs loss) analyzing the fraction of events belonging to one of them.
 
-![figX:Consequences feature](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png "Consequences features")
+![figX:Consequences isoform](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "extractConsequenceEnrichment")
 
-![figX:Splicing event](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Splicing event")
+Analysis of splicing/consequence enrichment, implemented in the extractConsequenceEnrichment() and extractSplicingEnrichment() functions, which analyzes whether a particular consequence/splice type occurs more frequently than the opposite event (e.g. domain loss vs domain gain) in a giving comparison (e.g. WT->KO1).
 
-![figX:Summary](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Summary")
+This functions function analyzes (the number of and) enrichment of specific splice events by for each set of opposing event (e.g.. exon skipping gain vs loss), by analyzing the fraction of events belonging to each type of consequence. Please note this summarizes the differences between the isoforms in a switch.
 
-![figX:Isoform usage](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "Isoform usage")
+![figX:Splicing event](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "extractSplicingEnrichment")
 
-### Analysis of individual isoform switching
+Which is equivivalent to the consequnce enrichment analysis described above. From this analysis, we see that although the patterns of consequences looked somewhat slimiar (as illustrated above), the underlying consequences are quite different. COAD utilizes alternative 3’ acceptor sites (A3), multiple exon skipping (MES) and alternative transcription start sites (ATSS) while LUAD utilize intron retention (IR) and alternative transcription termination sites (ATTS) more. For more details (and functionality) regarding splicing analysis see the Genome-Wide Analysis of Alternative Splicing section.
+
+This functions function summarizes the individual types of consequences for each gene or the pairwise switches and plots and/or returns a data.frame with the information.
+
+![figX:Consequences feature](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png "extractConsequenceSummary")
+
+From this summary plot many conclusions are possible. First of all, the most frequent changes are changes affecting protein domains and ORFs. Secondly, intron retention is more commonin LUAD than in COAD. Lastly, when considering oppositeconsequence (e.g. the gain vs loss of protein domains) its quite easy to see they are unevenly distributed (e.g. more protein domain loss than protein domain gain). This uneven distribution can be systematically analyzed using the build in enrichment analysis:
+
+This functions function summarizes the individual alternative splicing events for each gene or switches and plots and/or returns a data.frame with the information. Please note this summarizes the overall number of splicing events.
+
+![figX:Isoform usage](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "extractSplicingSummary")
+
+Note that it is possible to both summarize per gene or per isoform via the plotGenes argument and that the asFractionTotal argument enables analysis the fraction (if TRUE) or Number (if FALSE) of significant isoforms/genes which have a particular splice type.
+
+From the summary above, it is quite clear that some of the alternative splicing events are not equally used - most prominently illustrated by the use of ATSS in COAD, where there is (a lot) more gain than losses. To formally analyze this type of uneven alternative splicing usage we have implemented extractSplicingEnrichment(). This function summarizes the uneven usage within each comparison by for each alternative splicing type calculate the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction.
+
+This function enables a genome wide analysis of changes in isoform usage of isoforms with a common annotation.Specifically this function extract isoforms of interest and for each splicing type (such as exon skipping) the global distribution of IF (measuring isoform usage) are plotted for each subset of featuresin that category (e.g with exons skipping vs without exon skipping). This enables a global analysis of isoforms with a common annotation.
+The isoforms of interest can either be defined by isoforms form gene differentially expressed, isoform that are differential expressed or isoforms from genes with isoform switching - as controlled by featureToExtract.
+
+![figX:Summary](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "extractSplicingGenomeWide")
+
+Analysis of genome-wide changes in isoform usage, implemented in extractConsequenceGenomeWide() and extractSplicingGenomeWide() functions, which analyses the genome-wide changes in isoform usage for all isoforms with particular opposite pattern events. This type of analysis is particular interesting if the expected difference between conditions is large, since such effects could result in genome-wide changes. The analysis works by simultaneously analyzing all isoforms with a specific feature (e.g. intron retention) for changes in isoform usage.
+
+From which it can be seen that all isoforms using ATSS is generally used more, meaning it is a global phenomenon, whereas none of the other splice types are general (i.e. they seem to only happen in a specific subset of the data).
+
+Please note that:
+
+The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles (just like the box in a boxplot would).
+The analysis provided by extractSplicingGenomeWide() should only be expected to give a result when splicing is (severely) affected.
+When using the featureToExtract=‘all’ one should not use the reduceToSwitchingGenes=TRUE during the testing of isoform switches (as then it is not all isoforms but only those in genes containing at least one differentially used isoform) - then it will not be ‘all’ isoforms that can be analyzed.
+
+
+
+### Gene-specific isoform switching analysis
 
 > <hands-on-title> Task description </hands-on-title>
 >
