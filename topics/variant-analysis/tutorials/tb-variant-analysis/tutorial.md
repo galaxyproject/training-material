@@ -93,7 +93,7 @@ While one could examine the quality control report for each set of reads (forwar
 
 > <hands-on-title>Combining QC results</hands-on-title>
 >
-> 1. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} to aggregate the raw **FastQC** data of all input datasets into one report
+> 1. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the raw **FastQC** data of all input datasets into one report
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
@@ -291,7 +291,7 @@ Now that we have a collection of *high quality variants* we can search them agai
 Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
 
 > <hands-on-title>Run TB Profiler and TB Variant Report</hands-on-title>
-> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.0+galaxy0) %} with the following parameters
+> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.1+galaxy0) %} with the following parameters
 >   - *"Input File Type"*: `BAM`
 >       - *"Bam"*: `snippy on data XX, data XX, and data X mapped reads (bam)`
 >
@@ -447,7 +447,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >    > {: .solution}
 >    {: .question}
 >
-> 5. Run {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.3+galaxy0) %} on the *snippy on data XX, data XX, and data XX mapped reads (bam)* file. In the output, pay attention to the *sequences*, *reads mapped* and *reads unmapped* results.
+> 5. Run {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.4) %} on the *snippy on data XX, data XX, and data XX mapped reads (bam)* file. In the output, pay attention to the *sequences*, *reads mapped* and *reads unmapped* results.
 >
 > 6. Run the {% tool [BAM Coverage Plotter](toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0) %} on the mapped reads BAM file that you got from **snippy** using the FASTA format reference you made with **seqret** as the reference.
 >
