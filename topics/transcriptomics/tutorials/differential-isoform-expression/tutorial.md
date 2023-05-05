@@ -298,30 +298,18 @@ Now, we will integrate the outputs into **MultiQC**.
 >                    - {% icon param-repeat %} *"Insert STAR output"*
 >                        - *"Type of STAR output?"*: `Log`
 >                            - {% icon param-file %} *"STAR log output"*: `output_log` (output of **RNA STAR** {% icon tool %})
->                    - {% icon param-repeat %} *"Insert STAR output"*
->                        - *"Type of STAR output?"*: `Log`
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `RSeQC`
 >                - In *"RSeQC output"*:
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Infer experiment`
->                            - {% icon param-file %} *"RSeQC infer experiment: configuration output"*: `output` (output of **Infer Experiment** {% icon tool %})
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Infer experiment`
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Read distribution`
+>                            - {% icon param-file %} *"RSeQC infer experiment"*: select **Infer Experiment** files {% icon tool %})
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Read distribution`
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Junction saturation`
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Junction saturation`
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Junction annotation`
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Junction annotation`
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Gene body coverage`
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Gene body coverage`
 >
