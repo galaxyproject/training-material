@@ -208,17 +208,25 @@ In that section makes use of three main tools: **RNA STAR**, considered a state-
 
 **RNA STAR** is a splice-aware RNA-seq alignment tool that allows to identify canonical and non-canonical splice junctions by making use of sequential maximum mappable seed search in uncompressed suffix arrays followed by seed clustering and stitching procedure ({% cite Krianovi2017 %}). One advantage of **RNA STAR** with respect to other tools is that it includes a feature called *two-pass mode*, a framework in which splice junctions are separately discovered and quantified, allowing robustly and accurately identify  splice junction patterns for differential splicing analysis and variant discovery.
 
+> <details-title>RNA STAR two-pass mode</details-title>
+>
+> During two-pass mode splice junctions are discovered in a first alignment pass with high stringency, and are used as annotation in a second pass to permit lower stringency alignment, and therefore higher sensitivity (fig. 3). Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, confering greater read depth and providing significantly more accurate quantification of novel splice junctions that one-pass alignment ({% cite Veeneman2015 %}).
+>
+> ![figX:Sequence quality](../../images/differential_isoform/RNASTAR_twopass_mode.png "Two-pass alignment flowchart. Center and right, stepwise progression of two-pass alignment. First, the genome is indexed with gene annotation. Next, novel splice junctions are discovered from RNA sequencing data at a relatively high stringency (12 nt minimum spanning length). Third, these discovered splice junctions, and expressed annotated splice junctions are used to re-index the genome. Finally, alignment is performed a second time, quantifying novel and annotated splice junctions using the same, relatively lower stringency (3 nt minimum spanning length), producing splice junction expression (source: Veeneman et al., 2016)")
+>
+{: .details}
+
+
+
+The choice of **RNA STAR** as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use **GMAP** as aligment tool ({% cite Krianovi2017 %}). 
+
 > <comment-title>Intron spanning in RNA-seq analysis</comment-title>
 >
 > RNA-seq mappers need to face the challenge associated with intron spanning of mature mRNA molecules, from which introns have been removed by splicing (single short read might align to two locations that are separated by 10 kbp or more). The complexity of this operation can be better understood if we take in account that for a typical human RNA-seq data set using 100-bp reads, more than 35% of the reads will span multiple exons.
 >
 {: .comment}
 
-During two-pass mode splice junctions are discovered in a first alignment pass with high stringency, and are used as annotation in a second pass to permit lower stringency alignment, and therefore higher sensitivity (fig. 3). Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, confering greater read depth and providing significantly more accurate quantification of novel splice junctions that one-pass alignment ({% cite Veeneman2015 %}).
-
-![figX:Sequence quality](../../images/differential_isoform/RNASTAR_twopass_mode.png "Two-pass alignment flowchart. Center and right, stepwise progression of two-pass alignment. First, the genome is indexed with gene annotation. Next, novel splice junctions are discovered from RNA sequencing data at a relatively high stringency (12 nt minimum spanning length). Third, these discovered splice junctions, and expressed annotated splice junctions are used to re-index the genome. Finally, alignment is performed a second time, quantifying novel and annotated splice junctions using the same, relatively lower stringency (3 nt minimum spanning length), producing splice junction expression (source: Veeneman et al., 2016)")
-
-The choice of **RNA STAR** as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use **GMAP** as aligment tool ({% cite Krianovi2017 %}). So, let's perform the mapping step.
+So, let's perform the mapping step.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -232,6 +240,8 @@ The choice of **RNA STAR** as mapper is also determined by the sequencing techno
 >    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, perform single-sample 2-pass mapping of all reads`
 >
 {: .hands_on}
+
+
 
 Before moving to the transcriptome assembly and quantification step, we are going to use **RSeQC** in order to obtain some RNA-seq-specific quality control metrics.
 
@@ -366,7 +376,7 @@ After evaluating the quality of the RNA-seq data, we can start with the transcri
 
 StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts. It uses a network flow algorithm to reconstruct transcripts and quantitate them simultaneously. This algorithm is combined with an assembly method to merge read pairs into full fragments in the initial phase ({% cite Kovaka2019 %}, {% cite Pertea2015 %}).
 
-> <comment-title>StringTie algorithm details</comment-title>
+> <comment-title>StringTie algorithm</comment-title>
 >
 > StringTie first groups the reads into clusters, collapsing the reads that align to the identical location on the genome and keeping a count of how many alignments were collapsed,  then creates a splice graph for each cluster from which it identifies transcripts, and then for each transcript it creates a separate flow network to estimate its expression level using a maximum flow algorithm ({% cite Pertea2015 %}) (figure 10).
 >
@@ -712,6 +722,23 @@ In addition, it provides a RData object and three collections of plots: isoform 
 #### Analysis of splicing enrichment
 
 
+Alternative splicing events are classified for each isoform comparing it to the hypothetical pre-RNA generated by combining all the exons within a gene. 
+
+> <comment-title>Intepretation of splicing events</comment-title>
+>
+> The events are interpretated as follows:
+>
+> - ES: Exon Skipping. Compared to the hypothetical pre-RNA a single exon was skipped in the isoform analyzed.
+> - MEE: Mutually exclusive exon. Special case were two isoforms form the same gene contains two mutually exclusive exons and which are not found in any of the other isoforms from that gene.
+> - MES: Multiple Exon Skipping. Compared to the hypothetical pre-RNA multiple consecutive exon was skipped in the isoform analyzed.
+> - IR: Intron Retention. Compared to the hypothetical pre-RNA an intron was retained in the isoform analyzed.
+> - A5: Alternative 5’end donor site. Compared to the hypothetical pre-RNA an alternative 5’end donor site was used. Since it is compared to the pre-RNA, the donor site used is per definition more upstream than the the pre-RNA (the upstream exon is shorter).
+> - A3: Alternative 3’end acceptor site. Compared to the hypothetical pre-RNA an alternative 3’end acceptor site was used. Since it is compared to the pre-RNA, the donor site used is per definition more downstream than the the pre-RNA (the downstream exon is shorter).
+> - ATSS: Alternative Transcription Start Sites. Compared to the hypothetical pre-RNA an alternative transcription start sites was used. Since it is compared to the pre-RNA, the ATSS site used is per definition more downstream than the the pre-RNA.
+> - ATTS: Alternative Transcription Termination Sites. Compared to the hypothetical pre-RNA an alternative transcription Termination sites was used. Since it is compared to the pre-RNA, the ATTS site used is per definition more upstream than the the pre-RNA.
+>
+{: .comment}
+
 ![figX:Isoform usage](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "extractSplicingSummary")
 
 <!-- NEED TO BE MODIFIED
@@ -723,42 +750,11 @@ This function enables a genome wide analysis of changes in isoform usage of isof
 The isoforms of interest can either be defined by isoforms form gene differentially expressed, isoform that are differential expressed or isoforms from genes with isoform switching - as controlled by featureToExtract.
 -->
 
-First, we will evaluate the results corresponding to the consequence enrichment analysis. IsoformSwitchAnalyzeR analyzes the genome wide enrichment of specific consequences by for each set of opposing consequences. 
+Now, we will analyze the enrichment of specific splice events. 
 
-![figX:Splicing event](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "Enrichment/depletion in isoform switch consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
+![figX:Splicing event](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "extractSplicingEnrichment")
 
-According with the plot, the difference in intron retention is statistically significant; it means that the probability of a specific intron to remain unspliced in the mature polyadenylated mRNA in cancer tissues is higher than in health tissues.
-
-> <question-title></question-title>
->
-> What is the adjusted P-value corresponding to the Intron retention gain/lost feature test?
->
->   > <comment-title>Consequences enrichment dataset</comment-title>
->   >
->   > The consequences enrichment tabular dataset includes the following columns:
->   >
->   > - conseqPair: The set of oposite consequences considered.
->   > - feature: Description of the functional consequence
->   > - propOfRelevantEvents: Proportion of total number of genes being of the type described in the feature column.
->   > - propCiLo: The lower boundary of the confidence interval.
->   > - propCiHi: The high boundary of the confidence interval.
->   > - propPval: The p-value associated with the null hypothesis.
->   > - nUp: The number of genes with the consequence described in the feature column.
->   > - nDown: The number of genes with the opposite consequence of what is described in the feature column.
->   > - propQval: The adjusted P-value resulting when p-values are corrected using FDR (BenjaminiHochberg).
->   >
->   {: .comment}
->
-> > <solution-title></solution-title>
-> >
-> > This information can be found in the eighth column of the Consequences enrichment dataset 
-> >
-> > ![figX:Consequences isoform](../../images/differential_isoform/consequences_dataset.png "Consequences enrichment.")
-> >
-> > In that case, the adjusted P-value is 0.030291725471751.
-> >
-> {: .solution}
-{: .question}
+We can see that despite the probablity of intron retention is higher in cancer, health tissues utilizes alternative 3’ acceptor sites (A3) and alternative 5’ acceptor sites (A5) more.
 
 
 #### Analysis of consequence enrichment
@@ -788,26 +784,44 @@ This is simply done by, in addition to running analyzeSwitchConsequences with th
 ‘tts’ — which will analyze the isoforms for aTSS
 -->
 
-Now, we will analyze the enrichment of specific splice events. Alternative splicing events are classified for each isoform comparing it to the hypothetical pre-RNA generated by combining all the exons within a gene. 
+First, we will evaluate the results corresponding to the consequence enrichment analysis. IsoformSwitchAnalyzeR analyzes the genome wide enrichment of specific consequences by for each set of opposing consequences. 
 
-> <comment-title>Intepretation of splicing events</comment-title>
->
-> The events are interpretated as follows:
->
-> - ES: Exon Skipping. Compared to the hypothetical pre-RNA a single exon was skipped in the isoform analyzed.
-> - MEE: Mutually exclusive exon. Special case were two isoforms form the same gene contains two mutually exclusive exons and which are not found in any of the other isoforms from that gene.
-> - MES: Multiple Exon Skipping. Compared to the hypothetical pre-RNA multiple consecutive exon was skipped in the isoform analyzed.
-> - IR: Intron Retention. Compared to the hypothetical pre-RNA an intron was retained in the isoform analyzed.
-> - A5: Alternative 5’end donor site. Compared to the hypothetical pre-RNA an alternative 5’end donor site was used. Since it is compared to the pre-RNA, the donor site used is per definition more upstream than the the pre-RNA (the upstream exon is shorter).
-> - A3: Alternative 3’end acceptor site. Compared to the hypothetical pre-RNA an alternative 3’end acceptor site was used. Since it is compared to the pre-RNA, the donor site used is per definition more downstream than the the pre-RNA (the downstream exon is shorter).
-> - ATSS: Alternative Transcription Start Sites. Compared to the hypothetical pre-RNA an alternative transcription start sites was used. Since it is compared to the pre-RNA, the ATSS site used is per definition more downstream than the the pre-RNA.
-> - ATTS: Alternative Transcription Termination Sites. Compared to the hypothetical pre-RNA an alternative transcription Termination sites was used. Since it is compared to the pre-RNA, the ATTS site used is per definition more upstream than the the pre-RNA.
->
-{: .comment}
+![figX:Splicing event](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "Enrichment/depletion in isoform switch consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
 
-![figX:Splicing event](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "extractSplicingEnrichment")
+According with the plot, the difference in intron retention is statistically significant; it means that the probability of a specific intron to remain unspliced in the mature polyadenylated mRNA in cancer tissues is higher than in health tissues.
 
-We can see that despite the probablity of intron retention is higher in cancer, health tissues utilizes alternative 3’ acceptor sites (A3) and alternative 5’ acceptor sites (A5) more.
+> <question-title></question-title>
+>
+> What is the adjusted P-value corresponding to the Intron retention gain/lost feature test?
+>
+>   > <details-title>Consequences enrichment dataset</details-title>
+>   >
+>   > The consequences enrichment tabular dataset includes the following columns:
+>   >
+>   > - conseqPair: The set of oposite consequences considered.
+>   > - feature: Description of the functional consequence
+>   > - propOfRelevantEvents: Proportion of total number of genes being of the type described in the feature column.
+>   > - propCiLo: The lower boundary of the confidence interval.
+>   > - propCiHi: The high boundary of the confidence interval.
+>   > - propPval: The p-value associated with the null hypothesis.
+>   > - nUp: The number of genes with the consequence described in the feature column.
+>   > - nDown: The number of genes with the opposite consequence of what is described in the feature column.
+>   > - propQval: The adjusted P-value resulting when p-values are corrected using FDR (BenjaminiHochberg).
+>   >
+>   {: .details}
+>
+> > <solution-title></solution-title>
+> >
+> > This information can be found in the eighth column of the Consequences enrichment dataset 
+> >
+> > ![figX:Consequences isoform](../../images/differential_isoform/consequences_dataset.png "Consequences enrichment.")
+> >
+> > In that case, the adjusted P-value is 0.030291725471751.
+> >
+> {: .solution}
+{: .question}
+
+
 
 
 #### Analysis of genome-wide changes in isoform usage
