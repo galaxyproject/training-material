@@ -47,34 +47,6 @@ Many packages are available for the analysis of GC-MS or LC-MS data - for more d
 
 To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition (centroid and profile) or resolution (from low to high resolution), including FT-MS data coupled with a different kind of chromatography (liquid or gas). We use it to detect chromatographic peaks within our samples. Once we have detected them, they need to be deconvoluted into spectra representing chemical compounds. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of deconvoluted spectra in our sample, we compute the retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to a well-defined list of reference compound (commonly alkanes) analyzed on the same GC column. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using **matchms** ({% cite Huber2020 %}), resulting in a table of identified compounds weighted by a matching score.
 
-> <details-title> Skip data preprocessing and peak detection using XCMS </details-title>
-> 
-> Since the following two steps, data preprocessing and peak detection using **XCMS**, are already covered in a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html), it is possible to skip them. Instead, you can start with [Peak detection using XCMS]({{ site.baseurl }}/topics/metabolomics/tutorials/gc_ms_with_xcms/tutorial.html#peak-detection-using-xcms) step using a preprocessed **XCMS** object file prepared for you.
->
-> > <hands-on-title> Upload data </hands-on-title>
-> >
-> > 1. Create a new history for this tutorial
-> >
-> >    {% snippet faqs/galaxy/histories_create_new.md %}
-> >
-> > 2. Import the following files from [Zenodo]({{ page.zenodo_link }}):
-> >
-> >    ```
-> >    https://zenodo.org/record/7890956/files/XCMS_object.rdata.xcms.fillpeaks
-> >    https://zenodo.org/record/7890956/files/reference_alkanes.csv
-> >    https://zenodo.org/record/7890956/files/reference_spectral_library.msp
-> >    ```
-> >
-> >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
-> >
-> >    Please pay attention to the format of all uploaded files, and make sure they were correctly imported. The format of **XCMS** object is `rdata.xcms.fillpeaks`.
-> >
-> >    {% snippet faqs/galaxy/datatypes_understanding_datatypes.md %}
-> >
-> {: .hands_on}
->
-{: .details}
-
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -183,6 +155,34 @@ The first part of data processing is using the **XCMS** tool to detect peaks in 
 # Peak detection using XCMS
 
 The first step in the workflow is to detect the peaks in our data using **XCMS**. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can also be followed for our GC-MS data. Therefore, in this section, we do not explain this part of the workflow in detail but rather refer the reader to the dedicated tutorial. Please also pay attention to the parameter values for individual Galaxy tools, as these can differ from the referred tutorial and are adjusted to our dataset.
+
+> <details-title> Skip this step </details-title>
+> 
+> Since this step is already covered in a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html), it is possible to skip it. Instead, you can continue with [Peak deconvolution]({{ site.baseurl }}/topics/metabolomics/tutorials/gc_ms_with_xcms/tutorial.html#peak-deconvolution) step using a preprocessed **XCMS** object file prepared for you.
+>
+> > <hands-on-title> Upload data </hands-on-title>
+> >
+> > 1. Create a new history for this tutorial
+> >
+> >    {% snippet faqs/galaxy/histories_create_new.md %}
+> >
+> > 2. Import the following files from [Zenodo]({{ page.zenodo_link }}):
+> >
+> >    ```
+> >    https://zenodo.org/record/7890956/files/XCMS_object.rdata.xcms.fillpeaks
+> >    https://zenodo.org/record/7890956/files/reference_alkanes.csv
+> >    https://zenodo.org/record/7890956/files/reference_spectral_library.msp
+> >    ```
+> >
+> >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+> >
+> >    Please pay attention to the format of all uploaded files, and make sure they were correctly imported. The format of **XCMS** object is `rdata.xcms.fillpeaks`.
+> >
+> >    {% snippet faqs/galaxy/datatypes_understanding_datatypes.md %}
+> >
+> {: .hands_on}
+>
+{: .details}
 
 ## Peak picking
 
