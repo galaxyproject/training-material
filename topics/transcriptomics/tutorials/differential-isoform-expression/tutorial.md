@@ -801,12 +801,15 @@ This is simply done by, in addition to running analyzeSwitchConsequences with th
 
 ![figX:Isoform usage](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "extractSplicingSummary")
 
+<!-- NEED TO BE MODIFIED
 Note that it is possible to both summarize per gene or per isoform via the plotGenes argument and that the asFractionTotal argument enables analysis the fraction (if TRUE) or Number (if FALSE) of significant isoforms/genes which have a particular splice type.
 
 From the summary above, it is quite clear that some of the alternative splicing events are not equally used - most prominently illustrated by the use of ATSS in COAD, where there is (a lot) more gain than losses. To formally analyze this type of uneven alternative splicing usage we have implemented extractSplicingEnrichment(). This function summarizes the uneven usage within each comparison by for each alternative splicing type calculate the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction.
 
 This function enables a genome wide analysis of changes in isoform usage of isoforms with a common annotation.Specifically this function extract isoforms of interest and for each splicing type (such as exon skipping) the global distribution of IF (measuring isoform usage) are plotted for each subset of featuresin that category (e.g with exons skipping vs without exon skipping). This enables a global analysis of isoforms with a common annotation.
 The isoforms of interest can either be defined by isoforms form gene differentially expressed, isoform that are differential expressed or isoforms from genes with isoform switching - as controlled by featureToExtract.
+-->
+
 
 #### Analysis of genome-wide changes in isoform usage
 
@@ -829,12 +832,11 @@ One advantage of the Isoform Switch Analysis Plot is that it contains all inform
 To facilitate such screening we have implemented switchPlotTopSwitches() which will extract the top n genes (controlled by the n argument) with significant switches (as defined by alpha and dIFcutoff) and output a pdf or png version of the corresponding switch plot to the directory given by the pathToOutput argument. The function automatically ranks (by p-value or switch size) the switches and supports to either filter for isoform switches with predicted functional consequences or to output those with and those without consequences to separate folders.
 -->
 
-
-
-
-
 # Conclusion
 
+<!-- NEED TO BE MODIFIED
 Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. This means that the potential of existing RNA-seq data is untapped, and as a consequence, our general understanding of differential isoform usage is poor. The few efforts at analyzing individual isoform switches have typically dealt with isoforms by describing their frequent occurrence rather than trying to systematically predict their consequence. Overall, this is unsatisfying, as isoform usage is important in disease and especially cancer, where many individual isoform switches have been described {% cite VittingSeerup2017 %}.
 
 Here we present methods for the statistical identification and analysis of isoform switches with predicted functional consequences {% cite VittingSeerup2017 %}.
+
+-->
