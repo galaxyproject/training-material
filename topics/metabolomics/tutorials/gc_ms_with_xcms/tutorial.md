@@ -383,7 +383,7 @@ We use the package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/ria
 
 > <hands-on-title> Retention index calculation </hands-on-title>
 >
-> 1. {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} with the following parameters:
+> 1. {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.4+galaxy1) %} with the following parameters:
 >    - In *"Query dataset"*:
 >        - {% icon param-file %} *"Query compound list"*: `Mass spectra from RAMClustR` (output of **RAMClustR** {% icon tool %})
 >    - In *"Reference dataset"*:
