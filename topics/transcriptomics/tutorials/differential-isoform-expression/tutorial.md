@@ -206,7 +206,7 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 >            - *"Qualified quality phred"*: `20`
 > 2. Rename the output as `Trimmed health collection`
 >
-> 3. Repeat the procude with the `cancer collection` dataset.
+> 3. Repeat the procude with the `Cancer collection` dataset.
 >
 {: .hands_on}
 
@@ -301,20 +301,20 @@ Once all required outputs have been generated, we will integrate them by using *
 >
 > 2. {% tool [Gene body coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input BAM file"*: `Mapped health collection`
->    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` (output of **Convert GTF to BED12** {% icon tool %})
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >
 > 3. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` (output of **Convert GTF to BED12** {% icon tool %})
+>    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection`
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` 
 >    - *"Output R-Script"*: `Yes`
 >
 > 4. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` (output of **Convert GTF to BED12** {% icon tool %})
+>    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection` 
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` 
 >
 > 5. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` (output of **Convert GTF to BED12** {% icon tool %})
+>    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection`
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >
 > 6. Repeat the previous steps with he `Cancer health collection` dataset
 >
@@ -331,25 +331,25 @@ Now, we will integrate the outputs into **MultiQC**.
 >                - In *"STAR output"*:
 >                    - {% icon param-repeat %} *"Insert STAR output"*
 >                        - *"Type of STAR output?"*: `Log`
->                            - {% icon param-file %} *"STAR log output"*: `output_log` (output of **RNA STAR** {% icon tool %})
+>                            - {% icon param-file %} *"STAR log output"*: `log` collections
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `RSeQC`
 >                - In *"RSeQC output"*:
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Infer experiment`
->                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **Infer Experiment** files {% icon tool %})
+>                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **RNA-seq experiment contiguration** collections
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Read distribution`
->                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **Read Distribution** files {% icon tool %})
+>                            - {% icon param-collection %} *"RSeQC read distribution: stats output"*: select **stat** collections
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Junction saturation`
->                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **Infer Experiment** files {% icon tool %})
+>                            - {% icon param-collection %} *"RSeQC junction saturation: junction saturation plot Rscript file*: select **Rscript** collections
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Junction annotation`
->                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **Infer Experiment** files {% icon tool %})
+>                            - {% icon param-collection %} *"RSeQC junction annotation: stats file"*: select **stats** collections
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Gene body coverage`
->                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **Infer Experiment** files {% icon tool %})
+>                            - {% icon param-collection %} *"RSeQC gene body coverage: stats file"*: select **stats** collections
 >
 {: .hands_on}
 
@@ -429,10 +429,10 @@ Despite in this training we make us of RNA STAR as mapping tool, it is possible 
 >
 > 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
->        - {% icon param-file %} *"Input short mapped reads"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+>        - {% icon param-file %} *"Input short mapped reads"*: `Mapped health collection`
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
 >        - *"Reference file"*: `Use a file from history`
->            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `output` (Input dataset)
+>            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `gencode.v43.annotation.gtf.gz`
 >        - *"Use Reference transcripts only?"*: `Yes`
 >        - *"Output files for differential expression?"*: `Ballgown`
 >
@@ -545,7 +545,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 >
 > 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0) %} with the following parameters:
 >    - *"Tool function mode"*: `Analysis part one: Extract isoform switches and their sequences`
->        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `SwitchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >
 >   > <comment-title>Reduce to switch genes option</comment-title>
 >   >
@@ -585,7 +585,7 @@ PfamScan is an open-source tool developed by the EMBL-EBI for identifying protei
 > <hands-on-title> Domain identification with PfamScan </hands-on-title>
 >
 > 1. {% tool [PfamScan](toolshed.g2.bx.psu.edu/repos/bgruening/pfamscan/pfamscan/1.6+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Protein sequences FASTA file"*: `isoformAA` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>    - {% icon param-file %} *"Protein sequences FASTA file"*: `aminoacid sequences` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >    - {% icon param-file %} *"Pfam-A HMM library"*: `Pfam-A.hmm.gz`
 >    - {% icon param-file %} *"Pfam-A HMM Stockholm file"*: `Pfam-A.hmm.dat.gz`
 >    - *"Predict active site residues"*: `Enabled`
@@ -621,7 +621,7 @@ Each of those metrics is computed from a set of known protein-coding genes and a
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [CPAT](toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Query nucletide sequences"*: `isoformNT` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>    - {% icon param-file %} *"Query nucletide sequences"*: `Nucleotide sequences` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >    - {% icon param-file %} *"Reference genome"*: `GRCh38.p13.genome.fa.gz`
 >    - {% icon param-file %} *"Coding sequences file"*: `gencode.v42.pc_transcripts.fa.gz`
 >    - {% icon param-file %} *"Non coding sequeces file"*: `gencode.v42.lncRNA_transcripts.fa.gz`
@@ -678,11 +678,11 @@ The gene-specific mode is interesting for those experimental designs which aim t
 >    - *"Tool function mode"*: `Analysis part two: Plot all isoform switches and their annotation`
 >        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >        - *"Analysis mode"*: `Analyze specific gene`
->        - *"Gene name"*: `Example name`
+>        - *"Gene name"*: `RGMB`
 >        - *"Include prediction of coding potential information"*: `CPAT`
->            - {% icon param-file %} *"CPAT result file"*: `orf_seqs_prob_best` (output of **CPAT** {% icon tool %})
+>            - {% icon param-file %} *"CPAT result file"*: `ORF best probabilities (TSV)` (output of **CPAT** {% icon tool %})
 >        - *"Include Pfam information"*: `Enabled`
->            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `output` (output of **PfamScan** {% icon tool %})
+>            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: output of **PfamScan** {% icon tool %})
 >        - *"Include SignalP results"*: `Disabled`
 >        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
 >
