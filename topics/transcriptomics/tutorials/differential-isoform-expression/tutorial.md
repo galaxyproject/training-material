@@ -151,24 +151,28 @@ Once we have got the datasets, we can start with the analysis. The first step is
 >   >
 >   > 1. {% tool [FASTQ interlacer](toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0) %} with the following parameters:
 >   >    - *"Type of paired-end datasets"*: `1 paired dataset collection`
->   >        - {% icon param-collection %} *"Paired-end reads collection"*: `output` (Input dataset collection)
+>   >        - {% icon param-collection %} *"Paired-end reads collection"*: `Health collection`
 >   >
 >   > 2. Repeat the previos step
 >   >
 >   > 3. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->   >    - {% icon param-file %} *"Raw read data from your current history"*: `outfile_pairs_from_coll` (output of **FASTQ interlacer** {% icon tool %})
+>   >    - {% icon param-file %} *"Raw read data from your current history"*: output of **FASTQ interlacer** {% icon tool %}
 >   >
 >   > 4. Repeat the previous step
 >   >
+>   > 5. Repeat the previous procidure with the `Cancer collection`
 >   >
->   > 5. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
+>   > 6. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
 >   >    - In *"Results"*:
 >   >        - {% icon param-repeat %} *"Insert Results"*
 >   >            - *"Which tool was used generate logs?"*: `FastQC`
 >   >                - In *"FastQC output"*:
 >   >                    - {% icon param-repeat %} *"Insert FastQC output"*
->   >                        - {% icon param-file %} *"FastQC output"*: `text_file` (output of **FastQC** {% icon tool %})
+>   >                        - {% icon param-file %} *"FastQC output"*: `RawData` from the **Health collection** (output of **FastQC** {% icon tool %})
+>   >                    - {% icon param-repeat %} *"Insert FastQC output"*
+>   >                        - {% icon param-file %} *"FastQC output"*: `RawData` from the **Cancer collection** (output of **FastQC** {% icon tool %})
 >   >    - *"Report title"*: `Raw data QC`
+>   >
 >   >
 >   {: .hands_on}
 >
@@ -187,11 +191,11 @@ Once we have got the datasets, we can start with the analysis. The first step is
 
 In order to remove the adaptors we will make use of **fastp**, which is able to detect the adapter sequence by performing a per-read overlap analysis, so we won't even need to specify the adapter sequences. 
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title>Pre-process reads with fastp</hands-on-title>
 >
-> {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
+> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`
->        - {% icon param-collection %} *"Select paired collection(s)"*: `output` (Input dataset collection)
+>        - {% icon param-collection %} *"Select paired collection(s)"*: `Heath collection`
 >        - In *"Global trimming options"*:
 >            - *"Trim front for input 1"*: `10`
 >    - In *"Overrepresented Sequence Analysis"*:
@@ -200,6 +204,9 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 >    - In *"Filter Options"*:
 >        - In *"Quality filtering options"*:
 >            - *"Qualified quality phred"*: `20`
+> 2. Rename the output as `Trimmed health collection`
+>
+> 3. Repeat the procude with the `cancer collection` dataset.
 >
 {: .hands_on}
 
@@ -243,15 +250,18 @@ So, let's perform the mapping step.
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy1) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
->        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `output_paired_coll` (output of **fastp** {% icon tool %})
+>        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed health collection` (output of **fastp** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
->        - {% icon param-file %} *"Select a reference genome"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.genome.fa.gz`
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
->            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `output` (Input dataset)
+>            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `gencode.v43.annotation.gtf.gz`
 >    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, perform single-sample 2-pass mapping of all reads`
 >
+> 2. Rename the output as `Mapped health collection`
+>
+> 3. Repeat the procedure with the `Cancer collection` dataset.
+>
 {: .hands_on}
-
 
 
 Before moving to the transcriptome assembly and quantification step, we are going to use **RSeQC** in order to obtain some RNA-seq-specific quality control metrics.
@@ -262,12 +272,14 @@ RNA-seq-specific quality control metrics, such as sequencing depth, read distrib
 
 In this section we will make use of of the **RSeQC** toolkit in order to generate the RNA-seq-specific quality control metrics. But before starting, we need to convert the annotation GTF file into BED12 format, which will be required in subsequent steps.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title>GTF to BED12 GTF conversion</hands-on-title>
 >
 > 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} with the following parameters:
->    - {% icon param-file %} *"GTF File to convert"*: `output` (Input dataset)
+>    - {% icon param-file %} *"GTF File to convert"*: `gencode.v43.annotation.gtf.gz`
 >    - *"Advanced options"*: `Set advanced options`
 >        - *"Ignore groups without exons"*: `Yes`
+> 
+> 2. Rename the output as `BED12 annotation`
 >
 {: .hands_on}
 
@@ -281,29 +293,30 @@ We are going to use the following RSeQC modules:
 
 Once all required outputs have been generated, we will integrate them by using **MultiQC** in order to interpretate the results.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Raw reads QC</hands-on-title>
 >
 > 1. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
+>    - {% icon param-file %} *"Input BAM file"*: `Mapped health collection`
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >
 > 2. {% tool [Gene body coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
+>    - {% icon param-file %} *"Input BAM file"*: `Mapped health collection`
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` (output of **Convert GTF to BED12** {% icon tool %})
 >
 > 3. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
->    - *"Sampling bounds and frequency"*: `Default sampling bounds and frequency`
+>    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection` (output of **RNA STAR** {% icon tool %})
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` (output of **Convert GTF to BED12** {% icon tool %})
 >    - *"Output R-Script"*: `Yes`
 >
 > 4. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
+>    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection` (output of **RNA STAR** {% icon tool %})
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` (output of **Convert GTF to BED12** {% icon tool %})
 >
 > 5. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
+>    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection` (output of **RNA STAR** {% icon tool %})
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` (output of **Convert GTF to BED12** {% icon tool %})
+>
+> 6. Repeat the previous steps with he `Cancer health collection` dataset
 >
 {: .hands_on}
 
@@ -324,15 +337,19 @@ Now, we will integrate the outputs into **MultiQC**.
 >                - In *"RSeQC output"*:
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Infer experiment`
->                            - {% icon param-file %} *"RSeQC infer experiment"*: select **Infer Experiment** files {% icon tool %})
+>                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **Infer Experiment** files {% icon tool %})
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Read distribution`
+>                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **Read Distribution** files {% icon tool %})
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Junction saturation`
+>                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **Infer Experiment** files {% icon tool %})
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Junction annotation`
+>                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **Infer Experiment** files {% icon tool %})
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Gene body coverage`
+>                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **Infer Experiment** files {% icon tool %})
 >
 {: .hands_on}
 
