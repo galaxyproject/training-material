@@ -319,6 +319,41 @@ Illumina RNAseq PE | Paired-end data derived from RNAseq experiments | **bwa-mem
 Illumina ARTIC | Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %}
 ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols | **minimap2** {% cite li_2018 %} | **medaka**
 
+> <hands-on-title>Import the workflow for your data into Galaxy</hands-on-title>
+>
+> All workflows developed as part of the Galaxy Covid-19 project can be retrieved via either of the two popular workflow registries [Dockstore](https://dockstore.org/) and [WorkflowHub](https://workflowhub.eu/), the choice is up to you, and Galaxy makes this process really easy for you.
+>
+> {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' box_type="none" %}
+>
+> *IWC* (the intergalactic workflow commission) is the organization that the Galaxy Covid-19 project uses to publish its workflows, and the name restriction makes sure we are only getting workflows from that organization that deal with SARS-CoV-2 data analysis.
+>
+> Depending on your input data you will need to select the appropriate workflow from the list of hits returned by the workflow registry server.
+> This would be:
+> - **sars-cov-2-pe-illumina-artic-variant-calling/COVID-19-PE-ARTIC-ILLUMINA**
+>
+>   if you are working with the suggested batch of samples for this tutorial, or if your own data is tiled-amplicon data sequenced on the Illumina platform in paired-end mode
+>
+>   Once imported into Galaxy, this workflow appear under the name: **COVID-19: variation analysis on ARTIC PE data**.
+> - **sars-cov-2-ont-artic-variant-calling/COVID-19-ARTIC-ONT**
+>
+>   if you are working with tiled-amplicon data sequenced on the ONT platform
+>
+>   Once imported into Galaxy, this workflow appear under the name: **COVID-19: variation analysis of ARTIC ONT data**.
+> - **sars-cov-2-pe-illumina-wgs-variant-calling/COVID-19-PE-WGS-ILLUMINA**
+>
+>   if you are working with WGS (i.e. non-ampliconic) data obtained on the Illumina platform in paired-end mode
+>
+>   Once imported into Galaxy, this workflow appear under the name: **COVID-19: variation analysis on WGS PE data**.
+> - **sars-cov-2-se-illumina-wgs-variant-calling/COVID-19-SE-WGS-ILLUMINA**
+>
+>   if you are working with WGS data obtained on the Illumina platform in single-end mode
+>
+>   Once imported into Galaxy, this workflow appear under the name: **COVID-19: variation analysis on WGS SE data**.
+>
+> In all cases, the latest version of the workflow should be fine to use in this tutorial.
+>
+{: .hands-on}
+
 > <details-title>About the workflows</details-title>
 >
 > - The two Illumina RNASeq workflows (Illumina RNAseq SE and Illumina RNAseq PE) perform read mapping with **bwa-mem** and **bowtie2**, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq**.
@@ -329,60 +364,65 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 >
 {: .details}
 
+{% include _includes/cyoa-choices.html option1="tiled-amplicon Illumina paired-end" option2="tiled-amplicon ONT" option3="WGS Illumina paired-end" option4="WGS Illumina single-end" default="tiledamplicon-Illumina-pairedend" text="Now that you have imported the data and the corresponding workflow of your choice, please select the type of your input data so that we can adjust a few parts of this tutorial that are dependent on the nature of your data:" %}
+
 > <hands-on-title>From FASTQ to annotated AVs</hands-on-title>
 >
-> 1. **Get the workflow** for your data into Galaxy 
+> <div class="tiledamplicon-Illumina-pairedend" markdown="1">
 >
->    All workflows developed as part of the Galaxy Covid-19 project can be retrieved via the two popular workflow registries [Dockstore](https://dockstore.org/) and [WorkflowHub](https://workflowhub.eu/), and Galaxy makes this process really easy for you.
+> 1. Run the **COVID-19: variation analysis on ARTIC PE data** {% icon workflow %} workflow using the following parameters:
 >
->    {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' box_type="none" %}
+>    - {% icon param-collection %} *"Paired Collection"*: your paired collection of input sequencing data
+>    - {% icon param-file %} *"NC_045512.2 FASTA sequence of SARS-CoV-2"*: the `SARS-CoV-2 reference` sequence
+>    - {% icon param-file %} *"ARTIC primer BED"*: the uploaded primer scheme in **bed** format
+>    - {% icon param-file %} *"ARTIC primers to amplicon assignments"*: the uploaded amplicon info in **tabular** format
 >
->    *IWC* (the intergalactic workflow commission) is the organization that the Galaxy Covid-19 project uses to publish its workflows, and the name restriction makes sure we are only getting workflows from that organization that deal with SARS-CoV-2 data analysis.
+>      A common mistake here is to mix up the previous two datasets: the *primer BED* dataset is the one with the positions of the primer binding sites listed in it. The *amplicon assignments* dataset contains only (grouped) names of primers.
 >
->    Depending on your input data you will need to select the appropriate workflow from the list of hits returned by the workflow registry server.
->    This would be:
->    - **sars-cov-2-pe-illumina-artic-variant-calling/COVID-19-PE-ARTIC-ILLUMINA**
+>    The additional workflow parameters *"Read removal minimum AF"*, *"Read removal maximum AF"*, *"Minimum DP required after amplicon bias correction"* and *"Minimum DP_ALT required after amplicon bias correction"* can all be left at their default values.
+> </div>
+> <div class="tiledamplicon-ONT" markdown="1">
 >
->      if you are working with the suggested batch of samples for this tutorial, or if your own data is tiled-amplicon data sequenced on the Illumina platform in paired-end mode
->    - **sars-cov-2-ont-artic-variant-calling/COVID-19-ARTIC-ONT**
+> 1. Run the **COVID-19: variation analysis of ARTIC ONT data** {% icon workflow %} workflow using the following parameters:
 >
->      if you are working with tiled-amplicon data sequenced on the ONT platform
->    - **sars-cov-2-pe-illumina-wgs-variant-calling/COVID-19-PE-WGS-ILLUMINA**
+>    - {% icon param-collection %} *"ONT-sequenced reads"*: your collection of input sequencing data
+>    - {% icon param-file %} *"NC_045512.2 FASTA sequence of SARS-CoV-2"*: the `SARS-CoV-2 reference` sequence
+>    - {% icon param-file %} *"Primer binding sites info in BED format"*: the uploaded primer scheme in **bed** format
 >
->      if you are working with WGS data obtained on the Illumina platform in paired-end mode
->    - **sars-cov-2-se-illumina-wgs-variant-calling/COVID-19-SE-WGS-ILLUMINA**
+>    The optional workflow parameters *"Minimum read length"* and *"Maximum read length"* should be chosen according to the tiled-amplicon primer scheme's amplicon sizes.
+>    The [ARTIC network's recommendations for excluding obviously chimeric reads](https://artic.network/ncov-2019/ncov2019-bioinformatics-sop.html) (see the section "Read filtering" on that page) are a good starting point.
 >
->      if you are working with WGS data obtained on the Illumina platform in single-end mode
+>    The workflow defaults are appropriate for ARTIC network primers, but you may have to modify them if your sample material has been amplified with another primer scheme. As suggested on the above page: try to set *"Minimum read length"* to the size of the smallest amplicon in your primer scheme, and *"Maximum read length"* to the size of the largest amplicon plus 200 nts.
 >
-> 2. Run **COVID-19: variation analysis on ...** {% icon workflow %} using the following parameters:
+> </div>
+> <div class="WGS-Illumina-pairedend" markdown="1">
 >
->    {% snippet faqs/galaxy/workflows_run.md %}
+> 1. Run the **COVID-19: variation analysis on WGS PE data** {% icon workflow %} workflow using the following parameters:
 >
->    Note: the {% icon galaxy-gear %} icon next to **Run Workflow** offers the option to *Send results to a new history*.
->    This is very useful if you are planning to analyze the data in your current history in multiple different ways, and you would like to have each analysis end up in its own dedicated history.
->    Here, however, we only want to do one analysis of our batch of data so we are fine with results of the workflow run getting added to the current history.
+>    - {% icon param-collection %} *"Paired Collection"*: your paired collection of input sequencing data
+>    - {% icon param-file %} *"NC_045512.2 FASTA sequence of SARS-CoV-2"*: the `SARS-CoV-2 reference` sequence
 >
->    - For **Illumina ARTIC PE** workflow (named **COVID-19: variation analysis on ARTIC PE data**),  *to use for example datasets*
->      - {% icon param-file %} *"1: ARTIC primers to amplicon assignments"*: `ARTIC_amplicon_info_v3.tsv` or `ARTIC amplicon info v3`
->      - {% icon param-file %} *"2: ARTIC primer BED"*: `ARTIC_nCoV-2019_v3.bed` or `ARTIC nCoV-2019 v3`
->      - {% icon param-file %} *"3: FASTA sequence of SARS-CoV-2"*: `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
->      - {% icon param-collection %} *"4: Paired Collection (fastqsanger) - A paired collection of fastq datasets to call variant from"*: paired collection created for the input datasets
+> </div>
+> <div class="WGS-Illumina-singleend" markdown="1">
 >
->    - For **Illumina RNAseq PE** workflow (named **COVID-19: variation analysis on WGS PE data**)
->      - {% icon param-collection %} *"1: Paired Collection (fastqsanger)"*: paired collection created for the input datasets
->      - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
+> 1. Run the **COVID-19: variation analysis on WGS SE data** {% icon workflow %} workflow using the following parameters:
 >
->    - For **Illumina RNAseq SE** workflow (named **COVID-19: variation analysis on WGS SE data**)
->      - {% icon param-collection %} *"1: Input dataset collection"*: dataset collection created for the input datasets
->      - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
+>    - {% icon param-collection %} *"Single End Collection"*: your collection of input sequencing data
+>    - {% icon param-file %} *"NC_045512.2 FASTA sequence of SARS-CoV-2"*: the `SARS-CoV-2 reference` sequence
 >
->    - For **ONT ARTIC** workflow (named **COVID-19: variation analysis of ARTIC ONT data**)
->      - {% icon param-file %} *"1: ARTIC primer BED"*: `ARTIC_nCoV-2019_v3.bed` or `ARTIC nCoV-2019 v3`
->      - {% icon param-file %} *"2: FASTA sequence of SARS-CoV-2"*: `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
->      - {% icon param-collection %} *"3: Collection of ONT-sequenced reads"*: dataset collection created for the input datasets
+> </div>
+>
+>    > <tip-title>Running a workflow</tip-title>
+>    >
+>    > {% snippet faqs/galaxy/workflows_run.md box_type="none" %}
+>    >
+>    > Note: the {% icon galaxy-gear %} icon next to **Run Workflow** offers the option to *Send results to a new history*.
+>    > This is very useful if you are planning to analyze the data in your current history in multiple different ways, and you would like to have each analysis end up in its own dedicated history.
+>    > Here, however, we only want to do one analysis of our batch of data so we are fine with results of the workflow run getting added to the current history.
+>    {: .tip}
+>
 {: .hands_on}
 
-The execution of the workflow takes some time. It is possible to launch the next step even if it is not done, as long as all steps are successfully scheduled.
 
 ## From annotated AVs per sample to AV summary
 
@@ -390,72 +430,65 @@ Once the jobs of previous workflows are done, we identified AVs for each sample.
 
 This workflow takes the collection of called (with lofreq) and annotated (with SnpEff) variants (one VCF dataset per input sample) that got generated as one of the outputs of any of the four variation analysis workflows above, and generates two tabular reports and an overview plot summarizing all the variant information for your batch of samples.
 
-> <warning-title>Use the right collection of annotated variants!</warning-title>
-> The variation analysis workflow should have generated *two* collections of annotated variants - one called `Final (SnpEff-) annotated variants`, the other one called `Final (SnpEff-) annotated variants with strand-bias soft filter applied`.
-> 
-> If you have analyzed ampliconic data with any of the **variation analysis of ARTIC** data workflows, then please consider the strand-bias soft-filtered collection experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input to the next workflow.
+> <hands-on-title>Import the variant analysis reporting workflow into Galaxy</hands-on-title>
 >
-> If you are working with WGS data using either the **variation analysis on WGS PE data** or the **variation analysis on WGS SE data** workflow, then (and only then) you should continue with the `Final (SnpEff-) annotated variants with strand-bias soft filter applied` collection to eliminate some likely false-postive variant calls.
+> Just like the variation analysis workflows before, also the *reporting workflow* developed by the Galaxy Covid-19 project can be retrieved from *Dockstore* or *WorkflowHub*:
 >
-{: .warning}
+> {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' workflow_name="sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING" box_type="none" %}
+>
+> Again, you can just select the latest version of the workflow, and, once imported, it should appear in your list of workflows under the name: **COVID-19: variation analysis reporting**.
+>
+{: .hands-on}
 
 > <hands-on-title>From annotated AVs per sample to AV summary</hands-on-title>
 >
-> 1. **Get the workflow** into Galaxy
->    
->    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
+> 1. Run the **COVID-19: variation analysis reporting** {% icon workflow %} workflow with the following parameters:
 >
->      Please note that this option currently works *only* with usegalaxy.eu!
+>    <div class="tiledamplicon-Illumina-pairedend" markdown="1">
 >
->      - Open the [workflow page on WokflowHub](https://workflowhub.eu/workflows/109)
->      - Click on `Run on usegalaxy.eu` on the top right of the page
->      
->        The browser will open a new tab with Galaxy's workflow invocation interface.
+>    - *"Variation data to report"*: `Final (SnpEff-) annotated variants`
+>    </div>
+>    <div class="tiledamplicon-ONT" markdown="1">
 >
->    - Option 2: Import the workflow from [Dockstore](https://dockstore.org/) using Galaxy's workflow search
+>    - *"Variation data to report"*: `Final (SnpEff-) annotated variants`
+>    </div>
+>    <div class="WGS-Illumina-pairedend" markdown="1">
 >
->      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' workflow_name="sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING" %}
+>    - *"Variation data to report"*: `Final (SnpEff-) annotated variants with strand-bias soft filter applied`
+>    </div>
+>    <div class="WGS-Illumina-singleend" markdown="1">
 >
->    - Option 3: Import the workflow via its github repo link
+>    - *"Variation data to report"*: `Final (SnpEff-) annotated variants with strand-bias soft filter applied`
+>    </div>
 >
->      - Open the [workflow GitHub repository](https://github.com/iwc-workflows/sars-cov-2-variation-reporting)
->      - Open the `.ga` file
->      - Click on `Raw` on the top right of the file
->      - Save the file or Copy the URL of the file
->      - Import the workflow to Galaxy
+>      The collection with variation data in VCF format; output of the previous workflow
 >
->        {% snippet faqs/galaxy/workflows_import.md %}
+>      > <comment-title>Use the right collection of annotated variants!</comment-title>
+>      > The variation analysis workflow should have generated *two* collections of annotated variants - one called `Final (SnpEff-) annotated variants`, the other one called `Final (SnpEff-) annotated variants with strand-bias soft filter applied`.
+>      >
+>      > <div class="tiledamplicon-Illumina-pairedend" markdown="1">
+>      > For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input here.
+>      > </div>
+>      > <div class="tiledamplicon-ONT" markdown="1">
+>      > For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input here.
+>      > </div>
+>      > <div class="WGS-Illumina-pairedend" markdown="1">
+>      > For WGS (i.e. non-ampliconic) data, use the `Final (SnpEff-) annotated variants with strand-bias soft filter applied` collection as input here to eliminate some likely false-positive variant calls.
+>      > </div>
+>      > <div class="WGS-Illumina-singleend" markdown="1">
+>      > For WGS (i.e. non-ampliconic) data, use the `Final (SnpEff-) annotated variants with strand-bias soft filter applied` collection as input here to eliminate some likely false-positive variant calls.
+>      > </div>
+>      >
+>      {: .comment}
 >
-> 2. Run **COVID-19: variation analysis reporting** {% icon workflow %} using the following parameters:
+>    - *"gene products translations"*: the uploaded `SARS-CoV-2 feature mapping` dataset
 >
->    {% snippet faqs/galaxy/workflows_run.md %}
->
->    - *"Send results to a new history"*: `No`
->    - *"1: AF Filter - Allele Frequency Filter"*: `0.05`
-> 
->       This number is the minimum allele frequency required for variants to be included in the report.
->
->    - *"2: DP Filer"*: `1`
->
->       The minimum depth of all alignments required at a variant site;
->       the suggested value will, effectively, deactivate filtering on overall DP and will result in the DP_ALT Filter to be used as the only coverage-based filter.
->
->    - *"3: DP_ALT Filter"*: `10`
->
->       The minimum depth of alignments at a site that need to support the respective variant allele
->
->    - *"4: Variation data to report"*: `Final (SnpEff-) annotated variants`
->
->       The collection with variation data in VCF format: the output of the previous workflow
->
->
->    - *"4: gene products translations"*: `NC_045512.2_feature_mapping.tsv` or `NC_045512.2 feature mapping`
->
->       The custom tabular file mapping NCBI RefSeq Protein identifiers (as used by snpEff version 4.5covid19) to their commonly used names, part of the auxillary data; the names in the second column of this dataset are the ones that will appear in the reports generated by this workflow.
->
->    - *"5: Number of Clusters"*: `3`
+>      Remember, this mapping defines the gene names that will appear as affected by given mutations in the reports.
+>    - *"Number of Clusters"*: `3`
 >
 >      The variant frequency plot generated by the workflow will separate the samples into this number of clusters.
+>
+>    The remaining workflow parameters: *"AF Filter"*, *"DP Filter"*, and *"DP_ALT_FILTER"* can all be left at their default values.
 >
 {: .hands_on}
 
@@ -601,75 +634,66 @@ For the variant calls, we can now run a workflow which generates reliable consen
 
 The workflow takes a collection of VCFs and a collection of the corresponding aligned reads (for the purpose of calculating genome-wide coverage) such as produced by the first workflow we ran.
 
-> <warning-title>Use the right collections as input!</warning-title>
-> The variation analysis workflow should have generated *two* collections of annotated variants - one called `Final (SnpEff-) annotated variants`, the other one called `Final (SnpEff-) annotated variants with strand-bias soft filter applied`.
-> 
-> If you have analyzed ampliconic data with any of the **variation analysis of ARTIC** data workflows, then please consider the strand-bias soft-filtered collection experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input to the next workflow.
+> <hands-on-title>Import the consensus construction workflow into Galaxy</hands-on-title>
 >
-> If you are working with WGS data using either the **variation analysis on WGS PE data** or the **variation analysis on WGS SE data** workflow, then (and only then) you should continue with the `Final (SnpEff-) annotated variants with strand-bias soft filter applied` collection to eliminate some likely false-postive variant calls.
-> 
-> As for the collection of aligned reads, you should choose the collection of BAM datasets that was used for variant calling (specifically for the first round of variant calling in the case of Illumina ampliconic data). This collection should be called `Fully processed reads for variant calling (primer-trimmed, realigned reads with added indelquals)`, if it was generated by any of the Illumina variation analysis workflows, or `BamLeftAlign on collection ...`, if it was produced by the ONT variation analysis workflow.
-> 
-{: .warning}
-
+> Just like workflows before, also the *consensus construction workflow* developed by the Galaxy Covid-19 project can be retrieved from *Dockstore* or *WorkflowHub*:
+>
+> {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' workflow_name="sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION" box_type="none" %}
+>
+> Again, you can just select the latest version of the workflow, and, once imported, it should appear in your list of workflows under the name: **COVID-19: consensus construction**.
+>
+{: .hands-on}
 
 > <hands-on-title>From AVs to consensus sequences</hands-on-title>
 >
-> 1. **Get the workflow** into Galaxy
+> 1. Run the **COVID-19: consensus construction** {% icon workflow %} workflow with these parameters:
 >
->    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
+>    <div class="tiledamplicon-Illumina-pairedend" markdown="1">
 >
->      Please note that this option currently works *only* with usegalaxy.eu!
+>    - *"Variant calls"*: `Final (SnpEff-) annotated variants`
+>    </div>
+>    <div class="tiledamplicon-ONT" markdown="1">
 >
->      - Open the [workflow page on WokflowHub](https://workflowhub.eu/workflows/138)
->      - Click on `Run on usegalaxy.eu` on the top right of the page
->      
->        The browser will open a new tab with Galaxy's workflow invocation interface.
+>    - *"Variant calls"*: `Final (SnpEff-) annotated variants`
+>    </div>
+>    <div class="WGS-Illumina-pairedend" markdown="1">
 >
->    - Option 2: Import the workflow from [Dockstore](https://dockstore.org/) using Galaxy's workflow search
+>    - *"Variant calls"*: `Final (SnpEff-) annotated variants with strand-bias soft filter applied`
+>    </div>
+>    <div class="WGS-Illumina-singleend" markdown="1">
 >
->      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' workflow_name="sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION" %}
+>    - *"Variant calls"*: `Final (SnpEff-) annotated variants with strand-bias soft filter applied`
+>    </div>
 >
->    - Option 2: Import the workflow via its github repo link
+>      The collection with variation data in VCF format; output of the first workflow
 >
->      - Open the [workflow GitHub repository](https://github.com/iwc-workflows/sars-cov-2-consensus-from-variation)
->      - Open the `.ga` file
->      - Click on `Raw` on the top right of the file
->      - Save the file or Copy the URL of the file
->      - Import the workflow to Galaxy
+>      > <comment-title>Use the right collection of annotated variants!</comment-title>
+>      > The variation analysis workflow should have generated *two* collections of annotated variants - one called `Final (SnpEff-) annotated variants`, the other one called `Final (SnpEff-) annotated variants with strand-bias soft filter applied`.
+>      >
+>      > <div class="tiledamplicon-Illumina-pairedend" markdown="1">
+>      > For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input here.
+>      > </div>
+>      > <div class="tiledamplicon-ONT" markdown="1">
+>      > For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input here.
+>      > </div>
+>      > <div class="WGS-Illumina-pairedend" markdown="1">
+>      > For WGS (i.e. non-ampliconic) data, use the `Final (SnpEff-) annotated variants with strand-bias soft filter applied` collection as input here to eliminate some likely false-positive variant calls.
+>      > </div>
+>      > <div class="WGS-Illumina-singleend" markdown="1">
+>      > For WGS (i.e. non-ampliconic) data, use the `Final (SnpEff-) annotated variants with strand-bias soft filter applied` collection as input here to eliminate some likely false-positive variant calls.
+>      > </div>
+>      >
+>      {: .comment}
 >
->        {% snippet faqs/galaxy/workflows_import.md %}
->
-> 2. Run **COVID-19: consensus construction** {% icon workflow %} using the following parameters:
->
->    {% snippet faqs/galaxy/workflows_run.md %}
->
->    - *"Send results to a new history"*: `No`
->    - *"1: Variant calls"*: `Final (SnpEff-) annotated variants`
->
->       The collection with variation data in VCF format: the output of the first workflow
->
->    - *"2: min-AF for consensus variants*: `0.7`
->
->       Only variant calls with an AF greater than this value will be considered consensus variants.
->
->    - *"3: min-AF for failed variants"*: `0.25`
->
->       Variant calls with an AF higher than this value, but lower than the AF threshold for consensus variants will be considered questionable and the respective sites be masked (with Ns) in the consensus sequence. Variants with an AF below this threshold will be ignored.
->
->    - *"4: aligned reads data for depth calculation"*: `Fully processed reads for variant calling`
+>    - *"aligned reads data for depth calculation"*: `Fully processed reads for variant calling`
 >
 >       Collection with fully processed BAMs generated by the first workflow. 
 >
->       For ARTIC data, the BAMs should NOT have undergone processing with **ivar removereads**
+>       <span class="tiledamplicon-Illumina-pairedend">For tiled-amplicon data, the BAMs should NOT have undergone processing with **ivar removereads**, so please take care to select the right collection!</span>
 >
->    - *"5: Depth-threshold for masking"*: `5`
+>    - *"Reference genome*": the `SARS-CoV-2 reference` sequence
 >
->       Sites in the viral genome covered by less than this number of reads detection of variants is considered to become unreliable. Such sites will be masked (with Ns) in the consensus sequence unless there is a consensus variant call at the site.
->
->    - *"6: Reference genome*": `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
->
->       SARS-CoV-2 reference genome, part of the auxillary data.
+>    The remaining workflow parameters: *"min-AF for consensus variant"*, *"min-AF for failed variants"*, and *"Depth-threshold for masking"* can all be left at their default values.
 >
 {: .hands_on}
 
@@ -689,8 +713,9 @@ Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used
 
 > <hands-on-title>From consensus sequences to clade assignations using Pangolin</hands-on-title>
 >
-> 1. {% tool [Pangolin](toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/3.1.4+galaxy0) %} with the following parameters:
+> 1. {% tool [Pangolin](toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input FASTA File(s)"*: `Multisample consensus FASTA`
+>    - *"Include header line in output file"*: `Yes`
 >
 > 2. Inspect the generated output
 {: .hands_on}
@@ -742,9 +767,11 @@ Nextclade assigns clades, calls mutations and performs sequence quality checks o
 
 > <hands-on-title>From consensus sequences to clade assignations using Nextclade</hands-on-title>
 >
-> 1. {% tool [Nextclade](toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/0.14.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"SARS-CoV-2 consensus sequences (FASTA)"*: `Multisample consensus FASTA`
+> 1. {% tool [Nextclade](toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/2.7.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"FASTA file with input sequences"*: `Multisample consensus FASTA`
+>    - *"Version of database to use"*: `Download latest available database version from web`
 >    - {% icon param-check %} *"Output options"*: `Tabular format report`
+>    - *"Include header line in output file"*: `Yes`
 >
 > 2. Inspect the generated output
 {: .hands_on}
