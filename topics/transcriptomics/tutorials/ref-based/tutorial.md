@@ -180,7 +180,7 @@ We will first need to transform our the list of pairs to a simple list.
 >    >
 >    {: .question}
 >
->    As it is tidious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %}.
+>    As it is tedious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %}.
 >
 > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the FastQC reports with the following parameters:
 >    - In *"Results"*:
