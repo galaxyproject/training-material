@@ -9,22 +9,18 @@ questions:
   - "What is metagenomic binning refers to?"
   - "Which tools should be used for metagenomic binning?"
   - "How to assess the quality of metagenomic data binning?"
-# objectives:
-#   - "Describe what an assembly is"
-#   - "Describe what de-replication is"
-#   - "Explain the difference between co-assembly and individual assembly"
-#   - "Explain the difference between reads, contigs and scaffolds"
-#   - "Explain how tools based on De Bruijn graph work"
-#   - "Apply appropriate tools for analyzing the quality of metagenomic data"
-#   - "Construct and apply simple assembly pipelines on short read data"
-#   - "Apply appropriate tools for analyzing the quality of metagenomic assembly"
-#   - "Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Genome"
-# time_estimation: "2H"
-# key_points:
-#   - "Assembly groups reads into contigs and scafolds."
-#   - "De Brujin Graphs use k-mers to assembly reads"
-#   - "MetaSPAdes and MEGAHIT are assemblers"
-#   - "Quast is the tool to assess the assembly quality"
+objectives:
+  - "Describe what metagenomics binning is"
+  - "Describe common problems in metagenomics binning"
+  - "What software tools are available for metagenomics binning"
+  - "Binning of contigs into metagenome-assembled genomes (MAGs) using MetaBAT2 software"
+  - "Evaluation of MAG quality and completeness using CheckM software"
+time_estimation: "2H"
+key_points:
+  - "Metagenomics binning is a computational approach to grouping together DNA sequences from a mixed microbial sample into metagenome-assembled genomes (MAGs)"
+  - "The metagenomics binning workflow involves several steps, including preprocessing of raw sequencing data, assembly of sequencing reads into contigs, binning of contigs into MAGs, quality assessment of MAGs, and annotation of functional genes and metabolic pathways in MAGs"
+  - "The quality and completeness of MAGs can be evaluated using standard metrics, such as completeness, contamination, and genome size"
+  - "Metagenomics binning can be used to gain insights into the composition, diversity, and functional potential of microbial communities, and can be applied to a range of research areas, such as human health, environmental microbiology, and biotechnology"
 contributions:
   authorship:
     - npechl
@@ -67,21 +63,37 @@ There are plenty of computational tools to perform metafenomics binning. Some of
 - **GroopM**: A hybrid binning tool that combines reference-based and de novo approaches to achieve high binning accuracy.
 - **MetaWRAP**: A comprehensive metagenomic analysis pipeline that includes various modules for quality control, assembly, binning, and annotation.
 - **Anvi'o**: A platform for visualizing and analyzing metagenomic data, including features for binning, annotation, and comparative genomics.
+- **SemiBin**: A command tool for metagenomic binning with deep learning, handles both short and long reads.
 
-**In this tutorial, we will learn how to run metagenomic binning tools and evaluate the quality of the results**. In order to do that, we will use data from the study: [Temporal shotgun metagenomic dissection of the coffee fermentation ecosystem](https://www.ebi.ac.uk/metagenomics/studies/MGYS00005630#overview) and MetaBAT2 algorithm. For an in-depth analysis of the structure and functions of the coffee microbiome, a temporal shotgun metagenomic study (six time points) was performed. The six samples have been sequenced with Illumina MiSeq utilizing whole genome sequencing.
+**In this tutorial, we will learn how to run metagenomic binning tools and evaluate the quality of the results**. In order to do that, we will use data from the study: [Temporal shotgun metagenomic dissection of the coffee fermentation ecosystem](https://www.ebi.ac.uk/metagenomics/studies/MGYS00005630#overview) and MetaBAT2 algorithm. MetaBAT is a popular software tool for metagenomics binning, and there are several reasons why it is often used:
+- High accuracy: MetaBAT uses a combination of tetranucleotide frequency, coverage depth, and read linkage information to bin contigs, which has been shown to be highly accurate and efficient.
+- Easy to use: MetaBAT has a user-friendly interface and can be run on a standard desktop computer, making it accessible to a wide range of researchers with varying levels of computational expertise.
+- Flexibility: MetaBAT can be used with a variety of sequencing technologies, including Illumina, PacBio, and Nanopore, and can be applied to both microbial and viral metagenomes.
+- Scalability: MetaBAT can handle large-scale datasets, and its performance has been shown to improve with increasing sequencing depth.
+- Compatibility: MetaBAT outputs MAGs in standard formats that can be easily integrated into downstream analyses and tools, such as taxonomic annotation and functional prediction.
+
+For an in-depth analysis of the structure and functions of the coffee microbiome, a temporal shotgun metagenomic study (six time points) was performed. The six samples have been sequenced with Illumina MiSeq utilizing whole genome sequencing.
 
 Based on the 6 original dataset of the coffee fermentation system, we generated mock datasets for this tutorial.
 
-<!-- > <agenda-title></agenda-title>
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
 > 1. TOC
 > {:toc}
 >
-{: .agenda} -->
+{: .agenda}
 
 # Prepare analysis history and data
+
+MetaBAT2 takes metagenomic sequencing data as input, typically in the form of assembled contigs in fasta format and coverage information in bam format. Specifically, MetaBAT2 requires two input files:
+
+- A fasta file containing the assembled contigs, which can be generated from raw metagenomic sequencing reads using an assembler such as MEGAHIT, SPAdes, or IDBA-UD.
+
+- A bam file containing the read coverage information for each contig, which can be generated from the same sequencing reads using mapping software such as Bowtie2 or BWA.
+
+MetaBAT2 also requires a configuration file specifying various parameters and options for the binning process, such as the minimum contig length, the maximum number of clusters to generate, and the maximum expected contamination level.
 
 To run binning, we first need to get the data into Galaxy. Any analysis should get its own Galaxy history. So let's start by creating a new one:
 
@@ -106,12 +118,12 @@ In case of a not very large dataset it's more convenient to upload data directly
 > 2. Import the sequence read data (\*.fasta) from [Zenodo]({{ page.zenodo_link }}) or a data library:
 >
 >    ```text
->    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231567.fasta
->    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231568.fasta
->    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231569.fasta
->    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231570.fasta
->    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231571.fasta
->    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231572.fasta
+>    {{ page.zenodo_link }}/files/contigs_ERR2231567.fasta
+>    {{ page.zenodo_link }}/files/contigs_ERR2231568.fasta
+>    {{ page.zenodo_link }}/files/contigs_ERR2231569.fasta
+>    {{ page.zenodo_link }}/files/contigs_ERR2231570.fasta
+>    {{ page.zenodo_link }}/files/contigs_ERR2231571.fasta
+>    {{ page.zenodo_link }}/files/contigs_ERR2231572.fasta
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -141,11 +153,9 @@ As explained before, there are many challenges to metagenomics binning. The most
 
 ![Image show the binning process where sequences are grouped together based on genome signatures like the kmer profiles of each contig, contig coverage, or GC content](./images/binning.png "Binning"){:width="60%"}
 
-In this tutorial we will learn how to use **MetaBAT2** tool through Galaxy:
+In this tutorial we will learn how to use **MetaBAT2** tool through Galaxy. **MetaBAT** stands for "Metagenome Binning based on Abundance and Tetranucleotide frequency". It is:
 
-- **MetaBAT2**: Metagenome Binning based on Abundance and Tetranucleotide frequency
-
-  *Grouping large fragments assembled from shotgun metagenomic sequences to deconvolute complex microbial communities, or metagenome binning, enables the study of individual organisms and their interactions. Here we developed automated metagenome binning software, called MetaBAT, which integrates empirical probabilistic distances of genome abundance and tetranucleotide frequency. On synthetic datasets MetaBAT on average achieves 98percent precision and 90% recall at the strain level with 281 near complete unique genomes. Applying MetaBAT to a human gut microbiome data set we recovered 176 genome bins with 92% precision and 80% recall. Further analyses suggest MetaBAT is able to recover genome fragments missed in reference genomes up to 19%, while 53 genome bins are novel. In summary, we believe MetaBAT is a powerful tool to facilitate comprehensive understanding of complex microbial communities.*
+*Grouping large fragments assembled from shotgun metagenomic sequences to deconvolute complex microbial communities, or metagenome binning, enables the study of individual organisms and their interactions. Here we developed automated metagenome binning software, called MetaBAT, which integrates empirical probabilistic distances of genome abundance and tetranucleotide frequency. On synthetic datasets MetaBAT on average achieves 98percent precision and 90% recall at the strain level with 281 near complete unique genomes. Applying MetaBAT to a human gut microbiome data set we recovered 176 genome bins with 92% precision and 80% recall. Further analyses suggest MetaBAT is able to recover genome fragments missed in reference genomes up to 19%, while 53 genome bins are novel. In summary, we believe MetaBAT is a powerful tool to facilitate comprehensive understanding of complex microbial communities.*
 
 We will use the uploaded assembled fasta files as input to the algorithm (For simplicity reasons all other parameters will be preserved with their default values).
 
@@ -240,15 +250,6 @@ This information can be used to evaluate the quality of genome bins and to selec
 Based on the previous analysis we will use **CheckM lineage_wf**: *Assessing the completeness and contamination of genome bins using lineage-specific marker sets*
 
 `CheckM lineage_wf` is a specific workflow within the CheckM software tool that is used for taxonomic classification of genome bins based on their marker gene content. This workflow uses a reference database of marker genes and taxonomic information to classify the genome bins at different taxonomic levels, from domain to species.
-
-<!-- > <hands-on-title>Evaluation assembly quality with metaQUAST</hands-on-title>
->
-> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0) %} with parameters:
->    - *"Data structure for bins"*: `In collection`
->    - *"Bins "*: `Bins produced by MetaBAT2`
->
-> 2. Inspect produced table
-{: .hands_on} -->
 
 > <comment-title></comment-title>
 >
