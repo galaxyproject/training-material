@@ -1,7 +1,7 @@
 ---
-- doc: "Test sample data for Transcriptomics:Refence-based"
+- doc: "Test sample data for Transcriptomics:Refence-based PE"
   job:
-    Paired list collection with PE fastqs:
+    Paired list collection with PE FASTQs:
       class: Collection
       collection_type: 'list:paired'
       elements:
@@ -11,11 +11,11 @@
           elements:
           - identifier: forward
             class: File
-            location: https://zenodo.org/record/1185122/files/GSM461177_1.fastqsanger
+            location: https://zenodo.org/record/6457007/files/GSM461177_1_subsampled.fastqsanger
             filetype: fastqsanger
           - identifier: reverse
             class: File
-            location: https://zenodo.org/record/1185122/files/GSM461177_2.fastqsanger
+            location: https://zenodo.org/record/6457007/files/GSM461177_2_subsampled.fastqsanger
             filetype: fastqsanger
         - class: Collection
           type: paired
@@ -23,50 +23,148 @@
           elements:
           - identifier: forward
             class: File
-            location: https://zenodo.org/record/1185122/files/GSM461180_1.fastqsanger
+            location: https://zenodo.org/record/6457007/files/GSM461180_1_subsampled.fastqsanger
             filetype: fastqsanger
           - identifier: reverse
             class: File
-            location: https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
+            location: https://zenodo.org/record/6457007/files/GSM461180_2_subsampled.fastqsanger
             filetype: fastqsanger
-    Drosophila_melanogaster.BDGP6.87.gtf:
+    Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz:
       class: File
-      location: https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf
+      # Can be uncommented when https://github.com/galaxyproject/galaxy/pull/16014 is merged
+      # location: https://zenodo.org/record/6457007/files/Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz
+      # decompress: true
+      path: test-data/Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf
       filetype: gtf
   outputs:
-    multiqc_fastqc_html:
-      asserts:
-        has_text:
-          text: 'All samples have sequences of a single length (37bp).'
     multiqc_cutadapt_html:
       asserts:
-        has_text:
-          text: '<span class="val">12.4%</span>'
-        has_text:
-          text: '<span class="val">2.5%</span>'
-    multiqc_star_html:
+        - that: "has_text"
+          text: '<thead><tr><th class="rowheader">Sample Name</th><th id="header_mqc-generalstats-cutadapt-percent_trimmed" class="mqc-generalstats-cutadapt-percent_trimmed " data-dmax="100.0" data-dmin="0.0" data-namespace="Cutadapt" ><span class="mqc_table_tooltip" title="Cutadapt: % Total Base Pairs trimmed">% BP Trimmed</span></th></tr></thead><tbody><tr><th class="rowheader" data-original-sn="GSM461177_2">GSM461177_2</th><td class="data-coloured mqc-generalstats-cutadapt-percent_trimmed "><div class="wrapper"><span class="bar" style="width:2.4925569161554932%; background-color:#c3c7e2;"></span><span class="val">2.5%</span></div></td></tr><tr><th class="rowheader" data-original-sn="GSM461180_2">GSM461180_2</th><td class="data-coloured mqc-generalstats-cutadapt-percent_trimmed "><div class="wrapper"><span class="bar" style="width:12.387319258796483%; background-color:#cbdaeb;"></span><span class="val">12.4%</span></div></td></tr></tbody></table></div></div>'
+    multiqc_fastqc_html:
+      asserts:
+        - that: "has_text"
+          text: 'All samples have sequences of a single length (37bp).'
+        - that: "has_text"
+          text: '"GSM461180_forward": "pass"'
+        - that: "has_text"
+          text: '"GSM461177_reverse": "pass"'
+        - that: "has_text"
+          text: '"GSM461180_reverse": "pass"'
+        - that: "has_text"
+          text: '"GSM461177_forward": "pass"'
+    pgt:
+      asserts:
+        has_size:
+          value: 43294
+          delta: 4000
+    multiqc_featureCounts_html:
       asserts:
         has_text:
-          text: '<span class="val">79.0%</span>'
+          text: '<thead><tr><th class="rowheader">Sample Name</th><th id="header_mqc-generalstats-featurecounts-percent_assigned" class="mqc-generalstats-featurecounts-percent_assigned " data-dmax="100.0" data-dmin="0.0" data-namespace="featureCounts" ><span class="mqc_table_tooltip" title="featureCounts: % Assigned reads">% Assigned</span></th><th id="header_mqc-generalstats-featurecounts-Assigned" class="mqc-generalstats-featurecounts-Assigned " data-dmax="0.8434959999999999" data-dmin="0.0" data-namespace="featureCounts"  data-shared-key=read_count><span class="mqc_table_tooltip" title="featureCounts: Assigned reads (millions)">M Assigned</span></th></tr></thead><tbody><tr><th class="rowheader" data-original-sn="GSM461177">GSM461177</th><td class="data-coloured mqc-generalstats-featurecounts-percent_assigned "><div class="wrapper"><span class="bar" style="width:63.02362168643414%; background-color:#eff8d9;"></span><span class="val">63.0%</span></div></td><td class="data-coloured mqc-generalstats-featurecounts-Assigned "><div class="wrapper"><span class="bar" style="width:97.83389607063936%; background-color:#b3c5d0;"></span><span class="val">0.8</span></div></td></tr><tr><th class="rowheader" data-original-sn="GSM461180">GSM461180</th><td class="data-coloured mqc-generalstats-featurecounts-percent_assigned "><div class="wrapper"><span class="bar" style="width:62.99014556132065%; background-color:#eff8d9;"></span><span class="val">63.0%</span></div></td><td class="data-coloured mqc-generalstats-featurecounts-Assigned "><div class="wrapper"><span class="bar" style="width:100.0%; background-color:#b3c3cd;"></span><span class="val">0.8</span></div></td></tr></tbody></table></div></div>'
+    multiqc_reads_per_chrom_html:
+      asserts:
         has_text:
-          text: '<span class="val">83.1%</span>'
+          text: '<h3 id="samtools-idxstats-xy-counts">'
+    multiqc_dup_html:
+      asserts:
+        has_text:
+          text: '<thead><tr><th class="rowheader">Sample Name</th><th id="header_mqc-generalstats-picard-PERCENT_DUPLICATION" class="mqc-generalstats-picard-PERCENT_DUPLICATION " data-dmax="100.0" data-dmin="0.0" data-namespace="Picard" ><span class="mqc_table_tooltip" title="Picard: Mark Duplicates - Percent Duplication">% Dups</span></th></tr></thead><tbody><tr><th class="rowheader" data-original-sn="GSM461177">GSM461177</th><td class="data-coloured mqc-generalstats-picard-PERCENT_DUPLICATION "><div class="wrapper"><span class="bar" style="width:9.1614%; background-color:#fff9f1;"></span><span class="val">9.2%</span></div></td></tr><tr><th class="rowheader" data-original-sn="GSM461180">GSM461180</th><td class="data-coloured mqc-generalstats-picard-PERCENT_DUPLICATION "><div class="wrapper"><span class="bar" style="width:10.030999999999999%; background-color:#fff9f1;"></span><span class="val">10.0%</span></div></td></tr></tbody></table></div></div>'
+    multiqc_gene_body_cov_html:
+      asserts:
+        has_text:
+          text: '<h3 id="rseqc-gene_body_coverage">'
+    Gene length:
+      asserts:
+        has_n_lines:
+          n: 23932
+        has_line:
+          line: "FBgn0000003\t299"
+    multiqc_star_html:
+      asserts:
+        - that: "has_text"
+          text: '<thead><tr><th class="rowheader">Sample Name</th><th id="header_mqc-generalstats-star-uniquely_mapped_percent" class="mqc-generalstats-star-uniquely_mapped_percent " data-dmax="100.0" data-dmin="0.0" data-namespace="STAR" ><span class="mqc_table_tooltip" title="STAR: % Uniquely mapped reads">% Aligned</span></th><th id="header_mqc-generalstats-star-uniquely_mapped" class="mqc-generalstats-star-uniquely_mapped " data-dmax="0.881782" data-dmin="0.0" data-namespace="STAR"  data-shared-key=read_count><span class="mqc_table_tooltip" title="STAR: Uniquely mapped reads (millions)">M Aligned</span></th></tr></thead><tbody><tr><th class="rowheader" data-original-sn="GSM461177">GSM461177</th><td class="data-coloured mqc-generalstats-star-uniquely_mapped_percent "><div class="wrapper"><span class="bar" style="width:83.14%; background-color:#b6d5c4;"></span><span class="val">83.1%</span></div></td><td class="data-coloured mqc-generalstats-star-uniquely_mapped "><div class="wrapper"><span class="bar" style="width:98.30479642360584%; background-color:#d3b3bd;"></span><span class="val">0.9</span></div></td></tr><tr><th class="rowheader" data-original-sn="GSM461180">GSM461180</th><td class="data-coloured mqc-generalstats-star-uniquely_mapped_percent "><div class="wrapper"><span class="bar" style="width:78.98%; background-color:#bad7c5;"></span><span class="val">79.0%</span></div></td><td class="data-coloured mqc-generalstats-star-uniquely_mapped "><div class="wrapper"><span class="bar" style="width:100.0%; background-color:#d1b3bc;"></span><span class="val">0.9</span></div></td></tr></tbody></table></div></div>'
+    multiqc_star_counts_html:
+      asserts:
+        has_text:
+          text: '<h3 id="star_geneCounts">'
+    multiqc_read_distrib_html:
+      asserts:
+        has_text:
+          text: '<h3 id="rseqc-read_distribution">'
+    STAR_BAM:
+      element_tests:
+        GSM461177:
+          asserts:
+            has_size:
+              value: 77189682
+              delta: 7000000
+        GSM461180:
+          asserts:
+            has_size:
+              value: 93798515
+              delta: 9000000
+    featureCounts_sorted:
+      element_tests:
+        GSM461177:
+          asserts:
+            has_text:
+              text: "FBgn0284245\t12871"
+        GSM461180:
+          asserts:
+            has_text:
+              text: "FBgn0284245\t12904"
+    featureCounts:
+      element_tests:
+        GSM461177:
+          asserts:
+            has_text:
+              text: "FBgn0250732\t74"
+        GSM461180:
+          asserts:
+            has_text:
+              text: "FBgn0250732\t75"
+    featureCounts_gene_length:
+      element_tests:
+        GSM461177:
+          asserts:
+            has_n_lines:
+              n: 23933
+            has_line:
+              line: "FBgn0000003\t299"
+        GSM461180:
+          asserts:
+            has_n_lines:
+              n: 23933
+            has_line:
+              line: "FBgn0000003\t299"
     inferexperiment:
       element_tests:
         GSM461177:
           asserts:
             has_text:
-              text: '0.4649'
+              text: 'Fraction of reads explained by "1++,1--,2+-,2-+": 0.4967'
         GSM461180:
           asserts:
             has_text:
-              text: '0.4524'
-    featurecounts_summary:
+              text: 'Fraction of reads explained by "1++,1--,2+-,2-+": 0.4855'
+    counts_from_star:
       element_tests:
         GSM461177:
           asserts:
             has_text:
-              text: '8234664'
+              text: "FBgn0250732\t74"
         GSM461180:
           asserts:
             has_text:
-              text: '8412167'
+              text: "FBgn0250732\t75"
+    counts_from_star_sorted:
+      element_tests:
+        GSM461177:
+          asserts:
+            has_text:
+              text: "FBgn0284245\t12869"
+        GSM461180:
+          asserts:
+            has_text:
+              text: "FBgn0284245\t12902"
