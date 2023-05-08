@@ -669,10 +669,6 @@ To compare the expression of single genes between different conditions (*e.g.* w
 
 Two main tools are available for read counting: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). Additionally, **STAR** allows to count reads while mapping: its results are identical to those from **HTSeq-count**. While this output is sufficient for most analyses, **featureCounts** offers more customization on how to count reads (minimum mapping quality, counting reads instead of fragments, count transcripts instead of genes etc.).
 
-Therefore we offer a parallel tutorial for the 2 methods which give very similar results.
-
-{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" %}
-
 In principle, the counting of reads overlapping with genomic features is a fairly simple task. But the strandness of the library needs to be determined. Indeed this is a parameter of **featureCounts**. On the contrary, **STAR** evaluates the counts into the three possible strandnesses but you still need this information to extract the counts which corresponds to your library.
 
 ## Estimation of the strandness
@@ -937,6 +933,10 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
 {: .details}
 
 ## Counting reads per genes
+
+In order to count the number of reads per gene, we offer a parallel tutorial for the 2 methods (STAR and featureCounts) which give very similar results.
+
+{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" %}
 
 <div class="featureCounts" markdown="1">
 
