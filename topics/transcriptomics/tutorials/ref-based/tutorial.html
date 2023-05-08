@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Reference-based RNA-Seq data analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-02-08 10:11:09 +0000">
+<meta name="DC.date" content="2023-05-08 09:12:00 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Mallory Freeberg">
 <meta name="DC.creator" content="Mo Heydarian">
@@ -73,7 +73,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-02-08 10:11:09 +0000",
+  "dateModified": "2023-05-08 09:12:00 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Reference-based RNA-Seq data analysis",
   "interactivityType": "mixed",
@@ -437,7 +437,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-02-08 10:11:09 +0000",
+  "dateModified": "2023-05-08 09:12:00 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Reference-based RNA-Seq data analysis",
   "interactivityType": "mixed",
@@ -796,7 +796,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/4541751">
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/6457007">
     <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
 </a>
 
@@ -976,10 +976,6 @@
         
     
         
-        <a class="dropdown-item" href="https://galaxy.hyphy.org/" title="HyPhy HIV NGS Tools">
-            HyPhy HIV NGS Tools
-        </a>
-        
     
         
     
@@ -1069,7 +1065,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 8, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 8, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1134,6 +1130,7 @@
   </li>
   <li><a href="#analysis-of-the-differential-gene-expression" id="markdown-toc-analysis-of-the-differential-gene-expression">Analysis of the differential gene expression</a>    <ol>
       <li><a href="#identification-of-the-differentially-expressed-features" id="markdown-toc-identification-of-the-differentially-expressed-features">Identification of the differentially expressed features</a></li>
+      <li><a href="#annotation-of-the-deseq2-results" id="markdown-toc-annotation-of-the-deseq2-results">Annotation of the DESeq2 results</a></li>
       <li><a href="#extraction-and-annotation-of-differentially-expressed-genes" id="markdown-toc-extraction-and-annotation-of-differentially-expressed-genes">Extraction and annotation of differentially expressed genes</a></li>
       <li><a href="#visualization-of-the-expression-of-the-differentially-expressed-genes" id="markdown-toc-visualization-of-the-expression-of-the-differentially-expressed-genes">Visualization of the expression of the differentially expressed genes</a></li>
     </ol>
@@ -1164,16 +1161,16 @@
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
-    <li>Import the FASTQ file pairs from <a href="https://zenodo.org/record/4541751">Zenodo</a> or a data library:
+    <li>Import the FASTQ file pairs from <a href="https://zenodo.org/record/6457007">Zenodo</a> or a data library:
       <ul>
         <li><code class="language-plaintext highlighter-rouge">GSM461177</code> (untreated): <code class="language-plaintext highlighter-rouge">GSM461177_1</code> and <code class="language-plaintext highlighter-rouge">GSM461177_2</code></li>
         <li><code class="language-plaintext highlighter-rouge">GSM461180</code> (treated): <code class="language-plaintext highlighter-rouge">GSM461180_1</code> and <code class="language-plaintext highlighter-rouge">GSM461180_2</code></li>
       </ul>
 
-      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4541751/files/GSM461177_1.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461177_2.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461180_1.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461180_2.fastqsanger
+      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6457007/files/GSM461177_1.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461177_2.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461180_1.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461180_2.fastqsanger
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1186,12 +1183,12 @@ https://zenodo.org/record/4541751/files/GSM461180_2.fastqsanger
 
         <p>Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.</p>
 
-        <p>For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on <a href="https://zenodo.org/record/4541751">Zenodo</a>:</p>
+        <p>For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on <a href="https://zenodo.org/record/6457007">Zenodo</a>:</p>
 
-        <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4541751/files/GSM461177_1_subsampled.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461177_2_subsampled.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461180_1_subsampled.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
+        <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6457007/files/GSM461177_1_subsampled.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461177_2_subsampled.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461180_1_subsampled.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461180_2_subsampled.fastqsanger
 </code></pre></div>        </div>
 
       </blockquote>
@@ -1213,7 +1210,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-31"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-32"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How are the DNA sequences stored?</li>
@@ -1221,7 +1218,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-31"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-31" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-32"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-32" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>The DNA sequences are stored in a FASTQ file, in the second line of every 4-line group.</li>
       <li>This file format is called <a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ format</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
@@ -1281,13 +1278,13 @@ We will first need to transform our the list of pairs to a simple list.</p>
 
       </blockquote>
 
-      <p>As it is tidious to inspect all these reports individually we will combine them with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span> .</p>
+      <p>As it is tedious to inspect all these reports individually we will combine them with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span> .</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  to aggregate the FastQC reports with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span>  to aggregate the FastQC reports with the following parameters:
       <ul>
         <li>In <em>“Results”</em>:
           <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Results”</em>
+            <li><em>“Results”</em>
               <ul>
                 <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">FastQC</code>
                   <ul>
@@ -1372,12 +1369,12 @@ We will first need to transform our the list of pairs to a simple list.</p>
 <p>We should trim the reads to get rid of bases that were sequenced with high uncertainty (i.e. low quality bases) at the read ends, and also remove the reads of overall bad quality.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-32"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-33"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What is the relation between <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired_forward</code> and <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired_reverse</code> ?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-32"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-32" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-33"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-33" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The data has been sequenced using paired-end sequencing.</p>
 
     <p>The paired-end sequencing is based on the idea that the initial DNA fragments (longer than the actual read length) is sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. The distance between both reads is known. Thus, it can be used as an additional piece of information to improve the read mapping.</p>
@@ -1411,7 +1408,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
   <div class="box-title hands-on-title" id="hands-on-trimming-fastqs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Trimming FASTQs</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0" title="Cutadapt tool"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0</span></span>  with the following parameters to trim low quality sequences:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1" title="Cutadapt tool"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1</span></span>  with the following parameters to trim low quality sequences:
       <ul>
         <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end Collection</code>
           <ul>
@@ -1435,12 +1432,12 @@ We will first need to transform our the list of pairs to a simple list.</p>
 
           <blockquote class="question">
 
-            <div class="box-title question-title" id="question-33"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+            <div class="box-title question-title" id="question-34"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
             <p>Why do we run the trimming tool only once on a paired-end dataset and not twice, once for each dataset?</p>
 
             <blockquote class="solution">
-              <div class="box-title solution-title" id="solution-33"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-33" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+              <div class="box-title solution-title" id="solution-34"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-34" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
               <p>The tool can remove sequences if they become too short during the trimming process. For paired-end files it removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.</p>
 
@@ -1449,11 +1446,11 @@ We will first need to transform our the list of pairs to a simple list.</p>
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  to aggregate the Cutadapt reports with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span>  to aggregate the Cutadapt reports with the following parameters:
       <ul>
         <li>In <em>“Results”</em>:
           <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Results”</em>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Results”</em>
               <ul>
                 <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">Cutadapt/Trim Galore!</code>
                   <ul>
@@ -1502,7 +1499,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 <p>In this study, the authors used <em>Drosophila melanogaster</em> cells. We should therefore map the quality-controlled sequences to the reference genome of <em>Drosophila melanogaster</em>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-34"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-35"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What is a reference genome?</li>
@@ -1511,7 +1508,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-34"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-34" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-35"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-35" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism, but a mosaic of different nucleic acid sequences from each individual.</li>
       <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are built and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different released versions (called “builds”).</li>
@@ -1566,9 +1563,9 @@ We will first need to transform our the list of pairs to a simple list.</p>
 
   <ol>
     <li>
-      <p>Import the Ensembl gene annotation for <em>Drosophila melanogaster</em> (<code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code>) from the Shared Data library if available or from <a href="https://zenodo.org/record/4541751/files/Drosophila_melanogaster.BDGP6.87.gtf">Zenodo</a> into your current Galaxy history</p>
+      <p>Import the Ensembl gene annotation for <em>Drosophila melanogaster</em> (<code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</code>) from the Shared Data library if available or from <a href="https://zenodo.org/record/6457007/files/Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz">Zenodo</a> into your current Galaxy history</p>
 
-      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4541751/files/Drosophila_melanogaster.BDGP6.87.gtf
+      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6457007/files/Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz
 </code></pre></div>      </div>
 
       <ol>
@@ -1585,7 +1582,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a" title="RNA STAR tool"><strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a</span></span>  with the following parameters to map your reads on the reference genome:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3" title="RNA STAR tool"><strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3</span></span>  with the following parameters to map your reads on the reference genome:
       <ul>
         <li><em>“Single-end or paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as collection)</code>
           <ul>
@@ -1594,10 +1591,10 @@ We will first need to transform our the list of pairs to a simple list.</p>
         </li>
         <li><em>“Custom or built-in reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in index</code>
           <ul>
-            <li><em>“Reference genome with or without an annotation”</em>: <code class="language-plaintext highlighter-rouge">use genome reference without builtin gene-model</code>
+            <li><em>“Reference genome with or without an annotation”</em>: <code class="language-plaintext highlighter-rouge">use genome reference without builtin gene-model but provide a gtf</code>
               <ul>
                 <li><em>“Select reference genome”</em>: <code class="language-plaintext highlighter-rouge">Fly (Drosophila melanogaster): dm6 Full</code></li>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene model (gff3,gtf) file for splice junctions”</em>: the imported <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code></li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene model (gff3,gtf) file for splice junctions”</em>: the imported <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</code></li>
                 <li>
                   <p><em>“Length of the genomic sequence around annotated junctions”</em>: <code class="language-plaintext highlighter-rouge">36</code></p>
 
@@ -1608,13 +1605,18 @@ We will first need to transform our the list of pairs to a simple list.</p>
           </ul>
         </li>
         <li><em>“Per gene/transcript output”</em>: <code class="language-plaintext highlighter-rouge">Per gene read counts (GeneCounts)</code></li>
+        <li><em>“Compute coverage”</em>:
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">Yes in bedgraph format</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  to aggregate the STAR logs with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span>  to aggregate the STAR logs with the following parameters:
       <ul>
         <li>In <em>“Results”</em>:
           <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Results”</em>
+            <li><em>“Results”</em>
               <ul>
                 <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">STAR</code>
                   <ul>
@@ -1651,7 +1653,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
           <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
-            <li>More than 83% for <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> and more than 79% for <code class="language-plaintext highlighter-rouge">GSM461180_treat_paired</code>. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination.</li>
+            <li>More than 83% for <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> and 79% for <code class="language-plaintext highlighter-rouge">GSM461180_treat_paired</code>. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination.</li>
             <li>
               <p>We also have access to the number and percentage of reads that are mapped at several location, mapped at too many different location, not mapped because too short.</p>
 
@@ -1667,7 +1669,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
   </ol>
 </blockquote>
 
-<p>According to the <strong>MultiQC</strong> report, about 80% of reads for both samples are mapped exactly once to the reference genome. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination. Both samples have a low (less than 10%) percentage of reads that mapped to multiple locations on the reference genome. This is in the normal range for Illumina short-read sequencing, but may be lower for newer long-read sequencing datasets that can span larger repeated regions in the reference genome.</p>
+<p>According to the <strong>MultiQC</strong> report, about 80% of reads for both samples are mapped exactly once to the reference genome. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination. Both samples have a low (less than 10%) percentage of reads that mapped to multiple locations on the reference genome. This is in the normal range for Illumina short-read sequencing, but may be lower for newer long-read sequencing datasets that can span larger repeated regions in the reference genome and will be higher for 3’ end libraries.</p>
 
 <p>The main output of <strong>STAR</strong> is a BAM file.</p>
 
@@ -1771,7 +1773,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-35"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-36"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Which information do you find in a SAM/BAM file?</li>
@@ -1779,7 +1781,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-35"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-35" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-36"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-36" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Sequences and quality information, like a FASTQ</li>
       <li>Mapping information, Location of the read on the chromosome, Mapping quality, etc</li>
@@ -1800,7 +1802,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
     <li>Click on the collection <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li>Expand the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> file.</li>
     <li>Click on the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> visualize icon in the <code class="language-plaintext highlighter-rouge">GSM461177</code> file block.</li>
-    <li>In the center panel click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV local D. melanogaster (dm6)</code>to load the reads into the IGV browser
+    <li>In the center panel click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV (local, D. melanogaster (dm6))</code>to load the reads into the IGV browser
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
@@ -1902,16 +1904,16 @@ installed on your machine. However, the questions in this section can also be an
     <div class="box-title hands-on-title" id="hands-on-check-duplicate-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check duplicate reads</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3" title="MarkDuplicates tool"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.4" title="MarkDuplicates tool"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.4</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  to aggregate the MarkDuplicates logs with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span>  to aggregate the MarkDuplicates logs with the following parameters:
         <ul>
           <li>In <em>“Results”</em>:
             <ul>
-              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Results”</em>
+              <li><em>“Results”</em>
                 <ul>
                   <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">Picard</code>
                     <ul>
@@ -1963,11 +1965,11 @@ installed on your machine. However, the questions in this section can also be an
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file”</em>: <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  to aggregate the idxstats logs with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span>  to aggregate the idxstats logs with the following parameters:
         <ul>
           <li>In <em>“Results”</em>:
             <ul>
-              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Results”</em>
+              <li><em>“Results”</em>
                 <ul>
                   <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">Samtools</code>
                     <ul>
@@ -2029,7 +2031,7 @@ installed on your machine. However, the questions in this section can also be an
     <div class="box-title hands-on-title" id="hands-on-check-gene-body-coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check gene body coverage</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.13+galaxy2" title="Samtools view tool"><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.13+galaxy2</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Samtools view tool"><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“SAM/BAM/CRAM data set”</em>: <code class="language-plaintext highlighter-rouge">mapped_reads</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of reads</code>
@@ -2056,10 +2058,10 @@ installed on your machine. However, the questions in this section can also be an
       </li>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Convert GTF to BED12 tool"><strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357</span></span>  to convert the GTF file to BED:
         <ul>
-          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF File to convert”</em>: <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF File to convert”</em>: <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109.gtf.gz</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3" title="Gene Body Coverage (BAM) tool"><strong>Gene Body Coverage (BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy2" title="Gene Body Coverage (BAM) tool"><strong>Gene Body Coverage (BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy2</span></span>  with the following parameters:
         <ul>
           <li><em>“Run each sample separately, or combine mutiple samples into one plot”</em>: <code class="language-plaintext highlighter-rouge">Run each sample separately</code>
             <ul>
@@ -2069,11 +2071,11 @@ installed on your machine. However, the questions in this section can also be an
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">Convert GTF to BED12 on data N: BED12</code> (output of <strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  to aggregate the RSeQC results with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span>  to aggregate the RSeQC results with the following parameters:
         <ul>
           <li>In <em>“Results”</em>:
             <ul>
-              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Results”</em>
+              <li><em>“Results”</em>
                 <ul>
                   <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">RSeQC</code>
                     <ul>
@@ -2125,17 +2127,17 @@ installed on your machine. However, the questions in this section can also be an
     <div class="box-title hands-on-title" id="hands-on-check-the-number-of-reads-mapped-to-each-chromosome-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check the number of reads mapped to each chromosome</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1" title="Read Distribution tool"><strong>Read Distribution</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy2" title="Read Distribution tool"><strong>Read Distribution</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy2</span></span>  with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam/.sam file”</em>: <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: BED12 file (output of <strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  to aggregate the Read Distribution results with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span>  to aggregate the Read Distribution results with the following parameters:
         <ul>
           <li>In <em>“Results”</em>:
             <ul>
-              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Results”</em>
+              <li><em>“Results”</em>
                 <ul>
                   <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">RSeQC</code>
                     <ul>
@@ -2253,40 +2255,7 @@ installed on your machine. However, the questions in this section can also be an
 
 <p>Two main tools are available for read counting: <a href="http://htseq.readthedocs.io/en/release_0.9.1/count.html"><strong>HTSeq-count</strong></a> (<span class="citation"><a href="#anders2015htseq">Anders <i>et al.</i> 2015</a></span>) or <strong>featureCounts</strong> (<span class="citation"><a href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a></span>). Additionally, <strong>STAR</strong> allows to count reads while mapping: its results are identical to those from <strong>HTSeq-count</strong>. While this output is sufficient for most analyses, <strong>featureCounts</strong> offers more customization on how to count reads (minimum mapping quality, counting reads instead of fragments, count transcripts instead of genes etc.).</p>
 
-<p>Therefore we offer a parallel tutorial for the 2 methods which give very similar results.</p>
-
-<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
-	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
-	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
-	
-	
-		<input id="cyoa-opt1" type="radio" name="cyoa" value="featureCounts" onclick="cyoaChoice('featureCounts')" />
-		<label for="cyoa-opt1" class="select btn btn-secondary">featureCounts</label>
-	
-	
-		<input id="cyoa-opt2" type="radio" name="cyoa" value="STAR" onclick="cyoaChoice('STAR')" />
-		<label for="cyoa-opt2" class="select btn btn-secondary">STAR</label>
-	
-	
-	
-
-	
-	<script>
-		function ready(fn) {
-			if (document.readyState != 'loading'){
-				fn();
-			} else {
-				document.addEventListener('DOMContentLoaded', fn);
-			}
-		}
-		ready(function() {
-			cyoaDefault("featureCounts");
-		})
-	</script>
-	
-</blockquote>
-
-<p>In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to <strong>featureCounts</strong> or to the output of <strong>STAR</strong>, e.g. the strandness.</p>
+<p>In principle, the counting of reads overlapping with genomic features is a fairly simple task. But the strandness of the library needs to be determined. Indeed this is a parameter of <strong>featureCounts</strong>. On the contrary, <strong>STAR</strong> evaluates the counts into the three possible strandnesses but you still need this information to extract the counts which corresponds to your library.</p>
 
 <h2 id="estimation-of-the-strandness">Estimation of the strandness</h2>
 
@@ -2319,7 +2288,7 @@ installed on your machine. However, the questions in this section can also be an
 
 <figure id="figure-24"><img src="../../images/ref-based/strandness_cases.png" alt="How to estimate the strandness?" width="574" height="824" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 24</strong>:</span> In a stranded forward library, reads map mostly on the same strand as the genes. With stranded reverse library, reads map mostly on the opposite strand. With unstranded library, reads map on genes on both strands independently of the orientation of the gene.</figcaption></figure>
 
-<p>There are 3 ways to estimate strandness from <strong>STAR</strong> results (choose the one you prefer)</p>
+<p>There are 4 ways to estimate strandness from <strong>STAR</strong> results (choose the one you prefer)</p>
 
 <ol>
   <li>
@@ -2387,17 +2356,107 @@ installed on your machine. However, the questions in this section can also be an
     </blockquote>
   </li>
   <li>
-    <p>You can use the output of <strong>STAR</strong> with the counts.</p>
+    <p>Alternatively, instead of using the BAM you can use the stranded coverage generated by <strong>STAR</strong>. Using <strong>pyGenomeTracks</strong> we will be able to visualize the coverage on each strand for each sample. This tool has a lot of parameters to customize your plots.</p>
 
     <blockquote class="notranslate hands_on">
-      <div class="box-title hands-on-title" id="hands-on-estimate-strandness-with-star"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Estimate strandness with STAR</div>
+      <div class="box-title hands-on-title" id="hands-on-estimate-strandness-with-pygenometracks-from-star-coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Estimate strandness with pyGenometracks from STAR coverage</div>
 
       <ol>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  to aggregate the STAR logs with the following parameters:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1" title="pyGenomeTracks tool"><strong>pyGenomeTracks</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1</span></span> :
+          <ul>
+            <li><em>“Region of the genome to limit the operation”</em>: <code class="language-plaintext highlighter-rouge">chr4:540,000-560,000</code></li>
+            <li>In <em>“Include tracks in your plot”</em>:
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Include tracks in your plot”</em>
+                  <ul>
+                    <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Bedgraph track</code>
+                      <ul>
+                        <li><em>“Plot title”</em>: You need to leave this field empty so the title on the plot will be the sample name.</li>
+                        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Track file(s) bedgraph format”</em>: Select <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: Coverage Uniquely mapped strand 1</code>.</li>
+                        <li><em>“Color of track”</em>: Select a color of your choice for example blue</li>
+                        <li><em>“Minimum value”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+                        <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+                        <li><em>“Show visualization of data range”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Include tracks in your plot”</em>
+                  <ul>
+                    <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Bedgraph track</code>
+                      <ul>
+                        <li><em>“Plot title”</em>: You need to leave this field empty so the title on the plot will be the sample name.</li>
+                        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Track file(s) bedgraph format”</em>: Select <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: Coverage Uniquely mapped strand 2</code>.</li>
+                        <li><em>“Color of track”</em>: Select a color of your choice different from the first one for example red</li>
+                        <li><em>“Minimum value”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+                        <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+                        <li><em>“Show visualization of data range”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Include tracks in your plot”</em>
+                  <ul>
+                    <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Gene track / Bed track</code>
+                      <ul>
+                        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Genes</code></li>
+                        <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) bed or gtf format”</em>: Select <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </blockquote>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+      <figure id="figure-27"><img src="../../images/ref-based/pyGenomeTracks.png" alt="pyGenomeTracks. " width="1133" height="512" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 27</strong>:</span> STAR coverage for strand 1 in blue and strand 2 in red</figcaption></figure>
+
+      <ol>
+        <li>Which gene are we looking at? Which strand it is?</li>
+        <li>What is the average coverage for each strand?</li>
+        <li>What is the strandness of the library?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <ol>
+          <li>We see 3 transcripts called Thd1-RC, Thd1-RB and Thd1-RA of the gene Thd1. The gene is on the reverse strand.</li>
+          <li>The scale goes to 1.5-2 in the 4 profiles. The average coverage should be around 1.2-1.5</li>
+          <li>We deduce that the library is unstranded.</li>
+        </ol>
+
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How would it be if the library was stranded?</div>
+
+          <figure id="figure-28"><img src="../../images/ref-based/pyGenomeTracks_USvsRS.png" alt="pyGenomeTracks USvsRS. " width="1133" height="704" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 28</strong>:</span> STAR coverage for strand 1 in blue and strand 2 in red for unstranded and reverse stranded library</figcaption></figure>
+          <p>Note that the coverage on the strand 1 is very low for the stranded_PE sample while the gene is forward.
+This means that the library of stranded_PE is reverse stranded.
+On the contrary for unstranded_PE the scale is comparable for both strand.</p>
+        </blockquote>
+      </blockquote>
+
+    </blockquote>
+  </li>
+  <li>
+    <p>You can use the output of <strong>STAR</strong> with the counts. Indeed as explained before, <strong>STAR</strong> evaluates the number of reads on genes for the three possible scenarios: unstranded library, stranded forward or stranded reverse. The condition which attributes more reads to gene must be the condition which matches your library.</p>
+
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-estimate-strandness-with-star-counts"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Estimate strandness with STAR counts</div>
+
+      <ol>
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span>  to aggregate the STAR logs with the following parameters:
           <ul>
             <li>In <em>“Results”</em>:
               <ul>
-                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Results”</em>
+                <li><em>“Results”</em>
                   <ul>
                     <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">STAR</code>
                       <ul>
@@ -2427,7 +2486,7 @@ installed on your machine. However, the questions in this section can also be an
     </blockquote>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
       <ol>
         <li>What percentage of reads are asigned to genes if the library is unstranded/same stranded/reverse stranded?</li>
@@ -2435,24 +2494,24 @@ installed on your machine. However, the questions in this section can also be an
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-        <figure id="figure-27"><img src="../../images/ref-based/star_gene_counts_unstranded.png" alt="STAR Gene counts unstranded. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 27</strong>:</span> Gene counts unstranded</figcaption></figure>
-        <figure id="figure-28"><img src="../../images/ref-based/star_gene_counts_same.png" alt="STAR Gene counts same stranded. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 28</strong>:</span> Gene counts same stranded</figcaption></figure>
-        <figure id="figure-29"><img src="../../images/ref-based/star_gene_counts_reverse.png" alt="STAR Gene counts reverse stranded. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 29</strong>:</span> Gene counts reverse stranded</figcaption></figure>
+        <figure id="figure-29"><img src="../../images/ref-based/star_gene_counts_unstranded.png" alt="STAR Gene counts unstranded. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 29</strong>:</span> Gene counts unstranded</figcaption></figure>
+        <figure id="figure-30"><img src="../../images/ref-based/star_gene_counts_same.png" alt="STAR Gene counts same stranded. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 30</strong>:</span> Gene counts same stranded</figcaption></figure>
+        <figure id="figure-31"><img src="../../images/ref-based/star_gene_counts_reverse.png" alt="STAR Gene counts reverse stranded. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 31</strong>:</span> Gene counts reverse stranded</figcaption></figure>
 
         <ol>
-          <li>About 75% of reads are asigned to genes if the library is unstranded, while it is less than 40% in the other cases.</li>
+          <li>About 75% of reads are asigned to genes if the library is unstranded, while it is around 40% in the other cases.</li>
           <li>This suggests that the library is unstranded.</li>
         </ol>
 
         <blockquote class="comment">
-          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How would it be if the library was stranded?</div>
+          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How would it be if the library was stranded?</div>
 
-          <figure id="figure-30"><img src="../../images/ref-based/star_gene_counts_unstranded_USvsRS.png" alt="STAR Gene counts unstranded USvsRS. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 30</strong>:</span> Gene counts unstranded for unstranded and reverse stranded library</figcaption></figure>
-          <figure id="figure-31"><img src="../../images/ref-based/star_gene_counts_same_USvsRS.png" alt="STAR Gene counts same stranded USvsRS. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 31</strong>:</span> Gene counts same stranded for unstranded and reverse stranded library</figcaption></figure>
-          <figure id="figure-32"><img src="../../images/ref-based/star_gene_counts_reverse_USvsRS.png" alt="STAR Gene counts reverse stranded USvsRS. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 32</strong>:</span> Gene counts reverse stranded for unstranded and reverse stranded library</figcaption></figure>
-          <p>Note thare there is very few reads attributed to genes for same stranded.
+          <figure id="figure-32"><img src="../../images/ref-based/star_gene_counts_unstranded_USvsRS.png" alt="STAR Gene counts unstranded USvsRS. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 32</strong>:</span> Gene counts unstranded for unstranded and reverse stranded library</figcaption></figure>
+          <figure id="figure-33"><img src="../../images/ref-based/star_gene_counts_same_USvsRS.png" alt="STAR Gene counts same stranded USvsRS. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 33</strong>:</span> Gene counts same stranded for unstranded and reverse stranded library</figcaption></figure>
+          <figure id="figure-34"><img src="../../images/ref-based/star_gene_counts_reverse_USvsRS.png" alt="STAR Gene counts reverse stranded USvsRS. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 34</strong>:</span> Gene counts reverse stranded for unstranded and reverse stranded library</figcaption></figure>
+          <p>Note that there is very few reads attributed to genes for same stranded.
 The numbers are comparable between unstranded and reverse stranded because really few genes overlap on opposite strands but still it goes from 63.6% (unstranded) to 65% (reverse stranded).</p>
         </blockquote>
       </blockquote>
@@ -2470,12 +2529,12 @@ The numbers are comparable between unstranded and reverse stranded because reall
       <ol>
         <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Convert GTF to BED12 tool"><strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357</span></span>  to convert the GTF file to BED:
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF File to convert”</em>: <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF File to convert”</em>: <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</code></li>
           </ul>
 
-          <p>You may already have converted this <code class="language-plaintext highlighter-rouge">BED12</code> file from the <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code> dataset earlier if you did the detailed part on quality checks. In this case, no need to redo it a second time</p>
+          <p>You may already have converted this <code class="language-plaintext highlighter-rouge">BED12</code> file from the <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</code> dataset earlier if you did the detailed part on quality checks. In this case, no need to redo it a second time</p>
         </li>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1" title="Infer Experiment tool"><strong>Infer Experiment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1</span></span>  to determine the library strandness with the following parameters:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2" title="Infer Experiment tool"><strong>Infer Experiment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2</span></span>  to determine the library strandness with the following parameters:
           <ul>
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam file”</em>: <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: BED12 file (output of <strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -2510,7 +2569,7 @@ The numbers are comparable between unstranded and reverse stranded because reall
     <p>If the two “Fraction of reads explained by” numbers are close to each other, we conclude that the library is not a strand-specific dataset (or unstranded).</p>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
       <ol>
         <li>What are the “Fraction of the reads explained by” results for <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code>?</li>
@@ -2518,7 +2577,7 @@ The numbers are comparable between unstranded and reverse stranded because reall
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>
@@ -2528,12 +2587,12 @@ The numbers are comparable between unstranded and reverse stranded because reall
             <blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
             <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This is PairEnd Data
-Fraction of reads failed to determine: 0.0963
-Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
-Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
+Fraction of reads failed to determine: 0.1013
+Fraction of reads explained by "1++,1--,2+-,2-+": 0.4626
+Fraction of reads explained by "1+-,1-+,2++,2--": 0.4360
 </code></pre></div>            </div>
 
-            <p>so 46.46% of the reads are assigned to the forward strand and 43.88% to the reverse strand.</p>
+            <p>so 46.26% of the reads are assigned to the forward strand and 43.60% to the reverse strand.</p>
           </li>
           <li>
             <p>Similar statistics are found for <code class="language-plaintext highlighter-rouge">GSM461180_treat_paired</code>, so the library seems to be of the type unstranded for both samples.</p>
@@ -2541,7 +2600,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
         </ol>
 
         <blockquote class="comment">
-          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How would it be if the library was stranded?</div>
+          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How would it be if the library was stranded?</div>
 
           <p>Still taking the 2 BAM as example, We get for the unstranded:</p>
 
@@ -2629,6 +2688,39 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
 
 <h2 id="counting-reads-per-genes">Counting reads per genes</h2>
 
+<p>In order to count the number of reads per gene, we offer a parallel tutorial for the 2 methods (STAR and featureCounts) which give very similar results.</p>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="featureCounts" onclick="cyoaChoice('featureCounts')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">featureCounts</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="STAR" onclick="cyoaChoice('STAR')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">STAR</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("featureCounts");
+		})
+	</script>
+	
+</blockquote>
+
 <div class="featureCounts">
 
   <p>As you chose to use the featureCounts flavor of the tutorial, we now run <strong>featureCounts</strong> to count the number of reads per annotated gene.</p>
@@ -2637,41 +2729,32 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
     <div class="box-title hands-on-title" id="hands-on-counting-the-number-of-reads-per-annotated-gene"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Counting the number of reads per annotated gene</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2" title="featureCounts tool"><strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2</span></span>  with the following parameters to count the number of reads per gene:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1" title="featureCounts tool"><strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1</span></span>  with the following parameters to count the number of reads per gene:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Alignment file”</em>: <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           <li><em>“Specify strand information”</em>: <code class="language-plaintext highlighter-rouge">Unstranded</code></li>
           <li><em>“Gene annotation file”</em>: <code class="language-plaintext highlighter-rouge">in your history</code>
             <ul>
-              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene annotation file”</em>: <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code></li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene annotation file”</em>: <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</code></li>
             </ul>
           </li>
+          <li><em>“GFF feature type filter”</em>: <code class="language-plaintext highlighter-rouge">exon</code></li>
+          <li><em>“GFF gene identifier”</em>: <code class="language-plaintext highlighter-rouge">gene_id</code></li>
           <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Gene-ID "\t" read-count (MultiQC/DESeq2/edgeR/limma-voom compatible)</code></li>
           <li><em>“Create gene-length file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-          <li>In <em>“Options for paired-end reads”</em>:
-            <ul>
-              <li><em>“Count fragments instead of reads”</em>: <code class="language-plaintext highlighter-rouge">Enabled; fragments (or templates) will be counted instead of reads</code></li>
-            </ul>
-          </li>
+          <li><em>“Does the input have read pairs”</em>: <code class="language-plaintext highlighter-rouge">Yes, paired-end and count them as 1 single fragment</code></li>
           <li>In <em>“Read filtering options”</em>:
             <ul>
               <li><em>“Minimum mapping quality per read”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
             </ul>
           </li>
-          <li>In <em>“Advanced options”</em>:
-            <ul>
-              <li><em>“GFF feature type filter”</em>: <code class="language-plaintext highlighter-rouge">exon</code></li>
-              <li><em>“GFF gene identifier”</em>: <code class="language-plaintext highlighter-rouge">gene_id</code></li>
-              <li><em>“Allow reads to map to multiple features”</em>: <code class="language-plaintext highlighter-rouge">Disabled; reads that align to multiple features or overlapping features are excluded</code></li>
-            </ul>
-          </li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0</span></span>  to aggregate the reports with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span>  to aggregate the reports with the following parameters:
         <ul>
           <li>In <em>“Results”</em>:
             <ul>
-              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Results”</em>
+              <li><em>“Results”</em>
                 <ul>
                   <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">featureCounts</code>
                     <ul>
@@ -2685,7 +2768,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
         </ul>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
           <ol>
             <li>How many reads have been assigned to a gene?</li>
@@ -2693,13 +2776,13 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>
-                <p>Around 70% of the reads have been assigned to genes: this quantity is good enough.</p>
+                <p>Around 63% of the reads have been assigned to genes: this quantity is good enough.</p>
 
-                <figure id="figure-33"><img src="../../images/ref-based/featureCounts_assignment_plot.png" alt="featureCounts assignment. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 33</strong>:</span> Assignments with featureCounts</figcaption></figure>
+                <figure id="figure-35"><img src="../../images/ref-based/featureCounts_assignment_plot.png" alt="featureCounts assignment. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 35</strong>:</span> Assignments with featureCounts</figcaption></figure>
 
                 <p>Some reads are not assigned because they were multi-mapped; others were assigned to no features or to ambiguous ones.</p>
               </li>
@@ -2725,7 +2808,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
   <p>As written above, during mapping, <strong>STAR</strong> counted reads for each gene provided in the gene annotation file (this was achieved by the option <code class="language-plaintext highlighter-rouge">Per gene read counts (GeneCounts)</code>). However, this output provides some statistics at the beginning and the counts for each gene depending on the library (unstranded is column 2, stranded forward is column 3 and stranded reverse is column 4).</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-reformatting-star-output"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Reformatting STAR output</div>
+    <div class="box-title hands-on-title" id="hands-on-inspect-star-output"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspect STAR output</div>
 
     <ol>
       <li>Inspect the counts from <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> in the collection <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: reads per gene</code></li>
@@ -2733,7 +2816,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
   </blockquote>
   <blockquote class="question">
 
-    <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-16"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <ol>
       <li>How many reads are unmapped/multi-mapped?</li>
@@ -2743,11 +2826,11 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>There are 1,190,029 unmapped reads and 571,324 multi-mapped reads.</li>
-        <li>It starts at line 5 with the gene <code class="language-plaintext highlighter-rouge">FBgn0085804</code>.</li>
+        <li>It starts at line 5 with the gene <code class="language-plaintext highlighter-rouge">FBgn0250732</code>.</li>
         <li>There are 4 columns:
           <ol>
             <li>Gene ID</li>
@@ -2766,7 +2849,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
   <p>We will reformat the output of <strong>STAR</strong> to be similar to the output of <strong>featureCounts</strong> (or other counting softwares) which is only 2 columns, one with IDs and the other one with counts.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-reformatting-star-output-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Reformatting STAR output</div>
+    <div class="box-title hands-on-title" id="hands-on-reformatting-star-output"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Reformatting STAR output</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last tool"><strong>Select last</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0</span></span>  lines from a dataset (tail) to remove the first 4 lines with the following parameters:
@@ -2797,7 +2880,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
         <ul>
           <li><em>“Select a built-in GTF file or one from your history”</em>: <code class="language-plaintext highlighter-rouge">Use a GTF from history</code>
             <ul>
-              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a GTF file”</em>: <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code></li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a GTF file”</em>: <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</code></li>
             </ul>
           </li>
           <li><em>“Analysis to perform”</em>: <code class="language-plaintext highlighter-rouge">gene lengths only</code></li>
@@ -2819,12 +2902,12 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
 </div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-16"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-17"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Which feature has the most counts for both samples? (Hint: Use the Sort tool)</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the following:</p>
 
@@ -2850,7 +2933,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
       <li>
         <p>Inspect the result</p>
 
-        <p>The result of sorting the table on column 2 reveals that FBgn0000556 is the feature with the most counts (around 128,740 in <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> and 127,400 in <code class="language-plaintext highlighter-rouge">GSM461180_treat_paired</code>).</p>
+        <p>The result of sorting the table on column 2 reveals that FBgn0284245 is the feature with the most counts (around 128,740 in <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> and 127,400 in <code class="language-plaintext highlighter-rouge">GSM461180_treat_paired</code>).</p>
 
         <p>Comparing different output files is easier if we can view more than one dataset simultaneously. The Scratchbook function allows us to build up a collection of datasets that will be shown on the screen together.</p>
 
@@ -2861,32 +2944,25 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
             <li>
               <p>The <strong>Scratchbook</strong> is enabled by clicking the nine-blocks icon seen on the right of the Galaxy top menubar:</p>
 
-              <figure id="figure-34"><img src="../../images/ref-based/menubarWithScratchbook.png" alt="scratchbook icon. " width="519" height="38" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 34</strong>:</span> Menu bar with Scratchbook icon</figcaption></figure>
+              <figure id="figure-36"><img src="../../images/ref-based/menubarWithScratchbook.png" alt="scratchbook icon. " width="516" height="52" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 36</strong>:</span> Menu bar with Scratchbook icon</figcaption></figure>
             </li>
             <li>
               <p>When the Scratchbook is <strong>enabled</strong> datasets being viewed (by clicking the eye-icon) are added to the Scratchbook view:</p>
 
-              <figure id="figure-35"><img src="../../images/ref-based/menubarWithScratchbookEnabled.png" alt="Scratchbook icon enabled. " width="519" height="38" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 35</strong>:</span> Menu bar with Scratchbook icon enabled</figcaption></figure>
+              <figure id="figure-37"><img src="../../images/ref-based/menubarWithScratchbookEnabled.png" alt="Scratchbook icon enabled. " width="589" height="83" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 37</strong>:</span> Menu bar with Scratchbook icon enabled</figcaption></figure>
             </li>
             <li>
               <p>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon to view one of the <strong>sorted counts</strong> files. Instead of occupying the entire middle bar the dataset view is now shown an overlay:</p>
 
-              <figure id="figure-36"><img src="../../images/ref-based/scratchbookOneDataset.png" alt="Scratchbook one dataset shown. " width="1915" height="542" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 36</strong>:</span> Scratchbook showing one dataset overlay</figcaption></figure>
+              <figure id="figure-38"><img src="../../images/ref-based/scratchbookOneDataset.png" alt="Scratchbook one dataset shown. " width="1917" height="499" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 38</strong>:</span> Scratchbook showing one dataset overlay</figcaption></figure>
             </li>
             <li>
-              <p>When a dataset is shown <strong>click in the main interface</strong> to prepare to select another dataset. The interface now shows that there is one saved view in the Scratchbook:</p>
+              <p>Next click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon on the <strong>second sorted counts</strong> file. The second dataset goes over the first one but you can move the window in order to see the two datasets side by side:</p>
 
-              <figure id="figure-37"><img src="../../images/ref-based/scratchbookOneSavedView.png" alt="scratchbook one saved view. " width="568" height="43" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 37</strong>:</span> Menu bar with one saved dataset view in Scratchbook</figcaption></figure>
+              <figure id="figure-39"><img src="../../images/ref-based/scratchbookTwoDatasetsShown.png" alt="Scratchbook two datasets shown. " width="1918" height="479" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 39</strong>:</span> Scratchbook showing two side by side datasets</figcaption></figure>
             </li>
             <li>
-              <p>Next click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon on the <strong>second sorted counts</strong> file. The two datasets can now be seen side by side:</p>
-
-              <figure id="figure-38"><img src="../../images/ref-based/scratchbookTwoDatasetsShown.png" alt="Scratchbook two datasets shown. " width="1563" height="428" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 38</strong>:</span> Scratchbook showing two side by side datasets</figcaption></figure>
-            </li>
-            <li>
-              <p>To <strong>leave</strong> Scratchbook selection mode, click on the <strong>Scratchbook icon</strong> again. Your saved view will still remain for future viewing:</p>
-
-              <figure id="figure-39"><img src="../../images/ref-based/scratchbookDisabledWithSavedDatasets.png" alt="Scratchbook disabled datasets saved. " width="562" height="44" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 39</strong>:</span> Scratchbook disabled with two datasets saved</figcaption></figure>
+              <p>To <strong>leave</strong> Scratchbook selection mode, click on the <strong>Scratchbook icon</strong> again. You can decide to close the windows or to reduce them in order to display them later.</p>
             </li>
           </ol>
 
@@ -2902,7 +2978,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-optional-re-run-on-the-other-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: (Optional) Re-run on the other datasets</div>
 
-  <p>You can do the same process on the other sequence files available on <a href="https://zenodo.org/record/4541751">Zenodo</a> and on the data library.</p>
+  <p>You can do the same process on the other sequence files available on <a href="https://zenodo.org/record/6457007">Zenodo</a> and on the data library.</p>
 
   <ul>
     <li>Paired-end data
@@ -2922,16 +2998,16 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
 
   <p>The links to these files are below:</p>
 
-  <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4541751/files/GSM461178_1.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461178_2.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461181_1.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461181_2.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461176.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461179.fastqsanger
-https://zenodo.org/record/4541751/files/GSM461182.fastqsanger
+  <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6457007/files/GSM461178_1.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461178_2.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461181_1.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461181_2.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461176.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461179.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461182.fastqsanger
 </code></pre></div>  </div>
 
-  <p>For the single-end data, there is no need to flatten the collection before <strong>FastQC</strong>. The parameters of all tools are the same except <strong>STAR</strong> for which you can set <code class="language-plaintext highlighter-rouge">Length of the genomic sequence around annotated junctions</code> to 74 as one dataset has reads of 75bp (others are 44bp and 45bp).</p>
+  <p>For the single-end data, there is no need to flatten the collection before <strong>FastQC</strong>. The parameters of all tools are the same except <strong>STAR</strong> for which you can set <code class="language-plaintext highlighter-rouge">Length of the genomic sequence around annotated junctions</code> to 74 as one dataset has reads of 75bp (others are 44bp and 45bp) and <strong>FeatureCount</strong> were your data are not paired any more.</p>
 </blockquote>
 
 <h1 id="analysis-of-the-differential-gene-expression">Analysis of the differential gene expression</h1>
@@ -2946,25 +3022,25 @@ https://zenodo.org/record/4541751/files/GSM461182.fastqsanger
   <ol>
     <li>Create a new empty history</li>
     <li>
-      <p>Import the seven count files from <a href="https://zenodo.org/record/4541751">Zenodo</a> or the Shared Data library:</p>
+      <p>Import the seven count files from <a href="https://zenodo.org/record/6457007">Zenodo</a> or the Shared Data library:</p>
 
       <ul>
-        <li><code class="language-plaintext highlighter-rouge">GSM461176_untreat_single.counts</code></li>
-        <li><code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired.counts</code></li>
-        <li><code class="language-plaintext highlighter-rouge">GSM461178_untreat_paired.counts</code></li>
-        <li><code class="language-plaintext highlighter-rouge">GSM461179_treat_single.counts</code></li>
-        <li><code class="language-plaintext highlighter-rouge">GSM461180_treat_paired.counts</code></li>
-        <li><code class="language-plaintext highlighter-rouge">GSM461181_treat_paired.counts</code></li>
-        <li><code class="language-plaintext highlighter-rouge">GSM461182_untreat_single.counts</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM461176_untreat_single_featureCounts.counts</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired_featureCounts.counts</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM461178_untreat_paired_featureCounts.counts</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM461179_treat_single_featureCounts.counts</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM461180_treat_paired_featureCounts.counts</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM461181_treat_paired_featureCounts.counts</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM461182_untreat_single_featureCounts.counts</code></li>
       </ul>
 
-      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4541751/files/GSM461176_untreat_single.counts
-https://zenodo.org/record/4541751/files/GSM461177_untreat_paired.counts
-https://zenodo.org/record/4541751/files/GSM461178_untreat_paired.counts
-https://zenodo.org/record/4541751/files/GSM461179_treat_single.counts
-https://zenodo.org/record/4541751/files/GSM461180_treat_paired.counts
-https://zenodo.org/record/4541751/files/GSM461181_treat_paired.counts
-https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
+      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6457007/files/GSM461176_untreat_single_featureCounts.counts
+https://zenodo.org/record/6457007/files/GSM461177_untreat_paired_featureCounts.counts
+https://zenodo.org/record/6457007/files/GSM461178_untreat_paired_featureCounts.counts
+https://zenodo.org/record/6457007/files/GSM461179_treat_single_featureCounts.counts
+https://zenodo.org/record/6457007/files/GSM461180_treat_paired_featureCounts.counts
+https://zenodo.org/record/6457007/files/GSM461181_treat_paired_featureCounts.counts
+https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.counts
 </code></pre></div>      </div>
     </li>
     <li>
@@ -2975,14 +3051,6 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
     </li>
   </ol>
 
-</blockquote>
-
-<blockquote class="details">
-  <div class="box-title details-title" id="details-the-counts-obtained-in-the-previous-part-may-be-different-from-the-one-imported"><button class="gtn-boxify-button details" type="button" aria-controls="details-the-counts-obtained-in-the-previous-part-may-be-different-from-the-one-imported" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: The counts obtained in the previous part may be different from the one imported<span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-  <p>The featureCounts tables you download from zenodo (or from the Data Library) were generated with the option “Count fragments instead of reads” set to “Disabled”. This way you roughly get twice the number of counts as each each read (from a pair) is counted individually.
-In addition, the single reads dataset were run with the option <code class="language-plaintext highlighter-rouge">Length of the genomic sequence around annotated junctions</code> to 36 instead of 74.
-Finally the header was removed from the featureCounts tables available on Zenodo.</p>
 </blockquote>
 
 <p>You might think we can just compare the count values in the files directly and calculate the extent of differential gene expression. However, it is not that simple.</p>
@@ -3112,7 +3180,7 @@ Finally the header was removed from the featureCounts tables available on Zenodo
         </tbody>
       </table>
 
-      <p><em>Because of the small values in the example, we are scoring using a factor of 10.</em> <!-- confusing --></p>
+      <p><em>Because of the small values in the example, we are using “per tens” instead of “per million” and therefore divide the sum by 10 instead of 1,000,000.</em></p>
     </li>
     <li>
       <p>Divide the read counts by the “per million” scaling factor</p>
@@ -3155,6 +3223,8 @@ Finally the header was removed from the featureCounts tables available on Zenodo
           </tr>
         </tbody>
       </table>
+
+      <p><em>In the example we use the “per tens” scaling factor and we get reads per tens</em></p>
     </li>
     <li>
       <p>Divide the RPM values by the length of the gene, in kilobases.</p>
@@ -3297,7 +3367,7 @@ Finally the header was removed from the featureCounts tables available on Zenodo
         </tbody>
       </table>
 
-      <p><em>As above, because of the small values in the example, we are scoring using a factor of 10.</em></p>
+      <p><em>As above, because of the small values in the example, we use “per tens” instead of “per million” and therefore divide the sum by 10 instead of 1,000,000.</em></p>
     </li>
     <li>
       <p>Divide the RPK values by the “per million” scaling factor</p>
@@ -3867,7 +3937,7 @@ Finally the header was removed from the featureCounts tables available on Zenodo
   <div class="box-title hands-on-title" id="hands-on-determine-differentially-expressed-features"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Determine differentially expressed features</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy1" title="DESeq2 tool"><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy2" title="DESeq2 tool"><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><em>“how”</em>: <code class="language-plaintext highlighter-rouge">Select group tags corresponding to levels</code>
           <ul>
@@ -3920,7 +3990,7 @@ Finally the header was removed from the featureCounts tables available on Zenodo
             </li>
           </ul>
         </li>
-        <li><em>“Files have header?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Files have header?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Choice of Input data”</em>: <code class="language-plaintext highlighter-rouge">Count data (e.g. from HTSeq-count, featureCounts or StringTie)</code></li>
         <li>In <em>“Output options”</em>:
           <ul>
@@ -3962,7 +4032,7 @@ Finally the header was removed from the featureCounts tables available on Zenodo
         <p>It shows the samples in the 2D plane spanned by their first two principal components. Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-17"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-18"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
           <figure id="figure-40"><img src="../../images/ref-based/deseq2_pca.png" alt="DESeq PCA. " width="1050" height="1050" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 40</strong>:</span> Principal component plot of the samples</figcaption></figure>
 
@@ -3973,7 +4043,7 @@ Finally the header was removed from the featureCounts tables available on Zenodo
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>The first dimension is separating the treated samples from the untreated sample.</li>
@@ -3989,14 +4059,14 @@ Finally the header was removed from the featureCounts tables available on Zenodo
         <p>The heatmap gives an overview of similarities and dissimilarities between samples: the color represents the distance between the samples. Dark blue means shorter distance, i.e. closer samples given the normalized counts.</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-18"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-19"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
           <figure id="figure-41"><img src="../../images/ref-based/deseq2_sample_sample_distance_heatmap.png" alt="Heatmap of the sample-to-sample distances. " width="1050" height="1050" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 41</strong>:</span> Heatmap of the sample-to-sample distances</figcaption></figure>
 
           <p>How are the samples grouped?</p>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <p>They are first grouped by the treatment (the first factor) and secondly by the sequencing type (the second factor), as in the PCA plot.</p>
 
@@ -4050,7 +4120,7 @@ Finally the header was removed from the featureCounts tables available on Zenodo
 <p>For more information about <strong>DESeq2</strong> and its outputs, you can have a look at the <a href="https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf"><strong>DESeq2</strong> documentation</a>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-19"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-20"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>Is the FBgn0003360 gene differentially expressed because of the treatment? If yes, how much?</li>
@@ -4060,11 +4130,11 @@ Finally the header was removed from the featureCounts tables available on Zenodo
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-20"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-20" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
-        <p>FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value (\(4.0 \cdot 10^{-178} &lt;&lt; 0.05\)). It is less expressed (<code class="language-plaintext highlighter-rouge">-</code> in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 (\(2^{log2FC} = 2^{2.99977727873544}\)).</p>
+        <p>FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value (\(2.8 \cdot 10^{-171} &lt;&lt; 0.05\)). It is less expressed (<code class="language-plaintext highlighter-rouge">-</code> in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 (\(2^{log2FC} = 2^{2.99542318410271}\)).</p>
       </li>
       <li>You can manually check for the <code class="language-plaintext highlighter-rouge">FBgn0261552</code> in the first column or run <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>
         <ul>
@@ -4091,92 +4161,26 @@ correction for the variability due to the 2nd factor. In our current case, treat
   </blockquote>
 </blockquote>
 
-<h2 id="extraction-and-annotation-of-differentially-expressed-genes">Extraction and annotation of differentially expressed genes</h2>
-
-<p>Now we would like to extract the most differentially expressed genes due to the treatment with a fold change &gt; 2 (or &lt; 1/2).</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract the most differentially expressed genes</div>
-
-  <ol>
-    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  to extract genes with a significant change in gene expression (adjusted <em>p</em>-value below 0.05) between treated and untreated samples:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: the <code class="language-plaintext highlighter-rouge">DESeq2 result file</code> (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7&lt;0.05</code></li>
-      </ul>
-    </li>
-    <li>
-      <p>Rename the output <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value</code>.</p>
-
-      <blockquote class="question">
-        <div class="box-title question-title" id="question-20"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
-
-        <p>How many genes have a significant change in gene expression between these conditions?</p>
-
-        <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-20"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-20" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-          <p>We get 1,091 genes (6.21%) with a significant change in gene expression between treated and untreated samples.</p>
-
-        </blockquote>
-      </blockquote>
-      <blockquote class="comment">
-
-        <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
-
-        <p>The file with the independently filtered results can be used for further downstream analysis as it excludes genes with only a few read counts, as these genes will not be considered as significantly differentially expressed.</p>
-      </blockquote>
-
-      <p>We will now select only the genes with a fold change (FC) &gt; 2 or FC &lt; 0.5. Note that the DESeq2 output file contains \(log_{2} FC\), rather than FC itself, so we filter for \(abs(log_{2} FC) &gt; 1\) (which implies FC &gt; 2 or FC &lt; 0.5).</p>
-    </li>
-    <li><span class="tool" data-tool="Filter1" title="Filter tool"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  to extract genes with an \(abs(log_{2} FC) &gt; 1\):
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value</code></li>
-        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">abs(c3)&gt;1</code></li>
-      </ul>
-
-      <blockquote class="question">
-        <div class="box-title question-title" id="question-21"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
-
-        <ol>
-          <li>How many genes have been conserved?</li>
-          <li>Can the <em>Pasilla</em> gene (ps, FBgn0261552) be found in this table?</li>
-        </ol>
-
-        <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-21"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-21" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-          <ol>
-            <li>130, or 11.92% of the significantly differentially expressed genes.</li>
-            <li>The <em>Pasilla</em> gene can be found with a quick Search (or even using  <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  )</li>
-          </ol>
-        </blockquote>
-      </blockquote>
-    </li>
-  </ol>
-
-</blockquote>
-
-<p>We now have a table with 130 lines corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its \(log_{2} FC\) and other information.</p>
+<h2 id="annotation-of-the-deseq2-results">Annotation of the DESeq2 results</h2>
 
 <p>The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase (<span class="citation"><a href="#thurmond2018flybase">Thurmond <i>et al.</i> 2018</a></span>). These IDs are unique but sometimes we prefer to have the gene names, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene names may hint already to a function or they help you to search for desired candidates. We would also like to display the location of these genes within the genome. We can extract such information from the annotation file which we used for mapping and counting.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotation-of-the-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotation of the differentially expressed genes</div>
+  <div class="box-title hands-on-title" id="hands-on-annotation-of-the-deseq2-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotation of the DESeq2 results</div>
 
   <ol>
     <li>
-      <p>Import the Ensembl gene annotation for <em>Drosophila melanogaster</em> (<code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code>) from the previous history, or from the Shared Data library or from Zenodo:</p>
+      <p>Import the Ensembl gene annotation for <em>Drosophila melanogaster</em> (<code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</code>) from the previous history, or from the Shared Data library or from Zenodo:</p>
 
-      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4541751/files/Drosophila_melanogaster.BDGP6.87.gtf
+      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6457007/files/Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz
 </code></pre></div>      </div>
     </li>
     <li>
       <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0" title="Annotate DESeq2/DEXSeq output tables tool"><strong>Annotate DESeq2/DEXSeq output tables</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0</span></span>  with:</p>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular output of DESeq2/edgeR/limma/DEXSeq”</em>: output of the last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular output of DESeq2/edgeR/limma/DEXSeq”</em>: the <code class="language-plaintext highlighter-rouge">DESeq2 result file</code> (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Input file type”</em>: <code class="language-plaintext highlighter-rouge">DESeq2/edgeR/limma</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference annotation in GFF/GTF format”</em>: imported gtf <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference annotation in GFF/GTF format”</em>: imported gtf <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</code></li>
       </ul>
     </li>
   </ol>
@@ -4202,7 +4206,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 </ol>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-22"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-21"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>Where is the most over-expressed gene located?</li>
@@ -4211,7 +4215,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-22"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-22" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-21"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-21" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>FBgn0025111 (the top-ranked gene with the highest positive log2FC value) is located on the reverse strand of chromosome X, between 10,778,953 bp and 10,786,907 bp.</li>
@@ -4250,9 +4254,82 @@ correction for the variability due to the 2nd factor. In our current case, treat
         </li>
       </ul>
     </li>
-    <li>Rename the output to <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value &amp; abs(log2(FC)) &gt; 1</code></li>
+    <li>Rename the output to <code class="language-plaintext highlighter-rouge">Annotated DESeq2 results</code></li>
   </ol>
 </blockquote>
+
+<h2 id="extraction-and-annotation-of-differentially-expressed-genes">Extraction and annotation of differentially expressed genes</h2>
+
+<p>Now we would like to extract the most differentially expressed genes due to the treatment with a fold change &gt; 2 (or &lt; 1/2).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract the most differentially expressed genes</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  to extract genes with a significant change in gene expression (adjusted <em>p</em>-value below 0.05) between treated and untreated samples:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Annotated DESeq2 results</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7&lt;0.05</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value</code>.</p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-22"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+        <p>How many genes have a significant change in gene expression between these conditions?</p>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-22"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-22" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p>We get 966 (967 lines including a header) genes (4.04%) with a significant change in gene expression between treated and untreated samples.</p>
+
+        </blockquote>
+      </blockquote>
+      <blockquote class="comment">
+
+        <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+
+        <p>The file with the independently filtered results can be used for further downstream analysis as it excludes genes with only a few read counts, as these genes will not be considered as significantly differentially expressed.</p>
+      </blockquote>
+
+      <p>We will now select only the genes with a fold change (FC) &gt; 2 or FC &lt; 0.5. Note that the DESeq2 output file contains \(log_{2} FC\), rather than FC itself, so we filter for \(abs(log_{2} FC) &gt; 1\) (which implies FC &gt; 2 or FC &lt; 0.5).</p>
+    </li>
+    <li><span class="tool" data-tool="Filter1" title="Filter tool"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  to extract genes with an \(abs(log_{2} FC) &gt; 1\):
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">abs(c3)&gt;1</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value &amp; abs(log2(FC)) &gt; 1</code>.</p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-23"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
+        <ol>
+          <li>How many genes have been conserved?</li>
+          <li>Can the <em>Pasilla</em> gene (ps, FBgn0261552) be found in this table?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-23"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-23" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ol>
+            <li>114, or 11.79% of the significantly differentially expressed genes.</li>
+            <li>The <em>Pasilla</em> gene can be found with a quick Search (or even using  <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  )</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We now have a table with 113 lines and a header corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its \(log_{2} FC\) and other information including gene name and position.</p>
 
 <h2 id="visualization-of-the-expression-of-the-differentially-expressed-genes">Visualization of the expression of the differentially expressed genes</h2>
 
@@ -4309,16 +4386,16 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 </blockquote>
 
-<p>We now have a table with 131 lines (the 130 most differentially expressed genes and a header) and the normalized counts for these genes across the 7 samples.</p>
+<p>We now have a table with 114 lines (the 113 most differentially expressed genes and a header) and the normalized counts for these genes across the 7 samples.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-plot-the-heatmap-of-the-normalized-counts-of-these-genes-for-the-samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot the heatmap of the normalized counts of these genes for the samples</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.1+galaxy1" title="heatmap2 tool"><strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.1+galaxy1</span></span>  to plot the heatmap:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0" title="heatmap2 tool"><strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0</span></span>  to plot the heatmap:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input should have column headers”</em>: <code class="language-plaintext highlighter-rouge">Normalized counts for the most differentially expressed genes</code></li>
-        <li><em>“Data transformation”</em>: <code class="language-plaintext highlighter-rouge">Log2(value) transform my data</code></li>
+        <li><em>“Data transformation”</em>: <code class="language-plaintext highlighter-rouge">Log2(value+1) transform my data</code></li>
         <li><em>“Enable data clustering”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Labeling columns and rows”</em>: <code class="language-plaintext highlighter-rouge">Label columns and not rows</code></li>
         <li><em>“Type of colormap to use”</em>: <code class="language-plaintext highlighter-rouge">Gradient with 2 colors</code></li>
@@ -4330,25 +4407,27 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 <p>You should obtain something similar to:</p>
 
-<figure id="figure-42"><img src="../../images/ref-based/heatmap2_normalized_counts.png" alt="Heatmap with the normalized counts for the most differentially expressed genes. " width="1050" height="1050" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 42</strong>:</span> Normalized counts for the most differentially expressed genes</figcaption></figure>
+<figure id="figure-42"><img src="../../images/ref-based/heatmap2_normalized_counts.png" alt="Heatmap with the normalized counts for the most differentially expressed genes. " width="504" height="504" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 42</strong>:</span> Normalized counts for the most differentially expressed genes</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-23"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-24"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
     <li>What does the X-axis of the heatmap represent? What about the Y axis?</li>
     <li>Do you observe anything in the clustering of the samples and the genes?</li>
-    <li>What changes if you regenerate the heatmap, this time selecting <code class="language-plaintext highlighter-rouge">Plot the data as it is</code> in <em>“Advanced - log transformation”</em>/<em>“Data transformation”</em>?</li>
+    <li>What changes if you regenerate the heatmap, this time selecting <code class="language-plaintext highlighter-rouge">Plot the data as it is</code> in <em>“Data transformation”</em>?</li>
+    <li>Why cannot we use <code class="language-plaintext highlighter-rouge">Log2(value) transform my data</code> in <em>“Data transformation”</em>?</li>
     <li>How could you generate a heatmap of normalized counts for all up-regulated genes with fold change &gt; 2?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-23"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-23" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-24"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-24" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>The X-axis shows the 7 samples, together with a dendrogram representing the similarity between their patterns of gene expression. The Y-axis shows the 130 differentially expressed genes, likewise with a dendrogram representing the similarity between the patterns of gene expression. <!-- hope this is correct --></li>
+      <li>The X-axis shows the 7 samples, together with a dendrogram representing the similarity between their levels of gene expression. The Y-axis shows the 130 differentially expressed genes, likewise with a dendrogram representing the similarity between the levels of gene expression.</li>
       <li>The samples are clustering by treatment.</li>
-      <li>The scale changes and the differences between the genes are not visible anymore.</li>
+      <li>The scale changes and we only see few genes.</li>
+      <li>Because the normalized expression of the gene <code class="language-plaintext highlighter-rouge">FBgn0013688</code> in <code class="language-plaintext highlighter-rouge">GSM461180_treat_paired</code> is at <code class="language-plaintext highlighter-rouge">0</code>.</li>
       <li>Extract the genes with \(log_{2} FC\) &gt; 1 (filter for genes with <code class="language-plaintext highlighter-rouge">c3&gt;1</code> on the summary of the differentially expressed genes) and run <strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the generated table.</li>
     </ol>
   </blockquote>
@@ -4380,7 +4459,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
         <ul>
           <li><em>“Input Single or Multiple Tables”</em>: <code class="language-plaintext highlighter-rouge">Single Table</code>
             <ul>
-              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: <code class="language-plaintext highlighter-rouge">Normalized counts file on ...</code> (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: <code class="language-plaintext highlighter-rouge">Normalized counts file on data ... and others</code> (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
               <li><em>“Type of table operation”</em>: <code class="language-plaintext highlighter-rouge">Perform a full table operation</code>
                 <ul>
                   <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Custom</code>
@@ -4402,9 +4481,10 @@ correction for the variability due to the 2nd factor. In our current case, treat
         <ul>
           <li><em>“Input Single or Multiple Tables”</em>: <code class="language-plaintext highlighter-rouge">Multiple Table</code>
             <ul>
+              <li>Click on <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Tables”</em></li>
               <li>In <em>“1: Tables”</em>:
                 <ul>
-                  <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: <code class="language-plaintext highlighter-rouge">Normalized counts file on ...</code> (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: <code class="language-plaintext highlighter-rouge">Normalized counts file on data ... and others</code> (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                 </ul>
               </li>
               <li>Click on <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Tables”</em></li>
@@ -4430,7 +4510,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <p>We now have a table with the Z-score for all genes in the 7 samples.</p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-24"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-25"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
     <ol>
       <li>What is the range for the Z-score?</li>
@@ -4440,7 +4520,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-24"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-24" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-25"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-25" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>The Z-score ranges from -3 standard deviations up to +3 standard deviations. It can be placed on a normal distribution curve: -3 being the far left of the normal distribution curve and +3 the far right of the normal distribution curve</li>
@@ -4464,13 +4544,13 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 <p>We would like now to plot a heatmap for the Z-scores:</p>
 
-<figure id="figure-43"><img src="../../images/ref-based/z-score-heatmap.png" alt="Heatmap with the Z-score counts for the most differentially expressed genes. " width="1050" height="1050" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 43</strong>:</span> Z-scores for the most differentially expressed genes</figcaption></figure>
+<figure id="figure-43"><img src="../../images/ref-based/z-score-heatmap.png" alt="Heatmap with the Z-score counts for the most differentially expressed genes. " width="504" height="504" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 43</strong>:</span> Z-scores for the most differentially expressed genes</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-plot-the-z-score-of-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot the Z-score of the most differentially expressed genes</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.1+galaxy1" title="heatmap2 tool"><strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.1+galaxy1</span></span>  to plot the heatmap:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0" title="heatmap2 tool"><strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0</span></span>  to plot the heatmap:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input should have column headers”</em>: <code class="language-plaintext highlighter-rouge">Normalized counts for the most differentially expressed genes</code></li>
         <li><em>“Data transformation”</em>: <code class="language-plaintext highlighter-rouge">Plot the data as it is</code></li>
@@ -4648,7 +4728,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <p>To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted <em>p</em>-value.</p>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-25"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-26"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
       <ol>
         <li>How many GO terms are over-represented with an adjusted P-value &lt; 0.05? How many are under-represented?</li>
@@ -4656,16 +4736,16 @@ correction for the variability due to the 2nd factor. In our current case, treat
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-25"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-25" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-26"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-26" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>
-            <p>31 GO terms (0.27%) are over-represented and 80 (0.70%) under-represented.</p>
+            <p>60 GO terms (0.50%) are over-represented and 7 (0.07%) under-represented.</p>
 
             <p><span class="tool" data-tool="Filter1" title="Filter tool"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  on c8 (adjusted p-value for over-represented GO terms) and c9 (adjusted p-value for under-represented GO terms)</p>
           </li>
           <li>
-            <p>For over-represented, 17 BP, 3 CC and 11 MF and for under-represented, 50 BP, 27 CC and 3 MF</p>
+            <p>For over-represented, 50 BP, 5 CC and 5 MF and for under-represented, 5 BP, 2 CC and 0 MF</p>
 
             <p><span class="tool" data-tool="Grouping1" title="Group data tool"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  on column 7 (category) and count on column 1 (IDs)</p>
           </li>
@@ -4678,14 +4758,14 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <p>A graph with the top 10 over-represented GO terms</p>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-26"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-27"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
       <p><img src="../../images/ref-based/top_over-represented_go_terms.png" alt="Top over-represented GO terms. " loading="lazy" /></p>
 
       <p>What is the x-axis? How is it computed?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-26"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-26" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-27"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-27" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The x-axis is the percentage of genes in the category that have been identified as differentially expressed: \(100 \times \frac{numDEInCat}{numInCat}\)</p>
 
@@ -4745,7 +4825,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <p>A large table with the KEGG terms and some statistics</p>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-27"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-28"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
       <ol>
         <li>How many KEGG pathways terms have been identified?</li>
@@ -4755,13 +4835,13 @@ correction for the variability due to the 2nd factor. In our current case, treat
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-27"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-27" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-28"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-28" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
-          <li>The file has 127 lines including an header, so 126 KEGG pathways have been identified.</li>
-          <li>2 KEGG pathways (1.57%) are over-represented, using <strong>Filter</strong> on c6 (adjusted p-value for over-represented KEGG pathways)</li>
-          <li>The first 2 KEGG pathways are <code class="language-plaintext highlighter-rouge">01100</code> and <code class="language-plaintext highlighter-rouge">00010</code>. By searching on the <a href="https://www.genome.jp/kegg/kegg2.html">KEGG database</a> for them, we can find more information about these pathways: <code class="language-plaintext highlighter-rouge">01100</code> corresponds to all metabolic pathways and <code class="language-plaintext highlighter-rouge">00010</code> to pathway for Glycolysis / Gluconeogenesis.</li>
-          <li>1 KEGG pathways (0.79%) is under-represented, using <strong>Filter</strong> on c7 (adjusted p-value for under-represented KEGG pathways): <code class="language-plaintext highlighter-rouge">03040</code>, Spliceosome</li>
+          <li>The file has 128 lines including an header, so 127 KEGG pathways have been identified.</li>
+          <li>2 KEGG pathways (2.34%) are over-represented, using <strong>Filter</strong> on c6 (adjusted p-value for over-represented KEGG pathways)</li>
+          <li>The 2 KEGG pathways over-represented are <code class="language-plaintext highlighter-rouge">01100</code> and <code class="language-plaintext highlighter-rouge">00010</code>. By searching on the <a href="https://www.genome.jp/kegg/kegg2.html">KEGG database</a> for them, we can find more information about these pathways: <code class="language-plaintext highlighter-rouge">01100</code> corresponds to all metabolic pathways and <code class="language-plaintext highlighter-rouge">00010</code> to pathway for Glycolysis / Gluconeogenesis.</li>
+          <li>No KEGG pathway is under-represented, using <strong>Filter</strong> on c7 (adjusted p-value for under-represented KEGG pathways)</li>
         </ol>
       </blockquote>
     </blockquote>
@@ -4789,7 +4869,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   </li>
 </ul>
 
-<p>Here we would like to visualize the 2 KEGG pathways: the over-represented <code class="language-plaintext highlighter-rouge">00010</code> (Glycolysis / Gluconeogenesis) and the under-represented <code class="language-plaintext highlighter-rouge">03040</code> (Spliceosome). We would like the gene nodes to be colored by Log2 Fold Change for the differentially expressed genes because of the treatment.</p>
+<p>Here we would like to visualize the 2 KEGG pathways: the over-represented <code class="language-plaintext highlighter-rouge">00010</code> (Glycolysis / Gluconeogenesis) and the most under-represented (yet not significantly) <code class="language-plaintext highlighter-rouge">03040</code> (Spliceosome). We would like the gene nodes to be colored by Log2 Fold Change for the differentially expressed genes because of the treatment.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-overlay-log2fc-on-kegg-pathway"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Overlay log2FC on KEGG pathway</div>
@@ -4814,7 +4894,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 03040
 </code></pre></div>      </div>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.24.0+galaxy0" title="Pathview tool"><strong>Pathview</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.24.0+galaxy0</span></span>  with
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.34.0+galaxy0" title="Pathview tool"><strong>Pathview</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.34.0+galaxy0</span></span>  with
       <ul>
         <li><em>“Number of pathways to plot”</em>: <code class="language-plaintext highlighter-rouge">Multiple</code>
           <ul>
@@ -4826,7 +4906,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
         <li><em>“Provide a gene data file?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene data”</em>: <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value and their Log2 FC</code></li>
-            <li><em>“Does the file have header (a first line with column names)?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li><em>“Does the file have header (a first line with column names)?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><em>“Format for gene data”</em>: <code class="language-plaintext highlighter-rouge">Ensembl Gene ID</code></li>
           </ul>
         </li>
@@ -4848,7 +4928,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p><strong>Pathview</strong> generates a collection with the KEGG visualization: one file per pathway.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-28"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-29"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p><code class="language-plaintext highlighter-rouge">dme00010</code> KEGG pathway from <strong>Pathview</strong></p>
 
@@ -4860,7 +4940,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-28"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-28" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-29"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-29" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The colored boxes are genes in the pathway that are differentially expressed</li>
