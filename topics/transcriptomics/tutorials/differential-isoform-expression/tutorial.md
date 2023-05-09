@@ -248,7 +248,7 @@ So, let's perform the mapping step.
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy1) %} with the following parameters:
+> 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
 >        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed health collection` (output of **fastp** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
