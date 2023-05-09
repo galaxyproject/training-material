@@ -140,7 +140,7 @@ Next we will retrieve the remaining datasets.
 
 # Quality assessment
 
-Once we have got the datasets, we can start with the analysis. The first step is to perform the quality assessment. Since this step is deeply covered in the tutorial [Quality control](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html), we won't describe this section in detail.
+Once we have got the datasets, we can start with the analysis. The first step is to perform the quality assessment. Since this step is deeply covered in the tutorial [Quality control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}), we won't describe this section in detail.
 
 
 > <comment-title>Inicial quality evaluation (OPTIONAL)</comment-title>
@@ -640,7 +640,7 @@ For the downstream analysis, we will use only the `ORF best probabilities`, but 
 
 > <hands-on-title>Required format modifications on CPAT output</hands-on-title>
 >
-> 1. {% tool [Remove beginning](https://usegalaxy.eu/root?tool_id=Remove beginning1) %} with the following parameters:
+> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - *"Remove first"*: `1`
 >    - {% icon param-file %} *"From"*: `ORF best probabilities (TSV)` (output of **CPAT** {% icon tool %})
 >
@@ -648,7 +648,7 @@ For the downstream analysis, we will use only the `ORF best probabilities`, but 
 >    - {% icon param-file %} *"File to process"*: output of **Remove beginning**
 >    - *"AWK Program"*: `{print i++"\t"$1"\t"$3"\t"$8"\t"$9"\t"$10"\t"$11"\t""-"}`
 >
-> 3. {% tool [Concatenate datasets](https://usegalaxy.eu/root?tool_id=cat1) %} with the following parameters:
+> 3. {% tool [Concatenate datasets](cat1) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: `CPAT_header.tab`
 >    - In *"Dataset"*:
 >       - Click in "*Insert Dataset*"
