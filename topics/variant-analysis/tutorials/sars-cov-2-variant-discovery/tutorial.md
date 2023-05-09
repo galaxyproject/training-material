@@ -113,12 +113,14 @@ If you are going to use your own sequencing data, there are several possibilitie
   >
   {: .comment}
 
-For the suggested batch of early Omicron data we suggest downloading it via URLs from the
-[European Nucleotide Archive (ENA)](https://www.ebi.ac.uk/ena/browser/home). In case your Galaxy server offers that same data through a shared data library, this represents a faster (data is already on the server) alternative, so you'll find instructions for this scenario as well below.
+For the suggested batch of early Omicron data we suggest downloading it via URLs from the [European Nucleotide Archive (ENA)](https://www.ebi.ac.uk/ena/browser/home). In case your Galaxy server offers that same data through a shared data library, this represents a faster (data is already on the server) alternative, so we offer instructions for this scenario as well.
+
+{% include _includes/cyoa-choices.html option1="Import from ENA" option2="Import from Data Library" default="Import-from-ENA" %}
 
 > <hands-on-title>Import the sequencing data</hands-on-title>
 >
-> - Option 1: Import from the ENA
+> <div class="Import-from-ENA" markdown="1">
+> - Import from the ENA
 >
 >   ```
 >   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/002/SRR17054502/SRR17054502_1.fastq.gz
@@ -159,16 +161,27 @@ For the suggested batch of early Omicron data we suggest downloading it via URLs
 >   2. Open the {% tool [Upload](upload1) %} Manager
 >   3. In the top row of tabs select **Collection**
 >   4. Configure the drop-down select boxes on that tab like this:
->      - *"Collection Type"*: `Pair`
+>      - *"Collection Type"*: `List of Pairs`
 >      - *"File Type"*: `fastqsanger.gz`
 >   5. Click on **Paste/Fetch data** and paste the links you copied into the empty text box
 >   6. Press **Start**
->   7. Wait for the **Build** button to become enabled, click it, and, in the next dialogue, give a suitable **Name**, like `Sequencing data`, to the new collection.
->   8. Click on **Create collection**
+>   7. Wait for the **Build** button to become enabled, then click it
+>   8. In the lower half of the next dialogue, Galaxy already suggests a mostly reasonable pairing of the inputs.
 >
-> - Option 2: Import from a shared data library
+>      As you can see, however, this auto-pairing would retain a *.fastq* suffix attached to each pair of forward and reverse reads. To correct this
+>      1. Click **Unpair all** above the suggested pairings to undo all of them.
+>      2. Change the following default values in the upper half of the window:
+>         - *"unpaired forward"*: `_1.fastq.gz` (instead of *_1*)
+>         - *"unpaired reverse"*: `_2.fastq.gz` (instead of *_2*)
+>      3. Click **Auto-pair**
+>   9. At, the bottom of the window, enter a suitable **Name**, like `Sequencing data`, for the new collection
+>   10. Click on **Create collection**
+> </div>
+> <div class="Import-from-Data-Library" markdown="1">
+> - Import from a shared data library
 >
->   {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" collection_type="List of Pairs" collection_name="Sequencing data" tohistory="the history you created for this tutorial" path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" %}
+>   {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" collection_type="List of Pairs" collection_name="Sequencing data" tohistory="the history you created for this tutorial" path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" box_type="none" %}
+> </div>
 >
 {: .hands_on}
 
@@ -247,7 +260,7 @@ Besides the sequenced reads data, we need at least two additional datasets for c
 Another two datasets are needed only for the analysis of ampliconic, e.g. ARTIC-amplified, input data:
 
 - a BED file specifying the primers used during amplification and their binding sites on the viral genome
-- a custom tabular file describing the amplicon grouping of the primers
+- a custom tabular file describing the amplicon grouping of the primers (currently NOT used for tiled-amplicon ONT data)
 
 > <details-title>Using your own tiled-amplicon data? Provide the correct primer scheme and amplicon info.</details-title>
 >
@@ -266,14 +279,25 @@ Another two datasets are needed only for the analysis of ampliconic, e.g. ARTIC-
 
 > <hands-on-title>Get primer scheme and amplicon info</hands-on-title>
 >
-> 2. Get ARTIC v4 primer files
+> 1. Get the ARTIC v4 primer scheme file from
 >
 >    ```
 >    https://zenodo.org/record/5888324/files/ARTIC_nCoV-2019_v4.bed
+>    ```
+>
+>    and upload it to Galaxy as a dataset of type `bed`.
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="bed" %}
+>
+> 2. Get the ARTIC v4 amplicon info file from
+>
+>    ```
 >    https://zenodo.org/record/5888324/files/ARTIC_amplicon_info_v4.tsv
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    and upload it to Galaxy as a dataset of type `tabular`.
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="tabular" %}
 >
 {: .hands_on}
 
