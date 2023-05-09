@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome-wide alternative splicing analysis
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/7649293'
 questions:
 - Are there statistically significant different genome splicing patterns between healthy and tumor samples?
 - Are there ssignificant isoform switching events between healthy and tumor samples?
@@ -62,18 +62,18 @@ The first step of our analysis consists of retrieving the RNA-seq datasets from 
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      SRR9050437F	Health tissue	https://zenodo.org/record/7656544/files/SRR9050437_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050437R	Health tissue	https://zenodo.org/record/7656544/files/SRR9050437_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050438F	Health tissue	https://zenodo.org/record/7656544/files/SRR9050438_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050438R	Health tissue	https://zenodo.org/record/7656544/files/SRR9050438_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050439F	Health tissue	https://zenodo.org/record/7656544/files/SRR9050439_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050439R	Health tissue	https://zenodo.org/record/7656544/files/SRR9050439_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050440F	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050440_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050440R	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050440_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050441F	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050441_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050441R	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050441_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050442F	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050442_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050442R	Cancer tissue	https://zenodo.org/record/7656544/files/SRR9050442_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050437F	Health tissue	{{ page.zenodo_link }}/files/SRR9050437_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050437R	Health tissue	{{ page.zenodo_link }}/files/SRR9050437_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050438F	Health tissue	{{ page.zenodo_link }}/files/SRR9050438_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050438R	Health tissue	{{ page.zenodo_link }}/files/SRR9050438_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050439F	Health tissue	{{ page.zenodo_link }}/files/SRR9050439_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050439R	Health tissue	{{ page.zenodo_link }}/files/SRR9050439_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050440F	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050440_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050440R	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050440_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050441F	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050441_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050441R	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050441_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050442F	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050442_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050442R	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050442_reverse.fastqsanger.gz	fastqsanger.gz	2
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -104,15 +104,15 @@ Next we will retrieve the remaining datasets.
 >    - Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      CPAT_header.tab  https://zenodo.org/record/7656544/files/CPAT_header.tab
->      active_site.dat.gz	https://zenodo.org/record/7649293/files/active_site.dat.gz
->      gencode.v42.lncRNA_transcripts.fa.gz	https://zenodo.org/record/7649293/files/gencode.v42.lncRNA_transcripts.fa.gz
->      gencode.v42.pc_transcripts.fa.gz	https://zenodo.org/record/7649293/files/gencode.v42.pc_transcripts.fa.gz
->      gencode.v43.annotation.gtf.gz	https://zenodo.org/record/7649293/files/gencode.v43.annotation.gtf.gz
->      gencode.v43.transcripts.fa.gz	https://zenodo.org/record/7649293/files/gencode.v43.transcripts.fa.gz
->      GRCh38.p13.genome.fa.gz	https://zenodo.org/record/7649293/files/GRCh38.p13.genome.fa.gz
->      Pfam-A.hmm.dat.gz	https://zenodo.org/record/7649293/files/Pfam-A.hmm.dat.gz
->      Pfam-A.hmm.gz	https://zenodo.org/record/7649293/files/Pfam-A.hmm.gz
+>      CPAT_header.tab  {{ page.zenodo_link }}/files/CPAT_header.tab
+>      active_site.dat.gz	{{ page.zenodo_link }}/files/active_site.dat.gz
+>      gencode.v42.lncRNA_transcripts.fa.gz	{{ page.zenodo_link }}/files/gencode.v42.lncRNA_transcripts.fa.gz
+>      gencode.v42.pc_transcripts.fa.gz	{{ page.zenodo_link }}/files/gencode.v42.pc_transcripts.fa.gz
+>      gencode.v43.annotation.gtf.gz	{{ page.zenodo_link }}/files/gencode.v43.annotation.gtf.gz
+>      gencode.v43.transcripts.fa.gz	{{ page.zenodo_link }}/files/gencode.v43.transcripts.fa.gz
+>      GRCh38.p13.genome.fa.gz	{{ page.zenodo_link }}/files/GRCh38.p13.genome.fa.gz
+>      Pfam-A.hmm.dat.gz	{{ page.zenodo_link }}/files/Pfam-A.hmm.dat.gz
+>      Pfam-A.hmm.gz	{{ page.zenodo_link }}/files/Pfam-A.hmm.gz
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
