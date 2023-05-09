@@ -20,6 +20,17 @@ key_points:
 - 4 specialized, best-practice variant calling workflows are available for the identification of annotated allelic variants from raw sequencing data depending on the exact type of input
 - Data from batches of samples can be processed in parallel using collections
 - Annotated allelic variants can be used to build consensus sequences for and assign each sample to known viral clades/lineages
+requirements:
+  -
+    type: "internal"
+    topic_name: galaxy-interface
+    tutorials:
+      - collections
+  -
+    type: "internal"
+    topic_name: variant-analysis
+    tutorials:
+      - sars-cov-2
 contributors:
 - wm75
 - bebatut
@@ -31,27 +42,44 @@ tags:
 
 # Introduction
 
+Sequence-based monitoring of global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for surveilling the emergence and spread of new viral variants, and for understanding the evolutionary dynamics of the virus.
 
-Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for monitoring the emergence and spread of new variants, and for understanding the evolutionary dynamics of the virus.
+The tutorial [SARS-CoV-2 sequencing data analysis]({% link topics/variant-analysis/tutorials/sars-cov-2/tutorial.md %}) shows in detail how you can identify mutations in SARS-CoV-2 samples from paired-end whole-genome sequencing data generated on the Illumina platform.
 
-Two sequencing platforms (Illumina and Oxford Nanopore) in combination with several established library preparation (Ampliconic and metatranscriptomic) strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The Galaxy community has developed high-quality analysis workflows to support
+For versatile and efficient genome surveillance, however, you would want to:
+- be able to analyze data of different origin
 
-- sensitive identification of SARS-CoV-2 allelic variants (AVs) starting with allele frequencies as low as 5% from deep sequencing reads
-- generation of user-friendly reports for batches of results
-- reliable and configurable consensus genome generation from called variants
+  Besides WGS paired-end Illumina data, different labs are generating also single-end Illumina and ONT data, and are combining these platforms with various tiled-amplicon approaches upstream of sequencing.
 
-> <details-title>Further reading</details-title>
-> More information about the workflows, including benchmarking, can be found
-> - on the Galaxy Covid-19 effort website: [covid19.galaxyproject.org](https://covid19.galaxyproject.org/)
-> - as a BioRxiv preprint: [Global platform for SARS-CoV-2 analysis](https://www.biorxiv.org/content/10.1101/2021.03.25.437046v1)
-{: .details}
+- go beyond per-sample mutation calls in variant call format (VCF)
 
-This tutorial will teach you how to obtain, run and combine these workflows appropriately for different types of input data, be it:
+  To keep track of large numbers of samples sequenced in batches (as, nowadays, produced routinely by SARS-CoV-2 genome surveillance initiatives across the globe), you need concise reports and visualizations of results at the sample and batch level.
 
-- Single-end data derived from Illumina-based RNAseq experiments
-- Paired-end data derived from Illumina-based RNAseq experiments
-- Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols, or
-- ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
+- use sample mutation patterns to construct sanple consensus genomes
+
+- use the consensus genomes to assign the samples to SARS-CoV-2 lineages as defined by major lineage classification systems (Nextstrain and pango)
+
+- decrease hands-on time and data manipulation errors by combining analysis steps into workflows for automated execution
+
+The purpose of this tutorial is to demonstrate how a set of workflows developed by the [Galaxy Covid-19 project](https://galaxyproject.org/projects/covid19/) can be combined and used together with a handful of additional tools to achieve all of the above. Specifically, we will cover the analysis flow presented in figure 1.
+
+![Analysis flow in the tutorial](../../images/sars-cov-2-variant-discovery/schema.png "Analysis flow in the tutorial")
+
+Depending on the type of sequencing data **one of four variation analysis workflows** can be run to discover mutations in a batch of input samples. Outputs of any of these workflows can then be processed further with two additional workflows: the **variation reporting workflow** generates a per-sample report of mutations, but also batch-level reports and visualizations, while the **consensus construction workflow** reconstructs the full viral genomes of all samples in the batch by modifying the SARS-CoV-2 reference genome with each sample's set of mutations.
+
+A few highlights of these workflows are:
+
+- All the variation analysis workflows are more sensitive than they need to be for consensus sequence generation, i.e. they can not only be used to capture fixed or majority alleles, but can also be used on their own to address less routine questions such as co-infections with two viral lineages or shifting intrahost allele-frequencies in, for example, immunocompromised, longterm-infected patients.
+- The reporting workflow produces a batch-level overview plot of mutations and their observed allele-frequencies that enables spotting of batch-effects like sample cross-contamination and outlier samples that are different from the rest of the batch.
+- The consensus workflow can express uncertainty about any base position in the generated consensus sequence by N-masking the position according to user-defined thresholds.
+- All of the workflows are openly developed and available in the form of defined releases through major public workflow registries.
+
+In this tutorial you will learn to
+- obtain releases of the workflows from public registries
+- set up input data for different types of sequencing protocols
+- run and combine the workflows
+- understand the various outputs produced by the workflows and to extract insight about viral samples from them
+
 
 > <agenda-title></agenda-title>
 >
@@ -70,8 +98,8 @@ This data has been Illumina paired-end sequenced after amplification with the AR
 
 Alternatively, you can also follow this tutorial using your own SARS-CoV-2 sequencing data (you need at least two samples) as long as it is of one of the following types:
 
-- Single-end data derived from Illumina-based whole-genome RNAseq experiments
-- Paired-end data derived from Illumina-based whole-genome RNAseq experiments
+- Single-end data derived from Illumina-based whole-genome sequencing experiments
+- Paired-end data derived from Illumina-based whole-genome sequencing experiments
 - Paired-end data generated with Illumina-based tiled-amplicon (e.g. ARTIC) protocols
 - ONT FASTQ files generated with Oxford nanopore (ONT)-based tiled-amplicon (e.g. ARTIC) protocols
 
@@ -901,7 +929,6 @@ We can see that **Pangolin** and **Nextclade** are globally coherent despite dif
 
 In this tutorial, we used a collection of Galaxy workflows for the detection and interpretation of sequence variants in SARS-CoV-2:
 
-![Analysis flow in the tutorial](../../images/sars-cov-2-variant-discovery/schema.png "Analysis flow in the tutorial")
 
 The workflows can be freely used and immediately accessed from the three global Galaxy instances. Each is capable of supporting thousands of users running hundreds of thousands of analyses per month. 
 
