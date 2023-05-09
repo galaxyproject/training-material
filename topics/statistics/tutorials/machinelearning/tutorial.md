@@ -138,5 +138,5 @@ The last column of the predicted dataset shows the category of each row. A row e
 
 > <details-title>Additional ML resources</details-title>
 >
-> Read more about **machine learning using scikit-learn** [here](http://scikit-learn.org/stable/).
+> Read more about [machine learning using scikit-learn](http://scikit-learn.org/stable/).
 {:.details}
