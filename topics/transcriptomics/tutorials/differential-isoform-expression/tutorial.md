@@ -102,6 +102,7 @@ Next we will retrieve the remaining datasets.
 > 1. Import the files from Zenodo:
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on __Rule-based__ tab
 >    - *"Upload data as"*: `Datasets`
 >    - Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
