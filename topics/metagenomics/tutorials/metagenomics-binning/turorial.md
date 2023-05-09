@@ -56,14 +56,14 @@ Both methods have their strengths and limitations, and researchers often use a c
 
 There are plenty of computational tools to perform metafenomics binning. Some of the most widely used include:
 
-- **MaxBin**: A popular de novo binning algorithm that uses a combination of sequence features and marker genes to cluster contigs into genome bins.
-- **MetaBAT**: Another widely used de novo binning algorithm that employs a hierarchical clustering approach based on tetranucleotide frequency and coverage information.
-- **CONCOCT**: A de novo binning tool that uses a clustering algorithm based on sequence composition and coverage information to group contigs into genome bins.
-- **MyCC**: A reference-based binning tool that uses sequence alignment to identify contigs belonging to the same genome or taxonomic group.
-- **GroopM**: A hybrid binning tool that combines reference-based and de novo approaches to achieve high binning accuracy.
-- **MetaWRAP**: A comprehensive metagenomic analysis pipeline that includes various modules for quality control, assembly, binning, and annotation.
-- **Anvi'o**: A platform for visualizing and analyzing metagenomic data, including features for binning, annotation, and comparative genomics.
-- **SemiBin**: A command tool for metagenomic binning with deep learning, handles both short and long reads.
+- **MaxBin**  ({%cite maxbin2015%}): A popular de novo binning algorithm that uses a combination of sequence features and marker genes to cluster contigs into genome bins.
+- **MetaBAT** ({%cite Kang2019%}): Another widely used de novo binning algorithm that employs a hierarchical clustering approach based on tetranucleotide frequency and coverage information.
+- **CONCOCT** ({%cite Alneberg2014%}): A de novo binning tool that uses a clustering algorithm based on sequence composition and coverage information to group contigs into genome bins.
+- **MyCC** ({%cite Lin2016%}): A reference-based binning tool that uses sequence alignment to identify contigs belonging to the same genome or taxonomic group.
+- **GroopM** ({%cite Imelfort2014%}): A hybrid binning tool that combines reference-based and de novo approaches to achieve high binning accuracy.
+- **MetaWRAP** ({%cite Uritskiy2018%}): A comprehensive metagenomic analysis pipeline that includes various modules for quality control, assembly, binning, and annotation.
+- **Anvi'o** ({%cite Eren2015%}): A platform for visualizing and analyzing metagenomic data, including features for binning, annotation, and comparative genomics.
+- **SemiBin** ({%cite Pan2022%}): A command tool for metagenomic binning with deep learning, handles both short and long reads.
 
 **In this tutorial, we will learn how to run metagenomic binning tools and evaluate the quality of the results**. In order to do that, we will use data from the study: [Temporal shotgun metagenomic dissection of the coffee fermentation ecosystem](https://www.ebi.ac.uk/metagenomics/studies/MGYS00005630#overview) and MetaBAT2 algorithm. MetaBAT is a popular software tool for metagenomics binning, and there are several reasons why it is often used:
 - High accuracy: MetaBAT uses a combination of tetranucleotide frequency, coverage depth, and read linkage information to bin contigs, which has been shown to be highly accurate and efficient.
