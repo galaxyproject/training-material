@@ -143,12 +143,9 @@ If you are going to use your own sequencing data, there are several possibilitie
 
 For the suggested batch of early Omicron data we suggest downloading it via URLs from the [European Nucleotide Archive (ENA)](https://www.ebi.ac.uk/ena/browser/home). In case your Galaxy server offers that same data through a shared data library, this represents a faster (data is already on the server) alternative, so we offer instructions for this scenario as well.
 
-{% include _includes/cyoa-choices.html option1="Import from ENA" option2="Import from Data Library" default="Import-from-ENA" %}
-
 > <hands-on-title>Import the sequencing data</hands-on-title>
 >
-> <div class="Import-from-ENA" markdown="1">
-> - Import from the ENA
+> - Option 1: Import from the ENA
 >
 >   ```
 >   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/002/SRR17054502/SRR17054502_1.fastq.gz
@@ -204,12 +201,10 @@ For the suggested batch of early Omicron data we suggest downloading it via URLs
 >      3. Click **Auto-pair**
 >   9. At, the bottom of the window, enter a suitable **Name**, like `Sequencing data`, for the new collection
 >   10. Click on **Create collection**
-> </div>
-> <div class="Import-from-Data-Library" markdown="1">
-> - Import from a shared data library
+>
+> - Option 2: Import from a shared data library
 >
 >   {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" collection_type="List of Pairs" collection_name="Sequencing data" tohistory="the history you created for this tutorial" path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" box_type="none" %}
-> </div>
 >
 {: .hands_on}
 
@@ -358,7 +353,7 @@ If everything looks fine, you are ready to start the actual data analysis.
 >
 > More details about the workflows can be found on the [Covid-19 project pages](https://galaxyproject.org/projects/covid19/workflows/) of the [Galaxy Community Hub](https://galaxyproject.org/)
 
-## From FASTQ to annotated allelic variants
+## From sequencing data to annotated mutations per sample
 
 To identify the SARS-CoV-2 allelic variants (AVs), a first workflow converts the FASTQ files to annotated AVs through a series of steps that include quality control, trimming, mapping, deduplication, AV calling, and filtering.
 
@@ -418,7 +413,7 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 
 {% include _includes/cyoa-choices.html option1="tiled-amplicon Illumina paired-end" option2="tiled-amplicon ONT" option3="WGS Illumina paired-end" option4="WGS Illumina single-end" default="tiledamplicon-Illumina-pairedend" text="Now that you have imported the data and the corresponding workflow of your choice, please select the type of your input data so that we can adjust a few parts of this tutorial that are dependent on the nature of your data:" %}
 
-> <hands-on-title>From FASTQ to annotated AVs</hands-on-title>
+> <hands-on-title>From sequencing data to annotated mutations</hands-on-title>
 >
 > <div class="tiledamplicon-Illumina-pairedend" markdown="1">
 >
@@ -476,7 +471,7 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 {: .hands_on}
 
 
-## From annotated AVs per sample to AV summary
+## From mutations per sample to reports and visualizations
 
 Once the jobs of previous workflows are done, we identified AVs for each sample. We can run a "Reporting workflow" on them to generate a final AV summary.
 
@@ -492,7 +487,7 @@ This workflow takes the collection of called (with lofreq) and annotated (with S
 >
 {: .hands-on}
 
-> <hands-on-title>From annotated AVs per sample to AV summary</hands-on-title>
+> <hands-on-title>From mutations per sample to reports and visualizations</hands-on-title>
 >
 > 1. Run the **COVID-19: variation analysis reporting** {% icon workflow %} workflow with the following parameters:
 >
@@ -675,7 +670,7 @@ The three key results datasets produced by the Reporting workflow are:
 
    In the example datasets, the samples are clustered in 3 clusters (as we defined when running the workflow), that may represent different SARS-CoV-2 lineages as the AVs profiles are different.
 
-## From AVs to consensus sequences
+## From mutations per sample to consensus sequences
 
 For the variant calls, we can now run a workflow which generates reliable consensus sequences according to transparent criteria that capture at least some of the complexity of variant calling:
 
@@ -696,7 +691,7 @@ The workflow takes a collection of VCFs and a collection of the corresponding al
 >
 {: .hands-on}
 
-> <hands-on-title>From AVs to consensus sequences</hands-on-title>
+> <hands-on-title>From mutations per sample to consensus sequences</hands-on-title>
 >
 > 1. Run the **COVID-19: consensus construction** {% icon workflow %} workflow with these parameters:
 >
@@ -755,11 +750,11 @@ The main outputs of the workflow are:
 
 The last one can be used as input for tools like **Pangolin** or **Nextclade**.
 
-## From consensus sequences to clade/lineage assignments
+## From consensus sequences to lineage assignments
 
 To assign lineages to the different samples from their consensus sequences, two tools are available: **Pangolin** and **Nextclade**.
 
-### With Pangolin
+### Lineage assignment with Pangolin
 
 Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used to assign a SARS-CoV-2 genome sequence the most likely lineage based on the PANGO nomenclature system.
 
@@ -813,7 +808,7 @@ Column | Field | Meaning
 > {: .solution}
 {: .question}
 
-### With Nextclade
+### Lineage assignment with Nextclade
 
 Nextclade assigns clades, calls mutations and performs sequence quality checks on SARS-CoV-2 genomes.
 
@@ -897,7 +892,7 @@ Column | Field | Meaning
 > {: .solution}
 {: .question}
 
-### Comparison between Pangolin and Nextclade clade assignments
+### Comparison between Pangolin and Nextclade assignments
 
 We can compare **Pangolin** and **Nextclade** clade assignments by extracting interesting columns and joining them into a single dataset using sample ids.
 
@@ -924,11 +919,10 @@ We can compare **Pangolin** and **Nextclade** clade assignments by extracting in
 
 We can see that **Pangolin** and **Nextclade** are globally coherent despite differences in lineage nomenclature.
 
+
 # Conclusion
 
-
-In this tutorial, we used a collection of Galaxy workflows for the detection and interpretation of sequence variants in SARS-CoV-2:
-
+In this tutorial, we used a collection of Galaxy workflows for the detection and interpretation of sequence variants in SARS-CoV-2.
 
 The workflows can be freely used and immediately accessed from the three global Galaxy instances. Each is capable of supporting thousands of users running hundreds of thousands of analyses per month. 
 
