@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome-wide alternative splicing analysis
-zenodo_link: 'https://zenodo.org/record/7649293'
+zenodo_link: 'https://zenodo.org/record/7656544'
 questions:
 - Are there statistically significant different genome splicing patterns between healthy and tumor samples?
 - Are there ssignificant isoform switching events between healthy and tumor samples?
