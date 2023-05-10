@@ -339,11 +339,13 @@ The LifeMonitor now start working and automatically register the workflow with
 both the LifeMonitor test monitoring functionality and the WorkflowHub registry
 you enabled and selected.
 
-:bulb: If you enabled e-mail notifications, you should receive an email telling
-you that the registration happened and providing you with a direct link to the
-workflow on LifeMonitor (from which you'll be able to access the corresponding
-WorkflowHub entry).
-![LM new registration](./images/lm_new_registration.png)
+> <tip-title>E-mail notifications</tip-title>
+> If you enabled e-mail notifications, you should receive an email telling
+> you that the registration happened and providing you with a direct link to the
+> workflow on LifeMonitor (from which you'll be able to access the corresponding
+> WorkflowHub entry).
+> ![LM new registration](./images/lm_new_registration.png)
+{: .tip}
 
 The workflow should also appear on your [LifeMonitor
 dashboard](https://app.lifemonitor.eu/dashboard).  If the GitHub Action that

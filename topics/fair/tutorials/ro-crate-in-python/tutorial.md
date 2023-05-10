@@ -2,9 +2,15 @@
 layout: tutorial_hands_on
 title: "RO-Crate in Python"
 time_estimation: "30M"
-questions: []
-objectives: []
-key_points: []
+questions:
+- What data is contained within an RO-Crate
+- How can I create an RO-Crate myself?
+objectives:
+- Create a custom, annotated RO-Crate
+- Use ORCIDs and other linked data to annotate datasets contained within the crate
+key_points:
+- RO-Crates can be created by hand with essentially arbitrary data, using the rocrate python module
+- However the rocrate command line tool adds several commands to make it easier to automatically generate crates based on existing folder structures.
 tags:
 - ro-crate
 priority: 1
@@ -200,10 +206,9 @@ hackathon = crate.add(ContextEntity(crate, "#bh2021", properties={
 
 Note that entities can have multiple types, e.g.:
 
-```python
+```
     "@type" = ["File", "SoftwareSourceCode"]
 ```
-
 
 ## Consuming an RO-Crate
 
