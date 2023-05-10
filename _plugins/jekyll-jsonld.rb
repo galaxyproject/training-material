@@ -120,7 +120,7 @@ module Jekyll
         "description": contributor.nil? ? "A contributor to the GTN project." : contributor.fetch("bio", "A contributor to the GTN project."),
         "memberOf": [GTN],
       }
-      if ! contributor.nil? && contributor.has_key?('orcid')
+      if ! contributor.nil? && contributor.has_key?('orcid') and contributor['orcid']
         person['identifier'] = "https://orcid.org/" + contributor['orcid']
         person['orcid'] = "https://orcid.org/" + contributor['orcid']
       end
