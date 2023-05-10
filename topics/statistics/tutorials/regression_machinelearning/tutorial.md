@@ -246,7 +246,7 @@ Like the random forest method, gradient boosting is an ensemble-based regressor,
 
 > <hands-on-title>Train a model</hands-on-title>
 >
-> 1. {% tool [Ensemble methods for classification and regression*](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Gradient Boosting Regressor` (*Note:* choose `Gradient Boosting Regressor` not `Gradient Boosting Classifier`)
 >          - *"Select input type"*: `tabular data`
@@ -279,7 +279,7 @@ After learning on the training dataset, we should evaluate the performance on th
 
 > <hands-on-title>Predict targets using the model</hands-on-title>
 >
-> 1. {% tool [Ensemble methods for classification and regression*](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `gradient_boosting_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -395,7 +395,7 @@ Using the **Hyperparameter search** tool, we optimized our model, based on the t
 
 > <hands-on-title>Predict age</hands-on-title>
 >
-> 1. {% tool [Ensemble methods for classification and regression*](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >        - {% icon param-files %} *"Models"*: `zipped` file (output of **Hyperparameter search** {% icon tool %})
 >        - {% icon param-files %} *"Data (tabular)"*: `test_rows` tabular file
