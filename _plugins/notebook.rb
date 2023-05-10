@@ -57,25 +57,28 @@ module GTNNotebooks
     }.join("\n")
   end
 
-  def self.convert_notebook_markdown(content, language)
+  def self.convert_notebook_markdown(content, accepted_languages)
     out = []
     inside_block = false
+    cur_lang = nil
     val = []
     data = content.split("\n")
     data.each.with_index{|line, i|
-      if line == "```#{language}"
+      m = line.match /^```(#{accepted_languages.join('|')})\s*$/
+      if m
         if inside_block
           puts data[i-2..i+2]
           raise "[GTN/Notebook] L#{i} Error! we're already in a block:"
         end
         # End the previous block
-        out.push([val, inside_block])
+        out.push([val, inside_block, cur_lang])
         val = []
 
         inside_block = true
+        cur_lang = m[1]
       elsif inside_block && line == '```'
         # End of code block
-        out.push([val, inside_block])
+        out.push([val, inside_block, cur_lang])
         val = []
         inside_block = false
       else
@@ -84,7 +87,7 @@ module GTNNotebooks
     }
     # final flush
     if ! val.nil?
-      out.push([val, inside_block])
+      out.push([val, inside_block, cur_lang])
     end
 
     notebook = {
@@ -105,7 +108,7 @@ module GTNNotebooks
 
       # Remove any remaining language tagged code blocks, e.g. in
       # tip/solution/etc boxes. These do not render well.
-      res['source'] = res['source'].map{|x| x.gsub(/```#{language}/, '```')}
+      res['source'] = res['source'].map{|x| x.gsub(/```(#{accepted_languages.join('|')})/, '```')}
 
       if data[1]
         res = res.update({
@@ -115,7 +118,7 @@ module GTNNotebooks
           'metadata' => {
             'attributes' => {
               'classes' => [
-                language
+                data[2]
               ],
               'id' => '',
             }
@@ -283,6 +286,18 @@ module GTNNotebooks
     notebook
   end
 
+  def self.fixPythonNotebook(notebook)
+    # TODO
+    # prefix bash cells with `!`
+    notebook['cells'].map{|cell|
+      if cell.fetch('metadata', {}).fetch('attributes', {}).fetch('classes', [])[0] == "bash"
+        cell['source'] = cell['source'].map{|line| "!#{line}"}
+      end
+      cell
+    }
+    notebook
+  end
+
   def self.fixSqlNotebook(notebook)
     # Add in a %%sql at the top of each cell
     notebook['cells'].map{|cell|
@@ -383,7 +398,11 @@ module GTNNotebooks
   def self.render_jupyter_notebook(data, content, url, last_modified, notebook_language, site, dir)
     # Here we read use internal methods to convert the tutorial to a Hash
     # representing the notebook
-    notebook = self.convert_notebook_markdown(content, notebook_language)
+    accepted_languages = [notebook_language]
+    if notebook_language == 'python'
+      accepted_languages << 'bash'
+    end
+    notebook = self.convert_notebook_markdown(content, accepted_languages)
 
     # This extracts the metadata yaml header and does manual formatting of
     # the header data to make for a nicer notebook.
@@ -396,6 +415,8 @@ module GTNNotebooks
       notebook = self.fixSqlNotebook(notebook)
     elsif notebook_language == 'r'
       notebook = self.fixRNotebook(notebook)
+    elsif notebook_language == 'python'
+      notebook = self.fixPythonNotebook(notebook)
     end
 
     # Here we loop over the markdown cells and render them to HTML. This
