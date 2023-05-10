@@ -243,44 +243,22 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "DIA Analysis using OpenSwathWorkflow",
-      "zenodo_link": "https://zenodo.org/record/4307762",
+      "title": "MaxQuant and MSstats for the analysis of label-free data",
+      "zenodo_link": "",
       "level": "Intermediate",
       "questions": [
-        "How to analyze data independent acquisition (DIA) mass spectrometry (MS) data using OpenSwathWorkflow?",
-        "How to detect different Spike-in amounts of Ecoli in a HEK-Ecoli Benchmark DIA dataset?"
+        "How to perform label-free shotgun (DDA) data analysis in MaxQuant and MSstats?",
+        "Which proteins are differentially abundant in the two types of cutaneous squamous cell carcinomas?"
       ],
       "objectives": [
-        "Analysis of HEK-Ecoli Spike-in DIA data in Galaxy",
-        "Understanding DIA data principles and characteristics",
-        "Using OpenSwathworkflow to analyze HEK-Ecoli Spike-in DIA data"
+        "Learn how to use MaxQuant and MSstats for the analysis of label-free shotgun (DDA) data"
       ],
       "time_estimation": "2H",
       "key_points": [
-        "OpenSwathWorkflow enables analysis of data independent acquisition mass spectrometry data",
-        "DIA data analysis of HEK-Ecoli Spike-in dataset"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "proteomics",
-          "tutorials": [
-            "DIA_lib_OSW"
-          ]
-        }
+        "MaxQuant offers a single tool solution for protein identification and quantification.",
+        "Label-free quantitation reveals the most abundant proteins in serum samples."
       ],
       "contributors": [
-        {
-          "name": "Matthias Fahrner",
-          "email": "matthias.fahrner@mol-med.uni-freiburg.de",
-          "twitter": "mfahrner313",
-          "gitter": "matthias313",
-          "orcid": "0000-0001-7955-2518",
-          "joined": "2019-03",
-          "id": "matthias313",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/matthias313.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/"
-        },
         {
           "name": "Melanie Föll",
           "email": "melanie.foell@mol-med.uni-freiburg.de",
@@ -292,129 +270,75 @@
           "id": "foellmelanie",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/"
+        },
+        {
+          "name": "Matthias Fahrner",
+          "email": "matthias.fahrner@mol-med.uni-freiburg.de",
+          "twitter": "mfahrner313",
+          "gitter": "matthias313",
+          "orcid": "0000-0001-7955-2518",
+          "joined": "2019-03",
+          "id": "matthias313",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/matthias313.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "proteomics",
+          "tutorials": [
+            "maxquant-label-free"
+          ]
         }
       ],
       "subtopic": "id-quant",
       "tags": [
-        "DIA"
+        "label-free"
       ],
-      "url": "/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html",
+      "url": "/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html",
       "topic_name": "proteomics",
-      "tutorial_name": "DIA_Analysis_OSW",
-      "dir": "topics/proteomics/tutorials/DIA_Analysis_OSW",
-      "id": "proteomics/DIA_Analysis_OSW",
+      "tutorial_name": "maxquant-msstats-dda-lfq",
+      "dir": "topics/proteomics/tutorials/maxquant-msstats-dda-lfq",
+      "id": "proteomics/maxquant-msstats-dda-lfq",
       "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "Galaxy-Workflow-_DIA_Training_using_HEK_Ecoli_3_EG_data_.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/workflows/Galaxy-Workflow-_DIA_Training_using_HEK_Ecoli_3_EG_data_.ga",
-          "path": "topics/proteomics/tutorials/DIA_Analysis_OSW/workflows/Galaxy-Workflow-_DIA_Training_using_HEK_Ecoli_3_EG_data_.ga",
-          "wfid": "proteomics-DIA_Analysis_OSW",
-          "wfname": "galaxy-workflow-_dia_training_using_hek_ecoli_3_eg_data_",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-DIA_Analysis_OSW/versions/galaxy-workflow-_dia_training_using_hek_ecoli_3_eg_data_",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "Grep1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/2.5+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_export/pyprophet_export/2.1.4.1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_merge/pyprophet_merge/2.1.4.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_score/pyprophet_score/2.1.4.2"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Biomarker candidate identification",
-      "zenodo_link": "",
-      "questions": [
-        "How to mine public databases to retrieve info?",
-        "How to build a selection strategy by applying successive biochemical/cellular criteria to a list of gene/protein?",
-        "How to select biomarkers candidates using experimental information (transcriptomics & proteomics) and annotation from public databases?"
-      ],
-      "objectives": [
-        "Build a workflow implementing a strategy for the selection of tissue-leakage biomarkers using ProteoRE"
-      ],
-      "time_estimation": "3H",
-      "key_points": [
-        "Public proteomics databases are useful resources for annotation of biomarker candidates"
-      ],
-      "contributors": [
-        {
-          "name": "Florence Combes",
-          "email": "florence.combes@cea.fr",
-          "joined": "2019-04",
-          "elixir_node": "fr",
-          "id": "combesf",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/combesf.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/combesf/"
+        "tutorial": {
+          "description": "Modern mass spectrometry-based proteomics enables the identification and quantification of thousands of proteins. Therefore, quantitative mass spectrometry represents an indispensable technology for biological and clinical research. Statistical analyses are required for the unbiased answering of scientific questions and to uncover all important information in the proteomic data. In this training we will cover the full analysis workflow from label-free, data dependent acquisition (DDA) raw data to statistical results. We’ll use two popular quantitative proteomics software: MaxQuant and MSstats.",
+          "materials": [
+            {
+              "link": "topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html",
+              "title": "MaxQuant and MSstats for the analysis of label-free data",
+              "type": "Tutorial"
+            },
+            {
+              "external": true,
+              "link": "https://usegalaxy.eu/u/melanie-foell/h/maxquant-and-msstats-label-free-proteomics-training",
+              "title": "Galaxy History of this tutorial",
+              "type": "Example History"
+            }
+          ],
+          "tags": [
+            "proteomics"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "foellmelanie"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "1H",
+              "link": "IXdLAt2PAT4",
+              "speakers": [
+                "foellmelanie"
+              ]
+            }
+          ],
+          "gtn_id": "proteomics/maxquant-msstats-dda-lfq",
+          "title": "MaxQuant and MSstats for the analysis of label-free data",
+          "captioned": true
         },
-        {
-          "name": "David Christiany",
-          "joined": "2019-04",
-          "id": "davidchristiany",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/davidchristiany.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/davidchristiany/"
-        },
-        {
-          "name": "Valentin Loux",
-          "joined": "2019-04",
-          "id": "vloux",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/vloux.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/vloux/"
-        },
-        {
-          "name": "Yves Vandenbrouck",
-          "joined": "2019-04",
-          "id": "yvandenb",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvandenb.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvandenb/"
-        }
-      ],
-      "subtopic": "post-process",
-      "tags": [
-        "DDA",
-        "human"
-      ],
-      "url": "/topics/proteomics/tutorials/biomarker_selection/tutorial.html",
-      "topic_name": "proteomics",
-      "tutorial_name": "biomarker_selection",
-      "dir": "topics/proteomics/tutorials/biomarker_selection",
-      "id": "proteomics/biomarker_selection",
-      "video_library": {
-        "tutorial": null,
         "slides": null,
         "demo": null,
         "both": null,
@@ -426,11 +350,11 @@
         {
           "workflow": "main_workflow.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/workflows/main_workflow.ga",
-          "path": "topics/proteomics/tutorials/biomarker_selection/workflows/main_workflow.ga",
-          "wfid": "proteomics-biomarker_selection",
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/workflows/main_workflow.ga",
+          "path": "topics/proteomics/tutorials/maxquant-msstats-dda-lfq/workflows/main_workflow.ga",
+          "wfid": "proteomics-maxquant-msstats-dda-lfq",
           "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-biomarker_selection/versions/main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-maxquant-msstats-dda-lfq/versions/main_workflow",
           "license": null,
           "creators": [
 
@@ -438,14 +362,20 @@
         }
       ],
       "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.0.0",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_expression_rnaseq_abbased/rna_abbased_data/2019.03.07",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_id_converter/IDconverter/2019.01.28",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_ms_observation_pepatlas/retr_pepatlas1/2019.02.01.1",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_prot_features/prot_features/2019.01.18",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_tissue_specific_expression_data/retrieve_from_hpa/2019.02.27",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_venn_diagram/Jvenn/2018.12.18"
+        "Cut1",
+        "Filter1",
+        "Grep1",
+        "Summary_Statistics1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy4",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.22.0.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/4.0.0.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6",
+        "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1"
       ],
       "tours": false,
       "video": false,
@@ -460,8 +390,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/biomarker_selection/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/biomarker_selection/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.json"
       }
     },
     {
@@ -762,574 +692,62 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Metaproteomics tutorial",
-      "edam_ontology": "topic_0121",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.839701",
-      "questions": [
-        "How can I match metaproteomic mass spectrometry data to peptide sequences derived from shotgun metagenomic data?",
-        "How can I perform taxonomy analysis and visualize metaproteomics data?",
-        "How can I perform functional analysis on this metaproteomics data?"
-      ],
-      "objectives": [
-        "A taxonomy and functional analysis of metaproteomic mass spectrometry data."
-      ],
-      "time_estimation": "2h",
-      "key_points": [
-        "Use dataset collections",
-        "With SearchGUI and PeptideShaker you can gain access to multiple search engines",
-        "Learning the basics of SQL queries can pay off"
-      ],
-      "contributors": [
-        {
-          "name": "Timothy J. Griffin",
-          "email": "tgriffin@umn.edu",
-          "github": false,
-          "joined": "2017-09",
-          "orcid": "0000-0001-6801-2559",
-          "id": "timothygriffin",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/timothygriffin.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/"
-        },
-        {
-          "name": "Pratik Jagtap",
-          "email": "pjagtap@umn.edu",
-          "joined": "2017-09",
-          "orcid": "0000-0003-0984-0973",
-          "id": "pratikdjagtap",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pratikdjagtap.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/"
-        },
-        {
-          "name": "James Johnson",
-          "email": "jj@umn.edu",
-          "joined": "2017-09",
-          "id": "jj-umn",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jj-umn.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/"
-        },
-        {
-          "name": "Clemens Blank",
-          "email": "blankclemens@gmail.com",
-          "orcid": "0000-0002-1726-2256",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "blankclemens",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankclemens.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/"
-        },
-        {
-          "name": "Subina Mehta",
-          "email": "subinamehta@gmail.com",
-          "twitter": "Subina_Mehta",
-          "linkedin": "subinamehta",
-          "gitter": "subinamehta",
-          "orcid": "0000-0001-9818-0537",
-          "joined": "2018-06",
-          "id": "subinamehta",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/subinamehta.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/"
-        }
-      ],
-      "subtopic": "multi-omics",
-      "tags": [
-        "microbiome"
-      ],
-      "url": "/topics/proteomics/tutorials/metaproteomics/tutorial.html",
-      "topic_name": "proteomics",
-      "tutorial_name": "metaproteomics",
-      "dir": "topics/proteomics/tutorials/metaproteomics",
-      "id": "proteomics/metaproteomics",
-      "video_library": {
-        "tutorial": {
-          "description": "In this tutorial, the basic workflow for metaproteomics is described, which includes database search, seeking taxonomy information and functional analysis. Related metaproteomics and functional microbiome tools and GTN tutorials are also mentioned in this tutorial.",
-          "materials": [
-            {
-              "link": "topics/proteomics/tutorials/metaproteomics/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "proteomics"
-          ],
-          "type": "Demo",
-          "versions": [
-            {
-              "captions": [
-                "emmaleith"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "1H",
-              "link": "3_yaPp-RCFw",
-              "speakers": [
-                "pratikdjagtap"
-              ]
-            }
-          ],
-          "gtn_id": "proteomics/metaproteomics",
-          "title": "Metaproteomics tutorial",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/workflows/workflow.ga",
-          "path": "topics/proteomics/tutorials/metaproteomics/workflows/workflow.ga",
-          "wfid": "proteomics-metaproteomics",
-          "wfname": "workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-metaproteomics/versions/workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.3.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/metaproteomics/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/metaproteomics/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Machine Learning Modeling of Anticancer Peptides",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.4111092",
-      "level": "Intermediate",
-      "questions": [
-        "Which machine learning (ML) algorithm is superior in classifying anticancer peptides (ACPs) and non-anticancer peptides (non-ACPs)?"
-      ],
-      "objectives": [
-        "Learn, how to calculate peptide descriptor",
-        "Learn, how to create training data set from features?",
-        "Assessment of best ML algorithm in predicting anticancer peptide"
-      ],
-      "time_estimation": "30m",
-      "contributors": [
-        {
-          "name": "Jayadev Joshi",
-          "orcid": "0000-0001-7589-5230",
-          "joined": "2020-11",
-          "id": "jaidevjoshi83",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jaidevjoshi83.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jaidevjoshi83/"
-        },
-        {
-          "name": "Daniel Blankenberg",
-          "twitter": "dblankenberg",
-          "orcid": "0000-0002-6833-9049",
-          "joined": "2018-07",
-          "id": "blankenberg",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
-        }
-      ],
-      "subtopic": "property-prediction",
-      "tags": [
-        "ML",
-        "cancer"
-      ],
-      "url": "/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.html",
-      "topic_name": "proteomics",
-      "tutorial_name": "ml-modeling-of-anti-cancer-peptides",
-      "dir": "topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides",
-      "id": "proteomics/ml-modeling-of-anti-cancer-peptides",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "PeptideML.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/workflows/PeptideML.ga",
-          "path": "topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/workflows/PeptideML.ga",
-          "wfid": "proteomics-ml-modeling-of-anti-cancer-peptides",
-          "wfname": "peptideml",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-ml-modeling-of-anti-cancer-peptides/versions/peptideml",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Detection and quantitation of N-termini (degradomics) via N-TAILS",
-      "edam_ontology": "topic_0121",
+      "title": "Biomarker candidate identification",
       "zenodo_link": "",
-      "level": "Intermediate",
       "questions": [
-        "How can protein N-termini be enriched for LC-MS/MS?",
-        "How to analyze the LC-MS/MS data?"
+        "How to mine public databases to retrieve info?",
+        "How to build a selection strategy by applying successive biochemical/cellular criteria to a list of gene/protein?",
+        "How to select biomarkers candidates using experimental information (transcriptomics & proteomics) and annotation from public databases?"
       ],
       "objectives": [
-        "Run an N-TAILS data analysis."
+        "Build a workflow implementing a strategy for the selection of tissue-leakage biomarkers using ProteoRE"
       ],
-      "time_estimation": "1h",
+      "time_estimation": "3H",
       "key_points": [
-        "N-TAILS enriches natural protein N-termini and neo-N-termini.",
-        "neo-N-termini are typically generated by protease cleavage.",
-        "N-TAILS can be used for analysis of protease cleavage."
+        "Public proteomics databases are useful resources for annotation of biomarker candidates"
       ],
       "contributors": [
         {
-          "name": "Florian Christoph Sigloch",
-          "email": "sigloch+github@mailbox.org",
-          "joined": "2017-09",
-          "id": "stortebecker",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/stortebecker.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/"
-        },
-        {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "gitter": "bgruening",
-          "orcid": "0000-0002-3079-6586",
-          "linkedin": "bgruening",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
-        }
-      ],
-      "subtopic": "special",
-      "tags": [
-
-      ],
-      "url": "/topics/proteomics/tutorials/ntails/tutorial.html",
-      "topic_name": "proteomics",
-      "tutorial_name": "ntails",
-      "dir": "topics/proteomics/tutorials/ntails",
-      "id": "proteomics/ntails",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "WF_ntails.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ntails/workflows/WF_ntails.ga",
-          "path": "topics/proteomics/tutorials/ntails/workflows/WF_ntails.ga",
-          "wfid": "proteomics-ntails",
-          "wfname": "wf_ntails",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-ntails/versions/wf_ntails",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "ConsensusID",
-        "FalseDiscoveryRate",
-        "FeatureFinderMultiplex",
-        "FileFilter",
-        "FileMerger",
-        "HighResPrecursorMassCorrector",
-        "IDConflictResolver",
-        "IDFilter",
-        "IDMapper",
-        "IDMerger",
-        "MSGFPlusAdapter",
-        "MzTabExporter",
-        "PeptideIndexer"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/ntails/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/ntails/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Mass spectrometry imaging: Loading and exploring MSI data",
-      "edam_ontology": "topic_0121",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.1560645",
-      "level": "Introductory",
-      "questions": [
-        "Did the tryptic digestions work?",
-        "Is there an intensity gradient in the data?",
-        "How good is the m/z accuracy?"
-      ],
-      "objectives": [
-        "How to upload an imzML file into Galaxy",
-        "Getting an overview of the MSI data with the MSI quality control tool",
-        "How to export MSI data as tabular files"
-      ],
-      "time_estimation": "45m",
-      "key_points": [
-        "imzML (continuous or processed file type) and Analyze7.5 can be uploaded into Galaxy via the composite upload.",
-        "The MSI Qualitycontrol tool gives valuable information before starting the analysis.",
-        "The MSI data exporter can be used any time during the analysis when it is necessary to dig deeper into the data. Galaxy provides many text manipulation tools that can directly be applied on the exported tabular file to filter, sort, plot, ... the data."
-      ],
-      "contributors": [
-        {
-          "name": "Melanie Föll",
-          "email": "melanie.foell@mol-med.uni-freiburg.de",
-          "twitter": "MCFoell",
-          "gitter": "foellmelanie",
-          "orcid": "0000-0002-1887-7543",
-          "joined": "2018-10",
-          "elixir_node": "de",
-          "id": "foellmelanie",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/"
-        },
-        {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "gitter": "bgruening",
-          "orcid": "0000-0002-3079-6586",
-          "linkedin": "bgruening",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
-        }
-      ],
-      "subtopic": "special",
-      "tags": [
-        "mouse",
-        "imaging"
-      ],
-      "url": "/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html",
-      "topic_name": "proteomics",
-      "tutorial_name": "mass-spectrometry-imaging-loading-exploring-data",
-      "dir": "topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data",
-      "id": "proteomics/mass-spectrometry-imaging-loading-exploring-data",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "ms_imaging_loading_exploring_data.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/workflows/ms_imaging_loading_exploring_data.ga",
-          "path": "topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/workflows/ms_imaging_loading_exploring_data.ga",
-          "wfid": "proteomics-mass-spectrometry-imaging-loading-exploring-data",
-          "wfname": "ms_imaging_loading_exploring_data",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-mass-spectrometry-imaging-loading-exploring-data/versions/ms_imaging_loading_exploring_data",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "Grep1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/1.12.1.1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.2"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "metaQuantome 2: Function",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.4110725",
-      "level": "Intermediate",
-      "questions": [
-        "How do I look at differentially expressed proteins?",
-        "How do I get top 5 or 10 function present in the sample?",
-        "How can I visualize my results?"
-      ],
-      "objectives": [
-        "A functional and quantitational analysis of metaproteomic mass spectrometry data."
-      ],
-      "time_estimation": "1h",
-      "key_points": [
-        "All the inputs should have one column in common i.e. peptides.",
-        "Functional annotation can be performed using GO terms and EC numbers",
-        "Having basic knowledge regarding tools that can perform functional annotation can come in handy"
-      ],
-      "contributors": [
-        {
-          "name": "Subina Mehta",
-          "email": "subinamehta@gmail.com",
-          "twitter": "Subina_Mehta",
-          "linkedin": "subinamehta",
-          "gitter": "subinamehta",
-          "orcid": "0000-0001-9818-0537",
-          "joined": "2018-06",
-          "id": "subinamehta",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/subinamehta.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/"
-        },
-        {
-          "name": "Timothy J. Griffin",
-          "email": "tgriffin@umn.edu",
-          "github": false,
-          "joined": "2017-09",
-          "orcid": "0000-0001-6801-2559",
-          "id": "timothygriffin",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/timothygriffin.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/"
-        },
-        {
-          "name": "Pratik Jagtap",
-          "email": "pjagtap@umn.edu",
-          "joined": "2017-09",
-          "orcid": "0000-0003-0984-0973",
-          "id": "pratikdjagtap",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pratikdjagtap.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/"
-        },
-        {
-          "name": "Emma Leith",
-          "email": "leith023@umn.edu",
-          "joined": "2019-07",
-          "id": "emmaleith",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/emmaleith.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/"
-        },
-        {
-          "name": "Marie Crane",
-          "joined": "2019-05",
-          "email": "crane136@umn.edu",
-          "id": "mariecrane",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mariecrane.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mariecrane/"
-        },
-        {
-          "name": "Praveen Kumar",
-          "email": "kumar207@umn.edu",
+          "name": "Florence Combes",
+          "email": "florence.combes@cea.fr",
           "joined": "2019-04",
-          "id": "pravs3683",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pravs3683.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/"
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "proteomics",
-          "tutorials": [
-            "metaproteomics"
-          ]
+          "elixir_node": "fr",
+          "id": "combesf",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/combesf.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/combesf/"
         },
         {
-          "type": "internal",
-          "topic_name": "proteomics",
-          "tutorials": [
-            "metaquantome-taxonomy"
-          ]
-        }
-      ],
-      "requirements": [
+          "name": "David Christiany",
+          "joined": "2019-04",
+          "id": "davidchristiany",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/davidchristiany.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/davidchristiany/"
+        },
         {
-          "type": "internal",
-          "topic_name": "proteomics",
-          "tutorials": [
-            "metaquantome-data-creation"
-          ]
+          "name": "Valentin Loux",
+          "joined": "2019-04",
+          "id": "vloux",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/vloux.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/vloux/"
+        },
+        {
+          "name": "Yves Vandenbrouck",
+          "joined": "2019-04",
+          "id": "yvandenb",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvandenb.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvandenb/"
         }
       ],
-      "subtopic": "multi-omics",
+      "subtopic": "post-process",
       "tags": [
-        "microbiome"
+        "DDA",
+        "human"
       ],
-      "url": "/topics/proteomics/tutorials/metaquantome-function/tutorial.html",
+      "url": "/topics/proteomics/tutorials/biomarker_selection/tutorial.html",
       "topic_name": "proteomics",
-      "tutorial_name": "metaquantome-function",
-      "dir": "topics/proteomics/tutorials/metaquantome-function",
-      "id": "proteomics/metaquantome-function",
+      "tutorial_name": "biomarker_selection",
+      "dir": "topics/proteomics/tutorials/biomarker_selection",
+      "id": "proteomics/biomarker_selection",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -1343,11 +761,11 @@
         {
           "workflow": "main_workflow.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-function/workflows/main_workflow.ga",
-          "path": "topics/proteomics/tutorials/metaquantome-function/workflows/main_workflow.ga",
-          "wfid": "proteomics-metaquantome-function",
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/workflows/main_workflow.ga",
+          "path": "topics/proteomics/tutorials/biomarker_selection/workflows/main_workflow.ga",
+          "wfid": "proteomics-biomarker_selection",
           "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-metaquantome-function/versions/main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-biomarker_selection/versions/main_workflow",
           "license": null,
           "creators": [
 
@@ -1355,18 +773,14 @@
         }
       ],
       "tools": [
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_db/metaquantome_db/2.0.0-0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_db/metaquantome_db/2.0.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_expand/metaquantome_expand/2.0.0-0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_expand/metaquantome_expand/2.0.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_filter/metaquantome_filter/2.0.0-0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_filter/metaquantome_filter/2.0.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_sample/metaquantome_sample/2.0.0-0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_sample/metaquantome_sample/2.0.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_stat/metaquantome_stat/2.0.0-0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_stat/metaquantome_stat/2.0.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.2+galaxy0"
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_expression_rnaseq_abbased/rna_abbased_data/2019.03.07",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.05",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_id_converter/IDconverter/2019.01.28",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_ms_observation_pepatlas/retr_pepatlas1/2019.02.01.1",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_prot_features/prot_features/2019.01.18",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_tissue_specific_expression_data/retrieve_from_hpa/2019.02.27",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_venn_diagram/Jvenn/2018.12.18"
       ],
       "tours": false,
       "video": false,
@@ -1381,8 +795,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/metaquantome-function/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/metaquantome-function/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/biomarker_selection/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/biomarker_selection/tutorial.json"
       }
     },
     {
@@ -1568,6 +982,112 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Mass spectrometry imaging: Loading and exploring MSI data",
+      "edam_ontology": "topic_0121",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.1560645",
+      "level": "Introductory",
+      "questions": [
+        "Did the tryptic digestions work?",
+        "Is there an intensity gradient in the data?",
+        "How good is the m/z accuracy?"
+      ],
+      "objectives": [
+        "How to upload an imzML file into Galaxy",
+        "Getting an overview of the MSI data with the MSI quality control tool",
+        "How to export MSI data as tabular files"
+      ],
+      "time_estimation": "45m",
+      "key_points": [
+        "imzML (continuous or processed file type) and Analyze7.5 can be uploaded into Galaxy via the composite upload.",
+        "The MSI Qualitycontrol tool gives valuable information before starting the analysis.",
+        "The MSI data exporter can be used any time during the analysis when it is necessary to dig deeper into the data. Galaxy provides many text manipulation tools that can directly be applied on the exported tabular file to filter, sort, plot, ... the data."
+      ],
+      "contributors": [
+        {
+          "name": "Melanie Föll",
+          "email": "melanie.foell@mol-med.uni-freiburg.de",
+          "twitter": "MCFoell",
+          "gitter": "foellmelanie",
+          "orcid": "0000-0002-1887-7543",
+          "joined": "2018-10",
+          "elixir_node": "de",
+          "id": "foellmelanie",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "gitter": "bgruening",
+          "orcid": "0000-0002-3079-6586",
+          "linkedin": "bgruening",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        }
+      ],
+      "subtopic": "special",
+      "tags": [
+        "mouse",
+        "imaging"
+      ],
+      "url": "/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html",
+      "topic_name": "proteomics",
+      "tutorial_name": "mass-spectrometry-imaging-loading-exploring-data",
+      "dir": "topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data",
+      "id": "proteomics/mass-spectrometry-imaging-loading-exploring-data",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "ms_imaging_loading_exploring_data.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/workflows/ms_imaging_loading_exploring_data.ga",
+          "path": "topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/workflows/ms_imaging_loading_exploring_data.ga",
+          "wfid": "proteomics-mass-spectrometry-imaging-loading-exploring-data",
+          "wfname": "ms_imaging_loading_exploring_data",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-mass-spectrometry-imaging-loading-exploring-data/versions/ms_imaging_loading_exploring_data",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "Grep1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/1.12.1.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.2"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Library Generation for DIA Analysis",
       "zenodo_link": "https://zenodo.org/record/4293493",
       "level": "Intermediate",
@@ -1673,125 +1193,96 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Proteogenomics 3: Novel peptide analysis",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.1489208",
-      "level": "Intermediate",
+      "title": "Annotating a protein list identified by LC-MS/MS experiments",
+      "zenodo_link": "https://zenodo.org/record/3405119",
       "questions": [
-        "How to verify the spectra of novel proteoforms?",
-        "How to assign genomic allocation to these novel proteoforms?"
+        "How to filter out technical contaminants?",
+        "How to check for tissue-specificity?",
+        "How to perform enrichment analysis?",
+        "How to map your protein list to pathways (Reactome)?",
+        "How to compare your proteome with other studies?"
       ],
       "objectives": [
-        "How to assign and visualize the genomic localization of these identified novel proteoforms?"
+        "Execute a complete annotation pipeline of a protein list identified by LC-MS/MS experiments"
       ],
-      "time_estimation": "30m",
+      "time_estimation": "1H",
       "key_points": [
-        "Learning how to visualize proteomic data and to perform its genomic allocation"
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "proteomics",
-          "tutorials": [
-            "proteogenomics-dbcreation",
-            "proteogenomics-dbsearch"
-          ]
-        }
+        "The Human Protein Atlas is a valuable resource for annotation and exploration of protein data",
+        "Conversion between different gene identifiers is sometimes required",
+        "The Reactome pathway database can be used to browse biological pathways"
       ],
       "contributors": [
         {
-          "name": "Subina Mehta",
-          "email": "subinamehta@gmail.com",
-          "twitter": "Subina_Mehta",
-          "linkedin": "subinamehta",
-          "gitter": "subinamehta",
-          "orcid": "0000-0001-9818-0537",
-          "joined": "2018-06",
-          "id": "subinamehta",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/subinamehta.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/"
-        },
-        {
-          "name": "Timothy J. Griffin",
-          "email": "tgriffin@umn.edu",
-          "github": false,
-          "joined": "2017-09",
-          "orcid": "0000-0001-6801-2559",
-          "id": "timothygriffin",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/timothygriffin.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/"
-        },
-        {
-          "name": "Pratik Jagtap",
-          "email": "pjagtap@umn.edu",
-          "joined": "2017-09",
-          "orcid": "0000-0003-0984-0973",
-          "id": "pratikdjagtap",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pratikdjagtap.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/"
-        },
-        {
-          "name": "Ray Sajulga",
-          "email": "rsajulga@umn.edu",
-          "joined": "2018-11",
-          "id": "jraysajulga",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jraysajulga.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jraysajulga/"
-        },
-        {
-          "name": "James Johnson",
-          "email": "jj@umn.edu",
-          "joined": "2017-09",
-          "id": "jj-umn",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jj-umn.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/"
-        },
-        {
-          "name": "Praveen Kumar",
-          "email": "kumar207@umn.edu",
+          "name": "Valentin Loux",
           "joined": "2019-04",
-          "id": "pravs3683",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pravs3683.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/"
+          "id": "vloux",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/vloux.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/vloux/"
+        },
+        {
+          "name": "Florence Combes",
+          "email": "florence.combes@cea.fr",
+          "joined": "2019-04",
+          "elixir_node": "fr",
+          "id": "combesf",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/combesf.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/combesf/"
+        },
+        {
+          "name": "David Christiany",
+          "joined": "2019-04",
+          "id": "davidchristiany",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/davidchristiany.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/davidchristiany/"
+        },
+        {
+          "name": "Yves Vandenbrouck",
+          "joined": "2019-04",
+          "id": "yvandenb",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvandenb.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvandenb/"
         }
       ],
-      "subtopic": "multi-omics",
+      "subtopic": "post-process",
       "tags": [
-        "proteogenomics"
+        "DDA",
+        "human"
       ],
-      "url": "/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html",
+      "url": "/topics/proteomics/tutorials/proteome_annotation/tutorial.html",
       "topic_name": "proteomics",
-      "tutorial_name": "proteogenomics-novel-peptide-analysis",
-      "dir": "topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis",
-      "id": "proteomics/proteogenomics-novel-peptide-analysis",
+      "tutorial_name": "proteome_annotation",
+      "dir": "topics/proteomics/tutorials/proteome_annotation",
+      "id": "proteomics/proteome_annotation",
       "video_library": {
         "tutorial": {
-          "description": "In this demonstration, we will investigate the peptides that were identified during proteogenomics tutorial 2. We will identify the presence of novel proteoforms that are absent in the reference database, annotate the novel peptides and visualize them using the Multi-omics Visualization Platform (MVP). <strong> If you would like to view the results yourself, we provide example histories in the FAQ document</strong>",
+          "description": "This tutorial covers an annotation pipeline for a protein list identified by LC-MS/MS experiments.",
           "materials": [
             {
-              "link": "topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html",
+              "link": "topics/proteomics/tutorials/proteome_annotation/tutorial.html",
+              "title": "Annotating a protein list identified by LC-MS/MS experiments",
               "type": "Tutorial"
             }
           ],
           "tags": [
             "proteomics"
           ],
-          "type": "Demo",
+          "type": "Tutorial",
           "versions": [
             {
               "captions": [
-                "subinamehta"
+                "combesf"
               ],
               "date": "2021-02-15",
               "galaxy_version": "21.01",
-              "length": "40M",
-              "link": "Ku274KwFh1Y",
+              "length": "30M",
+              "link": "qG7GZc6BeGY",
               "speakers": [
-                "subinamehta"
+                "yvesvdb"
               ]
             }
           ],
-          "gtn_id": "proteomics/proteogenomics-novel-peptide-analysis",
-          "title": "Proteogenomics 3: Novel peptide analysis",
+          "gtn_id": "proteomics/proteome_annotation",
+          "title": "Annotating a protein list identified by LC-MS/MS experiments",
           "captioned": true
         },
         "slides": null,
@@ -1803,13 +1294,26 @@
       "slides": false,
       "workflows": [
         {
-          "workflow": "galaxy-workflow-mouse_novel_peptide_analysis.ga",
+          "workflow": "Galaxy-Workflow-_Proteome_annotation_.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
-          "path": "topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
-          "wfid": "proteomics-proteogenomics-novel-peptide-analysis",
-          "wfname": "galaxy-workflow-mouse_novel_peptide_analysis",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-novel-peptide-analysis/versions/galaxy-workflow-mouse_novel_peptide_analysis",
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/workflows/Galaxy-Workflow-_Proteome_annotation_.ga",
+          "path": "topics/proteomics/tutorials/proteome_annotation/workflows/Galaxy-Workflow-_Proteome_annotation_.ga",
+          "wfid": "proteomics-proteome_annotation",
+          "wfname": "galaxy-workflow-_proteome_annotation_",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteome_annotation/versions/galaxy-workflow-_proteome_annotation_",
+          "license": null,
+          "creators": [
+
+          ]
+        },
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/workflows/main_workflow.ga",
+          "path": "topics/proteomics/tutorials/proteome_annotation/workflows/main_workflow.ga",
+          "wfid": "proteomics-proteome_annotation",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteome_annotation/versions/main_workflow",
           "license": null,
           "creators": [
 
@@ -1817,10 +1321,14 @@
         }
       ],
       "tools": [
-        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0"
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_clusterprofiler/cluter_profiler/2019.02.18",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_expression_rnaseq_abbased/rna_abbased_data/2019.03.07",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.11",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_id_converter/IDconverter/2019.03.07",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_reactome/reactome_analysis/2018.12.12",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_reactome/reactome_analysis/2019.03.05",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_tissue_specific_expression_data/retrieve_from_hpa/2019.02.27",
+        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_venn_diagram/Jvenn/2019.02.21"
       ],
       "tours": false,
       "video": false,
@@ -1835,8 +1343,122 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/proteome_annotation/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/proteome_annotation/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Peptide and Protein ID using SearchGUI and PeptideShaker",
+      "zenodo_link": "https://zenodo.org/record/546301",
+      "level": "Introductory",
+      "questions": [
+        "How to convert LC-MS/MS raw files?",
+        "How to identify peptides?",
+        "How to identify proteins?",
+        "How to evaluate the results?"
+      ],
+      "objectives": [
+        "Protein identification from LC-MS/MS raw files."
+      ],
+      "time_estimation": "45m",
+      "key_points": [
+        "LC-MS/MS raw files have to be locally converted to mgf/mzML prior to further analysis on most Galaxy servers.",
+        "SearchGUI can be used for running several peptide search engines at once.",
+        "PeptideShaker can be used to combine and evaluate the results, and to perform protein inference."
+      ],
+      "contributors": [
+        {
+          "name": "Florian Christoph Sigloch",
+          "email": "sigloch+github@mailbox.org",
+          "joined": "2017-09",
+          "id": "stortebecker",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/stortebecker.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "gitter": "bgruening",
+          "orcid": "0000-0002-3079-6586",
+          "linkedin": "bgruening",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        }
+      ],
+      "subtopic": "id-quant",
+      "tags": [
+        "DDA",
+        "HeLa"
+      ],
+      "url": "/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html",
+      "topic_name": "proteomics",
+      "tutorial_name": "protein-id-sg-ps",
+      "dir": "topics/proteomics/tutorials/protein-id-sg-ps",
+      "id": "proteomics/protein-id-sg-ps",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "wf_proteinID_SG_PS.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS.ga",
+          "path": "topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS.ga",
+          "wfid": "proteomics-protein-id-sg-ps",
+          "wfname": "wf_proteinid_sg_ps",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-protein-id-sg-ps/versions/wf_proteinid_sg_ps",
+          "license": null,
+          "creators": [
+
+          ]
+        },
+        {
+          "workflow": "wf_proteinID_SG_PS_multipleFiles.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS_multipleFiles.ga",
+          "path": "topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS_multipleFiles.ga",
+          "wfid": "proteomics-protein-id-sg-ps",
+          "wfname": "wf_proteinid_sg_ps_multiplefiles",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-protein-id-sg-ps/versions/wf_proteinid_sg_ps_multiplefiles",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "FileConverter",
+        "Grep1",
+        "PeakPickerHiRes",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.11.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/2.9.0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.json"
       }
     },
     {
@@ -1957,159 +1579,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "MaxQuant and MSstats for the analysis of label-free data",
-      "zenodo_link": "",
-      "level": "Intermediate",
-      "questions": [
-        "How to perform label-free shotgun (DDA) data analysis in MaxQuant and MSstats?",
-        "Which proteins are differentially abundant in the two types of cutaneous squamous cell carcinomas?"
-      ],
-      "objectives": [
-        "Learn how to use MaxQuant and MSstats for the analysis of label-free shotgun (DDA) data"
-      ],
-      "time_estimation": "2H",
-      "key_points": [
-        "MaxQuant offers a single tool solution for protein identification and quantification.",
-        "Label-free quantitation reveals the most abundant proteins in serum samples."
-      ],
-      "contributors": [
-        {
-          "name": "Melanie Föll",
-          "email": "melanie.foell@mol-med.uni-freiburg.de",
-          "twitter": "MCFoell",
-          "gitter": "foellmelanie",
-          "orcid": "0000-0002-1887-7543",
-          "joined": "2018-10",
-          "elixir_node": "de",
-          "id": "foellmelanie",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/"
-        },
-        {
-          "name": "Matthias Fahrner",
-          "email": "matthias.fahrner@mol-med.uni-freiburg.de",
-          "twitter": "mfahrner313",
-          "gitter": "matthias313",
-          "orcid": "0000-0001-7955-2518",
-          "joined": "2019-03",
-          "id": "matthias313",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/matthias313.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/"
-        }
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "proteomics",
-          "tutorials": [
-            "maxquant-label-free"
-          ]
-        }
-      ],
-      "subtopic": "id-quant",
-      "tags": [
-        "label-free"
-      ],
-      "url": "/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html",
-      "topic_name": "proteomics",
-      "tutorial_name": "maxquant-msstats-dda-lfq",
-      "dir": "topics/proteomics/tutorials/maxquant-msstats-dda-lfq",
-      "id": "proteomics/maxquant-msstats-dda-lfq",
-      "video_library": {
-        "tutorial": {
-          "description": "Modern mass spectrometry-based proteomics enables the identification and quantification of thousands of proteins. Therefore, quantitative mass spectrometry represents an indispensable technology for biological and clinical research. Statistical analyses are required for the unbiased answering of scientific questions and to uncover all important information in the proteomic data. In this training we will cover the full analysis workflow from label-free, data dependent acquisition (DDA) raw data to statistical results. We’ll use two popular quantitative proteomics software: MaxQuant and MSstats.",
-          "materials": [
-            {
-              "link": "topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html",
-              "title": "MaxQuant and MSstats for the analysis of label-free data",
-              "type": "Tutorial"
-            },
-            {
-              "external": true,
-              "link": "https://usegalaxy.eu/u/melanie-foell/h/maxquant-and-msstats-label-free-proteomics-training",
-              "title": "Galaxy History of this tutorial",
-              "type": "Example History"
-            }
-          ],
-          "tags": [
-            "proteomics"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "foellmelanie"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "1H",
-              "link": "IXdLAt2PAT4",
-              "speakers": [
-                "foellmelanie"
-              ]
-            }
-          ],
-          "gtn_id": "proteomics/maxquant-msstats-dda-lfq",
-          "title": "MaxQuant and MSstats for the analysis of label-free data",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/workflows/main_workflow.ga",
-          "path": "topics/proteomics/tutorials/maxquant-msstats-dda-lfq/workflows/main_workflow.ga",
-          "wfid": "proteomics-maxquant-msstats-dda-lfq",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-maxquant-msstats-dda-lfq/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "Cut1",
-        "Filter1",
-        "Grep1",
-        "Summary_Statistics1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.22.0.1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/4.0.0.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6",
-        "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "draft": true,
       "title": "MaxQuant and MSstats for the analysis of TMT data",
       "zenodo_link": "https://zenodo.org/record/5195800",
@@ -2212,6 +1681,833 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Peptide Library Data Analysis",
+      "level": "Intermediate",
+      "questions": [
+        "How to utilize quantitative properties of amino acids and peptide sequence to analyse peptide data?"
+      ],
+      "objectives": [
+        "Calculate descriptors",
+        "Quantitative analysis of peptide sequence properties"
+      ],
+      "time_estimation": "20m",
+      "contributors": [
+        {
+          "name": "Jayadev Joshi",
+          "orcid": "0000-0001-7589-5230",
+          "joined": "2020-11",
+          "id": "jaidevjoshi83",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jaidevjoshi83.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jaidevjoshi83/"
+        },
+        {
+          "name": "Daniel Blankenberg",
+          "twitter": "dblankenberg",
+          "orcid": "0000-0002-6833-9049",
+          "joined": "2018-07",
+          "id": "blankenberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
+        }
+      ],
+      "subtopic": "property-prediction",
+      "tags": [
+
+      ],
+      "url": "/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html",
+      "topic_name": "proteomics",
+      "tutorial_name": "peptide-library-data-analysis",
+      "dir": "topics/proteomics/tutorials/peptide-library-data-analysis",
+      "id": "proteomics/peptide-library-data-analysis",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "PeptideDataAnalysis.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/workflows/PeptideDataAnalysis.ga",
+          "path": "topics/proteomics/tutorials/peptide-library-data-analysis/workflows/PeptideDataAnalysis.ga",
+          "wfid": "proteomics-peptide-library-data-analysis",
+          "wfname": "peptidedataanalysis",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-peptide-library-data-analysis/versions/peptidedataanalysis",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "DIA Analysis using OpenSwathWorkflow",
+      "zenodo_link": "https://zenodo.org/record/4307762",
+      "level": "Intermediate",
+      "questions": [
+        "How to analyze data independent acquisition (DIA) mass spectrometry (MS) data using OpenSwathWorkflow?",
+        "How to detect different Spike-in amounts of Ecoli in a HEK-Ecoli Benchmark DIA dataset?"
+      ],
+      "objectives": [
+        "Analysis of HEK-Ecoli Spike-in DIA data in Galaxy",
+        "Understanding DIA data principles and characteristics",
+        "Using OpenSwathworkflow to analyze HEK-Ecoli Spike-in DIA data"
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "OpenSwathWorkflow enables analysis of data independent acquisition mass spectrometry data",
+        "DIA data analysis of HEK-Ecoli Spike-in dataset"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "proteomics",
+          "tutorials": [
+            "DIA_lib_OSW"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Matthias Fahrner",
+          "email": "matthias.fahrner@mol-med.uni-freiburg.de",
+          "twitter": "mfahrner313",
+          "gitter": "matthias313",
+          "orcid": "0000-0001-7955-2518",
+          "joined": "2019-03",
+          "id": "matthias313",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/matthias313.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/"
+        },
+        {
+          "name": "Melanie Föll",
+          "email": "melanie.foell@mol-med.uni-freiburg.de",
+          "twitter": "MCFoell",
+          "gitter": "foellmelanie",
+          "orcid": "0000-0002-1887-7543",
+          "joined": "2018-10",
+          "elixir_node": "de",
+          "id": "foellmelanie",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/"
+        }
+      ],
+      "subtopic": "id-quant",
+      "tags": [
+        "DIA"
+      ],
+      "url": "/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html",
+      "topic_name": "proteomics",
+      "tutorial_name": "DIA_Analysis_OSW",
+      "dir": "topics/proteomics/tutorials/DIA_Analysis_OSW",
+      "id": "proteomics/DIA_Analysis_OSW",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "Galaxy-Workflow-_DIA_Training_using_HEK_Ecoli_3_EG_data_.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/workflows/Galaxy-Workflow-_DIA_Training_using_HEK_Ecoli_3_EG_data_.ga",
+          "path": "topics/proteomics/tutorials/DIA_Analysis_OSW/workflows/Galaxy-Workflow-_DIA_Training_using_HEK_Ecoli_3_EG_data_.ga",
+          "wfid": "proteomics-DIA_Analysis_OSW",
+          "wfname": "galaxy-workflow-_dia_training_using_hek_ecoli_3_eg_data_",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-DIA_Analysis_OSW/versions/galaxy-workflow-_dia_training_using_hek_ecoli_3_eg_data_",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "Grep1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/2.5+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_export/pyprophet_export/2.1.4.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_merge/pyprophet_merge/2.1.4.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_score/pyprophet_score/2.1.4.2"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Machine Learning Modeling of Anticancer Peptides",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.4111092",
+      "level": "Intermediate",
+      "questions": [
+        "Which machine learning (ML) algorithm is superior in classifying anticancer peptides (ACPs) and non-anticancer peptides (non-ACPs)?"
+      ],
+      "objectives": [
+        "Learn, how to calculate peptide descriptor",
+        "Learn, how to create training data set from features?",
+        "Assessment of best ML algorithm in predicting anticancer peptide"
+      ],
+      "time_estimation": "30m",
+      "contributors": [
+        {
+          "name": "Jayadev Joshi",
+          "orcid": "0000-0001-7589-5230",
+          "joined": "2020-11",
+          "id": "jaidevjoshi83",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jaidevjoshi83.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jaidevjoshi83/"
+        },
+        {
+          "name": "Daniel Blankenberg",
+          "twitter": "dblankenberg",
+          "orcid": "0000-0002-6833-9049",
+          "joined": "2018-07",
+          "id": "blankenberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
+        }
+      ],
+      "subtopic": "property-prediction",
+      "tags": [
+        "ML",
+        "cancer"
+      ],
+      "url": "/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.html",
+      "topic_name": "proteomics",
+      "tutorial_name": "ml-modeling-of-anti-cancer-peptides",
+      "dir": "topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides",
+      "id": "proteomics/ml-modeling-of-anti-cancer-peptides",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "PeptideML.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/workflows/PeptideML.ga",
+          "path": "topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/workflows/PeptideML.ga",
+          "wfid": "proteomics-ml-modeling-of-anti-cancer-peptides",
+          "wfname": "peptideml",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-ml-modeling-of-anti-cancer-peptides/versions/peptideml",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Metaproteomics tutorial",
+      "edam_ontology": "topic_0121",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.839701",
+      "questions": [
+        "How can I match metaproteomic mass spectrometry data to peptide sequences derived from shotgun metagenomic data?",
+        "How can I perform taxonomy analysis and visualize metaproteomics data?",
+        "How can I perform functional analysis on this metaproteomics data?"
+      ],
+      "objectives": [
+        "A taxonomy and functional analysis of metaproteomic mass spectrometry data."
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "Use dataset collections",
+        "With SearchGUI and PeptideShaker you can gain access to multiple search engines",
+        "Learning the basics of SQL queries can pay off"
+      ],
+      "contributors": [
+        {
+          "name": "Timothy J. Griffin",
+          "email": "tgriffin@umn.edu",
+          "github": false,
+          "joined": "2017-09",
+          "orcid": "0000-0001-6801-2559",
+          "id": "timothygriffin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/timothygriffin.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/"
+        },
+        {
+          "name": "Pratik Jagtap",
+          "email": "pjagtap@umn.edu",
+          "joined": "2017-09",
+          "orcid": "0000-0003-0984-0973",
+          "id": "pratikdjagtap",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pratikdjagtap.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/"
+        },
+        {
+          "name": "James Johnson",
+          "email": "jj@umn.edu",
+          "joined": "2017-09",
+          "id": "jj-umn",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jj-umn.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/"
+        },
+        {
+          "name": "Clemens Blank",
+          "email": "blankclemens@gmail.com",
+          "orcid": "0000-0002-1726-2256",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "blankclemens",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankclemens.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/"
+        },
+        {
+          "name": "Subina Mehta",
+          "email": "subinamehta@gmail.com",
+          "twitter": "Subina_Mehta",
+          "linkedin": "subinamehta",
+          "gitter": "subinamehta",
+          "orcid": "0000-0001-9818-0537",
+          "joined": "2018-06",
+          "id": "subinamehta",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/subinamehta.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/"
+        }
+      ],
+      "subtopic": "multi-omics",
+      "tags": [
+        "microbiome"
+      ],
+      "url": "/topics/proteomics/tutorials/metaproteomics/tutorial.html",
+      "topic_name": "proteomics",
+      "tutorial_name": "metaproteomics",
+      "dir": "topics/proteomics/tutorials/metaproteomics",
+      "id": "proteomics/metaproteomics",
+      "video_library": {
+        "tutorial": {
+          "description": "In this tutorial, the basic workflow for metaproteomics is described, which includes database search, seeking taxonomy information and functional analysis. Related metaproteomics and functional microbiome tools and GTN tutorials are also mentioned in this tutorial.",
+          "materials": [
+            {
+              "link": "topics/proteomics/tutorials/metaproteomics/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "proteomics"
+          ],
+          "type": "Demo",
+          "versions": [
+            {
+              "captions": [
+                "emmaleith"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "1H",
+              "link": "3_yaPp-RCFw",
+              "speakers": [
+                "pratikdjagtap"
+              ]
+            }
+          ],
+          "gtn_id": "proteomics/metaproteomics",
+          "title": "Metaproteomics tutorial",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/workflows/workflow.ga",
+          "path": "topics/proteomics/tutorials/metaproteomics/workflows/workflow.ga",
+          "wfid": "proteomics-metaproteomics",
+          "wfname": "workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-metaproteomics/versions/workflow",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.3.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/metaproteomics/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/metaproteomics/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Secretome Prediction",
+      "zenodo_link": "https://zenodo.org/record/519260",
+      "level": "Intermediate",
+      "questions": [
+        "How to predict cellular protein localization based upon GO-terms?",
+        "How to combine multiple localization predictions?"
+      ],
+      "objectives": [
+        "Predict proteins in the cellular secretome by using GO-terms.",
+        "Predict proteins in the cellular secretome by using WolfPSORT.",
+        "Combine the results of both predictions."
+      ],
+      "time_estimation": "30m",
+      "key_points": [
+        "The cellular secretome contains more than the classically secreted proteins.",
+        "Localization predictions by multiple different algorithms can improve sensitivity and/or specificity."
+      ],
+      "contributors": [
+        {
+          "name": "Florian Christoph Sigloch",
+          "email": "sigloch+github@mailbox.org",
+          "joined": "2017-09",
+          "id": "stortebecker",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/stortebecker.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "gitter": "bgruening",
+          "orcid": "0000-0002-3079-6586",
+          "linkedin": "bgruening",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        }
+      ],
+      "subtopic": "post-process",
+      "tags": [
+        "human"
+      ],
+      "url": "/topics/proteomics/tutorials/secretome-prediction/tutorial.html",
+      "topic_name": "proteomics",
+      "tutorial_name": "secretome-prediction",
+      "dir": "topics/proteomics/tutorials/secretome-prediction",
+      "id": "proteomics/secretome-prediction",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "WF_secretomePrediction_goWolfpsort.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/secretome-prediction/workflows/WF_secretomePrediction_goWolfpsort.ga",
+          "path": "topics/proteomics/tutorials/secretome-prediction/workflows/WF_secretomePrediction_goWolfpsort.ga",
+          "wfid": "proteomics-secretome-prediction",
+          "wfname": "wf_secretomeprediction_gowolfpsort",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-secretome-prediction/versions/wf_secretomeprediction_gowolfpsort",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "Convert characters1",
+        "Filter1",
+        "Grep1",
+        "comp1",
+        "get_subontology_from",
+        "term_id_vs_term_name",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/unique/bg_uniq/0.3",
+        "toolshed.g2.bx.psu.edu/repos/peterjc/tmhmm_and_signalp/wolf_psort/0.0.8"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/secretome-prediction/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/secretome-prediction/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "metaQuantome 2: Function",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.4110725",
+      "level": "Intermediate",
+      "questions": [
+        "How do I look at differentially expressed proteins?",
+        "How do I get top 5 or 10 function present in the sample?",
+        "How can I visualize my results?"
+      ],
+      "objectives": [
+        "A functional and quantitational analysis of metaproteomic mass spectrometry data."
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "All the inputs should have one column in common i.e. peptides.",
+        "Functional annotation can be performed using GO terms and EC numbers",
+        "Having basic knowledge regarding tools that can perform functional annotation can come in handy"
+      ],
+      "contributors": [
+        {
+          "name": "Subina Mehta",
+          "email": "subinamehta@gmail.com",
+          "twitter": "Subina_Mehta",
+          "linkedin": "subinamehta",
+          "gitter": "subinamehta",
+          "orcid": "0000-0001-9818-0537",
+          "joined": "2018-06",
+          "id": "subinamehta",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/subinamehta.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/"
+        },
+        {
+          "name": "Timothy J. Griffin",
+          "email": "tgriffin@umn.edu",
+          "github": false,
+          "joined": "2017-09",
+          "orcid": "0000-0001-6801-2559",
+          "id": "timothygriffin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/timothygriffin.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/"
+        },
+        {
+          "name": "Pratik Jagtap",
+          "email": "pjagtap@umn.edu",
+          "joined": "2017-09",
+          "orcid": "0000-0003-0984-0973",
+          "id": "pratikdjagtap",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pratikdjagtap.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/"
+        },
+        {
+          "name": "Emma Leith",
+          "email": "leith023@umn.edu",
+          "joined": "2019-07",
+          "id": "emmaleith",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/emmaleith.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/"
+        },
+        {
+          "name": "Marie Crane",
+          "joined": "2019-05",
+          "email": "crane136@umn.edu",
+          "id": "mariecrane",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mariecrane.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mariecrane/"
+        },
+        {
+          "name": "Praveen Kumar",
+          "email": "kumar207@umn.edu",
+          "joined": "2019-04",
+          "id": "pravs3683",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pravs3683.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/"
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "proteomics",
+          "tutorials": [
+            "metaproteomics"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "proteomics",
+          "tutorials": [
+            "metaquantome-taxonomy"
+          ]
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "proteomics",
+          "tutorials": [
+            "metaquantome-data-creation"
+          ]
+        }
+      ],
+      "subtopic": "multi-omics",
+      "tags": [
+        "microbiome"
+      ],
+      "url": "/topics/proteomics/tutorials/metaquantome-function/tutorial.html",
+      "topic_name": "proteomics",
+      "tutorial_name": "metaquantome-function",
+      "dir": "topics/proteomics/tutorials/metaquantome-function",
+      "id": "proteomics/metaquantome-function",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-function/workflows/main_workflow.ga",
+          "path": "topics/proteomics/tutorials/metaquantome-function/workflows/main_workflow.ga",
+          "wfid": "proteomics-metaquantome-function",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-metaquantome-function/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_db/metaquantome_db/2.0.0-0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_db/metaquantome_db/2.0.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_expand/metaquantome_expand/2.0.0-0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_expand/metaquantome_expand/2.0.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_filter/metaquantome_filter/2.0.0-0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_filter/metaquantome_filter/2.0.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_sample/metaquantome_sample/2.0.0-0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_sample/metaquantome_sample/2.0.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_stat/metaquantome_stat/2.0.0-0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_stat/metaquantome_stat/2.0.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.2+galaxy0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/metaquantome-function/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/metaquantome-function/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Label-free data analysis using MaxQuant",
+      "zenodo_link": "https://zenodo.org/record/3774452",
+      "level": "Introductory",
+      "questions": [
+        "How to perform label-free analysis in Maxquant?",
+        "Which are the most abundant proteins in serum?",
+        "How successful was the depletion of those in our experiment?"
+      ],
+      "objectives": [
+        "Analysis of human serum proteome samples with label-free quantification in MaxQuant"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "MaxQuant offers a single tool solution for protein identification and quantification.",
+        "Label-free quantitation reveals the most abundant proteins in serum samples."
+      ],
+      "contributors": [
+        {
+          "name": "Melanie Föll",
+          "email": "melanie.foell@mol-med.uni-freiburg.de",
+          "twitter": "MCFoell",
+          "gitter": "foellmelanie",
+          "orcid": "0000-0002-1887-7543",
+          "joined": "2018-10",
+          "elixir_node": "de",
+          "id": "foellmelanie",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/"
+        },
+        {
+          "name": "Matthias Fahrner",
+          "email": "matthias.fahrner@mol-med.uni-freiburg.de",
+          "twitter": "mfahrner313",
+          "gitter": "matthias313",
+          "orcid": "0000-0001-7955-2518",
+          "joined": "2019-03",
+          "id": "matthias313",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/matthias313.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/"
+        }
+      ],
+      "subtopic": "id-quant",
+      "tags": [
+        "DDA",
+        "label-free"
+      ],
+      "url": "/topics/proteomics/tutorials/maxquant-label-free/tutorial.html",
+      "topic_name": "proteomics",
+      "tutorial_name": "maxquant-label-free",
+      "dir": "topics/proteomics/tutorials/maxquant-label-free",
+      "id": "proteomics/maxquant-label-free",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "maxquant_label_free.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-label-free/workflows/maxquant_label_free.ga",
+          "path": "topics/proteomics/tutorials/maxquant-label-free/workflows/maxquant_label_free.ga",
+          "wfid": "proteomics-maxquant-label-free",
+          "wfname": "maxquant_label_free",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-maxquant-label-free/versions/maxquant_label_free",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "Cut1",
+        "Filter1",
+        "Grep1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/maxquant-label-free/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/maxquant-label-free/tutorial.json"
       }
     },
     {
@@ -2397,162 +2693,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Annotating a protein list identified by LC-MS/MS experiments",
-      "zenodo_link": "https://zenodo.org/record/3405119",
-      "questions": [
-        "How to filter out technical contaminants?",
-        "How to check for tissue-specificity?",
-        "How to perform enrichment analysis?",
-        "How to map your protein list to pathways (Reactome)?",
-        "How to compare your proteome with other studies?"
-      ],
-      "objectives": [
-        "Execute a complete annotation pipeline of a protein list identified by LC-MS/MS experiments"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "The Human Protein Atlas is a valuable resource for annotation and exploration of protein data",
-        "Conversion between different gene identifiers is sometimes required",
-        "The Reactome pathway database can be used to browse biological pathways"
-      ],
-      "contributors": [
-        {
-          "name": "Valentin Loux",
-          "joined": "2019-04",
-          "id": "vloux",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/vloux.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/vloux/"
-        },
-        {
-          "name": "Florence Combes",
-          "email": "florence.combes@cea.fr",
-          "joined": "2019-04",
-          "elixir_node": "fr",
-          "id": "combesf",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/combesf.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/combesf/"
-        },
-        {
-          "name": "David Christiany",
-          "joined": "2019-04",
-          "id": "davidchristiany",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/davidchristiany.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/davidchristiany/"
-        },
-        {
-          "name": "Yves Vandenbrouck",
-          "joined": "2019-04",
-          "id": "yvandenb",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvandenb.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvandenb/"
-        }
-      ],
-      "subtopic": "post-process",
-      "tags": [
-        "DDA",
-        "human"
-      ],
-      "url": "/topics/proteomics/tutorials/proteome_annotation/tutorial.html",
-      "topic_name": "proteomics",
-      "tutorial_name": "proteome_annotation",
-      "dir": "topics/proteomics/tutorials/proteome_annotation",
-      "id": "proteomics/proteome_annotation",
-      "video_library": {
-        "tutorial": {
-          "description": "This tutorial covers an annotation pipeline for a protein list identified by LC-MS/MS experiments.",
-          "materials": [
-            {
-              "link": "topics/proteomics/tutorials/proteome_annotation/tutorial.html",
-              "title": "Annotating a protein list identified by LC-MS/MS experiments",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "proteomics"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "combesf"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "30M",
-              "link": "qG7GZc6BeGY",
-              "speakers": [
-                "yvesvdb"
-              ]
-            }
-          ],
-          "gtn_id": "proteomics/proteome_annotation",
-          "title": "Annotating a protein list identified by LC-MS/MS experiments",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "Galaxy-Workflow-_Proteome_annotation_.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/workflows/Galaxy-Workflow-_Proteome_annotation_.ga",
-          "path": "topics/proteomics/tutorials/proteome_annotation/workflows/Galaxy-Workflow-_Proteome_annotation_.ga",
-          "wfid": "proteomics-proteome_annotation",
-          "wfname": "galaxy-workflow-_proteome_annotation_",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteome_annotation/versions/galaxy-workflow-_proteome_annotation_",
-          "license": null,
-          "creators": [
-
-          ]
-        },
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/workflows/main_workflow.ga",
-          "path": "topics/proteomics/tutorials/proteome_annotation/workflows/main_workflow.ga",
-          "wfid": "proteomics-proteome_annotation",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteome_annotation/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_clusterprofiler/cluter_profiler/2019.02.18",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_expression_rnaseq_abbased/rna_abbased_data/2019.03.07",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_filter_keywords_values/MQoutputfilter/2019.03.11",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_id_converter/IDconverter/2019.03.07",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_reactome/reactome_analysis/2018.12.12",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_reactome/reactome_analysis/2019.03.05",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_tissue_specific_expression_data/retrieve_from_hpa/2019.02.27",
-        "toolshed.g2.bx.psu.edu/repos/proteore/proteore_venn_diagram/Jvenn/2019.02.21"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/proteome_annotation/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/proteome_annotation/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Peptide and Protein ID using OpenMS tools",
       "zenodo_link": "https://zenodo.org/record/546301",
       "level": "Advanced",
@@ -2703,35 +2843,22 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Peptide and Protein Quantification via Stable Isotope Labelling (SIL)",
-      "zenodo_link": "https://zenodo.org/record/1051552",
-      "level": "Advanced",
+      "title": "Detection and quantitation of N-termini (degradomics) via N-TAILS",
+      "edam_ontology": "topic_0121",
+      "zenodo_link": "",
+      "level": "Intermediate",
       "questions": [
-        "What are MS1 features?",
-        "How to quantify based on MS1 features?",
-        "How to map MS1 features to MS2 identifications?",
-        "How to evaluate and optimize the results?"
+        "How can protein N-termini be enriched for LC-MS/MS?",
+        "How to analyze the LC-MS/MS data?"
       ],
       "objectives": [
-        "MS1 feature quantitation and mapping of quantitations to peptide and protein IDs."
+        "Run an N-TAILS data analysis."
       ],
       "time_estimation": "1h",
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "proteomics",
-          "tutorials": [
-            "database-handling",
-            "protein-id-oms"
-          ]
-        }
-      ],
       "key_points": [
-        "Peptides labelled with stable isotopes result in multiple parallel MS1 ion traces.",
-        "MS1 features can be used for relative protein quantitation.",
-        "Quantitations have to be mapped to PSMs.",
-        "PSM quantitations can be used to calculate protein quantitations.",
-        "Proper quantitation and mapping needs careful evaluation and optimization."
+        "N-TAILS enriches natural protein N-termini and neo-N-termini.",
+        "neo-N-termini are typically generated by protease cleavage.",
+        "N-TAILS can be used for analysis of protease cleavage."
       ],
       "contributors": [
         {
@@ -2754,29 +2881,17 @@
           "id": "bgruening",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
-        },
-        {
-          "name": "Matthias Fahrner",
-          "email": "matthias.fahrner@mol-med.uni-freiburg.de",
-          "twitter": "mfahrner313",
-          "gitter": "matthias313",
-          "orcid": "0000-0001-7955-2518",
-          "joined": "2019-03",
-          "id": "matthias313",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/matthias313.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/"
         }
       ],
-      "subtopic": "id-quant",
+      "subtopic": "special",
       "tags": [
-        "DDA",
-        "SILAC"
+
       ],
-      "url": "/topics/proteomics/tutorials/protein-quant-sil/tutorial.html",
+      "url": "/topics/proteomics/tutorials/ntails/tutorial.html",
       "topic_name": "proteomics",
-      "tutorial_name": "protein-quant-sil",
-      "dir": "topics/proteomics/tutorials/protein-quant-sil",
-      "id": "proteomics/protein-quant-sil",
+      "tutorial_name": "ntails",
+      "dir": "topics/proteomics/tutorials/ntails",
+      "id": "proteomics/ntails",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -2788,13 +2903,13 @@
       "slides": false,
       "workflows": [
         {
-          "workflow": "workflow.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/workflows/workflow.ga",
-          "path": "topics/proteomics/tutorials/protein-quant-sil/workflows/workflow.ga",
-          "wfid": "proteomics-protein-quant-sil",
-          "wfname": "workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-protein-quant-sil/versions/workflow",
+          "workflow": "WF_ntails.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ntails/workflows/WF_ntails.ga",
+          "path": "topics/proteomics/tutorials/ntails/workflows/WF_ntails.ga",
+          "wfid": "proteomics-ntails",
+          "wfname": "wf_ntails",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-ntails/versions/wf_ntails",
           "license": null,
           "creators": [
 
@@ -2802,23 +2917,19 @@
         }
       ],
       "tools": [
-        "Grep1",
-        "Summary_Statistics1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idconflictresolver/IDConflictResolver/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmapper/IDMapper/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_multiplexresolver/MultiplexResolver/2.5+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_proteinquantifier/ProteinQuantifier/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_xtandemadapter/XTandemAdapter/2.6+galaxy0"
+        "ConsensusID",
+        "FalseDiscoveryRate",
+        "FeatureFinderMultiplex",
+        "FileFilter",
+        "FileMerger",
+        "HighResPrecursorMassCorrector",
+        "IDConflictResolver",
+        "IDFilter",
+        "IDMapper",
+        "IDMerger",
+        "MSGFPlusAdapter",
+        "MzTabExporter",
+        "PeptideIndexer"
       ],
       "tours": false,
       "video": false,
@@ -2833,8 +2944,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/protein-quant-sil/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/protein-quant-sil/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/ntails/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/ntails/tutorial.json"
       }
     },
     {
@@ -3031,34 +3142,57 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Label-free data analysis using MaxQuant",
-      "zenodo_link": "https://zenodo.org/record/3774452",
-      "level": "Introductory",
+      "title": "Peptide and Protein Quantification via Stable Isotope Labelling (SIL)",
+      "zenodo_link": "https://zenodo.org/record/1051552",
+      "level": "Advanced",
       "questions": [
-        "How to perform label-free analysis in Maxquant?",
-        "Which are the most abundant proteins in serum?",
-        "How successful was the depletion of those in our experiment?"
+        "What are MS1 features?",
+        "How to quantify based on MS1 features?",
+        "How to map MS1 features to MS2 identifications?",
+        "How to evaluate and optimize the results?"
       ],
       "objectives": [
-        "Analysis of human serum proteome samples with label-free quantification in MaxQuant"
+        "MS1 feature quantitation and mapping of quantitations to peptide and protein IDs."
       ],
-      "time_estimation": "1H",
+      "time_estimation": "1h",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "proteomics",
+          "tutorials": [
+            "database-handling",
+            "protein-id-oms"
+          ]
+        }
+      ],
       "key_points": [
-        "MaxQuant offers a single tool solution for protein identification and quantification.",
-        "Label-free quantitation reveals the most abundant proteins in serum samples."
+        "Peptides labelled with stable isotopes result in multiple parallel MS1 ion traces.",
+        "MS1 features can be used for relative protein quantitation.",
+        "Quantitations have to be mapped to PSMs.",
+        "PSM quantitations can be used to calculate protein quantitations.",
+        "Proper quantitation and mapping needs careful evaluation and optimization."
       ],
       "contributors": [
         {
-          "name": "Melanie Föll",
-          "email": "melanie.foell@mol-med.uni-freiburg.de",
-          "twitter": "MCFoell",
-          "gitter": "foellmelanie",
-          "orcid": "0000-0002-1887-7543",
-          "joined": "2018-10",
+          "name": "Florian Christoph Sigloch",
+          "email": "sigloch+github@mailbox.org",
+          "joined": "2017-09",
+          "id": "stortebecker",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/stortebecker.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "gitter": "bgruening",
+          "orcid": "0000-0002-3079-6586",
+          "linkedin": "bgruening",
+          "joined": "2017-09",
           "elixir_node": "de",
-          "id": "foellmelanie",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/"
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
         },
         {
           "name": "Matthias Fahrner",
@@ -3075,13 +3209,13 @@
       "subtopic": "id-quant",
       "tags": [
         "DDA",
-        "label-free"
+        "SILAC"
       ],
-      "url": "/topics/proteomics/tutorials/maxquant-label-free/tutorial.html",
+      "url": "/topics/proteomics/tutorials/protein-quant-sil/tutorial.html",
       "topic_name": "proteomics",
-      "tutorial_name": "maxquant-label-free",
-      "dir": "topics/proteomics/tutorials/maxquant-label-free",
-      "id": "proteomics/maxquant-label-free",
+      "tutorial_name": "protein-quant-sil",
+      "dir": "topics/proteomics/tutorials/protein-quant-sil",
+      "id": "proteomics/protein-quant-sil",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -3093,13 +3227,13 @@
       "slides": false,
       "workflows": [
         {
-          "workflow": "maxquant_label_free.ga",
+          "workflow": "workflow.ga",
           "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-label-free/workflows/maxquant_label_free.ga",
-          "path": "topics/proteomics/tutorials/maxquant-label-free/workflows/maxquant_label_free.ga",
-          "wfid": "proteomics-maxquant-label-free",
-          "wfname": "maxquant_label_free",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-maxquant-label-free/versions/maxquant_label_free",
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/workflows/workflow.ga",
+          "path": "topics/proteomics/tutorials/protein-quant-sil/workflows/workflow.ga",
+          "wfid": "proteomics-protein-quant-sil",
+          "wfname": "workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-protein-quant-sil/versions/workflow",
           "license": null,
           "creators": [
 
@@ -3107,14 +3241,23 @@
         }
       ],
       "tools": [
-        "Cut1",
-        "Filter1",
         "Grep1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0",
+        "Summary_Statistics1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0",
         "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0"
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idconflictresolver/IDConflictResolver/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmapper/IDMapper/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_multiplexresolver/MultiplexResolver/2.5+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_proteinquantifier/ProteinQuantifier/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_xtandemadapter/XTandemAdapter/2.6+galaxy0"
       ],
       "tours": false,
       "video": false,
@@ -3129,63 +3272,133 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/maxquant-label-free/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/maxquant-label-free/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/protein-quant-sil/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/protein-quant-sil/tutorial.json"
       }
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Secretome Prediction",
-      "zenodo_link": "https://zenodo.org/record/519260",
+      "title": "Proteogenomics 3: Novel peptide analysis",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.1489208",
       "level": "Intermediate",
       "questions": [
-        "How to predict cellular protein localization based upon GO-terms?",
-        "How to combine multiple localization predictions?"
+        "How to verify the spectra of novel proteoforms?",
+        "How to assign genomic allocation to these novel proteoforms?"
       ],
       "objectives": [
-        "Predict proteins in the cellular secretome by using GO-terms.",
-        "Predict proteins in the cellular secretome by using WolfPSORT.",
-        "Combine the results of both predictions."
+        "How to assign and visualize the genomic localization of these identified novel proteoforms?"
       ],
       "time_estimation": "30m",
       "key_points": [
-        "The cellular secretome contains more than the classically secreted proteins.",
-        "Localization predictions by multiple different algorithms can improve sensitivity and/or specificity."
+        "Learning how to visualize proteomic data and to perform its genomic allocation"
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "proteomics",
+          "tutorials": [
+            "proteogenomics-dbcreation",
+            "proteogenomics-dbsearch"
+          ]
+        }
       ],
       "contributors": [
         {
-          "name": "Florian Christoph Sigloch",
-          "email": "sigloch+github@mailbox.org",
-          "joined": "2017-09",
-          "id": "stortebecker",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/stortebecker.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/"
+          "name": "Subina Mehta",
+          "email": "subinamehta@gmail.com",
+          "twitter": "Subina_Mehta",
+          "linkedin": "subinamehta",
+          "gitter": "subinamehta",
+          "orcid": "0000-0001-9818-0537",
+          "joined": "2018-06",
+          "id": "subinamehta",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/subinamehta.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/"
         },
         {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "gitter": "bgruening",
-          "orcid": "0000-0002-3079-6586",
-          "linkedin": "bgruening",
+          "name": "Timothy J. Griffin",
+          "email": "tgriffin@umn.edu",
+          "github": false,
           "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+          "orcid": "0000-0001-6801-2559",
+          "id": "timothygriffin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/timothygriffin.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/"
+        },
+        {
+          "name": "Pratik Jagtap",
+          "email": "pjagtap@umn.edu",
+          "joined": "2017-09",
+          "orcid": "0000-0003-0984-0973",
+          "id": "pratikdjagtap",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pratikdjagtap.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/"
+        },
+        {
+          "name": "Ray Sajulga",
+          "email": "rsajulga@umn.edu",
+          "joined": "2018-11",
+          "id": "jraysajulga",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jraysajulga.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jraysajulga/"
+        },
+        {
+          "name": "James Johnson",
+          "email": "jj@umn.edu",
+          "joined": "2017-09",
+          "id": "jj-umn",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jj-umn.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/"
+        },
+        {
+          "name": "Praveen Kumar",
+          "email": "kumar207@umn.edu",
+          "joined": "2019-04",
+          "id": "pravs3683",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pravs3683.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/"
         }
       ],
-      "subtopic": "post-process",
+      "subtopic": "multi-omics",
       "tags": [
-        "human"
+        "proteogenomics"
       ],
-      "url": "/topics/proteomics/tutorials/secretome-prediction/tutorial.html",
+      "url": "/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html",
       "topic_name": "proteomics",
-      "tutorial_name": "secretome-prediction",
-      "dir": "topics/proteomics/tutorials/secretome-prediction",
-      "id": "proteomics/secretome-prediction",
+      "tutorial_name": "proteogenomics-novel-peptide-analysis",
+      "dir": "topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis",
+      "id": "proteomics/proteogenomics-novel-peptide-analysis",
       "video_library": {
-        "tutorial": null,
+        "tutorial": {
+          "description": "In this demonstration, we will investigate the peptides that were identified during proteogenomics tutorial 2. We will identify the presence of novel proteoforms that are absent in the reference database, annotate the novel peptides and visualize them using the Multi-omics Visualization Platform (MVP). <strong> If you would like to view the results yourself, we provide example histories in the FAQ document</strong>",
+          "materials": [
+            {
+              "link": "topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "proteomics"
+          ],
+          "type": "Demo",
+          "versions": [
+            {
+              "captions": [
+                "subinamehta"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "40M",
+              "link": "Ku274KwFh1Y",
+              "speakers": [
+                "subinamehta"
+              ]
+            }
+          ],
+          "gtn_id": "proteomics/proteogenomics-novel-peptide-analysis",
+          "title": "Proteogenomics 3: Novel peptide analysis",
+          "captioned": true
+        },
         "slides": null,
         "demo": null,
         "both": null,
@@ -3195,13 +3408,13 @@
       "slides": false,
       "workflows": [
         {
-          "workflow": "WF_secretomePrediction_goWolfpsort.ga",
+          "workflow": "galaxy-workflow-mouse_novel_peptide_analysis.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/secretome-prediction/workflows/WF_secretomePrediction_goWolfpsort.ga",
-          "path": "topics/proteomics/tutorials/secretome-prediction/workflows/WF_secretomePrediction_goWolfpsort.ga",
-          "wfid": "proteomics-secretome-prediction",
-          "wfname": "wf_secretomeprediction_gowolfpsort",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-secretome-prediction/versions/wf_secretomeprediction_gowolfpsort",
+          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
+          "path": "topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
+          "wfid": "proteomics-proteogenomics-novel-peptide-analysis",
+          "wfname": "galaxy-workflow-mouse_novel_peptide_analysis",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-novel-peptide-analysis/versions/galaxy-workflow-mouse_novel_peptide_analysis",
           "license": null,
           "creators": [
 
@@ -3209,18 +3422,10 @@
         }
       ],
       "tools": [
-        "Convert characters1",
-        "Filter1",
-        "Grep1",
-        "comp1",
-        "get_subontology_from",
-        "term_id_vs_term_name",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.0.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.0.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.0.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/unique/bg_uniq/0.3",
-        "toolshed.g2.bx.psu.edu/repos/peterjc/tmhmm_and_signalp/wolf_psort/0.0.8"
+        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0"
       ],
       "tours": false,
       "video": false,
@@ -3235,213 +3440,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/secretome-prediction/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/secretome-prediction/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Peptide and Protein ID using SearchGUI and PeptideShaker",
-      "zenodo_link": "https://zenodo.org/record/546301",
-      "level": "Introductory",
-      "questions": [
-        "How to convert LC-MS/MS raw files?",
-        "How to identify peptides?",
-        "How to identify proteins?",
-        "How to evaluate the results?"
-      ],
-      "objectives": [
-        "Protein identification from LC-MS/MS raw files."
-      ],
-      "time_estimation": "45m",
-      "key_points": [
-        "LC-MS/MS raw files have to be locally converted to mgf/mzML prior to further analysis on most Galaxy servers.",
-        "SearchGUI can be used for running several peptide search engines at once.",
-        "PeptideShaker can be used to combine and evaluate the results, and to perform protein inference."
-      ],
-      "contributors": [
-        {
-          "name": "Florian Christoph Sigloch",
-          "email": "sigloch+github@mailbox.org",
-          "joined": "2017-09",
-          "id": "stortebecker",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/stortebecker.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/"
-        },
-        {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "gitter": "bgruening",
-          "orcid": "0000-0002-3079-6586",
-          "linkedin": "bgruening",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
-        }
-      ],
-      "subtopic": "id-quant",
-      "tags": [
-        "DDA",
-        "HeLa"
-      ],
-      "url": "/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html",
-      "topic_name": "proteomics",
-      "tutorial_name": "protein-id-sg-ps",
-      "dir": "topics/proteomics/tutorials/protein-id-sg-ps",
-      "id": "proteomics/protein-id-sg-ps",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "wf_proteinID_SG_PS.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS.ga",
-          "path": "topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS.ga",
-          "wfid": "proteomics-protein-id-sg-ps",
-          "wfname": "wf_proteinid_sg_ps",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-protein-id-sg-ps/versions/wf_proteinid_sg_ps",
-          "license": null,
-          "creators": [
-
-          ]
-        },
-        {
-          "workflow": "wf_proteinID_SG_PS_multipleFiles.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS_multipleFiles.ga",
-          "path": "topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS_multipleFiles.ga",
-          "wfid": "proteomics-protein-id-sg-ps",
-          "wfname": "wf_proteinid_sg_ps_multiplefiles",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-protein-id-sg-ps/versions/wf_proteinid_sg_ps_multiplefiles",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "FileConverter",
-        "Grep1",
-        "PeakPickerHiRes",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.11.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/2.9.0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Peptide Library Data Analysis",
-      "level": "Intermediate",
-      "questions": [
-        "How to utilize quantitative properties of amino acids and peptide sequence to analyse peptide data?"
-      ],
-      "objectives": [
-        "Calculate descriptors",
-        "Quantitative analysis of peptide sequence properties"
-      ],
-      "time_estimation": "20m",
-      "contributors": [
-        {
-          "name": "Jayadev Joshi",
-          "orcid": "0000-0001-7589-5230",
-          "joined": "2020-11",
-          "id": "jaidevjoshi83",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jaidevjoshi83.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jaidevjoshi83/"
-        },
-        {
-          "name": "Daniel Blankenberg",
-          "twitter": "dblankenberg",
-          "orcid": "0000-0002-6833-9049",
-          "joined": "2018-07",
-          "id": "blankenberg",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
-        }
-      ],
-      "subtopic": "property-prediction",
-      "tags": [
-
-      ],
-      "url": "/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html",
-      "topic_name": "proteomics",
-      "tutorial_name": "peptide-library-data-analysis",
-      "dir": "topics/proteomics/tutorials/peptide-library-data-analysis",
-      "id": "proteomics/peptide-library-data-analysis",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "PeptideDataAnalysis.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/workflows/PeptideDataAnalysis.ga",
-          "path": "topics/proteomics/tutorials/peptide-library-data-analysis/workflows/PeptideDataAnalysis.ga",
-          "wfid": "proteomics-peptide-library-data-analysis",
-          "wfname": "peptidedataanalysis",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-peptide-library-data-analysis/versions/peptidedataanalysis",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.json"
       }
     },
     {
