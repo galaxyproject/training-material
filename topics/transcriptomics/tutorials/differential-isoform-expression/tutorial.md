@@ -259,6 +259,7 @@ So, let's perform the mapping step.
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `gencode.v43.annotation.gtf.gz`
 >    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, perform single-sample 2-pass mapping of all reads`
+>    - *"Compute coverage"*: `Yes in bedgraph format`
 >
 > 2. Rename the output as `Mapped health collection`
 >
