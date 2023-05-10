@@ -161,10 +161,10 @@ In this tutorial we will learn how to use **MetaBAT2** tool through Galaxy. **Me
 
 We will use the uploaded assembled fasta files as input to the algorithm (For simplicity reasons all other parameters will be preserved with their default values).
 
-> <hands-on-title>Individual assembly of short-reads with MEGAHIT</hands-on-title>
+> <hands-on-title>Individual binning of short-reads with MetaBAT2</hands-on-title>
 > 1.  {% tool [MetaBAT2](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
 >     - *"Fasta file containing contigs"*: `assembly fasta files`
->     - In *Advanced options*
+<!-- >     - In *Advanced options*
 >       - *"Percentage of good contigs considered for binning decided by connection among contigs"*: `default 95`
 >       - *"Minimum score of an edge for binning"*: `default 60`
 >       - *"Maximum number of edges per node"*: `default 200`
@@ -176,7 +176,7 @@ We will use the uploaded assembled fasta files as input to the algorithm (For si
 >     - In *Output options*
 >       - *"Minimum size of a bin as the output"*: `default 200000`
 >       - *"Output only sequence labels as a list in a column without sequences?"*: `default "No"`
->       - *"Save cluster memberships as a matrix format?"*: `"Yes"`
+>       - *"Save cluster memberships as a matrix format?"*: `"Yes"` -->
 >
 {: .hands_on}
 
@@ -252,6 +252,25 @@ This information can be used to evaluate the quality of genome bins and to selec
 Based on the previous analysis we will use **CheckM lineage_wf**: *Assessing the completeness and contamination of genome bins using lineage-specific marker sets*
 
 `CheckM lineage_wf` is a specific workflow within the CheckM software tool that is used for taxonomic classification of genome bins based on their marker gene content. This workflow uses a reference database of marker genes and taxonomic information to classify the genome bins at different taxonomic levels, from domain to species.
+
+> <hands-on-title>Assessing the completeness and contamination of genome bins using lineage-specific marker sets with `CheckM lineage_wf`</hands-on-title>
+> 1.  {% tool [CheckM lineage_wf](https://testtoolshed.g2.bx.psu.edu/repository?repository_id=ddc780a33a470e80&changeset_revision=cb30bd36bfd0) %} with parameters:
+>     - *"Bins"*: `Folder containing the produced bins`
+<!-- >     - In *Advanced options*
+>       - *"Percentage of good contigs considered for binning decided by connection among contigs"*: `default 95`
+>       - *"Minimum score of an edge for binning"*: `default 60`
+>       - *"Maximum number of edges per node"*: `default 200`
+>       - *"TNF probability cutoff for building TNF graph"*: `default 0`
+>       - *"Turn off additional binning for lost or small contigs?"*: `default "No"`
+>       - *"Minimum mean coverage of a contig in each library for binning"*: `default 1`
+>       - *"Minimum total effective mean coverage of a contig for binning "*: `default 1`
+>       - *"For exact reproducibility"*: `default 0`
+>     - In *Output options*
+>       - *"Minimum size of a bin as the output"*: `default 200000`
+>       - *"Output only sequence labels as a list in a column without sequences?"*: `default "No"`
+>       - *"Save cluster memberships as a matrix format?"*: `"Yes"` -->
+>
+{: .hands_on}
 
 > <comment-title></comment-title>
 >
