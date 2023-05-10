@@ -227,9 +227,9 @@ The two critical pieces of metadata in this experiment are **sex** and **genotyp
 >         - *"Find pattern"*: `batch`
 >         - *"Replace with"*: `sex`
 >
->Run this tool - we will use the output in Step 2.
+>    Run this tool - we will use the output in Step 2.
 >
->From the output of Step 1 we want only the single column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
+>    From the output of Step 1 we want only the single column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
 >
 > 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c8`
