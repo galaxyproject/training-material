@@ -108,8 +108,8 @@ module Jekyll
         "@context": "https://schema.org",
         "@type": "Person",
         "http://purl.org/dc/terms/conformsTo": {
-            "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
-            "@type": "Person"
+            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+            "@type": "CreativeWork"
         },
         # I guess these are identical?
         "url": "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
@@ -128,6 +128,25 @@ module Jekyll
       person
     end
 
+    def generate_org_jsonld(id, contributor, site)
+      organization = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+        },
+        "name": contributor.fetch('name', id),
+        "description": contributor.fetch('funding_statement', "An organization supporting the Galaxy Training Network"),
+      }
+
+      if contributor.has_key?('url') and contributor['url']
+        organization['url'] = contributor['url']
+      end
+
+      organization
+    end
+
     ##
     # Generate the JSON-LD metadata for a person as JSON.
     # Parameters:
@@ -137,7 +156,11 @@ module Jekyll
     # Returns:
     # +String+:: The JSON-LD metadata.
     def to_person_jsonld(id, contributor, site)
-      JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
+      if contributor.has_key? "funder"
+        JSON.pretty_generate(generate_org_jsonld(id, contributor, site))
+      else
+        JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
+      end
     end
 
     ##
