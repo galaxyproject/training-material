@@ -64,18 +64,18 @@ The first step of our analysis consists of retrieving the RNA-seq datasets from 
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      SRR9050437	Health tissue	{{ page.zenodo_link }}/files/SRR9050437_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050437	Health tissue	{{ page.zenodo_link }}/files/SRR9050437_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050438	Health tissue	{{ page.zenodo_link }}/files/SRR9050438_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050438	Health tissue	{{ page.zenodo_link }}/files/SRR9050438_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050439	Health tissue	{{ page.zenodo_link }}/files/SRR9050439_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050439	Health tissue	{{ page.zenodo_link }}/files/SRR9050439_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050440	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050440_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050440	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050440_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050441	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050441_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050441	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050441_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050442	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050442_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050442	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050442_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050437_Health	{{ page.zenodo_link }}/files/SRR9050437_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050437_Health	{{ page.zenodo_link }}/files/SRR9050437_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050438_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050438_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050439_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050439_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050440_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050440_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050441_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050441_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050442_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050442_reverse.fastqsanger.gz	fastqsanger.gz	2
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -85,10 +85,9 @@ The first step of our analysis consists of retrieving the RNA-seq datasets from 
 >         > Then you've chosen to upload as a 'dataset' and not a 'collection'. Close the upload menu, and restart the process, making sure you check *Upload data as*: **Collection(s)**
 >         {: .tip}
 >
->       - Click `Add Definition` button and select `Collection Name`: column `B`
->       - Click `Add Definition` button and select `URL`: column `C`
->       - Click `Add Definition` button and select `Type`: column `D`
->       - Click `Add Definition` button and select `Pair-end Indicator`: column `E`
+>       - Click `Add Definition` button and select `URL`: column `B`
+>       - Click `Add Definition` button and select `Type`: column `C`
+>       - Click `Add Definition` button and select `Pair-end Indicator`: column `D`
 >
 >    - Click `Apply` and press <kbd>Upload</kbd>
 >
@@ -121,7 +120,7 @@ Next we will retrieve the remaining datasets.
 >    - From **Rules** menu select `Add / Modify Column Definitions`
 >       - Click `Add Definition` button and select `Name`: column `A`
 >       - Click `Add Definition` button and select `URL`: column `B`
->    - Click `Apply` and press <kbd>Upload</kbd>
+>    - Click `Apply`, give a name to your collection like `all samples` and press <kbd>Upload</kbd>
 >
 >
 {: .hands_on}
@@ -146,34 +145,27 @@ Next we will retrieve the remaining datasets.
 Once we have got the datasets, we can start with the analysis. The first step is to perform the quality assessment. Since this step is deeply covered in the tutorial [Quality control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}), we won't describe this section in detail.
 
 
-> <comment-title>Inicial quality evaluation (OPTIONAL)</comment-title>
+> <comment-title>Initial quality evaluation (OPTIONAL)</comment-title>
 >
->   For the initial quality evaluation it is necessary a pre-processing step consisting in interlacing the paired-end reads; this step is required because **FastQC** is not able to process separated paired-end reads. The problem is that the interlacing step will takes some time, so if you are in a hurry, it is recommended to skip this step. The `Raw data QC` files generated by **FastQC** will be combine into a a single one by making use of **MultiQC**.
+>   For the initial quality evaluation, it is necessary to perform a pre-processing step consisting in flattening the list of pairs into a simple list; this step is required because of issues between **FastQC** and **MultiQC**. The `Raw data QC` files generated by **FastQC** will be combine into a a single one by making use of **MultiQC**.
 >
 >   > <hands-on-title>Initial quality evaluation</hands-on-title>
 >   >
->   > 1. {% tool [FASTQ interlacer](toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0) %} with the following parameters:
->   >    - *"Type of paired-end datasets"*: `1 paired dataset collection`
->   >        - {% icon param-collection %} *"Paired-end reads collection"*: `Health collection`
+>   > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
+>   >     - *"Input Collection"*: `all samples`
 >   >
->   > 2. Repeat the previous step
+>   > 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
+>   >    - {% icon param-collection %} *"Raw read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
 >   >
->   > 3. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->   >    - {% icon param-file %} *"Raw read data from your current history"*: output of **FASTQ interlacer** {% icon tool %}
+>   >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >   >
->   > 4. Repeat the previous step
->   >
->   > 5. Repeat the previous procedure with the `Cancer collection`
->   >
->   > 6. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
+>   > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
 >   >    - In *"Results"*:
 >   >        - {% icon param-repeat %} *"Insert Results"*
 >   >            - *"Which tool was used generate logs?"*: `FastQC`
 >   >                - In *"FastQC output"*:
 >   >                    - {% icon param-repeat %} *"Insert FastQC output"*
->   >                        - {% icon param-file %} *"FastQC output"*: `RawData` from the **Health collection** (output of **FastQC** {% icon tool %})
->   >                    - {% icon param-repeat %} *"Insert FastQC output"*
->   >                        - {% icon param-file %} *"FastQC output"*: `RawData` from the **Cancer collection** (output of **FastQC** {% icon tool %})
+>   >                        - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
 >   >    - *"Report title"*: `Raw data QC`
 >   >
 >   >
@@ -198,7 +190,7 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 >
 > 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`
->        - {% icon param-collection %} *"Select paired collection(s)"*: `Heath collection`
+>        - {% icon param-collection %} *"Select paired collection(s)"*: `all samples`
 >        - In *"Global trimming options"*:
 >            - *"Trim front for input 1"*: `10`
 >    - In *"Overrepresented Sequence Analysis"*:
@@ -207,9 +199,7 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 >    - In *"Filter Options"*:
 >        - In *"Quality filtering options"*:
 >            - *"Qualified quality phred"*: `20`
-> 2. Rename the output as `Trimmed health collection`
->
-> 3. Repeat the procude with the `Cancer collection` dataset.
+> 2. Rename the output `fastp on collection X: Paired-end output` as `Trimmed samples`
 >
 {: .hands_on}
 
@@ -223,7 +213,7 @@ The following section can be considered as the hard-core part of the training, t
 >
 {: .comment}
 
-In that section makes use of three main tools: **RNA STAR**, considered a state-of-the-art mapping tool for RNA-seq data, **RSeQC**, a package that allows comprehensively evaluate different aspects of the RNA-seq data, and **Stringtie**, which uses a genome-guided transcriptome assembly approach along with concepts from de novo genome assembly to perform transcript assembly and quantification. 
+In that section makes use of three main tools: **RNA STAR**, considered a state-of-the-art mapping tool for RNA-seq data, **RSeQC**, a package that allows comprehensively evaluate different aspects of the RNA-seq data, and **Stringtie**, which uses a genome-guided transcriptome assembly approach along with concepts from de novo genome assembly to perform transcript assembly and quantification.
 
 ## RNA-seq mapping with **RNA STAR**
 
@@ -253,17 +243,17 @@ So, let's perform the mapping step.
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
->        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed health collection` (output of **fastp** {% icon tool %})
+>        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed samples` (output of **fastp** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
 >        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.genome.fa.gz`
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `gencode.v43.annotation.gtf.gz`
 >    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, perform single-sample 2-pass mapping of all reads`
 >    - *"Compute coverage"*: `Yes in bedgraph format`
+>       - *"Generate a coverage for each strand (stranded coverage)"*: `No`
 >
-> 2. Rename the output as `Mapped health collection`
+> 2. Rename the output `RNA STAR on collection X: mapped.bam` as `Mapped samples`
 >
-> 3. Repeat the procedure with the `Cancer collection` dataset.
 >
 {: .hands_on}
 
@@ -433,7 +423,7 @@ Despite in this training we make use of RNA STAR as mapping tool, it is possible
 >
 > 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
->        - {% icon param-file %} *"Input short mapped reads"*: `Mapped health collection`
+>        - {% icon param-file %} *"Input short mapped reads"*: `Mapped collection`
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
 >        - *"Reference file"*: `Use a file from history`
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `gencode.v43.annotation.gtf.gz`
@@ -442,7 +432,7 @@ Despite in this training we make use of RNA STAR as mapping tool, it is possible
 >
 {: .hands_on}
 
-Stringtie generates six collection with three elements each one, but we will use only the **transcript-level expression measurements** dataset collection.
+Stringtie generates six collection with six elements each one, but we will use only the **transcript-level expression measurements** dataset collection.
 
 > <details-title>Transcription-level expression measurements file</details-title>
 >
@@ -463,7 +453,7 @@ Stringtie generates six collection with three elements each one, but we will use
 
 # Isoform analysis with **IsoformSwitchAnalyzeR**
 
-IsoformSwitchAnalyzeR is an open-source R package that enables both  analyze changes in genome-wide patterns of alternative splicing and specific gene isoforms switch consequences (note: alternative splicing literally will result in isoform switches). An advantage of IsoformSwitchANalyzeR over other approaches is that it allows allows to integrate multiple layers of information, such as previously annotated coding sequences, de-novo coding potential predictions, protein domains and signal peptides. In addition, IsoformSwitchAnalyzeR facilitates identification of IS by making use of a new statistical methods that tests each individual isoform for differential usage, identifying the exact isoforms involved in an isoform switch ({% cite isoformswitchanalyzer %})
+IsoformSwitchAnalyzeR is an open-source R package that enables both analyze changes in genome-wide patterns of alternative splicing and specific gene isoforms switch consequences (note: alternative splicing literally will result in isoform switches). An advantage of IsoformSwitchANalyzeR over other approaches is that it allows allows to integrate multiple layers of information, such as previously annotated coding sequences, de-novo coding potential predictions, protein domains and signal peptides. In addition, IsoformSwitchAnalyzeR facilitates identification of IS by making use of a new statistical methods that tests each individual isoform for differential usage, identifying the exact isoforms involved in an isoform switch ({% cite isoformswitchanalyzer %})
 
 > <comment-title>Nonsense mediated decay</comment-title>
 >
@@ -489,6 +479,29 @@ In this training, the IsoformSwitchAnalyzeR stage is divided in four steps:
 
 Now, we can start with the isoform switch analysis.
 
+## Split collection between the 2 conditions
+
+We will generate 2 collections from the Stringtie output, one with the cancer samples and one with the healthy samples.
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
+>    - *"Dataset collection"*: `StringTie on collection N: transcript-level expression measurements`
+>
+> 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - *"Select lines from"*: `Extract element identifiers on data N` (output of  **Extract element identifiers** {% icon tool %})
+>    - *"that"*: `Match`
+>    - *"Regular Expression"*: `Cancer`
+>
+> 3. {% tool [Filter collecion](__FILTER_FROM_FILE__) %} with the following parameters:
+>    - *"Input collection"*: `StringTie on collection N: transcript-level expression measurements`
+>    - *"How should the elements to remove be determined"*: `Remove if identifiers are ABSENT from file`
+>        - *"Filter out identifiers absent from"*: `Search in textfiles on data N` (output of  **Search in textfiles** {% icon tool %})
+>
+> 4. Rename both collections `Transcripts Health` and `Transcripts Cancer`.
+>
+{: .hands_on}
+
 ## Import data into **IsoformSwitchAnalyzeR**
 
 The first step of the IsoformSwitchAnalyzeR pipeline is to import the required datasets.
@@ -505,10 +518,10 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >    - *"Tool function mode"*: `Import data`
 >        - In *"1: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Cancer`
->            - {% icon param-collection %} *"Transcript-level expression measurements"*: `transcript-level expression measurements` (output of **StringTie** {% icon tool %})
+>            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Transcripts Cancer`
 >        - In *"2: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Health`
->            - {% icon param-collection %} *"Transcript-level expression measurements"*: `transcript-level expression measurements` collection (output of **StringTie** {% icon tool %})
+>            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Transcripts Health`
 >        - *"Quantification data source"*: `StringTie`
 >            - *"Average read length"*: `140`
 >        - {% icon param-file %} *"Genome annotation (GTF)"*: `gencode.v43.annotation.gtf.gz`
