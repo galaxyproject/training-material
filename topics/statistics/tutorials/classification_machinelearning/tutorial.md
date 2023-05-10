@@ -246,7 +246,7 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearest
 
 > <hands-on-title>Train k-nearest neighbor classifier</hands-on-title>
 >
->  {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.4) %}:
+> {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Classifier type"*: `Nearest Neighbors`
 >          - *"Select input type"*: `tabular data`
@@ -276,7 +276,7 @@ Now, we should evaluate the performance on the test dataset to find out whether 
 
 > <hands-on-title>Predict class using the k-nearest neighbor classifier</hands-on-title>
 >
->  {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.4) %}:
+> {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `NearestNeighbors_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -379,7 +379,7 @@ One big advantage of random forest is that it can be used for both classificatio
 
 > <hands-on-title>Train random forest</hands-on-title>
 >
-> 1. {% tool [Ensemble methods for classification and regression*](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Random forest classifier`
 >          - *"Select input type"*: `tabular data`
@@ -411,7 +411,7 @@ After learning on the training dataset, we should evaluate the performance on th
 
 > <hands-on-title>Predict targets using the random forest</hands-on-title>
 >
-> 1. {% tool [Ensemble methods for classification and regression*](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `RandomForest_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -501,7 +501,7 @@ Using the **Hyperparameter search** tool, we found the best model, based on the 
 
 > <hands-on-title>Predict age</hands-on-title>
 >
-> 1. {% tool [Ensemble methods for classification and regression*](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >        - {% icon param-files %} *"Models"*: `zipped` file (output of **Hyperparameter search** {% icon tool %})
 >        - {% icon param-files %} *"Data (tabular)"*: `test_rows` tabular file
