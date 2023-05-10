@@ -120,7 +120,7 @@ The dataset is divided into two parts - training and test sets. The training set
 
 > <hands-on-title>Train a model</hands-on-title>
 >
-> 1. **Generalized linear models for classification and regression** {% icon tool %} with the following parameters to train the regressor:
+> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select a linear method"*: `Linear Regression model`
 >          - *"Select input type"*: `tabular data`
@@ -156,7 +156,7 @@ Now, we will predict age in the test dataset using this model in order to see if
 
 > <hands-on-title>Predict targets using the model</hands-on-title>
 >
-> 1. **Generalized linear models for classification and regression** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `LinearRegression_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -182,7 +182,7 @@ Now we visualize and analyze the predictions using the **Plot actual vs predicte
 Hint: Please find the above tool in "Graph/Display data" tool section in Galaxy.
 
 > <hands-on-title>Check and visualize the predictions</hands-on-title>
-> 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualize the predictions:
+> {% tool [Plot actual vs predicted curves and residual plots](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_without_header`
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data_linear`
 {: .hands_on}
@@ -246,7 +246,7 @@ Like the random forest method, gradient boosting is an ensemble-based regressor,
 
 > <hands-on-title>Train a model</hands-on-title>
 >
-> 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to train the regressor:
+> 1. {% tool [Ensemble methods for classification and regression*](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Gradient Boosting Regressor` (*Note:* choose `Gradient Boosting Regressor` not `Gradient Boosting Classifier`)
 >          - *"Select input type"*: `tabular data`
@@ -279,7 +279,7 @@ After learning on the training dataset, we should evaluate the performance on th
 
 > <hands-on-title>Predict targets using the model</hands-on-title>
 >
-> 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+> 1. {% tool [Ensemble methods for classification and regression*](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `gradient_boosting_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -290,7 +290,7 @@ After learning on the training dataset, we should evaluate the performance on th
 
 Now we can visualize and analyze the predictions using the **Plot actual vs predicted curves and residual plots** tool.
 > <hands-on-title>Check and visualize the predictions</hands-on-title>
-> 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualize the predictions:
+> {% tool [Plot actual vs predicted curves and residual plots](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels` (*Note:* use the `test_rows_labels` dataset, not the `test_rows_labels_without_header` one)
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data_gradient_boosting`
 {: .hands_on}
@@ -306,7 +306,7 @@ In the final step, we will create a pipeline learner with the **Pipeline builder
 
 > <hands-on-title>Create pipeline</hands-on-title>
 >
-> 1. **Pipeline builder** {% icon tool %} with the following parameters:
+> {% tool [Pipeline builder](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0.8.4) %}:
 >    - In *"Final Estimator"*:
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `GradientBoostingRegressor`
@@ -334,7 +334,7 @@ After the **New Pipeline/Estimator** dataset and its tunable hyperparameters are
 
 > <hands-on-title>Hyperparameter search</hands-on-title>
 >
-> 1. **Hyperparameter search** {% icon tool %} with the following parameters:
+> {% tool [Hyperparameter search](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.8.4) %}:
 >    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
 >        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (output of **Pipeline builder** {% icon tool %})
 >        - *"Is the estimator a deep learning model?"*: `No`
@@ -395,7 +395,7 @@ Using the **Hyperparameter search** tool, we optimized our model, based on the t
 
 > <hands-on-title>Predict age</hands-on-title>
 >
-> 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters:
+> 1. {% tool [Ensemble methods for classification and regression*](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >        - {% icon param-files %} *"Models"*: `zipped` file (output of **Hyperparameter search** {% icon tool %})
 >        - {% icon param-files %} *"Data (tabular)"*: `test_rows` tabular file
@@ -408,7 +408,7 @@ Now we will verify the performance by creating and analyzing the plots.
 
 > <hands-on-title>Create regression plots</hands-on-title>
 >
-> 1. **Plot actual vs predicted curves and residual plots of tabular data** {% icon tool %} with the following parameters:
+> {% tool [Plot actual vs predicted curves and residual plots](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1) %}:
 >    - {% icon param-files %} *"Select input data file"*: `test_rows_labels` tabular file
 >    - {% icon param-files %} *"Select predicted data file"*: `tabular` file (output of **Ensemble methods for classification and regression** {% icon tool %})
 >
