@@ -220,12 +220,12 @@ We now have:
 * transcript/ gene mapping
 * filtered FASTA
 
-We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you'll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It's often a good idea to check your tool versions. In this case the tutorial was built with Alevin Galaxy Version 1.5.1+galaxy0. To identify which version of a tool you are using. Select {% icon tool-versions %} 'Versions' and choose the appropriate version.
+We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you'll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It's often a good idea to check your tool versions. To identify which version of a tool you are using, select {% icon tool-versions %} 'Versions' and choose the appropriate version. In this case the tutorial was built with Alevin Galaxy Version 1.9.0+galaxy2.
 
 
 > <hands-on-title>Running Alevin</hands-on-title>
 >
-> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0) %}
+> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2) %} 
 >
 >     > <question-title></question-title>
 >     >
@@ -241,15 +241,18 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 >     >   >       - You are going to generate the binary index using your filtered FASTA!
 >     >   >    - {% icon param-file %} *"Transcripts FASTA file"*: `Filtered FASTA`
 >     >   >    - *"Single or paired-end reads?"*: `Paired-end`
->     >   >    - {% icon param-file %} *"file1"*: `N701-Read1`
->     >   >    - {% icon param-file %} *"file2"*: `N701-Read2`
+>     >   >    - {% icon param-file %} *"Mate pair 1"*: `N701-Read1`
+>     >   >    - {% icon param-file %} *"Mate pair 2"*: `N701-Read2`
 >     >   >    - *"Specify the strandedness of the reads"*: `Infer automatically (A)`
->     >   >    - *"Protocol"*: `DropSeq Single Cell protocol`
+>     >   >    - *"Type of single-cell protocol"*: `DropSeq Single Cell protocol`
 >     >   >    - {% icon param-file %} *"Transcript to gene map file"*: `Map`
->     >   >    - *"Retrieve all output files"*: `Yes`
->     >   >    - In *"Optional commands"*:
->     >   >        - *"dumpFeatures"*: `Yes`
->     >   >        - *"dumpMTX"*: `Yes`
+>     >   >    - In *"Extra output files"*:
+>     >   >        - {% icon param-check %} `Salmon Quant log file`
+>     >   >        - {% icon param-check %} `Features used by the CB classification and their counts at each cell level (--dumpFeatures)`
+>     >   >        
+>     >   >        - Of course you are welcome to select more options and explore the output files ({% icon warning %} warning: *"Per cell level parsimonious Umi graph (--dumpUmiGraph)"* will generate over 2 thousand single files), but for this tutorial you will only need to select those specified.
+>     >   >    - In *"Advanced options"*:
+>     >   >        - *"Dump cell v transcripts count matrix in MTX format"*: {% icon galaxy-toggle%} `Yes`
 >     >   {: .solution}
 >     {: .question}
 {: .hands_on}
@@ -259,13 +262,17 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 > The main parameter that needs changing for a 10X Chromium sample is the 'Protocol' parameter of Alevin. Just select the correct 10x Chemistry there instead.
 {: .comment}
 
+> <comment-title>Alevin file names</comment-title>
+>
+> You will notice that the names of the output files of Alevin are written in a certain convention, mentioning which tool was used and on which files, for example: *"Alevin on data X, data Y, and others: whitelist"*. Remember that you can always rename the files if you wish! For simplicity, when we refer to those files in the tutorial, we skip the information about tool and only use the second part of the name - in this case it would be simply *"whitelist"*. 
+{: .comment}
+
 This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, but we're most interested in is:
 
-* the matrix itself (quants_mat.mtx.gz - the count by gene and cell)
-* the row (cell/ barcode) identifiers (quants_mat_rows.txt) and
-* the column (gene) labels (quants_mat_cols.txt).
+* the matrix itself (*per-cell gene-count matrix (MTX)* - the count by gene and cell)
+* the row (cell/ barcode) identifiers (*row index (CB-ids)*) and
+* the column (gene) labels (*column headers (gene-ids)*).
 
-This is the matrix market (MTX) format.
 
 > <question-title></question-title>
 >
@@ -275,15 +282,15 @@ This is the matrix market (MTX) format.
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Inspect {% icon galaxy-eye %} the file {% icon param-file %} meta_info.json. You can see the mapping rate is a paltry `25.45%`. This is a terrible mapping rate. Why might this be? Remember this was downsampled, and specifically by taking only the last 400,000 reads of the FASTQ file. The overall mapping rate of the file is more like 50%, which is still quite poor, but for early Drop-Seq samples and single-cell data in general, you might expect a slightly poorer mapping rate. 10x samples are much better these days! This is real data, not test data, after all!
-> > 2. Inspect {% icon galaxy-eye %} the file {% icon param-file %} 'quants_mat_rows.txt', and you can see it has `2163` lines. The rows refer to the cells in the cell x gene matrix. According to this (rough) estimate, your sample has 2163 cells in it!
+> > 1. Inspect {% icon galaxy-eye %} the file {% icon param-file %} *Salmon log file*. You can see the mapping rate is a paltry `25.45%`. This is a terrible mapping rate. Why might this be? Remember this was downsampled, and specifically by taking only the last 400,000 reads of the FASTQ file. The overall mapping rate of the file is more like 50%, which is still quite poor, but for early Drop-Seq samples and single-cell data in general, you might expect a slightly poorer mapping rate. 10x samples are much better these days! This is real data, not test data, after all!
+> > 2. Inspect {% icon galaxy-eye %} the file {% icon param-file %} *row index (CB-ids)*, and you can see it has `2163` lines. The rows refer to the cells in the cell x gene matrix. According to this (rough) estimate, your sample has 2163 cells in it!
 > >
 > {: .solution}
 >
 {: .question}
 
 > <warning-title>Choose the appropriate input going forward!</warning-title>
-> Make certain to use **quants_mat.mtx.gz**  and NOT **quants_tier.mtx.gz** going forward.
+> Make certain to use **per-cell gene-count matrix (MTX)** file going forward.
 {: .warning}
 
 {% icon congratulations %} Congratulations - you've made an expression matrix! We could almost stop here. But it's sensible to do some basic QC, and one of the things we can do is look at a barcode rank plot.
@@ -296,7 +303,7 @@ The question we're looking to answer here, is: "do we mostly have a single cell 
 >
 > 1. {% tool [Droplet barcode rank plot](toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2) %} with the following parameters:
 >    - *"Input MTX-format matrix?"*: `No`
->    - {% icon param-file %} *"A two-column tab-delimited file, with barcodes in the first column and frequencies in the second"*: `raw_cb_frequencies.txt`
+>    - {% icon param-file %} *"A two-column tab-delimited file, with barcodes in the first column and frequencies in the second"*: Output of Alevin `raw CB classification frequencies`
 >    - *"Label to place in plot title"*: `Barcode rank plot (raw barcode frequencies)`
 >
 > 2. Rename {% icon galaxy-pencil %} the image output `Barcode Plot - raw barcode frequencies`
@@ -320,7 +327,7 @@ The right hand plots are density plots from the first one, and the thresholds ar
 >
 > 1. {% tool [Droplet barcode rank plot](toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2) %} with the following parameters:
 >    - *"Input MTX-format matrix?"*: `Yes`
->    - *"Matrix-market format matrix file, with cells by column (overrides --barcode-frequencies if supplied)"*: `quants_mat.mtx`
+>    - *"Matrix-market format matrix file, with cells by column (overrides --barcode-frequencies if supplied)"*: `per-cell gene-count matrix (MTX)`
 >    - *"For use with --mtx-matrix: force interpretation of matrix to assume cells are by row, rather than by column (default)"*: `Yes`
 >    - *"Label to place in plot title"*: `Barcode rank plot (Alevin-processed)`
 >
@@ -347,10 +354,10 @@ To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it
 ## Generate an unprocessed matrix in a usable format
 
 > <hands-on-title>Stopping Alevin from thresholding</hands-on-title>
-> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0) %} (Click re-run on the last Alevin output)
->    - *"Optional commands"*
->    - *"keepCBFraction"*: '1' - i.e. keep them all!
->    - *"freqThreshold"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
+> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2) %} (Click re-run on the last Alevin output)
+>    - *"Advanced options"*
+>    - *"Fraction of cellular barcodes to keep"*: '1' - i.e. keep them all!
+>    - *"Minimum frequency for a barcode to be considered"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
 >
 > {% snippet faqs/galaxy/tools_rerun.md %}
 {: .hands_on}
@@ -376,9 +383,9 @@ Alevin outputs MTX format, which we can pass to the dropletUtils package and run
 > <hands-on-title>Transform matrix</hands-on-title>
 >
 > 1. {% tool [salmonKallistoMtxTo10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6) %} with the following parameters:
->    - {% icon param-file %} *".mtx-format matrix"*: `quants_mat.mtx.gz` (output of **Alevin** {% icon tool %})
->    - {% icon param-file %} *"Tab-delimited genes file"*: `quants_mat_cols.txt` (output of **Alevin** {% icon tool %})
->    - {% icon param-file %} *"Tab-delimited barcodes file"*: `quants_mat_rows.txt` (output of **Alevin** {% icon tool %})
+>    - {% icon param-file %} *".mtx-format matrix"*: `per-cell gene-count matrix (MTX)` (output of **Alevin** {% icon tool %})
+>    - {% icon param-file %} *"Tab-delimited genes file"*: `column headers (gene-ids)` (output of **Alevin** {% icon tool %})
+>    - {% icon param-file %} *"Tab-delimited barcodes file"*: `row index (CB-ids)` (output of **Alevin** {% icon tool %})
 >
 > 2. Rename {% icon galaxy-pencil %} 'salmonKallistoMtxTo10x....:genes' to `Gene table`
 > 3. Rename {% icon galaxy-pencil %} 'salmonKallistoMtxTo10x....:barcodes' to `Barcode table`
@@ -516,13 +523,13 @@ We will nevertheless proceed with your majestic annotated expression matrix of 3
 >
 {: .hands_on}
 
-{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key), or compare how the subsampled datasets you've generated compare with the [total sample](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---total-n701-answer-key)
+{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3) (if you used Alevin Galaxy Version 1.5.1+galaxy0, you can check the [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key) run with that version of the tool). You can also compare how the subsampled datasets you've generated compare with the [total sample](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---total-n701-answer-key) (using Alevin Galaxy Version 1.5.1+galaxy0).
 
 However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
 
 # Analysing multiple FASTQ files
 
-This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/cs1generating-a-single-cell-matrix-using-alevin) and run them all at once! All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1generating-a-single-cell-matrix-using-alevin---all-downsample-fastq-processed-to-anndata). To combine the resultant files into a single matrix, you can look at the next tutorial in this case study: [Combining datasets after pre-processing]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %})
+This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-alevin-15) and run them all at once! All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1generating-a-single-cell-matrix-using-alevin---all-downsample-fastq-processed-to-anndata). To combine the resultant files into a single matrix, you can look at the next tutorial in this case study: [Combining datasets after pre-processing]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %})
 
 # Mitochondrial flagging
 
