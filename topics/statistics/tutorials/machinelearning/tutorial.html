@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Basics of machine learning">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.date" content="2023-05-09 18:19:04 +0000">
 <meta name="DC.creator" content="Anup Kumar">
 
         
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2023-05-09 18:19:04 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Basics of machine learning",
   "interactivityType": "mixed",
@@ -413,7 +413,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2023-05-09 18:19:04 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Basics of machine learning",
   "interactivityType": "mixed",
@@ -741,8 +741,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -890,7 +888,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 9, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -950,14 +948,14 @@
 
 <h1 id="data-upload">Data upload</h1>
 
-<p>The datasets required for this tutorial contain 9 features of breast cells which include the thickness of clump, cell-size, cell-shape and so on (<a href="https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w">more information</a>). In addition to these features, the training dataset contains one more column as <code class="language-plaintext highlighter-rouge">target</code>. It has a binary value (0 or 1) for each row. <code class="language-plaintext highlighter-rouge">0</code> indicates no breast cancer and <code class="language-plaintext highlighter-rouge">1</code> indicates breast cancer. The test dataset does not contain the <code class="language-plaintext highlighter-rouge">target</code> column.</p>
+<p>The datasets required for this tutorial contain 9 features of breast cells which include the thickness of clump, cell-size, cell-shape and so on (<a href="https://github.com/EpistasisLab/pmlb/tree/master/datasets/breast_w">more information</a>). In addition to these features, the training dataset contains one more column as <code class="language-plaintext highlighter-rouge">target</code>. It has a binary value (0 or 1) for each row. <code class="language-plaintext highlighter-rouge">0</code> indicates no breast cancer and <code class="language-plaintext highlighter-rouge">1</code> indicates breast cancer. The test dataset does not contain the <code class="language-plaintext highlighter-rouge">target</code> column.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
-      <p>Create a new history for this tutorial</p>
+      <p>Create a new history for this tutorial.</p>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
@@ -989,12 +987,12 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 </blockquote>
 
 <h1 id="train-a-classifier">Train a classifier</h1>
-<p>In this step, we will use the <a href="https://scikit-learn.org/stable/modules/svm.html#svm-classification">SVM (support vector machine)</a> classifier for training on the <code class="language-plaintext highlighter-rouge">breast-w_train</code> dataset. The classifier learns a mapping between each row and its category. SVM is a memory efficient classifier which needs only those data points which lie on the decision boundaries among different classes to predict a class for a new sample. The rest of the data points can thrown away. We will use the <code class="language-plaintext highlighter-rouge">LinearSVC</code> variant of SVM which is faster. Other variants <code class="language-plaintext highlighter-rouge">SVC</code> and <code class="language-plaintext highlighter-rouge">NuSVC</code> have high running time for large datasets. The last column of the training dataset contains a category/class for each row. The classifier learns a mapping between data row and its category which is called a trained model. The trained model is used to predict the categories of the unseen data.</p>
+<p>In this step, we will use the <a href="https://scikit-learn.org/stable/modules/svm.html#svm-classification">SVM (support vector machine)</a> classifier for training on the <code class="language-plaintext highlighter-rouge">breast-w_train</code> dataset. The classifier learns a mapping between each row and its category. SVM is a memory efficient classifier which needs only those data points which lie on the decision boundaries among different classes to predict a class for a new sample. The rest of the data points can be thrown away. We will use the <code class="language-plaintext highlighter-rouge">LinearSVC</code> variant of SVM which is faster. Other variants <code class="language-plaintext highlighter-rouge">SVC</code> and <code class="language-plaintext highlighter-rouge">NuSVC</code> have high running time for large datasets. The last column of the training dataset contains a category/class for each row. The classifier learns a mapping between data row and its category which is called a trained model. The trained model is used to predict the categories of the unseen data.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-train-a-classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Train a classifier</div>
 
-  <p><strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1" title="Support vector machines (SVMs) for classification tool"><strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1</span></span>  with the following parameters to train:</p>
   <ul>
     <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Train a model</code>
       <ul>
@@ -1015,17 +1013,16 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 </blockquote>
 
 <h1 id="predict-using-a-trained-model">Predict using a trained model</h1>
-<p>The previous step produced a trained model (<code class="language-plaintext highlighter-rouge">zip</code> file) which we will use to predict classes for the test data (<code class="language-plaintext highlighter-rouge">breast-w_test</code>).</p>
+<p>The previous step produced a trained model (a zip archive) which we will now use to predict classes for the test data (<code class="language-plaintext highlighter-rouge">breast-w_test</code>).</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-predict-using-a-trained-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Predict using a trained model</div>
 
-  <p><strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters</p>
-
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1" title="Support vector machines (SVMs) for classification tool"><strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1</span></span>  with the following parameters:</p>
   <ul>
     <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Load a model and predict</code>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="language-plaintext highlighter-rouge">Zipped </code>file (output of <strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: the zip dataset produced by <strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="language-plaintext highlighter-rouge">breast-w_test</code> file</li>
         <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Select the type of prediction”</em>: <code class="language-plaintext highlighter-rouge">Predict class labels</code></li>
@@ -1036,13 +1033,13 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 </blockquote>
 
 <h1 id="see-predictions">See predictions</h1>
-<p>The last column of the predicted dataset shows the category of each row. A row either gets <code class="language-plaintext highlighter-rouge">0</code> (no breast cancer) or <code class="language-plaintext highlighter-rouge">1</code> (breast cancer) as its predicted category.</p>
+<p>The last column of the predicted dataset shows the category of each row. A row either got <code class="language-plaintext highlighter-rouge">0</code> (no breast cancer) or <code class="language-plaintext highlighter-rouge">1</code> (breast cancer) as its predicted category.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-see-the-predicted-column"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: See the predicted column</div>
   <ol>
-    <li>Click on <code class="language-plaintext highlighter-rouge">view data</code> link of the dataset created after executing the previous step.</li>
-    <li>The last column of the <code class="language-plaintext highlighter-rouge">tabular</code> data shows the predicted category (<code class="language-plaintext highlighter-rouge">target</code>) for each row.</li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the dataset created by the previous step.</li>
+    <li>The last column of the table shows the predicted category (<code class="language-plaintext highlighter-rouge">target</code>) for each row.</li>
   </ol>
 
 </blockquote>
@@ -1050,7 +1047,7 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 <blockquote class="details">
   <div class="box-title details-title" id="details-additional-ml-resources"><button class="gtn-boxify-button details" type="button" aria-controls="details-additional-ml-resources" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Additional ML resources<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>Read more about <strong>machine learning using scikit-learn</strong> <a href="http://scikit-learn.org/stable/">here</a>.</p>
+  <p>Read more about <a href="http://scikit-learn.org/stable/">machine learning using scikit-learn</a>.</p>
 </blockquote>
 
                 </section>
