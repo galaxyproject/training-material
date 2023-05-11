@@ -38,13 +38,13 @@ Microbiome data can be gathered from different environments such as soil, water 
 Metatranscriptomic samples include the transcribed gene products, thus RNA, that therefore allow to not only study the presence of genes but additionally their expression in the given environment. The following tutorial will focus on metagenomics data, but the principle is the same for metatranscriptomics data.
 
 The investigation of microorganisms present at a specific site and their relative abundance is also called **"microbial community profiling"**.
-Basic for this is to find out which microorganisms are present in the sample. This can be achieved for all known microbes, where the DNA sequence specific for a certain species is known.
+The main objective is to identify the microorganisms that are present within the given sample. This can be achieved for all known microbes, where the DNA sequence specific for a certain species is known.
 
-For that we try to **identify the taxon** to which each individual reads belong.
+For that we try to **identify the taxon** to which each individual read belongs.
 
 {% snippet topics/metagenomics/faqs/taxon.md %}
 
-When we talk about metagenomic data here, what we start with is sequences derived from DNA fragments that could be isolated from the sample of interest. Ideally, from all microbes present in the sample, we would also find DNA. The underlying idea of taxonomic assignment is to compare the DNA sequences found in the sample (reads) to DNA sequences of a database. When a read matches a database DNA sequence of a known microbe, we can derive a list with microbes present in the sample.
+For metagenomic data analysis we start with sequences derived from DNA fragments that are isolated from the sample of interest. Ideally, the sequences from all microbes in the sample are present. The underlying idea of taxonomic assignment is to compare the DNA sequences found in the sample (reads) to DNA sequences of a database. When a read matches a database DNA sequence of a known microbe, we can derive a list with microbes present in the sample.
 
 When talking about taxonomic assignment or taxonomic classification, most of the time we actually talk about two methods, that in practice are often used interchangeably:
 - **taxonomic binning**: the clustering of individual sequence reads based on similarities criteria and assignation of clusters to reference taxa
@@ -53,9 +53,10 @@ When talking about taxonomic assignment or taxonomic classification, most of the
 ## Taxonomic profiling
 
 Tools for taxonomic profiling can be divided into three groups. Nevertheless, all of them require a pre-computed database based on previously sequenced microbial DNA or protein sequences.
-1. **DNA-to-DNA**: comparison of sequencing reads with genomic databases of DNA sequences, with tools like Kraken ({% cite Wood2014 %})
-2. **DNA-to-Protein** : compare sequencing reads with protein databases (more computationally intensive because of analysis of all six frames of potential DNA-to amino acid translation, with tools like DIAMOND
-3. **Marker based**: search for marker genes (e.g. 16S rRNA sequence) in reads, which is quick, but introduces bias, with tools like MetaPhlAn ({% cite blanco2023extending %})
+1. **DNA-to-DNA**: comparison of sequencing reads with genomic databases of DNA sequences with tools like Kraken ({% cite Wood2014 %})
+2. **DNA-to-Protein** : comparison of sequencing reads with protein databases (more computationally intensive because all six frames of potential DNA-to amino acid translations need to be analyzed) with tools like DIAMOND)
+3. **Marker based**: searching for marker genes (e.g. 16S rRNA sequence) in reads, which is quick, but introduces bias, with tools like MetaPhlAn ({% cite blanco2023extending %})
+4. **Mixed**: Combined search using e.g. maker genes and translated searches, with tools like HUMAnN ({% cite franzosa_species-level_2018 %})
 
 The comparison of reads to database sequences can be done in different ways, leading to three different types of taxonomic assignment:
 
@@ -69,7 +70,7 @@ The comparison of reads to database sequences can be done in different ways, lea
 
 - **k-mer based** approach
 
-   Databases as well as the samples DNA are broken into strings of length $$k$$ for comparison. From all the genomes in the database, where a specific k-mer is found, a lowest common ancestor (LCA) tree is derived and the abundance of k-mers within the tree is counted. This is the basis for a root-to-leaf path calculation, where the path with the highest score is used for classification of the sample. By counting the abundance of k-mers, also an estimation of relative abundance of taxa is possible. The major advantage of k-mer based analysis is the low compute cost. Major disadvantages are the low detection accuracy, that the unclassified percentage is unknown and that there is no gene detection, no SNVs detection and no genomic comparison possible. An example for a k-mer based analysis tool is Kraken, which will be used in this tutorial
+   Databases as well as the samples DNA are broken into strings of length $$k$$ for comparison. From all the genomes in the database, where a specific k-mer is found, a lowest common ancestor (LCA) tree is derived and the abundance of k-mers within the tree is counted. This is the basis for a root-to-leaf path calculation, where the path with the highest score is used for classification of the sample. By counting the abundance of k-mers, also an estimation of relative abundance of taxa is possible. The major advantage of k-mer based analysis is the low compute cost. Major disadvantages are the low detection accuracy, that the unclassified percentage is unknown and that there is no gene detection, no SNVs detection and no genomic comparison possible. An example for a k-mer based analysis tool is Kraken, which will be used in this tutorial.
 
 After this theoretical introduction, let's now get hands on analyzing an actual dataset!
 
@@ -84,7 +85,7 @@ Here we will use 2 datasets:
 The datasets differ in size, but according to the authors this doesn't matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits.
 
 The datafiles are named according to the first four characters of the filenames.
-It is a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. Additionally, the reads have been trimmed using __cutadapt__ as explained in the [Quality control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+It is a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. Additionally, the reads have been trimmed using __cutadapt__ as explained in the [Quality control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 > <agenda-title></agenda-title>
 >
@@ -111,7 +112,7 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 >
 {: .hands_on}
 
-We need now to import the data
+Now, we need to import the data
 
 > <hands-on-title>Import datasets</hands-on-title>
 >
@@ -471,7 +472,7 @@ We would like now to compare both samples.
 > 2. Select `%`  and unclick `Reads` in the blue area drop-down on the top
 > 3. Click on `Domain` green button
 >
->    ![Screenshot of a table with 4 rows (Bacteria, Eukaryota, Archaea, Viruses) and / columns (Name, Rank, TID, Max, JP4A, JC1A, Lineage)](./images/pavian-kraken-sankey-JC1A.png)
+>    ![Screenshot of a table with 4 rows (Bacteria, Eukaryota, Archaea, Viruses) and / columns (Name, Rank, TID, Max, JP4A, JC1A, Lineage)](./images/pavian-kraken-comparison-domain.png)
 >
 >    > <question-title></question-title>
 >    >
@@ -611,15 +612,15 @@ When it comes to taxonomic assignment while analyzing metagenomic data, **Kraken
 >
 > The benchmarking papers present different methods for comparing the available tools:
 > - The **CAMI challenge** is based on results of different labs that each used the CAMI dataset to perform their analysis on and send it back to the authors.
-> - {% cite Ye.2019 %} performed all the analysis themselves
+> - {% cite Ye.2019 %} performed all the analysis themselves.
 >
 > Additionally, the datasets used for both benchmarking approaches differ:
 > - **CAMI**: only ~30%-40% of reads are simulated from known taxa while the rest of the reads are from novel taxa, plasmids or simulated evolved strains.
 > - {% cite Ye.2019 %} used International Metagenomics and Microbiome Standards Alliance (IMMSA) datasets, wherein the taxa are described better.
 >
 > When benchmarking different classification tools, several metrics are used to compare their performance:
-> 1. **Precision**: proportion of true positive species identified in the sample divided by number of total species identified by the method
-> 2. **Recall**: proportion of true positive species divided by the number of distinct species actually in the sample
+> 1. **Precision**: proportion of true positive species identified in the sample divided by number of total species identified by the method.
+> 2. **Recall**: proportion of true positive species divided by the number of distinct species actually in the sample.
 > 3. Precision-recall curve: each point represents the precision and recall scores at a specific abundance threshold, the **area under the precision-recall curve (AUPR)**
 > 4. **L2 distance**: representation of abundance profiles → how accurately the abundance of each species or genera in the resulting classification reflects the abundance of each species in the original biological sample (“ground truth”)
 >
@@ -636,9 +637,9 @@ When it comes to taxonomic assignment while analyzing metagenomic data, **Kraken
 > However, some characteristics are common to all profilers:
 > - Most profilers only perform well until the family level
 > - Drastic decrease in performance between family and genus level, while little change between order and family level
-> - poorer performance of all profilers on CAMI datasets compared to International Metagenomics and Microbiome Standards Alliance (IMMSA)
+> - Poorer performance of all profilers on CAMI datasets compared to International Metagenomics and Microbiome Standards Alliance (IMMSA)
 > - Fidelity of abundance estimates decreases notably when viruses and plasmids were present
-> - high numbers of false positive calls at low abundance
+> - High numbers of false positive calls at low abundance
 > - Taxonomic profilers vs profiles from taxonomic binning:
 > Precision and recall of the taxonomic binners were comparable to that of the profilers;
 > abundance estimation at higher ranks was more problematic for the binners
@@ -759,7 +760,7 @@ Kraken | k-mer | Yes | Fastest; most memory efficient | Good performance metrics
 > > 2. Inspect the generated file
 > {: .hands_on}
 > 
-> As pointed before, the community looks a lot less diverse than with **Kraken**. It is probably due to the reference database complete enough yet to identify all taxons, or not enough reads in the input data to have marker genes in them. Indeed, no taxon has been identified for JC1A, which contains much less reads than JP4D. **Kraken** is also known to have high number of false positive.
+> As pointed before, the community looks a lot less diverse than with **Kraken**. This is probably due to the reference database, which is potentially not complete enough yet to identify all taxons. Or there are too few reads in the input data to cover enough marker genes. Indeed, no taxon has been identified for JC1A, which contains much less reads than JP4D. However, **Kraken** is also known to have high number of false positive. A benchmark dataset or mock community where the community DNA content is known would be required to correctly judge which tool provides the better taxonomic classification. 
 > 
 {: .details}
 
