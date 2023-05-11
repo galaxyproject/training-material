@@ -56,7 +56,7 @@ This tutorial will show you how to generate Galaxy-based [Workflow Run RO-Crate]
 
 ## Import an example workflow
 
-For this tutorial, we will use the workflow from the [Galaxy 101 for everyone tutorial](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html). If you have not done this tutorial yet, the only thing you need to know is that this is a workflow that takes as input a table of data about different species of iris plants, this table is subsequently sorted and filtered, and some plots are made. The specifics of the workflow are not important for this tutorial, only that it outputs a number of different kinds of outputs (images, tables, etc).
+For this tutorial, we will use the workflow from the [Galaxy 101 for everyone tutorial]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.md %}). If you have not done this tutorial yet, the only thing you need to know is that this is a workflow that takes as input a table of data about different species of iris plants, this table is subsequently sorted and filtered, and some plots are made. The specifics of the workflow are not important for this tutorial, only that it outputs a number of different kinds of outputs (images, tables, etc).
 
 We will start by importing this workflow into your Galaxy account:
 
