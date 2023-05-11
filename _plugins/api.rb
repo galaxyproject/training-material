@@ -1,5 +1,5 @@
 require 'json'
-require './_plugins/jekyll-topic-filter.rb'
+require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
 require './_plugins/gtn/git'
@@ -17,9 +17,9 @@ module Jekyll
     # +Array+ of contributor IDs
     def get_contributors(data)
       if data.has_key?('contributors')
-        return data['contributors']
+        data['contributors']
       elsif data.has_key?('contributions')
-        return data['contributions'].keys.map { |k| data['contributions'][k] }.flatten()
+        data['contributions'].keys.map { |k| data['contributions'][k] }.flatten
       end
     end
 
@@ -51,7 +51,7 @@ module Jekyll
           [k, visitAndMarkdownify(site, v)]
         end.to_h
       elsif f.is_a?(String)
-        f = markdownify(site, f).strip().gsub(/<p>/, '').gsub(/<\/p>/, '')
+        f = markdownify(site, f).strip.gsub(/<p>/, '').gsub(%r{</p>}, '')
       end
       f
     end
@@ -141,7 +141,7 @@ module Jekyll
       page2.content = JSON.pretty_generate({
                                              'type' => 'FeatureCollection',
                                              'features' => site.data['contributors']
-          .select { |k, v| v.has_key? 'location' }
+          .select { |_k, v| v.has_key? 'location' }
           .map do |k, v|
             {
               'type' => 'Feature',
@@ -169,7 +169,7 @@ module Jekyll
           q = x.dup
           q['contributors'] = get_contributors(q).dup.map { |c| mapContributor(site, c) }
 
-          q['urls'] = Hash.new
+          q['urls'] = {}
 
           if !q['hands_on'].nil?
             q['urls']['hands_on'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][8..-6]}.json"
@@ -197,7 +197,7 @@ module Jekyll
         site.pages << page2
       end
 
-      topics = Hash.new
+      topics = {}
       puts '[GTN/API] Topics'
       # Individual Topic Indexes
       site.data.each_pair do |k, v|
@@ -233,9 +233,7 @@ module Jekyll
           # Here we un-do the tutorial metadata priority, and overwrite with
           # slides metadata when available.
           slides_data = site.pages.select { |p| p.url == '/' + directory + '/slides.html' }[0]
-          if slides_data and slides_data.data
-            p.update(slides_data.data)
-          end
+          p.update(slides_data.data) if slides_data and slides_data.data
 
           page5.content = JSON.pretty_generate(p)
           page5.data['layout'] = nil
@@ -298,7 +296,7 @@ module Jekyll
           page2 = PageWithoutAFile.new(site, '', "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}/GALAXY",
                                        'descriptor.json')
           page2.content = JSON.pretty_generate({
-                                                 'content' => File.open(material['dir'] + '/workflows/' + workflow['workflow']).read,
+                                                 'content' => File.read(material['dir'] + '/workflows/' + workflow['workflow']),
                                                  'checksum' => [],
                                                  'url' => nil,
                                                })

@@ -15,27 +15,19 @@ module Jekyll
       # Mark this page as having citations
       page['cited'] = true
 
-      if page['citation_target'] == 'R'
-        return "@#{@text}"
-      end
+      return "@#{@text}" if page['citation_target'] == 'R'
 
       # Which page is rendering this tag?
       source_page = page['path']
 
       # Citation Frequency
-      if !site.config.has_key?('citation_count')
-        site.config['citation_count'] = Hash.new(0)
-      end
+      site.config['citation_count'] = Hash.new(0) if !site.config.has_key?('citation_count')
       site.config['citation_count'][@text] += 1
 
       # If the overall cache is nil, create it
-      if site.config['citation_cache'].nil?
-        site.config['citation_cache'] = Hash.new
-      end
+      site.config['citation_cache'] = {} if site.config['citation_cache'].nil?
       # If the individual page in the chace is nil, create it.
-      if site.config['citation_cache'][source_page].nil?
-        site.config['citation_cache'][source_page] = Array.new
-      end
+      site.config['citation_cache'][source_page] = [] if site.config['citation_cache'][source_page].nil?
 
       # Push it to our cache.
       site.config['citation_cache'][source_page].push(@text)
@@ -43,38 +35,32 @@ module Jekyll
       begin
         citation_text = site.config['cached_citeproc'].render(:citation, id: @text)
         layout = page.fetch('layout', nil)
-        if ['tutorial_slides', 'base_slides', 'introduction_slides'].include? layout
+        if %w[tutorial_slides base_slides introduction_slides].include? layout
           doi = site.config['cached_citeproc'].items[@text].doi
           url = site.config['cached_citeproc'].items[@text].url
-          if !doi.nil?
-            furl = "https://doi.org/#{doi}"
-          elsif !url.nil?
-            furl = url
-          else
-            furl = nil
-          end
+          furl = if !doi.nil?
+                   "https://doi.org/#{doi}"
+                 elsif !url.nil?
+                   url
+                 end
 
-          if furl.nil?
-            res = %Q(<span class="citation">#{citation_text}</span>)
-          else
-            res = %Q(<span class="citation"><a href="#{furl}">#{citation_text}</a></span>)
-          end
+          res = if furl.nil?
+                  %(<span class="citation">#{citation_text}</span>)
+                else
+                  %(<span class="citation"><a href="#{furl}">#{citation_text}</a></span>)
+                end
         else
-          res = %Q(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
+          res = %(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
         end
-      rescue => error
-        puts "[GTN/scholar] Could not render #{@text} from #{source_page} (#{error})"
-        res = %Q(<span>ERROR INVALID CITATION #{@text}</span>)
+      rescue StandardError => e
+        puts "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
+        res = %(<span>ERROR INVALID CITATION #{@text}</span>)
       end
 
-      if page['citation_target'] == 'jupyter'
-        res.gsub!(/"/, '\"')
-      end
+      res.gsub!(/"/, '\"') if page['citation_target'] == 'jupyter'
 
       res
     end
-
-    private
   end
 
   class BibTag < Liquid::Tag
@@ -94,7 +80,9 @@ module Jekyll
       citations = site.config['citation_cache'][source_page] || []
       # For each of these citation IDs, we need to get the formatted version + pull out
       # year, month for sorting.
-      unique_citations = citations.reduce(Hash.new(0)) { |a, b| a[b] += 1; a }.keys
+      unique_citations = citations.each_with_object(Hash.new(0)) do |b, a|
+        a[b] += 1
+      end.keys
       # Remove nil citations
       unique_citations = unique_citations.select { |c| !global_bib[c].nil? }
       # And now sort them by date + names
@@ -106,13 +94,11 @@ module Jekyll
       out = '<ol class="bibliography">'
       out += sorted_citations.map do |c|
         r = Gtn::Scholar.render_citation(c)
-        %Q(<li id="#{c}">#{r}</li>)
+        %(<li id="#{c}">#{r}</li>)
       end.join("\n")
       out += '</ol>'
       out
     end
-
-    private
   end
 end
 

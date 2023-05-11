@@ -15,38 +15,32 @@ module Gtn
     end
 
     def self.html_image_dimensions(tuto_dir, url)
-      if not FASTIMAGE_AVAILABLE
-        return ''
-      end
+      return '' if !FASTIMAGE_AVAILABLE
 
-      width, height = self.get_image_dimensions(tuto_dir, url)
-      if width && height
-        %Q(width="#{width}" height=#{height})
-      end
+      width, height = get_image_dimensions(tuto_dir, url)
+      return unless width && height
+
+      %(width="#{width}" height=#{height})
     end
 
     def self.get_image_dimensions(tuto_dir, url)
-      if match = url.match(/^{{\s*site.baseurl\s*}}\/(.*)/)
-        self._get_image_dimensions(match[1].strip)
+      if match = url.match(%r{^{{\s*site.baseurl\s*}}/(.*)})
+        _get_image_dimensions(match[1].strip)
       elsif match = url.match(/{%\s*link\s*(.*)\s*%}/)
-        self._get_image_dimensions(match[1].strip)
-      elsif !url.match(/https?:\/\//)
+        _get_image_dimensions(match[1].strip)
+      elsif !url.match(%r{https?://})
         img_path = File.absolute_path(File.join(tuto_dir, url))
-        if File.exist?(img_path)
-          self._get_image_dimensions(img_path)
-        end
+        _get_image_dimensions(img_path) if File.exist?(img_path)
       else
-        self._get_image_dimensions(img_path)
+        _get_image_dimensions(img_path)
       end
     end
 
     def self._get_image_dimensions(path)
-      self.cache.getset(path) do
-        begin
-          FastImage.size(path)
-        rescue
-          puts "Could not resolve size of #{path}"
-        end
+      cache.getset(path) do
+        FastImage.size(path)
+      rescue StandardError
+        puts "Could not resolve size of #{path}"
       end
     end
   end

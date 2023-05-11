@@ -9,9 +9,7 @@ require 'time'
 
 puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
 version_parts = RUBY_VERSION.split('.')
-if version_parts[0].to_i < 3
-  puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.'
-end
+puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if version_parts[0].to_i < 3
 
 ##
 # This module contains functions that are used in the GTN, our internal functions that is.
@@ -23,9 +21,9 @@ end
 # Returns:
 # +Array+:: The authors of the material
 def get_authors(material)
-  if material.key?('contributors') then
+  if material.key?('contributors')
     material['contributors']
-  elsif material.key?('contributions') then
+  elsif material.key?('contributions')
     material['contributions']['authorship']
   else
     []
@@ -40,7 +38,7 @@ end
 # Returns:
 # +String+:: The name of the user
 def lookup_name(user, site)
-  if site.data['contributors'].has_key?(user) then
+  if site.data['contributors'].has_key?(user)
     site.data['contributors'][user].fetch('name', user)
   else
     user
@@ -101,7 +99,7 @@ module Jekyll
       if citations.nil?
         {}
       else
-        citations.sort_by { |k, v| v }.reverse.to_h.first(20).map do |k, v|
+        citations.sort_by { |_k, v| v }.reverse.to_h.first(20).map do |k, v|
           [k, { 'count' => v, 'text' => Gtn::Scholar.render_citation(k) }]
         end.to_h
       end
@@ -118,7 +116,7 @@ module Jekyll
     #  slugify_unsafe("Hello, World!") # => "Hello-World"
     def slugify_unsafe(text)
       # Gets rid of *most* things without making it completely unusable?
-      text.gsub(/["'\\\/-;:,.!@#$%^&*()-]/, '').gsub(/\s/, '-')
+      text.gsub(%r{["'\\/-;:,.!@#$%^&*()-]}, '').gsub(/\s/, '-')
     end
 
     ##
@@ -169,7 +167,7 @@ module Jekyll
     #
     def gtn_mod_date(path)
       # Automatically strips any leading slashes.
-      Gtn::ModificationTimes.obtain_time(path.gsub(/^\//, ''))
+      Gtn::ModificationTimes.obtain_time(path.gsub(%r{^/}, ''))
     end
 
     ##
@@ -219,11 +217,9 @@ module Jekyll
     # Example:
     #  {% assign authors = page.contributors | filter_authors:page.contributions -%}
     def filter_authors(contributors, contributions)
-      if not contributors.nil?
-        return contributors
-      else
-        return contributions['authorship']
-      end
+      return contributors if !contributors.nil?
+
+      contributions['authorship']
     end
 
     ##
@@ -238,7 +234,7 @@ module Jekyll
     #
     #  fedi2link("@hexylena@galaxians.garden") => "https://galaxians.garden/@hexylena"
     def fedi2link(fedi_address)
-      fedi_address.gsub(/^@?(?<user>.*)@(?<host>.*)$/) { |m| "https://#{$~[:host]}/@#{$~[:user]}" }
+      fedi_address.gsub(/^@?(?<user>.*)@(?<host>.*)$/) { |_m| "https://#{$~[:host]}/@#{$~[:user]}" }
     end
 
     ##
@@ -251,12 +247,12 @@ module Jekyll
     # Example:
     #  {{ "assets/images/mastodon.svg" | load_svg }}
     def load_svg(path)
-      File.open(path).read.gsub(/\R+/, '')
+      File.read(path).gsub(/\R+/, '')
     end
 
     def regex_replace(str, regex_search, value_replace)
       regex = /#{regex_search}/m
-      return str.gsub(regex, value_replace)
+      str.gsub(regex, value_replace)
     end
 
     ##
@@ -267,7 +263,7 @@ module Jekyll
     #   {{ content | regex_replace: '<hr>', '' }}
     def regex_replace_once(str, regex_search, value_replace)
       regex = /#{regex_search}/m
-      return str.sub(regex, value_replace)
+      str.sub(regex, value_replace)
     end
 
     def convert_to_material_list(site, materials)
@@ -275,9 +271,7 @@ module Jekyll
       materials.map do |m|
         if m.key?('name') && m.key?('topic')
           found = TopicFilter.fetch_tutorial_material(site, m['topic'], m['name'])
-          if found.nil?
-            Jekyll.logger.warn "Could not find material #{m["topic"]}/#{m["name"]} in the site data"
-          end
+          Jekyll.logger.warn "Could not find material #{m['topic']}/#{m['name']} in the site data" if found.nil?
           found
         elsif m.key?('external') && m['external']
           {
@@ -304,16 +298,12 @@ module Jekyll
     #  {{ "topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga" | convert_workflow_path_to_trs }}
     #  => "/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control"
     def convert_workflow_path_to_trs(str)
-      if str.nil?
-        return 'GTN_TRS_ERROR_NIL'
-      end
+      return 'GTN_TRS_ERROR_NIL' if str.nil?
 
-      m = str.match(/topics\/(?<topic>.*)\/tutorials\/(?<tutorial>.*)\/workflows\/(?<workflow>.*)\.ga/)
-      if m
-        return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}"
-      end
+      m = str.match(%r{topics/(?<topic>.*)/tutorials/(?<tutorial>.*)/workflows/(?<workflow>.*)\.ga})
+      return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}" if m
 
-      return 'GTN_TRS_ERROR'
+      'GTN_TRS_ERROR'
     end
 
     ##
@@ -337,20 +327,14 @@ module Jekyll
     # Returns:
     # +String+:: The URL of the default link
     def get_default_link(material)
-      if material.nil?
-        return 'NO LINK'
-      end
+      return 'NO LINK' if material.nil?
 
       url = nil
 
-      if material['slides']
-        url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/slides.html"
-      end
+      url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/slides.html" if material['slides']
 
-      if material['hands_on']
-        if material['hands_on'] != 'external' && material['hands_on'] != ''
-          url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tutorial.html"
-        end
+      if material['hands_on'] && (material['hands_on'] != 'external' && material['hands_on'] != '')
+        url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tutorial.html"
       end
 
       url
@@ -365,12 +349,12 @@ Liquid::Template.register_filter(Jekyll::GtnFunctions)
 # Mapping the authors to their human names, and copying the cover (when present) to 'image'
 #
 # This exists because the jekyll-feed plugin expects those fields to look like that.
-Jekyll::Hooks.register :posts, :pre_render do |post, out|
+Jekyll::Hooks.register :posts, :pre_render do |post, _out|
   post.data['author'] = get_authors(post.data).map { |c| lookup_name(c, post.site) }.join(', ')
   post.data['image'] = post.data['cover']
 end
 
 if $0 == __FILE__
-  result = Gtn::ModificationTimes.obtain_time(ARGV[0].gsub(/^\//, ''))
-  puts "Modification time of #{ARGV[0].gsub(/^\//, '')} is #{result}"
+  result = Gtn::ModificationTimes.obtain_time(ARGV[0].gsub(%r{^/}, ''))
+  puts "Modification time of #{ARGV[0].gsub(%r{^/}, '')} is #{result}"
 end

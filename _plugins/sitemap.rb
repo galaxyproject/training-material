@@ -1,5 +1,5 @@
 require 'date'
-require './_plugins/gtn.rb'
+require './_plugins/gtn'
 
 module Jekyll
   class SitemapGenerator < Generator
@@ -23,7 +23,7 @@ module Jekyll
           d = Gtn::ModificationTimes.obtain_time(t.path)
           d.format = '%FT%T%:z'
           formatted_date = d.to_s
-        rescue
+        rescue StandardError
           d = Time.new
           formatted_date = d.strftime('%FT%T%:z')
         end

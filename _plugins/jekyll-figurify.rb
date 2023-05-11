@@ -10,10 +10,10 @@ module Jekyll
 
     def generate(site)
       site.pages
-          .select { |page| not skip_layout? page.data['layout'] }
+          .select { |page| !skip_layout? page.data['layout'] }
           .each { |page| figurify page, site }
       site.posts.docs
-          .select { |post| not skip_layout? post.data['layout'] }
+          .select { |post| !skip_layout? post.data['layout'] }
           .each { |post| figurify post, site }
     end
 
@@ -21,16 +21,14 @@ module Jekyll
 
     def figurify(page, site)
       num = 0
-      if page.content.nil?
-        return
-      end
+      return if page.content.nil?
 
       tuto_dir = File.dirname(page.path)
       page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"(.*)")\)({:(.*)})?/) do
-        alt = $1
-        url = $2
-        title = $3
-        style = $5
+        alt = ::Regexp.last_match(1)
+        url = ::Regexp.last_match(2)
+        title = ::Regexp.last_match(3)
+        style = ::Regexp.last_match(5)
 
         if skip_titles?(title) or (title.to_s.empty? and skip_empty?)
           Regexp.last_match
@@ -38,13 +36,9 @@ module Jekyll
           num += 1
 
           alt.gsub!(/"/, '&quot;')
-          if alt.strip.length > 0
-            unless alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?')
-              alt = "#{alt}. "
-            end
-          end
+          alt = "#{alt}. " if alt.strip.length > 0 && !(alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?'))
 
-          dimensions = Gtn::Images::html_image_dimensions(tuto_dir, url)
+          dimensions = Gtn::Images.html_image_dimensions(tuto_dir, url)
 
           prefix = figcaption_prefix(page, site)
           "<figure id=\"figure-#{num}\">" +
@@ -55,16 +49,12 @@ module Jekyll
       end
 
       page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)?\)({:(.*)})?/) do
-        alt = $1
-        url = $2
-        style = $4
+        alt = ::Regexp.last_match(1)
+        url = ::Regexp.last_match(2)
+        style = ::Regexp.last_match(4)
 
         alt.gsub!(/"/, '&quot;')
-        if alt.strip.length > 0
-          unless alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?')
-            alt = "#{alt}. "
-          end
-        end
+        alt = "#{alt}. " if alt.strip.length > 0 && !(alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?'))
         "<img src=\"#{url}\" alt=\"#{alt}\" #{style} loading=\"lazy\">"
       end
     end
@@ -75,7 +65,7 @@ module Jekyll
         lang = page['lang']
         fig = site.data['lang'][lang]['figure']
       end
-      @config['prefix'] || fig + ' '
+      @config['prefix'] || (fig + ' ')
     end
 
     def skip_empty?
@@ -85,9 +75,7 @@ module Jekyll
     def skip_layout?(layout)
       to_skip = @config['skip_layouts'] || []
 
-      if to_skip.empty?
-        true
-      end
+      true if to_skip.empty?
 
       to_skip.include?(layout)
     end

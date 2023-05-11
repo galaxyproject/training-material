@@ -1,6 +1,6 @@
 require 'json'
 require 'liquid'
-require './_plugins/colour-tags.rb'
+require './_plugins/colour-tags'
 
 module Jekyll
   class DumpSearchDataTag < Liquid::Tag
@@ -10,9 +10,7 @@ module Jekyll
     end
 
     def getlist(tutorial, attr)
-      if tutorial[attr].nil?
-        []
-      end
+      [] if tutorial[attr].nil?
 
       tutorial.fetch(attr, [])
     end
@@ -21,8 +19,8 @@ module Jekyll
       puts '[GTN/Search]'
 
       site = context.registers[:site]
-      topics = site.data.select { |k, v| v.is_a?(Hash) && v.has_key?('type') }
-                   .select { |k, v| ['use', 'admin-dev', 'basics'].include? v['type'] }
+      topics = site.data.select { |_k, v| v.is_a?(Hash) && v.has_key?('type') }
+                   .select { |_k, v| %w[use admin-dev basics].include? v['type'] }
 
       results = {}
       topics.each do |k, topic|
@@ -36,7 +34,7 @@ module Jekyll
               site.data['contributors'].fetch(c, {}).fetch('name', c)
             end.join(', '),
             'tags' => getlist(tutorial, 'tags').map do |tag|
-              %Q(<a class="label label-default" title="Show all tutorials tagged #{tag}" href="#{site.baseurl}/search?query=#{tag}" style="#{ColourTag.colour_tag tag}">#{tag}</a>)
+              %(<a class="label label-default" title="Show all tutorials tagged #{tag}" href="#{site.baseurl}/search?query=#{tag}" style="#{ColourTag.colour_tag tag}">#{tag}</a>)
             end,
             'url' => site.baseurl + tutorial['url'],
           }

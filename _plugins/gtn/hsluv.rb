@@ -29,13 +29,13 @@ module Hsluv
   M = [
     [3.240969941904521, -1.537383177570093, -0.498610760293],
     [-0.96924363628087, 1.87596750150772, 0.041555057407175],
-    [0.055630079696993, -0.20397695888897, 1.056971514242878],
+    [0.055630079696993, -0.20397695888897, 1.056971514242878]
   ]
 
   M_INV = [
     [0.41239079926595, 0.35758433938387, 0.18048078840183],
     [0.21263900587151, 0.71516867876775, 0.072192315360733],
-    [0.019330818715591, 0.11919477979462, 0.95053215224966],
+    [0.019330818715591, 0.11919477979462, 0.95053215224966]
   ]
 
   REF_X = 0.95045592705167
@@ -94,7 +94,7 @@ module Hsluv
 
   def hex_to_rgb(hex)
     hex = hex.tr('#', '')
-    [].tap { |arr| hex.split('').each_slice(2) { |block| arr << block.join.to_i(16) / 255.0 } }
+    [].tap { |arr| hex.split('').each_slice(2) { |block| arr << (block.join.to_i(16) / 255.0) } }
   end
 
   ###
@@ -163,12 +163,12 @@ module Hsluv
     return [0.0, 0.0, 0.0] if l == 0
 
     var_y = f_inv(l)
-    var_u = u / (13.0 * l) + REF_U
-    var_v = v / (13.0 * l) + REF_V
+    var_u = (u / (13.0 * l)) + REF_U
+    var_v = (v / (13.0 * l)) + REF_V
 
     y = var_y * REF_Y
-    x = 0.0 - (9.0 * y * var_u) / ((var_u - 4.0) * var_v - var_u * var_v)
-    z = (9.0 * y - (15.0 * var_v * y) - (var_v * x)) / (3.0 * var_v)
+    x = 0.0 - ((9.0 * y * var_u) / (((var_u - 4.0) * var_v) - (var_u * var_v)))
+    z = ((9.0 * y) - (15.0 * var_v * y) - (var_v * x)) / (3.0 * var_v)
 
     [x, y, z]
   end
@@ -234,22 +234,22 @@ module Hsluv
 
     get_bounds(l).each do |m1, b1|
       x = intersect_line_line([m1, b1], [-1.0 / m1, 0.0])
-      lengths << distance_from_pole([x, b1 + x * m1])
+      lengths << distance_from_pole([x, b1 + (x * m1)])
     end
 
     lengths.min
   end
 
   def get_bounds(l)
-    sub1 = ((l + 16.0)**3.0) / 1560896.0
+    sub1 = ((l + 16.0)**3.0) / 1_560_896.0
     sub2 = sub1 > EPSILON ? sub1 : l / KAPPA
     ret = []
 
     M.each do |m1, m2, m3|
       [0, 1].each do |t|
-        top1 = (284517.0 * m1 - 94839.0 * m3) * sub2
-        top2 = (838422.0 * m3 + 769860.0 * m2 + 731718.0 * m1) * l * sub2 - 769860.0 * t * l
-        bottom = (632260.0 * m3 - 126452.0 * m2) * sub2 + 126452.0 * t
+        top1 = ((284_517.0 * m1) - (94_839.0 * m3)) * sub2
+        top2 = (((838_422.0 * m3) + (769_860.0 * m2) + (731_718.0 * m1)) * l * sub2) - (769_860.0 * t * l)
+        bottom = (((632_260.0 * m3) - (126_452.0 * m2)) * sub2) + (126_452.0 * t)
         ret << [top1 / bottom, top2 / bottom]
       end
     end
@@ -259,7 +259,7 @@ module Hsluv
 
   def length_of_ray_until_intersect(theta, line)
     m1, b1 = line
-    length = b1 / (Math.sin(theta) - m1 * Math.cos(theta))
+    length = b1 / (Math.sin(theta) - (m1 * Math.cos(theta)))
     return nil if length < 0
 
     length
@@ -270,15 +270,15 @@ module Hsluv
   end
 
   def distance_from_pole(point)
-    Math.sqrt(point[0]**2 + point[1]**2)
+    Math.sqrt((point[0]**2) + (point[1]**2))
   end
 
   def f(t)
-    t > EPSILON ? 116 * ((t / REF_Y)**(1.0 / 3.0)) - 16.0 : t / REF_Y * KAPPA
+    t > EPSILON ? (116 * ((t / REF_Y)**(1.0 / 3.0))) - 16.0 : t / REF_Y * KAPPA
   end
 
   def f_inv(t)
-    t > 8 ? REF_Y * ((t + 16.0) / 116.0)**3.0 : REF_Y * t / KAPPA
+    t > 8 ? REF_Y * (((t + 16.0) / 116.0)**3.0) : REF_Y * t / KAPPA
   end
 
   def to_linear(c)
@@ -286,7 +286,7 @@ module Hsluv
   end
 
   def from_linear(c)
-    c <= 0.0031308 ? 12.92 * c : (1.055 * (c**(1.0 / 2.4)) - 0.055)
+    c <= 0.0031308 ? 12.92 * c : ((1.055 * (c**(1.0 / 2.4))) - 0.055)
   end
 
   def dot_product(a, b)
@@ -294,6 +294,11 @@ module Hsluv
   end
 
   def rgb_prepare(arr)
-    arr.map! { |ch| ch = ch.round(3); ch = [0, ch].max; ch = [1, ch].min; (ch * 255).round }
+    arr.map! do |ch|
+      ch = ch.round(3)
+      ch = [0, ch].max
+      ch = [1, ch].min
+      (ch * 255).round
+    end
   end
 end

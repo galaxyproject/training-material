@@ -15,7 +15,7 @@ module Jekyll
       match = /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/.match(duration)
 
       # If it doesn't match, pass through unedited so we don't cause unexpected issues.
-      if match.nil? then
+      if match.nil?
         puts "Could not parse time: #{duration}"
         return duration
       end
@@ -34,8 +34,8 @@ module Jekyll
       end
 
       # Hours
-      if !match[1].nil? then
-        if match[1] == '1' then
+      if !match[1].nil?
+        if match[1] == '1'
           duration_parts.push("#{match[1]} " + hour)
         else
           duration_parts.push("#{match[1]} " + hours)
@@ -43,16 +43,12 @@ module Jekyll
       end
 
       # Minutes - assuming no one uses `1 minute`
-      if !match[2].nil? then
-        duration_parts.push("#{match[2]} " + minutes)
-      end
+      duration_parts.push("#{match[2]} " + minutes) if !match[2].nil?
 
       # Hopefully no one uses seconds
-      if !match[3].nil? then
-        duration_parts.push("#{match[3]} seconds")
-      end
+      duration_parts.push("#{match[3]} seconds") if !match[3].nil?
 
-      return duration_parts.join(' ')
+      duration_parts.join(' ')
     end
   end
 end

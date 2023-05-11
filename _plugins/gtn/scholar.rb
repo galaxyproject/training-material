@@ -1,40 +1,32 @@
 module Gtn
   module Scholar
     def self.load_bib(site)
-      if not site.config.has_key?('cached_global_bib')
-        (global_bib, cp) = self.populate_cache()
-        site.config['cached_global_bib'] = global_bib
-        site.config['cached_citeproc'] = cp
-      end
+      return if site.config.has_key?('cached_global_bib')
+
+      (global_bib, cp) = populate_cache
+      site.config['cached_global_bib'] = global_bib
+      site.config['cached_citeproc'] = cp
     end
 
-    def self.populate_cache()
-      @@cache ||= self.discover_bib()
+    def self.populate_cache
+      @@cache ||= discover_bib
     end
 
     def self.render_citation(key)
-      (global_bib, citeproc) = self.populate_cache()
+      (global_bib, citeproc) = populate_cache
 
       text = citeproc.render(:bibliography, id: key)[0]
       entry = global_bib[key]
-      if entry.note
-        text += " #{entry.note}."
-      end
+      text += " #{entry.note}." if entry.note
       doi = entry.fetch('doi', nil)
-      if doi
-        text += " <a href=\"https://doi.org/#{doi}\">#{doi}</a>"
-      end
+      text += " <a href=\"https://doi.org/#{doi}\">#{doi}</a>" if doi
       url = entry.fetch('url', nil)
-      if url
-        if !(url.index('doi.org') and entry.doi)
-          text += " <a href=\"#{url}\">#{url}</a>"
-        end
-      end
+      text += " <a href=\"#{url}\">#{url}</a>" if url && !(url.index('doi.org') and entry.doi)
 
       text
     end
 
-    def self.discover_bib()
+    def self.discover_bib
       puts '[GTN/scholar] Creating global bib cache'
       global_bib = BibTeX::Bibliography.new
       bib_paths = [Find.find('./topics'), Find.find('./faqs'), Find.find('./news')].lazy.flat_map(&:lazy).select do |x|

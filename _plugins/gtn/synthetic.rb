@@ -1,4 +1,4 @@
-require './_plugins/jekyll-topic-filter.rb'
+require './_plugins/jekyll-topic-filter'
 
 module Jekyll
   class SyntheticTopicGenerator < Generator

@@ -20,15 +20,13 @@ module ColourTag
     lightness = lightnessOffset + (hash & 0xf)
 
     # randomly make yellow tags bright
-    if hue > 70 and hue < 96 and ((d & 0x100) === 0x100)
-      lightness += (100 - lightness) * 0.75
-    end
+    lightness += (100 - lightness) * 0.75 if hue > 70 and hue < 96 and ((d & 0x100) === 0x100)
 
     primary = Hsluv.hsluv_to_hex(hue, 100, lightness)
     darker = Hsluv.hsluv_to_hex(hue, 100, lightness * 0.9)
     dimmed = Hsluv.hsluv_to_hex(hue, 100, lightness * 0.95)
 
-    return "--color-primary: #{primary}; --color-darker: #{darker}; --color-dimmed: #{dimmed};"
+    "--color-primary: #{primary}; --color-darker: #{darker}; --color-dimmed: #{dimmed};"
   end
 end
 

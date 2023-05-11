@@ -1,5 +1,5 @@
 require 'jekyll'
-require './_plugins/gtn.rb'
+require './_plugins/gtn'
 
 module Jekyll
   class Boxify < Jekyll::Generator
@@ -18,21 +18,15 @@ module Jekyll
     # Params:
     # +page+:: The page to add boxes to
     # +site+:: The +Jekyll::Site+ object
-    def boxify(page, site)
-      if page.content.nil?
-        return
-      end
+    def boxify(page, _site)
+      return if page.content.nil?
 
-      if page['lang']
-        lang = page['lang']
-      else
-        lang = 'en'
-      end
+      lang = page['lang'] || 'en'
 
       # Interim solution, fancier box titles
-      page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})-title>(.*?)<\/\s*\1-title\s*>/) do
-        box_type = $1
-        title = $2
+      page.content = page.content.gsub(%r{<(#{Gtn::Boxify.box_classes})-title>(.*?)</\s*\1-title\s*>}) do
+        box_type = ::Regexp.last_match(1)
+        title = ::Regexp.last_match(2)
         if page.data['citation_target'] == 'jupyter'
           title = Gtn::Boxify.safe_title(title)
           title = Gtn::Boxify.format_box_title(title, box_type, lang = lang)

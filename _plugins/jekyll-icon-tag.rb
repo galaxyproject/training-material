@@ -5,9 +5,9 @@ module Jekyll
       parts = text.strip.split
       @text = parts[0]
       @aria = true
-      if parts[1] == 'aria=false' then
-        @aria = false
-      end
+      return unless parts[1] == 'aria=false'
+
+      @aria = false
     end
 
     ##
@@ -28,23 +28,21 @@ module Jekyll
     #  => <i class="fa fa-github"></i>
     def render_for_text(icon)
       if icon.empty?
-        raise SyntaxError.new(
-          "No icon defined for: '#{@text}'. " +
-          'Please define it in `_config.yml` (under `icon-tag:`).'
-        )
+        raise SyntaxError, "No icon defined for: '#{@text}'. " +
+                           'Please define it in `_config.yml` (under `icon-tag:`).'
       end
 
       if icon.start_with?('fa')
         if @aria
-          %Q(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+          %(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
         else
-          %Q(<i class="#{icon}" aria-hidden="true"></i>)
+          %(<i class="#{icon}" aria-hidden="true"></i>)
         end
       elsif icon.start_with?('ai')
         if @aria
-          %Q(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+          %(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
         else
-          %Q(<i class="ai #{icon}" aria-hidden="true"></i>)
+          %(<i class="ai #{icon}" aria-hidden="true"></i>)
         end
       end
     end

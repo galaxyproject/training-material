@@ -1,5 +1,5 @@
 require 'yaml'
-require './_plugins/gtn.rb'
+require './_plugins/gtn'
 
 module Jekyll
   module Tags
@@ -12,9 +12,9 @@ module Jekyll
 
       def get_icon(icon)
         if icon.start_with?('fa')
-          %Q(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+          %(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
         elsif icon.start_with?('ai')
-          %Q(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+          %(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
         end
       end
 
@@ -32,7 +32,7 @@ module Jekyll
         # render_variable(context) but it's not clear why that doesn't work.
         begin
           @site.inclusions[file] ||= locate_include_file(file)
-        rescue
+        rescue StandardError
           @site.inclusions[file] ||= locate_include_file(context[file])
         end
 
@@ -52,22 +52,18 @@ module Jekyll
             metadata = YAML.load(x)
 
             # allow overriding box type with include parameter ("none" to render without a box)
-            if not p.nil? and p['box_type']
-              box_type = p['box_type']
-            else
-              box_type = metadata['box_type']
-            end
+            box_type = if !p.nil? and p['box_type']
+                         p['box_type']
+                       else
+                         metadata['box_type']
+                       end
             icons = get_config(context)
 
             if context.registers[:page]&.key?('lang')
               lang = context.registers[:page].fetch('lang', 'en')
-              if lang.nil?
-                lang = 'en'
-              end
+              lang = 'en' if lang.nil?
             end
-            if lang != 'en' and lang != 'es'
-              lang = 'en'
-            end
+            lang = 'en' if lang != 'en' and lang != 'es'
             if box_type != 'none' and !box_type.nil?
               box_id, box_title = Gtn::Boxify.generate_title(box_type, metadata['title'], lang,
                                                              context.registers[:page]['path'])
@@ -95,7 +91,7 @@ module Jekyll
           # end
 
           '<!--SNIPPET-->' + markdownify(box_start + z + box_end)
-                             .gsub(/<(pre)[^>]*>(.*?)<\/\1>/m) { |m| m.gsub(/\n/, '<br>') } # Replace newlines inside of a PRE with <br>, so they don't get eaten during next one.
+                             .gsub(%r{<(pre)[^>]*>(.*?)</\1>}m) { |m| m.gsub(/\n/, '<br>') } # Replace newlines inside of a PRE with <br>, so they don't get eaten during next one.
                              .gsub(/\R+/, ' ') # Strip out spaces or the boxes break, replace them with single spaces so e.g. newlines get collapsed into a space and don't merge words together that shouldn't be merged.
                              .gsub('<h3', '<h3 data-toc-skip')
         end

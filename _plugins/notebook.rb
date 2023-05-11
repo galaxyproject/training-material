@@ -82,9 +82,7 @@ module GTNNotebooks
       end
     end
     # final flush
-    if !val.nil?
-      out.push([val, inside_block])
-    end
+    out.push([val, inside_block]) if !val.nil?
 
     notebook = {
       'metadata' => {},
@@ -98,9 +96,7 @@ module GTNNotebooks
         'source' => data[0].map { |x| x.rstrip + "\n" }
       }
       # Strip the trailing newline in the last cell.
-      if res['source'].length > 0
-        res['source'][-1] = res['source'][-1].rstrip
-      end
+      res['source'][-1] = res['source'][-1].rstrip if res['source'].length > 0
 
       # Remove any remaining language tagged code blocks, e.g. in
       # tip/solution/etc boxes. These do not render well.
@@ -139,21 +135,19 @@ module GTNNotebooks
       if first_char.nil?
         first_char = line[0]
         val = [line]
+      elsif line[0] == first_char
+        val.push(line)
+      elsif line[0..1] == '{:' && first_char == '>'
+        val.push(line)
       else
-        if line[0] == first_char
-          val.push(line)
-        elsif line[0..1] == '{:' && first_char == '>'
-          val.push(line)
-        else
-          # flush
-          out.push(val)
-          if line.size > 0
-            first_char = line[0]
-          else
-            first_char = ''
-          end
-          val = [line]
-        end
+        # flush
+        out.push(val)
+        first_char = if line.size > 0
+                       line[0]
+                     else
+                       ''
+                     end
+        val = [line]
       end
     end
     # final flush
@@ -178,11 +172,11 @@ module GTNNotebooks
   end
 
   def self.construct_byline(metadata)
-    if metadata.has_key?('contributors')
-      folks = metadata['contributors']
-    else
-      folks = metadata['contributions'].map { |k, v| v }.flatten
-    end
+    folks = if metadata.has_key?('contributors')
+              metadata['contributors']
+            else
+              metadata['contributions'].map { |_k, v| v }.flatten
+            end
 
     contributors = nil
     File.open('CONTRIBUTORS.yaml', 'r') do |f2|
@@ -190,12 +184,12 @@ module GTNNotebooks
     end
 
     folks.map do |c|
-      "[#{contributors.fetch(c, { "name" => c }).fetch('name', c)}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
+      "[#{contributors.fetch(c, { 'name' => c }).fetch('name', c)}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
     end.join(', ')
   end
 
   def self.add_metadata_cell(notebook, metadata)
-    by_line = self.construct_byline(metadata)
+    by_line = construct_byline(metadata)
 
     meta_header = [
       "<div style=\"border: 2px solid #8A9AD0; margin: 1em 0.2em; padding: 0.5em;\">\n\n",
@@ -206,16 +200,16 @@ module GTNNotebooks
       "#{metadata.fetch('license', 'CC-BY')} licensed content from the [Galaxy Training Network](https://training.galaxyproject.org/)\n",
       "\n",
       "**Objectives**\n",
-      "\n",
+      "\n"
     ] + metadata['questions'].map { |q| "- #{q}\n" } + [
       "\n",
       "**Objectives**\n",
-      "\n",
+      "\n"
     ] + metadata['objectives'].map { |q| "- #{q}\n" } + [
       "\n",
       "**Time Estimation: #{metadata['time_estimation']}**\n",
       "\n",
-      "</div>\n",
+      "</div>\n"
     ]
     metadata_cell = {
       'id' => 'metadata',
@@ -223,7 +217,7 @@ module GTNNotebooks
       'source' => meta_header
     }
     notebook['cells'].unshift(metadata_cell)
-    return notebook
+    notebook
   end
 
   def self.fixRNotebook(notebook)
@@ -245,10 +239,8 @@ module GTNNotebooks
     }
     # Strip out %%R since we'll use the bash kernel
     notebook['cells'].map do |cell|
-      if cell.fetch('cell_type') == 'code'
-        if cell['source'][0] == "%%R\n"
-          cell['source'] = cell['source'].slice(1..-1)
-        end
+      if cell.fetch('cell_type') == 'code' && (cell['source'][0] == "%%R\n")
+        cell['source'] = cell['source'].slice(1..-1)
       end
       cell
     end
@@ -272,10 +264,8 @@ module GTNNotebooks
     }
     # Strip out %%bash since we'll use the bash kernel
     notebook['cells'].map do |cell|
-      if cell.fetch('cell_type') == 'code'
-        if cell['source'][0] == "%%bash\n"
-          cell['source'] = cell['source'].slice(1..-1)
-        end
+      if cell.fetch('cell_type') == 'code' && (cell['source'][0] == "%%bash\n")
+        cell['source'] = cell['source'].slice(1..-1)
       end
       cell
     end
@@ -285,10 +275,8 @@ module GTNNotebooks
   def self.fixSqlNotebook(notebook)
     # Add in a %%sql at the top of each cell
     notebook['cells'].map do |cell|
-      if cell.fetch('cell_type') == 'code'
-        if cell['source'].join('').index('load_ext').nil?
-          cell['source'] = ["%%sql\n"] + cell['source']
-        end
+      if cell.fetch('cell_type') == 'code' && cell['source'].join('').index('load_ext').nil?
+        cell['source'] = ["%%sql\n"] + cell['source']
       end
       cell
     end
@@ -296,14 +284,12 @@ module GTNNotebooks
   end
 
   def self.markdownify(site, text)
-    begin
-      site.find_converter_instance(
-        Jekyll::Converters::Markdown
-      ).convert(text.to_s)
-    rescue
-      require 'kramdown'
-      Kramdown::Document.new(text).to_html
-    end
+    site.find_converter_instance(
+      Jekyll::Converters::Markdown
+    ).convert(text.to_s)
+  rescue StandardError
+    require 'kramdown'
+    Kramdown::Document.new(text).to_html
   end
 
   def self.notebook_filter(data, language = nil)
@@ -313,7 +299,7 @@ module GTNNotebooks
   end
 
   def self.render_rmarkdown(page_data, page_content, page_url, page_last_modified, fn)
-    by_line = self.construct_byline(page_data)
+    by_line = construct_byline(page_data)
 
     # Replace top level `>` blocks with fenced `:::`
     content = group_doc_by_first_char(page_content)
@@ -325,10 +311,10 @@ module GTNNotebooks
       content.gsub!(/{% icon #{key} %}/, val)
     end
     ICONS_FA.each do |key, val|
-      content.gsub!(/<i class="#{key}" aria-hidden="true"><\/i>/, ICONS[val])
+      content.gsub!(%r{<i class="#{key}" aria-hidden="true"></i>}, ICONS[val])
     end
 
-    content = content + %Q(\n\n# References\n\n<div id="refs"></div>\n)
+    content += %(\n\n# References\n\n<div id="refs"></div>\n)
 
     # https://raw.githubusercontent.com/rstudio/cheatsheets/master/rmarkdown-2.0.pdf
     # https://bookdown.org/yihui/rmarkdown/
@@ -366,36 +352,36 @@ module GTNNotebooks
       'anchor_sections' => true,
       'code_download' => true,
     }
-    rmddata['output']['html_document'] = JSON::parse(JSON::generate(rmddata['output']['html_notebook']))
+    rmddata['output']['html_document'] = JSON.parse(JSON.generate(rmddata['output']['html_notebook']))
 
     final_content = [
       "# Introduction\n",
       content.gsub(/```r/, '```{r}'),
-      "# Key Points\n",
+      "# Key Points\n"
     ] + page_data['key_points'].map { |k| "- #{k}" } + [
       "\n# Congratulations on successfully completing this tutorial!\n",
       "Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/training-material#{page_url}#feedback) and check there for further resources!\n"
     ]
 
-    rmddata.to_yaml(:line_width => rmddata['author'].size + 10) + "---\n" + final_content.join("\n")
+    rmddata.to_yaml(line_width: rmddata['author'].size + 10) + "---\n" + final_content.join("\n")
   end
 
-  def self.render_jupyter_notebook(data, content, url, last_modified, notebook_language, site, dir)
+  def self.render_jupyter_notebook(data, content, url, _last_modified, notebook_language, site, dir)
     # Here we read use internal methods to convert the tutorial to a Hash
     # representing the notebook
-    notebook = self.convert_notebook_markdown(content, notebook_language)
+    notebook = convert_notebook_markdown(content, notebook_language)
 
     # This extracts the metadata yaml header and does manual formatting of
     # the header data to make for a nicer notebook.
-    notebook = self.add_metadata_cell(notebook, data)
+    notebook = add_metadata_cell(notebook, data)
 
     # Apply language specific conventions
     if notebook_language == 'bash'
-      notebook = self.fixBashNotebook(notebook)
+      notebook = fixBashNotebook(notebook)
     elsif notebook_language == 'sql'
-      notebook = self.fixSqlNotebook(notebook)
+      notebook = fixSqlNotebook(notebook)
     elsif notebook_language == 'r'
-      notebook = self.fixRNotebook(notebook)
+      notebook = fixRNotebook(notebook)
     end
 
     # Here we loop over the markdown cells and render them to HTML. This
@@ -404,7 +390,7 @@ module GTNNotebooks
     # custom CSS which only seems to work when inline on a cell, i.e. we
     # can't setup a style block, so we really need to render the markdown
     # to html.
-    notebook = self.renderMarkdownCells(site, notebook, data, url, dir)
+    notebook = renderMarkdownCells(site, notebook, data, url, dir)
 
     # Here we add a close to the notebook
     notebook['cells'] = notebook['cells'] + [{
@@ -412,7 +398,7 @@ module GTNNotebooks
       'id' => 'final-ending-cell',
       'metadata' => { 'editable' => false, 'collapsed' => false },
       'source' => [
-        "# Key Points\n\n",
+        "# Key Points\n\n"
       ] + data['key_points'].map { |k| "- #{k}\n" } + [
         "\n# Congratulations on successfully completing this tutorial!\n\n",
         "Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/training-material#{url}#feedback) and check there for further resources!\n"
@@ -422,7 +408,7 @@ module GTNNotebooks
   end
 
   def self.renderMarkdownCells(site, notebook, metadata, page_url, dir)
-    seen_abbreviations = Hash.new
+    seen_abbreviations = {}
     notebook['cells'].map do |cell|
       if cell.fetch('cell_type') == 'markdown'
 
@@ -441,32 +427,32 @@ module GTNNotebooks
 
         # Replace all the broken icons that can't render, because we don't
         # have access to the full render pipeline.
-        cell['source'] = self.markdownify(site, source)
+        cell['source'] = markdownify(site, source)
 
         ICONS.each do |key, val|
           # Replace the new box titles with h3s.
-          cell['source'].gsub!(/<div class="box-title #{key}-title".*?<\/span>(.*?)<\/div>/,
+          cell['source'].gsub!(%r{<div class="box-title #{key}-title".*?</span>(.*?)</div>},
                                "<div style=\"font-weight:900;font-size: 125%\">#{val} " + '\1</div>')
 
           # Remove the fa-icon spans
-          cell['source'].gsub!(/<span role="button" class="fold-unfold fa fa-minus-square"><\/span>/, '')
+          cell['source'].gsub!(%r{<span role="button" class="fold-unfold fa fa-minus-square"></span>}, '')
 
           # just removing the buttons from solutions since they'll be changed
           # into summary/details in the parent notebook-jupyter.
-          cell['source'].gsub!(/<button class="gtn-boxify-button solution".*?<\/button>/, '')
+          cell['source'].gsub!(%r{<button class="gtn-boxify-button solution".*?</button>}, '')
         end
 
         if metadata.key?('abbreviations')
           metadata['abbreviations'].each do |abbr, defn|
             cell['source'].gsub(/\{#{abbr}\}/) do
-              if seen_abbreviations.key?(abbr) then
+              if seen_abbreviations.key?(abbr)
                 firstdef = false
               else
                 firstdef = true
                 seen_abbreviations[abbr] = true
               end
 
-              if firstdef then
+              if firstdef
                 "#{defn} (#{abbr})"
               else
                 "<abbr title=\"#{defn}\">#{abbr}</abbr>"
@@ -480,9 +466,7 @@ module GTNNotebooks
         # we're making it 'our own' a bit.
 
         COLORS.each do |key, val|
-          if COLORS_EXTRA.has_key? key
-            val = val + ';' + COLORS_EXTRA[key]
-          end
+          val = val + ';' + COLORS_EXTRA[key] if COLORS_EXTRA.has_key? key
 
           cell['source'].gsub!(/<blockquote class="#{key}">/,
                                "<blockquote class=\"#{key}\" style=\"border: 2px solid #{val}; margin: 1em 0.2em\">")
@@ -503,16 +487,16 @@ module GTNNotebooks
 
             if img[-3..-1].downcase == 'png'
               # puts "[GTN/Notebook/Images] Embedding png: #{img}"
-              data = Base64.encode64(File.open(image_path, 'rb').read)
-              %Q(<img src="data:image/png;base64,#{data}")
+              data = Base64.encode64(File.binread(image_path))
+              %(<img src="data:image/png;base64,#{data}")
             elsif img[-3..-1].downcase == 'jpg' or img[-4..-1].downcase == 'jpeg'
               # puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
-              data = Base64.encode64(File.open(image_path, 'rb').read)
-              %Q(<img src="data:image/jpeg;base64,#{data}")
+              data = Base64.encode64(File.binread(image_path))
+              %(<img src="data:image/jpeg;base64,#{data}")
             elsif img[-3..-1].downcase == 'svg'
               # puts "[GTN/Notebook/Images] Embedding svg: #{img}"
-              data = Base64.encode64(File.open(image_path, 'rb').read)
-              %Q(<img src="data:image/svg+xml;base64,#{data}")
+              data = Base64.encode64(File.binread(image_path))
+              %(<img src="data:image/svg+xml;base64,#{data}")
             else
               # puts "[GTN/Notebook/Images] Fallback for #{img}"
               # Falling back to non-embedded images

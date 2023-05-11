@@ -1,7 +1,7 @@
 require 'json'
 require 'fileutils'
 require './_plugins/notebook'
-require './_plugins/gtn.rb'
+require './_plugins/gtn'
 
 module Jekyll
   class JupyterNotebookGenerator < Generator
@@ -29,20 +29,18 @@ module Jekyll
         with_solutions = notebook.clone
 
         with_solutions['cells'] = with_solutions['cells'].map do |cell|
-          if cell.fetch('cell_type') == 'markdown'
-            if cell['source'].is_a? String
-              m = cell['source'].match(/<blockquote class="solution"[^>]*>/)
-              if m
-                cell['source'].gsub!(/<blockquote class="solution"[^>]*>/, '<br/><details style="border: 2px solid #B8C3EA; margin: 1em 0.2em; padding: 0.5em;"><summary>👁 View solution</summary>')
+          if cell.fetch('cell_type') == 'markdown' && (cell['source'].is_a? String)
+            m = cell['source'].match(/<blockquote class="solution"[^>]*>/)
+            if m
+              cell['source'].gsub!(/<blockquote class="solution"[^>]*>/, '<br/><details style="border: 2px solid #B8C3EA; margin: 1em 0.2em; padding: 0.5em;"><summary>👁 View solution</summary>')
 
-                idx = m.begin(0)
-                q = cell['source'][0..idx]
-                w = cell['source'][idx + 1..-1]
-                e = w.index('</blockquote>')
-                r = w[0..e - 1] + '</details>' + w[e + 13..-1]
+              idx = m.begin(0)
+              q = cell['source'][0..idx]
+              w = cell['source'][idx + 1..-1]
+              e = w.index('</blockquote>')
+              r = w[0..e - 1] + '</details>' + w[e + 13..-1]
 
-                cell['source'] = q + r
-              end
+              cell['source'] = q + r
             end
           end
           cell
@@ -59,10 +57,8 @@ module Jekyll
         no_solutions = notebook.clone
 
         no_solutions['cells'] = no_solutions['cells'].map do |cell|
-          if cell.fetch('cell_type') == 'markdown'
-            if cell['source'].is_a? String
-              cell['source'].gsub!(/<blockquote class="solution"[^>]*>/, '<blockquote class="solution" style="display:none">')
-            end
+          if cell.fetch('cell_type') == 'markdown' && (cell['source'].is_a? String)
+            cell['source'].gsub!(/<blockquote class="solution"[^>]*>/, '<blockquote class="solution" style="display:none">')
           end
           cell
         end

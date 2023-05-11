@@ -5,7 +5,7 @@ module Jekyll
       @text = text.strip
     end
 
-    def render(context)
+    def render(_context)
       # This is a workaround for https://github.com/jekyll/jekyll/issues/9179
       # We should remove it when 9179 is solved.
       #
