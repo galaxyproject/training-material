@@ -41,10 +41,7 @@ module Jekyll
           dimensions = Gtn::Images.html_image_dimensions(tuto_dir, url)
 
           prefix = figcaption_prefix(page, site)
-          "<figure id=\"figure-#{num}\">" +
-            "<img src=\"#{url}\" alt=\"#{alt}\" #{style} #{dimensions} loading=\"lazy\">" +
-            "<figcaption><span class=\"figcaption-prefix\"><strong>#{prefix}#{num}</strong>:</span> #{title}</figcaption>" +
-            '</figure>'
+          "<figure id=\"figure-#{num}\"><img src=\"#{url}\" alt=\"#{alt}\" #{style} #{dimensions} loading=\"lazy\"><figcaption><span class=\"figcaption-prefix\"><strong>#{prefix}#{num}</strong>:</span> #{title}</figcaption></figure>"
         end
       end
 
@@ -65,7 +62,7 @@ module Jekyll
         lang = page['lang']
         fig = site.data['lang'][lang]['figure']
       end
-      @config['prefix'] || (fig + ' ')
+      @config['prefix'] || ("#{fig} ")
     end
 
     def skip_empty?

@@ -67,8 +67,8 @@ module Jekyll
             if box_type != 'none' and !box_type.nil?
               box_id, box_title = Gtn::Boxify.generate_title(box_type, metadata['title'], lang,
                                                              context.registers[:page]['path'])
-              box_start = '> ' + box_title
-              box_end = "\n{: ." + box_type + '}'
+              box_start = "> #{box_title}"
+              box_end = "\n{: .#{box_type}}"
             end
           end
           y = x.gsub(/\A---(.|\n)*?---/, '')

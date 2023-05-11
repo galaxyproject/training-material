@@ -10,7 +10,7 @@ module Jekyll
       # We should remove it when 9179 is solved.
       #
       # Note that this does NOT support news posts with a date in the URL.
-      '/training-material/' + @text.gsub(/\.md/, '.html')
+      "/training-material/#{@text.gsub(/\.md/, '.html')}"
     end
   end
 end

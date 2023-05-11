@@ -124,8 +124,8 @@ module Jekyll
         memberOf: [GTN],
       }
       if !contributor.nil? && contributor.has_key?('orcid')
-        person['identifier'] = 'https://orcid.org/' + contributor['orcid']
-        person['orcid'] = 'https://orcid.org/' + contributor['orcid']
+        person['identifier'] = "https://orcid.org/#{contributor['orcid']}"
+        person['orcid'] = "https://orcid.org/#{contributor['orcid']}"
       end
 
       person

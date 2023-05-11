@@ -28,8 +28,7 @@ module Jekyll
     #  => <i class="fa fa-github"></i>
     def render_for_text(icon)
       if icon.empty?
-        raise SyntaxError, "No icon defined for: '#{@text}'. " +
-                           'Please define it in `_config.yml` (under `icon-tag:`).'
+        raise SyntaxError, "No icon defined for: '#{@text}'. Please define it in `_config.yml` (under `icon-tag:`)."
       end
 
       if icon.start_with?('fa')

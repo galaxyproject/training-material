@@ -120,7 +120,7 @@ module Jekyll
 
       # Metrics endpoint, /metrics
       page2 = PageWithoutAFile.new(site, '', '', 'metrics')
-      page2.content = "{% raw %}\n" + Gtn::Metrics.generate_metrics(site) + '{% endraw %}'
+      page2.content = "{% raw %}\n#{Gtn::Metrics.generate_metrics(site)}{% endraw %}"
       page2.data['layout'] = nil
       site.pages << page2
 
@@ -232,7 +232,7 @@ module Jekyll
 
           # Here we un-do the tutorial metadata priority, and overwrite with
           # slides metadata when available.
-          slides_data = site.pages.select { |p| p.url == '/' + directory + '/slides.html' }[0]
+          slides_data = site.pages.select { |p| p.url == "/#{directory}/slides.html" }[0]
           p.update(slides_data.data) if slides_data and slides_data.data
 
           page5.content = JSON.pretty_generate(p)
@@ -296,7 +296,7 @@ module Jekyll
           page2 = PageWithoutAFile.new(site, '', "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}/GALAXY",
                                        'descriptor.json')
           page2.content = JSON.pretty_generate({
-                                                 'content' => File.read(material['dir'] + '/workflows/' + workflow['workflow']),
+                                                 'content' => File.read("#{material['dir']}/workflows/#{workflow['workflow']}"),
                                                  'checksum' => [],
                                                  'url' => nil,
                                                })

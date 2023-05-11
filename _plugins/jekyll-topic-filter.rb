@@ -212,7 +212,7 @@ module TopicFilter
     material = {
       'topic' => parts[1], # Duplicate
       'topic_name' => parts[1],
-      'material' => parts[1] + '/' + parts[3],
+      'material' => "#{parts[1]}/#{parts[3]}",
       'tutorial_name' => parts[3],
       'dir' => parts[0..3].join('/'),
     }
@@ -350,16 +350,16 @@ module TopicFilter
 
     # Otherwise clone the metadata from it which works well enough.
     page_obj = page.data.dup
-    page_obj['id'] = page['topic_name'] + '/' + page['tutorial_name']
+    page_obj['id'] = "#{page['topic_name']}/#{page['tutorial_name']}"
     page_obj['ref'] = page_ref
 
     id = page_obj['id']
     page_obj['video_library'] = {}
 
     if site.data.has_key?('video-library')
-      page_obj['video_library']['tutorial'] = site.data['video-library'][id + '/tutorial']
-      page_obj['video_library']['slides'] = site.data['video-library'][id + '/slides']
-      page_obj['video_library']['demo'] = site.data['video-library'][id + '/demo']
+      page_obj['video_library']['tutorial'] = site.data['video-library']["#{id}/tutorial"]
+      page_obj['video_library']['slides'] = site.data['video-library']["#{id}/slides"]
+      page_obj['video_library']['demo'] = site.data['video-library']["#{id}/demo"]
       page_obj['video_library']['both'] = site.data['video-library'][id]
     end
 
@@ -618,7 +618,7 @@ module TopicFilter
   # short_tool("toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0") => "galaxyp/regex1"
   def self.short_tool(tool)
     if tool.count('/') > 4
-      tool.split('/')[2] + '/' + tool.split('/')[4]
+      "#{tool.split('/')[2]}/#{tool.split('/')[4]}"
     else
       tool
     end

@@ -11,7 +11,7 @@ module Gtn
 
       # Discover tutorials
       Dir.glob('topics/*/tutorials/*/tutorial.md').each do |tutorial|
-        html_path = '/' + tutorial.gsub(/md$/, 'html')
+        html_path = "/#{tutorial.gsub(/md$/, 'html')}"
         # If it's not already mapped by a key, add it.
         if !is_mapped(html_path, current_mapping)
           # Generate a short code
@@ -24,12 +24,12 @@ module Gtn
         # Also generate one from topic/tutorial name
         # These are idempotent and safe
         short_code2 = tutorial.split('/')[1..3].join('/').gsub(%r{/tutorials}, '')
-        current_mapping['name'][short_code2] = '/' + tutorial.gsub(/md$/, 'html')
+        current_mapping['name'][short_code2] = "/#{tutorial.gsub(/md$/, 'html')}"
       end
 
       # Discover slides
       Dir.glob('topics/*/tutorials/*/slides.html').each do |tutorial|
-        html_path = '/' + tutorial
+        html_path = "/#{tutorial}"
         # If it's not already mapped by a key, add it.
         if !is_mapped(html_path, current_mapping)
           # Generate a short code
@@ -41,13 +41,13 @@ module Gtn
 
         # Also generate one from topic/tutorial name
         # These are idempotent and safe
-        short_code2 = tutorial.split('/')[1..3].join('/').gsub(%r{/tutorials}, '') + '/slides'
-        current_mapping['name'][short_code2] = '/' + tutorial.gsub(/md$/, 'html')
+        short_code2 = "#{tutorial.split('/')[1..3].join('/').gsub(%r{/tutorials}, '')}/slides"
+        current_mapping['name'][short_code2] = "/#{tutorial.gsub(/md$/, 'html')}"
       end
 
       # Discover FAQs
       Dir.glob('faqs/**/*.md').each do |tutorial|
-        html_path = '/' + tutorial.gsub(/md$/, 'html')
+        html_path = "/#{tutorial.gsub(/md$/, 'html')}"
         # If it's not already mapped by a key, add it.
         if !is_mapped(html_path, current_mapping)
           # Generate a short code

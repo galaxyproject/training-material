@@ -93,7 +93,7 @@ module GTNNotebooks
     notebook['cells'] = out.map.with_index do |data, index|
       res = {
         'id' => "cell-#{index}",
-        'source' => data[0].map { |x| x.rstrip + "\n" }
+        'source' => data[0].map { |x| "#{x.rstrip}\n" }
       }
       # Strip the trailing newline in the last cell.
       res['source'][-1] = res['source'][-1].rstrip if res['source'].length > 0
@@ -363,7 +363,7 @@ module GTNNotebooks
       "Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/training-material#{page_url}#feedback) and check there for further resources!\n"
     ]
 
-    rmddata.to_yaml(line_width: rmddata['author'].size + 10) + "---\n" + final_content.join("\n")
+    "#{rmddata.to_yaml(line_width: rmddata['author'].size + 10)}---\n#{final_content.join("\n")}"
   end
 
   def self.render_jupyter_notebook(data, content, url, _last_modified, notebook_language, site, dir)
@@ -432,7 +432,7 @@ module GTNNotebooks
         ICONS.each do |key, val|
           # Replace the new box titles with h3s.
           cell['source'].gsub!(%r{<div class="box-title #{key}-title".*?</span>(.*?)</div>},
-                               "<div style=\"font-weight:900;font-size: 125%\">#{val} " + '\1</div>')
+                               "<div style=\"font-weight:900;font-size: 125%\">#{val} \\1</div>")
 
           # Remove the fa-icon spans
           cell['source'].gsub!(%r{<span role="button" class="fold-unfold fa fa-minus-square"></span>}, '')
@@ -466,7 +466,7 @@ module GTNNotebooks
         # we're making it 'our own' a bit.
 
         COLORS.each do |key, val|
-          val = val + ';' + COLORS_EXTRA[key] if COLORS_EXTRA.has_key? key
+          val = "#{val};#{COLORS_EXTRA[key]}" if COLORS_EXTRA.has_key? key
 
           cell['source'].gsub!(/<blockquote class="#{key}">/,
                                "<blockquote class=\"#{key}\" style=\"border: 2px solid #{val}; margin: 1em 0.2em\">")
@@ -500,7 +500,7 @@ module GTNNotebooks
             else
               # puts "[GTN/Notebook/Images] Fallback for #{img}"
               # Falling back to non-embedded images
-              '<img src="https://training.galaxyproject.org/training-material/' + page_url.split('/')[0..-2].join('/') + '/..'
+              "<img src=\"https://training.galaxyproject.org/training-material/#{page_url.split('/')[0..-2].join('/')}/.."
             end
           end
         end
