@@ -323,7 +323,7 @@ integration](#enable-workflowhub-integration-for-your-account).
 ## Make a workflow release
 
 Now you can make a release of your workflow. The LifeMonitor
-[configuration](#lifeMonitor-configuration-file) we specified for the workflow
+[configuration](#lifemonitor-configuration-file) we specified for the workflow
 repository specifies that we identify release by git tags matching the
 expression.  You can tag the workflow as release "0.1.0" with the git CLI:
 
