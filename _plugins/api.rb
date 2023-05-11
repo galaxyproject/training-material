@@ -46,13 +46,14 @@ module Jekyll
     # Returns:
     # +Hash+ with all strings markdownified
     def visitAndMarkdownify(site, f)
-      if f.is_a?(Array)
+      case f
+      when Array
         f.map! { |x| visitAndMarkdownify(site, x) }
-      elsif f.is_a?(Hash)
-        f = f.map do |k, v|
-          [k, visitAndMarkdownify(site, v)]
-        end.to_h
-      elsif f.is_a?(String)
+      when Hash
+        f = f.transform_values do |v|
+          visitAndMarkdownify(site, v)
+        end
+      when String
         f = markdownify(site, f).strip.gsub(/<p>/, '').gsub(%r{</p>}, '')
       end
       f
@@ -235,7 +236,7 @@ module Jekyll
           # Here we un-do the tutorial metadata priority, and overwrite with
           # slides metadata when available.
           slides_data = site.pages.select { |p| p.url == "/#{directory}/slides.html" }[0]
-          p.update(slides_data.data) if slides_data && slides_data.data
+          p.update(slides_data.data) if slides_data&.data
 
           page5.content = JSON.pretty_generate(p)
           page5.data['layout'] = nil

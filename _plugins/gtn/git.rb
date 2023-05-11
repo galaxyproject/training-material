@@ -25,7 +25,7 @@ module Gtn
       # Cache the git facts
 
       begin
-        git_head = File.read(File.join('.git', 'HEAD')).strip.split(' ')[1]
+        git_head = File.read(File.join('.git', 'HEAD')).strip.split[1]
         git_head_ref = File.read(File.join('.git', git_head)).strip
       rescue StandardError
         git_head_ref = 'none'

@@ -101,7 +101,7 @@ module TopicFilter
       all_topics_for_tutorial = filter_by_topic(site, topic_name)
       out['__OTHER__'] = {
         'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
-        'materials' => all_topics_for_tutorial.select { |x| !seen_ids.include?(x['id']) }
+        'materials' => all_topics_for_tutorial.reject { |x| seen_ids.include?(x['id']) }
       }
     elsif site.data[topic_name]['tag_based'] && site.data[topic_name]['custom_ordering']
       # TODO
@@ -132,7 +132,7 @@ module TopicFilter
       all_topics_for_tutorial = filter_by_topic(site, topic_name)
       out['__OTHER__'] = {
         'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
-        'materials' => all_topics_for_tutorial.select { |x| !seen_ids.include?(x['id']) }
+        'materials' => all_topics_for_tutorial.reject { |x| seen_ids.include?(x['id']) }
       }
     else
       # Or just the list (Jury is still out on this one, should it really be a
@@ -146,7 +146,7 @@ module TopicFilter
     end
 
     # Cleanup empty sections
-    out.delete('__OTHER__') if out.key?('__OTHER__') && (out['__OTHER__']['materials'].length == 0)
+    out.delete('__OTHER__') if out.key?('__OTHER__') && out['__OTHER__']['materials'].empty?
 
     out.each do |_k, v|
       v['materials'].sort_by! { |m| [m.fetch('priority', 1), m['title']] }
@@ -175,7 +175,7 @@ module TopicFilter
   # Returns:
   # +Array+:: The list of tool IDs
   def self.extract_workflow_tool_list(data)
-    out = data['steps'].select { |_k, v| v['type'] == 'tool' }.map { |_k, v| v['tool_id'] }.select { |x| !x.nil? }
+    out = data['steps'].select { |_k, v| v['type'] == 'tool' }.map { |_k, v| v['tool_id'] }.compact
     out += data['steps'].select do |_k, v|
              v['type'] == 'subworkflow'
            end.map { |_k, v| extract_workflow_tool_list(v['subworkflow']) }
@@ -282,7 +282,7 @@ module TopicFilter
     # In order to speed up queries later, we'll store a set of "interesting"
     # pages (i.e. things that are under `topic_name`)
     interesting = {}
-    for page in pages do
+    pages.each do |page|
       page_parts = page.url.split('/')
       # Skip anything outside of topics.
       next if !page.url.include?('/topics/')
@@ -330,8 +330,8 @@ module TopicFilter
     slide_has_video = false
     slide_translations = []
     page_ref = nil
-    if slides.length > 0
-      page = slides.sort { |a, b| a[1].path <=> b[1].path }[0][1]
+    if slides.length.positive?
+      page = slides.min { |a, b| a[1].path <=> b[1].path }[1]
       slide_has_video = page.data.fetch('video', false)
       slide_translations = page.data.fetch('translations', [])
       page_ref = page
@@ -339,8 +339,8 @@ module TopicFilter
 
     # No matter if there were slides, we override with tutorials if present.
     tutorial_translations = []
-    if tutorials.length > 0
-      page = tutorials.sort { |a, b| a[1].path <=> b[1].path }[0][1]
+    if tutorials.length.positive?
+      page = tutorials.min { |a, b| a[1].path <=> b[1].path }[1]
       tutorial_translations = page.data.fetch('translations', [])
       page_ref = page
     end
@@ -374,16 +374,16 @@ module TopicFilter
     # is hard to follow which keys are which and safer to test for both in
     # case someone edits the code later. If either of these exist, we can
     # automatically set `hands_on: true`
-    page_obj['hands_on'] = tutorials.length > 0 if !page_obj.key?('hands_on')
+    page_obj['hands_on'] = tutorials.length.positive? if !page_obj.key?('hands_on')
 
     # Same for slides, if there's a resource by that name, we can
     # automatically set `slides: true`
-    page_obj['slides'] = slides.length > 0 if !page_obj.key?('slides')
+    page_obj['slides'] = slides.length.positive? if !page_obj.key?('slides')
 
     folder = material['dir']
 
     ymls = Dir.glob("#{folder}/quiz/*.yml") + Dir.glob("#{folder}/quiz/*.yaml")
-    if ymls.length > 0
+    if ymls.length.positive?
       quizzes = ymls.map { |a| a.split('/')[-1] }
       page_obj['quiz'] = quizzes.map do |q|
         quiz_data = YAML.load_file("#{folder}/quiz/#{q}")
@@ -404,7 +404,7 @@ module TopicFilter
              end
     # Similar as above.
     workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
-    if workflows.length > 0
+    if workflows.length.positive?
       workflow_names = workflows.map { |a| a.split('/')[-1] }
       page_obj['workflows'] = workflow_names.map do |wf|
         wfid = "#{page['topic_name']}-#{page['tutorial_name']}"
@@ -417,7 +417,7 @@ module TopicFilter
 
         {
           'workflow' => wf,
-          'tests' => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
+          'tests' => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length.positive?,
           'url' => "#{domain}/#{folder}/workflows/#{wf}",
           'path' => wf_path,
           'wfid' => wfid,
@@ -436,17 +436,15 @@ module TopicFilter
     page_obj['tools'] = []
     page_obj['tools'] += page.content.scan(/{% tool \[[^\]]*\]\(([^)]*)\)\s*%}/) if page_obj['hands_on']
 
-    if page_obj['workflows']
-      page_obj['workflows'].each do |wf|
+    page_obj['workflows']&.each do |wf|
         wf_path = "#{folder}/workflows/#{wf['workflow']}"
 
         wf_data = JSON.parse(File.read(wf_path))
         page_obj['tools'] += extract_workflow_tool_list(wf_data)
       end
-    end
     page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
 
-    page_obj['tours'] = tours.length > 0
+    page_obj['tours'] = tours.length.positive?
     page_obj['video'] = slide_has_video
     page_obj['translations'] = {}
     page_obj['translations']['tutorial'] = tutorial_translations
@@ -479,7 +477,7 @@ module TopicFilter
     shortlinks_reversed = shortlinks['id'].invert
     mappings = Hash.new { |h, k| h[k] = [] }
 
-    shortlinks.keys.each do |kp|
+    shortlinks.each_key do |kp|
       shortlinks[kp].each do |k, v|
         mappings[v].push("/short/#{k}")
       end
@@ -538,14 +536,14 @@ module TopicFilter
     resource_pages = materials.select { |x| x['topic_name'] == topic_name }
 
     # If there is nothing with that topic name, try generating it by tags.
-    resource_pages = materials.select { |x| x.fetch('tags', []).include?(topic_name) } if resource_pages.length == 0
+    resource_pages = materials.select { |x| x.fetch('tags', []).include?(topic_name) } if resource_pages.empty?
 
     # The complete resources we'll return is the introduction slides first
     # (EDIT: not anymore, we rely on prioritisation!)
     # and then the rest of the pages.
     resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 1) }
 
-    puts "Error? Could not find any relevant pages for #{topic_name}" if resource_pages.length == 0
+    puts "Error? Could not find any relevant pages for #{topic_name}" if resource_pages.empty?
 
     resource_pages
   end
@@ -558,7 +556,7 @@ module TopicFilter
     # Select out materials with the correct subtopic
     resource_pages = resource_pages.select { |x| x['subtopic'] == subtopic_id }
 
-    puts "Error? Could not find any relevant pages for #{topic_name} / #{subtopic_id}" if resource_pages.length == 0
+    puts "Error? Could not find any relevant pages for #{topic_name} / #{subtopic_id}" if resource_pages.empty?
 
     resource_pages
   end
@@ -651,7 +649,7 @@ module TopicFilter
     end
 
     # Uniqueify/sort
-    t = tool_map.map do |k, v|
+    t = tool_map.to_h do |k, v|
       v['tool_id'].uniq!
       v['tool_id'].sort_by! { |k| k[1] }
       v['tool_id'].reverse!
@@ -659,7 +657,7 @@ module TopicFilter
       v['tutorials'].uniq!
       v['tutorials'].sort!
       [k, v]
-    end.to_h
+    end
 
     # Order by most popular tool
     t.sort_by { |_k, v| v['tutorials'].length }.reverse.to_h
@@ -687,14 +685,14 @@ module Jekyll
     # }
     def most_recent_contributors(contributors, count)
       # Remove non-hof
-      hof = contributors.select { |_k, v| v.fetch('halloffame', 'yes') != 'no' }
+      hof = contributors.reject { |_k, v| v.fetch('halloffame', 'yes') == 'no' }
       # Get keys + sort by joined date
       hof_k = hof.keys.sort do |x, y|
         hof[y].fetch('joined', '2016-01') <=> hof[x].fetch('joined', '2016-01')
       end
 
       # Transform back into hash
-      hof_k.slice(0, count).collect { |k| [k, hof[k]] }.to_h
+      hof_k.slice(0, count).to_h { |k| [k, hof[k]] }
     end
 
     ##

@@ -20,10 +20,10 @@ module Jekyll
 
     def generate(site) # :nodoc:
       site.pages
-          .select { |page| !skip_layout?(page.data['layout']) }
+          .reject { |page| skip_layout?(page.data['layout']) }
           .each { |page| abbreviate page }
       site.posts.docs
-          .select { |post| !skip_layout?(post.data['layout']) }
+          .reject { |post| skip_layout?(post.data['layout']) }
           .each { |post| abbreviate post }
     end
 

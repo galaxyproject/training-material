@@ -38,9 +38,9 @@ module Jekyll
 
               idx = m.begin(0)
               q = cell['source'][0..idx]
-              w = cell['source'][idx + 1..-1]
+              w = cell['source'][idx + 1..]
               e = w.index('</blockquote>')
-              r = "#{w[0..e - 1]}</details>#{w[e + 13..-1]}"
+              r = "#{w[0..e - 1]}</details>#{w[e + 13..]}"
 
               cell['source'] = q + r
             end

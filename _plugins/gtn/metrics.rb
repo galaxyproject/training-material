@@ -5,7 +5,7 @@ require 'time'
 
 class Hash
   def to_prometheus
-    if keys.length > 0
+    if keys.length.positive?
       '{' + map { |k, v| "#{k}=\"#{v}\"" }.join(',') + '}'
     else
       ''
@@ -31,7 +31,7 @@ module Gtn
     end
 
     def self.histogram(values)
-      values.map! { |v| v.to_i }
+      values.map!(&:to_i)
       width = bin_width(values)
       bins = ((values.max - values.min) / width).ceil
 
@@ -66,7 +66,7 @@ module Gtn
           attr.to_s => true,
         },
         {
-          :value => values.select { |v| !v.key? attr }.length,
+          :value => values.reject { |v| v.key? attr }.length,
           attr.to_s => false,
         }
       ]
@@ -93,7 +93,7 @@ module Gtn
           help: 'Total number of Pages',
           type: 'counter'
         }, 'gtn_contributors_total' => {
-             value: segment(site.data['contributors'].values.select { |x| x['halloffame'] != 'no' }, 'orcid'),
+             value: segment(site.data['contributors'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
              help: 'Total number of Contributors',
              type: 'counter'
            },
@@ -128,7 +128,7 @@ module Gtn
           help: 'When did contributors join? Buckets of their ages by days since joined.',
           value: histogram_dates(
             site.data['contributors']
-            .select { |x| x['halloffame'] != 'no' }
+            .reject { |x| x['halloffame'] == 'no' }
             .map do |_, contributor|
               (Date.today - Date.parse("#{contributor['joined']}-01")).to_i
             end
@@ -144,7 +144,7 @@ module Gtn
 
         if v[:value].is_a?(Array)
           v[:value].each do |val|
-            attrs = val.select { |k, _v| k != :value }.to_h
+            attrs = val.reject { |k, _v| k == :value }.to_h
             out += "#{k}#{attrs.to_prometheus} #{val[:value]}\n"
           end
         else

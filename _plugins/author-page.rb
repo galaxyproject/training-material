@@ -72,7 +72,7 @@ module Jekyll
         pusher(t, news_by_author, true) if t['layout'] == 'news'
       end
 
-      site.data['contributors'].select { |c| c['halloffame'] != 'no' }.each_key do |contributor|
+      site.data['contributors'].reject { |c| c['halloffame'] == 'no' }.each_key do |contributor|
         # Using PageWithoutAFile instead of a custom class which reads files
         # from disk each time, saves some time, but it is unclear how much
         # due to how the previous was accounted. But assuming 0.040s per page * 193 should be about 8 seconds.

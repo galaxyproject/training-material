@@ -21,10 +21,10 @@ module GTNNotebooks
     'feedback' => '#86D486',
     'code-in' => '#86D486',
     'code-out' => '#fb99d0',
-  }
+  }.freeze
   COLORS_EXTRA = {
     'agenda' => 'display: none',
-  }
+  }.freeze
 
   ICONS = {
     'tip' => '💡',
@@ -37,7 +37,7 @@ module GTNNotebooks
     'feedback' => '⁉️',
     'details' => '💬',
     'hands_on' => '✏️',
-  }
+  }.freeze
 
   ICONS_FA = {
     'far fa-keyboard' => 'code-in',
@@ -50,7 +50,7 @@ module GTNNotebooks
     'far fa-eye' => 'solution',
     'far fa-lightbulb' => 'tip',
     'fas fa-exclamation-triangle' => 'warning',
-  }
+  }.freeze
 
   def self.generate_css
     COLORS.map do |key, val|
@@ -98,14 +98,14 @@ module GTNNotebooks
         'source' => data[0].map { |x| "#{x.rstrip}\n" }
       }
       # Strip the trailing newline in the last cell.
-      res['source'][-1] = res['source'][-1].rstrip if res['source'].length > 0
+      res['source'][-1] = res['source'][-1].rstrip if res['source'].length.positive?
 
       # Remove any remaining language tagged code blocks, e.g. in
       # tip/solution/etc boxes. These do not render well.
       res['source'] = res['source'].map { |x| x.gsub(/```#{language}/, '```') }
 
       if data[1]
-        res = res.update({
+        res.update({
                            'cell_type' => 'code',
                            'execution_count' => nil,
                            'outputs' => [],
@@ -144,7 +144,7 @@ module GTNNotebooks
       else
         # flush
         out.push(val)
-        first_char = if line.size > 0
+        first_char = if line.size.positive?
                        line[0]
                      else
                        ''
@@ -155,8 +155,8 @@ module GTNNotebooks
     # final flush
     out.push(val)
 
-    out.select! do |v|
-      !(v[0][0] == '>' && v[-1][0..1] == '{:' && v[-1].match(/.agenda/))
+    out.reject! do |v|
+      (v[0][0] == '>' && v[-1][0..1] == '{:' && v[-1].match(/.agenda/))
     end
     out.map! do |v|
       if v[0][0] == '>' && v[-1][0..1] == '{:'
@@ -277,7 +277,7 @@ module GTNNotebooks
   def self.fixSqlNotebook(notebook)
     # Add in a %%sql at the top of each cell
     notebook['cells'].map do |cell|
-      if cell.fetch('cell_type') == 'code' && cell['source'].join('').index('load_ext').nil?
+      if cell.fetch('cell_type') == 'code' && cell['source'].join.index('load_ext').nil?
         cell['source'] = ["%%sql\n"] + cell['source']
       end
       cell
@@ -378,11 +378,12 @@ module GTNNotebooks
     notebook = add_metadata_cell(notebook, data)
 
     # Apply language specific conventions
-    if notebook_language == 'bash'
+    case notebook_language
+    when 'bash'
       notebook = fixBashNotebook(notebook)
-    elsif notebook_language == 'sql'
+    when 'sql'
       notebook = fixSqlNotebook(notebook)
-    elsif notebook_language == 'r'
+    when 'r'
       notebook = fixRNotebook(notebook)
     end
 
@@ -416,7 +417,7 @@ module GTNNotebooks
 
         # The source is initially a list of strings, we'll merge it together
         # to make it easier to work with.
-        source = cell['source'].join('').strip
+        source = cell['source'].join.strip
 
         # Here we replace individual `s with codeblocks, they screw up
         # rendering otherwise by going through rouge
@@ -484,18 +485,18 @@ module GTNNotebooks
 
         if cell['source'].match(/<img src="\.\./)
           cell['source'].gsub!(/<img src="(\.\.[^"]*)/) do |img|
-            path = img[10..-1]
+            path = img[10..]
             image_path = File.join(dir, path)
 
-            if img[-3..-1].downcase == 'png'
+            if img[-3..].downcase == 'png'
               # puts "[GTN/Notebook/Images] Embedding png: #{img}"
               data = Base64.encode64(File.binread(image_path))
               %(<img src="data:image/png;base64,#{data}")
-            elsif (img[-3..-1].downcase == 'jpg') || (img[-4..-1].downcase == 'jpeg')
+            elsif (img[-3..].downcase == 'jpg') || (img[-4..].downcase == 'jpeg')
               # puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
               data = Base64.encode64(File.binread(image_path))
               %(<img src="data:image/jpeg;base64,#{data}")
-            elsif img[-3..-1].downcase == 'svg'
+            elsif img[-3..].downcase == 'svg'
               # puts "[GTN/Notebook/Images] Embedding svg: #{img}"
               data = Base64.encode64(File.binread(image_path))
               %(<img src="data:image/svg+xml;base64,#{data}")

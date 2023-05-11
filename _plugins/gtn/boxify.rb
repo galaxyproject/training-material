@@ -137,7 +137,7 @@ module Gtn
 
     def self.format_box_title(title, box_type, lang = 'en')
       lang = 'en' if (lang == '') || lang.nil?
-      title_fmted = (!title.nil? && title.length > 0 ? ": #{title}" : '')
+      title_fmted = (!title.nil? && title.length.positive? ? ": #{title}" : '')
       "#{@@BOX_TITLES[lang][box_type]}#{title_fmted}"
     end
 
@@ -153,7 +153,7 @@ module Gtn
           <span class="fold-unfold fa fa-minus-square"></span>
         </button>
         </div>
-      ).split(/\n/).map { |x| x.strip }.join('').strip]
+      ).split(/\n/).map(&:strip).join.strip]
     end
 
     def self.generate_static_title(box_type, title, lang = 'en', key)
@@ -166,7 +166,7 @@ module Gtn
         <div class="box-title #{box_type}-title" id="#{box_id}">
           #{get_icon(box_type)} #{box_title}
         </div>
-      ).split(/\n/).map { |x| x.strip }.join('').strip]
+      ).split(/\n/).map(&:strip).join.strip]
     end
 
     def self.safe_title(title)
@@ -191,7 +191,7 @@ module Gtn
         <div class="box #{box_type}" markdown=0>
         #{box_title}
         <div class="box-content" id="#{box_id}-contents" markdown=1>
-      ).split(/\n/).map { |x| x.strip }.join('').strip
+      ).split(/\n/).map(&:strip).join.strip
     end
 
     def self.replace_elements(text, lang = 'en', key)
@@ -211,7 +211,7 @@ module Gtn
   end
 end
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
   require 'test/unit'
   class BoxIdTest < Test::Unit::TestCase
     def test_single_page

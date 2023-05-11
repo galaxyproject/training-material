@@ -64,7 +64,7 @@ module Gtn
   end
 end
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
   require 'yaml'
   current_mapping = YAML.load_file('metadata/shortlinks.yaml')
   Gtn::Shortlinks.update(current_mapping)

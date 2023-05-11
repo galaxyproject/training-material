@@ -12,10 +12,10 @@ module Jekyll
 
     def generate(site)
       site.pages
-          .select { |page| !skip_layout? page.data['layout'] }
+          .reject { |page| skip_layout? page.data['layout'] }
           .each { |page| figurify page, site }
       site.posts.docs
-          .select { |post| !skip_layout? post.data['layout'] }
+          .reject { |post| skip_layout? post.data['layout'] }
           .each { |post| figurify post, site }
     end
 
@@ -38,7 +38,9 @@ module Jekyll
           num += 1
 
           alt.gsub!(/"/, '&quot;')
-          alt = "#{alt}. " if alt.strip.length > 0 && !(alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?'))
+          if alt.strip.length.positive? && !(alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?'))
+            alt = "#{alt}. "
+          end
 
           dimensions = Gtn::Images.html_image_dimensions(tuto_dir, url)
 
@@ -53,7 +55,9 @@ module Jekyll
         style = ::Regexp.last_match(4)
 
         alt.gsub!(/"/, '&quot;')
-        alt = "#{alt}. " if alt.strip.length > 0 && !(alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?'))
+        if alt.strip.length.positive? && !(alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?'))
+          alt = "#{alt}. "
+        end
         "<img src=\"#{url}\" alt=\"#{alt}\" #{style} loading=\"lazy\">"
       end
     end

@@ -10,7 +10,7 @@ module Jekyll
       email: 'galaxytrainingnetwork@gmail.com',
       name: 'Galaxy Training Network',
       url: 'https://galaxyproject.org/teach/gtn/'
-    }
+    }.freeze
 
     A11Y = {
       accessMode: %w[textual visual],
@@ -20,7 +20,7 @@ module Jekyll
       accessibilityFeature: %w[alternativeText tableOfContents],
       # "accessibilityHazard": [],
       accessibilitySummary: 'The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.',
-    }
+    }.freeze
 
     ##
     # Generate the Dublin Core metadata for a material.
@@ -354,15 +354,15 @@ module Jekyll
         end
 
         # Description with questions, objectives and keypoints
-        if material.key?('questions') && !material['questions'].nil? && (material['questions'].length > 0)
+        if material.key?('questions') && !material['questions'].nil? && material['questions'].length.positive?
           questions = material['questions'].join("\n - ")
           description.push("The questions this #{material['type']} addresses are:\n - #{questions}\n\n")
         end
-        if material.key?('objectives') && !material['objectives'].nil? && (material['objectives'].length > 0)
+        if material.key?('objectives') && !material['objectives'].nil? && material['objectives'].length.positive?
           objectives = material['objectives'].join("\n - ")
           description.push("The objectives are:\n - #{objectives}\n\n")
         end
-        if material.key?('keypoints') && !material['keypoints'].nil? && (material['keypoints'].length > 0)
+        if material.key?('keypoints') && !material['keypoints'].nil? && material['keypoints'].length.positive?
           keypoints = material['keypoints'].join("\n - ")
           description.push("The keypoints are:\n - #{keypoints}\n\n")
         end
@@ -372,7 +372,7 @@ module Jekyll
         data['keywords'] = data['keywords'].join(', ')
         # Zenodo links
         if material.key?('zenodo_link')
-          mentions = mentions.push({
+          mentions.push({
                                      '@type': 'Thing',
                                      url: (material['zenodo_link']).to_s,
                                      name: "Training data for #{material['title']} tutorial"
@@ -401,11 +401,11 @@ module Jekyll
       reqs.push(*material['requirements']) if material.key?('requirements')
       if !reqs.empty?
         coursePrerequisites = []
-        for req in reqs do
+        reqs.each do |req|
           if req['type'] == 'internal'
             if req.key?('tutorials')
-              for tuto in req['tutorials'] do
-                for page in site['pages'] do
+              (req['tutorials']).each do |tuto|
+                (site['pages']).each do |page|
                   if ((page['name'] == 'tutorial.md') || (page['name'] == 'slides.html')) && ((page['topic_name'] == req['topic_name']) && (page['tutorial_name'] == tuto))
                     # slides
                     if page['name'] == 'slides.html'

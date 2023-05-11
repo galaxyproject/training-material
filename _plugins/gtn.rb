@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'English'
 require './_plugins/gtn/boxify'
 require './_plugins/gtn/mod'
 require './_plugins/gtn/images'
@@ -78,7 +79,7 @@ module Jekyll
       'se' => 'Sweden',
       'si' => 'Slovenia',
       'uk' => 'United Kingdom',
-    }
+    }.freeze
 
     ##
     # Returns the name of an elixir node, given its country ID
@@ -101,9 +102,9 @@ module Jekyll
       if citations.nil?
         {}
       else
-        citations.sort_by { |_k, v| v }.reverse.to_h.first(20).map do |k, v|
+        citations.sort_by { |_k, v| v }.reverse.to_h.first(20).to_h do |k, v|
           [k, { 'count' => v, 'text' => Gtn::Scholar.render_citation(k) }]
-        end.to_h
+        end
       end
     end
 
@@ -236,7 +237,7 @@ module Jekyll
     #
     #  fedi2link("@hexylena@galaxians.garden") => "https://galaxians.garden/@hexylena"
     def fedi2link(fedi_address)
-      fedi_address.gsub(/^@?(?<user>.*)@(?<host>.*)$/) { |_m| "https://#{$~[:host]}/@#{$~[:user]}" }
+      fedi_address.gsub(/^@?(?<user>.*)@(?<host>.*)$/) { |_m| "https://#{$LAST_MATCH_INFO[:host]}/@#{$LAST_MATCH_INFO[:user]}" }
     end
 
     ##
@@ -356,7 +357,7 @@ Jekyll::Hooks.register :posts, :pre_render do |post, _out|
   post.data['image'] = post.data['cover']
 end
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
   result = Gtn::ModificationTimes.obtain_time(ARGV[0].gsub(%r{^/}, ''))
   puts "Modification time of #{ARGV[0].gsub(%r{^/}, '')} is #{result}"
 end

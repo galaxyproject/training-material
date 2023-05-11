@@ -40,7 +40,7 @@ module Gtn
   end
 end
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
   Gtn::ModificationTimes.init_cache
   pp Gtn::ModificationTimes.time_cache
 end

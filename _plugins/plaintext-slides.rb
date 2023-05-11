@@ -7,7 +7,7 @@ module Jekyll
       base_slides
       introduction_slides
       tutorial_slides_ai4life
-    ]
+    ].freeze
 
     ##
     # Generate a plaintext version of the slides

@@ -86,7 +86,7 @@ module Jekyll
         a[b] += 1
       end.keys
       # Remove nil citations
-      unique_citations = unique_citations.select { |c| !global_bib[c].nil? }
+      unique_citations = unique_citations.reject { |c| global_bib[c].nil? }
       # And now sort them by date + names
       sorted_citations = unique_citations.sort do |a, b|
         global_bib[a].date.to_s + global_bib[a].names.join(' ') <=>
