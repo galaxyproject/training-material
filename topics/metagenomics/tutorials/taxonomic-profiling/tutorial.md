@@ -36,7 +36,7 @@ The term **"microbiome"** describes "a characteristic microbial community occupy
 Microbiome data can be gathered from different environments such as soil, water or the human gut. The biological interest lies in general in the question how the microbiome present at a specific site influences this environment. To study a microbiome, we need to use indirect methods like metagenomics or metatranscriptomics.
 
 **Metagenomic samples** contain DNA from different organisms at a specific site, where the sample was collected. Metagenomic data can be used to find out which organisms coexist in that niche and which genes are present in the different organisms.
-Metatranscriptomic samples include the transcribed gene products, thus RNA, that therefore allow to not only study the presence of genes but additionally their expression in the given environment. The following tutorial will focus on metagenomics data, but the principle is the same for metatranscriptomics data.
+**Metatranscriptomic samples** include the transcribed gene products, thus RNA, that therefore allow to not only study the presence of genes but additionally their expression in the given environment. The following tutorial will focus on metagenomics data, but the principle is the same for metatranscriptomics data.
 
 The investigation of microorganisms present at a specific site and their relative abundance is also called **"microbial community profiling"**.
 The main objective is to identify the microorganisms that are present within the given sample. This can be achieved for all known microbes, where the DNA sequence specific for a certain species is known.
@@ -50,6 +50,9 @@ For metagenomic data analysis we start with sequences derived from DNA fragments
 When talking about taxonomic assignment or taxonomic classification, most of the time we actually talk about two methods, that in practice are often used interchangeably:
 - **taxonomic binning**: the clustering of individual sequence reads based on similarities criteria and assignation of clusters to reference taxa
 - **taxonomic profiling**: classification of individual reads to reference taxa to extract the relative abundances of the different taxa
+
+The reads can be obtained from **amplicon sequencing**  (e.g. 16S, 18S, ITS), where only specific gene or gene fragments are targeted (using specific primers) or **shotgun metagenomic sequencing**, where all the accessible DNA of a mixed community is amplified (using random primers). 
+This tutorial focuses on reads obtained from shotgun metagenomic sequencing. 
 
 ## Taxonomic profiling
 
