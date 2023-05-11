@@ -2,7 +2,6 @@ require './_plugins/gtn/scholar'
 
 module Jekyll
   class CiteTag < Liquid::Tag
-
     def initialize(tag_name, text, tokens)
       super
       @text = text.strip
@@ -24,11 +23,10 @@ module Jekyll
       source_page = page['path']
 
       # Citation Frequency
-      if ! site.config.has_key?('citation_count')
+      if !site.config.has_key?('citation_count')
         site.config['citation_count'] = Hash.new(0)
       end
       site.config['citation_count'][@text] += 1
-
 
       # If the overall cache is nil, create it
       if site.config['citation_cache'].nil?
@@ -39,7 +37,7 @@ module Jekyll
         site.config['citation_cache'][source_page] = Array.new
       end
 
-       # Push it to our cache.
+      # Push it to our cache.
       site.config['citation_cache'][source_page].push(@text)
 
       begin
@@ -48,9 +46,9 @@ module Jekyll
         if ['tutorial_slides', 'base_slides', 'introduction_slides'].include? layout
           doi = site.config['cached_citeproc'].items[@text].doi
           url = site.config['cached_citeproc'].items[@text].url
-          if ! doi.nil?
+          if !doi.nil?
             furl = "https://doi.org/#{doi}"
-          elsif ! url.nil?
+          elsif !url.nil?
             furl = url
           else
             furl = nil
@@ -64,7 +62,6 @@ module Jekyll
         else
           res = %Q(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
         end
-
       rescue => error
         puts "[GTN/scholar] Could not render #{@text} from #{source_page} (#{error})"
         res = %Q(<span>ERROR INVALID CITATION #{@text}</span>)
@@ -79,8 +76,8 @@ module Jekyll
 
     private
   end
-  class BibTag < Liquid::Tag
 
+  class BibTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super
       @text = text.strip
@@ -99,15 +96,15 @@ module Jekyll
       # year, month for sorting.
       unique_citations = citations.reduce(Hash.new(0)) { |a, b| a[b] += 1; a }.keys
       # Remove nil citations
-      unique_citations = unique_citations.select{|c| ! global_bib[c].nil? }
+      unique_citations = unique_citations.select { |c| !global_bib[c].nil? }
       # And now sort them by date + names
-      sorted_citations = unique_citations.sort{|a, b|
+      sorted_citations = unique_citations.sort { |a, b|
         global_bib[a].date.to_s + global_bib[a].names.join(' ') <=>
-        global_bib[b].date.to_s + global_bib[b].names.join(' ')
+          global_bib[b].date.to_s + global_bib[b].names.join(' ')
       }
 
       out = '<ol class="bibliography">'
-      out += sorted_citations.map{|c|
+      out += sorted_citations.map { |c|
         r = Gtn::Scholar.render_citation(c)
         %Q(<li id="#{c}">#{r}</li>)
       }.join("\n")
@@ -117,7 +114,6 @@ module Jekyll
 
     private
   end
-
 end
 
 Liquid::Template.register_tag('cite', Jekyll::CiteTag)

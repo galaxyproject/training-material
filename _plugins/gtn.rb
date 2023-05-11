@@ -7,15 +7,13 @@ require './_plugins/gtn/scholar'
 require './_plugins/jekyll-topic-filter'
 require 'time'
 
-
 puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
 version_parts = RUBY_VERSION.split('.')
 if version_parts[0].to_i < 3
   puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.'
 end
 
-
-## 
+##
 # This module contains functions that are used in the GTN, our internal functions that is.
 
 ##
@@ -51,7 +49,6 @@ end
 
 module Jekyll
   module GtnFunctions
-
     def self.cache
       @@cache ||= Jekyll::Cache.new('GtnFunctions')
     end
@@ -104,8 +101,8 @@ module Jekyll
       if citations.nil?
         {}
       else
-        citations.sort_by{|k, v| v}.reverse.to_h.first(20).map{|k, v| 
-          [k, {'count' => v, 'text' => Gtn::Scholar.render_citation(k)}]
+        citations.sort_by { |k, v| v }.reverse.to_h.first(20).map { |k, v|
+          [k, { 'count' => v, 'text' => Gtn::Scholar.render_citation(k) }]
         }.to_h
       end
     end
@@ -183,10 +180,10 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the topic has been mentioned
     def how_many_topic_feedbacks(feedback, name)
-      feedback.select{|x| x['topic'] == name}.length
+      feedback.select { |x| x['topic'] == name }.length
     end
 
-    ## 
+    ##
     # How many times has a tutorial been mentioned in feedback?
     # Params:
     # +feedback+:: The feedback to search through
@@ -194,7 +191,7 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the tutorial has been mentioned
     def how_many_tutorial_feedbacks(feedback, name)
-      feedback.select{|x| x['tutorial'] == name}.length
+      feedback.select { |x| x['tutorial'] == name }.length
     end
 
     ##
@@ -241,7 +238,7 @@ module Jekyll
     #
     #  fedi2link("@hexylena@galaxians.garden") => "https://galaxians.garden/@hexylena"
     def fedi2link(fedi_address)
-      fedi_address.gsub(/^@?(?<user>.*)@(?<host>.*)$/){|m| "https://#{$~[:host]}/@#{$~[:user]}" }
+      fedi_address.gsub(/^@?(?<user>.*)@(?<host>.*)$/) { |m| "https://#{$~[:host]}/@#{$~[:user]}" }
     end
 
     ##
@@ -275,11 +272,11 @@ module Jekyll
 
     def convert_to_material_list(site, materials)
       # [{"name"=>"introduction", "topic"=>"admin"}]
-      materials.map{|m|
+      materials.map { |m|
         if m.key?('name') && m.key?('topic')
           found = TopicFilter.fetch_tutorial_material(site, m['topic'], m['name'])
           if found.nil?
-            Jekyll.logger.warn  "Could not find material #{m["topic"]}/#{m["name"]} in the site data"
+            Jekyll.logger.warn "Could not find material #{m["topic"]}/#{m["name"]} in the site data"
           end
           found
         elsif m.key?('external') && m['external']
@@ -291,7 +288,7 @@ module Jekyll
             'hands_on_url' => m['link'],
           }
         else
-          Jekyll.logger.warn  "[GTN] Unsure how to render #{m}"
+          Jekyll.logger.warn "[GTN] Unsure how to render #{m}"
         end
       }
     end
@@ -315,6 +312,7 @@ module Jekyll
       if m
         return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}"
       end
+
       return 'GTN_TRS_ERROR'
     end
 
@@ -342,6 +340,7 @@ module Jekyll
       if material.nil?
         return 'NO LINK'
       end
+
       url = nil
 
       if material['slides']
@@ -361,14 +360,13 @@ end
 
 Liquid::Template.register_filter(Jekyll::GtnFunctions)
 
-
 ##
 # This does post-modification to every page
 # Mapping the authors to their human names, and copying the cover (when present) to 'image'
 #
 # This exists because the jekyll-feed plugin expects those fields to look like that.
 Jekyll::Hooks.register :posts, :pre_render do |post, out|
-  post.data['author'] = get_authors(post.data).map{|c| lookup_name(c, post.site)}.join(', ')
+  post.data['author'] = get_authors(post.data).map { |c| lookup_name(c, post.site) }.join(', ')
   post.data['image'] = post.data['cover']
 end
 

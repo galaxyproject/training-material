@@ -7,10 +7,8 @@ module Jekyll
     safe true
 
     def generate(site)
-
       # For every tutorial with the 'notebook' key in the page data
-      site.pages.select { |page| GTNNotebooks.notebook_filter(page.data, language='r') }.each do |page|
-
+      site.pages.select { |page| GTNNotebooks.notebook_filter(page.data, language = 'r') }.each do |page|
         # We get the path to the tutorial source
         dir = File.dirname(File.join('.', page.url))
         fn = File.join('.', page.url).sub(/html$/, 'Rmd')

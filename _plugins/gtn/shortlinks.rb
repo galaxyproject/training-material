@@ -19,7 +19,7 @@ module Gtn
         # If it's not already mapped by a key, add it.
         if not is_mapped(html_path, current_mapping)
           # Generate a short code
-          short_code = 'T' + (current_mapping['id'].select{|x| x[0] == 'T'}.length).to_s.rjust(5, '0')
+          short_code = 'T' + (current_mapping['id'].select { |x| x[0] == 'T' }.length).to_s.rjust(5, '0')
           puts "Discovered tutorial #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
@@ -37,7 +37,7 @@ module Gtn
         # If it's not already mapped by a key, add it.
         if not is_mapped(html_path, current_mapping)
           # Generate a short code
-          short_code = 'S' + (current_mapping['id'].select{|x| x[0] == 'S'}.length).to_s.rjust(5, '0')
+          short_code = 'S' + (current_mapping['id'].select { |x| x[0] == 'S' }.length).to_s.rjust(5, '0')
           puts "Discovered slides #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
@@ -55,7 +55,7 @@ module Gtn
         # If it's not already mapped by a key, add it.
         if not is_mapped(html_path, current_mapping)
           # Generate a short code
-          short_code = 'F' + (current_mapping['id'].select{|x| x[0] == 'F'}.length).to_s.rjust(5, '0')
+          short_code = 'F' + (current_mapping['id'].select { |x| x[0] == 'F' }.length).to_s.rjust(5, '0')
           puts "Discovered FAQ #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path

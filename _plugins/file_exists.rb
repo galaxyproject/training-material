@@ -2,7 +2,6 @@ module Jekyll
   ##
   # This class adds a tag that checks if a file exists.
   class FileExistsTag < Liquid::Tag
-
     def initialize(tag_name, path, tokens) # :nodoc:
       super
       @path = path

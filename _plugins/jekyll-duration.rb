@@ -1,6 +1,5 @@
 module Jekyll
   module DurationFilter
-
     ##
     # This function converts a duration string into a human readable string.
     # Params:
@@ -28,28 +27,28 @@ module Jekyll
       hours = 'hours'
       minutes = 'minutes'
       if @context.registers[:page]&.key?('lang')
-          lang = @context.registers[:page]['lang']
-          hour = @context.registers[:site].data['lang'][lang]['hour']
-          hours = @context.registers[:site].data['lang'][lang]['hours']
-          minutes = @context.registers[:site].data['lang'][lang]['minutes']
+        lang = @context.registers[:page]['lang']
+        hour = @context.registers[:site].data['lang'][lang]['hour']
+        hours = @context.registers[:site].data['lang'][lang]['hours']
+        minutes = @context.registers[:site].data['lang'][lang]['minutes']
       end
 
       # Hours
-      if ! match[1].nil? then
+      if !match[1].nil? then
         if match[1] == '1' then
-          duration_parts.push("#{match[1]} "+hour)
+          duration_parts.push("#{match[1]} " + hour)
         else
-          duration_parts.push("#{match[1]} "+hours)
+          duration_parts.push("#{match[1]} " + hours)
         end
       end
 
       # Minutes - assuming no one uses `1 minute`
-      if ! match[2].nil? then
-        duration_parts.push("#{match[2]} "+minutes)
+      if !match[2].nil? then
+        duration_parts.push("#{match[2]} " + minutes)
       end
 
       # Hopefully no one uses seconds
-      if ! match[3].nil? then
+      if !match[3].nil? then
         duration_parts.push("#{match[3]} seconds")
       end
 

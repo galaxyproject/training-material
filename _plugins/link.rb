@@ -1,6 +1,5 @@
 module Jekyll
   class CustomLinkTag < Liquid::Tag
-
     def initialize(tag_name, text, tokens)
       super
       @text = text.strip

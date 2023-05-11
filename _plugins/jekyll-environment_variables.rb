@@ -9,9 +9,7 @@ require './_plugins/gtn/git'
 require './_plugins/gtn'
 
 module Jekyll
-
   class EnvironmentVariablesGenerator < Generator
-
     ##
     # Environment variables are added to the `site` object in Liquid templates.
     # Here we add the following:
@@ -21,7 +19,6 @@ module Jekyll
     #  - `site.config['gtn_fork']` - the fork of the GTN repo
     #  - `site.config['age']` - the age of the site in years
     def generate(site)
-
       # Add other environment variables to `site.config` here...
       Gtn::Scholar.load_bib(site)
       site.config.update(Gtn::Git.discover)

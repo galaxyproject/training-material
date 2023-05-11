@@ -2,7 +2,6 @@ require 'jekyll'
 
 module Jekyll
   class Figurify < Jekyll::Generator
-
     safe true
 
     def initialize(config)
@@ -11,11 +10,11 @@ module Jekyll
 
     def generate(site)
       site.pages
-        .select { |page| not skip_layout? page.data['layout'] }
-        .each { |page| figurify page,site }
+          .select { |page| not skip_layout? page.data['layout'] }
+          .each { |page| figurify page, site }
       site.posts.docs
-        .select { |post| not skip_layout? post.data['layout'] }
-        .each { |post| figurify post, site }
+          .select { |post| not skip_layout? post.data['layout'] }
+          .each { |post| figurify post, site }
     end
 
     private
@@ -51,7 +50,7 @@ module Jekyll
           "<figure id=\"figure-#{num}\">" +
             "<img src=\"#{url}\" alt=\"#{alt}\" #{style} #{dimensions} loading=\"lazy\">" +
             "<figcaption><span class=\"figcaption-prefix\"><strong>#{prefix}#{num}</strong>:</span> #{title}</figcaption>" +
-          '</figure>'
+            '</figure>'
         end
       }
 
@@ -73,10 +72,10 @@ module Jekyll
     def figcaption_prefix(page, site)
       fig = 'Figure'
       if page['lang']
-          lang = page['lang']
-          fig = site.data['lang'][lang]['figure']
+        lang = page['lang']
+        fig = site.data['lang'][lang]['figure']
       end
-      @config['prefix'] || fig+' '
+      @config['prefix'] || fig + ' '
     end
 
     def skip_empty?

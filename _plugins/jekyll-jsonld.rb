@@ -13,10 +13,10 @@ module Jekyll
     A11Y = {
       "accessMode": ['textual', 'visual'],
       "accessModeSufficient": ['textual', 'visual'],
-      #"accessibilityAPI": ,
+      # "accessibilityAPI": ,
       "accessibilityControl": ['fullKeyboardControl', 'fullMouseControl'],
       "accessibilityFeature": ['alternativeText', 'tableOfContents'],
-      #"accessibilityHazard": [],
+      # "accessibilityHazard": [],
       "accessibilitySummary": 'The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.',
     }
 
@@ -44,7 +44,7 @@ module Jekyll
         ['DC.date', Gtn::ModificationTimes.obtain_time(material['path'])],
       ]
 
-      attributes += get_authors(material).map{|user|
+      attributes += get_authors(material).map { |user|
         if site['data']['contributors'].has_key?(user) then
           ['DC.creator', site['data']['contributors'][user].fetch('name', user)]
         else
@@ -53,7 +53,7 @@ module Jekyll
         end
       }
 
-      return attributes.map{|a, b| "<meta name=\"#{a}\" content=\"#{b}\">" }.join("\n")
+      return attributes.map { |a, b| "<meta name=\"#{a}\" content=\"#{b}\">" }.join("\n")
     end
 
     ##
@@ -108,8 +108,8 @@ module Jekyll
         "@context": 'https://schema.org',
         "@type": 'Person',
         "http://purl.org/dc/terms/conformsTo": {
-            "@id": 'https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19',
-            "@type": 'Person'
+          "@id": 'https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19',
+          "@type": 'Person'
         },
         # I guess these are identical?
         "url": "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
@@ -117,10 +117,11 @@ module Jekyll
         "name": contributor.nil? ? id : contributor.fetch('name', id),
         "image": "https://avatars.githubusercontent.com/#{id}",
         # No clue what to put here it's a person.
-        "description": contributor.nil? ? 'A contributor to the GTN project.' : contributor.fetch('bio', 'A contributor to the GTN project.'),
+        "description": contributor.nil? ? 'A contributor to the GTN project.' : contributor.fetch('bio',
+                                                                                                  'A contributor to the GTN project.'),
         "memberOf": [GTN],
       }
-      if ! contributor.nil? && contributor.has_key?('orcid')
+      if !contributor.nil? && contributor.has_key?('orcid')
         person['identifier'] = 'https://orcid.org/' + contributor['orcid']
         person['orcid'] = 'https://orcid.org/' + contributor['orcid']
       end
@@ -148,7 +149,7 @@ module Jekyll
     # Returns:
     # +Hash+:: The JSON-LD metadata.
     def generate_news_jsonld(page, site)
-      authors = get_authors(page.to_h).map{ |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
+      authors = get_authors(page.to_h).map { |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
 
       data = {
         "@context": 'https://schema.org',
@@ -194,11 +195,10 @@ module Jekyll
         'es': 'Español',
       }
 
-
       eduLevel = {
         'Introductory' => 'Beginner',
         'Intermediate' => 'Intermediate',
-        'Advanced'     => 'Advanced'
+        'Advanced' => 'Advanced'
       }
       if not topic then
         return '{}'
@@ -219,117 +219,117 @@ module Jekyll
 
         # Required for BioSchemas
         "http://purl.org/dc/terms/conformsTo": {
-            "@id": 'https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE',
-            "@type": 'CreativeWork'
+          "@id": 'https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE',
+          "@type": 'CreativeWork'
         },
 
         # Properties from CreativeWork
-        #"about" described below
+        # "about" described below
         #
-        #"accountablePerson":,
-        #"aggregateRating":,
-        #"alternativeHeadline":,
-        #"associatedMedia":,
+        # "accountablePerson":,
+        # "aggregateRating":,
+        # "alternativeHeadline":,
+        # "associatedMedia":,
         "audience": {
           "@type": 'EducationalAudience',
           "educationalRole": 'Students'
         },
-        #"audio":,
-        #"award":,
-        #"author" described below
-        #"character":,
+        # "audio":,
+        # "award":,
+        # "author" described below
+        # "character":,
         "citation": {
           "@type": 'CreativeWork',
           "name": 'Community-Driven Data Analysis Training for Biology',
           "url": 'https://doi.org/10.1016/j.cels.2018.05.012'
         },
-        #"comment":,
-        #"commentCount":,
-        #"contentLocation":,
-        #"contentRating":,
-        #"contentReferenceTime":,
-        #"contributor" described below
+        # "comment":,
+        # "commentCount":,
+        # "contentLocation":,
+        # "contentRating":,
+        # "contentReferenceTime":,
+        # "contributor" described below
         "copyrightHolder": GTN,
-        #"copyrightYear":,
-        #"correction":,
-        #"creator":,
-        #"dateCreated":,
+        # "copyrightYear":,
+        # "correction":,
+        # "creator":,
+        # "dateCreated":,
         "dateModified": Gtn::ModificationTimes.obtain_time(material['path']),
-        #"datePublished":,
+        # "datePublished":,
         "discussionUrl": site['gitter_url'],
-        #"editor":,
-        #"educationalAlignment":,
-        #"educationalUse":,
-        #"encoding":,
-        #"encodingFormat":,
-        #"exampleOfWork":,
-        #"expires":,
-        #"funder":,
-        #"genre":,
-        #"hasPart" described below
+        # "editor":,
+        # "educationalAlignment":,
+        # "educationalUse":,
+        # "encoding":,
+        # "encodingFormat":,
+        # "exampleOfWork":,
+        # "expires":,
+        # "funder":,
+        # "genre":,
+        # "hasPart" described below
         "headline": "#{material['title']}",
-        #"interactionStatistic":,
+        # "interactionStatistic":,
         "interactivityType": 'mixed',
         "isAccessibleForFree": true,
-        #"isBasedOn":,
+        # "isBasedOn":,
         "isFamilyFriendly": true,
-        #"isPartOf" described below
-        #"keywords": described below
-        #"learningResourceType" described below
+        # "isPartOf" described below
+        # "keywords": described below
+        # "learningResourceType" described below
         "license": 'https://spdx.org/licenses/CC-BY-4.0.html',
-        #"locationCreated":,
-        #"mainEntity":,
-        #"material":,
-        #"mentions" described below
-        #"offers":,
-        #"position":,
+        # "locationCreated":,
+        # "mainEntity":,
+        # "material":,
+        # "mentions" described below
+        # "offers":,
+        # "position":,
         "producer": GTN,
         "provider": GTN,
-        #"publication":,
-        #"publisher":,
-        #"publisherImprint":,
-        #"publishingPrinciples":,
-        #"recordedAt":,
-        #"releasedEvent":,
-        #"review":,
-        #"schemaVersion":,
-        #"sdDatePublished":,
-        #"sdLicense":,
-        #"sdPublisher":,
+        # "publication":,
+        # "publisher":,
+        # "publisherImprint":,
+        # "publishingPrinciples":,
+        # "recordedAt":,
+        # "releasedEvent":,
+        # "review":,
+        # "schemaVersion":,
+        # "sdDatePublished":,
+        # "sdLicense":,
+        # "sdPublisher":,
         "sourceOrganization": GTN,
-        #"spatialCoverage":,
-        #"sponsor":,
-        #"temporalCoverage":,
-        #"text":,
-        #"thumbnailUrl":,
-        #"timeRequired" described below
-        #"translationOfWork":,
-        #"translator": Google Translate???,
-        #"typicalAgeRange":,
-        #"version":,
-        #"video":,
-        #"workExample":,
-        #"workTranslation":,
+        # "spatialCoverage":,
+        # "sponsor":,
+        # "temporalCoverage":,
+        # "text":,
+        # "thumbnailUrl":,
+        # "timeRequired" described below
+        # "translationOfWork":,
+        # "translator": Google Translate???,
+        # "typicalAgeRange":,
+        # "version":,
+        # "video":,
+        # "workExample":,
+        # "workTranslation":,
 
         # Properties from Thing
-        #"additionalType":,
-        #"alternateName":,
-        #"description" described below
-        #"disambiguatingDescription":,
+        # "additionalType":,
+        # "alternateName":,
+        # "description" described below
+        # "disambiguatingDescription":,
         "identifier": site['github_repository'],
-        #"image":,
-        #"mainEntityOfPage":,
-        #"name" described below
-        #"potentialAction":,
-        #"sameAs":,
-        #"subjectOf":,
+        # "image":,
+        # "mainEntityOfPage":,
+        # "name" described below
+        # "potentialAction":,
+        # "sameAs":,
+        # "subjectOf":,
         # "url" described below
       }
       data.update(A11Y)
 
-      #info depending if tutorial, hands-on or slide level
+      # info depending if tutorial, hands-on or slide level
       parts = []
-      #data['hasPart'] = parts
+      # data['hasPart'] = parts
 
       mentions = []
       description = []
@@ -368,13 +368,13 @@ module Jekyll
         # Keywords
         data['keywords'] = [topic['name']] + material.fetch('tags', [])
         data['keywords'] = data['keywords'].join(', ')
-        #Zenodo links
+        # Zenodo links
         if material.key?('zenodo_link') then
           mentions = mentions.push({
-            "@type": 'Thing',
-            "url": "#{material['zenodo_link']}",
-            "name": "Training data for #{material['title']} tutorial"
-          })
+                                     "@type": 'Thing',
+                                     "url": "#{material['zenodo_link']}",
+                                     "name": "Training data for #{material['title']} tutorial"
+                                   })
         end
       end
       data['description'] = description.join("\n")
@@ -410,40 +410,40 @@ module Jekyll
                 for page in site['pages'] do
                   if page['name'] == 'tutorial.md' or page['name'] == 'slides.html' then
                     if page['topic_name'] == req['topic_name'] and page['tutorial_name'] == tuto then
-                      #slides
+                      # slides
                       if page['name'] == 'slides.html' then
                         coursePrerequisites.push({
-                          "@context": 'http://schema.org',
-                          "@type": 'LearningResource',
-                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
-                          "name": "#{page['title']}",
-                          "description": "Slides for '#{page['title']}' tutorial",
-                          "learningResourceType": 'slides',
-                          "interactivityType": 'expositive',
-                          "provider": GTN
-                        })
+                                                   "@context": 'http://schema.org',
+                                                   "@type": 'LearningResource',
+                                                   "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
+                                                   "name": "#{page['title']}",
+                                                   "description": "Slides for '#{page['title']}' tutorial",
+                                                   "learningResourceType": 'slides',
+                                                   "interactivityType": 'expositive',
+                                                   "provider": GTN
+                                                 })
                         if page['hands_on_url'] then
                           coursePrerequisites.push({
-                            "@context": 'http://schema.org',
-                            "@type": 'LearningResource',
-                            "url": "#{page['hands_on_url']}",
-                            "learningResourceType": 'hands-on tutorial',
-                            "interactivityType": 'expositive',
-                          })
+                                                     "@context": 'http://schema.org',
+                                                     "@type": 'LearningResource',
+                                                     "url": "#{page['hands_on_url']}",
+                                                     "learningResourceType": 'hands-on tutorial',
+                                                     "interactivityType": 'expositive',
+                                                   })
                         end
                       end
-                      #hands-on
+                      # hands-on
                       if page['name'] == 'tutorial.md' then
                         coursePrerequisites.push({
-                          "@context": 'http://schema.org',
-                          "@type": 'LearningResource',
-                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
-                          "name": "#{page['title']}",
-                          "description": "Hands-on for '#{page['title']}' tutorial",
-                          "learningResourceType": 'hands-on tutorial',
-                          "interactivityType": 'expositive',
-                          "provider": GTN
-                        })
+                                                   "@context": 'http://schema.org',
+                                                   "@type": 'LearningResource',
+                                                   "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
+                                                   "name": "#{page['title']}",
+                                                   "description": "Hands-on for '#{page['title']}' tutorial",
+                                                   "learningResourceType": 'hands-on tutorial',
+                                                   "interactivityType": 'expositive',
+                                                   "provider": GTN
+                                                 })
                       end
                     end
                   end
@@ -451,20 +451,20 @@ module Jekyll
               end
             else
               coursePrerequisites.push({
-                "@context": 'http://schema.org',
-                "@type": 'LearningResource',
-                "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
-                "name": "#{site['data'][req['topic_name']]['title']}",
-                "description": "#{site['data'][req['topic_name']]['title']}",
-                "provider": GTN
-              })
+                                         "@context": 'http://schema.org',
+                                         "@type": 'LearningResource',
+                                         "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
+                                         "name": "#{site['data'][req['topic_name']]['title']}",
+                                         "description": "#{site['data'][req['topic_name']]['title']}",
+                                         "provider": GTN
+                                       })
             end
           elsif req['type'] == 'external' then
             coursePrerequisites.push({
-              "@type": 'CreativeWork',
-              "url": "#{req['link']}",
-              "name": "#{req['title']}"
-            })
+                                       "@type": 'CreativeWork',
+                                       "url": "#{req['link']}",
+                                       "name": "#{req['title']}"
+                                     })
           else
             coursePrerequisites.push("#{req['title']}")
           end
@@ -474,7 +474,9 @@ module Jekyll
 
       # Add contributors/authors
       if material.key?('contributors') then
-        contributors = material['contributors'].map{ |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
+        contributors = material['contributors'].map { |x|
+          generate_person_jsonld(x, site['data']['contributors'][x], site)
+        }
         data['author'] = contributors
         data['contributor'] = contributors
       end
@@ -483,13 +485,13 @@ module Jekyll
       about.push(topic_desc)
       if topic.key?('edam_ontology') then
         about.push({
-          "@type": 'DefinedTerm',
-          "@id": "http://edamontology.org/#{topic['edam_ontology']}",
-          "inDefinedTermSet": 'http://edamontology.org',
-          "termCode": "#{topic['edam_ontology']}",
-          #"name": ,
-          "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2F#{topic['edam_ontology']}"
-        })
+                     "@type": 'DefinedTerm',
+                     "@id": "http://edamontology.org/#{topic['edam_ontology']}",
+                     "inDefinedTermSet": 'http://edamontology.org',
+                     "termCode": "#{topic['edam_ontology']}",
+                     # "name": ,
+                     "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2F#{topic['edam_ontology']}"
+                   })
       end
       data['about'] = about
 

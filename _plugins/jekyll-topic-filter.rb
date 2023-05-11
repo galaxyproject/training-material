@@ -2,9 +2,7 @@ require 'json'
 require 'yaml'
 require './_plugins/gtn.rb'
 
-
 module TopicFilter
-
   ##
   # This function returns a list of all the topics that are available.
   # Params:
@@ -12,7 +10,7 @@ module TopicFilter
   # Returns:
   # +Array+:: The list of topics
   def self.list_topics(site)
-    site.data.select{|k, v| v.is_a?(Hash) && v.has_key?('maintainers')}.map{|k, v| k}
+    site.data.select { |k, v| v.is_a?(Hash) && v.has_key?('maintainers') }.map { |k, v| k }
   end
 
   ##
@@ -27,7 +25,7 @@ module TopicFilter
       site.data['cache_topic_filter'] = Hash.new
 
       # For each topic
-      self.list_topics(site).each{|topic|
+      self.list_topics(site).each { |topic|
         site.data['cache_topic_filter'][topic] = self.filter_by_topic(site, topic)
       }
       puts '[GTN/TopicFilter] End Cache Prefill'
@@ -87,21 +85,21 @@ module TopicFilter
       # We'll construct a new hash of subtopic => tutorials
       out = Hash.new
       seen_ids = []
-      site.data[topic_name]['subtopics'].each{|subtopic, v|
+      site.data[topic_name]['subtopics'].each { |subtopic, v|
         specific_resources = self.filter_by_topic_subtopic(site, topic_name, subtopic['id'])
         out[subtopic['id']] = {
           'subtopic' => subtopic,
           'materials' => specific_resources
         }
-        seen_ids += specific_resources.map{|x| x['id'] }
+        seen_ids += specific_resources.map { |x| x['id'] }
       }
 
       # And we'll have this __OTHER__ subtopic for any tutorials that weren't
       # in a subtopic.
       all_topics_for_tutorial = self.filter_by_topic(site, topic_name)
       out['__OTHER__'] = {
-        'subtopic' => {'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other'},
-        'materials' => all_topics_for_tutorial.select{|x| ! seen_ids.include?(x['id']) }
+        'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
+        'materials' => all_topics_for_tutorial.select { |x| !seen_ids.include?(x['id']) }
       }
     elsif site.data[topic_name]['tag_based'] and site.data[topic_name]['custom_ordering']
       # TODO
@@ -115,24 +113,24 @@ module TopicFilter
       materials = self.filter_by_topic(site, topic_name)
 
       # Which topics are represented in those materials?
-      seen_topics = materials.map{|x| x['topic_name']}.sort
+      seen_topics = materials.map { |x| x['topic_name'] }.sort
 
       # Treat them like subtopics, but fake subtopics.
-      seen_topics.each{|parent_topic, v|
-        specific_resources = materials.select{|x| x['topic_name'] == parent_topic}
+      seen_topics.each { |parent_topic, v|
+        specific_resources = materials.select { |x| x['topic_name'] == parent_topic }
         out[parent_topic] = {
-          'subtopic' => {'id' => parent_topic, 'title' => site.data[parent_topic]['title'], 'description' => nil},
+          'subtopic' => { 'id' => parent_topic, 'title' => site.data[parent_topic]['title'], 'description' => nil },
           'materials' => specific_resources
         }
-        seen_ids += specific_resources.map{|x| x['id'] }
+        seen_ids += specific_resources.map { |x| x['id'] }
       }
 
       # And we'll have this __OTHER__ subtopic for any tutorials that weren't
       # in a subtopic.
       all_topics_for_tutorial = self.filter_by_topic(site, topic_name)
       out['__OTHER__'] = {
-        'subtopic' => {'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other'},
-        'materials' => all_topics_for_tutorial.select{|x| ! seen_ids.include?(x['id']) }
+        'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
+        'materials' => all_topics_for_tutorial.select { |x| !seen_ids.include?(x['id']) }
       }
     else
       # Or just the list (Jury is still out on this one, should it really be a
@@ -150,8 +148,8 @@ module TopicFilter
       out.delete('__OTHER__')
     end
 
-    out.each{|k, v|
-      v['materials'].sort_by!{|m| [m.fetch('priority', 1), m['title']] }
+    out.each { |k, v|
+      v['materials'].sort_by! { |m| [m.fetch('priority', 1), m['title']] }
     }
 
     out
@@ -167,18 +165,20 @@ module TopicFilter
   # +Hash+:: The tutorial material
   def self.fetch_tutorial_material(site, topic_name, tutorial_name)
     self.fill_cache(site)
-    site.data['cache_topic_filter'][topic_name].select{|p| p['tutorial_name'] == tutorial_name}[0]
+    site.data['cache_topic_filter'][topic_name].select { |p| p['tutorial_name'] == tutorial_name }[0]
   end
 
-  ## 
+  ##
   # Extract the list of tools used in a workflow
   # Params:
   # +data+:: The workflow data
   # Returns:
   # +Array+:: The list of tool IDs
   def self.extract_workflow_tool_list(data)
-    out = data['steps'].select{|k, v| v['type'] == 'tool'}.map{|k, v| v['tool_id']}.select{|x| ! x.nil?}
-    out += data['steps'].select{|k, v| v['type'] == 'subworkflow'}.map{|k, v| self.extract_workflow_tool_list(v['subworkflow'])}
+    out = data['steps'].select { |k, v| v['type'] == 'tool' }.map { |k, v| v['tool_id'] }.select { |x| !x.nil? }
+    out += data['steps'].select { |k, v|
+             v['type'] == 'subworkflow'
+           }.map { |k, v| self.extract_workflow_tool_list(v['subworkflow']) }
     out
   end
 
@@ -259,7 +259,6 @@ module TopicFilter
     end
 
     return material
-
   end
 
   ##
@@ -335,9 +334,9 @@ module TopicFilter
     # means we do not (cannot) support external_slides AND external_handson.
     # This is probably a sub-optimal situation we'll end up fixing someday.
     #
-    tutorials = material['resources'].select{|a| a[0] == 'tutorial'}
-    slides    = material['resources'].select{|a| a[0] == 'slides'}
-    tours     = material['resources'].select{|a| a[0] == 'tours'}
+    tutorials = material['resources'].select { |a| a[0] == 'tutorial' }
+    slides    = material['resources'].select { |a| a[0] == 'slides' }
+    tours     = material['resources'].select { |a| a[0] == 'tours' }
 
     # Our final "page" object (a "material")
     page = nil
@@ -346,7 +345,7 @@ module TopicFilter
     slide_translations = []
     page_ref = nil
     if slides.length > 0 then
-      page = slides.sort{|a, b| a[1].path <=> b[1].path}[0][1]
+      page = slides.sort { |a, b| a[1].path <=> b[1].path }[0][1]
       slide_has_video = page.data.fetch('video', false)
       slide_translations = page.data.fetch('translations', [])
       page_ref = page
@@ -355,7 +354,7 @@ module TopicFilter
     # No matter if there were slides, we override with tutorials if present.
     tutorial_translations = []
     if tutorials.length > 0 then
-      page = tutorials.sort{|a, b| a[1].path <=> b[1].path}[0][1]
+      page = tutorials.sort { |a, b| a[1].path <=> b[1].path }[0][1]
       tutorial_translations = page.data.fetch('translations', [])
       page_ref = page
     end
@@ -405,8 +404,8 @@ module TopicFilter
 
     ymls = Dir.glob("#{folder}/quiz/*.yml") + Dir.glob("#{folder}/quiz/*.yaml")
     if ymls.length > 0
-      quizzes = ymls.map{ |a| a.split('/')[-1] }
-      page_obj['quiz'] = quizzes.map{|q|
+      quizzes = ymls.map { |a| a.split('/')[-1] }
+      page_obj['quiz'] = quizzes.map { |q|
         quiz_data = YAML.load_file("#{folder}/quiz/#{q}")
         {
           'id' => q,
@@ -426,8 +425,8 @@ module TopicFilter
     # Similar as above.
     workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
     if workflows.length > 0
-      workflow_names = workflows.map{ |a| a.split('/')[-1] }
-      page_obj['workflows'] = workflow_names.map{|wf|
+      workflow_names = workflows.map { |a| a.split('/')[-1] }
+      page_obj['workflows'] = workflow_names.map { |wf|
         wfid = "#{page['topic_name']}-#{page['tutorial_name']}"
         wfname = wf.gsub(/.ga/, '').downcase
         trs = "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}"
@@ -460,7 +459,7 @@ module TopicFilter
     end
 
     if page_obj['workflows']
-      page_obj['workflows'].each{|wf|
+      page_obj['workflows'].each { |wf|
         wf_path = "#{folder}/workflows/#{wf['workflow']}"
 
         wf_data = JSON.parse(File.open(wf_path).read)
@@ -482,7 +481,7 @@ module TopicFilter
     page_obj['type'] = 'tutorial'
 
     if page_obj.has_key?('draft') and page_obj['draft'] then
-      if ! page_obj.has_key? 'tags'
+      if !page_obj.has_key? 'tags'
         page_obj['tags'] = Array.new
       end
       page_obj['tags'].push('work-in-progress')
@@ -497,22 +496,22 @@ module TopicFilter
       return site.data['cache_processed_pages']
     end
 
-    materials = self.collate_materials(pages).map{|k, v| self.resolve_material(site, v) }
+    materials = self.collate_materials(pages).map { |k, v| self.resolve_material(site, v) }
     puts '[GTN/TopicFilter] Filling Materials Cache'
     site.data['cache_processed_pages'] = materials
 
     # Prepare short URLs
     shortlinks = site.data['shortlinks']
     shortlinks_reversed = shortlinks['id'].invert
-    mappings = Hash.new{|h, k| h[k] = Array.new}
+    mappings = Hash.new { |h, k| h[k] = Array.new }
 
-    shortlinks.keys.each{|kp|
-      shortlinks[kp].each{|k, v|
+    shortlinks.keys.each { |kp|
+      shortlinks[kp].each { |k, v|
         mappings[v].push("/short/#{k}")
       }
     }
     # Update the materials with their short IDs + redirects
-    pages.select{|p| mappings.keys.include? p.url }.each{|p|
+    pages.select { |p| mappings.keys.include? p.url }.each { |p|
       # Set the short id on the material
       #
       begin
@@ -522,13 +521,13 @@ module TopicFilter
       end
       if p['ref']
         # Initialise redirects if it wasn't set
-        if ! p['ref'].data.has_key?('redirect_from')
+        if !p['ref'].data.has_key?('redirect_from')
           p['ref'].data['redirect_from'] = []
         end
         p['ref'].data['redirect_from'].push(*mappings[p.url])
         p['ref'].data['redirect_from'].uniq!
       else
-        if ! p.data.has_key?('redirect_from')
+        if !p.data.has_key?('redirect_from')
           p.data['redirect_from'] = []
         end
 
@@ -557,7 +556,7 @@ module TopicFilter
   #
   def self.list_all_tags(site)
     materials = self.process_pages(site, site.pages)
-    materials.map{|x| x.fetch('tags', [])}.flatten.sort.uniq
+    materials.map { |x| x.fetch('tags', []) }.flatten.sort.uniq
   end
 
   def self.filter_by_topic(site, topic_name)
@@ -566,17 +565,17 @@ module TopicFilter
     materials = self.process_pages(site, site.pages)
 
     # Select out the materials by topic:
-    resource_pages = materials.select{|x| x['topic_name'] == topic_name}
+    resource_pages = materials.select { |x| x['topic_name'] == topic_name }
 
     # If there is nothing with that topic name, try generating it by tags.
     if resource_pages.length == 0
-      resource_pages = materials.select{|x| x.fetch('tags', []).include?(topic_name)}
+      resource_pages = materials.select { |x| x.fetch('tags', []).include?(topic_name) }
     end
 
     # The complete resources we'll return is the introduction slides first
     # (EDIT: not anymore, we rely on prioritisation!)
     # and then the rest of the pages.
-    resource_pages = resource_pages.sort_by{ |k| k.fetch('priority', 1)}
+    resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 1) }
 
     if resource_pages.length == 0 then
       puts "Error? Could not find any relevant pages for #{topic_name}"
@@ -591,7 +590,7 @@ module TopicFilter
     resource_pages = self.filter_by_topic(site, topic_name)
 
     # Select out materials with the correct subtopic
-    resource_pages = resource_pages.select{|x| x['subtopic'] == subtopic_id }
+    resource_pages = resource_pages.select { |x| x['subtopic'] == subtopic_id }
 
     if resource_pages.length == 0 then
       puts "Error? Could not find any relevant pages for #{topic_name} / #{subtopic_id}"
@@ -613,7 +612,7 @@ module TopicFilter
     if material.has_key?('contributors')
       material['contributors']
     else
-      material['contributions'].map{|k, v| v}.flatten
+      material['contributions'].map { |k, v| v }.flatten
     end
   end
 
@@ -625,8 +624,8 @@ module TopicFilter
   # +Array+:: An array of contributors as strings.
   def self.identify_contributors(materials)
     materials
-      .map{|k, v| v['materials']}.flatten # Not 100% sure why this flatten is needed? Probably due to the map over hash
-      .map{|mat| get_contributors(mat) }.flatten.uniq.shuffle
+      .map { |k, v| v['materials'] }.flatten # Not 100% sure why this flatten is needed? Probably due to the map over hash
+      .map { |mat| get_contributors(mat) }.flatten.uniq.shuffle
   end
 
   ##
@@ -679,21 +678,21 @@ module TopicFilter
     self.list_all_materials(site).each do |m|
       m.fetch('tools', []).each do |tool|
         sid = self.short_tool(tool)
-        if ! tool_map.has_key?(sid)
-          tool_map[sid] = {'tool_id' => [], 'tutorials' => []}
+        if !tool_map.has_key?(sid)
+          tool_map[sid] = { 'tool_id' => [], 'tutorials' => [] }
         end
 
         tool_map[sid]['tool_id'].push([tool, self.get_version(tool)])
         tool_map[sid]['tutorials'].push([
-          m['id'], m['title'], site.data[m['topic_name']]['title'], m['url']
-        ])
+                                          m['id'], m['title'], site.data[m['topic_name']]['title'], m['url']
+                                        ])
       end
     end
 
     # Uniqueify/sort
-    t = tool_map.map{|k, v| 
+    t = tool_map.map { |k, v|
       v['tool_id'].uniq!
-      v['tool_id'].sort_by!{|k| k[1]}
+      v['tool_id'].sort_by! { |k| k[1] }
       v['tool_id'].reverse!
 
       v['tutorials'].uniq!
@@ -702,14 +701,12 @@ module TopicFilter
     }.to_h
 
     # Order by most popular tool
-    t.sort_by{|k, v| v['tutorials'].length}.reverse.to_h
+    t.sort_by { |k, v| v['tutorials'].length }.reverse.to_h
   end
 end
 
-
 module Jekyll
   module ImplTopicFilter
-
     ##
     # List the most recent contributors to the GTN.
     # Parameters:
@@ -726,17 +723,17 @@ module Jekyll
     #  "avatar" => "https://avatars.githubusercontent.com/u/458683?v=3",
     #  ...
     #  }
-    #}
+    # }
     def most_recent_contributors(contributors, count)
       # Remove non-hof
-      hof = contributors.select{ |k, v| v.fetch('halloffame', 'yes') != 'no' }
+      hof = contributors.select { |k, v| v.fetch('halloffame', 'yes') != 'no' }
       # Get keys + sort by joined date
-      hof_k = hof.keys.sort{ |x, y|
+      hof_k = hof.keys.sort { |x, y|
         hof[y].fetch('joined', '2016-01') <=> hof[x].fetch('joined', '2016-01')
       }
 
       # Transform back into hash
-      Hash[hof_k.slice(0, count).collect{|k| [k, hof[k]]}]
+      Hash[hof_k.slice(0, count).collect { |k| [k, hof[k]] }]
     end
 
     ##
@@ -748,9 +745,9 @@ module Jekyll
     # Example:
     #  {% assign latest_tutorials = site | recently_modified_tutorials %}
     def recently_modified_tutorials(site)
-      tutorials = site.pages.select{|page| page.data['layout'] == 'tutorial_hands_on' }
+      tutorials = site.pages.select { |page| page.data['layout'] == 'tutorial_hands_on' }
 
-      latest = tutorials.sort{ |x, y|
+      latest = tutorials.sort { |x, y|
         Gtn::ModificationTimes.obtain_time(y.path) <=> Gtn::ModificationTimes.obtain_time(x.path)
       }
       latest.slice(0, 10)
@@ -769,7 +766,7 @@ module Jekyll
     # +page_name+:: The name of the page
     # Returns:
     # +Hash+:: The metadata for the tutorial material
-    # 
+    #
     # Example:
     #  {% assign material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
     def fetch_tutorial_material(site, topic_name, page_name)
@@ -777,19 +774,19 @@ module Jekyll
     end
 
     def list_topics_by_category(site, category)
-      q = TopicFilter.list_topics(site).map{|k|
+      q = TopicFilter.list_topics(site).map { |k|
         [k, site.data[k]]
       }
 
       # Alllow filtering by a category, or return "all" otherwise.
       if category == 'non-tag' then
-        q = q.select{|k, v| v['tag_based'].nil? }
+        q = q.select { |k, v| v['tag_based'].nil? }
       elsif category != 'all' then
-        q = q.select{|k, v| v['type'] == category }
+        q = q.select { |k, v| v['type'] == category }
       end
 
       # Sort alphabetically by titles
-      q = q.sort{|a, b| a[1]['title'] <=> b[1]['title'] }
+      q = q.sort { |a, b| a[1]['title'] <=> b[1]['title'] }
 
       q
     end
@@ -813,7 +810,6 @@ module Jekyll
     def identify_contributors(materials)
       TopicFilter.identify_contributors(materials)
     end
-
   end
 end
 

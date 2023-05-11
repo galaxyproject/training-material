@@ -18,14 +18,13 @@ module Jekyll
     def pusher(t, datastructure, flat)
       if t.data.has_key?('contributors')
         if flat
-          t.data['contributors'].each{|c| datastructure[c].push(t) }
+          t.data['contributors'].each { |c| datastructure[c].push(t) }
         else
-          t.data['contributors'].each{|c| datastructure[c].push([t, nil]) }
+          t.data['contributors'].each { |c| datastructure[c].push([t, nil]) }
         end
       elsif t.data.has_key?('contributions')
-        t.data['contributions'].each{|contribution_type, contributor|
-          contributor.each{|c|
-
+        t.data['contributions'].each { |contribution_type, contributor|
+          contributor.each { |c|
             if flat
               datastructure[c].push(t)
             else
@@ -52,33 +51,31 @@ module Jekyll
         news_by_author = Hash.new { |hash, key| hash[key] = [] }
         has_philosophy = Hash.new { false }
 
-        site.pages.each {|t|
+        site.pages.each { |t|
           # Tutorials
           if t['layout'] == 'tutorial_hands_on'
             pusher(t, tutorials_by_author, false)
           end
 
           # Slides
-          if ! ['base_slides', 'introduction_slides', 'tutorial_slides'].index(t['layout']).nil?
+          if !['base_slides', 'introduction_slides', 'tutorial_slides'].index(t['layout']).nil?
             pusher(t, slides_by_author, false)
           end
 
-
           # Philosophies
-          if t['layout'] == 'training_philosophy' && ! t.data['username'].nil?
+          if t['layout'] == 'training_philosophy' && !t.data['username'].nil?
             has_philosophy[t.data['username']] = true
           end
         }
 
-        site.posts.docs.each {|t|
+        site.posts.docs.each { |t|
           # News
           if t['layout'] == 'news'
             pusher(t, news_by_author, true)
           end
-
         }
 
-        site.data['contributors'].select{|c| c['halloffame'] != 'no'}.each_key do |contributor|
+        site.data['contributors'].select { |c| c['halloffame'] != 'no' }.each_key do |contributor|
           # Using PageWithoutAFile instead of a custom class which reads files
           # from disk each time, saves some time, but it is unclear how much
           # due to how the previous was accounted. But assuming 0.040s per page * 193 should be about 8 seconds.

@@ -18,11 +18,11 @@ module Jekyll
 
     def generate(site) # :nodoc:
       site.pages
-        .select { |page| not skip_layout?(page.data['layout']) }
-        .each { |page| abbreviate page }
+          .select { |page| not skip_layout?(page.data['layout']) }
+          .each { |page| abbreviate page }
       site.posts.docs
-        .select { |post| not skip_layout?(post.data['layout']) }
-        .each { |post| abbreviate post }
+          .select { |post| not skip_layout?(post.data['layout']) }
+          .each { |post| abbreviate post }
     end
 
     private
@@ -30,7 +30,7 @@ module Jekyll
     def abbreviate(page) # :nodoc:
       if page.data.key?('abbreviations') then
         seen = Hash.new
-        page.data['abbreviations'].each{|abbr, definition|
+        page.data['abbreviations'].each { |abbr, definition|
           page.content = page.content.gsub(/\{(#{abbr})\}/) {
             if seen.key?(abbr) then
               firstdef = false

@@ -10,7 +10,6 @@ end
 
 module Gtn
   module Images
-
     def self.cache
       @@cache ||= Jekyll::Cache.new('ImageDimensions')
     end
@@ -31,7 +30,7 @@ module Gtn
         self._get_image_dimensions(match[1].strip)
       elsif match = url.match(/{%\s*link\s*(.*)\s*%}/)
         self._get_image_dimensions(match[1].strip)
-      elsif ! url.match(/https?:\/\//)
+      elsif !url.match(/https?:\/\//)
         img_path = File.absolute_path(File.join(tuto_dir, url))
         if File.exist?(img_path)
           self._get_image_dimensions(img_path)

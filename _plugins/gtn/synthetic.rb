@@ -2,12 +2,11 @@ require './_plugins/jekyll-topic-filter.rb'
 
 module Jekyll
   class SyntheticTopicGenerator < Generator
-
     def generate(site)
       # Full Bibliography
       puts '[GTN/SyntheticTopics] Generating Indexes'
 
-      TopicFilter.list_topics(site).select{|t| site.data[t]['tag_based']}.each{|topic|
+      TopicFilter.list_topics(site).select { |t| site.data[t]['tag_based'] }.each { |topic|
         puts "[GTN/SyntheticTopics] Creating #{topic} topic"
 
         topic_index = PageWithoutAFile.new(site, '', "topics/#{topic}", 'index.md')
@@ -25,4 +24,3 @@ module Jekyll
     end
   end
 end
-

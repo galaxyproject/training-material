@@ -26,7 +26,7 @@ module Gtn
       end
       url = entry.fetch('url', nil)
       if url
-        if ! (url.index('doi.org') and entry.doi)
+        if !(url.index('doi.org') and entry.doi)
           text += " <a href=\"#{url}\">#{url}</a>"
         end
       end
@@ -37,8 +37,10 @@ module Gtn
     def self.discover_bib()
       puts '[GTN/scholar] Creating global bib cache'
       global_bib = BibTeX::Bibliography.new
-      bib_paths = [Find.find('./topics'), Find.find('./faqs'), Find.find('./news')].lazy.flat_map(&:lazy).select{|x| x =~ /bib$/}
-      bib_paths.each{|path|
+      bib_paths = [Find.find('./topics'), Find.find('./faqs'), Find.find('./news')].lazy.flat_map(&:lazy).select { |x|
+        x =~ /bib$/
+      }
+      bib_paths.each { |path|
         for x in BibTeX.open(path)
           x = x.convert_latex
           global_bib << x

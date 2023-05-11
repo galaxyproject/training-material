@@ -1,6 +1,5 @@
 module Jekyll
   class IconTag < Liquid::Tag
-
     def initialize(tag_name, text, tokens)
       super
       parts = text.strip.split

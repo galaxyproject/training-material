@@ -33,7 +33,7 @@ module Gtn
         tags = `git tag -l`.strip.split.sort
       rescue
         tags = []
-      end 
+      end
 
       first_commit = Date.parse('2015-06-29')
       today = Date.today

@@ -87,7 +87,7 @@ module Gtn
     ]
 
     @@BOX_CLASSES = @@ICONS.keys.join '|'
-    @@TITLE_CLASSES = @@ICONS.keys.map{|x| "#{x}-title" }.join '|'
+    @@TITLE_CLASSES = @@ICONS.keys.map { |x| "#{x}-title" }.join '|'
 
     def self.box_classes
       @@BOX_CLASSES
@@ -111,11 +111,11 @@ module Gtn
       accessible_addition = a11y ? %Q(<span class="sr-only">#{icon_a11y_title} box</span>) : ''
 
       if !icon.nil?
-       if icon.start_with?('fa')
-        %Q(<i class="#{icon}" aria-hidden=\"true\" #{icon_aria_label}></i>#{accessible_addition})
-       elsif icon.start_with?('ai')
-        %Q(<i class="ai #{icon}" aria-hidden=\"true\" #{icon_aria_label}></i>#{accessible_addition})
-       end
+        if icon.start_with?('fa')
+          %Q(<i class="#{icon}" aria-hidden=\"true\" #{icon_aria_label}></i>#{accessible_addition})
+        elsif icon.start_with?('ai')
+          %Q(<i class="ai #{icon}" aria-hidden=\"true\" #{icon_aria_label}></i>#{accessible_addition})
+        end
       else
         %Q(<span class="visually-hidden"></span>)
       end
@@ -137,16 +137,16 @@ module Gtn
       box_safe_final
     end
 
-    def self.format_box_title(title, box_type, lang='en')
+    def self.format_box_title(title, box_type, lang = 'en')
       if lang == '' or lang.nil? then lang = 'en' end
       title_fmted = ((!title.nil?) && title.length > 0 ? ": #{title}" : '')
       "#{@@BOX_TITLES[lang][box_type]}#{title_fmted}"
     end
 
-    def self.generate_collapsible_title(box_type, title, lang='en', key, contents: false)
+    def self.generate_collapsible_title(box_type, title, lang = 'en', key, contents: false)
       box_id = self.get_id(box_type, title, key)
-      box_title = self.format_box_title(title, box_type, lang=lang)
-      refers_to_contents = contents ? '-contents': ''
+      box_title = self.format_box_title(title, box_type, lang = lang)
+      refers_to_contents = contents ? '-contents' : ''
       # These are all collapsed by default, details, tip, and solution.
       return [box_id, %Q(
         <div class="box-title #{box_type}-title" id="#{box_id}">
@@ -155,12 +155,12 @@ module Gtn
           <span class="fold-unfold fa fa-minus-square"></span>
         </button>
         </div>
-      ).split(/\n/).map{|x| x.lstrip.rstrip}.join('').lstrip.rstrip]
+      ).split(/\n/).map { |x| x.lstrip.rstrip }.join('').lstrip.rstrip]
     end
 
-    def self.generate_static_title(box_type, title, lang='en', key)
+    def self.generate_static_title(box_type, title, lang = 'en', key)
       box_id = self.get_id(box_type, title, key)
-      box_title = self.format_box_title(title, box_type, lang=lang)
+      box_title = self.format_box_title(title, box_type, lang = lang)
 
       if title.nil?
         puts "Static | typ=#{box_type} | t=#{title} | l=#{lang} | k=#{key}"
@@ -170,7 +170,7 @@ module Gtn
         <div class="box-title #{box_type}-title" id="#{box_id}">
           #{self.get_icon(box_type)} #{box_title}
         </div>
-      ).split(/\n/).map{|x| x.lstrip.rstrip}.join('').lstrip.rstrip]
+      ).split(/\n/).map { |x| x.lstrip.rstrip }.join('').lstrip.rstrip]
     end
 
     def self.safe_title(title)
@@ -182,7 +182,7 @@ module Gtn
       title
     end
 
-    def self.generate_title(box_type, title, lang='en', key, contents: false)
+    def self.generate_title(box_type, title, lang = 'en', key, contents: false)
       title = self.safe_title(title)
       if @@COLLAPSIBLE_BOXES.include?(box_type)
         self.generate_collapsible_title(box_type, title, lang, key, contents: contents)
@@ -191,26 +191,26 @@ module Gtn
       end
     end
 
-    def self.generate_box(box_type, title, lang='en', key)
+    def self.generate_box(box_type, title, lang = 'en', key)
       title = self.safe_title(title)
       box_id, box_title = generate_title(box_type, title, lang, key, contents: true)
       return %Q(
         <div class="box #{box_type}" markdown=0>
         #{box_title}
         <div class="box-content" id="#{box_id}-contents" markdown=1>
-      ).split(/\n/).map{|x| x.lstrip.rstrip}.join('').lstrip.rstrip
+      ).split(/\n/).map { |x| x.lstrip.rstrip }.join('').lstrip.rstrip
     end
 
-    def self.replace_elements(text, lang='en', key)
+    def self.replace_elements(text, lang = 'en', key)
       # We want to replace any `<x-title>(.*)</x-title>` bits
       # And replace them one by one with "proper" boxes, based on generate_title.
       #
       # We're going to rely on never having two on one line
-      text.split("\n").map{|line|
-        line.gsub(/<(?<type>[a-z-]*)-title>(?<title>.*?)<\/[a-z-]*-title>/){|m|
+      text.split("\n").map { |line|
+        line.gsub(/<(?<type>[a-z-]*)-title>(?<title>.*?)<\/[a-z-]*-title>/) { |m|
           title = Regexp.last_match[:title]
           type = Regexp.last_match[:type]
-          _, box = self.generate_title(type, title, lang=lang, key)
+          _, box = self.generate_title(type, title, lang = lang, key)
           box
         }
       }.join("\n")

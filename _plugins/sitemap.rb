@@ -18,7 +18,7 @@ module Jekyll
       result = '<?xml version="1.0" encoding="UTF-8"?>'
       result += '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
 
-      site.pages.select{|t| t.path !~ /ipynb$/ }.each {|t|
+      site.pages.select { |t| t.path !~ /ipynb$/ }.each { |t|
         begin
           d = Gtn::ModificationTimes.obtain_time(t.path)
           d.format = '%FT%T%:z'

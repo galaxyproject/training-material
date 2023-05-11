@@ -9,7 +9,6 @@ module Jekyll
   ##
   # This class generates the GTN's "api" by writing out a folder full of JSON files.
   class APIGenerator < Generator
-
     ##
     # Returns contributors, regardless of whether they are 'contributor' or 'contributions' style
     # Params:
@@ -20,11 +19,11 @@ module Jekyll
       if data.has_key?('contributors')
         return data['contributors']
       elsif data.has_key?('contributions')
-        return data['contributions'].keys.map{|k| data['contributions'][k]}.flatten()
+        return data['contributions'].keys.map { |k| data['contributions'][k] }.flatten()
       end
     end
 
-    ## 
+    ##
     # Use Jekyll's Markdown converter to convert text to HTML
     # Params:
     # +site+:: +Jekyll::Site+ object
@@ -45,16 +44,16 @@ module Jekyll
     # Returns:
     # +Hash+ with all strings markdownified
     def visitAndMarkdownify(site, f)
-        if f.is_a?(Array)
-            f.map!{|x| visitAndMarkdownify(site, x)}
-        elsif f.is_a?(Hash)
-            f = f.map{|k, v|
-                [k, visitAndMarkdownify(site, v)]
-            }.to_h
-        elsif f.is_a?(String)
-            f = markdownify(site, f).strip().gsub(/<p>/, '').gsub(/<\/p>/, '')
-        end
-        f
+      if f.is_a?(Array)
+        f.map! { |x| visitAndMarkdownify(site, x) }
+      elsif f.is_a?(Hash)
+        f = f.map { |k, v|
+          [k, visitAndMarkdownify(site, v)]
+        }.to_h
+      elsif f.is_a?(String)
+        f = markdownify(site, f).strip().gsub(/<p>/, '').gsub(/<\/p>/, '')
+      end
+      f
     end
 
     ##
@@ -66,12 +65,12 @@ module Jekyll
     # +Hash+ of contributor information
     def mapContributor(site, c)
       x = site.data['contributors']
-        .fetch(c, {})
-        .merge({
-          'id' => c,
-          'url' => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json",
-          'page' => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
-        })
+              .fetch(c, {})
+              .merge({
+                       'id' => c,
+                       'url' => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json",
+                       'page' => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
+                     })
       visitAndMarkdownify(site, x)
     end
 
@@ -109,7 +108,7 @@ module Jekyll
     def generate(site)
       generateConfiguration(site)
       # For some reason the templating isn't working right here.
-      #generateVersion(site)
+      # generateVersion(site)
 
       # Full Bibliography
       Gtn::Scholar.load_bib(site)
@@ -128,10 +127,10 @@ module Jekyll
       # Contributors
       puts '[GTN/API] Contributors'
       page2 = PageWithoutAFile.new(site, '', 'api/', 'contributors.json')
-      page2.content = JSON.pretty_generate(site.data['contributors'].map{|c, _| mapContributor(site, c)})
+      page2.content = JSON.pretty_generate(site.data['contributors'].map { |c, _| mapContributor(site, c) })
       page2.data['layout'] = nil
       site.pages << page2
-      site.data['contributors'].each{|c, _|
+      site.data['contributors'].each { |c, _|
         page4 = PageWithoutAFile.new(site, '', 'api/', "contributors/#{c}.json")
         page4.content = JSON.pretty_generate(mapContributor(site, c))
         page4.data['layout'] = nil
@@ -140,13 +139,13 @@ module Jekyll
 
       page2 = PageWithoutAFile.new(site, '', 'api/', 'contributors.geojson')
       page2.content = JSON.pretty_generate({
-        'type' => 'FeatureCollection',
-        'features' => site.data['contributors']
-          .select{|k, v| v.has_key? 'location' }
-          .map{|k, v|
+                                             'type' => 'FeatureCollection',
+                                             'features' => site.data['contributors']
+          .select { |k, v| v.has_key? 'location' }
+          .map { |k, v|
             {
               'type' => 'Feature',
-              'geometry' => {'type' => 'Point', 'coordinates' => [v['location']['lon'], v['location']['lat']]},
+              'geometry' => { 'type' => 'Point', 'coordinates' => [v['location']['lon'], v['location']['lat']] },
               'properties' => {
                 'name' => v.fetch('name', k),
                 'url' => "https://training.galaxyproject.org/training-material/hall-of-fame/#{k}/",
@@ -157,27 +156,26 @@ module Jekyll
               }
             }
           }
-      })
+                                           })
       page2.data['layout'] = nil
       site.pages << page2
 
       # Trigger the topic cache to generate if it hasn't already
       puts '[GTN/API] Tutorials'
       TopicFilter.topic_filter(site, 'does-not-matter')
-      TopicFilter.list_topics(site).map{|topic|
-
+      TopicFilter.list_topics(site).map { |topic|
         out = site.data[topic].dup
-        out['materials'] = TopicFilter.topic_filter(site, topic).map{|x|
+        out['materials'] = TopicFilter.topic_filter(site, topic).map { |x|
           q = x.dup
-          q['contributors'] = get_contributors(q).dup.map{|c| mapContributor(site, c)}
+          q['contributors'] = get_contributors(q).dup.map { |c| mapContributor(site, c) }
 
           q['urls'] = Hash.new
 
-          if ! q['hands_on'].nil?
+          if !q['hands_on'].nil?
             q['urls']['hands_on'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][8..-6]}.json"
           end
 
-          if ! q['slides'].nil?
+          if !q['slides'].nil?
             q['urls']['slides'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][8..-6]}.json"
           end
 
@@ -191,7 +189,7 @@ module Jekyll
 
           q
         }
-        out['maintainers'] = out['maintainers'].map{|c| mapContributor(site, c)}
+        out['maintainers'] = out['maintainers'].map { |c| mapContributor(site, c) }
 
         page2 = PageWithoutAFile.new(site, '', 'api/topics/', "#{topic}.json")
         page2.content = JSON.pretty_generate(out)
@@ -202,7 +200,7 @@ module Jekyll
       topics = Hash.new
       puts '[GTN/API] Topics'
       # Individual Topic Indexes
-      site.data.each_pair{|k, v|
+      site.data.each_pair { |k, v|
         if v.is_a?(Hash) and v.has_key?('type') and v.has_key?('maintainers')
 
           topics[k] = {
@@ -210,7 +208,7 @@ module Jekyll
             'title' => v['title'],
             'summary' => v['summary'],
             'url' => site.config['url'] + site.config['baseurl'] + "/api/topics/#{k}.json",
-            'maintainers' => v['maintainers'].map{|c| mapContributor(site, c) }
+            'maintainers' => v['maintainers'].map { |c| mapContributor(site, c) }
           }
         end
       }
@@ -223,18 +221,18 @@ module Jekyll
 
       puts '[GTN/API] Tutorial and Slide pages'
 
-      TopicFilter.list_all_materials(site).each{|material|
+      TopicFilter.list_all_materials(site).each { |material|
         directory = material['dir']
 
         if material['slides']
           page5 = PageWithoutAFile.new(site, '', 'api/', "#{directory}/slides.json")
           p = material.dup
           p.delete('ref')
-          p['contributors'] = get_contributors(p).dup.map{|c| mapContributor(site, c)}
+          p['contributors'] = get_contributors(p).dup.map { |c| mapContributor(site, c) }
 
           # Here we un-do the tutorial metadata priority, and overwrite with
           # slides metadata when available.
-          slides_data = site.pages.select{|p| p.url == '/' + directory + '/slides.html'}[0]
+          slides_data = site.pages.select { |p| p.url == '/' + directory + '/slides.html' }[0]
           if slides_data and slides_data.data
             p.update(slides_data.data)
           end
@@ -248,7 +246,7 @@ module Jekyll
           page5 = PageWithoutAFile.new(site, '', 'api/', "#{directory}/tutorial.json")
           p = material.dup
           p.delete('ref')
-          p['contributors'] = get_contributors(p).dup.map{|c| mapContributor(site, c)}
+          p['contributors'] = get_contributors(p).dup.map { |c| mapContributor(site, c) }
           page5.content = JSON.pretty_generate(p)
           page5.data['layout'] = nil
           site.pages << page5
@@ -281,34 +279,33 @@ module Jekyll
 
       # GA4GH TRS Endpoint
       # Please note that this is all a fun hack
-      TopicFilter.list_all_materials(site).select{|m| m['workflows']}.each do |material|
+      TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|
         material['workflows'].each do |workflow|
           wfid = workflow['wfid']
           wfname = workflow['wfname']
 
           page2 = PageWithoutAFile.new(site, '', "api/ga4gh/trs/v2/tools/#{wfid}/versions/", "#{wfname}.json")
           page2.content = JSON.pretty_generate({
-            'id' => wfname,
-            'url' => site.config['url'] + site.config['baseurl'] + material['url'],
-            'name' => 'v1',
-            'author' => [],
-            'descriptor_type' => ['GALAXY'],
-          })
+                                                 'id' => wfname,
+                                                 'url' => site.config['url'] + site.config['baseurl'] + material['url'],
+                                                 'name' => 'v1',
+                                                 'author' => [],
+                                                 'descriptor_type' => ['GALAXY'],
+                                               })
           page2.data['layout'] = nil
           site.pages << page2
 
-          page2 = PageWithoutAFile.new(site, '', "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}/GALAXY", 'descriptor.json')
+          page2 = PageWithoutAFile.new(site, '', "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}/GALAXY",
+                                       'descriptor.json')
           page2.content = JSON.pretty_generate({
-            'content' => File.open(material['dir'] + '/workflows/' + workflow['workflow']).read,
-            'checksum' => [],
-            'url' => nil,
-          })
+                                                 'content' => File.open(material['dir'] + '/workflows/' + workflow['workflow']).read,
+                                                 'checksum' => [],
+                                                 'url' => nil,
+                                               })
           page2.data['layout'] = nil
           site.pages << page2
         end
       end
-
-
     end
   end
 end

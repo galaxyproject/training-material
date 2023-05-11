@@ -21,13 +21,14 @@ module Jekyll
 
         puts "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"
         last_modified = Gtn::ModificationTimes.obtain_time(page.path)
-        notebook = GTNNotebooks.render_jupyter_notebook(page.data, page.content, page.url, last_modified, notebook_language, site, dir)
+        notebook = GTNNotebooks.render_jupyter_notebook(page.data, page.content, page.url, last_modified,
+                                                        notebook_language, site, dir)
 
         topic_id = dir.split('/')[-3]
         tutorial_id = dir.split('/')[-1]
         with_solutions = notebook.clone
 
-        with_solutions['cells'] = with_solutions['cells'].map{|cell|
+        with_solutions['cells'] = with_solutions['cells'].map { |cell|
           if cell.fetch('cell_type') == 'markdown'
             if cell['source'].is_a? String
               m = cell['source'].match(/<blockquote class="solution"[^>]*>/)
@@ -38,9 +39,9 @@ module Jekyll
                 q = cell['source'][0..idx]
                 w = cell['source'][idx + 1..-1]
                 e = w.index('</blockquote>')
-                r = w[0..e-1] + '</details>' + w[e + 13..-1]
- 
-                cell['source'] = q + r 
+                r = w[0..e - 1] + '</details>' + w[e + 13..-1]
+
+                cell['source'] = q + r
               end
             end
           end
@@ -57,7 +58,7 @@ module Jekyll
         # Create a no-solutions version:
         no_solutions = notebook.clone
 
-        no_solutions['cells'] = no_solutions['cells'].map{|cell|
+        no_solutions['cells'] = no_solutions['cells'].map { |cell|
           if cell.fetch('cell_type') == 'markdown'
             if cell['source'].is_a? String
               cell['source'].gsub!(/<blockquote class="solution"[^>]*>/, '<blockquote class="solution" style="display:none">')
@@ -71,7 +72,6 @@ module Jekyll
         page2.data['layout'] = nil
         page2.data['citation_target'] = 'jupyter'
         site.pages << page2
-
       end
     end
   end

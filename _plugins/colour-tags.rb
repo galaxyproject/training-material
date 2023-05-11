@@ -2,7 +2,6 @@ require 'digest'
 require './_plugins/gtn/hsluv'
 
 module ColourTag
-
   ##
   # This function generates the CSS for a colour tag
   # Params
@@ -32,8 +31,6 @@ module ColourTag
     return "--color-primary: #{primary}; --color-darker: #{darker}; --color-dimmed: #{dimmed};"
   end
 end
-
-
 
 module Jekyll # :nodoc:
   module ImplColourTag
