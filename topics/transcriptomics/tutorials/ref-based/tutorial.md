@@ -805,14 +805,14 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
 
     > <hands-on-title>Estimate strandness with STAR counts</hands-on-title>
     >
-    > 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the STAR logs with the following parameters:
+    > 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the STAR counts with the following parameters:
     >    - In *"Results"*:
     >        - *"Results"*
     >            - *"Which tool was used generate logs?"*: `STAR`
     >                - In *"STAR output"*:
     >                    - {% icon param-repeat %} *"Insert STAR output"*
     >                        - *"Type of STAR output?"*: `Gene counts`
-    >                            - {% icon param-collection %} *"STAR log output"*: `RNA STAR on collection N: reads per gene` (output of **RNA STAR** {% icon tool %})
+    >                            - {% icon param-collection %} *"STAR gene count output"*: `RNA STAR on collection N: reads per gene` (output of **RNA STAR** {% icon tool %})
     >
     {: .hands_on}
 
@@ -1672,7 +1672,7 @@ The generated output is an extension of the previous file:
 > >
 > > 1. FBgn0025111 (the top-ranked gene with the highest positive log2FC value) is located on the reverse strand of chromosome X, between 10,778,953 bp and 10,786,907 bp.
 > > 2. From the table, we got the gene symbol: Ant2. After some search on the [online biological databases](https://www.ncbi.nlm.nih.gov/gene/32008), we find that Ant2 corresponds to adenine nucleotide translocase 2.
-> > 3. The *Pasilla* gene is located on the forward strand of chromosome 3, between 9,417,939 bp and 9,455,500 bp.
+> > 3. The *Pasilla* gene is located on the forward strand of chromosome 3R, between 9,417,939 bp and 9,455,500 bp.
 > {: .solution}
 {: .question}
 
