@@ -221,7 +221,7 @@ LM might notice that we don't have an RO-Crate:
 
 The LM app **automatically** executes
 [repo2crate](https://github.com/crs4/repo2rocrate) as recommended by [best
-practices](../galaxy-best-practices#best-practice-repositories-and-ro-crate) and
+practices]({% link topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.md %}#best-practice-repositories-and-ro-crate) and
 opens a pull request to propose the resulting RO-Crate for integration in our
 repository.  Review the RO-Crate and integrate additional metadata or correct
 it as necessary. Finally, merge the changes into your repository.  LifeMonitor with
