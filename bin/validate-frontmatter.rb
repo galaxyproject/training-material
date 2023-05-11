@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'yaml'
 require 'find'
 require 'pathname'
@@ -43,7 +45,7 @@ module SchemaValidator
 
   def self.validate_non_empty_key_value(map, key)
     return ["Missing #{key} for requirement"] unless map.key?(key)
-    return ["Empty #{key} for requirement"] if map[key].length == 0
+    return ["Empty #{key} for requirement"] if map[key].empty?
 
     []
   end
@@ -59,14 +61,15 @@ module SchemaValidator
   def self.validate_requirements(requirements)
     errs = []
     # Exit early if no requirements
-    return [] if requirements.nil? or requirements.length == 0
+    return [] if requirements.nil? || requirements.empty?
 
     # Otherwise check each
-    for requirement in requirements
+    requirements.each do |requirement|
       # For external links, they need a link that is non-empty
-      if requirement['type'] == 'external'
+      case requirement['type']
+      when 'external'
         errs.push(*validate_document(requirement, $requirement_external_validator))
-      elsif requirement['type'] == 'internal'
+      when 'internal'
         errs.push(*validate_document(requirement, $requirement_internal_validator))
 
         # For the internal requirements, test that they point at something real.
@@ -80,10 +83,10 @@ module SchemaValidator
             end
           end
         end
-      elsif requirement['type'] == 'none'
+      when 'none'
         errs.push(*validate_non_empty_key_value(requirement, 'title'))
 
-        requirement.keys.each do |x|
+        requirement.each_key do |x|
           errs.push("Unknown key #{x}") if !%w[title type].include?(x)
         end
       else
@@ -166,7 +169,7 @@ module SchemaValidator
     end
 
     # Check contributors OR contributions
-    if (is_slide(fn) || is_tutorial(fn)) && !(data.has_key?('contributors') or data.has_key?('contributions'))
+    if (is_slide(fn) || is_tutorial(fn)) && !(data.key?('contributors') || data.key?('contributions'))
       errs.push('Document lacks EITHER contributors OR contributions key')
     end
 
@@ -189,7 +192,7 @@ module SchemaValidator
       return nil
     end
 
-    data['questions'].select { |q| q.has_key? 'correct' }.each do |q|
+    data['questions'].select { |q| q.key? 'correct' }.each do |q|
       if q['correct'].is_a?(Array)
         if q['type'] != 'choose-many'
           errs.push("There are multiple answers for this question, but it is not a choose-many #{q['title']}")
@@ -225,7 +228,7 @@ module SchemaValidator
         last_component = path.split('/')[-1]
         if last_component =~ /slides.*html$/ || last_component =~ /tutorial.*md/ || last_component =~ /metadata.ya?ml/
           errs = lint_file(path)
-          errors += [[path, errs]] if !errs.nil? and errs.length > 0
+          errors += [[path, errs]] if !errs.nil? && errs.length.positive?
         end
       end
     end
@@ -242,7 +245,7 @@ module SchemaValidator
 
         if last_component =~ (/.*.md/) && !(last_component =~ /index.md$/ || last_component =~ /README.md/)
           errs = lint_faq_file(path)
-          if !errs.nil? and errs.length > 0
+          if !errs.nil? && errs.length.positive?
             puts "#{path}: #{errs}"
             errors += [[path, errs]]
           end
@@ -266,10 +269,10 @@ module SchemaValidator
   end
 end
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
   ec = 0
   errors = SchemaValidator.run
-  if errors.length > 0
+  if errors.length.positive?
     ec = 1
     errors.each do |path, errs|
       # Otherwise, print errors and exit non-zero

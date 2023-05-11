@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'cgi'
 require 'json'
 require 'yaml'
@@ -9,7 +11,7 @@ require 'tempfile'
 require 'digest'
 require 'tmpdir'
 
-PUNCTUATION = ['-', '--', '@', '%', '‘', '’', ',', '!', '(', ')', '.', "'", '"', '[', ']', ';', ':']
+PUNCTUATION = ['-', '--', '@', '%', '‘', '’', ',', '!', '(', ')', '.', "'", '"', '[', ']', ';', ':'].freeze
 ARI_MAP = File.expand_path(File.join(__dir__, 'ari-map.yml'))
 WORD_MAP = {}
 YAML.load_file(ARI_MAP).each_pair do |k, v|
@@ -45,14 +47,14 @@ end
 
 def correct(uncorrected_line)
   # First we try and catch the things we can directly replace (esp usegalaxy.*)
-  line = uncorrected_line.strip.split(' ').map do |w|
+  line = uncorrected_line.strip.split.map do |w|
     translate(w)
   end.join(' ')
 
   # Now we do more fancy replacements
   line.strip.split(/([ ‘’,'".:;!`()])/).reject(&:empty?).compact.map do |w|
     translate(w)
-  end.join('')
+  end.join
 end
 
 def call_engine(engine, line, mp3, voice, lang, neural)
@@ -67,7 +69,7 @@ def call_engine(engine, line, mp3, voice, lang, neural)
     args = ['aws', 'polly', 'synthesize-speech', '--engine', awseng, '--language-code', lang, '--voice-id', voice,
             '--output-format', 'mp3', '--text', line, mp3]
     _, stderr, err = Open3.capture3(*args)
-    if err.exited? and err.exitstatus > 0
+    if err.exited? && err.exitstatus.positive?
       puts "ERROR: #{stderr}"
       puts "ERROR: #{err}"
       exit 1
@@ -75,14 +77,14 @@ def call_engine(engine, line, mp3, voice, lang, neural)
   elsif engine == 'mozilla'
     raw = Tempfile.new('synth-raw')
     _, stderr, err = Open3.capture3('curl', '--silent', '-G', '--output', raw.path,
-                                    'http://localhost:5002/api/tts?text=' + CGI.escape(line))
-    if err.exited? and err.exitstatus > 0
+                                    "http://localhost:5002/api/tts?text=#{CGI.escape(line)}")
+    if err.exited? && err.exitstatus.positive?
       puts "ERROR: #{stderr}"
       exit 1
     end
 
     _, stderr, err = Open3.capture3('ffmpeg', '-loglevel', 'error', '-i', raw.path, '-y', mp3)
-    if err.exited? and err.exitstatus > 0
+    if err.exited? && err.exitstatus.positive?
       puts "ERROR: #{stderr}"
       exit 1
     end
@@ -127,7 +129,7 @@ def synthesize(uncorrected_line, engine, voice: 'Amy', lang: 'en-GB', neural: tr
     # https://github.com/synesthesiam/docker-mozillatts/issues/9
     # https://discourse.mozilla.org/t/sentences-which-trigger-an-endless-loop/72261/8
     warn 'Strange: line was too long'
-    call_engine(engine, line + '.', mp3)
+    call_engine(engine, "#{line}.", mp3)
     duration = find_duration(mp3)
   end
 
@@ -182,7 +184,7 @@ def parseOptions
     end
   end.parse!
 
-  if !(options[:aws] or options[:mozilla])
+  if !(options[:aws] || options[:mozilla])
     puts 'ERROR: You must use aws or mozilla'
     exit 1
   end
@@ -202,7 +204,7 @@ def parseOptions
   [sentence, engine, options]
 end
 
-if __FILE__ == $0
+if __FILE__ == $PROGRAM_NAME
   sentence, engine, options = parseOptions
   mp3, = synthesize(sentence, engine, voice: options[:voice], lang: options[:lang], neural: options[:neural])
   puts mp3

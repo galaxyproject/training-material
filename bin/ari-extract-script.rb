@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'yaml'
 require 'shellwords'
 require 'json'
@@ -10,7 +12,7 @@ require 'csl/styles'
 fn = ARGV[0]
 metadata = YAML.load_file(fn)
 
-topic_fn = fn.split('/').slice(0, 2).join('/') + '/metadata.yaml'
+topic_fn = "#{fn.split('/').slice(0, 2).join('/')}/metadata.yaml"
 topic_metadata = YAML.load_file(topic_fn)
 
 ARI_MAP = File.expand_path(File.join(__dir__, 'ari-map.yml'))
@@ -41,7 +43,7 @@ APPROVED_VOICES = {
     { 'id' => 'Conchita', 'lang' => 'es-ES', 'neural' => false },
     { 'id' => 'Lupe', 'lang' => 'es-US', 'neural' => true }
   ]
-}
+}.freeze
 
 # This is copied directly from the plugins, TODO: make into a module.
 global_bib = BibTeX::Bibliography.new
@@ -53,10 +55,10 @@ bib_paths.each  do |path|
     Find.prune # Don't look any further into this directory.
 
   elsif path =~ /bib$/
-    for x in BibTeX.open(path)
+    BibTeX.open(path).each do |x|
       x = x.convert_latex
       global_bib << x
-        end
+    end
   end
 end
 cp = CiteProc::Processor.new format: 'text', locale: 'en'
@@ -65,21 +67,21 @@ cp.import global_bib.to_citeproc
 # Do we have these slides? Yes or no.
 m_qs = metadata.fetch('questions', [])
 m_qs = [] if m_qs.nil?
-has_questions = m_qs.length > 0
+has_questions = m_qs.length.positive?
 
 m_os = metadata.fetch('objectives', [])
 m_os = [] if m_os.nil?
-has_objectives = m_os.length > 0
+has_objectives = m_os.length.positive?
 
 m_kp = metadata.fetch('key_points', [])
 m_kp = [] if m_kp.nil?
-has_keypoints = m_kp.length > 0
+has_keypoints = m_kp.length.positive?
 
 m_rq = metadata.fetch('requirements', [])
 m_rq = [] if m_rq.nil?
 t_rq = topic_metadata.fetch('requirements', [])
 t_rq = [] if t_rq.nil?
-has_requirements = m_rq.length > 0 || t_rq.length > 0
+has_requirements = m_rq.length.positive? || t_rq.length.positive?
 
 m_lang = metadata.fetch('lang', 'en')
 m_voice = metadata.fetch('voice', nil)
@@ -96,10 +98,10 @@ lines = file.readlines.map(&:chomp)
 # contents
 
 # +1 because we skipped the 0th entry, +1 again to not include the `---`
-end_meta = lines[1..-1].index('---') + 2
+end_meta = lines[1..].index('---') + 2
 
 # Strip off the metadata
-contents = lines[end_meta..-1]
+contents = lines[end_meta..]
 
 # This will be our final script
 blocks = [[metadata['title']]]
@@ -149,14 +151,14 @@ blocks = blocks.map do |block|
   # Remove the - prefix from each line
   script_lines = block.map { |x| x.strip.delete_prefix('- ') }
   # Remove the leading ???
-  script_lines = script_lines[1..-1] if script_lines[0] == '???'
+  script_lines = script_lines[1..] if script_lines[0] == '???'
   # Remove blank entries
-  script_lines = script_lines.select { |x| x.length != 0 }
+  script_lines = script_lines.reject(&:empty?)
   script_lines = script_lines.map do |line|
     line.delete_prefix('- ')
     line.gsub!(/`/, '"')
     # If they don't end with punctuation, fix it.
-    line += '.' if !(line.end_with?('.') or line.end_with?('?') or line.end_with?('!'))
+    line += '.' if !(line.end_with?('.') || line.end_with?('?') || line.end_with?('!'))
 
     line
   end
@@ -164,7 +166,7 @@ blocks = blocks.map do |block|
     line.gsub!(/{%\s*cite ([^}]*)\s*%}/) do |match|
       # Strip off the {% %} first, whitespace, and then remove cite at the
       # start and restrip again.
-      value = match[2..-3].strip[4..-1].strip
+      value = match[2..-3].strip[4..].strip
       # Render the citation, the :text format includes ( ) on both sides which
       # we strip off.
       cp.render(:citation, id: value)[1..-2]

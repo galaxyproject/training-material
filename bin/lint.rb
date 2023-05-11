@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'pathname'
 require 'find'
 require 'bibtex'
 require 'json'
-require 'find'
-require 'bibtex'
 require 'citeproc/ruby'
 require 'csl/styles'
 
@@ -84,7 +84,7 @@ module ReviewDogEmitter
     if !code.nil?
       res['code'] = {
         'value' => code,
-        'url' => @CODE_URL + '#' + code.gsub(/:/, '').downcase,
+        'url' => "#{@CODE_URL}##{code.gsub(/:/, '').downcase}",
       }
     end
     if !replacement.nil?
@@ -178,7 +178,7 @@ module GtnLinter
 
   def self.check_dois(contents)
     find_matching_texts(contents, %r{(\[[^\]]*\]\(https?://doi.org/[^)]*\))})
-      .select { |_idx, _text, selected| !selected[0].match(%r{10.5281/zenodo}) } # Ignoring zenodo
+      .reject { |_idx, _text, selected| selected[0].match(%r{10.5281/zenodo}) } # Ignoring zenodo
       .map do |idx, _text, selected|
       ReviewDogEmitter.warning(
         path: @path,
@@ -217,9 +217,9 @@ module GtnLinter
         match_start: selected.begin(0),
         match_end: selected.end(0) + 1,
         replacement: '[Something better here]',
-        message: "Please do not use 'here' as your link title, it is " +
-         '[bad for accessibility](https://usability.yale.edu/web-accessibility/articles/links#link-text). ' +
-         'Instead try restructuring your sentence to have useful descriptive text in the link.',
+        message: "Please do not use 'here' as your link title, it is " \
+                 '[bad for accessibility](https://usability.yale.edu/web-accessibility/articles/links#link-text). ' \
+                 'Instead try restructuring your sentence to have useful descriptive text in the link.',
         code: 'GTN:005'
       )
     end
@@ -286,7 +286,7 @@ module GtnLinter
       lib = BibTeX::Bibliography.new
       (enumerate_type(/bib$/) + enumerate_type(/bib$/, root_dir: 'faqs')).each do |path|
         b = BibTeX.open(path)
-        for x in b
+        b.each do |x|
           # Record the bib path.
           x._path = path
           lib << x
@@ -318,8 +318,8 @@ module GtnLinter
 
   def self.non_existent_snippet(contents)
     find_matching_texts(contents, /{%\s*snippet\s+([^ ]*)/i)
-      .select do |_idx, _text, selected|
-      !File.exist?(selected[1])
+      .reject do |_idx, _text, selected|
+      File.exist?(selected[1])
     end
       .map do |idx, _text, selected|
       ReviewDogEmitter.error(
@@ -375,7 +375,7 @@ module GtnLinter
     'upload1',
     'wc_gnu',
     'wig_to_bigWig'
-  ]
+  ].freeze
 
   def self.check_tool_link(contents)
     find_matching_texts(contents, /{%\s*tool \[([^\]]*)\]\(([^)]*)\)\s*%}/)
@@ -422,7 +422,7 @@ module GtnLinter
                     ))
         end
 
-        if !ALLOWED_SHORT_IDS.include?(link) and !link.match(/^interactive_tool_/) and !link.match(/__[A-Z_]+__/) && !link.match(/^{{.*}}$/)
+        if !ALLOWED_SHORT_IDS.include?(link) && !link.match(/^interactive_tool_/) && !link.match(/__[A-Z_]+__/) && !link.match(/^{{.*}}$/)
           errs.push(ReviewDogEmitter.error(
                       path: @path,
                       idx: idx,
@@ -543,11 +543,11 @@ module GtnLinter
     'for', 'endfor',
     'unless', 'endunless',
     'raw', 'endraw'
-  ]
+  ].freeze
 
   def self.check_bad_tag(contents)
     find_matching_texts(contents, /{%\s*(?<tag>[a-z]+)/)
-      .select { |_idx, _text, selected| !KNOWN_TAGS.include? selected[:tag] }
+      .reject { |_idx, _text, selected| KNOWN_TAGS.include? selected[:tag] }
       .map do |idx, _text, selected|
       ReviewDogEmitter.warning(
         path: @path,
@@ -574,7 +574,7 @@ module GtnLinter
     solution
     tip
     warning
-  ]
+  ].freeze
 
   def self.check_useless_box_prefix(contents)
     find_matching_texts(contents, /<(?<tag>[a-z_-]+)-title>(?<fw>[a-zA-Z_-]+:?\s*)/)
@@ -660,7 +660,7 @@ module GtnLinter
 
   def self.bib_missing_mandatory_fields(bib)
     results = []
-    for x in bib
+    bib.each do |x|
       begin
         doi = x.doi
       rescue StandardError
@@ -687,36 +687,36 @@ module GtnLinter
 
   def self.fix_ga_wf(contents)
     results = []
-    if !contents.has_key?('tags')
+    if !contents.key?('tags')
       topic = @path.split('/')[1]
       results.push(ReviewDogEmitter.file_error(
                      path: @path, message: "This workflow is missing tags. Please add `\"tags\": [\"#{topic}\"]`", code: 'GTN:015'
                    ))
     end
 
-    if !contents.has_key?('annotation')
+    if !contents.key?('annotation')
       results.push(ReviewDogEmitter.file_error(
                      path: @path, message: 'This workflow is missing an annotation. Please add `"annotation": "title of tutorial"`', code: 'GTN:016'
                    ))
     end
 
-    if !contents.has_key?('license')
+    if !contents.key?('license')
       results.push(ReviewDogEmitter.file_error(
                      path: @path, message: 'This workflow is missing a license. Please select a valid OSI license. You can correct this in the Galaxy workflow editor.', code: 'GTN:026'
                    ))
     end
 
-    if contents.has_key?('creator')
+    if contents.key?('creator')
       contents['creator']
         .select { |c| c['class'] == 'Person' }
         .each do |p|
-          if !p.has_key?('identifier') or p['identifier'] == ''
+          if !p.key?('identifier') || (p['identifier'] == '')
             results.push(ReviewDogEmitter.file_error(
                            path: @path, message: 'This workflow has a creator but is missing an identifier for them. Please ensure all creators have valid ORCIDs.', code: 'GTN:025'
                          ))
           end
 
-          if !p.has_key?('name') or p['name'] == ''
+          if !p.key?('name') || (p['name'] == '')
             results.push(ReviewDogEmitter.file_error(
                            path: @path, message: 'This workflow has a creator but is a name, please add it.', code: 'GTN:025'
                          ))
@@ -773,7 +773,7 @@ module GtnLinter
   def self.format_reviewdog_output(message)
     return if !@LIMIT_EMITTED_CODES.nil? && !@LIMIT_EMITTED_CODES.include?(message['code']['value'])
 
-    if !message.nil? and message != []
+    if !message.nil? && (message != [])
       if @PLAIN_OUTPUT # $stdout.tty? or
         parts = [
           message['location']['path'],
@@ -789,7 +789,7 @@ module GtnLinter
       end
     end
 
-    return unless @AUTO_APPLY_FIXES and message['suggestions'].length > 0
+    return unless @AUTO_APPLY_FIXES && message['suggestions'].length.positive?
 
     # {"message":"It is no longer necessary to prefix your hands-on box titles with Hands-on, this is done automatically.","location":{"path":"./topics/computational-chemistry/tutorials/zauberkugel/tutorial.md","range":{"start":{"line":186,"column":4},"end":{"line":186,"column":12}}},"severity":"WARNING","code":{"value":"GTN:022","url":"https://github.com/galaxyproject/training-material/wiki/Error-Codes#gtn022"},"suggestions":[{"text":"<hands-on-title>","range":{"start":{"line":186,"column":4},"end":{"line":186,"column":12}}}]}
 
@@ -812,7 +812,7 @@ module GtnLinter
       # puts "replace: #{repl}"
 
       # puts "#{original[0..start_coln - 2]} + #{repl} + #{original[end_coln-1..-1]}"
-      fixed = original[0..start_coln - 2] + repl + original[end_coln - 1..-1]
+      fixed = original[0..start_coln - 2] + repl + original[end_coln - 1..]
       warn "Fixing #{original} to #{fixed}"
       lines[start_line - 1] = fixed
 
@@ -824,23 +824,23 @@ module GtnLinter
   end
 
   def self.emit_results(results)
-    return unless !results.nil? and results.length > 0
+    return unless !results.nil? && results.length.positive?
 
-    results.select { |r| !r.nil? }.flatten.each { |r| format_reviewdog_output(r) }
+    results.compact.flatten.each { |r| format_reviewdog_output(r) }
   end
 
   def self.should_ignore(contents)
-    contents.select { |x| x.match(/GTN:IGNORE:(\d\d\d)/) }.map { |x| 'GTN:' + x.match(/GTN:IGNORE:(\d\d\d)/)[1] }.uniq
+    contents.select { |x| x.match(/GTN:IGNORE:(\d\d\d)/) }.map { |x| "GTN:#{x.match(/GTN:IGNORE:(\d\d\d)/)[1]}" }.uniq
   end
 
   def self.filter_results(results, ignores)
     if !results.nil?
       # Remove any empty lists
-      results = results.select { |x| !x.nil? && x.length > 0 }.flatten
+      results = results.select { |x| !x.nil? && x.length.positive? }.flatten
       # Before ignoring anything matching GTN:IGNORE:###
       return results if ignores.nil?
 
-      results = results.select { |x| ignores.index(x['code']['value']).nil? } if results.length > 0
+      results = results.select { |x| ignores.index(x['code']['value']).nil? } if results.length.positive?
       return results
     end
     nil
@@ -854,7 +854,8 @@ module GtnLinter
                                                 message: 'There are spaces in this filename, that is forbidden.', code: 'GTN:014')])
     end
 
-    if path.match(/md$/)
+    case path
+    when /md$/
       handle = File.open(path, 'r')
       contents = handle.read.split("\n")
       ignores = should_ignore(contents)
@@ -862,7 +863,7 @@ module GtnLinter
 
       results = filter_results(results, ignores)
       emit_results(results)
-    elsif path.match(/.bib$/)
+    when /.bib$/
       handle = File.open(path, 'r')
       contents = handle.read.split("\n")
 
@@ -871,7 +872,7 @@ module GtnLinter
 
       results = filter_results(results, ignores)
       emit_results(results)
-    elsif path.match(/.ga$/)
+    when /.ga$/
       handle = File.open(path, 'r')
       begin
         contents = handle.read
@@ -882,9 +883,9 @@ module GtnLinter
         folder = File.dirname(path)
         basename = File.basename(path).gsub(/.ga$/, '')
         possible_tests = Dir.glob("#{folder}/#{basename}*ym*")
-        possible_tests = possible_tests.select { |f| f =~ /#{basename}[_-]tests?.ya?ml/ }
+        possible_tests = possible_tests.grep(/#{basename}[_-]tests?.ya?ml/)
 
-        if possible_tests.length == 0
+        if possible_tests.empty?
           results += [
             ReviewDogEmitter.file_error(path: path,
                                         message: 'This workflow is missing a test, which is now mandatory. Please see [the FAQ on how to add tests to your workflows](https://training.galaxyproject.org/training-material/faqs/gtn/gtn_workflow_testing.html).', code: 'GTN:027')
@@ -982,7 +983,7 @@ module GtnLinter
   end
 end
 
-if $0 == __FILE__
+if $PROGRAM_NAME == __FILE__
   linter = GtnLinter
 
   require 'optparse'

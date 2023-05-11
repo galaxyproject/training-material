@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 # Given a script (json file)
 # explode it into a directory of individual lines in .txt format (.txt, -sub.txt)
 # For each spoken line convert into mp3
 # Then re-assemble a script for ffmpeg
-require __dir__ + '/ari-synthesize.rb'
+require "#{__dir__}/ari-synthesize.rb"
 require 'fileutils'
 require 'digest'
 require 'json'
@@ -52,10 +54,10 @@ def timefmt(t, fmt)
 end
 
 def split_sentence(sentence, timing)
-  res = sentence.split(' ')
+  res = sentence.split
   chunk_size = (res.length.to_f / (res.length.to_f / 20).ceil).ceil
   chunks = res.each_slice(chunk_size).to_a.length
-  res.each_slice(chunk_size).each_with_index.map do |chunk, idx|
+  res.each_slice(chunk_size).with_index.map do |chunk, idx|
     t0 = timing * (idx / chunks.to_f)
     tf = timing * ((1 + idx) / chunks.to_f)
     [chunk, t0, tf]
@@ -70,10 +72,10 @@ editly['clips'] = script['blocks'].map.with_index do |phrases, idx|
     digest = Digest::MD5.hexdigest subtitle
 
     # Write out our script bits.
-    handle = File.open(File.join(dir, digest + '.txt'), 'w')
+    handle = File.open(File.join(dir, "#{digest}.txt"), 'w')
     handle.write(subtitle)
 
-    handle = File.open(File.join(dir, digest + '-subtitle.txt'), 'w')
+    handle = File.open(File.join(dir, "#{digest}-subtitle.txt"), 'w')
     handle.write(subtitle)
 
     # Synthesize and copy to the temp dir
@@ -81,8 +83,8 @@ editly['clips'] = script['blocks'].map.with_index do |phrases, idx|
 
     mp3, json, duration = synthesize(subtitle, engine, voice: voice['id'], lang: voice['lang'], neural: voice['neural'])
     puts "\tSynthesizing: #{mp3} #{subtitle}"
-    FileUtils.cp(mp3, File.join(dir, digest + '.mp3'))
-    FileUtils.cp(json, File.join(dir, digest + '.json'))
+    FileUtils.cp(mp3, File.join(dir, "#{digest}.mp3"))
+    FileUtils.cp(json, File.join(dir, "#{digest}.json"))
 
     [
       {
@@ -132,12 +134,12 @@ end.flatten
 subtitle_timings = []
 offset = 0
 editly['clips'].each do |layer|
-  if layer.has_key?(:caption)
+  if layer.key?(:caption)
     subtitle_timings += split_sentence(layer[:caption], layer['duration']).map do |sen_part, time_prev, time_next|
       [sen_part.join(' '), offset + time_prev, offset + time_next]
     end
     offset += layer['duration']
-  elsif layer.has_key? 'transition'
+  elsif layer.key? 'transition'
     # End of slide.
     offset += 1.04 / 2 # The true transition time.
   else

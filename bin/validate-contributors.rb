@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'yaml'
 require 'kwalify'
 require './bin/gtn'
@@ -22,7 +24,7 @@ end
 errs.push(*validate_document(CONTRIBUTORS, $contribs_validator))
 
 # If we had no errors, validated successfully
-if errs.length == 0
+if errs.empty?
   puts "\e[38;5;40mCONTRIBUTORS.yaml validated succesfully\e[m"
   exit 0
 else

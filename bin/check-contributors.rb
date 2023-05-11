@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 # Checks the header of a tutorial or slides file fo the current contributor list
 # Then compares against the people who have touched that file in git using the git log
 #
@@ -30,7 +32,7 @@ current_contributors = data['contributors']
 # Full Contributors Data
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
 contributor_emails = CONTRIBUTORS.map do |k, v|
-  [v['email'], k] if v && v.has_key?('email')
+  [v['email'], k] if v && v.key?('email')
 end.compact.to_h
 
 file_contributors = `git log --use-mailmap --follow --pretty=%aE #{fn}`.lines.sort.uniq
@@ -41,7 +43,7 @@ fixed_contribs = file_contributors.map do |email|
     parts = /^([0-9]+\+)?(?<id>.*)@users.noreply.github.com/.match(email)
     # we just want their gh id
     parts[:id]
-  elsif contributor_emails.has_key?(email)
+  elsif contributor_emails.key?(email)
     contributor_emails[email]
   else
     email
@@ -49,12 +51,12 @@ fixed_contribs = file_contributors.map do |email|
 end
 
 # known contributors
-known = fixed_contribs.select { |x| !/@/.match(x) }
+known = fixed_contribs.reject { |x| /@/.match(x) }
 unknown = fixed_contribs.select { |x| /@/.match(x) }
 
 missing = (known - current_contributors).sort.uniq
 # These contributors not yet recognised
-puts "Missing contributors: #{missing}" if missing.length > 0
+puts "Missing contributors: #{missing}" if missing.length.positive?
 
 # These emails might map to known users, but we don't know yet.
-puts "Unknown emails: #{unknown.sort.uniq}" if unknown.length > 0
+puts "Unknown emails: #{unknown.sort.uniq}" if unknown.length.positive?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
 
 def automagic_loading(f)
@@ -10,7 +12,7 @@ def automagic_loading(f)
     if v.is_a?(Hash)
       automagic_loading(v)
     elsif v.is_a?(Array)
-      v.replace CONTRIBUTORS.keys if k == 'enum' and v[0] == 'CONTRIBUTORS'
+      v.replace CONTRIBUTORS.keys if (k == 'enum') && (v[0] == 'CONTRIBUTORS')
       v.flatten.each { |x| automagic_loading(x) if x.is_a?(Hash) }
     end
   end

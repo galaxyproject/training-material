@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'json'
 require 'kramdown'
 require 'uri'
@@ -69,38 +71,38 @@ data = {
     tutorials: addedfiles.select do |x|
                  filterTutorials(x)
                end.select { |x| onlyEnabled(x) }.map { |x| printableMaterial(x) },
-    news: addedfiles.select { |x| x =~ %r{news/_posts/.*\.md} }.map { |x| printableMaterial(x) }.map { |n| fixNews(n) }
+    news: addedfiles.grep(%r{news/_posts/.*\.md}).map { |x| printableMaterial(x) }.map { |n| fixNews(n) }
   },
   # 'modified': {
   # 'slides': modifiedfiles.select{|x| filterSlides(x)},
   # 'tutorials': modifiedfiles.select{|x| filterTutorials(x)},
   # },
   contributors: `git diff --unified --ignore-all-space #{options[:previousCommit]} CONTRIBUTORS.yaml`
-       .split("\n").select { |line| line =~ /^\+[^ ]+:\s*$/ }.map { |x| x.strip[1..-2] }
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] }
 }
 
 output = "# GTN News for #{NOW.strftime('%b %d')}"
 newsworthy = false
 
-if data[:added][:news].length > 0
+if data[:added][:news].length.positive?
   newsworthy = true
   output += "\n\n## Big News!\n\n"
   output += data[:added][:news].join("\n").gsub(/^/, '- ')
 end
 
-if data[:added][:tutorials].length > 0
+if data[:added][:tutorials].length.positive?
   newsworthy = true
   output += "\n\n## #{data[:added][:tutorials].length} new tutorials!\n\n"
   output += data[:added][:tutorials].join("\n").gsub(/^/, '- ')
 end
 
-if data[:added][:slides].length > 0
+if data[:added][:slides].length.positive?
   newsworthy = true
   output += "\n\n## #{data[:added][:slides].length} new slides!\n\n"
   output += data[:added][:slides].join("\n").gsub(/^/, '- ')
 end
 
-if data[:contributors].length > 0
+if data[:contributors].length.positive?
   newsworthy = true
   output += "\n\n## #{data[:contributors].length} new contributors!\n\n"
   output += data[:contributors].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
