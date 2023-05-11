@@ -277,7 +277,7 @@ module Jekyll
         #"correction":,
         #"creator":,
         #"dateCreated":,
-        "dateModified": Gtn::ModificationTimes.obtain_time(material['path']),
+        dateModified: Gtn::ModificationTimes.obtain_time(material["path"]).strftime("%Y-%m-%dT%H:%M:%S%:z"),
         #"datePublished":,
         "discussionUrl": site["gitter_url"],
         #"editor":,
@@ -346,7 +346,9 @@ module Jekyll
         #"potentialAction":,
         #"sameAs":,
         #"subjectOf":,
-        # "url" described below
+        #"url" described below
+        workTranslation: [],
+        creativeWorkStatus: material['draft'] ? 'Under development': 'Active',
       }
       data.update(A11Y)
 
@@ -382,6 +384,7 @@ module Jekyll
         if material.key?('objectives') and not material['objectives'].nil? and material['objectives'].length > 0 then
           objectives = material['objectives'].join("\n - ")
           description.push("The objectives are:\n - #{objectives}\n\n")
+          data['teaches'] = objectives
         end
         if material.key?('keypoints') and not material['keypoints'].nil? and material['keypoints'].length > 0 then
           keypoints = material['keypoints'].join("\n - ")
@@ -496,10 +499,10 @@ module Jekyll
       end
 
       # Add contributors/authors
-      if material.key?('contributors') then
-        contributors = material['contributors'].map{ |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
-        data['author'] = contributors
-        data['contributor'] = contributors
+      if material.key?('contributors') or material.key?('contributions')
+        authors = get_authors(material).map { |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
+
+        data['author'] = authors
       end
 
       about = []
@@ -516,9 +519,9 @@ module Jekyll
       end
       data['about'] = about
 
-      if material.key?('level') then
-        data['educationalLevel'] = eduLevel[material['level']]
-      end
+      data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Introductory'
+      data['mentions'] = material.fetch('tags', []).map { |x| { '@type': 'Thing', name: x } }
+      data['abstract'] = material['content'].split("\n").first
 
       return JSON.pretty_generate(data)
     end
