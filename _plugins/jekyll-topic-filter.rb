@@ -167,7 +167,11 @@ module TopicFilter
   # +Hash+:: The tutorial material
   def self.fetch_tutorial_material(site, topic_name, tutorial_name)
     self.fill_cache(site)
-    site.data['cache_topic_filter'][topic_name].select{|p| p['tutorial_name'] == tutorial_name}[0]
+    if site.data['cache_topic_filter'][topic_name].nil?
+      Jekyll.logger.warn "Topic cache not filled, cannot fetch tutorial material for #{topic_name}"
+    else
+      site.data['cache_topic_filter'][topic_name].select{|p| p['tutorial_name'] == tutorial_name}[0]
+    end
   end
 
   ## 
