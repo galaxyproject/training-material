@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Plugin to add environment variables to the `site` object in Liquid templates
 require 'find'
 require 'bibtex'

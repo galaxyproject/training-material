@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'json'
 require 'fileutils'
 require './_plugins/notebook'

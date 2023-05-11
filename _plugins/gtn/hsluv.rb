@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # The MIT License (MIT)
 #
 # Copyright (c) 2015 Radu-Bogdan Croitoru

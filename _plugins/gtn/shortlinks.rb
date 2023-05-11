@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Gtn
   module Shortlinks
     def self.is_mapped(tutorial, current_mapping)

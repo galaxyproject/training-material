@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Jekyll
   class ColorPickerTag < Liquid::Tag
     def initialize(tag_name, text, tokens) # :nodoc:

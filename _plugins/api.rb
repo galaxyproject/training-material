@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'json'
 require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn/metrics'
