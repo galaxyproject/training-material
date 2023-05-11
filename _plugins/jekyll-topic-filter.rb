@@ -437,11 +437,11 @@ module TopicFilter
     page_obj['tools'] += page.content.scan(/{% tool \[[^\]]*\]\(([^)]*)\)\s*%}/) if page_obj['hands_on']
 
     page_obj['workflows']&.each do |wf|
-        wf_path = "#{folder}/workflows/#{wf['workflow']}"
+      wf_path = "#{folder}/workflows/#{wf['workflow']}"
 
-        wf_data = JSON.parse(File.read(wf_path))
-        page_obj['tools'] += extract_workflow_tool_list(wf_data)
-      end
+      wf_data = JSON.parse(File.read(wf_path))
+      page_obj['tools'] += extract_workflow_tool_list(wf_data)
+    end
     page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
 
     page_obj['tours'] = tours.length.positive?

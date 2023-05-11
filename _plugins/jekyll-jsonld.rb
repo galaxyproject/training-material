@@ -373,10 +373,10 @@ module Jekyll
         # Zenodo links
         if material.key?('zenodo_link')
           mentions.push({
-                                     '@type': 'Thing',
-                                     url: (material['zenodo_link']).to_s,
-                                     name: "Training data for #{material['title']} tutorial"
-                                   })
+                          '@type': 'Thing',
+                          url: (material['zenodo_link']).to_s,
+                          name: "Training data for #{material['title']} tutorial"
+                        })
         end
       end
       data['description'] = description.join("\n")

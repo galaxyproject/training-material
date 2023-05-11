@@ -106,18 +106,18 @@ module GTNNotebooks
 
       if data[1]
         res.update({
-                           'cell_type' => 'code',
-                           'execution_count' => nil,
-                           'outputs' => [],
-                           'metadata' => {
-                             'attributes' => {
-                               'classes' => [
-                                 language
-                               ],
-                               'id' => '',
-                             }
-                           }
-                         })
+                     'cell_type' => 'code',
+                     'execution_count' => nil,
+                     'outputs' => [],
+                     'metadata' => {
+                       'attributes' => {
+                         'classes' => [
+                           language
+                         ],
+                         'id' => '',
+                       }
+                     }
+                   })
       else
         res['cell_type'] = 'markdown'
       end
