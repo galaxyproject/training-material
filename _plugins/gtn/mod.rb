@@ -12,7 +12,7 @@ module Gtn
       results.select! { |x| x.length > 1 }
       results.each do |date, files|
         files.split(/\n/).each do |f|
-          @@TIME_CACHE[f] = Time.at(date.to_i) if !@@TIME_CACHE.has_key? f
+          @@TIME_CACHE[f] = Time.at(date.to_i) if !@@TIME_CACHE.key? f
         end
       end
     end
@@ -23,7 +23,7 @@ module Gtn
 
     def self.obtain_time(f)
       init_cache
-      if @@TIME_CACHE.has_key? f
+      if @@TIME_CACHE.key? f
         @@TIME_CACHE[f]
       else
         begin

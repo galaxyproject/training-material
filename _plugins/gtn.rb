@@ -38,7 +38,7 @@ end
 # Returns:
 # +String+:: The name of the user
 def lookup_name(user, site)
-  if site.data['contributors'].has_key?(user)
+  if site.data['contributors'].key?(user)
     site.data['contributors'][user].fetch('name', user)
   else
     user

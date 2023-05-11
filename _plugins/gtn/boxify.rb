@@ -122,7 +122,7 @@ module Gtn
       box_safe = Jekyll::Utils.slugify(box_id)
       key = "#{path}|#{box_type}|#{box_safe}"
 
-      if @title_unique_offsets.has_key?(key)
+      if @title_unique_offsets.key?(key)
         box_safe_final = "#{box_safe}-#{@title_unique_offsets[key]}"
       else
         @title_unique_offsets[key] = 0

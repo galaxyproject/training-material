@@ -16,13 +16,13 @@ module Jekyll
     # Returns
     # +datastructure+:: The modified datastructure
     def pusher(t, datastructure, flat)
-      if t.data.has_key?('contributors')
+      if t.data.key?('contributors')
         if flat
           t.data['contributors'].each { |c| datastructure[c].push(t) }
         else
           t.data['contributors'].each { |c| datastructure[c].push([t, nil]) }
         end
-      elsif t.data.has_key?('contributions')
+      elsif t.data.key?('contributions')
         t.data['contributions'].each do |contribution_type, contributor|
           contributor.each do |c|
             if flat

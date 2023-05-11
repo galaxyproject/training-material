@@ -1,7 +1,7 @@
 module Gtn
   module Scholar
     def self.load_bib(site)
-      return if site.config.has_key?('cached_global_bib')
+      return if site.config.key?('cached_global_bib')
 
       (global_bib, cp) = populate_cache
       site.config['cached_global_bib'] = global_bib

@@ -60,11 +60,11 @@ module Gtn
     def self.segment(values, attr)
       [
         {
-          :value => values.select { |v| v.has_key? attr }.length,
+          :value => values.select { |v| v.key? attr }.length,
           "#{attr}" => true,
         },
         {
-          :value => values.select { |v| !v.has_key? attr }.length,
+          :value => values.select { |v| !v.key? attr }.length,
           "#{attr}" => false,
         }
       ]

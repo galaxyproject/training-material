@@ -172,7 +172,7 @@ module GTNNotebooks
   end
 
   def self.construct_byline(metadata)
-    folks = if metadata.has_key?('contributors')
+    folks = if metadata.key?('contributors')
               metadata['contributors']
             else
               metadata['contributions'].map { |_k, v| v }.flatten
@@ -294,7 +294,7 @@ module GTNNotebooks
 
   def self.notebook_filter(data, language = nil)
     data['layout'] == 'tutorial_hands_on' \
-      and data.has_key?('notebook') \
+      and data.key?('notebook') \
       and (language.nil? or data['notebook']['language'].downcase == language)
   end
 
@@ -466,7 +466,7 @@ module GTNNotebooks
         # we're making it 'our own' a bit.
 
         COLORS.each do |key, val|
-          val = "#{val};#{COLORS_EXTRA[key]}" if COLORS_EXTRA.has_key? key
+          val = "#{val};#{COLORS_EXTRA[key]}" if COLORS_EXTRA.key? key
 
           cell['source'].gsub!(/<blockquote class="#{key}">/,
                                "<blockquote class=\"#{key}\" style=\"border: 2px solid #{val}; margin: 1em 0.2em\">")

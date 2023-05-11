@@ -19,7 +19,7 @@ module Jekyll
       puts '[GTN/Search]'
 
       site = context.registers[:site]
-      topics = site.data.select { |_k, v| v.is_a?(Hash) && v.has_key?('type') }
+      topics = site.data.select { |_k, v| v.is_a?(Hash) && v.key?('type') }
                    .select { |_k, v| %w[use admin-dev basics].include? v['type'] }
 
       results = {}

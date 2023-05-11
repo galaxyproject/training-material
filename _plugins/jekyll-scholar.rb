@@ -21,7 +21,7 @@ module Jekyll
       source_page = page['path']
 
       # Citation Frequency
-      site.config['citation_count'] = Hash.new(0) if !site.config.has_key?('citation_count')
+      site.config['citation_count'] = Hash.new(0) if !site.config.key?('citation_count')
       site.config['citation_count'][@text] += 1
 
       # If the overall cache is nil, create it

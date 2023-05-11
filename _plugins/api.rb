@@ -16,9 +16,9 @@ module Jekyll
     # Returns:
     # +Array+ of contributor IDs
     def get_contributors(data)
-      if data.has_key?('contributors')
+      if data.key?('contributors')
         data['contributors']
-      elsif data.has_key?('contributions')
+      elsif data.key?('contributions')
         data['contributions'].keys.map { |k| data['contributions'][k] }.flatten
       end
     end
@@ -141,7 +141,7 @@ module Jekyll
       page2.content = JSON.pretty_generate({
                                              'type' => 'FeatureCollection',
                                              'features' => site.data['contributors']
-          .select { |_k, v| v.has_key? 'location' }
+          .select { |_k, v| v.key? 'location' }
           .map do |k, v|
             {
               'type' => 'Feature',
@@ -201,7 +201,7 @@ module Jekyll
       puts '[GTN/API] Topics'
       # Individual Topic Indexes
       site.data.each_pair do |k, v|
-        if v.is_a?(Hash) && v.has_key?('type') && v.has_key?('maintainers')
+        if v.is_a?(Hash) && v.key?('type') && v.key?('maintainers')
 
           topics[k] = {
             'name' => v['name'],

@@ -43,7 +43,7 @@ module Jekyll
       ]
 
       attributes += get_authors(material).map do |user|
-        if site['data']['contributors'].has_key?(user)
+        if site['data']['contributors'].key?(user)
           ['DC.creator', site['data']['contributors'][user].fetch('name', user)]
         else
           puts "[GTN/Meta] #{user} not found in CONTRIBUTORS.yaml"
@@ -123,7 +123,7 @@ module Jekyll
                      end,
         memberOf: [GTN],
       }
-      if !contributor.nil? && contributor.has_key?('orcid')
+      if !contributor.nil? && contributor.key?('orcid')
         person['identifier'] = "https://orcid.org/#{contributor['orcid']}"
         person['orcid'] = "https://orcid.org/#{contributor['orcid']}"
       end

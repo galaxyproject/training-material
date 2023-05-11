@@ -19,7 +19,7 @@ module Jekyll
         dir = File.dirname(File.join('.', page.url))
         page2 = Jekyll::Page.new(site, site.source, dir, page.name)
         page2.data['layout'] = 'slides-plain'
-        page2.basename = if page2.data.has_key?('lang')
+        page2.basename = if page2.data.key?('lang')
                            "slides-plain_#{page2.data['lang'].upcase}"
                          else
                            'slides-plain'
@@ -29,7 +29,7 @@ module Jekyll
 
           "<span id=\"#{anchor.strip}\"><i class=\"fas fa-link\" aria-hidden=\"true\"></i> #{anchor}</span>"
         end
-        if page2.data.has_key?('redirect_from')
+        if page2.data.key?('redirect_from')
           page2.data['redirect_from'].map { |x| x.gsub!(%r{/slides}, '/slides-plain') }
         end
 

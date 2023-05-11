@@ -10,7 +10,7 @@ module TopicFilter
   # Returns:
   # +Array+:: The list of topics
   def self.list_topics(site)
-    site.data.select { |_k, v| v.is_a?(Hash) && v.has_key?('maintainers') }.map { |k, _v| k }
+    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('maintainers') }.map { |k, _v| k }
   end
 
   ##
@@ -20,7 +20,7 @@ module TopicFilter
   # Returns:
   # +nil+
   def self.fill_cache(site)
-    return if site.data.has_key?('cache_topic_filter')
+    return if site.data.key?('cache_topic_filter')
 
     puts '[GTN/TopicFilter] Begin Cache Prefill'
     site.data['cache_topic_filter'] = {}
@@ -81,7 +81,7 @@ module TopicFilter
     fill_cache(site)
 
     # Here we want to either return data structured around subtopics
-    if site.data[topic_name].has_key?('subtopics')
+    if site.data[topic_name].key?('subtopics')
       # We'll construct a new hash of subtopic => tutorials
       out = {}
       seen_ids = []
@@ -144,7 +144,7 @@ module TopicFilter
     end
 
     # Cleanup empty sections
-    out.delete('__OTHER__') if out.has_key?('__OTHER__') && (out['__OTHER__']['materials'].length == 0)
+    out.delete('__OTHER__') if out.key?('__OTHER__') && (out['__OTHER__']['materials'].length == 0)
 
     out.each do |_k, v|
       v['materials'].sort_by! { |m| [m.fetch('priority', 1), m['title']] }
@@ -294,7 +294,7 @@ module TopicFilter
 
       mk = material_meta['material']
 
-      if !interesting.has_key? mk
+      if !interesting.key? mk
         interesting[mk] = material_meta.dup
         interesting[mk].delete('type') # Remove the type since it's specific, not generic
         interesting[mk]['resources'] = []
@@ -356,14 +356,14 @@ module TopicFilter
     id = page_obj['id']
     page_obj['video_library'] = {}
 
-    if site.data.has_key?('video-library')
+    if site.data.key?('video-library')
       page_obj['video_library']['tutorial'] = site.data['video-library']["#{id}/tutorial"]
       page_obj['video_library']['slides'] = site.data['video-library']["#{id}/slides"]
       page_obj['video_library']['demo'] = site.data['video-library']["#{id}/demo"]
       page_obj['video_library']['both'] = site.data['video-library'][id]
     end
 
-    page_obj['video_library']['session'] = site.data['session-library'][id] if site.data.has_key?('session-library')
+    page_obj['video_library']['session'] = site.data['session-library'][id] if site.data.key?('session-library')
 
     # Sometimes `hands_on` is set to something like `external`, in which
     # case it is important to not override it. So we only do that if the
@@ -372,11 +372,11 @@ module TopicFilter
     # is hard to follow which keys are which and safer to test for both in
     # case someone edits the code later. If either of these exist, we can
     # automatically set `hands_on: true`
-    page_obj['hands_on'] = tutorials.length > 0 if !page_obj.has_key?('hands_on')
+    page_obj['hands_on'] = tutorials.length > 0 if !page_obj.key?('hands_on')
 
     # Same for slides, if there's a resource by that name, we can
     # automatically set `slides: true`
-    page_obj['slides'] = slides.length > 0 if !page_obj.has_key?('slides')
+    page_obj['slides'] = slides.length > 0 if !page_obj.key?('slides')
 
     folder = material['dir']
 
@@ -395,7 +395,7 @@ module TopicFilter
     end
 
     # In dev configuration, this breaks for me. Not sure why config isn't available.
-    domain = if !site.config.nil? && site.config.has_key?('url')
+    domain = if !site.config.nil? && site.config.key?('url')
                "#{site.config['url']}#{site.config['baseurl']}"
              else
                '/training-material/'
@@ -456,8 +456,8 @@ module TopicFilter
     # make it future proof.
     page_obj['type'] = 'tutorial'
 
-    if page_obj.has_key?('draft') && page_obj['draft']
-      page_obj['tags'] = [] if !page_obj.has_key? 'tags'
+    if page_obj.key?('draft') && page_obj['draft']
+      page_obj['tags'] = [] if !page_obj.key? 'tags'
       page_obj['tags'].push('work-in-progress')
     end
 
@@ -466,7 +466,7 @@ module TopicFilter
 
   def self.process_pages(site, pages)
     # eww.
-    return site.data['cache_processed_pages'] if site.data.has_key?('cache_processed_pages')
+    return site.data['cache_processed_pages'] if site.data.key?('cache_processed_pages')
 
     materials = collate_materials(pages).map { |_k, v| resolve_material(site, v) }
     puts '[GTN/TopicFilter] Filling Materials Cache'
@@ -493,11 +493,11 @@ module TopicFilter
       end
       if p['ref']
         # Initialise redirects if it wasn't set
-        p['ref'].data['redirect_from'] = [] if !p['ref'].data.has_key?('redirect_from')
+        p['ref'].data['redirect_from'] = [] if !p['ref'].data.key?('redirect_from')
         p['ref'].data['redirect_from'].push(*mappings[p.url])
         p['ref'].data['redirect_from'].uniq!
       else
-        p.data['redirect_from'] = [] if !p.data.has_key?('redirect_from')
+        p.data['redirect_from'] = [] if !p.data.key?('redirect_from')
 
         p.data['redirect_from'].push(*mappings[p.url])
         p.data['redirect_from'].uniq!
@@ -571,7 +571,7 @@ module TopicFilter
   # Returns:
   # +Array+:: An array of contributors as strings.
   def self.get_contributors(material)
-    if material.has_key?('contributors')
+    if material.key?('contributors')
       material['contributors']
     else
       material['contributions'].map { |_k, v| v }.flatten
@@ -639,7 +639,7 @@ module TopicFilter
     list_all_materials(site).each do |m|
       m.fetch('tools', []).each do |tool|
         sid = short_tool(tool)
-        tool_map[sid] = { 'tool_id' => [], 'tutorials' => [] } if !tool_map.has_key?(sid)
+        tool_map[sid] = { 'tool_id' => [], 'tutorials' => [] } if !tool_map.key?(sid)
 
         tool_map[sid]['tool_id'].push([tool, get_version(tool)])
         tool_map[sid]['tutorials'].push([

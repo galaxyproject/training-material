@@ -5,9 +5,9 @@ module Gtn
     end
 
     def self.update(current_mapping)
-      current_mapping['id'] = {} if !current_mapping.has_key? 'id'
+      current_mapping['id'] = {} if !current_mapping.key? 'id'
 
-      current_mapping['name'] = {} if !current_mapping.has_key? 'name'
+      current_mapping['name'] = {} if !current_mapping.key? 'name'
 
       # Discover tutorials
       Dir.glob('topics/*/tutorials/*/tutorial.md').each do |tutorial|
