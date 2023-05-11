@@ -263,8 +263,8 @@ module Jekyll
         #"character":,
         "citation": {
           "@type": "CreativeWork",
-          "name": "Community-Driven Data Analysis Training for Biology",
-          "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+          name: "Galaxy Training: A Powerful Framework for Teaching!",
+          url: "https://doi.org/10.1371/journal.pcbi.1010752"
         },
         #"comment":,
         #"commentCount":,
@@ -299,7 +299,7 @@ module Jekyll
         #"isPartOf" described below
         #"keywords": described below
         #"learningResourceType" described below
-        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+        license: "https://spdx.org/licenses/#{material.fetch('license', 'CC-BY-4.0')}",
         #"locationCreated":,
         #"mainEntity":,
         #"material":,
