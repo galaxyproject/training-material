@@ -66,7 +66,7 @@ module GTNNotebooks
     val = []
     data = content.split("\n")
     data.each.with_index do |line, i|
-      m = line.match /^```(#{accepted_languages.join('|')})\s*$/
+      m = line.match(/^```(#{accepted_languages.join('|')})\s*$/)
       if m
         if inside_block
           puts data[i - 2..i + 2]
@@ -88,9 +88,7 @@ module GTNNotebooks
       end
     end
     # final flush
-    if ! val.nil?
-      out.push([val, inside_block, cur_lang])
-    end
+    out.push([val, inside_block, cur_lang]) if !val.nil?
 
     notebook = {
       'metadata' => {},
@@ -108,7 +106,7 @@ module GTNNotebooks
 
       # Remove any remaining language tagged code blocks, e.g. in
       # tip/solution/etc boxes. These do not render well.
-      res['source'] = res['source'].map{|x| x.gsub(/```(#{accepted_languages.join('|')})/, '```')}
+      res['source'] = res['source'].map { |x| x.gsub(/```(#{accepted_languages.join('|')})/, '```') }
 
       if data2[1]
         res.update({
@@ -285,12 +283,12 @@ module GTNNotebooks
   def self.fixPythonNotebook(notebook)
     # TODO
     # prefix bash cells with `!`
-    notebook['cells'].map{|cell|
-      if cell.fetch('metadata', {}).fetch('attributes', {}).fetch('classes', [])[0] == "bash"
-        cell['source'] = cell['source'].map{|line| "!#{line}"}
+    notebook['cells'].map do |cell|
+      if cell.fetch('metadata', {}).fetch('attributes', {}).fetch('classes', [])[0] == 'bash'
+        cell['source'] = cell['source'].map { |line| "!#{line}" }
       end
       cell
-    }
+    end
     notebook
   end
 
@@ -393,9 +391,7 @@ module GTNNotebooks
     # Here we read use internal methods to convert the tutorial to a Hash
     # representing the notebook
     accepted_languages = [notebook_language]
-    if notebook_language == 'python'
-      accepted_languages << 'bash'
-    end
+    accepted_languages << 'bash' if notebook_language == 'python'
     notebook = convert_notebook_markdown(content, accepted_languages)
     # This extracts the metadata yaml header and does manual formatting of
     # the header data to make for a nicer notebook.

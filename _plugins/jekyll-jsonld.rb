@@ -108,11 +108,11 @@ module Jekyll
     #
     def generate_person_jsonld(id, contributor, site)
       person = {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "http://purl.org/dc/terms/conformsTo": {
-            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
-            "@type": "CreativeWork"
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        'http://purl.org/dc/terms/conformsTo': {
+          '@id': 'https://bioschemas.org/profiles/Person/0.3-DRAFT',
+          '@type': 'CreativeWork'
         },
         # I guess these are identical?
         url: "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
@@ -128,7 +128,7 @@ module Jekyll
                      end,
         memberOf: [GTN],
       }
-      if ! contributor.nil? && contributor.has_key?('orcid') and contributor['orcid']
+      if !contributor.nil? && contributor.key?('orcid') && contributor['orcid']
         person['identifier'] = "https://orcid.org/#{contributor['orcid']}"
         person['orcid'] = "https://orcid.org/#{contributor['orcid']}"
       end
@@ -136,21 +136,19 @@ module Jekyll
       person
     end
 
-    def generate_org_jsonld(id, contributor, site)
+    def generate_org_jsonld(id, contributor, _site)
       organization = {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "http://purl.org/dc/terms/conformsTo": {
-            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
-            "@type": "CreativeWork"
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        'http://purl.org/dc/terms/conformsTo': {
+          '@id': 'https://bioschemas.org/profiles/Organization/0.3-DRAFT',
+          '@type': 'CreativeWork'
         },
-        "name": contributor.fetch('name', id),
-        "description": contributor.fetch('funding_statement', "An organization supporting the Galaxy Training Network"),
+        name: contributor.fetch('name', id),
+        description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
       }
 
-      if contributor.has_key?('url') and contributor['url']
-        organization['url'] = contributor['url']
-      end
+      organization['url'] = contributor['url'] if contributor.key?('url') && contributor['url']
 
       organization
     end
@@ -164,7 +162,7 @@ module Jekyll
     # Returns:
     # +String+:: The JSON-LD metadata.
     def to_person_jsonld(id, contributor, site)
-      if contributor.has_key? "funder"
+      if contributor.key? 'funder'
         JSON.pretty_generate(generate_org_jsonld(id, contributor, site))
       else
         JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
