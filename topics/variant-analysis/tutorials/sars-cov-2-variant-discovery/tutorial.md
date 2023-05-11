@@ -467,13 +467,35 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 >    > This is very useful if you are planning to analyze the data in your current history in multiple different ways, and you would like to have each analysis end up in its own dedicated history.
 >    > Here, however, we only want to do one analysis of our batch of data so we are fine with results of the workflow run getting added to the current history.
 >    {: .tip}
->
+> 
 {: .hands_on}
 
+Scheduling of the workflow will take a while. One of the last datasets that will be added to your history will be called **Preprocessing and mapping reports**. It is the first overview report that you will obtain in this tutorial, and the only one produced by the variation analysis workflow.
+
+Once this dataset is ready take a moment to explore its content. It contains potentially valuable information about coverage of reads mapped to the reference genome and quality statistics for these reads. Technical issues with any samples in a batch are typically visible in this report already and spotting them early can often prevent overinterpretation of later reports.
+
+If you are following along with the suggested batch of samples, we also have prepared a simple question for you.
+
+> <question-title></question-title>
+>
+> 1. There are at least three problematic samples in the batch. What are their identifiers and what is the issue with them?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The three samples are **SRR17054505**, **SRR17054506** and **SRR17054508**.
+> >
+> >    The problem with all three is poor coverage as can be seen from the "General Statistics" section.
+> >    When you inspect the "Cumulative genome coverage" plot, you can see that a fourth sample, **SRR17054502**, is not that much better than two of these three.
+> >
+> >    Coverage of the worst sample, **SRR17054505**, is critically low and we cannot expect very usable mutation calls from it.
+> >    For the other three we may hope for some results, but we should not expect those to be perfect.
+> >
+> {: .solution}
+{: .question}
 
 ## From mutations per sample to reports and visualizations
 
-Once the jobs of previous workflows are done, we identified AVs for each sample. We can run a "Reporting workflow" on them to generate a final AV summary.
+The main output of the first workflow, of course, is the collection with mutation calls per sample. This collection will serve as input to the "Reporting workflow".
 
 This workflow takes the collection of called (with lofreq) and annotated (with SnpEff) variants (one VCF dataset per input sample) that got generated as one of the outputs of any of the four variation analysis workflows above, and generates two tabular reports and an overview plot summarizing all the variant information for your batch of samples.
 
@@ -541,155 +563,96 @@ This workflow takes the collection of called (with lofreq) and annotated (with S
 
 The three key results datasets produced by the Reporting workflow are:
 
-1. **Combined Variant Report by Sample**: This table combines the key statistics for each AV call in each sample. Each line in the dataset represents one AV detected in one specific sample
+1. **Combined Variant Report by Sample**
 
-   Column | Field | Meaning
-   --- | --- | ---
-   1 | `Sample` | SRA run ID
-   2 | `POS` | Position in [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/1798174254)
-   3 | `FILTER` | `Filter` field from VCF
-   4 | `REF` |  Reference base
-   5 | `ALT` | Alternative base
-   6 | `DP` | Sequencing depth
-   7 | `AF` | Alternative allele frequency
-   8 | `SB` | Strand bias P-value from Fisher's exact test calculated by [`lofreq`](https://csb5.github.io/lofreq/)
-   9 |`DP4` | Depth for Forward Ref Counts, Reverse Ref Counts, Forward Alt Counts, Reverse Alt Counts
-   10 |`IMPACT` | Functional impact (from SNPEff)
-   11 |`FUNCLASS` | Funclass for change (from SNPEff)
-   12 |`EFFECT` | Effect of change (from SNPEff)
-   13 |`GENE` | Gene name
-   14 |`CODON` | Codon
-   15 |`AA` | Amino acid
-   16 |`TRID` | Short name for the gene
-   17 |`min(AF)` | Minimum Alternative Allele Freq across all samples containing this change
-   18 |`max(AF)` | Maximum Alternative Allele Freq across all samples containing this change
-   19 |`countunique(change)` | Number of distinct types of changes at this site across all samples
-   20 |`countunique(FUNCLASS)` | Number of distinct FUNCLASS values at this site across all samples
-   21 |`change` | Change at this site in this sample
+   This table combines the key statistics for each mutation call in each individual sample. Each line in the dataset represents one mutation detected in one specific sample.
 
-   > <question-title></question-title>
-   > 
-   > 1. How many AVs are found for all samples?
-   > 2. How many AVs are found for the first sample in the document?
-   > 3. How many AVs are found for each sample?
+   This report is meant as a faster and more legible way for studying the collection of per-sample mutations in VCF format directly.
+
+   > <details-title>Structure of the by-sample mutation report</details-title>
    >
-   > > <solution-title></solution-title>
-   > >
-   > > 1. By expanding the dataset in the history, we have the number of lines in the file. 868 lines for the example datasets. The first line is the header of the table. Then 867 AVs.
-   > >
-   > > 2. We can filter the table to get only the AVs for the first sample {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Filter*": `Combined Variant Report by Sample`
-   > >    - *"With following condition*": `c1=='ERR5931005'` (to adapt with the sample name)
-   > >    - *"Number of header lines to skip*": `1`
-   > >
-   > >    We got then only the AVs for the selected sample (48 for ERR5931005).
-   > >
-   > > 3. To get the number of AVs for each sample, we can run {% tool [Group data](Grouping1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Select data"*: `Combined Variant Report by Sample`
-   > >    - *"Group by column"*: `Column: 1`
-   > >    - In *"Operation"*:
-   > >      - In *"1: Operation"*:
-   > >        - *"Type"*: `Count`
-   > >        - *"On column"*: `Column: 2`
-   > >    
-   > >    With our example datasets, it seems that samples have between 42 and 56 AVs. 
-   > {: .solution}
-   {: .question}
-
-2. **Combined Variant Report by Variant**: This table combines the information about each AV *across* samples.
-
-   Column | Field | Meaning
-   --- | --- | ---
-   1 | `POS` | Position in [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/1798174254)
-   2 | `REF` | Reference base
-   3 | `ALT` | Alternative base
-   4 | `IMPACT` | Functional impact (from SnpEff) 
-   5 | `FUNCLASS` | Funclass for change (from SnpEff)
-   6 | `EFFECT` | Effect of change (from SnpEff)
-   7 | `GENE` | Gene 
-   8 | `CODON` | Codon 
-   9 | `AA` | Amino acid 
-   10 |`TRID` | Short name for the gene (from the feature mapping dataset)
-   11 |`countunique(Sample)` | Number of distinct samples containing this change 
-   12 |`min(AF)` | Minimum Alternative Allele Freq across all samples containing this change 
-   13 |`max(AF)` | Maximum Alternative Allele Freq across all samples containing this change 
-   14 |`SAMPLES(above-thresholds)` | List of distinct samples where this change has frequency abobe threshold (5%)
-   15 |`SAMPLES(all)` | List of distinct samples containing this change at any frequency (including below threshold) 
-   16 |`AFs(all)` | List of all allele frequencies across all samples 
-   17 |`change` |  Change 
-
-   > <question-title></question-title>
-   > 
-   > 1. How many AVs are found?
-   > 1. What are the different impacts of the AVs?
-   > 2. How many variants are found for each impact?
-   > 3. What are the different effects of HIGH impact?
-   > 4. Are there any AVs impacting all samples?
+   > Column | Field | Meaning
+   > --- | --- | ---
+   >  1  | `Sample` | Sample ID
+   >  2  | `POS` | Position of site with regard to the reference genome
+   >  3  | `FILTER` | Whether the variant passed the *AF*, *DP* and *DP_ALT* filters defined for the workflow run; variants that do not pass the filters in at least one sample are not reported, but a variant may fail some or all of the filters in *some* samples
+   >  4  | `REF` |  Reference base
+   >  5  | `ALT` | Alternative base
+   >  6  | `DP` | Sequencing depth at the variant site
+   >  7  | `AF` | Allele frequency
+   >  8  | `AFcaller` | Uncorrected allele frequency emitted by variant caller; for Illumina data, may differ from `AF` due to a [bug](https://github.com/CSB5/lofreq/issues/80) in the lofreq variant caller
+   >  8  | `SB` | Strand bias P-value from Fisher's exact test calculated by lofreq
+   >  9  |`DP4` | Observed counts of 1. REF-supporting fw-strand reads, 2. REF-supporting rv-strand reads, 3. ALT-supporting fw-strand reads, 4. ALT-supporting rv-strand reads
+   >  10 |`IMPACT` | Functional impact (from SnpEff annotation)
+   >  11 |`FUNCLASS` | Funclass for change (from SnpEff annotation)
+   >  12 |`EFFECT` | Effect of change (from SnpEff annotation)
+   >  13 |`GENE` | Name of affected viral gene or ORF (from SnpEff annotation)
+   >  14 |`CODON` | Affected codon (from SnpEff annotation)
+   >  15 |`AA` | Amino acid change caused by the mutation (from SnpEff annotation)
+   >  16 |`TRID` | Name of the affected viral protein (as defined in the feature mapping dataset)
+   >  17 |`min(AF)` | Minimum alternate allele frequency across all samples containing this mutation
+   >  18 |`max(AF)` | Maximum alternate allele frequency across all samples containing this mutation
+   >  19 |`countunique(change)` | Number of distinct types of changes at this site across all samples; if > 1, other samples in the batch have the same site affected by different base changes
+   >  20 |`countunique(FUNCLASS)` | Number of distinct FUNCLASS values at this site across all samples; if > 1, other samples in the batch have the same site affected by different base changes that have a different effect on the gene product
+   >  21 |`change` | Nucleotide change at this site in this sample
    >
-   > > <solution-title></solution-title>
-   > >
-   > > 1. By expanding the dataset in the history, we have the number of lines in the file. 184 lines for the example datasets. The first line is the header of the table. Then 183 AVs.
-   > >
-   > > 2. The different impacts of the AVs are HIGH, MODERATE and LOW.
-   > >
-   > > 2. To get the number of AVs for each impact levels, we can run {% tool [Group data](Grouping1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Select data"*: `Combined Variant Report by Variant`
-   > >    - *"Group by column"*: `Column: 4`
-   > >    - In *"Operation"*:
-   > >      - In *"1: Operation"*:
-   > >        - *"Type"*: `Count`
-   > >        - *"On column"*: `Column: 1`
-   > >    
-   > >    With our example datasets, we find:
-   > >    - 11 AVs with no predicted impact
-   > >    - 52 LOW AVs
-   > >    - 111 MODERATE AVs
-   > >    - 9 HIGH AVs
-   > >
-   > > 3. We can filter the table to get only the AVs with HIGH impact by running {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Filter*": `Combined Variant Report by Variant`
-   > >    - *"With following condition*": `c4=='HIGH'`
-   > >    - *"Number of header lines to skip*": `1`
-   > >
-   > >    The different effects for the 9 HIGH AVs are STOP_GAINED and FRAME_SHIFT.
-   > >
-   > > 4. We can filter the table to get the AVs for which `countunique(Sample)` is equal the number of samples (18 in our example dataset): {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Filter*": `Combined Variant Report by Variant`
-   > >    - *"With following condition*": `c11==18` (to adapt to the number of sample)
-   > >    - *"Number of header lines to skip*": `1`
-   > >
-   > >    For our example datasets, 4 AVs are found in all samples
-   > {: .solution}
-   {: .question}
+   {: .details}
+
+2. **Combined Variant Report by Variant**
+
+   This table aggregates the information about each mutation *across* samples. It is much more concise than the by-sample report at only a small amount of information loss.
+
+   > <details-title>Structure of the across-samples mutation report</details-title>
+   >
+   > Column | Field | Meaning
+   > --- | --- | ---
+   >  1 | `POS` | Position of site with regard to the reference genome
+   >  2 | `REF` | Reference base
+   >  3 | `ALT` | Alternative base
+   >  4 | `IMPACT` | Functional impact (from SnpEff annotation) 
+   >  5 | `FUNCLASS` | Funclass for change (from SnpEff annotation)
+   >  6 | `EFFECT` | Effect of change (from SnpEff annotation)
+   >  7 | `GENE` | Name of affected viral gene or ORF (from SnpEff annotation)
+   >  8 | `CODON` | Affected codon (from SnpEff annotation)
+   >  9 | `AA` | Amino acid change caused by the mutation (from SnpEff annotation)
+   >  10 |`TRID` | Name of the affected viral protein (as defined in the feature mapping dataset)
+   >  11 |`countunique(Sample)` | Number of distinct samples containing this change 
+   >  12 |`min(AF)` | Minimum alternate allele frequency across all samples containing this mutation
+   >  13 |`max(AF)` | Maximum alternate allele frequency across all samples containing this mutation 
+   >  14 |`SAMPLES(above-thresholds)` | List of samples, in which this mutation was identified and in which the call passed the *AF*, *DP* and *DP_ALT* filters defined for the workflow run
+   >  15 |`SAMPLES(all)` | List of all samples, in which this mutation was identified (including samples in which the call did not pass all filters)
+   >  16 |`AFs(all)` | List of allele frequencies at which the mutation was observed in the samples in SAMPLES(all)
+   >  17 |`change` |  Nucleotide change at this site
+   >
+   {: .details}
 
 3. **Variant frequency plot**
 
    ![Variant frequency plot](../../images/sars-cov-2-variant-discovery/variant-frequency.svg)
 
-   This plot represents AFs (cell color) for the different AVs (columns) and the different samples (rows). The AVs are grouped by genes (different colors on the 1st row). Information about their effect is also represented on the 2nd row. The samples are clustered following the tree displayed on the left.
+   This plot represents the allele-frequencies (AFs, cell color) for the different mutations (columns) in the different samples (rows). Mutations are grouped by viral ORFs (different colors on the 1st row). Information about their impact on translation of viral proteins is color-coded on the second row. Sample clustering is indicated by the tree displayed on the left.
 
-   In the example datasets, the samples are clustered in 3 clusters (as we defined when running the workflow), that may represent different SARS-CoV-2 lineages as the AVs profiles are different.
 
 ## From mutations per sample to consensus sequences
 
-For the variant calls, we can now run a workflow which generates reliable consensus sequences according to transparent criteria that capture at least some of the complexity of variant calling:
+We can now run a last workflow which generates reliable consensus sequences according to transparent criteria that capture at least some of the complexity of variant calling:
 
-- Each consensus sequence is guaranteed to capture all called, filter-passing variants as defined in the VCF of its sample that reach a user-defined consensus allele frequency threshold.
-- Filter-failing variants and variants below a second user-defined minimal allele frequency threshold are ignored.
-- Genomic positions of filter-passing variants with an allele frequency in between the two thresholds are hard-masked (with N) in the consensus sequence of their sample.
-- Genomic positions with a coverage (calculated from the read alignments input) below another user-defined threshold are hard-masked, too, unless they are consensus variant sites.
-
-The workflow takes a collection of VCFs and a collection of the corresponding aligned reads (for the purpose of calculating genome-wide coverage) such as produced by the first workflow we ran.
+- Each consensus sequence produced by the workflow is guaranteed to capture all called, filter-passing mutations as defined in the VCF of its sample that reach a user-defined consensus allele frequency threshold.
+- Filter-failing mutations and mutations below a second user-defined minimal allele frequency threshold are ignored.
+- Genomic positions of filter-passing mutations with an allele frequency in between the two thresholds are hard-masked (with N) in the consensus sequence of their sample.
+- Genomic positions with a coverage (calculated from the aligned reads for the sample) below another user-defined threshold are hard-masked, too, unless they are sites of consensus alleles.
 
 > <hands-on-title>Import the consensus construction workflow into Galaxy</hands-on-title>
 >
-> Just like workflows before, also the *consensus construction workflow* developed by the Galaxy Covid-19 project can be retrieved from *Dockstore* or *WorkflowHub*:
+> Just like all workflows before, also the *consensus construction workflow* developed by the Galaxy Covid-19 project can be retrieved from *Dockstore* or *WorkflowHub*:
 >
 > {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' workflow_name="sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION" box_type="none" %}
 >
 > Again, you can just select the latest version of the workflow, and, once imported, it should appear in your list of workflows under the name: **COVID-19: consensus construction**.
 >
 {: .hands-on}
+
+The workflow takes the collection of called variants (one VCF dataset per input sample, same collection as used as input for the *reporting* workflow) and a collection of the corresponding aligned reads (for the purpose of calculating genome-wide coverage). Both collections have been generated by the *variation analysis* workflow.
 
 > <hands-on-title>From mutations per sample to consensus sequences</hands-on-title>
 >
@@ -748,7 +711,55 @@ The main outputs of the workflow are:
 - A collection of viral consensus sequences.
 - A multisample FASTA of all these sequences.
 
-The last one can be used as input for tools like **Pangolin** or **Nextclade**.
+The first one is useful for quickly getting at the consensus sequence for one particular sample, the last one can be used as input for tools like **Pangolin** or **Nextclade**.
+
+### Exploring consensus sequence quality
+
+Unfortunately, not all consensus sequences are equal in terms of quality. As explained above, questionable mutations and low coverage can lead to N-masking of individual nucleotides or whole stretches of bases in any sample's consensus genome.
+
+Since these Ns are hard to discover by just scrolling through a consensus sequence fasta dataset, it is a good idea to have their positions reported explicitly.
+
+> <hands-on-title>Reporting masked positions in consensus sequences</hands-on-title>
+>
+> 1. {% tool [Fasta regular expression finder](toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0) %} with the following parameters:
+       - {% icon param-collection %} *"Input"*: `Consensus sequence with masking` collection produced by the last workflow run 
+>       - *"Regular expression"*: `N+`
+>
+>         This looks for stretches of one or more Ns.
+>       - In *"Specify advanced parameters"*:
+>         - *"Do not search the reverse complement"*: `Yes`
+>
+>           We are only interested in the forward strand (and an N is an N on both strands anyway) so we can save some compute by turning on this option.
+>         - *"Maximum length of the match to report"*: `1`
+>
+>           This causes stretches of Ns to be reported more concisely.
+{: .hands_on}
+
+If you are following along with the suggested batch of input sequences, you can now correlate our previous observations with this newly produced collection.
+
+> <question-title>Questions</question-title>
+>
+> 1. We know from the quality report produced as part of the *variation analysis* workflow that samples **SRR17054505**, **SRR17054506**, **SRR17054508** and **SRR17054502** suffer from low coverage sequencing data.
+>
+>    In how far is this reflected in the generated consensus sequences for these samples?
+> 2. The variant frequency plot (generated as part of the *reporting* workflow) showed all four of these samples as outliers outside of the main cluster of samples.
+>
+>    Since the plot does not show coverage at sites of mutations, it cannot be determined from the plot alone whether a mutation missing from particular samples did not get reported because the sample does not harbor it, or simply because there was insufficient coverage for detecting it. The report of consensus sequence N stretches, however, can help here.
+>
+>    Are the four samples really lacking all those mutations that are characteristic for the main cluster of samples, or may they have just gone undetected due to insufficient coverage?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The N-masking reports for these four samples reveal many more and larger stretches of Ns for the four problematic samples than for others.
+> >
+> >    **SRR17054505**, in particular, has a consensus sequence consisting almost entirely of Ns with just rather few resolved nucleotides in between them.
+> > 2. Most mutations that look like they are missing from the four samples based on the plot alone, turn out to simply be undeterminable as they also correspond to Ns (instead of to the reference allele in the corresponding consensus sequences.
+> >
+> >    The clusters of missing S gene mutations in **SRR17054502** and **SRR17054506**, between 22,578 and 22713, and between 23403 and 24130, for example, fall entirely into N-masked, i.e. low-coverage regions, of these samples.
+> >    This means there is no objective basis for thinking that these samples represent a different viral lineage than those of the main cluster of samples.
+> >
+> {: .solution}
+{: .question}
 
 ## From consensus sequences to lineage assignments
 
@@ -756,9 +767,9 @@ To assign lineages to the different samples from their consensus sequences, two 
 
 ### Lineage assignment with Pangolin
 
-Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used to assign a SARS-CoV-2 genome sequence the most likely lineage based on the PANGO nomenclature system.
+Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used to assign a SARS-CoV-2 genome sequence their most likely lineage based on the PANGO nomenclature system.
 
-> <hands-on-title>From consensus sequences to clade assignations using Pangolin</hands-on-title>
+> <hands-on-title>From consensus sequences to clade assignments using Pangolin</hands-on-title>
 >
 > 1. {% tool [Pangolin](toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input FASTA File(s)"*: `Multisample consensus FASTA`
@@ -767,43 +778,71 @@ Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used
 > 2. Inspect the generated output
 {: .hands_on}
 
-Pangolin generates a table file with taxon name and lineage assigned. Each line corresponds to each sample in the input consensus FASTA file provided. The columns are:
+Pangolin generates tabular output, in which each line corresponds to one sample found in the input consensus FASTA file. The output columns are explained in the Galaxy tool's help section and [here](https://cov-lineages.org/resources/pangolin/output.html).
 
-Column | Field | Meaning
---- | --- | ---
-1 | `taxon` | The name of an input query sequence, here the sample name.
-2 | `lineage` | The most likely lineage assigned to a given sequence based on the inference engine used and the SARS-CoV-2 diversity designated. This assignment may be is sensitive to missing data at key sites. [Lineage Description List](https://cov-lineages.org/lineage_description_list.html)
-3 | `conflict` | In the pangoLEARN decision tree model, a given sequence gets assigned to the most likely category based on known diversity. If a sequence can fit into more than one category, the conflict score will be greater than 0 and reflect the number of categories the sequence could fit into. If the conflict score is 0, this means that within the current decision tree there is only one category that the sequence could be assigned to.
-4 | `ambiguity_score` | This score is a function of the quantity of missing data in a sequence. It represents the proportion of relevant sites in a sequence which were imputed to the reference values. A score of 1 indicates that no sites were imputed, while a score of 0 indicates that more sites were imputed than were not imputed. This score only includes sites which are used by the decision tree to classify a sequence.
-5 | `scorpio_call` | If a query is assigned a constellation by scorpio this call is output in this column. The full set of constellations searched by default can be found at the constellations repository.
-6 | `scorpio_support` | The support score is the proportion of defining variants which have the alternative allele in the sequence.
-7 | `scorpio_conflict` | The conflict score is the proportion of defining variants which have the reference allele in the sequence. Ambiguous/other non-ref/alt bases at each of the variant positions contribute only to the denominators of these scores.
-8 | `version` | A version number that represents both the pango-designation number and the inference engine used to assign the lineage.
-9 | `pangolin_version` | The version of pangolin software running.
-10 | `pangoLEARN_version` | The dated version of the pangoLEARN model installed.
-11 | `pango_version` | The version of pango-designation lineages that this assignment is based on.
-12 | `status` | Indicates whether the sequence passed the QC thresholds for minimum length and maximum N content.
-13 | `note` | If any conflicts from the decision tree, this field will output the alternative assignments. If the sequence failed QC this field will describe why. If the sequence met the SNP thresholds for scorpio to call a constellation, it’ll describe the exact SNP counts of Alt, Ref and Amb (Alternative, Reference and Ambiguous) alleles for that call.
+With a larger number of samples we might actually want to create an observed lineage summary report. Lets see if you can generate such a report:
 
 > <question-title></question-title>
-> 
-> How many different lineages have been found? How many samples for each lineage?
+>
+> Can you configure the tool {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} to produce a three-column lineage summary from the pangolin output, in which each line lists one of the assigned lineages (from column 2 of the pangolin output) on the first column, how many samples had that lineage assigned on the second column, and the comma-separated identifiers of these samples (from column 1 of the pangolin output) on the third column?
 >
 > > <solution-title></solution-title>
 > >
-> > To summarize the number of lineages and number of samples for  each lineage, we can run {% tool [Group data](Grouping1) %} with the following parameters:
-> >    - {% icon param-file %} *"Select data"*: output of **pangolin**
-> >    - *"Group by column"*: `Column: 2`
-> >    - In *"Operation"*:
-> >      - In *"1: Operation"*:
-> >        - *"Type"*: `Count`
-> >        - *"On column"*: `Column: 1`
-> >    
-> > For our example datasets, we obtain then:
-> > - 13 samples B.1.1.7 / Alpha (B.1.1.7-like)
-> > - 3 samples B.1.617.2 / Delta (B.1.617.2-like)
-> > - 1 sample B.1.525	
-> > - 1 sample P.1
+> > Configure {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} like this:
+> > - {% icon param-file %} *"Input tabular dataset"*: the output of pangolin
+> > - *"Group by fields"*: 2
+> >
+> >   We want to group by pangolin lineages.
+> > - *"Sort input"*: `Yes`
+> >
+> >   Grouping only works as expected if the data is sorted by the values to group on, which isn't the case in the original pangolin output.
+> > - *"Input file has a header line"*: `Yes`
+> > - *"Print header line"*: `Yes`
+> > - In *"Operation to perform on each group"*
+> >   - In {% icon param-repeat %} *"1. Operation to perform on each group"*
+> >     - *"Type"*: `count`
+> >     - *"On column"*: `Column: 1`
+> >   - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+> >     - *"Type"*: `Combine all values`
+> >     - *"On column"*: `Column: 1`
+> {: .solution}
+{: .question}
+
+If you are following along with the suggested batch of data, here are some additional questions for you:
+
+> <question-title>Questions</question-title>
+> 
+> 1. Pangolin assigned most samples to one particular SARS-CoV-2 lineage and sub-lineages thereof.
+>    What is that lineage?
+>
+> 2. Which three samples did not get assigned to that lineage?
+>
+> 3. Can you explain the results for these three samples?
+>
+> 
+> > <solution-title></solution-title>
+> >
+> > 1. The lineage summary we have generated makes this easy to answer:
+> >
+> >    All samples except three got classified as BA.1 or sublineages thereof. BA.1 is the Omicron lineage that was dominant in South Africa when that new variant of concern was first discovered.
+> > 2. Again, this is straightforward to answer from the lineage summary:
+> >
+> >    The three samples are **SRR17051933** (which got assigned to lineage B.1), and **SRR17054505** and **SRR17054508** (both of which pangolin left unassigned).
+> > 3. We have encountered **SRR17054505** and **SRR17054508** previously as samples with low sequencing coverage.
+> >
+> >    When we ran pangolin, we used the default value for *"Maximum proportion of Ns allowed"* of `0.3`.
+> >    If you look up the two samples in the original output of pangolin and scroll to the right, you should see that they have a `fail` in the **qc_status** column and the **qc_notes** column explains that they had fractions of *Ambiguous content* (i.e. Ns) of 0.95 and 0.66, respectively.
+> >    In other words, pangolin refused (and rightly so) to perform lineage assignment for these two samples based on the very limited sequencing information available.
+> >
+> >    **SRR17051933**, on the other hand, has passed pangolin's quality control with very low *Ambiguous content* so we might tend to believe the assignment.
+> >    However, if you re-inspect the variant-frequency plot generated by the reporting workflow, you will find that this sample was the outlier sample that had more or less the same mutations called as the other samples in the batch, but nearly all of them at rather low allele-frequencies.
+> >    In fact, the only seemingly fixed mutations (with allele-frequencies close to one) are ancestral mutations that have been present in SARS-CoV-2 isolates since the Spring of 2020.
+> >    Since only these mutations made it into the consensus sequence for that sample, pnagolin has based the assignment only on them and has infered the ancestral lineage B.1 as a result.
+> >
+> >    Whether or not this is the correct assignment for this sample is hard to tell without additional information.
+> >    Several possibilities exist:
+> >    - the sample could indeed be from a pre-Omicron lineage and might have been cross-contaminated during its preparation for sequencing with DNA from one of the other samples processed together with it.
+> >    - the sample might have been taken from a patient who was infected with Omicron and a pre-Omicron lineage simultaneously.
 > >
 > {: .solution}
 {: .question}
@@ -812,7 +851,7 @@ Column | Field | Meaning
 
 Nextclade assigns clades, calls mutations and performs sequence quality checks on SARS-CoV-2 genomes.
 
-> <hands-on-title>From consensus sequences to clade assignations using Nextclade</hands-on-title>
+> <hands-on-title>From consensus sequences to clade assignments using Nextclade</hands-on-title>
 >
 > 1. {% tool [Nextclade](toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/2.7.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"FASTA file with input sequences"*: `Multisample consensus FASTA`
@@ -823,107 +862,82 @@ Nextclade assigns clades, calls mutations and performs sequence quality checks o
 > 2. Inspect the generated output
 {: .hands_on}
 
-Column | Field | Meaning
---- | --- | ---
-1 | `seqName` | Name of the sequence in the source data, here the sample name
-2 | `clade` | The result of the clade assignment of a sequence, as defined by Nextstrain. Currently known clades are depicted in the schema below
-3 | `qc.overallScore` | Overall QC score
-4 | `qc.overallStatus` | Overall QC status
-5 | `totalGaps` | Number of - characters (gaps)
-6 | `totalInsertions` | Total length of insertions
-7 | `totalMissing` | Number of N characters (missing data) 
-8 | `totalMutations` | Number of mutations. Mutations are called relative to the reference sequence Wuhan-Hu-1
-9 | `totalNonACGTNs` | Number of non-ACGTN characters
-10 | `totalPcrPrimerChanges` | Total number of mutations affecting user-specified PCR primer binding sites
-11 | `substitutions` | List of mutations
-12 | `deletions` | List of deletions (positions are 1-based)
-13 | `insertions` | Insertions relative to the reference Wuhan-Hu-1 (positions are 1-based)
-14 | `missing` | Intervals consisting of N characters
-15 | `nonACGTNs` | List of positions of non-ACGTN characters (for example ambiguous nucleotide codes)
-16 | `pcrPrimerChanges` | Number of user-specified PCR primer binding sites affected by mutations
-17 | `aaSubstitutions` | List of aminoacid changes
-18 | `totalAminoacidSubstitutions` | Number of aminoacid changes
-19 | `aaDeletions` | List of aminoacid deletions
-20 | `totalAminoacidDeletions` | Number of aminoacid deletions
-21 | `alignmentEnd` | Position of end of alignment
-22 | `alignmentScore` | Alignment score
-23 | `alignmentStart` | Position of beginning of alignment
-24 | `qc.missingData.missingDataThreshold` | Threshold for flagging sequences based on number of sites with Ns
-25 | `qc.missingData.score` | Score for missing data
-26 | `qc.missingData.status` | Status on missing data
-27 | `qc.missingData.totalMissing` | Number of sites with Ns
-28 | `qc.mixedSites.mixedSitesThreshold` | Threshold for flagging sequences based on number of mutations relative to the reference sequence
-29 | `qc.mixedSites.score` | Score for high divergence
-30 | `qc.mixedSites.status` | Status for high divergence 
-31 | `qc.mixedSites.totalMixedSites` | Number of sites with mutations
-32 | `qc.privateMutations.cutoff` | Threshold for the number of non-ACGTN characters for flagging sequences
-33 | `qc.privateMutations.excess` | Number of ambiguous nucleotides above the threshold
-34 | `qc.privateMutations.score` | Score for ambiguous nucleotides
-35 | `qc.privateMutations.status` | Status for ambiguous nucleotides
-36 | `qc.privateMutations.total` | Number of ambiguous nucleotides
-37 | `qc.snpClusters.clusteredSNPs` | Clusters with 6 or more differences in 100 bases
-38 | `qc.snpClusters.score` | Score for clustered differences
-39 | `qc.snpClusters.status` | Status for clustered differences
-40 | `qc.snpClusters.totalSNPs` | Number of differences in clusters
-41 | `errors` | Other errors (e.g. sequences in which some of the major genes fail to translate because of frame shifting insertions or deletions)
+Nextclade assigns lineages using an algorithm that differs from the one used by pangolin, and it uses a different "native" nomenclature system. A nice feature of Nextclade, however, is that it can translate between its own clade system, PANGO lineage names and the more coarse-grained WHO classification system.
+
+The details of and the rationale behind Nextclade "clade" assignment are explained in this [chapter of the Nextclade documentation](https://docs.nextstrain.org/projects/nextclade/en/stable/user/algorithm/06-clade-assignment.html#clade-assignment).
+
+The relationships between the clades (the ones known about in the Spring of 2023) and their correspondence to pangolin lineages are shown in Figure 2.
+
+![Illustration of phylogenetic relationship of clades, as used in Nextclade](../../images/sars-cov-2-variant-discovery/ncov_clades.svg "Illustration of phylogenetic relationship of clades, as used in Nextclade (Source: <a href="https://github.com/nextstrain/ncov-clades-schema/#ncov-clade-schema">Nextstrain</a>)")
+
+Let's use **Datamash** again to obtain a lineage summary report from the Nextclade results comparable to the one we created for pangolin, but including the additional lineage/clade identifiers available with Nextclade.
 
 > <question-title></question-title>
-> 
-> How many different lineages have been found? How many samples for each lineage?
 >
-> ![Illustration of phylogenetic relationship of clades, as used in Nextclade](../../images/sars-cov-2-variant-discovery/clades.svg "Illustration of phylogenetic relationship of clades, as used in Nextclade (Source: <a href="https://github.com/nextstrain/ncov-clades-schema/#ncov-clade-schema">Nextstrain</a>)")
+> Can you configure the {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} to produce a report summarizing the Nextclade results by `Nextclade_pango` (column 3 of Nextclade's output; for direct comparison to the pangolin results summary)?
+> This report should include the corresponding info from the `clade` column (column 2, which is Nextclade's native classification system) and from the `clade_who` (column 6), together with the sample counts and identifiers as previously calculated from pangolin's output.
 >
 > > <solution-title></solution-title>
 > >
-> > To summarize the number of lineages and number of samples for  each lineage, we can run {% tool [Group data](Grouping1) %} with the following parameters:
-> >    - {% icon param-file %} *"Select data"*: output of **Nextclade**
-> >    - *"Group by column"*: `Column: 2`
-> >    - In *"Operation"*:
-> >      - In *"1: Operation"*:
-> >        - *"Type"*: `Count`
-> >        - *"On column"*: `Column: 1`
-> >    
-> > For our example datasets, we obtain then:
-> > - 10 samples 20I (Alpha, V1)
-> > - 4 samples 20B (ancestor of 20I)
-> > - 3 samples 21A (Delta)
-> > - 1 sample 21D (Eta)
+> > Configure {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} like this:
+> > - {% icon param-file %} *"Input tabular dataset"*: the output of Nextclade
+> > - *"Group by fields"*: 3,2,6
+> >
+> >   We want to group by pangolin lineages. By including columns 2 and 6 we make sure the columns from these values are kept in the summary report (and that additional groups would be formed if any samples with identical assigned pangolin lineage should have different Nextclade or WHO assignments, which, of course, shouldn't be the case).
+> > - *"Sort input"*: `Yes`
+> > - *"Input file has a header line"*: `Yes`
+> > - *"Print header line"*: `Yes`
+> > - In *"Operation to perform on each group"*
+> >   - In {% icon param-repeat %} *"1. Operation to perform on each group"*
+> >     - *"Type"*: `count`
+> >     - *"On column"*: `Column: 1`
+> >   - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+> >     - *"Type"*: `Combine all values`
+> >     - *"On column"*: `Column: 1`
+> {: .solution}
+{: .question}
+
+Now you can compare the two summary reports (the one based on pangolin and the one based on Nextclade).
+
+Tip: Galaxy's {% icon galaxy-scratchbook %} Window Manager, which you can enable (and disable again) from the menu bar can be very helpful for side-by-side comparisons like this one.
+
+You should hopefully observe good (though not necessarily perfect) agreement between the reports.
+If you are following along with the suggested batch of data, here's a question about the detailed differences.
+
+> <question-title></question-title>
+> 
+> Which samples have been assigned differently by pangolin and Nextclade, and why?
+>
+> > <solution-title></solution-title>
+> >
+> > **SRR17054508**, one of the two samples left unassigned by pangolin is assigned to BA.1 by Nextclade.
+> >
+> > **SRR17054505**, the second sample left unassigned by pangolin is assigned to the recombinant lineage XAA by Nextclade.
+> > Discovering a recombinant lineage (with two different Omicron parents) this early during the emergence of Omicron would, of course, be a spectacular find, if it was real. However, we already know from the discussion of coverage and pangolin results for this sample that this assignment cannot make sense.
+> >
+> > Nextclade simply doesn't have pangolin's concept of leaving samples unassigned, and this is why it produced (highly unreliable) assignments for both **SRR17054508** and **SRR17054505**.
+> > However, if you inspect the original output of Nextclade, you'll see that the tool classified both samples as `bad` in terms of their **qc.overallStatus**.
+> > We could, thus, have used this column to filter out unreliable assignments to avoid the risk of overinterpreting the data.
 > >
 > {: .solution}
 {: .question}
 
-### Comparison between Pangolin and Nextclade assignments
 
-We can compare **Pangolin** and **Nextclade** clade assignments by extracting interesting columns and joining them into a single dataset using sample ids.
+# Conclusion and outlook
 
-> <hands-on-title>Comparison clade assignations</hands-on-title>
->
-> 1. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c1,c2`
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: output of **Nextclade**
->
-> 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c1,c2,c5`
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: output of **Pangolin**
->
-> 3. {% tool [Join two Datasets](join1) %}
->    - {% icon param-file %} *"Join*": output of first **cut**
->    - *"using column"*: `Column: 1`
->    - {% icon param-file %} *"with*": output of second **cut**
->    - *"and column"*: `Column: 1`
->
-> 4. Inspect the generated output
-{: .hands_on}
+## What we have covered
 
-We can see that **Pangolin** and **Nextclade** are globally coherent despite differences in lineage nomenclature.
+In this tutorial, we used a collection of Galaxy workflows for the detection and interpretation of SARS-CoV-2 sequence variants.
 
+The workflows can be freely used and are immediately accessible through global Galaxy instances.
 
-# Conclusion
+Combined, they enable rapid, reproducible, high-quality and flexible analysis of a range of different input data.
 
-In this tutorial, we used a collection of Galaxy workflows for the detection and interpretation of sequence variants in SARS-CoV-2.
+The combined analysis flow is compatible with a high-throughput of samples, but still allows for detailed dives into effects seen in only particular samples, and enables qualified users to draw valid conclusions about individual samples and whole batches of data at the same time.
 
-The workflows can be freely used and immediately accessed from the three global Galaxy instances. Each is capable of supporting thousands of users running hundreds of thousands of analyses per month. 
+## Further automation
 
-It is also possible to automate the workflow runs using the command line as explained in [a dedicated tutorial]({% link topics/galaxy-interface/tutorials/workflow-automation/tutorial.md %}).
+If at this point you are convinced of the quality of the analysis, but you are thinking that manually triggering those sequential workflow runs through the Galaxy user interface is still a lot of work when scaling to many batches of sequencing data, you may want to start learning about leveraging Galaxy's API to automate and orchestrate workflow executions.
+The GTN material has [a dedicated tutorial]({% link topics/galaxy-interface/tutorials/workflow-automation/tutorial.md %}) that explains triggering workflow runs from the command line via the API.
+
+The workflows presented here and API-based orchestration scripts are also among the main building blocks used by the Galaxy Covid-19 project to build a truly high-throughput, automated and reusable SARS-CoV-2 genome surveillance system, which has been used to analyze several hundreds of thousands of public SARS-CoV-2 sequencing datasets over the course of the pandemic and about which you can learn more on the corresponding [Infectious Diseases Toolkit page](https://www.infectious-diseases-toolkit.org/showcase/covid19-galaxy).
