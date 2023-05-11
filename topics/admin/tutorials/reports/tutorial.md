@@ -125,7 +125,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 6. The reports application should be available, under `<server_url>/reports/`.>
+> 6. The reports application should be available, under [`/reports`](https://my.gat.galaxy.training/?path=/reports)
 {: .hands_on}
 
 > ```bash
