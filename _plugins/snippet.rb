@@ -5,6 +5,8 @@ require './_plugins/gtn'
 
 module Jekyll
   module Tags
+    # A custom tag {% snippet %} which behaves almost identically to {% include %}
+    # Except that it will render the included file as a proper GTN Box
     class SnippetIncludeTag < IncludeTag
       def markdownify(text)
         @site.find_converter_instance(
@@ -46,7 +48,6 @@ module Jekyll
           context['include'] = parse_params(context) if @params
           x = inclusion.render(context).to_s
           p = context['include']
-          count = 0
 
           box_start = ''
           box_end = ''
@@ -59,7 +60,6 @@ module Jekyll
                        else
                          metadata['box_type']
                        end
-            icons = get_config(context)
 
             if context.registers[:page]&.key?('lang')
               lang = context.registers[:page].fetch('lang', 'en')
@@ -67,8 +67,8 @@ module Jekyll
             end
             lang = 'en' if (lang != 'en') && (lang != 'es')
             if (box_type != 'none') && !box_type.nil?
-              box_id, box_title = Gtn::Boxify.generate_title(box_type, metadata['title'], lang,
-                                                             context.registers[:page]['path'])
+              _box_id, box_title = Gtn::Boxify.generate_title(box_type, metadata['title'], lang,
+                                                              context.registers[:page]['path'])
               box_start = "> #{box_title}"
               box_end = "\n{: .#{box_type}}"
             end
@@ -93,8 +93,12 @@ module Jekyll
           # end
 
           '<!--SNIPPET-->' + markdownify(box_start + z + box_end)
-                             .gsub(%r{<(pre)[^>]*>(.*?)</\1>}m) { |m| m.gsub(/\n/, '<br>') } # Replace newlines inside of a PRE with <br>, so they don't get eaten during next one.
-                             .gsub(/\R+/, ' ') # Strip out spaces or the boxes break, replace them with single spaces so e.g. newlines get collapsed into a space and don't merge words together that shouldn't be merged.
+                             # Replace newlines inside of a PRE with <br>, so they don't get eaten during next one.
+                             .gsub(%r{<(pre)[^>]*>(.*?)</\1>}m) { |m| m.gsub(/\n/, '<br>') }
+                             # Strip out spaces or the boxes break, replace
+                             # them with single spaces so e.g. newlines get collapsed into a space
+                             # and don't merge words together that shouldn't be merged.
+                             .gsub(/\R+/, ' ')
                              .gsub('<h3', '<h3 data-toc-skip')
         end
       end

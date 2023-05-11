@@ -12,7 +12,7 @@ CONTRIBUTORS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-contributors.yaml')
 CONTRIBUTORS_SCHEMA = automagic_loading(CONTRIBUTORS_SCHEMA_UNSAFE)
 
 # Build validators now that we've filled out the subtopic enum
-$contribs_validator = Kwalify::Validator.new(CONTRIBUTORS_SCHEMA)
+contribs_validator = Kwalify::Validator.new(CONTRIBUTORS_SCHEMA)
 
 def validate_document(document, validator)
   errors = validator.validate(document)
@@ -21,7 +21,7 @@ def validate_document(document, validator)
   []
 end
 
-errs.push(*validate_document(CONTRIBUTORS, $contribs_validator))
+errs.push(*validate_document(CONTRIBUTORS, contribs_validator))
 
 # If we had no errors, validated successfully
 if errs.empty?

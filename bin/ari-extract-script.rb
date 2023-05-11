@@ -106,9 +106,7 @@ contents = lines[end_meta..]
 # This will be our final script
 blocks = [[metadata['title']]]
 if has_requirements
-  if m_lang == 'en'
-    blocks.push(['Before diving into this slide deck, we recommend you to have a look at the following.'])
-  elsif m_lang == 'es'
+  if m_lang == 'es'
     blocks.push(['Antes de profundizar en el contenido de estas diapositivas, te recomendamos que le des un vistazo a'])
   else
     blocks.push(['Before diving into this slide deck, we recommend you to have a look at the following.'])
@@ -138,9 +136,7 @@ end
 blocks.push(current_block)
 blocks.push(metadata['key_points']) if has_keypoints
 
-if m_lang == 'en'
-  blocks.push(['Thank you for watching!'])
-elsif m_lang == 'es'
+if m_lang == 'es'
   blocks.push(['¡Gracias por ver este vídeo!'])
 else
   blocks.push(['Thank you for watching!'])
@@ -181,9 +177,7 @@ res = {}
 res['blocks'] = blocks
 
 res['voice'] = if m_voice.nil?
-                 if m_lang == 'en'
-                   APPROVED_VOICES['en'].sample
-                 elsif m_lang == 'es'
+                 if m_lang == 'es'
                    APPROVED_VOICES['es'].sample
                  else
                    APPROVED_VOICES['en'].sample

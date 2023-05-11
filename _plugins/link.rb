@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Jekyll
+  # Replaces the built in link tag temporarily
   class CustomLinkTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super

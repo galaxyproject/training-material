@@ -4,6 +4,7 @@ require 'jekyll'
 require 'time'
 
 module Gtn
+  # Parse the git repo to get some facts
   module Git
     def self.cache
       @@cache ||= Jekyll::Cache.new('Git')

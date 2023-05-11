@@ -3,10 +3,12 @@
 require './_plugins/gtn/mod'
 require 'time'
 
+# Monkey patch Hash to make it Prometheus compatible
 class Hash
   def to_prometheus
     if keys.length.positive?
-      '{' + map { |k, v| "#{k}=\"#{v}\"" }.join(',') + '}'
+      inner = map { |k, v| "#{k}=\"#{v}\"" }.join(',')
+      "{#{inner}}"
     else
       ''
     end
@@ -14,6 +16,7 @@ class Hash
 end
 
 module Gtn
+  # Module for generating metrics for Prometheus
   module Metrics
     def self.iqr(array)
       # https://stackoverflow.com/questions/8856716/calculate-interquartile-mean-from-ruby-array/8856863#8856863
@@ -114,7 +117,8 @@ module Gtn
         },
         'tutorial_update_age_days' => {
           type: 'histogram',
-          help: 'How recently was every single Hands-on Tutorial touched within the GTN, grouped by days since last edited.',
+          help: 'How recently was every single Hands-on Tutorial touched within the GTN, ' \
+                'grouped by days since last edited.',
           value: histogram_dates(
             tutorials
             .map do |page|
@@ -139,16 +143,16 @@ module Gtn
 
     def self.generate_metrics(site)
       data = collect_metrics(site)
-      output = data.map do |k, v|
+      data.map do |k, v|
         out = "# HELP #{k} #{v[:help]}\n# TYPE #{k} #{v[:type]}\n"
 
         if v[:value].is_a?(Array)
           v[:value].each do |val|
-            attrs = val.reject { |k, _v| k == :value }.to_h
+            attrs = val.except(:value).to_h
             out += "#{k}#{attrs.to_prometheus} #{val[:value]}\n"
           end
         else
-          attrs = v.select { |k, _v| k != :value and k != :help and k != :type }.to_h
+          attrs = v.select { |k2, _v2| k2 != :value and k2 != :help and k2 != :type }.to_h
           out += "#{k}#{attrs.to_prometheus} #{v[:value]}\n"
         end
 

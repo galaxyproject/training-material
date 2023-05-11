@@ -25,6 +25,7 @@
 #
 # https://github.com/hsluv/hsluv-ruby
 
+# Converts between RGB, HSLUV
 module Hsluv
   module_function
 
@@ -110,7 +111,7 @@ module Hsluv
     x, y, z = arr
     l = f(y)
 
-    return [0.0, 0.0, 0.0] if [x, y, z, 0.0].uniq.length == 1 || l == 0.0
+    return [0.0, 0.0, 0.0] if [x, y, z, 0.0].uniq.length == 1 || l.zero?
 
     var_u = (4.0 * x) / (x + (15.0 * y) + (3.0 * z))
     var_v = (9.0 * y) / (x + (15.0 * y) + (3.0 * z))

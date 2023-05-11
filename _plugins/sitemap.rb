@@ -4,6 +4,7 @@ require 'date'
 require './_plugins/gtn'
 
 module Jekyll
+  # Generate a sitemap like Jekyll::Sitemap
   class SitemapGenerator < Generator
     safe true
 
@@ -18,7 +19,10 @@ module Jekyll
     def generate(site)
       puts '[GTN/Sitemap] Generating'
       result = '<?xml version="1.0" encoding="UTF-8"?>'
-      result += '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+      result += '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' \
+                'xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 ' \
+                'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" ' \
+                'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
 
       site.pages.reject { |t| t.path =~ /ipynb$/ }.each do |t|
         begin
@@ -30,7 +34,8 @@ module Jekyll
           formatted_date = d.strftime('%FT%T%:z')
         end
 
-        result += "<url><loc>#{site.config['url'] + site.config['baseurl'] + t.url}</loc><lastmod>#{formatted_date}</lastmod></url>"
+        result += "<url><loc>#{site.config['url'] + site.config['baseurl'] + t.url}</loc>" \
+                  "<lastmod>#{formatted_date}</lastmod></url>"
       end
       result += '</urlset>'
 

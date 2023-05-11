@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 module Gtn
+  # This module is responsible for generating shortlinks for tutorials and FAQs
   module Shortlinks
-    def self.is_mapped(tutorial, current_mapping)
+    def self.mapped?(tutorial, current_mapping)
       current_mapping['id'].values.include? tutorial
     end
 
@@ -15,9 +16,10 @@ module Gtn
       Dir.glob('topics/*/tutorials/*/tutorial.md').each do |tutorial|
         html_path = "/#{tutorial.gsub(/md$/, 'html')}"
         # If it's not already mapped by a key, add it.
-        if !is_mapped(html_path, current_mapping)
+        if !mapped?(html_path, current_mapping)
           # Generate a short code
-          short_code = 'T' + current_mapping['id'].select { |x| x[0] == 'T' }.length.to_s.rjust(5, '0')
+          short_code_number = current_mapping['id'].select { |x| x[0] == 'T' }.length.to_s.rjust(5, '0')
+          short_code = "T#{short_code_number}"
           puts "Discovered tutorial #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
@@ -33,9 +35,10 @@ module Gtn
       Dir.glob('topics/*/tutorials/*/slides.html').each do |tutorial|
         html_path = "/#{tutorial}"
         # If it's not already mapped by a key, add it.
-        if !is_mapped(html_path, current_mapping)
+        if !mapped?(html_path, current_mapping)
           # Generate a short code
-          short_code = 'S' + current_mapping['id'].select { |x| x[0] == 'S' }.length.to_s.rjust(5, '0')
+          short_code_number = current_mapping['id'].select { |x| x[0] == 'S' }.length.to_s.rjust(5, '0')
+          short_code = "S#{short_code_number}"
           puts "Discovered slides #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
@@ -51,9 +54,10 @@ module Gtn
       Dir.glob('faqs/**/*.md').each do |tutorial|
         html_path = "/#{tutorial.gsub(/md$/, 'html')}"
         # If it's not already mapped by a key, add it.
-        if !is_mapped(html_path, current_mapping)
+        if !mapped?(html_path, current_mapping)
           # Generate a short code
-          short_code = 'F' + current_mapping['id'].select { |x| x[0] == 'F' }.length.to_s.rjust(5, '0')
+          short_code_number = current_mapping['id'].select { |x| x[0] == 'F' }.length.to_s.rjust(5, '0')
+          short_code = "F#{short_code_number}"
           puts "Discovered FAQ #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path

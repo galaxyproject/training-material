@@ -47,9 +47,9 @@ def timefmt(t, fmt)
   ms = 1000 * ms
 
   if fmt == 'vtt'
-    format('%02d:%02d:%02d.%03d', hours, minutes, seconds, ms)
+    format('%<h>02d:%<m>02d:%<s>02d.%<ms>03d', { h: hours, m: minutes, s: seconds, ms: ms })
   else
-    format('%02d:%02d:%02d,%03d', hours, minutes, seconds, ms)
+    format('%<h>02d:%<m>02d:%<s>02d,%<ms>03d', { h: hours, m: minutes, s: seconds, ms: ms })
   end
 end
 

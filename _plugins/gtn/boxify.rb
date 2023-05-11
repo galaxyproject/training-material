@@ -3,6 +3,7 @@
 require 'jekyll'
 
 module Gtn
+  # Generate boxes
   module Boxify
     @@ICONS = {
       'agenda' => '',
@@ -143,9 +144,10 @@ module Gtn
 
     def self.generate_collapsible_title(box_type, title, lang = 'en', key, contents: false)
       box_id = get_id(box_type, title, key)
-      box_title = format_box_title(title, box_type, lang = lang)
+      box_title = format_box_title(title, box_type, lang)
       refers_to_contents = contents ? '-contents' : ''
       # These are all collapsed by default, details, tip, and solution.
+      # rubocop:disable Layout/LineLength
       [box_id, %(
         <div class="box-title #{box_type}-title" id="#{box_id}">
         <button class="gtn-boxify-button #{box_type}" type="button" aria-controls="#{box_id}#{refers_to_contents}" aria-expanded="true">
@@ -154,11 +156,12 @@ module Gtn
         </button>
         </div>
       ).split(/\n/).map(&:strip).join.strip]
+      # rubocop:enable Layout/LineLength
     end
 
     def self.generate_static_title(box_type, title, lang = 'en', key)
       box_id = get_id(box_type, title, key)
-      box_title = format_box_title(title, box_type, lang = lang)
+      box_title = format_box_title(title, box_type, lang)
 
       puts "Static | typ=#{box_type} | t=#{title} | l=#{lang} | k=#{key}" if title.nil?
 
@@ -203,7 +206,7 @@ module Gtn
         line.gsub(%r{<(?<type>[a-z-]*)-title>(?<title>.*?)</[a-z-]*-title>}) do |_m|
           title = Regexp.last_match[:title]
           type = Regexp.last_match[:type]
-          _, box = generate_title(type, title, lang = lang, key)
+          _, box = generate_title(type, title, lang, key)
           box
         end
       end.join("\n")
@@ -213,6 +216,7 @@ end
 
 if $PROGRAM_NAME == __FILE__
   require 'test/unit'
+  # Test the box ID algorithm
   class BoxIdTest < Test::Unit::TestCase
     def test_single_page
       assert_equal(Gtn::Boxify.get_id('hands-on', 'a box', 'index.md'), 'hands-on-a-box')

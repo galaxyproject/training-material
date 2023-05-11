@@ -117,7 +117,7 @@ def synthesize(uncorrected_line, engine, voice: 'Amy', lang: 'en-GB', neural: tr
     # TTS would generate
     #
     # In: Some important terms you should know.
-    # Out Some important terms you should know know know know know know know know know know know know know know know know ...
+    # Out Some important terms you should know know know know know know know know know know know know know know ...
     #
     # So we put in a check that the duration hasn't done something crazy, and
     # if it is add something to the end which seems to short-circuit that

@@ -3,6 +3,7 @@
 require './_plugins/jekyll-topic-filter'
 
 module Jekyll
+  # Generates synthetic topics from tutorials with specific tags
   class SyntheticTopicGenerator < Generator
     def generate(site)
       # Full Bibliography

@@ -3,6 +3,7 @@
 require 'test/unit'
 require './bin/lint'
 
+# Test case for the GTN linter
 class GtnLinterTest < Test::Unit::TestCase
   include GtnLinter
 
@@ -84,7 +85,7 @@ class GtnLinterTest < Test::Unit::TestCase
 
   def test_doi
     text = "a\nfrom [Pedro Larrañaga, 2006](https://doi.org/10.1093/bib/bbk007).\nasdf".split "\n"
-    #          123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+    #          123456789012345678901234567890123456789012345678901234567890123456789012345678901234567
     result = GtnLinter.check_dois(text)
 
     assert_equal(result[0]['location']['range']['start']['line'], 2)
@@ -100,7 +101,7 @@ class GtnLinterTest < Test::Unit::TestCase
     assert_equal(result[0]['suggestions'][0]['range']['end']['column'], 64 + 2)
 
     text = "a\nfrom [Pedro Larrañaga, 2006](https://doi.org/10.5281/zenodo.10238184212).\nasdf".split "\n"
-    #          123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+    #          12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012
     result = GtnLinter.check_dois(text)
     assert_equal(result.length, 0)
   end

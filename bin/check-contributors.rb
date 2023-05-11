@@ -40,7 +40,7 @@ file_contributors = `git log --use-mailmap --follow --pretty=%aE #{fn}`.lines.so
 fixed_contribs = file_contributors.map do |email|
   email = email.strip
   if /users.noreply.github.com/.match(email)
-    parts = /^([0-9]+\+)?(?<id>.*)@users.noreply.github.com/.match(email)
+    parts = /^(?<_num>[0-9]+\+)?(?<id>.*)@users.noreply.github.com/.match(email)
     # we just want their gh id
     parts[:id]
   elsif contributor_emails.key?(email)

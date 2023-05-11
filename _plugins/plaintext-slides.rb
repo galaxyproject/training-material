@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module Jekyll
+  # Convert our slides to plaintext
+  # It's not a great convesion, the CSS classes are retained which are ugly
+  # But there's no good way to parse those out since they use a wildly nonstandard syntax
   class PlaintextSlidesGenerator < Generator
     SLIDE_LAYOUTS = %w[
       tutorial_slides

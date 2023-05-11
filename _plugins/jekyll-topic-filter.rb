@@ -4,6 +4,7 @@ require 'json'
 require 'yaml'
 require './_plugins/gtn'
 
+# The main GTN module to parse tutorials and topics into useful lists of things that can bes shown on topic pages
 module TopicFilter
   ##
   # This function returns a list of all the topics that are available.
@@ -283,7 +284,6 @@ module TopicFilter
     # pages (i.e. things that are under `topic_name`)
     interesting = {}
     pages.each do |page|
-      page_parts = page.url.split('/')
       # Skip anything outside of topics.
       next if !page.url.include?('/topics/')
 
@@ -586,7 +586,8 @@ module TopicFilter
   # +Array+:: An array of contributors as strings.
   def self.identify_contributors(materials)
     materials
-      .map { |_k, v| v['materials'] }.flatten # Not 100% sure why this flatten is needed? Probably due to the map over hash
+      .map { |_k, v| v['materials'] }.flatten
+      # Not 100% sure why this flatten is needed? Probably due to the map over hash
       .map { |mat| get_contributors(mat) }.flatten.uniq.shuffle
   end
 
@@ -651,7 +652,7 @@ module TopicFilter
     # Uniqueify/sort
     t = tool_map.to_h do |k, v|
       v['tool_id'].uniq!
-      v['tool_id'].sort_by! { |k| k[1] }
+      v['tool_id'].sort_by! { |k2| k2[1] }
       v['tool_id'].reverse!
 
       v['tutorials'].uniq!
@@ -665,6 +666,7 @@ module TopicFilter
 end
 
 module Jekyll
+  # The "implementation" of the topic filter as liquid accessible filters
   module ImplTopicFilter
     ##
     # List the most recent contributors to the GTN.

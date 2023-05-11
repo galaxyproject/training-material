@@ -5,6 +5,7 @@ require 'liquid'
 require './_plugins/colour-tags'
 
 module Jekyll
+  # Export search data as JSON
   class DumpSearchDataTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super
@@ -36,7 +37,10 @@ module Jekyll
               site.data['contributors'].fetch(c, {}).fetch('name', c)
             end.join(', '),
             'tags' => getlist(tutorial, 'tags').map do |tag|
-              %(<a class="label label-default" title="Show all tutorials tagged #{tag}" href="#{site.baseurl}/search?query=#{tag}" style="#{ColourTag.colour_tag tag}">#{tag}</a>)
+              href = "#{site.baseurl}/search?query=#{tag}"
+              title = "Show all tutorials tagged #{tag}"
+              style = ColourTag.colour_tag tag
+              %(<a class="label label-default" title="#{title}" href="#{href}" style="#{style}">#{tag}</a>)
             end,
             'url' => site.baseurl + tutorial['url'],
           }

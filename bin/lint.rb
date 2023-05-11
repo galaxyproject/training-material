@@ -10,6 +10,7 @@ require 'csl/styles'
 
 # This is our ONE central linting script that handles EVERYTHING.
 
+# A custom module to properly format reviewdog json output
 module ReviewDogEmitter
   @CODE_URL = 'https://github.com/galaxyproject/training-material/wiki/Error-Codes'
   def self.delete_text(path: '', idx: 0, text: '', message: 'No message', code: 'GTN000', full_line: '')
@@ -38,7 +39,8 @@ module ReviewDogEmitter
     )
   end
 
-  def self.warning(path: '', idx: 0, match_start: 0, match_end: 1, replacement: nil, message: 'No message', code: 'GTN000', full_line: '')
+  def self.warning(path: '', idx: 0, match_start: 0, match_end: 1,
+                   replacement: nil, message: 'No message', code: 'GTN000', full_line: '')
     self.message(
       path: path,
       idx: idx,
@@ -52,7 +54,8 @@ module ReviewDogEmitter
     )
   end
 
-  def self.error(path: '', idx: 0, match_start: 0, match_end: 1, replacement: nil, message: 'No message', code: 'GTN000', full_line: '')
+  def self.error(path: '', idx: 0, match_start: 0, match_end: 1, replacement: nil, message: 'No message',
+                 code: 'GTN000', full_line: '')
     self.message(
       path: path,
       idx: idx,
@@ -66,7 +69,8 @@ module ReviewDogEmitter
     )
   end
 
-  def self.message(path: '', idx: 0, match_start: 0, match_end: 1, replacement: nil, message: 'No message', level: 'WARNING', code: 'GTN000', full_line: '')
+  def self.message(path: '', idx: 0, match_start: 0, match_end: 1, replacement: nil, message: 'No message',
+                   level: 'WARNING', code: 'GTN000', full_line: '')
     end_area = { 'line' => idx + 1, 'column' => match_end }
     end_area = { 'line' => idx + 2, 'column' => 1 } if match_end == full_line.length
 
@@ -100,6 +104,7 @@ module ReviewDogEmitter
   end
 end
 
+# Linting functions for the GTN
 module GtnLinter
   @BAD_TOOL_LINK = /{% tool (\[[^\]]*\])\(https?.*tool_id=([^)]*)\)\s*%}/i
 
@@ -133,7 +138,9 @@ module GtnLinter
         match_start: selected.begin(0),
         match_end: selected.end(0) + 1,
         replacement: '',
-        message: 'Instead of embedding IFrames to YouTube contents, consider adding this video to the [GTN Video Library](https://github.com/gallantries/video-library/issues/) where it will be more visible for others.',
+        message: 'Instead of embedding IFrames to YouTube contents, consider adding this video to the ' \
+                 '[GTN Video Library](https://github.com/gallantries/video-library/issues/) where it will ' \
+                 'be more visible for others.',
         code: 'GTN:002'
       )
     end
@@ -152,7 +159,8 @@ module GtnLinter
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement: "{% link #{selected[3]}.md %}",
-        message: 'Please use the link function to link to other pages within the GTN. It helps us ensure that all links are correct',
+        message: 'Please use the link function to link to other pages within the GTN. ' \
+                 'It helps us ensure that all links are correct',
         code: 'GTN:003'
       )
     end
@@ -170,7 +178,8 @@ module GtnLinter
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement: "{% link #{selected[3]} %}",
-        message: 'Please use the link function to link to other pages within the GTN. It helps us ensure that all links are correct',
+        message: 'Please use the link function to link to other pages within the GTN. ' \
+                 'It helps us ensure that all links are correct',
         code: 'GTN:003'
       )
     end
@@ -186,7 +195,9 @@ module GtnLinter
         match_start: selected.begin(0),
         match_end: selected.end(0) + 2,
         replacement: '{% cite ... %}',
-        message: 'This looks like a DOI which could be better served by using the built-in Citations mechanism. You can use https://doi2bib.org to convert your DOI into a .bib formatted entry, and add to your tutorial.md',
+        message: 'This looks like a DOI which could be better served by using the built-in Citations mechanism. ' \
+                 'You can use https://doi2bib.org to convert your DOI into a .bib formatted entry, ' \
+                 'and add to your tutorial.md',
         code: 'GTN:004'
       )
     end
@@ -202,7 +213,9 @@ module GtnLinter
         match_start: selected.begin(0),
         match_end: selected.end(0) + 2,
         replacement: '{% cite ... %}',
-        message: 'This looks like a PMID which could be better served by using the built-in Citations mechanism. You can use https://doi2bib.org to convert your PMID/PMCID into a .bib formatted entry, and add to your tutorial.md',
+        message: 'This looks like a PMID which could be better served by using the built-in Citations mechanism. ' \
+                 'You can use https://doi2bib.org to convert your PMID/PMCID into a .bib formatted entry, ' \
+                 'and add to your tutorial.md',
         code: 'GTN:004'
       )
     end
@@ -281,7 +294,7 @@ module GtnLinter
 
   @CITATION_LIBRARY = nil
 
-  def self.get_citation_library
+  def self.citation_library
     if @CITATION_LIBRARY.nil?
       lib = BibTeX::Bibliography.new
       (enumerate_type(/bib$/) + enumerate_type(/bib$/, root_dir: 'faqs')).each do |path|
@@ -302,7 +315,7 @@ module GtnLinter
     find_matching_texts(contents, /{%\s*cite\s+([^%]*)\s*%}/i)
       .map do |idx, _text, selected|
       citation_key = selected[1].strip
-      if get_citation_library[citation_key].nil?
+      if citation_library[citation_key].nil?
         ReviewDogEmitter.error(
           path: @path,
           idx: idx,
@@ -380,7 +393,7 @@ module GtnLinter
   def self.check_tool_link(contents)
     find_matching_texts(contents, /{%\s*tool \[([^\]]*)\]\(([^)]*)\)\s*%}/)
       .map do |idx, _text, selected|
-      text = selected[1]
+      # text = selected[1]
       link = selected[2]
 
       errs = []
@@ -422,14 +435,18 @@ module GtnLinter
                     ))
         end
 
-        if !ALLOWED_SHORT_IDS.include?(link) && !link.match(/^interactive_tool_/) && !link.match(/__[A-Z_]+__/) && !link.match(/^{{.*}}$/)
+        if !ALLOWED_SHORT_IDS.include?(link) &&
+           !link.match(/^interactive_tool_/) &&
+           !link.match(/__[A-Z_]+__/) &&
+           !link.match(/^{{.*}}$/)
           errs.push(ReviewDogEmitter.error(
                       path: @path,
                       idx: idx,
                       match_start: selected.begin(2),
                       match_end: selected.end(2) + 1,
                       replacement: nil,
-                      message: 'Unknown short tool ID. Please use the full tool ID, or check bin/lint.rb if you believe this is correct.',
+                      message: 'Unknown short tool ID. Please use the full tool ID, or check bin/lint.rb ' \
+                               'if you believe this is correct.',
                       code: 'GTN:009'
                     ))
         end
@@ -481,7 +498,8 @@ module GtnLinter
         match_start: selected.begin(0),
         match_end: selected.end(0),
         replacement: nil,
-        message: 'Please do not use `target="_blank"`, [it is bad for accessibility.](https://www.a11yproject.com/checklist/#identify-links-that-open-in-a-new-tab-or-window)',
+        message: 'Please do not use `target="_blank"`, [it is bad for accessibility.]' \
+                 '(https://www.a11yproject.com/checklist/#identify-links-that-open-in-a-new-tab-or-window)',
         code: 'GTN:011'
       )
     end
@@ -520,13 +538,14 @@ module GtnLinter
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement: "### #{selected[1]}",
-        message: "This looks like a heading, but isn't. Please use proper semantic headings where possible. You should check the heading level of this suggestion, rather than accepting the change as-is.",
+        message: "This looks like a heading, but isn't. Please use proper semantic headings where possible. " \
+                 'You should check the heading level of this suggestion, rather than accepting the change as-is.',
         code: 'GTN:020'
       )
     end
   end
 
-  KNOWN_TAGS = [
+  @KNOWN_TAGS = [
     # GTN
     'cite',
     'snippet',
@@ -547,7 +566,7 @@ module GtnLinter
 
   def self.check_bad_tag(contents)
     find_matching_texts(contents, /{%\s*(?<tag>[a-z]+)/)
-      .reject { |_idx, _text, selected| KNOWN_TAGS.include? selected[:tag] }
+      .reject { |_idx, _text, selected| @KNOWN_TAGS.include? selected[:tag] }
       .map do |idx, _text, selected|
       ReviewDogEmitter.warning(
         path: @path,
@@ -561,7 +580,7 @@ module GtnLinter
     end
   end
 
-  BOX_CLASSES = %w[
+  @BOX_CLASSES = %w[
     agenda
     code-in
     code-out
@@ -579,7 +598,7 @@ module GtnLinter
   def self.check_useless_box_prefix(contents)
     find_matching_texts(contents, /<(?<tag>[a-z_-]+)-title>(?<fw>[a-zA-Z_-]+:?\s*)/)
       .select do |_idx, _text, selected|
-      BOX_CLASSES.include?(selected[:tag]) and selected[:tag] == selected[:fw].gsub(/:\s*$/, '').downcase
+      @BOX_CLASSES.include?(selected[:tag]) and selected[:tag] == selected[:fw].gsub(/:\s*$/, '').downcase
     end
       .map do |idx, _text, selected|
       ReviewDogEmitter.warning(
@@ -588,7 +607,8 @@ module GtnLinter
         match_start: selected.begin(2),
         match_end: selected.end(2) + 1,
         replacement: '',
-        message: "It is no longer necessary to prefix your #{selected[:tag]} box titles with #{selected[:tag].capitalize}, this is done automatically.",
+        message: "It is no longer necessary to prefix your #{selected[:tag]} box titles with " \
+                 "#{selected[:tag].capitalize}, this is done automatically.",
         code: 'GTN:022'
       )
     end
@@ -626,7 +646,8 @@ module GtnLinter
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement: selected[:title][2..-3],
-        message: 'Please do not bold headings, it is unncessary and will potentially cause screen readers to shout them.',
+        message: 'Please do not bold headings, it is unncessary ' \
+                 'and will potentially cause screen readers to shout them.',
         code: 'GTN:029'
       )
     end
@@ -690,19 +711,25 @@ module GtnLinter
     if !contents.key?('tags')
       topic = @path.split('/')[1]
       results.push(ReviewDogEmitter.file_error(
-                     path: @path, message: "This workflow is missing tags. Please add `\"tags\": [\"#{topic}\"]`", code: 'GTN:015'
+                     path: @path, message: "This workflow is missing tags. Please add `\"tags\": [\"#{topic}\"]`",
+                     code: 'GTN:015'
                    ))
     end
 
     if !contents.key?('annotation')
       results.push(ReviewDogEmitter.file_error(
-                     path: @path, message: 'This workflow is missing an annotation. Please add `"annotation": "title of tutorial"`', code: 'GTN:016'
+                     path: @path,
+                     message: 'This workflow is missing an annotation. Please add `"annotation": "title of tutorial"`',
+                     code: 'GTN:016'
                    ))
     end
 
     if !contents.key?('license')
       results.push(ReviewDogEmitter.file_error(
-                     path: @path, message: 'This workflow is missing a license. Please select a valid OSI license. You can correct this in the Galaxy workflow editor.', code: 'GTN:026'
+                     path: @path,
+                     message: 'This workflow is missing a license. Please select a valid OSI license. ' \
+                              'You can correct this in the Galaxy workflow editor.',
+                     code: 'GTN:026'
                    ))
     end
 
@@ -712,19 +739,26 @@ module GtnLinter
         .each do |p|
           if !p.key?('identifier') || (p['identifier'] == '')
             results.push(ReviewDogEmitter.file_error(
-                           path: @path, message: 'This workflow has a creator but is missing an identifier for them. Please ensure all creators have valid ORCIDs.', code: 'GTN:025'
+                           path: @path,
+                           message: 'This workflow has a creator but is missing an identifier for them. ' \
+                                    'Please ensure all creators have valid ORCIDs.',
+                           code: 'GTN:025'
                          ))
           end
 
           if !p.key?('name') || (p['name'] == '')
             results.push(ReviewDogEmitter.file_error(
-                           path: @path, message: 'This workflow has a creator but is a name, please add it.', code: 'GTN:025'
+                           path: @path, message: 'This workflow has a creator but is a name, please add it.',
+                           code: 'GTN:025'
                          ))
           end
         end
     else
       results.push(ReviewDogEmitter.file_error(
-                     path: @path, message: 'This workflow is missing a Creator. Please edit this workflow in Galaxy to add the correct creator entities', code: 'GTN:024'
+                     path: @path,
+                     message: 'This workflow is missing a Creator. Please edit this workflow in ' \
+                              'Galaxy to add the correct creator entities',
+                     code: 'GTN:024'
                    ))
     end
     results
@@ -761,7 +795,7 @@ module GtnLinter
   end
 
   @LIMIT_EMITTED_CODES = nil
-  def self.set_code_limits(codes)
+  def self.code_limits(codes)
     @LIMIT_EMITTED_CODES = codes
   end
 
@@ -790,8 +824,6 @@ module GtnLinter
     end
 
     return unless @AUTO_APPLY_FIXES && message['suggestions'].length.positive?
-
-    # {"message":"It is no longer necessary to prefix your hands-on box titles with Hands-on, this is done automatically.","location":{"path":"./topics/computational-chemistry/tutorials/zauberkugel/tutorial.md","range":{"start":{"line":186,"column":4},"end":{"line":186,"column":12}}},"severity":"WARNING","code":{"value":"GTN:022","url":"https://github.com/galaxyproject/training-material/wiki/Error-Codes#gtn022"},"suggestions":[{"text":"<hands-on-title>","range":{"start":{"line":186,"column":4},"end":{"line":186,"column":12}}}]}
 
     start_line = message['location']['range']['start']['line']
     start_coln = message['location']['range']['start']['column']
@@ -851,7 +883,8 @@ module GtnLinter
 
     if path.match(/\s/)
       emit_results([ReviewDogEmitter.file_error(path: path,
-                                                message: 'There are spaces in this filename, that is forbidden.', code: 'GTN:014')])
+                                                message: 'There are spaces in this filename, that is forbidden.',
+                                                code: 'GTN:014')])
     end
 
     case path
@@ -888,7 +921,11 @@ module GtnLinter
         if possible_tests.empty?
           results += [
             ReviewDogEmitter.file_error(path: path,
-                                        message: 'This workflow is missing a test, which is now mandatory. Please see [the FAQ on how to add tests to your workflows](https://training.galaxyproject.org/training-material/faqs/gtn/gtn_workflow_testing.html).', code: 'GTN:027')
+                                        message: 'This workflow is missing a test, which is now mandatory. Please ' \
+                                                 'see [the FAQ on how to add tests to your workflows](' \
+                                                 'https://training.galaxyproject.org/training-material/faqs/' \
+                                                 'gtn/gtn_workflow_testing.html).',
+                                        code: 'GTN:027')
           ]
         end
 
@@ -965,7 +1002,7 @@ module GtnLinter
       )
     end
 
-    enumerate_symlinks.each  do |path|
+    enumerate_symlinks.each do |path|
       if !File.exist?(Pathname.new(path).realpath)
         format_reviewdog_output(
           ReviewDogEmitter.file_error(path: path, message: 'This is a BAD symlink', code: 'GTN:013')
@@ -980,7 +1017,8 @@ module GtnLinter
       if path.split('/')[-1] != 'data-library.yaml'
         format_reviewdog_output(
           ReviewDogEmitter.file_error(path: path,
-                                      message: 'This file must be named data-library.yaml. Please rename it.', code: 'GTN:023')
+                                      message: 'This file must be named data-library.yaml. Please rename it.',
+                                      code: 'GTN:023')
         )
       end
     end
@@ -999,32 +1037,32 @@ if $PROGRAM_NAME == __FILE__
   require 'optparse'
   require 'ostruct'
 
-  options = OpenStruct.new
+  options = {}
   OptionParser.new do |opt|
     # Mutually exclusive
-    opt.on('-f', '--format [plain|rdjson]', 'Preferred output format, defaults to plain') { |o| options.format = o }
+    opt.on('-f', '--format [plain|rdjson]', 'Preferred output format, defaults to plain') { |o| options[:format] = o }
     opt.on('-p', '--path file.md', 'Specify a single file to check instead of the entire repository') do |o|
-      options.path = o
+      options[:path] = o
     end
-    opt.on('-l', '--limit GTN:001,...', 'Limit output to specific codes') { |o| options.limit = o }
-    opt.on('-a', '--auto-fix', 'I am not sure this is really safe, be careful') { |_o| options.apply = true }
+    opt.on('-l', '--limit GTN:001,...', 'Limit output to specific codes') { |o| options[:limit] = o }
+    opt.on('-a', '--auto-fix', 'I am not sure this is really safe, be careful') { |_o| options[:apply] = true }
   end.parse!
 
-  options.format = 'plain' if options.format.nil?
+  options[:format] = 'plain' if options[:format].nil?
 
-  if options.format == 'plain'
+  if options[:format] == 'plain'
     linter.set_plain_output
   else
     linter.set_rdjson_output
   end
 
-  linter.set_code_limits(options.limit.split(',')) if options.limit
+  linter.code_limits(options[:limit].split(',')) if options[:limit]
 
-  linter.enable_auto_fix if options.apply
+  linter.enable_auto_fix if options[:apply]
 
-  if options.path.nil?
+  if options[:path].nil?
     linter.run_linter_global
   else
-    linter.fix_file(options.path)
+    linter.fix_file(options[:path])
   end
 end

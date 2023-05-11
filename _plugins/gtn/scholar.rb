@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Gtn
+  # GTN implementation of Jekyll::Scholar except faster.
   module Scholar
     def self.load_bib(site)
       return if site.config.key?('cached_global_bib')

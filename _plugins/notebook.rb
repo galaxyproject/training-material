@@ -6,6 +6,7 @@ require 'fileutils'
 require 'yaml'
 require 'base64'
 
+# Generate Notebooks from Markdown
 module GTNNotebooks
   COLORS = {
     'overview' => '#8A9AD0',
@@ -92,10 +93,10 @@ module GTNNotebooks
       'nbformat_minor' => 5,
     }
 
-    notebook['cells'] = out.map.with_index do |data, index|
+    notebook['cells'] = out.map.with_index do |data2, index|
       res = {
         'id' => "cell-#{index}",
-        'source' => data[0].map { |x| "#{x.rstrip}\n" }
+        'source' => data2[0].map { |x| "#{x.rstrip}\n" }
       }
       # Strip the trailing newline in the last cell.
       res['source'][-1] = res['source'][-1].rstrip if res['source'].length.positive?
@@ -104,7 +105,7 @@ module GTNNotebooks
       # tip/solution/etc boxes. These do not render well.
       res['source'] = res['source'].map { |x| x.gsub(/```#{language}/, '```') }
 
-      if data[1]
+      if data2[1]
         res.update({
                      'cell_type' => 'code',
                      'execution_count' => nil,
@@ -186,7 +187,8 @@ module GTNNotebooks
     end
 
     folks.map do |c|
-      "[#{contributors.fetch(c, { 'name' => c }).fetch('name', c)}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
+      name = contributors.fetch(c, { 'name' => c }).fetch('name', c)
+      "[#{name}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
     end.join(', ')
   end
 
@@ -199,7 +201,8 @@ module GTNNotebooks
       "\n",
       "by #{by_line}\n",
       "\n",
-      "#{metadata.fetch('license', 'CC-BY')} licensed content from the [Galaxy Training Network](https://training.galaxyproject.org/)\n",
+      "#{metadata.fetch('license', 'CC-BY')} licensed content from the [Galaxy Training Network]" \
+      "(https://training.galaxyproject.org/)\n",
       "\n",
       "**Objectives**\n",
       "\n"
@@ -362,7 +365,8 @@ module GTNNotebooks
       "# Key Points\n"
     ] + page_data['key_points'].map { |k| "- #{k}" } + [
       "\n# Congratulations on successfully completing this tutorial!\n",
-      "Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/training-material#{page_url}#feedback) and check there for further resources!\n"
+      'Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/' \
+      "training-material#{page_url}#feedback) and check there for further resources!\n"
     ]
 
     "#{rmddata.to_yaml(line_width: rmddata['author'].size + 10)}---\n#{final_content.join("\n")}"
@@ -404,7 +408,8 @@ module GTNNotebooks
         "# Key Points\n\n"
       ] + data['key_points'].map { |k| "- #{k}\n" } + [
         "\n# Congratulations on successfully completing this tutorial!\n\n",
-        "Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/training-material#{url}#feedback) and check there for further resources!\n"
+        'Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/training-material' \
+        "#{url}#feedback) and check there for further resources!\n"
       ]
     }]
     notebook

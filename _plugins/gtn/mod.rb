@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module Gtn
+  # Module for obtaining modification times of files.
+  # It walks the git history to record the last time a file was modified.
+  # This is faster than talking to the file system.
   module ModificationTimes
     @@TIME_CACHE = nil
 

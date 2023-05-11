@@ -7,6 +7,7 @@ require 'pathname'
 require 'kwalify'
 require './bin/gtn'
 
+# Validates the frontmatter of all files
 module SchemaValidator
   # Schemas
   @TOPIC_SCHEMA_UNSAFE = YAML.load_file('bin/schema-topic.yaml')
@@ -28,13 +29,13 @@ module SchemaValidator
   @SLIDES_SCHEMA['mapping']['contributions']['required'] = false
 
   # Build validators now that we've filled out the subtopic enum
-  $topic_validator = Kwalify::Validator.new(@TOPIC_SCHEMA)
-  $tutorial_validator = Kwalify::Validator.new(@TUTORIAL_SCHEMA)
-  $slides_validator = Kwalify::Validator.new(@SLIDES_SCHEMA)
-  $faq_validator = Kwalify::Validator.new(@FAQ_SCHEMA)
-  $quiz_validator = Kwalify::Validator.new(@QUIZ_SCHEMA)
-  $requirement_external_validator = Kwalify::Validator.new(@requirement_external_schema)
-  $requirement_internal_validator = Kwalify::Validator.new(@requirement_internal_schema)
+  @topic_validator = Kwalify::Validator.new(@TOPIC_SCHEMA)
+  @tutorial_validator = Kwalify::Validator.new(@TUTORIAL_SCHEMA)
+  @slides_validator = Kwalify::Validator.new(@SLIDES_SCHEMA)
+  @faq_validator = Kwalify::Validator.new(@FAQ_SCHEMA)
+  @quiz_validator = Kwalify::Validator.new(@QUIZ_SCHEMA)
+  @requirement_external_validator = Kwalify::Validator.new(@requirement_external_schema)
+  @requirement_internal_validator = Kwalify::Validator.new(@requirement_internal_schema)
 
   def self.validate_document(document, validator)
     errors = validator.validate(document)
@@ -50,11 +51,11 @@ module SchemaValidator
     []
   end
 
-  def self.is_tutorial(fn)
+  def self.tutorial?(fn)
     fn.include?('tutorial.md') || fn =~ /tutorial_[A-Z]{2,}.md/
   end
 
-  def self.is_slide(fn)
+  def self.slide?(fn)
     fn.include?('slides.html') || fn =~ /slides_[A-Z]{2,}.html/
   end
 
@@ -68,9 +69,9 @@ module SchemaValidator
       # For external links, they need a link that is non-empty
       case requirement['type']
       when 'external'
-        errs.push(*validate_document(requirement, $requirement_external_validator))
+        errs.push(*validate_document(requirement, @requirement_external_validator))
       when 'internal'
-        errs.push(*validate_document(requirement, $requirement_internal_validator))
+        errs.push(*validate_document(requirement, @requirement_internal_validator))
 
         # For the internal requirements, test that they point at something real.
         if requirement.key?('tutorials')
@@ -79,7 +80,8 @@ module SchemaValidator
             pn = Pathname.new("topics/#{requirement['topic_name']}/tutorials/#{tutorial}")
 
             if !pn.directory?
-              errs.push("Internal requirement to topics/#{requirement['topic_name']}/tutorials/#{tutorial} does not exist")
+              errs.push("Internal requirement to topics/#{requirement['topic_name']}/tutorials/#{tutorial} " \
+                        'does not exist')
             end
           end
         end
@@ -112,7 +114,7 @@ module SchemaValidator
       puts "Skipping #{fn}"
       return nil
     end
-    errs.push(*validate_document(data, $faq_validator))
+    errs.push(*validate_document(data, @faq_validator))
     errs
   end
 
@@ -147,8 +149,8 @@ module SchemaValidator
 
         @TUTORIAL_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
         @SLIDES_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
-        $tutorial_validator = Kwalify::Validator.new(@TUTORIAL_SCHEMA)
-        $slides_validator = Kwalify::Validator.new(@SLIDES_SCHEMA)
+        @tutorial_validator = Kwalify::Validator.new(@TUTORIAL_SCHEMA)
+        @slides_validator = Kwalify::Validator.new(@SLIDES_SCHEMA)
       end
     end
 
@@ -160,16 +162,16 @@ module SchemaValidator
     errs.push(*validate_requirements(data['follow_up_training'])) if data.key?('follow_up_training')
 
     # Custom error handling:
-    if is_tutorial(fn)
-      errs.push(*validate_document(data, $tutorial_validator))
+    if tutorial?(fn)
+      errs.push(*validate_document(data, @tutorial_validator))
     elsif fn.include?('metadata.yaml')
-      errs.push(*validate_document(data, $topic_validator))
-    elsif is_slide(fn)
-      errs.push(*validate_document(data, $slides_validator))
+      errs.push(*validate_document(data, @topic_validator))
+    elsif slide?(fn)
+      errs.push(*validate_document(data, @slides_validator))
     end
 
     # Check contributors OR contributions
-    if (is_slide(fn) || is_tutorial(fn)) && !(data.key?('contributors') || data.key?('contributions'))
+    if (slide?(fn) || tutorial?(fn)) && !(data.key?('contributors') || data.key?('contributions'))
       errs.push('Document lacks EITHER contributors OR contributions key')
     end
 
@@ -212,7 +214,7 @@ module SchemaValidator
       end
     end
 
-    errs.push(*validate_document(data, $quiz_validator))
+    errs.push(*validate_document(data, @quiz_validator))
     errs
   end
 

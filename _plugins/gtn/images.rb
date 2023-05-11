@@ -11,6 +11,8 @@ rescue LoadError
 end
 
 module Gtn
+  # Module to handle pre-calculating image dimensions
+  # We can then use those dimensions in the HTML to avoid reflow
   module Images
     def self.cache
       @@cache ||= Jekyll::Cache.new('ImageDimensions')
@@ -26,9 +28,7 @@ module Gtn
     end
 
     def self.get_image_dimensions(tuto_dir, url)
-      if (match = url.match(%r{^{{\s*site.baseurl\s*}}/(.*)}))
-        _get_image_dimensions(match[1].strip)
-      elsif (match = url.match(/{%\s*link\s*(.*)\s*%}/))
+      if (match = url.match(%r{^{{\s*site.baseurl\s*}}/(.*)})) || (match = url.match(/{%\s*link\s*(.*)\s*%}/))
         _get_image_dimensions(match[1].strip)
       elsif !url.match(%r{https?://})
         img_path = File.absolute_path(File.join(tuto_dir, url))
