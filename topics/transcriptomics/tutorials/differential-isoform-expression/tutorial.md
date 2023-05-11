@@ -566,7 +566,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 >
 >   > <comment-title>Reduce to switch genes option</comment-title>
 >   >
->   > An important argument is the 'Reduce to switch genes' optin. When enabled, it will reduce/subset  of genes to those which each contains at least one differential used isoform, as indicated by the alpha and dIFcutoff cutoffs. This option ensures the rest of the workflow runs significantly faster since isoforms from genes without IS are not analyzed.
+>   > An important argument is the 'Reduce to switch genes' option. When enabled, it will reduce/subset  of genes to those which each contains at least one differential used isoform, as indicated by the alpha and dIFcutoff cutoffs. This option ensures the rest of the workflow runs significantly faster since isoforms from genes without IS are not analyzed.
 >   >
 >   {: .comment}
 >
@@ -575,7 +575,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 
 ## Outward sequence analysis
 
-The next step is to use to use generated FASTA files corresponding to the aminoacid and nucleotide sequences to perform the external analysis tools. In that case, we will use **PfamScan** for predicting protein domains and **CPAT** predicting the coding potential. This informatin will be integrated in the downstream analysis.
+The next step is to use to use generated FASTA files corresponding to the aminoacid and nucleotide sequences to perform the external analysis tools. In that case, we will use **PfamScan** for predicting protein domains and **CPAT** predicting the coding potential. This information will be integrated in the downstream analysis.
 
 > <comment-title>Additional sequence analysis tools</comment-title>
 >
