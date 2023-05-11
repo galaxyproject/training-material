@@ -21,7 +21,8 @@ if options[:previousCommit].nil?
 end
 
 addedfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=A #{options[:previousCommit]}`.split("\n")
-modifiedfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=M #{options[:previousCommit]}`.split("\n")
+# modifiedfiles = `git diff --cached --name-only --ignore-all-space
+# --diff-filter=M #{options[:previousCommit]}`.split("\n")
 
 NOW = Time.now
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
@@ -67,10 +68,14 @@ end
 
 data = {
   added: {
-    slides: addedfiles.select { |x| filterSlides(x) }.select { |x| onlyEnabled(x) }.map { |x| printableMaterial(x) },
-    tutorials: addedfiles.select do |x|
-                 filterTutorials(x)
-               end.select { |x| onlyEnabled(x) }.map { |x| printableMaterial(x) },
+    slides: addedfiles
+       .select { |x| filterSlides(x) }
+       .select { |x| onlyEnabled(x) }
+       .map { |x| printableMaterial(x) },
+    tutorials: addedfiles
+       .select { |x| filterTutorials(x) }
+       .select { |x| onlyEnabled(x) }
+       .map { |x| printableMaterial(x) },
     news: addedfiles.grep(%r{news/_posts/.*\.md}).map { |x| printableMaterial(x) }.map { |n| fixNews(n) }
   },
   # 'modified': {

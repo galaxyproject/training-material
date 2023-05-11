@@ -43,7 +43,7 @@ def timefmt(t, fmt)
   minutes = seconds.to_i / 60
   seconds = seconds % 60
   (seconds, ms) = seconds.divmod(1)
-  seconds = seconds
+  # seconds = seconds
   ms = 1000 * ms
 
   if fmt == 'vtt'
