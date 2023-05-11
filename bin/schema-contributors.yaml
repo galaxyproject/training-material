@@ -125,17 +125,21 @@ mapping:
                     - 2020-1-NL01-KA203-064717
             url:
                 type: str
-                description: associated webpage
+                description: associated webpage (NOTE, funders only!)
+                examples:
+                  - "https://elixir-europe.org"
             funding_system:
                 type: str
-                description: Funding system
-                examples:
-                    - Horizon2020
+                description: Automatically link to the grant's information in the appropriate funding system site.
+                enum:
+                    - "cordis"
+                    - "erasmusplus"
             funding_statement:
                 type: str
                 description: A short statement about the funder, markdown is supported.
                 examples:
                     - This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+
             in_memoriam:
                 type: str
                 description: |
