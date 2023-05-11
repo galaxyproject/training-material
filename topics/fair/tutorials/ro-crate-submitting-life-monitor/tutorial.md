@@ -103,7 +103,7 @@ its GitHub Action through [this link](https://github.com/by-covid/gtn/tree/main/
 
 The [{LM} GitHub App](https://github.com/apps/lifemonitor) provides the most
 straightforward way to use {LM} with your GitHub-hosted workflow. The app can do
-the following things. 
+the following things.
 
 * Examine your repository and apply a series of automated *checks*.
 * Suggest pull requests (PRs) to make changes or additions to bring the workflow
@@ -193,7 +193,7 @@ The LifeMonitor documentation has [a more detailed explanation](https://www.life
 ### Enable WorkflowHub Integration for your account
 
 Enabling registry integration for WorkflowHub enables the LM automations related
-to workflow registry activities.  
+to workflow registry activities.
 
 
 Go to the *Registry Integration* tab on your [LifeMonitor account
