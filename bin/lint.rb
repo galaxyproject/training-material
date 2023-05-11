@@ -916,7 +916,6 @@ module GtnLinter
         emit_results([ReviewDogEmitter.file_error(path: path, message: 'Unparseable JSON in this workflow file.',
                                                   code: 'GTN:019')])
       end
-      bib = BibTeX.open(path)
     end
   end
 
@@ -954,7 +953,18 @@ module GtnLinter
     enumerate_type(/bib$/) + enumerate_type(/md$/) + enumerate_type(/md$/, root_dir: 'faqs')
   end
 
+  def self.enumerate_all
+    enumerate_type(/.*/)
+  end
+
   def self.run_linter_global
+    enumerate_type(/:/).each do |path|
+      format_reviewdog_output(
+        ReviewDogEmitter.file_error(path: path,
+                                    message: 'There are colons in this filename, that is forbidden.', code: 'GTN:014')
+      )
+    end
+
     enumerate_symlinks.each  do |path|
       if !File.exist?(Pathname.new(path).realpath)
         format_reviewdog_output(
