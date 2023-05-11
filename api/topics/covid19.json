@@ -19,6 +19,281 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
+      "title": "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.3732358",
+      "questions": [
+        "How can a genome of interest be assembled against a background of contaminating reads from other genomes?",
+        "How can sequencing data from public sources be turned into assembly-ready polished datasets?"
+      ],
+      "objectives": [
+        "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
+        "Organize the data into collections and check its quality",
+        "Detect and remove human reads",
+        "Assemble retained reads and explore the results"
+      ],
+      "time_estimation": "4h",
+      "level": "Intermediate",
+      "key_points": [
+        "Certain types of NGS samples can be heavily contaminated with sequences from other genomes",
+        "Reads from known/expected contaminating sources can be identified by mapping to the respective genomes",
+        "After mapping, use filtering tools to remove identified contaminating reads, and use conversion tools to convert remaining mapped reads back into raw sequenced reads expected by most downstream tools"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "assembly",
+          "tutorials": [
+            "unicycler-assembly"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "sequence-analysis",
+          "tutorials": [
+            "mapping"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections"
+          ]
+        }
+      ],
+      "tags": [
+        "covid19"
+      ],
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "orcid": "0000-0002-9464-6640",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+        }
+      ],
+      "url": "/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "assembly-with-preprocessing",
+      "dir": "topics/assembly/tutorials/assembly-with-preprocessing",
+      "id": "assembly/assembly-with-preprocessing",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": {
+          "description": "This tutorial guides you through the preprocessing of sequencing data of bronchoalveolar lavage fluid (BALF) samples obtained from early COVID-19 patients in China. Since such samples are expected to be contaminated signficantly with human sequenced reads, the goal is to enrich the data for SARS-CoV-2 reads by identifying and discarding reads of human origin before trying to assemble the viral genome sequence.",
+          "materials": [
+            {
+              "link": "topics/assembly/tutorials/assembly-with-preprocessing/slides.html",
+              "type": "Slides"
+            },
+            {
+              "link": "topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "assembly"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "mtekman"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "25M",
+              "link": "jNFLYhjgJPs",
+              "speakers": [
+                "gallardoalba"
+              ]
+            }
+          ],
+          "gtn_id": "assembly/assembly-with-preprocessing",
+          "title": "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads",
+          "captioned": true
+        },
+        "session": null
+      },
+      "hands_on": true,
+      "slides": true,
+      "workflows": [
+        {
+          "workflow": "assembly_with_preprocessing.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/workflows/assembly_with_preprocessing.ga",
+          "path": "topics/assembly/tutorials/assembly-with-preprocessing/workflows/assembly_with_preprocessing.ga",
+          "wfid": "assembly-assembly-with-preprocessing",
+          "wfname": "assembly_with_preprocessing",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-assembly-with-preprocessing/versions/assembly_with_preprocessing",
+          "license": null,
+          "creators": [
+
+          ]
+        },
+        {
+          "workflow": "assembly_with_preprocessing_and_sra_download.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/workflows/assembly_with_preprocessing_and_sra_download.ga",
+          "path": "topics/assembly/tutorials/assembly-with-preprocessing/workflows/assembly_with_preprocessing_and_sra_download.ga",
+          "wfid": "assembly-assembly-with-preprocessing",
+          "wfname": "assembly_with_preprocessing_and_sra_download",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-assembly-with-preprocessing/versions/assembly_with_preprocessing_and_sra_download",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "__ZIP_COLLECTION__",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.19.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
+        "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.25.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_sample/1.3.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.4+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.8.0",
+        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring",
+      "level": "Intermediate",
+      "zenodo_link": "https://zenodo.org/record/3730474",
+      "questions": [
+        "How can candidate ligands be generated and docked to a protein in Galaxy?",
+        "How can the poses of the docked ligands be evaluated?",
+        "How can a workflow for drug virtual screening be constructed in Galaxy?"
+      ],
+      "objectives": [
+        "Understand how Galaxy was used to perform docking and pose scoring on the SARS-CoV-2 main protease (MPro).",
+        "Replicate the study on a (very) small scale",
+        "Gain familiarity with the docking and scoring techniques involved."
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "Galaxy can support large, rapid studies in computational chemistry",
+        "Protein-ligand docking contributes to the discovery of new drugs"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "computational-chemistry",
+          "tutorials": [
+            "cheminformatics"
+          ]
+        }
+      ],
+      "tags": [
+        "covid19"
+      ],
+      "contributors": [
+        {
+          "name": "Simon Bray",
+          "joined": "2019-05",
+          "elixir_node": "de",
+          "id": "simonbray",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
+        }
+      ],
+      "url": "/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html",
+      "topic_name": "computational-chemistry",
+      "tutorial_name": "covid19-docking",
+      "dir": "topics/computational-chemistry/tutorials/covid19-docking",
+      "id": "computational-chemistry/covid19-docking",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/covid19-docking/workflows/workflow.ga",
+          "path": "topics/computational-chemistry/tutorials/covid19-docking/workflows/workflow.ga",
+          "wfid": "computational-chemistry-covid19-docking",
+          "wfname": "workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-covid19-docking/versions/workflow",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/0.1.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/2013.1-0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/0.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/2020.03.4+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/2.4.2.2.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/rdock_rbcavity/rdock_rbcavity/0.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/rdock_rbdock/rdock_rbdock/0.1.4",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbcavity/rxdock_rbcavity/0.1.5",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbdock/rxdock_rbdock/0.1.5",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.4.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/0.2.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/2020.03.4+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/xchem_transfs_scoring/xchem_transfs_scoring/0.4.0",
+        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2",
+        "xchem_pose_scoring"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/covid19-docking/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/covid19-docking/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Removal of human reads from SARS-CoV-2 sequencing data",
       "questions": [
         "How can you remove traces of human sequence data from a sequenced viral sample?"
@@ -385,145 +660,30 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring",
-      "level": "Intermediate",
-      "zenodo_link": "https://zenodo.org/record/3730474",
+      "title": "Submitting sequence data to ENA",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.5163611",
       "questions": [
-        "How can candidate ligands be generated and docked to a protein in Galaxy?",
-        "How can the poses of the docked ligands be evaluated?",
-        "How can a workflow for drug virtual screening be constructed in Galaxy?"
+        "How do you submit raw sequence reads and assembled genomes to the European Nucleotide Archive?"
       ],
       "objectives": [
-        "Understand how Galaxy was used to perform docking and pose scoring on the SARS-CoV-2 main protease (MPro).",
-        "Replicate the study on a (very) small scale",
-        "Gain familiarity with the docking and scoring techniques involved."
+        "Submit raw sequencing reads and metadata to ENA's test server",
+        "Submit consensus sequence and metadata to ENA's test server"
       ],
-      "time_estimation": "2H",
-      "key_points": [
-        "Galaxy can support large, rapid studies in computational chemistry",
-        "Protein-ligand docking contributes to the discovery of new drugs"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "computational-chemistry",
-          "tutorials": [
-            "cheminformatics"
-          ]
-        }
-      ],
-      "tags": [
-        "covid19"
-      ],
-      "contributors": [
-        {
-          "name": "Simon Bray",
-          "joined": "2019-05",
-          "elixir_node": "de",
-          "id": "simonbray",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
-        }
-      ],
-      "url": "/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html",
-      "topic_name": "computational-chemistry",
-      "tutorial_name": "covid19-docking",
-      "dir": "topics/computational-chemistry/tutorials/covid19-docking",
-      "id": "computational-chemistry/covid19-docking",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/covid19-docking/workflows/workflow.ga",
-          "path": "topics/computational-chemistry/tutorials/covid19-docking/workflows/workflow.ga",
-          "wfid": "computational-chemistry-covid19-docking",
-          "wfname": "workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-covid19-docking/versions/workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/0.1.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/2013.1-0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/0.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/2020.03.4+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/2.4.2.2.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/rdock_rbcavity/rdock_rbcavity/0.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/rdock_rbdock/rdock_rbdock/0.1.4",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbcavity/rxdock_rbcavity/0.1.5",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbdock/rxdock_rbdock/0.1.5",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.4.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/0.2.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/2020.03.4+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/xchem_transfs_scoring/xchem_transfs_scoring/0.4.0",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2",
-        "xchem_pose_scoring"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/covid19-docking/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/covid19-docking/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.3732358",
-      "questions": [
-        "How can a genome of interest be assembled against a background of contaminating reads from other genomes?",
-        "How can sequencing data from public sources be turned into assembly-ready polished datasets?"
-      ],
-      "objectives": [
-        "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
-        "Organize the data into collections and check its quality",
-        "Detect and remove human reads",
-        "Assemble retained reads and explore the results"
-      ],
-      "time_estimation": "4h",
+      "time_estimation": "1h",
       "level": "Intermediate",
       "key_points": [
-        "Certain types of NGS samples can be heavily contaminated with sequences from other genomes",
-        "Reads from known/expected contaminating sources can be identified by mapping to the respective genomes",
-        "After mapping, use filtering tools to remove identified contaminating reads, and use conversion tools to convert remaining mapped reads back into raw sequenced reads expected by most downstream tools"
+        "Use Galaxy's 'ENA Upload tool' to submit raw reads to ENA",
+        "Use Galaxy's 'Submit consensus sequence to ENA' tool",
+        "You need to include your ENA Webin credentials in Galaxy",
+        "For small submission use 'ENA Upload tool' interactive metadata forms feature",
+        "For bulk submissions use a spreadsheet metadata template"
       ],
       "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "assembly",
-          "tutorials": [
-            "unicycler-assembly"
-          ]
-        },
         {
           "type": "internal",
           "topic_name": "sequence-analysis",
           "tutorials": [
-            "mapping"
+            "human-reads-removal"
           ]
         },
         {
@@ -539,84 +699,48 @@
       ],
       "contributors": [
         {
-          "name": "Wolfgang Maier",
-          "orcid": "0000-0002-9464-6640",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "wm75",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+          "name": "Miguel Roncoroni",
+          "joined": "2021-08",
+          "email": "miguel.roncoroni@elixir-belgium.org",
+          "id": "roncoronimiguel",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/roncoronimiguel.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/"
+        },
+        {
+          "name": "Bert Droesbeke",
+          "email": "bedro@psb.ugent.be",
+          "gitter": "bedroesb",
+          "orcid": "0000-0003-0522-5674",
+          "joined": "2019-12",
+          "elixir_node": "be",
+          "id": "bedroesb",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bedroesb.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bedroesb/"
         }
       ],
-      "url": "/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html",
-      "topic_name": "assembly",
-      "tutorial_name": "assembly-with-preprocessing",
-      "dir": "topics/assembly/tutorials/assembly-with-preprocessing",
-      "id": "assembly/assembly-with-preprocessing",
+      "url": "/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html",
+      "topic_name": "galaxy-interface",
+      "tutorial_name": "upload-data-to-ena",
+      "dir": "topics/galaxy-interface/tutorials/upload-data-to-ena",
+      "id": "galaxy-interface/upload-data-to-ena",
       "video_library": {
         "tutorial": null,
         "slides": null,
         "demo": null,
-        "both": {
-          "description": "This tutorial guides you through the preprocessing of sequencing data of bronchoalveolar lavage fluid (BALF) samples obtained from early COVID-19 patients in China. Since such samples are expected to be contaminated signficantly with human sequenced reads, the goal is to enrich the data for SARS-CoV-2 reads by identifying and discarding reads of human origin before trying to assemble the viral genome sequence.",
-          "materials": [
-            {
-              "link": "topics/assembly/tutorials/assembly-with-preprocessing/slides.html",
-              "type": "Slides"
-            },
-            {
-              "link": "topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "assembly"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "mtekman"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "25M",
-              "link": "jNFLYhjgJPs",
-              "speakers": [
-                "gallardoalba"
-              ]
-            }
-          ],
-          "gtn_id": "assembly/assembly-with-preprocessing",
-          "title": "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads",
-          "captioned": true
-        },
+        "both": null,
         "session": null
       },
       "hands_on": true,
       "slides": true,
       "workflows": [
         {
-          "workflow": "assembly_with_preprocessing.ga",
+          "workflow": "main_workflow.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/workflows/assembly_with_preprocessing.ga",
-          "path": "topics/assembly/tutorials/assembly-with-preprocessing/workflows/assembly_with_preprocessing.ga",
-          "wfid": "assembly-assembly-with-preprocessing",
-          "wfname": "assembly_with_preprocessing",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-assembly-with-preprocessing/versions/assembly_with_preprocessing",
-          "license": null,
-          "creators": [
-
-          ]
-        },
-        {
-          "workflow": "assembly_with_preprocessing_and_sra_download.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/workflows/assembly_with_preprocessing_and_sra_download.ga",
-          "path": "topics/assembly/tutorials/assembly-with-preprocessing/workflows/assembly_with_preprocessing_and_sra_download.ga",
-          "wfid": "assembly-assembly-with-preprocessing",
-          "wfname": "assembly_with_preprocessing_and_sra_download",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-assembly-with-preprocessing/versions/assembly_with_preprocessing_and_sra_download",
+          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/workflows/main_workflow.ga",
+          "path": "topics/galaxy-interface/tutorials/upload-data-to-ena/workflows/main_workflow.ga",
+          "wfid": "galaxy-interface-upload-data-to-ena",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-upload-data-to-ena/versions/main_workflow",
           "license": null,
           "creators": [
 
@@ -624,22 +748,9 @@
         }
       ],
       "tools": [
-        "__ZIP_COLLECTION__",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.19.5+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
-        "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.25.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_sample/1.3.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.4+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.8.0",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"
+        "toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/ena_webin_cli/7d751b5943b0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1"
       ],
       "tours": false,
       "video": false,
@@ -654,8 +765,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.json"
       }
     },
     {
@@ -801,117 +912,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-automation/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/workflow-automation/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Submitting sequence data to ENA",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.5163611",
-      "questions": [
-        "How do you submit raw sequence reads and assembled genomes to the European Nucleotide Archive?"
-      ],
-      "objectives": [
-        "Submit raw sequencing reads and metadata to ENA's test server",
-        "Submit consensus sequence and metadata to ENA's test server"
-      ],
-      "time_estimation": "1h",
-      "level": "Intermediate",
-      "key_points": [
-        "Use Galaxy's 'ENA Upload tool' to submit raw reads to ENA",
-        "Use Galaxy's 'Submit consensus sequence to ENA' tool",
-        "You need to include your ENA Webin credentials in Galaxy",
-        "For small submission use 'ENA Upload tool' interactive metadata forms feature",
-        "For bulk submissions use a spreadsheet metadata template"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "sequence-analysis",
-          "tutorials": [
-            "human-reads-removal"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "collections"
-          ]
-        }
-      ],
-      "tags": [
-        "covid19"
-      ],
-      "contributors": [
-        {
-          "name": "Miguel Roncoroni",
-          "joined": "2021-08",
-          "email": "miguel.roncoroni@elixir-belgium.org",
-          "id": "roncoronimiguel",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/roncoronimiguel.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/"
-        },
-        {
-          "name": "Bert Droesbeke",
-          "email": "bedro@psb.ugent.be",
-          "gitter": "bedroesb",
-          "orcid": "0000-0003-0522-5674",
-          "joined": "2019-12",
-          "elixir_node": "be",
-          "id": "bedroesb",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bedroesb.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bedroesb/"
-        }
-      ],
-      "url": "/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html",
-      "topic_name": "galaxy-interface",
-      "tutorial_name": "upload-data-to-ena",
-      "dir": "topics/galaxy-interface/tutorials/upload-data-to-ena",
-      "id": "galaxy-interface/upload-data-to-ena",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": true,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/workflows/main_workflow.ga",
-          "path": "topics/galaxy-interface/tutorials/upload-data-to-ena/workflows/main_workflow.ga",
-          "wfid": "galaxy-interface-upload-data-to-ena",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/galaxy-interface-upload-data-to-ena/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/ena_webin_cli/7d751b5943b0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.json"
       }
     },
     {
