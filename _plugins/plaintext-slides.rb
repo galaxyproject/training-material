@@ -24,11 +24,11 @@ module Jekyll
         else
           page2.basename = 'slides-plain'
         end
-        page2.content = page2.content.gsub(/^name:\s*([^ ]+)\s*$/) {
+        page2.content = page2.content.gsub(/^name:\s*([^ ]+)\s*$/) do
           anchor = $1
 
           "<span id=\"#{anchor.strip}\"><i class=\"fas fa-link\" aria-hidden=\"true\"></i> #{anchor}</span>"
-        }
+        end
         if page2.data.has_key?('redirect_from')
           page2.data['redirect_from'].map { |x| x.gsub!(/\/slides/, '/slides-plain') }
         end

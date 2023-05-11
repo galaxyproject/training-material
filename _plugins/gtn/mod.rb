@@ -9,13 +9,13 @@ module Gtn
         results = `git log --name-only --pretty='GTN_GTN:%ct'`.split('GTN_GTN:')
         results.map! { |x| x.split(/\n\n/) }
         results.select! { |x| x.length > 1 }
-        results.each { |date, files|
-          files.split(/\n/).each { |f|
+        results.each do |date, files|
+          files.split(/\n/).each do |f|
             if not @@TIME_CACHE.has_key? f
               @@TIME_CACHE[f] = Time.at(date.to_i)
             end
-          }
-        }
+          end
+        end
       end
     end
 

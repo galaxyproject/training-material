@@ -25,37 +25,37 @@ module Jekyll
                    .select { |k, v| ['use', 'admin-dev', 'basics'].include? v['type'] }
 
       results = {}
-      topics.each { |k, topic|
+      topics.each do |k, topic|
         tutorials = site.data['cache_topic_filter'][k]
-        tutorials.each { |tutorial|
+        tutorials.each do |tutorial|
           results[tutorial['url']] = {
             'type' => 'Tutorial',
             'topic' => topic['title'],
             'title' => tutorial['title'],
-            'contributors' => getlist(tutorial, 'contributors').map { |c|
+            'contributors' => getlist(tutorial, 'contributors').map do |c|
               site.data['contributors'].fetch(c, {}).fetch('name', c)
-            }.join(', '),
-            'tags' => getlist(tutorial, 'tags').map { |tag|
+            end.join(', '),
+            'tags' => getlist(tutorial, 'tags').map do |tag|
               %Q(<a class="label label-default" title="Show all tutorials tagged #{tag}" href="#{site.baseurl}/search?query=#{tag}" style="#{ColourTag.colour_tag tag}">#{tag}</a>)
-            },
+            end,
             'url' => site.baseurl + tutorial['url'],
           }
-        }
-      }
+        end
+      end
 
       faqs = site.pages.select { |p| p.data['layout'] == 'faq' }
-      faqs.each { |resource|
+      faqs.each do |resource|
         results[resource['url']] = {
           'type' => 'FAQ',
           'topic' => 'FAQ',
           'title' => resource['title'],
-          'contributors' => getlist(resource.data, 'contributors').map { |c|
+          'contributors' => getlist(resource.data, 'contributors').map do |c|
             site.data['contributors'].fetch(c, {}).fetch('name', c)
-          }.join(', '),
+          end.join(', '),
           'tags' => [],
           'url' => site.baseurl + resource['url'],
         }
-      }
+      end
 
       JSON.pretty_generate(results)
     end

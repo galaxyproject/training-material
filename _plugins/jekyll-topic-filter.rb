@@ -25,9 +25,9 @@ module TopicFilter
       site.data['cache_topic_filter'] = Hash.new
 
       # For each topic
-      self.list_topics(site).each { |topic|
+      self.list_topics(site).each do |topic|
         site.data['cache_topic_filter'][topic] = self.filter_by_topic(site, topic)
-      }
+      end
       puts '[GTN/TopicFilter] End Cache Prefill'
     end
   end
@@ -85,14 +85,14 @@ module TopicFilter
       # We'll construct a new hash of subtopic => tutorials
       out = Hash.new
       seen_ids = []
-      site.data[topic_name]['subtopics'].each { |subtopic, v|
+      site.data[topic_name]['subtopics'].each do |subtopic, v|
         specific_resources = self.filter_by_topic_subtopic(site, topic_name, subtopic['id'])
         out[subtopic['id']] = {
           'subtopic' => subtopic,
           'materials' => specific_resources
         }
         seen_ids += specific_resources.map { |x| x['id'] }
-      }
+      end
 
       # And we'll have this __OTHER__ subtopic for any tutorials that weren't
       # in a subtopic.
@@ -116,14 +116,14 @@ module TopicFilter
       seen_topics = materials.map { |x| x['topic_name'] }.sort
 
       # Treat them like subtopics, but fake subtopics.
-      seen_topics.each { |parent_topic, v|
+      seen_topics.each do |parent_topic, v|
         specific_resources = materials.select { |x| x['topic_name'] == parent_topic }
         out[parent_topic] = {
           'subtopic' => { 'id' => parent_topic, 'title' => site.data[parent_topic]['title'], 'description' => nil },
           'materials' => specific_resources
         }
         seen_ids += specific_resources.map { |x| x['id'] }
-      }
+      end
 
       # And we'll have this __OTHER__ subtopic for any tutorials that weren't
       # in a subtopic.
@@ -148,9 +148,9 @@ module TopicFilter
       out.delete('__OTHER__')
     end
 
-    out.each { |k, v|
+    out.each do |k, v|
       v['materials'].sort_by! { |m| [m.fetch('priority', 1), m['title']] }
-    }
+    end
 
     out
   end
@@ -176,9 +176,9 @@ module TopicFilter
   # +Array+:: The list of tool IDs
   def self.extract_workflow_tool_list(data)
     out = data['steps'].select { |k, v| v['type'] == 'tool' }.map { |k, v| v['tool_id'] }.select { |x| !x.nil? }
-    out += data['steps'].select { |k, v|
+    out += data['steps'].select do |k, v|
              v['type'] == 'subworkflow'
-           }.map { |k, v| self.extract_workflow_tool_list(v['subworkflow']) }
+           end.map { |k, v| self.extract_workflow_tool_list(v['subworkflow']) }
     out
   end
 
@@ -405,7 +405,7 @@ module TopicFilter
     ymls = Dir.glob("#{folder}/quiz/*.yml") + Dir.glob("#{folder}/quiz/*.yaml")
     if ymls.length > 0
       quizzes = ymls.map { |a| a.split('/')[-1] }
-      page_obj['quiz'] = quizzes.map { |q|
+      page_obj['quiz'] = quizzes.map do |q|
         quiz_data = YAML.load_file("#{folder}/quiz/#{q}")
         {
           'id' => q,
@@ -413,7 +413,7 @@ module TopicFilter
           'title' => quiz_data['title'],
           'contributors' => quiz_data['contributors'],
         }
-      }
+      end
     end
 
     # In dev configuration, this breaks for me. Not sure why config isn't available.
@@ -426,7 +426,7 @@ module TopicFilter
     workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
     if workflows.length > 0
       workflow_names = workflows.map { |a| a.split('/')[-1] }
-      page_obj['workflows'] = workflow_names.map { |wf|
+      page_obj['workflows'] = workflow_names.map do |wf|
         wfid = "#{page['topic_name']}-#{page['tutorial_name']}"
         wfname = wf.gsub(/.ga/, '').downcase
         trs = "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}"
@@ -446,7 +446,7 @@ module TopicFilter
           'license' => license,
           'creators' => creators,
         }
-      }
+      end
     end
 
     # Tool List
@@ -459,12 +459,12 @@ module TopicFilter
     end
 
     if page_obj['workflows']
-      page_obj['workflows'].each { |wf|
+      page_obj['workflows'].each do |wf|
         wf_path = "#{folder}/workflows/#{wf['workflow']}"
 
         wf_data = JSON.parse(File.open(wf_path).read)
         page_obj['tools'] += self.extract_workflow_tool_list(wf_data)
-      }
+      end
     end
     page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
 
@@ -505,13 +505,13 @@ module TopicFilter
     shortlinks_reversed = shortlinks['id'].invert
     mappings = Hash.new { |h, k| h[k] = Array.new }
 
-    shortlinks.keys.each { |kp|
-      shortlinks[kp].each { |k, v|
+    shortlinks.keys.each do |kp|
+      shortlinks[kp].each do |k, v|
         mappings[v].push("/short/#{k}")
-      }
-    }
+      end
+    end
     # Update the materials with their short IDs + redirects
-    pages.select { |p| mappings.keys.include? p.url }.each { |p|
+    pages.select { |p| mappings.keys.include? p.url }.each do |p|
       # Set the short id on the material
       #
       begin
@@ -534,7 +534,7 @@ module TopicFilter
         p.data['redirect_from'].push(*mappings[p.url])
         p.data['redirect_from'].uniq!
       end
-    }
+    end
 
     materials
   end
@@ -690,7 +690,7 @@ module TopicFilter
     end
 
     # Uniqueify/sort
-    t = tool_map.map { |k, v|
+    t = tool_map.map do |k, v|
       v['tool_id'].uniq!
       v['tool_id'].sort_by! { |k| k[1] }
       v['tool_id'].reverse!
@@ -698,7 +698,7 @@ module TopicFilter
       v['tutorials'].uniq!
       v['tutorials'].sort!
       [k, v]
-    }.to_h
+    end.to_h
 
     # Order by most popular tool
     t.sort_by { |k, v| v['tutorials'].length }.reverse.to_h
@@ -728,9 +728,9 @@ module Jekyll
       # Remove non-hof
       hof = contributors.select { |k, v| v.fetch('halloffame', 'yes') != 'no' }
       # Get keys + sort by joined date
-      hof_k = hof.keys.sort { |x, y|
+      hof_k = hof.keys.sort do |x, y|
         hof[y].fetch('joined', '2016-01') <=> hof[x].fetch('joined', '2016-01')
-      }
+      end
 
       # Transform back into hash
       Hash[hof_k.slice(0, count).collect { |k| [k, hof[k]] }]
@@ -747,9 +747,9 @@ module Jekyll
     def recently_modified_tutorials(site)
       tutorials = site.pages.select { |page| page.data['layout'] == 'tutorial_hands_on' }
 
-      latest = tutorials.sort { |x, y|
+      latest = tutorials.sort do |x, y|
         Gtn::ModificationTimes.obtain_time(y.path) <=> Gtn::ModificationTimes.obtain_time(x.path)
-      }
+      end
       latest.slice(0, 10)
     end
 
@@ -774,9 +774,9 @@ module Jekyll
     end
 
     def list_topics_by_category(site, category)
-      q = TopicFilter.list_topics(site).map { |k|
+      q = TopicFilter.list_topics(site).map do |k|
         [k, site.data[k]]
-      }
+      end
 
       # Alllow filtering by a category, or return "all" otherwise.
       if category == 'non-tag' then

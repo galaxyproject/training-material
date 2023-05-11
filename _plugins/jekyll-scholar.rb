@@ -98,16 +98,16 @@ module Jekyll
       # Remove nil citations
       unique_citations = unique_citations.select { |c| !global_bib[c].nil? }
       # And now sort them by date + names
-      sorted_citations = unique_citations.sort { |a, b|
+      sorted_citations = unique_citations.sort do |a, b|
         global_bib[a].date.to_s + global_bib[a].names.join(' ') <=>
           global_bib[b].date.to_s + global_bib[b].names.join(' ')
-      }
+      end
 
       out = '<ol class="bibliography">'
-      out += sorted_citations.map { |c|
+      out += sorted_citations.map do |c|
         r = Gtn::Scholar.render_citation(c)
         %Q(<li id="#{c}">#{r}</li>)
-      }.join("\n")
+      end.join("\n")
       out += '</ol>'
       out
     end

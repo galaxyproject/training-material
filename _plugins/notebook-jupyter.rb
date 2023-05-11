@@ -28,7 +28,7 @@ module Jekyll
         tutorial_id = dir.split('/')[-1]
         with_solutions = notebook.clone
 
-        with_solutions['cells'] = with_solutions['cells'].map { |cell|
+        with_solutions['cells'] = with_solutions['cells'].map do |cell|
           if cell.fetch('cell_type') == 'markdown'
             if cell['source'].is_a? String
               m = cell['source'].match(/<blockquote class="solution"[^>]*>/)
@@ -46,7 +46,7 @@ module Jekyll
             end
           end
           cell
-        }
+        end
 
         # Write it out!
         page2 = PageWithoutAFile.new(site, '', dir, "#{topic_id}-#{tutorial_id}.ipynb")
@@ -58,14 +58,14 @@ module Jekyll
         # Create a no-solutions version:
         no_solutions = notebook.clone
 
-        no_solutions['cells'] = no_solutions['cells'].map { |cell|
+        no_solutions['cells'] = no_solutions['cells'].map do |cell|
           if cell.fetch('cell_type') == 'markdown'
             if cell['source'].is_a? String
               cell['source'].gsub!(/<blockquote class="solution"[^>]*>/, '<blockquote class="solution" style="display:none">')
             end
           end
           cell
-        }
+        end
 
         page2 = PageWithoutAFile.new(site, '', dir, "#{topic_id}-#{tutorial_id}-course.ipynb")
         page2.content = JSON.pretty_generate(no_solutions)

@@ -101,9 +101,9 @@ module Jekyll
       if citations.nil?
         {}
       else
-        citations.sort_by { |k, v| v }.reverse.to_h.first(20).map { |k, v|
+        citations.sort_by { |k, v| v }.reverse.to_h.first(20).map do |k, v|
           [k, { 'count' => v, 'text' => Gtn::Scholar.render_citation(k) }]
-        }.to_h
+        end.to_h
       end
     end
 
@@ -272,7 +272,7 @@ module Jekyll
 
     def convert_to_material_list(site, materials)
       # [{"name"=>"introduction", "topic"=>"admin"}]
-      materials.map { |m|
+      materials.map do |m|
         if m.key?('name') && m.key?('topic')
           found = TopicFilter.fetch_tutorial_material(site, m['topic'], m['name'])
           if found.nil?
@@ -290,7 +290,7 @@ module Jekyll
         else
           Jekyll.logger.warn "[GTN] Unsure how to render #{m}"
         end
-      }
+      end
     end
 
     ##

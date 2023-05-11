@@ -51,9 +51,9 @@ module GTNNotebooks
   }
 
   def self.generate_css
-    COLORS.map { |key, val|
+    COLORS.map do |key, val|
       ".#{key} { padding: 0 1em; margin: 1em 0.2em; border: 2px solid #{val} }"
-    }.join("\n")
+    end.join("\n")
   end
 
   def self.convert_notebook_markdown(content, language)
@@ -61,7 +61,7 @@ module GTNNotebooks
     inside_block = false
     val = []
     data = content.split("\n")
-    data.each.with_index { |line, i|
+    data.each.with_index do |line, i|
       if line == "```#{language}"
         if inside_block
           puts data[i - 2..i + 2]
@@ -80,7 +80,7 @@ module GTNNotebooks
       else
         val.push(line)
       end
-    }
+    end
     # final flush
     if !val.nil?
       out.push([val, inside_block])
@@ -92,7 +92,7 @@ module GTNNotebooks
       'nbformat_minor' => 5,
     }
 
-    notebook['cells'] = out.map.with_index { |data, index|
+    notebook['cells'] = out.map.with_index do |data, index|
       res = {
         'id' => "cell-#{index}",
         'source' => data[0].map { |x| x.rstrip + "\n" }
@@ -124,7 +124,7 @@ module GTNNotebooks
         res['cell_type'] = 'markdown'
       end
       res
-    }
+    end
     notebook
   end
 
@@ -135,7 +135,7 @@ module GTNNotebooks
     data = data.split("\n")
 
     # Here we collapse running groups of `>` into single blocks.
-    data.each { |line|
+    data.each do |line|
       if first_char.nil?
         first_char = line[0]
         val = [line]
@@ -155,14 +155,14 @@ module GTNNotebooks
           val = [line]
         end
       end
-    }
+    end
     # final flush
     out.push(val)
 
-    out.select! { |v|
+    out.select! do |v|
       !(v[0][0] == '>' && v[-1][0..1] == '{:' && v[-1].match(/.agenda/))
-    }
-    out.map! { |v|
+    end
+    out.map! do |v|
       if v[0][0] == '>' && v[-1][0..1] == '{:'
         cls = v[-1][2..-2].strip
         res = [":::{#{cls}}"]
@@ -172,7 +172,7 @@ module GTNNotebooks
       else
         v
       end
-    }
+    end
 
     out.flatten(1).join("\n")
   end
@@ -189,9 +189,9 @@ module GTNNotebooks
       contributors = YAML.load(f2.read)
     end
 
-    folks.map { |c|
+    folks.map do |c|
       "[#{contributors.fetch(c, { "name" => c }).fetch('name', c)}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
-    }.join(', ')
+    end.join(', ')
   end
 
   def self.add_metadata_cell(notebook, metadata)
@@ -244,14 +244,14 @@ module GTNNotebooks
       }
     }
     # Strip out %%R since we'll use the bash kernel
-    notebook['cells'].map { |cell|
+    notebook['cells'].map do |cell|
       if cell.fetch('cell_type') == 'code'
         if cell['source'][0] == "%%R\n"
           cell['source'] = cell['source'].slice(1..-1)
         end
       end
       cell
-    }
+    end
     notebook
   end
 
@@ -271,27 +271,27 @@ module GTNNotebooks
       }
     }
     # Strip out %%bash since we'll use the bash kernel
-    notebook['cells'].map { |cell|
+    notebook['cells'].map do |cell|
       if cell.fetch('cell_type') == 'code'
         if cell['source'][0] == "%%bash\n"
           cell['source'] = cell['source'].slice(1..-1)
         end
       end
       cell
-    }
+    end
     notebook
   end
 
   def self.fixSqlNotebook(notebook)
     # Add in a %%sql at the top of each cell
-    notebook['cells'].map { |cell|
+    notebook['cells'].map do |cell|
       if cell.fetch('cell_type') == 'code'
         if cell['source'].join('').index('load_ext').nil?
           cell['source'] = ["%%sql\n"] + cell['source']
         end
       end
       cell
-    }
+    end
     notebook
   end
 
@@ -321,12 +321,12 @@ module GTNNotebooks
     # Re-run a second time to catch singly-nested Q&A?
     content = group_doc_by_first_char(content)
 
-    ICONS.each { |key, val|
+    ICONS.each do |key, val|
       content.gsub!(/{% icon #{key} %}/, val)
-    }
-    ICONS_FA.each { |key, val|
+    end
+    ICONS_FA.each do |key, val|
       content.gsub!(/<i class="#{key}" aria-hidden="true"><\/i>/, ICONS[val])
-    }
+    end
 
     content = content + %Q(\n\n# References\n\n<div id="refs"></div>\n)
 
@@ -423,7 +423,7 @@ module GTNNotebooks
 
   def self.renderMarkdownCells(site, notebook, metadata, page_url, dir)
     seen_abbreviations = Hash.new
-    notebook['cells'].map { |cell|
+    notebook['cells'].map do |cell|
       if cell.fetch('cell_type') == 'markdown'
 
         # The source is initially a list of strings, we'll merge it together
@@ -443,7 +443,7 @@ module GTNNotebooks
         # have access to the full render pipeline.
         cell['source'] = self.markdownify(site, source)
 
-        ICONS.each { |key, val|
+        ICONS.each do |key, val|
           # Replace the new box titles with h3s.
           cell['source'].gsub!(/<div class="box-title #{key}-title".*?<\/span>(.*?)<\/div>/,
                                "<div style=\"font-weight:900;font-size: 125%\">#{val} " + '\1</div>')
@@ -454,11 +454,11 @@ module GTNNotebooks
           # just removing the buttons from solutions since they'll be changed
           # into summary/details in the parent notebook-jupyter.
           cell['source'].gsub!(/<button class="gtn-boxify-button solution".*?<\/button>/, '')
-        }
+        end
 
         if metadata.key?('abbreviations')
-          metadata['abbreviations'].each { |abbr, defn|
-            cell['source'].gsub(/\{#{abbr}\}/) {
+          metadata['abbreviations'].each do |abbr, defn|
+            cell['source'].gsub(/\{#{abbr}\}/) do
               if seen_abbreviations.key?(abbr) then
                 firstdef = false
               else
@@ -471,22 +471,22 @@ module GTNNotebooks
               else
                 "<abbr title=\"#{defn}\">#{abbr}</abbr>"
               end
-            }
-          }
+            end
+          end
         end
 
         # Here we give a GTN-ish styling that doesn't try to be too faithful,
         # so we aren't spending time keeping up with changes to GTN css,
         # we're making it 'our own' a bit.
 
-        COLORS.each { |key, val|
+        COLORS.each do |key, val|
           if COLORS_EXTRA.has_key? key
             val = val + ';' + COLORS_EXTRA[key]
           end
 
           cell['source'].gsub!(/<blockquote class="#{key}">/,
                                "<blockquote class=\"#{key}\" style=\"border: 2px solid #{val}; margin: 1em 0.2em\">")
-        }
+        end
 
         # Images are referenced in the GTN through relative URLs which is
         # fab, but in a notebook this doesn't make sense as it will live
@@ -497,7 +497,7 @@ module GTNNotebooks
         # without their images for a bit until it's merged.
 
         if cell['source'].match(/<img src="\.\./)
-          cell['source'].gsub!(/<img src="(\.\.[^"]*)/) { |img|
+          cell['source'].gsub!(/<img src="(\.\.[^"]*)/) do |img|
             path = img[10..-1]
             image_path = File.join(dir, path)
 
@@ -518,7 +518,7 @@ module GTNNotebooks
               # Falling back to non-embedded images
               '<img src="https://training.galaxyproject.org/training-material/' + page_url.split('/')[0..-2].join('/') + '/..'
             end
-          }
+          end
         end
 
         # Strip out the highlighting as it is bad on some platforms.
@@ -538,7 +538,7 @@ module GTNNotebooks
         cell['source'].gsub!(/\$/, '&#36;')
       end
       cell
-    }
+    end
     notebook
   end
 end

@@ -37,15 +37,15 @@ module Gtn
     def self.discover_bib()
       puts '[GTN/scholar] Creating global bib cache'
       global_bib = BibTeX::Bibliography.new
-      bib_paths = [Find.find('./topics'), Find.find('./faqs'), Find.find('./news')].lazy.flat_map(&:lazy).select { |x|
+      bib_paths = [Find.find('./topics'), Find.find('./faqs'), Find.find('./news')].lazy.flat_map(&:lazy).select do |x|
         x =~ /bib$/
-      }
-      bib_paths.each { |path|
+      end
+      bib_paths.each do |path|
         for x in BibTeX.open(path)
           x = x.convert_latex
           global_bib << x
         end
-      }
+      end
       puts "[GTN/scholar] Done: #{global_bib.length}"
       style = CSL::Style.load('_layouts/g3.csl')
       cp = CiteProc::Processor.new style: style,

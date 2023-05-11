@@ -47,9 +47,9 @@ module Jekyll
       if f.is_a?(Array)
         f.map! { |x| visitAndMarkdownify(site, x) }
       elsif f.is_a?(Hash)
-        f = f.map { |k, v|
+        f = f.map do |k, v|
           [k, visitAndMarkdownify(site, v)]
-        }.to_h
+        end.to_h
       elsif f.is_a?(String)
         f = markdownify(site, f).strip().gsub(/<p>/, '').gsub(/<\/p>/, '')
       end
@@ -130,19 +130,19 @@ module Jekyll
       page2.content = JSON.pretty_generate(site.data['contributors'].map { |c, _| mapContributor(site, c) })
       page2.data['layout'] = nil
       site.pages << page2
-      site.data['contributors'].each { |c, _|
+      site.data['contributors'].each do |c, _|
         page4 = PageWithoutAFile.new(site, '', 'api/', "contributors/#{c}.json")
         page4.content = JSON.pretty_generate(mapContributor(site, c))
         page4.data['layout'] = nil
         site.pages << page4
-      }
+      end
 
       page2 = PageWithoutAFile.new(site, '', 'api/', 'contributors.geojson')
       page2.content = JSON.pretty_generate({
                                              'type' => 'FeatureCollection',
                                              'features' => site.data['contributors']
           .select { |k, v| v.has_key? 'location' }
-          .map { |k, v|
+          .map do |k, v|
             {
               'type' => 'Feature',
               'geometry' => { 'type' => 'Point', 'coordinates' => [v['location']['lon'], v['location']['lat']] },
@@ -155,7 +155,7 @@ module Jekyll
                 'contact_for_training' => v.fetch('contact_for_training', false),
               }
             }
-          }
+          end
                                            })
       page2.data['layout'] = nil
       site.pages << page2
@@ -163,9 +163,9 @@ module Jekyll
       # Trigger the topic cache to generate if it hasn't already
       puts '[GTN/API] Tutorials'
       TopicFilter.topic_filter(site, 'does-not-matter')
-      TopicFilter.list_topics(site).map { |topic|
+      TopicFilter.list_topics(site).map do |topic|
         out = site.data[topic].dup
-        out['materials'] = TopicFilter.topic_filter(site, topic).map { |x|
+        out['materials'] = TopicFilter.topic_filter(site, topic).map do |x|
           q = x.dup
           q['contributors'] = get_contributors(q).dup.map { |c| mapContributor(site, c) }
 
@@ -188,19 +188,19 @@ module Jekyll
           site.pages << page6
 
           q
-        }
+        end
         out['maintainers'] = out['maintainers'].map { |c| mapContributor(site, c) }
 
         page2 = PageWithoutAFile.new(site, '', 'api/topics/', "#{topic}.json")
         page2.content = JSON.pretty_generate(out)
         page2.data['layout'] = nil
         site.pages << page2
-      }
+      end
 
       topics = Hash.new
       puts '[GTN/API] Topics'
       # Individual Topic Indexes
-      site.data.each_pair { |k, v|
+      site.data.each_pair do |k, v|
         if v.is_a?(Hash) and v.has_key?('type') and v.has_key?('maintainers')
 
           topics[k] = {
@@ -211,7 +211,7 @@ module Jekyll
             'maintainers' => v['maintainers'].map { |c| mapContributor(site, c) }
           }
         end
-      }
+      end
 
       # Overall topic index
       page2 = PageWithoutAFile.new(site, '', 'api/', 'topics.json')
@@ -221,7 +221,7 @@ module Jekyll
 
       puts '[GTN/API] Tutorial and Slide pages'
 
-      TopicFilter.list_all_materials(site).each { |material|
+      TopicFilter.list_all_materials(site).each do |material|
         directory = material['dir']
 
         if material['slides']
@@ -251,7 +251,7 @@ module Jekyll
           page5.data['layout'] = nil
           site.pages << page5
         end
-      }
+      end
 
       # Deploy the feedback file as well
       page2 = PageWithoutAFile.new(site, '', 'api/', 'feedback.json')

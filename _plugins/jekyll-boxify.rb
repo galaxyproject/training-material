@@ -30,7 +30,7 @@ module Jekyll
       end
 
       # Interim solution, fancier box titles
-      page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})-title>(.*?)<\/\s*\1-title\s*>/) {
+      page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})-title>(.*?)<\/\s*\1-title\s*>/) do
         box_type = $1
         title = $2
         if page.data['citation_target'] == 'jupyter'
@@ -45,7 +45,7 @@ module Jekyll
         end
 
         box
-      }
+      end
 
       # Long term solution, proper new boxes
       # BUT: does not work with <details></details> that are actual HTML elements, so we'll need to rename those.

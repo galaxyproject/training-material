@@ -26,7 +26,7 @@ module Jekyll
       end
 
       tuto_dir = File.dirname(page.path)
-      page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"(.*)")\)({:(.*)})?/) {
+      page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"(.*)")\)({:(.*)})?/) do
         alt = $1
         url = $2
         title = $3
@@ -52,9 +52,9 @@ module Jekyll
             "<figcaption><span class=\"figcaption-prefix\"><strong>#{prefix}#{num}</strong>:</span> #{title}</figcaption>" +
             '</figure>'
         end
-      }
+      end
 
-      page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)?\)({:(.*)})?/) {
+      page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)?\)({:(.*)})?/) do
         alt = $1
         url = $2
         style = $4
@@ -66,7 +66,7 @@ module Jekyll
           end
         end
         "<img src=\"#{url}\" alt=\"#{alt}\" #{style} loading=\"lazy\">"
-      }
+      end
     end
 
     def figcaption_prefix(page, site)

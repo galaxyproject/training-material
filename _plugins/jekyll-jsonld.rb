@@ -44,14 +44,14 @@ module Jekyll
         ['DC.date', Gtn::ModificationTimes.obtain_time(material['path'])],
       ]
 
-      attributes += get_authors(material).map { |user|
+      attributes += get_authors(material).map do |user|
         if site['data']['contributors'].has_key?(user) then
           ['DC.creator', site['data']['contributors'][user].fetch('name', user)]
         else
           puts "[GTN/Meta] #{user} not found in CONTRIBUTORS.yaml"
           ['DC.creator', user]
         end
-      }
+      end
 
       return attributes.map { |a, b| "<meta name=\"#{a}\" content=\"#{b}\">" }.join("\n")
     end
@@ -474,9 +474,9 @@ module Jekyll
 
       # Add contributors/authors
       if material.key?('contributors') then
-        contributors = material['contributors'].map { |x|
+        contributors = material['contributors'].map do |x|
           generate_person_jsonld(x, site['data']['contributors'][x], site)
-        }
+        end
         data['author'] = contributors
         data['contributor'] = contributors
       end

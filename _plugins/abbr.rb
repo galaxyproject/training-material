@@ -30,8 +30,8 @@ module Jekyll
     def abbreviate(page) # :nodoc:
       if page.data.key?('abbreviations') then
         seen = Hash.new
-        page.data['abbreviations'].each { |abbr, definition|
-          page.content = page.content.gsub(/\{(#{abbr})\}/) {
+        page.data['abbreviations'].each do |abbr, definition|
+          page.content = page.content.gsub(/\{(#{abbr})\}/) do
             if seen.key?(abbr) then
               firstdef = false
             else
@@ -44,8 +44,8 @@ module Jekyll
             else
               "<abbr title=\"#{definition}\">#{abbr}</abbr>"
             end
-          }
-        }
+          end
+        end
       end
     end
 

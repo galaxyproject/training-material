@@ -33,7 +33,7 @@ module Gtn
       width = self.bin_width(values)
       bins = ((values.max - values.min) / width).ceil
 
-      (0..bins).map { |bin_idx|
+      (0..bins).map do |bin_idx|
         left = values.min + (bin_idx * width)
         right = values.min + ((bin_idx + 1) * width)
         count = values.select { |x| left <= x and x < right }.length
@@ -41,20 +41,20 @@ module Gtn
           :value => count,
           'le' => bin_idx == bins ? '+Inf' : right.to_s
         }
-      }
+      end
     end
 
     def self.histogram_dates(values)
       day_bins = [1, 7, 28, 90, 365, 365 * 2, 365 * 3, 365 * 5]
       last_bin = 0
-      day_bins.map { |bin, idx|
+      day_bins.map do |bin, idx|
         count = values.select { |x| last_bin <= x and x < bin }.length
         last_bin = bin
         {
           :value => count,
           'le' => bin == day_bins[-1] ? '+Inf' : bin
         }
-      }
+      end
     end
 
     def self.segment(values, attr)
@@ -72,12 +72,12 @@ module Gtn
 
     def self.segment_page_by_key(values, key)
       possible_keys = values.map { |v| v.data[key].to_s }.sort.uniq
-      possible_keys.map { |k|
+      possible_keys.map do |k|
         {
           :value => values.select { |v| v.data[key] == k }.length,
           "#{key}" => k,
         }
-      }
+      end
     end
 
     def self.collect_metrics(site)
@@ -115,9 +115,9 @@ module Gtn
           :help => 'How recently was every single Hands-on Tutorial touched within the GTN, grouped by days since last edited.',
           :value => self.histogram_dates(
             tutorials
-            .map { |page|
+            .map do |page|
               Time.now() - Gtn::ModificationTimes.obtain_time(page['path'].gsub(/^\//, ''))
-            }
+            end
             .map { |seconds| seconds / 3600.0 / 24.0 }
           )
         },
@@ -127,9 +127,9 @@ module Gtn
           :value => self.histogram_dates(
             site.data['contributors']
             .select { |x| x['halloffame'] != 'no' }
-            .map { |_, contributor|
+            .map do |_, contributor|
               (Date.today() - Date.parse("#{contributor['joined']}-01")).to_i
-            }
+            end
           )
         },
       }
@@ -138,21 +138,21 @@ module Gtn
 
     def self.generate_metrics(site)
       data = self.collect_metrics(site)
-      output = data.map { |k, v|
+      output = data.map do |k, v|
         out = "# HELP #{k} #{v[:help]}\n# TYPE #{k} #{v[:type]}\n"
 
         if v[:value].is_a?(Array)
-          v[:value].each { |val|
+          v[:value].each do |val|
             attrs = val.select { |k, v| k != :value }.to_h
             out += "#{k}#{attrs.to_prometheus} #{val[:value]}\n"
-          }
+          end
         else
           attrs = v.select { |k, v| k != :value and k != :help and k != :type }.to_h
           out += "#{k}#{attrs.to_prometheus} #{v[:value]}\n"
         end
 
         out
-      }.join("\n")
+      end.join("\n")
     end
   end
 end

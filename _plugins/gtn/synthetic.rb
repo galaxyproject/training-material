@@ -6,7 +6,7 @@ module Jekyll
       # Full Bibliography
       puts '[GTN/SyntheticTopics] Generating Indexes'
 
-      TopicFilter.list_topics(site).select { |t| site.data[t]['tag_based'] }.each { |topic|
+      TopicFilter.list_topics(site).select { |t| site.data[t]['tag_based'] }.each do |topic|
         puts "[GTN/SyntheticTopics] Creating #{topic} topic"
 
         topic_index = PageWithoutAFile.new(site, '', "topics/#{topic}", 'index.md')
@@ -20,7 +20,7 @@ module Jekyll
         # faq_index.content = ""
         # faq_index.data["layout"] = "faq-page"
         # site.pages << faq_index
-      }
+      end
     end
   end
 end
