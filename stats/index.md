@@ -1,5 +1,7 @@
 ---
 layout: base
+redirect_from:
+- /stats
 ---
 
 <!-- tutorial stats -->
