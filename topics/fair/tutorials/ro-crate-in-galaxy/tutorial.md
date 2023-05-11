@@ -41,7 +41,7 @@ subtopic: ro-crate
 Requirements:
 
 [Using Galaxy and Managing your Data](https://training.galaxyproject.org/training-material/topics/galaxy-interface/):
-- [Creating, Editing and Importing Galaxy Workflows](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html) 
+- [Creating, Editing and Importing Galaxy Workflows]({% link topics/galaxy-interface/tutorials/workflow-editor/tutorial.md %}) 
 - [Extracting Workflows from Histories](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html )
 
 
