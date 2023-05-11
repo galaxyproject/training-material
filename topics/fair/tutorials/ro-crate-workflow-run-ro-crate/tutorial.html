@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Workflow Run RO-Crate Introduction</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html">
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Workflow Run RO-Crate Introduction">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-05-10 14:10:03 +0000">
+<meta name="DC.creator" content="Simone Leo">
+
+        
+        
+        
+        
+        <meta name="description" content="These lessons will teach you how to make your research ob...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Workflow Run RO-Crate Introduction">
+        <meta property="og:description" content="These lessons will teach you how to make your research ob...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-05-10 14:10:03 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Workflow Run RO-Crate Introduction",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "FAIR Data, Workflows, and Research",
+    "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+    "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Workflow Run RO-Crate Introduction' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "fair, ro-crate",
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "FAIR Data, Workflows, and Research",
+      "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+    }
+  ]
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/fair" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> FAIR Data, Workflows, and Research
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/fair/faqs/" title="Check our FAQs for the FAIR Data, Workflows, and Research topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-05-02/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html" title="Version 2023-05-02">2023-05-02</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-05-01/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html" title="Version 2023-05-01">2023-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-04-01/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html" title="Version 2023-04-01">2023-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+
+
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-05-10 14:10:03 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Workflow Run RO-Crate Introduction",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "FAIR Data, Workflows, and Research",
+    "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+    "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Workflow Run RO-Crate Introduction' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "fair, ro-crate",
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "FAIR Data, Workflows, and Research",
+      "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+    }
+  ]
+}
+</script>
+
+<article class="tutorial topic-fair">
+    <h1 data-toc-skip>Workflow Run RO-Crate Introduction</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/simleo/" class="contributor-badge contributor-simleo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/simleo?s=27" alt="Avatar">Simone Leo</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 10, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+	    Tutorial Content is licensed under <a rel="license" href="https://spdx.org/licenses/Apache-2.0">Apache-2.0</a>.
+             The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>The <a href="https://www.researchobject.org/workflow-run-crate/">Workflow Run RO-Crate</a> working group is developing a series of <a href="https://www.researchobject.org/ro-crate/profiles.html">RO-Crate profiles</a> for representing the provenance of computational workflow executions. The set includes three profiles, which represent provenance with increasing level of detail:</p>
+
+<ul>
+  <li><a href="https://w3id.org/ro/wfrun/process">Process Run Crate</a> can be used to describe the execution of one or more tools that contribute to a generic computation;</li>
+  <li><a href="https://w3id.org/ro/wfrun/workflow">Workflow Run Crate</a> also describes computational processes, but in this case the execution is supposed to be orchestrated by a computational workflow (e.g., a Galaxy workflow);</li>
+  <li><a href="https://w3id.org/ro/wfrun/provenance">Provenance Run Crate</a> is based on Workflow Run Crate, but provides additional specifications for describing the details of each step’s execution.</li>
+</ul>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, you will learn how to create a git repo, and begin working with it.</p>
+
+<ol id="markdown-toc">
+  <li><a href="#process-run-crate" id="markdown-toc-process-run-crate">Process Run Crate</a></li>
+  <li><a href="#workflow-run-crate" id="markdown-toc-workflow-run-crate">Workflow Run Crate</a></li>
+  <li><a href="#provenance-run-crate" id="markdown-toc-provenance-run-crate">Provenance Run Crate</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="process-run-crate">Process Run Crate</h2>
+
+<p>Consider a simple computation where we select the first four lines of a text file, and then we select the last three lines out of the initial selection. Suppose we start with the following input file, <code class="language-plaintext highlighter-rouge">lines.txt</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>one
+two
+three
+four
+five
+</code></pre></div></div>
+
+<p>Then we run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>head --lines 4 lines.txt &gt;sel1.txt
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">sel1.txt</code> file will then be:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>one
+two
+three
+four
+</code></pre></div></div>
+
+<p>Now we run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tail --lines 3 sel1.txt &gt;sel2.txt
+</code></pre></div></div>
+
+<p>Obtaining the following <code class="language-plaintext highlighter-rouge">sel2.txt</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>two
+three
+four
+</code></pre></div></div>
+
+<p>A Process Run Crate that describes the above computation will contain the three text files, plus an <code class="language-plaintext highlighter-rouge">ro-crate-metadata.json</code> file structured as follows:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"@context"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/crate/1.1/context"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@graph"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ro-crate-metadata.json"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"conformsTo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/crate/1.1"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"about"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"conformsTo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/wfrun/process/0.1"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lines.txt"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sel1.txt"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sel2.txt"</span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"mentions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#runHead"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#runTail"</span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">   </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/wfrun/process/0.1"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Process Run Crate"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.gnu.org/software/coreutils/head"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SoftwareApplication"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"head"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"softwareVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8.30"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.gnu.org/software/coreutils/tail"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SoftwareApplication"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tail"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"softwareVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8.30"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#runHead"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreateAction"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select first four lines"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"head --lines 4 lines.txt &gt;sel1.txt"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"endTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-27T15:02:56+02:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"instrument"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.gnu.org/software/coreutils/head"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lines.txt"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sel1.txt"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"agent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#runTail"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreateAction"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select first four lines"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tail --lines 3 sel1.txt &gt;sel2.txt"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"endTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-27T15:04:02+02:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"instrument"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.gnu.org/software/coreutils/tail"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sel1.txt"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sel2.txt"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"agent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lines.txt"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sel1.txt"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sel2.txt"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Josiah Carberry"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The RO-Crate describes two actions, <code class="language-plaintext highlighter-rouge">#runHead</code> and <code class="language-plaintext highlighter-rouge">#runTail</code>, which represent, respectively, the execution of the <code class="language-plaintext highlighter-rouge">head</code> and <code class="language-plaintext highlighter-rouge">tail</code> programs, referenced via the <code class="language-plaintext highlighter-rouge">instrument</code> property. Each action references its input(s) via <code class="language-plaintext highlighter-rouge">object</code> and its output(s) via <code class="language-plaintext highlighter-rouge">result</code>. Note how the two actions are connected by the fact that the output of <code class="language-plaintext highlighter-rouge">#runHead</code> is the input of <code class="language-plaintext highlighter-rouge">#runTail</code>: they form an “implicit workflow”, whose steps have been executed manually rather than by a higher level software tool. The actions also refer to their executor via the <code class="language-plaintext highlighter-rouge">agent</code> property. The following diagram shows the relationships between the various entities:</p>
+
+<p><img alt="head-tail diagram" src="img/head-tail-diagram.svg" width="600" /></p>
+
+<p>For more information, you can see the <a href="https://w3id.org/ro/wfrun/process">Process Run Crate</a> profile, which contains the full specification.</p>
+
+<h2 id="workflow-run-crate">Workflow Run Crate</h2>
+
+<p>Suppose now that we write a script to automate the above process:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
+
+<span class="nb">set</span> <span class="nt">-euo</span> pipefail
+
+die<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> <span class="nv">$1</span> 1&gt;&amp;2
+    <span class="nb">exit </span>1
+<span class="o">}</span>
+
+<span class="nv">nargs</span><span class="o">=</span>3
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$# </span><span class="nt">-ne</span> <span class="k">${</span><span class="nv">nargs</span><span class="k">}</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span>die <span class="s2">"Usage: </span><span class="nv">$0</span><span class="s2"> input_file head_lines tail_lines"</span>
+<span class="k">fi
+</span><span class="nv">input_file</span><span class="o">=</span><span class="nv">$1</span>
+<span class="nv">head_lines</span><span class="o">=</span><span class="nv">$2</span>
+<span class="nv">tail_lines</span><span class="o">=</span><span class="nv">$3</span>
+
+<span class="nv">output_file</span><span class="o">=</span><span class="s2">"chunk.txt"</span>
+
+<span class="nv">workdir</span><span class="o">=</span><span class="si">$(</span><span class="nb">mktemp</span> <span class="nt">-d</span><span class="si">)</span>
+<span class="nv">head_output</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">workdir</span><span class="k">}</span><span class="s2">/temp.txt"</span>
+<span class="nb">head</span> <span class="nt">--lines</span> <span class="k">${</span><span class="nv">head_lines</span><span class="k">}</span> <span class="s2">"</span><span class="k">${</span><span class="nv">input_file</span><span class="k">}</span><span class="s2">"</span> <span class="o">&gt;</span><span class="s2">"</span><span class="k">${</span><span class="nv">head_output</span><span class="k">}</span><span class="s2">"</span>
+<span class="nb">tail</span> <span class="nt">--lines</span> <span class="k">${</span><span class="nv">tail_lines</span><span class="k">}</span> <span class="s2">"</span><span class="k">${</span><span class="nv">head_output</span><span class="k">}</span><span class="s2">"</span> <span class="o">&gt;</span><span class="s2">"</span><span class="k">${</span><span class="nv">output_file</span><span class="k">}</span><span class="s2">"</span>
+<span class="nb">rm</span> <span class="nt">-rf</span> <span class="s2">"</span><span class="k">${</span><span class="nv">workdir</span><span class="k">}</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>This script can be considered a workflow, since it orchestrates the execution of other applications, managing the flow of data between them, to get the final output. Note that the script is parametrized, so every time it is run we can choose a different input file and different values for the number of lines to extract with <code class="language-plaintext highlighter-rouge">head</code> and <code class="language-plaintext highlighter-rouge">tail</code>. If you name the script <code class="language-plaintext highlighter-rouge">head_tail.sh</code>, you can obtain the same result as above by running:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash head_tail.sh lines.txt 4 3
+</code></pre></div></div>
+
+<p>The result will be stored in the <code class="language-plaintext highlighter-rouge">chunk.txt</code> file.</p>
+
+<p>A Workflow Run Crate to represent a run of this workflow would contain the workflow itself (<code class="language-plaintext highlighter-rouge">head_tail.sh</code>), the input and output files (<code class="language-plaintext highlighter-rouge">lines.txt</code>, <code class="language-plaintext highlighter-rouge">chunk.txt</code>) and an ro-crate-metadata.json file like the following:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"@context"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/crate/1.1/context"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@graph"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ro-crate-metadata.json"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"about"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"conformsTo"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/crate/1.1"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/workflowhub/workflow-ro-crate/1.0"</span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"conformsTo"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/wfrun/process/0.1"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/wfrun/workflow/0.1"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/workflowhub/workflow-ro-crate/1.0"</span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"head_tail.sh"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lines.txt"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chunk.txt"</span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://spdx.org/licenses/CC0-1.0"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"mainEntity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"head_tail.sh"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"mentions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#runHeadTail"</span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/wfrun/process/0.1"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Process Run Crate"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/wfrun/workflow/0.1"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Workflow Run Crate"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/workflowhub/workflow-ro-crate/1.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Workflow RO-Crate"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"head_tail.sh"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"File"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SoftwareSourceCode"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ComputationalWorkflow"</span><span class="p">],</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Head-Tail"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"programmingLanguage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#bash"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"input"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#input_file-param"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#head_lines-param"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#tail_lines-param"</span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#output_file-param"</span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#input_file-param"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FormalParameter"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"additionalType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"input_file"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"valueRequired"</span><span class="p">:</span><span class="w"> </span><span class="s2">"True"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#head_lines-param"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FormalParameter"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"additionalType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Integer"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"head_lines"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"valueRequired"</span><span class="p">:</span><span class="w"> </span><span class="s2">"True"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#tail_lines-param"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FormalParameter"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"additionalType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Integer"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tail_lines"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"valueRequired"</span><span class="p">:</span><span class="w"> </span><span class="s2">"True"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#output_file-param"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FormalParameter"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"additionalType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"output_file"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#bash"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ComputerLanguage"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.gnu.org/software/bash/"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bash"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.gnu.org/software/bash/"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#runHeadTail"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreateAction"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Run of head_tail.sh"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"endTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-05-04T17:02:01+02:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"instrument"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"head_tail.sh"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lines.txt"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#head_lines-pv"</span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#tail_lines-pv"</span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chunk.txt"</span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"agent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lines.txt"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"exampleOfWork"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#input_file-param"</span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#head_lines-pv"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PropertyValue"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"exampleOfWork"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#head_lines-param"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"head_lines"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#tail_lines-pv"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PropertyValue"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"exampleOfWork"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#tail_lines-param"</span><span class="p">},</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tail_lines"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chunk.txt"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"exampleOfWork"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#output_file-param"</span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Josiah Carberry"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Note how the crate has a <code class="language-plaintext highlighter-rouge">mainEntity</code> that points to the workflow (<code class="language-plaintext highlighter-rouge">head_tail.sh</code>). This is in conformance with the <a href="https://w3id.org/workflowhub/workflow-ro-crate/1.0">Workflow RO-Crate</a> profile. In addition to Workflow RO-Crate, Workflow Run Crates also conform to the <a href="https://w3id.org/ro/wfrun/process">Process Run Crate</a> profile and to the <a href="https://w3id.org/ro/wfrun/workflow">Workflow Run Crate</a> profile itself, as you can see from the <code class="language-plaintext highlighter-rouge">conformsTo</code> entries.</p>
+
+<p>One of the main additions with respect to Process Run Crate is the representation of parameter “slots” (which can take different values according to the specific run) via <code class="language-plaintext highlighter-rouge">FormalParameter</code>. In this case we have three input parameters:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">#input_file-param</code>, corresponding to the input file</li>
+  <li><code class="language-plaintext highlighter-rouge">#head_lines-param</code>, corresponding to the number of lines to select with the <code class="language-plaintext highlighter-rouge">head</code> program</li>
+  <li><code class="language-plaintext highlighter-rouge">#tail_lines-param</code>, corresponding to the number of lines to select with the <code class="language-plaintext highlighter-rouge">tail</code> program</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">#runHeadTail</code> action has three <code class="language-plaintext highlighter-rouge">object</code> entries, which represent the actual values used for the parameters in this specific run. The first item is the <code class="language-plaintext highlighter-rouge">lines.txt</code> file, while the other two are represented via <a href="https://schema.org/PropertyValue">PropertyValue</a> instances, where the <code class="language-plaintext highlighter-rouge">value</code> property provides the values taken by the parameters. Crucially, the <code class="language-plaintext highlighter-rouge">exampleOfWork</code> property connects each parameter value to the corresponding <code class="language-plaintext highlighter-rouge">FormalParameter</code>. Similarly, the <code class="language-plaintext highlighter-rouge">chunk.txt</code> file matches the output parameter <code class="language-plaintext highlighter-rouge">#output_file-param</code>.</p>
+
+<p>An example of a Workflow Run Crate for a Galaxy workflow is available at <a href="https://doi.org/10.5281/zenodo.7785860">https://doi.org/10.5281/zenodo.7785860</a>.</p>
+
+<p>You can export a Galaxy workflow invocation as a Workflow Run Crate by following <a href="https://by-covid.github.io/gtn/ro-crate-in-galaxy/">this tutorial</a>.</p>
+
+<h2 id="provenance-run-crate">Provenance Run Crate</h2>
+
+<p><a href="https://w3id.org/ro/wfrun/provenance">Provenance Run Crate</a> further extends Workflow Run Crate, specifying how to represent the actions corresponding to individual steps in the workflow. The extent to which this can be done may depend on how the workflow is written and how the workflow engine operates. For instance, the shell script we used in the previous section does not keep the intermediate output from the execution of <code class="language-plaintext highlighter-rouge">head</code>: it’s stored in a temporary directory, which is deleted at the end of the script.</p>
+
+<p>A workflow management system that supports Provenance Run Crate is <a href="https://streamflow.di.unito.it/">StreamFlow</a>, which executes <a href="https://www.commonwl.org/">CWL</a> workflows. Let’s write a CWL workflow that implements our head-tail application. We start by writing <code class="language-plaintext highlighter-rouge">headtool.cwl</code>, a wrapper for the <code class="language-plaintext highlighter-rouge">head</code> tool:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">class</span><span class="pi">:</span> <span class="s">CommandLineTool</span>
+<span class="na">cwlVersion</span><span class="pi">:</span> <span class="s">v1.0</span>
+
+<span class="na">baseCommand</span><span class="pi">:</span> <span class="s">head</span>
+
+<span class="na">inputs</span><span class="pi">:</span>
+  <span class="na">lines</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">int</span>
+    <span class="na">inputBinding</span><span class="pi">:</span>
+      <span class="na">position</span><span class="pi">:</span> <span class="m">1</span>
+      <span class="na">prefix</span><span class="pi">:</span> <span class="s2">"</span><span class="s">--lines"</span>
+  <span class="na">input</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">inputBinding</span><span class="pi">:</span>
+      <span class="na">position</span><span class="pi">:</span> <span class="m">2</span>
+<span class="na">outputs</span><span class="pi">:</span>
+  <span class="na">output</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">outputBinding</span><span class="pi">:</span>
+      <span class="na">glob</span><span class="pi">:</span> <span class="s">head_out.txt</span>
+<span class="na">stdout</span><span class="pi">:</span> <span class="s">head_out.txt</span>
+</code></pre></div></div>
+
+<p>We then do the same for <code class="language-plaintext highlighter-rouge">tail</code>, calling the wrapper <code class="language-plaintext highlighter-rouge">tailtool.cwl</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">class</span><span class="pi">:</span> <span class="s">CommandLineTool</span>
+<span class="na">cwlVersion</span><span class="pi">:</span> <span class="s">v1.0</span>
+
+<span class="na">baseCommand</span><span class="pi">:</span> <span class="s">tail</span>
+
+<span class="na">inputs</span><span class="pi">:</span>
+  <span class="na">lines</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">int</span>
+    <span class="na">inputBinding</span><span class="pi">:</span>
+      <span class="na">position</span><span class="pi">:</span> <span class="m">1</span>
+      <span class="na">prefix</span><span class="pi">:</span> <span class="s2">"</span><span class="s">--lines"</span>
+  <span class="na">input</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">inputBinding</span><span class="pi">:</span>
+      <span class="na">position</span><span class="pi">:</span> <span class="m">2</span>
+<span class="na">outputs</span><span class="pi">:</span>
+  <span class="na">output</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">outputBinding</span><span class="pi">:</span>
+      <span class="na">glob</span><span class="pi">:</span> <span class="s">tail_out.txt</span>
+<span class="na">stdout</span><span class="pi">:</span> <span class="s">tail_out.txt</span>
+</code></pre></div></div>
+
+<p>Finally, we write the workflow, <code class="language-plaintext highlighter-rouge">head_tail.cwl</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">class</span><span class="pi">:</span> <span class="s">Workflow</span>
+<span class="na">cwlVersion</span><span class="pi">:</span> <span class="s">v1.0</span>
+
+<span class="na">inputs</span><span class="pi">:</span>
+  <span class="na">input_file</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="na">head_lines</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">int</span>
+  <span class="na">tail_lines</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">int</span>
+<span class="na">outputs</span><span class="pi">:</span>
+  <span class="na">output_file</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">outputSource</span><span class="pi">:</span> <span class="s">tail/output</span>
+
+<span class="na">steps</span><span class="pi">:</span>
+  <span class="na">head</span><span class="pi">:</span>
+    <span class="na">in</span><span class="pi">:</span>
+      <span class="na">lines</span><span class="pi">:</span> <span class="s">head_lines</span>
+      <span class="na">input</span><span class="pi">:</span> <span class="s">input_file</span>
+    <span class="na">out</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">output</span><span class="pi">]</span>
+    <span class="na">run</span><span class="pi">:</span> <span class="s">headtool.cwl</span>
+  <span class="na">tail</span><span class="pi">:</span>
+    <span class="na">in</span><span class="pi">:</span>
+      <span class="na">lines</span><span class="pi">:</span> <span class="s">tail_lines</span>
+      <span class="na">input</span><span class="pi">:</span> <span class="s">head/output</span>
+    <span class="na">out</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">output</span><span class="pi">]</span>
+    <span class="na">run</span><span class="pi">:</span> <span class="s">tailtool.cwl</span>
+</code></pre></div></div>
+
+<p>Now that we have the workflow, let’s write the file that contains the parameter settings for our specific run, <code class="language-plaintext highlighter-rouge">params.yml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">input_file</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="na">location</span><span class="pi">:</span> <span class="s">lines.txt</span>
+<span class="na">head_lines</span><span class="pi">:</span> <span class="m">4</span>
+<span class="na">tail_lines</span><span class="pi">:</span> <span class="m">3</span>
+</code></pre></div></div>
+
+<p>Now, install StreamFlow (we’re going to need a version with RO-Crate support). To avoid possible conflicts, consider installing in a clean <a href="https://docs.python.org/3/library/venv.html">virtual environment</a>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install 'streamflow==0.2.0.dev4'
+</code></pre></div></div>
+
+<p>Now run the workflow:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cwl-runner head_tail.cwl params.yml
+</code></pre></div></div>
+
+<p>To generate the RO-Crate, we’re going to need the workflow’s name in the StreamFlow database:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>streamflow list
+<span class="go">NAME                                  TYPE EXECUTIONS 
+f6b2273d-a945-4b27-aa98-dcfe0b778f4c  cwl  1
+</span></code></pre></div></div>
+
+<p>In your case, the name might be different. Now generate the RO-Crate with:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>streamflow prov f6b2273d-a945-4b27-aa98-dcfe0b778f4c
+</code></pre></div></div>
+
+<p>taking care to replace the workflow name with the actual one you got from <code class="language-plaintext highlighter-rouge">streamflow list</code>. This will generate a zip archive containing the RO-Crate. Unzip the archive to get the RO-Crate directory:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unzip -d f6b2273d-a945-4b27-aa98-dcfe0b778f4c{,.crate.zip}
+</code></pre></div></div>
+
+<p>If you inspect <code class="language-plaintext highlighter-rouge">f6b2273d-a945-4b27-aa98-dcfe0b778f4c/ro-crate-metadata.json</code>, you will find a similar structure to the one seen for Workflow Run Crate, but with a lot more detail. Most notably, there will be three actions: in addition to the one representing the execution of the whole workflow, there will be two more, representing the execution of <code class="language-plaintext highlighter-rouge">headtool.cwl</code> and of <code class="language-plaintext highlighter-rouge">tailtool.cwl</code>. Each of this points to the corresponding tool via <code class="language-plaintext highlighter-rouge">instrument</code>, and to its inputs and outputs via <code class="language-plaintext highlighter-rouge">object</code> and <code class="language-plaintext highlighter-rouge">result</code>. The intermediate file resulting from the <code class="language-plaintext highlighter-rouge">head</code> run (<code class="language-plaintext highlighter-rouge">head_out.txt</code>) is included, and listed both as an output of the <code class="language-plaintext highlighter-rouge">head</code> run and as an input of the <code class="language-plaintext highlighter-rouge">tail</code> run. This situation is similar to what we’ve seen in the <a href="#process-run-crate">Process Run Crate example</a>, but this time everything has been orchestrated by a workflow engine on the basis of a formal workflow description.</p>
+
+<p>More information on the entities represented in a Provenance Run Crate is available in the <a href="https://w3id.org/ro/wfrun/provenance">specification</a>.</p>
+
+<p>An example a Provenance Run Crate representing an execution of a digital pathology image annotation workflow is available at <a href="https://doi.org/10.5281/zenodo.7669622">https://doi.org/10.5281/zenodo.7669622</a>.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/fair/faqs/">FAQ page for the FAIR Data, Workflows, and Research topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Workflow Run RO-Crate Introduction (FAIR Data, Workflows, and Research)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Simone Leo,  <b>Workflow Run RO-Crate Introduction (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html">https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{fair-ro-crate-workflow-run-ro-crate,
+author = "Simone Leo",
+title = "Workflow Run RO-Crate Introduction (Galaxy Training Materials)",
+year = "",
+month = "",
+day = ""
+url = "\url{https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/by-covid" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/by-covid/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<p>BY-COVID is an <a href="https://cordis.europa.eu/project/id/101046203">EC funded project</a> that tackles the data challenges that can hinder effective pandemic response.</p>
+
+<p>This project has received funding from the European Union’s Horizon Europe research and innovation programme under grant agreement No. 101046203 (BY-COVID)</p>
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+var d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
+        var snippets=document.querySelectorAll('div.highlight');
+        [].forEach.call(snippets,function(snippet){
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+
+        var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+            target:function(trigger){return trigger.nextElementSibling;
+        }});
+        </script>
+        
+
+        <script type="text/javascript">
+            if(window.location.hostname === "galaxyproject.github.io") {
+                // Redirect
+                var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+                $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+                window.setTimeout(function(){
+                    window.location.href = redirect;
+                }, 5000)
+
+            }
+        </script>
+    </body>
+</html>
