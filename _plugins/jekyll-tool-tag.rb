@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Jekyll
+  # The tool tag which allows us to do fancy tool links
   class ToolTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super
@@ -22,13 +23,16 @@ module Jekyll
         # check if a variable was provided for the tool id
         tool = context[m[2].tr('{}', '')] || m[2]
 
-        %(<span class="tool" data-tool="#{tool}" title="#{m[1]} tool"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: #{tool}</span></span> )
+        "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\"><strong>#{m[1]}</strong> " \
+          '<i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i>' \
+          "<span class=\"visually-hidden\">Tool: #{tool}</span></span>"
       else
-        %(<span><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> )
+        %(<span><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>)
       end
     end
   end
 
+  # Same for the workflow tags
   class WorkflowTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super
@@ -42,7 +46,8 @@ module Jekyll
 
       # It MUST be this format:
       # {% workflow [Main Workflow](topics/x/tutorials/y/material/workflows/main.ga) %}
-      %(<span class="workflow" data-workflow="#{m[:url]}"><strong>#{m[:title]}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> )
+      "<span class=\"workflow\" data-workflow=\"#{m[:url]}\"><strong>#{m[:title]}</strong> " \
+        '<i class="fas fa-share-alt" aria-hidden="true"></i></span>'
     end
   end
 end

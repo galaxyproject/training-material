@@ -141,25 +141,27 @@ module Jekyll
       end
 
       page2 = PageWithoutAFile.new(site, '', 'api/', 'contributors.geojson')
-      page2.content = JSON.pretty_generate({
-                                             'type' => 'FeatureCollection',
-                                             'features' => site.data['contributors']
-          .select { |_k, v| v.key? 'location' }
-          .map do |k, v|
-            {
-              'type' => 'Feature',
-              'geometry' => { 'type' => 'Point', 'coordinates' => [v['location']['lon'], v['location']['lat']] },
-              'properties' => {
-                'name' => v.fetch('name', k),
-                'url' => "https://training.galaxyproject.org/training-material/hall-of-fame/#{k}/",
-                'joined' => v['joined'],
-                'orcid' => v['orcid'],
-                'id' => k,
-                'contact_for_training' => v.fetch('contact_for_training', false),
+      page2.content = JSON.pretty_generate(
+        {
+          'type' => 'FeatureCollection',
+          'features' => site.data['contributors']
+            .select { |_k, v| v.key? 'location' }
+            .map do |k, v|
+              {
+                'type' => 'Feature',
+                'geometry' => { 'type' => 'Point', 'coordinates' => [v['location']['lon'], v['location']['lat']] },
+                'properties' => {
+                  'name' => v.fetch('name', k),
+                  'url' => "https://training.galaxyproject.org/training-material/hall-of-fame/#{k}/",
+                  'joined' => v['joined'],
+                  'orcid' => v['orcid'],
+                  'id' => k,
+                  'contact_for_training' => v.fetch('contact_for_training', false),
+                }
               }
-            }
-          end
-                                           })
+            end
+        }
+      )
       page2.data['layout'] = nil
       site.pages << page2
 
@@ -235,7 +237,7 @@ module Jekyll
 
           # Here we un-do the tutorial metadata priority, and overwrite with
           # slides metadata when available.
-          slides_data = site.pages.select { |p| p.url == "/#{directory}/slides.html" }[0]
+          slides_data = site.pages.select { |p2| p2.url == "/#{directory}/slides.html" }[0]
           p.update(slides_data.data) if slides_data&.data
 
           page5.content = JSON.pretty_generate(p)
@@ -286,23 +288,27 @@ module Jekyll
           wfname = workflow['wfname']
 
           page2 = PageWithoutAFile.new(site, '', "api/ga4gh/trs/v2/tools/#{wfid}/versions/", "#{wfname}.json")
-          page2.content = JSON.pretty_generate({
-                                                 'id' => wfname,
-                                                 'url' => site.config['url'] + site.config['baseurl'] + material['url'],
-                                                 'name' => 'v1',
-                                                 'author' => [],
-                                                 'descriptor_type' => ['GALAXY'],
-                                               })
+          page2.content = JSON.pretty_generate(
+            {
+              'id' => wfname,
+              'url' => site.config['url'] + site.config['baseurl'] + material['url'],
+              'name' => 'v1',
+              'author' => [],
+              'descriptor_type' => ['GALAXY'],
+            }
+          )
           page2.data['layout'] = nil
           site.pages << page2
 
           page2 = PageWithoutAFile.new(site, '', "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}/GALAXY",
                                        'descriptor.json')
-          page2.content = JSON.pretty_generate({
-                                                 'content' => File.read("#{material['dir']}/workflows/#{workflow['workflow']}"),
-                                                 'checksum' => [],
-                                                 'url' => nil,
-                                               })
+          page2.content = JSON.pretty_generate(
+            {
+              'content' => File.read("#{material['dir']}/workflows/#{workflow['workflow']}"),
+              'checksum' => [],
+              'url' => nil,
+            }
+          )
           page2.data['layout'] = nil
           site.pages << page2
         end

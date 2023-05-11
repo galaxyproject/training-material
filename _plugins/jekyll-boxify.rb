@@ -4,8 +4,10 @@ require 'jekyll'
 require './_plugins/gtn'
 
 module Jekyll
+  # The GTN Box generation process
   class Boxify < Jekyll::Generator
     def initialize(config) # :nodoc:
+      super
       @config = config['boxify'] ||= {}
     end
 
@@ -31,9 +33,10 @@ module Jekyll
         title = ::Regexp.last_match(2)
         if page.data['citation_target'] == 'jupyter'
           title = Gtn::Boxify.safe_title(title)
-          title = Gtn::Boxify.format_box_title(title, box_type, lang = lang)
+          title = Gtn::Boxify.format_box_title(title, box_type, lang)
           icon = Gtn::Boxify.get_icon(box_type, emoji: true)
-          box = "<div class=\"box-title\" aria-description=\"#{box_type} box: #{title}\" style=\"font-size: 150%\">#{icon} #{title}</div>"
+          box = "<div class=\"box-title\" aria-description=\"#{box_type} box: " \
+                "#{title}\" style=\"font-size: 150%\">#{icon} #{title}</div>"
           box.gsub!(/\\&quot/, '&quot')
           box.gsub!(/([^\\])"/, '\1\\"')
         else

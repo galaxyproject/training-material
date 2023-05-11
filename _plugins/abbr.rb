@@ -15,6 +15,7 @@ module Jekyll
     safe true
 
     def initialize(config) # :nodoc:
+      super
       @config = config['abbreviate'] ||= {}
     end
 

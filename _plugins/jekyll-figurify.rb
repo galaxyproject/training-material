@@ -3,10 +3,12 @@
 require 'jekyll'
 
 module Jekyll
+  # Our modifications to the markdown renderer to process images with figure captions
   class Figurify < Jekyll::Generator
     safe true
 
     def initialize(config)
+      super
       @config = config['figurify'] ||= {}
     end
 
@@ -45,7 +47,10 @@ module Jekyll
           dimensions = Gtn::Images.html_image_dimensions(tuto_dir, url)
 
           prefix = figcaption_prefix(page, site)
-          "<figure id=\"figure-#{num}\"><img src=\"#{url}\" alt=\"#{alt}\" #{style} #{dimensions} loading=\"lazy\"><figcaption><span class=\"figcaption-prefix\"><strong>#{prefix}#{num}</strong>:</span> #{title}</figcaption></figure>"
+
+          "<figure id=\"figure-#{num}\"><img src=\"#{url}\" alt=\"#{alt}\" #{style} #{dimensions} loading=\"lazy\">" \
+            "<figcaption><span class=\"figcaption-prefix\"><strong>#{prefix}#{num}</strong>:</span> #{title}" \
+            '</figcaption></figure>'
         end
       end
 

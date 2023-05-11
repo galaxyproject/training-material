@@ -3,6 +3,8 @@
 require 'digest'
 require './_plugins/gtn/hsluv'
 
+# Our automatic colour tag generator
+# It makes tags colourful in a reproducible way
 module ColourTag
   ##
   # This function generates the CSS for a colour tag
@@ -22,7 +24,7 @@ module ColourTag
     lightness = lightnessOffset + (hash & 0xf)
 
     # randomly make yellow tags bright
-    lightness += (100 - lightness) * 0.75 if (hue > 70) && (hue < 96) && ((d & 0x100) === 0x100)
+    lightness += (100 - lightness) * 0.75 if (hue > 70) && (hue < 96) && ((d & 0x100) == 0x100)
 
     primary = Hsluv.hsluv_to_hex(hue, 100, lightness)
     darker = Hsluv.hsluv_to_hex(hue, 100, lightness * 0.9)
@@ -33,6 +35,7 @@ module ColourTag
 end
 
 module Jekyll # :nodoc:
+  # The jekyll implementation of the colour tag
   module ImplColourTag
     def cache
       @@cache ||= Jekyll::Cache.new('ColorTags')

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Jekyll
+  # This module contains a filter for converting a duration string into a human readable string.
   module DurationFilter
     ##
     # This function converts a duration string into a human readable string.

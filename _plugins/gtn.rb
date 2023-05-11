@@ -49,6 +49,7 @@ def lookup_name(user, site)
 end
 
 module Jekyll
+  # The main GTN function library
   module GtnFunctions
     def self.cache
       @@cache ||= Jekyll::Cache.new('GtnFunctions')
@@ -298,7 +299,8 @@ module Jekyll
     # +String+:: The TRS path
     #
     # Example:
-    #  {{ "topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga" | convert_workflow_path_to_trs }}
+    #  {{ "topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga" |
+    #     convert_workflow_path_to_trs }}
     #  => "/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control"
     def convert_workflow_path_to_trs(str)
       return 'GTN_TRS_ERROR_NIL' if str.nil?

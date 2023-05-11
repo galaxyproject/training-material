@@ -92,14 +92,15 @@ module Jekyll
           # puts "=== RENDERED ===\n#{markdownify(box_start+z+box_end)}\n\n"
           # end
 
-          '<!--SNIPPET-->' + markdownify(box_start + z + box_end)
-                             # Replace newlines inside of a PRE with <br>, so they don't get eaten during next one.
-                             .gsub(%r{<(pre)[^>]*>(.*?)</\1>}m) { |m| m.gsub(/\n/, '<br>') }
-                             # Strip out spaces or the boxes break, replace
-                             # them with single spaces so e.g. newlines get collapsed into a space
-                             # and don't merge words together that shouldn't be merged.
-                             .gsub(/\R+/, ' ')
-                             .gsub('<h3', '<h3 data-toc-skip')
+          final_box_text = markdownify(box_start + z + box_end)
+                           # Replace newlines inside of a PRE with <br>, so they don't get eaten during next one.
+                           .gsub(%r{<(pre)[^>]*>(.*?)</\1>}m) { |m| m.gsub(/\n/, '<br>') }
+                           # Strip out spaces or the boxes break, replace
+                           # them with single spaces so e.g. newlines get collapsed into a space
+                           # and don't merge words together that shouldn't be merged.
+                           .gsub(/\R+/, ' ')
+                           .gsub('<h3', '<h3 data-toc-skip')
+          "<!--SNIPPET-->#{final_box_text}<!--END_SNIPPET-->"
         end
       end
 

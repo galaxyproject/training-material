@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Jekyll
+  # Our {% icon X %} tag
   class IconTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super
@@ -21,7 +22,8 @@ module Jekyll
     #
     # Returns:
     # The HTML for the icon
-    # Note: The icon text label is wrapped in a span with class "visually-hidden" to make it accessible to screen readers.
+    # Note: The icon text label is wrapped in a span with class
+    #       "visually-hidden" to make it accessible to screen readers.
     #
     # Example:
     #  {% icon fa fa-github %}
@@ -59,6 +61,7 @@ module Jekyll
     end
   end
 
+  # The variable version that can accept a variable name instead of a string
   class IconTagVar < IconTag
     def initialize(tag_name, text, tokens)
       super

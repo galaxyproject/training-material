@@ -3,6 +3,7 @@
 require './_plugins/gtn/scholar'
 
 module Jekyll
+  # {% cite X %} which generates the link to the bib + text
   class CiteTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super
@@ -65,6 +66,7 @@ module Jekyll
     end
   end
 
+  # {% bibliography %} which generates the bibliography
   class BibTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super
@@ -77,7 +79,7 @@ module Jekyll
       # Which page is rendering this tag?
       source_page = context.registers[:page]['path']
       global_bib = site.config['cached_global_bib']
-      citeproc = site.config['cached_citeproc']
+      # citeproc = site.config['cached_citeproc']
       # We have our page's citations
       citations = site.config['citation_cache'][source_page] || []
       # For each of these citation IDs, we need to get the formatted version + pull out

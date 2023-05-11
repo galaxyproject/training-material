@@ -4,6 +4,7 @@ require 'json'
 require './_plugins/gtn'
 
 module Jekyll
+  # Generate JSON-LD metadata for the GTN.
   module JsonldFilter
     GTN = {
       '@type': 'Organization',
@@ -19,7 +20,9 @@ module Jekyll
       accessibilityControl: %w[fullKeyboardControl fullMouseControl],
       accessibilityFeature: %w[alternativeText tableOfContents],
       # "accessibilityHazard": [],
-      accessibilitySummary: 'The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.',
+      accessibilitySummary: 'The text aims to be as accessible as possible. Image descriptions will vary per ' \
+                            'tutorial, from images being completely inaccessible, to images with good descriptions ' \
+                            'for non-visual users.',
     }.freeze
 
     ##
@@ -330,7 +333,7 @@ module Jekyll
       data.update(A11Y)
 
       # info depending if tutorial, hands-on or slide level
-      parts = []
+      # parts = []
       # data['hasPart'] = parts
 
       mentions = []
@@ -406,54 +409,65 @@ module Jekyll
             if req.key?('tutorials')
               (req['tutorials']).each do |tuto|
                 (site['pages']).each do |page|
-                  if ((page['name'] == 'tutorial.md') || (page['name'] == 'slides.html')) && ((page['topic_name'] == req['topic_name']) && (page['tutorial_name'] == tuto))
+                  if ((page['name'] == 'tutorial.md') || (page['name'] == 'slides.html')) &&
+                     ((page['topic_name'] == req['topic_name']) && (page['tutorial_name'] == tuto))
                     # slides
                     if page['name'] == 'slides.html'
-                      coursePrerequisites.push({
-                                                 '@context': 'http://schema.org',
-                                                 '@type': 'LearningResource',
-                                                 url: "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
-                                                 name: (page['title']).to_s,
-                                                 description: "Slides for '#{page['title']}' tutorial",
-                                                 learningResourceType: 'slides',
-                                                 interactivityType: 'expositive',
-                                                 provider: GTN
-                                               })
+                      coursePrerequisites.push(
+                        {
+                          '@context': 'http://schema.org',
+                          '@type': 'LearningResource',
+                          url: "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/" \
+                               "tutorials/#{tuto}/slides.html",
+                          name: (page['title']).to_s,
+                          description: "Slides for '#{page['title']}' tutorial",
+                          learningResourceType: 'slides',
+                          interactivityType: 'expositive',
+                          provider: GTN
+                        }
+                      )
                       if page['hands_on_url']
-                        coursePrerequisites.push({
-                                                   '@context': 'http://schema.org',
-                                                   '@type': 'LearningResource',
-                                                   url: (page['hands_on_url']).to_s,
-                                                   learningResourceType: 'hands-on tutorial',
-                                                   interactivityType: 'expositive',
-                                                 })
+                        coursePrerequisites.push(
+                          {
+                            '@context': 'http://schema.org',
+                            '@type': 'LearningResource',
+                            url: (page['hands_on_url']).to_s,
+                            learningResourceType: 'hands-on tutorial',
+                            interactivityType: 'expositive',
+                          }
+                        )
                       end
                     end
                     # hands-on
                     if page['name'] == 'tutorial.md'
-                      coursePrerequisites.push({
-                                                 '@context': 'http://schema.org',
-                                                 '@type': 'LearningResource',
-                                                 url: "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
-                                                 name: (page['title']).to_s,
-                                                 description: "Hands-on for '#{page['title']}' tutorial",
-                                                 learningResourceType: 'hands-on tutorial',
-                                                 interactivityType: 'expositive',
-                                                 provider: GTN
-                                               })
+                      coursePrerequisites.push(
+                        {
+                          '@context': 'http://schema.org',
+                          '@type': 'LearningResource',
+                          url: "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials" \
+                               "/#{tuto}/tutorial.html",
+                          name: (page['title']).to_s,
+                          description: "Hands-on for '#{page['title']}' tutorial",
+                          learningResourceType: 'hands-on tutorial',
+                          interactivityType: 'expositive',
+                          provider: GTN
+                        }
+                      )
                     end
                   end
                 end
               end
             else
-              coursePrerequisites.push({
-                                         '@context': 'http://schema.org',
-                                         '@type': 'LearningResource',
-                                         url: "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
-                                         name: (site['data'][req['topic_name']]['title']).to_s,
-                                         description: (site['data'][req['topic_name']]['title']).to_s,
-                                         provider: GTN
-                                       })
+              coursePrerequisites.push(
+                {
+                  '@context': 'http://schema.org',
+                  '@type': 'LearningResource',
+                  url: "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
+                  name: (site['data'][req['topic_name']]['title']).to_s,
+                  description: (site['data'][req['topic_name']]['title']).to_s,
+                  provider: GTN
+                }
+              )
             end
           elsif req['type'] == 'external'
             coursePrerequisites.push({
@@ -480,14 +494,17 @@ module Jekyll
       about = []
       about.push(topic_desc)
       if topic.key?('edam_ontology')
-        about.push({
-                     '@type': 'DefinedTerm',
-                     '@id': "http://edamontology.org/#{topic['edam_ontology']}",
-                     inDefinedTermSet: 'http://edamontology.org',
-                     termCode: (topic['edam_ontology']).to_s,
-                     # "name": ,
-                     url: "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2F#{topic['edam_ontology']}"
-                   })
+        about.push(
+          {
+            '@type': 'DefinedTerm',
+            '@id': "http://edamontology.org/#{topic['edam_ontology']}",
+            inDefinedTermSet: 'http://edamontology.org',
+            termCode: (topic['edam_ontology']).to_s,
+            # "name": ,
+            url: 'https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=' \
+                 "http%3A%2F%2Fedamontology.org%2F#{topic['edam_ontology']}"
+          }
+        )
       end
       data['about'] = about
 
