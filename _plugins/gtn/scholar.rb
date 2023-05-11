@@ -21,7 +21,7 @@ module Gtn
       doi = entry.fetch('doi', nil)
       text += " <a href=\"https://doi.org/#{doi}\">#{doi}</a>" if doi
       url = entry.fetch('url', nil)
-      text += " <a href=\"#{url}\">#{url}</a>" if url && !(url.index('doi.org') and entry.doi)
+      text += " <a href=\"#{url}\">#{url}</a>" if url && !(url.index('doi.org') && entry.doi)
 
       text
     end

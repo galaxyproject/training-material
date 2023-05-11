@@ -101,7 +101,7 @@ module TopicFilter
         'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
         'materials' => all_topics_for_tutorial.select { |x| !seen_ids.include?(x['id']) }
       }
-    elsif site.data[topic_name]['tag_based'] and site.data[topic_name]['custom_ordering']
+    elsif site.data[topic_name]['tag_based'] && site.data[topic_name]['custom_ordering']
       # TODO
       puts 'UNIMPLEMENTED'
       out = {}
@@ -144,7 +144,7 @@ module TopicFilter
     end
 
     # Cleanup empty sections
-    out.delete('__OTHER__') if out.has_key?('__OTHER__') and out['__OTHER__']['materials'].length == 0
+    out.delete('__OTHER__') if out.has_key?('__OTHER__') && (out['__OTHER__']['materials'].length == 0)
 
     out.each do |_k, v|
       v['materials'].sort_by! { |m| [m.fetch('priority', 1), m['title']] }
@@ -395,7 +395,7 @@ module TopicFilter
     end
 
     # In dev configuration, this breaks for me. Not sure why config isn't available.
-    domain = if !site.config.nil? and site.config.has_key? 'url'
+    domain = if !site.config.nil? && site.config.has_key?('url')
                "#{site.config['url']}#{site.config['baseurl']}"
              else
                '/training-material/'
@@ -456,7 +456,7 @@ module TopicFilter
     # make it future proof.
     page_obj['type'] = 'tutorial'
 
-    if page_obj.has_key?('draft') and page_obj['draft']
+    if page_obj.has_key?('draft') && page_obj['draft']
       page_obj['tags'] = [] if !page_obj.has_key? 'tags'
       page_obj['tags'].push('work-in-progress')
     end

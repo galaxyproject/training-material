@@ -336,7 +336,7 @@ module Jekyll
 
       data['isPartOf'] = topic_desc
 
-      if material['name'] == 'tutorial.md' or material['name'] == 'slides.html'
+      if (material['name'] == 'tutorial.md') || (material['name'] == 'slides.html')
         if material['name'] == 'tutorial.md'
           data['learningResourceType'] = 'hands-on tutorial'
           data['name'] = "Hands-on for '#{material['title']}' tutorial"
@@ -347,20 +347,20 @@ module Jekyll
         data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
 
         # Time required
-        if material.key?('time_estimation') and !material['time_estimation'].nil?
+        if material.key?('time_estimation') && !material['time_estimation'].nil?
           data['timeRequired'] = "PT#{material['time_estimation'].upcase}"
         end
 
         # Description with questions, objectives and keypoints
-        if material.key?('questions') and !material['questions'].nil? and material['questions'].length > 0
+        if material.key?('questions') && !material['questions'].nil? && (material['questions'].length > 0)
           questions = material['questions'].join("\n - ")
           description.push("The questions this #{material['type']} addresses are:\n - #{questions}\n\n")
         end
-        if material.key?('objectives') and !material['objectives'].nil? and material['objectives'].length > 0
+        if material.key?('objectives') && !material['objectives'].nil? && (material['objectives'].length > 0)
           objectives = material['objectives'].join("\n - ")
           description.push("The objectives are:\n - #{objectives}\n\n")
         end
-        if material.key?('keypoints') and !material['keypoints'].nil? and material['keypoints'].length > 0
+        if material.key?('keypoints') && !material['keypoints'].nil? && (material['keypoints'].length > 0)
           keypoints = material['keypoints'].join("\n - ")
           description.push("The keypoints are:\n - #{keypoints}\n\n")
         end
@@ -404,7 +404,7 @@ module Jekyll
             if req.key?('tutorials')
               for tuto in req['tutorials'] do
                 for page in site['pages'] do
-                  if (page['name'] == 'tutorial.md' or page['name'] == 'slides.html') && (page['topic_name'] == req['topic_name'] and page['tutorial_name'] == tuto)
+                  if ((page['name'] == 'tutorial.md') || (page['name'] == 'slides.html')) && ((page['topic_name'] == req['topic_name']) && (page['tutorial_name'] == tuto))
                     # slides
                     if page['name'] == 'slides.html'
                       coursePrerequisites.push({

@@ -201,7 +201,7 @@ module Jekyll
       puts '[GTN/API] Topics'
       # Individual Topic Indexes
       site.data.each_pair do |k, v|
-        if v.is_a?(Hash) and v.has_key?('type') and v.has_key?('maintainers')
+        if v.is_a?(Hash) && v.has_key?('type') && v.has_key?('maintainers')
 
           topics[k] = {
             'name' => v['name'],
@@ -233,7 +233,7 @@ module Jekyll
           # Here we un-do the tutorial metadata priority, and overwrite with
           # slides metadata when available.
           slides_data = site.pages.select { |p| p.url == "/#{directory}/slides.html" }[0]
-          p.update(slides_data.data) if slides_data and slides_data.data
+          p.update(slides_data.data) if slides_data && slides_data.data
 
           page5.content = JSON.pretty_generate(p)
           page5.data['layout'] = nil

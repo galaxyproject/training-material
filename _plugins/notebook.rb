@@ -489,7 +489,7 @@ module GTNNotebooks
               # puts "[GTN/Notebook/Images] Embedding png: #{img}"
               data = Base64.encode64(File.binread(image_path))
               %(<img src="data:image/png;base64,#{data}")
-            elsif img[-3..-1].downcase == 'jpg' or img[-4..-1].downcase == 'jpeg'
+            elsif (img[-3..-1].downcase == 'jpg') || (img[-4..-1].downcase == 'jpeg')
               # puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
               data = Base64.encode64(File.binread(image_path))
               %(<img src="data:image/jpeg;base64,#{data}")

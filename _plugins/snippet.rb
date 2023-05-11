@@ -52,7 +52,7 @@ module Jekyll
             metadata = YAML.safe_load(x)
 
             # allow overriding box type with include parameter ("none" to render without a box)
-            box_type = if !p.nil? and p['box_type']
+            box_type = if !p.nil? && p['box_type']
                          p['box_type']
                        else
                          metadata['box_type']
@@ -63,8 +63,8 @@ module Jekyll
               lang = context.registers[:page].fetch('lang', 'en')
               lang = 'en' if lang.nil?
             end
-            lang = 'en' if lang != 'en' and lang != 'es'
-            if box_type != 'none' and !box_type.nil?
+            lang = 'en' if (lang != 'en') && (lang != 'es')
+            if (box_type != 'none') && !box_type.nil?
               box_id, box_title = Gtn::Boxify.generate_title(box_type, metadata['title'], lang,
                                                              context.registers[:page]['path'])
               box_start = "> #{box_title}"

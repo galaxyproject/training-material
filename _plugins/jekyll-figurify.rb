@@ -30,7 +30,7 @@ module Jekyll
         title = ::Regexp.last_match(3)
         style = ::Regexp.last_match(5)
 
-        if skip_titles?(title) or (title.to_s.empty? and skip_empty?)
+        if skip_titles?(title) || (title.to_s.empty? && skip_empty?)
           Regexp.last_match
         else
           num += 1
