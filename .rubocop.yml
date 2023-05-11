@@ -15,3 +15,10 @@ Style/NegatedIf:
 # No.
 Metrics:
   Enabled: false
+
+# This one is nice but we have some non-ruby-ish things that cause it to freeze
+# empty hashes that are about to be modified.
+#
+# We don't want that. It breaks things.
+Style/MutableConstant:
+  Enabled: false
