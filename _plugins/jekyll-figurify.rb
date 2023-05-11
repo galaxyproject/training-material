@@ -40,7 +40,7 @@ module Jekyll
 
           alt.gsub!(/"/, '&quot;')
           if alt.strip.length > 0
-            unless alt.end_with?(".") || alt.end_with?("!") || alt.end_with?("?")
+            unless alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?')
               alt = "#{alt}. "
             end
           end
@@ -51,7 +51,7 @@ module Jekyll
           "<figure id=\"figure-#{num}\">" +
             "<img src=\"#{url}\" alt=\"#{alt}\" #{style} #{dimensions} loading=\"lazy\">" +
             "<figcaption><span class=\"figcaption-prefix\"><strong>#{prefix}#{num}</strong>:</span> #{title}</figcaption>" +
-          "</figure>"
+          '</figure>'
         end
       }
 
@@ -62,7 +62,7 @@ module Jekyll
 
         alt.gsub!(/"/, '&quot;')
         if alt.strip.length > 0
-          unless alt.end_with?(".") || alt.end_with?("!") || alt.end_with?("?")
+          unless alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?')
             alt = "#{alt}. "
           end
         end
@@ -71,10 +71,10 @@ module Jekyll
     end
 
     def figcaption_prefix(page, site)
-      fig = "Figure"
+      fig = 'Figure'
       if page['lang']
           lang = page['lang']
-          fig = site.data["lang"][lang]["figure"]
+          fig = site.data['lang'][lang]['figure']
       end
       @config['prefix'] || fig+' '
     end

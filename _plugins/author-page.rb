@@ -78,29 +78,29 @@ module Jekyll
 
         }
 
-        site.data['contributors'].select{|c| c['halloffame'] != "no"}.each_key do |contributor|
+        site.data['contributors'].select{|c| c['halloffame'] != 'no'}.each_key do |contributor|
           # Using PageWithoutAFile instead of a custom class which reads files
           # from disk each time, saves some time, but it is unclear how much
           # due to how the previous was accounted. But assuming 0.040s per page * 193 should be about 8 seconds.
-          page2 = PageWithoutAFile.new(site, "", File.join(dir, contributor), "index.html")
+          page2 = PageWithoutAFile.new(site, '', File.join(dir, contributor), 'index.html')
           page2.content = nil
           name = site.data['contributors'][contributor].fetch('name', contributor)
 
           # Their tutorials
-          page2.data["contributor"] = contributor
+          page2.data['contributor'] = contributor
           page2.data['personname'] = name
           page2.data['title'] = "GTN Contributor: #{name}"
-          page2.data["layout"] = "contributor_index"
+          page2.data['layout'] = 'contributor_index'
 
-          page2.data["tutorials"] = tutorials_by_author[contributor]
-          page2.data["slides"] = slides_by_author[contributor]
-          page2.data["news"] = news_by_author[contributor]
+          page2.data['tutorials'] = tutorials_by_author[contributor]
+          page2.data['slides'] = slides_by_author[contributor]
+          page2.data['news'] = news_by_author[contributor]
 
-          page2.data["tutorials_count"] = tutorials_by_author[contributor].length
-          page2.data["slides_count"] = slides_by_author[contributor].length
-          page2.data["news_count"] = news_by_author[contributor].length
+          page2.data['tutorials_count'] = tutorials_by_author[contributor].length
+          page2.data['slides_count'] = slides_by_author[contributor].length
+          page2.data['news_count'] = news_by_author[contributor].length
 
-          page2.data["has_philosophy"] = has_philosophy[contributor]
+          page2.data['has_philosophy'] = has_philosophy[contributor]
 
           site.pages << page2
         end

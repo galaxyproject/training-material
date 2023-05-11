@@ -5,15 +5,15 @@ module Jekyll
 
     def generate(site)
       # Full Bibliography
-      puts "[GTN/SyntheticTopics] Generating Indexes"
+      puts '[GTN/SyntheticTopics] Generating Indexes'
 
       TopicFilter.list_topics(site).select{|t| site.data[t]['tag_based']}.each{|topic|
         puts "[GTN/SyntheticTopics] Creating #{topic} topic"
 
-        topic_index = PageWithoutAFile.new(site, "", "topics/#{topic}", "index.md")
-        topic_index.content = ""
-        topic_index.data["layout"] = "topic"
-        topic_index.data["topic_name"] = topic
+        topic_index = PageWithoutAFile.new(site, '', "topics/#{topic}", 'index.md')
+        topic_index.content = ''
+        topic_index.data['layout'] = 'topic'
+        topic_index.data['topic_name'] = topic
         site.pages << topic_index
 
         # For now, intentionally no FAQ

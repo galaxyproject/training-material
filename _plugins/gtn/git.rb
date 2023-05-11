@@ -4,7 +4,7 @@ require 'time'
 module Gtn
   module Git
     def self.cache
-      @@cache ||= Jekyll::Cache.new("Git")
+      @@cache ||= Jekyll::Cache.new('Git')
     end
 
     ##
@@ -35,7 +35,7 @@ module Gtn
         tags = []
       end 
 
-      first_commit = Date.parse("2015-06-29")
+      first_commit = Date.parse('2015-06-29')
       today = Date.today
 
       {

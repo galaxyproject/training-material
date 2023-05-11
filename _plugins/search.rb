@@ -19,7 +19,7 @@ module Jekyll
     end
 
     def render(context)
-      puts "[GTN/Search]"
+      puts '[GTN/Search]'
 
       site = context.registers[:site]
       topics = site.data.select{|k, v| v.is_a?(Hash) && v.has_key?('type')}
@@ -30,16 +30,16 @@ module Jekyll
         tutorials = site.data['cache_topic_filter'][k]
         tutorials.each{|tutorial|
           results[tutorial['url']] = {
-            "type" => 'Tutorial',
-            "topic" => topic['title'],
-            "title" => tutorial['title'],
-            "contributors" => getlist(tutorial, 'contributors').map{|c|
+            'type' => 'Tutorial',
+            'topic' => topic['title'],
+            'title' => tutorial['title'],
+            'contributors' => getlist(tutorial, 'contributors').map{|c|
               site.data['contributors'].fetch(c, {}).fetch('name', c)
             }.join(', '),
-            "tags" => getlist(tutorial, 'tags').map{|tag|
+            'tags' => getlist(tutorial, 'tags').map{|tag|
               %Q(<a class="label label-default" title="Show all tutorials tagged #{tag}" href="#{site.baseurl}/search?query=#{tag}" style="#{ColourTag.colour_tag tag}">#{tag}</a>)
             },
-            "url" => site.baseurl + tutorial['url'],
+            'url' => site.baseurl + tutorial['url'],
           }
         }
       }
@@ -47,14 +47,14 @@ module Jekyll
       faqs = site.pages.select{|p| p.data['layout'] == 'faq'}
       faqs.each{|resource|
           results[resource['url']] = {
-            "type" => 'FAQ',
-            "topic" => 'FAQ',
-            "title" => resource['title'],
-            "contributors" => getlist(resource.data, 'contributors').map{|c|
+            'type' => 'FAQ',
+            'topic' => 'FAQ',
+            'title' => resource['title'],
+            'contributors' => getlist(resource.data, 'contributors').map{|c|
               site.data['contributors'].fetch(c, {}).fetch('name', c)
             }.join(', '),
-            "tags" => [],
-            "url" => site.baseurl + resource['url'],
+            'tags' => [],
+            'url' => site.baseurl + resource['url'],
           }
       }
 

@@ -9,9 +9,9 @@ require 'time'
 
 
 puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
-version_parts = RUBY_VERSION.split(".")
+version_parts = RUBY_VERSION.split('.')
 if version_parts[0].to_i < 3
-  puts "[GTN] WARNING: This Ruby is pretty old, you might want to update."
+  puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.'
 end
 
 
@@ -53,34 +53,34 @@ module Jekyll
   module GtnFunctions
 
     def self.cache
-      @@cache ||= Jekyll::Cache.new("GtnFunctions")
+      @@cache ||= Jekyll::Cache.new('GtnFunctions')
     end
 
     ##
     # List of elixir node country IDs (ISO 3166-1 alpha-2) and their names
     ELIXIR_NODES = {
-      "au" => "Australia",
-      "be" => "Belgium",
-      "ch" => "Switzerland",
-      "cz" => "Czechia",
-      "de" => "Germany",
-      "dk" => "Denmark",
-      "ee" => "Estonia",
-      "es" => "Spain",
-      "fi" => "Finland",
-      "fr" => "France",
-      "gr" => "Greece",
-      "hu" => "Hungary",
-      "ie" => "Ireland",
-      "il" => "Israel",
-      "it" => "Italy",
-      "lu" => "Luxembourg",
-      "nl" => "the Netherlands",
-      "no" => "Norway",
-      "pt" => "Portugal",
-      "se" => "Sweden",
-      "si" => "Slovenia",
-      "uk" => "United Kingdom",
+      'au' => 'Australia',
+      'be' => 'Belgium',
+      'ch' => 'Switzerland',
+      'cz' => 'Czechia',
+      'de' => 'Germany',
+      'dk' => 'Denmark',
+      'ee' => 'Estonia',
+      'es' => 'Spain',
+      'fi' => 'Finland',
+      'fr' => 'France',
+      'gr' => 'Greece',
+      'hu' => 'Hungary',
+      'ie' => 'Ireland',
+      'il' => 'Israel',
+      'it' => 'Italy',
+      'lu' => 'Luxembourg',
+      'nl' => 'the Netherlands',
+      'no' => 'Norway',
+      'pt' => 'Portugal',
+      'se' => 'Sweden',
+      'si' => 'Slovenia',
+      'uk' => 'United Kingdom',
     }
 
     ##
@@ -105,7 +105,7 @@ module Jekyll
         {}
       else
         citations.sort_by{|k, v| v}.reverse.to_h.first(20).map{|k, v| 
-          [k, {"count" => v, "text" => Gtn::Scholar.render_citation(k)}]
+          [k, {'count' => v, 'text' => Gtn::Scholar.render_citation(k)}]
         }.to_h
       end
     end
@@ -135,12 +135,12 @@ module Jekyll
     #  humanize_types("seq") # => "List of Items"
     def humanize_types(type)
       data = {
-        "seq" => "List of Items",
-        "str" => "Free Text",
-        "map" => "A dictionary/map",
-        "float" => "Decimal Number",
-        "int" => "Integer Number",
-        "bool" => "Boolean"
+        'seq' => 'List of Items',
+        'str' => 'Free Text',
+        'map' => 'A dictionary/map',
+        'float' => 'Decimal Number',
+        'int' => 'Integer Number',
+        'bool' => 'Boolean'
       }
       data[type]
     end
@@ -183,7 +183,7 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the topic has been mentioned
     def how_many_topic_feedbacks(feedback, name)
-      feedback.select{|x| x["topic"] == name}.length
+      feedback.select{|x| x['topic'] == name}.length
     end
 
     ## 
@@ -194,7 +194,7 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the tutorial has been mentioned
     def how_many_tutorial_feedbacks(feedback, name)
-      feedback.select{|x| x["tutorial"] == name}.length
+      feedback.select{|x| x['tutorial'] == name}.length
     end
 
     ##
@@ -225,7 +225,7 @@ module Jekyll
       if not contributors.nil?
         return contributors
       else
-        return contributions["authorship"]
+        return contributions['authorship']
       end
     end
 
@@ -276,19 +276,19 @@ module Jekyll
     def convert_to_material_list(site, materials)
       # [{"name"=>"introduction", "topic"=>"admin"}]
       materials.map{|m|
-        if m.key?("name") && m.key?("topic")
-          found = TopicFilter.fetch_tutorial_material(site, m["topic"], m["name"])
+        if m.key?('name') && m.key?('topic')
+          found = TopicFilter.fetch_tutorial_material(site, m['topic'], m['name'])
           if found.nil?
             Jekyll.logger.warn  "Could not find material #{m["topic"]}/#{m["name"]} in the site data"
           end
           found
-        elsif m.key?("external") && m['external']
+        elsif m.key?('external') && m['external']
           {
-            "layout" => "tutorial_hands_on",
-            "name" => m["name"],
-            "title" => m["name"],
-            "hands_on" => "external",
-            "hands_on_url" => m["link"],
+            'layout' => 'tutorial_hands_on',
+            'name' => m['name'],
+            'title' => m['name'],
+            'hands_on' => 'external',
+            'hands_on_url' => m['link'],
           }
         else
           Jekyll.logger.warn  "[GTN] Unsure how to render #{m}"
@@ -308,14 +308,14 @@ module Jekyll
     #  => "/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control"
     def convert_workflow_path_to_trs(str)
       if str.nil?
-        return "GTN_TRS_ERROR_NIL"
+        return 'GTN_TRS_ERROR_NIL'
       end
 
       m = str.match(/topics\/(?<topic>.*)\/tutorials\/(?<tutorial>.*)\/workflows\/(?<workflow>.*)\.ga/)
       if m
         return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}"
       end
-      return "GTN_TRS_ERROR"
+      return 'GTN_TRS_ERROR'
     end
 
     ##
@@ -340,7 +340,7 @@ module Jekyll
     # +String+:: The URL of the default link
     def get_default_link(material)
       if material.nil?
-        return "NO LINK"
+        return 'NO LINK'
       end
       url = nil
 
@@ -349,7 +349,7 @@ module Jekyll
       end
 
       if material['hands_on']
-        if material['hands_on'] != "external" && material['hands_on'] != ""
+        if material['hands_on'] != 'external' && material['hands_on'] != ''
           url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tutorial.html"
         end
       end
@@ -368,7 +368,7 @@ Liquid::Template.register_filter(Jekyll::GtnFunctions)
 #
 # This exists because the jekyll-feed plugin expects those fields to look like that.
 Jekyll::Hooks.register :posts, :pre_render do |post, out|
-  post.data['author'] = get_authors(post.data).map{|c| lookup_name(c, post.site)}.join(", ")
+  post.data['author'] = get_authors(post.data).map{|c| lookup_name(c, post.site)}.join(', ')
   post.data['image'] = post.data['cover']
 end
 

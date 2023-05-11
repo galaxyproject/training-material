@@ -24,14 +24,14 @@ module Jekyll
       # Otherwise append english terms for the various parts
       duration_parts = []
 
-      hour = "hour"
-      hours = "hours"
-      minutes = "minutes"
+      hour = 'hour'
+      hours = 'hours'
+      minutes = 'minutes'
       if @context.registers[:page]&.key?('lang')
           lang = @context.registers[:page]['lang']
-          hour = @context.registers[:site].data["lang"][lang]["hour"]
-          hours = @context.registers[:site].data["lang"][lang]["hours"]
-          minutes = @context.registers[:site].data["lang"][lang]["minutes"]
+          hour = @context.registers[:site].data['lang'][lang]['hour']
+          hours = @context.registers[:site].data['lang'][lang]['hours']
+          minutes = @context.registers[:site].data['lang'][lang]['minutes']
       end
 
       # Hours

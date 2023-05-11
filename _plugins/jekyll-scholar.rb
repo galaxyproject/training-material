@@ -24,10 +24,10 @@ module Jekyll
       source_page = page['path']
 
       # Citation Frequency
-      if ! site.config.has_key?("citation_count")
-        site.config["citation_count"] = Hash.new(0)
+      if ! site.config.has_key?('citation_count')
+        site.config['citation_count'] = Hash.new(0)
       end
-      site.config["citation_count"][@text] += 1
+      site.config['citation_count'][@text] += 1
 
 
       # If the overall cache is nil, create it
@@ -106,12 +106,12 @@ module Jekyll
         global_bib[b].date.to_s + global_bib[b].names.join(' ')
       }
 
-      out = "<ol class=\"bibliography\">"
+      out = '<ol class="bibliography">'
       out += sorted_citations.map{|c|
         r = Gtn::Scholar.render_citation(c)
         %Q(<li id="#{c}">#{r}</li>)
       }.join("\n")
-      out += "</ol>"
+      out += '</ol>'
       out
     end
 

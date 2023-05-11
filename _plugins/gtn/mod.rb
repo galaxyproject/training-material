@@ -5,7 +5,7 @@ module Gtn
     def self.init_cache
       if @@TIME_CACHE.nil?
         @@TIME_CACHE = Hash.new
-        puts "[GTN/MOD] Filling Time Cache"
+        puts '[GTN/MOD] Filling Time Cache'
         results = `git log --name-only --pretty='GTN_GTN:%ct'`.split('GTN_GTN:')
         results.map!{|x| x.split(/\n\n/)}
         results.select!{|x| x.length > 1}

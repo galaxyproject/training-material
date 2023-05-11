@@ -39,16 +39,16 @@ module GTNNotebooks
   }
 
   ICONS_FA = {
-    "far fa-keyboard" => "code-in",
-    "fas fa-laptop-code" => "code-out",
-    "far fa-comment-dots" => "comment",
-    "fas fa-info-circle" => "details",
-    "far fa-comments" => "feedback",
-    "fas fa-pencil-alt" => "hands_on",
-    "far fa-question-circle" => "question",
-    "far fa-eye" => "solution",
-    "far fa-lightbulb" => "tip",
-    "fas fa-exclamation-triangle" => "warning",
+    'far fa-keyboard' => 'code-in',
+    'fas fa-laptop-code' => 'code-out',
+    'far fa-comment-dots' => 'comment',
+    'fas fa-info-circle' => 'details',
+    'far fa-comments' => 'feedback',
+    'fas fa-pencil-alt' => 'hands_on',
+    'far fa-question-circle' => 'question',
+    'far fa-eye' => 'solution',
+    'far fa-lightbulb' => 'tip',
+    'fas fa-exclamation-triangle' => 'warning',
   }
 
   def self.generate_css
@@ -88,9 +88,9 @@ module GTNNotebooks
     end
 
     notebook = {
-     "metadata" => {},
-     "nbformat" => 4,
-     "nbformat_minor" => 5,
+     'metadata' => {},
+     'nbformat' => 4,
+     'nbformat_minor' => 5,
     }
 
     notebook['cells'] = out.map.with_index{|data, index|
@@ -151,7 +151,7 @@ module GTNNotebooks
           if line.size > 0
             first_char = line[0]
           else
-            first_char = ""
+            first_char = ''
           end
           val = [line]
         end
@@ -168,7 +168,7 @@ module GTNNotebooks
         cls = v[-1][2..-2].strip
         res = [":::{#{cls}}"]
         res += v[0..-2].map{|c| c.sub(/^>\s*/, '')}
-        res += [":::"]
+        res += [':::']
         res
       else
         v
@@ -192,7 +192,7 @@ module GTNNotebooks
 
     folks.map{|c|
       "[#{contributors.fetch(c, {"name" => c}).fetch('name', c)}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
-    }.join(", ")
+    }.join(', ')
   end
 
   def self.add_metadata_cell(notebook, metadata)
@@ -370,7 +370,7 @@ module GTNNotebooks
 
     final_content = [
       "# Introduction\n",
-      content.gsub(/```r/, "```{r}"),
+      content.gsub(/```r/, '```{r}'),
       "# Key Points\n",
     ] + page_data['key_points'].map{|k| "- #{k}"} + [
         "\n# Congratulations on successfully completing this tutorial!\n",
@@ -408,10 +408,10 @@ module GTNNotebooks
 
     # Here we add a close to the notebook
     notebook['cells'] = notebook['cells'] + [{
-      "cell_type" => "markdown",
-      "id" => "final-ending-cell",
-      "metadata" => {"editable" => false, "collapsed" => false},
-      "source" => [
+      'cell_type' => 'markdown',
+      'id' => 'final-ending-cell',
+      'metadata' => {'editable' => false, 'collapsed' => false},
+      'source' => [
         "# Key Points\n\n",
       ] + data['key_points'].map{|k| "- #{k}\n"} + [
         "\n# Congratulations on successfully completing this tutorial!\n\n",
@@ -428,7 +428,7 @@ module GTNNotebooks
 
         # The source is initially a list of strings, we'll merge it together
         # to make it easier to work with.
-        source = cell['source'].join("").strip
+        source = cell['source'].join('').strip
 
         # Here we replace individual `s with codeblocks, they screw up
         # rendering otherwise by going through rouge
@@ -480,7 +480,7 @@ module GTNNotebooks
 
         COLORS.each{ |key, val|
           if COLORS_EXTRA.has_key? key
-            val = val + ";" + COLORS_EXTRA[key]
+            val = val + ';' + COLORS_EXTRA[key]
           end
 
           cell['source'].gsub!(/<blockquote class="#{key}">/, "<blockquote class=\"#{key}\" style=\"border: 2px solid #{val}; margin: 1em 0.2em\">")
@@ -501,15 +501,15 @@ module GTNNotebooks
 
             if img[-3..-1].downcase == 'png'
               #puts "[GTN/Notebook/Images] Embedding png: #{img}"
-              data = Base64.encode64(File.open(image_path, "rb").read)
+              data = Base64.encode64(File.open(image_path, 'rb').read)
               %Q(<img src="data:image/png;base64,#{data}")
             elsif img[-3..-1].downcase == 'jpg' or img[-4..-1].downcase == 'jpeg'
               #puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
-              data = Base64.encode64(File.open(image_path, "rb").read)
+              data = Base64.encode64(File.open(image_path, 'rb').read)
               %Q(<img src="data:image/jpeg;base64,#{data}")
             elsif img[-3..-1].downcase == 'svg'
               #puts "[GTN/Notebook/Images] Embedding svg: #{img}"
-              data = Base64.encode64(File.open(image_path, "rb").read)
+              data = Base64.encode64(File.open(image_path, 'rb').read)
               %Q(<img src="data:image/svg+xml;base64,#{data}")
             else
               #puts "[GTN/Notebook/Images] Fallback for #{img}"
@@ -532,7 +532,7 @@ module GTNNotebooks
         # end up causing paragraphs to be rendered as code. So we wipe out
         # all leading space.
         # 'editable' is actually CoCalc specific but oh well.
-        cell['metadata'] = {"editable" => false, "collapsed" => false}
+        cell['metadata'] = {'editable' => false, 'collapsed' => false}
         cell['source'].gsub!(/\$/, '&#36;')
       end
       cell

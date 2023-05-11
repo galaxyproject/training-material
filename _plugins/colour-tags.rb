@@ -38,7 +38,7 @@ end
 module Jekyll # :nodoc:
   module ImplColourTag
     def cache
-      @@cache ||= Jekyll::Cache.new("ColorTags")
+      @@cache ||= Jekyll::Cache.new('ColorTags')
     end
 
     def colour_tag(contents)

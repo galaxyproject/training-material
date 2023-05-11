@@ -23,14 +23,14 @@ module TopicFilter
   # +nil+
   def self.fill_cache(site)
     if not site.data.has_key?('cache_topic_filter')
-      puts "[GTN/TopicFilter] Begin Cache Prefill"
+      puts '[GTN/TopicFilter] Begin Cache Prefill'
       site.data['cache_topic_filter'] = Hash.new
 
       # For each topic
       self.list_topics(site).each{|topic|
         site.data['cache_topic_filter'][topic] = self.filter_by_topic(site, topic)
       }
-      puts "[GTN/TopicFilter] End Cache Prefill"
+      puts '[GTN/TopicFilter] End Cache Prefill'
     end
   end
 
@@ -83,15 +83,15 @@ module TopicFilter
     self.fill_cache(site)
 
     # Here we want to either return data structured around subtopics
-    if site.data[topic_name].has_key?("subtopics")
+    if site.data[topic_name].has_key?('subtopics')
       # We'll construct a new hash of subtopic => tutorials
       out = Hash.new
       seen_ids = []
       site.data[topic_name]['subtopics'].each{|subtopic, v|
         specific_resources = self.filter_by_topic_subtopic(site, topic_name, subtopic['id'])
         out[subtopic['id']] = {
-          "subtopic" => subtopic,
-          "materials" => specific_resources
+          'subtopic' => subtopic,
+          'materials' => specific_resources
         }
         seen_ids += specific_resources.map{|x| x['id'] }
       }
@@ -99,13 +99,13 @@ module TopicFilter
       # And we'll have this __OTHER__ subtopic for any tutorials that weren't
       # in a subtopic.
       all_topics_for_tutorial = self.filter_by_topic(site, topic_name)
-      out["__OTHER__"] = {
-        "subtopic" => {"title" => "Other", "description" => "Assorted Tutorials", "id" => "other"},
-        "materials" => all_topics_for_tutorial.select{|x| ! seen_ids.include?(x['id']) }
+      out['__OTHER__'] = {
+        'subtopic' => {'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other'},
+        'materials' => all_topics_for_tutorial.select{|x| ! seen_ids.include?(x['id']) }
       }
     elsif site.data[topic_name]['tag_based'] and site.data[topic_name]['custom_ordering']
       # TODO
-      puts "UNIMPLEMENTED"
+      puts 'UNIMPLEMENTED'
       out = Hash.new
     elsif site.data[topic_name]['tag_based'] # Tag based Topic
       # We'll construct a new hash of subtopic(parent topic) => tutorials
@@ -121,8 +121,8 @@ module TopicFilter
       seen_topics.each{|parent_topic, v|
         specific_resources = materials.select{|x| x['topic_name'] == parent_topic}
         out[parent_topic] = {
-          "subtopic" => {"id" => parent_topic, "title" => site.data[parent_topic]['title'], "description" => nil},
-          "materials" => specific_resources
+          'subtopic' => {'id' => parent_topic, 'title' => site.data[parent_topic]['title'], 'description' => nil},
+          'materials' => specific_resources
         }
         seen_ids += specific_resources.map{|x| x['id'] }
       }
@@ -130,24 +130,24 @@ module TopicFilter
       # And we'll have this __OTHER__ subtopic for any tutorials that weren't
       # in a subtopic.
       all_topics_for_tutorial = self.filter_by_topic(site, topic_name)
-      out["__OTHER__"] = {
-        "subtopic" => {"title" => "Other", "description" => "Assorted Tutorials", "id" => "other"},
-        "materials" => all_topics_for_tutorial.select{|x| ! seen_ids.include?(x['id']) }
+      out['__OTHER__'] = {
+        'subtopic' => {'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other'},
+        'materials' => all_topics_for_tutorial.select{|x| ! seen_ids.include?(x['id']) }
       }
     else
       # Or just the list (Jury is still out on this one, should it really be a
       # flat list? Or in this identical structure.)
       out = {
-        "__FLAT__" => {
-          "subtopic" => nil,
-          "materials" => self.filter_by_topic(site, topic_name)
+        '__FLAT__' => {
+          'subtopic' => nil,
+          'materials' => self.filter_by_topic(site, topic_name)
         }
       }
     end
 
     # Cleanup empty sections
-    if out.has_key?("__OTHER__") and out["__OTHER__"]["materials"].length == 0
-      out.delete("__OTHER__")
+    if out.has_key?('__OTHER__') and out['__OTHER__']['materials'].length == 0
+      out.delete('__OTHER__')
     end
 
     out.each{|k, v|
@@ -177,8 +177,8 @@ module TopicFilter
   # Returns:
   # +Array+:: The list of tool IDs
   def self.extract_workflow_tool_list(data)
-    out = data['steps'].select{|k, v| v['type'] == "tool"}.map{|k, v| v['tool_id']}.select{|x| ! x.nil?}
-    out += data['steps'].select{|k, v| v['type'] == "subworkflow"}.map{|k, v| self.extract_workflow_tool_list(v['subworkflow'])}
+    out = data['steps'].select{|k, v| v['type'] == 'tool'}.map{|k, v| v['tool_id']}.select{|x| ! x.nil?}
+    out += data['steps'].select{|k, v| v['type'] == 'subworkflow'}.map{|k, v| self.extract_workflow_tool_list(v['subworkflow'])}
     out
   end
 
@@ -220,11 +220,11 @@ module TopicFilter
     end
 
     material = {
-      "topic" => parts[1], # Duplicate
-      "topic_name" => parts[1],
-      "material" => parts[1] + '/' + parts[3],
-      "tutorial_name" => parts[3],
-      "dir" => parts[0..3].join('/'),
+      'topic' => parts[1], # Duplicate
+      'topic_name' => parts[1],
+      'material' => parts[1] + '/' + parts[3],
+      'tutorial_name' => parts[3],
+      'dir' => parts[0..3].join('/'),
     }
 
     if path =~ /\/faqs\//
@@ -313,15 +313,15 @@ module TopicFilter
 
       if not interesting.has_key? mk
         interesting[mk] = material_meta.dup
-        interesting[mk].delete("type") # Remove the type since it's specific, not generic
-        interesting[mk]["resources"] = []
+        interesting[mk].delete('type') # Remove the type since it's specific, not generic
+        interesting[mk]['resources'] = []
       end
 
       page.data['topic_name'] = material_meta['topic_name']
       page.data['tutorial_name'] = material_meta['tutorial_name']
       page.data['dir'] = material_meta['dir']
 
-      interesting[mk]["resources"].push([material_meta["type"], page])
+      interesting[mk]['resources'].push([material_meta['type'], page])
     end
 
     interesting
@@ -335,9 +335,9 @@ module TopicFilter
     # means we do not (cannot) support external_slides AND external_handson.
     # This is probably a sub-optimal situation we'll end up fixing someday.
     #
-    tutorials = material["resources"].select{|a| a[0] == 'tutorial'}
-    slides    = material["resources"].select{|a| a[0] == 'slides'}
-    tours     = material["resources"].select{|a| a[0] == 'tours'}
+    tutorials = material['resources'].select{|a| a[0] == 'tutorial'}
+    slides    = material['resources'].select{|a| a[0] == 'slides'}
+    tours     = material['resources'].select{|a| a[0] == 'tours'}
 
     # Our final "page" object (a "material")
     page = nil
@@ -361,7 +361,7 @@ module TopicFilter
     end
 
     if page.nil? then
-      puts "[GTN/TopicFilter] Could not process material"
+      puts '[GTN/TopicFilter] Could not process material'
       return {}
     end
 
@@ -373,15 +373,15 @@ module TopicFilter
     id = page_obj['id']
     page_obj['video_library'] = Hash.new
 
-    if site.data.has_key?("video-library") then
-      page_obj['video_library']["tutorial"] = site.data['video-library'][id + "/tutorial"]
-      page_obj['video_library']["slides"] = site.data['video-library'][id + "/slides"]
-      page_obj['video_library']["demo"] = site.data['video-library'][id + "/demo"]
-      page_obj['video_library']["both"] = site.data['video-library'][id]
+    if site.data.has_key?('video-library') then
+      page_obj['video_library']['tutorial'] = site.data['video-library'][id + '/tutorial']
+      page_obj['video_library']['slides'] = site.data['video-library'][id + '/slides']
+      page_obj['video_library']['demo'] = site.data['video-library'][id + '/demo']
+      page_obj['video_library']['both'] = site.data['video-library'][id]
     end
 
-    if site.data.has_key?("session-library") then
-      page_obj['video_library']["session"] = site.data['session-library'][id]
+    if site.data.has_key?('session-library') then
+      page_obj['video_library']['session'] = site.data['session-library'][id]
     end
 
     # Sometimes `hands_on` is set to something like `external`, in which
@@ -391,17 +391,17 @@ module TopicFilter
     # is hard to follow which keys are which and safer to test for both in
     # case someone edits the code later. If either of these exist, we can
     # automatically set `hands_on: true`
-    if not page_obj.has_key?("hands_on") then
+    if not page_obj.has_key?('hands_on') then
       page_obj['hands_on'] = tutorials.length > 0
     end
 
     # Same for slides, if there's a resource by that name, we can
     # automatically set `slides: true`
-    if not page_obj.has_key?("slides") then
+    if not page_obj.has_key?('slides') then
       page_obj['slides'] = slides.length > 0
     end
 
-    folder = material["dir"]
+    folder = material['dir']
 
     ymls = Dir.glob("#{folder}/quiz/*.yml") + Dir.glob("#{folder}/quiz/*.yaml")
     if ymls.length > 0
@@ -409,19 +409,19 @@ module TopicFilter
       page_obj['quiz'] = quizzes.map{|q|
         quiz_data = YAML.load_file("#{folder}/quiz/#{q}")
         {
-          "id" => q,
-          "path" => "#{folder}/quiz/#{q}",
-          "title" => quiz_data['title'],
-          "contributors" => quiz_data['contributors'],
+          'id' => q,
+          'path' => "#{folder}/quiz/#{q}",
+          'title' => quiz_data['title'],
+          'contributors' => quiz_data['contributors'],
         }
       }
     end
 
     # In dev configuration, this breaks for me. Not sure why config isn't available.
-    if not site.config.nil? and site.config.has_key? "url"
+    if not site.config.nil? and site.config.has_key? 'url'
       domain = "#{site.config['url']}#{site.config['baseurl']}"
     else
-      domain = "/training-material/"
+      domain = '/training-material/'
     end
     # Similar as above.
     workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
@@ -437,15 +437,15 @@ module TopicFilter
         creators = wf_json['creator'] || []
 
         {
-          "workflow" => wf,
-          "tests" => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
-          "url" => "#{domain}/#{folder}/workflows/#{wf}",
-          "path" => wf_path,
-          "wfid" => wfid,
-          "wfname" => wfname,
-          "trs_endpoint" => "#{domain}/#{trs}",
-          "license" => license,
-          "creators" => creators,
+          'workflow' => wf,
+          'tests' => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
+          'url' => "#{domain}/#{folder}/workflows/#{wf}",
+          'path' => wf_path,
+          'wfid' => wfid,
+          'wfname' => wfname,
+          'trs_endpoint' => "#{domain}/#{trs}",
+          'license' => license,
+          'creators' => creators,
         }
       }
     end
@@ -472,8 +472,8 @@ module TopicFilter
     page_obj['tours'] = tours.length > 0
     page_obj['video'] = slide_has_video
     page_obj['translations'] = Hash.new
-    page_obj['translations']["tutorial"] = tutorial_translations
-    page_obj['translations']["slides"] = slide_translations
+    page_obj['translations']['tutorial'] = tutorial_translations
+    page_obj['translations']['slides'] = slide_translations
     page_obj['translations']['video'] = slide_has_video # Just demand it?
     # I feel less certain about this override, but it works well enough in
     # practice, and I did not find any examples of `type: <anything other
@@ -481,7 +481,7 @@ module TopicFilter
     # make it future proof.
     page_obj['type'] = 'tutorial'
 
-    if page_obj.has_key?("draft") and page_obj['draft'] then
+    if page_obj.has_key?('draft') and page_obj['draft'] then
       if ! page_obj.has_key? 'tags'
         page_obj['tags'] = Array.new
       end
@@ -498,7 +498,7 @@ module TopicFilter
     end
 
     materials = self.collate_materials(pages).map{|k, v| self.resolve_material(site, v) }
-    puts "[GTN/TopicFilter] Filling Materials Cache"
+    puts '[GTN/TopicFilter] Filling Materials Cache'
     site.data['cache_processed_pages'] = materials
 
     # Prepare short URLs
@@ -522,13 +522,13 @@ module TopicFilter
       end
       if p['ref']
         # Initialise redirects if it wasn't set
-        if ! p['ref'].data.has_key?("redirect_from")
+        if ! p['ref'].data.has_key?('redirect_from')
           p['ref'].data['redirect_from'] = []
         end
         p['ref'].data['redirect_from'].push(*mappings[p.url])
         p['ref'].data['redirect_from'].uniq!
       else
-        if ! p.data.has_key?("redirect_from")
+        if ! p.data.has_key?('redirect_from')
           p.data['redirect_from'] = []
         end
 
@@ -610,7 +610,7 @@ module TopicFilter
   # Returns:
   # +Array+:: An array of contributors as strings.
   def self.get_contributors(material)
-    if material.has_key?("contributors")
+    if material.has_key?('contributors')
       material['contributors']
     else
       material['contributions'].map{|k, v| v}.flatten
@@ -680,11 +680,11 @@ module TopicFilter
       m.fetch('tools', []).each do |tool|
         sid = self.short_tool(tool)
         if ! tool_map.has_key?(sid)
-          tool_map[sid] = {"tool_id" => [], "tutorials" => []}
+          tool_map[sid] = {'tool_id' => [], 'tutorials' => []}
         end
 
-        tool_map[sid]["tool_id"].push([tool, self.get_version(tool)])
-        tool_map[sid]["tutorials"].push([
+        tool_map[sid]['tool_id'].push([tool, self.get_version(tool)])
+        tool_map[sid]['tutorials'].push([
           m['id'], m['title'], site.data[m['topic_name']]['title'], m['url']
         ])
       end
@@ -692,17 +692,17 @@ module TopicFilter
 
     # Uniqueify/sort
     t = tool_map.map{|k, v| 
-      v["tool_id"].uniq!
-      v["tool_id"].sort_by!{|k| k[1]}
-      v["tool_id"].reverse!
+      v['tool_id'].uniq!
+      v['tool_id'].sort_by!{|k| k[1]}
+      v['tool_id'].reverse!
 
-      v["tutorials"].uniq!
-      v["tutorials"].sort!
+      v['tutorials'].uniq!
+      v['tutorials'].sort!
       [k, v]
     }.to_h
 
     # Order by most popular tool
-    t.sort_by{|k, v| v["tutorials"].length}.reverse.to_h
+    t.sort_by{|k, v| v['tutorials'].length}.reverse.to_h
   end
 end
 
@@ -729,7 +729,7 @@ module Jekyll
     #}
     def most_recent_contributors(contributors, count)
       # Remove non-hof
-      hof = contributors.select{ |k, v| v.fetch("halloffame", "yes") != "no" }
+      hof = contributors.select{ |k, v| v.fetch('halloffame', 'yes') != 'no' }
       # Get keys + sort by joined date
       hof_k = hof.keys.sort{ |x, y|
         hof[y].fetch('joined', '2016-01') <=> hof[x].fetch('joined', '2016-01')
@@ -782,9 +782,9 @@ module Jekyll
       }
 
       # Alllow filtering by a category, or return "all" otherwise.
-      if category == "non-tag" then
+      if category == 'non-tag' then
         q = q.select{|k, v| v['tag_based'].nil? }
-      elsif category != "all" then
+      elsif category != 'all' then
         q = q.select{|k, v| v['type'] == category }
       end
 

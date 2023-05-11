@@ -40,7 +40,7 @@ module Gtn
         count = values.select{|x| left <= x and x < right }.length
         {
           :value => count,
-          "le" => bin_idx == bins ? "+Inf" : right.to_s
+          'le' => bin_idx == bins ? '+Inf' : right.to_s
         }
       }
     end
@@ -53,7 +53,7 @@ module Gtn
         last_bin = bin
         {
           :value => count,
-          "le" => bin == day_bins[-1] ? "+Inf" : bin
+          'le' => bin == day_bins[-1] ? '+Inf' : bin
         }
       }
     end
@@ -82,38 +82,38 @@ module Gtn
     end
 
     def self.collect_metrics(site)
-      tutorials = site.pages.select{|x| x.data['layout'] == "tutorial_hands_on"}
-      first_commit = Date.parse("2015-06-29")
+      tutorials = site.pages.select{|x| x.data['layout'] == 'tutorial_hands_on'}
+      first_commit = Date.parse('2015-06-29')
       today = Date.today()
 
       output = {
-        "gtn_pages_total" => {
+        'gtn_pages_total' => {
           :value => self.segment_page_by_key(site.pages, 'layout'),
-          :help => "Total number of Pages",
-          :type => "counter"
-        }, "gtn_contributors_total" => {
-          :value => self.segment(site.data['contributors'].values.select{|x| x['halloffame'] != "no"}, "orcid"),
-          :help => "Total number of Contributors",
-          :type => "counter"
+          :help => 'Total number of Pages',
+          :type => 'counter'
+        }, 'gtn_contributors_total' => {
+          :value => self.segment(site.data['contributors'].values.select{|x| x['halloffame'] != 'no'}, 'orcid'),
+          :help => 'Total number of Contributors',
+          :type => 'counter'
         },
-        "gtn_tutorials_total" => {
+        'gtn_tutorials_total' => {
           :value => tutorials.length,
-          :help => "Total number of Hands-on Tutorials",
-          :type => "counter"
+          :help => 'Total number of Hands-on Tutorials',
+          :type => 'counter'
         },
-        "gtn_faqs_total" => {
-          :value => site.pages.select{|x| x.data['layout'] == "faq"}.length,
-          :help => "Total number of FAQs",
-          :type => "counter"
+        'gtn_faqs_total' => {
+          :value => site.pages.select{|x| x.data['layout'] == 'faq'}.length,
+          :help => 'Total number of FAQs',
+          :type => 'counter'
         },
-        "gtn_project_years_total" => {
+        'gtn_project_years_total' => {
           :value => (today - first_commit).to_f / 365,
-          :help => "Total years of project lifetime",
-          :type => "counter"
+          :help => 'Total years of project lifetime',
+          :type => 'counter'
         },
-        "tutorial_update_age_days" => {
-          :type => "histogram",
-          :help => "How recently was every single Hands-on Tutorial touched within the GTN, grouped by days since last edited.",
+        'tutorial_update_age_days' => {
+          :type => 'histogram',
+          :help => 'How recently was every single Hands-on Tutorial touched within the GTN, grouped by days since last edited.',
           :value => self.histogram_dates(
             tutorials
             .map{|page|
@@ -122,12 +122,12 @@ module Gtn
             .map{|seconds| seconds / 3600.0 / 24.0}
           )
         },
-        "contributor_join_age_days" => {
-          :type => "histogram",
-          :help => "When did contributors join? Buckets of their ages by days since joined.",
+        'contributor_join_age_days' => {
+          :type => 'histogram',
+          :help => 'When did contributors join? Buckets of their ages by days since joined.',
           :value => self.histogram_dates(
             site.data['contributors']
-            .select{|x| x['halloffame'] != "no"}
+            .select{|x| x['halloffame'] != 'no'}
             .map{|_, contributor|
               (Date.today() - Date.parse("#{contributor['joined']}-01")).to_i
             }

@@ -31,17 +31,17 @@ module Jekyll
       if icon.empty?
         raise SyntaxError.new(
           "No icon defined for: '#{@text}'. " +
-          "Please define it in `_config.yml` (under `icon-tag:`)."
+          'Please define it in `_config.yml` (under `icon-tag:`).'
         )
       end
 
-      if icon.start_with?("fa")
+      if icon.start_with?('fa')
         if @aria
           %Q(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
         else
           %Q(<i class="#{icon}" aria-hidden="true"></i>)
         end
-      elsif icon.start_with?("ai")
+      elsif icon.start_with?('ai')
         if @aria
           %Q(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
         else

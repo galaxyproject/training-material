@@ -8,7 +8,7 @@ module Jekyll
     end
 
     def generate(site) # :nodoc:
-      puts "[GTN/Boxify]"
+      puts '[GTN/Boxify]'
       site.pages.each { |page| boxify page,site }
       site.posts.docs.each { |post| boxify post, site }
     end
@@ -26,7 +26,7 @@ module Jekyll
       if page['lang']
         lang = page['lang']
       else
-        lang = "en"
+        lang = 'en'
       end
 
       # Interim solution, fancier box titles

@@ -4,7 +4,7 @@ FASTIMAGE_AVAILABLE = true
 begin
   require 'fastimage'
 rescue LoadError
-  Jekyll.logger.info "[GTN/Images] Could not load fastimage gem, disabling feature (probably due to conda)"
+  Jekyll.logger.info '[GTN/Images] Could not load fastimage gem, disabling feature (probably due to conda)'
   FASTIMAGE_AVAILABLE = false
 end
 
@@ -12,12 +12,12 @@ module Gtn
   module Images
 
     def self.cache
-      @@cache ||= Jekyll::Cache.new("ImageDimensions")
+      @@cache ||= Jekyll::Cache.new('ImageDimensions')
     end
 
     def self.html_image_dimensions(tuto_dir, url)
       if not FASTIMAGE_AVAILABLE
-        return ""
+        return ''
       end
 
       width, height = self.get_image_dimensions(tuto_dir, url)
