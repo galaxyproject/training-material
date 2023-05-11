@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require './_plugins/gtn/mod'
 require 'time'
 
@@ -62,11 +63,11 @@ module Gtn
       [
         {
           :value => values.select { |v| v.key? attr }.length,
-          "#{attr}" => true,
+          attr.to_s => true,
         },
         {
           :value => values.select { |v| !v.key? attr }.length,
-          "#{attr}" => false,
+          attr.to_s => false,
         }
       ]
     end
@@ -76,7 +77,7 @@ module Gtn
       possible_keys.map do |k|
         {
           :value => values.select { |v| v.data[key] == k }.length,
-          "#{key}" => k,
+          key.to_s => k,
         }
       end
     end

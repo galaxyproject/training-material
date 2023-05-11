@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Jekyll
   class PlaintextSlidesGenerator < Generator
     SLIDE_LAYOUTS = %w[

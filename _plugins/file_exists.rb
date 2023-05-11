@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Jekyll
   ##
   # This class adds a tag that checks if a file exists.
@@ -21,7 +22,7 @@ module Jekyll
       file_path = "#{site_source}/#{url}"
 
       # Check if file exists (returns true or false)
-      "#{File.exist?(file_path.strip!)}"
+      File.exist?(file_path.strip!).to_s
     end
   end
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require './_plugins/jekyll-topic-filter'
 
 module Jekyll

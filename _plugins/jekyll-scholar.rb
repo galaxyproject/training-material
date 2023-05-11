@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require './_plugins/gtn/scholar'
 
 module Jekyll

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'digest'
 require './_plugins/gtn/hsluv'
 

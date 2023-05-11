@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'jekyll'
 # The fastimage gem may not be installed, and that is OK, we will fall back to another method
 FASTIMAGE_AVAILABLE = true

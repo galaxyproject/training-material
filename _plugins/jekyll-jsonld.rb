@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'json'
 require './_plugins/gtn'
 
@@ -207,8 +208,8 @@ module Jekyll
 
       topic_desc = {
         '@type': 'CreativeWork',
-        name: "#{topic['title']}",
-        description: "#{topic['summary']}",
+        name: (topic['title']).to_s,
+        description: (topic['summary']).to_s,
         url: "#{site['url']}#{site['baseurl']}/topics/#{topic['name']}/"
       }
 
@@ -268,7 +269,7 @@ module Jekyll
         # "funder":,
         # "genre":,
         # "hasPart" described below
-        headline: "#{material['title']}",
+        headline: (material['title']).to_s,
         # "interactionStatistic":,
         interactivityType: 'mixed',
         isAccessibleForFree: true,
@@ -373,7 +374,7 @@ module Jekyll
         if material.key?('zenodo_link')
           mentions = mentions.push({
                                      '@type': 'Thing',
-                                     url: "#{material['zenodo_link']}",
+                                     url: (material['zenodo_link']).to_s,
                                      name: "Training data for #{material['title']} tutorial"
                                    })
         end
@@ -412,7 +413,7 @@ module Jekyll
                                                  '@context': 'http://schema.org',
                                                  '@type': 'LearningResource',
                                                  url: "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
-                                                 name: "#{page['title']}",
+                                                 name: (page['title']).to_s,
                                                  description: "Slides for '#{page['title']}' tutorial",
                                                  learningResourceType: 'slides',
                                                  interactivityType: 'expositive',
@@ -422,7 +423,7 @@ module Jekyll
                         coursePrerequisites.push({
                                                    '@context': 'http://schema.org',
                                                    '@type': 'LearningResource',
-                                                   url: "#{page['hands_on_url']}",
+                                                   url: (page['hands_on_url']).to_s,
                                                    learningResourceType: 'hands-on tutorial',
                                                    interactivityType: 'expositive',
                                                  })
@@ -434,7 +435,7 @@ module Jekyll
                                                  '@context': 'http://schema.org',
                                                  '@type': 'LearningResource',
                                                  url: "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
-                                                 name: "#{page['title']}",
+                                                 name: (page['title']).to_s,
                                                  description: "Hands-on for '#{page['title']}' tutorial",
                                                  learningResourceType: 'hands-on tutorial',
                                                  interactivityType: 'expositive',
@@ -449,19 +450,19 @@ module Jekyll
                                          '@context': 'http://schema.org',
                                          '@type': 'LearningResource',
                                          url: "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
-                                         name: "#{site['data'][req['topic_name']]['title']}",
-                                         description: "#{site['data'][req['topic_name']]['title']}",
+                                         name: (site['data'][req['topic_name']]['title']).to_s,
+                                         description: (site['data'][req['topic_name']]['title']).to_s,
                                          provider: GTN
                                        })
             end
           elsif req['type'] == 'external'
             coursePrerequisites.push({
                                        '@type': 'CreativeWork',
-                                       url: "#{req['link']}",
-                                       name: "#{req['title']}"
+                                       url: (req['link']).to_s,
+                                       name: (req['title']).to_s
                                      })
           else
-            coursePrerequisites.push("#{req['title']}")
+            coursePrerequisites.push((req['title']).to_s)
           end
         end
         data['competencyRequired'] = coursePrerequisites.uniq
@@ -483,7 +484,7 @@ module Jekyll
                      '@type': 'DefinedTerm',
                      '@id': "http://edamontology.org/#{topic['edam_ontology']}",
                      inDefinedTermSet: 'http://edamontology.org',
-                     termCode: "#{topic['edam_ontology']}",
+                     termCode: (topic['edam_ontology']).to_s,
                      # "name": ,
                      url: "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2F#{topic['edam_ontology']}"
                    })

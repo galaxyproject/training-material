@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Jekyll
   ##
   # This class generates the GTN's author pags

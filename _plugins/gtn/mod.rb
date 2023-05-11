@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Gtn
   module ModificationTimes
     @@TIME_CACHE = nil

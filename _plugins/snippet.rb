@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'yaml'
 require './_plugins/gtn'
 
@@ -43,7 +44,7 @@ module Jekyll
 
         context.stack do
           context['include'] = parse_params(context) if @params
-          x = "#{inclusion.render(context)}"
+          x = inclusion.render(context).to_s
           p = context['include']
           count = 0
 
