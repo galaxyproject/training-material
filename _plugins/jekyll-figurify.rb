@@ -62,7 +62,7 @@ module Jekyll
         lang = page['lang']
         fig = site.data['lang'][lang]['figure']
       end
-      @config['prefix'] || ("#{fig} ")
+      @config['prefix'] || "#{fig} "
     end
 
     def skip_empty?

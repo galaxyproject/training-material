@@ -180,7 +180,7 @@ module GTNNotebooks
 
     contributors = nil
     File.open('CONTRIBUTORS.yaml', 'r') do |f2|
-      contributors = YAML.load(f2.read)
+      contributors = YAML.safe_load(f2.read)
     end
 
     folks.map do |c|

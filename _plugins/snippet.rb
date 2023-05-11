@@ -49,7 +49,7 @@ module Jekyll
           box_start = ''
           box_end = ''
           if x.slice(0, 3) == '---'
-            metadata = YAML.load(x)
+            metadata = YAML.safe_load(x)
 
             # allow overriding box type with include parameter ("none" to render without a box)
             box_type = if !p.nil? and p['box_type']
