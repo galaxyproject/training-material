@@ -26,9 +26,9 @@ module Gtn
     end
 
     def self.get_image_dimensions(tuto_dir, url)
-      if match = url.match(%r{^{{\s*site.baseurl\s*}}/(.*)})
+      if (match = url.match(%r{^{{\s*site.baseurl\s*}}/(.*)}))
         _get_image_dimensions(match[1].strip)
-      elsif match = url.match(/{%\s*link\s*(.*)\s*%}/)
+      elsif (match = url.match(/{%\s*link\s*(.*)\s*%}/))
         _get_image_dimensions(match[1].strip)
       elsif !url.match(%r{https?://})
         img_path = File.absolute_path(File.join(tuto_dir, url))
@@ -46,7 +46,4 @@ module Gtn
       end
     end
   end
-end
-
-if $PROGRAM_NAME == __FILE__
 end
