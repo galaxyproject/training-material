@@ -344,6 +344,55 @@
 
  <br> 
 
+<h3 id="deployment"> <a href="#deployment"> Deployment </a></h3>
+
+<hr/>
+
+
+
+<h4 class="faq-area"> Blank page or no CSS/JavaScript <a href="/training-material/topics/admin/faqs/galaxy-blank-screen.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-blank-page-or-no-css-javascript"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-blank-page-or-no-css-javascript" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Blank page or no CSS/JavaScript<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>This generally means that serving of static content is broken:</p>   <ul>   <li>Check browser console for 404 errors.</li>   <li>Check proxy error log for permission errors.</li>   <li>Verify that your proxy static configuration is correct.</li>   <li>If you have recently upgraded Galaxy or changed the GUI in some way, you will need to rebuild the client</li> </ul> </blockquote> 
+
+
+
+
+<h4 class="faq-area"> Database Issues <a href="/training-material/topics/admin/faqs/database-slow-query.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-database-issues"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-database-issues" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Database Issues<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>For slow queries, start with <code class="language-plaintext highlighter-rouge">EXPLAIN ANALYZE</code></p>   <ul>   <li><a href="https://gist.github.com/natefoo/da46bea8136ba67d65f616c86a27c454">Example of the “jobs ready to run” query</a></li> </ul>   <p>However it can be useful to dig into the queries with the <a href="https://tatiyants.com/pev/#/plans">Postgres EXPLAIN Visualizer (PEV)</a> to get a more visual and clear representation. (Try it with this <a href="https://gist.github.com/hexylena/467c7726b5ab9e18c47080893dbc072e">demo data</a>)</p>   <p>You can set some options in the Galaxy configuration or database that will help debugging this:</p>   <ul>   <li><code class="language-plaintext highlighter-rouge">database_engine_option_echo</code> (but warning, extremely verbose)</li>   <li><code class="language-plaintext highlighter-rouge">slow_query_log_threshold</code> logs to Galaxy log file</li>   <li><code class="language-plaintext highlighter-rouge">sentry_sloreq_threshold</code> if using Sentry</li> </ul>   <p>Additionally check that your database is running <code class="language-plaintext highlighter-rouge">VACUUM</code> regularly enough and look at <code class="language-plaintext highlighter-rouge">VACUUM ANALYZE</code></p>   <p>There are some <code class="language-plaintext highlighter-rouge">gxadmin query pg-*</code> commands which can help you monitor and track this information.</p>   <p>Lastly, check your database settings! It might not have enough resources allocated. Check <a href="https://pgtune.leopard.in.ua/">PGTune</a> for some suggestions of optimised parameters.</p> </blockquote> 
+
+
+
+
+<h4 class="faq-area"> Debugging tool errors <a href="/training-material/topics/admin/faqs/galaxy-tool-error.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-debugging-tool-errors"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-debugging-tool-errors" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Debugging tool errors<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tool stdout/stderr is available in UI under “i” icon on history dataset</p>   <ol>   <li>Set <code class="language-plaintext highlighter-rouge">cleanup_job</code> to <code class="language-plaintext highlighter-rouge">onsuccess</code></li>   <li>Cause a job failure</li>   <li>Go to job working directory (find in logs or <code class="language-plaintext highlighter-rouge">/data/jobs/&lt;hash&gt;/&lt;job_id&gt;</code>)</li>   <li>Poke around, try running things (<code class="language-plaintext highlighter-rouge">srun --pty bash</code> considered useful)</li> </ol>   <p>Familiarize yourself with the places Galaxy keeps things</p> </blockquote> 
+
+
+
+
+<h4 class="faq-area"> Debugging tool memory errors <a href="/training-material/topics/admin/faqs/galaxy-tool-memory-error.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-debugging-tool-memory-errors"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-debugging-tool-memory-errors" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Debugging tool memory errors<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Often the tool output contains one of:</p>   <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">MemoryError                 #</span><span class="w"> </span>Python<br><span class="gp">what():  std::bad_alloc     #</span><span class="w"> </span>C++<br><span class="gp">Segmentation Fault          #</span><span class="w"> </span>C - but could be other problems too<br><span class="gp">Killed                      #</span><span class="w"> </span>Linux OOM Killer<br></code></pre></div></div>   <p>Solutions:</p>   <ul>   <li>Change input sizes or params     <ul>       <li>Map/reduce?</li>     </ul>   </li>   <li>Decrease the amount of memory the tool needs</li>   <li>Increase the amount of memory available to the job     <ul>       <li>Request more memory from cluster scheduler</li>       <li>Use job resubmission to automatically rerun with a larger memory allocation</li>     </ul>   </li>   <li>Cross your fingers and rerun the job</li> </ul> </blockquote> 
+
+
+
+
+<h4 class="faq-area"> Galaxy UI is slow <a href="/training-material/topics/admin/faqs/galaxy-ui-slow.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-galaxy-ui-is-slow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-galaxy-ui-is-slow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Galaxy UI is slow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There is a great <a href="https://docs.galaxyproject.org/en/master/dev/finding_and_improving_slow_code.html#profiling">Tutorial from @mvdbeek</a> which we recommend you follow.</p>   <p>Additionally you can use <code class="language-plaintext highlighter-rouge">py-spy</code> to record the issue and generate a flame graph.</p> </blockquote> 
+
+
+
+
+<h4 class="faq-area"> Tool missing from Galaxy <a href="/training-material/topics/admin/faqs/galaxy-tool-missing.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-tool-missing-from-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tool-missing-from-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Tool missing from Galaxy<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>First, restart Galaxy and watch the log for lines like:</p>   <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Loaded tool id: toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33, version: 1.33 into tool panel....<br></span></code></pre></div></div>   <p>After startup, check <code class="language-plaintext highlighter-rouge">integrated_tool_panel.xml</code> for a line like the following to be sure it was loaded properly and added to the toolbox (if not, check the logs further)</p>   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33"</span> <span class="nt">/&gt;</span><br></code></pre></div></div>   <p>If it is a toolshed tool, check <code class="language-plaintext highlighter-rouge">shed_tool_conf.xml</code> for</p>   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/iuc/sickle/43e081d32f90/sickle/sickle.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33"</span><span class="nt">&gt;</span><br>...<br><span class="nt">&lt;/tool&gt;</span><br></code></pre></div></div>   <p>Additionally if you have multiple job handlers, <em>sometimes</em>, rarely they don’t all get the update. Just restart them if that’s the case. Alternatively you can send an (authenticated) API requested:</p>   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X PUT https://galaxy.example.org/api/configuration<br></code></pre></div></div> </blockquote> 
+
+
+
+ <br> 
+
 <h3 id="diffs"> <a href="#diffs"> Diffs </a></h3>
 
 <hr/>
@@ -495,7 +544,7 @@ add a button, include configuration options:
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/88adf5e55cac5c253fd2d0fc6df7499fd8bd8a80">88adf5e55cac5c253fd2d0fc6df7499fd8bd8a80</a>. </p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/9627d9c7c89d93fdaa6cb809ece6006097a01f5f">9627d9c7c89d93fdaa6cb809ece6006097a01f5f</a>. </p>
     </div>
 </footer>
 
