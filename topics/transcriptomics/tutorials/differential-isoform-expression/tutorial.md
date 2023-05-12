@@ -711,6 +711,35 @@ Let's have a look at the generated plot (fig. 13).
 
 In that case, we can appreciate that despite differences in overall gene expression is not statistically significant between health and cancerous tissues, there exists statistically significant isoform switching: the isoform [ENST00000308234.11](https://www.uniprot.org/uniprotkb/J3KNF6/entry), which encodes the 478 aminoacid Repulsive guidance molecule BMP co-receptor b protein is repressed in cancer; on the other hand, the isoform [ENST00000513185.3](https://www.uniprot.org/uniprotkb/Q6NW40/entry), which encodes the 437 aminoanid Repulsive guidance molecule B is induced.
 
+We will try to confirm this isoform switching by visualising the coverage on this gene and more precisely on the region which is different between the two isoforms. We will take advantage of the coverage we generated with **STAR** and use a software called **pyGenomeTracks**
+
+> <hands-on-title>Check isoform switching with pyGenometracks from STAR coverage</hands-on-title>
+>
+> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1) %}:
+>    - *"Region of the genome to limit the operation"*: `chr5:98,762,495-98,803,294`
+>    - In *"Include tracks in your plot"*:
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bedgraph track`
+>                - *"Plot title"*: You need to leave this field empty so the title on the plot will be the sample name.
+>                - {% icon param-collection %} *"Track file(s) bedgraph format"*: Select `RNA STAR on collection N: Coverage Uniquely mapped strand 1`.
+>                - *"Minimum value"*: `0`
+>                - *"height"*: `3`
+>                - *"Show visualization of data range"*: `Yes`
+>                - *"Include spacer at the end of the track"*: `1`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Gene track / Bed track`
+>                - *"Plot title"*: `Genes`
+>                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `gencode.v43.annotation.gtf.gz`
+>                - *"height"*: `10`
+>                - *"Put all labels inside the plotted region"*: `Yes`
+>                - *"Bed style"*: `UCSC`
+>                   - *"Configure other bed parameters"*:
+>                       - *"When using gtf as input"*:
+>                           - *"attribute to use as label"*: `transcript_id`
+>
+> 2. Repeat with *"Region of the genome to limit the operation"*: `chr5:98,767,000-98,775,000` in order to better see the 5' of the gene.
+{: .hands_on}
+
 ### IsoformSwitchAnalyzer genome-wide analysis
 
 A genome-wide analysis is both useful for getting an overview of the extent of isoform switching as well as discovering general patterns. In this training we will perform three different summaries/analyses for both the analysis of alternative splicing and isoform switches with predicted consequences:
