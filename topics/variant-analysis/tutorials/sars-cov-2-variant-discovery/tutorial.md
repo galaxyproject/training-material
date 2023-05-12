@@ -146,7 +146,7 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 >   > A detailed explanation of all of the above-mentioned options for getting your data into Galaxy and organizing it in your history is beyond the scope of this tutorial.
 >   > If you are struggling with getting your own data set up like shown for the example data in this section, please:
 >   > - Option 1: Browse some of the material on [Using Galaxy and Managing your Data]({% link topics/galaxy-interface %})
->   > - Option 2: Consult the FAQs on [uploading data]({% link faqs/galaxy#data upload %}) and on [collections]({% link faqs/galaxy#collections %})
+>   > - Option 2: Consult the FAQs on [uploading data]({% link faqs/galaxy#data%20upload %}) and on [collections]({% link faqs/galaxy#collections %})
 >   > - Option 3: Watch some of the related brief videos from the [{% icon video %} Galactic introductions](https://www.youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE) playlist.
 >   >
 >   {: .details}
