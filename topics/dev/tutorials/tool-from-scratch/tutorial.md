@@ -399,6 +399,29 @@ user interface, then translate the user's selections back into the command to be
 on writing a wrapper. Although this section will cover the full process and many of the options available to
 anyone wrapping a tool, a more complete list is available in [the Galaxy tool docs](https://docs.galaxyproject.org/en/latest/dev/schema.html).
 
+## Galaxy Language Server
+
+Although Galaxy tools can be written by hand using the resources below and the [Galaxy documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html) as needed, the [Galaxy Language Server](https://github.com/galaxyproject/galaxy-language-server) for VSCode has been developed to ease and speed the wrapping of new tools. The plugin contains the following features that will benefit any developer working in Galaxy tools:
+
+- Tag and attribute auto-completion
+- Documentation on Hover
+- Document validation
+- Document auto-formatting
+- Tag auto-closing
+- Snippets
+- Embedded syntax highlighting
+- Auto-generate tests
+- Auto-generate command section
+- Auto-sort param attributes
+- Run planemo tests in the Test Explorer
+- Improved macros support
+- Extract macro
+- Full Galaxy tool linter integration
+
+To install, go to the `extensions` tab in VSCode, search "Galaxy Tools", and click install. Make sure that the python version available in your environment is compatible, and install updates as necessary, as requested by the alerts in VSCode. Once installed, simply make sure the document format is `Galaxy Tool Wrapper` when working on a tool to ensure the laungage server is enabled.
+
+Alternatively you can use the open-source IDE VSCodium and install via the Open VSX registry.
+
 ## Initializing a Tool Wrapper
 
 Initializing a tool wrapper to be run in Galaxy is simple
