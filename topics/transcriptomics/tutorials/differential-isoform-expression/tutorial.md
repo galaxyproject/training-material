@@ -325,16 +325,16 @@ Now, we will integrate the outputs into **MultiQC**.
 >                - In *"STAR output"*:
 >                    - {% icon param-repeat %} *"Insert STAR output"*
 >                        - *"Type of STAR output?"*: `Log`
->                            - {% icon param-file %} *"STAR log output"*: `log` collections
+>                            - {% icon param-collection %} *"STAR log output"*: `log` collection
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `RSeQC`
 >                - In *"RSeQC output"*:
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Infer experiment`
->                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **RNA-seq experiment configuration** collections
+>                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **RNA-seq experiment configuration** collection
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Read distribution`
->                            - {% icon param-collection %} *"RSeQC read distribution: stats output"*: select **stat** collections
+>                            - {% icon param-collection %} *"RSeQC read distribution: stats output"*: select **stats (TXT)** collection
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Junction saturation`
 >                            - {% icon param-collection %} *"RSeQC junction saturation: junction saturation plot Rscript file*: select **Rscript** collections
@@ -343,7 +343,7 @@ Now, we will integrate the outputs into **MultiQC**.
 >                            - {% icon param-collection %} *"RSeQC junction annotation: stats file"*: select **stats** collections
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Gene body coverage`
->                            - {% icon param-collection %} *"RSeQC gene body coverage: stats file"*: select **stats** collections
+>                            - {% icon param-collection %} *"RSeQC gene body coverage: stats file"*: select **stats (TXT)** collections
 >
 {: .hands_on}
 
@@ -693,13 +693,13 @@ The gene-specific mode is interesting for those experimental designs which aim t
 >
 > 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0) %} with the following parameters:
 >    - *"Tool function mode"*: `Analysis part two: Plot all isoform switches and their annotation`
->        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %} part 1)
 >        - *"Analysis mode"*: `Analyze specific gene`
 >        - *"Gene name"*: `RGMB`
 >        - *"Include prediction of coding potential information"*: `CPAT`
->            - {% icon param-file %} *"CPAT result file"*: `ORF best probabilities (TSV)` (output of **CPAT** {% icon tool %})
+>            - {% icon param-file %} *"CPAT result file"*: `Concatenate datasets on data ...` (output of **Concatenate datasets** {% icon tool %})
 >        - *"Include Pfam information"*: `Enabled`
->            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: output of **PfamScan** {% icon tool %})
+>            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `PfamScan on data ...` (output of **PfamScan** {% icon tool %})
 >        - *"Include SignalP results"*: `Disabled`
 >        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
 >
@@ -729,10 +729,10 @@ A genome-wide analysis is both useful for getting an overview of the extent of i
 >
 > 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0) %} with the following parameters:
 >    - *"Tool function mode"*: `Analysis part two: Plot all isoform switches and their annotation`
->        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %} part 1)
 >        - *"Analysis mode"*: `Full analysis`
 >        - *"Include prediction of coding potential information"*: `CPAT`
->            - {% icon param-file %} *"CPAT result file"*: `orf_seqs_prob_best` (output of **CPAT** {% icon tool %})
+>            - {% icon param-file %} *"CPAT result file"*: `Concatenate datasets on data ...` (output of **Concatenate datasets** {% icon tool %})
 >        - *"Include Pfam information"*: `Enabled`
 >            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `output` (output of **PfamScan** {% icon tool %})
 >        - *"Include SignalP results"*: `Disabled`
