@@ -38,6 +38,7 @@ contributors:
 - wm75
 tags:
 - virology
+- one-health
 ---
 
 
@@ -63,7 +64,7 @@ This tutorial demonstrates how such data can be analyzed correctly with Galaxy.
 
 > <comment-title>Advanced tutorial</comment-title>
 > The analysis presented here demonstrates a very close to real-world analysis of viral sequencing data with Galaxy. In fact, it is modeled after this [fully production-ready workflow](https://workflowhub.eu/workflows/439) for analysis of the same type of data.
-> As such, this tutorial avoids many simplifactions that are often made in training material to ease understanding.
+> As such, this tutorial avoids many simplifications that are often made in training material to ease understanding.
 > On the technical side, in particular, it makes use of many different Galaxy features and often assumes more than just basic familiarity with them.
 > Like in other tutorials, you will find precise instructions for running every step in the analysis, but explanations focus very much on the biology of pox viruses and will often not offer much details on *why* a certain component of Galaxy is used the way it is described.
 >
@@ -87,7 +88,7 @@ The following figure provides an overview of the wet lab data generation process
 
 On the wet lab side, the genome of a viral sample gets amplified in the form of 23 overlapping amplicons using a set of pan-genus primers suitable for all species of *capripoxvirus*.
 
-Amplification happens in four separate mutliplex PCR reactions: the primers for the odd-numbered amplicons (1-11) from the 5' amplicon pool are used in reaction 1a, the primers for the even-numbered amplicons (2-12) in reaction 1b, the odd-numbered amplicons (13-23) from the 3' amplicon pool in reaction 2a and the even numbered amplicons (12-22) from that pool in reaction 2b.
+Amplification happens in four separate multiplex PCR reactions: the primers for the odd-numbered amplicons (1-11) from the 5' amplicon pool are used in reaction 1a, the primers for the even-numbered amplicons (2-12) in reaction 1b, the odd-numbered amplicons (13-23) from the 3' amplicon pool in reaction 2a and the even numbered amplicons (12-22) from that pool in reaction 2b.
 
 Note that the 5'-ITR gets amplified as part of amplicon 1, while the 3'-ITR is part of amplicon 23. Amplification of the two regions is specific because the right primer of amplicon 1 and the left primer of amplicon 23 both bind in the "central coding region", i.e. outside the reverse-complementary ITRs.
 
@@ -745,7 +746,7 @@ Luckily, there is a tool to help us, and we have even used it before to check th
 >    > >
 >    > > The tool reports only two stretches consisting of Ns at both ends of the genome, and their positions are exactly identical between the samples. There are no interior Ns, nor other ambiguity characters.
 >    > >
->    > > The 5'-end strech of Ns extends up to position 264 (in bed format, so zero-based and the position itself not included). The binding site of the first primer in the primer scheme is from (bed format again) 235 up to 264.
+>    > > The 5'-end stretch of Ns extends up to position 264 (in bed format, so zero-based and the position itself not included). The binding site of the first primer in the primer scheme is from (bed format again) 235 up to 264.
 >    > >
 >    > > Remember that we used ivar trim to mask primer sequences? This seems to have worked well, and we got a consensus sequence from the first position for which we could reasonably expect information!
 >    > >
