@@ -73,7 +73,7 @@ There are plenty of computational tools to perform metafenomics binning. Some of
 - **Anvi'o** ({%cite Eren2015%}): A platform for visualizing and analyzing metagenomic data, including features for binning, annotation, and comparative genomics.
 - **SemiBin** ({%cite Pan2022%}): A command tool for metagenomic binning with deep learning, handles both short and long reads.
 
-A benchmark study of metagenomics software can be found at [Sczyrba, A. et al.](https://doi.org/10.1038/nmeth.4458). MetaBAT 2 outperforms previous MetaBAT and other alternatives in both accuracy and computational efficiency . All are based on default parameters ({%cite Sczyrba2017%}).
+A benchmark study of metagenomics software can be found at {%cite Sczyrba2017%}. MetaBAT 2 outperforms previous MetaBAT and other alternatives in both accuracy and computational efficiency . All are based on default parameters ({%cite Sczyrba2017%}).
 
 **In this tutorial, we will learn how to run metagenomic binning tools and evaluate the quality of the results**. In order to do that, we will use data from the study: [Temporal shotgun metagenomic dissection of the coffee fermentation ecosystem](https://www.ebi.ac.uk/metagenomics/studies/MGYS00005630#overview) and MetaBAT2 algorithm. MetaBAT is a popular software tool for metagenomics binning, and there are several reasons why it is often used:
 - High accuracy: MetaBAT uses a combination of tetranucleotide frequency, coverage depth, and read linkage information to bin contigs, which has been shown to be highly accurate and efficient.
@@ -262,7 +262,7 @@ Based on the previous analysis we will use **CheckM lineage_wf**: *Assessing the
 `CheckM lineage_wf` is a specific workflow within the CheckM software tool that is used for taxonomic classification of genome bins based on their marker gene content. This workflow uses a reference database of marker genes and taxonomic information to classify the genome bins at different taxonomic levels, from domain to species.
 
 > <hands-on-title>Assessing the completeness and contamination of genome bins using lineage-specific marker sets with `CheckM lineage_wf`</hands-on-title>
-> 1.  {% tool [CheckM lineage_wf](https://testtoolshed.g2.bx.psu.edu/repository?repository_id=ddc780a33a470e80&changeset_revision=cb30bd36bfd0) %} with parameters:
+> 1.  {% tool [CheckM lineage_wf](toolshed.g2.bx.psu.edu/repos/iuc/checkm_lineage_wf/checkm_lineage_wf/1.2.0+galaxy0) %} with parameters:
 >     - *"Bins"*: `Folder containing the produced bins`
 <!-- >     - In *Advanced options*
 >       - *"Percentage of good contigs considered for binning decided by connection among contigs"*: `default 95`
