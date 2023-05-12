@@ -60,7 +60,6 @@ Tools for taxonomic profiling can be divided into three groups. Nevertheless, al
 1. **DNA-to-DNA**: comparison of sequencing reads with genomic databases of DNA sequences with tools like Kraken ({% cite Wood2014 %})
 2. **DNA-to-Protein** : comparison of sequencing reads with protein databases (more computationally intensive because all six frames of potential DNA-to amino acid translations need to be analyzed) with tools like DIAMOND)
 3. **Marker based**: searching for marker genes (e.g. 16S rRNA sequence) in reads, which is quick, but introduces bias, with tools like MetaPhlAn ({% cite blanco2023extending %})
-4. **Mixed**: Combined search using e.g. maker genes and translated searches, with tools like HUMAnN ({% cite franzosa_species-level_2018 %})
 
 The comparison of reads to database sequences can be done in different ways, leading to three different types of taxonomic assignment:
 
