@@ -122,7 +122,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 109</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">generateConfiguration</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-comment"># For some reason the templating isn&#39;t working right here.</span>
@@ -354,7 +354,9 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generateConfiguration</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-string">&quot;configuration.json&quot;</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">update</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Git</span>.<span class="ruby-identifier">discover</span>)
-  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>)
+  <span class="ruby-comment"># Remove every key that starts with &quot;cached_&quot;</span>
+  <span class="ruby-identifier">conf</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">reject</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;cached_&quot;</span>)}
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
 <span class="ruby-keyword">end</span></pre>
@@ -381,7 +383,7 @@
 <p>Returns: nil</p>
 
           <div class="method-source-code" id="generateVersion-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 98</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generateVersion</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;api/&quot;</span>, <span class="ruby-string">&quot;version.json&quot;</span>)
   <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Git</span>.<span class="ruby-identifier">discover</span>)

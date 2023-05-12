@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/stats/">
+	<link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-05-11 14:19:18 +0000">
+
+        
+        
+        
+        
+        <meta name="description" content="Collection of tutorials developed and maintained by the w...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training">
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/stats/" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/stats/" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-05-02/stats/" title="Version 2023-05-02">2023-05-02</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-05-01/stats/" title="Version 2023-05-01">2023-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-04-01/stats/" title="Version 2023-04-01">2023-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <!-- tutorial stats -->
+
+<!-- topic stats -->
+
+<!-- contributors stats -->
+
+<!-- use chart.js for graphs -->
+<script src="/training-material/assets/js/Chart.bundle.js"></script>
+
+<!-- plugin for adding data labels to charts -->
+<script src="/training-material/assets/js/chartjs-plugin-datalabels@0.7.0.js"></script>
+
+<style type="text/css" media="all">
+.card-title {
+	font-size: 2rem;
+	text-align: center;
+}
+</style>
+
+<section>
+<h1>GTN Statistics</h1>
+
+<div class="stats">
+
+<!--SNIPPET--> <!-- tutorial stats --> <div class="row" style="color: var(--text-color-boxtitle)"> <div class="col-md-4">  <div class="gtn-card color-agenda">    <div class="card-title">34</div>    <div class="card-text">Topics</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-tip">    <div class="card-title">346</div>    <div class="card-text">Tutorials</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-details">    <div class="card-title">378</div>    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-comment">    <div class="card-title">302</div>    <div class="card-text">Contributors</div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-handson">    <div class="card-title">7.9</div>    <div class="card-text">Years</div>  </div> </div> </div> 
+<div class="row">
+
+<!-- tutorials per topic -->
+<div class="col-md-6">
+ <div class="card">
+  <div class="card-body">
+   <h5 class="card-title">21 Scientific Topics</h5>
+   <canvas id="tutorialsBar" width="400" height="400"></canvas>
+   </div>
+ </div>
+</div>
+
+ <!-- conttributors over time  -->
+<div class="col-md-6">
+ <div class="card">
+  <div class="card-body">
+   <h5 class="card-title">Growing Community</h5>
+   <canvas id="contributorsGraph" width="400" height="400"></canvas>
+   </div>
+ </div>
+</div>
+
+ <!-- tutorials per topic (technical topics) -->
+<div class="col-md-8">
+ <div class="card">
+  <div class="card-body">
+   <h5 class="card-title">7 Technical Topics</h5>
+   <canvas id="tutorialsBarTechnical" width="400"></canvas>
+   </div>
+ </div>
+</div>
+
+ <!-- list the 5 newest contributors -->
+<div class="col-md-4">
+ <div class="card">
+  <div class="card-body">
+   <h5 class="card-title">New Contributors</h5>
+   <p class="card-text">Welcome to our newest members!</p>
+
+    
+    <ul>
+    
+        
+        <li><a href="/training-material/hall-of-fame/ElectronicBlueberry/" class="contributor-badge contributor-ElectronicBlueberry"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" /><img src="https://avatars.githubusercontent.com/ElectronicBlueberry?s=27" alt="Avatar" />Laila Los</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/ilveroluca/" class="contributor-badge contributor-ilveroluca"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" /><img src="https://avatars.githubusercontent.com/ilveroluca?s=27" alt="Avatar" />Luca Pireddu</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/kinow/" class="contributor-badge contributor-kinow"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" /><img src="https://avatars.githubusercontent.com/kinow?s=27" alt="Avatar" />Bruno P. Kinoshita</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/kikkomep/" class="contributor-badge contributor-kikkomep"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" /><img src="https://avatars.githubusercontent.com/kikkomep?s=27" alt="Avatar" />Marco Enrico Piras</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/pauldg/" class="contributor-badge contributor-pauldg"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" /><img src="https://avatars.githubusercontent.com/pauldg?s=27" alt="Avatar" />Paul De Geest</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/simleo/" class="contributor-badge contributor-simleo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" /><img src="https://avatars.githubusercontent.com/simleo?s=27" alt="Avatar" />Simone Leo</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/sophia120199/" class="contributor-badge contributor-sophia120199"><img src="https://avatars.githubusercontent.com/sophia120199?s=27" alt="Avatar" />Sophia Hampe</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/stain/" class="contributor-badge contributor-stain"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" /><img src="https://avatars.githubusercontent.com/stain?s=27" alt="Avatar" />Stian Soiland-Reyes</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/eosc-life/" class="contributor-badge contributor-eosc-life"><img src="https://avatars.githubusercontent.com/eosc-life?s=27" alt="Avatar" />EOSC-Life</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/by-covid/" class="contributor-badge contributor-by-covid"><img src="https://avatars.githubusercontent.com/by-covid?s=27" alt="Avatar" />BeYond-COVID</a></li>
+    
+    </ul>
+    <p class="card-text">Thanks a lot for your contributions!</p>
+
+   </div>
+ </div>
+</div>
+
+
+<!-- Latest modified Tutorials -->
+<div class="col-md-12">
+ <div class="card">
+  <div class="card-body">
+   <h5 class="card-title">Recently Updated Tutorials</h5>
+   
+   <table class="table table-striped">
+    <thead>
+      <tr><th>Date</th><th>Topic</th><th>Title</th></tr>
+    </thead>
+    <tbody>
+    
+            
+            
+      <tr>
+        <td></td>
+        <td style="text-align:right">
+            <a href="/training-material/topics/assembly">
+                Assembly
+            </a>
+</td>
+        <td><a href="/training-material//topics/assembly/tutorials/metagenomics-assembly/tutorial.html">
+            Assembly of metagenomic sequencing data
+            </a></td>
+      </tr>
+    
+            
+            
+      <tr>
+        <td></td>
+        <td style="text-align:right">
+            <a href="/training-material/topics/fair">
+                FAIR Data, Workflows, and Research
+            </a>
+</td>
+        <td><a href="/training-material//topics/fair/tutorials/ro-crate-submitting-life-monitor/tutorial.html">
+            Submitting workflows to LifeMonitor
+            </a></td>
+      </tr>
+    
+            
+            
+      <tr>
+        <td></td>
+        <td style="text-align:right">
+            <a href="/training-material/topics/transcriptomics">
+                Transcriptomics
+            </a>
+</td>
+        <td><a href="/training-material//topics/transcriptomics/tutorials/ref-based/tutorial.html">
+            Reference-based RNA-Seq data analysis
+            </a></td>
+      </tr>
+    
+            
+            
+      <tr>
+        <td></td>
+        <td style="text-align:right">
+            <a href="/training-material/topics/fair">
+                FAIR Data, Workflows, and Research
+            </a>
+</td>
+        <td><a href="/training-material//topics/fair/tutorials/ro-crate-in-galaxy/tutorial.html">
+            Exporting Workflow Run RO-Crates from Galaxy
+            </a></td>
+      </tr>
+    
+            
+            
+      <tr>
+        <td></td>
+        <td style="text-align:right">
+            <a href="/training-material/topics/admin">
+                Galaxy Server administration
+            </a>
+</td>
+        <td><a href="/training-material//topics/admin/tutorials/reports/tutorial.html">
+            Galaxy Monitoring with Reports
+            </a></td>
+      </tr>
+    
+            
+            
+      <tr>
+        <td></td>
+        <td style="text-align:right">
+            <a href="/training-material/topics/fair">
+                FAIR Data, Workflows, and Research
+            </a>
+</td>
+        <td><a href="/training-material//topics/fair/tutorials/ro-crate-in-python/tutorial.html">
+            RO-Crate in Python
+            </a></td>
+      </tr>
+    
+            
+            
+      <tr>
+        <td></td>
+        <td style="text-align:right">
+            <a href="/training-material/topics/fair">
+                FAIR Data, Workflows, and Research
+            </a>
+</td>
+        <td><a href="/training-material//topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.html">
+            Best practices for workflows in GitHub repositories
+            </a></td>
+      </tr>
+    
+            
+            
+      <tr>
+        <td></td>
+        <td style="text-align:right">
+            <a href="/training-material/topics/fair">
+                FAIR Data, Workflows, and Research
+            </a>
+</td>
+        <td><a href="/training-material//topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html">
+            Workflow Run RO-Crate Introduction
+            </a></td>
+      </tr>
+    
+            
+            
+      <tr>
+        <td></td>
+        <td style="text-align:right">
+            <a href="/training-material/topics/statistics">
+                Statistics and machine learning
+            </a>
+</td>
+        <td><a href="/training-material//topics/statistics/tutorials/classification_machinelearning/tutorial.html">
+            Classification in Machine Learning
+            </a></td>
+      </tr>
+    
+            
+            
+      <tr>
+        <td></td>
+        <td style="text-align:right">
+            <a href="/training-material/topics/single-cell">
+                Single Cell
+            </a>
+</td>
+        <td><a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">
+            Combining datasets after pre-processing
+            </a></td>
+      </tr>
+    
+    </tbody>
+   </table>
+    <p class="card-text">Thanks a lot for your contributions!</p>
+
+   </div>
+ </div>
+</div>
+
+
+<!-- Plausible Graphs -->
+<div class="col-md-12">
+ <div class="card">
+  <div class="card-body">
+   <h5 class="card-title">Analytics Data</h5>
+   <p class="card-text">You get to see the same data that we do! <a href="https://plausible.galaxyproject.eu/training.galaxyproject.org">Visit plausible.galaxyproject.eu</a>.</p>
+   <iframe src="https://plausible.galaxyproject.eu/training.galaxyproject.org" width="100%" height="1600px" frameborder="0"></iframe>
+   </div>
+ </div>
+</div>
+
+ <!-- end stats cards -->
+
+
+</div>
+</div>
+
+</section>
+
+<!-- make the charts -->
+<script type="text/javascript">
+Chart.plugins.unregister(ChartDataLabels);
+
+function genColors(size) {
+	var o = [];
+	for(i = 0; i < size; i++){
+		o.push(`hsl(${ i * 360 / size }, 100%, 50%)`)
+	}
+	return o;
+}
+
+
+// Charts displaying number of tutorials per topic
+// Scientific Topics
+var data_tutos = [2,16,7,8,8,15,9,2,15,5,12,8,12,27,4,21,17,3,21,14,3];
+var labels_topics = ["Image analysis using Deep Learning","Assembly","Climate","Computational chemistry","SARS-CoV-2","Ecology","Epigenetics","Evolution","Genome Annotation","Imaging","Introduction to Galaxy Analyses","Metabolomics","Metagenomics","Proteomics","Sequence analysis","Single Cell","Statistics and machine learning","Synthetic Biology","Transcriptomics","Variant Analysis","Visualisation"];
+
+// Remove animations for accessibility
+const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+if(isReduced){
+    Chart.defaults.global.animation.duration = 0;
+}
+
+var tutorialsBar = new Chart('tutorialsBar', {
+  type: 'horizontalBar',
+
+  data: {
+    labels: labels_topics,
+    datasets: [{
+      backgroundColor: genColors(data_tutos.length),
+      data: data_tutos
+    }]
+  },
+  plugins: [ChartDataLabels],
+
+  options: {
+    legend: {
+	  display: false
+	},
+    title: {
+      display: true,
+      text: 'Tutorials per Topic'
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end'
+      }
+    }
+  }
+});
+
+// Technical Topics
+// Chart displaying number of tutorials per topic
+var data_tutos = [48,19,36,21,5,22,14];
+var labels_topics = ["Galaxy Server administration","Contributing to the Galaxy Training Material","Foundations of Data Science","Development in Galaxy","FAIR Data, Workflows, and Research","Using Galaxy and Managing your Data","Teaching and Hosting Galaxy training"];
+
+var tutorialsBarTechnical = new Chart("tutorialsBarTechnical", {
+  type: 'horizontalBar',
+
+  data: {
+    labels: labels_topics,
+    datasets: [{
+      backgroundColor: genColors(data_tutos.length),
+      data: data_tutos
+    }]
+  },
+  plugins: [ChartDataLabels],
+
+  options: {
+    scales: {
+      xAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }],
+    },
+    legend: {
+	  display: false
+	},
+    title: {
+      display: true,
+      text: 'Tutorials per Topic'
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end'
+      }
+    }
+  }
+});
+
+
+
+// Contributors chart
+var data_contributors = [{x:"2017-10" , y: 62 } ,{x:"2017-12" , y: 64 } ,{x:"2018-02" , y: 65 } ,{x:"2018-06" , y: 67 } ,{x:"2018-07" , y: 83 } ,{x:"2018-08" , y: 89 } ,{x:"2018-09" , y: 94 } ,{x:"2018-10" , y: 105 } ,{x:"2018-11" , y: 106 } ,{x:"2018-12" , y: 109 } ,{x:"2019-01" , y: 110 } ,{x:"2019-02" , y: 111 } ,{x:"2019-03" , y: 112 } ,{x:"2019-04" , y: 118 } ,{x:"2019-05" , y: 125 } ,{x:"2019-06" , y: 129 } ,{x:"2019-07" , y: 138 } ,{x:"2019-08" , y: 146 } ,{x:"2019-09" , y: 148 } ,{x:"2019-10" , y: 150 } ,{x:"2019-11" , y: 151 } ,{x:"2019-12" , y: 153 } ,{x:"2020-01" , y: 155 } ,{x:"2020-03" , y: 157 } ,{x:"2020-04" , y: 158 } ,{x:"2020-07" , y: 159 } ,{x:"2020-09" , y: 164 } ,{x:"2020-10" , y: 166 } ,{x:"2020-11" , y: 169 } ,{x:"2020-12" , y: 174 } ,{x:"2021-01" , y: 176 } ,{x:"2021-02" , y: 179 } ,{x:"2021-03" , y: 182 } ,{x:"2021-05" , y: 185 } ,{x:"2021-06" , y: 193 } ,{x:"2021-08" , y: 195 } ,{x:"2021-09" , y: 197 } ,{x:"2021-10" , y: 200 } ,{x:"2021-11" , y: 223 } ,{x:"2021-12" , y: 230 } ,{x:"2022-01" , y: 233 } ,{x:"2022-02" , y: 238 } ,{x:"2022-03" , y: 244 } ,{x:"2022-04" , y: 261 } ,{x:"2022-05" , y: 266 } ,{x:"2022-06" , y: 269 } ,{x:"2022-07" , y: 271 } ,{x:"2022-08" , y: 273 } ,{x:"2022-09" , y: 275 } ,{x:"2022-10" , y: 282 } ,{x:"2022-12" , y: 284 } ,{x:"2023-02" , y: 286 } ,{x:"2023-03" , y: 287 } ,{x:"2023-04" , y: 292 } ,{x:"" , y: 302 } ];
+
+var labels_contributors = ["2017-09","2017-10","2017-12","2018-02","2018-06","2018-07","2018-08","2018-09","2018-10","2018-11","2018-12","2019-01","2019-02","2019-03","2019-04","2019-05","2019-06","2019-07","2019-08","2019-09","2019-10","2019-11","2019-12","2020-01","2020-03","2020-04","2020-07","2020-09","2020-10","2020-11","2020-12","2021-01","2021-02","2021-03","2021-05","2021-06","2021-08","2021-09","2021-10","2021-11","2021-12","2022-01","2022-02","2022-03","2022-04","2022-05","2022-06","2022-07","2022-08","2022-09","2022-10","2022-12","2023-02","2023-03","2023-04"];
+
+var contributorsBar = new Chart('contributorsGraph', {
+  type: 'line',
+  data: {
+    datasets: [{
+      data: data_contributors,
+    }]
+  },
+
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }],
+      xAxes: [{
+        type: 'time',
+        time: {
+          displayFormats:{month:'YYYY-MM'},
+          min:'2017-10',
+          unit: 'month',
+          distribution: 'linear'
+        }
+      }]
+    },
+    legend: {
+	  display: false
+	},
+    title: {
+      display: true,
+      text: 'Contributors over time'
+    }
+  }
+});
+
+</script>
+
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+        The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+        </p>
+
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/7f03fc0dbf5b68581c6fd66c2ad9e702cfed448e">7f03fc0dbf5b68581c6fd66c2ad9e702cfed448e</a>. </p>
+    </div>
+</footer>
+
+        
+        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script src="/training-material/assets/js/popper.min.js"></script>
+        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script src="/training-material/assets/js/main.js"></script>
+        <script src="/training-material/assets/js/clipboard.min.js"></script>
+        <script>
+        var snippets=document.querySelectorAll('div.highlight');
+        [].forEach.call(snippets,function(snippet){
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+
+        var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+            target:function(trigger){return trigger.nextElementSibling;
+        }});
+        </script>
+        
+
+        <script type="text/javascript">
+            if(window.location.hostname === "galaxyproject.github.io") {
+                // Redirect
+                var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+                $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+                window.setTimeout(function(){
+                    window.location.href = redirect;
+                }, 5000)
+
+            }
+        </script>
+    </body>
+</html>

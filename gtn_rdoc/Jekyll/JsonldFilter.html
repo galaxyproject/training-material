@@ -456,8 +456,8 @@
     <span class="ruby-comment">#&quot;character&quot;:,</span>
     <span class="ruby-value">&quot;citation&quot;:</span> {
       <span class="ruby-value">&quot;@type&quot;:</span> <span class="ruby-string">&quot;CreativeWork&quot;</span>,
-      <span class="ruby-value">&quot;name&quot;:</span> <span class="ruby-string">&quot;Community-Driven Data Analysis Training for Biology&quot;</span>,
-      <span class="ruby-value">&quot;url&quot;:</span> <span class="ruby-string">&quot;https://doi.org/10.1016/j.cels.2018.05.012&quot;</span>
+      <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Galaxy Training: A Powerful Framework for Teaching!&quot;</span>,
+      <span class="ruby-value">url:</span> <span class="ruby-string">&quot;https://doi.org/10.1371/journal.pcbi.1010752&quot;</span>
     },
     <span class="ruby-comment">#&quot;comment&quot;:,</span>
     <span class="ruby-comment">#&quot;commentCount&quot;:,</span>
@@ -470,7 +470,7 @@
     <span class="ruby-comment">#&quot;correction&quot;:,</span>
     <span class="ruby-comment">#&quot;creator&quot;:,</span>
     <span class="ruby-comment">#&quot;dateCreated&quot;:,</span>
-    <span class="ruby-value">&quot;dateModified&quot;:</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;path&#39;</span>]),
+    <span class="ruby-value">dateModified:</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">material</span>[<span class="ruby-string">&quot;path&quot;</span>]).<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&quot;%Y-%m-%dT%H:%M:%S%:z&quot;</span>),
     <span class="ruby-comment">#&quot;datePublished&quot;:,</span>
     <span class="ruby-value">&quot;discussionUrl&quot;:</span> <span class="ruby-identifier">site</span>[<span class="ruby-string">&quot;gitter_url&quot;</span>],
     <span class="ruby-comment">#&quot;editor&quot;:,</span>
@@ -492,7 +492,7 @@
     <span class="ruby-comment">#&quot;isPartOf&quot; described below</span>
     <span class="ruby-comment">#&quot;keywords&quot;: described below</span>
     <span class="ruby-comment">#&quot;learningResourceType&quot; described below</span>
-    <span class="ruby-value">&quot;license&quot;:</span> <span class="ruby-string">&quot;https://spdx.org/licenses/CC-BY-4.0.html&quot;</span>,
+    <span class="ruby-value">license:</span> <span class="ruby-node">&quot;https://spdx.org/licenses/#{material.fetch(&#39;license&#39;, &#39;CC-BY-4.0&#39;)}&quot;</span>,
     <span class="ruby-comment">#&quot;locationCreated&quot;:,</span>
     <span class="ruby-comment">#&quot;mainEntity&quot;:,</span>
     <span class="ruby-comment">#&quot;material&quot;:,</span>
@@ -539,7 +539,9 @@
     <span class="ruby-comment">#&quot;potentialAction&quot;:,</span>
     <span class="ruby-comment">#&quot;sameAs&quot;:,</span>
     <span class="ruby-comment">#&quot;subjectOf&quot;:,</span>
-    <span class="ruby-comment"># &quot;url&quot; described below</span>
+    <span class="ruby-comment">#&quot;url&quot; described below</span>
+    <span class="ruby-value">workTranslation:</span> [],
+    <span class="ruby-value">creativeWorkStatus:</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;draft&#39;</span>] <span class="ruby-operator">?</span> <span class="ruby-string">&#39;Under development&#39;</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Active&#39;</span>,
   }
   <span class="ruby-identifier">data</span>.<span class="ruby-identifier">update</span>(<span class="ruby-constant">A11Y</span>)
 
@@ -575,6 +577,7 @@
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;objectives&#39;</span>) <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;objectives&#39;</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;objectives&#39;</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
       <span class="ruby-identifier">objectives</span> = <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;objectives&#39;</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n - &quot;</span>)
       <span class="ruby-identifier">description</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;The objectives are:\n - #{objectives}\n\n&quot;</span>)
+      <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;teaches&#39;</span>] = <span class="ruby-identifier">objectives</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;keypoints&#39;</span>) <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;keypoints&#39;</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;keypoints&#39;</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
       <span class="ruby-identifier">keypoints</span> = <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;keypoints&#39;</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n - &quot;</span>)
@@ -689,10 +692,10 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Add contributors/authors</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">contributors</span> = <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">generate_person_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;contributors&#39;</span>][<span class="ruby-identifier">x</span>], <span class="ruby-identifier">site</span>) }
-    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;author&#39;</span>] = <span class="ruby-identifier">contributors</span>
-    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributor&#39;</span>] = <span class="ruby-identifier">contributors</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>)
+    <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">get_authors</span>(<span class="ruby-identifier">material</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">generate_person_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>[<span class="ruby-string">&#39;data&#39;</span>][<span class="ruby-string">&#39;contributors&#39;</span>][<span class="ruby-identifier">x</span>], <span class="ruby-identifier">site</span>) }
+
+    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;author&#39;</span>] = <span class="ruby-identifier">authors</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">about</span> = []
@@ -709,9 +712,9 @@
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;about&#39;</span>] = <span class="ruby-identifier">about</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;level&#39;</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;educationalLevel&#39;</span>] = <span class="ruby-identifier">eduLevel</span>[<span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;level&#39;</span>]]
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;educationalLevel&#39;</span>] = <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;level&#39;</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">eduLevel</span>[<span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;level&#39;</span>]] <span class="ruby-operator">:</span> <span class="ruby-string">&#39;Introductory&#39;</span>
+  <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;mentions&#39;</span>] = <span class="ruby-identifier">material</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tags&#39;</span>, []).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> { <span class="ruby-value">&#39;@type&#39;:</span> <span class="ruby-string">&#39;Thing&#39;</span>, <span class="ruby-value">name:</span> <span class="ruby-identifier">x</span> } }
+  <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;abstract&#39;</span>] = <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;content&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">first</span>
 
   <span class="ruby-keyword">return</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">data</span>)
 <span class="ruby-keyword">end</span></pre>
