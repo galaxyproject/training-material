@@ -546,20 +546,20 @@ of the requirement would change the value for `@TOOL_VERSION@` (and reset the `@
 
 A basic example of the xml macros would look like this
 
-```xml
-<macros>
-    <xml name="example_parameter">
-        <param name="ex_1" type="integer" label="Example help text"/>
-        <param name="ex_2" type="text" label="Example help text"/>
-    </xml>
-</macros>
-```
+> ```xml
+> </macros>
+>     <xml name="example_parameter">
+>         <param name="ex_1" type="integer" label="Example help text"/>
+>         <param name="ex_2" type="text" label="Example help text"/>
+>     </xml>
+> </macros>
+> ```
 
 One would then use that macro at any point in the xml it is relevant using the `<expand/>` tag like so:
 
-```xml
-<expand macro="example_parameter" />
-```
+> ```xml
+> <expand macro="example_parameter" />
+> ```
 
 This would add both of the `<param/>` tags at that location. Though inputs are used as an example macro here, any tag or group of tags can be made into a macro.
 
@@ -846,49 +846,49 @@ a list of bash commands connected by '&&', with the conda packages listed in the
 
 Cheetah allows loops, logic gates, and assignments of variables in a command section. Creation of a logic gate is as simple as this
 
-```bash
-#if ${parameter} == "value":
-  <command>
-#end if
-```
+> ```bash
+> #if ${parameter} == "value":
+>   <command>
+> #end if
+> ```
 
 For an "else":
 
-```bash
-#if ${parameter} == "value":
-    <command>
-#else:
-    <command_2>
-#end if
-```
+> ```bash
+> #if ${parameter} == "value":
+>     <command>
+> #else:
+>     <command_2>
+> #end if
+> ```
 
 For an "else if":
 
-```bash
-#if ${parameter} == "value":
-    <command>
-#else if ${parameter} == "other value":
-    <command_2>
-#else:
-    <command_3>
-#end if
-```
+> ```bash
+> #if ${parameter} == "value":
+>     <command>
+> #else if ${parameter} == "other value":
+>     <command_2>
+> #else:
+>     <command_3>
+> #end if
+> ```
 
 Similarly, loops would appear as
 
-```bash
-#for value in ${param}
-    <Loop commands>
-#end for
-```
+> ```bash
+> #for value in ${param}
+>     <Loop commands>
+> #end for
+> ```
 
 For all open loops and gates, an "#end" must be used to close.
 
 Finally, to define a variable within the command section, use
 
-```bash
-#set $variable = value
-```
+> ```bash
+> #set $variable = value
+> ```
 
 #### *Using other scripts*
 
