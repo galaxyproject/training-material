@@ -21,19 +21,10 @@ key_points:
 requirements:
   -
     type: "internal"
-    topic_name: introduction
-  -
-    type: "internal"
     topic_name: galaxy-interface
     tutorials:
       - collections
       - upload-rules
-  -
-    type: "internal"
-    topic_name: sequence-analysis
-    tutorials:
-      - quality-control
-      - mapping
 contributors:
 - wm75
 tags:
