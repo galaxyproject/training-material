@@ -141,6 +141,9 @@ We are also using a reference genome *Arabidopsis thaliana* for a later comparis
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>    
+> 3. Check that the datatypes for the three files of sequencing reads are `fastq.gz`, not `fastqsanger.gz` and change datatype if needed.
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 {: .hands_on}
 
 * This tutorial uses these input files and gives some examples from the results.
