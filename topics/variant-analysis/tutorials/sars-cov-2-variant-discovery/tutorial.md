@@ -6,20 +6,23 @@ subtopic: one-health
 level: Intermediate
 zenodo_link: "https://zenodo.org/record/5036687"
 questions:
-- How can we extract annotated allelic variants in SARS-Cov-2 sequences in Galaxy?
-- Which tools and workflows can we use to identify SARS-CoV-2 lineages in Galaxy?
+- How can a complete analysis, including viral consensus sequence reconstruction and lineage assignment be performed?
+- How can such an analysis be kept manageable for lots of samples, yet flexible enough to handle different types of input data?
+- What are key results beyond consensus genomes and lineage assignments that need to be understood to avoid inappropriate conclusions about samples?
+- How can the needs for high-throughput data analysis in an ongoing infectious disease outbreak/pandemic and the need for proper quality control and data inspection be balanced?
 objectives:
-- Repeat SARS-CoV-2 data preparation
-- Select and run workflow to extract annotated allelic variants from FASTQ files
-- Run workflow to summarize and generate report for previously called allelic variants
-- Interpret summaries for annotated allelic variants
-- Run workflow to extract consensus sequences
-- Select and run tools to assign clades/lineages
+- Discover and obtain recommended Galaxy workflows for SARS-CoV-2 sequence data analysis through public workflow registries
+- Choose and run a workflow to discover mutations in a batch of viral samples from sequencing data obtained through a range of different protocols and platforms
+- Run a workflow to summarize and visualize the mutation discovery results for a batch of samples
+- Run a workflow to construct viral consensus sequences for the samples in a batch
+- Know different SARS-CoV-2 lineage classification systems, and use pangolin and Nextclade to assign samples to predefined lineages
+- Combine information from different analysis steps to be able to draw appropriate conclusions about individual samples and batches of viral data
 time_estimation: 3H
 key_points:
-- 4 specialized, best-practice variant calling workflows are available for the identification of annotated allelic variants from raw sequencing data depending on the exact type of input
-- Data from batches of samples can be processed in parallel using collections
-- Annotated allelic variants can be used to build consensus sequences for and assign each sample to known viral clades/lineages
+- The Galaxy Covid-19 project has developed a flexible set of workflows for SARS-CoV-2 genome surveillance, which is freely available through public workflow registries.
+- The workflows enable processing of whole batches of samples with rather limited user interaction.
+- They provide a high-throughput and flexible analysis solution without compromising on accuracy, nor on the possibility to explore intermediate steps and outputs in detail.
+
 requirements:
   -
     type: "internal"
@@ -58,7 +61,7 @@ For versatile and efficient genome surveillance, however, you would want to:
 
 - use sample mutation patterns to construct sanple consensus genomes
 
-- use the consensus genomes to assign the samples to SARS-CoV-2 lineages as defined by major lineage classification systems (Nextstrain and PANGO)
+- use the consensus genomes to assign the samples to SARS-CoV-2 lineages as defined by major lineage classification systems ([Nextstrain clades](https://nextstrain.org/blog/2022-04-29-SARS-CoV-2-clade-naming-2022) and [PANGO](https://www.pango.network/))
 
 - decrease hands-on time and data manipulation errors by combining analysis steps into workflows for automated execution
 
@@ -80,7 +83,6 @@ In this tutorial you will learn to
 - set up input data for different types of sequencing protocols
 - run and combine the workflows
 - understand the various outputs produced by the workflows and to extract insight about viral samples from them
-
 
 > <agenda-title></agenda-title>
 >
@@ -144,7 +146,7 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 >   > A detailed explanation of all of the above-mentioned options for getting your data into Galaxy and organizing it in your history is beyond the scope of this tutorial.
 >   > If you are struggling with getting your own data set up like shown for the example data in this section, please:
 >   > - Option 1: Browse some of the material on [Using Galaxy and Managing your Data]({% link topics/galaxy-interface %})
->   > - Option 2: Consult the FAQs on [uploading data]({% link faqs/galaxy/#data%20upload %}) and on [collections]({% link faqs/galaxy/#collections %})
+>   > - Option 2: Consult the FAQs on [uploading data]({% link faqs/galaxy#data upload %}) and on [collections]({% link faqs/galaxy#collections %})
 >   > - Option 3: Watch some of the related brief videos from the [{% icon video %} Galactic introductions](https://www.youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE) playlist.
 >   >
 >   {: .details}
@@ -797,7 +799,7 @@ Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used
 > 2. Inspect the generated output
 {: .hands_on}
 
-Pangolin generates tabular output, in which each line corresponds to one sample found in the input consensus FASTA file. The output columns are explained in the Galaxy tool's help section and [here](https://cov-lineages.org/resources/pangolin/output.html).
+Pangolin generates tabular output, in which each line corresponds to one sample found in the input consensus FASTA file. The output columns are explained in the Galaxy tool's help section and in [this chapter of the pangolin documentation](https://cov-lineages.org/resources/pangolin/output.html).
 
 With a larger number of samples we might actually want to create an observed lineage summary report. Lets see if you can generate such a report:
 
