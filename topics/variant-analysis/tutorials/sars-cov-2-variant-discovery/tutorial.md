@@ -37,6 +37,7 @@ contributors:
 tags:
 - covid19
 - virology
+- one-health
 ---
 
 
@@ -57,7 +58,7 @@ For versatile and efficient genome surveillance, however, you would want to:
 
 - use sample mutation patterns to construct sanple consensus genomes
 
-- use the consensus genomes to assign the samples to SARS-CoV-2 lineages as defined by major lineage classification systems (Nextstrain and pango)
+- use the consensus genomes to assign the samples to SARS-CoV-2 lineages as defined by major lineage classification systems (Nextstrain and PANGO)
 
 - decrease hands-on time and data manipulation errors by combining analysis steps into workflows for automated execution
 
@@ -90,20 +91,24 @@ In this tutorial you will learn to
 >
 {: .agenda}
 
+
 # Prepare Galaxy and data
 
 The suggested input for this tutorial is a special batch of data that is of particular interest as it represents a turning point in the COVID-19 pandemic.
 It is a subset (16 samples) of the first sequencing data reported from South Africa at the end of November 2021 for the then novel, fast-spreading SARS-CoV-2 variant that would later be named Omicron.
 This data has been Illumina paired-end sequenced after amplification with the ARTIC v4 set of tiled-amplicon primers.
 
-Alternatively, you can also follow this tutorial using your own SARS-CoV-2 sequencing data (you need at least two samples) as long as it is of one of the following types:
-
-- Single-end data derived from Illumina-based whole-genome sequencing experiments
-- Paired-end data derived from Illumina-based whole-genome sequencing experiments
-- Paired-end data generated with Illumina-based tiled-amplicon (e.g. ARTIC) protocols
-- ONT FASTQ files generated with Oxford nanopore (ONT)-based tiled-amplicon (e.g. ARTIC) protocols
-
-If you are using your own *tiled-amplicon* data, you are also expected to know the primer scheme used at the amplification step.
+> <comment-title>Bringing your own data</comment-title>
+> Alternatively, you can also follow this tutorial using your own SARS-CoV-2 sequencing data (you need at least two samples) as long as it is of one of the following types:
+>
+> - Single-end data derived from Illumina-based whole-genome sequencing experiments
+> - Paired-end data derived from Illumina-based whole-genome sequencing experiments
+> - Paired-end data generated with Illumina-based tiled-amplicon (e.g. ARTIC) protocols
+> - ONT FASTQ files generated with Oxford nanopore (ONT)-based tiled-amplicon (e.g. ARTIC) protocols
+>
+> {% icon warning %} If you are using your own *tiled-amplicon* data, you are also expected to know the primer scheme used at the amplification step.
+>
+{: .comment}
 
 ## Prepare a new Galaxy history
 
@@ -123,23 +128,35 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 
 ## Get sequencing data
 
-If you are going to use your own sequencing data, there are several possibilities to upload the data depending on how many datasets you have and what their origin is:
-
-- You can import data
-
-  - from your local file system,
-  - from a given URL or
-  - from a shared data library on the Galaxy server you are working on
-
-  In all of these cases you will also have to organize the imported data into a dataset collection.
-
-- Alternatively, if your data is available from the [NCBI's Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra), you can import it with the help of a dedicated tool, which will organize the data into collections for you.
-
-  > <comment-title>Getting data from SRA</comment-title>
-  >
-  > The simpler [SARS-CoV-2 sequencing data analysis tutorial]({% link topics/variant-analysis/tutorials/sars-cov-2/tutorial.md %}) uses and explains this alternative way of importing.
-  >
-  {: .comment}
+> <comment-title>Importing your own data</comment-title>
+> If you are going to use your own sequencing data, there are several possibilities to upload the data depending on how many datasets you have and what their origin is:
+>
+> - You can import data
+>
+>   - from your local file system,
+>   - from a given URL or
+>   - from a shared data library on the Galaxy server you are working on
+>
+>   In all of these cases you will also have to organize the imported data into a dataset collection like explained in detail for the suggested example data.
+>
+>   > <details-title>Data logistics</details-title>
+>   >
+>   > A detailed explanation of all of the above-mentioned options for getting your data into Galaxy and organizing it in your history is beyond the scope of this tutorial.
+>   > If you are struggling with getting your own data set up like shown for the example data in this section, please:
+>   > - Option 1: Browse some of the material on [Using Galaxy and Managing your Data]({% link topics/galaxy-interface %})
+>   > - Option 2: Consult the FAQs on [uploading data]({% link faqs/galaxy/#data%20upload %}) and on [collections]({% link faqs/galaxy/#collections %})
+>   > - Option 3: Watch some of the related brief videos from the [{% icon video %} Galactic introductions](https://www.youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE) playlist.
+>   >
+>   {: .details}
+>
+> - Alternatively, if your data is available from [NCBI's Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra), you can import it with the help of a dedicated tool, which will organize the data into collections for you.
+>
+>   > <details-title>Getting data from SRA</details-title>
+>   >
+>   > The simpler [SARS-CoV-2 sequencing data analysis tutorial]({% link topics/variant-analysis/tutorials/sars-cov-2/tutorial.md %}) uses and explains this alternative way of importing.
+>   >
+>   {: .details}
+{: .comment}
 
 For the suggested batch of early Omicron data we suggest downloading it via URLs from the [European Nucleotide Archive (ENA)](https://www.ebi.ac.uk/ena/browser/home). In case your Galaxy server offers that same data through a shared data library, this represents a faster (data is already on the server) alternative, so we offer instructions for this scenario as well.
 
@@ -291,7 +308,7 @@ Another two datasets are needed only for the analysis of ampliconic, e.g. ARTIC-
 >
 > If you have decided to analyze your own tiled-amplicon sequencing data in this tutorial, and if your samples have been amplified with a **different** set of primers, you are supposed, at the following step, to upload a primer scheme file and corresponding amplicon information that describes this set of primers.
 >
-> The Galaxy Project maintains a collection of such files for some commonly used sets of primers at [Zenodo](https://doi.org/10.5281/zenodo.4555734).
+> The Galaxy Project maintains a [collection of such files for some commonly used sets of primers](https://doi.org/10.5281/zenodo.4555734).
 > If the files describing your set of primers are part of this collection, you can simply upload them using their Zenodo download URLs (analogous to what is shown for the ARTIC v4 primers below).
 >
 > For sets of primers *not* included in the collection, you will have to create those files yourself (or obtain them from other sources).
@@ -331,13 +348,13 @@ At this point you should have the following items in your history:
 
      If you are going to analyze the suggested batch of Omicron data, the list should have 16 elements.
 
-   - Each of the list elements should itself be a paired collection of a *forward* and a *reverse* reads dataset, each in *fastqsanger.gz* format.
+   - For paired-end sequenced data, like the suggested batch, each of the list elements should itself be a paired collection of a *forward* and a *reverse* reads dataset, each in *fastqsanger.gz* format.
 
 2. The SARS-CoV-2 reference as a single *fasta* dataset
 3. The SARS-CoV-2 feature mappings as a single *tabular* dataset
 4. Only required if you are analyzing *tiled-amplicon* data (which is the case for the suggested batch):
    - a primer scheme as a single *bed* or *bed6* dataset
-   - amplicon information as a single *tabular* dataset
+   - amplicon information as a single *tabular* dataset (*not* required for ONT data)
 
 If any of these items are still missing, head back to the corresponding section(s) and upload them now.
 
@@ -347,24 +364,26 @@ If any of these items have not been assigned the correct format (expand the view
 
 If everything looks fine, you are ready to start the actual data analysis.
 
+
 # Analysis
 
-> The workflows default to requiring an AF ≥ 0.05 and AV-supporting reads of ≥ 10 (these and all other parameters can be easily changed by the user). For an AV to be listed in the reports, it must surpass these thresholds in at least one sample of the respective dataset. We estimate that for AV calls with an AF ≥ 0.05, our analyses have a false-positive rate of < 15% for both Illumina RNAseq and Illumina ARTIC data, while the true-positive rate of calling such low-frequency AVs is ~80% and approaches 100% for AVs with an AF ≥ 0.15. This estimate is based on an initial application of the Illumina RNAseq and Illumina ARTIC workflows to two samples for which data of both types had been obtained at the virology department of the University of Freiburg and the assumption that AVs supported by both sets of sequencing data are true AVs. The second threshold of 10 AV-supporting reads is applied to ensure that calculated AFs are sufficiently precise for all AVs.
->
-> More details about the workflows can be found on the [Covid-19 project pages](https://galaxyproject.org/projects/covid19/workflows/) of the [Galaxy Community Hub](https://galaxyproject.org/)
+As shown in figure 1, the analysis will consist mainly of running three workflows - one for calling the mutations for each input sample, one for reporting the findings and one for generating sample consensus sequences based on the identified mutations.
+
+You will also run a handful of individual tools, in particular for generating and exploring lineage assignments for the input samples.
+
+Along the way you will interpret key outputs of each used workflow and tool to get a complete picture of what can be learnt about the genomes of the input samples.
 
 ## From sequencing data to annotated mutations per sample
 
-To identify the SARS-CoV-2 allelic variants (AVs), a first workflow converts the FASTQ files to annotated AVs through a series of steps that include quality control, trimming, mapping, deduplication, AV calling, and filtering.
+To identify mutations from sequencing data, the first workflow performs steps including
 
-Four versions of this workflow are available with their tools and parameters optimized for different types of input data as outlined in the following table:
+- sequencing data quality control with filtering and trimming of low-quality reads
+- mapping
+- filtering and further processing of mapped reads (including primer-trimming in case of tiled-amplicon data)
+- calling of mutations
+- annotation of identified mutations with their effects on open-reading frames (ORFs) and proteins
 
-Workflow version 	| Input data | Read aligner | Variant caller
---- | --- | --- | ---
-Illumina RNAseq SE | Single-end data derived from RNAseq experiments | **bowtie2** {% cite langmead_2012 %} | **lofreq** {% cite wilm_2012 %}
-Illumina RNAseq PE | Paired-end data derived from RNAseq experiments | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %}
-Illumina ARTIC | Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %}
-ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols | **minimap2** {% cite li_2018 %} | **medaka**
+Four flavors of this workflow are available that are optimized for different types of input data so your first task is to obtain the correct workflow for your type of input data.
 
 > <hands-on-title>Import the workflow for your data into Galaxy</hands-on-title>
 >
@@ -403,11 +422,12 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 
 > <details-title>About the workflows</details-title>
 >
-> - The two Illumina RNASeq workflows (Illumina RNAseq SE and Illumina RNAseq PE) perform read mapping with **bwa-mem** and **bowtie2**, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq**.
-> - The workflow for Illumina-based ARTIC data (Illumina ARTIC) builds on the RNASeq workflow for paired-end data using the same steps for mapping (**bwa-mem**) and AV calling (**lofreq**), but adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such “tainted” amplicons when calculating alternative allele frequences (AFs) of other AVs.
-> - The workflow for ONT-sequenced ARTIC data (ONT ARTIC) is modeled after the alignment/AV-calling steps of the [ARTIC pipeline](https://artic.readthedocs.io/). It performs, essentially, the same steps as that pipeline’s minion command, i.e. read mapping with **minimap2** and AV calling with **medaka**. Like the Illumina ARTIC workflow it uses **ivar** for primer trimming. Since ONT-sequenced reads have a much higher error rate than Illumina-sequenced reads and are therefore plagued more by false-positive AV calls, this workflow makes no attempt to handle amplicons affected by potential primer-binding site mutations.
+> Differences between the four different *variation analysis* workflow flavors are as follows:
+> - All workflows for analysis of Illumina data use a core analysis flow through **bwa-mem** (or **bowtie2** for single-end data) as the read mapper and **lofreq** as a sensitive variant caller (which is capable of identifying also non-majority variant alleles), while the workflow for analysis of ONT data uses **minimap2** and **medaka** for read mapping and variant calling, respectively.
+> - Workflows for analysis of tiled-amplicon data differ from WGS data analysis ones in that they do not perform mapped reads deduplication (because apparent duplicates are a side-effect of sequencing defined amplicons instead of random genome fragments).
+>   In addition, the tiled-amplicon data analysis workflows handle primer trimming and amplicon-based filtering through the **ivar** suite of tools and additional processing logic.
 >
-> All four workflows use **SnpEff**, specifically its 4.5covid19 version, for AV annotation.
+> All four workflows use **fastp** for quality control, raw reads filtering and trimming, and **SnpEff**, specifically its 4.5covid19 version, for annotation of mutation effects.
 >
 {: .details}
 
@@ -424,9 +444,9 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 >    - {% icon param-file %} *"ARTIC primer BED"*: the uploaded primer scheme in **bed** format
 >    - {% icon param-file %} *"ARTIC primers to amplicon assignments"*: the uploaded amplicon info in **tabular** format
 >
->      A common mistake here is to mix up the previous two datasets: the *primer BED* dataset is the one with the positions of the primer binding sites listed in it. The *amplicon assignments* dataset contains only (grouped) names of primers.
+>      A common mistake here is to mix up the last two datasets: the *primer BED* dataset is the one with the positions of the primer binding sites listed in it. The *amplicon assignments* dataset contains only (grouped) names of primers.
 >
->    The additional workflow parameters *"Read removal minimum AF"*, *"Read removal maximum AF"*, *"Minimum DP required after amplicon bias correction"* and *"Minimum DP_ALT required after amplicon bias correction"* can all be left at their default values.
+>    The additional workflow parameters *"Read removal minimum AF"*, *"Read removal maximum AF"*, *"Minimum DP required after amplicon bias correction"* and *"Minimum DP_ALT required after amplicon bias correction"* can all be left at their default values. The tiled-amplicon Illumina workflow goes to great lengths in order to calculate accurate allele-frequencies even in cases of viral mutations that affect the binding of some of the tiled-amplicon primers. The four settings above are for fine-tuning this behavior, but their defaults have been carefully chosen and you should modify them only if you know exactly what you are doing. 
 > </div>
 > <div class="tiledamplicon-ONT" markdown="1">
 >
@@ -467,7 +487,7 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 >    > This is very useful if you are planning to analyze the data in your current history in multiple different ways, and you would like to have each analysis end up in its own dedicated history.
 >    > Here, however, we only want to do one analysis of our batch of data so we are fine with results of the workflow run getting added to the current history.
 >    {: .tip}
-> 
+>
 {: .hands_on}
 
 Scheduling of the workflow will take a while. One of the last datasets that will be added to your history will be called **Preprocessing and mapping reports**. It is the first overview report that you will obtain in this tutorial, and the only one produced by the variation analysis workflow.
@@ -495,9 +515,7 @@ If you are following along with the suggested batch of samples, we also have pre
 
 ## From mutations per sample to reports and visualizations
 
-The main output of the first workflow, of course, is the collection with mutation calls per sample. This collection will serve as input to the "Reporting workflow".
-
-This workflow takes the collection of called (with lofreq) and annotated (with SnpEff) variants (one VCF dataset per input sample) that got generated as one of the outputs of any of the four variation analysis workflows above, and generates two tabular reports and an overview plot summarizing all the variant information for your batch of samples.
+The main output of the first workflow is a collection with annotated mutation calls per sample. This collection will serve as input to the *reporting* workflow.
 
 > <hands-on-title>Import the variant analysis reporting workflow into Galaxy</hands-on-title>
 >
@@ -557,7 +575,7 @@ This workflow takes the collection of called (with lofreq) and annotated (with S
 >
 >      The variant frequency plot generated by the workflow will separate the samples into this number of clusters.
 >
->    The remaining workflow parameters: *"AF Filter"*, *"DP Filter"*, and *"DP_ALT_FILTER"* can all be left at their default values.
+>    The remaining workflow parameters *"AF Filter"*, *"DP Filter"*, and *"DP_ALT_FILTER"* define criteria for reporting mutations as reliable. They can all be left at their default values.
 >
 {: .hands_on}
 
@@ -609,16 +627,16 @@ The three key results datasets produced by the Reporting workflow are:
    >  1 | `POS` | Position of site with regard to the reference genome
    >  2 | `REF` | Reference base
    >  3 | `ALT` | Alternative base
-   >  4 | `IMPACT` | Functional impact (from SnpEff annotation) 
+   >  4 | `IMPACT` | Functional impact (from SnpEff annotation)
    >  5 | `FUNCLASS` | Funclass for change (from SnpEff annotation)
    >  6 | `EFFECT` | Effect of change (from SnpEff annotation)
    >  7 | `GENE` | Name of affected viral gene or ORF (from SnpEff annotation)
    >  8 | `CODON` | Affected codon (from SnpEff annotation)
    >  9 | `AA` | Amino acid change caused by the mutation (from SnpEff annotation)
    >  10 |`TRID` | Name of the affected viral protein (as defined in the feature mapping dataset)
-   >  11 |`countunique(Sample)` | Number of distinct samples containing this change 
+   >  11 |`countunique(Sample)` | Number of distinct samples containing this change
    >  12 |`min(AF)` | Minimum alternate allele frequency across all samples containing this mutation
-   >  13 |`max(AF)` | Maximum alternate allele frequency across all samples containing this mutation 
+   >  13 |`max(AF)` | Maximum alternate allele frequency across all samples containing this mutation
    >  14 |`SAMPLES(above-thresholds)` | List of samples, in which this mutation was identified and in which the call passed the *AF*, *DP* and *DP_ALT* filters defined for the workflow run
    >  15 |`SAMPLES(all)` | List of all samples, in which this mutation was identified (including samples in which the call did not pass all filters)
    >  16 |`AFs(all)` | List of allele frequencies at which the mutation was observed in the samples in SAMPLES(all)
@@ -722,24 +740,25 @@ Since these Ns are hard to discover by just scrolling through a consensus sequen
 > <hands-on-title>Reporting masked positions in consensus sequences</hands-on-title>
 >
 > 1. {% tool [Fasta regular expression finder](toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0) %} with the following parameters:
-       - {% icon param-collection %} *"Input"*: `Consensus sequence with masking` collection produced by the last workflow run 
->       - *"Regular expression"*: `N+`
+>    - {% icon param-collection %} *"Input"*: `Consensus sequence with masking` collection produced by the last workflow run
+>    - *"Regular expression"*: `N+`
 >
->         This looks for stretches of one or more Ns.
->       - In *"Specify advanced parameters"*:
->         - *"Do not search the reverse complement"*: `Yes`
+>      This looks for stretches of one or more Ns.
+>    - In *"Specify advanced parameters"*:
+>      - *"Do not search the reverse complement"*: `Yes`
 >
->           We are only interested in the forward strand (and an N is an N on both strands anyway) so we can save some compute by turning on this option.
->         - *"Maximum length of the match to report"*: `1`
+>        We are only interested in the forward strand (and an N is an N on both strands anyway) so we can save some compute by turning on this option.
+>      - *"Maximum length of the match to report"*: `1`
 >
->           This causes stretches of Ns to be reported more concisely.
+>        This causes stretches of Ns to be reported more concisely.
+>
 {: .hands_on}
 
 If you are following along with the suggested batch of input sequences, you can now correlate our previous observations with this newly produced collection.
 
 > <question-title>Questions</question-title>
 >
-> 1. We know from the quality report produced as part of the *variation analysis* workflow that samples **SRR17054505**, **SRR17054506**, **SRR17054508** and **SRR17054502** suffer from low coverage sequencing data.
+> 1. We know from the quality report produced as part of the *variation analysis* workflow that samples **SRR17054505**, **SRR17054506**, **SRR17054508** and **SRR17054502** suffer from low-coverage sequencing data.
 >
 >    In how far is this reflected in the generated consensus sequences for these samples?
 > 2. The variant frequency plot (generated as part of the *reporting* workflow) showed all four of these samples as outliers outside of the main cluster of samples.
@@ -755,7 +774,7 @@ If you are following along with the suggested batch of input sequences, you can 
 > >    **SRR17054505**, in particular, has a consensus sequence consisting almost entirely of Ns with just rather few resolved nucleotides in between them.
 > > 2. Most mutations that look like they are missing from the four samples based on the plot alone, turn out to simply be undeterminable as they also correspond to Ns (instead of to the reference allele in the corresponding consensus sequences.
 > >
-> >    The clusters of missing S gene mutations in **SRR17054502** and **SRR17054506**, between 22,578 and 22713, and between 23403 and 24130, for example, fall entirely into N-masked, i.e. low-coverage regions, of these samples.
+> >    The clusters of missing S gene mutations in **SRR17054502** and **SRR17054506**, visible in the plot between 22,578 and 22713, and between 23403 and 24130, for example, fall entirely into N-masked, i.e. low-coverage regions, of these samples.
 > >    This means there is no objective basis for thinking that these samples represent a different viral lineage than those of the main cluster of samples.
 > >
 > {: .solution}
@@ -767,7 +786,7 @@ To assign lineages to the different samples from their consensus sequences, two 
 
 ### Lineage assignment with Pangolin
 
-Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used to assign a SARS-CoV-2 genome sequence their most likely lineage based on the PANGO nomenclature system.
+Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used to assign a SARS-CoV-2 genome sequence to its most likely lineage from the PANGO nomenclature system.
 
 > <hands-on-title>From consensus sequences to clade assignments using Pangolin</hands-on-title>
 >
@@ -784,7 +803,10 @@ With a larger number of samples we might actually want to create an observed lin
 
 > <question-title></question-title>
 >
-> Can you configure the tool {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} to produce a three-column lineage summary from the pangolin output, in which each line lists one of the assigned lineages (from column 2 of the pangolin output) on the first column, how many samples had that lineage assigned on the second column, and the comma-separated identifiers of these samples (from column 1 of the pangolin output) on the third column?
+> Can you configure the tool {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} to produce a three-column lineage summary from the pangolin output, in which each line lists:
+> - one of the assigned lineages (from column 2 of the pangolin output) on the first column,
+> - how many samples had that lineage assigned on the second column, and
+> - comma-separated identifiers of these samples (from column 1 of the pangolin output) on the third column?
 >
 > > <solution-title></solution-title>
 > >
@@ -808,7 +830,7 @@ With a larger number of samples we might actually want to create an observed lin
 > {: .solution}
 {: .question}
 
-If you are following along with the suggested batch of data, here are some additional questions for you:
+If you are working with the suggested batch of data, here are some specific follow-up questions for you:
 
 > <question-title>Questions</question-title>
 > 
@@ -819,7 +841,6 @@ If you are following along with the suggested batch of data, here are some addit
 >
 > 3. Can you explain the results for these three samples?
 >
-> 
 > > <solution-title></solution-title>
 > >
 > > 1. The lineage summary we have generated makes this easy to answer:
@@ -837,11 +858,11 @@ If you are following along with the suggested batch of data, here are some addit
 > >    **SRR17051933**, on the other hand, has passed pangolin's quality control with very low *Ambiguous content* so we might tend to believe the assignment.
 > >    However, if you re-inspect the variant-frequency plot generated by the reporting workflow, you will find that this sample was the outlier sample that had more or less the same mutations called as the other samples in the batch, but nearly all of them at rather low allele-frequencies.
 > >    In fact, the only seemingly fixed mutations (with allele-frequencies close to one) are ancestral mutations that have been present in SARS-CoV-2 isolates since the Spring of 2020.
-> >    Since only these mutations made it into the consensus sequence for that sample, pnagolin has based the assignment only on them and has infered the ancestral lineage B.1 as a result.
+> >    Since only these mutations made it into the consensus sequence for that sample, pangolin has based the assignment only on them and has infered the ancestral lineage B.1 as a result.
 > >
 > >    Whether or not this is the correct assignment for this sample is hard to tell without additional information.
 > >    Several possibilities exist:
-> >    - the sample could indeed be from a pre-Omicron lineage and might have been cross-contaminated during its preparation for sequencing with DNA from one of the other samples processed together with it.
+> >    - the sample could indeed be from a pre-Omicron lineage and might have been lab-contaminated with DNA from one of the other (Omicron) samples processed together with it.
 > >    - the sample might have been taken from a patient who was infected with Omicron and a pre-Omicron lineage simultaneously.
 > >
 > {: .solution}
@@ -874,7 +895,8 @@ Let's use **Datamash** again to obtain a lineage summary report from the Nextcla
 
 > <question-title></question-title>
 >
-> Can you configure the {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} to produce a report summarizing the Nextclade results by `Nextclade_pango` (column 3 of Nextclade's output; for direct comparison to the pangolin results summary)?
+> Can you configure the {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} to produce a report summarizing the Nextclade results by `Nextclade_pango` (column 3 of Nextclade's output) for direct comparison to the pangolin results summary?
+>
 > This report should include the corresponding info from the `clade` column (column 2, which is Nextclade's native classification system) and from the `clade_who` (column 6), together with the sample counts and identifiers as previously calculated from pangolin's output.
 >
 > > <solution-title></solution-title>
@@ -883,7 +905,7 @@ Let's use **Datamash** again to obtain a lineage summary report from the Nextcla
 > > - {% icon param-file %} *"Input tabular dataset"*: the output of Nextclade
 > > - *"Group by fields"*: 3,2,6
 > >
-> >   We want to group by pangolin lineages. By including columns 2 and 6 we make sure the columns from these values are kept in the summary report (and that additional groups would be formed if any samples with identical assigned pangolin lineage should have different Nextclade or WHO assignments, which, of course, shouldn't be the case).
+> >   We want to group by pangolin lineages. By including columns 2 and 6 we make sure the columns from these values are kept in the summary report (and that additional groups would be formed if any samples with identical assigned pangolin lineage have different Nextclade or WHO assignments, which, of course, shouldn't be the case).
 > > - *"Sort input"*: `Yes`
 > > - *"Input file has a header line"*: `Yes`
 > > - *"Print header line"*: `Yes`
@@ -905,7 +927,7 @@ You should hopefully observe good (though not necessarily perfect) agreement bet
 If you are following along with the suggested batch of data, here's a question about the detailed differences.
 
 > <question-title></question-title>
-> 
+>
 > Which samples have been assigned differently by pangolin and Nextclade, and why?
 >
 > > <solution-title></solution-title>
