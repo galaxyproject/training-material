@@ -25,6 +25,8 @@ contributors:
 
 # Introduction
 
+*Note: We recommend running this tutorial on either the Galaxy Europe or Galaxy Australia servers. Other servers (such as Galaxy main) have not yet been configured fully for all the tools in this analysis.*
+
 ## What is genome assembly?
 
 A genome is a representation of the set of DNA in an organism, such as the set of chromosomes. When the DNA is extracted from the sample, it is broken up into fragments much smaller than the lengths of DNA in the chromosomes. After being sequenced, these fragments (and their copies) are called sequencing reads. To assemble the genome, we need to join the reads back into, ideally, chromosome-sized lengths.
