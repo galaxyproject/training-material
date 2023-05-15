@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 module Gtn
+  # Handle tool support queries
   module Supported
     ##
     # Identify the servers that support a given tool list
     #
     # Params:
     # +data+:: The data from metadata/public-server-tools.json
-    # +tool_list+:: The list of tools to check (either 'upload1' or 'toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy10' style tools)
+    # +tool_list+:: The list of tools to check (either 'upload1' or
+    #      'toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy10' style tools)
     # Returns:
     # +supported+:: A hash of supported servers, with the following structure:
     #  {
@@ -59,8 +61,9 @@ module Gtn
         it = supported[:inexact][tool] || []
         inexact_support &= (et | it)
       end
-      # Remove the exactly supported ones because that would be extraneous
-      # we check here if it's an array because the above code will occasionally generate a 'false' value when merging sets.
+      # Remove the exactly supported ones because that would be extraneous we
+      # check here if it's an array because the above code will occasionally
+      # generate a 'false' value when merging sets.
       inexact_support -= exact_support
 
       {
@@ -79,6 +82,7 @@ end
 if __FILE__ == $PROGRAM_NAME
   if ARGV.length.positive? && (ARGV[0] == 'test')
     require 'test/unit'
+    # Testing for the class
     class IntersectionTest < Test::Unit::TestCase
       def test_exact
         data = {

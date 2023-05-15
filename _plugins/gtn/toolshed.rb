@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 module Gtn
+  # Handle toolshed yaml formatting for ephemeris
   module Toolshed
     ##
     # Prepare a tool list for installation
     #
     # Params:
     # +data+:: The data from metadata/toolshed-revisions.json
-    # +tool_list+:: The list of tools to check (either 'upload1' or 'toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy10' style tools)
+    # +tool_list+:: The list of tools to check (either 'upload1' or
+    #               'toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy10' style tools)
     # +topic+:: The topic to install the tools under
     # Returns:
     # +supported+:: A string of the admin install, ready for ephemeris
