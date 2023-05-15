@@ -684,7 +684,7 @@ for example in a spreadsheet. However this is not feasible when analyzing hundre
 
 A far more scalable approach is to combine Galaxy tools to automate the necessary data processing steps for us.
 
-#### Select the line containing the drug resistance profile in the report of every sample
+### Select the line containing the drug resistance profile in the report of every sample
 
 **grep** is used to search patterns of text within text files. Each time **grep** finds that
 pattern, it will print as a result **the complete line** containing such pattern.
@@ -701,7 +701,7 @@ as output the complete line, for example `Drug-resistance: MDR`
 >
 {: .hands_on}
 
-#### Collapse collection into a table with each line prepended with a sample name
+### Collapse collection into a table with each line prepended with a sample name
 
 Next, we want to turn the collection of single-line datasets we just created into a single two-column table with
 one column of sample IDs and another one with the corresponding drug resistance status.
@@ -714,7 +714,7 @@ one column of sample IDs and another one with the corresponding drug resistance 
 >
 {: .hands_on}
 
-#### Clean up the table
+### Clean up the table
 In this step we will use a simple tool that searches and replaces text to remove the redundant string "Drug-resistance: " from our table by replacing it with *nothing*.
 
 > <hands-on-title>Removing redundant content</hands-on-title>
@@ -748,7 +748,7 @@ In this step we will use a simple tool that searches and replaces text to remove
 > {: .solution}
 {: .question}
 
-#### Combine the drug-resistance and the cluster tables
+### Combine the drug-resistance and the cluster tables
 
 The two tables we have generated in the two parts of the tutorial share a sample column, which we can use now to join the two tables.
 
