@@ -17,6 +17,8 @@ key_points:
 
 contributors:
 - gallardoalba
+editors:
+- lldelisle
 ---
 
 # Introduction
@@ -29,7 +31,7 @@ Extensive alternative splicing programmes contribute to the regulation of cell d
 
 ![Figure 01. Examples of cancer splicing dysregulation on cancer hallmarks](../../images/differential_isoform/differential_cancer.png "Effect of alternative splicing dysregulation on cancer progression. The diagram depicts various cancer hallmarks.")
 
-Alterations in gene splicing and isoform switching has been demonstrated to have significant impact on cancer development and progression. For instance, the unannotated isoform of TNS3 was found to be a novel driver of breast cancer  ({% cite Namba2021 %}). These alterations can lead to the activation of oncogenes (OCGs) or the inactivation of tumor suppressor genes (TSGs), which can promote or suppress tumorigenesis, respectively ({% cite Bashyam2019 %}). However, the strict classification of cancer genes as either OCGs or TSGs may be an oversimplification, as some genes can exhibit a dual role in cancer development, often impacting the same facet of tumorigenesis ({% cite Bashyam2019 %}). 
+Alterations in gene splicing and isoform switching has been demonstrated to have significant impact on cancer development and progression. For instance, the unannotated isoform of TNS3 was found to be a novel driver of breast cancer  ({% cite Namba2021 %}). These alterations can lead to the activation of oncogenes (OCGs) or the inactivation of tumor suppressor genes (TSGs), which can promote or suppress tumorigenesis, respectively ({% cite Bashyam2019 %}). However, the strict classification of cancer genes as either OCGs or TSGs may be an oversimplification, as some genes can exhibit a dual role in cancer development, often impacting the same facet of tumorigenesis ({% cite Bashyam2019 %}).
 
 In this tutorial, we aim to perform a genome-wide analysis of the isoform switch phaenomena in cancer, which offers improved resolution over gene expression, with the objective of identifying genes of potential clinical relevance.
 
@@ -62,18 +64,18 @@ The first step of our analysis consists of retrieving the RNA-seq datasets from 
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      SRR9050437	Health tissue	{{ page.zenodo_link }}/files/SRR9050437_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050437	Health tissue	{{ page.zenodo_link }}/files/SRR9050437_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050438	Health tissue	{{ page.zenodo_link }}/files/SRR9050438_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050438	Health tissue	{{ page.zenodo_link }}/files/SRR9050438_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050439	Health tissue	{{ page.zenodo_link }}/files/SRR9050439_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050439	Health tissue	{{ page.zenodo_link }}/files/SRR9050439_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050440	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050440_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050440	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050440_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050441	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050441_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050441	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050441_reverse.fastqsanger.gz	fastqsanger.gz	2
->      SRR9050442	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050442_forward.fastqsanger.gz	fastqsanger.gz	1
->      SRR9050442	Cancer tissue	{{ page.zenodo_link }}/files/SRR9050442_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050437_Health	{{ page.zenodo_link }}/files/SRR9050437_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050437_Health	{{ page.zenodo_link }}/files/SRR9050437_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050438_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050438_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050439_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050439_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050440_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050440_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050441_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050441_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050442_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050442_reverse.fastqsanger.gz	fastqsanger.gz	2
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -83,10 +85,9 @@ The first step of our analysis consists of retrieving the RNA-seq datasets from 
 >         > Then you've chosen to upload as a 'dataset' and not a 'collection'. Close the upload menu, and restart the process, making sure you check *Upload data as*: **Collection(s)**
 >         {: .tip}
 >
->       - Click `Add Definition` button and select `Collection Name`: column `B`
->       - Click `Add Definition` button and select `URL`: column `C`
->       - Click `Add Definition` button and select `Type`: column `D`
->       - Click `Add Definition` button and select `Pair-end Indicator`: column `E`
+>       - Click `Add Definition` button and select `URL`: column `B`
+>       - Click `Add Definition` button and select `Type`: column `C`
+>       - Click `Add Definition` button and select `Pair-end Indicator`: column `D`
 >
 >    - Click `Apply` and press <kbd>Upload</kbd>
 >
@@ -100,6 +101,7 @@ Next we will retrieve the remaining datasets.
 > 1. Import the files from Zenodo:
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on __Rule-based__ tab
 >    - *"Upload data as"*: `Datasets`
 >    - Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
@@ -118,7 +120,7 @@ Next we will retrieve the remaining datasets.
 >    - From **Rules** menu select `Add / Modify Column Definitions`
 >       - Click `Add Definition` button and select `Name`: column `A`
 >       - Click `Add Definition` button and select `URL`: column `B`
->    - Click `Apply` and press <kbd>Upload</kbd>
+>    - Click `Apply`, give a name to your collection like `all samples` and press <kbd>Upload</kbd>
 >
 >
 {: .hands_on}
@@ -143,40 +145,33 @@ Next we will retrieve the remaining datasets.
 Once we have got the datasets, we can start with the analysis. The first step is to perform the quality assessment. Since this step is deeply covered in the tutorial [Quality control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}), we won't describe this section in detail.
 
 
-> <comment-title>Inicial quality evaluation (OPTIONAL)</comment-title>
+> <comment-title>Initial quality evaluation (OPTIONAL)</comment-title>
 >
->   For the initial quality evaluation it is necessary a pre-processing step consisting in interlacing the paired-end reads; this step is required because **FastQC** is not able to process separated paired-end reads. The problem is that the interlacing step will takes some time, so if you are in a hurry, it is recommended to skip this step. The `Raw data QC` files generated by **FastQC** will be combine into a a single one by making use of **MultiQC**.
+>   For the initial quality evaluation, it is necessary to perform a pre-processing step consisting in flattening the list of pairs into a simple list; this step is required because of issues between **FastQC** and **MultiQC**. The `Raw data QC` files generated by **FastQC** will be combine into a a single one by making use of **MultiQC**.
 >
 >   > <hands-on-title>Initial quality evaluation</hands-on-title>
 >   >
->   > 1. {% tool [FASTQ interlacer](toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0) %} with the following parameters:
->   >    - *"Type of paired-end datasets"*: `1 paired dataset collection`
->   >        - {% icon param-collection %} *"Paired-end reads collection"*: `Health collection`
+>   > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
+>   >     - *"Input Collection"*: `all samples`
 >   >
->   > 2. Repeat the previous step
+>   > 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
+>   >    - {% icon param-collection %} *"Raw read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
 >   >
->   > 3. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->   >    - {% icon param-file %} *"Raw read data from your current history"*: output of **FASTQ interlacer** {% icon tool %}
+>   >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >   >
->   > 4. Repeat the previous step
->   >
->   > 5. Repeat the previous procedure with the `Cancer collection`
->   >
->   > 6. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
+>   > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
 >   >    - In *"Results"*:
 >   >        - {% icon param-repeat %} *"Insert Results"*
 >   >            - *"Which tool was used generate logs?"*: `FastQC`
 >   >                - In *"FastQC output"*:
 >   >                    - {% icon param-repeat %} *"Insert FastQC output"*
->   >                        - {% icon param-file %} *"FastQC output"*: `RawData` from the **Health collection** (output of **FastQC** {% icon tool %})
->   >                    - {% icon param-repeat %} *"Insert FastQC output"*
->   >                        - {% icon param-file %} *"FastQC output"*: `RawData` from the **Cancer collection** (output of **FastQC** {% icon tool %})
+>   >                        - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
 >   >    - *"Report title"*: `Raw data QC`
 >   >
 >   >
 >   {: .hands_on}
 >
-> 
+>
 >   Let's evaluate the per base sequence quality and the adapter content.
 >
 >   ![Figure 02. MultiQC initial QC report](../../images/differential_isoform/fastqc_per_base_sequence_quality.png "MultiQC aggregated reports. Mean quality scores (a). Adapter content (b).")
@@ -189,13 +184,13 @@ Once we have got the datasets, we can start with the analysis. The first step is
 
 ## Read pre-processing with fastp
 
-In order to remove the adaptors we will make use of **fastp**, which is able to detect the adapter sequence by performing a per-read overlap analysis, so we won't even need to specify the adapter sequences. 
+In order to remove the adaptors we will make use of **fastp**, which is able to detect the adapter sequence by performing a per-read overlap analysis, so we won't even need to specify the adapter sequences.
 
 > <hands-on-title>Pre-process reads with fastp</hands-on-title>
 >
 > 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`
->        - {% icon param-collection %} *"Select paired collection(s)"*: `Heath collection`
+>        - {% icon param-collection %} *"Select paired collection(s)"*: `all samples`
 >        - In *"Global trimming options"*:
 >            - *"Trim front for input 1"*: `10`
 >    - In *"Overrepresented Sequence Analysis"*:
@@ -204,15 +199,13 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 >    - In *"Filter Options"*:
 >        - In *"Quality filtering options"*:
 >            - *"Qualified quality phred"*: `20`
-> 2. Rename the output as `Trimmed health collection`
->
-> 3. Repeat the procude with the `Cancer collection` dataset.
+> 2. Rename the output `fastp on collection X: Paired-end output` as `Trimmed samples`
 >
 {: .hands_on}
 
-# RNA-seq mapping and isoform quantification 
+# RNA-seq mapping and isoform quantification
 
-The following section can be considered as the hard-core part of the training, the reason is  not because of it’s complexity (not all the details about the computational procedures will be presented, just those elements required for a basic understanding), but because it allows to characterize isoform quantification approach as genome-guided-based method. 
+The following section can be considered as the hard-core part of the training, the reason is  not because of it’s complexity (not all the details about the computational procedures will be presented, just those elements required for a basic understanding), but because it allows to characterize isoform quantification approach as genome-guided-based method.
 
 > <comment-title>Transcriptome-reconstruction approaches</comment-title>
 >
@@ -220,7 +213,7 @@ The following section can be considered as the hard-core part of the training, t
 >
 {: .comment}
 
-In that section makes use of three main tools: **RNA STAR**, considered a state-of-the-art mapping tool for RNA-seq data, **RSeQC**, a package that allows comprehensively evaluate different aspects of the RNA-seq data, and **Stringtie**, which uses a genome-guided transcriptome assembly approach along with concepts from de novo genome assembly to perform transcript assembly and quantification. 
+In that section makes use of three main tools: **RNA STAR**, considered a state-of-the-art mapping tool for RNA-seq data, **RSeQC**, a package that allows comprehensively evaluate different aspects of the RNA-seq data, and **Stringtie**, which uses a genome-guided transcriptome assembly approach along with concepts from de novo genome assembly to perform transcript assembly and quantification.
 
 ## RNA-seq mapping with **RNA STAR**
 
@@ -236,7 +229,7 @@ In that section makes use of three main tools: **RNA STAR**, considered a state-
 
 
 
-The choice of **RNA STAR** as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use **GMAP** as alignment tool ({% cite Krianovi2017 %}). 
+The choice of **RNA STAR** as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use **GMAP** as alignment tool ({% cite Krianovi2017 %}).
 
 > <comment-title>Intron spanning in RNA-seq analysis</comment-title>
 >
@@ -250,16 +243,17 @@ So, let's perform the mapping step.
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
->        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed health collection` (output of **fastp** {% icon tool %})
+>        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed samples` (output of **fastp** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
 >        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.genome.fa.gz`
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `gencode.v43.annotation.gtf.gz`
 >    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, perform single-sample 2-pass mapping of all reads`
+>    - *"Compute coverage"*: `Yes in bedgraph format`
+>       - *"Generate a coverage for each strand (stranded coverage)"*: `No`
 >
-> 2. Rename the output as `Mapped health collection`
+> 2. Rename the output `RNA STAR on collection X: mapped.bam` as `Mapped samples`
 >
-> 3. Repeat the procedure with the `Cancer collection` dataset.
 >
 {: .hands_on}
 
@@ -278,7 +272,7 @@ In this section we will make use of of the **RSeQC** toolkit in order to generat
 >    - {% icon param-file %} *"GTF File to convert"*: `gencode.v43.annotation.gtf.gz`
 >    - *"Advanced options"*: `Set advanced options`
 >        - *"Ignore groups without exons"*: `Yes`
-> 
+>
 > 2. Rename the output as `BED12 annotation`
 >
 {: .hands_on}
@@ -305,12 +299,12 @@ Once all required outputs have been generated, we will integrate them by using *
 >
 > 3. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection`
->    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` 
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >    - *"Output R-Script"*: `Yes`
 >
 > 4. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection` 
->    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation` 
+>    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection`
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >
 > 5. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input BAM/SAM file"*: `Mapped health collection`
@@ -331,16 +325,16 @@ Now, we will integrate the outputs into **MultiQC**.
 >                - In *"STAR output"*:
 >                    - {% icon param-repeat %} *"Insert STAR output"*
 >                        - *"Type of STAR output?"*: `Log`
->                            - {% icon param-file %} *"STAR log output"*: `log` collections
+>                            - {% icon param-collection %} *"STAR log output"*: `log` collection
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `RSeQC`
 >                - In *"RSeQC output"*:
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Infer experiment`
->                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **RNA-seq experiment configuration** collections
+>                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **RNA-seq experiment configuration** collection
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Read distribution`
->                            - {% icon param-collection %} *"RSeQC read distribution: stats output"*: select **stat** collections
+>                            - {% icon param-collection %} *"RSeQC read distribution: stats output"*: select **stats (TXT)** collection
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Junction saturation`
 >                            - {% icon param-collection %} *"RSeQC junction saturation: junction saturation plot Rscript file*: select **Rscript** collections
@@ -349,7 +343,7 @@ Now, we will integrate the outputs into **MultiQC**.
 >                            - {% icon param-collection %} *"RSeQC junction annotation: stats file"*: select **stats** collections
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Gene body coverage`
->                            - {% icon param-collection %} *"RSeQC gene body coverage: stats file"*: select **stats** collections
+>                            - {% icon param-collection %} *"RSeQC gene body coverage: stats file"*: select **stats (TXT)** collections
 >
 {: .hands_on}
 
@@ -358,17 +352,17 @@ First, we will evaluate the plot corresponding to the RNA STAR alignment scores 
 
 ![Figure 04. RNA STAR alignment stats plot](../../images/differential_isoform/star_alignment.png "RNA star alignment stats plot. Note that STAR counts a paired-end read as one read..")
 
-Now we can have a look at the **RSeQC** results;  we will evaluate the RSeQC **Read Distribution plot** (figure 7). 
+Now we can have a look at the **RSeQC** results;  we will evaluate the RSeQC **Read Distribution plot** (figure 7).
 
 ![Figure 05. RSeQC read distribution plot](../../images/differential_isoform/rseqc_read_distribution_plot.png "RSeQC read distribution. This module will calculate how mapped reads were distributed over genome feature (like CDS exon, 5’UTR exon, 3’ UTR exon, Intron, Intergenic regions).")
 
 In that case, all samples show a similar trend, both in health and cancer samples, with most reads mapping on CDS exons (around 72%), 5'UTR (around 4.5%) and 3'UTR (around 13.5%).
 
-Now we will evaluate the results of the **Infer Experiment** module, which allows to speculate the experimental design (whether sequencing is strand-specific, and if so, how reads are stranded) by sampling a subset of reads from the BAM file and comparing their genome coordinates and strands with those of the reference gene model ({% cite Wang2012 %}).  
+Now we will evaluate the results of the **Infer Experiment** module, which allows to speculate the experimental design (whether sequencing is strand-specific, and if so, how reads are stranded) by sampling a subset of reads from the BAM file and comparing their genome coordinates and strands with those of the reference gene model ({% cite Wang2012 %}).
 
-![Figure 06. RSeQC infer experiment plot](../../images/differential_isoform/rseqc_infer_experiment.png "RSeQC Infer Experiment plot. It counts the percentage of reads and read pairs that match the strandedness of overlapping transcripts. It can be used to infer whether RNA-seq library preps are stranded (sense or antisense).")
+![Figure 06. RSeQC infer experiment plot](../../images/differential_isoform/rseqc_infer_experiment_plot.png "RSeQC Infer Experiment plot. It counts the percentage of reads and read pairs that match the strandedness of overlapping transcripts. It can be used to infer whether RNA-seq library preps are stranded (sense or antisense).")
 
-As can be appreciated in the image, the proportion of reads assigned as *sense* is similar to the ones assigned as *antisense*, which indicates that in that case our RNA-seq data is non-strand specific. 
+As can be appreciated in the image, the proportion of reads assigned as *sense* is similar to the ones assigned as *antisense*, which indicates that in that case our RNA-seq data is non-strand specific.
 
 Now, let's evaluate the results generated by the **Gene Body Coverage** module. It scales all transcripts to 100 nt and calculates the number of reads covering each nucleotide position. The plot generated from this information illustrates the coverage profile along the gene body, defined as the entire gene from the transcription start site to the end of the transcript (fig. 5).
 
@@ -376,7 +370,7 @@ Now, let's evaluate the results generated by the **Gene Body Coverage** module. 
 
 The gene body coverage pattern is highly influenced by the RNA-seq protocol, and it is useful for identifying artifacts such as 3' skew in libraries. For example, a skew towards increased 3' coverage can happen in degraded samples prepared with poly-A selection. According the figure 5, there're not bias in our reads as a result of sequencing technical problems.
 
-Other important metric for alternative splicing analysis is the one provided by the **Junction Saturation** module, which allows to determine if the current sequencing depth is sufficient to perform alternative splicing analyses by comparing the detected splice junctions to reference gene model (fig. 6). 
+Other important metric for alternative splicing analysis is the one provided by the **Junction Saturation** module, which allows to determine if the current sequencing depth is sufficient to perform alternative splicing analyses by comparing the detected splice junctions to reference gene model (fig. 6).
 
 Since for a well annotated organism both the number of expressed genes and spliced junctions is considered to be almost fixed, if the number of known junctions reaches a plateau means that the current sequencing depth is almost saturated for known junction detection. In other words, nearly all known junctions have already been detected, and deeper sequencing will not likely detect additional known junctions. Using an unsaturated sequencing depth would miss many rare splice junctions ({% cite Wang2012 %}).
 
@@ -386,13 +380,13 @@ Since for a well annotated organism both the number of expressed genes and splic
 >
 {: .comment}
 
-![Figure 08. RSeQC junction saturation plot](../../images/differential_isoform/rseqc_junction_saturation.png "RSeQC junction saturation. Saturation is checked by re-sampling the alignments from the BAM file (5%, 10%, 15%,...), and the splice junctions from each subset is detected (green) and and compared them to the reference model (grey).")
+![Figure 08. RSeQC junction saturation plot](../../images/differential_isoform/rseqc_junction_saturation_plot.png "RSeQC junction saturation. Saturation is checked by re-sampling the alignments from the BAM file (5%, 10%, 15%,...), and the splice junctions from each subset is detected (green) and and compared them to the reference model (grey).")
 
 As we can appreciate in the plot, the known junctions tend to stabilize around 160.000, which indicates that the read sequencing depth is good enough for performing the alternative splicing analysis.
 
 After confirming that the saturation level is good enough, finally, we will check the output generated by the RSeQC junction annotation module (figure 8); it allows to distinguish between splice junctions (multiple reads show the same splicing event) and splice events (single read level). In addition, the detected junctions are divided in three exclusive categories: known splicing junctions, partial novel splicing junction (one of the splice site is novel) and new splicing junctions (figure 8).
 
-![Figure 09. RSeQC junction annotation plot](../../images/differential_isoform/rseqc_junction_annotation_junctions.png "RSeQC junction annotation. The detected junctions are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green).")
+![Figure 09.A RSeQC junction annotation plot](../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png "RSeQC junction annotation. The detected junctions are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green).") ![Figure 09.B RSeQC junction annotation plot per event](../../images/differential_isoform/rseqc_junction_annotation_junctions_plot_event.png "RSeQC junction annotation per event instead of per junction.")
 
 According to the results, despite the number of new (or partially new) splicing junctions is relatively slow (around 0.5%), a large proportion of reads show novel splicing junction patterns.
 
@@ -423,13 +417,13 @@ The main reason underlying the greater accuracy of StringTie most likely derives
 >
 {: .details}
 
-Despite in this training we make use of RNA STAR as mapping tool, it is possible to use different splice-aware aligner such as HISAT2. Independently of the tool, each record with a spliced alignment should have the XS tag in the SAM/BAM file, which indicates the genomic strand from which the RNA that produced the read originated . 
+Despite in this training we make use of RNA STAR as mapping tool, it is possible to use different splice-aware aligner such as HISAT2. Independently of the tool, each record with a spliced alignment should have the XS tag in the SAM/BAM file, which indicates the genomic strand from which the RNA that produced the read originated .
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
->        - {% icon param-file %} *"Input short mapped reads"*: `Mapped health collection`
+>        - {% icon param-file %} *"Input short mapped reads"*: `Mapped collection`
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
 >        - *"Reference file"*: `Use a file from history`
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `gencode.v43.annotation.gtf.gz`
@@ -438,12 +432,12 @@ Despite in this training we make use of RNA STAR as mapping tool, it is possible
 >
 {: .hands_on}
 
-Stringtie generates six collection with three elements each one, but we will use only the **transcript-level expression measurements** dataset collection.
+Stringtie generates six collection with six elements each one, but we will use only the **transcript-level expression measurements** dataset collection.
 
 > <details-title>Transcription-level expression measurements file</details-title>
 >
 >  The transcript-level expression measurements (t_tab.ctab) file includes one row per transcript, with the following columns:
-> 
+>
 > - t_id: numeric transcript id
 > - chr, strand, start, end: genomic location of the transcript
 > - t_name: generated transcript id
@@ -459,7 +453,7 @@ Stringtie generates six collection with three elements each one, but we will use
 
 # Isoform analysis with **IsoformSwitchAnalyzeR**
 
-IsoformSwitchAnalyzeR is an open-source R package that enables both  analyze changes in genome-wide patterns of alternative splicing and specific gene isoforms switch consequences (note: alternative splicing literally will result in isoform switches). An advantage of IsoformSwitchANalyzeR over other approaches is that it allows allows to integrate multiple layers of information, such as previously annotated coding sequences, de-novo coding potential predictions, protein domains and signal peptides. In addition, IsoformSwitchAnalyzeR facilitates identification of IS by making use of a new statistical methods that tests each individual isoform for differential usage, identifying the exact isoforms involved in an isoform switch ({% cite isoformswitchanalyzer %})
+IsoformSwitchAnalyzeR is an open-source R package that enables both analyze changes in genome-wide patterns of alternative splicing and specific gene isoforms switch consequences (note: alternative splicing literally will result in isoform switches). An advantage of IsoformSwitchANalyzeR over other approaches is that it allows allows to integrate multiple layers of information, such as previously annotated coding sequences, de-novo coding potential predictions, protein domains and signal peptides. In addition, IsoformSwitchAnalyzeR facilitates identification of IS by making use of a new statistical methods that tests each individual isoform for differential usage, identifying the exact isoforms involved in an isoform switch ({% cite isoformswitchanalyzer %})
 
 > <comment-title>Nonsense mediated decay</comment-title>
 >
@@ -485,6 +479,29 @@ In this training, the IsoformSwitchAnalyzeR stage is divided in four steps:
 
 Now, we can start with the isoform switch analysis.
 
+## Split collection between the 2 conditions
+
+We will generate 2 collections from the Stringtie output, one with the cancer samples and one with the healthy samples.
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
+>    - *"Dataset collection"*: `StringTie on collection N: transcript-level expression measurements`
+>
+> 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - *"Select lines from"*: `Extract element identifiers on data N` (output of  **Extract element identifiers** {% icon tool %})
+>    - *"that"*: `Match`
+>    - *"Regular Expression"*: `Cancer`
+>
+> 3. {% tool [Filter collecion](__FILTER_FROM_FILE__) %} with the following parameters:
+>    - *"Input collection"*: `StringTie on collection N: transcript-level expression measurements`
+>    - *"How should the elements to remove be determined"*: `Remove if identifiers are ABSENT from file`
+>        - *"Filter out identifiers absent from"*: `Search in textfiles on data N` (output of  **Search in textfiles** {% icon tool %})
+>
+> 4. Rename both collections `Transcripts Health` and `Transcripts Cancer`.
+>
+{: .hands_on}
+
 ## Import data into **IsoformSwitchAnalyzeR**
 
 The first step of the IsoformSwitchAnalyzeR pipeline is to import the required datasets.
@@ -501,10 +518,10 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >    - *"Tool function mode"*: `Import data`
 >        - In *"1: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Cancer`
->            - {% icon param-collection %} *"Transcript-level expression measurements"*: `transcript-level expression measurements` (output of **StringTie** {% icon tool %})
+>            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Transcripts Cancer`
 >        - In *"2: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Health`
->            - {% icon param-collection %} *"Transcript-level expression measurements"*: `transcript-level expression measurements` collection (output of **StringTie** {% icon tool %})
+>            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Transcripts Health`
 >        - *"Quantification data source"*: `StringTie`
 >            - *"Average read length"*: `140`
 >        - {% icon param-file %} *"Genome annotation (GTF)"*: `gencode.v43.annotation.gtf.gz`
@@ -518,13 +535,13 @@ It generates a **switchAnalyzeRlist** object that contains all relevant informat
 
 ## Pre-processing step
 
-Once the datasets have been imported into a RData file, we can start with the pre-processing step. In order to enhace the reliability of the downstream analysis, it is important to remove the non-informative genes/isoforms (e.g. single isoform genes and non-expressed isoforms). 
+Once the datasets have been imported into a RData file, we can start with the pre-processing step. In order to enhace the reliability of the downstream analysis, it is important to remove the non-informative genes/isoforms (e.g. single isoform genes and non-expressed isoforms).
 
 After the pre-processing, IsoformSwitchAnalyzieR performs the differential isoform usage analysis by using **DESXSeq**, which despite originally designed for testing differential exon usage, it has demonstrated to perform exceptionally well for differential isoform usage. DEXSeq uses generalized linear models to assess the significance of observed differences in isoform usage values between conditions, taking into account the biological variation between replicates ({% cite dexseq %}).
 
 > <comment-title>Difference in isoform fraction contept</comment-title>
 >
-> IsoformSwitchAnalyzeR measures isoform usage vian isoform fraction (IF) values which quantifies the fraction of the parent gene expression originating from a specific isoform, (calculated as isoform_exp / gene_exp). Consequently, the difference in isoform usage is quantified as the difference in isoform fraction (dIF) calculated as IF2 - IF1, and these dIF are used to measure the effect size  ({% cite isoformswitchanalyzer %}). 
+> IsoformSwitchAnalyzeR measures isoform usage vian isoform fraction (IF) values which quantifies the fraction of the parent gene expression originating from a specific isoform, (calculated as isoform_exp / gene_exp). Consequently, the difference in isoform usage is quantified as the difference in isoform fraction (dIF) calculated as IF2 - IF1, and these dIF are used to measure the effect size  ({% cite isoformswitchanalyzer %}).
 >
 {: .comment}
 
@@ -537,7 +554,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 
 > <comment-title>Isoform or gene resolution analysis?</comment-title>
 >
-> Despite IsoformSwitchAnalyzeR supports both isoform and gene resolution analysi, it is recommended to tu use the isoform-level analysis. The reason is that since the analysis is restricted to genes involved in isoform switch, gene-level analysis is conditioned by higher false positive rates. 
+> Despite IsoformSwitchAnalyzeR supports both isoform and gene resolution analysi, it is recommended to tu use the isoform-level analysis. The reason is that since the analysis is restricted to genes involved in isoform switch, gene-level analysis is conditioned by higher false positive rates.
 >
 {: .comment}
 
@@ -549,7 +566,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 >
 >   > <comment-title>Reduce to switch genes option</comment-title>
 >   >
->   > An important argument is the 'Reduce to switch genes' optin. When enabled, it will reduce/subset  of genes to those which each contains at least one differential used isoform, as indicated by the alpha and dIFcutoff cutoffs. This option ensures the rest of the workflow runs significantly faster since isoforms from genes without IS are not analyzed.
+>   > An important argument is the 'Reduce to switch genes' option. When enabled, it will reduce/subset  of genes to those which each contains at least one differential used isoform, as indicated by the alpha and dIFcutoff cutoffs. This option ensures the rest of the workflow runs significantly faster since isoforms from genes without IS are not analyzed.
 >   >
 >   {: .comment}
 >
@@ -558,7 +575,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 
 ## Outward sequence analysis
 
-The next step is to use to use generated FASTA files corresponding to the aminoacid and nucleotide sequences to perform the external analysis tools. In that case, we will use **PfamScan** for predicting protein domains and **CPAT** predicting the coding potential. This informatin will be integrated in the downstream analysis.
+The next step is to use to use generated FASTA files corresponding to the aminoacid and nucleotide sequences to perform the external analysis tools. In that case, we will use **PfamScan** for predicting protein domains and **CPAT** predicting the coding potential. This information will be integrated in the downstream analysis.
 
 > <comment-title>Additional sequence analysis tools</comment-title>
 >
@@ -576,7 +593,7 @@ PfamScan is an open-source tool developed by the EMBL-EBI for identifying protei
 
 > <comment-title>Pfam database</comment-title>
 >
-> Pfam is a collection of multiple sequence alignments and profile hidden Markov models (HMMs). Each Pfam profile HMM represents a protein family or domain.  Pfam families are divided into two categories, Pfam-A and Pfam-B. 
+> Pfam is a collection of multiple sequence alignments and profile hidden Markov models (HMMs). Each Pfam profile HMM represents a protein family or domain.  Pfam families are divided into two categories, Pfam-A and Pfam-B.
 >
 > Pfam-A is a collection of manually curated protein families based on seed alignments, and it is the primary set of families in the Pfam database. Pfam-B is an automatically generated supplement to Pfam-A, containing additional protein families not covered by Pfam-A, derived from clusters produced by MMSeqs2. For most applications, Pfam-A is likely to provide more accurate and interpretable results, but using Pfam-B can be helpful when no Pfam-A matches are found.
 >
@@ -606,7 +623,7 @@ Each of those metrics is computed from a set of known protein-coding genes and a
 > CPAT makes use of for predictior variables for performing the coding-potential analysis. The figure 10 shows the scoring distribution between coding and noncoding transcripts for the four metrics.
 >
 > ![Figure 12. CPAT predictor score distributions](../../images/differential_isoform/CPAT_distributions.jpg "Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. (A) ORF size. (B) ORF coverage. (C) Fickett score (TESTCODE statistic). (D) Hexamer usage bias measured by log-likelihood ratio.")
-> 
+>
 > The maximum length of the ORF (figure 10,A) is one of the most fundamental features used to distinguish ncRNA from messenger RNA because a long putative ORF is unlikely to be observed by random chance in noncoding sequences.
 >
 > The ORF coverage (figure 10, B)  is the ratio of ORF to transcript lengths. This feature has demonstrated to have good classification power, and it is highly complementary to, and independent of, the ORF length (some large ncRNAs may contain putative long ORFs by random chance, but usually have much lower ORF coverage than protein-coding RNAs).
@@ -625,7 +642,7 @@ Each of those metrics is computed from a set of known protein-coding genes and a
 >    - {% icon param-file %} *"Reference genome"*: `GRCh38.p13.genome.fa.gz`
 >    - {% icon param-file %} *"Coding sequences file"*: `gencode.v42.pc_transcripts.fa.gz`
 >    - {% icon param-file %} *"Non coding sequeces file"*: `gencode.v42.lncRNA_transcripts.fa.gz`
-> 
+>
 >
 {: .hands_on}
 
@@ -676,13 +693,13 @@ The gene-specific mode is interesting for those experimental designs which aim t
 >
 > 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0) %} with the following parameters:
 >    - *"Tool function mode"*: `Analysis part two: Plot all isoform switches and their annotation`
->        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %} part 1)
 >        - *"Analysis mode"*: `Analyze specific gene`
 >        - *"Gene name"*: `RGMB`
 >        - *"Include prediction of coding potential information"*: `CPAT`
->            - {% icon param-file %} *"CPAT result file"*: `ORF best probabilities (TSV)` (output of **CPAT** {% icon tool %})
+>            - {% icon param-file %} *"CPAT result file"*: `Concatenate datasets on data ...` (output of **Concatenate datasets** {% icon tool %})
 >        - *"Include Pfam information"*: `Enabled`
->            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: output of **PfamScan** {% icon tool %})
+>            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `PfamScan on data ...` (output of **PfamScan** {% icon tool %})
 >        - *"Include SignalP results"*: `Disabled`
 >        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
 >
@@ -693,6 +710,35 @@ Let's have a look at the generated plot (fig. 13).
 ![Figure 13. RGMB gene isoform expression profile plot](../../images/differential_isoform/isoformSwitchAnalyzer_gene.png "RGMB isoform expression profile plot. the plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
 
 In that case, we can appreciate that despite differences in overall gene expression is not statistically significant between health and cancerous tissues, there exists statistically significant isoform switching: the isoform [ENST00000308234.11](https://www.uniprot.org/uniprotkb/J3KNF6/entry), which encodes the 478 aminoacid Repulsive guidance molecule BMP co-receptor b protein is repressed in cancer; on the other hand, the isoform [ENST00000513185.3](https://www.uniprot.org/uniprotkb/Q6NW40/entry), which encodes the 437 aminoanid Repulsive guidance molecule B is induced.
+
+We will try to confirm this isoform switching by visualising the coverage on this gene and more precisely on the region which is different between the two isoforms. We will take advantage of the coverage we generated with **STAR** and use a software called **pyGenomeTracks**
+
+> <hands-on-title>Check isoform switching with pyGenometracks from STAR coverage</hands-on-title>
+>
+> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1) %}:
+>    - *"Region of the genome to limit the operation"*: `chr5:98,762,495-98,803,294`
+>    - In *"Include tracks in your plot"*:
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bedgraph track`
+>                - *"Plot title"*: You need to leave this field empty so the title on the plot will be the sample name.
+>                - {% icon param-collection %} *"Track file(s) bedgraph format"*: Select `RNA STAR on collection N: Coverage Uniquely mapped strand 1`.
+>                - *"Minimum value"*: `0`
+>                - *"height"*: `3`
+>                - *"Show visualization of data range"*: `Yes`
+>                - *"Include spacer at the end of the track"*: `1`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Gene track / Bed track`
+>                - *"Plot title"*: `Genes`
+>                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `gencode.v43.annotation.gtf.gz`
+>                - *"height"*: `10`
+>                - *"Put all labels inside the plotted region"*: `Yes`
+>                - *"Bed style"*: `UCSC`
+>                   - *"Configure other bed parameters"*:
+>                       - *"When using gtf as input"*:
+>                           - *"attribute to use as label"*: `transcript_id`
+>
+> 2. Repeat with *"Region of the genome to limit the operation"*: `chr5:98,767,000-98,775,000` in order to better see the 5' of the gene.
+{: .hands_on}
 
 ### IsoformSwitchAnalyzer genome-wide analysis
 
@@ -712,15 +758,15 @@ A genome-wide analysis is both useful for getting an overview of the extent of i
 >
 > 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0) %} with the following parameters:
 >    - *"Tool function mode"*: `Analysis part two: Plot all isoform switches and their annotation`
->        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %} part 1)
 >        - *"Analysis mode"*: `Full analysis`
 >        - *"Include prediction of coding potential information"*: `CPAT`
->            - {% icon param-file %} *"CPAT result file"*: `orf_seqs_prob_best` (output of **CPAT** {% icon tool %})
+>            - {% icon param-file %} *"CPAT result file"*: `Concatenate datasets on data ...` (output of **Concatenate datasets** {% icon tool %})
 >        - *"Include Pfam information"*: `Enabled`
 >            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `output` (output of **PfamScan** {% icon tool %})
 >        - *"Include SignalP results"*: `Disabled`
 >        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
->   
+>
 >   > <comment-title>Only significantly differential isoforms</comment-title>
 >   >
 >   > A more strict analysis can be performed by enabling the **Only significantly differential used isoforms**  option, which causes to only consider significant isoforms meaning the compensatory changes in isoform usage are ignored unless they themselves are significant.
@@ -744,7 +790,7 @@ It generates five tabular files with the results of the different statistical an
 >
 > > <solution-title></solution-title>
 > >
-> > The top three genes are HSPA8, RPS2 and RLP41 (fig. 14).
+> > The top three genes are MPDU1, RGMB and ARAP1 (fig. 14).
 > >
 > > ![Figure  14. Switching gene/isoform tabular dataset](../../images/differential_isoform/list_genes.png "Switching gene/isoform dataset.")
 > >
@@ -791,7 +837,7 @@ To analyze large-scale patterns in predicted isoform switch consequences, Isofor
 
 ![Figure 18. Summary of genome-wide enrichment/depletion o isoform switching events](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png " Number of isoforms significantly differentially used between cancer and health resulting in at least one isoform switch consequence.")
 
-To assess this observation, a standard proportion test is performed (fig. 19. The results indicate that differences in intron retention between health and cancer samples is statistically significant.
+To assess this observation, a standard proportion test is performed (fig. 19. The results indicate that differences in intron retention between health and cancer samples is statistically significant).
 
 ![Figure 19. Enrichment/depletion isoform switch analysis](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
 
@@ -823,7 +869,7 @@ According with the plot, the difference in intron retention is statistically sig
 > >
 > > ![Figure 20. Consequences enrichment dataset](../../images/differential_isoform/consequences_dataset.png "Consequences enrichment table.")
 > >
-> > In that case, the adjusted P-value is 0.030291725471751.
+> > In that case, the adjusted P-value is 0.598.
 > >
 > {: .solution}
 {: .question}
