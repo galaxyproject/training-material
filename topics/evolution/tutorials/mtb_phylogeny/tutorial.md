@@ -15,11 +15,16 @@ objectives:
 - Understand the basic concepts behind phylogenetic trees, as applied to *Mycobacterium tuberculosis*
 - Be able to read and interrogate a phylogeny encountered in the literature
 time_estimation: 1H
-contributors:
-- cstritt
-- dbrites
-- GaloGS
-
+contributions:
+   authorship:
+     - cstritt
+     - dbrites
+     - GaloGS
+   editing:
+     - wm75
+tags:
+- prokaryote
+- one-health
 ---
 
 

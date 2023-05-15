@@ -4,8 +4,6 @@ layout: tutorial_hands_on
 title: "M. tuberculosis Variant Analysis"
 subtopic: one-health
 zenodo_link: https://doi.org/10.5281/zenodo.3496437
-tags:
-  - prokaryote
 questions:
   - "How do we detect differences between a set of reads from *M. tuberculosis* (Mtb) and the Mtb reference genome"
 objectives:
@@ -22,6 +20,9 @@ contributors:
   - pvanheus
   - slugger70
   - thobalose
+tags:
+  - prokaryote
+  - one-health
 ---
 # Introduction
 
