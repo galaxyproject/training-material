@@ -53,7 +53,8 @@ Each sample constitutes a separate biological replicate of the corresponding con
 
 > <comment-title></comment-title>
 >
-> This tutorial is significantly based on Galaxy's ["Reference-based RNA-Seq data analysis"](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html) tutorial.
+> This tutorial is significantly based on Galaxy's ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) tutorial.
+
 >
 {: .comment}
 
