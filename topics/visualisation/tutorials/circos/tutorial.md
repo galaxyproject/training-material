@@ -514,8 +514,8 @@ You should see a plot like:
 > >
 > > 1. Yes, plotting for example only chromosome 1 (left) and comparing this with the chromosome 5 plot (right), reveals that chr5 has abnormally high number of SVs compared to the other chromosomes
 > >
-> >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr1.png ){: width="40%"}
-> >    ![Circos plot of chromosome 1 SVs](../../images/circos/cancer_svs_chr5.png ){: width="40%"}
+> >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr1.png){: width="40%"}
+> >    ![Circos plot of chromosome 1 SVs](../../images/circos/cancer_svs_chr5.png){: width="40%"}
 > >
 > >
 > > 2. No, only part of chromosome 5 appears to be affected. It turns out that this region is exactly one arm of the chromosome.
@@ -657,7 +657,7 @@ Now that our file is prepared, we can add a track to our Circos image. We will c
 >    > > 1. We see the new track, but it overlaps with the SV track. This is because we used the same `radius` parameter.
 >    > >    This parameter determines the position of the track within the plot.
 >    > >
->    > >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer-overlap.png ){: width="80%"}
+>    > >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer-overlap.png){: width="80%"}
 >    > >
 >    > >
 >    > > 2. To fix this, we can rerun the Circos tool, and change the radius of the link track (SVs) to be inside the new copynumber track (<`0.8`).
