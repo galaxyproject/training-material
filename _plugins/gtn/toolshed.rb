@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Gtn
   module Toolshed
     ##
@@ -11,26 +13,24 @@ module Gtn
     # +supported+:: A string of the admin install, ready for ephemeris
     def self.format_admin_install(data, tool_list, topic)
       # p "Calculating supported servers for this tool list"
-      if data.nil? or data.empty?
-        return {}
-      end
+      return {} if data.nil? || data.empty?
 
-      tools = tool_list.select{|t| data.key? t}.map do |tool|
+      tools = tool_list.select { |t| data.key? t }.map do |tool|
         tool_info = data[tool]
         {
-          "name" => tool_info[1],
-          "owner" => tool_info[0],
-          "revisions" => tool_info[2],
-          "tool_panel_section_label" => topic,
-          "tool_shed_url" => "https://toolshed.g2.bx.psu.edu/",
+          'name' => tool_info[1],
+          'owner' => tool_info[0],
+          'revisions' => tool_info[2],
+          'tool_panel_section_label' => topic,
+          'tool_shed_url' => 'https://toolshed.g2.bx.psu.edu/',
         }
       end
 
       {
-        "install_tool_dependencies" => true,
-        "install_repository_dependencies" => true,
-        "install_resolver_dependencies" => true,
-        "tools" => tools
+        'install_tool_dependencies' => true,
+        'install_repository_dependencies' => true,
+        'install_resolver_dependencies' => true,
+        'tools' => tools
       }
     end
   end

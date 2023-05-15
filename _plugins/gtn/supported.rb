@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Gtn
   module Supported
     ##
@@ -16,8 +18,8 @@ module Gtn
       # p "Calculating supported servers for this tool list"
       if data.nil? || data.empty?
         return {
-          "exact" => [],
-          "inexact" => [{"name" => "UseGalaxy.eu", "url" => "https://usegalaxy.eu", "usegalaxy" => true}],
+          'exact' => [],
+          'inexact' => [{ 'name' => 'UseGalaxy.eu', 'url' => 'https://usegalaxy.eu', 'usegalaxy' => true }],
         }
       end
 
@@ -45,14 +47,14 @@ module Gtn
       # Exactly supporting servers:
       # this is the set of intersections across supported[:exact][*]
       exact_support = (0..data['servers'].length - 1).to_a
-      for tool in tool_list
+      tool_list.each do |tool|
         exact_support &= (supported[:exact][tool] || [])
       end
 
       # Inexactly supporting servers
       # Set of intersections across (union of supported[:exact] and supported[:inexact])
       inexact_support = (0..data['servers'].length - 1).to_a
-      for tool in tool_list
+      tool_list.each do |tool|
         et = supported[:exact][tool] || []
         it = supported[:inexact][tool] || []
         inexact_support &= (et | it)
@@ -62,18 +64,20 @@ module Gtn
       inexact_support -= exact_support
 
       {
-        "exact" => (exact_support || []).map { |id| data['servers'][id].update(
-          {"usegalaxy" => data['servers'][id]['url'].downcase.include?("usegalaxy.").to_s})
-        },
-        "inexact" => (inexact_support || []).map { |id| data['servers'][id] }
+        'exact' => (exact_support || []).map do |id|
+          data['servers'][id].update(
+            { 'usegalaxy' => data['servers'][id]['url'].downcase.include?('usegalaxy.').to_s }
+          )
+        end,
+        'inexact' => (inexact_support || []).map { |id| data['servers'][id] }
       }
     end
   end
 end
 
 ## Allow running from the CLI
-if __FILE__ == $0
-  if ARGV.length > 0 and ARGV[0] == 'test'
+if __FILE__ == $PROGRAM_NAME
+  if ARGV.length.positive? && (ARGV[0] == 'test')
     require 'test/unit'
     class IntersectionTest < Test::Unit::TestCase
       def test_exact
@@ -96,14 +100,13 @@ if __FILE__ == $0
                      { exact: %w[s0 s1], inexact: %w[s2] })
         assert_equal(Gtn::Supported.calculate(data, ['upload1', 'ts/repos/hexy/lena/tool1/2.0']),
                      { exact: %w[s0 s2], inexact: %w[s1] })
-        assert_equal(Gtn::Supported.calculate(data, ['upload1', 'unknown-tool']),
+        assert_equal(Gtn::Supported.calculate(data, %w[upload1 unknown-tool]),
                      { exact: %w[], inexact: %w[] })
       end
     end
   else
-    require 'pp'
     require 'json'
     pp ARGV
-    pp Gtn::Supported.calculate(JSON.load(File.open('metadata/public-server-tools.json')) , ARGV)
+    pp Gtn::Supported.calculate(JSON.parse(File.open('metadata/public-server-tools.json')), ARGV)
   end
 end

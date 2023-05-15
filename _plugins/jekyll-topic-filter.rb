@@ -169,7 +169,7 @@ module TopicFilter
     if site.data['cache_topic_filter'][topic_name].nil?
       Jekyll.logger.warn "Topic cache not filled, cannot fetch tutorial material for #{topic_name}"
     else
-      site.data['cache_topic_filter'][topic_name].select{|p| p['tutorial_name'] == tutorial_name}[0]
+      site.data['cache_topic_filter'][topic_name].select { |p| p['tutorial_name'] == tutorial_name }[0]
     end
   end
 
@@ -450,7 +450,8 @@ module TopicFilter
     page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
     page_obj['supported_servers'] = Gtn::Supported.calculate(site.data['public-server-tools'], page_obj['tools'])
     topic_name_human = site.data[page_obj['topic_name']]['title']
-    admin_install = Gtn::Toolshed.format_admin_install(site.data['toolshed-revisions'], page_obj['tools'], topic_name_human)
+    admin_install = Gtn::Toolshed.format_admin_install(site.data['toolshed-revisions'], page_obj['tools'],
+                                                       topic_name_human)
     page_obj['admin_install'] = admin_install
     page_obj['admin_install_yaml'] = admin_install.to_yaml
 

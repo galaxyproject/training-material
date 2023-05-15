@@ -351,7 +351,7 @@ module Jekyll
         # "subjectOf":,
         # "url" described below
         workTranslation: [],
-        creativeWorkStatus: material['draft'] ? 'Under development': 'Active',
+        creativeWorkStatus: material['draft'] ? 'Under development' : 'Active',
       }
       data.update(A11Y)
 
@@ -507,7 +507,7 @@ module Jekyll
       end
 
       # Add contributors/authors
-      if material.key?('contributors') or material.key?('contributions')
+      if material.key?('contributors') || material.key?('contributions')
         authors = get_authors(material).map { |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
 
         data['author'] = authors
