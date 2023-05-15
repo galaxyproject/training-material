@@ -2,11 +2,6 @@
 layout: tutorial_hands_on
 title: Tree thinking for tuberculosis evolution and epidemiology
 zenodo_link: 'https://zenodo.org/record/6010176'
-draft: true
-tags:
-  - prokaryotes
-  - phylogenetics
-  - evolution
 level: Introductory
 questions:
 - What information can I get from a phylogenetic tree?
@@ -15,6 +10,17 @@ objectives:
 - Understand the basic concepts behind phylogenetic trees, as applied to *Mycobacterium tuberculosis*
 - Be able to read and interrogate a phylogeny encountered in the literature
 time_estimation: 1H
+requirements:
+  -
+    type: "internal"
+    topic_name: variant-analysis
+    tutorials:
+      - tb-variant-analysis
+  -
+    type: "internal"
+    topic_name: evolution
+    tutorials:
+      - mtb_transmission
 contributions:
    authorship:
      - cstritt
@@ -25,11 +31,11 @@ contributions:
 tags:
 - prokaryote
 - one-health
+- phylogenetics
 ---
 
 
 # Introduction
-
 
 *"Nothing in biology makes sense except in the light of evolution."* --- Theodosius Dobzhansky, 1973
 
@@ -40,11 +46,21 @@ In evolutionary and epidemiological studies of *Mycobacterium tuberculosis*, it 
 This tutorial provides an introduction to phylogenetic trees in the context of whole genome sequencing of *Mycobacterium tuberculosis* strains. Phylogenetics is a vast topic, and we can only scratch its surface here. For those motivated to delve deeper into the topic, the [Resources section](#resources) contains links and reading suggestions.
 
 
-# Basic concepts: How to read a phylogeny
-Below are two phylogenies of the *Mycobacterium tuberculosis* complex (MTBC) to illustrate some basic vocabulary and concepts. If the following sounds a bit too esoteric, revisit the previous step of the course, the [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
+## Basic concepts: How to read a phylogeny
 
-## Rooted trees and tree topology
-These trees look rather different at a first glance, but they are identical except for one key aspect: tree A is **rooted** while tree B is not.
+Below are two phylogenies of the *Mycobacterium tuberculosis* complex (MTBC) to illustrate some basic vocabulary and concepts.
+
+> <details-title>Need a more thorough introduction to the topic?</details-title>
+>
+> If the following discussion sounds a bit too esoteric, you might be interested in a more thorough introduction to the topic of phylogeny like provided, for example, by the [introduction to phylogenetics](https://doi.org/10.6019/TOL.phyl.2015.00001.1) from the [EMBL-EBI collection of online tutorials](https://www.ebi.ac.uk/training/on-demand?facets=type:Online%20tutorial).
+>
+{: .details}
+
+### Rooted trees and tree topology
+
+![Phylogeny](./images/mtbc_1strainPerLineage.nwk.COMB.svg "Rooted [A] and unrooted [B] phylogeny of the MTBC. Some basic tree vocabulary is shown in red.")
+
+The trees in figure 1 look rather different at a first glance, but they are identical except for one key aspect: tree A is **rooted** while tree B is not.
 
 What is the difference between the two? First, let's state what is the same in the two trees: the tree **topology**, that is, the relative branching order. The same groupings are present in the two trees: they both contain the same information about the **relatedness** of strains. An example: TB isolated from Peruvian mummies is most similar to *M. pinnipedii* known from marine mammals; they share a most recent common ancestor. This can be seen in the rooted as well as in the unrooted tree.
 
@@ -52,16 +68,13 @@ The key difference between the rooted and the unrooted tree is that only the roo
 
 The best way to root a tree is by including an **outgroup**: a species or lineage which we know *a priori* to lay outside the phylogeny we're interested in. *M. canettii* usually serves this purpose for studying the MTBC, but you can also root, for example, a phylogeny of lineage 2 by including a lineage 4 strain.
 
-![Phylogeny](./images/mtbc_1strainPerLineage.nwk.COMB.svg "Rooted [A] and unrooted [B] phylogeny of the MTBC. Some basic tree vocabulary is shown in red."){:width="800"}
+### Branch lengths
 
-
-## Branch lengths
-Besides relatedness and direction, a third important piece of information contained in a phylogeny is the branch length. When a phylogeny was estimated from DNA or protein sequences, branch lengths usually reflect the evolutionary distance between nodes in the tree. This information can be used to translate distance in terms of expected nucleotide changes into years, and thus to connect evolutionary change to historical events.
-
-As branch lengths reflect evolutionary distances, they can also be used to identify transmission clusters and outbreaks. Below is a (rooted) tree of the Central Asian Clade (CAC), which is part of lineage 2 ({% cite Eldholm2016 %}). The orange color highlights the Afghan strain family within the CAC. At the bottom of the tree, note the clade with short branch lengths. This is how one would expect an outbreak to look in a phylogenetic tree: a set of strains clustering together and separated by extremely short branches, reflecting their almost identical genomes.
+Besides relatedness and direction, a third important piece of information contained in a phylogeny is the branch length. When a phylogeny has been estimated from DNA or protein sequences, branch lengths usually reflect the evolutionary distance between nodes in the tree. This information can be used to translate distance in terms of expected nucleotide changes into years, and thus to connect evolutionary change to historical events.
 
 ![Phylogeny](./images/eldholm2016_tree.png "Phylogeny of the central Asian clade, including the Oslo outbreak. Modified Eldholm et al. 2016."){:width="200"}
 
+As branch lengths reflect evolutionary distances, they can also be used to identify transmission clusters and outbreaks. Figure 2 shows a (rooted) tree of the Central Asian Clade (CAC), which is part of lineage 2 ({% cite Eldholm2016 %}). The orange color highlights the Afghan strain family within the CAC. At the bottom of the tree, note the clade with short branch lengths. This is how one would expect an outbreak to look in a phylogenetic tree: a set of strains clustering together and separated by extremely short branches, reflecting their almost identical genomes.
 
 > <comment-title>Phylogenetics with <i>Mycobacterium tuberculosis</i></comment-title>
 >
@@ -78,12 +91,35 @@ As branch lengths reflect evolutionary distances, they can also be used to ident
 {: .comment}
 
 
-# The alignment
-Aligned DNA or protein sequences are the starting material for phylogenetic inference with molecular data. Here we will make use of the single nucleotide polymorphisms (SNPs) you obtained in the previous [tutorial on transmission clusters]({% link topics/evolution/tutorials/mtb_transmission/tutorial.md %}), reflecting the diversity of 19 MTBC strains and 1 strain of *M. canettii*. The latter is included as outgroup, allowing us to root the phylogeny.
+## Infering phylogeny from SNP alignments
 
-Recall that the alignment here was generated using SNPs called from reference-aligned short reads. Below is a snapshot of a SNP alignment. Each row is a different strain, each column a position in the reference genome. Because this alignment is based on SNPs, it contains *only variable positions*. This is important to keep in mind. Genetic distances between strains will be hugely overestimated if we leave out all the positions which show no variation. In exercise 6 below, we will see a way to correct for this.
+Aligned DNA or protein sequences are the starting material for phylogenetic inference with molecular data.
 
-![Alignment](./images/MEGA_alignment.png){:width="500"}
+In this tutorial we will explore the phylogenetic relationship between 19 MTBC strains and 1 strain of *M. canettii*, where the latter is included as outgroup, allowing us to root the phylogeny. Our starting point will be an alignment of all SNPs identified from whole-genome sequencing data of these 20 strains. This *SNP alignment* was generated by
+
+1. mapping short sequenced reads from each sample to the infered sequence of the most recent common ancestor of the MTBC as the reference
+2. calling variants against that reference from the mapped reads of each sample
+3. incorporating the SNP variants of each sample into the reference to obtain a consensus genome of that sample
+4. combining the consensus genomes into a single multi-sequence fasta dataset
+5. discarding bases found to be identical in all samples from all sequences
+
+> <comment-title>Recommended tutorials</comment-title>
+>
+> Steps 1 and 2 are explained in detail in the tutorial [MTB variant analysis]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %}).
+> Steps 3 - 5 are conducted for the exact same 20 samples used here in the [tutorial on transmission clusters]({% link topics/evolution/tutorials/mtb_transmission/tutorial.md %}).
+>
+> If you want to gain a complete understanding of the whole process of sequencing-based analysis of MTBC strains, we recommend you, if you have not done so yet, to work through these two tutorials in the order above before continuing with this one here.
+>
+{: .comment}
+
+Figure 3 shows a snapshot of an illustrative SNP alignment.
+Each row in the alignment represents a different strain, each column a position in the reference genome.
+
+![Alignment](./images/MEGA_alignment.png "Illustrative example of a SNP alignment. Note the absence of conserved positions.")
+
+Because this alignment is based on SNPs, it contains *only variable positions*. This is important to keep in mind! Genetic distances between strains will be hugely overestimated if we leave out all the positions which show no variation!
+
+In exercise 6 below, we will see a way to correct for this.
 
 > <comment-title>The alternative approach: genome assembly</comment-title>
 >
@@ -91,49 +127,99 @@ Recall that the alignment here was generated using SNPs called from reference-al
 >
 {: .comment}
 
+With this bit of introduction you should, hopefully, be prepared to follow the flow and purpose of the analysis presented here.
+
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+
+# Phylogenetic analysis of MTBC strains with Galaxy and Rstudio
 
 ## Get the data
-> <hands-on-title>Obtain your data</hands-on-title>
+
+If you have worked at least through the first part of the [tutorial on transmission clusters]({% link topics/evolution/tutorials/mtb_transmission/tutorial.md %}) before coming here, you are all set.
+
+You can continue working in the same history you created for the other tutorial, or copy the *SNP alignment* (the output of **Finds SNP sites** {% icon tool %}) over to a new one, and can safely skip the following first hands-on part.
+
+If you are not interested in that other tutorial, here are the instructions for setting up a history for the analysis here, and for obtaining a copy of the SNP alignment from [Zenodo](https://zenodo.org/record/6010176).
+
+> <hands-on-title>Create a new history and prepare the input data</hands-on-title>
 >
-> 1. Make sure you have an empty analysis history. Give it a name.
+> 1. Create a new history for this analysis
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the following files from [Zenodo](https://zenodo.org/record/6010176) or from the shared data library
+> 2. Give the history a suitable name
+>
+>    {% snippet faqs/galaxy/histories_rename.md name="MTB tree thinking tutorial" %}
+>
+> 3. {% tool [Upload](upload1) %} a version of the SNP alignment via this URL
 >
 >    ```
 >    https://zenodo.org/record/6010176/files/SNP_alignment.fasta
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    and make sure the dataset format is set to `fasta`.
 >
-> 3. Take a look at the alignment
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
 >
->   Once the file is loaded, select it in the history on the right. Click on the 'Visualize' icon and and try both, the 'Editor' and the 'Multiple Sequence Alignment'. Can you see one of the MTBC particularities mentioned above, the predominance of singletons? How many sites are there in the alignment? Also take a look at the M. canettii sequence: being the outgroup, it has a large number of SNPs.
+> 4. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) in entire line %} to clean up the aligned sequence names
+>
+>    - {% icon param-file %} *"File to process"*: the uploaded SNP alignment
+>    - In {% icon param-repeat %} *"1. Replacement"*:
+>      - *"Find pattern"*: `^(>.+)\.fastq.*`
+>      - *"Replace with"*: `\1`
+>
+>    From just a brief inspection of the downloaded SNP alignment, you should see that the sequence names in that file carry a `.fastq.vcf` or `.fastq.gz.vcf` suffix on the actual sample names.
+>    The above replacement operation, drops these unnecessary endings, which we would otherwise carry over to all outputs generated in the analysis.
+>
+> 5. When the Replace Text tool run is finished, **rename** the output dataset to, for example, **SNP alignment**
+>
+>    {% snippet faqs/galaxy/datasets_rename.md name="SNP alignment" %}
+>
+> 6. Take a look at the alignment
+>
+>    Click on the dataset that you just renamed to expand it in the history, then click on {% icon galaxy-barchart %} **Visualize** and try both, the "Editor" and the "Multiple Sequence Alignment".
+>
+>    Can you see one of the MTBC particularities mentioned above, the predominance of singletons?
+>
+>    How many sites are there in the alignment?
+>
+>    Also take a look at the M. canettii sequence: being the outgroup, it has a large number of SNPs.
 >
 {: .hands_on}
 
-# Estimate a phylogeny
+## Estimate a phylogeny
+
 There are numerous methods to infer phylogenetic trees, but the most frequently used with large-scale molecular data are based on maximum likelihood and Bayesian inference. The details of how these methods construct trees from an alignment are beyond the scope of this introductory course. To be able to read trees, it is not necessary to know the statistical and computational details of how the trees are estimated. The books listed in the [Resources](#resources) section provide in-depth introductions into the different principles of phylogenetic inference, in particular Baum & Smith 2013 and Yang 2014.
 
 In this tutorial, we will use the maximum likelihood method [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) to estimate a phylogenetic tree for the 20 strains.
 
 An aspect we ignore in this tutorial is the uncertainty involved in phylogenetic inference. While RAxML will deliver a single tree, not all aspects of this tree are equally well supported by the data. This uncertainty can be quantified through **bootstrapping**, a procedure where a large number of trees are estimated from random samples of the original data. If a certain split in the original tree is present in all the bootstrapped trees, then we can be confident about this split. Published phylogenies should always include a measure of uncertainty, while for this tutorial you will have to believe me that we are looking at a solid phylogeny...
 
-## Hands-on
 > <hands-on-title>Estimate a phylogeny for 20 MTBC strains</hands-on-title>
 >
-> 1. {% tool [Phyogenetic reconstruction with RAxML](toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.4+galaxy2) %} with the following parameters:
+> 1. {% tool [Phyogenetic reconstruction with RAxML](toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.12+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Source file with aligned sequences"*: `output` (Input dataset)
 >    - *"Model type"*: `Nucleotide`
 >    - *"RAxML options to use"*: `Required options only`
 >
-> 2. The RAxML output we are interested in is the "Best-scoring ML tree". Select it in you Galaxy history and take a look at it with the different visualization options offered by Galaxy.
+> 2. The RAxML output we are interested in is the *"Best-scoring ML tree"*.
+>
+>    Select it in you Galaxy history and take a look at it with the different {% icon galaxy-barchart %} visualization options offered by Galaxy.
+>
+>    ![Unrooted tree Galaxy visualization](./images/tree_unrooted_galaxy_vis.png "(Unrooted) RAxML tree in Galaxy's Phylogenetic Tree Visualization"){:width="300"}
 >
 {: .hands_on}
 
+## Visualize and manipulate the tree
 
-# Visualize and manipulate the tree
 Phylogenetic trees are great tools because they are at the same time quantitative (we can do calculations on branch lengths, estimate uncertainty of a tree topology etc.) and visually appealing, allowing to actually "see" biologically interesting patterns. Often this requires some tweaking of the tree, for example by coloring parts of the tree according to some background information we have about the samples.
 
 We will use R to plot and manipulate the phylogeny obtained from RAxML. The code to produce the figures is shown in the boxes below. You can execute it by starting RStudio within Galaxy, as explained in the box below. This is **not required to finish this tutorial**, the different trees resulting from executing the code are shown below. But if you have used R before, it might be worthwhile to go through the code, modify it, and explore the numerous phylogenetics packages and functions in R.
@@ -156,6 +242,7 @@ We will use R to plot and manipulate the phylogeny obtained from RAxML. The code
 {: .hands_on}
 
 ## Plot the RAxML output
+
 The RAxML output includes the "Best-scoring ML tree" in your Galaxy history. The code below imports this tree into a Galaxy instance of RStudio and plots the tree.
 
 ```r
@@ -170,7 +257,7 @@ tree <- read.tree(treefile)
 plot(tree)
 
 ```
-![Unrooted tree](./images/tree_unrooted.svg){:width="600"}
+![Unrooted tree](./images/tree_unrooted.svg)
 
 > <question-title>Exercise 1</question-title>
 >
@@ -184,16 +271,15 @@ plot(tree)
 >
 {: .question}
 
-
 ## Root the tree
 To make the phylogeny better interpretable, we will now root it and add some additional information. First, we root the tree and then exclude the canettii strain, such that patterns within the MTBC become more clear.
 
 ```r
 # Root the tree
-tree_rooted <- root(tree, "ERR313115.fastq.vcf")
+tree_rooted <- root(tree, "ERR313115")
 
 # Remove the outgroup to make distances within MTB more clear
-tree_rooted <- drop.tip(tree_rooted, "ERR313115.fastq.vcf")
+tree_rooted <- drop.tip(tree_rooted, "ERR313115")
 tree_rooted$root.edge <- 0.005
 plot(tree_rooted, root.edge = T, cex=0.6)
 ```
@@ -203,32 +289,33 @@ plot(tree_rooted, root.edge = T, cex=0.6)
 This already looks better, the tree topology stands out more clearly now, and we can identify groups of closely related strains.
 
 ## Show the different lineages present in the sample
+
 A first piece of information we now want to add to the phylogeny is to which lineage the strains belong. This will allow us to assess whether our tree is consistent with the known phylogeny of the MTBC, shown in Figure 1A, and to visualize which lineages are present in our sample. The information to which lineage a strain belongs can be found in the output of TB-profiler, as obtained in the [tutorial on TB variant analysis]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %}).
 
 ```r
 # Assign lineages to samples, as identified by TB-profiler
 
 mtbc_lineages <- c(
-"ERR181435.fastq.vcf" = "L7",
-"ERR313115.fastq.vcf" = "canettii",
-"ERR551620.fastq.vcf" = "L5",
-"ERR1203059.fastq.vcf" = "L5",
-"ERR2659153.fastq.vcf" = "orygis",
-"ERR2704678.fastq.vcf" = "L3",
-"ERR2704679.fastq.vcf" = "L1",
-"ERR2704687.fastq.vcf" = "L6",
-"ERR5987300.fastq.vcf" = "L2",
-"ERR5987352.fastq.vcf" = "L4",
-"ERR6362078.fastq.gz.vcf" = "L2",
-"ERR6362138.fastq.gz.vcf" = "L2",
-"ERR6362139.fastq.vcf" = "L4",
-"ERR6362156.fastq.gz.vcf" = "L2",
-"ERR6362253.fastq.gz.vcf" = "L2",
-"ERR6362333.fastq.gz.vcf" = "L2",
-"ERR6362484.fastq.vcf" = "L4",
-"ERR6362653.fastq.gz.vcf" = "L2",
-"SRR998584.fastq.vcf" = "L5",
-"SRR13046689.fastq.vcf" = "bovis"
+"ERR181435" = "L7",
+"ERR313115" = "canettii",
+"ERR551620" = "L5",
+"ERR1203059" = "L5",
+"ERR2659153" = "orygis",
+"ERR2704678" = "L3",
+"ERR2704679" = "L1",
+"ERR2704687" = "L6",
+"ERR5987300" = "L2",
+"ERR5987352" = "L4",
+"ERR6362078" = "L2",
+"ERR6362138" = "L2",
+"ERR6362139" = "L4",
+"ERR6362156" = "L2",
+"ERR6362253" = "L2",
+"ERR6362333" = "L2",
+"ERR6362484" = "L4",
+"ERR6362653" = "L2",
+"SRR998584" = "L5",
+"SRR13046689" = "bovis"
 )
 
 # Create tree with lineage as tip label instead of strain name
@@ -304,7 +391,6 @@ plot(tree_lineages,cex = 0.8, tip.color = pal_lineages, root.edge = TRUE)
 >
 {: .question}
 
-
 ## Map a trait onto the tree
 
 Phylogenies are particularly useful when combined with additional information. For our 19 MTB strains, for example, we might know such things as the country of origin, the sampling date, or various phenotypes determined in the lab, for example the virulence of the strains in an animal model. By mapping this additional information onto the phylogeny, we can gain insights into how, where and when these traits evolved.
@@ -316,26 +402,26 @@ For our 20 samples, a trait you previously identified is the DR profile. Let us 
 # Same as above, but with DR profiles instead of lineages
 
 mtbc_dr <- c(
-"ERR181435.fastq.vcf" = "Sensitive",
-"ERR313115.fastq.vcf" = "Sensitive",
-"ERR551620.fastq.vcf" = "MDR",
-"ERR1203059.fastq.vcf" = "Sensitive",
-"ERR2659153.fastq.vcf" = "Sensitive",
-"ERR2704678.fastq.vcf" = "Sensitive",
-"ERR2704679.fastq.vcf" = "Sensitive",
-"ERR2704687.fastq.vcf" = "Sensitive",
-"ERR5987300.fastq.vcf" = "PreXDR",
-"ERR5987352.fastq.vcf" = "PreMDR",
-"ERR6362078.fastq.gz.vcf" = "MDR",
-"ERR6362138.fastq.gz.vcf" = "MDR",
-"ERR6362139.fastq.vcf" = "PreMDR",
-"ERR6362156.fastq.gz.vcf" = "PreXDR",
-"ERR6362253.fastq.gz.vcf" = "MDR",
-"ERR6362333.fastq.gz.vcf" = "PreXDR",
-"ERR6362484.fastq.vcf" = "PreMDR",
-"ERR6362653.fastq.gz.vcf" = "MDR",
-"SRR998584.fastq.vcf" = "Sensitive",
-"SRR13046689.fastq.vcf" = "Other"
+"ERR181435" = "Sensitive",
+"ERR313115" = "Sensitive",
+"ERR551620" = "MDR",
+"ERR1203059" = "Sensitive",
+"ERR2659153" = "Sensitive",
+"ERR2704678" = "Sensitive",
+"ERR2704679" = "Sensitive",
+"ERR2704687" = "Sensitive",
+"ERR5987300" = "PreXDR",
+"ERR5987352" = "PreMDR",
+"ERR6362078" = "MDR",
+"ERR6362138" = "MDR",
+"ERR6362139" = "PreMDR",
+"ERR6362156" = "PreXDR",
+"ERR6362253" = "MDR",
+"ERR6362333" = "PreXDR",
+"ERR6362484" = "PreMDR",
+"ERR6362653" = "MDR",
+"SRR998584" = "Sensitive",
+"SRR13046689" = "Other"
 )
 
 tree_dr <- tree_rooted
@@ -409,7 +495,7 @@ Look at the scale bars of the two trees. Accounting for invariable sites has a h
 
 ```r
 # Let's also remove the two outlier strains, they would cause troubles and are anyway useless
-tree_rescaled <- drop.tip(tree_rescaled, c("ERR1203059.fastq.vcf", "ERR5987300.fastq.vcf"))
+tree_rescaled <- drop.tip(tree_rescaled, c("ERR1203059", "ERR5987300"))
 
 # Estimate dates: translate phylogenetic distance into years by assuming a mutation rate and the number of generations per year
 mutation_rate = 2.01e-10
@@ -447,6 +533,8 @@ axisPhylo()
 >
 {: .question}
 
+# Conclusion
+TO DO
 
 # Resources
 To develop a deeper understanding of phylogenetic trees, there is no better way than estimating phylogenies yourself --- and work through a book on the topic in your own mind's pace.
