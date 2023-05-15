@@ -1,0 +1,134 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Pox virus genome analysis from tiled-amplicon sequencing data",
+  "subtopic": "one-health",
+  "level": "Advanced",
+  "questions": [
+    "Which special challenges does one encounter during sequence data analysis of pox viruses?",
+    "How can standard workflows for viral mutation calling and consensus generation be adapted to the particularities of pox viruses?",
+    "How can viral consensus sequences, multiple-sequence alignments and mutation calls be generated from each other and used to answer questions about the data?"
+  ],
+  "objectives": [
+    "Learn how to deal with pox virus genomes inverted terminal repeats through a combination of wet lab protocol and tailored bioinformatics",
+    "Construct a sample consensus genome from mapped reads",
+    "Explore a recombinant pox virus genome via a multiple-sequence alignment of consensus genome and references and through lists of mutations derived from it"
+  ],
+  "time_estimation": "4H",
+  "key_points": [
+    "Compared to other viruses, analysis of sequencing data from pox viruses is complicated by the rather large genome size and by the presence of inverted terminal repeats, but well-designed wet lab and bioinformatic workflows can handle these particularities.",
+    "Galaxy and its huge set of tools are flexible enough to handle half-genome sequencing data efficiently.",
+    "A mapping-based approach can result in high-quality consensus genome reconstructions from pox virus sequencing data and appears promising even when dealing with recombinant samples."
+  ],
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "galaxy-interface",
+      "tutorials": [
+        "collections",
+        "upload-rules"
+      ]
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Wolfgang Maier",
+      "orcid": "0000-0002-9464-6640",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "wm75",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+    },
+    {
+      "name": "Tomas Klingström",
+      "email": "tomas.klingstrom@slu.se",
+      "twitter": "TKlingstrom",
+      "gitter": "TKlingstrom",
+      "orcid": "0000-0002-9504-1352",
+      "joined": "2018-11",
+      "elixir_node": "se",
+      "id": "TKlingstrom",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/TKlingstrom.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/TKlingstrom/"
+    }
+  ],
+  "tags": [
+    "virology",
+    "one-health"
+  ],
+  "url": "/topics/variant-analysis/tutorials/pox-tiled-amplicon/tutorial.html",
+  "topic_name": "variant-analysis",
+  "tutorial_name": "pox-tiled-amplicon",
+  "dir": "topics/variant-analysis/tutorials/pox-tiled-amplicon",
+  "id": "variant-analysis/pox-tiled-amplicon",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "pox-virus-tiled-amplicon-ref-masking.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/pox-tiled-amplicon/workflows/pox-virus-tiled-amplicon-ref-masking.ga",
+      "path": "topics/variant-analysis/tutorials/pox-tiled-amplicon/workflows/pox-virus-tiled-amplicon-ref-masking.ga",
+      "wfid": "variant-analysis-pox-tiled-amplicon",
+      "wfname": "pox-virus-tiled-amplicon-ref-masking",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-pox-tiled-amplicon/versions/pox-virus-tiled-amplicon-ref-masking",
+      "license": "MIT",
+      "creators": [
+        {
+          "class": "Person",
+          "identifier": "https://orcid.org/0000-0001-6897-1215",
+          "name": "Viktoria Isabel Schwarz"
+        },
+        {
+          "class": "Person",
+          "identifier": "https://orcid.org/0000-0002-9464-6640",
+          "name": "Wolfgang Maier"
+        }
+      ]
+    }
+  ],
+  "tools": [
+    "Cut1",
+    "Grep1",
+    "__APPLY_RULES__",
+    "__ZIP_COLLECTION__",
+    "param_value_from_file",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS: maskseq51/5.0.0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.3",
+    "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/ivar_trim/ivar_trim/1.4.2+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3",
+    "toolshed.g2.bx.psu.edu/repos/iuc/samtools_merge/samtools_merge/1.15.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_fatovcf/fatovcf/426+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0",
+    "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_info/0.1.8_1",
+    "upload1"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}
