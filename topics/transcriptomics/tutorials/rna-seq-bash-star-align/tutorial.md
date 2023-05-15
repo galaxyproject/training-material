@@ -262,7 +262,7 @@ The alignment process consists of two steps:
 >
 >
 > Have a look at the [STAR manual](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf), while we are running STAR with the default
-
+>
 > parameters here, your use case might require a change of parameters. *NOTE: Always read the manual page for any tool before using
 > and make sure the options you use are appropriate for your data.*
 >
