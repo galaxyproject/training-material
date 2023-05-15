@@ -14,7 +14,7 @@ key_points:
   - "To use most powerful bioinformatic tools, you will need to use the command line."
   - "There a few basic steps to follow in order to process the RNA sequences"
   - "Quality control, trimming and alignment to reference genome are the first part of the RNA-seq downstream analysis"
-contributors:
+contributions:
   authorship:
     - Sofokli5
   editing:
@@ -100,8 +100,10 @@ The "Data Upload" process is the only one in this tutorial that takes place dire
 >
 >
 >    We also need to import two more files, essential for the alignment operation (and basically every alignment procedure): the organism's reference genome (here *D. melanogaster*) and the organism's gene annotation.
->    Those can be aquired directly through data library as described above. For this tutorial we are going to use the files [dm3.fa](https://usegalaxy.eu/libraries/folders/Fdf740ff7e86f2efb/dataset/8ab324b9329be9fc) and [Drosophila_melanogaster.BDGP5.78.gtf (dm3)](https://usegalaxy.eu/libraries/folders/F30cab321d898d2fb/dataset/d8e875803390fe20).
-> 
+>    Those can be aquired directly via link and Galaxy's data library as described above. For this tutorial we are going to use the files [dm6.fa.gz](https://hgdownload.soe.ucsc.edu/goldenPath/dm6/bigZips/dm6.fa.gz) and [Drosophila_melanogaster.BDGP6.87.gtf (dm6)](https://usegalaxy.eu/libraries/folders/F30cab321d898d2fb/dataset/02c5f7fcdb6bf41f). Note that it is essential to convert genome's file from `*.fa.gz` to `*.fa`. That is easy now that we have already used the same method to convert `fastqsanger` to `fastq`. Remember to change the name of the file, too, in your working history as Galaxy will not do it automatically. Doing so will prevent any confusions later on.
+>
+> {% snippet faqs/galaxy/datasets_rename.md name="dm6.fa" %}
+>
 {: .hands_on}
 
 {% include topics/sequence-analysis/tutorials/quality-control/fastq_question.md %}
@@ -129,11 +131,11 @@ Keep in mind that the reads are raw data from the sequencing machine without any
 >
 > | Software | Version | Manual | Available for | Description |
 > | -------- | ------------ | ------ | ------------- | ----------- |
-> | [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) | 0.12.0 | [fastqc Manual](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) | Linux, MacOS, Windows | A quality control tool for high throughput sequence data. |
-> | [Cutadapt](https://cutadapt.readthedocs.io/en/stable/index.html) |  | [Cutadapt Manual](https://cutadapt.readthedocs.io/en/stable/guide.html) | Linux, MacOS | Finds and removes adapter sequences, primers, poly-A tails and other types of unwanted sequence from your high-throughput sequencing reads. |
-> | [STAR](https://github.com/alexdobin/STAR) |  | [STAR Manual](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf) | Linux, MacOS | Universal RNA-seq aligner. |
-> | [SAMtools](http://samtools.sourceforge.net/) |  | [SAMtools Manual](http://www.htslib.org/doc/samtools.html) | Linux, MacOS | Utilities for manipulating alignments in the SAM format. |
-> | [Subread](https://subread.sourceforge.net/) |  | [featureCounts Manual](https://subread.sourceforge.net/featureCounts.html) | Linux, MacOS, Windows | Subread is a general-purpose read aligner which can align both genomic DNA-seq and RNA-seq reads and it includes **featureCounts**, a highly efficient general-purpose read summarization program that counts mapped reads for genomic features.  |
+> | [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) | 0.12.1 | [fastqc Manual](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) | Linux, MacOS, Windows | A quality control tool for high throughput sequence data. |
+> | [Cutadapt](https://cutadapt.readthedocs.io/en/stable/index.html) | 4.4 | [Cutadapt Manual](https://cutadapt.readthedocs.io/en/stable/guide.html) | Linux, MacOS | Finds and removes adapter sequences, primers, poly-A tails and other types of unwanted sequence from your high-throughput sequencing reads. |
+> | [STAR](https://github.com/alexdobin/STAR) | 2.7.10b | [STAR Manual](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf) | Linux, MacOS | Universal RNA-seq aligner. |
+> | [SAMtools](http://samtools.sourceforge.net/) | 1.17 | [SAMtools Manual](http://www.htslib.org/doc/samtools.html) | Linux, MacOS | Utilities for manipulating alignments in the SAM format. |
+> | [Subread](https://subread.sourceforge.net/) | 2.0.3 | [featureCounts Manual](https://subread.sourceforge.net/featureCounts.html) | Linux, MacOS, Windows | Subread is a general-purpose read aligner which can align both genomic DNA-seq and RNA-seq reads and it includes **featureCounts**, a highly efficient general-purpose read summarization program that counts mapped reads for genomic features.  |
 >
 {: .hands_on}
 
