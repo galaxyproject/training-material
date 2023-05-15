@@ -430,6 +430,18 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     </ul>
                 </blockquote>
                 {% endif %}
+
+		{% if own_material.tools %}
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<pre>
+shed-tools install [-g GALAXY] [-a API_KEY] -t <(curl {{ own_material.api }} | jq .admin_install_yaml -r)
+</pre>
+                </blockquote>
+		{% endif %}
+
+
                 </section>
 
             </div>

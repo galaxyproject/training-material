@@ -239,10 +239,6 @@ module TopicFilter
       return nil
     end
 
-    if parts[-1] == 'tools.yaml'
-      return nil
-    end
-
     if parts[4] =~ /tutorial.*\.md/
       material['type'] = 'tutorial'
     elsif parts[4] =~ /slides.*\.html/
@@ -453,6 +449,9 @@ module TopicFilter
         }
       }
     end
+
+    # Really only used for tool list install for ephemeris, not general.
+    page_obj['api'] = "#{domain}/api/topics/#{page['topic_name']}/tutorials/#{page['tutorial_name']}/tutorial.json"
 
     # Tool List
     #
