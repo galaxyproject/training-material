@@ -282,6 +282,7 @@ The alignment process consists of two steps:
 > > Date Time ..... started mapping
 > > ```
 > {: .code-out}
+>
 {: .hands_on}
 
 # SAM/BAM format
