@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+require 'English'
 require './_plugins/gtn/boxify'
 require './_plugins/gtn/mod'
 require './_plugins/gtn/images'
@@ -9,15 +12,11 @@ require './_plugins/gtn/toolshed'
 require './_plugins/jekyll-topic-filter'
 require 'time'
 
-
 puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
-version_parts = RUBY_VERSION.split(".")
-if version_parts[0].to_i < 3
-  puts "[GTN] WARNING: This Ruby is pretty old, you might want to update."
-end
+version_parts = RUBY_VERSION.split('.')
+puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if version_parts[0].to_i < 3
 
-
-## 
+##
 # This module contains functions that are used in the GTN, our internal functions that is.
 
 ##
@@ -27,9 +26,9 @@ end
 # Returns:
 # +Array+:: The authors of the material
 def get_authors(material)
-  if material.key?('contributors') then
+  if material.key?('contributors')
     material['contributors']
-  elsif material.key?('contributions') then
+  elsif material.key?('contributions')
     material['contributions']['authorship']
   else
     []
@@ -44,7 +43,7 @@ end
 # Returns:
 # +String+:: The name of the user
 def lookup_name(user, site)
-  if site.data['contributors'].has_key?(user) then
+  if site.data['contributors'].key?(user)
     site.data['contributors'][user].fetch('name', user)
   else
     user
@@ -52,38 +51,38 @@ def lookup_name(user, site)
 end
 
 module Jekyll
+  # The main GTN function library
   module GtnFunctions
-
     def self.cache
-      @@cache ||= Jekyll::Cache.new("GtnFunctions")
+      @@cache ||= Jekyll::Cache.new('GtnFunctions')
     end
 
     ##
     # List of elixir node country IDs (ISO 3166-1 alpha-2) and their names
     ELIXIR_NODES = {
-      "au" => "Australia",
-      "be" => "Belgium",
-      "ch" => "Switzerland",
-      "cz" => "Czechia",
-      "de" => "Germany",
-      "dk" => "Denmark",
-      "ee" => "Estonia",
-      "es" => "Spain",
-      "fi" => "Finland",
-      "fr" => "France",
-      "gr" => "Greece",
-      "hu" => "Hungary",
-      "ie" => "Ireland",
-      "il" => "Israel",
-      "it" => "Italy",
-      "lu" => "Luxembourg",
-      "nl" => "the Netherlands",
-      "no" => "Norway",
-      "pt" => "Portugal",
-      "se" => "Sweden",
-      "si" => "Slovenia",
-      "uk" => "United Kingdom",
-    }
+      'au' => 'Australia',
+      'be' => 'Belgium',
+      'ch' => 'Switzerland',
+      'cz' => 'Czechia',
+      'de' => 'Germany',
+      'dk' => 'Denmark',
+      'ee' => 'Estonia',
+      'es' => 'Spain',
+      'fi' => 'Finland',
+      'fr' => 'France',
+      'gr' => 'Greece',
+      'hu' => 'Hungary',
+      'ie' => 'Ireland',
+      'il' => 'Israel',
+      'it' => 'Italy',
+      'lu' => 'Luxembourg',
+      'nl' => 'the Netherlands',
+      'no' => 'Norway',
+      'pt' => 'Portugal',
+      'se' => 'Sweden',
+      'si' => 'Slovenia',
+      'uk' => 'United Kingdom',
+    }.freeze
 
     ##
     # Returns the name of an elixir node, given its country ID
@@ -106,9 +105,9 @@ module Jekyll
       if citations.nil?
         {}
       else
-        citations.sort_by{|k, v| v}.reverse.to_h.first(20).map{|k, v| 
-          [k, {"count" => v, "text" => Gtn::Scholar.render_citation(k)}]
-        }.to_h
+        citations.sort_by { |_k, v| v }.reverse.to_h.first(20).to_h do |k, v|
+          [k, { 'count' => v, 'text' => Gtn::Scholar.render_citation(k) }]
+        end
       end
     end
 
@@ -123,7 +122,7 @@ module Jekyll
     #  slugify_unsafe("Hello, World!") # => "Hello-World"
     def slugify_unsafe(text)
       # Gets rid of *most* things without making it completely unusable?
-      text.gsub(/["'\\\/-;:,.!@#$%^&*()-]/, '').gsub(/\s/, '-')
+      text.gsub(%r{["'\\/-;:,.!@#$%^&*()-]}, '').gsub(/\s/, '-')
     end
 
     ##
@@ -137,12 +136,12 @@ module Jekyll
     #  humanize_types("seq") # => "List of Items"
     def humanize_types(type)
       data = {
-        "seq" => "List of Items",
-        "str" => "Free Text",
-        "map" => "A dictionary/map",
-        "float" => "Decimal Number",
-        "int" => "Integer Number",
-        "bool" => "Boolean"
+        'seq' => 'List of Items',
+        'str' => 'Free Text',
+        'map' => 'A dictionary/map',
+        'float' => 'Decimal Number',
+        'int' => 'Integer Number',
+        'bool' => 'Boolean'
       }
       data[type]
     end
@@ -174,7 +173,7 @@ module Jekyll
     #
     def gtn_mod_date(path)
       # Automatically strips any leading slashes.
-      Gtn::ModificationTimes.obtain_time(path.gsub(/^\//, ''))
+      Gtn::ModificationTimes.obtain_time(path.gsub(%r{^/}, ''))
     end
 
     ##
@@ -185,10 +184,10 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the topic has been mentioned
     def how_many_topic_feedbacks(feedback, name)
-      feedback.select{|x| x["topic"] == name}.length
+      feedback.select { |x| x['topic'] == name }.length
     end
 
-    ## 
+    ##
     # How many times has a tutorial been mentioned in feedback?
     # Params:
     # +feedback+:: The feedback to search through
@@ -196,7 +195,7 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the tutorial has been mentioned
     def how_many_tutorial_feedbacks(feedback, name)
-      feedback.select{|x| x["tutorial"] == name}.length
+      feedback.select { |x| x['tutorial'] == name }.length
     end
 
     ##
@@ -224,11 +223,9 @@ module Jekyll
     # Example:
     #  {% assign authors = page.contributors | filter_authors:page.contributions -%}
     def filter_authors(contributors, contributions)
-      if not contributors.nil?
-        return contributors
-      else
-        return contributions["authorship"]
-      end
+      return contributors if !contributors.nil?
+
+      contributions['authorship']
     end
 
     ##
@@ -243,7 +240,7 @@ module Jekyll
     #
     #  fedi2link("@hexylena@galaxians.garden") => "https://galaxians.garden/@hexylena"
     def fedi2link(fedi_address)
-      fedi_address.gsub(/^@?(?<user>.*)@(?<host>.*)$/){|m| "https://#{$~[:host]}/@#{$~[:user]}" }
+      fedi_address.gsub(/^@?(?<user>.*)@(?<host>.*)$/) { |_m| "https://#{$LAST_MATCH_INFO[:host]}/@#{$LAST_MATCH_INFO[:user]}" }
     end
 
     ##
@@ -256,12 +253,12 @@ module Jekyll
     # Example:
     #  {{ "assets/images/mastodon.svg" | load_svg }}
     def load_svg(path)
-      File.open(path).read.gsub(/\R+/, '')
+      File.read(path).gsub(/\R+/, '')
     end
 
     def regex_replace(str, regex_search, value_replace)
       regex = /#{regex_search}/m
-      return str.gsub(regex, value_replace)
+      str.gsub(regex, value_replace)
     end
 
     ##
@@ -272,30 +269,28 @@ module Jekyll
     #   {{ content | regex_replace: '<hr>', '' }}
     def regex_replace_once(str, regex_search, value_replace)
       regex = /#{regex_search}/m
-      return str.sub(regex, value_replace)
+      str.sub(regex, value_replace)
     end
 
     def convert_to_material_list(site, materials)
       # [{"name"=>"introduction", "topic"=>"admin"}]
-      materials.map{|m|
-        if m.key?("name") && m.key?("topic")
-          found = TopicFilter.fetch_tutorial_material(site, m["topic"], m["name"])
-          if found.nil?
-            Jekyll.logger.warn  "Could not find material #{m["topic"]}/#{m["name"]} in the site data"
-          end
+      materials.map do |m|
+        if m.key?('name') && m.key?('topic')
+          found = TopicFilter.fetch_tutorial_material(site, m['topic'], m['name'])
+          Jekyll.logger.warn "Could not find material #{m['topic']}/#{m['name']} in the site data" if found.nil?
           found
-        elsif m.key?("external") && m['external']
+        elsif m.key?('external') && m['external']
           {
-            "layout" => "tutorial_hands_on",
-            "name" => m["name"],
-            "title" => m["name"],
-            "hands_on" => "external",
-            "hands_on_url" => m["link"],
+            'layout' => 'tutorial_hands_on',
+            'name' => m['name'],
+            'title' => m['name'],
+            'hands_on' => 'external',
+            'hands_on_url' => m['link'],
           }
         else
-          Jekyll.logger.warn  "[GTN] Unsure how to render #{m}"
+          Jekyll.logger.warn "[GTN] Unsure how to render #{m}"
         end
-      }
+      end
     end
 
     ##
@@ -306,18 +301,16 @@ module Jekyll
     # +String+:: The TRS path
     #
     # Example:
-    #  {{ "topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga" | convert_workflow_path_to_trs }}
+    #  {{ "topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga" |
+    #     convert_workflow_path_to_trs }}
     #  => "/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control"
     def convert_workflow_path_to_trs(str)
-      if str.nil?
-        return "GTN_TRS_ERROR_NIL"
-      end
+      return 'GTN_TRS_ERROR_NIL' if str.nil?
 
-      m = str.match(/topics\/(?<topic>.*)\/tutorials\/(?<tutorial>.*)\/workflows\/(?<workflow>.*)\.ga/)
-      if m
-        return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}"
-      end
-      return "GTN_TRS_ERROR"
+      m = str.match(%r{topics/(?<topic>.*)/tutorials/(?<tutorial>.*)/workflows/(?<workflow>.*)\.ga})
+      return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}" if m
+
+      'GTN_TRS_ERROR'
     end
 
     ##
@@ -341,19 +334,14 @@ module Jekyll
     # Returns:
     # +String+:: The URL of the default link
     def get_default_link(material)
-      if material.nil?
-        return "NO LINK"
-      end
+      return 'NO LINK' if material.nil?
+
       url = nil
 
-      if material['slides']
-        url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/slides.html"
-      end
+      url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/slides.html" if material['slides']
 
-      if material['hands_on']
-        if material['hands_on'] != "external" && material['hands_on'] != ""
-          url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tutorial.html"
-        end
+      if material['hands_on'] && (material['hands_on'] != 'external' && material['hands_on'] != '')
+        url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tutorial.html"
       end
 
       url
@@ -363,18 +351,17 @@ end
 
 Liquid::Template.register_filter(Jekyll::GtnFunctions)
 
-
 ##
 # This does post-modification to every page
 # Mapping the authors to their human names, and copying the cover (when present) to 'image'
 #
 # This exists because the jekyll-feed plugin expects those fields to look like that.
-Jekyll::Hooks.register :posts, :pre_render do |post, out|
-  post.data['author'] = get_authors(post.data).map{|c| lookup_name(c, post.site)}.join(", ")
+Jekyll::Hooks.register :posts, :pre_render do |post, _out|
+  post.data['author'] = get_authors(post.data).map { |c| lookup_name(c, post.site) }.join(', ')
   post.data['image'] = post.data['cover']
 end
 
-if $0 == __FILE__
-  result = Gtn::ModificationTimes.obtain_time(ARGV[0].gsub(/^\//, ''))
-  puts "Modification time of #{ARGV[0].gsub(/^\//, '')} is #{result}"
+if $PROGRAM_NAME == __FILE__
+  result = Gtn::ModificationTimes.obtain_time(ARGV[0].gsub(%r{^/}, ''))
+  puts "Modification time of #{ARGV[0].gsub(%r{^/}, '')} is #{result}"
 end
