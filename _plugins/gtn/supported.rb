@@ -14,6 +14,12 @@ module Gtn
     #  }
     def self.calculate(data, tool_list)
       # p "Calculating supported servers for this tool list"
+      if data.nil?
+        {
+          "exact" => [],
+          "inexact" => [],
+        }
+      end
 
       supported = { exact: {}, inexact: {} }
       tool_list.each do |tool|
