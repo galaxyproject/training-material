@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Large genome assembly and polishing">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-03-06 12:23:54 +0000">
+<meta name="DC.date" content="2023-05-13 02:59:12 +0000">
 <meta name="DC.creator" content="Anna Syme">
 
         
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-06T12:23:54+00:00",
+  "dateModified": "2023-05-13T02:59:12+00:00",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Large genome assembly and polishing",
   "interactivityType": "mixed",
@@ -764,7 +764,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 6, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 13, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -787,6 +787,8 @@
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
+
+<p><em>Note: We recommend running this tutorial on either the Galaxy Europe or Galaxy Australia servers. Other servers (such as Galaxy main) have not yet been configured fully for all the tools in this analysis.</em></p>
 
 <h2 id="what-is-genome-assembly">What is genome assembly?</h2>
 
@@ -845,7 +847,12 @@
       <li><a href="#summary-of-read-data-for-genome-assembly" id="markdown-toc-summary-of-read-data-for-genome-assembly">Summary of read data for genome assembly</a></li>
     </ol>
   </li>
-  <li><a href="#genome-assembly" id="markdown-toc-genome-assembly">Genome Assembly</a></li>
+  <li><a href="#genome-assembly" id="markdown-toc-genome-assembly">Genome Assembly</a>    <ol>
+      <li><a href="#which-assembly-tool-and-approach-to-use" id="markdown-toc-which-assembly-tool-and-approach-to-use">Which assembly tool and approach to use?</a></li>
+      <li><a href="#assembly-with-flye-workflow" id="markdown-toc-assembly-with-flye-workflow">Assembly with Flye workflow</a></li>
+      <li><a href="#assembly-results" id="markdown-toc-assembly-results">Assembly results</a></li>
+    </ol>
+  </li>
   <li><a href="#assembly-polishing" id="markdown-toc-assembly-polishing">Assembly polishing</a>    <ol>
       <li><a href="#polishing-workflow" id="markdown-toc-polishing-workflow">Polishing workflow</a></li>
       <li><a href="#polishing-results" id="markdown-toc-polishing-results">Polishing results</a></li>
@@ -853,6 +860,7 @@
   </li>
   <li><a href="#genome-quality-assessment" id="markdown-toc-genome-quality-assessment">Genome quality assessment</a>    <ol>
       <li><a href="#genome-assessment-workflow" id="markdown-toc-genome-assessment-workflow">Genome assessment workflow</a></li>
+      <li><a href="#assessment-results" id="markdown-toc-assessment-results">Assessment results</a></li>
     </ol>
   </li>
   <li><a href="#combining-workflows" id="markdown-toc-combining-workflows">Combining workflows</a>    <ol>
@@ -993,6 +1001,10 @@ https://zenodo.org/record/7055935/files/Ref_genome_Arabidopsis.fasta
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+    </li>
+    <li>
+      <p>Check that the datatypes for the three files of sequencing reads are <code class="language-plaintext highlighter-rouge">fastq.gz</code>, not <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> and change datatype if needed.
+<!--SNIPPET-->&lt;blockquote class="tip"&gt;   &lt;div class="box-title tip-title" id="tip-changing-the-datatype"&gt;<button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button>&lt;/div&gt;   &lt;ul&gt;   &lt;li&gt;Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes&lt;/li&gt;   &lt;li&gt;In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top&lt;/li&gt;   &lt;li&gt;In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     &lt;ul&gt;       &lt;li&gt;tip: you can start typing the datatype into the field to filter the dropdown menu&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Click the <strong>Save</strong> button&lt;/li&gt; &lt;/ul&gt; &lt;/blockquote&gt;</p>
     </li>
   </ol>
 </blockquote>
@@ -1352,7 +1364,7 @@ These coverages are very high but are ok to use with tutorial data. With a typic
 
 <p>Genome assembly algorithms use different approaches to work with the complexities of large sequencing read data sets, large genomes, different sequencing error rates, and computational resources. Many use graph-based algorithms.  For more about genome assembly algorithms see <a href="https://langmead-lab.org/teaching-materials/">these tutorials by Ben Langmead</a>.</p>
 
-<h3 id="which-assembly-tool-and-approach-to-use">Which assembly tool and approach to use?</h3>
+<h2 id="which-assembly-tool-and-approach-to-use">Which assembly tool and approach to use?</h2>
 
 <p>Here, we will use the assembly tool called Flye to assemble the long reads. This is fast and deals well with the high error rate. Then, we will polish (correct) the assembly using information from the long reads (in their unassembled state), as well as the more accurate short Illumina reads.</p>
 
@@ -1360,7 +1372,7 @@ These coverages are very high but are ok to use with tutorial data. With a typic
 
 <p>For more about the differences between current assembly and polishing tools see <span class="citation"><a href="#Chen2021">Chen <i>et al.</i> 2021</a></span> and <span class="citation"><a href="#McCartney2021">McCartney <i>et al.</i> 2021</a></span>.</p>
 
-<h4 id="assembly-with-flye-workflow">Assembly with Flye workflow</h4>
+<h2 id="assembly-with-flye-workflow">Assembly with Flye workflow</h2>
 
 <p>What it does: Assembles long reads with the tool Flye</p>
 
@@ -1430,7 +1442,7 @@ These coverages are very high but are ok to use with tutorial data. With a typic
   </ol>
 </blockquote>
 
-<h4 id="assembly-results">Assembly results</h4>
+<h2 id="assembly-results">Assembly results</h2>
 
 <p>The assembled contigs are in the “Flye assembly on data X (consensus)” (X is a number that will vary depending on where it sits in your history).<br />
 Open the Quast tabular report to see the assembly statistics:</p>
@@ -1449,11 +1461,11 @@ Open the Quast tabular report to see the assembly statistics:</p>
 
 <p>As this is a subsampled data set, it is not surprising that most of the contigs are unjoined. The joined contigs at the top left are likely to be part of the mitochondrial genome as these reads were probably over-represented in our subsampled data set.</p>
 
-<h4 id="what-about-centromeres-and-telomeres">What about centromeres and telomeres?</h4>
+<h3 id="what-about-centromeres-and-telomeres">What about centromeres and telomeres?</h3>
 
 <p>Some genomic areas such as centromeres, telomeres, and ribosomal DNA arrays, are much harder to assemble. These are long stretches of very similar repeats. With improved sequencing accuracy, length, and technologies (particularly long-range scaffolding), these may soon be much easier to assemble. The latest human genome assembly has a good demonstration of the techniques used for this.   See <span class="citation"><a href="#Nurk2021">Nurk <i>et al.</i> 2021</a></span>, and in particular, Figure 2: Bandage graphs of the human genome chromosomes, with the grey shading showing centromeric regions.</p>
 
-<h4 id="what-about-haplotigs">What about haplotigs?</h4>
+<h3 id="what-about-haplotigs">What about haplotigs?</h3>
 
 <p>Although our sample may be diploid, with pairs of chromosomes, the resulting assembly is often a haploid (or “collapsed”) assembly. This is not the sequence of one of the chromosomes, but a mix of the two.</p>
 
@@ -1699,7 +1711,7 @@ Open the Quast tabular report to see the assembly statistics:</p>
   </ol>
 </blockquote>
 
-<h3 id="assessment-results">Assessment results</h3>
+<h2 id="assessment-results">Assessment results</h2>
 
 <p>The output is a set of Quast and Busco reports.</p>
 
