@@ -166,12 +166,12 @@ The only thing the script cannot currently automate is the installation of the i
 
 
 
-### Installing an entire topic
+## Installing an entire topic
 
 If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/bin/install_topic_requirements.sh)
 
 
-### Installing a subset of components
+## Installing a subset of components
 
 If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours) please see the [Quickstart section](#quickstart) for the individual commands used by the script
 
