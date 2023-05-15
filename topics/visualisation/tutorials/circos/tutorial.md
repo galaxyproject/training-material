@@ -274,7 +274,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 
 > <hands-on-title>Set ideogram configuration</hands-on-title>
 >
-> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} visualizes data in a circular layout with the following parameters:
+> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12) %} visualizes data in a circular layout with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype_withbands.txt`
@@ -1024,7 +1024,7 @@ Let's start by creating the ideogram for our plot:
 
 > <hands-on-title>Set ideogram configuration</hands-on-title>
 >
-> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} with the following parameters:
+> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12) %} with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `debate_karyotype.tab`
@@ -1214,7 +1214,7 @@ We will now create the plot all at once. Normally, this would be a more iterativ
 
 > <hands-on-title>Circos</hands-on-title>
 >
-> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} with the following parameters:
+> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12) %} with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `chrom.tab`

@@ -239,10 +239,6 @@ module TopicFilter
       return nil
     end
 
-    if parts[-1] == 'tools.yaml'
-      return nil
-    end
-
     if parts[4] =~ /tutorial.*\.md/
       material['type'] = 'tutorial'
     elsif parts[4] =~ /slides.*\.html/
@@ -425,7 +421,7 @@ module TopicFilter
     if not site.config.nil? and site.config.has_key? "url"
       domain = "#{site.config['url']}#{site.config['baseurl']}"
     else
-      domain = "/training-material/"
+      domain = "http://localhost:4000/training-material/"
     end
     # Similar as above.
     workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
@@ -454,6 +450,9 @@ module TopicFilter
       }
     end
 
+    # Really only used for tool list install for ephemeris, not general.
+    page_obj['api'] = "#{domain}/api/topics/#{page['topic_name']}/tutorials/#{page['tutorial_name']}/tutorial.json"
+
     # Tool List
     #
     # This is exposed in the GTN API to help admins/devs easily get the tool
@@ -472,6 +471,11 @@ module TopicFilter
       }
     end
     page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
+    page_obj['supported_servers'] = Gtn::Supported.calculate(site.data['public-server-tools'], page_obj['tools'])
+    topic_name_human = site.data[page_obj['topic_name']]['title']
+    admin_install = Gtn::Toolshed.format_admin_install(site.data['toolshed-revisions'], page_obj['tools'], topic_name_human)
+    page_obj['admin_install'] = admin_install
+    page_obj['admin_install_yaml'] = admin_install.to_yaml
 
     page_obj['tours'] = tours.length > 0
     page_obj['video'] = slide_has_video

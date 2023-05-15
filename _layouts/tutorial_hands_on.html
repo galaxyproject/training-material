@@ -154,7 +154,7 @@ We should ONLY be using new_material (if at all possible.)
 
 
             {% if tuto_has_docker and topic.name != 'admin' %}
-                <li class="btn btn-default supporting_material">{% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}</li>
+                <li class="btn btn-default supporting_material">{% include _includes/instance-dropdown.html material=own_material docker=topic.docker_image label=true %}</li>
             {% endif %}
         </ul>
         {% endif %}
@@ -423,12 +423,25 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 
                 {% if page.follow_up_training %}
                 <blockquote class="agenda follow-up">
+                    <div class="box-title">Go Further</div>
                     <strong class="follow-up">{% icon curriculum aria=false %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
                     <ul>
                         {% include _includes/display_extra_training.md extra_trainings=page.follow_up_training %}
                     </ul>
                 </blockquote>
                 {% endif %}
+
+		{% if own_material.tools %}
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl {{ own_material.api }} | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>{{ own_material.admin_install_yaml }}</code></pre></div>
+                </blockquote>
+		{% endif %}
+
+
                 </section>
 
             </div>
