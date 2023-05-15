@@ -770,7 +770,7 @@ Let's now run **Krona** to visualize the communities
 > 2. Inspect the generated file
 {: .hands_on}
 
-As pointed before, the community looks a lot less diverse than with **Kraken**. This is probably due to the reference database, which is potentially not complete enough yet to identify all taxons. Or there are too few reads in the input data to cover enough marker genes. Indeed, no taxon has been identified for JC1A, which contains much less reads than JP4D. However, **Kraken** is also known to have high number of false positive. A benchmark dataset or mock community where the community DNA content is known would be required to correctly judge which tool provides the better taxonomic classification. å
+As pointed before, the community looks a lot less diverse than with **Kraken**. This is probably due to the reference database, which is potentially not complete enough yet to identify all taxons. Or there are too few reads in the input data to cover enough marker genes. Indeed, no taxon has been identified for JC1A, which contains much less reads than JP4D. However, **Kraken** is also known to have high number of false positive. A benchmark dataset or mock community where the community DNA content is known would be required to correctly judge which tool provides the better taxonomic classification.
 
 # Conclusion
 
