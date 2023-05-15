@@ -15,7 +15,7 @@ module Gtn
     def self.calculate(data, tool_list)
       # p "Calculating supported servers for this tool list"
       if data.nil? || data.empty?
-        {
+        return {
           "exact" => [],
           "inexact" => [{"name" => "UseGalaxy.eu", "url" => "https://usegalaxy.eu", "usegalaxy" => true}],
         }

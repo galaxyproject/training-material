@@ -11,6 +11,9 @@ module Gtn
     # +supported+:: A string of the admin install, ready for ephemeris
     def self.format_admin_install(data, tool_list, topic)
       # p "Calculating supported servers for this tool list"
+      if data.nil? or data.empty?
+        return {}
+      end
 
       tools = tool_list.select{|t| data.key? t}.map do |tool|
         tool_info = data[tool]
