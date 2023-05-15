@@ -23,9 +23,10 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Taxonomic Profiling and Visualization of Metagenomic Data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-03 14:33:33 +0000">
+<meta name="DC.date" content="2023-05-12 07:49:13 +0000">
 <meta name="DC.creator" content="Sophia Hampe">
 <meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Paul Zierep">
 
         
         
@@ -65,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-03T14:33:33+00:00",
+  "dateModified": "2023-05-12T07:49:13+00:00",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Taxonomic Profiling and Visualization of Metagenomic Data",
   "interactivityType": "mixed",
@@ -189,6 +190,29 @@
       ],
       "identifier": "https://orcid.org/0000-0001-9852-1987",
       "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/zierep/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/zierep/",
+      "name": "Paul Zierep",
+      "image": "https://avatars.githubusercontent.com/zierep",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2982-388X",
+      "orcid": "https://orcid.org/0000-0003-2982-388X"
     }
   ],
   "about": [
@@ -419,7 +443,7 @@
 	<tr>
 		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
 		<td>
-			<a href="/training-material/hall-of-fame/sophia120199/" class="contributor-badge contributor-sophia120199"><img src="https://avatars.githubusercontent.com/sophia120199?s=27" alt="Avatar">Sophia Hampe</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+			<a href="/training-material/hall-of-fame/sophia120199/" class="contributor-badge contributor-sophia120199"><img src="https://avatars.githubusercontent.com/sophia120199?s=27" alt="Avatar">Sophia Hampe</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a><a href="/training-material/hall-of-fame/zierep/" class="contributor-badge contributor-zierep"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/zierep?s=27" alt="Avatar">Paul Zierep</a>
 		</td>
 	</tr>
 	
@@ -754,7 +778,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 12, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -783,17 +807,17 @@
 <p>Microbiome data can be gathered from different environments such as soil, water or the human gut. The biological interest lies in general in the question how the microbiome present at a specific site influences this environment. To study a microbiome, we need to use indirect methods like metagenomics or metatranscriptomics.</p>
 
 <p><strong>Metagenomic samples</strong> contain DNA from different organisms at a specific site, where the sample was collected. Metagenomic data can be used to find out which organisms coexist in that niche and which genes are present in the different organisms.
-Metatranscriptomic samples include the transcribed gene products, thus RNA, that therefore allow to not only study the presence of genes but additionally their expression in the given environment. The following tutorial will focus on metagenomics data, but the principle is the same for metatranscriptomics data.</p>
+<strong>Metatranscriptomic samples</strong> include the transcribed gene products, thus RNA, that therefore allow to not only study the presence of genes but additionally their expression in the given environment. The following tutorial will focus on metagenomics data, but the principle is the same for metatranscriptomics data.</p>
 
 <p>The investigation of microorganisms present at a specific site and their relative abundance is also called <strong>“microbial community profiling”</strong>.
-Basic for this is to find out which microorganisms are present in the sample. This can be achieved for all known microbes, where the DNA sequence specific for a certain species is known.</p>
+The main objective is to identify the microorganisms that are present within the given sample. This can be achieved for all known microbes, where the DNA sequence specific for a certain species is known.</p>
 
-<p>For that we try to <strong>identify the taxon</strong> to which each individual reads belong.</p>
+<p>For that we try to <strong>identify the taxon</strong> to which each individual read belongs.</p>
 
 <!--SNIPPET-->
 <blockquote class="details">   <div class="box-title details-title" id="details-what-is-taxonomy"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-taxonomy" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: What is Taxonomy?<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Taxonomy is the method used to naming, defining (circumscribing) and classifying groups of biological organisms based on shared characteristics such as morphological characteristics, phylogenetic characteristics, DNA data, etc. It is founded on the concept that the similarities descend from a common evolutionary ancestor.</p>   <p>Defined groups of organisms are known as <strong>taxa</strong>. Taxa are given a taxonomic rank and are aggregated into super groups of higher rank to create a taxonomic hierarchy. The taxonomic hierarchy includes eight levels: <strong>Domain, Kingdom, Phylum, Class, Order, Family, Genus and Species.</strong></p>   <p><img src="/training-material/topics/metagenomics/faqs/images/taxonomy.png" alt="Example of taxonomy. It starts, top to bottom, with Kingdom &quot;Animalia&quot;, Phylum &quot;Chordata&quot;, Class &quot;Mammalia&quot;, and Order &quot;Carnivora&quot;. Then it splits in 3. On the left, Family &quot;Felidae&quot;, with 2 genus &quot;Felis&quot; and &quot;Panthera&quot; and below 3 species &quot;F. catus&quot; and &quot;F. pardalis&quot; below &quot;Felis&quot;, &quot;P. pardus&quot; below &quot;Panthera&quot;. In the middle, Family &quot;Canidae&quot;, genus &quot;Canis&quot; and 2 species &quot;C. familiaris&quot; and &quot;C. lupus&quot;. On the right, Family &quot;Ursidae&quot;, Genus &quot;Ursus&quot; and 2 species &quot;U. arctos&quot; and &quot;U. horribilus&quot;. Below each species is a illustration of the species" /></p>   <p>The classification system begins with <strong>3 domains</strong> that encompass all living and extinct forms of life</p>   <ul>   <li>The <strong>Bacteria</strong> and <strong>Archae</strong> are mostly microscopic, but quite widespread.</li>   <li>Domain <strong>Eukarya</strong> contains more complex organisms</li> </ul>   <p>When new species are found, they are assigned into taxa in the taxonomic hierarchy. For example for the cat:</p>   <table>   <thead>     <tr>       <th>Level</th>       <th>Classification</th>     </tr>   </thead>   <tbody>     <tr>       <td>Domain</td>       <td>Eukaryota</td>     </tr>     <tr>       <td>Kingdom</td>       <td>Animalia</td>     </tr>     <tr>       <td>Phylum</td>       <td>Chordata</td>     </tr>     <tr>       <td>Class</td>       <td>Mammalia</td>     </tr>     <tr>       <td>Order</td>       <td>Carnivora</td>     </tr>     <tr>       <td>Family</td>       <td>Felidae</td>     </tr>     <tr>       <td>Genus</td>       <td><em>Felis</em></td>     </tr>     <tr>       <td>Species</td>       <td><em>F. catus</em></td>     </tr>   </tbody> </table>   <p>From this classification, one can generate a tree of life, also known as a phylogenetic tree. It is a rooted tree that describes the relationship of all life on earth. At the root sits the “last universal common ancestor” and the three main branches (in taxonomy also called domains) are bacteria, archaea and eukaryotes. Most important for this is the idea that all life on earth is derived from a common ancestor and therefore when comparing two species, you will -sooner or later- find a common ancestor for all of them.</p>   <p>Let’s explore taxonomy in the Tree of Life, using <a href="https://lifemap.univ-lyon1.fr/">Lifemap</a></p>   <iframe id="Lifemap" src="https://lifemap.univ-lyon1.fr/explore.html" frameborder="0" width="100%" height="600px"></iframe> </blockquote>
 
-<p>When we talk about metagenomic data here, what we start with is sequences derived from DNA fragments that could be isolated from the sample of interest. Ideally, from all microbes present in the sample, we would also find DNA. The underlying idea of taxonomic assignment is to compare the DNA sequences found in the sample (reads) to DNA sequences of a database. When a read matches a database DNA sequence of a known microbe, we can derive a list with microbes present in the sample.</p>
+<p>For metagenomic data analysis we start with sequences derived from DNA fragments that are isolated from the sample of interest. Ideally, the sequences from all microbes in the sample are present. The underlying idea of taxonomic assignment is to compare the DNA sequences found in the sample (reads) to DNA sequences of a database. When a read matches a database DNA sequence of a known microbe, we can derive a list with microbes present in the sample.</p>
 
 <p>When talking about taxonomic assignment or taxonomic classification, most of the time we actually talk about two methods, that in practice are often used interchangeably:</p>
 <ul>
@@ -801,13 +825,16 @@ Basic for this is to find out which microorganisms are present in the sample. Th
   <li><strong>taxonomic profiling</strong>: classification of individual reads to reference taxa to extract the relative abundances of the different taxa</li>
 </ul>
 
+<p>The reads can be obtained from <strong>amplicon sequencing</strong>  (e.g. 16S, 18S, ITS), where only specific gene or gene fragments are targeted (using specific primers) or <strong>shotgun metagenomic sequencing</strong>, where all the accessible DNA of a mixed community is amplified (using random primers). 
+This tutorial focuses on reads obtained from shotgun metagenomic sequencing.</p>
+
 <h2 id="taxonomic-profiling">Taxonomic profiling</h2>
 
 <p>Tools for taxonomic profiling can be divided into three groups. Nevertheless, all of them require a pre-computed database based on previously sequenced microbial DNA or protein sequences.</p>
 <ol>
-  <li><strong>DNA-to-DNA</strong>: comparison of sequencing reads with genomic databases of DNA sequences, with tools like Kraken (<span class="citation"><a href="#Wood2014">Wood and Salzberg 2014</a></span>)</li>
-  <li><strong>DNA-to-Protein</strong> : compare sequencing reads with protein databases (more computationally intensive because of analysis of all six frames of potential DNA-to amino acid translation, with tools like DIAMOND</li>
-  <li><strong>Marker based</strong>: search for marker genes (e.g. 16S rRNA sequence) in reads, which is quick, but introduces bias, with tools like MetaPhlAn (<span class="citation"><a href="#blanco2023extending">Blanco-Mı́guez Aitor <i>et al.</i> 2023</a></span>)</li>
+  <li><strong>DNA-to-DNA</strong>: comparison of sequencing reads with genomic databases of DNA sequences with tools like Kraken (<span class="citation"><a href="#Wood2014">Wood and Salzberg 2014</a></span>)</li>
+  <li><strong>DNA-to-Protein</strong> : comparison of sequencing reads with protein databases (more computationally intensive because all six frames of potential DNA-to amino acid translations need to be analyzed) with tools like DIAMOND)</li>
+  <li><strong>Marker based</strong>: searching for marker genes (e.g. 16S rRNA sequence) in reads, which is quick, but introduces bias, with tools like MetaPhlAn (<span class="citation"><a href="#blanco2023extending">Blanco-Mı́guez Aitor <i>et al.</i> 2023</a></span>)</li>
 </ol>
 
 <p>The comparison of reads to database sequences can be done in different ways, leading to three different types of taxonomic assignment:</p>
@@ -826,7 +853,7 @@ Basic for this is to find out which microorganisms are present in the sample. Th
   <li>
     <p><strong>k-mer based</strong> approach</p>
 
-    <p>Databases as well as the samples DNA are broken into strings of length \(k\) for comparison. From all the genomes in the database, where a specific k-mer is found, a lowest common ancestor (LCA) tree is derived and the abundance of k-mers within the tree is counted. This is the basis for a root-to-leaf path calculation, where the path with the highest score is used for classification of the sample. By counting the abundance of k-mers, also an estimation of relative abundance of taxa is possible. The major advantage of k-mer based analysis is the low compute cost. Major disadvantages are the low detection accuracy, that the unclassified percentage is unknown and that there is no gene detection, no SNVs detection and no genomic comparison possible. An example for a k-mer based analysis tool is Kraken, which will be used in this tutorial</p>
+    <p>Databases as well as the samples DNA are broken into strings of length \(k\) for comparison. From all the genomes in the database, where a specific k-mer is found, a lowest common ancestor (LCA) tree is derived and the abundance of k-mers within the tree is counted. This is the basis for a root-to-leaf path calculation, where the path with the highest score is used for classification of the sample. By counting the abundance of k-mers, also an estimation of relative abundance of taxa is possible. The major advantage of k-mer based analysis is the low compute cost. Major disadvantages are the low detection accuracy, that the unclassified percentage is unknown and that there is no gene detection, no SNVs detection and no genomic comparison possible. An example for a k-mer based analysis tool is Kraken, which will be used in this tutorial.</p>
   </li>
 </ul>
 
@@ -845,7 +872,7 @@ Basic for this is to find out which microorganisms are present in the sample. Th
 <p>The datasets differ in size, but according to the authors this doesn’t matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits.</p>
 
 <p>The datafiles are named according to the first four characters of the filenames.
-It is a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. Additionally, the reads have been trimmed using <strong>cutadapt</strong> as explained in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality control tutorial</a></p>
+It is a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. Additionally, the reads have been trimmed using <strong>cutadapt</strong> as explained in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality control tutorial</a>.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -895,7 +922,7 @@ It is a collection of paired-end data with R1 being the forward reads and R2 bei
 
 </blockquote>
 
-<p>We need now to import the data</p>
+<p>Now, we need to import the data</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-import-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import datasets</div>
@@ -1407,7 +1434,7 @@ https://zenodo.org/record/7871630/files/JP4D_R2.fastq.gz
     <li>
       <p>Click on <code class="language-plaintext highlighter-rouge">Domain</code> green button</p>
 
-      <p><img src="./images/pavian-kraken-sankey-JC1A.png" alt="Screenshot of a table with 4 rows (Bacteria, Eukaryota, Archaea, Viruses) and / columns (Name, Rank, TID, Max, JP4A, JC1A, Lineage). " loading="lazy" /></p>
+      <p><img src="./images/pavian-kraken-comparison-domain.png" alt="Screenshot of a table with 4 rows (Bacteria, Eukaryota, Archaea, Viruses) and / columns (Name, Rank, TID, Max, JP4A, JC1A, Lineage). " loading="lazy" /></p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1599,7 +1626,7 @@ When generating a metadata file for your own data, you can take this as an examp
   <p>The benchmarking papers present different methods for comparing the available tools:</p>
   <ul>
     <li>The <strong>CAMI challenge</strong> is based on results of different labs that each used the CAMI dataset to perform their analysis on and send it back to the authors.</li>
-    <li><span class="citation"><a href="#Ye.2019">Ye <i>et al.</i> 2019</a></span> performed all the analysis themselves</li>
+    <li><span class="citation"><a href="#Ye.2019">Ye <i>et al.</i> 2019</a></span> performed all the analysis themselves.</li>
   </ul>
 
   <p>Additionally, the datasets used for both benchmarking approaches differ:</p>
@@ -1610,8 +1637,8 @@ When generating a metadata file for your own data, you can take this as an examp
 
   <p>When benchmarking different classification tools, several metrics are used to compare their performance:</p>
   <ol>
-    <li><strong>Precision</strong>: proportion of true positive species identified in the sample divided by number of total species identified by the method</li>
-    <li><strong>Recall</strong>: proportion of true positive species divided by the number of distinct species actually in the sample</li>
+    <li><strong>Precision</strong>: proportion of true positive species identified in the sample divided by number of total species identified by the method.</li>
+    <li><strong>Recall</strong>: proportion of true positive species divided by the number of distinct species actually in the sample.</li>
     <li>Precision-recall curve: each point represents the precision and recall scores at a specific abundance threshold, the <strong>area under the precision-recall curve (AUPR)</strong></li>
     <li><strong>L2 distance</strong>: representation of abundance profiles → how accurately the abundance of each species or genera in the resulting classification reflects the abundance of each species in the original biological sample (“ground truth”)</li>
   </ol>
@@ -1633,9 +1660,9 @@ When generating a metadata file for your own data, you can take this as an examp
   <ul>
     <li>Most profilers only perform well until the family level</li>
     <li>Drastic decrease in performance between family and genus level, while little change between order and family level</li>
-    <li>poorer performance of all profilers on CAMI datasets compared to International Metagenomics and Microbiome Standards Alliance (IMMSA)</li>
+    <li>Poorer performance of all profilers on CAMI datasets compared to International Metagenomics and Microbiome Standards Alliance (IMMSA)</li>
     <li>Fidelity of abundance estimates decreases notably when viruses and plasmids were present</li>
-    <li>high numbers of false positive calls at low abundance</li>
+    <li>High numbers of false positive calls at low abundance</li>
     <li>Taxonomic profilers vs profiles from taxonomic binning:
 Precision and recall of the taxonomic binners were comparable to that of the profilers;
 abundance estimation at higher ranks was more problematic for the binners</li>
@@ -1843,7 +1870,7 @@ abundance estimation at higher ranks was more problematic for the binners</li>
     </ol>
   </blockquote>
 
-  <p>As pointed before, the community looks a lot less diverse than with <strong>Kraken</strong>. It is probably due to the reference database complete enough yet to identify all taxons, or not enough reads in the input data to have marker genes in them. Indeed, no taxon has been identified for JC1A, which contains much less reads than JP4D. <strong>Kraken</strong> is also known to have high number of false positive.</p>
+  <p>As pointed before, the community looks a lot less diverse than with <strong>Kraken</strong>. This is probably due to the reference database, which is potentially not complete enough yet to identify all taxons. Or there are too few reads in the input data to cover enough marker genes. Indeed, no taxon has been identified for JC1A, which contains much less reads than JP4D. However, <strong>Kraken</strong> is also known to have high number of false positive. A benchmark dataset or mock community where the community DNA content is known would be required to correctly judge which tool provides the better taxonomic classification.</p>
 
 </blockquote>
 
@@ -1920,7 +1947,7 @@ abundance estimation at higher ranks was more problematic for the binners</li>
                 <p>
                     <ol>
                         <li id="citation-text">
-                            Sophia Hampe, Bérénice Batut,  <b>Taxonomic Profiling and Visualization of Metagenomic Data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/taxonomic-profiling/tutorial.html">https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/taxonomic-profiling/tutorial.html</a> Online; accessed TODAY
+                            Sophia Hampe, Bérénice Batut, Paul Zierep,  <b>Taxonomic Profiling and Visualization of Metagenomic Data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/taxonomic-profiling/tutorial.html">https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/taxonomic-profiling/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1943,7 +1970,7 @@ abundance estimation at higher ranks was more problematic for the binners</li>
 
 
 <code id="citation-code">@misc{metagenomics-taxonomic-profiling,
-author = "Sophia Hampe and Bérénice Batut",
+author = "Sophia Hampe and Bérénice Batut and Paul Zierep",
 title = "Taxonomic Profiling and Visualization of Metagenomic Data (Galaxy Training Materials)",
 year = "",
 month = "",
