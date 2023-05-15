@@ -63,7 +63,7 @@ Specifically, gravity/gunicorn and job handler logs.
 # Database migration
 
 .reduce90[
-```
+```console
 galaxy.model.migrations.OutdatedDatabaseError: Your galaxy database has version e0e3bb173ee6, but
 this code expects version caa7742f7bca. To upgrade your database, run `manage_db.sh upgrade`. For
 more options (e.g. upgrading/downgrading to a specific version) see instructions in that file.
@@ -97,7 +97,7 @@ class: left
 # Stuck in a restart loop
 
 .reduce90[
-```
+```console
 Executing: PYTHONPATH=lib GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml VIRTUAL_ENV=/srv/galaxy/venv
   /srv/galaxy/venv/bin/gunicorn 'galaxy.webapps.galaxy.fast_factory:factory()' --timeout 300 ...
 DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/galaxy/server/lib, ...
@@ -333,6 +333,7 @@ What happens: job fails (!!?!?)
 Solutions:
 - If the wrapped tool uses proper exit codes, use `<tool profile="16.04">` or later to ignore stderr
 - Using current tool development best practices ensures this is the case
+- [List of tool profiles](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-profile)
 
 ---
 class: left
@@ -700,11 +701,11 @@ In this case, `job_handler_0` is not `handler_0` or `handler_1` (probably due to
 
 .left[Limit to specific services, e.g.:]
 
-`galaxyctl` | `systemctl`
+`galaxyctl` | `journalctl`
 --- | ---
-`galaxyctl follow gunicorn` | `systemctl -fu galaxy-gunicorn`
-`galaxyctl follow handler` | `systemctl -fu 'galaxy-handler*'`
-`galaxyctl follow tusd` | `systemctl -fu 'galaxy-tusd'`
+`galaxyctl follow gunicorn` | `journalctl -fu galaxy-gunicorn`
+`galaxyctl follow handler` | `journalctl -fu 'galaxy-handler*'`
+`galaxyctl follow tusd` | `journalctl -fu 'galaxy-tusd'`
 
 ---
 
@@ -856,20 +857,6 @@ Increase `shared_buffers`. 2GB on Main (16GB of memory on VM). Better: [Use PGTu
 # error: [Errno 32] Broken pipe
 
 This error is not indicative of any kind of failure. It just means that the client closed a connection before the server finished sending a response.
-
----
-
-# Installation failures - Python dependencies
-
-```
-psutil/_psutil_linux.c:12:20: fatal error: Python.h: No such file or directory
-compilation terminated.
-error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
-```
-
-Find `Python.h` on [packages.ubuntu.com](http://packages.ubuntu.com/) and install that package (hint: development package for Python 3)
-
-But also: a precompiled wheel for a Galaxy dependency is not available for your platform, please report.
 
 ---
 

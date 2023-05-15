@@ -9,7 +9,7 @@ questions:
 objectives:
 - Explain what taxonomic assignment is
 - Explain how taxonomic assignment works
-- Apply Kraken to assign taxonomic labels
+- Apply Kraken and MetaPhlAn to assign taxonomic labels
 - Apply Krona and Pavian to visualize results of assignment and understand the output
 - Identify taxonomic classification tool that fits best depending on their data
 level: Introductory
@@ -23,6 +23,7 @@ contributions:
    authorship:
     - sophia120199
     - bebatut
+    - zierep
 tags:
 - metagenomics
 - taxonomic profiling
@@ -35,27 +36,30 @@ The term **"microbiome"** describes "a characteristic microbial community occupy
 Microbiome data can be gathered from different environments such as soil, water or the human gut. The biological interest lies in general in the question how the microbiome present at a specific site influences this environment. To study a microbiome, we need to use indirect methods like metagenomics or metatranscriptomics.
 
 **Metagenomic samples** contain DNA from different organisms at a specific site, where the sample was collected. Metagenomic data can be used to find out which organisms coexist in that niche and which genes are present in the different organisms.
-Metatranscriptomic samples include the transcribed gene products, thus RNA, that therefore allow to not only study the presence of genes but additionally their expression in the given environment. The following tutorial will focus on metagenomics data, but the principle is the same for metatranscriptomics data.
+**Metatranscriptomic samples** include the transcribed gene products, thus RNA, that therefore allow to not only study the presence of genes but additionally their expression in the given environment. The following tutorial will focus on metagenomics data, but the principle is the same for metatranscriptomics data.
 
 The investigation of microorganisms present at a specific site and their relative abundance is also called **"microbial community profiling"**.
-Basic for this is to find out which microorganisms are present in the sample. This can be achieved for all known microbes, where the DNA sequence specific for a certain species is known.
+The main objective is to identify the microorganisms that are present within the given sample. This can be achieved for all known microbes, where the DNA sequence specific for a certain species is known.
 
-For that we try to **identify the taxon** to which each individual reads belong.
+For that we try to **identify the taxon** to which each individual read belongs.
 
 {% snippet topics/metagenomics/faqs/taxon.md %}
 
-When we talk about metagenomic data here, what we start with is sequences derived from DNA fragments that could be isolated from the sample of interest. Ideally, from all microbes present in the sample, we would also find DNA. The underlying idea of taxonomic assignment is to compare the DNA sequences found in the sample (reads) to DNA sequences of a database. When a read matches a database DNA sequence of a known microbe, we can derive a list with microbes present in the sample.
+For metagenomic data analysis we start with sequences derived from DNA fragments that are isolated from the sample of interest. Ideally, the sequences from all microbes in the sample are present. The underlying idea of taxonomic assignment is to compare the DNA sequences found in the sample (reads) to DNA sequences of a database. When a read matches a database DNA sequence of a known microbe, we can derive a list with microbes present in the sample.
 
 When talking about taxonomic assignment or taxonomic classification, most of the time we actually talk about two methods, that in practice are often used interchangeably:
 - **taxonomic binning**: the clustering of individual sequence reads based on similarities criteria and assignation of clusters to reference taxa
 - **taxonomic profiling**: classification of individual reads to reference taxa to extract the relative abundances of the different taxa
 
+The reads can be obtained from **amplicon sequencing**  (e.g. 16S, 18S, ITS), where only specific gene or gene fragments are targeted (using specific primers) or **shotgun metagenomic sequencing**, where all the accessible DNA of a mixed community is amplified (using random primers). 
+This tutorial focuses on reads obtained from shotgun metagenomic sequencing. 
+
 ## Taxonomic profiling
 
 Tools for taxonomic profiling can be divided into three groups. Nevertheless, all of them require a pre-computed database based on previously sequenced microbial DNA or protein sequences.
-1. **DNA-to-DNA**: comparison of sequencing reads with genomic databases of DNA sequences, with tools like Kraken ({% cite Wood2014 %})
-2. **DNA-to-Protein** : compare sequencing reads with protein databases (more computationally intensive because of analysis of all six frames of potential DNA-to amino acid translation, with tools like DIAMOND
-3. **Marker based**: search for marker genes (e.g. 16S rRNA sequence) in reads, which is quick, but introduces bias, with tools like MetaPhlAn ({% cite blanco2023extending %})
+1. **DNA-to-DNA**: comparison of sequencing reads with genomic databases of DNA sequences with tools like Kraken ({% cite Wood2014 %})
+2. **DNA-to-Protein** : comparison of sequencing reads with protein databases (more computationally intensive because all six frames of potential DNA-to amino acid translations need to be analyzed) with tools like DIAMOND)
+3. **Marker based**: searching for marker genes (e.g. 16S rRNA sequence) in reads, which is quick, but introduces bias, with tools like MetaPhlAn ({% cite blanco2023extending %})
 
 The comparison of reads to database sequences can be done in different ways, leading to three different types of taxonomic assignment:
 
@@ -69,7 +73,7 @@ The comparison of reads to database sequences can be done in different ways, lea
 
 - **k-mer based** approach
 
-   Databases as well as the samples DNA are broken into strings of length $$k$$ for comparison. From all the genomes in the database, where a specific k-mer is found, a lowest common ancestor (LCA) tree is derived and the abundance of k-mers within the tree is counted. This is the basis for a root-to-leaf path calculation, where the path with the highest score is used for classification of the sample. By counting the abundance of k-mers, also an estimation of relative abundance of taxa is possible. The major advantage of k-mer based analysis is the low compute cost. Major disadvantages are the low detection accuracy, that the unclassified percentage is unknown and that there is no gene detection, no SNVs detection and no genomic comparison possible. An example for a k-mer based analysis tool is Kraken, which will be used in this tutorial
+   Databases as well as the samples DNA are broken into strings of length $$k$$ for comparison. From all the genomes in the database, where a specific k-mer is found, a lowest common ancestor (LCA) tree is derived and the abundance of k-mers within the tree is counted. This is the basis for a root-to-leaf path calculation, where the path with the highest score is used for classification of the sample. By counting the abundance of k-mers, also an estimation of relative abundance of taxa is possible. The major advantage of k-mer based analysis is the low compute cost. Major disadvantages are the low detection accuracy, that the unclassified percentage is unknown and that there is no gene detection, no SNVs detection and no genomic comparison possible. An example for a k-mer based analysis tool is Kraken, which will be used in this tutorial.
 
 After this theoretical introduction, let's now get hands on analyzing an actual dataset!
 
@@ -84,7 +88,7 @@ Here we will use 2 datasets:
 The datasets differ in size, but according to the authors this doesn't matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits.
 
 The datafiles are named according to the first four characters of the filenames.
-It is a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. Additionally, the reads have been trimmed using __cutadapt__ as explained in the [Quality control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+It is a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. Additionally, the reads have been trimmed using __cutadapt__ as explained in the [Quality control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 > <agenda-title></agenda-title>
 >
@@ -111,29 +115,29 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 >
 {: .hands_on}
 
-We need now to import the data
+Now, we need to import the data
 
 > <hands-on-title>Import datasets</hands-on-title>
 >
 > 1. Import the following samples via link from [Zenodo]({{ page.zenodo_link }}) or Galaxy shared data libraries:
 >
 >    ```text
->    {{ page.zenodo_link }}/files/JC1A_R1.fastq.gz
->    {{ page.zenodo_link }}/files/JC1A_R2.fastq.gz
->    {{ page.zenodo_link }}/files/JP4D_R1.fastq.gz
->    {{ page.zenodo_link }}/files/JP4D_R2.fastq.gz
+>    {{ page.zenodo_link }}/files/JC1A_R1.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/JC1A_R2.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/JP4D_R1.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/JP4D_R2.fastqsanger.gz
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 2. 3. Create a paired collection.
+> 2. Create a paired collection.
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
 {: .hands_on}
 
-# k-mer based taxonomic assignment of metagenomic data
+# k-mer based taxonomic assignment with Kraken2
 
 Our input data is the DNA reads of microbes present at Cuatro Ciénegas.
 
@@ -141,17 +145,24 @@ To find out which microorganisms are present, we will compare the reads of the s
 
 {% snippet topics/metagenomics/faqs/kraken.md %}
 
-For this tutorial, we will use the Standard (archaea, bacteria, viral, plasmid, human, UniVec_Core) plus protozoa & fungi database, which means:
+For this tutorial, we will use the PlusPF database which contains the Standard (archaea, bacteria, viral, plasmid, human, UniVec_Core), protozoa and fungi data.
 
-- archaea: RefSeq complete archaeal genomes/proteins
-- bacteria: RefSeq complete bacterial genomes/proteins
-- plasmid: RefSeq plasmid nucleotide/protein sequences
-- viral: RefSeq complete viral genomes/proteins
-- human: GRCh38 human genome/proteins
-- fungi: RefSeq complete fungal genomes/proteins
-- plant: RefSeq complete plant genomes/proteins
-- protozoa: RefSeq complete protozoan genomes/proteins
-- UniVec_Core: A subset of UniVec, NCBI-supplied database of vector, adapter, linker, and primer sequences that may be contaminating sequencing projects and/or assemblies, chosen to minimize false positive hits to the vector database
+> <details-title>What is in the PlusPF database</details-title>
+> 
+> Database | Origin
+> --- | ---
+> Archaea | RefSeq complete archaeal genomes/proteins
+> Bacteria | RefSeq complete bacterial genomes/proteins
+> Plasmid | RefSeq plasmid nucleotide/protein sequences
+> Viral | RefSeq complete viral genomes/proteins
+> Human | GRCh38 human genome/proteins
+> Fungi | RefSeq complete fungal genomes/proteins
+> Plant | RefSeq complete plant genomes/proteins
+> Protozoa | RefSeq complete protozoan genomes/proteins
+> UniVec_Core | A subset of UniVec, NCBI-supplied database of vector, adapter, linker, and primer sequences that may be contaminating sequencing projects and/or assemblies, chosen to minimize false positive hits to the vector database
+>
+> The databases have been prepared for Kraken2 by Ben Leagmead and [details can found on his page](https://benlangmead.github.io/aws-indexes/k2).
+{: .details}
 
 > <hands-on-title>Assign taxonomic labels with Kraken2</hands-on-title>
 >
@@ -276,10 +287,11 @@ A "simple and worthwile addition to Kraken for better abundance estimates" ({% c
 >
 > 1. {% tool [Estimate Abundance at Taxonomic Level](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1) %} with the following parameters:
 >     - {% icon param-collection %} *"Kraken report file"*: **Report** output of **Kraken**
->     - *"Select a kmer distribution"*: `PlusPF (2021-05-17)`
+>     - *"Select a kmer distribution"*: `PlusPF`, same as for Kraken
 >
 >        It is important to choose the same database that you also chose for Kraken2
 >
+>     - *"Level"*: `Species`
 >     - *"Produce Kraken-Style Bracken report"*: `yes`
 >
 {: .hands_on}
@@ -287,7 +299,7 @@ A "simple and worthwile addition to Kraken for better abundance estimates" ({% c
 # Visualization of taxonomic assignment
 
 Once we have assigned the corresponding taxa to each sequence, the next step is to properly visualize the data. There are several tools for that:
-- __Krona pie chart__ tool ({% cite Ondov.2011 %})
+- __Krona__ ({% cite Ondov.2011 %})
 - __Phinch__ ({% cite Bik.2014 %})
 - __Pavian__ ({% cite Breitwieser.2020 %})
 
@@ -471,7 +483,7 @@ We would like now to compare both samples.
 > 2. Select `%`  and unclick `Reads` in the blue area drop-down on the top
 > 3. Click on `Domain` green button
 >
->    ![Screenshot of a table with 4 rows (Bacteria, Eukaryota, Archaea, Viruses) and / columns (Name, Rank, TID, Max, JP4A, JC1A, Lineage)](./images/pavian-kraken-sankey-JC1A.png)
+>    ![Screenshot of a table with 4 rows (Bacteria, Eukaryota, Archaea, Viruses) and / columns (Name, Rank, TID, Max, JP4A, JC1A, Lineage)](./images/pavian-kraken-comparison-domain.png)
 >
 >    > <question-title></question-title>
 >    >
@@ -611,15 +623,15 @@ When it comes to taxonomic assignment while analyzing metagenomic data, **Kraken
 >
 > The benchmarking papers present different methods for comparing the available tools:
 > - The **CAMI challenge** is based on results of different labs that each used the CAMI dataset to perform their analysis on and send it back to the authors.
-> - {% cite Ye.2019 %} performed all the analysis themselves
+> - {% cite Ye.2019 %} performed all the analysis themselves.
 >
 > Additionally, the datasets used for both benchmarking approaches differ:
 > - **CAMI**: only ~30%-40% of reads are simulated from known taxa while the rest of the reads are from novel taxa, plasmids or simulated evolved strains.
 > - {% cite Ye.2019 %} used International Metagenomics and Microbiome Standards Alliance (IMMSA) datasets, wherein the taxa are described better.
 >
 > When benchmarking different classification tools, several metrics are used to compare their performance:
-> 1. **Precision**: proportion of true positive species identified in the sample divided by number of total species identified by the method
-> 2. **Recall**: proportion of true positive species divided by the number of distinct species actually in the sample
+> 1. **Precision**: proportion of true positive species identified in the sample divided by number of total species identified by the method.
+> 2. **Recall**: proportion of true positive species divided by the number of distinct species actually in the sample.
 > 3. Precision-recall curve: each point represents the precision and recall scores at a specific abundance threshold, the **area under the precision-recall curve (AUPR)**
 > 4. **L2 distance**: representation of abundance profiles → how accurately the abundance of each species or genera in the resulting classification reflects the abundance of each species in the original biological sample (“ground truth”)
 >
@@ -636,9 +648,9 @@ When it comes to taxonomic assignment while analyzing metagenomic data, **Kraken
 > However, some characteristics are common to all profilers:
 > - Most profilers only perform well until the family level
 > - Drastic decrease in performance between family and genus level, while little change between order and family level
-> - poorer performance of all profilers on CAMI datasets compared to International Metagenomics and Microbiome Standards Alliance (IMMSA)
+> - Poorer performance of all profilers on CAMI datasets compared to International Metagenomics and Microbiome Standards Alliance (IMMSA)
 > - Fidelity of abundance estimates decreases notably when viruses and plasmids were present
-> - high numbers of false positive calls at low abundance
+> - High numbers of false positive calls at low abundance
 > - Taxonomic profilers vs profiles from taxonomic binning:
 > Precision and recall of the taxonomic binners were comparable to that of the profilers;
 > abundance estimation at higher ranks was more problematic for the binners
@@ -653,116 +665,113 @@ FOCUS |  | No | Fast, most memory efficient |
 Bracken | k-mer | Yes | Fast |
 Kraken | k-mer | Yes | Fastest; most memory efficient | Good performance metrics; very fast on large numbers of samples; allow custom databases when high amounts of memory (>100 Gb) are available
 
-> <details-title>Using a marker gene approach with MetaPhlAn</details-title>
+# Marker gene based approach using MetaPhlAn 
+
+In this tutorial, we follow second approach using **MetaPhlAn** ({% cite truong2015metaphlan2 %}). MetaPhlAn is a computational tool for profiling the composition of microbial communities (Bacteria, Archaea and Eukaryotes) from metagenomic shotgun sequencing data (i.e. not 16S) at species-level. MetaPhlAn 4 relies on ~5.1M unique clade-specific marker genes identified from ~1M microbial genomes (~236,600 references (bacterial, archeal, viral and eukaryotic) and 771,500 metagenomic assembled genomes) spanning 26,970 species-level genome bins.
+
+It allows:
+- unambiguous taxonomic assignments;
+- accurate estimation of organismal relative abundance;
+- species-level resolution for bacteria, archaea, eukaryotes and viruses;
+- strain identification and tracking
+- orders of magnitude speedups compared to existing methods.
+- microbiota strain-level population genomics
+- MetaPhlAn clade-abundance estimation
+
+The basic usage of MetaPhlAn consists in the identification of the clades (from phyla to species and strains in particular cases) present in the microbiota obtained from a microbiome sample and their relative abundance.
+
+**MetaPhlAn** in Galaxy can not directly take as input a paired collection but expect 2 collections: 1 with forward data and 1 with reverse. Before launching **MetaPhlAn**, we need to split our input paired collection.
+
+> <hands-on-title>Assign taxonomic labels with MetaPhlAn</hands-on-title>
 >
-> In this tutorial, we follow second approach using **MetaPhlAn** ({% cite truong2015metaphlan2 %}). MetaPhlAn is a computational tool for profiling the composition of microbial communities (Bacteria, Archaea and Eukaryotes) from metagenomic shotgun sequencing data (i.e. not 16S) at species-level. MetaPhlAn 4 relies on ~5.1M unique clade-specific marker genes identified from ~1M microbial genomes (~236,600 references (bacterial, archeal, viral and eukaryotic) and 771,500 metagenomic assembled genomes) spanning 26,970 species-level genome bins.
-> 
-> It allows:
-> - unambiguous taxonomic assignments;
-> - accurate estimation of organismal relative abundance;
-> - species-level resolution for bacteria, archaea, eukaryotes and viruses;
-> - strain identification and tracking
-> - orders of magnitude speedups compared to existing methods.
-> - microbiota strain-level population genomics
-> - MetaPhlAn clade-abundance estimation
-> 
-> The basic usage of MetaPhlAn consists in the identification of the clades (from phyla to species and strains in particular cases) present in the microbiota obtained from a microbiome sample and their relative abundance.
-> 
-> **MetaPhlAn** in Galaxy can not directly take as input a paired collection but expect 2 collections: 1 with forward data and 1 with reverse. Before launching **MetaPhlAn**, we need to split our input paired collection.
-> 
-> > <hands-on-title>Assign taxonomic labels with MetaPhlAn</hands-on-title>
-> >
-> > 1. {% tool [Unzip collection](__UNZIP_COLLECTION__) %} with the following parameters:
-> >    - {% icon param-collection %} *"Paired input to unzip"*: Input paired collection
-> >
-> > 2. {% tool [MetaPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy1) %} with the following parameters:
-> >    - In *"Inputs"*
-> >      - *"Input(s)"*: `Fasta/FastQ file(s) with microbiota reads`
-> >        - *"Fasta/FastQ file(s) with microbiota reads"*: `Paired-end files`
-> >          - {% icon param-collection %} *"Forward paired-end Fasta/FastQ file with microbiota reads"*: output of **Unzip collection** with **forward** in the name
-> >          - {% icon param-collection %} *"Reverse paired-end Fasta/FastQ file with microbiota reads"*: output of **Unzip collection** with **reverse** in the name
-> >    - In *"Outputs"*:
-> >        - *"Output for Krona?"*: `Yes`
-> {: .hands_on}
+> 1. {% tool [Unzip collection](__UNZIP_COLLECTION__) %} with the following parameters:
+>    - {% icon param-collection %} *"Paired input to unzip"*: Input paired collection
 >
->
-> 5 files and a collection are generated by **MetaPhlAn** {% icon tool %}:
->
-> - `Predicted taxon relative abundances`: tabular files with the **community profile**
+> 2. {% tool [MetaPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy1) %} with the following parameters:
+>    - In *"Inputs"*
+>      - *"Input(s)"*: `Fasta/FastQ file(s) with microbiota reads`
+>        - *"Fasta/FastQ file(s) with microbiota reads"*: `Paired-end files`
+>          - {% icon param-collection %} *"Forward paired-end Fasta/FastQ file with microbiota reads"*: output of **Unzip collection** with **forward** in the name
+>          - {% icon param-collection %} *"Reverse paired-end Fasta/FastQ file with microbiota reads"*: output of **Unzip collection** with **reverse** in the name
+>    - In *"Outputs"*:
+>        - *"Output for Krona?"*: `Yes`
+{: .hands_on}
+
+
+5 files and a collection are generated by **MetaPhlAn** {% icon tool %}:
+
+- `Predicted taxon relative abundances`: tabular files with the **community profile**
+
+   ```
+   #SampleID 	Metaphlan_Analysis 		
+   #clade_name 	NCBI_tax_id 	relative_abundance 	additional_species
+   k__Bacteria 	2 	100.0 	
+   k__Bacteria|p__Bacteroidetes 	2|976 	94.38814 	
+   k__Bacteria|p__Proteobacteria 	2|1224 	5.61186 	
+   k__Bacteria|p__Bacteroidetes|c__CFGB45935 	2|976| 	94.38814 	
+   k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria 	2|1224|28211 	5.61186 	
+   k__Bacteria|p__Bacteroidetes|c__CFGB45935|o__OFGB45935 	2|976|| 	94.38814 	
+   k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales 	2|1224|28211|204455 	5.61186 	
+   k__Bacteria|p__Bacteroidetes|c__CFGB45935|o__OFGB45935|f__FGB45935 	2|976||| 	94.38814 	
+   k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales|f__Rhodobacteraceae 	2|1224|28211|> 204455|    31989 	5.61186 	
+   k__Bacteria|p__Bacteroidetes|c__CFGB45935|o__OFGB45935|f__FGB45935|g__GGB56609 	2|976|||| 	94.38814 	
+   k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales|f__Rhodobacteraceae|g__Phycocomes 	2| 1224|    28211|204455|31989|2873978 	5.61186 	
+   k__Bacteria|p__Bacteroidetes|c__CFGB45935|o__OFGB45935|f__FGB45935|g__GGB56609|s__GGB56609_SGB78025 	2| 976||||| 	94.    38814 	
+   k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales|f__Rhodobacteraceae|g__Phycocomes|     s__Phycocomes_zhengii 	2|1224|28211|204455|31989|2873978|2056810 	5.61186 	
+   k__Bacteria|p__Bacteroidetes|c__CFGB45935|o__OFGB45935|f__FGB45935|g__GGB56609|s__GGB56609_SGB78025| t__SGB78025 	2|    976|||||| 	94.38814 	
+   k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales|f__Rhodobacteraceae|g__Phycocomes|     s__Phycocomes_zhengii|t__SGB31485 	2|1224|28211|204455|31989|2873978|2056810| 	5.61186 	
+   ```
+
+   Each line contains 4 columns:
+   1. the lineage with different taxonomic levels, from high level taxa (kingdom: `k__`) to more precise taxa
+   2. the NCBI taxon ids of the lineage taxonomic level
+   3. the relative abundance found for our sample for the lineage
+   4. any additional species
+
+   > <question-title></question-title>
+   >
+   > 1. Which kindgoms have been identified for JC1A?
+   > 2. For JP4D?
+   > 3. How is the diversity for JP4D compared to **Kraken** results?
+   >
+   > > <solution-title></solution-title>
+   > > 1. All reads have been unclassified so no kindgom identified
+   > > 2. Bacteria, no eukaryotes
+   > > 3. Diversity is really reduced for JP4D using **MetaPhlAn**, compared to the one identified with **Kraken**
+   > {: .solution}
+   {: .question}
+
+- `Predicted taxon relative abundances for Krona`: same information as the previous files but formatted for > visualization using **Krona**
+
+   ```
+   Column 1	Column 2	Column 3	Column 4	Column 5	Column 6	Column 7	Column 8	Column 9	Column 10
+   94.38814 		Bacteria 	Bacteroidetes 	CFGB45935 	OFGB45935 	FGB45935 	GGB56609 	GGB56609 SGB78025 	
+   5.61186 		Bacteria 	Proteobacteria 	Alphaproteobacteria 	Rhodobacterales 	Rhodobacteraceae 	Phycocomes 	Phycocomes zhengii 	
+   94.38814 		Bacteria 	Bacteroidetes 	CFGB45935 	OFGB45935 	FGB45935 	GGB56609 	GGB56609 SGB78025 	SGB78025
+   5.61186 		Bacteria 	Proteobacteria 	Alphaproteobacteria 	Rhodobacterales 	Rhodobacteraceae 	Phycocomes 	Phycocomes zhengii 	SGB31485 
+   ```
+
+   Each line represent an identified taxons with 9 columns:
+   - Column 1: The percentage of reads assigned the taxon
+   - Column 2-9: The taxon description at the different taxonomic levels from Kindgom to more precise taxa
+
+- A **collection** with the same information as in the tabular file but splitted into different files, one per taxonomic level
+- `BIOM file` with **community profile** in BIOM format, a common and standard format in microbiomics and used as the input for tools like mothur or Qiime.
+
+- `Bowtie2 output` and `SAM file` with the results of the sequence mapping on the reference database
+
+Let's now run **Krona** to visualize the communities
+
+> <hands-on-title>Generate Krona visualisation</hands-on-title>
+> 1. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1) %} with the following parameters:
+>    - *"Type of input data"*: `tabular`
+>    - {% icon param-collection %} *"Input file"*: Krona output of **Metaphlan**
 > 
->    ```
->    #SampleID 	Metaphlan_Analysis 		
->    #clade_name 	NCBI_tax_id 	relative_abundance 	additional_species
->    k__Bacteria 	2 	100.0 	
->    k__Bacteria|p__Bacteroidetes 	2|976 	94.38814 	
->    k__Bacteria|p__Proteobacteria 	2|1224 	5.61186 	
->    k__Bacteria|p__Bacteroidetes|c__CFGB45935 	2|976| 	94.38814 	
->    k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria 	2|1224|28211 	5.61186 	
->    k__Bacteria|p__Bacteroidetes|c__CFGB45935|o__OFGB45935 	2|976|| 	94.38814 	
->    k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales 	2|1224|28211|204455 	5.61186 	
->    k__Bacteria|p__Bacteroidetes|c__CFGB45935|o__OFGB45935|f__FGB45935 	2|976||| 	94.38814 	
->    k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales|f__Rhodobacteraceae 	2|1224|28211|> 204455|    31989 	5.61186 	
->    k__Bacteria|p__Bacteroidetes|c__CFGB45935|o__OFGB45935|f__FGB45935|g__GGB56609 	2|976|||| 	94.38814 	
->    k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales|f__Rhodobacteraceae|g__Phycocomes 	2| 1224|    28211|204455|31989|2873978 	5.61186 	
->    k__Bacteria|p__Bacteroidetes|c__CFGB45935|o__OFGB45935|f__FGB45935|g__GGB56609|s__GGB56609_SGB78025 	2| 976||||| 	94.    38814 	
->    k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales|f__Rhodobacteraceae|g__Phycocomes|     s__Phycocomes_zhengii 	2|1224|28211|204455|31989|2873978|2056810 	5.61186 	
->    k__Bacteria|p__Bacteroidetes|c__CFGB45935|o__OFGB45935|f__FGB45935|g__GGB56609|s__GGB56609_SGB78025| t__SGB78025 	2|    976|||||| 	94.38814 	
->    k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales|f__Rhodobacteraceae|g__Phycocomes|     s__Phycocomes_zhengii|t__SGB31485 	2|1224|28211|204455|31989|2873978|2056810| 	5.61186 	
->    ```
-> 
->    Each line contains 4 columns:
->    1. the lineage with different taxonomic levels, from high level taxa (kingdom: `k__`) to more precise taxa
->    2. the NCBI taxon ids of the lineage taxonomic level
->    3. the relative abundance found for our sample for the lineage
->    4. any additional species
-> 
->    > <question-title></question-title>
->    >
->    > 1. Which kindgoms have been identified for JC1A?
->    > 2. For JP4D?
->    > 3. How is the diversity for JP4D compared to **Kraken** results?
->    >
->    > > <solution-title></solution-title>
->    > > 1. All reads have been unclassified so no kindgom identified
->    > > 2. Bacteria, no eukaryotes
->    > > 3. Diversity is really reduced for JP4D using **MetaPhlAn**, compared to the one identified with **Kraken**
->    > {: .solution}
->    {: .question}
-> 
-> - `Predicted taxon relative abundances for Krona`: same information as the previous files but formatted for > visualization using **Krona**
-> 
->    ```
->    Column 1	Column 2	Column 3	Column 4	Column 5	Column 6	Column 7	Column 8	Column 9	Column 10
->    94.38814 		Bacteria 	Bacteroidetes 	CFGB45935 	OFGB45935 	FGB45935 	GGB56609 	GGB56609 SGB78025 	
->    5.61186 		Bacteria 	Proteobacteria 	Alphaproteobacteria 	Rhodobacterales 	Rhodobacteraceae 	Phycocomes 	Phycocomes zhengii 	
->    94.38814 		Bacteria 	Bacteroidetes 	CFGB45935 	OFGB45935 	FGB45935 	GGB56609 	GGB56609 SGB78025 	SGB78025
->    5.61186 		Bacteria 	Proteobacteria 	Alphaproteobacteria 	Rhodobacterales 	Rhodobacteraceae 	Phycocomes 	Phycocomes zhengii 	SGB31485 
->    ```
->
->    Each line represent an identified taxons with 9 columns:
->    - Column 1: The percentage of reads assigned the taxon
->    - Column 2-9: The taxon description at the different taxonomic levels from Kindgom to more precise taxa
-> 
-> - A **collection** with the same information as in the tabular file but splitted into different files, one per taxonomic level
-> - `BIOM file` with **community profile** in BIOM format, a common and standard format in microbiomics and used as the input for tools like mothur or Qiime.
-> 
-> - `Bowtie2 output` and `SAM file` with the results of the sequence mapping on the reference database
->
-> Let's now run **Krona** to visualize the communities
-> 
->
-> > <hands-on-title>Generate Krona visualisation</hands-on-title>
-> > 1. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1) %} with the following parameters:
-> >    - *"Type of input data"*: `tabular`
-> >    - {% icon param-collection %} *"Input file"*: Krona output of **Metaphlan**
-> > 
-> > 2. Inspect the generated file
-> {: .hands_on}
-> 
-> As pointed before, the community looks a lot less diverse than with **Kraken**. It is probably due to the reference database complete enough yet to identify all taxons, or not enough reads in the input data to have marker genes in them. Indeed, no taxon has been identified for JC1A, which contains much less reads than JP4D. **Kraken** is also known to have high number of false positive.
-> 
-{: .details}
+> 2. Inspect the generated file
+{: .hands_on}
+
+As pointed before, the community looks a lot less diverse than with **Kraken**. This is probably due to the reference database, which is potentially not complete enough yet to identify all taxons. Or there are too few reads in the input data to cover enough marker genes. Indeed, no taxon has been identified for JC1A, which contains much less reads than JP4D. However, **Kraken** is also known to have high number of false positive. A benchmark dataset or mock community where the community DNA content is known would be required to correctly judge which tool provides the better taxonomic classification.
 
 # Conclusion
 
-In this tutorial, we look how to get the community profile from microbiome data. We apply **Kraken2** to assign taxonomic labels to two microbiome sample datasets. We then visualize the results using **Krona**, **Pavian** and **Phinch** to analyze and compare the datasets. Finally, we discuss important facts when it comes to choosing the right tool for taxonomic assignment. Additionally, we use **MetaPhlAn** on the same datsets and compare the results to **Kraken2**.
+In this tutorial, we look how to get the community profile from microbiome data. We apply **Kraken2** or **MetaPhlAn** to assign taxonomic labels to two microbiome sample datasets. We then visualize the results using **Krona**, **Pavian** and **Phinch** to analyze and compare the datasets. Finally, we discuss important facts when it comes to choosing the right tool for taxonomic assignment.å

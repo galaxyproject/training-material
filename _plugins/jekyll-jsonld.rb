@@ -350,6 +350,8 @@ module Jekyll
         # "sameAs":,
         # "subjectOf":,
         # "url" described below
+        workTranslation: [],
+        creativeWorkStatus: material['draft'] ? 'Under development': 'Active',
       }
       data.update(A11Y)
 
@@ -385,6 +387,7 @@ module Jekyll
         if material.key?('objectives') && !material['objectives'].nil? && material['objectives'].length.positive?
           objectives = material['objectives'].join("\n - ")
           description.push("The objectives are:\n - #{objectives}\n\n")
+          data['teaches'] = objectives
         end
         if material.key?('keypoints') && !material['keypoints'].nil? && material['keypoints'].length.positive?
           keypoints = material['keypoints'].join("\n - ")
@@ -504,12 +507,10 @@ module Jekyll
       end
 
       # Add contributors/authors
-      if material.key?('contributors')
-        contributors = material['contributors'].map do |x|
-          generate_person_jsonld(x, site['data']['contributors'][x], site)
-        end
-        data['author'] = contributors
-        data['contributor'] = contributors
+      if material.key?('contributors') or material.key?('contributions')
+        authors = get_authors(material).map { |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
+
+        data['author'] = authors
       end
 
       about = []
@@ -529,7 +530,9 @@ module Jekyll
       end
       data['about'] = about
 
-      data['educationalLevel'] = eduLevel[material['level']] if material.key?('level')
+      data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Introductory'
+      data['mentions'] = material.fetch('tags', []).map { |x| { '@type': 'Thing', name: x } }
+      data['abstract'] = material['content'].split("\n").first
 
       JSON.pretty_generate(data)
     end

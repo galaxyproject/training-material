@@ -17,8 +17,9 @@ tags:
 priority: 1
 contributions:
   authorship:
-    - simleo
     - ilveroluca
+    - simleo
+    - kikkomep
   editing:
     - hexylena
   funding:

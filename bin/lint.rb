@@ -616,13 +616,17 @@ module GtnLinter
 
   def self.check_bad_heading_order(contents)
     depth = 1
-    find_matching_texts(contents, /^(?<level>#+)/)
-      .map do |idx, text, selected|
+    headings = find_matching_texts(contents, /^(?<level>#+)\s?(?<title>.*)/)
+    .map {|idx, text, selected|
       new_depth = selected[:level].length
       depth_change = new_depth - depth
       depth = new_depth
       [idx, text, selected, depth_change, new_depth]
-    end.select do |_idx, _text, _selected, depth_change, _new_depth|
+    }
+
+    all_headings = headings.map{ |idx, text, selected, depth_change, new_depth| selected[:level] + " " + selected[:title] }
+
+    headings.select{ |idx, text, selected, depth_change, new_depth|
       depth_change > 1
     end.map do |idx, _text, selected, depth_change, new_depth|
       ReviewDogEmitter.error(
@@ -631,8 +635,8 @@ module GtnLinter
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement: '#' * (new_depth - depth_change + 1),
-        message: 'You have skipped a heading level, please correct this.',
-        code: 'GTN:028'
+        message: "You have skipped a heading level, please correct this.\n<details><summary>Listing of Heading Levels</summary>\n\n```\n#{all_headings.join("\n")}\n```\n</details>",
+        code: 'GTN:028',
       )
     end
   end
@@ -815,7 +819,7 @@ module GtnLinter
           message['location']['range']['start']['column'],
           message['location']['range']['end']['line'],
           message['location']['range']['end']['column'],
-          "#{message['code']['value'].gsub(/:/, '')} #{message['message']}"
+          "#{message['code']['value'].gsub(/:/, '')} #{message['message'].split("\n")[0]}"
         ]
         puts parts.join(':')
       else

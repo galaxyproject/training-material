@@ -7,6 +7,8 @@ require './_plugins/gtn/images'
 require './_plugins/gtn/synthetic'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
+require './_plugins/gtn/supported'
+require './_plugins/gtn/toolshed'
 require './_plugins/jekyll-topic-filter'
 require 'time'
 
