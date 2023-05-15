@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Taxonomic Profiling and Visualization of Metagenomic Data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-12 07:49:13 +0000">
+<meta name="DC.date" content="2023-05-15 12:13:30 +0000">
 <meta name="DC.creator" content="Sophia Hampe">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Paul Zierep">
@@ -66,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-12T07:49:13+00:00",
+  "dateModified": "2023-05-15T12:13:30+00:00",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Taxonomic Profiling and Visualization of Metagenomic Data",
   "interactivityType": "mixed",
@@ -123,9 +123,9 @@
   "name": "Hands-on for 'Taxonomic Profiling and Visualization of Metagenomic Data' tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/taxonomic-profiling/tutorial.html",
   "timeRequired": "PT2H",
-  "teaches": "Explain what taxonomic assignment is\n - Explain how taxonomic assignment works\n - Apply Kraken to assign taxonomic labels\n - Apply Krona and Pavian to visualize results of assignment and understand the output\n - Identify taxonomic classification tool that fits best depending on their data",
+  "teaches": "Explain what taxonomic assignment is\n - Explain how taxonomic assignment works\n - Apply Kraken and MetaPhlAn to assign taxonomic labels\n - Apply Krona and Pavian to visualize results of assignment and understand the output\n - Identify taxonomic classification tool that fits best depending on their data",
   "keywords": "metagenomics, metagenomics, taxonomic profiling",
-  "description": "The questions this  addresses are:\n - Which species (or genera, families, ...) are present in my sample?\n - What are the different approaches and tools to get the community profile of my sample?\n - How can we visualize and compare community profiles?\n\n\nThe objectives are:\n - Explain what taxonomic assignment is\n - Explain how taxonomic assignment works\n - Apply Kraken to assign taxonomic labels\n - Apply Krona and Pavian to visualize results of assignment and understand the output\n - Identify taxonomic classification tool that fits best depending on their data\n\n",
+  "description": "The questions this  addresses are:\n - Which species (or genera, families, ...) are present in my sample?\n - What are the different approaches and tools to get the community profile of my sample?\n - How can we visualize and compare community profiles?\n\n\nThe objectives are:\n - Explain what taxonomic assignment is\n - Explain how taxonomic assignment works\n - Apply Kraken and MetaPhlAn to assign taxonomic labels\n - Apply Krona and Pavian to visualize results of assignment and understand the output\n - Identify taxonomic classification tool that fits best depending on their data\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -494,7 +494,7 @@
         <li><p>Explain how taxonomic assignment works</p>
 </li>
         
-        <li><p>Apply Kraken to assign taxonomic labels</p>
+        <li><p>Apply Kraken and MetaPhlAn to assign taxonomic labels</p>
 </li>
         
         <li><p>Apply Krona and Pavian to visualize results of assignment and understand the output</p>
@@ -778,7 +778,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 12, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 15, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -886,13 +886,14 @@ It is a collection of paired-end data with R1 being the forward reads and R2 bei
     </ol>
   </li>
   <li><a href="#prepare-galaxy-and-data" id="markdown-toc-prepare-galaxy-and-data">Prepare Galaxy and data</a></li>
-  <li><a href="#k-mer-based-taxonomic-assignment-of-metagenomic-data" id="markdown-toc-k-mer-based-taxonomic-assignment-of-metagenomic-data">k-mer based taxonomic assignment of metagenomic data</a></li>
+  <li><a href="#k-mer-based-taxonomic-assignment-with-kraken2" id="markdown-toc-k-mer-based-taxonomic-assignment-with-kraken2">k-mer based taxonomic assignment with Kraken2</a></li>
   <li><a href="#visualization-of-taxonomic-assignment" id="markdown-toc-visualization-of-taxonomic-assignment">Visualization of taxonomic assignment</a>    <ol>
       <li><a href="#visualisation-using-krona" id="markdown-toc-visualisation-using-krona">Visualisation using Krona</a></li>
       <li><a href="#visualization-using-pavian" id="markdown-toc-visualization-using-pavian">Visualization using Pavian</a></li>
     </ol>
   </li>
   <li><a href="#choosing-the-right-tool" id="markdown-toc-choosing-the-right-tool">Choosing the right tool</a></li>
+  <li><a href="#marker-gene-based-approach-using-metaphlan" id="markdown-toc-marker-gene-based-approach-using-metaphlan">Marker gene based approach using MetaPhlAn</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
@@ -931,10 +932,10 @@ It is a collection of paired-end data with R1 being the forward reads and R2 bei
     <li>
       <p>Import the following samples via link from <a href="https://zenodo.org/record/7871630">Zenodo</a> or Galaxy shared data libraries:</p>
 
-      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7871630/files/JC1A_R1.fastq.gz
-https://zenodo.org/record/7871630/files/JC1A_R2.fastq.gz
-https://zenodo.org/record/7871630/files/JP4D_R1.fastq.gz
-https://zenodo.org/record/7871630/files/JP4D_R2.fastq.gz
+      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7871630/files/JC1A_R1.fastqsanger.gz
+https://zenodo.org/record/7871630/files/JC1A_R2.fastqsanger.gz
+https://zenodo.org/record/7871630/files/JP4D_R1.fastqsanger.gz
+https://zenodo.org/record/7871630/files/JP4D_R2.fastqsanger.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -943,9 +944,7 @@ https://zenodo.org/record/7871630/files/JP4D_R2.fastq.gz
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
-      <ol>
-        <li>Create a paired collection.</li>
-      </ol>
+      <p>Create a paired collection.</p>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a paired collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward reads</li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse reads</li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
@@ -954,7 +953,7 @@ https://zenodo.org/record/7871630/files/JP4D_R2.fastq.gz
 
 </blockquote>
 
-<h1 id="k-mer-based-taxonomic-assignment-of-metagenomic-data">k-mer based taxonomic assignment of metagenomic data</h1>
+<h1 id="k-mer-based-taxonomic-assignment-with-kraken2">k-mer based taxonomic assignment with Kraken2</h1>
 
 <p>Our input data is the DNA reads of microbes present at Cuatro Ciénegas.</p>
 
@@ -963,19 +962,60 @@ https://zenodo.org/record/7871630/files/JP4D_R2.fastq.gz
 <!--SNIPPET-->
 <blockquote class="details">   <div class="box-title details-title" id="details-kraken2-and-the-k-mer-approach-for-taxonomy-classification"><button class="gtn-boxify-button details" type="button" aria-controls="details-kraken2-and-the-k-mer-approach-for-taxonomy-classification" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Kraken2 and the k-mer approach for taxonomy classification<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>In the \(k\)-mer approach for taxonomy classification, we use a database containing DNA sequences of genomes whose taxonomy we already know. On a computer, the genome sequences are broken into short pieces of length \(k\) (called \(k\)-mers), usually 30bp.</p>   <p><strong>Kraken</strong> examines the \(k\)-mers within the query sequence, searches for them in the database, looks for where these are placed within the taxonomy tree inside the database, makes the classification with the most probable position, then maps \(k\)-mers to the lowest common ancestor (LCA) of all genomes known to contain the given \(k\)-mer.</p>   <p><img src="/training-material/topics/metagenomics/faqs/images/kmers-kraken.jpg" alt="Kraken2" title="Kraken sequence classification algorithm. To classify a sequence, each k-mer in the sequence is mapped to the lowest common ancestor (LCA, i.e. the lowest node) of the genomes that contain that k-mer in the database. The taxa associated with the sequence's k-mers, as well as the taxa's ancestors, form a pruned subtree of the general taxonomy tree, which is used for classification. In the classification tree, each node has a weight equal to the number of k-mers in the sequence associated with the node's taxon. Each root-to-leaf (RTL) path in the classification tree is scored by adding all weights in the path, and the maximal RTL path in the classification tree is the classification path (nodes highlighted in yellow). The leaf of this classification path (the orange, leftmost leaf in the classification tree) is the classification used for the query sequence. Source: &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;#Wood2014&quot;&gt;Wood and Salzberg 2014&lt;/a&gt;&lt;/span&gt;" /></p>   <p><strong>Kraken2</strong> uses a compact hash table, a probabilistic data structure that allows for faster queries and lower memory requirements. It applies a spaced seed mask of <em>s</em> spaces to the minimizer and calculates a compact hash code, which is then used as a search query in its compact hash table; the lowest common ancestor (LCA) taxon associated with the compact hash code is then assigned to the k-mer.</p>   <p>You can find more information about the <strong>Kraken2</strong> algorithm in the paper <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0"><em>Improved metagenomic analysis with Kraken 2</em></a>.</p> </blockquote>
 
-<p>For this tutorial, we will use the Standard (archaea, bacteria, viral, plasmid, human, UniVec_Core) plus protozoa &amp; fungi database, which means:</p>
+<p>For this tutorial, we will use the PlusPF database which contains the Standard (archaea, bacteria, viral, plasmid, human, UniVec_Core), protozoa and fungi data.</p>
 
-<ul>
-  <li>archaea: RefSeq complete archaeal genomes/proteins</li>
-  <li>bacteria: RefSeq complete bacterial genomes/proteins</li>
-  <li>plasmid: RefSeq plasmid nucleotide/protein sequences</li>
-  <li>viral: RefSeq complete viral genomes/proteins</li>
-  <li>human: GRCh38 human genome/proteins</li>
-  <li>fungi: RefSeq complete fungal genomes/proteins</li>
-  <li>plant: RefSeq complete plant genomes/proteins</li>
-  <li>protozoa: RefSeq complete protozoan genomes/proteins</li>
-  <li>UniVec_Core: A subset of UniVec, NCBI-supplied database of vector, adapter, linker, and primer sequences that may be contaminating sequencing projects and/or assemblies, chosen to minimize false positive hits to the vector database</li>
-</ul>
+<blockquote class="details">
+  <div class="box-title details-title" id="details-what-is-in-the-pluspf-database"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-in-the-pluspf-database" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: What is in the PlusPF database<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Database</th>
+        <th>Origin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Archaea</td>
+        <td>RefSeq complete archaeal genomes/proteins</td>
+      </tr>
+      <tr>
+        <td>Bacteria</td>
+        <td>RefSeq complete bacterial genomes/proteins</td>
+      </tr>
+      <tr>
+        <td>Plasmid</td>
+        <td>RefSeq plasmid nucleotide/protein sequences</td>
+      </tr>
+      <tr>
+        <td>Viral</td>
+        <td>RefSeq complete viral genomes/proteins</td>
+      </tr>
+      <tr>
+        <td>Human</td>
+        <td>GRCh38 human genome/proteins</td>
+      </tr>
+      <tr>
+        <td>Fungi</td>
+        <td>RefSeq complete fungal genomes/proteins</td>
+      </tr>
+      <tr>
+        <td>Plant</td>
+        <td>RefSeq complete plant genomes/proteins</td>
+      </tr>
+      <tr>
+        <td>Protozoa</td>
+        <td>RefSeq complete protozoan genomes/proteins</td>
+      </tr>
+      <tr>
+        <td>UniVec_Core</td>
+        <td>A subset of UniVec, NCBI-supplied database of vector, adapter, linker, and primer sequences that may be contaminating sequencing projects and/or assemblies, chosen to minimize false positive hits to the vector database</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The databases have been prepared for Kraken2 by Ben Leagmead and <a href="https://benlangmead.github.io/aws-indexes/k2">details can found on his page</a>.</p>
+</blockquote>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-assign-taxonomic-labels-with-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assign taxonomic labels with Kraken2</div>
@@ -1145,10 +1185,11 @@ https://zenodo.org/record/7871630/files/JP4D_R2.fastq.gz
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Kraken report file”</em>: <strong>Report</strong> output of <strong>Kraken</strong></li>
         <li>
-          <p><em>“Select a kmer distribution”</em>: <code class="language-plaintext highlighter-rouge">PlusPF (2021-05-17)</code></p>
+          <p><em>“Select a kmer distribution”</em>: <code class="language-plaintext highlighter-rouge">PlusPF</code>, same as for Kraken</p>
 
           <p>It is important to choose the same database that you also chose for Kraken2</p>
         </li>
+        <li><em>“Level”</em>: <code class="language-plaintext highlighter-rouge">Species</code></li>
         <li><em>“Produce Kraken-Style Bracken report”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
     </li>
@@ -1160,7 +1201,7 @@ https://zenodo.org/record/7871630/files/JP4D_R2.fastq.gz
 
 <p>Once we have assigned the corresponding taxa to each sequence, the next step is to properly visualize the data. There are several tools for that:</p>
 <ul>
-  <li><strong>Krona pie chart</strong> tool (<span class="citation"><a href="#Ondov.2011">Ondov <i>et al.</i> 2011</a></span>)</li>
+  <li><strong>Krona</strong> (<span class="citation"><a href="#Ondov.2011">Ondov <i>et al.</i> 2011</a></span>)</li>
   <li><strong>Phinch</strong> (<span class="citation"><a href="#Bik.2014">Bik 2014</a></span>)</li>
   <li><strong>Pavian</strong> (<span class="citation"><a href="#Breitwieser.2020">Breitwieser and Salzberg 2020</a></span>)</li>
 </ul>
@@ -1725,68 +1766,67 @@ abundance estimation at higher ranks was more problematic for the binners</li>
   </tbody>
 </table>
 
-<blockquote class="details">
-  <div class="box-title details-title" id="details-using-a-marker-gene-approach-with-metaphlan"><button class="gtn-boxify-button details" type="button" aria-controls="details-using-a-marker-gene-approach-with-metaphlan" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Using a marker gene approach with MetaPhlAn<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<h1 id="marker-gene-based-approach-using-metaphlan">Marker gene based approach using MetaPhlAn</h1>
 
-  <p>In this tutorial, we follow second approach using <strong>MetaPhlAn</strong> (<span class="citation"><a href="#truong2015metaphlan2">Truong <i>et al.</i> 2015</a></span>). MetaPhlAn is a computational tool for profiling the composition of microbial communities (Bacteria, Archaea and Eukaryotes) from metagenomic shotgun sequencing data (i.e. not 16S) at species-level. MetaPhlAn 4 relies on ~5.1M unique clade-specific marker genes identified from ~1M microbial genomes (~236,600 references (bacterial, archeal, viral and eukaryotic) and 771,500 metagenomic assembled genomes) spanning 26,970 species-level genome bins.</p>
+<p>In this tutorial, we follow second approach using <strong>MetaPhlAn</strong> (<span class="citation"><a href="#truong2015metaphlan2">Truong <i>et al.</i> 2015</a></span>). MetaPhlAn is a computational tool for profiling the composition of microbial communities (Bacteria, Archaea and Eukaryotes) from metagenomic shotgun sequencing data (i.e. not 16S) at species-level. MetaPhlAn 4 relies on ~5.1M unique clade-specific marker genes identified from ~1M microbial genomes (~236,600 references (bacterial, archeal, viral and eukaryotic) and 771,500 metagenomic assembled genomes) spanning 26,970 species-level genome bins.</p>
 
-  <p>It allows:</p>
-  <ul>
-    <li>unambiguous taxonomic assignments;</li>
-    <li>accurate estimation of organismal relative abundance;</li>
-    <li>species-level resolution for bacteria, archaea, eukaryotes and viruses;</li>
-    <li>strain identification and tracking</li>
-    <li>orders of magnitude speedups compared to existing methods.</li>
-    <li>microbiota strain-level population genomics</li>
-    <li>MetaPhlAn clade-abundance estimation</li>
-  </ul>
+<p>It allows:</p>
+<ul>
+  <li>unambiguous taxonomic assignments;</li>
+  <li>accurate estimation of organismal relative abundance;</li>
+  <li>species-level resolution for bacteria, archaea, eukaryotes and viruses;</li>
+  <li>strain identification and tracking</li>
+  <li>orders of magnitude speedups compared to existing methods.</li>
+  <li>microbiota strain-level population genomics</li>
+  <li>MetaPhlAn clade-abundance estimation</li>
+</ul>
 
-  <p>The basic usage of MetaPhlAn consists in the identification of the clades (from phyla to species and strains in particular cases) present in the microbiota obtained from a microbiome sample and their relative abundance.</p>
+<p>The basic usage of MetaPhlAn consists in the identification of the clades (from phyla to species and strains in particular cases) present in the microbiota obtained from a microbiome sample and their relative abundance.</p>
 
-  <p><strong>MetaPhlAn</strong> in Galaxy can not directly take as input a paired collection but expect 2 collections: 1 with forward data and 1 with reverse. Before launching <strong>MetaPhlAn</strong>, we need to split our input paired collection.</p>
+<p><strong>MetaPhlAn</strong> in Galaxy can not directly take as input a paired collection but expect 2 collections: 1 with forward data and 1 with reverse. Before launching <strong>MetaPhlAn</strong>, we need to split our input paired collection.</p>
 
-  <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-assign-taxonomic-labels-with-metaphlan"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assign taxonomic labels with MetaPhlAn</div>
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-assign-taxonomic-labels-with-metaphlan"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assign taxonomic labels with MetaPhlAn</div>
 
-    <ol>
-      <li><span class="tool" data-tool="__UNZIP_COLLECTION__" title="Unzip collection tool"><strong>Unzip collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>UNZIP_COLLECTION</strong></span></span>  with the following parameters:
-        <ul>
-          <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Paired input to unzip”</em>: Input paired collection</li>
-        </ul>
-      </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy1" title="MetaPhlAn tool"><strong>MetaPhlAn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy1</span></span>  with the following parameters:
-        <ul>
-          <li>In <em>“Inputs”</em>
-            <ul>
-              <li><em>“Input(s)”</em>: <code class="language-plaintext highlighter-rouge">Fasta/FastQ file(s) with microbiota reads</code>
-                <ul>
-                  <li><em>“Fasta/FastQ file(s) with microbiota reads”</em>: <code class="language-plaintext highlighter-rouge">Paired-end files</code>
-                    <ul>
-                      <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Forward paired-end Fasta/FastQ file with microbiota reads”</em>: output of <strong>Unzip collection</strong> with <strong>forward</strong> in the name</li>
-                      <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Reverse paired-end Fasta/FastQ file with microbiota reads”</em>: output of <strong>Unzip collection</strong> with <strong>reverse</strong> in the name</li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>In <em>“Outputs”</em>:
-            <ul>
-              <li><em>“Output for Krona?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ol>
-  </blockquote>
+  <ol>
+    <li><span class="tool" data-tool="__UNZIP_COLLECTION__" title="Unzip collection tool"><strong>Unzip collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>UNZIP_COLLECTION</strong></span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Paired input to unzip”</em>: Input paired collection</li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy1" title="MetaPhlAn tool"><strong>MetaPhlAn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy1</span></span>  with the following parameters:
+      <ul>
+        <li>In <em>“Inputs”</em>
+          <ul>
+            <li><em>“Input(s)”</em>: <code class="language-plaintext highlighter-rouge">Fasta/FastQ file(s) with microbiota reads</code>
+              <ul>
+                <li><em>“Fasta/FastQ file(s) with microbiota reads”</em>: <code class="language-plaintext highlighter-rouge">Paired-end files</code>
+                  <ul>
+                    <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Forward paired-end Fasta/FastQ file with microbiota reads”</em>: output of <strong>Unzip collection</strong> with <strong>forward</strong> in the name</li>
+                    <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Reverse paired-end Fasta/FastQ file with microbiota reads”</em>: output of <strong>Unzip collection</strong> with <strong>reverse</strong> in the name</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Outputs”</em>:
+          <ul>
+            <li><em>“Output for Krona?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
 
-  <p>5 files and a collection are generated by <strong>MetaPhlAn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:</p>
+<p>5 files and a collection are generated by <strong>MetaPhlAn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:</p>
 
-  <ul>
-    <li>
-      <p><code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances</code>: tabular files with the <strong>community profile</strong></p>
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances</code>: tabular files with the <strong>community profile</strong></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> #SampleID 	Metaphlan_Analysis 		
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> #SampleID 	Metaphlan_Analysis 		
  #clade_name 	NCBI_tax_id 	relative_abundance 	additional_species
  k__Bacteria 	2 	100.0 	
  k__Bacteria|p__Bacteroidetes 	2|976 	94.38814 	
@@ -1803,80 +1843,78 @@ abundance estimation at higher ranks was more problematic for the binners</li>
  k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales|f__Rhodobacteraceae|g__Phycocomes|     s__Phycocomes_zhengii 	2|1224|28211|204455|31989|2873978|2056810 	5.61186 	
  k__Bacteria|p__Bacteroidetes|c__CFGB45935|o__OFGB45935|f__FGB45935|g__GGB56609|s__GGB56609_SGB78025| t__SGB78025 	2|    976|||||| 	94.38814 	
  k__Bacteria|p__Proteobacteria|c__Alphaproteobacteria|o__Rhodobacterales|f__Rhodobacteraceae|g__Phycocomes|     s__Phycocomes_zhengii|t__SGB31485 	2|1224|28211|204455|31989|2873978|2056810| 	5.61186 	
-</code></pre></div>      </div>
+</code></pre></div>    </div>
 
-      <p>Each line contains 4 columns:</p>
+    <p>Each line contains 4 columns:</p>
+    <ol>
+      <li>the lineage with different taxonomic levels, from high level taxa (kingdom: <code class="language-plaintext highlighter-rouge">k__</code>) to more precise taxa</li>
+      <li>the NCBI taxon ids of the lineage taxonomic level</li>
+      <li>the relative abundance found for our sample for the lineage</li>
+      <li>any additional species</li>
+    </ol>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+
       <ol>
-        <li>the lineage with different taxonomic levels, from high level taxa (kingdom: <code class="language-plaintext highlighter-rouge">k__</code>) to more precise taxa</li>
-        <li>the NCBI taxon ids of the lineage taxonomic level</li>
-        <li>the relative abundance found for our sample for the lineage</li>
-        <li>any additional species</li>
+        <li>Which kindgoms have been identified for JC1A?</li>
+        <li>For JP4D?</li>
+        <li>How is the diversity for JP4D compared to <strong>Kraken</strong> results?</li>
       </ol>
 
-      <blockquote class="question">
-        <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
-
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <ol>
-          <li>Which kindgoms have been identified for JC1A?</li>
-          <li>For JP4D?</li>
-          <li>How is the diversity for JP4D compared to <strong>Kraken</strong> results?</li>
+          <li>All reads have been unclassified so no kindgom identified</li>
+          <li>Bacteria, no eukaryotes</li>
+          <li>Diversity is really reduced for JP4D using <strong>MetaPhlAn</strong>, compared to the one identified with <strong>Kraken</strong></li>
         </ol>
-
-        <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-          <ol>
-            <li>All reads have been unclassified so no kindgom identified</li>
-            <li>Bacteria, no eukaryotes</li>
-            <li>Diversity is really reduced for JP4D using <strong>MetaPhlAn</strong>, compared to the one identified with <strong>Kraken</strong></li>
-          </ol>
-        </blockquote>
       </blockquote>
-    </li>
-    <li>
-      <p><code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances for Krona</code>: same information as the previous files but formatted for &gt; visualization using <strong>Krona</strong></p>
+    </blockquote>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances for Krona</code>: same information as the previous files but formatted for &gt; visualization using <strong>Krona</strong></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Column 1	Column 2	Column 3	Column 4	Column 5	Column 6	Column 7	Column 8	Column 9	Column 10
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Column 1	Column 2	Column 3	Column 4	Column 5	Column 6	Column 7	Column 8	Column 9	Column 10
  94.38814 		Bacteria 	Bacteroidetes 	CFGB45935 	OFGB45935 	FGB45935 	GGB56609 	GGB56609 SGB78025 	
  5.61186 		Bacteria 	Proteobacteria 	Alphaproteobacteria 	Rhodobacterales 	Rhodobacteraceae 	Phycocomes 	Phycocomes zhengii 	
  94.38814 		Bacteria 	Bacteroidetes 	CFGB45935 	OFGB45935 	FGB45935 	GGB56609 	GGB56609 SGB78025 	SGB78025
  5.61186 		Bacteria 	Proteobacteria 	Alphaproteobacteria 	Rhodobacterales 	Rhodobacteraceae 	Phycocomes 	Phycocomes zhengii 	SGB31485 
-</code></pre></div>      </div>
+</code></pre></div>    </div>
 
-      <p>Each line represent an identified taxons with 9 columns:</p>
+    <p>Each line represent an identified taxons with 9 columns:</p>
+    <ul>
+      <li>Column 1: The percentage of reads assigned the taxon</li>
+      <li>Column 2-9: The taxon description at the different taxonomic levels from Kindgom to more precise taxa</li>
+    </ul>
+  </li>
+  <li>A <strong>collection</strong> with the same information as in the tabular file but splitted into different files, one per taxonomic level</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">BIOM file</code> with <strong>community profile</strong> in BIOM format, a common and standard format in microbiomics and used as the input for tools like mothur or Qiime.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Bowtie2 output</code> and <code class="language-plaintext highlighter-rouge">SAM file</code> with the results of the sequence mapping on the reference database</li>
+</ul>
+
+<p>Let’s now run <strong>Krona</strong> to visualize the communities</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generate-krona-visualisation-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate Krona visualisation</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1" title="Krona pie chart tool"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1</span></span>  with the following parameters:
       <ul>
-        <li>Column 1: The percentage of reads assigned the taxon</li>
-        <li>Column 2-9: The taxon description at the different taxonomic levels from Kindgom to more precise taxa</li>
+        <li><em>“Type of input data”</em>: <code class="language-plaintext highlighter-rouge">tabular</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: Krona output of <strong>Metaphlan</strong></li>
       </ul>
     </li>
-    <li>A <strong>collection</strong> with the same information as in the tabular file but splitted into different files, one per taxonomic level</li>
-    <li>
-      <p><code class="language-plaintext highlighter-rouge">BIOM file</code> with <strong>community profile</strong> in BIOM format, a common and standard format in microbiomics and used as the input for tools like mothur or Qiime.</p>
-    </li>
-    <li><code class="language-plaintext highlighter-rouge">Bowtie2 output</code> and <code class="language-plaintext highlighter-rouge">SAM file</code> with the results of the sequence mapping on the reference database</li>
-  </ul>
-
-  <p>Let’s now run <strong>Krona</strong> to visualize the communities</p>
-
-  <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-generate-krona-visualisation-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate Krona visualisation</div>
-    <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1" title="Krona pie chart tool"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1</span></span>  with the following parameters:
-        <ul>
-          <li><em>“Type of input data”</em>: <code class="language-plaintext highlighter-rouge">tabular</code></li>
-          <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: Krona output of <strong>Metaphlan</strong></li>
-        </ul>
-      </li>
-      <li>Inspect the generated file</li>
-    </ol>
-  </blockquote>
-
-  <p>As pointed before, the community looks a lot less diverse than with <strong>Kraken</strong>. This is probably due to the reference database, which is potentially not complete enough yet to identify all taxons. Or there are too few reads in the input data to cover enough marker genes. Indeed, no taxon has been identified for JC1A, which contains much less reads than JP4D. However, <strong>Kraken</strong> is also known to have high number of false positive. A benchmark dataset or mock community where the community DNA content is known would be required to correctly judge which tool provides the better taxonomic classification.</p>
-
+    <li>Inspect the generated file</li>
+  </ol>
 </blockquote>
+
+<p>As pointed before, the community looks a lot less diverse than with <strong>Kraken</strong>. This is probably due to the reference database, which is potentially not complete enough yet to identify all taxons. Or there are too few reads in the input data to cover enough marker genes. Indeed, no taxon has been identified for JC1A, which contains much less reads than JP4D. However, <strong>Kraken</strong> is also known to have high number of false positive. A benchmark dataset or mock community where the community DNA content is known would be required to correctly judge which tool provides the better taxonomic classification.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>In this tutorial, we look how to get the community profile from microbiome data. We apply <strong>Kraken2</strong> to assign taxonomic labels to two microbiome sample datasets. We then visualize the results using <strong>Krona</strong>, <strong>Pavian</strong> and <strong>Phinch</strong> to analyze and compare the datasets. Finally, we discuss important facts when it comes to choosing the right tool for taxonomic assignment. Additionally, we use <strong>MetaPhlAn</strong> on the same datsets and compare the results to <strong>Kraken2</strong>.</p>
+<p>In this tutorial, we look how to get the community profile from microbiome data. We apply <strong>Kraken2</strong> or <strong>MetaPhlAn</strong> to assign taxonomic labels to two microbiome sample datasets. We then visualize the results using <strong>Krona</strong>, <strong>Pavian</strong> and <strong>Phinch</strong> to analyze and compare the datasets. Finally, we discuss important facts when it comes to choosing the right tool for taxonomic assignment.å</p>
 
                 </section>
 
