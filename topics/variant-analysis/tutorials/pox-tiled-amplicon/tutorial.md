@@ -27,6 +27,7 @@ requirements:
       - upload-rules
 contributors:
 - wm75
+- TKlingstrom
 tags:
 - virology
 - one-health
@@ -51,11 +52,10 @@ Independent of their size, ITRs pose a problem for the analysis of high-throughp
 Recently, a tiled-amplicon approach with separate sequencing of half-genomes has been developed for *capripoxviruses* ({% cite Mathijs2022 %}) that makes it possible to assign ITR-derived reads unambiguously to the 5'- or 3'-end of a pox virus genome when combined with a suitable bioinformatics pipeline.
   
 This tutorial demonstrates how such data can be analyzed correctly with Galaxy.
-  
 
 > <comment-title>Advanced tutorial</comment-title>
-> The analysis presented here demonstrates a very close to real-world analysis of viral sequencing data with Galaxy. In fact, it is modeled after this [fully production-ready workflow](https://workflowhub.eu/workflows/439) for analysis of the same type of data.
-> As such, this tutorial avoids many simplifications that are often made in training material to ease understanding.
+> This tutorial demonstrates a very close to real-world analysis of viral sequencing data with Galaxy[^prior_work].
+> As such, it avoids many simplifications that are often made in training material to ease understanding.
 > On the technical side, in particular, it makes use of many different Galaxy features and often assumes more than just basic familiarity with them.
 > Like in other tutorials, you will find precise instructions for running every step in the analysis, but explanations focus very much on the biology of pox viruses and will often not offer much details on *why* a certain component of Galaxy is used the way it is described.
 >
@@ -93,6 +93,7 @@ Likewise, we will use a 5'-masked genome for the mapping of the "pool 2" reads, 
 Once the correct alignments of the reads from the two pools have been recorded, we can safely merge the two results, and use that merged data to construct a consensus sequence for the sample.
 
 Compared to a standard tiled-amplicon approach involving just one sequencing pool, the half-genome sequencing approach is more accurate, especially at the boundaries between the "central coding region" and the ITRs, but the analysis is complicated by the doubled number of inputs, by the need to generate masked reference sequences and by the extra step of merging two read mapping results.
+
 
 > <agenda-title></agenda-title>
 >
@@ -934,3 +935,7 @@ We have reached the end of this tutorial, in which we have introduced a lot of t
 
 We were able to generate high-quality pox virus consensus genomes and explore them in different ways right in Galaxy. Many of the concepts and techniques you have seen in this tutorial are useful also in analysis of other data - certainly for data from other pox viruses like monkeypox, but much could be reapplied to other viruses.
 
+
+# Footnotes
+
+[^prior_work]: This tutorial is modeled after this [fully production-ready workflow](https://workflowhub.eu/workflows/439) for the analysis of pox virus genomes sequenced as half-genomes in a tiled-amplicon approach. The workflow and the tutorial are based on and enhance original protocols and a training developed in the DEFEND project (www.defend2020.eu) with funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 773701.
