@@ -14,6 +14,7 @@ key_points:
   - "To use most powerful bioinformatic tools, you will need to use the command line."
   - "There a few basic steps to follow in order to process the RNA sequences"
   - "Quality control, trimming and alignment to reference genome are the first part of the RNA-seq downstream analysis"
+zenodo_link: "https://zenodo.org/record/6457007"
 contributions:
   authorship:
     - Sofokli5
