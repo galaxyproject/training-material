@@ -316,24 +316,28 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
->    > <tip-title>Using `git`?</tip-title>
->    > If you're using git, it can make sense to tell git to ignore the `roles`
->    > directory, as all of that data can be perfectly recreated from our
->    > variables in the requirements.yml file.
->    >
->    > Simply create a file `.gitignore` with the following content:
->    >
->    > ```console
->    > roles/
->    > .vault-password.txt
->    > ```
->    >
->    > When you run `git status` you'll notice that the `roles/` folder is not listed among the other "Untracked files". We're adding the `.vault-password.txt` file as well, ahead of time, because this should *never* ever be committed to the repository.
->    >
->    > Now you can do `git add .` to add all of the files in the current directory, and not worry about committing generated artifacts!
->    {: .tip}
+> 4. Inspect the contents of the newly created `roles/` directory in your working directory.
 >
-> 4. Inspect the contents of the newly created `roles` directory in your working directory.
+> 5. It's good practice to put your playbooks and configuration files under version control (usually in a git repository), but there is no need to keep track of the content of the `roles/` directory, as all of that data can be perfectly recreated from the `requirements.yml` file.
+>
+>    If you plan to put this git repository online (e.g. on GitHub), any file containing clear-text passwords should *never* ever be committed to the repository, even if the repository is private. For this reason, we should tell git, ahead of time, to ignore one such file, `.vault-password.txt` , which will use later on in this lesson.
+>
+>    To configure git to ignore certain files and directories, they need to be listed in a file called `.gitignore` , which should be instead tracked as part of your git repository. You can now create the `.gitignore` file with the following content:
+>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/.gitignore
+>    @@ -0,0 +1,2 @@
+>    +roles/
+>    +.vault-password.txt
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add .gitignore"}
+>
+>    When you run `git status` you'll notice that the `roles/` folder is not listed among the other "Untracked files".
+>
+>    Now you can do `git add .` to add all of the files in the current directory to your repository, and not worry about committing these files and directories by mistake!
 {: .hands_on}
 
 > <hands-on-title>Configuration files</hands-on-title>
@@ -2545,12 +2549,12 @@ If you've been following along you should have a production-ready Galaxy, secure
 
 > <hands-on-title>Using Git with Ansible Vaults</hands-on-title>
 > When looking at `git log` to see what you changed, you cannot easily look into
-> Ansible Vault changes: you just see the changes in the encrypted versions which
+> Ansible Vault changes: you just see the changes in the encrypted versions, which
 > is unpleasant to read.
 > 
-> Instead we can use [`.gitattributes`](https://www.git-scm.com/docs/gitattributes) to tell `git` that we want to use a
-> different program to visualise differences between two versions of a file,
-> namely `ansible-vault`.
+> Instead we can use [`.gitattributes`](https://www.git-scm.com/docs/gitattributes) to tell `git` that we want to use a certain
+> program to convert some files before calculating their diffs,
+> in this case `ansible-vault view`.
 > 
 > 1. Check your `git log -p` and see how the Vault changes look (you can type `/vault` to search). Notice that they're just changed encoded content.
 > 1. Create the file `.gitattributes` in the same folder as your `galaxy.yml` playbook, with the following contents:
@@ -2564,7 +2568,19 @@ If you've been following along you should have a production-ready Galaxy, secure
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add git attributes"}
+>
+>    This set the `diff` attribute to `ansible-vault` for the `group_vars/secret.yml` file.
+>    Additionally, the `merge=binary` option tells git not to attempt to do a three-way merge of this file.
 > 
+> 1. Run the following command to configure git to convert the files having the `diff` attribute set to `ansible-vault`, using the `ansible-vault view` command, before diffing them:
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > git config --global diff.ansible-vault.textconv "ansible-vault view"
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 > 1. Try again to `git log -p` and look for the vault changes. Note that you can now see the decrypted content! Very useful.
 {: .hands_on}
 

@@ -60,8 +60,10 @@ Specifically, gravity/gunicorn and job handler logs.
 
 .reduce90[
 ```
-Exception: Your database has version '144' but this code expects version '165'. Please
-backup your database and then migrate the database schema by running 'sh manage_db.sh upgrade'.
+galaxy.model.migrations.OutdatedDatabaseError: Your galaxy database has version e0e3bb173ee6, but
+this code expects version caa7742f7bca. To upgrade your database, run `manage_db.sh upgrade`. For
+more options (e.g. upgrading/downgrading to a specific version) see instructions in that file.
+Please remember to backup your database before migrating.
 ```
 ]
 
@@ -70,10 +72,11 @@ Use Ansible! This is permanently solved for you.
 Otherwise, upgrade as instructed.
 
 .left[If you believe this message is in error, you can:]
-- Check DB table `migrate_version`, column `version`.
-- Check folder `lib/galaxy/model/migrate/versions/` - the latest migration should match the DB.
+- Check DB table `alembic_version`, column `version`.
+- Check folder `lib/galaxy/model/migrations/alembic/versions_gxy/` - the latest migration should match the DB.
 - Clean the `*.pyc` files in migrate versions folder to make sure there is no remnant from other code revisions.
   - See [makepyc.py in galaxyproject.galaxy](https://github.com/galaxyproject/ansible-galaxy/blob/master/files/makepyc.py).
+  - Ansible role does this for you.
 
 ---
 class: left
@@ -85,19 +88,25 @@ class: left
   3. Clean `*.pyc`
 
 ---
+
 # Stuck in a restart loop
 
+.reduce90[
 ```
-[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
-*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+Executing: PYTHONPATH=lib GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml VIRTUAL_ENV=/srv/galaxy/venv
+  /srv/galaxy/venv/bin/gunicorn 'galaxy.webapps.galaxy.fast_factory:factory()' --timeout 300 ...
+DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/galaxy/server/lib, ...
 ... bunch of stuff ...
-[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
-*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+Executing: PYTHONPATH=lib GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml VIRTUAL_ENV=/srv/galaxy/venv
+  /srv/galaxy/venv/bin/gunicorn 'galaxy.webapps.galaxy.fast_factory:factory()' --timeout 300 ...
+DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/galaxy/server/lib, ...
 ... bunch of stuff ...
-[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
-*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+Executing: PYTHONPATH=lib GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml VIRTUAL_ENV=/srv/galaxy/venv
+  /srv/galaxy/venv/bin/gunicorn 'galaxy.webapps.galaxy.fast_factory:factory()' --timeout 300 ...
+DEBUG:galaxy.app:python path is: /srv/galaxy/server, /srv/galaxy/venv/bin, /srv/galaxy/server/lib, ...
 ...
 ```
+]
 
 1. Open the log *without* following
 2. Scroll to the end
@@ -109,11 +118,11 @@ class: left
 
 The reason that Galaxy is dying might not be in the log. If it's not, then
 
-If using **systemd** then it should be in `journalctl -u galaxy`
+If using **systemd** then it should be in `journalctl -eu galaxy-gunicorn`
 
 If using something else, it's wherever `stderr` is being redirected to (supervisor?)
 
-Or maybe the system is killing it... (`/var/log/{messages,syslog}`)
+Or maybe the system is killing it... (`/var/log/{messages,syslog,kern.log}`, `dmesg`)
 
 ---
 # Web/UI Problems
@@ -126,57 +135,67 @@ Where do you begin? In the...
 
 ## LOGS
 
-Specifically: uWSGI, nginx, and browser console logs
+Specifically: gunicorn, nginx, and browser console logs
 
 ---
+
 # 502 Bad Gateway
 
 Your reverse proxy has failed to connect to the Galaxy socket
 
+- `systemctl status galaxy-gunicorn`
 - Check that Galaxy is running / not in a reboot loop
-- Check that your proxy and Galaxy/uWSGI socket options match
+- Check that your proxy and Galaxy/gunicorn socket options match
+  - For UNIX domain sockets, ensure the web server user can r/w the socket
 - Check proxy server logs (e.g. `/var/log/nginx`)
-- Check uWSGI logs for `bind(): Address already in use [core/socket.c line 769]`
-- Check that something is listening on the correct port (`sudo ss -tlpn 'sport = :port'` (demo!) or `sudo lsof -i :port` (demo!))
-  - If it's uWSGI, make sure it's not an old one!
+- Check gunicorn logs for `[<PID>] [ERROR] Connection in use: ('localhost', 8080)`
+  - Check that something is listening on the correct port (`sudo ss -tlpn 'sport = :port'` (demo!) or `sudo lsof -i :port` (demo!))
+  - If the culprit gunicorn, make sure it's not an old one!
 
 ---
+
 # 504 Gateway Timeout
 
-Or timeout messages in the Galaxy UI
+Use `htop` (demo!) and `ps` (demo!)
 
-In uWSGI logs:
-```
-*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
-*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
-*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
-*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
-```
+- `htop` process state **D** (*kernel uninterruptable sleep*)?
 
-Galaxy is not processing requests in a timely manner
+.reduce90[
+```console
+$ htop -u galaxy
+    0[||                                           1.6%]   Tasks: 98, 244 thr; 1 running
+    1[||                                           2.7%]   Load average: 105.04 102.08 91.04
+  Mem[||||||||||||||||||||||||||||||||||||||2.28G/15.6G]   Uptime: 3 days, 15:46:31
+  Swp[                                            0K/0K]
+
+    PID USER      PRI  NI  VIRT   RES   SHR S CPU%▽MEM%   TIME+  Command
+   3440 galaxy     20   0 2806M  297M 53364 D 17.2  5.2  3:11.40 python3 gunicorn ...
+...
+```
+]
 
 ---
+
 # 504 Gateway Timeout
 
-Use `uwsgitop` (demo!)
+- `ps` process state **D**?
 
-- `uwsgitop` state busy?
-
+.reduce90[
 ```console
-uwsgi-2.0.17.1 - Fri Feb  1 17:13:59 2019 - req: 0 - RPS: 0 - lq: 0 - tx: 0
-node: localhost - cwd: /srv/galaxy/server - uid: 999 - gid: 999 - masterpid: 1925
- WID    %       PID     REQ     RPS     EXC     SIG     STATUS  AVG     RSS     VSZ     TX      ReSpwn  HC      RunT    LastSpwn
- 1      12.7    3453    59962   1       13      0       busy    89ms    0       0       536.0M  1       0       450m    09:35:36
-```
-
-Process state **D**?
-
-```console
+$ ps uwwU galaxy
 USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ...
+galaxy    3440 17.2  5.2 2873344 304128 ?      D    Nov10   3:11 python3 gunicorn ...
+...
 ```
+]
 
-Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.
+---
+
+# 504 Gateway Timeout
+
+Cycling state **D**/**S**/**R** is fine, but stuck on **D** is Very Bad™
+
+Probably IO - check filesystems, disks.
 
 Restart Galaxy
 
@@ -194,7 +213,7 @@ $ uptime
 
 Averages are 1, 5, 15 minutes.
 
-Average should be <= number of cores (`lscpu`, beware SMT)
+Average should be <= number of cores (`lscpu`, (beware SMT) or just `htop`)
 
 More on troubleshooting load later
 
@@ -222,8 +241,8 @@ More on troubleshooting load later
 # Galaxy UI is slow
 
 - [Tutorial from @mvdbeek](https://docs.galaxyproject.org/en/master/dev/finding_and_improving_slow_code.html#profiling)
-- Use Galaxy [heartbeat](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/galaxy.yml.sample#L1036) (demo!)
-- Use `py-spy`
+- Use Galaxy [heartbeat](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/galaxy.yml.sample#L1036) (not super relevant anymore thanks to...)
+- Use `py-spy` (demo later!)
 
 ---
 # Blank page or no CSS/JavaScript
@@ -384,7 +403,7 @@ An incredibly useful feature to hit unruly tool dependencies with a large hammer
 
 Galaxy Tool Shed dependencies are dead.<sup>1</sup> If you don't know what Tool Shed dependencies are (lucky you) skip this slide.
 
-Don't attempt to fix Galaxy Tool Shed dependencies, just update tool and reinstall with Conda.
+Don't attempt to fix Galaxy Tool Shed dependencies, just update tool and use container (or Conda) deps.
 
 Put Conda first in [dependency_resolvers_conf.xml](https://github.com/galaxyproject/galaxy/blob/dev/config/dependency_resolvers_conf.xml.sample) if you still need to support both.
 
@@ -447,60 +466,84 @@ Use these tests (automateable with [Ephemeris](https://github.com/galaxyproject/
 
 ---
 class: smaller
+
 # Jobs aren't running: always gray
 
 Corresponds to `job.state = 'new'` or `'queued'` in database
 
-.left[Check the Galaxy server log for errors. Successful job lifecycle:]
+.left[Check the Galaxy server log for errors. Successful job lifecycle (web/gunicorn side):]
 
 .reduce50[
-```console
-galaxy.tools DEBUG 2019-02-01 14:30:20,469 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Validated and populated state for tool request (11.587 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,500 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Handled output named output1 for tool testing (2.334 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,507 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Added output datasets to history (6.210 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,513 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Setup for job Job[unflushed,tool_id=testing] complete, ready to flush (5.408 ms)
-galaxy.tools.actions INFO 2019-02-01 14:30:20,558 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Flushed transaction for job Job[id=21,tool_id=testing] (44.550 ms)
-galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Sending message to farm job-handlers: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
-galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Tool [testing] created job [21] (73.833 ms)
-galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,560 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Received message: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
-galaxy.tools.execute DEBUG 2019-02-01 14:30:20,562 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Executed 1 job(s) for tool testing request: (91.901 ms)
-galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Released lock
-galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6594,w:0,m:2] [UWSGIFarmMessageTransport.dispatcher_thread] Acquired message lock, waiting for new message
-galaxy.jobs.rules.map_resources INFO 2019-02-01 14:30:21,526 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] returning destination: slurm
-galaxy.jobs.mapper DEBUG 2019-02-01 14:30:21,527 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Mapped job to destination id: slurm
-galaxy.jobs.handler DEBUG 2019-02-01 14:30:21,532 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Dispatching to slurm runner
-galaxy.jobs DEBUG 2019-02-01 14:30:21,539 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Persisting job destination (destination id: slurm)
-galaxy.jobs DEBUG 2019-02-01 14:30:21,565 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Working directory for job is: /srv/galaxy/jobs/000/21
-galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,579 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] Job [21] queued (44.601 ms)
-galaxy.jobs.handler INFO 2019-02-01 14:30:21,585 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Job dispatched
-galaxy.jobs.command_factory INFO 2019-02-01 14:30:21,714 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] Built script [/srv/galaxy/jobs/000/21/tool_script.sh] for tool command [echo "Running with '${GALAXY_SLOTS:-1}' threads" > "/data/000/dataset_21.dat"]
-galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,791 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) command is: rm -rf working; mkdir -p working; cd working; /srv/galaxy/jobs/000/21/tool_script.sh; return_code=$?; cd '/srv/galaxy/jobs/000/21';
-[ "$GALAXY_VIRTUAL_ENV" = "None" ] && GALAXY_VIRTUAL_ENV="$_GALAXY_VIRTUAL_ENV"; _galaxy_setup_environment True
-python "/srv/galaxy/jobs/000/21/set_metadata_FVs2H3.py" "/srv/galaxy/jobs/000/21/registry.xml" "/srv/galaxy/jobs/000/21/working/galaxy.json" "/srv/galaxy/jobs/000/21/metadata_in_HistoryDatasetAssociation_21_LeYyR2,/srv/galaxy/jobs/000/21/metadata_kwds_HistoryDatasetAssociation_21_2yXqbX,/srv/galaxy/jobs/000/21/metadata_out_HistoryDatasetAssociation_21_WwKZCq,/srv/galaxy/jobs/000/21/metadata_results_HistoryDatasetAssociation_21_nfKGx4,/data/000/dataset_21.dat,/srv/galaxy/jobs/000/21/metadata_override_HistoryDatasetAssociation_21_xsOoSa" 5242880; sh -c "exit $return_code"
-galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:21,821 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) submitting file /srv/galaxy/jobs/000/21/galaxy_21.sh
-galaxy.jobs.runners.drmaa INFO 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) queued as 19
-galaxy.jobs DEBUG 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) Persisting job destination (destination id: slurm)
-galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:22,158 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is queued and active
-galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:23,171 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is running
+```
+galaxy.tools INFO 2023-04-20 13:51:20,736 [pN:main.1,p:273250,tN:WSGI_0] Validated and populated state for tool request (4.308 ms)
+galaxy.tools.actions INFO 2023-04-20 13:51:20,747 [pN:main.1,p:273250,tN:WSGI_0] Handled output named out_file1 for tool secure_hash_message_digest (0.756 ms)
+galaxy.tools.actions INFO 2023-04-20 13:51:20,759 [pN:main.1,p:273250,tN:WSGI_0] Added output datasets to history (12.102 ms)
+galaxy.tools.actions INFO 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Setup for job Job[unflushed,tool_id=secure_hash_message_digest] complete, ready to be enqueued (1
+.097 ms)
+galaxy.tools.execute DEBUG 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Tool secure_hash_message_digest created job None (21.968 ms)
+galaxy.web_stack.handlers INFO 2023-04-20 13:51:20,792 [pN:main.1,p:273250,tN:WSGI_0] (Job[id=2,tool_id=secure_hash_message_digest]) Handler '_default_' assigned using 'db-skip-l
+ocked' assignment method
+galaxy.tools.execute DEBUG 2023-04-20 13:51:20,797 [pN:main.1,p:273250,tN:WSGI_0] Created 1 job(s) for tool secure_hash_message_digest request (60.168 ms)
 ```
 ]
 
 ---
+class: smaller
+
+# Jobs aren't running: always gray
+
+Successful job lifecycle (job handler side):
+
+<pre class="reduce50" style="text-align: left">
+galaxy.jobs.handler DEBUG 2023-04-20 13:51:20,879 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Grabbed Job(s): 2
+tpv.rules.gateway INFO 2023-04-20 13:51:20,920 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] loading tpv rules from: ['https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml', '/srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml']
+tpv.rules.gateway INFO 2023-04-20 13:51:21,266 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Watching for changes in file: /srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml
+galaxy.util.watcher DEBUG 2023-04-20 13:51:21,266 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Watching for changes to file: /srv/galaxy/config/TPV_DO_NOT_TOUCH/tpv_rules_local.yml
+tpv.core.entities DEBUG 2023-04-20 13:51:21,354 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Ranking destinations: [runner=local_runner, ... (line truncated)
+galaxy.jobs.mapper DEBUG 2023-04-20 13:51:21,354 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Mapped job to destination id: local_env
+galaxy.jobs.handler DEBUG 2023-04-20 13:51:21,370 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Dispatching to local_runner runner
+galaxy.jobs DEBUG 2023-04-20 13:51:21,387 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Persisting job destination (destination id: local_env)
+galaxy.jobs DEBUG 2023-04-20 13:51:21,402 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Working directory for job is: /data/jobs/000/2
+galaxy.jobs.runners DEBUG 2023-04-20 13:51:21,412 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] Job [2] queued (41.730 ms)
+galaxy.jobs.handler INFO 2023-04-20 13:51:21,423 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Job dispatched
+galaxy.jobs DEBUG 2023-04-20 13:51:21,500 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] Job wrapper for Job [2] prepared (70.012 ms)
+galaxy.jobs.command_factory INFO 2023-04-20 13:51:21,508 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] Built script [/data/jobs/000/2/tool_script.sh] for tool command [python '/srv/galaxy/server/tools/filters/secure_hash_message_digest.py' --input '/data/datasets/5/9/6/dataset_596da164-5b91-4003-8699-db43afd9f26d.dat' --output '/data/jobs/000/2/outputs/galaxy_dataset_bfc51e23-4d98-4968-b9f6-a7fc970fad28.dat' --algorithm "sha256"]
+galaxy.jobs.runners DEBUG 2023-04-20 13:51:21,554 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] (2) command is: mkdir -p working outputs configs
+if [ -d _working ]; then
+rm -rf working/ outputs/ configs/; cp -R _working working; cp -R _outputs outputs; cp -R _configs configs
+else
+cp -R working _working; cp -R outputs _outputs; cp -R configs _configs
+fi
+cd working; /bin/bash /data/jobs/000/2/tool_script.sh > '../outputs/tool_stdout' 2> '../outputs/tool_stderr'; return_code=$?; echo $return_code > /data/jobs/000/2/galaxy_2.ec; cd '/data/jobs/000/2';
+[ "$GALAXY_VIRTUAL_ENV" = "None" ] && GALAXY_VIRTUAL_ENV="$_GALAXY_VIRTUAL_ENV"; _galaxy_setup_environment True; python metadata/set.py; sh -c "exit $return_code"
+galaxy.jobs.runners.local DEBUG 2023-04-20 13:51:21,558 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] (2) executing job script: /data/jobs/000/2/galaxy_2.sh
+galaxy.jobs.runners.util.process_groups DEBUG 2023-04-20 13:51:25,191 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] check_pg(): No process found in process group 587010
+galaxy.jobs.runners.local DEBUG 2023-04-20 13:51:25,192 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] execution finished: /data/jobs/000/2/galaxy_2.sh
+galaxy.jobs DEBUG 2023-04-20 13:51:25,202 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] finish(): Moved /data/jobs/000/2/outputs/galaxy_dataset_bfc51e23-4d98-4968-b9f6-a7fc970fad28.dat to /data/datasets/b/f/c/dataset_bfc51e23-4d98-4968-b9f6-a7fc970fad28.dat
+galaxy.model.metadata DEBUG 2023-04-20 13:51:25,212 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] loading metadata from file for: HistoryDatasetAssociation 2
+galaxy.jobs INFO 2023-04-20 13:51:25,235 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] Collecting metrics for Job 2 in /data/jobs/000/2
+galaxy.jobs DEBUG 2023-04-20 13:51:25,250 [pN:handler_1,p:272701,tN:LocalRunner.work_thread-3] job_wrapper.finish for job 2 executed (51.404 ms)
+</pre>
+
+
+---
 class: smaller, left
+
 # Successful job lifecycle
 
-Note `[p:PPPP,w:W,m:M]` in log messages:
+Note `[pN:NNNN,p:PPPP,tN:NNNN]` in log messages:
 
 ```console
-galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Tool [testing] created job [21] (73.833 ms)
-galaxy.jobs.mapper DEBUG 2019-02-01 14:30:21,527 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Mapped job to destination id: slurm
+galaxy.tools.execute DEBUG 2023-04-20 13:51:20,761 [pN:main.1,p:273250,tN:WSGI_0] Tool secure_hash_message_digest created job None (21.968 ms)
+galaxy.jobs.mapper DEBUG 2023-04-20 13:51:21,354 [pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread] (2) Mapped job to destination id: local_env
 ```
 
-- `[p:6590,w:1,m:0]`: PID 6590, web worker, not a mule (0)
-- `[p:6593,w:0,m:1]`: PID 6593, not a web worker (0), mule 1
+- `[pN:main.1,p:273250,tN:WSGI_0]`: PID 273250, web worker (not a job handler)
+- `[pN:handler_1,p:272701,tN:JobHandlerQueue.monitor_thread]`: PID 272701, job handler (not a web worker)
 
 ---
 class: smaller
+
 # Successful job lifecycle
 
 Dissecting the lifecycle messages
