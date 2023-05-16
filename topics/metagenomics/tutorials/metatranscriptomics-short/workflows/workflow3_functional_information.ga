@@ -157,11 +157,6 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "HUMAnN on input dataset(s): Gene families and their abundance",
-                    "output_name": "gene_families_tsv",
-                    "uuid": "ba124b0f-cbd5-4b65-b87a-84cfa578a927"
-                },
-                {
                     "label": "HUMAnN on input dataset(s): Pathways and their abundance",
                     "output_name": "pathabundance_tsv",
                     "uuid": "65797303-6f12-4ae8-9511-1af40f52e71d"
@@ -175,6 +170,11 @@
                     "label": "HUMAnN on input dataset(s): Log",
                     "output_name": "log",
                     "uuid": "60492d72-7b3c-45c9-b32b-b6374ab08228"
+                },
+                {
+                    "label": "HUMAnN on input dataset(s): Gene families and their abundance",
+                    "output_name": "gene_families_tsv",
+                    "uuid": "ba124b0f-cbd5-4b65-b87a-84cfa578a927"
                 }
             ]
         },
@@ -324,12 +324,7 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Replace",
-                    "name": "infile"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Replace",
             "outputs": [
@@ -350,7 +345,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"g__Hungateiclostridium.s__Hungateiclostridium_thermocellum\", \"replace_pattern\": \"g__Acetivibrio.s__Acetivibrio_thermocellus\", \"is_regex\": false, \"global\": false, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"g__Hungateiclostridium.s__Hungateiclostridium_thermocellum\", \"replace_pattern\": \"g__Acetivibrio.s__Acetivibrio_thermocellus\", \"is_regex\": false, \"global\": false, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.4",
             "type": "tool",
             "uuid": "c2f7fe25-be75-4247-95d8-e139610b151e",
@@ -503,14 +498,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "Split a HUMAnN table on input dataset(s): Stratified table",
-                    "output_name": "stratified",
-                    "uuid": "6a65ee93-3a2e-4a81-94ff-35917396bdfa"
-                },
-                {
                     "label": "Split a HUMAnN table on input dataset(s): Unstratified table",
                     "output_name": "unstratified",
                     "uuid": "1ff60d0a-4a64-44c0-8b6f-bbdfa8566a0c"
+                },
+                {
+                    "label": "Split a HUMAnN table on input dataset(s): Stratified table",
+                    "output_name": "stratified",
+                    "uuid": "6a65ee93-3a2e-4a81-94ff-35917396bdfa"
                 }
             ]
         },
@@ -542,7 +537,15 @@
                 "left": 1169.296670629776,
                 "top": 63.92767530080023
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActiongene_families_output_file": {
+                    "action_arguments": {
+                        "newname": "Combined MetaPhlAn and HUMAnN output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "gene_families_output_file"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0",
             "tool_shed_repository": {
                 "changeset_revision": "fdfb35745104",
@@ -682,6 +685,6 @@
         }
     },
     "tags": [],
-    "uuid": "dbd990ec-3326-453e-8dac-b0d297e98e2a",
-    "version": 11
+    "uuid": "af0f30ba-952a-42d6-9dfe-6ca5ff437c92",
+    "version": 12
 }

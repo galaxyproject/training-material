@@ -21,7 +21,7 @@
             "outputs": [],
             "position": {
                 "left": 9.64714688080777,
-                "top": 58.688991948932845
+                "top": 53.73730095248055
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -48,7 +48,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 185.96590358526086
+                "top": 181.01421258880856
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -79,7 +79,7 @@
             "outputs": [],
             "position": {
                 "left": 433.82115402133917,
-                "top": 252.26418542073222
+                "top": 247.31249442427992
             },
             "subworkflow": {
                 "a_galaxy_workflow": "true",
@@ -592,7 +592,7 @@
             "name": "Workflow 2: Community Profile",
             "outputs": [],
             "position": {
-                "left": 1317.915732694805,
+                "left": 1027.8838838959205,
                 "top": 0
             },
             "subworkflow": {
@@ -1017,7 +1017,7 @@
             "outputs": [],
             "position": {
                 "left": 1217.2796872753727,
-                "top": 1170.2937868270524
+                "top": 1165.3420958306
             },
             "subworkflow": {
                 "a_galaxy_workflow": "true",
@@ -1336,52 +1336,42 @@
                     },
                     "7": {
                         "annotation": "",
-                        "content_id": "toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4",
                         "errors": null,
                         "id": 7,
                         "input_connections": {
-                            "humann2_file": {
+                            "infile": {
                                 "id": 4,
                                 "output_name": "output"
-                            },
-                            "metaphlan2_file": {
-                                "id": 2,
-                                "output_name": "out_file1"
                             }
                         },
                         "inputs": [],
-                        "label": "Combination of taxonomic and metabolic assignations for gene families",
-                        "name": "Combine MetaPhlAn2 and HUMAnN2 outputs",
+                        "label": null,
+                        "name": "Replace",
                         "outputs": [
                             {
-                                "name": "gene_families_output_file",
-                                "type": "tabular"
+                                "name": "outfile",
+                                "type": "input"
                             }
                         ],
                         "position": {
-                            "left": 1068.5,
-                            "top": 164.73693839706976
+                            "left": 847.1732278327396,
+                            "top": 250.58252841847084
                         },
                         "post_job_actions": {},
-                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0",
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4",
                         "tool_shed_repository": {
-                            "changeset_revision": "fdfb35745104",
-                            "name": "combine_metaphlan2_humann2",
-                            "owner": "bebatut",
+                            "changeset_revision": "d698c222f354",
+                            "name": "text_processing",
+                            "owner": "bgruening",
                             "tool_shed": "toolshed.g2.bx.psu.edu"
                         },
-                        "tool_state": "{\"humann2_file\": {\"__class__\": \"ConnectedValue\"}, \"metaphlan2_file\": {\"__class__\": \"ConnectedValue\"}, \"type\": \"gene_families\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-                        "tool_version": "0.2.0",
+                        "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"g__Hungateiclostridium.s__Hungateiclostridium_thermocellum\", \"replace_pattern\": \"g__Acetivibrio.s__Acetivibrio_thermocellus\", \"is_regex\": false, \"global\": false, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "1.1.4",
                         "type": "tool",
-                        "uuid": "47c1c071-024b-44cd-8dab-f710a6875b2a",
+                        "uuid": "c2f7fe25-be75-4247-95d8-e139610b151e",
                         "when": null,
-                        "workflow_outputs": [
-                            {
-                                "label": "Combine MetaPhlAn2 and HUMAnN2 outputs on input dataset(s): Gene family abundances related to genus/species abundances",
-                                "output_name": "gene_families_output_file",
-                                "uuid": "b34cf972-ec0c-4ecc-ab77-bd0e61d8a0e2"
-                            }
-                        ]
+                        "workflow_outputs": []
                     },
                     "8": {
                         "annotation": "",
@@ -1542,9 +1532,66 @@
                     },
                     "11": {
                         "annotation": "",
-                        "content_id": "Grep1",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0",
                         "errors": null,
                         "id": 11,
+                        "input_connections": {
+                            "humann2_file": {
+                                "id": 7,
+                                "output_name": "outfile"
+                            },
+                            "metaphlan2_file": {
+                                "id": 2,
+                                "output_name": "out_file1"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Combination of taxonomic and metabolic assignations for gene families",
+                        "name": "Combine MetaPhlAn2 and HUMAnN2 outputs",
+                        "outputs": [
+                            {
+                                "name": "gene_families_output_file",
+                                "type": "tabular"
+                            }
+                        ],
+                        "position": {
+                            "left": 1169.296670629776,
+                            "top": 63.92767530080023
+                        },
+                        "post_job_actions": {
+                            "RenameDatasetActiongene_families_output_file": {
+                                "action_arguments": {
+                                    "newname": "Combined MetaPhlAn and HUMAnN output"
+                                },
+                                "action_type": "RenameDatasetAction",
+                                "output_name": "gene_families_output_file"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "fdfb35745104",
+                            "name": "combine_metaphlan2_humann2",
+                            "owner": "bebatut",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"humann2_file\": {\"__class__\": \"ConnectedValue\"}, \"metaphlan2_file\": {\"__class__\": \"ConnectedValue\"}, \"type\": \"gene_families\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.2.0",
+                        "type": "tool",
+                        "uuid": "47c1c071-024b-44cd-8dab-f710a6875b2a",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "Combine MetaPhlAn2 and HUMAnN2 outputs on input dataset(s): Gene family abundances related to genus/species abundances",
+                                "output_name": "gene_families_output_file",
+                                "uuid": "b34cf972-ec0c-4ecc-ab77-bd0e61d8a0e2"
+                            }
+                        ]
+                    },
+                    "12": {
+                        "annotation": "",
+                        "content_id": "Grep1",
+                        "errors": null,
+                        "id": 12,
                         "input_connections": {
                             "input": {
                                 "id": 9,
@@ -1579,11 +1626,11 @@
                             }
                         ]
                     },
-                    "12": {
+                    "13": {
                         "annotation": "",
                         "content_id": "Grep1",
                         "errors": null,
-                        "id": 12,
+                        "id": 13,
                         "input_connections": {
                             "input": {
                                 "id": 9,
@@ -1600,8 +1647,8 @@
                             }
                         ],
                         "position": {
-                            "left": 1844.5,
-                            "top": 576.2369383970697
+                            "left": 1826.8038463164564,
+                            "top": 569.1619915272356
                         },
                         "post_job_actions": {},
                         "tool_id": "Grep1",
@@ -1618,11 +1665,11 @@
                             }
                         ]
                     },
-                    "13": {
+                    "14": {
                         "annotation": "",
                         "content_id": "Grep1",
                         "errors": null,
-                        "id": 13,
+                        "id": 14,
                         "input_connections": {
                             "input": {
                                 "id": 9,
@@ -1659,7 +1706,7 @@
                     }
                 },
                 "tags": "",
-                "uuid": "62a1678c-9db0-47c5-b34e-3cce8979f996"
+                "uuid": "af0f30ba-952a-42d6-9dfe-6ca5ff437c92"
             },
             "tool_id": null,
             "type": "subworkflow",
@@ -1669,6 +1716,6 @@
         }
     },
     "tags": [],
-    "uuid": "5683582b-14b8-4a09-ae28-6204cf26db5f",
-    "version": 57
+    "uuid": "e7fa8252-765f-4d74-b23d-b23ae49de9c3",
+    "version": 67
 }

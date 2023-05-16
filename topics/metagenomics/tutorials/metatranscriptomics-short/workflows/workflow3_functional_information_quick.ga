@@ -20,7 +20,7 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 0.0,
+                "left": 0,
                 "top": 315.16828885381835
             },
             "tool_id": null,
@@ -96,12 +96,7 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Cut",
-                    "name": "input"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Cut",
             "outputs": [
@@ -116,7 +111,7 @@
             },
             "post_job_actions": {},
             "tool_id": "Cut1",
-            "tool_state": "{\"columnList\": \"c1,c3\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"columnList\": \"c1,c3\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.2",
             "type": "tool",
             "uuid": "c8e6794a-4df8-42e0-a97a-d0bff733a5a0",
@@ -482,7 +477,15 @@
                 "left": 1287.220433609576,
                 "top": 0
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActiongene_families_output_file": {
+                    "action_arguments": {
+                        "newname": "Combined MetaPhlAn and HUMAnN output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "gene_families_output_file"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0",
             "tool_shed_repository": {
                 "changeset_revision": "fdfb35745104",
@@ -625,6 +628,6 @@
         "asaim",
         "metagenomics"
     ],
-    "uuid": "881a7f21-b09c-4509-a6dd-32361769494e",
-    "version": 6
+    "uuid": "a5269b22-54cd-460e-90fd-8119ea0445d6",
+    "version": 7
 }
