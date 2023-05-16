@@ -23,7 +23,8 @@ module Jekyll
         # check if a variable was provided for the tool id
         tool = context[m[2].tr('{}', '')] || m[2]
 
-        "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\"><strong>#{m[1]}</strong> " \
+        "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" aria-role=\"link\">"\
+          "<strong>#{m[1]}</strong> " \
           '<i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i>' \
           "<span class=\"visually-hidden\">Tool: #{tool}</span></span>"
       else

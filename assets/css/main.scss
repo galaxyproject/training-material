@@ -272,7 +272,7 @@ figure {
 }
 
 footer {
-    margin-top: 3em;
+    margin-top: 5em;
     text-align: center;
     color: var(--text-color-muted);
     font-size: $font-size - 2;
@@ -1055,36 +1055,45 @@ ul.supporting_material{
   margin-top: 1em;
 }
 
-span.tool, span.workflow {
-	border: 1px solid #999;
-	padding: 2px;
-	border-radius: 5px;
 
-	&:hover {
-		border: 1px solid blue;
-
+// The default presentation
+body {
+	.show-when-galaxy-proxy-active {
+		cursor: not-allowed;
 	}
 
-	&.galaxy-proxy-active {
+	span.tool, span.workflow {
+		border: 1px solid #999;
+		padding: 2px;
+		border-radius: 5px;
+
+		&:hover {
+			border: 1px solid blue;
+		}
+	}
+}
+
+// The fancier presentation when possible
+body.galaxy-proxy-active {
+	.show-when-galaxy-proxy-active {
+		cursor: pointer;
+	}
+
+	.hide-when-galaxy-proxy-active {
+		display: none;
+	}
+
+	span.tool, span.workflow {
 		cursor: pointer;
 		color: var(--brand-color-contrast);
 		background-color: var(--brand-color);
 		border-color: var(--brand-color);
 		padding: 0.2em 0.5em;
-	}
 
-	&.galaxy-proxy-active:hover {
-		background-color: var(--hyperlink);
-		border-color: var(--hyperlink);
-	}
-}
-
-body.galaxy-proxy-active {
-	.galaxy-proxy-active-show {
-		//
-	}
-	.galaxy-proxy-active-hide {
-		display: none;
+		&:hover {
+			background-color: var(--hyperlink);
+			border-color: var(--hyperlink);
+		}
 	}
 }
 
