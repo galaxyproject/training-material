@@ -59,7 +59,7 @@ else if(currentMonth === 6 && window.location.pathname === "/"){ // Just for Jun
 }
 else { // Not one of the "special" months
 	// If we had automatically set the theme in the past, or never automatically set one before
-	if localStorage.getItem('training-theme-automatic') === "true" || localStorage.getItem('training-theme-automatic') === undefined {
+	if (localStorage.getItem('training-theme-automatic') === "true" || localStorage.getItem('training-theme-automatic') === undefined){
 		// Then we mark it as non-automatic
 		localStorage.setItem('training-theme-automatic', 'false');
 		// And set the theme back to default
