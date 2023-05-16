@@ -108,7 +108,7 @@ TEST_PHRASES = [
 TITLE_TOPIC = /^(?<tutorial>.*) \((?<topic>.*)\)$/
 
 data = CSV.parse($stdin.read, col_sep: "\t", headers: true, quote_char: '|')
-data.map! do |x|
+data = data.map do |x|
   x[:timestamp] = x['Timestamp']
   x[:rating] = x['How much did you like this tutorial?']
   x[:pro] = x['What did you like?']
