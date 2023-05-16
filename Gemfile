@@ -17,3 +17,6 @@ gem 'csl-styles'
 
 # Image processing
 gem 'fastimage'
+
+# For our CLI tools
+gem 'commander'
