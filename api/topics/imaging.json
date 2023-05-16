@@ -3,7 +3,9 @@
   "type": "use",
   "title": "Imaging",
   "summary": "Image analysis using Galaxy",
-  "edam_ontology": "topic_3382",
+  "edam_ontology": [
+    "topic_3382"
+  ],
   "docker_image": "quay.io/galaxy/imaging-training",
   "requirements": [
     {
@@ -76,7 +78,7 @@
           "email": "saskia.hiltemann@gmail.com",
           "twitter": "shiltemann",
           "linkedin": "shiltemann",
-          "gitter": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
           "orcid": "0000-0003-3803-468X",
           "joined": "2017-09",
           "bio": "Researcher at Erasmus Medical Center",
@@ -124,6 +126,7 @@
           ]
         }
       ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/imaging-introduction/tutorial.json",
       "tools": [
         "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.4",
         "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1",
@@ -135,6 +138,92 @@
         "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_segmentation_mask/ip_overlay_segmentation/0.0.6",
         "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2"
       ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "2d_auto_threshold",
+            "owner": "imgteam",
+            "revisions": "81f0cbca04a7",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_histogram_equalization",
+            "owner": "imgteam",
+            "revisions": "70316d792fc9",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_simple_filter",
+            "owner": "imgteam",
+            "revisions": "dba87c4b32d3",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bfconvert",
+            "owner": "imgteam",
+            "revisions": "b07f4839ca77",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "binary2labelimage",
+            "owner": "imgteam",
+            "revisions": "6e65fd971e13",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "count_objects",
+            "owner": "imgteam",
+            "revisions": "664232d2a3f7",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "image_info",
+            "owner": "imgteam",
+            "revisions": "7b6d9412c7f8",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "unzip",
+            "owner": "imgteam",
+            "revisions": "38eec75fbe9b",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: 81f0cbca04a7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_histogram_equalization\n  owner: imgteam\n  revisions: 70316d792fc9\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_simple_filter\n  owner: imgteam\n  revisions: dba87c4b32d3\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: b07f4839ca77\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: binary2labelimage\n  owner: imgteam\n  revisions: 6e65fd971e13\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: count_objects\n  owner: imgteam\n  revisions: 664232d2a3f7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: image_info\n  owner: imgteam\n  revisions: 7b6d9412c7f8\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 38eec75fbe9b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -224,6 +313,7 @@
           ]
         }
       ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.json",
       "tools": [
         "toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2",
         "toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+galaxy1",
@@ -236,6 +326,96 @@
         "toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1",
         "toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+galaxy1"
       ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "mesmer",
+            "owner": "goeckslab",
+            "revisions": "187918c47051",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "rename_tiff_channels",
+            "owner": "goeckslab",
+            "revisions": "09e240a12897",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "scimap_mcmicro_to_anndata",
+            "owner": "goeckslab",
+            "revisions": "8ca435ec19be",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "scimap_phenotyping",
+            "owner": "goeckslab",
+            "revisions": "dcfcad35e847",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "vitessce_spatial",
+            "owner": "goeckslab",
+            "revisions": "9f60ef2d586e",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bfconvert",
+            "owner": "imgteam",
+            "revisions": "f3360fbeda64",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ashlar",
+            "owner": "perssond",
+            "revisions": "33ab2058c6d9",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "basic_illumination",
+            "owner": "perssond",
+            "revisions": "acc6f509968c",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "coreograph",
+            "owner": "perssond",
+            "revisions": "ee92746d141a",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "quantification",
+            "owner": "perssond",
+            "revisions": "3a916c4e9f5f",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: mesmer\n  owner: goeckslab\n  revisions: 187918c47051\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: rename_tiff_channels\n  owner: goeckslab\n  revisions: '09e240a12897'\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scimap_mcmicro_to_anndata\n  owner: goeckslab\n  revisions: 8ca435ec19be\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scimap_phenotyping\n  owner: goeckslab\n  revisions: dcfcad35e847\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: vitessce_spatial\n  owner: goeckslab\n  revisions: 9f60ef2d586e\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: f3360fbeda64\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ashlar\n  owner: perssond\n  revisions: 33ab2058c6d9\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: basic_illumination\n  owner: perssond\n  revisions: acc6f509968c\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: coreograph\n  owner: perssond\n  revisions: ee92746d141a\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: quantification\n  owner: perssond\n  revisions: 3a916c4e9f5f\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -286,7 +466,7 @@
           "email": "beatrizserrano.galaxy@gmail.com",
           "twitter": "BSerranoSolano",
           "linkedin": "beatriz-serrano",
-          "gitter": "beatrizserrano",
+          "matrix": "beatrizserrano:matrix.org",
           "orcid": "0000-0002-5862-6132",
           "joined": "2020-07",
           "id": "beatrizserrano",
@@ -331,6 +511,7 @@
           ]
         }
       ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/tutorial-CP/tutorial.json",
       "tools": [
         "toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9",
         "toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9",
@@ -353,6 +534,180 @@
         "toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9",
         "toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.41"
       ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "cp_cellprofiler",
+            "owner": "bgruening",
+            "revisions": "e917a2424690",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_common",
+            "owner": "bgruening",
+            "revisions": "e7273daa5ae2",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_convert_objects_to_image",
+            "owner": "bgruening",
+            "revisions": "df3ad3ba5c6f",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_display_data_on_image",
+            "owner": "bgruening",
+            "revisions": "2484086dee41",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_enhance_or_suppress_features",
+            "owner": "bgruening",
+            "revisions": "f2ed92b011a9",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_export_to_spreadsheet",
+            "owner": "bgruening",
+            "revisions": "f8fa0f6718a3",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_gray_to_color",
+            "owner": "bgruening",
+            "revisions": "31d195bedf6d",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_identify_primary_objects",
+            "owner": "bgruening",
+            "revisions": "993faa34333b",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_image_math",
+            "owner": "bgruening",
+            "revisions": "c09dcda1143f",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_mask_image",
+            "owner": "bgruening",
+            "revisions": "3a05117669cf",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_measure_granularity",
+            "owner": "bgruening",
+            "revisions": "a1a961c46d4b",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_measure_image_area_occupied",
+            "owner": "bgruening",
+            "revisions": "20dbb1f7ec7b",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_measure_image_intensity",
+            "owner": "bgruening",
+            "revisions": "5499dc6f8ac1",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_measure_image_quality",
+            "owner": "bgruening",
+            "revisions": "e972e07c7845",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_measure_object_intensity",
+            "owner": "bgruening",
+            "revisions": "980aed9e8fd5",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_measure_object_size_shape",
+            "owner": "bgruening",
+            "revisions": "79e10d12d90a",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_measure_texture",
+            "owner": "bgruening",
+            "revisions": "035a58c7f54a",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_relate_objects",
+            "owner": "bgruening",
+            "revisions": "8083a87d2fdf",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_save_images",
+            "owner": "bgruening",
+            "revisions": "4ecf93628f97",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "idr_download_by_ids",
+            "owner": "iuc",
+            "revisions": "e08b1dc0480c",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: cp_cellprofiler\n  owner: bgruening\n  revisions: e917a2424690\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_common\n  owner: bgruening\n  revisions: e7273daa5ae2\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_convert_objects_to_image\n  owner: bgruening\n  revisions: df3ad3ba5c6f\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_display_data_on_image\n  owner: bgruening\n  revisions: 2484086dee41\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_enhance_or_suppress_features\n  owner: bgruening\n  revisions: f2ed92b011a9\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_export_to_spreadsheet\n  owner: bgruening\n  revisions: f8fa0f6718a3\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_gray_to_color\n  owner: bgruening\n  revisions: 31d195bedf6d\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_identify_primary_objects\n  owner: bgruening\n  revisions: 993faa34333b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_image_math\n  owner: bgruening\n  revisions: c09dcda1143f\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_mask_image\n  owner: bgruening\n  revisions: 3a05117669cf\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_measure_granularity\n  owner: bgruening\n  revisions: a1a961c46d4b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_measure_image_area_occupied\n  owner: bgruening\n  revisions: 20dbb1f7ec7b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_measure_image_intensity\n  owner: bgruening\n  revisions: 5499dc6f8ac1\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_measure_image_quality\n  owner: bgruening\n  revisions: e972e07c7845\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_measure_object_intensity\n  owner: bgruening\n  revisions: 980aed9e8fd5\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_measure_object_size_shape\n  owner: bgruening\n  revisions: 79e10d12d90a\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_measure_texture\n  owner: bgruening\n  revisions: 035a58c7f54a\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_relate_objects\n  owner: bgruening\n  revisions: 8083a87d2fdf\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_save_images\n  owner: bgruening\n  revisions: 4ecf93628f97\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: idr_download_by_ids\n  owner: iuc\n  revisions: e08b1dc0480c\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -469,6 +824,7 @@
           ]
         }
       ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/hela-screen-analysis/tutorial.json",
       "tools": [
         "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.3",
         "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1",
@@ -477,6 +833,82 @@
         "toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1",
         "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0"
       ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "2d_auto_threshold",
+            "owner": "imgteam",
+            "revisions": "d4da97f51700",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_feature_extraction",
+            "owner": "imgteam",
+            "revisions": "5791a7f65275",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_filter_segmentation_by_features",
+            "owner": "imgteam",
+            "revisions": "e576b73a2e2f",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_simple_filter",
+            "owner": "imgteam",
+            "revisions": "dba87c4b32d3",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_split_binaryimage_by_watershed",
+            "owner": "imgteam",
+            "revisions": "f8f7987586b7",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "collapse_collections",
+            "owner": "nml",
+            "revisions": "25136a2b0cfe",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: d4da97f51700\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_feature_extraction\n  owner: imgteam\n  revisions: 5791a7f65275\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_filter_segmentation_by_features\n  owner: imgteam\n  revisions: e576b73a2e2f\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_simple_filter\n  owner: imgteam\n  revisions: dba87c4b32d3\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_split_binaryimage_by_watershed\n  owner: imgteam\n  revisions: f8f7987586b7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 25136a2b0cfe\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -532,7 +964,7 @@
           "email": "beatrizserrano.galaxy@gmail.com",
           "twitter": "BSerranoSolano",
           "linkedin": "beatriz-serrano",
-          "gitter": "beatrizserrano",
+          "matrix": "beatrizserrano:matrix.org",
           "orcid": "0000-0002-5862-6132",
           "joined": "2020-07",
           "id": "beatrizserrano",
@@ -576,6 +1008,7 @@
           ]
         }
       ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.json",
       "tools": [
         "toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9+galaxy0",
@@ -590,6 +1023,120 @@
         "toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2"
       ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "cp_cellprofiler",
+            "owner": "bgruening",
+            "revisions": "0e4dccaafef5",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_color_to_gray",
+            "owner": "bgruening",
+            "revisions": "e8f822eeb9fd",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_common",
+            "owner": "bgruening",
+            "revisions": "670975e92458",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_export_to_spreadsheet",
+            "owner": "bgruening",
+            "revisions": "d0178bdcd00e",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_identify_primary_objects",
+            "owner": "bgruening",
+            "revisions": "b6eec6087271",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_measure_object_intensity",
+            "owner": "bgruening",
+            "revisions": "407925835dd9",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_measure_object_size_shape",
+            "owner": "bgruening",
+            "revisions": "acf3aa487283",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_overlay_outlines",
+            "owner": "bgruening",
+            "revisions": "91560258e972",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_save_images",
+            "owner": "bgruening",
+            "revisions": "33f4fa1413fb",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_tile",
+            "owner": "bgruening",
+            "revisions": "878bafb411dd",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cp_track_objects",
+            "owner": "bgruening",
+            "revisions": "1fd453cd757b",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "unzip",
+            "owner": "imgteam",
+            "revisions": "38eec75fbe9b",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: cp_cellprofiler\n  owner: bgruening\n  revisions: 0e4dccaafef5\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_color_to_gray\n  owner: bgruening\n  revisions: e8f822eeb9fd\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_common\n  owner: bgruening\n  revisions: 670975e92458\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_export_to_spreadsheet\n  owner: bgruening\n  revisions: d0178bdcd00e\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_identify_primary_objects\n  owner: bgruening\n  revisions: b6eec6087271\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_measure_object_intensity\n  owner: bgruening\n  revisions: 407925835dd9\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_measure_object_size_shape\n  owner: bgruening\n  revisions: acf3aa487283\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_overlay_outlines\n  owner: bgruening\n  revisions: 91560258e972\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_save_images\n  owner: bgruening\n  revisions: 33f4fa1413fb\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_tile\n  owner: bgruening\n  revisions: 878bafb411dd\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cp_track_objects\n  owner: bgruening\n  revisions: 1fd453cd757b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 38eec75fbe9b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {

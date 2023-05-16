@@ -56,8 +56,8 @@
   },
   "citation": {
     "@type": "CreativeWork",
-    "name": "Galaxy Training: A Powerful Framework for Teaching!",
-    "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
   },
   "copyrightHolder": {
     "@type": "Organization",
@@ -65,13 +65,13 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-11T12:57:40+00:00",
+  "dateModified": "2023-04-11 12:57:40 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Ansible",
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
   "isFamilyFriendly": true,
-  "license": "https://spdx.org/licenses/CC-BY-4.0",
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
   "producer": {
     "@type": "Organization",
     "email": "galaxytrainingnetwork@gmail.com",
@@ -595,6 +595,7 @@
 
 <!--SNIPPET-->
 <blockquote class="tip">   <div class="box-title tip-title" id="tip-operating-system-compatibility"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-operating-system-compatibility" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Operating system compatibility<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>These Ansible roles and training materials were last tested on Centos 7 and Ubuntu 18.04, but will probably work on other RHEL and Debian variants.</p>   <p>The roles that are used in these training are currently used by <code class="language-plaintext highlighter-rouge">usegalaxy.*</code>, and other, servers in maintaining their infrastructure. (<a href="https://github.com/galaxyproject/infrastructure-playbook/">US</a>, <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">EU</a>, both are running CentOS 7)</p>   <p>If you have an issue running these trainings on your OS flavour, please report <a href="https://github.com/galaxyproject/training-material/issues/new">the issue</a> in the training material and we can see if it is possible to solve.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
 
 <h1 id="what-is-ansible">What is Ansible?</h1>
 
@@ -1179,6 +1180,7 @@ to show how a person using <code class="language-plaintext highlighter-rouge">my
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-variable-connection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-variable-connection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Variable connection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named <code class="language-plaintext highlighter-rouge">my_hosts</code>, it checks many different places for variables, including “group_vars/my_hosts.yml”. If there are variables there, they’re added to the collection of current variables. It also checks “group_vars/all.yml” (for the built-in host group <code class="language-plaintext highlighter-rouge">all</code>). There is a precedence order, but then these variables are available for roles and tasks to consume.</p> </blockquote>
+      <p><!--END_SNIPPET--></p>
     </li>
     <li>
       <p>Run the playbook again, but imagine you are worried about this change, and supply the <code class="language-plaintext highlighter-rouge">--check --diff</code> flag to see what changes are made before committing to make them.</p>
@@ -1191,6 +1193,7 @@ to show how a person using <code class="language-plaintext highlighter-rouge">my
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-what-if-you-forget-diff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-if-you-forget-diff" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: What if you forget `--diff`?<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you forget to use <code class="language-plaintext highlighter-rouge">--diff</code>, it is not easy to see what has changed. Some modules like the <code class="language-plaintext highlighter-rouge">copy</code> and <code class="language-plaintext highlighter-rouge">template</code> modules have a <code class="language-plaintext highlighter-rouge">backup</code> option. If you set this option, then it will keep a backup copy next to the destination file.</p>   <p>However, most modules do not have such an option, so if you want to know what changes, always use <code class="language-plaintext highlighter-rouge">--diff</code>.</p> </blockquote>
+      <p><!--END_SNIPPET--></p>
 
       <blockquote class="code-out">
         <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
@@ -1347,6 +1350,7 @@ The solution to this is to set <code class="language-plaintext highlighter-rouge
 
 <!--SNIPPET-->
 <blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: How do I know what I can do with a role? What variables are available?<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>You don’t. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, galaxyproject) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.</p>   <p>So, definitely check there first, but if they aren’t there, then you’ll need to read through <code class="language-plaintext highlighter-rouge">defaults/</code> and <code class="language-plaintext highlighter-rouge">tasks/</code> and <code class="language-plaintext highlighter-rouge">templates/</code> to figure out what the role does and how you can control and modify it to accomplish your goals.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
 
 <h1 id="ansible-vault">Ansible Vault</h1>
 
@@ -1639,6 +1643,23 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/admin/tutorials/ansible/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+
                 </section>
 
             </div>

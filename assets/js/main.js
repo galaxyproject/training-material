@@ -59,7 +59,8 @@ $("section.tutorial .hands_on,section.tutorial .hands-on").each((idx, el) => {
 // CYOA Support
 function cyoaChoice(text){
 	if(text !== undefined && text !== null){
-		localStorage.setItem('gtn-cyoa', text);
+		const loc = new URL(document.location)
+		localStorage.setItem(`gtn-cyoa-${loc.pathname}`, text);
 
 		var inputs = document.querySelectorAll(".gtn-cyoa input"),
 			options = [...inputs].map(x => x.value),
@@ -78,14 +79,15 @@ function cyoaChoice(text){
 
 function cyoaDefault(defaultOption){
 	// Start with the URL parameter
-	var urlOption = (new URL(document.location)).searchParams.get("gtn-cyoa");
+	const loc = new URL(document.location)
+	var urlOption = loc.searchParams.get("gtn-cyoa");
 	if(urlOption){
 		cyoaChoice(urlOption);
 		return;
 	}
 
 	// Otherwise fall back to local storage (survives refreshes)
-	var lsOption = localStorage.getItem('gtn-cyoa');
+	var lsOption = localStorage.getItem(`gtn-cyoa-${loc.pathname}`);
 	if(lsOption !== null){
 		cyoaChoice(lsOption);
 		return;

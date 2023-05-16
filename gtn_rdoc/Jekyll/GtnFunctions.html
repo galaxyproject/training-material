@@ -99,6 +99,8 @@
 
   <section class="description">
     
+<p>The main GTN function library</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -132,9 +134,9 @@
           
 
           <div class="method-source-code" id="cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 55</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">cache</span>
-  <span class="ruby-identifier">@@cache</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Cache</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;GtnFunctions&quot;</span>)
+  <span class="ruby-identifier">@@cache</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Cache</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;GtnFunctions&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -160,28 +162,26 @@
           
 
           <div class="method-source-code" id="convert_to_material_list-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 276</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 275</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_to_material_list</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">materials</span>)
   <span class="ruby-comment"># [{&quot;name&quot;=&gt;&quot;introduction&quot;, &quot;topic&quot;=&gt;&quot;admin&quot;}]</span>
-  <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&quot;name&quot;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&quot;topic&quot;</span>)
-      <span class="ruby-identifier">found</span> = <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">fetch_tutorial_material</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">m</span>[<span class="ruby-string">&quot;topic&quot;</span>], <span class="ruby-identifier">m</span>[<span class="ruby-string">&quot;name&quot;</span>])
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">found</span>.<span class="ruby-identifier">nil?</span>
-        <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>  <span class="ruby-node">&quot;Could not find material #{m[&quot;topic&quot;]}/#{m[&quot;name&quot;]} in the site data&quot;</span>
-      <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;name&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;topic&#39;</span>)
+      <span class="ruby-identifier">found</span> = <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">fetch_tutorial_material</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;topic&#39;</span>], <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;name&#39;</span>])
+      <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Could not find material #{m[&#39;topic&#39;]}/#{m[&#39;name&#39;]} in the site data&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">found</span>.<span class="ruby-identifier">nil?</span>
       <span class="ruby-identifier">found</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&quot;external&quot;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;external&#39;</span>]
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;external&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;external&#39;</span>]
       {
-        <span class="ruby-string">&quot;layout&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;tutorial_hands_on&quot;</span>,
-        <span class="ruby-string">&quot;name&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&quot;name&quot;</span>],
-        <span class="ruby-string">&quot;title&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&quot;name&quot;</span>],
-        <span class="ruby-string">&quot;hands_on&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;external&quot;</span>,
-        <span class="ruby-string">&quot;hands_on_url&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&quot;link&quot;</span>],
+        <span class="ruby-string">&#39;layout&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;tutorial_hands_on&#39;</span>,
+        <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;name&#39;</span>],
+        <span class="ruby-string">&#39;title&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;name&#39;</span>],
+        <span class="ruby-string">&#39;hands_on&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;external&#39;</span>,
+        <span class="ruby-string">&#39;hands_on_url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;link&#39;</span>],
       }
     <span class="ruby-keyword">else</span>
-      <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>  <span class="ruby-node">&quot;[GTN] Unsure how to render #{m}&quot;</span>
+      <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;[GTN] Unsure how to render #{m}&quot;</span>
     <span class="ruby-keyword">end</span>
-  }
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -211,21 +211,19 @@
 
 <p>Example:</p>
 
-<pre>{{ &quot;topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga&quot; | convert_workflow_path_to_trs }}
+<pre>{{ &quot;topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga&quot; |
+   convert_workflow_path_to_trs }}
 =&gt; &quot;/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control&quot;</pre>
 
           <div class="method-source-code" id="convert_workflow_path_to_trs-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 309</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 307</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_workflow_path_to_trs</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;GTN_TRS_ERROR_NIL&quot;</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;GTN_TRS_ERROR_NIL&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">nil?</span>
 
-  <span class="ruby-identifier">m</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/topics\/(?&lt;topic&gt;.*)\/tutorials\/(?&lt;tutorial&gt;.*)\/workflows\/(?&lt;workflow&gt;.*)\.ga/</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;GTN_TRS_ERROR&quot;</span>
+  <span class="ruby-identifier">m</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">%r{topics/(?&lt;topic&gt;.*)/tutorials/(?&lt;tutorial&gt;.*)/workflows/(?&lt;workflow&gt;.*)\.ga}</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>
+
+  <span class="ruby-string">&#39;GTN_TRS_ERROR&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -254,7 +252,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="elixirnode2name-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 92</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">elixirnode2name</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-constant">ELIXIR_NODES</span>[<span class="ruby-identifier">name</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -291,9 +289,9 @@
 fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.garden/@hexylena&quot;</pre>
 
           <div class="method-source-code" id="fedi2link-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 243</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 242</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fedi2link</span>(<span class="ruby-identifier">fedi_address</span>)
-  <span class="ruby-identifier">fedi_address</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^@?(?&lt;user&gt;.*)@(?&lt;host&gt;.*)$/</span>){<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;https://#{$~[:host]}/@#{$~[:user]}&quot;</span> }
+  <span class="ruby-identifier">fedi_address</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^@?(?&lt;user&gt;.*)@(?&lt;host&gt;.*)$/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">_m</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;https://#{$LAST_MATCH_INFO[:host]}/@#{$LAST_MATCH_INFO[:user]}&quot;</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -331,13 +329,11 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{% assign authors = page.contributors | filter_authors:page.contributions -%}</pre>
 
           <div class="method-source-code" id="filter_authors-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 224</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 225</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_authors</span>(<span class="ruby-identifier">contributors</span>, <span class="ruby-identifier">contributions</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">contributors</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">contributors</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">contributions</span>[<span class="ruby-string">&quot;authorship&quot;</span>]
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">contributors</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">contributors</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">contributions</span>[<span class="ruby-string">&#39;authorship&#39;</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -372,7 +368,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="fix_box_titles-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 208</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 209</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fix_box_titles</span>(<span class="ruby-identifier">content</span>, <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">key</span>)
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Boxify</span>.<span class="ruby-identifier">replace_elements</span>(<span class="ruby-identifier">content</span>, <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">key</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -403,21 +399,16 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="get_default_link-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 341</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 336</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_default_link</span>(<span class="ruby-identifier">material</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;NO LINK&quot;</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;NO LINK&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">nil?</span>
+
   <span class="ruby-identifier">url</span> = <span class="ruby-keyword">nil</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;slides&#39;</span>]
-    <span class="ruby-identifier">url</span> = <span class="ruby-node">&quot;topics/#{material[&#39;topic_name&#39;]}/tutorials/#{material[&#39;tutorial_name&#39;]}/slides.html&quot;</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">url</span> = <span class="ruby-node">&quot;topics/#{material[&#39;topic_name&#39;]}/tutorials/#{material[&#39;tutorial_name&#39;]}/slides.html&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;slides&#39;</span>]
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;hands_on&#39;</span>]
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;hands_on&#39;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;external&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;hands_on&#39;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span>
-      <span class="ruby-identifier">url</span> = <span class="ruby-node">&quot;topics/#{material[&#39;topic_name&#39;]}/tutorials/#{material[&#39;tutorial_name&#39;]}/tutorial.html&quot;</span>
-    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;hands_on&#39;</span>] <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;hands_on&#39;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;external&#39;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;hands_on&#39;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-identifier">url</span> = <span class="ruby-node">&quot;topics/#{material[&#39;topic_name&#39;]}/tutorials/#{material[&#39;tutorial_name&#39;]}/tutorial.html&quot;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">url</span>
@@ -453,7 +444,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{{ page | get_topic }}</pre>
 
           <div class="method-source-code" id="get_topic-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 330</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 325</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_topic</span>(<span class="ruby-identifier">page</span>)
   <span class="ruby-comment"># Arrays that will store all introduction slides and tutorials we discover.</span>
   <span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">1</span>]
@@ -485,10 +476,10 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="gtn_mod_date-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 173</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 174</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gtn_mod_date</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-comment"># Automatically strips any leading slashes.</span>
-  <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^\//</span>, <span class="ruby-string">&#39;&#39;</span>))
+  <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{^/}</span>, <span class="ruby-string">&#39;&#39;</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -520,9 +511,9 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="how_many_topic_feedbacks-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 185</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">how_many_topic_feedbacks</span>(<span class="ruby-identifier">feedback</span>, <span class="ruby-identifier">name</span>)
-  <span class="ruby-identifier">feedback</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&quot;topic&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>}.<span class="ruby-identifier">length</span>
+  <span class="ruby-identifier">feedback</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;topic&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> }.<span class="ruby-identifier">length</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -554,9 +545,9 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="how_many_tutorial_feedbacks-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 196</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 197</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">how_many_tutorial_feedbacks</span>(<span class="ruby-identifier">feedback</span>, <span class="ruby-identifier">name</span>)
-  <span class="ruby-identifier">feedback</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&quot;tutorial&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>}.<span class="ruby-identifier">length</span>
+  <span class="ruby-identifier">feedback</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;tutorial&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span> }.<span class="ruby-identifier">length</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -590,15 +581,15 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </pre>
 
           <div class="method-source-code" id="humanize_types-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 136</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 137</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">humanize_types</span>(<span class="ruby-identifier">type</span>)
   <span class="ruby-identifier">data</span> = {
-    <span class="ruby-string">&quot;seq&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;List of Items&quot;</span>,
-    <span class="ruby-string">&quot;str&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Free Text&quot;</span>,
-    <span class="ruby-string">&quot;map&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;A dictionary/map&quot;</span>,
-    <span class="ruby-string">&quot;float&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Decimal Number&quot;</span>,
-    <span class="ruby-string">&quot;int&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Integer Number&quot;</span>,
-    <span class="ruby-string">&quot;bool&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Boolean&quot;</span>
+    <span class="ruby-string">&#39;seq&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;List of Items&#39;</span>,
+    <span class="ruby-string">&#39;str&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;Free Text&#39;</span>,
+    <span class="ruby-string">&#39;map&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;A dictionary/map&#39;</span>,
+    <span class="ruby-string">&#39;float&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;Decimal Number&#39;</span>,
+    <span class="ruby-string">&#39;int&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;Integer Number&#39;</span>,
+    <span class="ruby-string">&#39;bool&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;Boolean&#39;</span>
   }
   <span class="ruby-identifier">data</span>[<span class="ruby-identifier">type</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -631,7 +622,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <p>TODO: These two could be unified tbh</p>
 
           <div class="method-source-code" id="last_modified_at-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 162</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">last_modified_at</span>(<span class="ruby-identifier">page</span>)
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -666,9 +657,9 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{{ &quot;assets/images/mastodon.svg&quot; | load_svg }}</pre>
 
           <div class="method-source-code" id="load_svg-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 256</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 255</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_svg</span>(<span class="ruby-identifier">path</span>)
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">read</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\R+/</span>, <span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\R+/</span>, <span class="ruby-string">&#39;&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -687,10 +678,10 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           
 
           <div class="method-source-code" id="regex_replace-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 260</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">regex_replace</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">regex_search</span>, <span class="ruby-identifier">value_replace</span>)
   <span class="ruby-identifier">regex</span> = <span class="ruby-regexp">/#{regex_search}/m</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">regex</span>, <span class="ruby-identifier">value_replace</span>)
+  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">regex</span>, <span class="ruby-identifier">value_replace</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -713,10 +704,10 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{{ content | regex_replace: &#39;&lt;hr&gt;&#39;, &#39;&#39; }}</pre>
 
           <div class="method-source-code" id="regex_replace_once-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 271</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 270</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">regex_replace_once</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">regex_search</span>, <span class="ruby-identifier">value_replace</span>)
   <span class="ruby-identifier">regex</span> = <span class="ruby-regexp">/#{regex_search}/m</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-identifier">regex</span>, <span class="ruby-identifier">value_replace</span>)
+  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-identifier">regex</span>, <span class="ruby-identifier">value_replace</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -735,7 +726,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           <p>Replaces newlines with newline + two spaces</p>
 
           <div class="method-source-code" id="replace_newline_doublespace-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 150</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace_newline_doublespace</span>(<span class="ruby-identifier">text</span>)
   <span class="ruby-identifier">text</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\n/</span>, <span class="ruby-string">&quot;\n  &quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -771,10 +762,10 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </pre>
 
           <div class="method-source-code" id="slugify_unsafe-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 122</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">slugify_unsafe</span>(<span class="ruby-identifier">text</span>)
   <span class="ruby-comment"># Gets rid of *most* things without making it completely unusable?</span>
-  <span class="ruby-identifier">text</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[&quot;&#39;\\\/-;:,.!@#$%^&amp;*()-]/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;-&#39;</span>)
+  <span class="ruby-identifier">text</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{[&quot;&#39;\\/-;:,.!@#$%^&amp;*()-]}</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;-&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -803,14 +794,14 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="top_citations-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 103</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">top_citations</span>(<span class="ruby-identifier">citations</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">citations</span>.<span class="ruby-identifier">nil?</span>
     {}
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">citations</span>.<span class="ruby-identifier">sort_by</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>}.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">first</span>(<span class="ruby-value">20</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> 
-      [<span class="ruby-identifier">k</span>, {<span class="ruby-string">&quot;count&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">v</span>, <span class="ruby-string">&quot;text&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Scholar</span>.<span class="ruby-identifier">render_citation</span>(<span class="ruby-identifier">k</span>)}]
-    }.<span class="ruby-identifier">to_h</span>
+    <span class="ruby-identifier">citations</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span> }.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">first</span>(<span class="ruby-value">20</span>).<span class="ruby-identifier">to_h</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      [<span class="ruby-identifier">k</span>, { <span class="ruby-string">&#39;count&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">v</span>, <span class="ruby-string">&#39;text&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Scholar</span>.<span class="ruby-identifier">render_citation</span>(<span class="ruby-identifier">k</span>) }]
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

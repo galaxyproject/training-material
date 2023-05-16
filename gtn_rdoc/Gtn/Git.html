@@ -82,6 +82,8 @@
 
   <section class="description">
     
+<p>Parse the git repo to get some facts</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -106,24 +108,24 @@
           
 
           <div class="method-source-code" id="_discover-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/git.rb, line 22</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/git.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">_discover</span>
   <span class="ruby-comment"># Cache the git facts</span>
 
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">git_head</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.git&#39;</span>, <span class="ruby-string">&#39;HEAD&#39;</span>)).<span class="ruby-identifier">read</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>)[<span class="ruby-value">1</span>]
-    <span class="ruby-identifier">git_head_ref</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.git&#39;</span>, <span class="ruby-identifier">git_head</span>)).<span class="ruby-identifier">read</span>.<span class="ruby-identifier">strip</span>
-  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">git_head</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.git&#39;</span>, <span class="ruby-string">&#39;HEAD&#39;</span>)).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>[<span class="ruby-value">1</span>]
+    <span class="ruby-identifier">git_head_ref</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.git&#39;</span>, <span class="ruby-identifier">git_head</span>)).<span class="ruby-identifier">strip</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
     <span class="ruby-identifier">git_head_ref</span> = <span class="ruby-string">&#39;none&#39;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">tags</span> = <span class="ruby-string">`git tag -l`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">sort</span>
-  <span class="ruby-keyword">rescue</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
     <span class="ruby-identifier">tags</span> = []
-  <span class="ruby-keyword">end</span> 
+  <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">first_commit</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&quot;2015-06-29&quot;</span>)
+  <span class="ruby-identifier">first_commit</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&#39;2015-06-29&#39;</span>)
   <span class="ruby-identifier">today</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>
 
   {
@@ -152,9 +154,9 @@
           
 
           <div class="method-source-code" id="cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/git.rb, line 6</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/git.rb, line 9</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">cache</span>
-  <span class="ruby-identifier">@@cache</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Cache</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Git&quot;</span>)
+  <span class="ruby-identifier">@@cache</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Cache</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;Git&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -183,10 +185,10 @@
 </dd></dl>
 
           <div class="method-source-code" id="discover-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/git.rb, line 16</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/git.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">discover</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">getset</span>(<span class="ruby-string">&#39;facts&#39;</span>) <span class="ruby-keyword">do</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_discover</span>
+  <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">getset</span>(<span class="ruby-string">&#39;facts&#39;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">_discover</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

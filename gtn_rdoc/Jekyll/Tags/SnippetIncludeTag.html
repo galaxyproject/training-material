@@ -89,6 +89,8 @@
 
   <section class="description">
     
+<p>A custom tag {% snippet %} which behaves almost identically to {% include %} Except that it will render the included file as a proper GTN Box</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -113,9 +115,9 @@
           
 
           <div class="method-source-code" id="get_config-source">
-            <pre><span class="ruby-comment"># File _plugins/snippet.rb, line 22</span>
+            <pre><span class="ruby-comment"># File _plugins/snippet.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_config</span>(<span class="ruby-identifier">context</span>)
-    <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;icon-tag&#39;</span>]
+  <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;icon-tag&#39;</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -134,13 +136,13 @@
           
 
           <div class="method-source-code" id="get_icon-source">
-            <pre><span class="ruby-comment"># File _plugins/snippet.rb, line 14</span>
+            <pre><span class="ruby-comment"># File _plugins/snippet.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_icon</span>(<span class="ruby-identifier">icon</span>)
-   <span class="ruby-keyword">if</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;fa&quot;</span>)
-    <span class="ruby-node">%Q(&lt;i class=&quot;#{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;#{@text}&lt;/span&gt;)</span>
-   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;ai&quot;</span>)
-    <span class="ruby-node">%Q(&lt;i class=&quot;ai #{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;#{@text}&lt;/span&gt;)</span>
-   <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;fa&#39;</span>)
+    <span class="ruby-node">%(&lt;i class=&quot;#{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;#{@text}&lt;/span&gt;)</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;ai&#39;</span>)
+    <span class="ruby-node">%(&lt;i class=&quot;ai #{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;#{@text}&lt;/span&gt;)</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -159,7 +161,7 @@
           
 
           <div class="method-source-code" id="markdownify-source">
-            <pre><span class="ruby-comment"># File _plugins/snippet.rb, line 8</span>
+            <pre><span class="ruby-comment"># File _plugins/snippet.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">markdownify</span>(<span class="ruby-identifier">text</span>)
   <span class="ruby-ivar">@site</span>.<span class="ruby-identifier">find_converter_instance</span>(
     <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span><span class="ruby-operator">::</span><span class="ruby-constant">Markdown</span>
@@ -182,9 +184,8 @@
           
 
           <div class="method-source-code" id="render-source">
-            <pre><span class="ruby-comment"># File _plugins/snippet.rb, line 26</span>
+            <pre><span class="ruby-comment"># File _plugins/snippet.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render</span>(<span class="ruby-identifier">context</span>)
-
   <span class="ruby-ivar">@site</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>]
 
   <span class="ruby-identifier">file</span> = <span class="ruby-identifier">render_variable</span>(<span class="ruby-identifier">context</span>) <span class="ruby-operator">||</span> <span class="ruby-ivar">@file</span>
@@ -194,71 +195,71 @@
   <span class="ruby-comment"># render_variable(context) but it&#39;s not clear why that doesn&#39;t work.</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-ivar">@site</span>.<span class="ruby-identifier">inclusions</span>[<span class="ruby-identifier">file</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">locate_include_file</span>(<span class="ruby-identifier">file</span>)
-  <span class="ruby-keyword">rescue</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
     <span class="ruby-ivar">@site</span>.<span class="ruby-identifier">inclusions</span>[<span class="ruby-identifier">file</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">locate_include_file</span>(<span class="ruby-identifier">context</span>[<span class="ruby-identifier">file</span>])
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">inclusion</span> = <span class="ruby-ivar">@site</span>.<span class="ruby-identifier">inclusions</span>[<span class="ruby-identifier">file</span>]
 
-  <span class="ruby-identifier">add_include_to_dependency</span>(<span class="ruby-identifier">inclusion</span>, <span class="ruby-identifier">context</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;incremental&quot;</span>]
+  <span class="ruby-identifier">add_include_to_dependency</span>(<span class="ruby-identifier">inclusion</span>, <span class="ruby-identifier">context</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;incremental&#39;</span>]
 
   <span class="ruby-identifier">context</span>.<span class="ruby-identifier">stack</span> <span class="ruby-keyword">do</span>
-    <span class="ruby-identifier">context</span>[<span class="ruby-string">&quot;include&quot;</span>] = <span class="ruby-identifier">parse_params</span>(<span class="ruby-identifier">context</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@params</span>
-    <span class="ruby-identifier">x</span> = <span class="ruby-node">&quot;#{inclusion.render(context)}&quot;</span>
-    <span class="ruby-identifier">p</span> = <span class="ruby-identifier">context</span>[<span class="ruby-string">&quot;include&quot;</span>]
-    <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span>
+    <span class="ruby-identifier">context</span>[<span class="ruby-string">&#39;include&#39;</span>] = <span class="ruby-identifier">parse_params</span>(<span class="ruby-identifier">context</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@params</span>
+    <span class="ruby-identifier">x</span> = <span class="ruby-identifier">inclusion</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">context</span>).<span class="ruby-identifier">to_s</span>
+    <span class="ruby-identifier">p</span> = <span class="ruby-identifier">context</span>[<span class="ruby-string">&#39;include&#39;</span>]
 
-    <span class="ruby-identifier">box_start</span>=<span class="ruby-string">&quot;&quot;</span>
-    <span class="ruby-identifier">box_end</span>=<span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-identifier">box_start</span> = <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">box_end</span> = <span class="ruby-string">&#39;&#39;</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">0</span>, <span class="ruby-value">3</span>) <span class="ruby-operator">==</span> <span class="ruby-string">&#39;---&#39;</span>
-      <span class="ruby-identifier">metadata</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">x</span>)
+      <span class="ruby-identifier">metadata</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">safe_load</span>(<span class="ruby-identifier">x</span>)
 
       <span class="ruby-comment"># allow overriding box type with include parameter (&quot;none&quot; to render without a box)</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">p</span>[<span class="ruby-string">&quot;box_type&quot;</span>]
-          <span class="ruby-identifier">box_type</span> = <span class="ruby-identifier">p</span>[<span class="ruby-string">&quot;box_type&quot;</span>]
-      <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">box_type</span> = <span class="ruby-identifier">metadata</span>[<span class="ruby-string">&#39;box_type&#39;</span>]
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">icons</span> = <span class="ruby-identifier">get_config</span>(<span class="ruby-identifier">context</span>)
+      <span class="ruby-identifier">box_type</span> = <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">p</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;box_type&#39;</span>]
+                   <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;box_type&#39;</span>]
+                 <span class="ruby-keyword">else</span>
+                   <span class="ruby-identifier">metadata</span>[<span class="ruby-string">&#39;box_type&#39;</span>]
+                 <span class="ruby-keyword">end</span>
 
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>]&amp;.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;lang&#39;</span>)
-        <span class="ruby-identifier">lang</span> = <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>].<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;lang&#39;</span>, <span class="ruby-string">&quot;en&quot;</span>)
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">lang</span>.<span class="ruby-identifier">nil?</span>
-          <span class="ruby-identifier">lang</span> = <span class="ruby-string">&quot;en&quot;</span>
-        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">lang</span> = <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>].<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;lang&#39;</span>, <span class="ruby-string">&#39;en&#39;</span>)
+        <span class="ruby-identifier">lang</span> = <span class="ruby-string">&#39;en&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lang</span>.<span class="ruby-identifier">nil?</span>
       <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">lang</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;en&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">lang</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;es&quot;</span>
-        <span class="ruby-identifier">lang</span> = <span class="ruby-string">&quot;en&quot;</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">box_type</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;none&#39;</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">box_type</span>.<span class="ruby-identifier">nil?</span>
-        <span class="ruby-identifier">box_id</span>, <span class="ruby-identifier">box_title</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Boxify</span>.<span class="ruby-identifier">generate_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">metadata</span>[<span class="ruby-string">&#39;title&#39;</span>], <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>][<span class="ruby-string">&#39;path&#39;</span>])
-        <span class="ruby-identifier">box_start</span> = <span class="ruby-string">&#39;&gt; &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">box_title</span>
-        <span class="ruby-identifier">box_end</span> = <span class="ruby-string">&quot;\n{: .&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">box_type</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;}&quot;</span>
+      <span class="ruby-identifier">lang</span> = <span class="ruby-string">&#39;en&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">lang</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;en&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">lang</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;es&#39;</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">box_type</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;none&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">box_type</span>.<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">_box_id</span>, <span class="ruby-identifier">box_title</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Boxify</span>.<span class="ruby-identifier">generate_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">metadata</span>[<span class="ruby-string">&#39;title&#39;</span>], <span class="ruby-identifier">lang</span>,
+                                                        <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>][<span class="ruby-string">&#39;path&#39;</span>])
+        <span class="ruby-identifier">box_start</span> = <span class="ruby-node">&quot;&gt; #{box_title}&quot;</span>
+        <span class="ruby-identifier">box_end</span> = <span class="ruby-node">&quot;\n{: .#{box_type}}&quot;</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-identifier">y</span> = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\A---(.|\n)*?---/</span>, <span class="ruby-string">&#39;&#39;</span>)
-    <span class="ruby-comment">#if y =~ /contribute/</span>
-      <span class="ruby-comment">#puts &quot;=== step 1   ===\n#{y}\n\n&quot;</span>
-    <span class="ruby-comment">#end</span>
+    <span class="ruby-comment"># if y =~ /contribute/</span>
+    <span class="ruby-comment"># puts &quot;=== step 1   ===\n#{y}\n\n&quot;</span>
+    <span class="ruby-comment"># end</span>
     <span class="ruby-identifier">z</span> = <span class="ruby-identifier">markdownify</span>(<span class="ruby-identifier">y</span>)
-    <span class="ruby-comment">#if z =~ /contribute/</span>
-      <span class="ruby-comment">#puts &quot;=== step 2   ===\n#{z}\n\n&quot;</span>
-    <span class="ruby-comment">#end</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">box_start</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span>
-       <span class="ruby-identifier">z</span> = <span class="ruby-identifier">z</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\R/</span>,<span class="ruby-string">&quot;\n&gt; &quot;</span>)
-       <span class="ruby-comment">#puts box_start+y+box_end</span>
+    <span class="ruby-comment"># if z =~ /contribute/</span>
+    <span class="ruby-comment"># puts &quot;=== step 2   ===\n#{z}\n\n&quot;</span>
+    <span class="ruby-comment"># end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">box_start</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
+      <span class="ruby-identifier">z</span> = <span class="ruby-identifier">z</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\R/</span>, <span class="ruby-string">&quot;\n&gt; &quot;</span>)
+      <span class="ruby-comment"># puts box_start+y+box_end</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-comment">#if z =~ /contribute/</span>
-      <span class="ruby-comment">#puts &quot;=== step 3   ===\n#{z}\n\n&quot;</span>
-      <span class="ruby-comment">#puts &quot;=== MARKDOWN ===\n#{box_start+z+box_end}\n\n&quot;</span>
-      <span class="ruby-comment">#puts &quot;=== RENDERED ===\n#{markdownify(box_start+z+box_end)}\n\n&quot;</span>
-    <span class="ruby-comment">#end</span>
+    <span class="ruby-comment"># if z =~ /contribute/</span>
+    <span class="ruby-comment"># puts &quot;=== step 3   ===\n#{z}\n\n&quot;</span>
+    <span class="ruby-comment"># puts &quot;=== MARKDOWN ===\n#{box_start+z+box_end}\n\n&quot;</span>
+    <span class="ruby-comment"># puts &quot;=== RENDERED ===\n#{markdownify(box_start+z+box_end)}\n\n&quot;</span>
+    <span class="ruby-comment"># end</span>
 
-    <span class="ruby-string">&#39;&lt;!--SNIPPET--&gt;&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">markdownify</span>(<span class="ruby-identifier">box_start</span><span class="ruby-operator">+</span><span class="ruby-identifier">z</span><span class="ruby-operator">+</span><span class="ruby-identifier">box_end</span>)
-      .<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&lt;(pre)[^&gt;]*&gt;(.*?)&lt;\/\1&gt;/m</span>){<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\n/</span>, <span class="ruby-string">&#39;&lt;br&gt;&#39;</span>) } <span class="ruby-comment"># Replace newlines inside of a PRE with &lt;br&gt;, so they don&#39;t get eaten during next one.</span>
-      .<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\R+/</span>, <span class="ruby-string">&#39; &#39;</span>) <span class="ruby-comment"># Strip out spaces or the boxes break, replace them with single spaces so e.g. newlines get collapsed into a space and don&#39;t merge words together that shouldn&#39;t be merged.</span>
-      .<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;&lt;h3&#39;</span>,<span class="ruby-string">&#39;&lt;h3 data-toc-skip&#39;</span>)
+    <span class="ruby-identifier">final_box_text</span> = <span class="ruby-identifier">markdownify</span>(<span class="ruby-identifier">box_start</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">z</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">box_end</span>)
+                     <span class="ruby-comment"># Replace newlines inside of a PRE with &lt;br&gt;, so they don&#39;t get eaten during next one.</span>
+                     .<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{&lt;(pre)[^&gt;]*&gt;(.*?)&lt;/\1&gt;}m</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\n/</span>, <span class="ruby-string">&#39;&lt;br&gt;&#39;</span>) }
+                     <span class="ruby-comment"># Strip out spaces or the boxes break, replace</span>
+                     <span class="ruby-comment"># them with single spaces so e.g. newlines get collapsed into a space</span>
+                     <span class="ruby-comment"># and don&#39;t merge words together that shouldn&#39;t be merged.</span>
+                     .<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\R+/</span>, <span class="ruby-string">&#39; &#39;</span>)
+                     .<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;&lt;h3&#39;</span>, <span class="ruby-string">&#39;&lt;h3 data-toc-skip&#39;</span>)
+    <span class="ruby-node">&quot;&lt;!--SNIPPET--&gt;#{final_box_text}&lt;!--END_SNIPPET--&gt;&quot;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

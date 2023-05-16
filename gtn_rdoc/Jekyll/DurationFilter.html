@@ -80,6 +80,8 @@
 
   <section class="description">
     
+<p>This module contains a filter for converting a duration string into a human readable string.</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -119,13 +121,13 @@
 =&gt; &quot;1 hour 30 minutes&quot;</pre>
 
           <div class="method-source-code" id="duration_to_human-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-duration.rb, line 14</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-duration.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">duration_to_human</span>(<span class="ruby-identifier">duration</span>)
   <span class="ruby-comment"># Match the different parts of the string, must match entire string or it will fail.</span>
   <span class="ruby-identifier">match</span> = <span class="ruby-regexp">/^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">duration</span>)
 
   <span class="ruby-comment"># If it doesn&#39;t match, pass through unedited so we don&#39;t cause unexpected issues.</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">match</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">then</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">match</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Could not parse time: #{duration}&quot;</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">duration</span>
   <span class="ruby-keyword">end</span>
@@ -133,36 +135,32 @@
   <span class="ruby-comment"># Otherwise append english terms for the various parts</span>
   <span class="ruby-identifier">duration_parts</span> = []
 
-  <span class="ruby-identifier">hour</span> = <span class="ruby-string">&quot;hour&quot;</span>
-  <span class="ruby-identifier">hours</span> = <span class="ruby-string">&quot;hours&quot;</span>
-  <span class="ruby-identifier">minutes</span> = <span class="ruby-string">&quot;minutes&quot;</span>
+  <span class="ruby-identifier">hour</span> = <span class="ruby-string">&#39;hour&#39;</span>
+  <span class="ruby-identifier">hours</span> = <span class="ruby-string">&#39;hours&#39;</span>
+  <span class="ruby-identifier">minutes</span> = <span class="ruby-string">&#39;minutes&#39;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>]&amp;.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;lang&#39;</span>)
-      <span class="ruby-identifier">lang</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>][<span class="ruby-string">&#39;lang&#39;</span>]
-      <span class="ruby-identifier">hour</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;lang&quot;</span>][<span class="ruby-identifier">lang</span>][<span class="ruby-string">&quot;hour&quot;</span>]
-      <span class="ruby-identifier">hours</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;lang&quot;</span>][<span class="ruby-identifier">lang</span>][<span class="ruby-string">&quot;hours&quot;</span>]
-      <span class="ruby-identifier">minutes</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;lang&quot;</span>][<span class="ruby-identifier">lang</span>][<span class="ruby-string">&quot;minutes&quot;</span>]
+    <span class="ruby-identifier">lang</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>][<span class="ruby-string">&#39;lang&#39;</span>]
+    <span class="ruby-identifier">hour</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;lang&#39;</span>][<span class="ruby-identifier">lang</span>][<span class="ruby-string">&#39;hour&#39;</span>]
+    <span class="ruby-identifier">hours</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;lang&#39;</span>][<span class="ruby-identifier">lang</span>][<span class="ruby-string">&#39;hours&#39;</span>]
+    <span class="ruby-identifier">minutes</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;lang&#39;</span>][<span class="ruby-identifier">lang</span>][<span class="ruby-string">&#39;minutes&#39;</span>]
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Hours</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;1&#39;</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[1]} &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">hour</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;1&#39;</span>
+      <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[1]} &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">hour</span>)
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[1]} &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">hours</span>)
+      <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[1]} &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">hours</span>)
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Minutes - assuming no one uses `1 minute`</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[2]} &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">minutes</span>)
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[2]} &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">minutes</span>) <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">match</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">nil?</span>
 
   <span class="ruby-comment"># Hopefully no one uses seconds</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[3]} seconds&quot;</span>)
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[3]} seconds&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">match</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">nil?</span>
 
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

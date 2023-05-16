@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Gtn::Toolshed - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-format_admin_install">::format_admin_install</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Gtn::Toolshed">
+  <h1 id="module-Gtn::Toolshed" class="module">
+    module Gtn::Toolshed
+  </h1>
+
+  <section class="description">
+    
+<p>Handle toolshed yaml formatting for ephemeris</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-format_admin_install" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">format_admin_install</span><span
+            class="method-args">(data, tool_list, topic)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Prepare a tool list for installation</p>
+
+<p>Params:</p>
+<dl class="rdoc-list note-list"><dt><code>data</code>
+<dd>
+<p>The data from metadata/toolshed-revisions.json</p>
+</dd><dt><code>tool_list</code>
+<dd>
+<p>The list of tools to check (either &#39;upload1&#39; or &#39;toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy10&#39; style tools)</p>
+</dd><dt><code>topic</code>
+<dd>
+<p>The topic to install the tools under</p>
+</dd></dl>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>supported</code>
+<dd>
+<p>A string of the admin install, ready for ephemeris</p>
+</dd></dl>
+
+          <div class="method-source-code" id="format_admin_install-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/toolshed.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">format_admin_install</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">tool_list</span>, <span class="ruby-identifier">topic</span>)
+  <span class="ruby-comment"># p &quot;Calculating supported servers for this tool list&quot;</span>
+  <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-identifier">tools</span> = <span class="ruby-identifier">tool_list</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">t</span> }.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tool</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">tool_info</span> = <span class="ruby-identifier">data</span>[<span class="ruby-identifier">tool</span>]
+    {
+      <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tool_info</span>[<span class="ruby-value">1</span>],
+      <span class="ruby-string">&#39;owner&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tool_info</span>[<span class="ruby-value">0</span>],
+      <span class="ruby-string">&#39;revisions&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tool_info</span>[<span class="ruby-value">2</span>],
+      <span class="ruby-string">&#39;tool_panel_section_label&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">topic</span>,
+      <span class="ruby-string">&#39;tool_shed_url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;https://toolshed.g2.bx.psu.edu/&#39;</span>,
+    }
+  <span class="ruby-keyword">end</span>
+
+  {
+    <span class="ruby-string">&#39;install_tool_dependencies&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-string">&#39;install_repository_dependencies&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-string">&#39;install_resolver_dependencies&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-string">&#39;tools&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tools</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.3.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

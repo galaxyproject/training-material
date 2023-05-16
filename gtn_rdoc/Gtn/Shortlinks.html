@@ -66,7 +66,7 @@
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    <li ><a href="#method-c-is_mapped">::is_mapped</a>
+    <li ><a href="#method-c-mapped-3F">::mapped?</a>
     <li ><a href="#method-c-update">::update</a>
   </ul>
 </div>
@@ -81,6 +81,8 @@
 
   <section class="description">
     
+<p>This module is responsible for generating shortlinks for tutorials and FAQs</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -94,9 +96,9 @@
          <h3>Public Class Methods</h3>
        </header>
 
-      <div id="method-c-is_mapped" class="method-detail ">
+      <div id="method-c-mapped-3F" class="method-detail ">
         <div class="method-heading">
-          <span class="method-name">is_mapped</span><span
+          <span class="method-name">mapped?</span><span
             class="method-args">(tutorial, current_mapping)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -104,10 +106,10 @@
         <div class="method-description">
           
 
-          <div class="method-source-code" id="is_mapped-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/shortlinks.rb, line 3</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">is_mapped</span>(<span class="ruby-identifier">tutorial</span>, <span class="ruby-identifier">current_mapping</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>].<span class="ruby-identifier">values</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">tutorial</span>
+          <div class="method-source-code" id="mapped-3F-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/shortlinks.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">mapped?</span>(<span class="ruby-identifier">tutorial</span>, <span class="ruby-identifier">current_mapping</span>)
+  <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>].<span class="ruby-identifier">values</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">tutorial</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -126,23 +128,20 @@
           
 
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/shortlinks.rb, line 7</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/shortlinks.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">update</span>(<span class="ruby-identifier">current_mapping</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">current_mapping</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-string">&#39;id&#39;</span>
-    <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>] = {}
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>] = {} <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_mapping</span>.<span class="ruby-identifier">key?</span> <span class="ruby-string">&#39;id&#39;</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">current_mapping</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-string">&#39;name&#39;</span>
-    <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;name&#39;</span>] = {}
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;name&#39;</span>] = {} <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_mapping</span>.<span class="ruby-identifier">key?</span> <span class="ruby-string">&#39;name&#39;</span>
 
   <span class="ruby-comment"># Discover tutorials</span>
   <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-string">&#39;topics/*/tutorials/*/tutorial.md&#39;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tutorial</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">html_path</span> = <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tutorial</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/md$/</span>, <span class="ruby-string">&#39;html&#39;</span>)
+    <span class="ruby-identifier">html_path</span> = <span class="ruby-node">&quot;/#{tutorial.gsub(/md$/, &#39;html&#39;)}&quot;</span>
     <span class="ruby-comment"># If it&#39;s not already mapped by a key, add it.</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">is_mapped</span>(<span class="ruby-identifier">html_path</span>, <span class="ruby-identifier">current_mapping</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">mapped?</span>(<span class="ruby-identifier">html_path</span>, <span class="ruby-identifier">current_mapping</span>)
       <span class="ruby-comment"># Generate a short code</span>
-      <span class="ruby-identifier">short_code</span> = <span class="ruby-string">&#39;T&#39;</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;T&#39;</span>}.<span class="ruby-identifier">length</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">5</span>, <span class="ruby-string">&#39;0&#39;</span>)
+      <span class="ruby-identifier">short_code_number</span> = <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;T&#39;</span> }.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">5</span>, <span class="ruby-string">&#39;0&#39;</span>)
+      <span class="ruby-identifier">short_code</span> = <span class="ruby-node">&quot;T#{short_code_number}&quot;</span>
       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Discovered tutorial #{short_code}&quot;</span>
       <span class="ruby-comment"># If the target of this flavour of short code isn&#39;t already in here, then add it</span>
       <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>][<span class="ruby-identifier">short_code</span>] = <span class="ruby-identifier">html_path</span>
@@ -150,17 +149,18 @@
 
     <span class="ruby-comment"># Also generate one from topic/tutorial name</span>
     <span class="ruby-comment"># These are idempotent and safe</span>
-    <span class="ruby-identifier">short_code2</span> = <span class="ruby-identifier">tutorial</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\/tutorials/</span>, <span class="ruby-string">&#39;&#39;</span>)
-    <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;name&#39;</span>][<span class="ruby-identifier">short_code2</span>] = <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tutorial</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/md$/</span>, <span class="ruby-string">&#39;html&#39;</span>)
+    <span class="ruby-identifier">short_code2</span> = <span class="ruby-identifier">tutorial</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{/tutorials}</span>, <span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;name&#39;</span>][<span class="ruby-identifier">short_code2</span>] = <span class="ruby-node">&quot;/#{tutorial.gsub(/md$/, &#39;html&#39;)}&quot;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Discover slides</span>
   <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-string">&#39;topics/*/tutorials/*/slides.html&#39;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tutorial</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">html_path</span> = <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tutorial</span>
+    <span class="ruby-identifier">html_path</span> = <span class="ruby-node">&quot;/#{tutorial}&quot;</span>
     <span class="ruby-comment"># If it&#39;s not already mapped by a key, add it.</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">is_mapped</span>(<span class="ruby-identifier">html_path</span>, <span class="ruby-identifier">current_mapping</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">mapped?</span>(<span class="ruby-identifier">html_path</span>, <span class="ruby-identifier">current_mapping</span>)
       <span class="ruby-comment"># Generate a short code</span>
-      <span class="ruby-identifier">short_code</span> = <span class="ruby-string">&#39;S&#39;</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;S&#39;</span>}.<span class="ruby-identifier">length</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">5</span>, <span class="ruby-string">&#39;0&#39;</span>)
+      <span class="ruby-identifier">short_code_number</span> = <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;S&#39;</span> }.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">5</span>, <span class="ruby-string">&#39;0&#39;</span>)
+      <span class="ruby-identifier">short_code</span> = <span class="ruby-node">&quot;S#{short_code_number}&quot;</span>
       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Discovered slides #{short_code}&quot;</span>
       <span class="ruby-comment"># If the target of this flavour of short code isn&#39;t already in here, then add it</span>
       <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>][<span class="ruby-identifier">short_code</span>] = <span class="ruby-identifier">html_path</span>
@@ -168,17 +168,18 @@
 
     <span class="ruby-comment"># Also generate one from topic/tutorial name</span>
     <span class="ruby-comment"># These are idempotent and safe</span>
-    <span class="ruby-identifier">short_code2</span> = <span class="ruby-identifier">tutorial</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\/tutorials/</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/slides&#39;</span>
-    <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;name&#39;</span>][<span class="ruby-identifier">short_code2</span>] = <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tutorial</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/md$/</span>, <span class="ruby-string">&#39;html&#39;</span>)
+    <span class="ruby-identifier">short_code2</span> = <span class="ruby-node">&quot;#{tutorial.split(&#39;/&#39;)[1..3].join(&#39;/&#39;).gsub(%r{/tutorials}, &#39;&#39;)}/slides&quot;</span>
+    <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;name&#39;</span>][<span class="ruby-identifier">short_code2</span>] = <span class="ruby-node">&quot;/#{tutorial.gsub(/md$/, &#39;html&#39;)}&quot;</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Discover FAQs</span>
   <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-string">&#39;faqs/**/*.md&#39;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tutorial</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">html_path</span> = <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tutorial</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/md$/</span>, <span class="ruby-string">&#39;html&#39;</span>)
+    <span class="ruby-identifier">html_path</span> = <span class="ruby-node">&quot;/#{tutorial.gsub(/md$/, &#39;html&#39;)}&quot;</span>
     <span class="ruby-comment"># If it&#39;s not already mapped by a key, add it.</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">is_mapped</span>(<span class="ruby-identifier">html_path</span>, <span class="ruby-identifier">current_mapping</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">mapped?</span>(<span class="ruby-identifier">html_path</span>, <span class="ruby-identifier">current_mapping</span>)
       <span class="ruby-comment"># Generate a short code</span>
-      <span class="ruby-identifier">short_code</span> = <span class="ruby-string">&#39;F&#39;</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;F&#39;</span>}.<span class="ruby-identifier">length</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">5</span>, <span class="ruby-string">&#39;0&#39;</span>)
+      <span class="ruby-identifier">short_code_number</span> = <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;F&#39;</span> }.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">rjust</span>(<span class="ruby-value">5</span>, <span class="ruby-string">&#39;0&#39;</span>)
+      <span class="ruby-identifier">short_code</span> = <span class="ruby-node">&quot;F#{short_code_number}&quot;</span>
       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Discovered FAQ #{short_code}&quot;</span>
       <span class="ruby-comment"># If the target of this flavour of short code isn&#39;t already in here, then add it</span>
       <span class="ruby-identifier">current_mapping</span>[<span class="ruby-string">&#39;id&#39;</span>][<span class="ruby-identifier">short_code</span>] = <span class="ruby-identifier">html_path</span>

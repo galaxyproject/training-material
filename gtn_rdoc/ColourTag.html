@@ -80,6 +80,8 @@
 
   <section class="description">
     
+<p>Our automatic colour tag generator It makes tags colourful in a reproducible way</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -119,7 +121,7 @@
 </pre>
 
           <div class="method-source-code" id="colour_tag-source">
-            <pre><span class="ruby-comment"># File _plugins/colour-tags.rb, line 16</span>
+            <pre><span class="ruby-comment"># File _plugins/colour-tags.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">colour_tag</span>(<span class="ruby-identifier">contents</span>)
   <span class="ruby-identifier">d</span> = (<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span> <span class="ruby-identifier">contents</span>).<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>)
 
@@ -128,15 +130,13 @@
   <span class="ruby-identifier">lightness</span> = <span class="ruby-identifier">lightnessOffset</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">hash</span> <span class="ruby-operator">&amp;</span> <span class="ruby-value">0xf</span>)
 
   <span class="ruby-comment"># randomly make yellow tags bright</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">hue</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">70</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">hue</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">96</span> <span class="ruby-keyword">and</span> ((<span class="ruby-identifier">d</span> <span class="ruby-operator">&amp;</span> <span class="ruby-value">0x100</span>) <span class="ruby-operator">===</span> <span class="ruby-value">0x100</span>)
-    <span class="ruby-identifier">lightness</span> <span class="ruby-operator">+=</span> (<span class="ruby-value">100</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">lightness</span>) <span class="ruby-operator">*</span> <span class="ruby-value">0.75</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">lightness</span> <span class="ruby-operator">+=</span> (<span class="ruby-value">100</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">lightness</span>) <span class="ruby-operator">*</span> <span class="ruby-value">0.75</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">hue</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">70</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">hue</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">96</span>) <span class="ruby-operator">&amp;&amp;</span> ((<span class="ruby-identifier">d</span> <span class="ruby-operator">&amp;</span> <span class="ruby-value">0x100</span>) <span class="ruby-operator">==</span> <span class="ruby-value">0x100</span>)
 
   <span class="ruby-identifier">primary</span> = <span class="ruby-constant">Hsluv</span>.<span class="ruby-identifier">hsluv_to_hex</span>(<span class="ruby-identifier">hue</span>, <span class="ruby-value">100</span>, <span class="ruby-identifier">lightness</span>)
   <span class="ruby-identifier">darker</span> = <span class="ruby-constant">Hsluv</span>.<span class="ruby-identifier">hsluv_to_hex</span>(<span class="ruby-identifier">hue</span>, <span class="ruby-value">100</span>, <span class="ruby-identifier">lightness</span> <span class="ruby-operator">*</span> <span class="ruby-value">0.9</span>)
   <span class="ruby-identifier">dimmed</span> = <span class="ruby-constant">Hsluv</span>.<span class="ruby-identifier">hsluv_to_hex</span>(<span class="ruby-identifier">hue</span>, <span class="ruby-value">100</span>, <span class="ruby-identifier">lightness</span> <span class="ruby-operator">*</span> <span class="ruby-value">0.95</span>)
 
-  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;--color-primary: #{primary}; --color-darker: #{darker}; --color-dimmed: #{dimmed};&quot;</span>
+  <span class="ruby-node">&quot;--color-primary: #{primary}; --color-darker: #{darker}; --color-dimmed: #{dimmed};&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

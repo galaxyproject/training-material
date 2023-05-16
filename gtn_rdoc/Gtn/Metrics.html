@@ -87,6 +87,8 @@
 
   <section class="description">
     
+<p>Module for generating metrics for Prometheus</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -111,10 +113,10 @@
           
 
           <div class="method-source-code" id="bin_width-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 27</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">bin_width</span>(<span class="ruby-identifier">values</span>)
   <span class="ruby-comment"># https://en.wikipedia.org/wiki/Freedman%E2%80%93Diaconis_rule</span>
-  <span class="ruby-value">2</span> <span class="ruby-operator">*</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">iqr</span>(<span class="ruby-identifier">values</span>) <span class="ruby-operator">/</span> (<span class="ruby-identifier">values</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">**</span> (<span class="ruby-value">1</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>))
+  <span class="ruby-value">2</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">iqr</span>(<span class="ruby-identifier">values</span>) <span class="ruby-operator">/</span> (<span class="ruby-identifier">values</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">**</span>(<span class="ruby-value">1</span> <span class="ruby-operator">/</span> <span class="ruby-value">3</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -133,61 +135,61 @@
           
 
           <div class="method-source-code" id="collect_metrics-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 84</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">collect_metrics</span>(<span class="ruby-identifier">site</span>)
-  <span class="ruby-identifier">tutorials</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;tutorial_hands_on&quot;</span>}
-  <span class="ruby-identifier">first_commit</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&quot;2015-06-29&quot;</span>)
-  <span class="ruby-identifier">today</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>()
+  <span class="ruby-identifier">tutorials</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;tutorial_hands_on&#39;</span> }
+  <span class="ruby-identifier">first_commit</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&#39;2015-06-29&#39;</span>)
+  <span class="ruby-identifier">today</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>
 
-  <span class="ruby-identifier">output</span> = {
-    <span class="ruby-string">&quot;gtn_pages_total&quot;</span> <span class="ruby-operator">=&gt;</span> {
-      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">segment_page_by_key</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>, <span class="ruby-string">&#39;layout&#39;</span>),
-      <span class="ruby-value">:help</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Total number of Pages&quot;</span>,
-      <span class="ruby-value">:type</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;counter&quot;</span>
-    }, <span class="ruby-string">&quot;gtn_contributors_total&quot;</span> <span class="ruby-operator">=&gt;</span> {
-      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">segment</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">values</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;halloffame&#39;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;no&quot;</span>}, <span class="ruby-string">&quot;orcid&quot;</span>),
-      <span class="ruby-value">:help</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Total number of Contributors&quot;</span>,
-      <span class="ruby-value">:type</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;counter&quot;</span>
+  {
+    <span class="ruby-string">&#39;gtn_pages_total&#39;</span> <span class="ruby-operator">=&gt;</span> {
+      <span class="ruby-value">value:</span> <span class="ruby-identifier">segment_page_by_key</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>, <span class="ruby-string">&#39;layout&#39;</span>),
+      <span class="ruby-value">help:</span> <span class="ruby-string">&#39;Total number of Pages&#39;</span>,
+      <span class="ruby-value">type:</span> <span class="ruby-string">&#39;counter&#39;</span>
+    }, <span class="ruby-string">&#39;gtn_contributors_total&#39;</span> <span class="ruby-operator">=&gt;</span> {
+         <span class="ruby-value">value:</span> <span class="ruby-identifier">segment</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">values</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;halloffame&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;no&#39;</span> }, <span class="ruby-string">&#39;orcid&#39;</span>),
+         <span class="ruby-value">help:</span> <span class="ruby-string">&#39;Total number of Contributors&#39;</span>,
+         <span class="ruby-value">type:</span> <span class="ruby-string">&#39;counter&#39;</span>
+       },
+    <span class="ruby-string">&#39;gtn_tutorials_total&#39;</span> <span class="ruby-operator">=&gt;</span> {
+      <span class="ruby-value">value:</span> <span class="ruby-identifier">tutorials</span>.<span class="ruby-identifier">length</span>,
+      <span class="ruby-value">help:</span> <span class="ruby-string">&#39;Total number of Hands-on Tutorials&#39;</span>,
+      <span class="ruby-value">type:</span> <span class="ruby-string">&#39;counter&#39;</span>
     },
-    <span class="ruby-string">&quot;gtn_tutorials_total&quot;</span> <span class="ruby-operator">=&gt;</span> {
-      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tutorials</span>.<span class="ruby-identifier">length</span>,
-      <span class="ruby-value">:help</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Total number of Hands-on Tutorials&quot;</span>,
-      <span class="ruby-value">:type</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;counter&quot;</span>
+    <span class="ruby-string">&#39;gtn_faqs_total&#39;</span> <span class="ruby-operator">=&gt;</span> {
+      <span class="ruby-value">value:</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;faq&#39;</span> }.<span class="ruby-identifier">length</span>,
+      <span class="ruby-value">help:</span> <span class="ruby-string">&#39;Total number of FAQs&#39;</span>,
+      <span class="ruby-value">type:</span> <span class="ruby-string">&#39;counter&#39;</span>
     },
-    <span class="ruby-string">&quot;gtn_faqs_total&quot;</span> <span class="ruby-operator">=&gt;</span> {
-      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;faq&quot;</span>}.<span class="ruby-identifier">length</span>,
-      <span class="ruby-value">:help</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Total number of FAQs&quot;</span>,
-      <span class="ruby-value">:type</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;counter&quot;</span>
+    <span class="ruby-string">&#39;gtn_project_years_total&#39;</span> <span class="ruby-operator">=&gt;</span> {
+      <span class="ruby-value">value:</span> (<span class="ruby-identifier">today</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">first_commit</span>).<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">365</span>,
+      <span class="ruby-value">help:</span> <span class="ruby-string">&#39;Total years of project lifetime&#39;</span>,
+      <span class="ruby-value">type:</span> <span class="ruby-string">&#39;counter&#39;</span>
     },
-    <span class="ruby-string">&quot;gtn_project_years_total&quot;</span> <span class="ruby-operator">=&gt;</span> {
-      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> (<span class="ruby-identifier">today</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">first_commit</span>).<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-value">365</span>,
-      <span class="ruby-value">:help</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Total years of project lifetime&quot;</span>,
-      <span class="ruby-value">:type</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;counter&quot;</span>
-    },
-    <span class="ruby-string">&quot;tutorial_update_age_days&quot;</span> <span class="ruby-operator">=&gt;</span> {
-      <span class="ruby-value">:type</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;histogram&quot;</span>,
-      <span class="ruby-value">:help</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;How recently was every single Hands-on Tutorial touched within the GTN, grouped by days since last edited.&quot;</span>,
-      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">histogram_dates</span>(
+    <span class="ruby-string">&#39;tutorial_update_age_days&#39;</span> <span class="ruby-operator">=&gt;</span> {
+      <span class="ruby-value">type:</span> <span class="ruby-string">&#39;histogram&#39;</span>,
+      <span class="ruby-value">help:</span> <span class="ruby-string">&#39;How recently was every single Hands-on Tutorial touched within the GTN, &#39;</span> \
+            <span class="ruby-string">&#39;grouped by days since last edited.&#39;</span>,
+      <span class="ruby-value">value:</span> <span class="ruby-identifier">histogram_dates</span>(
         <span class="ruby-identifier">tutorials</span>
-        .<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span>
-          <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>() <span class="ruby-operator">-</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^\//</span>, <span class="ruby-string">&#39;&#39;</span>))
-        }
-        .<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">seconds</span><span class="ruby-operator">|</span> <span class="ruby-identifier">seconds</span> <span class="ruby-operator">/</span> <span class="ruby-value">3600.0</span> <span class="ruby-operator">/</span> <span class="ruby-value">24.0</span>}
+        .<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{^/}</span>, <span class="ruby-string">&#39;&#39;</span>))
+        <span class="ruby-keyword">end</span>
+        .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">seconds</span><span class="ruby-operator">|</span> <span class="ruby-identifier">seconds</span> <span class="ruby-operator">/</span> <span class="ruby-value">3600.0</span> <span class="ruby-operator">/</span> <span class="ruby-value">24.0</span> }
       )
     },
-    <span class="ruby-string">&quot;contributor_join_age_days&quot;</span> <span class="ruby-operator">=&gt;</span> {
-      <span class="ruby-value">:type</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;histogram&quot;</span>,
-      <span class="ruby-value">:help</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;When did contributors join? Buckets of their ages by days since joined.&quot;</span>,
-      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">histogram_dates</span>(
+    <span class="ruby-string">&#39;contributor_join_age_days&#39;</span> <span class="ruby-operator">=&gt;</span> {
+      <span class="ruby-value">type:</span> <span class="ruby-string">&#39;histogram&#39;</span>,
+      <span class="ruby-value">help:</span> <span class="ruby-string">&#39;When did contributors join? Buckets of their ages by days since joined.&#39;</span>,
+      <span class="ruby-value">value:</span> <span class="ruby-identifier">histogram_dates</span>(
         <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
-        .<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;halloffame&#39;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;no&quot;</span>}
-        .<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">_</span>, <span class="ruby-identifier">contributor</span><span class="ruby-operator">|</span>
-          (<span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>() <span class="ruby-operator">-</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;#{contributor[&#39;joined&#39;]}-01&quot;</span>)).<span class="ruby-identifier">to_i</span>
-        }
+        .<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;halloffame&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;no&#39;</span> }
+        .<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>, <span class="ruby-identifier">contributor</span><span class="ruby-operator">|</span>
+          (<span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span> <span class="ruby-operator">-</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;#{contributor[&#39;joined&#39;]}-01&quot;</span>)).<span class="ruby-identifier">to_i</span>
+        <span class="ruby-keyword">end</span>
       )
     },
   }
-  <span class="ruby-identifier">output</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -206,24 +208,24 @@
           
 
           <div class="method-source-code" id="generate_metrics-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 140</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_metrics</span>(<span class="ruby-identifier">site</span>)
-  <span class="ruby-identifier">data</span> =  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect_metrics</span>(<span class="ruby-identifier">site</span>)
-  <span class="ruby-identifier">output</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">data</span> = <span class="ruby-identifier">collect_metrics</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">data</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">out</span> = <span class="ruby-node">&quot;# HELP #{k} #{v[:help]}\n# TYPE #{k} #{v[:type]}\n&quot;</span>
 
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>[<span class="ruby-value">:value</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
-      <span class="ruby-identifier">v</span>[<span class="ruby-value">:value</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:value</span>}.<span class="ruby-identifier">to_h</span>
+      <span class="ruby-identifier">v</span>[<span class="ruby-value">:value</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">except</span>(<span class="ruby-value">:value</span>).<span class="ruby-identifier">to_h</span>
         <span class="ruby-identifier">out</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;#{k}#{attrs.to_prometheus} #{val[:value]}\n&quot;</span>
-      }
+      <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:value</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:help</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:type</span>}.<span class="ruby-identifier">to_h</span>
+      <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k2</span>, <span class="ruby-identifier">_v2</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k2</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:value</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">k2</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:help</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">k2</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:type</span> }.<span class="ruby-identifier">to_h</span>
       <span class="ruby-identifier">out</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;#{k}#{attrs.to_prometheus} #{v[:value]}\n&quot;</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">out</span>
-  }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -242,21 +244,21 @@
           
 
           <div class="method-source-code" id="histogram-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 32</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">histogram</span>(<span class="ruby-identifier">values</span>)
-  <span class="ruby-identifier">values</span>.<span class="ruby-identifier">map!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_i</span>}
-  <span class="ruby-identifier">width</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">bin_width</span>(<span class="ruby-identifier">values</span>)
+  <span class="ruby-identifier">values</span>.<span class="ruby-identifier">map!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_i</span>)
+  <span class="ruby-identifier">width</span> = <span class="ruby-identifier">bin_width</span>(<span class="ruby-identifier">values</span>)
   <span class="ruby-identifier">bins</span> = ((<span class="ruby-identifier">values</span>.<span class="ruby-identifier">max</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">min</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">width</span>).<span class="ruby-identifier">ceil</span>
 
-  (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">bins</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">bin_idx</span><span class="ruby-operator">|</span>
+  (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">bins</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">bin_idx</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">left</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">min</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">bin_idx</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">width</span>)
     <span class="ruby-identifier">right</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">min</span> <span class="ruby-operator">+</span> ((<span class="ruby-identifier">bin_idx</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">width</span>)
-    <span class="ruby-identifier">count</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">left</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">right</span> }.<span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">count</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">left</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">right</span> }.<span class="ruby-identifier">length</span>
     {
       <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">count</span>,
-      <span class="ruby-string">&quot;le&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">bin_idx</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">bins</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;+Inf&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">right</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-string">&#39;le&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">bin_idx</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">bins</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;+Inf&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">right</span>.<span class="ruby-identifier">to_s</span>
     }
-  }
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -275,18 +277,18 @@
           
 
           <div class="method-source-code" id="histogram_dates-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 48</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">histogram_dates</span>(<span class="ruby-identifier">values</span>)
   <span class="ruby-identifier">day_bins</span> = [<span class="ruby-value">1</span>, <span class="ruby-value">7</span>, <span class="ruby-value">28</span>, <span class="ruby-value">90</span>, <span class="ruby-value">365</span>, <span class="ruby-value">365</span> <span class="ruby-operator">*</span> <span class="ruby-value">2</span>, <span class="ruby-value">365</span> <span class="ruby-operator">*</span> <span class="ruby-value">3</span>, <span class="ruby-value">365</span> <span class="ruby-operator">*</span> <span class="ruby-value">5</span>]
   <span class="ruby-identifier">last_bin</span> = <span class="ruby-value">0</span>
-  <span class="ruby-identifier">day_bins</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">bin</span>, <span class="ruby-identifier">idx</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">count</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">last_bin</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">bin</span> }.<span class="ruby-identifier">length</span>
+  <span class="ruby-identifier">day_bins</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">bin</span>, <span class="ruby-identifier">_idx</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">count</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">last_bin</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">bin</span> }.<span class="ruby-identifier">length</span>
     <span class="ruby-identifier">last_bin</span> = <span class="ruby-identifier">bin</span>
     {
       <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">count</span>,
-      <span class="ruby-string">&quot;le&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">bin</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">day_bins</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">?</span> <span class="ruby-string">&quot;+Inf&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">bin</span>
+      <span class="ruby-string">&#39;le&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">bin</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">day_bins</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">?</span> <span class="ruby-string">&#39;+Inf&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">bin</span>
     }
-  }
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -305,15 +307,15 @@
           
 
           <div class="method-source-code" id="iqr-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 17</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">iqr</span>(<span class="ruby-identifier">array</span>)
   <span class="ruby-comment"># https://stackoverflow.com/questions/8856716/calculate-interquartile-mean-from-ruby-array/8856863#8856863</span>
   <span class="ruby-identifier">arr</span> = <span class="ruby-identifier">array</span>.<span class="ruby-identifier">sort</span>
   <span class="ruby-identifier">length</span> = <span class="ruby-identifier">arr</span>.<span class="ruby-identifier">size</span>
-  <span class="ruby-identifier">quart</span> = (<span class="ruby-identifier">length</span><span class="ruby-operator">/</span><span class="ruby-value">4.0</span>).<span class="ruby-identifier">floor</span>
-  <span class="ruby-identifier">fraction</span> = <span class="ruby-value">1</span><span class="ruby-operator">-</span>((<span class="ruby-identifier">length</span><span class="ruby-operator">/</span><span class="ruby-value">4.0</span>)<span class="ruby-operator">-</span><span class="ruby-identifier">quart</span>)
+  <span class="ruby-identifier">quart</span> = (<span class="ruby-identifier">length</span> <span class="ruby-operator">/</span> <span class="ruby-value">4.0</span>).<span class="ruby-identifier">floor</span>
+  <span class="ruby-identifier">fraction</span> = <span class="ruby-value">1</span> <span class="ruby-operator">-</span> ((<span class="ruby-identifier">length</span> <span class="ruby-operator">/</span> <span class="ruby-value">4.0</span>) <span class="ruby-operator">-</span> <span class="ruby-identifier">quart</span>)
   <span class="ruby-identifier">new_arr</span> = <span class="ruby-identifier">arr</span>[<span class="ruby-identifier">quart</span><span class="ruby-operator">..</span><span class="ruby-operator">-</span>(<span class="ruby-identifier">quart</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)]
-  (<span class="ruby-identifier">fraction</span><span class="ruby-operator">*</span>(<span class="ruby-identifier">new_arr</span>[<span class="ruby-value">0</span>]<span class="ruby-operator">+</span><span class="ruby-identifier">new_arr</span>[<span class="ruby-value">-1</span>]) <span class="ruby-operator">+</span> <span class="ruby-identifier">new_arr</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-2</span>].<span class="ruby-identifier">inject</span>(<span class="ruby-value">:+</span>))<span class="ruby-operator">/</span>(<span class="ruby-identifier">length</span><span class="ruby-operator">/</span><span class="ruby-value">2.0</span>)
+  ((<span class="ruby-identifier">fraction</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">new_arr</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">new_arr</span>[<span class="ruby-value">-1</span>])) <span class="ruby-operator">+</span> <span class="ruby-identifier">new_arr</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-2</span>].<span class="ruby-identifier">inject</span>(<span class="ruby-value">:+</span>)) <span class="ruby-operator">/</span> (<span class="ruby-identifier">length</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -332,16 +334,16 @@
           
 
           <div class="method-source-code" id="segment-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 61</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">segment</span>(<span class="ruby-identifier">values</span>, <span class="ruby-identifier">attr</span>)
   [
     {
-      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">attr</span> }.<span class="ruby-identifier">length</span>,
-      <span class="ruby-node">&quot;#{attr}&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">attr</span> }.<span class="ruby-identifier">length</span>,
+      <span class="ruby-identifier">attr</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
     },
     {
-      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">attr</span> }.<span class="ruby-identifier">length</span>,
-      <span class="ruby-node">&quot;#{attr}&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">false</span>,
+      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">attr</span> }.<span class="ruby-identifier">length</span>,
+      <span class="ruby-identifier">attr</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">false</span>,
     }
   ]
 <span class="ruby-keyword">end</span></pre>
@@ -362,15 +364,15 @@
           
 
           <div class="method-source-code" id="segment_page_by_key-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 74</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/metrics.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">segment_page_by_key</span>(<span class="ruby-identifier">values</span>, <span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">possible_keys</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">to_s</span>}.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
-  <span class="ruby-identifier">possible_keys</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">possible_keys</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">to_s</span> }.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+  <span class="ruby-identifier">possible_keys</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
     {
-      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">key</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">k</span> }.<span class="ruby-identifier">length</span>,
-      <span class="ruby-node">&quot;#{key}&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">k</span>,
+      <span class="ruby-value">:value</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">key</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">k</span> }.<span class="ruby-identifier">length</span>,
+      <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">k</span>,
     }
-  }
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

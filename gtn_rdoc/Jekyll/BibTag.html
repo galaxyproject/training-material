@@ -87,6 +87,8 @@
 
   <section class="description">
     
+<p>{% bibliography %} which generates the bibliography</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -115,7 +117,7 @@
             </div>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-scholar.rb, line 84</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-scholar.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">tag_name</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">tokens</span>)
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@text</span> = <span class="ruby-identifier">text</span>.<span class="ruby-identifier">strip</span>
@@ -144,33 +146,35 @@
           
 
           <div class="method-source-code" id="render-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-scholar.rb, line 89</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-scholar.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render</span>(<span class="ruby-identifier">context</span>)
   <span class="ruby-identifier">site</span> = <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>]
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Scholar</span>.<span class="ruby-identifier">load_bib</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-comment"># Which page is rendering this tag?</span>
   <span class="ruby-identifier">source_page</span> = <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>][<span class="ruby-string">&#39;path&#39;</span>]
   <span class="ruby-identifier">global_bib</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;cached_global_bib&#39;</span>]
-  <span class="ruby-identifier">citeproc</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;cached_citeproc&#39;</span>]
+  <span class="ruby-comment"># citeproc = site.config[&#39;cached_citeproc&#39;]</span>
   <span class="ruby-comment"># We have our page&#39;s citations</span>
   <span class="ruby-identifier">citations</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;citation_cache&#39;</span>][<span class="ruby-identifier">source_page</span>] <span class="ruby-operator">||</span> []
   <span class="ruby-comment"># For each of these citation IDs, we need to get the formatted version + pull out</span>
   <span class="ruby-comment"># year, month for sorting.</span>
-  <span class="ruby-identifier">unique_citations</span> = <span class="ruby-identifier">citations</span>.<span class="ruby-identifier">reduce</span>(<span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)) { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-identifier">b</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>; <span class="ruby-identifier">a</span> }.<span class="ruby-identifier">keys</span>
+  <span class="ruby-identifier">unique_citations</span> = <span class="ruby-identifier">citations</span>.<span class="ruby-identifier">each_with_object</span>(<span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span>, <span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span>[<span class="ruby-identifier">b</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">keys</span>
   <span class="ruby-comment"># Remove nil citations</span>
-  <span class="ruby-identifier">unique_citations</span> = <span class="ruby-identifier">unique_citations</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">global_bib</span>[<span class="ruby-identifier">c</span>].<span class="ruby-identifier">nil?</span> }
+  <span class="ruby-identifier">unique_citations</span> = <span class="ruby-identifier">unique_citations</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">global_bib</span>[<span class="ruby-identifier">c</span>].<span class="ruby-identifier">nil?</span> }
   <span class="ruby-comment"># And now sort them by date + names</span>
-  <span class="ruby-identifier">sorted_citations</span> = <span class="ruby-identifier">unique_citations</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sorted_citations</span> = <span class="ruby-identifier">unique_citations</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">global_bib</span>[<span class="ruby-identifier">a</span>].<span class="ruby-identifier">date</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">global_bib</span>[<span class="ruby-identifier">a</span>].<span class="ruby-identifier">names</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>) <span class="ruby-operator">&lt;=&gt;</span>
-    <span class="ruby-identifier">global_bib</span>[<span class="ruby-identifier">b</span>].<span class="ruby-identifier">date</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">global_bib</span>[<span class="ruby-identifier">b</span>].<span class="ruby-identifier">names</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
-  }
+      <span class="ruby-identifier">global_bib</span>[<span class="ruby-identifier">b</span>].<span class="ruby-identifier">date</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">global_bib</span>[<span class="ruby-identifier">b</span>].<span class="ruby-identifier">names</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">out</span> = <span class="ruby-string">&quot;&lt;ol class=\&quot;bibliography\&quot;&gt;&quot;</span>
-  <span class="ruby-identifier">out</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">sorted_citations</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">out</span> = <span class="ruby-string">&#39;&lt;ol class=&quot;bibliography&quot;&gt;&#39;</span>
+  <span class="ruby-identifier">out</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">sorted_citations</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">r</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Scholar</span>.<span class="ruby-identifier">render_citation</span>(<span class="ruby-identifier">c</span>)
-    <span class="ruby-node">%Q(&lt;li id=&quot;#{c}&quot;&gt;#{r}&lt;/li&gt;)</span>
-  }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
-  <span class="ruby-identifier">out</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;&lt;/ol&gt;&quot;</span>
+    <span class="ruby-node">%(&lt;li id=&quot;#{c}&quot;&gt;#{r}&lt;/li&gt;)</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+  <span class="ruby-identifier">out</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&#39;&lt;/ol&gt;&#39;</span>
   <span class="ruby-identifier">out</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

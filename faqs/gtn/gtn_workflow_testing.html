@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Adding workflow tests with Planemo">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-24 15:36:26 +0000">
+<meta name="DC.date" content="2023-05-16 08:42:46 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 
         
@@ -263,18 +263,42 @@ pip install planemo
   <li>
     <p>You will need to check the <code class="language-plaintext highlighter-rouge">-tests.yml</code> file, it has some automatically generated comparisons. Namely it tests that output data matches the test-data exactly, however, you might want to replace that with assertions that check for e.g. correct file size, or specific text content you expect to see.</p>
   </li>
-  <li>If the files in test-data are already uploaded to Zenodo, to save disk space, you should delete them from the <code class="language-plaintext highlighter-rouge">test-data</code> dir and use their URL in the <code class="language-plaintext highlighter-rouge">-tests.yml</code> file, as in this example:</li>
-</ol>
+  <li>
+    <p>If the files in test-data are already uploaded to Zenodo, to save disk space, you should delete them from the <code class="language-plaintext highlighter-rouge">test-data</code> dir and use their URL in the <code class="language-plaintext highlighter-rouge">-tests.yml</code> file, as in this example:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   - doc: Test the M. Tuberculosis Variant Analysis workflow
-     job:
-        'Read 1':
-           location: https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
-           class: File
-           filetype: fastqsanger.gz
-</code></pre></div></div>
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">doc</span><span class="pi">:</span> <span class="s">Test the M. Tuberculosis Variant Analysis workflow</span>
+  <span class="na">job</span><span class="pi">:</span>
+     <span class="s1">'</span><span class="s">Read</span><span class="nv"> </span><span class="s">1'</span><span class="err">:</span>
+        <span class="na">location</span><span class="pi">:</span> <span class="s">https://zenodo.org/record/3960260/files/004-2_1.fastq.gz</span>
+        <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+        <span class="na">filetype</span><span class="pi">:</span> <span class="s">fastqsanger.gz</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Add tests on the outputs! Check the <a href="https://planemo.readthedocs.io/en/latest/test_format.html">planemo reference if you need more detail</a>.</p>
 
-<ol>
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">doc</span><span class="pi">:</span> <span class="s">Test the M. Tuberculosis Variant Analysis workflow</span>
+  <span class="na">job</span><span class="pi">:</span>
+     <span class="c1"># Simple explicit Inputs</span>
+     <span class="s1">'</span><span class="s">Read</span><span class="nv"> </span><span class="s">1'</span><span class="err">:</span>
+        <span class="na">location</span><span class="pi">:</span> <span class="s">https://zenodo.org/record/3960260/files/004-2_1.fastq.gz</span>
+        <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+        <span class="na">filetype</span><span class="pi">:</span> <span class="s">fastqsanger.gz</span>
+  <span class="na">outputs</span><span class="pi">:</span>
+    <span class="na">jbrowse_html</span><span class="pi">:</span>
+      <span class="na">asserts</span><span class="pi">:</span>
+        <span class="na">has_text</span><span class="pi">:</span>
+          <span class="na">text</span><span class="pi">:</span> <span class="s2">"</span><span class="s">JBrowseDefaultMainPage"</span>
+    <span class="na">snippy_fasta</span><span class="pi">:</span>
+      <span class="na">asserts</span><span class="pi">:</span>
+        <span class="na">has_line</span><span class="pi">:</span>
+          <span class="na">line</span><span class="pi">:</span> <span class="s1">'</span><span class="s">&gt;Wildtype</span><span class="nv"> </span><span class="s">Staphylococcus</span><span class="nv"> </span><span class="s">aureus</span><span class="nv"> </span><span class="s">strain</span><span class="nv"> </span><span class="s">WT.'</span>
+    <span class="na">snippy_tabular</span><span class="pi">:</span>
+      <span class="na">asserts</span><span class="pi">:</span>
+        <span class="na">has_n_columns</span><span class="pi">:</span>
+          <span class="na">n</span><span class="pi">:</span> <span class="m">2</span>
+</code></pre></div>    </div>
+  </li>
   <li>Contribute all of those files to the GTN in a PR.</li>
 </ol>
 
@@ -347,7 +371,7 @@ add a button, include configuration options:
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/5903eecad5f4e37e7b594ab17a86f77033f99c55">5903eecad5f4e37e7b594ab17a86f77033f99c55</a>. This page has a shortlink, and will always be accessible via <a href="https://gxy.io/GTN:F00162">https://gxy.io/GTN:F00162</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/ecaa89c546a09abde84768080cb6557b1c3010f6">ecaa89c546a09abde84768080cb6557b1c3010f6</a>. This page has a shortlink, and will always be accessible via <a href="https://gxy.io/GTN:F00162">https://gxy.io/GTN:F00162</a></p>
     </div>
 </footer>
 

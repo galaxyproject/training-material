@@ -86,6 +86,8 @@
 
   <section class="description">
     
+<p>Generates synthetic topics from tutorials with specific tags</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -110,18 +112,18 @@
           
 
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/synthetic.rb, line 6</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/synthetic.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-comment"># Full Bibliography</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/SyntheticTopics] Generating Indexes&quot;</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;[GTN/SyntheticTopics] Generating Indexes&#39;</span>
 
-  <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_topics</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">t</span>][<span class="ruby-string">&#39;tag_based&#39;</span>]}.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">topic</span><span class="ruby-operator">|</span>
+  <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_topics</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">t</span>][<span class="ruby-string">&#39;tag_based&#39;</span>] }.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">topic</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[GTN/SyntheticTopics] Creating #{topic} topic&quot;</span>
 
-    <span class="ruby-identifier">topic_index</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-node">&quot;topics/#{topic}&quot;</span>, <span class="ruby-string">&quot;index.md&quot;</span>)
-    <span class="ruby-identifier">topic_index</span>.<span class="ruby-identifier">content</span> = <span class="ruby-string">&quot;&quot;</span>
-    <span class="ruby-identifier">topic_index</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;layout&quot;</span>] = <span class="ruby-string">&quot;topic&quot;</span>
-    <span class="ruby-identifier">topic_index</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&quot;topic_name&quot;</span>] = <span class="ruby-identifier">topic</span>
+    <span class="ruby-identifier">topic_index</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-node">&quot;topics/#{topic}&quot;</span>, <span class="ruby-string">&#39;index.md&#39;</span>)
+    <span class="ruby-identifier">topic_index</span>.<span class="ruby-identifier">content</span> = <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">topic_index</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] = <span class="ruby-string">&#39;topic&#39;</span>
+    <span class="ruby-identifier">topic_index</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;topic_name&#39;</span>] = <span class="ruby-identifier">topic</span>
     <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">topic_index</span>
 
     <span class="ruby-comment"># For now, intentionally no FAQ</span>
@@ -129,7 +131,7 @@
     <span class="ruby-comment"># faq_index.content = &quot;&quot;</span>
     <span class="ruby-comment"># faq_index.data[&quot;layout&quot;] = &quot;faq-page&quot;</span>
     <span class="ruby-comment"># site.pages &lt;&lt; faq_index</span>
-  }
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

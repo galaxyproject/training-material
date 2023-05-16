@@ -90,6 +90,8 @@
 
   <section class="description">
     
+<p>Generate boxes</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -114,7 +116,7 @@
           
 
           <div class="method-source-code" id="box_classes-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 92</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">box_classes</span>
   <span class="ruby-identifier">@@BOX_CLASSES</span>
 <span class="ruby-keyword">end</span></pre>
@@ -127,7 +129,7 @@
       <div id="method-c-format_box_title" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">format_box_title</span><span
-            class="method-args">(title, box_type, lang=&quot;en&quot;)</span>
+            class="method-args">(title, box_type, lang = &#39;en&#39;)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -135,10 +137,10 @@
           
 
           <div class="method-source-code" id="format_box_title-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 140</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">format_box_title</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">lang</span>=<span class="ruby-string">&quot;en&quot;</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">lang</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">lang</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">lang</span> = <span class="ruby-string">&quot;en&quot;</span> <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">title_fmted</span> = ((<span class="ruby-operator">!</span><span class="ruby-identifier">title</span>.<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">title</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;: #{title}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;&quot;</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">format_box_title</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">lang</span> = <span class="ruby-string">&#39;en&#39;</span>)
+  <span class="ruby-identifier">lang</span> = <span class="ruby-string">&#39;en&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">lang</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">lang</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">title_fmted</span> = (<span class="ruby-operator">!</span><span class="ruby-identifier">title</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">title</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;: #{title}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>)
   <span class="ruby-node">&quot;#{@@BOX_TITLES[lang][box_type]}#{title_fmted}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -150,7 +152,7 @@
       <div id="method-c-generate_box" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">generate_box</span><span
-            class="method-args">(box_type, title, lang=&quot;en&quot;, key)</span>
+            class="method-args">(box_type, title, lang = &#39;en&#39;, key)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -158,15 +160,15 @@
           
 
           <div class="method-source-code" id="generate_box-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 194</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_box</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>=<span class="ruby-string">&quot;en&quot;</span>, <span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">title</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">safe_title</span>(<span class="ruby-identifier">title</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 190</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_box</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span> = <span class="ruby-string">&#39;en&#39;</span>, <span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">title</span> = <span class="ruby-identifier">safe_title</span>(<span class="ruby-identifier">title</span>)
   <span class="ruby-identifier">box_id</span>, <span class="ruby-identifier">box_title</span> = <span class="ruby-identifier">generate_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">key</span>, <span class="ruby-value">contents:</span> <span class="ruby-keyword">true</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-node">%Q(
+  <span class="ruby-node">%(
     &lt;div class=&quot;box #{box_type}&quot; markdown=0&gt;
     #{box_title}
     &lt;div class=&quot;box-content&quot; id=&quot;#{box_id}-contents&quot; markdown=1&gt;
-  )</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">lstrip</span>.<span class="ruby-identifier">rstrip</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;&quot;</span>).<span class="ruby-identifier">lstrip</span>.<span class="ruby-identifier">rstrip</span>
+  )</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:strip</span>).<span class="ruby-identifier">join</span>.<span class="ruby-identifier">strip</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -177,7 +179,7 @@
       <div id="method-c-generate_collapsible_title" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">generate_collapsible_title</span><span
-            class="method-args">(box_type, title, lang=&quot;en&quot;, key, contents: false)</span>
+            class="method-args">(box_type, title, lang = &#39;en&#39;, key, contents: false)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -185,20 +187,22 @@
           
 
           <div class="method-source-code" id="generate_collapsible_title-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 146</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_collapsible_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>=<span class="ruby-string">&quot;en&quot;</span>, <span class="ruby-identifier">key</span>, <span class="ruby-value">contents:</span> <span class="ruby-keyword">false</span>)
-  <span class="ruby-identifier">box_id</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_id</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">box_title</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format_box_title</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">lang</span>=<span class="ruby-identifier">lang</span>)
-  <span class="ruby-identifier">refers_to_contents</span> = <span class="ruby-identifier">contents</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;-contents&quot;</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;&quot;</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_collapsible_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span> = <span class="ruby-string">&#39;en&#39;</span>, <span class="ruby-identifier">key</span>, <span class="ruby-value">contents:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">box_id</span> = <span class="ruby-identifier">get_id</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">box_title</span> = <span class="ruby-identifier">format_box_title</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">lang</span>)
+  <span class="ruby-identifier">refers_to_contents</span> = <span class="ruby-identifier">contents</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;-contents&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-comment"># These are all collapsed by default, details, tip, and solution.</span>
-  <span class="ruby-keyword">return</span> [<span class="ruby-identifier">box_id</span>, <span class="ruby-node">%Q(
+  <span class="ruby-comment"># rubocop:disable Layout/LineLength</span>
+  [<span class="ruby-identifier">box_id</span>, <span class="ruby-node">%(
     &lt;div class=&quot;box-title #{box_type}-title&quot; id=&quot;#{box_id}&quot;&gt;
     &lt;button class=&quot;gtn-boxify-button #{box_type}&quot; type=&quot;button&quot; aria-controls=&quot;#{box_id}#{refers_to_contents}&quot; aria-expanded=&quot;true&quot;&gt;
-      #{self.get_icon(box_type)} #{box_title}
+      #{get_icon(box_type)} #{box_title}
       &lt;span class=&quot;fold-unfold fa fa-minus-square&quot;&gt;&lt;/span&gt;
     &lt;/button&gt;
     &lt;/div&gt;
-  )</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">lstrip</span>.<span class="ruby-identifier">rstrip</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;&quot;</span>).<span class="ruby-identifier">lstrip</span>.<span class="ruby-identifier">rstrip</span>]
+  )</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:strip</span>).<span class="ruby-identifier">join</span>.<span class="ruby-identifier">strip</span>]
+  <span class="ruby-comment"># rubocop:enable Layout/LineLength</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -209,7 +213,7 @@
       <div id="method-c-generate_static_title" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">generate_static_title</span><span
-            class="method-args">(box_type, title, lang=&quot;en&quot;, key)</span>
+            class="method-args">(box_type, title, lang = &#39;en&#39;, key)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -217,20 +221,18 @@
           
 
           <div class="method-source-code" id="generate_static_title-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 161</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_static_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>=<span class="ruby-string">&quot;en&quot;</span>, <span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">box_id</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_id</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">box_title</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format_box_title</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">lang</span>=<span class="ruby-identifier">lang</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_static_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span> = <span class="ruby-string">&#39;en&#39;</span>, <span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">box_id</span> = <span class="ruby-identifier">get_id</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">box_title</span> = <span class="ruby-identifier">format_box_title</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">lang</span>)
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">title</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Static | typ=#{box_type} | t=#{title} | l=#{lang} | k=#{key}&quot;</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Static | typ=#{box_type} | t=#{title} | l=#{lang} | k=#{key}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">title</span>.<span class="ruby-identifier">nil?</span>
 
-  <span class="ruby-keyword">return</span> [<span class="ruby-identifier">box_id</span>, <span class="ruby-node">%Q(
+  [<span class="ruby-identifier">box_id</span>, <span class="ruby-node">%(
     &lt;div class=&quot;box-title #{box_type}-title&quot; id=&quot;#{box_id}&quot;&gt;
-      #{self.get_icon(box_type)} #{box_title}
+      #{get_icon(box_type)} #{box_title}
     &lt;/div&gt;
-  )</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">lstrip</span>.<span class="ruby-identifier">rstrip</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;&quot;</span>).<span class="ruby-identifier">lstrip</span>.<span class="ruby-identifier">rstrip</span>]
+  )</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:strip</span>).<span class="ruby-identifier">join</span>.<span class="ruby-identifier">strip</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -241,7 +243,7 @@
       <div id="method-c-generate_title" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">generate_title</span><span
-            class="method-args">(box_type, title, lang=&quot;en&quot;, key, contents: false)</span>
+            class="method-args">(box_type, title, lang = &#39;en&#39;, key, contents: false)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -249,13 +251,13 @@
           
 
           <div class="method-source-code" id="generate_title-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 185</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>=<span class="ruby-string">&quot;en&quot;</span>, <span class="ruby-identifier">key</span>, <span class="ruby-value">contents:</span> <span class="ruby-keyword">false</span>)
-  <span class="ruby-identifier">title</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">safe_title</span>(<span class="ruby-identifier">title</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span> = <span class="ruby-string">&#39;en&#39;</span>, <span class="ruby-identifier">key</span>, <span class="ruby-value">contents:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">title</span> = <span class="ruby-identifier">safe_title</span>(<span class="ruby-identifier">title</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">@@COLLAPSIBLE_BOXES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">box_type</span>)
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_collapsible_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">key</span>, <span class="ruby-value">contents:</span> <span class="ruby-identifier">contents</span>)
+    <span class="ruby-identifier">generate_collapsible_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">key</span>, <span class="ruby-value">contents:</span> <span class="ruby-identifier">contents</span>)
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_static_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">key</span>)
+    <span class="ruby-identifier">generate_static_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">key</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -275,28 +277,24 @@
           
 
           <div class="method-source-code" id="get_icon-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 100</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_icon</span>(<span class="ruby-identifier">icon_cls</span>, <span class="ruby-value">emoji:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">a11y:</span> <span class="ruby-keyword">false</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">emoji</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">@@ICONS_EMOJI</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">icon_cls</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">@@ICONS_EMOJI</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">icon_cls</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">emoji</span>
 
   <span class="ruby-identifier">icon</span> = <span class="ruby-identifier">@@ICONS</span>[<span class="ruby-identifier">icon_cls</span>]
 
   <span class="ruby-comment"># We support announcing the proper label of the box, e.g. &#39;hands on box&#39;,</span>
   <span class="ruby-comment"># but default to hiding this, as the icons are *mostly* decorative.</span>
   <span class="ruby-identifier">icon_a11y_title</span> = <span class="ruby-identifier">icon_cls</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[-_]/</span>, <span class="ruby-string">&#39; &#39;</span>)
-  <span class="ruby-identifier">icon_aria_label</span> = <span class="ruby-identifier">a11y</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;title=\&quot;#{icon_a11y_title} box\&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-identifier">accessible_addition</span> = <span class="ruby-identifier">a11y</span> <span class="ruby-operator">?</span> <span class="ruby-node">%Q(&lt;span class=&quot;sr-only&quot;&gt;#{icon_a11y_title} box&lt;/span&gt;)</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-identifier">icon_aria_label</span> = <span class="ruby-identifier">a11y</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;title=\&quot;#{icon_a11y_title} box\&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-identifier">accessible_addition</span> = <span class="ruby-identifier">a11y</span> <span class="ruby-operator">?</span> <span class="ruby-node">%(&lt;span class=&quot;sr-only&quot;&gt;#{icon_a11y_title} box&lt;/span&gt;)</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">icon</span>.<span class="ruby-identifier">nil?</span>
-   <span class="ruby-keyword">if</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;fa&quot;</span>)
-    <span class="ruby-node">%Q(&lt;i class=&quot;#{icon}&quot; aria-hidden=\&quot;true\&quot; #{icon_aria_label}&gt;&lt;/i&gt;#{accessible_addition})</span>
-   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;ai&quot;</span>)
-    <span class="ruby-node">%Q(&lt;i class=&quot;ai #{icon}&quot; aria-hidden=\&quot;true\&quot; #{icon_aria_label}&gt;&lt;/i&gt;#{accessible_addition})</span>
-   <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-string">%Q(&lt;span class=&quot;visually-hidden&quot;&gt;&lt;/span&gt;)</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-string">%(&lt;span class=&quot;visually-hidden&quot;&gt;&lt;/span&gt;)</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;fa&#39;</span>)
+    <span class="ruby-node">%(&lt;i class=&quot;#{icon}&quot; aria-hidden=&quot;true&quot; #{icon_aria_label}&gt;&lt;/i&gt;#{accessible_addition})</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;ai&#39;</span>)
+    <span class="ruby-node">%(&lt;i class=&quot;ai #{icon}&quot; aria-hidden=&quot;true&quot; #{icon_aria_label}&gt;&lt;/i&gt;#{accessible_addition})</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -316,17 +314,17 @@
           
 
           <div class="method-source-code" id="get_id-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 124</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_id</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">box_id</span> = <span class="ruby-node">&quot;#{box_type}-#{title}&quot;</span>
-  <span class="ruby-identifier">box_safe</span> = <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Utils</span><span class="ruby-operator">::</span><span class="ruby-identifier">slugify</span>(<span class="ruby-identifier">box_id</span>)
+  <span class="ruby-identifier">box_safe</span> = <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Utils</span>.<span class="ruby-identifier">slugify</span>(<span class="ruby-identifier">box_id</span>)
   <span class="ruby-identifier">key</span> = <span class="ruby-node">&quot;#{path}|#{box_type}|#{box_safe}&quot;</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-ivar">@title_unique_offsets</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@title_unique_offsets</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
+    <span class="ruby-identifier">box_safe_final</span> = <span class="ruby-node">&quot;#{box_safe}-#{@title_unique_offsets[key]}&quot;</span>
+  <span class="ruby-keyword">else</span>
     <span class="ruby-ivar">@title_unique_offsets</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-value">0</span>
     <span class="ruby-identifier">box_safe_final</span> = <span class="ruby-identifier">box_safe</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">box_safe_final</span> = <span class="ruby-node">&quot;#{box_safe}-#{@title_unique_offsets[key]}&quot;</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-ivar">@title_unique_offsets</span>[<span class="ruby-identifier">key</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
 
@@ -341,7 +339,7 @@
       <div id="method-c-replace_elements" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">replace_elements</span><span
-            class="method-args">(text, lang=&quot;en&quot;, key)</span>
+            class="method-args">(text, lang = &#39;en&#39;, key)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -349,20 +347,20 @@
           
 
           <div class="method-source-code" id="replace_elements-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 204</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">replace_elements</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">lang</span>=<span class="ruby-string">&quot;en&quot;</span>, <span class="ruby-identifier">key</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 200</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">replace_elements</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">lang</span> = <span class="ruby-string">&#39;en&#39;</span>, <span class="ruby-identifier">key</span>)
   <span class="ruby-comment"># We want to replace any `&lt;x-title&gt;(.*)&lt;/x-title&gt;` bits</span>
   <span class="ruby-comment"># And replace them one by one with &quot;proper&quot; boxes, based on generate_title.</span>
   <span class="ruby-comment">#</span>
   <span class="ruby-comment"># We&#39;re going to rely on never having two on one line</span>
-  <span class="ruby-identifier">text</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&lt;(?&lt;type&gt;[a-z-]*)-title&gt;(?&lt;title&gt;.*?)&lt;\/[a-z-]*-title&gt;/</span>){<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">text</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{&lt;(?&lt;type&gt;[a-z-]*)-title&gt;(?&lt;title&gt;.*?)&lt;/[a-z-]*-title&gt;}</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">_m</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">title</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>[<span class="ruby-value">:title</span>]
       <span class="ruby-identifier">type</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>[<span class="ruby-value">:type</span>]
-      <span class="ruby-identifier">_</span>, <span class="ruby-identifier">box</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_title</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>=<span class="ruby-identifier">lang</span>, <span class="ruby-identifier">key</span>)
+      <span class="ruby-identifier">_</span>, <span class="ruby-identifier">box</span> = <span class="ruby-identifier">generate_title</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">key</span>)
       <span class="ruby-identifier">box</span>
-    }
-  }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -381,14 +379,11 @@
           
 
           <div class="method-source-code" id="safe_title-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 176</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 175</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">safe_title</span>(<span class="ruby-identifier">title</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">title</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">title</span> = <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">title</span> = <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">title</span>.<span class="ruby-identifier">nil?</span>
 
-  <span class="ruby-identifier">title</span> = <span class="ruby-identifier">title</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&quot;/</span>, <span class="ruby-string">&#39;&amp;quot;&#39;</span>)
-  <span class="ruby-identifier">title</span>
+  <span class="ruby-identifier">title</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&quot;/</span>, <span class="ruby-string">&#39;&amp;quot;&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -407,7 +402,7 @@
           
 
           <div class="method-source-code" id="title_classes-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 96</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/boxify.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">title_classes</span>
   <span class="ruby-identifier">@@TITLE_CLASSES</span>
 <span class="ruby-keyword">end</span></pre>

@@ -87,6 +87,8 @@
 
   <section class="description">
     
+<p>Replaces the built in link tag temporarily</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -115,7 +117,7 @@
             </div>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File _plugins/link.rb, line 4</span>
+            <pre><span class="ruby-comment"># File _plugins/link.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">tag_name</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">tokens</span>)
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@text</span> = <span class="ruby-identifier">text</span>.<span class="ruby-identifier">strip</span>
@@ -136,7 +138,7 @@
       <div id="method-i-render" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">render</span><span
-            class="method-args">(context)</span>
+            class="method-args">(_context)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -144,13 +146,13 @@
           
 
           <div class="method-source-code" id="render-source">
-            <pre><span class="ruby-comment"># File _plugins/link.rb, line 9</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render</span>(<span class="ruby-identifier">context</span>)
+            <pre><span class="ruby-comment"># File _plugins/link.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render</span>(<span class="ruby-identifier">_context</span>)
   <span class="ruby-comment"># This is a workaround for https://github.com/jekyll/jekyll/issues/9179</span>
   <span class="ruby-comment"># We should remove it when 9179 is solved.</span>
   <span class="ruby-comment">#</span>
   <span class="ruby-comment"># Note that this does NOT support news posts with a date in the URL.</span>
-  <span class="ruby-string">&quot;/training-material/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@text</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\.md/</span>, <span class="ruby-string">&#39;.html&#39;</span>)
+  <span class="ruby-node">&quot;/training-material/#{@text.gsub(/\.md/, &#39;.html&#39;)}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

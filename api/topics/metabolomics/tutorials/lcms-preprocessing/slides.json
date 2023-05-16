@@ -1,5 +1,5 @@
 {
-  "layout": "base_slides",
+  "layout": "tutorial_slides",
   "title": "Mass spectrometry: LC-MS preprocessing - advanced",
   "zenodo_link": "https://zenodo.org/record/3757956",
   "level": "Intermediate",
@@ -36,6 +36,7 @@
   },
   "hands_on": true,
   "slides": true,
+  "api": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.json",
   "tools": [
     "toolshed.g2.bx.psu.edu/repos/lecorguille/camera_annotate/abims_CAMERA_annotateDiffreport/2.2.6+camera1.48.0-galaxy0",
     "toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0",
@@ -50,6 +51,124 @@
     "toolshed.g2.bx.psu.edu/repos/melpetera/idchoice/idchoice/19.12",
     "toolshed.g2.bx.psu.edu/repos/melpetera/intensity_checks/intens_check/1.2.8"
   ],
+  "supported_servers": {
+    "exact": [
+      {
+        "url": "https://usegalaxy.fr/",
+        "name": "UseGalaxy.fr",
+        "usegalaxy": "true"
+      }
+    ],
+    "inexact": [
+      {
+        "url": "https://galaxy.genouest.org",
+        "name": "Galaxy@GenOuest",
+        "usegalaxy": "false"
+      },
+      {
+        "url": "https://usegalaxy.eu",
+        "name": "UseGalaxy.eu",
+        "usegalaxy": "true"
+      },
+      {
+        "url": "https://usegalaxy.no/",
+        "name": "UseGalaxy.no",
+        "usegalaxy": "true"
+      }
+    ]
+  },
+  "admin_install": {
+    "install_tool_dependencies": true,
+    "install_repository_dependencies": true,
+    "install_resolver_dependencies": true,
+    "tools": [
+      {
+        "name": "camera_annotate",
+        "owner": "lecorguille",
+        "revisions": "512c2b701d96",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "msnbase_readmsdata",
+        "owner": "lecorguille",
+        "revisions": "11ab2081bd4a",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "xcms_export_samplemetadata",
+        "owner": "lecorguille",
+        "revisions": "94eb263cfab4",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "xcms_fillpeaks",
+        "owner": "lecorguille",
+        "revisions": "26d77e9ceb49",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "xcms_group",
+        "owner": "lecorguille",
+        "revisions": "d45a786cbc40",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "xcms_merge",
+        "owner": "lecorguille",
+        "revisions": "5bd125a3f3b0",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "xcms_plot_chromatogram",
+        "owner": "lecorguille",
+        "revisions": "024974037c4e",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "xcms_retcor",
+        "owner": "lecorguille",
+        "revisions": "aa252eec9229",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "xcms_summary",
+        "owner": "lecorguille",
+        "revisions": "018a9771de28",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "xcms_xcmsset",
+        "owner": "lecorguille",
+        "revisions": "b02d1992a43a",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "idchoice",
+        "owner": "melpetera",
+        "revisions": "bb19b1d15732",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "intensity_checks",
+        "owner": "melpetera",
+        "revisions": "a31f3f802b2b",
+        "tool_panel_section_label": "Metabolomics",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      }
+    ]
+  },
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: camera_annotate\n  owner: lecorguille\n  revisions: 512c2b701d96\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: msnbase_readmsdata\n  owner: lecorguille\n  revisions: 11ab2081bd4a\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xcms_export_samplemetadata\n  owner: lecorguille\n  revisions: 94eb263cfab4\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xcms_fillpeaks\n  owner: lecorguille\n  revisions: 26d77e9ceb49\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xcms_group\n  owner: lecorguille\n  revisions: d45a786cbc40\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xcms_merge\n  owner: lecorguille\n  revisions: 5bd125a3f3b0\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xcms_plot_chromatogram\n  owner: lecorguille\n  revisions: '024974037c4e'\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xcms_retcor\n  owner: lecorguille\n  revisions: aa252eec9229\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xcms_summary\n  owner: lecorguille\n  revisions: '018a9771de28'\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xcms_xcmsset\n  owner: lecorguille\n  revisions: b02d1992a43a\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: idchoice\n  owner: melpetera\n  revisions: bb19b1d15732\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: intensity_checks\n  owner: melpetera\n  revisions: a31f3f802b2b\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {

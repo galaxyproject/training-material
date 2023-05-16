@@ -72,7 +72,7 @@
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    <li ><a href="#method-c-new">::new</a>
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
     <li ><a href="#method-i-generate">#generate</a>
   </ul>
 </div>
@@ -87,6 +87,8 @@
 
   <section class="description">
     
+<p>Our modifications to the markdown renderer to process images with figure captions</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -109,10 +111,15 @@
 
         <div class="method-description">
           
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-figurify.rb, line 8</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-figurify.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;figurify&#39;</span>] <span class="ruby-operator">||=</span> {}
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -139,14 +146,14 @@
           
 
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-figurify.rb, line 12</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-figurify.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>
-    .<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">skip_layout?</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] }
-    .<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span> <span class="ruby-identifier">figurify</span> <span class="ruby-identifier">page</span>,<span class="ruby-identifier">site</span> }
+      .<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span> <span class="ruby-identifier">skip_layout?</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] }
+      .<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span> <span class="ruby-identifier">figurify</span> <span class="ruby-identifier">page</span>, <span class="ruby-identifier">site</span> }
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">posts</span>.<span class="ruby-identifier">docs</span>
-    .<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">post</span><span class="ruby-operator">|</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">skip_layout?</span> <span class="ruby-identifier">post</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] }
-    .<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">post</span><span class="ruby-operator">|</span> <span class="ruby-identifier">figurify</span> <span class="ruby-identifier">post</span>, <span class="ruby-identifier">site</span> }
+      .<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">post</span><span class="ruby-operator">|</span> <span class="ruby-identifier">skip_layout?</span> <span class="ruby-identifier">post</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] }
+      .<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">post</span><span class="ruby-operator">|</span> <span class="ruby-identifier">figurify</span> <span class="ruby-identifier">post</span>, <span class="ruby-identifier">site</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

@@ -89,6 +89,8 @@
 
   <section class="description">
     
+<p>Our {% icon X %} tag</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -117,15 +119,15 @@
             </div>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-icon-tag.rb, line 4</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-icon-tag.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">tag_name</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">tokens</span>)
   <span class="ruby-keyword">super</span>
   <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">text</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>
   <span class="ruby-ivar">@text</span> = <span class="ruby-identifier">parts</span>[<span class="ruby-value">0</span>]
   <span class="ruby-ivar">@aria</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;aria=false&#39;</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@aria</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;aria=false&#39;</span>
+
+  <span class="ruby-ivar">@aria</span> = <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -204,7 +206,9 @@
 <p>The text to add to the icon</p>
 </dd></dl>
 
-<p>Returns: The HTML for the icon Note: The icon text label is wrapped in a span with class “visually-hidden” to make it accessible to screen readers.</p>
+<p>Returns: The HTML for the icon Note: The icon text label is wrapped in a span with class</p>
+
+<pre>&quot;visually-hidden&quot; to make it accessible to screen readers.</pre>
 
 <p>Example:</p>
 
@@ -214,26 +218,23 @@
 =&gt; &lt;i class=&quot;fa fa-github&quot;&gt;&lt;/i&gt;</pre>
 
           <div class="method-source-code" id="render_for_text-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-icon-tag.rb, line 30</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-icon-tag.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render_for_text</span>(<span class="ruby-identifier">icon</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">empty?</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">SyntaxError</span>.<span class="ruby-identifier">new</span>(
-      <span class="ruby-node">&quot;No icon defined for: &#39;#{@text}&#39;. &quot;</span> <span class="ruby-operator">+</span>
-      <span class="ruby-string">&quot;Please define it in `_config.yml` (under `icon-tag:`).&quot;</span>
-    )
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">SyntaxError</span>, <span class="ruby-node">&quot;No icon defined for: &#39;#{@text}&#39;. Please define it in `_config.yml` (under `icon-tag:`).&quot;</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;fa&quot;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;fa&#39;</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@aria</span>
-      <span class="ruby-node">%Q(&lt;i class=&quot;#{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;#{@text}&lt;/span&gt;)</span>
+      <span class="ruby-node">%(&lt;i class=&quot;#{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;#{@text}&lt;/span&gt;)</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-node">%Q(&lt;i class=&quot;#{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;)</span>
+      <span class="ruby-node">%(&lt;i class=&quot;#{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;)</span>
     <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;ai&quot;</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">icon</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;ai&#39;</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@aria</span>
-      <span class="ruby-node">%Q(&lt;i class=&quot;ai #{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;#{@text}&lt;/span&gt;)</span>
+      <span class="ruby-node">%(&lt;i class=&quot;ai #{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;#{@text}&lt;/span&gt;)</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-node">%Q(&lt;i class=&quot;ai #{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;)</span>
+      <span class="ruby-node">%(&lt;i class=&quot;ai #{icon}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;)</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>

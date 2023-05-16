@@ -82,6 +82,8 @@
 
   <section class="description">
     
+<p>Module for obtaining modification times of files. It walks the git history to record the last time a file was modified. This is faster than talking to the file system.</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -106,21 +108,19 @@
           
 
           <div class="method-source-code" id="init_cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 5</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">init_cache</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">@@TIME_CACHE</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">@@TIME_CACHE</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;[GTN/MOD] Filling Time Cache&quot;</span>
-    <span class="ruby-identifier">results</span> = <span class="ruby-string">`git log --name-only --pretty=&#39;GTN_GTN:%ct&#39;`</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;GTN_GTN:&#39;</span>)
-    <span class="ruby-identifier">results</span>.<span class="ruby-identifier">map!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n\n/</span>)}
-    <span class="ruby-identifier">results</span>.<span class="ruby-identifier">select!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>}
-    <span class="ruby-identifier">results</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">date</span>, <span class="ruby-identifier">files</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">files</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">@@TIME_CACHE</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">f</span>
-          <span class="ruby-identifier">@@TIME_CACHE</span>[<span class="ruby-identifier">f</span>] = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">date</span>.<span class="ruby-identifier">to_i</span>)
-        <span class="ruby-keyword">end</span>
-      }
-    }
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">@@TIME_CACHE</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">@@TIME_CACHE</span> = {}
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;[GTN/MOD] Filling Time Cache&#39;</span>
+  <span class="ruby-identifier">results</span> = <span class="ruby-string">`git log --name-only --pretty=&#39;GTN_GTN:%ct&#39;`</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;GTN_GTN:&#39;</span>)
+  <span class="ruby-identifier">results</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n\n/</span>) }
+  <span class="ruby-identifier">results</span>.<span class="ruby-identifier">select!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> }
+  <span class="ruby-identifier">results</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">date</span>, <span class="ruby-identifier">files</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">files</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">@@TIME_CACHE</span>[<span class="ruby-identifier">f</span>] = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">date</span>.<span class="ruby-identifier">to_i</span>) <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">@@TIME_CACHE</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">f</span>
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -140,17 +140,17 @@
           
 
           <div class="method-source-code" id="obtain_time-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 26</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">obtain_time</span>(<span class="ruby-identifier">f</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">init_cache</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">@@TIME_CACHE</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">f</span>
+  <span class="ruby-identifier">init_cache</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">@@TIME_CACHE</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">f</span>
     <span class="ruby-identifier">@@TIME_CACHE</span>[<span class="ruby-identifier">f</span>]
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">begin</span>
       <span class="ruby-comment"># Non git file.</span>
       <span class="ruby-identifier">@@TIME_CACHE</span>[<span class="ruby-identifier">f</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">mtime</span>(<span class="ruby-identifier">f</span>)
       <span class="ruby-identifier">@@TIME_CACHE</span>[<span class="ruby-identifier">f</span>]
-    <span class="ruby-keyword">rescue</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
       <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-value">0</span>)
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
@@ -172,7 +172,7 @@
           
 
           <div class="method-source-code" id="time_cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 22</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">time_cache</span>
   <span class="ruby-identifier">@@TIME_CACHE</span>
 <span class="ruby-keyword">end</span></pre>

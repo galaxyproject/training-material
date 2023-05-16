@@ -115,17 +115,7 @@
 
   <section class="description">
     
-<p>The MIT License (MIT)</p>
-
-<p>Copyright © 2015 Radu-Bogdan Croitoru Copyright © 2016 Alexei Boronine</p>
-
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
-
-<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
-
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-
-<p><a href="https://github.com/hsluv/hsluv-ruby">github.com/hsluv/hsluv-ruby</a></p>
+<p>Converts between RGB, HSLUV</p>
 
   </section>
 
@@ -176,8 +166,8 @@
           
 
           <div class="method-source-code" id="degrees_to_radians-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 218</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">degrees_to_radians</span> (<span class="ruby-identifier">degrees</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 219</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">degrees_to_radians</span>(<span class="ruby-identifier">degrees</span>)
   <span class="ruby-identifier">degrees</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span> <span class="ruby-operator">/</span> <span class="ruby-value">180.0</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -197,9 +187,9 @@
           
 
           <div class="method-source-code" id="distance_from_pole-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 273</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">distance_from_pole</span> (<span class="ruby-identifier">point</span>)
-  <span class="ruby-constant">Math</span>.<span class="ruby-identifier">sqrt</span>(<span class="ruby-identifier">point</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">**</span> <span class="ruby-value">2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">point</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">**</span> <span class="ruby-value">2</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 275</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">distance_from_pole</span>(<span class="ruby-identifier">point</span>)
+  <span class="ruby-constant">Math</span>.<span class="ruby-identifier">sqrt</span>((<span class="ruby-identifier">point</span>[<span class="ruby-value">0</span>]<span class="ruby-operator">**</span><span class="ruby-value">2</span>) <span class="ruby-operator">+</span> (<span class="ruby-identifier">point</span>[<span class="ruby-value">1</span>]<span class="ruby-operator">**</span><span class="ruby-value">2</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -218,8 +208,8 @@
           
 
           <div class="method-source-code" id="dot_product-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 293</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dot_product</span> (<span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 295</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dot_product</span>(<span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span>)
   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">b</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span>, <span class="ruby-identifier">j</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">j</span> }.<span class="ruby-identifier">inject</span>(<span class="ruby-value">:+</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -239,9 +229,9 @@
           
 
           <div class="method-source-code" id="f-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 277</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">f</span> (<span class="ruby-identifier">t</span>)
-  <span class="ruby-identifier">t</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">EPSILON</span> <span class="ruby-operator">?</span> <span class="ruby-value">116</span> <span class="ruby-operator">*</span> ((<span class="ruby-identifier">t</span> <span class="ruby-operator">/</span> <span class="ruby-constant">REF_Y</span>) <span class="ruby-operator">**</span> (<span class="ruby-value">1.0</span> <span class="ruby-operator">/</span> <span class="ruby-value">3.0</span>)) <span class="ruby-operator">-</span> <span class="ruby-value">16.0</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">/</span> <span class="ruby-constant">REF_Y</span> <span class="ruby-operator">*</span> <span class="ruby-constant">KAPPA</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 279</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">f</span>(<span class="ruby-identifier">t</span>)
+  <span class="ruby-identifier">t</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">EPSILON</span> <span class="ruby-operator">?</span> (<span class="ruby-value">116</span> <span class="ruby-operator">*</span> ((<span class="ruby-identifier">t</span> <span class="ruby-operator">/</span> <span class="ruby-constant">REF_Y</span>)<span class="ruby-operator">**</span>(<span class="ruby-value">1.0</span> <span class="ruby-operator">/</span> <span class="ruby-value">3.0</span>))) <span class="ruby-operator">-</span> <span class="ruby-value">16.0</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">/</span> <span class="ruby-constant">REF_Y</span> <span class="ruby-operator">*</span> <span class="ruby-constant">KAPPA</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -260,9 +250,9 @@
           
 
           <div class="method-source-code" id="f_inv-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 281</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">f_inv</span> (<span class="ruby-identifier">t</span>)
-  <span class="ruby-identifier">t</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">8</span> <span class="ruby-operator">?</span> <span class="ruby-constant">REF_Y</span> <span class="ruby-operator">*</span> ((<span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">16.0</span>) <span class="ruby-operator">/</span> <span class="ruby-value">116.0</span>) <span class="ruby-operator">**</span> <span class="ruby-value">3.0</span> <span class="ruby-operator">:</span> <span class="ruby-constant">REF_Y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">/</span> <span class="ruby-constant">KAPPA</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 283</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">f_inv</span>(<span class="ruby-identifier">t</span>)
+  <span class="ruby-identifier">t</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">8</span> <span class="ruby-operator">?</span> <span class="ruby-constant">REF_Y</span> <span class="ruby-operator">*</span> (((<span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">16.0</span>) <span class="ruby-operator">/</span> <span class="ruby-value">116.0</span>)<span class="ruby-operator">**</span><span class="ruby-value">3.0</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">REF_Y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">/</span> <span class="ruby-constant">KAPPA</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -281,9 +271,9 @@
           
 
           <div class="method-source-code" id="from_linear-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 289</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_linear</span> (<span class="ruby-identifier">c</span>)
-  <span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0.0031308</span> <span class="ruby-operator">?</span> <span class="ruby-value">12.92</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">:</span> (<span class="ruby-value">1.055</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">c</span> <span class="ruby-operator">**</span> (<span class="ruby-value">1.0</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.4</span>)) <span class="ruby-operator">-</span> <span class="ruby-value">0.055</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 291</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_linear</span>(<span class="ruby-identifier">c</span>)
+  <span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0.0031308</span> <span class="ruby-operator">?</span> <span class="ruby-value">12.92</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">:</span> ((<span class="ruby-value">1.055</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">c</span><span class="ruby-operator">**</span>(<span class="ruby-value">1.0</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.4</span>))) <span class="ruby-operator">-</span> <span class="ruby-value">0.055</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -302,17 +292,17 @@
           
 
           <div class="method-source-code" id="get_bounds-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 245</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_bounds</span> (<span class="ruby-identifier">l</span>)
-  <span class="ruby-identifier">sub1</span> = ((<span class="ruby-identifier">l</span> <span class="ruby-operator">+</span> <span class="ruby-value">16.0</span>) <span class="ruby-operator">**</span> <span class="ruby-value">3.0</span>) <span class="ruby-operator">/</span> <span class="ruby-value">1560896.0</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 246</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_bounds</span>(<span class="ruby-identifier">l</span>)
+  <span class="ruby-identifier">sub1</span> = ((<span class="ruby-identifier">l</span> <span class="ruby-operator">+</span> <span class="ruby-value">16.0</span>)<span class="ruby-operator">**</span><span class="ruby-value">3.0</span>) <span class="ruby-operator">/</span> <span class="ruby-value">1_560_896.0</span>
   <span class="ruby-identifier">sub2</span> = <span class="ruby-identifier">sub1</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">EPSILON</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">sub1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">/</span> <span class="ruby-constant">KAPPA</span>
   <span class="ruby-identifier">ret</span> = []
 
   <span class="ruby-constant">M</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m1</span>, <span class="ruby-identifier">m2</span>, <span class="ruby-identifier">m3</span><span class="ruby-operator">|</span>
     [<span class="ruby-value">0</span>, <span class="ruby-value">1</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">top1</span> = (<span class="ruby-value">284517.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m1</span> <span class="ruby-operator">-</span> <span class="ruby-value">94839.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m3</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">sub2</span>
-      <span class="ruby-identifier">top2</span> = (<span class="ruby-value">838422.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m3</span> <span class="ruby-operator">+</span> <span class="ruby-value">769860.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m2</span> <span class="ruby-operator">+</span> <span class="ruby-value">731718.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m1</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">sub2</span> <span class="ruby-operator">-</span> <span class="ruby-value">769860.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">l</span>
-      <span class="ruby-identifier">bottom</span> = (<span class="ruby-value">632260.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m3</span> <span class="ruby-operator">-</span> <span class="ruby-value">126452.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m2</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">sub2</span> <span class="ruby-operator">+</span> <span class="ruby-value">126452.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">t</span>
+      <span class="ruby-identifier">top1</span> = ((<span class="ruby-value">284_517.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m1</span>) <span class="ruby-operator">-</span> (<span class="ruby-value">94_839.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m3</span>)) <span class="ruby-operator">*</span> <span class="ruby-identifier">sub2</span>
+      <span class="ruby-identifier">top2</span> = (((<span class="ruby-value">838_422.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m3</span>) <span class="ruby-operator">+</span> (<span class="ruby-value">769_860.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m2</span>) <span class="ruby-operator">+</span> (<span class="ruby-value">731_718.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m1</span>)) <span class="ruby-operator">*</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">sub2</span>) <span class="ruby-operator">-</span> (<span class="ruby-value">769_860.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">l</span>)
+      <span class="ruby-identifier">bottom</span> = (((<span class="ruby-value">632_260.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m3</span>) <span class="ruby-operator">-</span> (<span class="ruby-value">126_452.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m2</span>)) <span class="ruby-operator">*</span> <span class="ruby-identifier">sub2</span>) <span class="ruby-operator">+</span> (<span class="ruby-value">126_452.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">t</span>)
       <span class="ruby-identifier">ret</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">top1</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">bottom</span>, <span class="ruby-identifier">top2</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">bottom</span>]
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
@@ -336,8 +326,8 @@
           
 
           <div class="method-source-code" id="hex_to_hpluv-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 64</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hex_to_hpluv</span> (<span class="ruby-identifier">hex</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hex_to_hpluv</span>(<span class="ruby-identifier">hex</span>)
   <span class="ruby-identifier">rgb_to_hpluv</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">hex_to_rgb</span>(<span class="ruby-identifier">hex</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -357,8 +347,8 @@
           
 
           <div class="method-source-code" id="hex_to_hsluv-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 60</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hex_to_hsluv</span> (<span class="ruby-identifier">hex</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hex_to_hsluv</span>(<span class="ruby-identifier">hex</span>)
   <span class="ruby-identifier">rgb_to_hsluv</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">hex_to_rgb</span>(<span class="ruby-identifier">hex</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -378,10 +368,10 @@
           
 
           <div class="method-source-code" id="hex_to_rgb-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 96</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hex_to_rgb</span> (<span class="ruby-identifier">hex</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hex_to_rgb</span>(<span class="ruby-identifier">hex</span>)
   <span class="ruby-identifier">hex</span> = <span class="ruby-identifier">hex</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;#&#39;</span>, <span class="ruby-string">&#39;&#39;</span>)
-  [].<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hex</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">each_slice</span>(<span class="ruby-value">2</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">block</span><span class="ruby-operator">|</span> <span class="ruby-identifier">arr</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">join</span>.<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>) <span class="ruby-operator">/</span> <span class="ruby-value">255.0</span> } }
+  [].<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hex</span>.<span class="ruby-identifier">chars</span>.<span class="ruby-identifier">each_slice</span>(<span class="ruby-value">2</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">block</span><span class="ruby-operator">|</span> <span class="ruby-identifier">arr</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">block</span>.<span class="ruby-identifier">join</span>.<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>) <span class="ruby-operator">/</span> <span class="ruby-value">255.0</span>) } }
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -400,8 +390,8 @@
           
 
           <div class="method-source-code" id="hpluv_to_hex-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 56</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hpluv_to_hex</span> (<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hpluv_to_hex</span>(<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>)
   <span class="ruby-identifier">rgb_to_hex</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">hpluv_to_rgb</span>(<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -421,8 +411,8 @@
           
 
           <div class="method-source-code" id="hpluv_to_lch-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 200</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hpluv_to_lch</span> (<span class="ruby-identifier">arr</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 201</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hpluv_to_lch</span>(<span class="ruby-identifier">arr</span>)
   <span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span> = <span class="ruby-identifier">arr</span>
 
   <span class="ruby-keyword">return</span> [<span class="ruby-value">100</span>, <span class="ruby-value">0.0</span>, <span class="ruby-identifier">h</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">99.9999999</span>
@@ -450,8 +440,8 @@
           
 
           <div class="method-source-code" id="hpluv_to_rgb-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 76</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hpluv_to_rgb</span> (<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hpluv_to_rgb</span>(<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>)
   <span class="ruby-identifier">lch_to_rgb</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">hpluv_to_lch</span>([<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>]))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -471,8 +461,8 @@
           
 
           <div class="method-source-code" id="hsluv_to_hex-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 52</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hsluv_to_hex</span> (<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hsluv_to_hex</span>(<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>)
   <span class="ruby-identifier">rgb_to_hex</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">hsluv_to_rgb</span>(<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -492,8 +482,8 @@
           
 
           <div class="method-source-code" id="hsluv_to_lch-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 188</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hsluv_to_lch</span> (<span class="ruby-identifier">arr</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 189</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hsluv_to_lch</span>(<span class="ruby-identifier">arr</span>)
   <span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span> = <span class="ruby-identifier">arr</span>
 
   <span class="ruby-keyword">return</span> [<span class="ruby-value">100</span>, <span class="ruby-value">0.0</span>, <span class="ruby-identifier">h</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">99.9999999</span>
@@ -521,8 +511,8 @@
           
 
           <div class="method-source-code" id="hsluv_to_rgb-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 68</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hsluv_to_rgb</span> (<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hsluv_to_rgb</span>(<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>)
   <span class="ruby-identifier">xyz_to_rgb</span>(<span class="ruby-identifier">luv_to_xyz</span>(<span class="ruby-identifier">lch_to_luv</span>(<span class="ruby-identifier">hsluv_to_lch</span>([<span class="ruby-identifier">h</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">l</span>]))))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -542,8 +532,8 @@
           
 
           <div class="method-source-code" id="intersect_line_line-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 269</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">intersect_line_line</span> (<span class="ruby-identifier">line1</span>, <span class="ruby-identifier">line2</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 271</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">intersect_line_line</span>(<span class="ruby-identifier">line1</span>, <span class="ruby-identifier">line2</span>)
   (<span class="ruby-identifier">line1</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">line2</span>[<span class="ruby-value">1</span>]) <span class="ruby-operator">/</span> (<span class="ruby-identifier">line2</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">line1</span>[<span class="ruby-value">0</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -563,8 +553,8 @@
           
 
           <div class="method-source-code" id="lch_to_hpluv-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 142</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lch_to_hpluv</span> (<span class="ruby-identifier">arr</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lch_to_hpluv</span>(<span class="ruby-identifier">arr</span>)
   <span class="ruby-identifier">l</span>, <span class="ruby-identifier">c</span>, <span class="ruby-identifier">h</span> = <span class="ruby-identifier">arr</span>
 
   <span class="ruby-keyword">return</span> [<span class="ruby-identifier">h</span>, <span class="ruby-value">0.0</span>, <span class="ruby-value">100.0</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">99.9999999</span>
@@ -592,8 +582,8 @@
           
 
           <div class="method-source-code" id="lch_to_hsluv-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 131</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lch_to_hsluv</span> (<span class="ruby-identifier">arr</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lch_to_hsluv</span>(<span class="ruby-identifier">arr</span>)
   <span class="ruby-identifier">l</span>, <span class="ruby-identifier">c</span>, <span class="ruby-identifier">h</span> = <span class="ruby-identifier">arr</span>
   <span class="ruby-keyword">return</span> [<span class="ruby-identifier">h</span>, <span class="ruby-value">0.0</span>, <span class="ruby-value">100.0</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">99.9999999</span>
   <span class="ruby-keyword">return</span> [<span class="ruby-identifier">h</span>, <span class="ruby-value">0.0</span>, <span class="ruby-value">0.0</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0.00000001</span>
@@ -620,8 +610,8 @@
           
 
           <div class="method-source-code" id="lch_to_luv-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 178</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lch_to_luv</span> (<span class="ruby-identifier">arr</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lch_to_luv</span>(<span class="ruby-identifier">arr</span>)
   <span class="ruby-identifier">l</span>, <span class="ruby-identifier">c</span>, <span class="ruby-identifier">h</span> = <span class="ruby-identifier">arr</span>
 
   <span class="ruby-identifier">hrad</span> = <span class="ruby-identifier">degrees_to_radians</span>(<span class="ruby-identifier">h</span>)
@@ -647,8 +637,8 @@
           
 
           <div class="method-source-code" id="lch_to_rgb-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 84</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lch_to_rgb</span> (<span class="ruby-identifier">l</span>, <span class="ruby-identifier">c</span>, <span class="ruby-identifier">h</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lch_to_rgb</span>(<span class="ruby-identifier">l</span>, <span class="ruby-identifier">c</span>, <span class="ruby-identifier">h</span>)
   <span class="ruby-identifier">xyz_to_rgb</span>(<span class="ruby-identifier">luv_to_xyz</span>(<span class="ruby-identifier">lch_to_luv</span>([<span class="ruby-identifier">l</span>, <span class="ruby-identifier">c</span>, <span class="ruby-identifier">h</span>])))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -668,11 +658,12 @@
           
 
           <div class="method-source-code" id="length_of_ray_until_intersect-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 262</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length_of_ray_until_intersect</span> (<span class="ruby-identifier">theta</span>, <span class="ruby-identifier">line</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 263</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length_of_ray_until_intersect</span>(<span class="ruby-identifier">theta</span>, <span class="ruby-identifier">line</span>)
   <span class="ruby-identifier">m1</span>, <span class="ruby-identifier">b1</span> = <span class="ruby-identifier">line</span>
-  <span class="ruby-identifier">length</span> = <span class="ruby-identifier">b1</span> <span class="ruby-operator">/</span> (<span class="ruby-constant">Math</span>.<span class="ruby-identifier">sin</span>(<span class="ruby-identifier">theta</span>) <span class="ruby-operator">-</span> <span class="ruby-identifier">m1</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">cos</span>(<span class="ruby-identifier">theta</span>))
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+  <span class="ruby-identifier">length</span> = <span class="ruby-identifier">b1</span> <span class="ruby-operator">/</span> (<span class="ruby-constant">Math</span>.<span class="ruby-identifier">sin</span>(<span class="ruby-identifier">theta</span>) <span class="ruby-operator">-</span> (<span class="ruby-identifier">m1</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">cos</span>(<span class="ruby-identifier">theta</span>)))
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">negative?</span>
+
   <span class="ruby-identifier">length</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -692,10 +683,10 @@
           
 
           <div class="method-source-code" id="luv_to_lch-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 122</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">luv_to_lch</span> (<span class="ruby-identifier">arr</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">luv_to_lch</span>(<span class="ruby-identifier">arr</span>)
   <span class="ruby-identifier">l</span>, <span class="ruby-identifier">u</span>, <span class="ruby-identifier">v</span> = <span class="ruby-identifier">arr</span>
-  <span class="ruby-identifier">c</span> = ((<span class="ruby-identifier">u</span> <span class="ruby-operator">**</span> <span class="ruby-value">2</span>) <span class="ruby-operator">+</span> (<span class="ruby-identifier">v</span> <span class="ruby-operator">**</span> <span class="ruby-value">2</span>)) <span class="ruby-operator">**</span> (<span class="ruby-value">1</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>)
+  <span class="ruby-identifier">c</span> = ((<span class="ruby-identifier">u</span><span class="ruby-operator">**</span><span class="ruby-value">2</span>) <span class="ruby-operator">+</span> (<span class="ruby-identifier">v</span><span class="ruby-operator">**</span><span class="ruby-value">2</span>))<span class="ruby-operator">**</span>(<span class="ruby-value">1</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>)
   <span class="ruby-identifier">hrad</span> = <span class="ruby-constant">Math</span>.<span class="ruby-identifier">atan2</span>(<span class="ruby-identifier">v</span>, <span class="ruby-identifier">u</span>)
   <span class="ruby-identifier">h</span> = <span class="ruby-identifier">radians_to_degrees</span>(<span class="ruby-identifier">hrad</span>)
   <span class="ruby-identifier">h</span> <span class="ruby-operator">+=</span> <span class="ruby-value">360.0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">h</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0.0</span>
@@ -718,20 +709,19 @@
           
 
           <div class="method-source-code" id="luv_to_xyz-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 161</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">luv_to_xyz</span> (<span class="ruby-identifier">arr</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">luv_to_xyz</span>(<span class="ruby-identifier">arr</span>)
   <span class="ruby-identifier">l</span>, <span class="ruby-identifier">u</span>, <span class="ruby-identifier">v</span> = <span class="ruby-identifier">arr</span>
 
-  <span class="ruby-keyword">return</span> [<span class="ruby-value">0.0</span>, <span class="ruby-value">0.0</span>, <span class="ruby-value">0.0</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">return</span> [<span class="ruby-value">0.0</span>, <span class="ruby-value">0.0</span>, <span class="ruby-value">0.0</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">zero?</span>
 
   <span class="ruby-identifier">var_y</span> = <span class="ruby-identifier">f_inv</span>(<span class="ruby-identifier">l</span>)
-  <span class="ruby-identifier">var_u</span> = <span class="ruby-identifier">u</span> <span class="ruby-operator">/</span> (<span class="ruby-value">13.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">l</span>) <span class="ruby-operator">+</span> <span class="ruby-constant">REF_U</span>
-  <span class="ruby-identifier">var_v</span> = <span class="ruby-identifier">v</span> <span class="ruby-operator">/</span> (<span class="ruby-value">13.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">l</span>) <span class="ruby-operator">+</span> <span class="ruby-constant">REF_V</span>
-
+  <span class="ruby-identifier">var_u</span> = (<span class="ruby-identifier">u</span> <span class="ruby-operator">/</span> (<span class="ruby-value">13.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">l</span>)) <span class="ruby-operator">+</span> <span class="ruby-constant">REF_U</span>
+  <span class="ruby-identifier">var_v</span> = (<span class="ruby-identifier">v</span> <span class="ruby-operator">/</span> (<span class="ruby-value">13.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">l</span>)) <span class="ruby-operator">+</span> <span class="ruby-constant">REF_V</span>
 
   <span class="ruby-identifier">y</span> = <span class="ruby-identifier">var_y</span> <span class="ruby-operator">*</span> <span class="ruby-constant">REF_Y</span>
-  <span class="ruby-identifier">x</span> = <span class="ruby-value">0.0</span> <span class="ruby-operator">-</span> (<span class="ruby-value">9.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">var_u</span>) <span class="ruby-operator">/</span> ((<span class="ruby-identifier">var_u</span> <span class="ruby-operator">-</span> <span class="ruby-value">4.0</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">var_v</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">var_u</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">var_v</span>)
-  <span class="ruby-identifier">z</span> = (<span class="ruby-value">9.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">y</span> <span class="ruby-operator">-</span> (<span class="ruby-value">15.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">var_v</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">y</span>) <span class="ruby-operator">-</span> (<span class="ruby-identifier">var_v</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">x</span>)) <span class="ruby-operator">/</span> (<span class="ruby-value">3.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">var_v</span>)
+  <span class="ruby-identifier">x</span> = <span class="ruby-value">0.0</span> <span class="ruby-operator">-</span> ((<span class="ruby-value">9.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">var_u</span>) <span class="ruby-operator">/</span> (((<span class="ruby-identifier">var_u</span> <span class="ruby-operator">-</span> <span class="ruby-value">4.0</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">var_v</span>) <span class="ruby-operator">-</span> (<span class="ruby-identifier">var_u</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">var_v</span>)))
+  <span class="ruby-identifier">z</span> = ((<span class="ruby-value">9.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">y</span>) <span class="ruby-operator">-</span> (<span class="ruby-value">15.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">var_v</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">y</span>) <span class="ruby-operator">-</span> (<span class="ruby-identifier">var_v</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">x</span>)) <span class="ruby-operator">/</span> (<span class="ruby-value">3.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">var_v</span>)
 
   [<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">z</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -752,8 +742,8 @@
           
 
           <div class="method-source-code" id="max_chroma_for-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 222</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_chroma_for</span> (<span class="ruby-identifier">l</span>, <span class="ruby-identifier">h</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 223</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_chroma_for</span>(<span class="ruby-identifier">l</span>, <span class="ruby-identifier">h</span>)
   <span class="ruby-identifier">hrad</span> = <span class="ruby-identifier">h</span> <span class="ruby-operator">/</span> <span class="ruby-value">360.0</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span> <span class="ruby-operator">*</span> <span class="ruby-value">2.0</span>
   <span class="ruby-identifier">lengths</span> = []
 
@@ -781,13 +771,13 @@
           
 
           <div class="method-source-code" id="max_safe_chroma_for-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 234</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_safe_chroma_for</span> (<span class="ruby-identifier">l</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 235</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_safe_chroma_for</span>(<span class="ruby-identifier">l</span>)
   <span class="ruby-identifier">lengths</span> = []
 
   <span class="ruby-identifier">get_bounds</span>(<span class="ruby-identifier">l</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m1</span>, <span class="ruby-identifier">b1</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">x</span> = <span class="ruby-identifier">intersect_line_line</span>([<span class="ruby-identifier">m1</span>, <span class="ruby-identifier">b1</span>], [<span class="ruby-value">-1.0</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">m1</span>, <span class="ruby-value">0.0</span>])
-    <span class="ruby-identifier">lengths</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">distance_from_pole</span>([<span class="ruby-identifier">x</span>, <span class="ruby-identifier">b1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m1</span>])
+    <span class="ruby-identifier">lengths</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">distance_from_pole</span>([<span class="ruby-identifier">x</span>, <span class="ruby-identifier">b1</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">m1</span>)])
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">lengths</span>.<span class="ruby-identifier">min</span>
@@ -809,8 +799,8 @@
           
 
           <div class="method-source-code" id="radians_to_degrees-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 214</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">radians_to_degrees</span> (<span class="ruby-identifier">rad</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 215</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">radians_to_degrees</span>(<span class="ruby-identifier">rad</span>)
   <span class="ruby-identifier">rad</span> <span class="ruby-operator">*</span> <span class="ruby-value">180.0</span> <span class="ruby-operator">/</span> <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -830,9 +820,14 @@
           
 
           <div class="method-source-code" id="rgb_prepare-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 297</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_prepare</span> (<span class="ruby-identifier">arr</span>)
-  <span class="ruby-identifier">arr</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">ch</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ch</span> = <span class="ruby-identifier">ch</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">3</span>); <span class="ruby-identifier">ch</span> = [<span class="ruby-value">0</span>, <span class="ruby-identifier">ch</span>].<span class="ruby-identifier">max</span>; <span class="ruby-identifier">ch</span> = [<span class="ruby-value">1</span>, <span class="ruby-identifier">ch</span>].<span class="ruby-identifier">min</span>; (<span class="ruby-identifier">ch</span> <span class="ruby-operator">*</span> <span class="ruby-value">255</span>).<span class="ruby-identifier">round</span> }
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 299</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_prepare</span>(<span class="ruby-identifier">arr</span>)
+  <span class="ruby-identifier">arr</span>.<span class="ruby-identifier">map!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ch</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">ch</span> = <span class="ruby-identifier">ch</span>.<span class="ruby-identifier">round</span>(<span class="ruby-value">3</span>)
+    <span class="ruby-identifier">ch</span> = [<span class="ruby-value">0</span>, <span class="ruby-identifier">ch</span>].<span class="ruby-identifier">max</span>
+    <span class="ruby-identifier">ch</span> = [<span class="ruby-value">1</span>, <span class="ruby-identifier">ch</span>].<span class="ruby-identifier">min</span>
+    (<span class="ruby-identifier">ch</span> <span class="ruby-operator">*</span> <span class="ruby-value">255</span>).<span class="ruby-identifier">round</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -851,8 +846,8 @@
           
 
           <div class="method-source-code" id="rgb_to_hex-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 92</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_to_hex</span> (<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_to_hex</span>(<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>)
   <span class="ruby-string">&#39;#%02x%02x%02x&#39;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">rgb_prepare</span>([<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -872,8 +867,8 @@
           
 
           <div class="method-source-code" id="rgb_to_hpluv-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 80</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_to_hpluv</span> (<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_to_hpluv</span>(<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>)
   <span class="ruby-identifier">lch_to_hpluv</span>(<span class="ruby-identifier">rgb_to_lch</span>(<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -893,8 +888,8 @@
           
 
           <div class="method-source-code" id="rgb_to_hsluv-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_to_hsluv</span> (<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_to_hsluv</span>(<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>)
   <span class="ruby-identifier">lch_to_hsluv</span>(<span class="ruby-identifier">rgb_to_lch</span>(<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -914,8 +909,8 @@
           
 
           <div class="method-source-code" id="rgb_to_lch-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_to_lch</span> (<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_to_lch</span>(<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>)
   <span class="ruby-identifier">luv_to_lch</span>(<span class="ruby-identifier">xyz_to_luv</span>(<span class="ruby-identifier">rgb_to_xyz</span>([<span class="ruby-identifier">r</span>, <span class="ruby-identifier">g</span>, <span class="ruby-identifier">b</span>])))
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -935,8 +930,8 @@
           
 
           <div class="method-source-code" id="rgb_to_xyz-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 103</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_to_xyz</span> (<span class="ruby-identifier">arr</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rgb_to_xyz</span>(<span class="ruby-identifier">arr</span>)
   <span class="ruby-identifier">rgbl</span> = <span class="ruby-identifier">arr</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-identifier">to_linear</span>(<span class="ruby-identifier">val</span>) }
   <span class="ruby-constant">M_INV</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">dot_product</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">rgbl</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -957,9 +952,9 @@
           
 
           <div class="method-source-code" id="to_linear-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 285</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_linear</span> (<span class="ruby-identifier">c</span>)
-  <span class="ruby-identifier">c</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0.04045</span> <span class="ruby-operator">?</span> ((<span class="ruby-identifier">c</span> <span class="ruby-operator">+</span> <span class="ruby-value">0.055</span>) <span class="ruby-operator">/</span> <span class="ruby-value">1.055</span>) <span class="ruby-operator">**</span> <span class="ruby-value">2.4</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">/</span> <span class="ruby-value">12.92</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 287</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_linear</span>(<span class="ruby-identifier">c</span>)
+  <span class="ruby-identifier">c</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0.04045</span> <span class="ruby-operator">?</span> ((<span class="ruby-identifier">c</span> <span class="ruby-operator">+</span> <span class="ruby-value">0.055</span>) <span class="ruby-operator">/</span> <span class="ruby-value">1.055</span>)<span class="ruby-operator">**</span><span class="ruby-value">2.4</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">/</span> <span class="ruby-value">12.92</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -978,12 +973,12 @@
           
 
           <div class="method-source-code" id="xyz_to_luv-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 108</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">xyz_to_luv</span> (<span class="ruby-identifier">arr</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">xyz_to_luv</span>(<span class="ruby-identifier">arr</span>)
   <span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">z</span> = <span class="ruby-identifier">arr</span>
   <span class="ruby-identifier">l</span> = <span class="ruby-identifier">f</span>(<span class="ruby-identifier">y</span>)
 
-  <span class="ruby-keyword">return</span> [<span class="ruby-value">0.0</span>, <span class="ruby-value">0.0</span>, <span class="ruby-value">0.0</span>] <span class="ruby-keyword">if</span> [<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">z</span>, <span class="ruby-value">0.0</span>].<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">==</span> <span class="ruby-value">0.0</span>
+  <span class="ruby-keyword">return</span> [<span class="ruby-value">0.0</span>, <span class="ruby-value">0.0</span>, <span class="ruby-value">0.0</span>] <span class="ruby-keyword">if</span> [<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">z</span>, <span class="ruby-value">0.0</span>].<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">zero?</span>
 
   <span class="ruby-identifier">var_u</span> = (<span class="ruby-value">4.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">x</span>) <span class="ruby-operator">/</span> (<span class="ruby-identifier">x</span> <span class="ruby-operator">+</span> (<span class="ruby-value">15.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">y</span>) <span class="ruby-operator">+</span> (<span class="ruby-value">3.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">z</span>))
   <span class="ruby-identifier">var_v</span> = (<span class="ruby-value">9.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">y</span>) <span class="ruby-operator">/</span> (<span class="ruby-identifier">x</span> <span class="ruby-operator">+</span> (<span class="ruby-value">15.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">y</span>) <span class="ruby-operator">+</span> (<span class="ruby-value">3.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">z</span>))
@@ -1009,8 +1004,8 @@
           
 
           <div class="method-source-code" id="xyz_to_rgb-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 156</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">xyz_to_rgb</span> (<span class="ruby-identifier">arr</span>)
+            <pre><span class="ruby-comment"># File _plugins/gtn/hsluv.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">xyz_to_rgb</span>(<span class="ruby-identifier">arr</span>)
   <span class="ruby-identifier">xyz</span> = <span class="ruby-constant">M</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">dot_product</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">arr</span>) }
   <span class="ruby-identifier">xyz</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">from_linear</span>(<span class="ruby-identifier">i</span>) }
 <span class="ruby-keyword">end</span></pre>

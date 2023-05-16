@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Set up a Galaxy for Training">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.date" content="2023-05-15 14:47:03 +0000">
 <meta name="DC.creator" content="Saskia Hiltemann">
 <meta name="DC.creator" content="Bérénice Batut">
 
@@ -56,8 +56,8 @@
   },
   "citation": {
     "@type": "CreativeWork",
-    "name": "Galaxy Training: A Powerful Framework for Teaching!",
-    "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
   },
   "copyrightHolder": {
     "@type": "Organization",
@@ -65,13 +65,13 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18T14:23:35+00:00",
+  "dateModified": "2023-05-15 14:47:03 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Set up a Galaxy for Training",
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
   "isFamilyFriendly": true,
-  "license": "https://spdx.org/licenses/CC-BY-4.0",
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
   "producer": {
     "@type": "Organization",
     "email": "galaxytrainingnetwork@gmail.com",
@@ -432,7 +432,7 @@
 
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 15, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -460,7 +460,6 @@
 
 <p>Tutorials in this repository are all supplemented with files describing the technical requirements to run them. This makes it easy to automate installation of tutorial requirements.</p>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">tools.yaml</code>: describes the Tool Shed tools used in the tutorial</li>
   <li><code class="language-plaintext highlighter-rouge">data-library.yaml</code>: describes the input datasets</li>
   <li><code class="language-plaintext highlighter-rouge">data-manager.yaml</code>: describes the reference data required by tools</li>
   <li><code class="language-plaintext highlighter-rouge">workflows</code> folder: contains one or more workflows with all steps in the tutorial</li>
@@ -487,7 +486,11 @@
       <li><a href="#install-ephemeris" id="markdown-toc-install-ephemeris">Install Ephemeris</a></li>
     </ol>
   </li>
-  <li><a href="#installing-tutorial-requirements" id="markdown-toc-installing-tutorial-requirements">Installing tutorial requirements</a></li>
+  <li><a href="#installing-tutorial-requirements" id="markdown-toc-installing-tutorial-requirements">Installing tutorial requirements</a>    <ol>
+      <li><a href="#installing-an-entire-topic" id="markdown-toc-installing-an-entire-topic">Installing an entire topic</a></li>
+      <li><a href="#installing-a-subset-of-components" id="markdown-toc-installing-a-subset-of-components">Installing a subset of components</a></li>
+    </ol>
+  </li>
   <li><a href="#quickstart" id="markdown-toc-quickstart">Quickstart</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
@@ -619,11 +622,11 @@ pip <span class="nb">install </span>ephemeris
 
 </blockquote>
 
-<h3 id="installing-an-entire-topic">Installing an entire topic</h3>
+<h2 id="installing-an-entire-topic">Installing an entire topic</h2>
 
 <p>If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in <a href="https://github.com/galaxyproject/training-material/tree/main/bin/install_topic_requirements.sh"><code class="language-plaintext highlighter-rouge">bin/install_topic_requirements.sh</code></a></p>
 
-<h3 id="installing-a-subset-of-components">Installing a subset of components</h3>
+<h2 id="installing-a-subset-of-components">Installing a subset of components</h2>
 
 <p>If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours) please see the <a href="#quickstart">Quickstart section</a> for the individual commands used by the script</p>
 
@@ -647,7 +650,7 @@ bin/install_topic_requirements.sh topics/&lt;yourtopic&gt; &lt;Galaxy URL&gt; &l
 <p>Using ephemeris directly:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># install tools
-shed-tools install -g &lt;Galaxy URL&gt; -a &lt;API key&gt; -t topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/tools.yaml
+shed-tools install -g &lt;Galaxy URL&gt; -a &lt;API key&gt; -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/tutorial.json | jq .admin_install_yaml -r)
 
 # create data library with input datasets
 setup-data-libraries -g &lt;Galaxy URL&gt; -a &lt;API key&gt; -i topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/data-library.yaml
@@ -783,6 +786,23 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
 
                 
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/teaching/tutorials/setup-galaxy-for-training/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+
                 </section>
 
             </div>
