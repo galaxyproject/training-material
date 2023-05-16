@@ -250,15 +250,15 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 > <comment-title></comment-title>
 >
-> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a) %} consumes a large amount of memory. During the Smörgåsbord training please use `Human (Homo Sapiens): hg19 chrX` as the reference genome if you follow this tutorial on [usegalaxy.org](https://usegalaxy.org). This performs the mapping only against chromosome X. The full output dataset is available at [zenodo](https://zenodo.org/record/3581213/files/matrix.mtx) and will be the starting point for the next tutorial.
+> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.10b+galaxy3) %} consumes a large amount of memory. During the Smörgåsbord training please use `Human (Homo Sapiens): hg19 chrX` as the reference genome if you follow this tutorial on [usegalaxy.org](https://usegalaxy.org). This performs the mapping only against chromosome X. The full output dataset is available at [zenodo](https://zenodo.org/record/3581213/files/matrix.mtx) and will be the starting point for the next tutorial.
 {: .comment}
 
 > <hands-on-title></hands-on-title>
 >
-> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a) %}  with the following parameters:
+> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.10b+galaxy3) %}  with the following parameters:
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
->            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full` or `Human (Homo Sapiens): hg19 chrX`
+>            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full` or `Human (Homo Sapiens) (b37): hg19`
 >            - *"Gene model (gff3,gtf) file for splice junctions"*: `Homo_sapiens.GRCh37.75.gtf`
 >            - *"Length of genomic sequence around annotated junctions"*: `100`
 >    - *"Type of single-cell RNA-seq"*: `Drop-seq or 10X Chromium`
@@ -266,13 +266,13 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: Multi-select `L001_R1_001` and `L002_R1_001` using the Ctrl key.
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: Multi-select `L001_R2_001` and `L002_R2_001` using the Ctrl key.
 >        - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
->        - *"Configure Chemistry Options"*: `Cell Ranger v3`
+>        - *"Configure Chemistry Options"*: `Chromium chemistry v3`
 >        - *"UMI deduplication (collapsing) algorithm"*: `CellRanger2-4 algorithm`
->        - *"Matching the Cell Barcodes to the WhiteList"*: `Multiple matches (CellRanger 2)`
->    - Under *"Advanced Settings"*:
->        - *"Strandedness of Library"*: `Forward`
->        - *"Collect UMI counts for these genomic features"*: `Gene: Count reads matching the Gene Transcript`
 >        - *"Type of UMI filtering"*: `Remove UMIs with N and homopolymers (similar to CellRanger 2.2.0)`
+>        - *"Matching the Cell Barcodes to the WhiteList"*: `Multiple matches (CellRanger 2, 1MM_multi)`
+>    - Under *"Advanced Settings"*:
+>        - *"Strandedness of Library"*: `Read strand same as the original RNA molecule`
+>        - *"Collect UMI counts for these genomic features"*: `Gene: Count reads matching the Gene Transcript`
 >        - *"Cell filter type and parameters"*: `Do not filter`
 >        - *"Field 3 in the Genes output"*: `Gene Expression`
 >
@@ -336,30 +336,31 @@ We can look at this directly by clicking on the {% icon galaxy-eye %} symbol of 
 
 > <comment-title>RNA STARsolo log output</comment-title>
 > ```
-> Barcodes:
->                   nNoAdapter              0
->                       nNoUMI              0
->                        nNoCB              0
->                       nNinCB              0
->                      nNinUMI            358
->              nUMIhomopolymer            707
->                     nTooMany              0
->                     nNoMatch          50037
->          nMismatchesInMultCB              0
->                  nExactMatch        7530489
->               nMismatchOneWL          19534
->            nMismatchToMultWL          84800
-> Genes:
->                    nUnmapped         278029
->                   nNoFeature        3060392
->                nAmbigFeature         419262
->        nAmbigFeatureMultimap         333163
->                     nTooMany          18448
->                nNoExactMatch              0
->                  nExactMatch        3829826
->                       nMatch        3858692
->                nCellBarcodes           6101
->                        nUMIs        1697298
+>Barcodes:
+>                                       noNoAdapter              0
+>                                           noNoUMI              0
+>                                            noNoCB              0
+>                                           noNinCB              0
+>                                          noNinUMI            358
+>                                  noUMIhomopolymer            707
+>                                       noNoWLmatch          50037
+>                                       noTooManyMM              0
+>                                noTooManyWLmatches              0
+>                                   yesWLmatchExact        7530489
+>                               yesOneWLmatchWithMM          19534
+>                              yesMultWLmatchWithMM          84800
+>Genes:
+>                                        noUnmapped         278029
+>                                       noNoFeature        3060392
+>                                      MultiFeature         419262
+>                       subMultiFeatureMultiGenomic         333163
+>                                noTooManyWLmatches          28645
+>                              noMMtoWLwithoutExact           7148
+>                                        yesWLmatch        3841347
+>                                yessubWLmatchExact        3829826
+>                       yessubWLmatch_UniqueFeature        3841347
+>                                   yesCellBarcodes           5200
+>                                           yesUMIs        1689978
 >
 > ```
 {: .comment}
@@ -370,10 +371,10 @@ The explanation of these parameters can be seen in the [RNA STAR Manual](https:/
 >
 >  | Parameter | Explanation |
 >  |-----------|-------------|
->  | nNinCB | number of reads with more than 2 Ns in cell barcode (CB) |
->  | nUMIhomopolymer | number of reads with homopolymer in CB |
->  | nTooMany | (not used at the moment) |
->  | nNoMatch | number of reads with CBs that do not match whitelist even with one mismatch |
+>  | noNinCB | number of reads with more than 2 Ns in cell barcode (CB) |
+>  | noUMIhomopolymer | number of reads with homopolymer in CB |
+>  | noTooManyWLmatches | (not used at the moment) |
+>  | noNoWLmatch | number of reads with CBs that do not match whitelist even with one mismatch |
 >
 > All of the above reads are discarded from Solo output.
 >
@@ -382,25 +383,25 @@ The explanation of these parameters can be seen in the [RNA STAR Manual](https:/
 >
 >  | Parameter | Explanation |
 >  |-----------|-------------|
->  | nUnmapped | number of reads unmapped to the genome |
->  | nNoFeature | number of reads that map to the genome but do not belong to a feature |
->  | nAmbigFeature | number of reads that belong to more than one feature |
->  | nAmbigFeatureMultimap | number of reads that belong to more than one feature and are also multimapping to the genome (this is a subset of the `nAmbigFeature`) |
->  | nTooMany | number of reads with ambiguous CB (i.e. CB matches whitelist with one mismatch but with posterior probability 0.95) |
->  | nNoExactMatch | number of reads with CB that matches a whitelist barcode with 1 mismatch, but this whitelist barcode does not get any other reads with exact matches of CB |
+>  | noUnmapped | number of reads unmapped to the genome |
+>  | noNoFeature | number of reads that map to the genome but do not belong to a feature |
+>  | MultiFeature | number of reads that belong to more than one feature |
+>  | subMultiFeatureMultiGenomic | number of reads that belong to more than one feature and are also multimapping to the genome (this is a subset of the `nAmbigFeature`) |
+>  | noTooManyWLmatches | number of reads with ambiguous CB (i.e. CB matches whitelist with one mismatch but with posterior probability 0.95) |
+>  | noMMtoWLwithoutExact | number of reads with CB that matches a whitelist barcode with 1 mismatch, but this whitelist barcode does not get any other reads with exact matches of CB |
 >
 > These metrics can be grouped into more broad categories:
 >
-> * `nNinCB` + `nUMIhomopolymer` + `nNoMatch` + `nTooMany` + `nNoExactMatch` = number of reads with CBs that do not match whitelist.
-> * `nUnmapped` + `nAmbigFeature` = number of reads without defined feature (gene).
-> * `nMatch` = number of reads that are output as solo counts.
+> * `noNinCB` + `noUMIhomopolymer` + `noNoWLmatch` + `noTooManyWLmatches` + `noMMtoWLwithoutExact` = number of reads with CBs that do not match whitelist.
+> * `noUnmapped` + `MultiFeature` = number of reads without defined feature (gene).
+> * `yessubWLmatch_UniqueFeature` = number of reads that are output as solo counts.
 >
 > The three categories above summed together should be equal to the total number of reads (which is also given in the MultiQC output).
 >
 {: .details}
 
 
-The main information to gather at this stage is that the `nCellBarcodes` tell us how many cells were detected in our sample, where we see that there are 6101 cells. Another metric to take into account is that the number of matches (`nMatch`) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (`nNoFeature`) is not too large. The number of no features is also quite high when mapping the original (non-subsampled) 10x input datasets, so this appears to be the default expected behaviour.
+The main information to gather at this stage is that the `yesCellBarcodes` tell us how many cells were detected in our sample, where we see that there are 5200 cells. Another metric to take into account is that the number of matches (`yessubWLmatch_UniqueFeature`) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (`noNoFeature`) is not too large. The number of no features is also quite high when mapping the original (non-subsampled) 10x input datasets, so this appears to be the default expected behaviour.
 
 
 # Producing a Quality Count Matrix
@@ -415,7 +416,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 
 > <hands-on-title>Default Method</hands-on-title>
 >
-> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
@@ -443,7 +444,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 > > <solution-title></solution-title>
 > >
 > > 1. By clicking on the title of the output dataset in the history we can expand the box to see the output says that there are `272` cells in the output table.
-> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `6101` cells. What this means is that *6101* barcodes were detected in total, but only *272* of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
+> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `yesCellBarcodes` value, we see that *RNA STARsolo* detected `5200` cells. What this means is that *5200* barcodes were detected in total, but only *272* of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
 > {: .solution}
 {: .question}
 
@@ -474,7 +475,7 @@ A useful diagnostic for droplet-based data is the barcode rank plot, which shows
 
 > <hands-on-title>Rank Barcodes</hands-on-title>
 >
-> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
@@ -495,7 +496,7 @@ The knee and inflection points on the curve mark the transition between two comp
 > 1. What is the minimum number of UMIs that we can expect to see for high quality cells?
 >
 > > <solution-title></solution-title>
-> > 1. We see the blue knee line cross the threshold of barcodes at just below than the 10000 Rank on the horizontal log scale, which is shown in the expanded view of our data as `"knee = 5300"`. This is in good accordance with the `6101` cells shown in the STARsolo log output previously.
+> > 1. We see the blue knee line cross the threshold of barcodes at just below than the 10000 Rank on the horizontal log scale, which is shown in the expanded view of our data as `"knee = 5300"`. This is in good accordance with the `5200` cells shown in the STARsolo log output previously.
 > > 1. This threshold is given by the inflection line, which is given at `"inflection = 260"`, so 260 cells.
 > > 1. The vertical drop in the chart occurs at a log X-axis position just above `1e+02`, so we can estimate ~ 200 UMIs minimum per cell.
 > {: .solution}
@@ -505,7 +506,7 @@ On large 10x datasets we can use these thresholds as metrics to utilise in our o
 
 > <hands-on-title>Custom Filtering</hands-on-title>
 >
-> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
