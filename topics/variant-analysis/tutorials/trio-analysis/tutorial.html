@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Trio Analysis using Synthetic Datasets from RD-Connect GPAP">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-03-27 13:17:12 +0000">
+<meta name="DC.date" content="2023-05-16 13:31:34 +0000">
 <meta name="DC.creator" content="Jasper Ouwerkerk">
 <meta name="DC.creator" content="Wolfgang Maier">
 <meta name="DC.creator" content="Helena Rasche">
@@ -67,7 +67,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-27 13:17:12 +0000",
+  "dateModified": "2023-05-16 13:31:34 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Trio Analysis using Synthetic Datasets from RD-Connect GPAP",
   "interactivityType": "mixed",
@@ -774,7 +774,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 27, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 16, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -804,7 +804,7 @@
 
 <p>To discover these mutations either whole exome sequencing (WES) or whole genome sequencing (WGS) can be used. With these technologies it is possible to uncover the DNA of the parents and offspring to find (shared) mutations in the DNA. These mutations can include insertions/deletions (indels), loss of heterozygosity (LOH), single nucleotide variants (SNVs), copy number variations (CNVs), and fusion genes.</p>
 
-<p>In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span> tool, so we don’t have to leave Galaxy to retrieve our data.</p>
+<p>In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0</span></span> tool, so we don’t have to leave Galaxy to retrieve our data.</p>
 
 <p>We will not start our analysis from scratch, since the main goal of this tutorial is to use the HTSGET protocol to download variant information from an online archive and to find the causative variant from those variants. If you want to learn how to do the analysis from scratch, using the raw reads, you can have a look at the <a href="/training-material/topics/variant-analysis/tutorials/exome-seq/tutorial.html">Exome sequencing data analysis for diagnosing a genetic disease</a> tutorial.</p>
 
@@ -886,42 +886,6 @@
 	
 </blockquote>
 
-<div class="Zenodo">
-  <p>I see, you can’t wait to get DAC access. To download the data from zenodo for this tutorial you can follow the step below.</p>
-
-  <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-retrieve-data-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Retrieve data from zenodo</div>
-
-    <ol>
-      <li>Import the 3 VCFs from <a href="https://zenodo.org/record/6483454">Zenodo</a> to Galaxy <strong>as a collection</strong>.
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6483454/files/Case5_F.17.g.vcf.gz
-https://zenodo.org/record/6483454/files/Case5_IC.17.g.vcf.gz
-https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
-</code></pre></div>        </div>
-
-        <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>     <p>Click on <strong>Collection</strong> on the top</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li>     <p>Click on <strong>Build</strong> when available</p>   </li>   <li>     <p>Enter a name for the collection</p>   </li>   <li>Click on <strong>Create list</strong> (and wait a bit)</li> </ul> </blockquote>
-        <p><!--END_SNIPPET--></p>
-      </li>
-      <li>
-        <p>Set the datatype to <strong>vcf</strong>.</p>
-      </li>
-      <li>
-        <p>Click on <strong>Start</strong></p>
-      </li>
-      <li>
-        <p>If you forgot to select the <em>“Collections”</em> tab during upload, please put the file in a collection now.</p>
-
-        <!--SNIPPET-->
-        <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a dataset collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
-        <p><!--END_SNIPPET--></p>
-      </li>
-    </ol>
-
-  </blockquote>
-
-</div>
-
 <div class="EGA-Archive">
 
   <h2 id="getting-dac-access">Getting DAC access</h2>
@@ -931,7 +895,7 @@ https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
     <div class="box-title hands-on-title" id="hands-on-check-log-in-and-authorized-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check log-in and authorized datasets</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0</span></span> with the following parameters:
         <ul>
           <li><em>“What would you like to do?”</em>: <code class="language-plaintext highlighter-rouge">List my authorized datasets</code></li>
         </ul>
@@ -947,13 +911,13 @@ https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
   </blockquote>
 
   <h2 id="download-list-of-files">Download list of files</h2>
-  <p>When you have access to the EGA dataset, you can download all the needed files. However, the EGA dataset contains many different filetypes and cases, but we are only interested in the VCFs from case 5 and, to reduce execution time, the variants on chromosome 17. To be able to donwload these files we first need to request the list of files from which we can download. Make sure to use <strong>version 4+</strong> of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span>.</p>
+  <p>When you have access to the EGA dataset, you can download all the needed files. However, the EGA dataset contains many different filetypes and cases, but we are only interested in the VCFs from case 5 and, to reduce execution time, the variants on chromosome 17. To be able to donwload these files we first need to request the list of files from which we can download. Make sure to use <strong>version 4+</strong> of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0</span></span>.</p>
 
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-request-list-of-files-in-the-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Request list of files in the dataset</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span> <strong>version 4+</strong> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0</span></span> <strong>version 4+</strong> with the following parameters:
         <ul>
           <li><em>“What would you like to do?”</em>: <code class="language-plaintext highlighter-rouge">List files in a datasets</code></li>
           <li><em>“EGA Dataset Accession ID?”</em>: <code class="language-plaintext highlighter-rouge">EGAD00001008392</code></li>
@@ -997,7 +961,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
     <div class="box-title hands-on-title" id="hands-on-download-listed-vcfs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Download listed VCFs</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0</span></span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0" title="EGA Download Client tool"><strong>EGA Download Client</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0</span></span> with the following parameters:
         <ul>
           <li><em>“What would you like to do?”</em>: <code class="language-plaintext highlighter-rouge">Download multiple files (based on a file with IDs)</code>
             <ul>
@@ -1043,8 +1007,44 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
     <p>After transforming all the VCFs you need to combine the converted VCFs into a colllection again.</p>
 
     <!--SNIPPET-->
-    <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a dataset collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check the 3 vcf files</li>   <li>     <p>Click <strong>3 of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a dataset collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check the 3 vcf files</li>   <li>     <p>Click <strong>3 of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
     <p><!--END_SNIPPET--></p>
+
+  </blockquote>
+
+</div>
+
+<div class="Zenodo">
+  <p>I see, you can’t wait to get DAC access. To download the data from zenodo for this tutorial you can follow the step below.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-retrieve-data-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Retrieve data from zenodo</div>
+
+    <ol>
+      <li>Import the 3 VCFs from <a href="https://zenodo.org/record/6483454">Zenodo</a> to Galaxy <strong>as a collection</strong>.
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6483454/files/Case5_F.17.g.vcf.gz
+https://zenodo.org/record/6483454/files/Case5_IC.17.g.vcf.gz
+https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
+</code></pre></div>        </div>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>     <p>Click on <strong>Collection</strong> on the top</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li>     <p>Click on <strong>Build</strong> when available</p>   </li>   <li>     <p>Enter a name for the collection</p>   </li>   <li>Click on <strong>Create list</strong> (and wait a bit)</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Set the datatype to <strong>vcf</strong>.</p>
+      </li>
+      <li>
+        <p>Click on <strong>Start</strong></p>
+      </li>
+      <li>
+        <p>If you forgot to select the <em>“Collections”</em> tab during upload, please put the file in a collection now.</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a dataset collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
 
   </blockquote>
 
@@ -1575,12 +1575,7 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: ega_download_client
   owner: iuc
-  revisions: 1162bfd9f782
-  tool_panel_section_label: Variant Analysis
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: ega_download_client
-  owner: iuc
-  revisions: 9564758e8638
+  revisions: f9db47f68e5e
   tool_panel_section_label: Variant Analysis
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: gemini_inheritance
