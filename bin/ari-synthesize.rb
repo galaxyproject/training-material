@@ -101,7 +101,7 @@ end
 def synthesize(uncorrected_line, engine, voice: 'Amy', lang: 'en-GB', neural: true, output: nil)
   line = correct(uncorrected_line)
   digest = Digest::MD5.hexdigest line
-  if output.nil? 
+  if output.nil?
     mp3 = File.join(GTN_CACHE, "#{engine}-#{digest}-#{voice}.mp3")
     json = File.join(GTN_CACHE, "#{engine}-#{digest}-#{voice}.json")
     if File.file?(mp3)
@@ -110,7 +110,7 @@ def synthesize(uncorrected_line, engine, voice: 'Amy', lang: 'en-GB', neural: tr
     end
   else
     mp3 = output
-    json = output + '.json'
+    json = "#{output}.json"
     if File.file?(output)
       return mp3, json, 0.0 # Todo
     end
@@ -218,6 +218,7 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   sentence, engine, options = parseOptions
-  mp3, = synthesize(sentence, engine, voice: options[:voice], lang: options[:lang], neural: options[:neural], output: options[:output])
+  mp3, = synthesize(sentence, engine, voice: options[:voice], lang: options[:lang], neural: options[:neural],
+                                      output: options[:output])
   puts mp3
 end

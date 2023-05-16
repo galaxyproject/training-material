@@ -34,8 +34,8 @@ APPROVED_VOICES = {
     { 'id' => 'Nicole', 'lang' => 'en-AU', 'neural' => false },
     { 'id' => 'Olivia', 'lang' => 'en-AU', 'neural' => true },
     { 'id' => 'Raveena', 'lang' => 'en-IN', 'neural' => false },
-    { 'id' => 'Salli', 'lang' => 'en-US', 'neural' => true }
-    { 'id' => 'Ayanda', 'lang' => 'en-ZA', 'neural' => true }
+    { 'id' => 'Salli', 'lang' => 'en-US', 'neural' => true },
+    { 'id' => 'Ayanda', 'lang' => 'en-ZA', 'neural' => true },
     { 'id' => 'Geraint', 'lang' => 'en-GB-WLS', 'neural' => false }
   ],
   'es' => [

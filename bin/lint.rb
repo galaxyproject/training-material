@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
+
 require 'yaml'
 require 'pathname'
 require 'find'
@@ -956,7 +957,6 @@ module GtnLinter
 
         end
 
-
         # Check if they use TS tools, we do this here because it's easier to look at the plain text.
         contents.split("\n").each.with_index do |text, linenumber|
           if text.match(/testtoolshed/)
@@ -977,7 +977,7 @@ module GtnLinter
 
         results = filter_results(results, ignores)
         emit_results(results)
-      rescue StandardError, Psych::SyntaxError => e
+      rescue StandardError => e
         warn "Error parsing #{path}: #{e}"
         emit_results([ReviewDogEmitter.file_error(path: path, message: 'Unparseable JSON in this workflow file.',
                                                   code: 'GTN:019')])
