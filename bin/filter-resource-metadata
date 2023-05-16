@@ -8,5 +8,5 @@ files = ARGV.drop(1)
 
 files.each do |fn|
   data = YAML.load_file(fn)
-  puts fn.to_s if data.is_a?(Hash) && data.key?(key) && data[key] == true
+  puts fn if data.is_a?(Hash) && data.key?(key) && data[key] == true
 end
