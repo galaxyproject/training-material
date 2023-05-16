@@ -168,14 +168,7 @@ Finally, we need to decompress our bgzipped VCFs, since we will use a text manip
 >
 > After transforming all the VCFs you need to combine the converted VCFs into a colllection again.
 >
-> > <tip-title>Adding files to collection</tip-title>
-> >
-> > 1. Click on the dataset **selector icon** {% icon param-check %} in your history.
-> > 2. Select the 3 vcf files.
-> > 3. Click on the button **For all selected...** and select **Build Dataset List**
-> > 4. Give the new collection a name and click on **Create collection**.
-> >
-> {: .tip}
+> {% snippet faqs/galaxy/collections_build_list.md datasets_description="the 3 vcf files" n="3" %}
 >
 {: .hands_on}
 

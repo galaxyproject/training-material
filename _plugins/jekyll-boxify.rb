@@ -1,38 +1,42 @@
+# frozen_string_literal: true
+
 require 'jekyll'
-require './_plugins/gtn.rb'
+require './_plugins/gtn'
 
 module Jekyll
+  # The GTN Box generation process
   class Boxify < Jekyll::Generator
-    def initialize(config)
+    def initialize(config) # :nodoc:
+      super
       @config = config['boxify'] ||= {}
     end
 
-    def generate(site)
-      puts "[GTN/Boxify]"
-      site.pages.each { |page| boxify page,site }
+    def generate(site) # :nodoc:
+      puts '[GTN/Boxify]'
+      site.pages.each { |page| boxify page, site }
       site.posts.docs.each { |post| boxify post, site }
     end
 
-    def boxify(page, site)
-      if page.content.nil?
-        return
-      end
+    ##
+    # This function adds boxes to the page content.
+    # Params:
+    # +page+:: The page to add boxes to
+    # +site+:: The +Jekyll::Site+ object
+    def boxify(page, _site)
+      return if page.content.nil?
 
-      if page['lang']
-        lang = page['lang']
-      else
-        lang = "en"
-      end
+      lang = page['lang'] || 'en'
 
       # Interim solution, fancier box titles
-      page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})-title>(.*?)<\/\s*\1-title\s*>/) {
-        box_type = $1
-        title = $2
+      page.content = page.content.gsub(%r{<(#{Gtn::Boxify.box_classes})-title>(.*?)</\s*\1-title\s*>}) do
+        box_type = ::Regexp.last_match(1)
+        title = ::Regexp.last_match(2)
         if page.data['citation_target'] == 'jupyter'
           title = Gtn::Boxify.safe_title(title)
-          title = Gtn::Boxify.format_box_title(title, box_type, lang=lang)
+          title = Gtn::Boxify.format_box_title(title, box_type, lang)
           icon = Gtn::Boxify.get_icon(box_type, emoji: true)
-          box = "<div class=\"box-title\" aria-label=\"#{box_type} box: #{title}\" style=\"font-size: 150%\">#{icon} #{title}</div>"
+          box = "<div class=\"box-title\" aria-description=\"#{box_type} box: " \
+                "#{title}\" style=\"font-size: 150%\">#{icon} #{title}</div>"
           box.gsub!(/\\&quot/, '&quot')
           box.gsub!(/([^\\])"/, '\1\\"')
         else
@@ -40,27 +44,27 @@ module Jekyll
         end
 
         box
-      }
+      end
 
       # Long term solution, proper new boxes
       # BUT: does not work with <details></details> that are actual HTML elements, so we'll need to rename those.
-      #page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})>/) {
-        #box_type = $1
-        #box = Gtn::Boxify.generate_box(box_type, nil, lang, page.path)
-        #box
-      #}
+      # page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})>/) {
+      # box_type = $1
+      # box = Gtn::Boxify.generate_box(box_type, nil, lang, page.path)
+      # box
+      # }
 
-      #page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes}) title="([^"]*)">/) {
-        #box_type = $1
-        #title = $2
-        #box = Gtn::Boxify.generate_box(box_type, title, lang, page.path)
-        #box
-      #}
+      # page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes}) title="([^"]*)">/) {
+      # box_type = $1
+      # title = $2
+      # box = Gtn::Boxify.generate_box(box_type, title, lang, page.path)
+      # box
+      # }
 
-      #page.content = page.content.gsub(/<\/\s*(#{Gtn::Boxify::box_classes})\s*>/) {
-        #box_type = $1
-        #"\n</div></div><!--#{box_type}-->"
-      #}
+      # page.content = page.content.gsub(/<\/\s*(#{Gtn::Boxify::box_classes})\s*>/) {
+      # box_type = $1
+      # "\n</div></div><!--#{box_type}-->"
+      # }
     end
   end
 end

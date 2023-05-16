@@ -24,10 +24,10 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 
 	// Naturally we also need to toggle the aria-expanded attribute to make sure we're accessible
     $(this).attr("aria-expanded",
-		// if it's collapsed
-		$(">span.fold-unfold", this).hasClass("fa-plus-square") ? 
+		// if it's collapsed (i.e. showing plus icon indicating expanding)
+		$(">span.fold-unfold", this).hasClass("fa-plus-square") ?
 		// mark as collapsed
-		"true" : "false"
+		"false" : "true"
 	);
 });
 
@@ -59,7 +59,8 @@ $("section.tutorial .hands_on,section.tutorial .hands-on").each((idx, el) => {
 // CYOA Support
 function cyoaChoice(text){
 	if(text !== undefined && text !== null){
-		localStorage.setItem('gtn-cyoa', text);
+		const loc = new URL(document.location)
+		localStorage.setItem(`gtn-cyoa-${loc.pathname}`, text);
 
 		var inputs = document.querySelectorAll(".gtn-cyoa input"),
 			options = [...inputs].map(x => x.value),
@@ -78,14 +79,15 @@ function cyoaChoice(text){
 
 function cyoaDefault(defaultOption){
 	// Start with the URL parameter
-	var urlOption = (new URL(document.location)).searchParams.get("gtn-cyoa");
+	const loc = new URL(document.location)
+	var urlOption = loc.searchParams.get("gtn-cyoa");
 	if(urlOption){
 		cyoaChoice(urlOption);
 		return;
 	}
 
 	// Otherwise fall back to local storage (survives refreshes)
-	var lsOption = localStorage.getItem('gtn-cyoa');
+	var lsOption = localStorage.getItem(`gtn-cyoa-${loc.pathname}`);
 	if(lsOption !== null){
 		cyoaChoice(lsOption);
 		return;
@@ -153,8 +155,8 @@ function fixDiffPresentation(codeBlock){
 }
 
 <!--  For admin training -->
-document.querySelectorAll("section.tutorial.topic-admin div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
-document.querySelectorAll("section.tutorial.topic-data-science div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
+document.querySelectorAll("article.topic-admin section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
+document.querySelectorAll("article.topic-data-science section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 
 $("#theme-selector button").click(function(evt){
 	var theme = $(evt.target).data('theme');

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+ruby '~> 3.0.0'
+
 source "https://rubygems.org"
 gem "nokogiri", ">= 1.10.4"
 gem 'addressable'
@@ -14,3 +17,9 @@ gem 'webrick' if RUBY_VERSION >= '3.0' # Ruby3 does not ship with webrick and Je
 gem 'bibtex-ruby'
 gem 'citeproc-ruby'
 gem 'csl-styles'
+
+# Image processing
+gem 'fastimage'
+
+# For our CLI tools
+gem 'commander'

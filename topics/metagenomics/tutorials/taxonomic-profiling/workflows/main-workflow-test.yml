@@ -1,0 +1,66 @@
+---
+- doc: Test for the workflow
+  job:
+    raw-reads:
+      class: Collection
+      collection_type: 'list:paired'
+      elements:
+      - class: Collection
+        type: paired
+        identifier: JP4D
+        elements:
+        - identifier: forward
+          class: File
+          location: https://zenodo.org/record/7871630/files/JP4D_R1.fastqsanger.gz
+          filetype: fastqsanger
+        - identifier: reverse
+          class: File
+          location: https://zenodo.org/record/7871630/files/JP4D_R2.fastqsanger.gz
+          filetype: fastqsanger
+      - class: Collection
+        type: paired
+        identifier: JC1A
+        elements:
+        - identifier: forward
+          class: File
+          location: https://zenodo.org/record/7871630/files/JC1A_R1.fastqsanger.gz
+          filetype: fastqsanger
+        - identifier: reverse
+          class: File
+          location: https://zenodo.org/record/7871630/files/JC1A_2.fastqsanger.gz
+          filetype: fastqsanger
+    metadata:
+      class: File
+      location: metadata.tabular
+      filetype: tabular
+  outputs:
+    kraken_report:
+      element_tests:
+        JC1A:
+          asserts:
+            has_text:
+              text: 'Rhodobacterales'
+        JP4D:
+          asserts:
+            has_text:
+              text: 'Aphaproteobacteria'
+    krakentool_report:
+      element_tests:
+        JC1A:
+          asserts:
+            has_text:
+              text: 'o__Rhodobacterales'
+        JP4D:
+          asserts:
+            has_text:
+              text: 'o__Rhodobacterales'
+    metaphlan_output:
+      element_tests:
+        JC1A:
+          asserts:
+            has_text:
+              text: 'UNCLASSIFIED'
+        JP4D:
+          asserts:
+            has_text:
+              text: 'c__Alphaproteobacteria|o__Rhodobacterales'

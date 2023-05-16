@@ -13,12 +13,12 @@ time_estimation: 1H
 key_points:
 - Diversity indicators
 - Champs Blocs
+- Boulder Fields
 contributors:
 - Marie59
 - yvanlebras
 translations:
    - fr
-   
 ---
 
 
@@ -80,7 +80,7 @@ Now let's focus on our workflow on boulder field ecological state
 {% include _includes/cyoa-choices.html option1="Yes" option2="No" default="Yes" text="Are your ESTAMP data ready ?" %}
 
 <div class="No" markdown="1">
-> 1. Download your data on ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/donnees). You will get a zip folder.
+> 1. Download your data on ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/) website, clicking on "Accédez aux données" at the bottom of the page. You will get a zip folder.
 >
 > 2. Unzip your folder. In the folder three files .csv will interest us :
 > - champbloc_ivr.csv
@@ -126,7 +126,7 @@ Based on the proportion of "turned" and "not turned" blocs this indicator vary f
 {: .tip}
 
 
-## **IVR**
+## IVR
 
 Go on the tool **IVR**
 
@@ -151,8 +151,10 @@ Go on the tool **IVR**
 > > <tip-title>Search for your site results</tip-title>
 > >
 > > 1. In the top of the History panel (on the right) go on the search box
-> > 2. Type the name of your site (for instance "Bilfot")
-> > 3. If nothing show up click on **show hidden** (just beneath the name of the history in the History panel)
+> > 2. Click on the double arrows to display more filter options
+> > 3. Type the name of your site (for instance "Bilfot") on the "Filter by name:" criteria then click on "No" for the "Visible:" criteria, as plots are created in a data collection and not directly visible on the history
+> >
+> >  ![Bilfot filter](../../images/champbloc/filter_data.jpg "Filter IVR for Bilfot"){:width="620px"}
 > >
 > {: .tip}
 > **For your reports you need to download the ones you want. You won't be able to vizualise them directly on Galaxy center panel !**
@@ -165,7 +167,7 @@ Go on the tool **IVR**
 
 # Computing dissimilarity coefficient for each site
 
-## **Dissimilarity**
+## Dissimilarity
 Cleaning out your data in order and then compute de dissimilarity coefficient.
 Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0) %} tool
 
@@ -198,5 +200,32 @@ Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/c
 >
 {: .hands_on}
 
+## Diversity indicators
+Taking as input cleaned data from the Dissimilarity step tocompute diversity indicators.
+Get the {% tool [Diversity indicators](toolshed.g2.bx.psu.edu/repos/ecology/cb_div/cb_div/0.0.0) %} tool
+
+> <hands-on-title>Calculate diversity indicators</hands-on-title>
+>
+> 1. {% tool [Diversity indicators](toolshed.g2.bx.psu.edu/repos/ecology/cb_div/cb_div/0.0.0) %} with the following parameters:
+>    - {% icon param-file %} *"Input clean data"*: `input` (Clean Rdata)
+>
+> 2. Press **Execute** 
+>
+> 3. View graphs
+>  * Once it's green, click on type of plot you want to see
+>  * Then, click on the {% icon galaxy-eye %} (eye) icon of your output in the history panel.
+> 
+>  The information is displayed in the central panel
+>
+> ![Div ](../../images/champbloc/simpson.jpg "Simpson indicator"){:width="620px"}
+>
+>
+> 3. Download your results
+> 
+>  * Click on the output you are interested in
+>  * Click on {% icon galaxy-save %} (download)
+>
+{: .hands_on}
+
 # Conclusion
-Here you have finished your study on your champs blocs biodiversity state.
+Here you have finished your study on your boulder fields biodiversity state.

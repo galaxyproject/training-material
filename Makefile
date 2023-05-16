@@ -53,7 +53,7 @@ COND_ENV_DIR=$(shell dirname $(dir $(CONDA)))
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --no-document --system && \
-		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby && \
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby fastimage && \
 		pushd ${COND_ENV_DIR}/envs/${CONDA_ENV}/share/rubygems/bin && \
 		ln -sf ../../../bin/ruby ruby
 .PHONY: install
@@ -231,8 +231,8 @@ video: ## Build all videos
 
 annotate: ## annotate the tutorials with usable Galaxy instances
 	${ACTIVATE_ENV} && \
-	bash bin/workflow_to_tool_yaml.sh && \
-	python bin/add_galaxy_instance_annotations.py
+	wget https://github.com/hexylena/toolshed-version-database/raw/main/guid-rev.json -O metadata/toolshed-revisions.json && \
+	python bin/supported-fetch.py
 .PHONY: annotate
 
 rebuild-search-index: ## Rebuild search index
