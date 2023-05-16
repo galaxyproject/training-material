@@ -15,6 +15,17 @@ key_points:
 - Clustering can be used to investigate the transmission of certain traits, like drug resistance.
 - Clustering does not provide information about particular transmission events nor their directionality (who infected whom).
 - Clustering is very much influenced by sampling. Lower sampling proportions and shorter sampling timeframes lead to lower clustering rates that shoud not be confounded with lack of transmission.
+requirements:
+  -
+    type: "internal"
+    topic_name: galaxy-interface
+    tutorials:
+      - collections
+  -
+    type: "internal"
+    topic_name: variant-analysis
+    tutorials:
+      - tb-variant-analysis
 contributions:
    authorship:
      - GaloGS
@@ -27,40 +38,39 @@ tags:
 - one-health
 ---
 
-# Pre-requisites
-This tutorial assumes that you have watched the respective webinars about ([Drug resistance prediction](https://youtu.be/Ddwt-_gQR2M), [Phylogenetic mutations](https://youtu.be/1ps_o5rpnmw), [The concept of clustering](https://youtu.be/l4cPUECJ7VU) and
-  [Genetic distance thresholds](https://youtu.be/kKNgmpy1N94)) and therefore you understand 1) How genotypic drug susceptibility is determined
-based on WGS analysis 2) The concept of clustering. It also assumes that you have completed the tutorial on [MTB variant analysis]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %}).
-
-
 # Introduction
 
-Now you are familiar with the process of genome sequencing, quality control of sequencing data, mapping and
-variant calling. Additionally, you know how to run `TB-profiler` in order to detect drug resistance-conferring
-mutations and predict drug-resistant phenotypes. However you have only analyzed one sample unrelated to our study for the purpose of
-learning. Before starting the transmission analysis, we would need to analyze the 20 samples that we
-have been asked to analyze. The process to follow is exactly the same for any sample, meaning that
-we would need to analyze the 20 samples following the same steps... twenty times??? Of course not.
+In a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates.
 
-The way you can perform the same analysis tasks on multiple samples at a a time in Galaxy (being it
-a simple step like running Trimmomatic, or a complete analysis pipeline composed of many different steps)
-is by using `Dataset collections`. To know more about dataset collections,
-you can [have a look at the following material](https://galaxyproject.org/tutorials/collections/), however the idea is very simple:
-all samples to be analyzed are merged into a "dataset collection", and then you analyze that "collection"
-as you would analyze a single sample, with the difference that all steps will be performed for each
-sample individually. Do not worry if you do not fully understand this right now, we will be creating
-a dataset collection at the beginning of this tutorial and we will analyze it.
+This tutorial guides you through transmission cluster identification from preprocessed whole-genome sequencing data of MTB strains. It consists of two parts:
 
-To save you some time, (and server load) we have run the pipeline that you used in the previous tutorial for
-the 20 samples that we want to analyze. Thus, we now have 20 VCF files that describe the
-mutations found for each of the samples. **These 20 VCFs files will be the starting point of this tutorial.**
- If you want to perform the mapping and variant calling for
-all of the samples, feel free to do it. You can find the respective [FASTQ files here](https://zenodo.org/record/5911437), and
-the [Galaxy workflows used here](./workflows/Galaxy-Workflow-From_Fastqs_to_VCFs_and_BAMs.ga). However this is completely optional,
-and we suggest you to do it after you have finished all the tutorials of this workshop.
+1. Part one starts from per-sample lists of mutations/variants (in *variant call format*, VCF), as derived from sequencing data through mapping of sequenced reads to a reference genome followed by variant calling. From the lists of variants, more specifically from the single nucleotide variants found for every sample, you will construct a sample distance matrix and identify likely transmission clusters based on overall sample similarity.
 
-Before starting, bear in mind that this tutorial assumes that you watched the respective webinars of
-this lesson
+2. Part two starts with drug-resistance profiles of the same samples and combines these profiles with the cluster information obtained in part one to enable reasoning about the validity of identified clusters and about evolution of drug resistance in the samples.
+
+Both the lists of variants and the drug-resistance reports for all samples have been pre-generated for you, and can simply be imported into Galaxy from public sources.
+
+> <comment-title>Origin of the input data</comment-title>
+>
+> This tutorial does *not* discuss the analysis steps that lead from sequencing data to lists of variants, nor the generation of drug-resistance profiles with the tool TB-Profiler. These topics are covered in the separate tutorial [M. tuberculosis Variant Analysis]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %}) instead.
+>
+> If, after working through this and the other tutorial, you would like to combine the two to perform the complete analysis from sequenced reads to transmission clusters for the 20 samples used here, you can find their raw sequencing data in this [Zenodo record](https://zenodo.org/record/5911437), and two Galaxy workflows to process the data into VCFs and to generate drug-resistance profiles as [supplementary material](./workflows) to this tutorial.
+>
+{: .comment}
+
+> <comment-title>Recommended background information</comment-title>
+>
+> A series of webinars has been produced alongside this tutorial to provide some theoretical background for the topics touched here. Specifically, these are:
+>
+> - [{% icon video %} Drug resistance prediction](https://youtu.be/Ddwt-_gQR2M)
+> - [{% icon video %} Phylogenetic mutations](https://youtu.be/1ps_o5rpnmw)
+> - [{% icon video %} The concept of clustering](https://youtu.be/l4cPUECJ7VU)
+> - [{% icon video %} Genetic distance thresholds](https://youtu.be/kKNgmpy1N94)
+>
+> Watching at least some of them before or after doing the tutorial is highly recommended.
+>
+{: .comment}
+
 
 > <agenda-title></agenda-title>
 >
@@ -71,8 +81,9 @@ this lesson
 >
 {: .agenda}
 
+# Analysis Part 1: Identification of transmission clusters from per-sample variants
 
-# Get the data
+## Get the data
 
 Any analysis should get its own Galaxy history. So let's start by creating a new one:
 
@@ -88,10 +99,13 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 >
 {: .hands_on}
 
-As mentioned in the introduction, we have performed mapping and variant calling for the 20 samples
-that we need to analyze. The result are the respective 20 VCF files that describe the mutations found
-for each of the samples. Before starting the analysis of such mutations, we will need to import them
-into Galaxy.
+As mentioned in the introduction, mapping and variant calling have already be performed for the 20 samples
+that we need to analyze. The result of this preprocessing are 20 VCF files that describe the mutations found
+for each of the samples, and which we now need to import into Galaxy.
+
+The fastest way to do so, which lets us build a collection from the 20 datasets with correctly named elements (corresponding to the sample identifiers) directly during data upload is through the so-called *Rule-based uploader*. The Galaxy training material has dedicated tutorials, [Rule Based Uploader]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}) and [Rule Based Uploader Advanced]({% link topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.md %}), that introduce this powerful feature in detail.
+
+For the purpose of this tutorial, it is enough if you simply follow the step-by-step instructions provided here exactly.
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -165,7 +179,7 @@ into Galaxy.
 >    11. Set the name of the new collection to `MTB sample variants`
 >    12. Click on **Upload**
 >
->    It is ok to continue with the next step even while the upload of the pool 1 reads is still ongoing.
+>    It is ok to continue with the next step even while the upload of this data is still ongoing.
 >    Just click on the **Close** button of the information pop-up window if it is still open when you are ready to proceed.
 > 2. {% tool [Upload](upload1) %} the reference genome that was used for SNP calling from:
 >
@@ -180,7 +194,7 @@ into Galaxy.
 {: .hands_on}
 
 
-# Generate a SNP alignment
+## Generate a SNP alignment
 
 In this tutorial we aim to calculate the genetic differences (in SNPs) between pairs of MTB genomes.
 To do so, we need to compare, between each pair of genomes (thus pairwise), the nucleotides that are
@@ -189,27 +203,25 @@ observed at each position. Each time we find a different nucleotide at a given p
 mean that their respective genomes are almost identical, except for 5 positions along all the genome
 in which they have different nucleotides.
 
-To do such calculation we need to first build an alignment of all the genomes (multiple-sequence
-  alignment, or MSA). Afterwards, we will use specific software to analyze this MSA, count SNPs,
-  and thus calculate the genetic distance between each pair of samples.
+To do such calculation we need to first build an alignment of all the genomes (a multiple-sequence alignment, or MSA).
+Afterwards, we will use specific software to analyze this MSA, count SNPs, and thus calculate the genetic distance between each pair of samples.
 
 ![MSA of 5 MTB genomes](./images/MSA.png "A SNP is highlighted in a MSA of five MTB genomes")
 
-## Generate complete genomes
+### Generate complete genomes
+
 The first step to generate the genomes MSA will be... to get the complete genomes of our samples!
 In the [MTB Variant Analysis tutorial]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %}) we have analyzed short-read high-throughput sequencing data (Illumina) to
 obtain the respective VCF files that describe the mutations found in each of our samples, as compared
 to the reference genome. We can now use these VCF files to build the complete genome of each of our
 samples.
 
-### Filter VCF files for epidemiological/phylogenetic investigation
+#### Filter VCF files for epidemiological/phylogenetic investigation
 Interpreting **mixed calls** or **indels** in phylogenetic/epidemiological applications can be very
 complicated. That is the reason why we typically use alignments that only contain **fixed SNPs**.
 
 Thus, the first step in this tutorial will be to filter the VCFs so we are sure that
-they only contain **fixed SNPs**. As it was introduced in day 2 webinar [Mapping and Variant calling](https://youtu.be/38GUBKwWXv8), we will consider fixed
-those variants at a frequency equal or greater than 90%. We will be using here the tool
-**TB Variant Filter**.
+they only contain **fixed SNPs**, which we (somewhat arbitrarily) define as those single-nucleotide variants that are observed at an allele frequency of 90% or greater. We will be using the tool **TB Variant Filter** for this task.
 
 *Note: TB variant Filter refers to SNPs as SNVs. These two short forms are interchangeable, meaning **S**ingle **N**ucleotide **P**olymorphism and **S**ingle **N**ucleotide **V**ariant, respectively.*
 
@@ -224,7 +236,7 @@ those variants at a frequency equal or greater than 90%. We will be using here t
 > > <question-title></question-title>
 > >
 > > **TB Variant Filter** reads the VCF and output only SNPs that have, at least, 90% frequency.
-> > How can this sofware extract such information from the VCF files?
+> > How can the software extract such information from the VCF datasets?
 > >
 > > > <solution-title></solution-title>
 > > >
@@ -237,13 +249,13 @@ those variants at a frequency equal or greater than 90%. We will be using here t
 > {: .question}
 {: .hands_on}
 
-### Reconstruct the complete genome of each sample with **bcftools consensus**
-Our VCF files now only contain **fixed SNPs** that were found in the genome of the respective strains.
+#### Reconstruct the complete genome of each sample
+Our new collection of VCF datasets now only contains **fixed SNPs** that were found in the genome of the respective strains.
 Genomic positions not in the VCF mean that, at that particular position, the strain has the
 same nucleotide than the reference genome. Knowing this information, one could reconstruct the
 complete genome of each strain pretty easily. From the first to the last position in the genome,
 one would put the same nucleotide than in the reference if that position is not in the VCF, or the
-SNP described in the VCF otherwise. This is exactly what `bcftools consensus` will do for us,
+SNP described in the VCF otherwise. This is exactly what the tool **bcftools consensus** will do for us,
 given the reference genome and the VCF of the strain we want to reconstruct the genome for.
 
 > <hands-on-title>Reconstruct the complete genome of each sample</hands-on-title>
@@ -283,7 +295,8 @@ given the reference genome and the VCF of the strain we want to reconstruct the 
 > {: .solution}
 {: .question}
 
-## Multiple-sequence alignment (MSA) of all genomes
+### Multiple-sequence alignment (MSA) of all genomes
+
 Multiple sequence alignment is a process in which multiple DNA, RNA or protein sequences are arranged
 to find regions of similarity that are supposed to reflect the consequences of different evolutionary
 processes (Figure 1). MSAs are used to test hypotheses about these evolutionary processes and to infer phylogenetic
@@ -292,11 +305,11 @@ of evolutionary relationship. You will learn more on MSAs and phylogenetic infer
 tutorial.
 
 Building MSAs of several complete genomes can be a complicated process and computationally demanding. To perform
-such a task there are many software packages available like `Muscle`, `MAFFT` or `Clustal` just to mention some.
+such a task there are many software packages available like **Muscle**, **MAFFT** or **Clustal**, just to mention some.
 Which one are we going to use in this tutorial? Well, we are going to use a trick. We are going to
 just stack one genome on top of each other within a text file. (More on why we can do this below).
 
-Our aim is to generate a **multifasta** file in which the genomes of our samples are aligned.
+Our aim is to generate a **multifasta** dataset in which the genomes of our samples are aligned.
 Something that looks like this:
 
 ```
@@ -309,9 +322,7 @@ TTCGTTCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACG...
 ```
 
 This could be done manually, by copy-pasting all genomes in a single text file.
-However we can do the same with a specific command that *concatenates* files.
-
-### Build a multiple-sequence alignment from complete genomes with "**Concatenate datasets**"
+However we can do the same with a specific command that *concatenates* datasets.
 
 > <hands-on-title>Concatenate genomes to build a MSA</hands-on-title>
 >
@@ -344,7 +355,7 @@ all of our genomes! However, it is important that you understand the following q
 >
 {: .question}
 
-### Remove invariant positions with **Finds SNP sites**
+### Remove invariant positions
 
 We have generated a MSA that is the basis for the transmission (clustering) and phylogenetic
 analysis. Although we could already use this MSA for such analysis, it is common practice to remove
@@ -381,10 +392,10 @@ In SNP alignments you have to **bear in mind that positions do not longer corres
 coordinates**, meaning that two contiguous nucleotides may correspond to coordinates thousands of
 positions apart.
 
+## Identify transmission clusters
 
-# Identify transmission clusters
+### Calculate pairwise SNP distances
 
-## Calculate pairwise SNP distances
 Now we are all set to calculate pairwise SNP distances between samples and decide whether two
 patients are within the same transmission cluster or not. Having a SNP alignment, this is fairly
 easy. We will use **SNP distance matrix**, that will generate a matrix with pairwise SNP distances.
@@ -403,7 +414,8 @@ easy. We will use **SNP distance matrix**, that will generate a matrix with pair
 >
 {: .hands_on}
 
-## Determine transmission clusters based on a SNP threshold
+### Determine transmission clusters based on a SNP threshold
+
 Now that we have a distance matrix that describes the SNP distance between each pair of samples, we
 could already describe the transmission clusters based on a **SNP threshold**, as [explained in the
 respective webinar](https://youtu.be/kKNgmpy1N94) . If two samples are at a distance below that threshold, we will say that they
@@ -435,7 +447,7 @@ linking them in between as exemplified in the picture below.
 > {: .solution}
 {: .question}
 
-## Determine transmission clusters using Rscript
+### Determine transmission clusters using Rscript
 
 Currently there is not tool in Galaxy to perform the exact task that we need (although we plan to
 include it!).  So far, we can use **R** and the **cluster** library through an **interactive tool** from within Galaxy to achieve what we want.
@@ -544,7 +556,7 @@ The output of the R script, which is now available as a dataset in your history 
 {: .question}
 
 
-# Using clustering to investigate the emergence of drug resistance
+# Analysis Part 2: Combining cluster information with drug-resistance reports
 
 Although we have stressed the fact that **clustering cannot be used to delineate
 transmission events**, clustering is very useful to investigate outbreaks and determine which cases are
@@ -556,15 +568,17 @@ on our clustering analysis.
 
 ## Get the data
 
-In the [MTB Variant Analysis tutorial]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %})
-you have used **TB-profiler** to generate a report with determinants of drug resistance of a
+The [MTB Variant Analysis tutorial]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %})
+demonstrates the use of **TB-profiler** to generate a report with determinants of drug resistance of a
 particular MTB strain, and predict its genotypic drug susceptibility. We have done **exactly the same**
-for the 20 samples that we used in the clustering analysis, so we have now the TB-profiler report for
+for the 20 samples that we used in the clustering analysis, so we have now the TB-profiler reports for
 all of them.
+
+Like in part 1, we can use Galaxy's rule-based uploader functionality to upload the data, build a collection from it and name its elements correctly, all in one step.
 
 > <hands-on-title>Data upload</hands-on-title>
 >
-> 1. Import the TB profiler reports for the samples
+> 1. Import the TB-profiler reports for the samples
 >
 >    ```
 >    https://zenodo.org/record/6010176/files/ERR1203059.TBprof.txt
@@ -715,6 +729,7 @@ one column of sample IDs and another one with the corresponding drug resistance 
 {: .hands_on}
 
 ### Clean up the table
+
 In this step we will use a simple tool that searches and replaces text to remove the redundant string "Drug-resistance: " from our table by replacing it with *nothing*.
 
 > <hands-on-title>Removing redundant content</hands-on-title>
@@ -748,7 +763,7 @@ In this step we will use a simple tool that searches and replaces text to remove
 > {: .solution}
 {: .question}
 
-### Combine the drug-resistance and the cluster tables
+## Combine the drug-resistance and the cluster tables
 
 The two tables we have generated in the two parts of the tutorial share a sample column, which we can use now to join the two tables.
 
@@ -886,9 +901,10 @@ which may help overcome some of these limitations.
 
 In the following tutorial you will perform a phylogenetic analysis of these same 20 strains.
 
+
 # Bonus
 
 You might have noticed that one of the strains analyzed presents thousands of differences (SNPs) to
 the reference genome, standing out from the rest of strains. This strain is a *M. canettii* strain,
 that was actually not part of the outbreak investigated. However we decided to include it here. Why? Let's find out
-in the next tutorial.
+in the follow-up tutorial [Tree thinking for tuberculosis evolution and epidemiology]({% link topics/evolution/tutorials/mtb_phylogeny/tutorial.md %}).
