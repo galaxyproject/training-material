@@ -54,13 +54,38 @@ contributors: [hexylena]
 
 10. If the files in test-data are already uploaded to Zenodo, to save disk space, you should delete them from the `test-data` dir and use their URL in the `-tests.yml` file, as in this example:
 
-   ```
-   - doc: Test the M. Tuberculosis Variant Analysis workflow
-     job:
-        'Read 1':
-           location: https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
-           class: File
-           filetype: fastqsanger.gz
-   ```
+    ```yaml
+    - doc: Test the M. Tuberculosis Variant Analysis workflow
+      job:
+         'Read 1':
+            location: https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
+            class: File
+            filetype: fastqsanger.gz
+    ```
 
-11. Contribute all of those files to the GTN in a PR.
+11. Add tests on the outputs! Check the [planemo reference if you need more detail](https://planemo.readthedocs.io/en/latest/test_format.html).
+
+    ```yaml
+    - doc: Test the M. Tuberculosis Variant Analysis workflow
+      job:
+         # Simple explicit Inputs
+         'Read 1':
+            location: https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
+            class: File
+            filetype: fastqsanger.gz
+      outputs:
+        jbrowse_html:
+          asserts:
+            has_text:
+              text: "JBrowseDefaultMainPage"
+        snippy_fasta:
+          asserts:
+            has_line:
+              line: '>Wildtype Staphylococcus aureus strain WT.'
+        snippy_tabular:
+          asserts:
+            has_n_columns:
+              n: 2
+    ```
+
+12. Contribute all of those files to the GTN in a PR.

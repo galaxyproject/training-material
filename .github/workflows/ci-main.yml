@@ -63,6 +63,8 @@ jobs:
         env:
             REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run rubocop
-        run: |
-          rubocop bin/*.rb _plugins/
+      - name: rubocop
+        uses: reviewdog/action-rubocop@v2
+        with:
+          rubocop_version: gemfile
+          reporter: github-pr-review
