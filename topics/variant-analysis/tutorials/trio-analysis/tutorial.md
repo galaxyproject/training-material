@@ -58,32 +58,6 @@ We offer two ways to download the files. Firstly, you can download the files dir
 {% include _includes/cyoa-choices.html option1="EGA-Archive" option2="Zenodo" default="EGA-Archive"
        text="Here you can choose to either follow the data preperation for the data from the EGA-archive or Zenodo." %}
 
-<div class="Zenodo" markdown="1">
-I see, you can't wait to get DAC access. To download the data from zenodo for this tutorial you can follow the step below.
-
-> <hands-on-title>Retrieve data from zenodo</hands-on-title>
->
-> 1. Import the 3 VCFs from [Zenodo](https://zenodo.org/record/6483454) to Galaxy **as a collection**.
->    ```
->    https://zenodo.org/record/6483454/files/Case5_F.17.g.vcf.gz
->    https://zenodo.org/record/6483454/files/Case5_IC.17.g.vcf.gz
->    https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
->    ```
->
->    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true %}
->
-> 2. Set the datatype to **vcf**.
->
-> 3. Click on **Start**
->
-> 4. If you forgot to select the *"Collections"* tab during upload, please put the file in a collection now.
->
->    {% snippet faqs/galaxy/collections_build_list.md %}
->
-{: .hands_on}
-
-</div>
-
 <div class="EGA-Archive" markdown="1">
 
 ## Getting DAC access
@@ -169,6 +143,32 @@ Finally, we need to decompress our bgzipped VCFs, since we will use a text manip
 > After transforming all the VCFs you need to combine the converted VCFs into a colllection again.
 >
 > {% snippet faqs/galaxy/collections_build_list.md datasets_description="the 3 vcf files" n="3" %}
+>
+{: .hands_on}
+
+</div>
+
+<div class="Zenodo" markdown="1">
+I see, you can't wait to get DAC access. To download the data from zenodo for this tutorial you can follow the step below.
+
+> <hands-on-title>Retrieve data from zenodo</hands-on-title>
+>
+> 1. Import the 3 VCFs from [Zenodo](https://zenodo.org/record/6483454) to Galaxy **as a collection**.
+>    ```
+>    https://zenodo.org/record/6483454/files/Case5_F.17.g.vcf.gz
+>    https://zenodo.org/record/6483454/files/Case5_IC.17.g.vcf.gz
+>    https://zenodo.org/record/6483454/files/Case5_M.17.g.vcf.gz
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true %}
+>
+> 2. Set the datatype to **vcf**.
+>
+> 3. Click on **Start**
+>
+> 4. If you forgot to select the *"Collections"* tab during upload, please put the file in a collection now.
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 
