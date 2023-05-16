@@ -515,18 +515,16 @@ module Jekyll
 
       about = []
       about.push(topic_desc)
-      if topic.key?('edam_ontology')
-        about.push(
-          {
-            '@type': 'DefinedTerm',
-            '@id': "http://edamontology.org/#{topic['edam_ontology']}",
-            inDefinedTermSet: 'http://edamontology.org',
-            termCode: (topic['edam_ontology']).to_s,
-            # "name": ,
-            url: 'https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=' \
-                 "http%3A%2F%2Fedamontology.org%2F#{topic['edam_ontology']}"
-          }
-        )
+      about += topic.fetch('edam_ontology', []).map do |term|
+        {
+          '@type': 'DefinedTerm',
+          '@id': "http://edamontology.org/#{term}",
+          inDefinedTermSet: 'http://edamontology.org',
+          termCode: term,
+          # "name": ,
+          url: 'https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=' \
+               "http%3A%2F%2Fedamontology.org%2F#{term}"
+        }
       end
       data['about'] = about
 

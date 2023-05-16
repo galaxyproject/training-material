@@ -61,12 +61,14 @@ mapping:
             - "The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy"
             - It can drastically simplify management of large numbers of VMs
     edam_ontology:
-        type: str
-        pattern: /^topic_[0-9]+$/
-        description: |
-            An edam ontology id that describes the topic or tutorial.
-        examples:
-            - topic_3173
+        type: seq
+        sequence:
+          - type: str
+            pattern: /^topic_[0-9]+$/
+            description: |
+                An edam ontology id that describes the resource
+            examples:
+                - topic_3173
     gitter:
         type: str
         description: |
