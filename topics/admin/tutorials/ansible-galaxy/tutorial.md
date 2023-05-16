@@ -44,6 +44,11 @@ requirements:
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 20.04 - 22.04."
 abbreviations:
     DVCS: Distributed Version Control System
+
+edam_ontology:
+- topic_3489 # Database Management
+- topic_0605 # Informatics
+- topic_3071 # Data Management
 ---
 
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:

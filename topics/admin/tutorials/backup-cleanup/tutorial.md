@@ -37,6 +37,11 @@ requirements:
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
 abbreviations:
     WORM: Write Once Read Many
+
+edam_ontology:
+- topic_3489 # Database Management
+- topic_0605 # Informatics
+- topic_3071 # Data Management
 ---
 
 Keeping your Galaxy cleaned up is an important way to retain space, especially since for many groups that is the
