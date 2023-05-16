@@ -63,12 +63,14 @@ mapping:
             - Balanced batches and replicates allow bioinformatic batch correction
             - Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.
     edam_ontology:
-        type: str
-        pattern: /^topic_[0-9]+$/
-        description: |
-            An edam ontology id that describes the tutorial.
-        examples:
-            - topic_3173
+        type: seq
+        sequence:
+          - type: str
+            pattern: /^topic_[0-9]+$/
+            description: |
+                An edam ontology id that describes the resource
+            examples:
+                - topic_3173
     video:
         type: bool
         description: |

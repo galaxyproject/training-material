@@ -515,19 +515,20 @@ module Jekyll
 
       about = []
       about.push(topic_desc)
-      if topic.key?('edam_ontology')
-        about.push(
-          {
-            '@type': 'DefinedTerm',
-            '@id': "http://edamontology.org/#{topic['edam_ontology']}",
-            inDefinedTermSet: 'http://edamontology.org',
-            termCode: (topic['edam_ontology']).to_s,
-            # "name": ,
-            url: 'https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=' \
-                 "http%3A%2F%2Fedamontology.org%2F#{topic['edam_ontology']}"
-          }
-        )
+      edam_terms = topic.fetch('edam_ontology', []) | material.fetch('edam_ontology', [])
+
+      about += edam_terms.map do |term|
+        {
+          '@type': 'DefinedTerm',
+          '@id': "http://edamontology.org/#{term}",
+          inDefinedTermSet: 'http://edamontology.org',
+          termCode: term,
+          # "name": ,
+          url: 'https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=' \
+               "http%3A%2F%2Fedamontology.org%2F#{term}"
+        }
       end
+
       data['about'] = about
 
       data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Introductory'
