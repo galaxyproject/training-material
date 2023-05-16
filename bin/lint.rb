@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
-
+require 'yaml'
 require 'pathname'
 require 'find'
 require 'bibtex'
@@ -934,7 +934,28 @@ module GtnLinter
                                                  'gtn/gtn_workflow_testing.html).',
                                         code: 'GTN:027')
           ]
+        else
+          # Load tests and run some quick checks:
+          possible_tests.each do |test_file|
+            test = YAML.safe_load(File.open(test_file))
+            # check that for each test, the outputs is non-empty
+            test.each do |test_job|
+              if test_job['outputs'].nil? || test_job['outputs'].empty?
+                results += [
+                  ReviewDogEmitter.file_error(path: path,
+                                              message: 'This workflow test does not test the contents of outputs, ' \
+                                                       'which is now mandatory. Please see [the FAQ on how to add ' \
+                                                       'tests to your workflows](' \
+                                                       'https://training.galaxyproject.org/training-material/faqs/' \
+                                                       'gtn/gtn_workflow_testing.html).',
+                                              code: 'GTN:030')
+                ]
+              end
+            end
+          end
+
         end
+
 
         # Check if they use TS tools, we do this here because it's easier to look at the plain text.
         contents.split("\n").each.with_index do |text, linenumber|
@@ -956,7 +977,8 @@ module GtnLinter
 
         results = filter_results(results, ignores)
         emit_results(results)
-      rescue StandardError
+      rescue StandardError, Psych::SyntaxError => e
+        warn "Error parsing #{path}: #{e}"
         emit_results([ReviewDogEmitter.file_error(path: path, message: 'Unparseable JSON in this workflow file.',
                                                   code: 'GTN:019')])
       end
