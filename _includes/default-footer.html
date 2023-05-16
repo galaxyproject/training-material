@@ -11,13 +11,15 @@
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-					Revision <a href="https://github.com/galaxyproject/training-material/commit/{{ site.git_revision }}">{{ site.git_revision_short }}</a>, built with Jekyll
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/{{ site.git_revision }}">{{ site.git_revision_short }}</a>, built with Jekyll ({{ jekyll.version }} | {{ jekyll.environment }})
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
+				{% if page.short_id %}
 				<p>
-					{% if page.short_id %}Resource <abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>{% endif %}
+					Resource <abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>
 				</p>
+				{% endif %}
 				<p>
 					{% if page.layout == "tutorial_hands_on" %}
 						This material licensed under
