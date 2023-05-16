@@ -161,7 +161,7 @@ As explained before, there are many challenges to metagenomics binning. The most
 - Chimeric sequences.
 - Strain variation.
 
-![Image show the binning process where sequences are grouped together based on genome signatures like the kmer profiles of each contig, contig coverage, or GC content](./images/binning.png "Binning"){:width="60%"}
+![Image show the binning process where sequences are grouped together based on genome signatures like the kmer profiles of each contig, contig coverage, or GC content](./binning.png "Binning"){:width="60%"}
 
 In this tutorial we will learn how to use **MetaBAT2** tool through Galaxy. **MetaBAT** stands for "Metagenome Binning based on Abundance and Tetranucleotide frequency". It is:
 
@@ -300,18 +300,19 @@ Based on the previous analysis we will use **CheckM lineage_wf**: *Assessing the
 > {: .hands_on}
 {: .comment}
 
-The output of "CheckM lineage_wf" includes several (optional) files and tables that provide information about the taxonomic classification and quality assessment of genome bins. Here are some of the key outputs:
+The output of "CheckM lineage_wf" includes several files and tables that provide information about the taxonomic classification and quality assessment of genome bins. Here are some of the key outputs:
 
-- "checkm_taxonomy.tsv": This is a tab-separated file that lists the taxonomic assignments for each genome bin. The file includes columns for the bin ID, the domain, phylum, class, order, family, genus, and species (if available) of the closest reference genome(s) to the bin.
+- **CheckM Lineage Workflow Output Report**: This report provides a summary of the quality assessment performed by CheckM. It includes statistics such as the number of genomes analyzed, their completeness, contamination, and other quality metrics.
 
-- "checkm_taxonomy.log": This file provides detailed information about the taxonomic classification process, including the marker genes used, the reference database, and the classification algorithm.
+- **Lineage-specific Quality Assessment**: CheckM generates lineage-specific quality assessment files for each analyzed genome. These files contain detailed information about the completeness and contamination of the genome based on its taxonomic lineage.
 
-- "checkm_ms.txt": This file contains a summary of the completeness and contamination scores for each genome bin, along with other quality metrics.
+- **Marker Set Analysis**: CheckM uses a set of marker genes to estimate genome completeness and contamination. The tool produces marker-specific analysis files that provide details on the presence, absence, and copy number of each marker gene in the analyzed genomes.
 
-- "checkm_qa.tsv": This file provides more detailed information about the completeness and contamination scores, including the number of marker genes used, the number of genome fragments included in the bin, and the size of the bin.
+- **Visualizations**: CheckM generates various visualizations to aid in the interpretation of the results. These include plots such as the lineage-specific completeness and contamination plots, scatter plots, and other visual representations of the data.
 
-- "checkm_tree.nwk": This is a Newick format tree file that shows the phylogenetic relationship between the genome bins and the reference genomes used for classification.
+- **Tables and Data Files**: CheckM generates tabular data files that contain detailed information about the analyzed genomes, including their names, taxonomic assignments, completeness scores, contamination scores, and other relevant metrics. These files are useful for further downstream analysis or data manipulation.
 
+It should be noted that "CheckM lineage_wf" offers a range of optional outputs that can be generated to provide additional information to the user.
 
 <!--# De-replication
 
