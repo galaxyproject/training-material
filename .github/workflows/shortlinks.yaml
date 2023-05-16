@@ -19,7 +19,7 @@ jobs:
       # BEGIN Dependencies
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "2.7"
+          ruby-version: "3.0"
       - uses: actions/cache@v2
         with:
           path: |
@@ -38,7 +38,7 @@ jobs:
       - name: Update Shortlinks
         id: generate
         run: |
-          echo "new_ids=$(ruby bin/update-shortlink.rb)" >> $GITHUB_OUTPUT
+          echo "new_ids=$(ruby bin/update-shortlink.rb | wc -l)" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.

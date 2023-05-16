@@ -11,7 +11,7 @@ Sharing your history allows others to import and access the datasets, parameters
 
 
 1. **Share via link**
-   - Open the **History Options** {% icon galaxy-gear %} menu (gear icon) at the top of your history panel
+   - Open the **History Options** {% icon galaxy-gear %} menu (gear icon) at the top of your history panel and select **Share or Publish**
      - {% icon galaxy-toggle %} **Make History accessible**
      - A **Share Link** will appear that you give to others
    - Anybody who has this link can view and copy your history

@@ -25,7 +25,7 @@ Configure My GAT Instance by entering the URL of your VM.
 document.addEventListener("DOMContentLoaded", function(event) {
 	// Get the path from the URL parameter named 'path'
 	let params = new URLSearchParams(window.location.search);
-	let path = params.get('path');
+	let path = params.get('path') || '/';
 	var url = localStorage.getItem('gat-url');
 
 	function setUrl(url, path) {
@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	if (url) {
 		setUrl(url, path);
 	} else {
+		$('#edit').hide();
 		$('#clickthrough').hide();
 	}
 

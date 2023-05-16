@@ -18,7 +18,7 @@
         <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}">
         <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+	<link rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
 
         {{ page | generate_dublin_core: site }}
 

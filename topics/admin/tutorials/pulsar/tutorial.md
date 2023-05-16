@@ -271,7 +271,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -167,8 +167,11 @@ certbot_environment: staging
+>    @@ -171,8 +171,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -283,7 +283,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -218,6 +221,47 @@ slurm_config:
+>    @@ -222,6 +225,47 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -437,7 +437,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > Make sure to replace \<password\> with the one from your vault.
 >    > If you don't have jq installed, just leave that part with the pipe out, it just makes it prettier.
 >    > ```bash
->    > curl -s -u admin:<password> https://localhost:15672/api/whoami | jq
+>    > curl --silent -s -u admin:<password> http://localhost:15672/api/whoami | jq
 >    > ```
 >    {: .code-in}
 >
@@ -446,16 +446,12 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > This should report the following response:
 >    >
 >    > ```console
->    >  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
->    >                                 Dload  Upload   Total   Spent    Left  Speed
->    >100    44  100    44    0     0  22000      0 --:--:-- --:--:-- --:--:-- 22000
->    >{
->    >  "name": "admin",
->    >  "tags": [
->    >    "administrator"
->    >  ]
->    >}
->    > 
+>    > {
+>    >   "name": "admin",
+>    >   "tags": [
+>    >     "administrator"
+>    >   ]
+>    > }
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -465,6 +461,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > ```bash
 >    > curl http://localhost:5672
 >    > ```
+>    > (the non-encrypted port)
 >    {: .code-in}
 >
 >    > <code-out-title>Bash</code-out-title>
@@ -484,7 +481,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
->    > curl -k https://localhost:5671 --output - && printf "\n"
+>    > curl -k --http0.9 https://localhost:5671 --output - && printf "\n"
 >    > ```
 >    {: .code-in}
 >
@@ -507,7 +504,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 
 By this point you should have a functional RabbitMQ! Let's check out the dashboard:
 
-> <hands-on-title>Accessing the RabbitMQ Dashbaord</hands-on-title>
+> <hands-on-title>Accessing the RabbitMQ Dashboard</hands-on-title>
 >
 > 1. RabbitMQ has a fancy dashboard, so we should make that accessible with our NGINX:
 >
@@ -533,6 +530,15 @@ By this point you should have a functional RabbitMQ! Let's check out the dashboa
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add proxy"}
+>
+> 1. Run the playbook.
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 1. Now we can take a look at the RabbitMQ dashboard.
 >
@@ -582,7 +588,7 @@ Some of the other options we will be using are:
 >    --- /dev/null
 >    +++ b/group_vars/pulsarservers.yml
 >    @@ -0,0 +1,51 @@
->    +galaxy_server_hostname: "" # Important!!!
+>    +galaxy_server_hostname: "{{ groups['galaxyservers'][0] }}" # Important!!!
 >    +# Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
 >    +
 >    +pulsar_root: /mnt/pulsar
@@ -652,7 +658,7 @@ Some of the other options we will be using are:
 >     [dbservers:children]
 >     galaxyservers
 >    +[pulsarservers]
->    +gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
+>    +gat-0.oz.galaxy.training ansible_user=ubuntu
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar host"}
@@ -769,7 +775,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```
 >    {: data-commit="Add pulsar plugin"}
 >
->    Add the following to the `<destinations>` section of your job conf file:
+>    Add the following to the `destinations:` section of your `tpv_rules_local` file:
 >
 >    {% raw %}
 >    ```diff

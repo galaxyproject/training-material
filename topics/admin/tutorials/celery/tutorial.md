@@ -149,7 +149,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -275,3 +275,7 @@ rabbitmq_users:
+>        @@ -279,3 +279,7 @@ rabbitmq_users:
 >         # TUS
 >         galaxy_tusd_port: 1080
 >         galaxy_tus_upload_store: /data/tus
@@ -248,7 +248,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -262,6 +262,7 @@ rabbitmq_config:
+>        @@ -266,6 +266,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
 >           - /pulsar/pulsar_au
@@ -256,7 +256,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -271,6 +272,13 @@ rabbitmq_users:
+>        @@ -275,6 +276,13 @@ rabbitmq_users:
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -299,7 +299,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -287,3 +287,22 @@ galaxy_tus_upload_store: /data/tus
+>        @@ -291,3 +291,22 @@ galaxy_tus_upload_store: /data/tus
 >         #Redis
 >         galaxy_additional_venv_packages:
 >           - redis
@@ -373,7 +373,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -124,6 +124,11 @@ galaxy_config:
+>    @@ -127,6 +127,11 @@ galaxy_config:
 >           preload: true
 >         celery:
 >           concurrency: 2
@@ -394,7 +394,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -105,6 +105,11 @@ galaxy_config:
+>    @@ -108,6 +108,11 @@ galaxy_config:
 >         # Data Library Directories
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
