@@ -42,16 +42,16 @@ if(training_theme_cookie){
 }
 
 // However we have some additional things:
-const currentDate = new Date();
-const currentMonth = currentDate.getMonth();
+const gtnThemeCurrentDate = new Date();
+const gtnThemeCurrentMonth = gtnThemeCurrentDate.getMonth();
 
-if(currentMonth === 1 && window.location.pathname === "/"){ // Just for February
+if(gtnThemeCurrentMonth === 1 && window.location.pathname === "/"){ // Just for February
 	// If the user hasn't chosen a theme
 	if(getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
 		setTheme("blm", true);
 	}
 }
-else if(currentMonth === 6 && window.location.pathname === "/"){ // Just for June
+else if(gtnThemeCurrentMonth === 6 && window.location.pathname === "/"){ // Just for June
 	// If the user hasn't chosen a theme
 	if(getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
 		setTheme("progress", true);
