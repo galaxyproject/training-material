@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-ruby "~> 3.0.0"
+ruby '~> 3.0.0'
 
 source "https://rubygems.org"
 gem "nokogiri", ">= 1.10.4"
