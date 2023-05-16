@@ -8,6 +8,28 @@
         
             <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+Sentry.init({
+  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+  release: "galaxy-training-network@30c5c87c77164777ccdfd2cb81a4d090bd44bc82",
+  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+  tracesSampleRate: 0.01,
+  // Capture Replay for no sessions by default
+  replaysSessionSampleRate: 0,
+  // plus for 1% of sessions with an error
+  replaysOnErrorSampleRate: 0.01,
+  // PII OFF
+  sendDefaultPii: false, // Off by default but just in case.
+  environment: "production",
+});
+</script>
+
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
@@ -372,8 +394,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right">
 
-        
-        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/ecoli_comparison/tutorial.md" title="Edit on GitHub">
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/maintopics/assembly/tutorials/ecoli_comparison/tutorial.md" title="Edit on GitHub">
           <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
         </a>
 
@@ -900,7 +921,7 @@ to be altered (e.g. column numbers) when using data directly from NCBI.</p>
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="Cut1" title="Cut tool"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>   columns from a table:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="link"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>   columns from a table:</p>
 
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c20</code></li>
@@ -1030,7 +1051,7 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
   <div class="box-title hands-on-title" id="hands-on-uploading-i-e-coli-i-assembly-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Uploading <i>E. coli</i> assembly into Galaxy</div>
 
   <ol>
-    <li><span class="tool" data-tool="upload1" title="Upload tool"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  :
+    <li><span class="tool" data-tool="upload1" title="Upload tool" aria-role="link"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  :
       <ul>
         <li>Click <strong>Paste/Fetch data</strong> button (Bottom of the interface box)</li>
         <li><strong>Paste</strong> <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code> into the box.</li>
@@ -1062,13 +1083,13 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
   <div class="box-title hands-on-title" id="hands-on-fixing-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Fixing assembly</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2" title="Filter sequences by length tool"><strong>Filter sequences by length</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2" title="Filter sequences by length tool" aria-role="link"><strong>Filter sequences by length</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2</span></span> with the following parameters:
       <ul>
         <li><em>“Fasta file”</em>: the dataset you’ve just uploaded. (<code class="language-plaintext highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code>).</li>
         <li><em>“Minimal length”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text tool"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span> in entire line:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text tool" aria-role="link"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span> in entire line:
       <ul>
         <li><em>“File to process”</em>: the output of the Filter sequences by length <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“1: Replacement”</em>
@@ -1130,7 +1151,7 @@ Detailed description of regular expressions is outside of the scope of this tuto
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-running-lastz"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Running LASTZ</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool" aria-role="link"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span> with the following parameters:
       <ul>
         <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="language-plaintext highlighter-rouge">from your history</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a reference dataset”</em>: the “Complete genomes” collection we uploaded earlier</li>
@@ -1201,7 +1222,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-combining-collection-into-a-single-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Combining collection into a single dataset</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" aria-role="link"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span> with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the output of <strong>LASTZ</strong> (collecion input)</li>
       </ul>
@@ -1218,7 +1239,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-selecting-random-subset-of-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Selecting random subset of data</div>
   <ol>
-    <li><span class="tool" data-tool="random_lines1" title="Select random lines from a file tool"><strong>Select random lines from a file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: random_lines1</span></span>   with the following parameters:
+    <li><span class="tool" data-tool="random_lines1" title="Select random lines from a file tool" aria-role="link"><strong>Select random lines from a file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: random_lines1</span></span>   with the following parameters:
       <ul>
         <li><em>“Randomly select”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
         <li><em>“from”</em>: the output from <code class="language-plaintext highlighter-rouge">Collapse Collection</code></li>
@@ -1251,7 +1272,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-filtering-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filtering data</div>
   <ol>
-    <li><span class="tool" data-tool="Filter1" title="Filter tool"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> data on any column using simple expressions:
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="link"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> data on any column using simple expressions:
       <ul>
         <li><em>“Filter”</em>: the full dataset, from the output of the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3 &gt;= 90 and c4 &gt;= 10000</code> (here <code class="language-plaintext highlighter-rouge">c</code> stands for <em>column</em>).</li>
@@ -1276,7 +1297,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-aggregating-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Aggregating the data</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Datamash (operations on tabular data) tool"><strong>Datamash (operations on tabular data)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</span></span>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Datamash (operations on tabular data) tool" aria-role="link"><strong>Datamash (operations on tabular data)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</span></span>   with the following parameters:
       <ul>
         <li><em>“Input tabular dataset”</em>: output of the previous <code class="language-plaintext highlighter-rouge">Filter</code> step.</li>
         <li><em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">2</code>. (column 1 contains name of the <em>E. coli</em> genome we mapped against)</li>
@@ -1346,7 +1367,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-extracting-into-about-best-hits"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extracting into about best hits</div>
   <ol>
-    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="link"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: to the output from <code class="language-plaintext highlighter-rouge">Datamash</code></li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">LT906474|CP024090|CP020543</code>. (Here <code class="language-plaintext highlighter-rouge">|</code> means <code class="language-plaintext highlighter-rouge">or</code>).</li>
@@ -1393,7 +1414,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
   <p>Using the three accession listed above we will fetch necessary data from NCBI. We will use the spreadsheet we uploaded at the start to accomplish this.</p>
 
   <ol>
-    <li><span class="tool" data-tool="upload1" title="Upload tool"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span> the <em>E. coli</em> C genome if you have not done so already:
+    <li><span class="tool" data-tool="upload1" title="Upload tool" aria-role="link"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span> the <em>E. coli</em> C genome if you have not done so already:
       <ul>
         <li>Click <strong>Paste/Fetch data</strong> button (Bottom of the interface box)</li>
         <li><strong>Paste</strong> <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code> into the box.</li>
@@ -1401,14 +1422,14 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
         <li>Click <strong>Start</strong></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="link"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: the <code class="language-plaintext highlighter-rouge">genomes.tsv</code> you uploaded earlier</li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">LT906474|CP024090|CP020543</code></li>
       </ul>
     </li>
     <li>
-      <p><span class="tool" data-tool="Cut1" title="Cut tool"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> columns from a table:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="link"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> columns from a table:</p>
 
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c20</code></li>
@@ -1572,7 +1593,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
   <div class="box-title hands-on-title" id="hands-on-aligning-again"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Aligning again</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool" aria-role="link"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span> with the following parameters:
       <ul>
         <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="language-plaintext highlighter-rouge">from your history</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a reference dataset”</em>: <code class="language-plaintext highlighter-rouge">DNA</code>, the <em>E. coli</em> genomes we uploaded earlier</li>
@@ -1656,7 +1677,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span></p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" aria-role="link"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span></p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse”</em> the three genomes (collection) named <code class="language-plaintext highlighter-rouge">DNA</code></li>
@@ -1669,7 +1690,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Converting the file format<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the upper part <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong>, select <code class="language-plaintext highlighter-rouge">Convert compressed to uncompressed</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Concatenate datasets tool"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0</span></span> tail-to-head (cat):
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Concatenate datasets tool" aria-role="link"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0</span></span> tail-to-head (cat):
       <ul>
         <li><em>“Datasets to concatenate”</em>: <code class="language-plaintext highlighter-rouge">Collapse collection ... uncompressed</code>, the output from the uncompression step.</li>
         <li>Click <strong>Insert Dataset</strong> button
@@ -1793,7 +1814,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
   <div class="box-title hands-on-title" id="hands-on-convert-lastz-output-to-bed"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Convert LASTZ output to BED</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Replace Text tool"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</span></span> in a specific column:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Replace Text tool" aria-role="link"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</span></span> in a specific column:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: output of LASTZ (<code class="language-plaintext highlighter-rouge">LASTZ Alignments</code>)</li>
         <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column 12</code></li>
@@ -1801,7 +1822,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
         <li><em>“Replace with”</em>: leave empty</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1" title="Merge Columns together tool"><strong>Merge Columns together</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1" title="Merge Columns together tool" aria-role="link"><strong>Merge Columns together</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select data”</em>: the output of the previous step, <code class="language-plaintext highlighter-rouge">Replace Text on collection ...</code></li>
         <li><em>“Merge column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code> (this is the Target sequence name)</li>
@@ -1813,7 +1834,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
         <p>The tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, <code class="language-plaintext highlighter-rouge">CP020543.1</code> and <code class="language-plaintext highlighter-rouge">LT906474.1</code> because they will have accessions embedded within alignment block IDs. For example, the first alignment between <code class="language-plaintext highlighter-rouge">CP020543.1</code> and our assembly <code class="language-plaintext highlighter-rouge">Ecoli_C</code> will have alignment block id <code class="language-plaintext highlighter-rouge">CP020543.11</code>, while the 225th alignment between <code class="language-plaintext highlighter-rouge">LT906474.1</code> and <code class="language-plaintext highlighter-rouge">Ecoli_C</code> will have ID <code class="language-plaintext highlighter-rouge">LT906474.1225</code>. Because of this we can collapse the entire collection of alignments into a single dataset:</p>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" aria-role="link"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse”</em>: the output of the previous step, <code class="language-plaintext highlighter-rouge">Merge Columns on collection...</code></li>
       </ul>
@@ -1828,7 +1849,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p><span class="tool" data-tool="Cut1" title="Cut tool"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> columns from a table:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="link"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> columns from a table:</p>
 
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2,c4,c5,c14,c12,c8</code></li>
@@ -1975,7 +1996,7 @@ In the second BED, column 1 will contain name of our assembly: <code class="lang
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Target Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> with the following parameters
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="link"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> with the following parameters
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c7,c9,c10,c14,c12,c8</code> (look at the data shown above and the definition of BED to see why we make these choices.)</li>
         <li><em>“From”</em>: <code class="language-plaintext highlighter-rouge">Unprocessed alignments</code>, the output of <strong>collection collapse</strong></li>
@@ -1988,7 +2009,7 @@ In the second BED, column 1 will contain name of our assembly: <code class="lang
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Query Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><span class="tool" data-tool="cat1" title="Concatenate datasets tail-to-head tool"><strong>Concatenate datasets tail-to-head</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>
+    <li><span class="tool" data-tool="cat1" title="Concatenate datasets tail-to-head tool" aria-role="link"><strong>Concatenate datasets tail-to-head</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>
       <ul>
         <li><em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">Query Alignments</code></li>
         <li>Click “Insert Dataset” button</li>
@@ -2163,7 +2184,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-extract-cdss-from-annotation-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract CDSs from annotation datasets</div>
   <ol>
-    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="link"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: the collection containing annotations, <code class="language-plaintext highlighter-rouge">Genes</code></li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">^CDS</code></li>
@@ -2171,7 +2192,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
       <p>This is because we want to retain all lines that begin (<code class="language-plaintext highlighter-rouge">^</code>) with <code class="language-plaintext highlighter-rouge">CDS</code>.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0" title="Add column to an existing dataset tool"><strong>Add column to an existing dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0</span></span>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0" title="Add column to an existing dataset tool" aria-role="link"><strong>Add column to an existing dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0</span></span>   with the following parameters:
       <ul>
         <li><em>“Add this value”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“to Dataset”</em>: the collection produced by the previous step (<code class="language-plaintext highlighter-rouge">Select on collection...</code>)</li>
@@ -2180,7 +2201,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
       <p>This will be used for the “score” field of the BED file since we do not have a proper “score”</p>
     </li>
     <li>
-      <p><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> with the following parameters:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="link"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> with the following parameters:</p>
 
       <p>We will produce two BED files, one using the product name (e.g. “chromosomal replication initiator protein DnaA”) and one using the symbol (e.g. “thrA”). The product name is much more interesting to see in visualisations, but the symbol is more often used in other analyses and we will use that file later. We will start with the product name:</p>
 
@@ -2228,7 +2249,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
       <p>As we mentioned above these datasets lack genome IDs such as <code class="language-plaintext highlighter-rouge">CP020543.1</code>. However, the individual elements in the collection we’ve created already have genome IDs. We will leverage this when collapsing this collection into a single dataset:</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" aria-role="link"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>   with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Cut on collection...</code>)</li>
         <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -2236,7 +2257,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
       </ul>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span> in a specific column</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="link"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span> in a specific column</p>
 
       <p>Many bed parsers do not like whitespace in the <code class="language-plaintext highlighter-rouge">Name</code> column, so we will replace that</p>
 
@@ -2315,7 +2336,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="Cut1" title="Cut columns from a table tool"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> with the following parameters:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="link"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> with the following parameters:</p>
 
       <p>We will produce two BED files, one using the product name (e.g. “chromosomal replication initiator protein DnaA”) and one using the symbol (e.g. “thrA”). The product name is much more interesting to see in visualisations, but the symbol is more often used in other analyses and we will use that file later. We will start with the product name:</p>
 
@@ -2361,7 +2382,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </tbody>
       </table>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" aria-role="link"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span> with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Cut on collection...</code>)</li>
         <li><em>“Append File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -2393,13 +2414,13 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
   <div class="box-title hands-on-title" id="hands-on-creating-a-genome-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating a genome file</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1" title="Compute sequence length tool"><strong>Compute sequence length</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1</span></span>:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1" title="Compute sequence length tool" aria-role="link"><strong>Compute sequence length</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1</span></span>:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Compute length for these sequences”</em>: <code class="language-plaintext highlighter-rouge">DNA (E. coli + Relatives)</code>, the FASTA dataset we generated from <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Strip fasta description from header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span> data in ascending or descending order:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" aria-role="link"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span> data in ascending or descending order:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Compute sequence length on ...</code>)</li>
         <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -2444,13 +2465,13 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </blockquote>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0" title="SortBED order the intervals tool"><strong>SortBED order the intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0</span></span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0" title="SortBED order the intervals tool" aria-role="link"><strong>SortBED order the intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0</span></span> with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort the following BED file”</em>: <code class="language-plaintext highlighter-rouge">Target &amp; Query Alignments</code></li>
         <li><em>“Sort by”</em> on its default setting (<code class="language-plaintext highlighter-rouge">chromosome, then by start position (asc)</code>)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0" title="ComplementBed Extract intervals not represented by an interval file tool"><strong>ComplementBed Extract intervals not represented by an interval file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0" title="ComplementBed Extract intervals not represented by an interval file tool" aria-role="link"><strong>ComplementBed Extract intervals not represented by an interval file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0</span></span> with the following parameters:
       <ul>
         <li><em>“BED/VCF/GFF file”</em>: output of the <strong>SortBED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in the previous step</li>
         <li><em>“Genome file”</em>: <code class="language-plaintext highlighter-rouge">Genome file from your history</code>
@@ -2460,7 +2481,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Filter1" title="Filter tool"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  data on any column using simple expressions
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="link"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  data on any column using simple expressions
       <ul>
         <li><em>“Filter”</em>: dataset from the last step (<code class="language-plaintext highlighter-rouge">Complement of SortBed on ...</code>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3-c2&gt;=10000</code></li>
@@ -2534,7 +2555,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
   <div class="box-title hands-on-title" id="hands-on-restricting-list-of-deleted-regions-to-the-i-common-i-deletion"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Restricting list of deleted regions to the <i>common</i> deletion</div>
 
   <ol>
-    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="link"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> with the following parameters:
       <ul>
         <li><em>“Filter”</em>: dataset from the last step (<code class="language-plaintext highlighter-rouge">Filter on data...</code>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c2 &gt; 2000000</code>.</li>
@@ -2606,7 +2627,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-view-genomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: View genomes</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1" title="JBrowse tool"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1</span></span> genome browser:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1" title="JBrowse tool" aria-role="link"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1</span></span> genome browser:
       <ul>
         <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
@@ -2677,7 +2698,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
   <div class="box-title hands-on-title" id="hands-on-circos"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Circos</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool" aria-role="link"><strong>LASTZ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2</span></span> with the following parameters:
       <ul>
         <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="language-plaintext highlighter-rouge">from your history</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a reference dataset”</em>: <code class="language-plaintext highlighter-rouge">DNA</code>, the <em>E. coli</em> genomes we uploaded earlier</li>
@@ -2694,23 +2715,23 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" aria-role="link"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span> with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the MAF output of <strong>LASTZ</strong> (collecion input)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7" title="Circos: Alignemnts to Links tool"><strong>Circos: Alignemnts to Links</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7</span></span> reformats alignment files to prepare for Circos:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7" title="Circos: Alignemnts to Links tool" aria-role="link"><strong>Circos: Alignemnts to Links</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7</span></span> reformats alignment files to prepare for Circos:
       <ul>
         <li><em>“Alignment file”</em>: the output of the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7" title="Circos: Interval to Tiles tool"><strong>Circos: Interval to Tiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7</span></span> reformats interval files for Circos’ use:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7" title="Circos: Interval to Tiles tool" aria-role="link"><strong>Circos: Interval to Tiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7</span></span> reformats interval files for Circos’ use:
       <ul>
         <li><em>“BED File”</em>: <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives)</code></li>
       </ul>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7" title="Circos tool"><strong>Circos</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7</span></span> genome browser:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7" title="Circos tool" aria-role="link"><strong>Circos</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7</span></span> genome browser:</p>
 
       <ul>
         <li>In the section <em>“Karyoytype”</em>
@@ -2814,7 +2835,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
   <div class="box-title hands-on-title" id="hands-on-finding-genes-deleted-in-our-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Finding genes deleted in our assembly</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2" title="Intersect intervals find overlapping intervals in various ways tool"><strong>Intersect intervals find overlapping intervals in various ways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2" title="Intersect intervals find overlapping intervals in various ways tool" aria-role="link"><strong>Intersect intervals find overlapping intervals in various ways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2</span></span> with the following parameters:
       <ul>
         <li><em>“File A to intersect with B”</em>: <code class="language-plaintext highlighter-rouge">Gaps</code></li>
         <li><em>“File(s) B to intersect with A”</em>: <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives) with Symbol Name</code></li>
@@ -2986,7 +3007,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
   <div class="box-title hands-on-title" id="hands-on-are-there-essential-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Are there essential genes?</div>
 
   <ol>
-    <li><span class="tool" data-tool="join1" title="Join two Datasets tool"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span> side by side on a specified field:
+    <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="link"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span> side by side on a specified field:
       <ul>
         <li><em>“Join”</em>: the results of the <a href="#hands-on-finding-genes-deleted-in-our-assembly">intersect operation</a>(<code class="language-plaintext highlighter-rouge">Intersect intervals on data...</code>)</li>
         <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 7</code> (because it contains gene names. If it is not a drop down enter <code class="language-plaintext highlighter-rouge">7</code>.)</li>
@@ -3635,9 +3656,9 @@ note = "[Online; accessed TODAY]"
 
 <script>
 // update the date on load, or leave fallback of 'today'
-var d = new Date();
-document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
-document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
 </script>
 
                 <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
@@ -3778,7 +3799,50 @@ tools:
 <br/>
 
         </div>
-        
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/30c5c87c77164777ccdfd2cb81a4d090bd44bc82">30c5c87</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					Resource <abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00032">https://gxy.io/GTN:T00032</a>
+				</p>
+				
+				<p>
+					
+						This material licensed under
+					
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/ecoli_comparison/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+    </div>
+</footer>
+
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
         <script src="/training-material/assets/js/popper.min.js"></script>
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>

@@ -1060,7 +1060,7 @@ figure figcaption {
 }
 
 footer {
-  margin-top: 3em;
+  margin-top: 5em;
   text-align: center;
   color: var(--text-color-muted);
   font-size: 13px;
@@ -2133,28 +2133,34 @@ ul.supporting_material .btn {
   margin-top: 1em;
 }
 
-span.tool, span.workflow {
+body .show-when-galaxy-proxy-active {
+  cursor: not-allowed;
+}
+body span.tool, body span.workflow {
   border: 1px solid #999;
   padding: 2px;
   border-radius: 5px;
 }
-span.tool:hover, span.workflow:hover {
+body span.tool:hover, body span.workflow:hover {
   border: 1px solid blue;
 }
-span.tool.galaxy-proxy-active, span.workflow.galaxy-proxy-active {
+
+body.galaxy-proxy-active .show-when-galaxy-proxy-active {
+  cursor: pointer;
+}
+body.galaxy-proxy-active .hide-when-galaxy-proxy-active {
+  display: none;
+}
+body.galaxy-proxy-active span.tool, body.galaxy-proxy-active span.workflow {
   cursor: pointer;
   color: var(--brand-color-contrast);
   background-color: var(--brand-color);
   border-color: var(--brand-color);
   padding: 0.2em 0.5em;
 }
-span.tool.galaxy-proxy-active:hover, span.workflow.galaxy-proxy-active:hover {
+body.galaxy-proxy-active span.tool:hover, body.galaxy-proxy-active span.workflow:hover {
   background-color: var(--hyperlink);
   border-color: var(--hyperlink);
-}
-
-body.galaxy-proxy-active .galaxy-proxy-active-hide {
-  display: none;
 }
 
 @media (max-width: 992px) {

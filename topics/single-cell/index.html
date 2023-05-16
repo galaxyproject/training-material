@@ -8,6 +8,28 @@
         
             <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+Sentry.init({
+  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+  release: "galaxy-training-network@30c5c87c77164777ccdfd2cb81a4d090bd44bc82",
+  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+  tracesSampleRate: 0.01,
+  // Capture Replay for no sessions by default
+  replaysSessionSampleRate: 0,
+  // plus for 1% of sessions with an error
+  replaysOnErrorSampleRate: 0.01,
+  // PII OFF
+  sendDefaultPii: false, // Off by default but just in case.
+  environment: "production",
+});
+</script>
+
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
@@ -109,8 +131,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right">
 
-        
-        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/" title="Edit on GitHub">
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/maintopics/single-cell/index.md" title="Edit on GitHub">
           <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
         </a>
 
@@ -289,9 +310,9 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00d4ca; --color-darker: #00bdb4; --color-dimmed: #00c9bf;" title="Click to show all tutorials tagged español">español</a>
+              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00ede1; --color-darker: #00d3c9; --color-dimmed: #00e0d5;" title="Click to show all tutorials tagged español">español</a>
               
             
             </div>
@@ -704,7 +725,7 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
             
             </div>
@@ -977,7 +998,7 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
             
             </div>
@@ -1258,15 +1279,15 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffa5b3; --color-darker: #ff8399; --color-dimmed: #ff95a6;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffc6ce; --color-darker: #ffa3b1; --color-dimmed: #ffb5c0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00d4d1; --color-darker: #00bdba; --color-dimmed: #00c8c5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ece9; --color-darker: #00d2d0; --color-dimmed: #00dfdc;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00d4ca; --color-darker: #00bdb4; --color-dimmed: #00c9bf;" title="Click to show all tutorials tagged español">español</a>
+              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00ede1; --color-darker: #00d3c9; --color-dimmed: #00e0d5;" title="Click to show all tutorials tagged español">español</a>
               
-              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #d1c100; --color-darker: #baab00; --color-dimmed: #c6b600;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
+              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #e9d700; --color-darker: #d0bf00; --color-dimmed: #dccb00;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
               
             
             </div>
@@ -1569,15 +1590,15 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffa5b3; --color-darker: #ff8399; --color-dimmed: #ff95a6;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffc6ce; --color-darker: #ffa3b1; --color-dimmed: #ffb5c0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00d4d1; --color-darker: #00bdba; --color-dimmed: #00c8c5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ece9; --color-darker: #00d2d0; --color-dimmed: #00dfdc;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00d4ca; --color-darker: #00bdb4; --color-dimmed: #00c9bf;" title="Click to show all tutorials tagged español">español</a>
+              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00ede1; --color-darker: #00d3c9; --color-dimmed: #00e0d5;" title="Click to show all tutorials tagged español">español</a>
               
-              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #d1c100; --color-darker: #baab00; --color-dimmed: #c6b600;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
+              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #e9d700; --color-darker: #d0bf00; --color-dimmed: #dccb00;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
               
             
             </div>
@@ -1880,15 +1901,15 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffa5b3; --color-darker: #ff8399; --color-dimmed: #ff95a6;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffc6ce; --color-darker: #ffa3b1; --color-dimmed: #ffb5c0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00d4d1; --color-darker: #00bdba; --color-dimmed: #00c8c5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ece9; --color-darker: #00d2d0; --color-dimmed: #00dfdc;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00d4ca; --color-darker: #00bdb4; --color-dimmed: #00c9bf;" title="Click to show all tutorials tagged español">español</a>
+              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00ede1; --color-darker: #00d3c9; --color-dimmed: #00e0d5;" title="Click to show all tutorials tagged español">español</a>
               
-              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #d1c100; --color-darker: #baab00; --color-dimmed: #c6b600;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
+              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #e9d700; --color-darker: #d0bf00; --color-dimmed: #dccb00;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
               
             
             </div>
@@ -2191,19 +2212,19 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffa5b3; --color-darker: #ff8399; --color-dimmed: #ff95a6;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffc6ce; --color-darker: #ffa3b1; --color-dimmed: #ffb5c0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00d4d1; --color-darker: #00bdba; --color-dimmed: #00c8c5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ece9; --color-darker: #00d2d0; --color-dimmed: #00dfdc;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffa988; --color-darker: #ff8a46; --color-dimmed: #ff9a6c;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffc8b6; --color-darker: #ffa784; --color-dimmed: #ffb89f;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
-              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #d1c100; --color-darker: #baab00; --color-dimmed: #c6b600;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
+              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #e9d700; --color-darker: #d0bf00; --color-dimmed: #dccb00;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00d2e2; --color-darker: #00bbca; --color-dimmed: #00c6d6;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00eafd; --color-darker: #00d0e1; --color-dimmed: #00ddef;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00d2e2; --color-darker: #00bbca; --color-dimmed: #00c6d6;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00eafd; --color-darker: #00d0e1; --color-dimmed: #00ddef;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -2476,13 +2497,13 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffa5b3; --color-darker: #ff8399; --color-dimmed: #ff95a6;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffc6ce; --color-darker: #ffa3b1; --color-dimmed: #ffb5c0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00d4d1; --color-darker: #00bdba; --color-dimmed: #00c8c5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ece9; --color-darker: #00d2d0; --color-dimmed: #00dfdc;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #d1c100; --color-darker: #baab00; --color-dimmed: #c6b600;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
+              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #e9d700; --color-darker: #d0bf00; --color-dimmed: #dccb00;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
               
             
             </div>
@@ -2883,15 +2904,15 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=trajectory-analysis" class="label label-default tutorial_tag" style="--color-primary: #00d897; --color-darker: #00c186; --color-dimmed: #00cd8e;" title="Click to show all tutorials tagged trajectory-analysis">trajectory-analysis</a>
+              <a href="/training-material/search?query=trajectory-analysis" class="label label-default tutorial_tag" style="--color-primary: #00f1a9; --color-darker: #00d796; --color-dimmed: #00e49f;" title="Click to show all tutorials tagged trajectory-analysis">trajectory-analysis</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00d4d1; --color-darker: #00bdba; --color-dimmed: #00c8c5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ece9; --color-darker: #00d2d0; --color-dimmed: #00dfdc;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00d2e2; --color-darker: #00bbca; --color-dimmed: #00c6d6;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00eafd; --color-darker: #00d0e1; --color-dimmed: #00ddef;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
-              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #cbb1ff; --color-darker: #bc96ff; --color-dimmed: #c4a4ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
+              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #ddcdff; --color-darker: #caafff; --color-dimmed: #d3beff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
               
             
             </div>
@@ -3140,17 +3161,17 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00d7b0; --color-darker: #00bf9d; --color-dimmed: #00cba7;" title="Click to show all tutorials tagged mouse">mouse</a>
+              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00efc5; --color-darker: #00d5af; --color-dimmed: #00e2ba;" title="Click to show all tutorials tagged mouse">mouse</a>
               
-              <a href="/training-material/search?query=human" class="label label-default tutorial_tag" style="--color-primary: #ffa7a1; --color-darker: #ff867b; --color-dimmed: #ff978f;" title="Click to show all tutorials tagged human">human</a>
+              <a href="/training-material/search?query=human" class="label label-default tutorial_tag" style="--color-primary: #ffc7c3; --color-darker: #ffa59e; --color-dimmed: #ffb6b1;" title="Click to show all tutorials tagged human">human</a>
               
-              <a href="/training-material/search?query=deconvolution" class="label label-default tutorial_tag" style="--color-primary: #6dd600; --color-darker: #61bf00; --color-dimmed: #67ca00;" title="Click to show all tutorials tagged deconvolution">deconvolution</a>
+              <a href="/training-material/search?query=deconvolution" class="label label-default tutorial_tag" style="--color-primary: #7bef00; --color-darker: #6cd500; --color-dimmed: #74e200;" title="Click to show all tutorials tagged deconvolution">deconvolution</a>
               
-              <a href="/training-material/search?query=bulk" class="label label-default tutorial_tag" style="--color-primary: #6dd600; --color-darker: #61bf00; --color-dimmed: #67ca00;" title="Click to show all tutorials tagged bulk">bulk</a>
+              <a href="/training-material/search?query=bulk" class="label label-default tutorial_tag" style="--color-primary: #7bef00; --color-darker: #6cd500; --color-dimmed: #74e200;" title="Click to show all tutorials tagged bulk">bulk</a>
               
-              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #d1c100; --color-darker: #baab00; --color-dimmed: #c6b600;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
+              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #e9d700; --color-darker: #d0bf00; --color-dimmed: #dccb00;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
               
             
             </div>
@@ -3431,15 +3452,15 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=human" class="label label-default tutorial_tag" style="--color-primary: #ffa7a1; --color-darker: #ff867b; --color-dimmed: #ff978f;" title="Click to show all tutorials tagged human">human</a>
+              <a href="/training-material/search?query=human" class="label label-default tutorial_tag" style="--color-primary: #ffc7c3; --color-darker: #ffa59e; --color-dimmed: #ffb6b1;" title="Click to show all tutorials tagged human">human</a>
               
-              <a href="/training-material/search?query=deconvolution" class="label label-default tutorial_tag" style="--color-primary: #6dd600; --color-darker: #61bf00; --color-dimmed: #67ca00;" title="Click to show all tutorials tagged deconvolution">deconvolution</a>
+              <a href="/training-material/search?query=deconvolution" class="label label-default tutorial_tag" style="--color-primary: #7bef00; --color-darker: #6cd500; --color-dimmed: #74e200;" title="Click to show all tutorials tagged deconvolution">deconvolution</a>
               
-              <a href="/training-material/search?query=bulk" class="label label-default tutorial_tag" style="--color-primary: #6dd600; --color-darker: #61bf00; --color-dimmed: #67ca00;" title="Click to show all tutorials tagged bulk">bulk</a>
+              <a href="/training-material/search?query=bulk" class="label label-default tutorial_tag" style="--color-primary: #7bef00; --color-darker: #6cd500; --color-dimmed: #74e200;" title="Click to show all tutorials tagged bulk">bulk</a>
               
-              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #d1c100; --color-darker: #baab00; --color-dimmed: #c6b600;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
+              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #e9d700; --color-darker: #d0bf00; --color-dimmed: #dccb00;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
               
             
             </div>
@@ -3654,15 +3675,15 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=human" class="label label-default tutorial_tag" style="--color-primary: #ffa7a1; --color-darker: #ff867b; --color-dimmed: #ff978f;" title="Click to show all tutorials tagged human">human</a>
+              <a href="/training-material/search?query=human" class="label label-default tutorial_tag" style="--color-primary: #ffc7c3; --color-darker: #ffa59e; --color-dimmed: #ffb6b1;" title="Click to show all tutorials tagged human">human</a>
               
-              <a href="/training-material/search?query=deconvolution" class="label label-default tutorial_tag" style="--color-primary: #6dd600; --color-darker: #61bf00; --color-dimmed: #67ca00;" title="Click to show all tutorials tagged deconvolution">deconvolution</a>
+              <a href="/training-material/search?query=deconvolution" class="label label-default tutorial_tag" style="--color-primary: #7bef00; --color-darker: #6cd500; --color-dimmed: #74e200;" title="Click to show all tutorials tagged deconvolution">deconvolution</a>
               
-              <a href="/training-material/search?query=bulk" class="label label-default tutorial_tag" style="--color-primary: #6dd600; --color-darker: #61bf00; --color-dimmed: #67ca00;" title="Click to show all tutorials tagged bulk">bulk</a>
+              <a href="/training-material/search?query=bulk" class="label label-default tutorial_tag" style="--color-primary: #7bef00; --color-darker: #6cd500; --color-dimmed: #74e200;" title="Click to show all tutorials tagged bulk">bulk</a>
               
-              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #d1c100; --color-darker: #baab00; --color-dimmed: #c6b600;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
+              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #e9d700; --color-darker: #d0bf00; --color-dimmed: #dccb00;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
               
             
             </div>
@@ -3885,17 +3906,17 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00d7b0; --color-darker: #00bf9d; --color-dimmed: #00cba7;" title="Click to show all tutorials tagged mouse">mouse</a>
+              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00efc5; --color-darker: #00d5af; --color-dimmed: #00e2ba;" title="Click to show all tutorials tagged mouse">mouse</a>
               
-              <a href="/training-material/search?query=human" class="label label-default tutorial_tag" style="--color-primary: #ffa7a1; --color-darker: #ff867b; --color-dimmed: #ff978f;" title="Click to show all tutorials tagged human">human</a>
+              <a href="/training-material/search?query=human" class="label label-default tutorial_tag" style="--color-primary: #ffc7c3; --color-darker: #ffa59e; --color-dimmed: #ffb6b1;" title="Click to show all tutorials tagged human">human</a>
               
-              <a href="/training-material/search?query=deconvolution" class="label label-default tutorial_tag" style="--color-primary: #6dd600; --color-darker: #61bf00; --color-dimmed: #67ca00;" title="Click to show all tutorials tagged deconvolution">deconvolution</a>
+              <a href="/training-material/search?query=deconvolution" class="label label-default tutorial_tag" style="--color-primary: #7bef00; --color-darker: #6cd500; --color-dimmed: #74e200;" title="Click to show all tutorials tagged deconvolution">deconvolution</a>
               
-              <a href="/training-material/search?query=bulk" class="label label-default tutorial_tag" style="--color-primary: #6dd600; --color-darker: #61bf00; --color-dimmed: #67ca00;" title="Click to show all tutorials tagged bulk">bulk</a>
+              <a href="/training-material/search?query=bulk" class="label label-default tutorial_tag" style="--color-primary: #7bef00; --color-darker: #6cd500; --color-dimmed: #74e200;" title="Click to show all tutorials tagged bulk">bulk</a>
               
-              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #d1c100; --color-darker: #baab00; --color-dimmed: #c6b600;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
+              <a href="/training-material/search?query=transcriptomics" class="label label-default tutorial_tag" style="--color-primary: #e9d700; --color-darker: #d0bf00; --color-dimmed: #dccb00;" title="Click to show all tutorials tagged transcriptomics">transcriptomics</a>
               
             
             </div>
@@ -4152,7 +4173,7 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
             
             </div>
@@ -4495,7 +4516,7 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
             
             </div>
@@ -4718,9 +4739,9 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffa5b3; --color-darker: #ff8399; --color-dimmed: #ff95a6;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffc6ce; --color-darker: #ffa3b1; --color-dimmed: #ffb5c0;" title="Click to show all tutorials tagged 10x">10x</a>
               
             
             </div>
@@ -4943,9 +4964,9 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffa5b3; --color-darker: #ff8399; --color-dimmed: #ff95a6;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffc6ce; --color-darker: #ffa3b1; --color-dimmed: #ffb5c0;" title="Click to show all tutorials tagged 10x">10x</a>
               
             
             </div>
@@ -5226,9 +5247,9 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffa5b3; --color-darker: #ff8399; --color-dimmed: #ff95a6;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffc6ce; --color-darker: #ffa3b1; --color-dimmed: #ffb5c0;" title="Click to show all tutorials tagged 10x">10x</a>
               
             
             </div>
@@ -5629,11 +5650,11 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
-              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #62d800; --color-darker: #56c000; --color-dimmed: #5ccc00;" title="Click to show all tutorials tagged plants">plants</a>
+              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #6ef100; --color-darker: #61d600; --color-dimmed: #68e300;" title="Click to show all tutorials tagged plants">plants</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00d4d1; --color-darker: #00bdba; --color-dimmed: #00c8c5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ece9; --color-darker: #00d2d0; --color-dimmed: #00dfdc;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
             
             </div>
@@ -5948,7 +5969,7 @@
             
             
               
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00d5c4; --color-darker: #00beaf; --color-dimmed: #00c9b9;" title="Click to show all tutorials tagged single-cell">single-cell</a>
+              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00eedb; --color-darker: #00d3c3; --color-dimmed: #00e0cf;" title="Click to show all tutorials tagged single-cell">single-cell</a>
               
             
             </div>
@@ -6463,7 +6484,7 @@
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
     
-    <a href="/training-material/hall-of-fame/ethering/" class="contributor-badge contributor-ethering"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/ethering?s=27" alt="Avatar">Graham Etherington</a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=27" alt="Avatar">Pavankumar Videm</a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=27" alt="Avatar">Cristóbal Gallardo</a><a href="/training-material/hall-of-fame/epsrc-training-grant/" class="contributor-badge contributor-epsrc-training-grant"><img src="https://avatars.githubusercontent.com/epsrc-training-grant?s=27" alt="Avatar">EPSRC Training Grant DTP 2020-2021 Open University</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a><a href="/training-material/hall-of-fame/eosc-life/" class="contributor-badge contributor-eosc-life"><img src="https://avatars.githubusercontent.com/eosc-life?s=27" alt="Avatar">EOSC-Life</a><a href="/training-material/hall-of-fame/erxleben/" class="contributor-badge contributor-erxleben"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/erxleben?s=27" alt="Avatar">Anika Erxleben</a><a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge contributor-blankenberg"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/blankenberg?s=27" alt="Avatar">Daniel Blankenberg</a><a href="/training-material/hall-of-fame/hrukkudyr/" class="contributor-badge contributor-hrukkudyr"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hrukkudyr?s=27" alt="Avatar">Graeme Tyson</a><a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-nsoranzo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/nsoranzo?s=27" alt="Avatar">Nicola Soranzo</a><a href="/training-material/hall-of-fame/pinin4fjords/" class="contributor-badge contributor-pinin4fjords"><img src="https://avatars.githubusercontent.com/pinin4fjords?s=27" alt="Avatar">Jonathan Manning</a><a href="/training-material/hall-of-fame/astrovsky01/" class="contributor-badge contributor-astrovsky01"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/astrovsky01?s=27" alt="Avatar">Alex Ostrovsky</a><a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=27" alt="Avatar">Julia Jakiela</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/wm75?s=27" alt="Avatar">Wolfgang Maier</a><a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=27" alt="Avatar">Mehmet Tekman</a><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=27" alt="Avatar">Wendi Bacon</a><a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-beatrizserrano"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/beatrizserrano?s=27" alt="Avatar">Beatriz Serrano-Solano</a><a href="/training-material/hall-of-fame/MarisaJL/" class="contributor-badge contributor-MarisaJL"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/MarisaJL?s=27" alt="Avatar">Marisa Loach</a><a href="/training-material/hall-of-fame/hrhotz/" class="contributor-badge contributor-hrhotz"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hrhotz?s=27" alt="Avatar">Hans-Rudolf Hotz</a>
+    <a href="/training-material/hall-of-fame/pinin4fjords/" class="contributor-badge contributor-pinin4fjords"><img src="https://avatars.githubusercontent.com/pinin4fjords?s=27" alt="Avatar">Jonathan Manning</a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=27" alt="Avatar">Pavankumar Videm</a><a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge contributor-blankenberg"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/blankenberg?s=27" alt="Avatar">Daniel Blankenberg</a><a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=27" alt="Avatar">Julia Jakiela</a><a href="/training-material/hall-of-fame/hrukkudyr/" class="contributor-badge contributor-hrukkudyr"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hrukkudyr?s=27" alt="Avatar">Graeme Tyson</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a><a href="/training-material/hall-of-fame/hrhotz/" class="contributor-badge contributor-hrhotz"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hrhotz?s=27" alt="Avatar">Hans-Rudolf Hotz</a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/wm75?s=27" alt="Avatar">Wolfgang Maier</a><a href="/training-material/hall-of-fame/astrovsky01/" class="contributor-badge contributor-astrovsky01"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/astrovsky01?s=27" alt="Avatar">Alex Ostrovsky</a><a href="/training-material/hall-of-fame/eosc-life/" class="contributor-badge contributor-eosc-life"><img src="https://avatars.githubusercontent.com/eosc-life?s=27" alt="Avatar">EOSC-Life</a><a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-beatrizserrano"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/beatrizserrano?s=27" alt="Avatar">Beatriz Serrano-Solano</a><a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=27" alt="Avatar">Mehmet Tekman</a><a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-nsoranzo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/nsoranzo?s=27" alt="Avatar">Nicola Soranzo</a><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=27" alt="Avatar">Wendi Bacon</a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=27" alt="Avatar">Cristóbal Gallardo</a><a href="/training-material/hall-of-fame/ethering/" class="contributor-badge contributor-ethering"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/ethering?s=27" alt="Avatar">Graham Etherington</a><a href="/training-material/hall-of-fame/erxleben/" class="contributor-badge contributor-erxleben"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/erxleben?s=27" alt="Avatar">Anika Erxleben</a><a href="/training-material/hall-of-fame/epsrc-training-grant/" class="contributor-badge contributor-epsrc-training-grant"><img src="https://avatars.githubusercontent.com/epsrc-training-grant?s=27" alt="Avatar">EPSRC Training Grant DTP 2020-2021 Open University</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a><a href="/training-material/hall-of-fame/MarisaJL/" class="contributor-badge contributor-MarisaJL"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/MarisaJL?s=27" alt="Avatar">Marisa Loach</a>
 
     
     <h2 id="references">References</h2>
@@ -6484,23 +6505,46 @@
 </section>
 
         </div>
-        
-            <footer>
-    <div class="container">
-        <br><br>
-        <p>
-            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
-            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
-        </p>
-        <p>
-        The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
-        </p>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/30c5c87c77164777ccdfd2cb81a4d090bd44bc82">30c5c87</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					
+						Materials licensed under
+					
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/index.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/7fe52143b4a26c82692bf0e07f4dbb48cb99509b">7fe52143b4a26c82692bf0e07f4dbb48cb99509b</a>. </p>
+
     </div>
 </footer>
 
-        
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
         <script src="/training-material/assets/js/popper.min.js"></script>
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
@@ -6521,7 +6565,6 @@
         </script>
         
         <script type="text/javascript" src="/training-material/assets/js/list.min.js"></script>
-        <script type="text/javascript" src="/training-material/assets/js/topic.js"></script>
         
 
         <script type="text/javascript">

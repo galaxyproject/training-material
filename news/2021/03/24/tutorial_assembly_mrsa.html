@@ -8,6 +8,28 @@
         
             <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+Sentry.init({
+  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+  release: "galaxy-training-network@30c5c87c77164777ccdfd2cb81a4d090bd44bc82",
+  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+  tracesSampleRate: 0.01,
+  // Capture Replay for no sessions by default
+  replaysSessionSampleRate: 0,
+  // plus for 1% of sessions with an error
+  replaysOnErrorSampleRate: 0.01,
+  // PII OFF
+  sendDefaultPii: false, // Off by default but just in case.
+  environment: "production",
+});
+</script>
+
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
@@ -107,8 +129,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right">
 
-        
-        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/2021/03/24/tutorial_assembly_mrsa.md" title="Edit on GitHub">
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/mainnews/_posts/2021-03-24-tutorial_assembly_mrsa.md" title="Edit on GitHub">
           <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
         </a>
 
@@ -203,17 +224,17 @@
 
 
 
-<button class="label label-default tutorial_tag" id="new tutorial" style="--color-primary: #ffad3c; --color-darker: #e89800; --color-dimmed: #f6a200;" title="new tutorial">new tutorial</button>
+<button class="label label-default tutorial_tag" id="new tutorial" style="--color-primary: #ffca9c; --color-darker: #ffab30; --color-dimmed: #ffbb74;" title="new tutorial">new tutorial</button>
 
-<button class="label label-default tutorial_tag" id="assembly" style="--color-primary: #ffa1d6; --color-darker: #ff7bca; --color-dimmed: #ff8fd0;" title="assembly">assembly</button>
+<button class="label label-default tutorial_tag" id="assembly" style="--color-primary: #ffc3e3; --color-darker: #ff9fd5; --color-dimmed: #ffb1dc;" title="assembly">assembly</button>
 
-<button class="label label-default tutorial_tag" id="mrsa" style="--color-primary: #00d3da; --color-darker: #00bcc2; --color-dimmed: #00c7ce;" title="mrsa">mrsa</button>
+<button class="label label-default tutorial_tag" id="mrsa" style="--color-primary: #00ebf3; --color-darker: #00d1d8; --color-dimmed: #00dee6;" title="mrsa">mrsa</button>
 
-<button class="label label-default tutorial_tag" id="amr" style="--color-primary: #a4bdff; --color-darker: #80a8ff; --color-dimmed: #92b3ff;" title="amr">amr</button>
+<button class="label label-default tutorial_tag" id="amr" style="--color-primary: #c5d4ff; --color-darker: #a1bcff; --color-dimmed: #b4c8ff;" title="amr">amr</button>
 
-<button class="label label-default tutorial_tag" id="nanopore" style="--color-primary: #7ac6ff; --color-darker: #00b4ff; --color-dimmed: #56bcff;" title="nanopore">nanopore</button>
+<button class="label label-default tutorial_tag" id="nanopore" style="--color-primary: #b0d9ff; --color-darker: #76c4ff; --color-dimmed: #95cfff;" title="nanopore">nanopore</button>
 
-<button class="label label-default tutorial_tag" id="illumina" style="--color-primary: #fab100; --color-darker: #df9d00; --color-dimmed: #eca700;" title="illumina">illumina</button>
+<button class="label label-default tutorial_tag" id="illumina" style="--color-primary: #ffcb8b; --color-darker: #f8af00; --color-dimmed: #ffbc52;" title="illumina">illumina</button>
 
 
 <hr/>
@@ -408,23 +429,46 @@ in the other you perform a similar analysis on Illlumina-sequenced datasets.</p>
 </section>
 
         </div>
-        
-            <footer>
-    <div class="container">
-        <br><br>
-        <p>
-            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
-            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
-        </p>
-        <p>
-        The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
-        </p>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/30c5c87c77164777ccdfd2cb81a4d090bd44bc82">30c5c87</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					
+						Materials licensed under
+					
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2021-03-24-tutorial_assembly_mrsa.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/7fe52143b4a26c82692bf0e07f4dbb48cb99509b">7fe52143b4a26c82692bf0e07f4dbb48cb99509b</a>. </p>
+
     </div>
 </footer>
 
-        
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
         <script src="/training-material/assets/js/popper.min.js"></script>
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
