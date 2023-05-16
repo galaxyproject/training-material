@@ -414,9 +414,11 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
-> 3. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
+> 3. Click on the dataset in your history to expand it, then click on the {% icon galaxy-barchart %} (**Visualize**) icon
 >
-> 4. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` now visible in the Visualize menu.
+>    ![visualize button on the expanded history item](../../images/101_ucsc_visualize.png)
+>
+> 4. To **visualize the data in UCSC genome browser**, click on `display at UCSC (main)` now visible at the top (blue box) of the Visualize menu.
 >
 >    ![`display at UCSC main` link](../../images/101_displayucsc.png)
 >
