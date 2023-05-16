@@ -515,7 +515,9 @@ module Jekyll
 
       about = []
       about.push(topic_desc)
-      about += topic.fetch('edam_ontology', []).map do |term|
+      edam_terms = topic.fetch('edam_ontology', []) | material.fetch('edam_ontology', [])
+
+      about += edam_terms.map do |term|
         {
           '@type': 'DefinedTerm',
           '@id': "http://edamontology.org/#{term}",
@@ -526,6 +528,7 @@ module Jekyll
                "http%3A%2F%2Fedamontology.org%2F#{term}"
         }
       end
+
       data['about'] = about
 
       data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Introductory'
