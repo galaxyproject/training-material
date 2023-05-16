@@ -55,7 +55,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 Single-cell RNA-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells.
 The cellular resolution and genome wide scope make it possible to draw new conclusions that are not otherwise possible with bulk RNA-seq. The analysis requires a great deal of knowledge about statistics, wet-lab protocols, and some machine learning due to variability and sparseness of the data. The uncertainty from the low coverage and low cell numbers per sample that once were common setbacks in the field are overcome by 10x Genomics which provides high-throughput solutions which are quickly championing the field.
 
-### Era of 10x Genomics
+## Era of 10x Genomics
 
 10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level, but has defined the standards of the field that many downstream analysis packages are now scrambling to accommodate.
 
@@ -63,7 +63,7 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 
 The gain in resolution reduces the granularity and noise issues that plagued the field of scRNA-seq not long ago, where now individual clusters are much easier to decipher due to the added stability added by this gain in information.
 
-### Library Preparation
+## Library Preparation
 
 ![Library Preparation]({% link topics/single-cell/images/scrna-pre-processing/tenx_libprep.png %} "An overview of the library preparation")
 
@@ -139,7 +139,7 @@ The source material consists of 6 FASTQ files split into two sequencing lanes *L
 
 The *Cell Ranger* pipeline requires all three files to perform the demultiplexing and quantification, but **RNA STARsolo** does [not require](https://github.com/alexdobin/STAR/issues/640) the I1 lane file to perform the analysis. These source files are provided in the [Zenodo](https://zenodo.org/record/3457880) data repository, but they require approximately 2 hours to process. For this tutorial, we will use datasets sub-sampled from the source files to contain approximately 300 cells instead of 1000. Details of this sub-sampling process can be viewed at the [Zenodo link](https://zenodo.org/record/3457880/files/subsetting_data.txt).
 
-### Data upload and organization
+## Data upload and organization
 
 For the mapping, we require the sub-sampled source files, as well as a "whitelist" of (~3,7 million) known cell barcodes, [freely extracted](https://kb.10xgenomics.com/hc/en-us/articles/115004506263-What-is-a-barcode-whitelist) from the *Cell Ranger* pipeline. This whitelist file may be found within the Galaxy Data Library, but it is included here in the Zenodo record for convenience and also because the sequencing facility may not always provide this file.
 
@@ -336,7 +336,7 @@ We can look at this directly by clicking on the {% icon galaxy-eye %} symbol of 
 
 > <comment-title>RNA STARsolo log output</comment-title>
 > ```
->Barcodes:
+> Barcodes:
 >                                       noNoAdapter              0
 >                                           noNoUMI              0
 >                                            noNoCB              0
@@ -349,7 +349,7 @@ We can look at this directly by clicking on the {% icon galaxy-eye %} symbol of 
 >                                   yesWLmatchExact        7530489
 >                               yesOneWLmatchWithMM          19534
 >                              yesMultWLmatchWithMM          84800
->Genes:
+> Genes:
 >                                        noUnmapped         278029
 >                                       noNoFeature        3060392
 >                                      MultiFeature         419262
