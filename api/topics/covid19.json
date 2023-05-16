@@ -823,22 +823,40 @@
       "level": "Intermediate",
       "zenodo_link": "https://zenodo.org/record/5036687",
       "questions": [
-        "How can we extract annotated allelic variants in SARS-Cov-2 sequences in Galaxy?",
-        "Which tools and workflows can we use to identify SARS-CoV-2 lineages in Galaxy?"
+        "How can a complete analysis, including viral consensus sequence reconstruction and lineage assignment be performed?",
+        "How can such an analysis be kept manageable for lots of samples, yet flexible enough to handle different types of input data?",
+        "What are key results beyond consensus genomes and lineage assignments that need to be understood to avoid inappropriate conclusions about samples?",
+        "How can the needs for high-throughput data analysis in an ongoing infectious disease outbreak/pandemic and the need for proper quality control and data inspection be balanced?"
       ],
       "objectives": [
-        "Repeat SARS-CoV-2 data preparation",
-        "Select and run workflow to extract annotated allelic variants from FASTQ files",
-        "Run workflow to summarize and generate report for previously called allelic variants",
-        "Interpret summaries for annotated allelic variants",
-        "Run workflow to extract consensus sequences",
-        "Select and run tools to assign clades/lineages"
+        "Discover and obtain recommended Galaxy workflows for SARS-CoV-2 sequence data analysis through public workflow registries",
+        "Choose and run a workflow to discover mutations in a batch of viral samples from sequencing data obtained through a range of different protocols and platforms",
+        "Run a workflow to summarize and visualize the mutation discovery results for a batch of samples",
+        "Run a workflow to construct viral consensus sequences for the samples in a batch",
+        "Know different SARS-CoV-2 lineage classification systems, and use pangolin and Nextclade to assign samples to predefined lineages",
+        "Combine information from different analysis steps to be able to draw appropriate conclusions about individual samples and batches of viral data"
       ],
       "time_estimation": "3H",
       "key_points": [
-        "4 specialized, best-practice variant calling workflows are available for the identification of annotated allelic variants from raw sequencing data depending on the exact type of input",
-        "Data from batches of samples can be processed in parallel using collections",
-        "Annotated allelic variants can be used to build consensus sequences for and assign each sample to known viral clades/lineages"
+        "The Galaxy Covid-19 project has developed a flexible set of workflows for SARS-CoV-2 genome surveillance, which is freely available through public workflow registries.",
+        "The workflows enable processing of whole batches of samples with rather limited user interaction.",
+        "They provide a high-throughput and flexible analysis solution without compromising on accuracy, nor on the possibility to explore intermediate steps and outputs in detail."
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "variant-analysis",
+          "tutorials": [
+            "sars-cov-2"
+          ]
+        }
       ],
       "contributors": [
         {
@@ -873,7 +891,8 @@
       ],
       "tags": [
         "covid19",
-        "virology"
+        "virology",
+        "one-health"
       ],
       "url": "/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html",
       "topic_name": "variant-analysis",
@@ -918,42 +937,23 @@
       "slides": false,
       "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.json",
       "tools": [
-        "Cut1",
         "Filter1",
-        "Grouping1",
-        "join1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/0.14.4+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/3.1.4+galaxy0"
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/2.7.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0",
+        "upload1"
       ],
       "supported_servers": {
         "exact": [
           {
-            "url": "https://test.galaxyproject.org/",
-            "name": "Galaxy Test",
-            "usegalaxy": "false"
-          },
-          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
             "usegalaxy": "true"
           }
         ],
         "inexact": [
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
+
         ]
       },
       "admin_install": {
@@ -962,22 +962,36 @@
         "install_resolver_dependencies": true,
         "tools": [
           {
+            "name": "datamash_ops",
+            "owner": "iuc",
+            "revisions": "4c07ddedc198",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
             "name": "nextclade",
             "owner": "iuc",
-            "revisions": "3b75d5285aff",
+            "revisions": "128ba8da994f",
             "tool_panel_section_label": "Variant Analysis",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
             "name": "pangolin",
             "owner": "iuc",
-            "revisions": "42a174224817",
+            "revisions": "03ed9524dcd1",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fasta_regex_finder",
+            "owner": "mbernt",
+            "revisions": "9a811adb714f",
             "tool_panel_section_label": "Variant Analysis",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: nextclade\n  owner: iuc\n  revisions: 3b75d5285aff\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pangolin\n  owner: iuc\n  revisions: 42a174224817\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: datamash_ops\n  owner: iuc\n  revisions: 4c07ddedc198\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: nextclade\n  owner: iuc\n  revisions: 128ba8da994f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pangolin\n  owner: iuc\n  revisions: 03ed9524dcd1\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fasta_regex_finder\n  owner: mbernt\n  revisions: 9a811adb714f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
