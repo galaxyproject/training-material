@@ -98,14 +98,22 @@ def find_duration(mp3)
   data['format']['duration'].to_f
 end
 
-def synthesize(uncorrected_line, engine, voice: 'Amy', lang: 'en-GB', neural: true)
+def synthesize(uncorrected_line, engine, voice: 'Amy', lang: 'en-GB', neural: true, output: nil)
   line = correct(uncorrected_line)
   digest = Digest::MD5.hexdigest line
-  mp3 = File.join(GTN_CACHE, "#{engine}-#{digest}-#{voice}.mp3")
-  json = File.join(GTN_CACHE, "#{engine}-#{digest}-#{voice}.json")
-  if File.file?(mp3)
-    duration = JSON.parse(File.read(json))['end']
-    return mp3, json, duration.to_f
+  if output.nil? 
+    mp3 = File.join(GTN_CACHE, "#{engine}-#{digest}-#{voice}.mp3")
+    json = File.join(GTN_CACHE, "#{engine}-#{digest}-#{voice}.json")
+    if File.file?(mp3)
+      duration = JSON.parse(File.read(json))['end']
+      return mp3, json, duration.to_f
+    end
+  else
+    mp3 = output
+    json = output + '.json'
+    if File.file?(output)
+      return mp3, json, 0.0 # Todo
+    end
   end
 
   # Call our engine
@@ -179,6 +187,10 @@ def parseOptions
       options[:file] = n
     end
 
+    opts.on('-oFILE', '--output=FILE', 'Location to save the file in (defaults to auto-generated location)') do |n|
+      options[:output] = n
+    end
+
     opts.on('-v', '--[no-]verbose', 'Run verbosely') do |v|
       options[:verbose] = v
     end
@@ -206,6 +218,6 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   sentence, engine, options = parseOptions
-  mp3, = synthesize(sentence, engine, voice: options[:voice], lang: options[:lang], neural: options[:neural])
+  mp3, = synthesize(sentence, engine, voice: options[:voice], lang: options[:lang], neural: options[:neural], output: options[:output])
   puts mp3
 end
