@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module Jekyll
   ##
   # This class adds a tag that checks if a file exists.
   class FileExistsTag < Liquid::Tag
-
     def initialize(tag_name, path, tokens) # :nodoc:
       super
       @path = path
@@ -18,10 +19,10 @@ module Jekyll
 
       # Adds the site source, so that it also works with a custom one
       site_source = context.registers[:site].config['source']
-      file_path = site_source + '/' + url
+      file_path = "#{site_source}/#{url}"
 
       # Check if file exists (returns true or false)
-      "#{File.exist?(file_path.strip!)}"
+      File.exist?(file_path.strip!).to_s
     end
   end
 end

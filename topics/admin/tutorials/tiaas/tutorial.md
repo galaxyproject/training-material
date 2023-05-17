@@ -64,9 +64,9 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -51,3 +51,6 @@
->     - name: dj-wasabi.telegraf
->       src: https://github.com/dj-wasabi/ansible-telegraf
 >       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
+>     - src: cloudalchemy.grafana
+>       version: 0.14.2
 >    +# Training Infrastructure as a Service
 >    +- src: galaxyproject.tiaas2
 >    +  version: 2.1.5
@@ -91,7 +91,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -333,3 +333,8 @@ telegraf_plugins_extra:
+>    @@ -346,3 +346,8 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"
@@ -170,14 +170,14 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -50,6 +50,7 @@
+>    @@ -47,6 +47,7 @@
 >         - galaxyproject.nginx
 >         - geerlingguy.docker
 >         - usegalaxy_eu.rabbitmqserver
 >    +    - galaxyproject.tiaas2
 >         - galaxyproject.gxadmin
->         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
+>         - dj-wasabi.telegraf
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TIaaS role to the Galaxy playbook"}
@@ -188,12 +188,12 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -108,4 +108,6 @@ server {
->     		proxy_pass http://127.0.0.1:3000/;
+>    @@ -113,4 +113,6 @@ server {
 >     		proxy_set_header Host $http_host;
 >     	}
->    +
+>     
 >    +	{{ tiaas_nginx_routes }}
+>    +
 >     }
 >    {% endraw %}
 >    ```
@@ -220,14 +220,14 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 {TIaaS} should be available now! The following routes on your server are now configured (we will run through these in the next section)
 
 
-|URL | Use | Who |
-|:----|----|-----|
-|https://\<server\>/tiaas/new/ | Request a new TIaaS training | Instructors |
-|https://\<server\>/tiaas/admin/ | Approve and Manage requests | Admin |
-|https://\<server\>/tiaas/stats/ | Overall TIaaS statistics ([EU Stats](https://usegalaxy.eu/tiaas/stats/)) | Admins, Funding Agencies |
-|https://\<server\>/tiaas/calendar/ | Calendar of trainings ([EU Calendar](https://usegalaxy.eu/tiaas/calendar/))| Admins, Funding Agencies |
-|https://\<server\>/join-training/\<training-id\> | Join an TIaaS training | Participants |
-|https://\<server\>/join-training/\<training-id\>/status | Dashboard with job states of trainees.| Instructors|
+| URL                                                                                       | Use                                                                         | Audience                 |
+| :----                                                                                     | ----                                                                        | -----                    |
+| [/tiaas/new/](https://my.gat.galaxy.training/?path=/tiaas/new/)                           | Request a new TIaaS training                                                | Instructors              |
+| [/tiaas/admin/](https://my.gat.galaxy.training/?path=/tiaas/admin/)                       | Approve and Manage requests                                                 | Admin                    |
+| [/tiaas/stats/](https://my.gat.galaxy.training/?path=/tiaas/stats/)                       | Overall TIaaS statistics ([EU Stats](https://usegalaxy.eu/tiaas/stats/))    | Admins, Funding Agencies |
+| [/tiaas/calendar/](https://my.gat.galaxy.training/?path=/tiaas/calendar/)                 | Calendar of trainings ([EU Calendar](https://usegalaxy.eu/tiaas/calendar/)) | Admins, Funding Agencies |
+| [/join-training/ID](https://my.gat.galaxy.training/?path=/join-training/ID)               | Join an TIaaS training                                                      | Participants             |
+| [/join-training/ID/status](https://my.gat.galaxy.training/?path=/join-training/ID/status) | Dashboard with job states of trainees.                                      | Instructors              |
 
 
 Let's see it in action!
@@ -235,7 +235,7 @@ Let's see it in action!
 > <hands-on-title>Using TIaaS</hands-on-title>
 >
 > 1. **Create a new TIaaS request**
->    - Go to https://\<server\>/tiaas/new/
+>    - Go to [/tiaas/new](https://my.gat.galaxy.training/?path=/tiaas/new)
 >    - Here you will find the request form users will fill in to request TIaaS:
 >      ![TIaaS request form](../../images/tiaas/tiaas_request_form.png)
 >    - For *"Training Identifier"*, fill in `gat`
@@ -248,7 +248,7 @@ Let's see it in action!
 >
 > 2. **Approve TIaaS request**
 >    - Next, the request will have to be approved by an admin
->    - Go to https://\<server\>/tiaas/admin
+>    - Go to [/tiaas/admin](https://my.gat.galaxy.training/?path=/tiaas/admin)
 >    - **Log in** using the values you configured `tiaas_admin_user` and `tiaas_admin_pass` in your group variables file
 >      - Default values were `admin:changeme`
 >    - You should now see the admin panel:
@@ -265,13 +265,13 @@ Let's see it in action!
 > 3. **Join TIaaS Training**
 >    - Make sure you are logged in to Galaxy
 >    - On the day of the workshop, participants will visit a following URL to join the TIaaS group
->      - https://\<server\>/join-training/gat
+>      - [/join-training/gat](https://my.gat.galaxy.training/?path=/join-training/gat)
 >      - A confirmation dialog should appear if all went well:
 >        ![Join TIaaS](../../images/tiaas/tiaas_join_training.png)
 >
 > 4. **Monitor TIaaS status**
 >    - This is very useful for instructors to monitor the job state of their participants
->    - Go to https://\<server\>/join-training/gat/status
+>    - Go to [/join-training/gat](https://my.gat.galaxy.training/?path=/join-training/gat)
 >    - In the Dasboard you should see that one user (you) has joined the training \
 >    - Run some jobs to see the dashboard in action
 >      ![TIaaS dashboard](../../images/tiaas/tiaas_dashboard.png)
@@ -309,28 +309,26 @@ In order to achieve this, we first need some way to sort the jobs of the trainin
 >    ```diff
 >    --- a/files/galaxy/config/tpv_rules_local.yml
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -35,6 +35,17 @@ tools:
+>    @@ -35,6 +35,15 @@ tools:
 >           require:
 >             - pulsar
 >     
 >    +roles:
 >    +  training.*:
->    +    rules:
->    +    - id: tiaas
->    +      max_cores: 2
->    +      max_mem: max_cores * 3.8  # TODO check multiplier
->    +      scheduling:
->    +        require:
->    +          - slurm
->    +          - training
+>    +    max_cores: 2
+>    +    max_mem: max_cores * 3.8  # TODO check multiplier
+>    +    scheduling:
+>    +      require:
+>    +        - slurm
+>    +        - training
 >    +
 >     destinations:
 >       local_env:
 >         runner: local_runner
->    @@ -63,6 +74,20 @@ destinations:
+>    @@ -62,6 +71,19 @@ destinations:
+>         max_mem: 8
 >         params:
 >           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
->     
 >    +  slurm-training:
 >    +    inherits: singularity
 >    +    runner: slurm
@@ -344,10 +342,9 @@ In order to achieve this, we first need some way to sort the jobs of the trainin
 >    +      require:
 >    +        - slurm
 >    +        - training
->    +
+>     
 >       pulsar:
 >         runner: pulsar_runner
->         params:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}

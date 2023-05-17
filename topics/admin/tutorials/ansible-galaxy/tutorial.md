@@ -44,6 +44,11 @@ requirements:
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 20.04 - 22.04."
 abbreviations:
     DVCS: Distributed Version Control System
+
+edam_ontology:
+- topic_3489 # Database Management
+- topic_0605 # Informatics
+- topic_3071 # Data Management
 ---
 
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
@@ -316,24 +321,28 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
->    > <tip-title>Using `git`?</tip-title>
->    > If you're using git, it can make sense to tell git to ignore the `roles`
->    > directory, as all of that data can be perfectly recreated from our
->    > variables in the requirements.yml file.
->    >
->    > Simply create a file `.gitignore` with the following content:
->    >
->    > ```console
->    > roles/
->    > .vault-password.txt
->    > ```
->    >
->    > When you run `git status` you'll notice that the `roles/` folder is not listed among the other "Untracked files". We're adding the `.vault-password.txt` file as well, ahead of time, because this should *never* ever be committed to the repository.
->    >
->    > Now you can do `git add .` to add all of the files in the current directory, and not worry about committing generated artifacts!
->    {: .tip}
+> 4. Inspect the contents of the newly created `roles/` directory in your working directory.
 >
-> 4. Inspect the contents of the newly created `roles` directory in your working directory.
+> 5. It's good practice to put your playbooks and configuration files under version control (usually in a git repository), but there is no need to keep track of the content of the `roles/` directory, as all of that data can be perfectly recreated from the `requirements.yml` file.
+>
+>    If you plan to put this git repository online (e.g. on GitHub), any file containing clear-text passwords should *never* ever be committed to the repository, even if the repository is private. For this reason, we should tell git, ahead of time, to ignore one such file, `.vault-password.txt` , which will use later on in this lesson.
+>
+>    To configure git to ignore certain files and directories, they need to be listed in a file called `.gitignore` , which should be instead tracked as part of your git repository. You can now create the `.gitignore` file with the following content:
+>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/.gitignore
+>    @@ -0,0 +1,2 @@
+>    +roles/
+>    +.vault-password.txt
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add .gitignore"}
+>
+>    When you run `git status` you'll notice that the `roles/` folder is not listed among the other "Untracked files".
+>
+>    Now you can do `git add .` to add all of the files in the current directory to your repository, and not worry about committing these files and directories by mistake!
 {: .hands_on}
 
 > <hands-on-title>Configuration files</hands-on-title>
@@ -375,7 +384,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 > 2. Create the `hosts` inventory file if you have not done so yet, defining a `[galaxyservers]` group with the address of the host where you want to install Galaxy. If you are running Ansible on the same machine where Galaxy will be installed to, you should set the `ansible_connection=local` variable. Lastly, you should explicitly set the `ansible_user` variable to the username to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not `ansible_user` is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.
 >
->    You shouuld also define a `[dbservers]` group for the hosts that will run Galaxy's database. In many cases (and in the case of the Galaxy Admin Training), these will be the same host, but the tutorial is designed to support either scenario, and helps to strengthen understanding of the purpose of host groupings in Ansible for more advanced real-world deployments. Here however we suggest using `[dbservers:children]` and adding `galaxyservers` as the child of that.
+>    You should also define a `[dbservers]` group for the hosts that will run Galaxy's database. In many cases (and in the case of the Galaxy Admin Training), these will be the same host, but the tutorial is designed to support either scenario, and helps to strengthen understanding of the purpose of host groupings in Ansible for more advanced real-world deployments. Here however we suggest using `[dbservers:children]` and adding `galaxyservers` as the child of that.
 >
 >    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
@@ -945,7 +954,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -10,3 +10,15 @@ galaxy_force_checkout: true
+>    @@ -10,3 +10,17 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.12.0
 >     miniconda_channels: ['conda-forge', 'defaults']
@@ -958,6 +967,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
 >    +    file_path: /data/datasets
 >    +    job_working_directory: /data/jobs
+>    +    object_store_store_by: uuid
+>    +    id_secret: "{{ vault_id_secret }}"
 >    +
 >    +galaxy_extra_dirs:
 >    +  - /data
@@ -1010,10 +1021,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -19,6 +19,32 @@ galaxy_config:
->         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->         file_path: /data/datasets
+>    @@ -21,6 +21,32 @@ galaxy_config:
 >         job_working_directory: /data/jobs
+>         object_store_store_by: uuid
+>         id_secret: "{{ vault_id_secret }}"
 >    +  gravity:
 >    +    process_manager: systemd
 >    +    galaxy_root: "{{ galaxy_root }}/server"
@@ -1773,7 +1784,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    > Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Consumed 3.381s CPU time.
 >    > ```
 >    >
->    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect.
+>    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect. You might observe a warning that `Dynamic handlers are configured in Gravity but Galaxy is not configured to assign jobs to handlers dynamically`. We will address this [below](#job-configuration), and you can disregard it for now.
 >    {: .tip}
 >
 > 6. Some things to note:
@@ -1808,7 +1819,7 @@ With this we have:
 - PostgreSQL running
 - Galaxy running (managed by Gravity + systemd)
 
-Although Gunicorn can server HTTP for us directly, a reverse proxy in front of Gunicorn can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
+Although Gunicorn can serve HTTP for us directly, a reverse proxy in front of Gunicorn can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
 
 For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EKS). It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.
 
@@ -1836,7 +1847,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -48,3 +48,55 @@ galaxy_config:
+>    @@ -50,3 +50,55 @@ galaxy_config:
 >     
 >     galaxy_extra_dirs:
 >       - /data
@@ -2003,11 +2014,11 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -0,0 +1,61 @@
 >    +upstream galaxy {
->    +	server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock;
+>    +	server {{ galaxy_config.gravity.gunicorn.bind }};
 >    +
 >    +	# Or if you serve galaxy at a path like http(s)://fqdn/galaxy
 >    +	# Remember to set galaxy_url_prefix in the galaxy.yml file.
->    +	# server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock:/galaxy;
+>    +	# server {{ galaxy_config.gravity.gunicorn.bind }}:/galaxy;
 >    +}
 >    +
 >    +server {
@@ -2245,10 +2256,10 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >     galaxy_config:
 >       galaxy:
 >         # Main Configuration
->    @@ -19,6 +37,7 @@ galaxy_config:
->         database_connection: "postgresql:///{{ galaxy_db_name }}?host=/var/run/postgresql"
->         file_path: /data/datasets
+>    @@ -21,6 +39,7 @@ galaxy_config:
 >         job_working_directory: /data/jobs
+>         object_store_store_by: uuid
+>         id_secret: "{{ vault_id_secret }}"
 >    +    job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >       gravity:
 >         process_manager: systemd
@@ -2300,9 +2311,9 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -38,6 +38,28 @@ galaxy_config:
->         file_path: /data/datasets
->         job_working_directory: /data/jobs
+>    @@ -40,6 +40,28 @@ galaxy_config:
+>         object_store_store_by: uuid
+>         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    # SQL Performance
 >    +    slow_query_log_threshold: 5
@@ -2543,12 +2554,12 @@ If you've been following along you should have a production-ready Galaxy, secure
 
 > <hands-on-title>Using Git with Ansible Vaults</hands-on-title>
 > When looking at `git log` to see what you changed, you cannot easily look into
-> Ansible Vault changes: you just see the changes in the encrypted versions which
+> Ansible Vault changes: you just see the changes in the encrypted versions, which
 > is unpleasant to read.
 > 
-> Instead we can use [`.gitattributes`](https://www.git-scm.com/docs/gitattributes) to tell `git` that we want to use a
-> different program to visualise differences between two versions of a file,
-> namely `ansible-vault`.
+> Instead we can use [`.gitattributes`](https://www.git-scm.com/docs/gitattributes) to tell `git` that we want to use a certain
+> program to convert some files before calculating their diffs,
+> in this case `ansible-vault view`.
 > 
 > 1. Check your `git log -p` and see how the Vault changes look (you can type `/vault` to search). Notice that they're just changed encoded content.
 > 1. Create the file `.gitattributes` in the same folder as your `galaxy.yml` playbook, with the following contents:
@@ -2562,7 +2573,19 @@ If you've been following along you should have a production-ready Galaxy, secure
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add git attributes"}
+>
+>    This set the `diff` attribute to `ansible-vault` for the `group_vars/secret.yml` file.
+>    Additionally, the `merge=binary` option tells git not to attempt to do a three-way merge of this file.
 > 
+> 1. Run the following command to configure git to convert the files having the `diff` attribute set to `ansible-vault`, using the `ansible-vault view` command, before diffing them:
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > git config --global diff.ansible-vault.textconv "ansible-vault view"
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 > 1. Try again to `git log -p` and look for the vault changes. Note that you can now see the decrypted content! Very useful.
 {: .hands_on}
 

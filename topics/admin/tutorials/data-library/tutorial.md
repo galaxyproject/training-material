@@ -68,8 +68,8 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >    +        dest: /libraries/
 >       roles:
+>         - galaxyproject.tusd
 >         - usegalaxy_eu.apptainer
->         - galaxyproject.galaxy
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the git repository to the pre-tasks"}
@@ -84,7 +84,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -85,6 +85,9 @@ galaxy_config:
+>    @@ -88,6 +88,9 @@ galaxy_config:
 >         # Tool Dependencies
 >         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
 >         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
@@ -275,7 +275,7 @@ Let's try setting that up in our Galaxy!
 
 ![Screenshot of data libraries, we're in a library folder named "Mouse sequencing project" and a directory and single file are shown. The file has an ugly URL as its name](../../images/data/imported.png)
 
-That's it! You should be able to see your newly created data library in your Galaxy.
+That's it! You should be able to [see your newly created data library in your Galaxy.](https://my.gat.galaxy.training/?path=/libraries)
 
 > ```bash
 > 2.sh

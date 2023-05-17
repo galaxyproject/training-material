@@ -311,9 +311,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
 >    @@ -37,6 +37,7 @@
+>           become_user: "{{ galaxy_user_name }}"
 >         - galaxyproject.nginx
 >         - galaxyproject.gxadmin
->         - galaxyproject.tusd
 >    +    - galaxyproject.cvmfs
 >       post_tasks:
 >         - name: Setup gxadmin cleanup task
@@ -507,10 +507,10 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -67,6 +67,8 @@ galaxy_config:
->         new_user_dataset_access_role_default_private: true # Make datasets private by default
+>    @@ -70,6 +70,8 @@ galaxy_config:
 >         # TUS
->         tus_upload_store: /data/tus
+>         galaxy_infrastructure_url: "https://{{ inventory_hostname }}"
+>         tus_upload_store: "{{ galaxy_tus_upload_store }}"
 >    +    # CVMFS
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >       gravity:

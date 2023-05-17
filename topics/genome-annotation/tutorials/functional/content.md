@@ -12,7 +12,7 @@
 
 > <hands-on-title></hands-on-title>
 >
-> 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy2.1.8) %} with the following parameters:
+> 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Fasta sequences to annotate"*: {{ input_dataset }}
 >    - *"Version of eggNOG Database"*: select the latest version available
 >    - In *"Output Options"*:
@@ -34,7 +34,7 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 > <hands-on-title></hands-on-title>
 >
-> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.55-88.0+galaxy3) %} with the following parameters:
+> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.59-91.0+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Protein FASTA File"*: {{ input_dataset }}
 >    - *"InterProScan database"*: select the latest version available
 >    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you run InterProScan for commercial use)

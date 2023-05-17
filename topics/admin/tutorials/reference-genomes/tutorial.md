@@ -63,6 +63,8 @@ For more background details on data managers, check out:
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="reference-genomes" %}
+
 # Galaxy Reference Data Components
 
 As discussed in the overview, Galaxy Data Managers handle the population of numerous Galaxy components. From the highest level to the lowest:
@@ -198,7 +200,7 @@ Next, we will install some reference data. Specifically, we will grab sacCer2 (v
 > <hands-on-title>Download and install sacCer2</hands-on-title>
 >
 > 1. Access the Admin menu from the top bar
-> 2. Click **Local Data**, which can be found on the left, under **Server**
+> 2. [Click **Local Data**](https://my.gat.galaxy.training/?path=/admin/data_manager), which can be found on the left, under **Server**
 >
 >    You should see something like this:
 >
@@ -206,7 +208,7 @@ Next, we will install some reference data. Specifically, we will grab sacCer2 (v
 >
 >    If you instead see the message "You do not currently have any Data Managers installed," you may need to restart your Galaxy server.
 >
-> 3. Click **all_fasta** under **View Tool Data Table Entries**
+> 3. [Click **all_fasta**](https://my.gat.galaxy.training/?path=/admin/data_manager/table/all_fasta) under **View Tool Data Table Entries**
 >
 >    You should see the current contents of `tool-data/all_fasta.loc`, which will be empty.
 >
@@ -668,3 +670,5 @@ Finally, we will verify that the BWA tool can see the new genome indexes.
 {: .hands_on}
 
 How cool is that? No editing `.loc` files, no making sure you've got TABs instead of spaces. Fully auto!
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="reference-genomes" %}

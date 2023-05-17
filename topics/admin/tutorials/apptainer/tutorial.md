@@ -82,10 +82,11 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -20,3 +20,5 @@
+>    @@ -20,3 +20,6 @@
 >     # CVMFS Support
 >     - src: galaxyproject.cvmfs
 >       version: 0.2.21
+>    +# Singularity/Apptainer
 >    +- src: usegalaxy_eu.apptainer
 >    +  version: 0.0.1
 >    {% endraw %}
@@ -109,10 +110,10 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -30,6 +30,7 @@
->             name: ['tmpreaper']
+>    @@ -31,6 +31,7 @@
 >           when: ansible_os_family == 'Debian'
 >       roles:
+>         - galaxyproject.tusd
 >    +    - usegalaxy_eu.apptainer
 >         - galaxyproject.galaxy
 >         - role: galaxyproject.miniconda
@@ -172,14 +173,14 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_templates` entry:
 >
-> 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_templates` entry:
+> 1. Edit the `group_vars/galaxyservers.yml` file and add a `container_resolvers_config_file` entry and a corresponding `galaxy_config_templates` entry:
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -69,6 +69,9 @@ galaxy_config:
->         tus_upload_store: /data/tus
+>    @@ -72,6 +72,9 @@ galaxy_config:
+>         tus_upload_store: "{{ galaxy_tus_upload_store }}"
 >         # CVMFS
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >    +    # Tool Dependencies
@@ -188,7 +189,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -104,6 +107,12 @@ galaxy_config_files:
+>    @@ -111,6 +114,12 @@ galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >     

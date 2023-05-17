@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads"
-zenodo_link: "https://doi.org/10.5281/zenodo.3732358"
+zenodo_link: 'https://zenodo.org/record/3732359'
 questions:
   - How can a genome of interest be assembled against a background of contaminating reads from other genomes?
   - How can sequencing data from public sources be turned into assembly-ready polished datasets?
