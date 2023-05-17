@@ -57,6 +57,12 @@ def extract_public_galaxy_servers_tools():
         # list.
         if '.usegalaxy.eu' in server['url']:
             continue
+        # Apparently the french do it too
+        if '.usegalaxy.fr' in server['url']:
+            continue
+        # The aussies will soon
+        if '.usegalaxy.org.au' in server['url']:
+            continue
 
         s = { 'name': server['title'], 'url': server['url'] }
         to_process.append(s)
