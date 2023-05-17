@@ -29,15 +29,13 @@ contributions:
 
 Discovered over 40 years ago, alternative splicing formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes  ({% cite Alt1980 %}). The majority of eukaryote genes have multiple transcriptional isoforms, and recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average ({% cite Piovesan2016 %}). In humans,  approximately 95% of multi-exon genes show evidence of alternative splicing (AS) and approximately 60% of genes have at least one alternative transcription start site, some of which exert antagonistic functions ({% cite Carninci2006 %}, {% cite Miura2012 %}).
 
-AS regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes ({% cite Wang2008 %}, {% cite Kalsotra2011 %}). Differential usage of isoforms in different conditions, often referred to as isoform switching (IS), can have substantial biological impact, caused by the difference in the functional potential of the two isoforms ({% cite VittingSeerup2017 %}).
-
-Extensive alternative splicing programmes contribute to the regulation of cell differentiation and organ development, and its disruption has been demonstrated to be able to contribute to virtually every aspect of cancer progression ({% cite Namba2021 %}, {% cite Bonnal2020 %}) (fig. 1). Cancer is a disease characterized by the uncontrolled growth and spread of abnormal cells in the body. It can start almost anywhere in the human body, which is made up of trillions of cells. From a molecular point of view, cancer is caused by changes to genes that control cell function, particularly how they grow and divide. There are more than 100 types of cancer, and they are usually named for the organs or tissues where they form. Some common types of cancer include carcinomas, sarcomas, leukemias, and lymphomas.
+AS regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes ({% cite Wang2008 %}, {% cite Kalsotra2011 %}), and its disruption has been demonstrated to be able to contribute to virtually every aspect of cancer progression ({% cite Namba2021 %}, {% cite Bonnal2020 %}) (fig. 1).
 
 ![Figure 01. Examples of cancer splicing dysregulation on cancer hallmarks](../../images/differential_isoform/differential_cancer.png "Effect of alternative splicing dysregulation on cancer progression. The diagram depicts various cancer hallmarks.")
 
-Alterations in gene splicing and isoform switching has been demonstrated to have significant impact on cancer development and progression. For instance, the unannotated isoform of TNS3 was found to be a novel driver of breast cancer  ({% cite Namba2021 %}). These alterations can lead to the activation of oncogenes (OCGs) or the inactivation of tumor suppressor genes (TSGs), which can promote or suppress tumorigenesis, respectively ({% cite Bashyam2019 %}). However, the strict classification of cancer genes as either OCGs or TSGs may be an oversimplification, as some genes can exhibit a dual role in cancer development, often impacting the same facet of tumorigenesis ({% cite Bashyam2019 %}).
+Alterations in gene splicing has been demonstrated to have significant impact on cancer development and progression. For instance, the unannotated isoform of TNS3 was found to be a novel driver of breast cancer ({% cite Namba2021 %}). These alterations can lead to the activation of oncogenes (OCGs) or the inactivation of tumor suppressor genes (TSGs), which can promote or suppress tumorigenesis, respectively ({% cite Bashyam2019 %}). However, the strict classification of cancer genes as either OCGs or TSGs may be an oversimplification, as some genes can exhibit a dual role in cancer development, often impacting the same facet of tumorigenesis ({% cite Bashyam2019 %}).
 
-In this tutorial, we aim to perform a genome-wide analysis of the isoform switch phaenomena in cancer, which offers improved resolution over gene expression, with the objective of identifying genes of potential clinical relevance.
+Differential usage of isoforms in different conditions, often referred to as isoform switching (IS), can have substantial biological impact, caused by the difference in the functional potential of the two isoforms ({% cite VittingSeerup2017 %}). In this tutorial, we aim to perform a genome-wide analysis of the IS phaenomena in cancer, which offers improved resolution over gene expression, with the objective of identifying genes of potential clinical relevance and gene regulatory networks on a genome-scale.
 
 > <agenda-title></agenda-title>
 >
@@ -847,7 +845,7 @@ From the figure 17 , it can be hypothesised that some of the alternative splicin
 
 According with the results (fig. 18), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the origital datasets in order to speed up the analysis).
 
-> <comment-title>Results on full-data</comment-title>
+> <comment-title>Results on original full-data</comment-title>
 >
 > If we perform the analysis on the original datasets, there exist statistically significant differences in isoform switching in three splicing patterns (fig. 19).
 >
@@ -869,7 +867,7 @@ To assess this observation, a standard proportion test is performed (fig. 21). T
 
 According with the results (fig. 21), there are not statistically significant differences of IS consequences despite the apparent differentes in total event counts. However, as noted previously, in that case it is due to the small size of the datasets used.
 
-> <comment-title>Results on full-data</comment-title>
+> <comment-title>Results on original full-data</comment-title>
 >
 > Let's have a look at the results corresponding to the complete original dataset analysis.
 >
