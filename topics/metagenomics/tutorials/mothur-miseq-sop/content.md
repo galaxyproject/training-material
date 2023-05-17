@@ -1103,7 +1103,7 @@ We will now repeat the OTU clustering we performed on our mock community for our
 
 {% else %}
 
-### Remove Mock Sample
+## Remove Mock Sample
 
 Now that we have cleaned up our data set as best we can, and assured ourselves of the quality of our sequencing
 pipeline by considering a mock sample, we are almost ready to cluster and classify our real data. But
@@ -1121,7 +1121,7 @@ the **Remove.groups** tool:
 >
 {: .hands_on}
 
-### Cluster sequences into OTUs
+## Cluster sequences into OTUs
 
 There are several ways we can perform clustering. For the Mock community, we used the traditional approach of
 using the **Dist.seqs** and **Cluster** tools. Alternatively, we can also use the **Cluster.split** tool. With
