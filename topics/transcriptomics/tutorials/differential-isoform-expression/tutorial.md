@@ -17,8 +17,9 @@ key_points:
 
 contributors:
 - gallardoalba
-editors:
 - lldelisle
+editors:
+- pavanvidem
 ---
 
 # Introduction
