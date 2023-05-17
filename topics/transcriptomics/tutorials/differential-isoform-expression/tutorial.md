@@ -2,7 +2,10 @@
 layout: tutorial_hands_on
 
 title: Genome-wide alternative splicing analysis
-zenodo_link: 'https://zenodo.org/record/7656544'
+zenodo_link: 'https://zenodo.org/record/7941871'
+tags:
+    - alternative-splicing
+    - isoform-switching
 questions:
 - Are there statistically significant different genome splicing patterns between healthy and tumor samples?
 - Are there ssignificant isoform switching events between healthy and tumor samples?
@@ -11,15 +14,15 @@ objectives:
 - Evaluate the differential splicing in specific genes
 time_estimation: 3H
 key_points:
-- Before start analyzing RNA-seq data, it is important to evaluate the quality of the samples by using RSeQC.
-- StringTie can be used for gene isoform quantification and isoform switch analysis.
+- Before starting RNA-seq data analysis, it is important to evaluate the quality of the samples by using RSeQC.
+- StringTie is a powerfull tool for gene isoform quantification and isoform switch analysis.
 - IsoformSwitchAnalyzeR allows to evaluate the statistical significance of isoform switch events in different conditions.
-
-contributors:
-- gallardoalba
-- lldelisle
-editors:
-- pavanvidem
+contributions:
+  authorship:
+    - gallardoalba
+    - lldelisle
+  editing:
+    - pavanvidem
 ---
 
 # Introduction
