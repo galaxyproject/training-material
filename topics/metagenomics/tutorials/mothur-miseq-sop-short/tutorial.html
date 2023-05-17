@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@f1d6fde1bfee3db4b1d572f20f1f92dfb4df0ff1",
+  release: "galaxy-training-network@646a204cacfe4ba9925f5683a41f44f4d8d5061f",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   tracesSampleRate: 0.01,
   // Capture Replay for no sessions by default
@@ -631,12 +631,6 @@ Sentry.init({
 	</li>
     
 	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org" title="">
-			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
-		</a>
-	</li>
-    
-	<li>
 		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
 			UseGalaxy.org.au <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
 		</a>
@@ -755,7 +749,10 @@ more in-depth discussion of each step, please see the <a href="/training-materia
       <li><a href="#removal-of-non-bacterial-sequences" id="markdown-toc-removal-of-non-bacterial-sequences">Removal of non-bacterial sequences</a></li>
     </ol>
   </li>
-  <li><a href="#optional-calculate-error-rates-based-on-our-mock-community" id="markdown-toc-optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</a></li>
+  <li><a href="#optional-calculate-error-rates-based-on-our-mock-community" id="markdown-toc-optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</a>    <ol>
+      <li><a href="#cluster-mock-sequences-into-otus" id="markdown-toc-cluster-mock-sequences-into-otus">Cluster mock sequences into OTUs</a></li>
+    </ol>
+  </li>
   <li><a href="#otu-clustering" id="markdown-toc-otu-clustering">OTU Clustering</a></li>
   <li><a href="#diversity-analysis" id="markdown-toc-diversity-analysis">Diversity Analysis</a>    <ol>
       <li><a href="#alpha-diversity" id="markdown-toc-alpha-diversity">Alpha diversity</a></li>
@@ -1261,17 +1258,15 @@ this chimera removal using the <code class="language-plaintext highlighter-rouge
   <div class="box-title hands-on-title" id="hands-on-clean-aligned-sequences-and-chimera-removal"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Clean Aligned sequences and Chimera Removal</div>
 
   <ol>
-    <li><strong>Import the workflow</strong> into Galaxy
-      <ul>
-        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow2_data_cleaning.ga">this workflow</a> or download it to your computer.</li>
-        <li>Import the workflow into Galaxy</li>
-      </ul>
+    <li>
+      <p><strong>Import the workflow</strong> into Galaxy</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflow-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a workflow</div>   <div class="show-when-galaxy-proxy-active"> Click here to run the  <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow2_data_cleaning"><strong>Data Cleaning and Chimera Removal</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <p class="hide-when-galaxy-proxy-active">Or copy the URL (e.g. via right-click) of <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow2_data_cleaning.ga">this workflow</a>, and import the workflow into Galaxy</p>   <div class="hide-when-galaxy-proxy-active"> <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote> <!--END_SNIPPET--> </div> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Run <strong>Workflow 2: Data Cleaning and Chimera Removal</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
+    <li>
+      <p>Run <strong>Workflow 2: Data Cleaning and Chimera Removal</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Aligned Sequences”</em>: the <code class="language-plaintext highlighter-rouge">align</code> output from <strong>Align.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1374,17 +1369,15 @@ and want to remove them from our dataset.</p>
   <div class="box-title hands-on-title" id="hands-on-taxonomic-classification-and-removal-of-non-bacterial-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Taxonomic Classification and removal of non-bacterial sequences</div>
 
   <ol>
-    <li><strong>Import the workflow</strong> into Galaxy
-      <ul>
-        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow3_classification.ga">this workflow</a> or download it to your computer.</li>
-        <li>Import the workflow into Galaxy</li>
-      </ul>
+    <li>
+      <p><strong>Import the workflow</strong> into Galaxy</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflow-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a workflow</div>   <div class="show-when-galaxy-proxy-active"> Click here to run the  <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow3_classification"><strong>Taxonomic Classification</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <p class="hide-when-galaxy-proxy-active">Or copy the URL (e.g. via right-click) of <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow3_classification.ga">this workflow</a>, and import the workflow into Galaxy</p>   <div class="hide-when-galaxy-proxy-active"> <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote> <!--END_SNIPPET--> </div> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Run <strong>Workflow 3: Classification</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
+    <li>
+      <p>Run <strong>Workflow 3: Classification</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Cleaned sequences”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Remove.seqs</strong> (i.e. pick.fasta) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1536,7 +1529,7 @@ Errors    Sequences
 <p>That is pretty good! The error rate is only 0.0065%! This gives us confidence that the rest of the samples
 are also of high quality, and we can continue with our analysis.</p>
 
-<h3 id="cluster-mock-sequences-into-otus">Cluster mock sequences into OTUs</h3>
+<h2 id="cluster-mock-sequences-into-otus">Cluster mock sequences into OTUs</h2>
 
 <p>We will now estimate the accuracy of our sequencing and analysis pipeline by clustering the Mock sequences into OTUs,
 and comparing the results with the expected outcome.</p>
@@ -1568,17 +1561,15 @@ separation.</p>
   <div class="box-title hands-on-title" id="hands-on-cluster-mock-sequences-into-otus"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cluster mock sequences into OTUs</div>
 
   <ol>
-    <li><strong>Import the workflow</strong> into Galaxy
-      <ul>
-        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow4_mock_otu_clustering.ga">this workflow</a> or download it to your computer.</li>
-        <li>Import the workflow into Galaxy</li>
-      </ul>
+    <li>
+      <p><strong>Import the workflow</strong> into Galaxy</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflow-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a workflow</div>   <div class="show-when-galaxy-proxy-active"> Click here to run the  <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow4_mock_otu_clustering"><strong>Mock OTU Clustering</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <p class="hide-when-galaxy-proxy-active">Or copy the URL (e.g. via right-click) of <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow4_mock_otu_clustering.ga">this workflow</a>, and import the workflow into Galaxy</p>   <div class="hide-when-galaxy-proxy-active"> <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote> <!--END_SNIPPET--> </div> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Run <strong>Workflow 4: Mock OTU Clustering</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
+    <li>
+      <p>Run <strong>Workflow 4: Mock OTU Clustering</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Mock Count Table”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> output from <strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1680,17 +1671,15 @@ separation.</p>
   <div class="box-title hands-on-title" id="hands-on-cluster-our-data-into-otus"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cluster our data into OTUs</div>
 
   <ol>
-    <li><strong>Import the workflow</strong> into Galaxy
-      <ul>
-        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow5_otu_clustering.ga">this workflow</a> or download it to your computer.</li>
-        <li>Import the workflow into Galaxy</li>
-      </ul>
+    <li>
+      <p><strong>Import the workflow</strong> into Galaxy</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflow-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a workflow</div>   <div class="show-when-galaxy-proxy-active"> Click here to run the  <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow5_otu_clustering"><strong>OTU Clustering</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <p class="hide-when-galaxy-proxy-active">Or copy the URL (e.g. via right-click) of <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow5_otu_clustering.ga">this workflow</a>, and import the workflow into Galaxy</p>   <div class="hide-when-galaxy-proxy-active"> <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote> <!--END_SNIPPET--> </div> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Run <strong>Workflow 5: OTU Clustering</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
+    <li>
+      <p>Run <strong>Workflow 5: OTU Clustering</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Sequences”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Remove.lineage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1830,17 +1819,15 @@ species rich habitat, only a small fraction has been sampled.</p>
   <div class="box-title hands-on-title" id="hands-on-alpha-diversity"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Alpha Diversity</div>
 
   <ol>
-    <li><strong>Import the workflow</strong> into Galaxy
-      <ul>
-        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow6_alpha_diversity.ga">this workflow</a> or download it to your computer.</li>
-        <li>Import the workflow into Galaxy</li>
-      </ul>
+    <li>
+      <p><strong>Import the workflow</strong> into Galaxy</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-5" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflow-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a workflow</div>   <div class="show-when-galaxy-proxy-active"> Click here to run the  <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow6_alpha_diversity"><strong>Alpha Diversity Analysis</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <p class="hide-when-galaxy-proxy-active">Or copy the URL (e.g. via right-click) of <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow6_alpha_diversity.ga">this workflow</a>, and import the workflow into Galaxy</p>   <div class="hide-when-galaxy-proxy-active"> <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-5" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote> <!--END_SNIPPET--> </div> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Run <strong>Workflow 6: Alpha Diversity</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
+    <li>
+      <p>Run <strong>Workflow 6: Alpha Diversity</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Shared File”</em>: the <code class="language-plaintext highlighter-rouge">Shared file</code> output from <strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1917,17 +1904,15 @@ coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wi
   <div class="box-title hands-on-title" id="hands-on-beta-diversity"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Beta Diversity</div>
 
   <ol>
-    <li><strong>Import the workflow</strong> into Galaxy
-      <ul>
-        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow7_beta_diversity.ga">this workflow</a> or download it to your computer.</li>
-        <li>Import the workflow into Galaxy</li>
-      </ul>
+    <li>
+      <p><strong>Import the workflow</strong> into Galaxy</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-6" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
+      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflow-6"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a workflow</div>   <div class="show-when-galaxy-proxy-active"> Click here to run the  <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow7_beta_diversity"><strong>Beta Diversity Analysis</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <p class="hide-when-galaxy-proxy-active">Or copy the URL (e.g. via right-click) of <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow7_beta_diversity.ga">this workflow</a>, and import the workflow into Galaxy</p>   <div class="hide-when-galaxy-proxy-active"> <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-6" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote> <!--END_SNIPPET--> </div> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Run <strong>Workflow 7: Beta Diversity</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
+    <li>
+      <p>Run <strong>Workflow 7: Beta Diversity</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Shared File”</em>: the <code class="language-plaintext highlighter-rouge">Shared file</code> output from <strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2453,7 +2438,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/f1d6fde1bfee3db4b1d572f20f1f92dfb4df0ff1">f1d6fde</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/646a204cacfe4ba9925f5683a41f44f4d8d5061f">646a204</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

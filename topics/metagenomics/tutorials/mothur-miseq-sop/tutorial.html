@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@f1d6fde1bfee3db4b1d572f20f1f92dfb4df0ff1",
+  release: "galaxy-training-network@646a204cacfe4ba9925f5683a41f44f4d8d5061f",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   tracesSampleRate: 0.01,
   // Capture Replay for no sessions by default
@@ -631,12 +631,6 @@ Sentry.init({
 	</li>
     
 	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org" title="">
-			UseGalaxy.org (Main)
-		</a>
-	</li>
-    
-	<li>
 		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
 			UseGalaxy.org.au
 		</a>
@@ -727,8 +721,15 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
       <li><a href="#removal-of-non-bacterial-sequences" id="markdown-toc-removal-of-non-bacterial-sequences">Removal of non-bacterial sequences</a></li>
     </ol>
   </li>
-  <li><a href="#optional-calculate-error-rates-based-on-our-mock-community" id="markdown-toc-optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</a></li>
-  <li><a href="#otu-clustering" id="markdown-toc-otu-clustering">OTU Clustering</a></li>
+  <li><a href="#optional-calculate-error-rates-based-on-our-mock-community" id="markdown-toc-optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</a>    <ol>
+      <li><a href="#cluster-mock-sequences-into-otus" id="markdown-toc-cluster-mock-sequences-into-otus">Cluster mock sequences into OTUs</a></li>
+    </ol>
+  </li>
+  <li><a href="#otu-clustering" id="markdown-toc-otu-clustering">OTU Clustering</a>    <ol>
+      <li><a href="#remove-mock-sample" id="markdown-toc-remove-mock-sample">Remove Mock Sample</a></li>
+      <li><a href="#cluster-sequences-into-otus" id="markdown-toc-cluster-sequences-into-otus">Cluster sequences into OTUs</a></li>
+    </ol>
+  </li>
   <li><a href="#diversity-analysis" id="markdown-toc-diversity-analysis">Diversity Analysis</a>    <ol>
       <li><a href="#alpha-diversity" id="markdown-toc-alpha-diversity">Alpha diversity</a></li>
       <li><a href="#beta-diversity" id="markdown-toc-beta-diversity">Beta diversity</a></li>
@@ -1704,7 +1705,7 @@ Errors    Sequences
 <p>That is pretty good! The error rate is only 0.0065%! This gives us confidence that the rest of the samples
 are also of high quality, and we can continue with our analysis.</p>
 
-<h3 id="cluster-mock-sequences-into-otus">Cluster mock sequences into OTUs</h3>
+<h2 id="cluster-mock-sequences-into-otus">Cluster mock sequences into OTUs</h2>
 
 <p>We will now estimate the accuracy of our sequencing and analysis pipeline by clustering the Mock sequences into OTUs,
 and comparing the results with the expected outcome.</p>
@@ -1853,7 +1854,7 @@ separation.</p>
   <p>(Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)</p>
 </blockquote>
 
-<h3 id="remove-mock-sample">Remove Mock Sample</h3>
+<h2 id="remove-mock-sample">Remove Mock Sample</h2>
 
 <p>Now that we have cleaned up our data set as best we can, and assured ourselves of the quality of our sequencing
 pipeline by considering a mock sample, we are almost ready to cluster and classify our real data. But
@@ -1877,7 +1878,7 @@ the <strong>Remove.groups</strong> tool:</p>
 
 </blockquote>
 
-<h3 id="cluster-sequences-into-otus">Cluster sequences into OTUs</h3>
+<h2 id="cluster-sequences-into-otus">Cluster sequences into OTUs</h2>
 
 <p>There are several ways we can perform clustering. For the Mock community, we used the traditional approach of
 using the <strong>Dist.seqs</strong> and <strong>Cluster</strong> tools. Alternatively, we can also use the <strong>Cluster.split</strong> tool. With
@@ -2827,7 +2828,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/f1d6fde1bfee3db4b1d572f20f1f92dfb4df0ff1">f1d6fde</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/646a204cacfe4ba9925f5683a41f44f4d8d5061f">646a204</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
