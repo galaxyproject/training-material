@@ -131,10 +131,14 @@
             <pre><span class="ruby-comment"># File _plugins/gtn/supported.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">calculate</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">tool_list</span>)
   <span class="ruby-comment"># p &quot;Calculating supported servers for this tool list&quot;</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">tool_list</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">tool_list</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-keyword">return</span> {
       <span class="ruby-string">&#39;exact&#39;</span> <span class="ruby-operator">=&gt;</span> [],
-      <span class="ruby-string">&#39;inexact&#39;</span> <span class="ruby-operator">=&gt;</span> [{ <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;UseGalaxy.eu&#39;</span>, <span class="ruby-string">&#39;url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;https://usegalaxy.eu&#39;</span>, <span class="ruby-string">&#39;usegalaxy&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> }],
+      <span class="ruby-string">&#39;inexact&#39;</span> <span class="ruby-operator">=&gt;</span> [
+        { <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;UseGalaxy.eu&#39;</span>, <span class="ruby-string">&#39;url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;https://usegalaxy.eu&#39;</span>, <span class="ruby-string">&#39;usegalaxy&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> },
+        { <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;UseGalaxy.org&#39;</span>, <span class="ruby-string">&#39;url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;https://usegalaxy.org&#39;</span>, <span class="ruby-string">&#39;usegalaxy&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> },
+        { <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;UseGalaxy.org.au&#39;</span>, <span class="ruby-string">&#39;url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;https://usegalaxy.org.au&#39;</span>, <span class="ruby-string">&#39;usegalaxy&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> }
+      ],
     }
   <span class="ruby-keyword">end</span>
 

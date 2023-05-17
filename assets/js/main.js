@@ -59,8 +59,12 @@ $("section.tutorial .hands_on,section.tutorial .hands-on").each((idx, el) => {
 // CYOA Support
 function cyoaChoice(text){
 	if(text !== undefined && text !== null){
-		const loc = new URL(document.location)
-		localStorage.setItem(`gtn-cyoa-${loc.pathname}`, text);
+		var loc = new URL(document.location)
+		try {
+			localStorage.setItem(`gtn-cyoa-${loc.pathname}`, text);
+		} catch(e) {
+			// Helaas pindakaas
+		}
 
 		var inputs = document.querySelectorAll(".gtn-cyoa input"),
 			options = [...inputs].map(x => x.value),
@@ -73,13 +77,17 @@ function cyoaChoice(text){
 		document.querySelectorAll(`.${text}`).forEach(el => el.classList.remove("gtn-cyoa-hidden"));
 
 		// Just in case we mark it as checked (e.g. if default/from URL)
-		document.querySelector(`input[value="${text}"]`).checked = true
+		var input_el = document.querySelector(`input[value="${text}"]`)
+		// Can be undefined
+		if(input_el) {
+			input_el.checked = true;
+		}
 	}
 }
 
 function cyoaDefault(defaultOption){
 	// Start with the URL parameter
-	const loc = new URL(document.location)
+	var loc = new URL(document.location)
 	var urlOption = loc.searchParams.get("gtn-cyoa");
 	if(urlOption){
 		cyoaChoice(urlOption);
@@ -87,8 +95,13 @@ function cyoaDefault(defaultOption){
 	}
 
 	// Otherwise fall back to local storage (survives refreshes)
-	var lsOption = localStorage.getItem(`gtn-cyoa-${loc.pathname}`);
-	if(lsOption !== null){
+	var lsOption;
+	try {
+		lsOption = localStorage.getItem(`gtn-cyoa-${loc.pathname}`);
+	} catch(e) {
+		// Helaas pindakaas
+	}
+	if(lsOption !== null && lsOption !== undefined){
 		cyoaChoice(lsOption);
 		return;
 	}

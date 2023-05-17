@@ -1,3 +1,23 @@
+function gtnLocalSet(key, value){
+	// Work around for localStorage not being available in Safari private browsing
+	// https://stackoverflow.com/a/14555361/358804
+	try {
+		localStorage.setItem(key, value);
+	} catch (e) {
+		console.log(`localStorage not available, cannot set ${key} to ${value}`);
+	}
+}
+
+function gtnLocalGet(key){
+	// Work around for localStorage not being available in Safari private browsing
+	try {
+		return localStorage.getItem(key);
+	} catch (e) {
+		console.log(`localStorage not available, cannot get ${key}`);
+		return undefined;
+	}
+}
+
 function getThemePreference(){
 	// If there's a theme specified in the URL
 	params = (new URL(document.location)).searchParams;
@@ -6,17 +26,18 @@ function getThemePreference(){
 	if(paramTheme){
 		setThemePreference(paramTheme, false);
 	}
-	return localStorage.getItem('training-theme');
+	return gtnLocalGet('training-theme');
 }
 
+
 function setThemePreference(newValue, automatic) {
-	localStorage.setItem('training-theme', newValue);
+	gtnLocalSet('training-theme', newValue);
 
 	// If this setTheme call was triggered "automatically", not by user choice, mark it as such
 	if(automatic === true){
-		localStorage.setItem('training-theme-automatic', 'true');
+		gtnLocalSet('training-theme-automatic', 'true');
 	} else {
-		localStorage.setItem('training-theme-automatic', 'false');
+		gtnLocalSet('training-theme-automatic', 'false');
 	}
 }
 
@@ -42,8 +63,8 @@ if(training_theme_cookie){
 }
 
 // However we have some additional things:
-const gtnThemeCurrentDate = new Date();
-const gtnThemeCurrentMonth = gtnThemeCurrentDate.getMonth();
+var gtnThemeCurrentDate = new Date();
+var gtnThemeCurrentMonth = gtnThemeCurrentDate.getMonth();
 
 if(gtnThemeCurrentMonth === 1 && window.location.pathname === "/"){ // Just for February
 	// If the user hasn't chosen a theme
@@ -59,9 +80,9 @@ else if(gtnThemeCurrentMonth === 6 && window.location.pathname === "/"){ // Just
 }
 else { // Not one of the "special" months
 	// If we had automatically set the theme in the past, or never automatically set one before
-	if (localStorage.getItem('training-theme-automatic') === "true" || localStorage.getItem('training-theme-automatic') === undefined){
+	if (gtnLocalGet('training-theme-automatic') === "true" || gtnLocalGet('training-theme-automatic') === undefined){
 		// Then we mark it as non-automatic
-		localStorage.setItem('training-theme-automatic', 'false');
+		gtnLocalSet('training-theme-automatic', 'false');
 		// And set the theme back to default
 		setTheme("default", false);
 	}
