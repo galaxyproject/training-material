@@ -7,11 +7,11 @@ tags:
     - alternative-splicing
     - isoform-switching
 questions:
-- Are there statistically significant different gene splicing patterns between samples?
+- Are there statistically significant differences in gene splicing patterns between samples?
 - Are there significant isoform switching events between the experimental conditions?
 objectives:
-- Perform genome-wide isoform analyis in order to evaluate diffences in isoform expression profiles between cancer and healthy tissues
-- Evaluate the differential splicing in specific genes
+- Perform genome-wide isoform analysis in order to evaluate differences in expression profiles between cancer and healthy tissues
+- Evaluate the differential alternative splicing in specific genes
 time_estimation: 3H
 key_points:
 - Before starting RNA-seq data analysis, it is important to evaluate the quality of the samples by using RSeQC.
