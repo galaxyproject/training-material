@@ -424,7 +424,7 @@ module GtnLinter
             ))
           end
 
-          if not ALLOWED_SHORT_IDS.include?(link) and not link.match(/^interactive_tool_/) and not link.match(/__[A-Z_]+__/)
+          if not ALLOWED_SHORT_IDS.include?(link) and not link.match(/^interactive_tool_/) and not link.match(/__[A-Z_]+__/) and not link.match(/^CONVERTER_/)
             if not link.match(/^{{.*}}$/)
               errs.push(ReviewDogEmitter.error(
                 path: @path,
