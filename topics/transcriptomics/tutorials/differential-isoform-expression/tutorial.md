@@ -143,7 +143,7 @@ Next we will retrieve the remaining datasets.
 > >    - {% icon param-files %} *"Tab-delimited file"*: Output of **Search in textfiles**
 > >    - *"Title column(s)"*: `Column: 1`
 > >    - *"Sequence column"*: `Column: 2`
-> > 4. {% tool [HISAT2](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} converter with the following parameters:
+> > 4. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} converter with the following parameters:
 > >    - In *"Source for the reference genome"*: `Use a genome from history`
 > >         - {% icon param-files %} *"Select the reference genome"*: Output of **Tabular-to-FASTA**
 > >    - In *"Is this a single or paired library"*: `Paired-end Dataset Collection`
