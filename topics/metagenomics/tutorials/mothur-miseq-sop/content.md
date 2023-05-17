@@ -980,7 +980,7 @@ That is pretty good! The error rate is only 0.0065%! This gives us confidence th
 are also of high quality, and we can continue with our analysis.
 
 
-### Cluster mock sequences into OTUs
+## Cluster mock sequences into OTUs
 
 We will now estimate the accuracy of our sequencing and analysis pipeline by clustering the Mock sequences into OTUs,
 and comparing the results with the expected outcome.
