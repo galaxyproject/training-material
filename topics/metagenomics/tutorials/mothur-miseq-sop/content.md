@@ -699,10 +699,8 @@ this chimera removal using the `VSEARCH` algorithm {% cite Rognes2016 %} that is
 > <hands-on-title>Clean Aligned sequences and Chimera Removal</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow2_data_cleaning.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow2_data_cleaning.ga" title="Data Cleaning" %}
 >
 > 2. Run **Workflow 2: Data Cleaning and Chimera Removal** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -803,10 +801,8 @@ and want to remove them from our dataset.
 > <hands-on-title>Taxonomic Classification and removal of non-bacterial sequences</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_classification.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow3_classification.ga" title="Taxonomic Classification" %}
 >
 > 2. Run **Workflow 3: Classification** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -1003,10 +999,8 @@ a clustering is derived using the OptiClust algorithm:
 > {% if include.short %}
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow4_mock_otu_clustering.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow4_mock_otu_clustering.ga" title="Mock OTU Clustering" %}
 >
 > 2. Run **Workflow 4: Mock OTU Clustering** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -1145,10 +1139,8 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 > {% if include.short %}
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow5_otu_clustering.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow5_otu_clustering.ga" title="OTU Clustering" %}
 >
 > 2. Run **Workflow 5: OTU Clustering** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -1335,10 +1327,8 @@ We will use a plotting tool to visualize the rarefaction curves, and use **Summa
 > <hands-on-title>Alpha Diversity</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow6_alpha_diversity.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow6_alpha_diversity.ga" title="Alpha Diversity Analysis" %}
 >
 > 2. Run **Workflow 6: Alpha Diversity** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -1477,10 +1467,8 @@ In the following workflow we will:
 > <hands-on-title>Beta Diversity</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow7_beta_diversity.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow7_beta_diversity.ga" title="Beta Diversity Analysis" %}
 >
 > 2. Run **Workflow 7: Beta Diversity** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
