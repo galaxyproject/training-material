@@ -433,11 +433,11 @@ Four flavors of this workflow are available that are optimized for different typ
 >
 {: .details}
 
-{% include _includes/cyoa-choices.html option1="tiled-amplicon Illumina paired-end" option2="tiled-amplicon ONT" option3="WGS Illumina paired-end" option4="WGS Illumina single-end" default="tiledamplicon-Illumina-pairedend" text="Now that you have imported the data and the corresponding workflow of your choice, please select the type of your input data so that we can adjust a few parts of this tutorial that are dependent on the nature of your data:" %}
+{% include _includes/cyoa-choices.html option1="tiled-amplicon Illumina paired-end" option2="tiled-amplicon ONT" option3="WGS Illumina paired-end" option4="WGS Illumina single-end" default="tiled-amplicon-Illumina-paired-end" text="Now that you have imported the data and the corresponding workflow of your choice, please select the type of your input data so that we can adjust a few parts of this tutorial that are dependent on the nature of your data:" %}
 
 > <hands-on-title>From sequencing data to annotated mutations</hands-on-title>
 >
-> <div class="tiledamplicon-Illumina-pairedend" markdown="1">
+> <div class="tiled-amplicon-Illumina-paired-end" markdown="1">
 >
 > 1. Run the **COVID-19: variation analysis on ARTIC PE data** {% icon workflow %} workflow using the following parameters:
 >
@@ -450,7 +450,7 @@ Four flavors of this workflow are available that are optimized for different typ
 >
 >    The additional workflow parameters *"Read removal minimum AF"*, *"Read removal maximum AF"*, *"Minimum DP required after amplicon bias correction"* and *"Minimum DP_ALT required after amplicon bias correction"* can all be left at their default values. The tiled-amplicon Illumina workflow goes to great lengths in order to calculate accurate allele-frequencies even in cases of viral mutations that affect the binding of some of the tiled-amplicon primers. The four settings above are for fine-tuning this behavior, but their defaults have been carefully chosen and you should modify them only if you know exactly what you are doing. 
 > </div>
-> <div class="tiledamplicon-ONT" markdown="1">
+> <div class="tiled-amplicon-ONT" markdown="1">
 >
 > 1. Run the **COVID-19: variation analysis of ARTIC ONT data** {% icon workflow %} workflow using the following parameters:
 >
@@ -464,7 +464,7 @@ Four flavors of this workflow are available that are optimized for different typ
 >    The workflow defaults are appropriate for ARTIC network primers, but you may have to modify them if your sample material has been amplified with another primer scheme. As suggested on the above page: try to set *"Minimum read length"* to the size of the smallest amplicon in your primer scheme, and *"Maximum read length"* to the size of the largest amplicon plus 200 nts.
 >
 > </div>
-> <div class="WGS-Illumina-pairedend" markdown="1">
+> <div class="WGS-Illumina-paired-end" markdown="1">
 >
 > 1. Run the **COVID-19: variation analysis on WGS PE data** {% icon workflow %} workflow using the following parameters:
 >
@@ -472,7 +472,7 @@ Four flavors of this workflow are available that are optimized for different typ
 >    - {% icon param-file %} *"NC_045512.2 FASTA sequence of SARS-CoV-2"*: the `SARS-CoV-2 reference` sequence
 >
 > </div>
-> <div class="WGS-Illumina-singleend" markdown="1">
+> <div class="WGS-Illumina-single-end" markdown="1">
 >
 > 1. Run the **COVID-19: variation analysis on WGS SE data** {% icon workflow %} workflow using the following parameters:
 >
@@ -533,19 +533,19 @@ The main output of the first workflow is a collection with annotated mutation ca
 >
 > 1. Run the **COVID-19: variation analysis reporting** {% icon workflow %} workflow with the following parameters:
 >
->    <div class="tiledamplicon-Illumina-pairedend" markdown="1">
+>    <div class="tiled-amplicon-Illumina-paired-end" markdown="1">
 >
 >    - *"Variation data to report"*: `Final (SnpEff-) annotated variants`
 >    </div>
->    <div class="tiledamplicon-ONT" markdown="1">
+>    <div class="tiled-amplicon-ONT" markdown="1">
 >
 >    - *"Variation data to report"*: `Final (SnpEff-) annotated variants`
 >    </div>
->    <div class="WGS-Illumina-pairedend" markdown="1">
+>    <div class="WGS-Illumina-paired-end" markdown="1">
 >
 >    - *"Variation data to report"*: `Final (SnpEff-) annotated variants with strand-bias soft filter applied`
 >    </div>
->    <div class="WGS-Illumina-singleend" markdown="1">
+>    <div class="WGS-Illumina-single-end" markdown="1">
 >
 >    - *"Variation data to report"*: `Final (SnpEff-) annotated variants with strand-bias soft filter applied`
 >    </div>
@@ -555,16 +555,16 @@ The main output of the first workflow is a collection with annotated mutation ca
 >      > <comment-title>Use the right collection of annotated variants!</comment-title>
 >      > The variation analysis workflow should have generated *two* collections of annotated variants - one called `Final (SnpEff-) annotated variants`, the other one called `Final (SnpEff-) annotated variants with strand-bias soft filter applied`.
 >      >
->      > <div class="tiledamplicon-Illumina-pairedend" markdown="1">
+>      > <div class="tiled-amplicon-Illumina-paired-end" markdown="1">
 >      > For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input here.
 >      > </div>
->      > <div class="tiledamplicon-ONT" markdown="1">
+>      > <div class="tiled-amplicon-ONT" markdown="1">
 >      > For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input here.
 >      > </div>
->      > <div class="WGS-Illumina-pairedend" markdown="1">
+>      > <div class="WGS-Illumina-paired-end" markdown="1">
 >      > For WGS (i.e. non-ampliconic) data, use the `Final (SnpEff-) annotated variants with strand-bias soft filter applied` collection as input here to eliminate some likely false-positive variant calls.
 >      > </div>
->      > <div class="WGS-Illumina-singleend" markdown="1">
+>      > <div class="WGS-Illumina-single-end" markdown="1">
 >      > For WGS (i.e. non-ampliconic) data, use the `Final (SnpEff-) annotated variants with strand-bias soft filter applied` collection as input here to eliminate some likely false-positive variant calls.
 >      > </div>
 >      >
@@ -733,19 +733,19 @@ The workflow takes the collection of called variants (one VCF dataset per input 
 >
 > 1. Run the **COVID-19: consensus construction** {% icon workflow %} workflow with these parameters:
 >
->    <div class="tiledamplicon-Illumina-pairedend" markdown="1">
+>    <div class="tiled-amplicon-Illumina-paired-end" markdown="1">
 >
 >    - *"Variant calls"*: `Final (SnpEff-) annotated variants`
 >    </div>
->    <div class="tiledamplicon-ONT" markdown="1">
+>    <div class="tiled-amplicon-ONT" markdown="1">
 >
 >    - *"Variant calls"*: `Final (SnpEff-) annotated variants`
 >    </div>
->    <div class="WGS-Illumina-pairedend" markdown="1">
+>    <div class="WGS-Illumina-paired-end" markdown="1">
 >
 >    - *"Variant calls"*: `Final (SnpEff-) annotated variants with strand-bias soft filter applied`
 >    </div>
->    <div class="WGS-Illumina-singleend" markdown="1">
+>    <div class="WGS-Illumina-single-end" markdown="1">
 >
 >    - *"Variant calls"*: `Final (SnpEff-) annotated variants with strand-bias soft filter applied`
 >    </div>
@@ -755,16 +755,16 @@ The workflow takes the collection of called variants (one VCF dataset per input 
 >      > <comment-title>Use the right collection of annotated variants!</comment-title>
 >      > The variation analysis workflow should have generated *two* collections of annotated variants - one called `Final (SnpEff-) annotated variants`, the other one called `Final (SnpEff-) annotated variants with strand-bias soft filter applied`.
 >      >
->      > <div class="tiledamplicon-Illumina-pairedend" markdown="1">
+>      > <div class="tiled-amplicon-Illumina-paired-end" markdown="1">
 >      > For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input here.
 >      > </div>
->      > <div class="tiledamplicon-ONT" markdown="1">
+>      > <div class="tiled-amplicon-ONT" markdown="1">
 >      > For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input here.
 >      > </div>
->      > <div class="WGS-Illumina-pairedend" markdown="1">
+>      > <div class="WGS-Illumina-paired-end" markdown="1">
 >      > For WGS (i.e. non-ampliconic) data, use the `Final (SnpEff-) annotated variants with strand-bias soft filter applied` collection as input here to eliminate some likely false-positive variant calls.
 >      > </div>
->      > <div class="WGS-Illumina-singleend" markdown="1">
+>      > <div class="WGS-Illumina-single-end" markdown="1">
 >      > For WGS (i.e. non-ampliconic) data, use the `Final (SnpEff-) annotated variants with strand-bias soft filter applied` collection as input here to eliminate some likely false-positive variant calls.
 >      > </div>
 >      >
@@ -774,7 +774,7 @@ The workflow takes the collection of called variants (one VCF dataset per input 
 >
 >       Collection with fully processed BAMs generated by the first workflow. 
 >
->       <span class="tiledamplicon-Illumina-pairedend">For tiled-amplicon data, the BAMs should NOT have undergone processing with **ivar removereads**, so please take care to select the right collection!</span>
+>       <span class="tiled-amplicon-Illumina-paired-end">For tiled-amplicon data, the BAMs should NOT have undergone processing with **ivar removereads**, so please take care to select the right collection!</span>
 >
 >    - *"Reference genome*": the `SARS-CoV-2 reference` sequence
 >
