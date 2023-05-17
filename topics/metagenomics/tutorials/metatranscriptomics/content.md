@@ -78,6 +78,7 @@ A graphical representation of the ASaiM workflow which we will be using today is
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>    
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. {% tool [Import](upload1) %} `T1A_forward` and `T1A_reverse` from [Zenodo]({{ page.zenodo_link }}) or from the data library (ask your instructor)
@@ -88,6 +89,7 @@ A graphical representation of the ASaiM workflow which we will be using today is
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
