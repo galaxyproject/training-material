@@ -448,7 +448,12 @@ module TopicFilter
       page_obj['tools'] += extract_workflow_tool_list(wf_data)
     end
     page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
-    page_obj['supported_servers'] = Gtn::Supported.calculate(site.data['public-server-tools'], page_obj['tools'])
+    if page_obj['tools'].empty?
+      page_obj['supported_servers'] = []
+    else
+      page_obj['supported_servers'] = Gtn::Supported.calculate(site.data['public-server-tools'], page_obj['tools'])
+    end
+
     topic_name_human = site.data[page_obj['topic_name']]['title']
     admin_install = Gtn::Toolshed.format_admin_install(site.data['toolshed-revisions'], page_obj['tools'],
                                                        topic_name_human)
