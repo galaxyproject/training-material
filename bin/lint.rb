@@ -398,7 +398,6 @@ module GtnLinter
       link = selected[2]
 
       errs = []
-
       if link.match(%r{/})
         if link.count('/') < 5
           errs.push(ReviewDogEmitter.error(
@@ -439,7 +438,8 @@ module GtnLinter
         if !ALLOWED_SHORT_IDS.include?(link) &&
            !link.match(/^interactive_tool_/) &&
            !link.match(/__[A-Z_]+__/) &&
-           !link.match(/^{{.*}}$/)
+           !link.match(/^{{.*}}$/) &&
+           !link.match(/^CONVERTER_/)
           errs.push(ReviewDogEmitter.error(
                       path: @path,
                       idx: idx,
@@ -932,70 +932,71 @@ module GtnLinter
       begin
         contents = handle.read
         data = JSON.parse(contents)
-        results = []
-
-        # Check if there's a missing workflow test
-        folder = File.dirname(path)
-        basename = File.basename(path).gsub(/.ga$/, '')
-        possible_tests = Dir.glob("#{folder}/#{basename}*ym*")
-        possible_tests = possible_tests.grep(/#{basename}[_-]tests?.ya?ml/)
-
-        if possible_tests.empty?
-          results += [
-            ReviewDogEmitter.file_error(path: path,
-                                        message: 'This workflow is missing a test, which is now mandatory. Please ' \
-                                                 'see [the FAQ on how to add tests to your workflows](' \
-                                                 'https://training.galaxyproject.org/training-material/faqs/' \
-                                                 'gtn/gtn_workflow_testing.html).',
-                                        code: 'GTN:027')
-          ]
-        else
-          # Load tests and run some quick checks:
-          possible_tests.each do |test_file|
-            test = YAML.safe_load(File.open(test_file))
-            # check that for each test, the outputs is non-empty
-            test.each do |test_job|
-              if test_job['outputs'].nil? || test_job['outputs'].empty?
-                results += [
-                  ReviewDogEmitter.file_error(path: path,
-                                              message: 'This workflow test does not test the contents of outputs, ' \
-                                                       'which is now mandatory. Please see [the FAQ on how to add ' \
-                                                       'tests to your workflows](' \
-                                                       'https://training.galaxyproject.org/training-material/faqs/' \
-                                                       'gtn/gtn_workflow_testing.html).',
-                                              code: 'GTN:030')
-                ]
-              end
-            end
-          end
-
-        end
-
-        # Check if they use TS tools, we do this here because it's easier to look at the plain text.
-        contents.split("\n").each.with_index do |text, linenumber|
-          if text.match(/testtoolshed/)
-            results += [
-              ReviewDogEmitter.error(
-                path: @path,
-                idx: linenumber,
-                match_start: 0,
-                match_end: text.length,
-                replacement: nil,
-                message: 'This step uses a tool from the testtoolshed. These are not permitted in GTN tutorials.',
-                code: 'GTN:017'
-              )
-            ]
-          end
-        end
-        results += fix_ga_wf(data)
-
-        results = filter_results(results, ignores)
-        emit_results(results)
       rescue StandardError => e
         warn "Error parsing #{path}: #{e}"
         emit_results([ReviewDogEmitter.file_error(path: path, message: 'Unparseable JSON in this workflow file.',
                                                   code: 'GTN:019')])
       end
+
+      results = []
+
+      # Check if there's a missing workflow test
+      folder = File.dirname(path)
+      basename = File.basename(path).gsub(/.ga$/, '')
+      possible_tests = Dir.glob("#{folder}/#{basename}*ym*")
+      possible_tests = possible_tests.grep(/#{basename}[_-]tests?.ya?ml/)
+
+      if possible_tests.empty?
+        results += [
+          ReviewDogEmitter.file_error(path: path,
+                                      message: 'This workflow is missing a test, which is now mandatory. Please ' \
+                                               'see [the FAQ on how to add tests to your workflows](' \
+                                               'https://training.galaxyproject.org/training-material/faqs/' \
+                                               'gtn/gtn_workflow_testing.html).',
+                                      code: 'GTN:027')
+        ]
+      else
+        # Load tests and run some quick checks:
+        possible_tests.each do |test_file|
+          test = YAML.safe_load(File.open(test_file))
+          # check that for each test, the outputs is non-empty
+          test.each do |test_job|
+            if test_job['outputs'].nil? || test_job['outputs'].empty?
+              results += [
+                ReviewDogEmitter.file_error(path: path,
+                                            message: 'This workflow test does not test the contents of outputs, ' \
+                                                     'which is now mandatory. Please see [the FAQ on how to add ' \
+                                                     'tests to your workflows](' \
+                                                     'https://training.galaxyproject.org/training-material/faqs/' \
+                                                     'gtn/gtn_workflow_testing.html).',
+                                            code: 'GTN:030')
+              ]
+            end
+          end
+        end
+
+      end
+
+      # Check if they use TS tools, we do this here because it's easier to look at the plain text.
+      contents.split("\n").each.with_index do |text, linenumber|
+        if text.match(/testtoolshed/)
+          results += [
+            ReviewDogEmitter.error(
+              path: @path,
+              idx: linenumber,
+              match_start: 0,
+              match_end: text.length,
+              replacement: nil,
+              message: 'This step uses a tool from the testtoolshed. These are not permitted in GTN tutorials.',
+              code: 'GTN:017'
+            )
+          ]
+        end
+      end
+      results += fix_ga_wf(data)
+
+      results = filter_results(results, ignores)
+      emit_results(results)
     end
   end
 
