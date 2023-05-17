@@ -378,7 +378,7 @@ DimPlot(filtered_srt, reduction = "umap", label = TRUE, label.box = TRUE)+ NoLeg
 We can also look for expression of particular genes and see how those map to our UMAP projection. This is often useful in getting a quick and initial understanding of which clusters might be representing which cell types.
 
 ```{r}
-FeaturePlot(filtered_srt, features = "Gapdh")
+FeaturePlot(filtered_srt, features = "Gapdh", order = TRUE)
 ```
 
 We just plotted a housekeeping gene, Gapdh, so the broad expression is expected. 
@@ -387,7 +387,7 @@ In practice, it is helpful to plot known markers of cell types you expect to be 
 >For example, we can plot macrophage marker Aif1 and get an idea of which cells and/or clusters might resemble macrophages: 
 
 ```{r}
-FeaturePlot(filtered_srt, features = "Aif1")
+FeaturePlot(filtered_srt, features = "Aif1", order = TRUE)
 ```
 
 It is a good idea, when analyzing your own data, to plot some markers of cell types you expect to be present. Later on we can also use these FeaturePlots to visualize manual annotation of clusters. 
@@ -453,10 +453,22 @@ It would be nice to know what these cells are. This analysis (googling all of th
 
 | Clusters | Markers                 | Cell Type                           |
 |----------|-------------------------|-------------------------------------|
-| 4        | Il2ra                   | Double negative (early T-cell)      |
-| 0,1,2,6  | Cd8b1, Cd8a, Cd4        | Double positive (middle T-cell)     |
-| 5        | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
-| 3        | Itm2a                   | Mature T-cell                       |
-| 7        | Aif1                    | Macrophages                         |
+| 3        | Il2ra                   | Double negative (early T-cell)      |
+| 1,2,4,6  | Cd8b1, Cd8a, Cd4        | Double positive (middle T-cell)     |
+| 0        | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
+| 5        | Itm2a                   | Mature T-cell                       |
 
->
+>We can manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
+```{r}
+library(dplyr)
+filtered_srt@meta.data<- mutate(filtered_srt@meta.data, celltype = case_when(
+  seurat_clusters %in% c(3) ~ "Double negative (early T-cell)", 
+  seurat_clusters %in% c(1, 2, 4, 6) ~ " Double positive (middle T-cell)",
+  seurat_clusters %in% c(0) ~ "Double positive (late middle T-cell)", 
+  seurat_clusters %in% c(5) ~ "Mature T-cell"
+))
+```
+Once we have labelled our clusters, we can visualize what our cell types actually look like: 
+```{r}
+DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype")
+```
