@@ -2,9 +2,13 @@
 import copy
 import re
 import sys
+import logging
 
 # read in a tutorial, and check the structure of it.
 file = sys.argv[1]
+if len(sys.argv) > 2 and sys.argv[2] == '--debug':
+    logging.basicConfig(level=logging.DEBUG)
+
 tuto = open(file, 'r')
 
 boxes = r'^([\s>]*>[\s>]*)'
@@ -44,7 +48,7 @@ for line, text in enumerate(tuto.read().split('\n')):
         depth = m.group(1).count('>')
     else:
         depth = 0
-    # print(f'{depth} {line} {text}')
+    logging.debug(f'{depth} {line} {text}')
 
     mw = re.match(whitespace, text).group(1)
 
@@ -53,7 +57,7 @@ for line, text in enumerate(tuto.read().split('\n')):
         m1 = re.match(box_open, unprefixed)
         if m1:
             tag = m1.group(1).replace('-', '_')
-            # print(f'{mw}{" " * (depth - 1)}<{tag}>')
+            logging.debug(f'line={line + 1} {mw}{" " * (depth - 1)}<{tag}>')
 
             tag_stack.append({
                 'tag': tag,
@@ -62,30 +66,32 @@ for line, text in enumerate(tuto.read().split('\n')):
                 'mw': mw,
             })
         else:
-            # print(f'{mw}{" " * (depth - 1)}<NONE>')
+            logging.debug(f'{mw}{" " * (depth - 1)}<NONE>')
             tag_stack.append({
                 'tag': None,
                 'line': line,
                 'text': text,
                 'mw': mw,
             })
-            # print(f"{line} Potential Quote/Hidden/Spoken")
+            logging.debug(f"{line} Potential Quote/Hidden/Spoken")
             # error?
 
     elif depth < prev_depth:
         unprefixed = stripN(text, depth)
         m1 = re.match(box_close, unprefixed)
-        # print(f'prev={prev_depth} -> curr={depth} line={line} m={m1} ts={len(tag_stack)} tss={[x["tag"] for x in tag_stack]}')
+        logging.debug(f'prev={prev_depth} -> curr={depth} line={line + 1} m1={m1} ts={len(tag_stack)} tss={[x["tag"] for x in tag_stack]}')
         if m1 is None:
-            # print(f'NONE {line} |{text}|')
-            # print(tag_stack[-1])
-            # print(f"{mw}{' ' * (depth)}</NONE>")
+            message = f"Potential broken box. A {tag_stack[-1]['tag']} was opened, but not closed on line {line}"
+            print(f"{file}:{line}: {message}")
+            logging.debug(f'NONE {line} |{text}|')
+            logging.debug(tag_stack[-1])
+            logging.debug(f"{mw}{' ' * (depth)}</NONE>")
             tag_stack.pop()
         else:
             if any([skippable_tag(BASE_SKIPPABLE_TAGS, t) for t in m1.groups()]):
-                # print(f"{mw}{' ' * (depth)}</NONE-skip tag={m1.groups()[0]}>")
-                # print(f'NONE {line} |{text}|')
-                # print(tag_stack[-1])
+                logging.debug(f"{mw}{' ' * (depth)}</NONE-skip tag={m1.groups()[0]}>")
+                logging.debug(f'NONE {line} |{text}|')
+                logging.debug(tag_stack[-1])
                 if 'code-2col' in m1.groups()[0] and (len(tag_stack) == 0 or tag_stack[-1]['tag'] is not None):
                     pass
                     # This is a special case.
@@ -96,8 +102,8 @@ for line, text in enumerate(tuto.read().split('\n')):
             else:
                 closing_tags = m1.groups(1)[0].replace('-', '_').lstrip('.').split('.')
                 closing_tag = closing_tags[0].strip()
-                # print(tag_stack[-1])
-                # print(f"{mw}{' ' * (depth)}</{closing_tag}>")
+                logging.debug(tag_stack[-1])
+                logging.debug(f"{mw}{' ' * (depth)}</{closing_tag}>")
 
                 if len(tag_stack) == 0:
                     message = f"Potential broken was closed with {closing_tag} on line {line}"
@@ -105,7 +111,7 @@ for line, text in enumerate(tuto.read().split('\n')):
                 if tag_stack[-1]['tag'] == closing_tag:
                     p = tag_stack.pop()
                 else:
-                    # print(f'prev={prev_depth} -> curr={depth} line={line} m={m1} c={closing_tags}')
+                    logging.debug(f'prev={prev_depth} -> curr={depth} line={line} m={m1} c={closing_tags}')
                     if not (tag_stack[-1]['tag'] is None and closing_tag not in BASE_EXPECTED_TAGS):
                         message = f"A {tag_stack[-1]['tag']} was opened, but closed with {closing_tag} on line {line}"
                         print(f"{file}:{line}: {message}")
