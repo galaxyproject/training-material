@@ -486,7 +486,7 @@ We'll use a prepared workflow to run the first few of the QCs below. This will a
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
 >
 > 2. Import this file as type BED file:
 >    ```
