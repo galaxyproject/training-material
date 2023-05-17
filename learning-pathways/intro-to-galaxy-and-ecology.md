@@ -8,8 +8,6 @@ description: |
   You will learn how to use Galaxy for analysis, and will be guided through the common
   steps of biodiversity data analysis: download, check, filter and explore biodiversity data and analyze abundance data through modeling.
 
-priority: 1
-
 pathway:
   - section: "Module 1: Introduction to Galaxy"
     description: |
