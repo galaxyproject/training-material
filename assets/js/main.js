@@ -60,7 +60,11 @@ $("section.tutorial .hands_on,section.tutorial .hands-on").each((idx, el) => {
 function cyoaChoice(text){
 	if(text !== undefined && text !== null){
 		var loc = new URL(document.location)
-		localStorage.setItem(`gtn-cyoa-${loc.pathname}`, text);
+		try {
+			localStorage.setItem(`gtn-cyoa-${loc.pathname}`, text);
+		} catch(e) {
+			// Helaas pindakaas
+		}
 
 		var inputs = document.querySelectorAll(".gtn-cyoa input"),
 			options = [...inputs].map(x => x.value),
@@ -87,8 +91,13 @@ function cyoaDefault(defaultOption){
 	}
 
 	// Otherwise fall back to local storage (survives refreshes)
-	var lsOption = localStorage.getItem(`gtn-cyoa-${loc.pathname}`);
-	if(lsOption !== null){
+	var lsOption;
+	try {
+		lsOption = localStorage.getItem(`gtn-cyoa-${loc.pathname}`);
+	} catch(e) {
+		// Helaas pindakaas
+	}
+	if(lsOption !== null && lsOption !== undefined){
 		cyoaChoice(lsOption);
 		return;
 	}
