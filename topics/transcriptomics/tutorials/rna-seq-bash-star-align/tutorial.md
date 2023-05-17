@@ -55,7 +55,6 @@ Each sample constitutes a separate biological replicate of the corresponding con
 > <comment-title></comment-title>
 >
 > This tutorial is significantly based on Galaxy's ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) tutorial.
-
 >
 {: .comment}
 
@@ -96,7 +95,7 @@ The "Data Upload" process is the only one in this tutorial that takes place dire
 >    >
 >    {: .comment}
 >
->    >Change the datatype from `fastqsanger` to `fastq`.
+>    Change the datatype from `fastqsanger` to `fastq`.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastq" %}
 >
@@ -189,7 +188,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > > ```
 > {: .code-in}
 > The same trimming procedure should take place for the second pair of reads (forward and reverse as above). After that, the files we are going to work with are the ones located in the **trimmedData** folder (4 in our case). 
-
+>
 {: .hands_on}
 
 > <hands-on-title>FastQC on trimmed data</hands-on-title>
@@ -227,7 +226,6 @@ The alignment process consists of two steps:
 > Our first step is to index the reference genome for use by STAR. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 >
 > > <code-in-title>Indexing with `STAR`</code-in-title>
-
 > > ```bash
 > > $ mkdir index
 > > $ STAR --runThreadN 16 --runMode genomeGenerate --genomeDir ~/index --genomeFastaFiles /import/14 --sjdbGTFfile /import/15 --sjdbOverhang 100 --genomeSAindexNbases 12

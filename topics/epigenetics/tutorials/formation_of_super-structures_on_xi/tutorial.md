@@ -410,8 +410,8 @@ To learn how to do the normalization, we will take the `wt_H3K4me3_rep1` sample 
 > >
 > > > <solution-title></solution-title>
 > > > 1. This tool generates a table with 4 columns:  reference sequence identifier, reference sequence length, number of mapped reads and number of placed but unmapped reads. Here it estimates how many reads mapped to which chromosome. Furthermore, it tells the chromosome lengths and naming convention (with or without 'chr' in the beginning)
-> > 2. 1,204,821 for ChIP-seq samples and 1,893,595 for the input
-> > 3. The number of reads can be different because of  different sequencing depth. It can bias the interpretation of the number of reads mapped to a specific genome region and the identification of the H3K4me3 sites. Specially here, as the number of reads for the input is higher than the ChIP data less regions could be identified having a significantly higher read coverage for the ChIP data comparing to the corresponding input.
+> > > 2. 1,204,821 for ChIP-seq samples and 1,893,595 for the input
+> > > 3. The number of reads can be different because of  different sequencing depth. It can bias the interpretation of the number of reads mapped to a specific genome region and the identification of the H3K4me3 sites. Specially here, as the number of reads for the input is higher than the ChIP data less regions could be identified having a significantly higher read coverage for the ChIP data comparing to the corresponding input.
 > > {: .solution }
 > {: .question}
 {: .hands_on}

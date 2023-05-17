@@ -143,8 +143,8 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 > > > <solution-title></solution-title>
 > > > You can do that using:
 > > > 1. **Paste two files side by side tool** {% icon tool %} with the following parameters:
-> >     - {% icon param-file %} *"paste"*: output from **RData parser** {% icon tool %} headed with "SPECIES"
-> >     - {% icon param-file %}*"and"*: output from **RData parser** {% icon tool %} with headed with "SITE"
+> > >   - {% icon param-file %} *"paste"*: output from **RData parser** {% icon tool %} headed with "SPECIES"
+> > >   - {% icon param-file %}*"and"*: output from **RData parser** {% icon tool %} with headed with "SITE"
 > > > 2. Repeat **Paste two files side by side** {% icon tool %} executions as many times as there are separated files in order to create a final dataset with all the columns:
 > > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 2 columns with the one headed by `YEAR`
 > > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 3 columns with the one headed by `MONTH`

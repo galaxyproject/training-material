@@ -141,7 +141,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 > > You may have noticed this text earlier when you were exploring Entrez search.  This text only appears some of the time, when the number of search results falls within a fairly broad window.  You won't see it if you only have a few results, and you won't see it if you have more results than the Run Selector can accept.
 > >
 > > *You need to get to Run Selector to send your results to Galaxy.* What if you don't have enough results to trigger this link being shown?  In that case you call get to the Run Selector by **clicking** on the `Send to` pulldown menu at the top right of the results panel.  To get to Run Selector, **select** `Run Selector` and then **click** the `Go` button.
-> ![sra entrez send to](../../images/sra_entrez_send_to.png)
+> > ![sra entrez send to](../../images/sra_entrez_send_to.png)
 > {: .tip}
 >
 >

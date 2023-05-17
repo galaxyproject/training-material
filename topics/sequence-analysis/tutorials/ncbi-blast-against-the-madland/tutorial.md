@@ -58,11 +58,11 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 >
 {: .hands_on}
 
-> We just imported a FASTA file into Galaxy. Now, the next would be to perfrom the BLAST analysis against MAdLandDB. 
+We just imported a FASTA file into Galaxy. Now, the next would be to perfrom the BLAST analysis against MAdLandDB. 
 
 ## Perform NCBI Blast+ on Galaxy
 
->   Since MAdLandDB is the collection of protein sequences, You can perform {% tool [BLASTp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} and {% tool [BLASTx](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) %} tools.
+Since MAdLandDB is the collection of protein sequences, You can perform {% tool [BLASTp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} and {% tool [BLASTx](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) %} tools.
 
 > <hands-on-title> Similarity search against MAdLand Database </hands-on-title>
 >
@@ -80,9 +80,7 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 
 ## Blast output
 
-> {% icon tool %} The BLAST output will be in tabular format (you can select the desired output format from the drop down menu) and include the following fields : 
-
->
+{% icon tool %} The BLAST output will be in tabular format (you can select the desired output format from the drop down menu) and include the following fields : 
 
 | Column | NCBI name | Description |
 |-------|------------|-------------|
@@ -99,7 +97,7 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 | 11 | evalue | Expectation value (E-value) |
 | 12 | bitscore | Bit score |
 
-> The fields are separated by tabs, and each row represents a single hit. For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html#similarity-searches-blast) tutorial.
+The fields are separated by tabs, and each row represents a single hit. For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html#similarity-searches-blast) tutorial.
 
 
 > <details-title>Further Reading about BLAST Tools in Galaxy</details-title>

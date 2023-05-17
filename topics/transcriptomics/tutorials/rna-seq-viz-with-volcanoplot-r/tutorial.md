@@ -298,9 +298,9 @@ We'll make the points a bit smaller. We'll change to 0.5.
 >    > <solution-title></solution-title>
 >    >
 >    > We could use `alpha =`. For example
->    ```R
->    geom_point(aes(colour = sig), alpha = 0.5)
->    ```
+>    > ```R
+>    > geom_point(aes(colour = sig), alpha = 0.5)
+>    > ```
 >    >
 >    {: .solution}
 {: .question}
@@ -336,9 +336,9 @@ We'll make the font size of the labels a bit smaller.
 >    > <solution-title></solution-title>
 >    >
 >    > We could change the 10 to 20 here
->    ```R
->    top <- slice_min(results, order_by = pvalue, n = 20)
->    ```
+>    > ```R
+>    > top <- slice_min(results, order_by = pvalue, n = 20)
+>    > ```
 >    >
 >    {: .solution}
 {: .question}

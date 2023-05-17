@@ -318,9 +318,9 @@ However, because of the high average data quality, there was no need to perform 
 >        - *"Read group sample name (SM)"*: `Not available.`
 >      - *"Platform/technology used to produce the reads (PL)"*: `ILLUNINA`
 >      - *"Select analysis mode"*: `Simple illumina mode`
- {: .hands_on}
+{: .hands_on}
 
- > Name the created list as **Mapping-lsit**
+Name the created list as **Mapping-lsit**
 
 
 

@@ -70,8 +70,7 @@ There are 12,738 [2d-reads](http://www.nature.com/nmeth/journal/v12/n4/fig_tab/n
 You can see that there many reads under the second peak with median of approximately 7.5 kb.
 
 > <warning-title>Oxford Nanopore Data Format</warning-title>
-> Oxford Nanopore machines output
- data in [fast5](http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/) format that contains additional information besides sequence data. In this tutorial we assume that this data is *already* converted into [fastq](https://en.wikipedia.org/wiki/FASTQ_format). An additional tutorial dedicated to handling fast5 datasets will be developed shortly.
+> Oxford Nanopore machines output data in [fast5](http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/) format that contains additional information besides sequence data. In this tutorial we assume that this data is *already* converted into [fastq](https://en.wikipedia.org/wiki/FASTQ_format). An additional tutorial dedicated to handling fast5 datasets will be developed shortly.
 {: .warning}
 
 

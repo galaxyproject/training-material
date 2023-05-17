@@ -50,7 +50,8 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 {: .agenda}
 
 # **Pre-installed tutorial tools, datasets and workflows from the docker image**
-> An efficient way to install and run the tutorial using papaa tools is available on docker based galaxy instance that has pre-installed papaa tool-suite as **papaa** under tools section. Additionally this local galaxy instance comes with datasets and workflow for generating PI3K_OG classifier. Instructions to run the docker image is below.
+
+An efficient way to install and run the tutorial using papaa tools is available on docker based galaxy instance that has pre-installed papaa tool-suite as **papaa** under tools section. Additionally this local galaxy instance comes with datasets and workflow for generating PI3K_OG classifier. Instructions to run the docker image is below.
 
 > <hands-on-title>Tutorial for galaxy docker container installation and running the workflow:</hands-on-title>
 > 1. Pulling the docker image from docker hub: Open a terminal and type the following command:
@@ -115,29 +116,29 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 
 > <details-title>Datasets descriptions</details-title>
 >
--    **pancan_rnaseq_freeze.tsv:** Publicly available gene expression data for the TCGA Pan-cancer dataset. This file has gene-expression data for ~20,000 genes (columns) in ~10,000 samples (rows).
--    **pancan_mutation_freeze.tsv:** Publicly available Mutational information for TCGA Pan-cancer dataset. This file has mutational data for all genes (columns) as binary valued (0/1) in all samples (rows).
--    **mutation_burden_freeze.tsv:** Publicly available Mutational information for TCGA Pan-cancer dataset. This file has mutational burden information for all samples(rows).
--    **sample_freeze.tsv:** The file lists the frozen samples as determined by TCGA PanCancer Atlas consortium along with raw RNA-Seq and mutation data. These were previously determined and included for all downstream analysis All other datasets were processed and subset according to the frozen samples.
--    **cosmic_cancer_classification.tsv:** Compendium of OG and TSG used for the analysis. This file has list of cancer genes(rows) from [cosmic database](https://cancer.sanger.ac.uk/cosmic) classified as Oncogene or tumor suppressor (columns).
--    **CCLE_DepMap_18Q1_maf_20180207.txt:** Publicly available Mutational data for CCLE cell lines from Broad Institute Cancer Cell Line Encyclopedia [CCLE](https://portals.broadinstitute.org/ccle)/[DepMap Portal](https://depmap.org/portal/). Variant classification along with nucleotide and protein level changes are provided in the columns for genes(rows).
--    **ccle_rnaseq_genes_rpkm_20180929_mod.tsv:** Publicly available Expression data for 1,019 cell lines (RPKM) from Broad Institute Cancer Cell Line Encyclopedia (CCLE) / DepMap Portal. This file has gene-expression data for genes(rows) in various cell lines (columns).
--    **CCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv:** Publicly available merged Mutational and copy number alterations that include gene amplifications and deletions for the CCLE cell lines. This file has mutational/copy number variation data for all cancer genes (rows) as binary valued (0/1) in all CCLE cell lines (columns).
--    **GDSC_cell_lines_EXP_CCLE_names.tsv:** Publicly available RMA normalized expression data for Genomics of Drug Sensitivity in Cancer [GDSC](https://www.cancerrxgene.org/) cell-lines. This data was subset to 382 cell lines that are common among CCLE and GDSC. This file has gene-expression data for genes(rows) in various cell lines (columns).
--    **GDSC_CCLE_common_mut_cnv_binary.tsv:** A subset of merged Mutational and copy number alterations that include gene amplifications and deletions for common cell lines between GDSC and CCLE.
--    **gdsc1_ccle_pharm_fitted_dose_data.txt:** Pharmacological data for GDSC-1 cell lines. This data was subset to 379 cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug information, concentrations used, AUC(columns) of 304 tested compounds in various cell-lines(rows).
--    **gdsc2_ccle_pharm_fitted_dose_data.txt:** Pharmacological data for GDSC-2 cell lines. This data was subset to 347 cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug information, concentrations used, AUC(columns) of 170 tested compounds in various cell-lines(rows).
--    **compounds_of_interest.txt:** This file contains the compounds of interest for generation of pharmacological correlations with classifier scores. List of inhibitor compounds against EGFR-signaling, ERK-MAPK-signaling, Other-kinases, PI3K/MTOR-signaling, and RTK-signaling pathways.
--    **tcga_dictonary.tsv:** List of cancer types used in the analysis.
--    **GSE69822_pi3k_sign.txt:** File with values assigned for tumor [1] or normal [-1] for external data samples deposited in Gene Expression Omnibus database accession:[GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822).
--    **GSE69822_pi3k_trans.csv:** Variant stabilized transformed values for the RNA expression levels in the external samples from [GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822).
--    **path_rtk_ras_pi3k_genes.txt:** List of genes belong to RTK,RAS,PI3K used in our study.
--    **path_myc_genes.txt:** List of genes belong to Myc signaling pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3).
--    **path_ras_genes.txt:** List of genes belong to Ras signaling Pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3).
--    **path_cell_cycle_genes.txt:** List of genes belong to cell cycle pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3).
--    **path_wnt_genes.txt:** List of genes belong to wnt signaling pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3).
--    **GSE94937_rpkm_kras.csv:** RNA expression levels in the external samples from [GSE94937](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937).
--    **GSE94937_kras_sign.txt:** File with values assigned for tumor [1] or normal [-1] for external data samples deposited in Gene Expression Omnibus database accession: [GSE94937](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937).
+> -    **pancan_rnaseq_freeze.tsv:** Publicly available gene expression data for the TCGA Pan-cancer dataset. This file has gene-expression data for ~20,000 genes (columns) in ~10,000 samples (rows).
+> -    **pancan_mutation_freeze.tsv:** Publicly available Mutational information for TCGA Pan-cancer dataset. This file has mutational data for all genes (columns) as binary valued (0/1) in all samples (rows).
+> -    **mutation_burden_freeze.tsv:** Publicly available Mutational information for TCGA Pan-cancer dataset. This file has mutational burden information for all samples(rows).
+> -    **sample_freeze.tsv:** The file lists the frozen samples as determined by TCGA PanCancer Atlas consortium along with raw RNA-Seq and mutation data. These were previously determined and included for all downstream analysis All other datasets were processed and subset according to the frozen samples.
+> -    **cosmic_cancer_classification.tsv:** Compendium of OG and TSG used for the analysis. This file has list of cancer genes(rows) from [cosmic database](https://cancer.sanger.ac.uk/cosmic) classified as Oncogene or tumor suppressor (columns).
+> -    **CCLE_DepMap_18Q1_maf_20180207.txt:** Publicly available Mutational data for CCLE cell lines from Broad Institute Cancer Cell Line Encyclopedia [CCLE](https://portals.broadinstitute.org/ccle)/[DepMap Portal](https://depmap.org/portal/). Variant classification along with nucleotide and protein level changes are provided in the columns for genes(rows).
+> -    **ccle_rnaseq_genes_rpkm_20180929_mod.tsv:** Publicly available Expression data for 1,019 cell lines (RPKM) from Broad Institute Cancer Cell Line Encyclopedia (CCLE) / DepMap Portal. This file has gene-expression data for genes(rows) in various cell lines (columns).
+> -    **CCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv:** Publicly available merged Mutational and copy number alterations that include gene amplifications and deletions for the CCLE cell lines. This file has mutational/copy number variation data for all cancer genes (rows) as binary valued (0/1) in all CCLE cell lines (columns).
+> -    **GDSC_cell_lines_EXP_CCLE_names.tsv:** Publicly available RMA normalized expression data for Genomics of Drug Sensitivity in Cancer [GDSC](https://www.cancerrxgene.org/) cell-lines. This data was subset to 382 cell lines that are common among CCLE and GDSC. This file has gene-expression data for genes(rows) in various cell lines (columns).
+> -    **GDSC_CCLE_common_mut_cnv_binary.tsv:** A subset of merged Mutational and copy number alterations that include gene amplifications and deletions for common cell lines between GDSC and CCLE.
+> -    **gdsc1_ccle_pharm_fitted_dose_data.txt:** Pharmacological data for GDSC-1 cell lines. This data was subset to 379 cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug information, concentrations used, AUC(columns) of 304 tested compounds in various cell-lines(rows).
+> -    **gdsc2_ccle_pharm_fitted_dose_data.txt:** Pharmacological data for GDSC-2 cell lines. This data was subset to 347 cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug information, concentrations used, AUC(columns) of 170 tested compounds in various cell-lines(rows).
+> -    **compounds_of_interest.txt:** This file contains the compounds of interest for generation of pharmacological correlations with classifier scores. List of inhibitor compounds against EGFR-signaling, ERK-MAPK-signaling, Other-kinases, PI3K/MTOR-signaling, and RTK-signaling pathways.
+> -    **tcga_dictonary.tsv:** List of cancer types used in the analysis.
+> -    **GSE69822_pi3k_sign.txt:** File with values assigned for tumor [1] or normal [-1] for external data samples deposited in Gene Expression Omnibus database accession:[GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822).
+> -    **GSE69822_pi3k_trans.csv:** Variant stabilized transformed values for the RNA expression levels in the external samples from [GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822).
+> -    **path_rtk_ras_pi3k_genes.txt:** List of genes belong to RTK,RAS,PI3K used in our study.
+> -    **path_myc_genes.txt:** List of genes belong to Myc signaling pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3).
+> -    **path_ras_genes.txt:** List of genes belong to Ras signaling Pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3).
+> -    **path_cell_cycle_genes.txt:** List of genes belong to cell cycle pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3).
+> -    **path_wnt_genes.txt:** List of genes belong to wnt signaling pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3).
+> -    **GSE94937_rpkm_kras.csv:** RNA expression levels in the external samples from [GSE94937](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937).
+> -    **GSE94937_kras_sign.txt:** File with values assigned for tumor [1] or normal [-1] for external data samples deposited in Gene Expression Omnibus database accession: [GSE94937](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937).
 {:.details}
 
 # PanCancer aberrant pathway activity analysis (PAPAA)
@@ -155,11 +156,9 @@ Where *alpha* and *l* are regularization and elastic net mixing hyperparameters 
 
 ***Sample Processing step:***
 
-- **x-matrix:**
-  > Gene-expression data comprises of expression levels for ~20,000 genes/sample and ~10,000 samples. Top 8,000 highly variable genes per sample with in each disease were measured by median absolute deviation (MAD) and considered for analysis.
+- **x-matrix:**: Gene-expression data comprises of expression levels for ~20,000 genes/sample and ~10,000 samples. Top 8,000 highly variable genes per sample with in each disease were measured by median absolute deviation (MAD) and considered for analysis.
 
-- **y-matrix:**
-  > Copy number and mutational data as binary valued (0/1) datasets for all samples. This matrix is subset to given pathway target genes and cancer types.
+- **y-matrix:**: Copy number and mutational data as binary valued (0/1) datasets for all samples. This matrix is subset to given pathway target genes and cancer types.
 
 We then randomly held out 10% of the samples to create a test set and rest 90% for training.  The testing set is used as the validation to evaluate the performance of any machine learning algorithm and the remaining parts are used for learning/training. The training set is balanced for different cancer-types and PI3K status.
 

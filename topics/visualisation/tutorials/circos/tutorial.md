@@ -531,7 +531,7 @@ You should see a plot like:
 > <comment-title>Background: Chromothripsis</comment-title>
 >
 > **Chromothripsis** is a phenomenon whereby (part of) a chromosome is shattered in a single catastrophic event, and subsequently imprecisely stitched
-together by the cell's repair mechanisms. This leads to a huge number of SV junctions.
+> together by the cell's repair mechanisms. This leads to a huge number of SV junctions.
 >
 > ![Chromothripsis](../../images/circos/chromothripsis.png "Chromothripsis is a scattering of the DNA, followed by an imprecise repair process, leading to many structural rearrangements."){: width="60%"}
 >

@@ -322,7 +322,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 >   > 4. The *"Add grid to plot for multi-fasta data sets"* parameter adds grid lines to the plot to separate multiple sequences. This is useful when using multi-fasta inputs.
 >   > 5. The *"Generate image of detected events"* parameter will include, if enabled, a plot of the rearrangements detected with colors, one per type of rearrangement. More on that later!
 >    {: .comment}
->    >
+>
 >
 {: .hands_on}
 
@@ -339,7 +339,7 @@ Figure 3 shows the comparison plot for the plant chromosomes. Notice that the or
 - Blocks that are not in the main diagonal are "transposed", meaning that they have been rearranged in one of the sequences but not in the other. These can also be inverted.
 
 > <comment-title>Note on the comparison plot</comment-title>
-Notice that the comparison plot is only an approximation. It is aimed at showing the general location and direction of syntenies. For example, if `CHROMEISTER` was run with parameter **Output dotplot size** equal to `1000`, then each pixel in the plot contains the averaged information of nearly 500,000 base pairs! Thus, any block can contain lots of smaller rearrangements, mutations, inversions, etc., that are ignored for the sake of providing a clean overview of the general alignment direction in a pairwise comparison.
+> Notice that the comparison plot is only an approximation. It is aimed at showing the general location and direction of syntenies. For example, if `CHROMEISTER` was run with parameter **Output dotplot size** equal to `1000`, then each pixel in the plot contains the averaged information of nearly 500,000 base pairs! Thus, any block can contain lots of smaller rearrangements, mutations, inversions, etc., that are ignored for the sake of providing a clean overview of the general alignment direction in a pairwise comparison.
 {: .comment}
 
 Also note that a `score` value can be seen in the title of the plot (this value is also available in the **Comparison score** file). This value is calculated based on the alignment coverage and number of rearrangements and can be used to automatically filter out similar from dissimilar sequence comparisons. A value of `0` means that the sequences are nearly equal (rearrangement-wise), whereas a value closer to `1` means that the sequences are more dissimilar.
