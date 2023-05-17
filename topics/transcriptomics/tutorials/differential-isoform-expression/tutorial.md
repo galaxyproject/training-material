@@ -12,8 +12,8 @@ objectives:
 time_estimation: 3H
 key_points:
 - Before start analyzing RNA-seq data, it is important to evaluate the quality of the samples by using RSeQC.
-- StingTie can be used for gene isoform quantification
-- SwitchIsoformAnalyzer can be used for evaluate the statistical siggnificance of isoform switching events in different conditions
+- StringTie can be used for gene isoform quantification and isoform switch analysis.
+- IsoformSwitchAnalyzeR allows to evaluate the statistical significance of isoform switch events in different conditions.
 
 contributors:
 - gallardoalba
@@ -47,7 +47,7 @@ In this tutorial, we aim to perform a genome-wide analysis of the isoform switch
 
 # Background on data
 
-The datasets consist of twelve FASTQ files, generated through the Illumina NovaSeq 6000 sequencing system. The samples were obtained by RNA sequencing on PANC1 cell line samples. The protocol used for extracting the samples includes the depletion of rRNAs by subtractive hybridization, a general strategy for mRNA enrichment in RNA-seq samples. The original datasets are available in the NCBI SRA database, with the accession number [PRJNA542693](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA542693).
+The datasets consist of twelve FASTQ files, generated through the Illumina NovaSeq 6000 sequencing system. The samples were obtained by RNA sequencing on PANC1 cell line samples. The protocol used for extracting the samples includes the depletion of rRNAs by subtractive hybridization, a general strategy for mRNA enrichment in RNA-seq samples. For this training we will use a reduced set of reads, in order to speed up the analysis. The original datasets are available in the NCBI SRA database, with the accession number [PRJNA542693](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA542693).
 
 ## Get data
 
@@ -89,7 +89,7 @@ The first step of our analysis consists of retrieving the RNA-seq datasets from 
 >       - Click `Add Definition` button and select `Type`: column `C`
 >       - Click `Add Definition` button and select `Pair-end Indicator`: column `D`
 >
->    - Click `Apply` and press <kbd>Upload</kbd>
+>    - Click `Apply`, give a name to your collection like `All samples`  and press <kbd>Upload</kbd>
 >
 {: .hands_on}
 
@@ -119,7 +119,7 @@ Next we will retrieve the remaining datasets.
 >    - From **Rules** menu select `Add / Modify Column Definitions`
 >       - Click `Add Definition` button and select `Name`: column `A`
 >       - Click `Add Definition` button and select `URL`: column `B`
->    - Click `Apply`, give a name to your collection like `all samples` and press <kbd>Upload</kbd>
+>    - Click `Apply` and press <kbd>Upload</kbd>
 >
 >
 {: .hands_on}
@@ -130,13 +130,25 @@ Next we will retrieve the remaining datasets.
 >
 > > <hands-on-title>Dataset subsampling</hands-on-title>
 > >
-> > 1. {% tool [Sub-sample sequences files ](toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs/sample_seqs/0.2.5) %} with the following parameters:
-> >    - {% icon param-files %} *"Multiple datasets"*: Each of the FASTQ files
-> >    - *"Subsampling approach"*: `Take every N-th sequence (or pair e.g. every fifth sequence)`
-> >    - *"N"*: `100`
+> > 1. {% tool [Convert FASTA to Tabular](CONVERTER_fasta_to_tabular) %} converter with the following parameters:
+> >    - {% icon param-files %} *"Fasta file"*: `GRCh38.p13.genome.fa.gz`
+> > 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} converter with the following parameters:
+> >    - {% icon param-files %} *"Select lines from"*: Output of **Convert FASTA to Tabular**
+> >    - *"Regular Expression2"*: `chr5`
+> > 3. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} converter with the following parameters:
+> >    - {% icon param-files %} *"Tab-delimited file"*: Output of **Search in textfiles**
+> >    - *"Title column(s)"*: `Column: 1`
+> >    - *"Sequence column"*: `Column: 2`
+> > 4. {% tool [HISAT2](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} converter with the following parameters:
+> >    - In *"Source for the reference genome"*: `Use a genome from history`
+> >         - {% icon param-files %} *"Select the reference genome"*: Output of **Tabular-to-FASTA**
+> >    - In *"Is this a single or paired library"*: `Paired-end Dataset Collection`
+> >         - *"Paired Collection"*: Select the collection of the original datasets
+> >    - In *"Output options"*: `Specify output options`
+> >         - *"Write aligned reads (in fastq format) to separate file(s)"*: `Yes`
 > {: .hands_on}
 >
-> In this way, we will only take 1% of reads at a random sampling rate.
+> It will generate three collections: one with the aligned BAM files, one with the FASTQ files corresponding with the forward reads, and one with the FASTQ files corresponding to the reverse reads. Those FASTQ files are the ones that will be used in this training.
 {: .details}
 
 # Quality assessment
@@ -151,7 +163,7 @@ Once we have got the datasets, we can start with the analysis. The first step is
 >   > <hands-on-title>Initial quality evaluation</hands-on-title>
 >   >
 >   > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
->   >     - *"Input Collection"*: `all samples`
+>   >     - *"Input Collection"*: `All samples`
 >   >
 >   > 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
 >   >    - {% icon param-collection %} *"Raw read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
@@ -173,12 +185,11 @@ Once we have got the datasets, we can start with the analysis. The first step is
 >
 >   Let's evaluate the per base sequence quality and the adapter content.
 >
->   ![Figure 02. MultiQC initial QC report](../../images/differential_isoform/fastqc_per_base_sequence_quality.png "MultiQC aggregated reports. Mean quality scores (a). Adapter content (b).")
+>   ![Figure 02. MultiQC initial QC report](../../images/differential_isoform/fastqc_per_base_sequence_quality.png "MultiQC aggregated reports. Mean quality scores.")
 >
->   As we can appreciate in the figure 2.a, the per base quality of all reads seems to be very good, with values over 30 in all cases. With respect to the adapter content, the adapter content is around 1% in most samples; it means that primers contamination is not a big issue in our case.
+>   As we can appreciate in the figure the per base quality of all reads seems to be very good, with values over 30 in all cases. In addition, according the report no samples werefound with adapter contamination higher than 0.1%.
 >
 {: .comment}
-
 
 
 ## Read pre-processing with fastp
@@ -189,7 +200,7 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 >
 > 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`
->        - {% icon param-collection %} *"Select paired collection(s)"*: `all samples`
+>        - {% icon param-collection %} *"Select paired collection(s)"*: `All samples`
 >        - In *"Global trimming options"*:
 >            - *"Trim front for input 1"*: `10`
 >    - In *"Overrepresented Sequence Analysis"*:
@@ -222,7 +233,7 @@ In that section makes use of three main tools: **RNA STAR**, considered a state-
 >
 > During two-pass mode splice junctions are discovered in a first alignment pass with high stringency, and are used as annotation in a second pass to permit lower stringency alignment, and therefore higher sensitivity (fig. 3). Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions that one-pass alignment ({% cite Veeneman2015 %}).
 >
-> ![Figure 03. RNA STAR twopass mode](../../images/differential_isoform/RNASTAR_twopass_mode.png "Two-pass alignment flowchart. Center and right, stepwise progression of two-pass alignment. First, the genome is indexed with gene annotation. Next, novel splice junctions are discovered from RNA sequencing data at a relatively high stringency (12 nt minimum spanning length). Third, these discovered splice junctions, and expressed annotated splice junctions are used to re-index the genome. Finally, alignment is performed a second time, quantifying novel and annotated splice junctions using the same, relatively lower stringency (3 nt minimum spanning length), producing splice junction expression (source: Veeneman et al., 2016)")
+> ![Figure 03. RNA STAR twopass mode](../../images/differential_isoform/RNASTAR_twopass_mode.png "Two-pass alignment flowchart. Center and right, stepwise progression of two-pass alignment. First, the genome is indexed with gene annotation. Next, novel splice junctions are discovered from RNA sequencing data at a relatively high stringency (12 nt minimum spanning length). Third, these discovered splice junctions, and expressed annotated splice junctions are used to re-index the genome. Finally, alignment is performed a second time, quantifying novel and annotated splice junctions using the same, relatively lower stringency (3 nt minimum spanning length), producing splice junction expression. Source: Veeneman et al., 2016.")
 >
 {: .details}
 
@@ -345,11 +356,11 @@ Now, we will integrate the outputs into **MultiQC**.
 {: .hands_on}
 
 
-First, we will evaluate the plot corresponding to the RNA STAR alignment scores (figure 6), which will allow us to easily compare the samples to get an overview of the quality of the samples. As a general criteria, we can consider that good quality samples should have at least 75% of the reads uniquely mapped. In our case, of samples have unique mapping values over 90%.
+First, we will evaluate the plot corresponding to the RNA STAR alignment scores (fig. 6), which will allow us to easily compare the samples to get an overview of the quality of the samples. As a general criteria, we can consider that good quality samples should have at least 75% of the reads uniquely mapped. In our case, of samples have unique mapping values over 90%.
 
 ![Figure 04. RNA STAR alignment stats plot](../../images/differential_isoform/star_alignment.png "RNA star alignment stats plot. Note that STAR counts a paired-end read as one read..")
 
-Now we can have a look at the **RSeQC** results;  we will evaluate the RSeQC **Read Distribution plot** (figure 7).
+Now we can have a look at the **RSeQC** results;  we will evaluate the RSeQC **Read Distribution plot** (fig. 7).
 
 ![Figure 05. RSeQC read distribution plot](../../images/differential_isoform/rseqc_read_distribution_plot.png "RSeQC read distribution. This module will calculate how mapped reads were distributed over genome feature (like CDS exon, 5’UTR exon, 3’ UTR exon, Intron, Intergenic regions).")
 
@@ -381,7 +392,7 @@ Since for a well annotated organism both the number of expressed genes and splic
 
 As we can appreciate in the plot, the known junctions tend to stabilize around 160.000, which indicates that the read sequencing depth is good enough for performing the alternative splicing analysis.
 
-After confirming that the saturation level is good enough, finally, we will check the output generated by the RSeQC junction annotation module (figure 8); it allows to distinguish between splice junctions (multiple reads show the same splicing event) and splice events (single read level). In addition, the detected junctions are divided in three exclusive categories: known splicing junctions, partial novel splicing junction (one of the splice site is novel) and new splicing junctions (figure 8).
+After confirming that the saturation level is good enough, finally, we will check the output generated by the RSeQC junction annotation module (fig. 8); it allows to distinguish between splice junctions (multiple reads show the same splicing event) and splice events (single read level). In addition, the detected junctions are divided in three exclusive categories: known splicing junctions, partial novel splicing junction (one of the splice site is novel) and new splicing junctions (fig. 9).
 
 ![Figure 09.A RSeQC junction annotation plot](../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png "RSeQC junction annotation. The detected junctions and events are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green). Splice events refer to the number of times a RNA-read is spliced (A). Splice junctions correspond to multiple splicing events spanning the same intron.") 
 
@@ -391,26 +402,25 @@ After evaluating the quality of the RNA-seq data, we can start with the transcri
 
 ## Transcriptome assembly and quantification with **StringTie**
 
-
-StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts. It uses a network flow algorithm to reconstruct transcripts and quantitate them simultaneously. This algorithm is combined with an assembly method to merge read pairs into full fragments in the initial phase ({% cite Kovaka2019 %}, {% cite Pertea2015 %}).
+**StringTie** is a fast and highly efficient assembler of RNA-seq alignments into potential transcripts. It uses a network flow algorithm to reconstruct transcripts and quantitate them simultaneously. This algorithm is combined with an assembly method to merge read pairs into full fragments in the initial phase ({% cite Kovaka2019 %}, {% cite Pertea2015 %}).
 
 > <comment-title>StringTie algorithm</comment-title>
 >
-> StringTie first groups the reads into clusters, collapsing the reads that align to the identical location on the genome and keeping a count of how many alignments were collapsed,  then creates a splice graph for each cluster from which it identifies transcripts, and then for each transcript it creates a separate flow network to estimate its expression level using a maximum flow algorithm ({% cite Pertea2015 %}) (figure 10).
+> StringTie first groups the reads into clusters, collapsing the reads that align to the identical location on the genome and keeping a count of how many alignments were collapsed,  then creates a splice graph for each cluster from which it identifies transcripts, and then for each transcript it creates a separate flow network to estimate its expression level using a maximum flow algorithm ({% cite Pertea2015 %}) (fig. 10).
 >
 > > ![Figure 10. StringTie algorithm details](../../images/differential_isoform/stringtie_algorithm.png "Transcript assembly pipeline for StringTie. It begins with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned. Source: Perea et al., 2015")
 >
-> StringTie uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate < 0.5%, then StringTie2 requires 25% more reads than usual (the default is 1 read per bp) to support that particular spliced alignment. In addition, if a spliced read spans a very long intron (more than 100,000 bp), StringTie2 accepts that alignment (and the intron) only if a larger anchor of 25 bp (10 bp is the default) is present on both sides of the splice site. Here the term “anchor” refers to the portion of the read aligned within the exon beginning at the exon-intron boundary ({% cite Kovaka2019 %}).
+> **StringTie** uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate < 0.5%, then **StringTie** requires 25% more reads than usual (the default is 1 read per bp) to support that particular spliced alignment. In addition, if a spliced read spans a very long intron (more than 100,000 bp), **StringTie** accepts that alignment (and the intron) only if a larger anchor of 25 bp (10 bp is the default) is present on both sides of the splice site. Here the term “anchor” refers to the portion of the read aligned within the exon beginning at the exon-intron boundary ({% cite Kovaka2019 %}).
 >
 >
 {: .comment}
 
-The main reason underlying the greater accuracy of StringTie most likely derives from its optimization criteria. By balancing the coverage (or flow) of each transcript across each assembly, it incorporates depth of coverage constraints into the assembly algorithm itself. When assembling a whole genome, coverage is a crucial parameter that must be used to constrain the algorithm; otherwise an assembler may incorrectly collapse repetitive sequences. Similarly, when assembling a transcript, each exon within an isoform should have similar coverage, and ignoring this parameter may produce sets of transcripts that are parsimonious but wrong ({% cite Pertea2015 %}).
+The main reason underlying the greater accuracy of **StringTie** most likely derives from its optimization criteria. By balancing the coverage (or flow) of each transcript across each assembly, it incorporates depth of coverage constraints into the assembly algorithm itself. When assembling a whole genome, coverage is a crucial parameter that must be used to constrain the algorithm; otherwise an assembler may incorrectly collapse repetitive sequences. Similarly, when assembling a transcript, each exon within an isoform should have similar coverage, and ignoring this parameter may produce sets of transcripts that are parsimonious but wrong ({% cite Pertea2015 %}).
 
 
 > <details-title>StringTie long RNA-seq assembly</details-title>
 >
-> To handle the high error rates in the long reads, StringTie implements two techniques. First, it correct potentially wrong splice sites by checking all the splice sites present in the alignment of a read with a high-error alignment rate. If a splice site is not supported by any low-error alignment reads, then it tries to find a nearby splice site (within 10 bp, by default) that is supported by the most alignments among all nearby splice sites. Secondly, it implements a pruning algorithm that reduces the size of the splicing graph to a more realistic size by removing the edges in the graph starting from the edge least supported by reads to the most supported edge, until the number of nodes in the splicing graph falls under a given threshold (by default 1000 nodes).
+> To handle the high error rates in the long reads, **StringTie** implements two techniques. First, it correct potentially wrong splice sites by checking all the splice sites present in the alignment of a read with a high-error alignment rate. If a splice site is not supported by any low-error alignment reads, then it tries to find a nearby splice site (within 10 bp, by default) that is supported by the most alignments among all nearby splice sites. Secondly, it implements a pruning algorithm that reduces the size of the splicing graph to a more realistic size by removing the edges in the graph starting from the edge least supported by reads to the most supported edge, until the number of nodes in the splicing graph falls under a given threshold (by default 1000 nodes).
 >
 {: .details}
 
@@ -429,7 +439,7 @@ Despite in this training we make use of RNA STAR as mapping tool, it is possible
 >
 {: .hands_on}
 
-Stringtie generates six collection with six elements each one, but we will use only the **transcript-level expression measurements** dataset collection.
+**Stringtie** generates six collection with six elements each one, but we will use only the `transcript-level expression measurements` dataset collection.
 
 > <details-title>Transcription-level expression measurements file</details-title>
 >
@@ -450,18 +460,18 @@ Stringtie generates six collection with six elements each one, but we will use o
 
 # Isoform analysis with **IsoformSwitchAnalyzeR**
 
-IsoformSwitchAnalyzeR is an open-source R package that enables both analyze changes in genome-wide patterns of alternative splicing and specific gene isoforms switch consequences (note: alternative splicing literally will result in isoform switches). An advantage of IsoformSwitchANalyzeR over other approaches is that it allows allows to integrate multiple layers of information, such as previously annotated coding sequences, de-novo coding potential predictions, protein domains and signal peptides. In addition, IsoformSwitchAnalyzeR facilitates identification of IS by making use of a new statistical methods that tests each individual isoform for differential usage, identifying the exact isoforms involved in an isoform switch ({% cite isoformswitchanalyzer %})
+**IsoformSwitchAnalyzeR** is an open-source R package that enables both analyze changes in genome-wide patterns of alternative splicing and specific gene isoforms switch consequences (note: alternative splicing literally will result in isoform switches). An advantage of **IsoformSwitchAnalyzeR** over other approaches is that it allows allows to integrate multiple layers of information, such as previously annotated coding sequences, de-novo coding potential predictions, protein domains and signal peptides. In addition, IsoformSwitchAnalyzeR facilitates identification of IS by making use of a new statistical methods that tests each individual isoform for differential usage, identifying the exact isoforms involved in an isoform switch ({% cite isoformswitchanalyzer %})
 
 > <comment-title>Nonsense mediated decay</comment-title>
 >
-> If transcript structures are predicted (either de-novo or guided) IsoformSwitchAnalyzeR offers an accurate tool for identifying the dominant ORF of the isoforms. The knowledge of isoform positions for the CDS/ORF allows for prediction of sensitivity to Nonsense Mediated Decay (NMD) — the mRNA quality control machinery that degrades isoforms with pre-mature termination codons (PTC).
+> If transcript structures are predicted (either de-novo or guided) **IsoformSwitchAnalyzeR** offers an accurate tool for identifying the dominant ORF of the isoforms. The knowledge of isoform positions for the CDS/ORF allows for prediction of sensitivity to Nonsense Mediated Decay (NMD) — the mRNA quality control machinery that degrades isoforms with pre-mature termination codons (PTC).
 >
 {: .comment}
 
 In this training, the IsoformSwitchAnalyzeR stage is divided in four steps:
 
-1. Data import: import into IsoformSwitchAnalyzer the transcription-level expression measurement dataset generated by Stringtie. This step also requires to import the GTF annotation file and the transcriptome.
-2. Pre-processing step: non-informative gene/isoforms are removed from the datasets and differentially isoform usage analysis with DEXSeq. Once the IS have been found, the corresponding nucleotide and aminoacid sequences are extracted.
+1. Data import: import into **IsoformSwitchAnalyzeR** the transcription-level expression measurement dataset generated by **Stringtie**. This step also requires to import the GTF annotation file and the transcriptome.
+2. Pre-processing step: non-informative gene/isoforms are removed from the datasets and differentially isoform usage analysis with **DEXSeq**. Once the IS have been found, the corresponding nucleotide and aminoacid sequences are extracted.
 3. Outward sequence analysis: The sequences obtained in the previous step are used in order to evaluate their coding potential and the motifs that they contain by using two different tools: **PfamScan** and **CPAT**.
 4. Isoform switching analysis: The final step involves importing and incorporating the results of the external sequence analysis, identifying intron retention, predicting functional consequences and generating the reports.
 
@@ -534,7 +544,7 @@ It generates a **switchAnalyzeRlist** object that contains all relevant informat
 
 Once the datasets have been imported into a RData file, we can start with the pre-processing step. In order to enhace the reliability of the downstream analysis, it is important to remove the non-informative genes/isoforms (e.g. single isoform genes and non-expressed isoforms).
 
-After the pre-processing, IsoformSwitchAnalyzieR performs the differential isoform usage analysis by using **DESXSeq**, which despite originally designed for testing differential exon usage, it has demonstrated to perform exceptionally well for differential isoform usage. DEXSeq uses generalized linear models to assess the significance of observed differences in isoform usage values between conditions, taking into account the biological variation between replicates ({% cite dexseq %}).
+After the pre-processing, **IsoformSwitchAnalyzieR** performs the differential isoform usage analysis by using **DESXSeq**, which despite originally designed for testing differential exon usage, it has demonstrated to perform exceptionally well for differential isoform usage.**DEXSeq** uses generalized linear models to assess the significance of observed differences in isoform usage values between conditions, taking into account the biological variation between replicates ({% cite dexseq %}).
 
 > <comment-title>Difference in isoform fraction contept</comment-title>
 >
@@ -611,23 +621,23 @@ PfamScan is an open-source tool developed by the EMBL-EBI for identifying protei
 
 ### Coding probablity prediction with **CPAT**
 
-CPAT (Coding-Potential Assessment Tool ) is an open-source alignment-free tool, which uses logistic regression to distinguish between coding and noncoding transcripts on the basis of four sequence features. To achieve this goal, CPAT computes the following four metrics: maximum length of the open reading frame (ORF), ORF coverage, Fickett TESTCODE and Hexamer usage bias.
+**CPAT** (Coding-Potential Assessment Tool ) is an open-source alignment-free tool, which uses logistic regression to distinguish between coding and noncoding transcripts on the basis of four sequence features. To achieve this goal, **CPAT** computes the following four metrics: maximum length of the open reading frame (ORF), ORF coverage, Fickett TESTCODE and Hexamer usage bias.
 
-Each of those metrics is computed from a set of known protein-coding genes and another set of non-coding genes. CPAT will then builds a logistic regression model using theses as predictor variables and the “protein-coding status” as the response variable. After evaluating the performance and determining the probability cutoff, the model can be used to predict new RNA sequences.
+Each of those metrics is computed from a set of known protein-coding genes and another set of non-coding genes. **CPAT** will then builds a logistic regression model using theses as predictor variables and the “protein-coding status” as the response variable. After evaluating the performance and determining the probability cutoff, the model can be used to predict new RNA sequences ({% cite Wang2013 %}).
 
 > <details-title>CPAT scores in detail</details-title>
 >
 > CPAT makes use of for predictior variables for performing the coding-potential analysis. The figure 10 shows the scoring distribution between coding and noncoding transcripts for the four metrics.
 >
-> ![Figure 12. CPAT predictor score distributions](../../images/differential_isoform/CPAT_distributions.jpg "Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. (A) ORF size. (B) ORF coverage. (C) Fickett score (TESTCODE statistic). (D) Hexamer usage bias measured by log-likelihood ratio.")
+> ![Figure 12. CPAT predictor score distributions](../../images/differential_isoform/CPAT_distributions.jpg "Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. The different subplots correspond to ORF size (A), ORF coverage (B), Fickett score (TESTCODE statistic) (C) and hexamer usage bias measured by log-likelihood ratio (D). Source: Wang et al., 2013")
 >
-> The maximum length of the ORF (figure 10,A) is one of the most fundamental features used to distinguish ncRNA from messenger RNA because a long putative ORF is unlikely to be observed by random chance in noncoding sequences.
+> The maximum length of the ORF (fig. 10,A) is one of the most fundamental features used to distinguish ncRNA from messenger RNA because a long putative ORF is unlikely to be observed by random chance in noncoding sequences.
 >
-> The ORF coverage (figure 10, B)  is the ratio of ORF to transcript lengths. This feature has demonstrated to have good classification power, and it is highly complementary to, and independent of, the ORF length (some large ncRNAs may contain putative long ORFs by random chance, but usually have much lower ORF coverage than protein-coding RNAs).
+> The ORF coverage (fig. 10, B)  is the ratio of ORF to transcript lengths. This feature has demonstrated to have good classification power, and it is highly complementary to, and independent of, the ORF length (some large ncRNAs may contain putative long ORFs by random chance, but usually have much lower ORF coverage than protein-coding RNAs).
 >
-> The Fickett TESTCODE (figure 10, C) distinguishes protein-coding RNA and ncRNA according to the combinational effect of nucleotide composition and codon usage bias. It is independent of the ORF, and when the test region is ≥200 nt in length (which includes most lncRNA), this feature alone can achieve 94% sensitivity and 97% specificity.
+> The Fickett TESTCODE (fig. 10, C) distinguishes protein-coding RNA and ncRNA according to the combinational effect of nucleotide composition and codon usage bias. It is independent of the ORF, and when the test region is ≥200 nt in length (which includes most lncRNA), this feature alone can achieve 94% sensitivity and 97% specificity.
 >
-> Finally, the fourth metric is the hexamer usage bias (figure 10, D), determines the relative degree of hexamer usage bias in a particular sequence. Positive values indicate a coding sequence, whereas negative values indicate a noncoding sequence.
+> Finally, the fourth metric is the hexamer usage bias (fig. 10, D), determines the relative degree of hexamer usage bias in a particular sequence. Positive values indicate a coding sequence, whereas negative values indicate a noncoding sequence.
 >
 {: .details}
 
@@ -673,7 +683,7 @@ For the downstream analysis, we will use only the `ORF best probabilities`, but 
 
 ## Isoform switching analysis
 
-Once the expression data has been integrated and the required auxiliar information has been generated, we can start with the final stage of the analysis. IsoformSwitchAnalyzeR will extract the isoforms with significant changes in their isoform usage and the isoform, that compensate for the changes. Then, those isoforms are classified according to their contribution to gene expression (determinated by the dIF values).Finally, the isoforms with increased contribution (dIF values larger than the dIFcutoff) are compared in a pairwise manner to the isoforms with negative contribution.
+Once the expression data has been integrated and the required auxiliar information has been generated, we can start with the final stage of the analysis. **IsoformSwitchAnalyzeR** will extract the isoforms with significant changes in their isoform usage and the isoform, that compensate for the changes. Then, those isoforms are classified according to their contribution to gene expression (determinated by the dIF values). Finally, the isoforms with increased contribution (dIF values larger than the dIFcutoff) are compared in a pairwise manner to the isoforms with negative contribution.
 
 IsoformSwitchAnalyzeR allows two analysis modes:
 
@@ -791,9 +801,9 @@ It generates five tabular files with the results of the different statistical an
 >
 > > <solution-title></solution-title>
 > >
-> > The top three genes are MPDU1, RGMB and ARAP1 (fig. 14).
+> > The top three genes are MPDU1, RGMB and ARAP1 (fig. 15).
 > >
-> > ![Figure  14. Switching gene/isoform tabular dataset](../../images/differential_isoform/list_genes.png "Switching gene/isoform dataset.")
+> > ![Figure  15. Switching gene/isoform tabular dataset](../../images/differential_isoform/list_genes.png "Switching gene/isoform dataset.")
 > >
 > >
 > {: .solution}
@@ -823,26 +833,47 @@ Alternative splicing events are classified for each isoform comparing it to the 
 >
 {: .comment}
 
-![Figure 17. Summary of genome-wide total splicing events](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event .")
+First, we will start analyzing the total number of splicing events (fig. 17).
 
-From the figure 17 , it can be hypothesised that some of the alternative splicing events are not equally used (e.g. IR). To formally analyze this type of uneven alternative splicing, IsoformSwithAnalyzeR computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 18).
+![Figure 17. Summary of genome-wide total splicing events](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "Analysis of splicing enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event.")
 
-![Figure 17. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
+From the figure 17 , it can be hypothesised that some of the alternative splicing events are not equally used. To formally analyze this type of uneven alternative splicing, **IsoformSwithAnalyzeR** computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 18).
 
-We can see that despite the probability of intron retention is higher in cancer, while health tissues utilizes alternative 3’ acceptor sites (A3) and alternative 5’ acceptor sites (A5) more when compared with the hyphotetical pre-RNA.
+> ![Figure 18. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
 
+According with the results (fig. 18), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the origital datasets in order to speed up the analysis).
+
+> <comment-title>Results on full-data</comment-title>
+>
+> If we perform the analysis on the original datasets, there exist statistically significant differences in isoform switching in three splicing patterns (fig. 19).
+>
+> ![Figure 19. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event_fulldata.png "Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
+>
+> According the results, there's statistically significant gain of introl retention in cancer tissues. On the other hand, health tissues utilize alternative 3’ acceptor sites (A3) and alternative 5’ acceptor sites (A5) more than cancer tissues, when compared with the hyphotetical pre-RNA.
+>
+{: .comment}
 
 #### Analysis of consequence enrichment
 
-To analyze large-scale patterns in predicted isoform switch consequences, IsoformSwitchAnalyzer computes all isoform switches resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss) when comparing cancer and ctrl (fig. 19). According the results many types of isoform switch consequences were either enriched or depleted in isoform switches between health and tumoral samples (e.g. intron retention).
+To analyze large-scale patterns in predicted isoform switch consequences, **IsoformSwitchAnalyzer** computes all isoform switches resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss) when comparing cancer and ctrl (fig. 20). According the results some types of functional consequences seem to be enriched or depleted between health and tumoral samples (e.g. intron retention).
 
-![Figure 19. Summary of genome-wide enrichment/depletion o isoform switching events](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png " Number of isoforms significantly differentially used between cancer and health resulting in at least one isoform switch consequence.")
+![Figure 20. Summary of genome-wide enrichment/depletion o isoform switching events](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png "Analysis of consequence enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one isoform switch consequence.")
 
-To assess this observation, a standard proportion test is performed (fig. 20. The results indicate that differences in intron retention between health and cancer samples is statistically significant).
+To assess this observation, a standard proportion test is performed (fig. 21). The results indicate that differences in intron retention between health and cancer samples is statistically significant).
 
 ![Figure 20. Enrichment/depletion isoform switch analysis](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
 
-According with the plot, the difference in intron retention is statistically significant; it means that the probability of a specific intron to remain unspliced in the mature polyadenylated mRNA in cancer tissues is higher than in health tissues.
+According with the results (fig. 21), there are not statistically significant differences of IS consequences despite the apparent differentes in total event counts. However, as noted previously, in that case it is due to the small size of the datasets used.
+
+> <comment-title>Results on full-data</comment-title>
+>
+> Let's have a look at the results corresponding to the complete original dataset analysis.
+>
+> ![Figure 20. Enrichment/depletion isoform switch analysis](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform_fulldata.png "Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
+>
+> According with the results (fig. 22), the difference in intron retention is statistically significant; it means that the probability of a specific intron to remain unspliced in the mature mRNA in cancer is higher than in health tissues.
+>
+{: .comment}
 
 > <question-title></question-title>
 >
@@ -878,11 +909,85 @@ According with the plot, the difference in intron retention is statistically sig
 
 #### Analysis of genome-wide changes in isoform usage
 
-This type of analysis is particular interesting if the expected difference between conditions is large, since such effects could result in genome-wide changes (fig. 22).
+Finally, we will evaluate the genome-wide changes in isoform usage. This type of analysis allows to identify if differentes in splicing events are genome-wide or retricted to specific regions, and is particular interesting if the expected difference between conditions is large (fig. 22).
 
 ![Figure 22. Genome-wide changes violing plot](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Genome-wide changes violin plot. The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
 
-According the results, genome-wide differences in A3 splicing events are statistically significant, meaning it is a global phenomenon, whereas none of the other splice types are general (i.e. they seem to only happen in a specific subset of the data).
+As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events.
+
+# Optional exercise: original data analysis
+
+As additional activity, you can try to run the pipeline by using the original datasets. In that case we will make use of the Galaxy Workflow System, which will allow us to automatize the analysis by minimizing the number of required manual steps. We will start by importing the datasets from Zenodo.
+
+> <hands-on-title>Retrieve miRNA-Seq and mRNA-Seq datasets</hands-on-title>
+>
+> 1. Create a new history for this analsyis
+> 2. Import the files from Zenodo:
+>
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on __Rule-based__ tab
+>    - *"Upload data as"*: `Collection(s)`
+>    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
+>
+>      ```
+>      SRR9050437_Health	{{ page.zenodo_link }}/files/SRR9050437_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050437_Health	{{ page.zenodo_link }}/files/SRR9050437_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050438_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050438_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050439_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050439_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050440_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050440_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050441_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050441_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050442_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050442_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      ```
+>
+>    - From **Rules** menu select `Add / Modify Column Definitions`
+>       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
+>       - Click `Add Definition` button and select `URL`: column `B`
+>       - Click `Add Definition` button and select `Type`: column `C`
+>       - Click `Add Definition` button and select `Pair-end Indicator`: column `D`
+>
+>    - Click `Apply`, provide the name `Original samples` and press <kbd>Upload</kbd>
+>
+{: .hands_on}
+
+Also, you will need to import the additional datasets. Now, we will import the worfklow from WorkflowHub.
+
+> <hands-on-title> Import a workflow </hands-on-title>
+>
+> 1. Click on the **Workflow** menu, located in the top bar.
+> 2. Click on the **Import** button, located in the right corner.
+> 3. In the section "Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)", click on **Search form**.
+>
+> 4. In the **TRS Server: *workflowhub.eu*** menu you should type `Genome-wide alternative splicing analysis`
+> 5. Finally select the latest available version.
+{: .hands_on}
+
+Once we have imported the workflow, we can run the pipeline on the [original datasets](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA542693).
+
+> <hands-on-title>Genome-wide alternative splicing analysis workflow</hands-on-title>
+>
+> 1. Click in the **Workflow** menu, located in the top bar
+> 2. Click in the {% icon workflow-run %} **Run workflow** buttom corresponding to `Genome-wide alternative splicing analysis`
+> 3. In the **Workflow: VGP genome profile analysis** menu:
+>   - {% icon param-file %} "*Reference genome*": `GRCh38.p13.genome.fa.gz`
+>   - {% icon param-file %} "*Genome annotation*": `gencode.v43.annotation.gtf.gz`
+>   - {% icon param-collection %} "*RNA-seq data collection*": `Original samples`
+>   - {% icon param-file %} "*Transcriptome*": `gencode.v43.transcripts.fa.gz`
+>   - {% icon param-file %} "*Protein coding transcripts*": `gencode.v43.pc_transcripts.fa.gz`
+>   - {% icon param-file %} "*lncRNA transcripts*": `gencode.v43.lncRNA_transcripts.fa.gz`
+>   - {% icon param-file %} "*CPAT header*": `CPAT_header.tab`
+>   - {% icon param-file %} "*Pfam-A HMM Stockholm file*": `Pfam-A.hmm.dat.gz`
+>   - {% icon param-file %} "*Active sites dataset*": `active_site.dat.gz`
+>   - {% icon param-file %} "*Pfam-A HMM library*": `Pfam-A.hmm.gz`
+>
+> 4. Click on the <kbd>Run workflow</kbd> buttom
+>
+>
+{: .hands_on}
 
 # Conclusion
 
