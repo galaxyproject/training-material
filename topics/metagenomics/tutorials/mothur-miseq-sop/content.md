@@ -700,7 +700,7 @@ this chimera removal using the `VSEARCH` algorithm {% cite Rognes2016 %} that is
 >
 > 1. **Import the workflow** into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow2_data_cleaning.ga" title="Data Cleaning" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow2_data_cleaning.ga" title="Data Cleaning and Chimera Removal" %}
 >
 > 2. Run **Workflow 2: Data Cleaning and Chimera Removal** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
