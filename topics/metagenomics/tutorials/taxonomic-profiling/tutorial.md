@@ -23,7 +23,7 @@ contributions:
    authorship:
     - sophia120199
     - bebatut
-    - zierep
+    - paulzierep
 tags:
 - metagenomics
 - taxonomic profiling
