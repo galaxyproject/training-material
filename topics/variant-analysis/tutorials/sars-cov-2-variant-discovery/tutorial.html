@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@592da9b4d1b9ebf798375b6b171ca09852cc3b09",
+  release: "galaxy-training-network@5ff40e136b76fbb07206374f6eaabd4597ae8a9e",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   tracesSampleRate: 0.01,
   // Capture Replay for no sessions by default
@@ -45,7 +45,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-16 17:26:42 +0000">
+<meta name="DC.date" content="2023-05-17 13:20:15 +0000">
 <meta name="DC.creator" content="Wolfgang Maier">
 <meta name="DC.creator" content="Bérénice Batut">
 
@@ -87,7 +87,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-16 17:26:42 +0000",
+  "dateModified": "2023-05-17 13:20:15 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data",
   "interactivityType": "mixed",
@@ -904,6 +904,12 @@ Sentry.init({
 		</a>
 	</li>
     
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
     
 	<li class="dropdown-header">
 		<b>Possibly Working</b>
@@ -927,7 +933,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 16, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -1494,19 +1500,19 @@ In addition, the tiled-amplicon data analysis workflows handle primer trimming a
 	</p>
 	
 	
-		<input id="cyoa-opt1" type="radio" name="cyoa" value="tiledamplicon-Illumina-pairedend" onclick="cyoaChoice('tiledamplicon-Illumina-pairedend')" />
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="tiled-amplicon-Illumina-paired-end" onclick="cyoaChoice('tiled-amplicon-Illumina-paired-end')" />
 		<label for="cyoa-opt1" class="select btn btn-secondary">tiled-amplicon Illumina paired-end</label>
 	
 	
-		<input id="cyoa-opt2" type="radio" name="cyoa" value="tiledamplicon-ONT" onclick="cyoaChoice('tiledamplicon-ONT')" />
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="tiled-amplicon-ONT" onclick="cyoaChoice('tiled-amplicon-ONT')" />
 		<label for="cyoa-opt2" class="select btn btn-secondary">tiled-amplicon ONT</label>
 	
 	
-		<input id="cyoa-opt3" type="radio" name="cyoa" value="WGS-Illumina-pairedend" onclick="cyoaChoice('WGS-Illumina-pairedend')" />
+		<input id="cyoa-opt3" type="radio" name="cyoa" value="WGS-Illumina-paired-end" onclick="cyoaChoice('WGS-Illumina-paired-end')" />
 		<label for="cyoa-opt3" class="select btn btn-secondary">WGS Illumina paired-end</label>
 	
 	
-		<input id="cyoa-opt4" type="radio" name="cyoa" value="WGS-Illumina-singleend" onclick="cyoaChoice('WGS-Illumina-singleend')" />
+		<input id="cyoa-opt4" type="radio" name="cyoa" value="WGS-Illumina-single-end" onclick="cyoaChoice('WGS-Illumina-single-end')" />
 		<label for="cyoa-opt4" class="select btn btn-secondary">WGS Illumina single-end</label>
 	
 
@@ -1520,7 +1526,7 @@ In addition, the tiled-amplicon data analysis workflows handle primer trimming a
 			}
 		}
 		ready(function() {
-			cyoaDefault("tiledampliconIlluminapairedend");
+			cyoaDefault("tiled-amplicon-Illumina-paired-end");
 		})
 	</script>
 	
@@ -1529,7 +1535,7 @@ In addition, the tiled-amplicon data analysis workflows handle primer trimming a
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-from-sequencing-data-to-annotated-mutations"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: From sequencing data to annotated mutations</div>
 
-  <div class="tiledamplicon-Illumina-pairedend">
+  <div class="tiled-amplicon-Illumina-paired-end">
 
     <ol>
       <li>
@@ -1550,7 +1556,7 @@ In addition, the tiled-amplicon data analysis workflows handle primer trimming a
       </li>
     </ol>
   </div>
-  <div class="tiledamplicon-ONT">
+  <div class="tiled-amplicon-ONT">
 
     <ol>
       <li>
@@ -1570,7 +1576,7 @@ The <a href="https://artic.network/ncov-2019/ncov2019-bioinformatics-sop.html">A
     </ol>
 
   </div>
-  <div class="WGS-Illumina-pairedend">
+  <div class="WGS-Illumina-paired-end">
 
     <ol>
       <li>
@@ -1584,7 +1590,7 @@ The <a href="https://artic.network/ncov-2019/ncov2019-bioinformatics-sop.html">A
     </ol>
 
   </div>
-  <div class="WGS-Illumina-singleend">
+  <div class="WGS-Illumina-single-end">
 
     <ol>
       <li>
@@ -1669,25 +1675,25 @@ For the other three we may hope for some results, but we should not expect those
     <li>
       <p>Run the <strong>COVID-19: variation analysis reporting</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> workflow with the following parameters:</p>
 
-      <div class="tiledamplicon-Illumina-pairedend">
+      <div class="tiled-amplicon-Illumina-paired-end">
 
         <ul>
           <li><em>“Variation data to report”</em>: <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code></li>
         </ul>
       </div>
-      <div class="tiledamplicon-ONT">
+      <div class="tiled-amplicon-ONT">
 
         <ul>
           <li><em>“Variation data to report”</em>: <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code></li>
         </ul>
       </div>
-      <div class="WGS-Illumina-pairedend">
+      <div class="WGS-Illumina-paired-end">
 
         <ul>
           <li><em>“Variation data to report”</em>: <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code></li>
         </ul>
       </div>
-      <div class="WGS-Illumina-singleend">
+      <div class="WGS-Illumina-single-end">
 
         <ul>
           <li><em>“Variation data to report”</em>: <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code></li>
@@ -1700,16 +1706,16 @@ For the other three we may hope for some results, but we should not expect those
         <div class="box-title comment-title" id="comment-use-the-right-collection-of-annotated-variants"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Use the right collection of annotated variants!</div>
         <p>The variation analysis workflow should have generated <em>two</em> collections of annotated variants - one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code>, the other one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code>.</p>
 
-        <div class="tiledamplicon-Illumina-pairedend">
+        <div class="tiled-amplicon-Illumina-paired-end">
           <p>For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code> collection as input here.</p>
         </div>
-        <div class="tiledamplicon-ONT">
+        <div class="tiled-amplicon-ONT">
           <p>For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code> collection as input here.</p>
         </div>
-        <div class="WGS-Illumina-pairedend">
+        <div class="WGS-Illumina-paired-end">
           <p>For WGS (i.e. non-ampliconic) data, use the <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code> collection as input here to eliminate some likely false-positive variant calls.</p>
         </div>
-        <div class="WGS-Illumina-singleend">
+        <div class="WGS-Illumina-single-end">
           <p>For WGS (i.e. non-ampliconic) data, use the <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code> collection as input here to eliminate some likely false-positive variant calls.</p>
         </div>
 
@@ -2092,25 +2098,25 @@ It is relatively obvious then that most of these variants have a AF value betwee
     <li>
       <p>Run the <strong>COVID-19: consensus construction</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> workflow with these parameters:</p>
 
-      <div class="tiledamplicon-Illumina-pairedend">
+      <div class="tiled-amplicon-Illumina-paired-end">
 
         <ul>
           <li><em>“Variant calls”</em>: <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code></li>
         </ul>
       </div>
-      <div class="tiledamplicon-ONT">
+      <div class="tiled-amplicon-ONT">
 
         <ul>
           <li><em>“Variant calls”</em>: <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code></li>
         </ul>
       </div>
-      <div class="WGS-Illumina-pairedend">
+      <div class="WGS-Illumina-paired-end">
 
         <ul>
           <li><em>“Variant calls”</em>: <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code></li>
         </ul>
       </div>
-      <div class="WGS-Illumina-singleend">
+      <div class="WGS-Illumina-single-end">
 
         <ul>
           <li><em>“Variant calls”</em>: <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code></li>
@@ -2123,16 +2129,16 @@ It is relatively obvious then that most of these variants have a AF value betwee
         <div class="box-title comment-title" id="comment-use-the-right-collection-of-annotated-variants-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Use the right collection of annotated variants!</div>
         <p>The variation analysis workflow should have generated <em>two</em> collections of annotated variants - one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code>, the other one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code>.</p>
 
-        <div class="tiledamplicon-Illumina-pairedend">
+        <div class="tiled-amplicon-Illumina-paired-end">
           <p>For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code> collection as input here.</p>
         </div>
-        <div class="tiledamplicon-ONT">
+        <div class="tiled-amplicon-ONT">
           <p>For tiled-amplicon data, please consider the strand-bias filter experimental and proceed with the <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code> collection as input here.</p>
         </div>
-        <div class="WGS-Illumina-pairedend">
+        <div class="WGS-Illumina-paired-end">
           <p>For WGS (i.e. non-ampliconic) data, use the <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code> collection as input here to eliminate some likely false-positive variant calls.</p>
         </div>
-        <div class="WGS-Illumina-singleend">
+        <div class="WGS-Illumina-single-end">
           <p>For WGS (i.e. non-ampliconic) data, use the <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code> collection as input here to eliminate some likely false-positive variant calls.</p>
         </div>
 
@@ -2144,7 +2150,7 @@ It is relatively obvious then that most of these variants have a AF value betwee
 
           <p>Collection with fully processed BAMs generated by the first workflow.</p>
 
-          <p><span class="tiledamplicon-Illumina-pairedend">For tiled-amplicon data, the BAMs should NOT have undergone processing with <strong>ivar removereads</strong>, so please take care to select the right collection!</span></p>
+          <p><span class="tiled-amplicon-Illumina-paired-end">For tiled-amplicon data, the BAMs should NOT have undergone processing with <strong>ivar removereads</strong>, so please take care to select the right collection!</span></p>
         </li>
         <li>
           <p><em>“Reference genome</em>”: the <code class="language-plaintext highlighter-rouge">SARS-CoV-2 reference</code> sequence</p>
@@ -2669,7 +2675,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/592da9b4d1b9ebf798375b6b171ca09852cc3b09">592da9b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5ff40e136b76fbb07206374f6eaabd4597ae8a9e">5ff40e1</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
