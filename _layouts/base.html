@@ -36,7 +36,7 @@
         {%- if page.cover %}{% assign coverimage = page.cover %}
         {%- elsif page.tags contains "cofest" %}{% assign coverimage = "/assets/images/cofest.png" %}
         {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "/assets/images/GalaxyNews.png" %}
-        {%- elsif n.tags contains "gat" %}{% assign coverimage = "/assets/images/gat.png" %}
+        {%- elsif page.tags contains "gat" %}{% assign coverimage = "/assets/images/gat.png" %}
         {%- else %}{% assign coverimage = "/assets/images/GTN.png" %}{% endif %}
         {% assign og_image = page.og_image | default: coverimage | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
         <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}">
