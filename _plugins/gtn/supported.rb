@@ -18,10 +18,14 @@ module Gtn
     #  }
     def self.calculate(data, tool_list)
       # p "Calculating supported servers for this tool list"
-      if data.nil? || data.empty?
+      if data.nil? || data.empty? || tool_list.empty? || tool_list.nil?
         return {
           'exact' => [],
-          'inexact' => [{ 'name' => 'UseGalaxy.eu', 'url' => 'https://usegalaxy.eu', 'usegalaxy' => true }],
+          'inexact' => [
+            { 'name' => 'UseGalaxy.eu', 'url' => 'https://usegalaxy.eu', 'usegalaxy' => true },
+            { 'name' => 'UseGalaxy.org', 'url' => 'https://usegalaxy.org', 'usegalaxy' => true },
+            { 'name' => 'UseGalaxy.org.au', 'url' => 'https://usegalaxy.org.au', 'usegalaxy' => true }
+          ],
         }
       end
 
