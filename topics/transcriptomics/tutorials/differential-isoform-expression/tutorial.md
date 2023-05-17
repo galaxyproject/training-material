@@ -899,9 +899,9 @@ According with the results (fig. 21), there are not statistically significant di
 >
 > > <solution-title></solution-title>
 > >
-> > This information can be found in the eighth column of the Consequences enrichment dataset (fig. 21).
+> > This information can be found in the eighth column of the Consequences enrichment dataset (fig. 23).
 > >
-> > ![Figure 21. Consequences enrichment dataset](../../images/differential_isoform/consequences_dataset.png "Consequences enrichment table.")
+> > ![Figure 23. Consequences enrichment dataset](../../images/differential_isoform/consequences_dataset.png "Consequences enrichment table.")
 > >
 > > In that case, the adjusted P-value is 0.598.
 > >
@@ -911,9 +911,9 @@ According with the results (fig. 21), there are not statistically significant di
 
 #### Analysis of genome-wide changes in isoform usage
 
-Finally, we will evaluate the genome-wide changes in isoform usage. This type of analysis allows to identify if differentes in splicing events are genome-wide or retricted to specific regions, and is particular interesting if the expected difference between conditions is large (fig. 22).
+Finally, we will evaluate the genome-wide changes in isoform usage. This type of analysis allows to identify if differentes in splicing events are genome-wide or retricted to specific regions, and is particular interesting if the expected difference between conditions is large (fig. 24).
 
-![Figure 22. Genome-wide changes violing plot](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Genome-wide changes violin plot. The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
+![Figure 24. Genome-wide changes violing plot](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Genome-wide changes violin plot. The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
 
 As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events.
 
