@@ -77,7 +77,11 @@ function cyoaChoice(text){
 		document.querySelectorAll(`.${text}`).forEach(el => el.classList.remove("gtn-cyoa-hidden"));
 
 		// Just in case we mark it as checked (e.g. if default/from URL)
-		document.querySelector(`input[value="${text}"]`).checked = true
+		var input_el = document.querySelector(`input[value="${text}"]`)
+		// Can be undefined
+		if(input_el) {
+			input_el.checked = true;
+		}
 	}
 }
 
