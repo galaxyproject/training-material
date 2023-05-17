@@ -42,8 +42,8 @@ if(training_theme_cookie){
 }
 
 // However we have some additional things:
-const gtnThemeCurrentDate = new Date();
-const gtnThemeCurrentMonth = gtnThemeCurrentDate.getMonth();
+var gtnThemeCurrentDate = new Date();
+var gtnThemeCurrentMonth = gtnThemeCurrentDate.getMonth();
 
 if(gtnThemeCurrentMonth === 1 && window.location.pathname === "/"){ // Just for February
 	// If the user hasn't chosen a theme
