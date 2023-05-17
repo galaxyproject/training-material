@@ -7,8 +7,8 @@ tags:
     - alternative-splicing
     - isoform-switching
 questions:
-- Are there statistically significant different genome splicing patterns between healthy and tumor samples?
-- Are there ssignificant isoform switching events between healthy and tumor samples?
+- Are there statistically significant different gene splicing patterns between samples?
+- Are there significant isoform switching events between the experimental conditions?
 objectives:
 - Perform genome-wide isoform analyis in order to evaluate diffences in isoform expression profiles between cancer and healthy tissues
 - Evaluate the differential splicing in specific genes
