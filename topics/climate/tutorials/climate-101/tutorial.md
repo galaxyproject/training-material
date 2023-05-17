@@ -348,7 +348,7 @@ temperature. The baseline temperature is typically computed by averaging 30 or m
 >
 > [Copernicus Climate Bulletins](https://climate.copernicus.eu/climate-bulletins) presents the current condition of the climate using key climate change indicators.
 > They also provide data, analysis of the maps and guidance on how they are produced. Datasets for temperature anomalies can be found and are
-> regularly updated (with recent dates). For instance, in March 2020, the corresponding dataset can be found [here](https://climate.copernicus.eu/sites/default/files/2020-04/ts_1month_anomaly_Global_ea_2t_202003_v01.csv).
+> regularly updated (with recent dates). For instance, in March 2020, [the corresponding dataset](https://climate.copernicus.eu/sites/default/files/2020-04/ts_1month_anomaly_Global_ea_2t_202003_v01.csv) can be found on the Copernicus site.
 >
 {: .tip}
 
