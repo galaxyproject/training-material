@@ -20,6 +20,7 @@ layout: base
 		<div class="row">
 
 			<div class="col-md-3">
+				<div>
 				{% if contributors[page.contributor].github != false %}
 					<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
 				{% elsif contributors[page.contributor].avatar %}
@@ -29,8 +30,9 @@ layout: base
 						<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
 					</span>
 				{% endif %}
+				</div>
 
-                {% if contributors[page.contributor].bio %}
+				{% if contributors[page.contributor].bio %}
 				<p class="text-muted">
 					{{ contributors[page.contributor].bio }}
 				</p>
@@ -52,6 +54,23 @@ layout: base
 				</div>
 				{% endif %}
 
+				{% if contributors[page.contributor].funding_id %}
+					Grant ID:
+					{% if contributors[page.contributor].funding_system %}
+						{% if contributors[page.contributor].funding_system == "cordis" %}
+							<a href="https://cordis.europa.eu/project/id/{{ contributors[page.contributor].funding_id }}">
+								{{ contributors[page.contributor].funding_id }}
+							</a>
+						{% elsif contributors[page.contributor].funding_system == "erasmusplus" %}
+							<a href="https://erasmus-plus.ec.europa.eu/projects/search/details/{{ contributors[page.contributor].funding_id }}">
+								{{ contributors[page.contributor].funding_id }}
+							</a>
+						{% endif %}
+					{% else %}
+						{{ contributors[page.contributor].funding_id }}
+					{% endif %}
+				{% endif %}
+
 				{% if contributors[page.contributor].email %}
 				<div class="contact-items">
 					<a title="E-mail" href="mailto:{{ contributors[page.contributor].email }}">
@@ -60,10 +79,18 @@ layout: base
 				</div>
 				{% endif %}
 
-				{% if contributors[page.contributor].gitter %}
+				{% if contributors[page.contributor].matrix %}
 				<div class="contact-items">
-					<a title="Gitter" href="https://gitter.im/{{ contributors[page.contributor].gitter }}">
-						{% icon gitter %} {{ contributors[page.contributor].gitter }}
+					<a title="matrix" href="https://matrix.to/#/@{{ contributors[page.contributor].matrix }}">
+						{% icon gitter %} {{ contributors[page.contributor].matrix }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if contributors[page.contributor].fediverse %}
+				<div class="contact-items">
+					<a href="{{ contributors[page.contributor].fediverse }}" rel="me">
+						<span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> {{ contributors[page.contributor].fediverse }}
 					</a>
 				</div>
 				{% endif %}
@@ -109,6 +136,9 @@ layout: base
 				<h1>
 					{{ contributors[page.contributor].name | default: page.contributor }}
 				</h1>
+				{% if contributors[page.contributor].funder %}
+				<div class="label label-default label-large" style="{{ 'GTN Funder' | colour_tag }}">GTN Funder</div>
+				{% endif %}
 				{% if contributors[page.contributor].in_memoriam %}
 				<div class="alert alert-dark" role="alert">
 					<h2 class="alert-heading">In Memoriam</h2>
@@ -128,6 +158,7 @@ layout: base
 
                 {% unless contributors[page.contributor].github == false %}
                 <br><br>
+		{% unless contributors[page.contributor].funder %}
                 <h3> GitHub Activity</h4>
                 <ul>
                   <li><a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+author%3A{{page.contributor}}">{% icon github %} Pull Requests</a> </li>
@@ -135,6 +166,7 @@ layout: base
                   <li><a href="https://github.com/galaxyproject/training-material/issues?q=+is%3Aissue+author%3A{{page.contributor}}">{% icon github %} Issues Reported</a></li>
                 </ul>
                 {% endunless %}
+		{% endunless %}
                 </p>
 
 				{% if page.tutorials_count > 0 %}
@@ -188,9 +220,9 @@ layout: base
                 {% endfor %}
                 </div>
 				{% endif %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+<script src="{% link assets/js/Chart.bundle.js %}"></script>
 
-<script type="text/javascript">
+<script>
 const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
 if(isReduced){
     Chart.defaults.global.animation.duration = 0;

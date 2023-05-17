@@ -13,12 +13,12 @@
         <link rel="stylesheet" href="{{ "/assets/css/bootstrap.min.css?v=3" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/bootstrap-toc.min.css" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/main.css?v=2" | prepend: site.baseurl }}">
-        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{{ "/assets/fontawesome/css/all.css" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/academicons.css" | prepend: site.baseurl }}">
-        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}" />
-        <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}">
+        <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+	<link rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
 
         {{ page | generate_dublin_core: site }}
 
@@ -28,12 +28,18 @@
             {% assign og_title = page.title %}
         {% endif %}
         {% assign og_desc = topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
-        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
-        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        {% assign og_image = page.og_image | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
-        <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}" />
+        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}">
+        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}">
+
+        {%- if page.cover %}{% assign coverimage = page.cover %}
+        {%- elsif page.tags contains "cofest" %}{% assign coverimage = "/assets/images/cofest.png" %}
+        {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "/assets/images/GalaxyNews.png" %}
+        {%- elsif page.tags contains "gat" %}{% assign coverimage = "/assets/images/gat.png" %}
+        {%- else %}{% assign coverimage = "/assets/images/GTN.png" %}{% endif %}
+        {% assign og_image = page.og_image | default: coverimage | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
+        <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}">
 
         {% if page.layout == "tutorial_hands_on" %}
         <script type="application/ld+json">
@@ -52,21 +58,19 @@
         <div class="container main-content" role="main">
         {{ content }}
         </div>
-        {% if page.layout != "tutorial_hands_on" %}
-            {% include _includes/default-footer.html %}
-        {% endif %}
-        <script type="text/javascript" src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/popper.min.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/bootstrap.min.js?v=3" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/details-element-polyfill.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="{{ "/assets/js/bootstrap-toc.min.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript">
+        {% include _includes/default-footer.html %}
+        <script src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
+        <script src="{{ "/assets/js/popper.min.js" | prepend: site.baseurl }}"></script>
+        <script src="{{ "/assets/js/bootstrap.min.js?v=3" | prepend: site.baseurl }}"></script>
+        <script src="{{ "/assets/js/details-element-polyfill.js" | prepend: site.baseurl }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="{{ "/assets/js/bootstrap-toc.min.js" | prepend: site.baseurl }}"></script>
+        <script src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
+        <script src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
+        <script>
         var snippets=document.querySelectorAll('div.highlight');
         [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
@@ -75,7 +79,6 @@
         </script>
         {% if page.layout == "topic" %}
         <script type="text/javascript" src="{{ site.baseurl }}/assets/js/list.min.js"></script>
-        <script type="text/javascript" src="{{ site.baseurl }}/assets/js/topic.js"></script>
         {% endif %}
 
         <script type="text/javascript">

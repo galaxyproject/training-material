@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "DNA Methylation data analysis"
 zenodo_link: "https://zenodo.org/record/557099"
-edam_ontology: "topic_3173"
+edam_ontology: ["topic_3173"]
 questions:
   - "What is methylation and why it cannot be recognised by a normal NGS procedure?"
   - "Can a different methylation influence the expression of a gene? How?"

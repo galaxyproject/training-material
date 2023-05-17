@@ -11,9 +11,12 @@ contributors: [annefou,shiltemann,nomadscientist]
 >
 > > <hands-on-title>Run JupyterLab</hands-on-title>
 > >
-> > 1. {% tool [Interactive Jupyter Notebook](interactive_tool_jupyter_notebook) %}:
+> > 1. {% tool [Interactive Jupyter Notebook](interactive_tool_jupyter_notebook) %}. Note that on some Galaxies this is called {% tool [Interactive JupyTool and notebook](interactive_tool_jupyter_notebook) %}:
 > > 2. Click Run Tool
 > > 3. The tool will start running and will stay running permanently
+> >
+> >     This may take a moment, but once the `Executed notebook` in your history is **orange**, you are up and running!
+> >
 > > 4. Click on the **User** menu at the top and go to **Active Interactive Tools** and locate the JupyterLab instance you started.
 > > 5. Click on your JupyterLab instance
 > >

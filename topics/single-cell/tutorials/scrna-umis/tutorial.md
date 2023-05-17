@@ -215,9 +215,9 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 >       {% snippet faqs/galaxy/datasets_import_via_link.md %} <br/>
 >
 >    1. Build a *Dataset pair* for the two FASTQ files <!-- cannot force this to count from 3 -->
->       - Click the *Operations on multiple datasets* check box at the top of the history panel
+>       - Click on {% icon galaxy-selector %} "Select Items" at the top of the history panel
 >       - Check the two boxes next to the R1 and R2 scRNA FASTQ samples
->       - Click *For all selected...* and choose *Build dataset pair*
+>       - Click *2 of N selected* and choose *Build dataset pair*
 >       - Ensure that the forward read is the `R1` sample, and the reverse read is the `R2` sample.
 >          - Click 'Swap' otherwise.
 >       - Set the name of the pair
