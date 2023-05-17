@@ -32,7 +32,13 @@
         <meta property="og:site_name" content="Galaxy Training Network">
         <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}">
         <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}">
-        {% assign og_image = page.og_image | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
+
+        {%- if page.cover %}{% assign coverimage = page.cover %}
+        {%- elsif page.tags contains "cofest" %}{% assign coverimage = "/assets/images/cofest.png" %}
+        {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "/assets/images/GalaxyNews.png" %}
+        {%- elsif n.tags contains "gat" %}{% assign coverimage = "/assets/images/gat.png" %}
+        {%- else %}{% assign coverimage = "/assets/images/GTN.png" %}{% endif %}
+        {% assign og_image = page.og_image | default: coverimage | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
         <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}">
 
         {% if page.layout == "tutorial_hands_on" %}
