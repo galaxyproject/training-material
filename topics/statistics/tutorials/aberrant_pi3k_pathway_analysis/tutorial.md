@@ -49,7 +49,7 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 >
 {: .agenda}
 
-# **Pre-installed tutorial tools, datasets and workflows from the docker image**
+# Pre-installed tutorial tools, datasets and workflows from the docker image
 
 An efficient way to install and run the tutorial using papaa tools is available on docker based galaxy instance that has pre-installed papaa tool-suite as **papaa** under tools section. Additionally this local galaxy instance comes with datasets and workflow for generating PI3K_OG classifier. Instructions to run the docker image is below.
 
@@ -147,14 +147,14 @@ An efficient way to install and run the tutorial using papaa tools is available 
 
 TCGA Pancancer has uniformly processed multi-omic data including RNA-Seq, copy number and mutational data. It covers 33 different cancer types and having information from over 10000 samples. We used publicly available RNA-Seq, mutation and CNV data sets from TCGA. Description and processing details of these data sets are listed at this site: [PanCancer aberrant pathway activity analysis](https://github.com/nvk747/papaa.git).
 
-***Machine learning methodology***
+## Machine learning methodology
 Logistic regression is a kind of machine learning approach where statistical analysis is used to predict the outcome of a dependent variable based on observed changes in other variables. e.g. Changes in gene expression are directly connected to alterations/mutations in genes. We used above approach to predict mutational status given the gene expression. Optimizing to the above prediction of mutational status with gene expression variable, we used elastic net penalty with gradient descent algorithm is used to find the optimal cost function by going over a number of iterations. The objective of the classifier is to determine the probability a given sample (*i*) has a aberrant gene event given the sample’s RNA-Seq measurements (*Xi*). In order to achieve the objective, the classifier learns a vector of coefficients or gene-specific weights (*w*) that optimize the following penalized logistic function.
 
 ![Equations for probability measurement ](../../images/aberrant_pi3k_pathway_analysis/equation.png "Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutational status can be estimated by Multiplying Xi with gene specific weights (W). The negative log likelihood (L) is used for calculating minimum weights for each sample")
 
 Where *alpha* and *l* are regularization and elastic net mixing hyperparameters respectively. Their optimal values are found during 5 fold cross validation by using scikit-learn [girdsearchCV](https://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html) approach.
 
-***Sample Processing step:***
+## Sample Processing step:
 
 - **x-matrix:**: Gene-expression data comprises of expression levels for ~20,000 genes/sample and ~10,000 samples. Top 8,000 highly variable genes per sample with in each disease were measured by median absolute deviation (MAD) and considered for analysis.
 
