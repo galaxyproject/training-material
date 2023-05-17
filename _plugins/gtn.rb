@@ -122,7 +122,7 @@ module Jekyll
     #  slugify_unsafe("Hello, World!") # => "Hello-World"
     def slugify_unsafe(text)
       # Gets rid of *most* things without making it completely unusable?
-      text.gsub(%r{["'\\/-;:,.!@#$%^&*()-]}, '').gsub(/\s/, '-')
+      text.gsub(%r{["'\\/;:,.!@#$%^&*()]}, '').gsub(/\s/, '-').gsub(/-+/, '-')
     end
 
     ##
