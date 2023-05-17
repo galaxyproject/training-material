@@ -952,6 +952,14 @@ module GtnLinter
         else
           # Load tests and run some quick checks:
           possible_tests.each do |test_file|
+            if ! test_file.match(/-test.yml/)
+              results += [
+                ReviewDogEmitter.file_error(path: path,
+                                            message: 'Please use the extension -test.yml for this test file.'
+                                            code: 'GTN:032')
+              ]
+            end
+
             test = YAML.safe_load(File.open(test_file))
             # check that for each test, the outputs is non-empty
             test.each do |test_job|
