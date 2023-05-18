@@ -5,7 +5,7 @@ contributions:
   authorship: [gallardoalba]
 
 cover: news/images/isoform_usage_post.jpg
-cover_alt: "Schematic of an isoform switch and detection pipeline. Data is annotated and a prediction is made for isoform switch consequences"
+coveralt: "Schematic of an isoform switch and detection pipeline. Data is annotated and a prediction is made for isoform switch consequences"
 tags: [new tutorial]
 ---
 
