@@ -104,9 +104,8 @@ module SchemaValidator
 
     begin
       data = YAML.load_file(fn)
-    rescue StandardError
-      puts "Skipping #{fn}"
-      return nil
+    rescue StandardError => e
+      return ["YAML error, failed to parse #{fn}, #{e}"]
     end
 
     # Check this is something we actually want to process
@@ -124,8 +123,8 @@ module SchemaValidator
 
     begin
       data = YAML.load_file(fn)
-    rescue StandardError
-      puts "Skipping #{fn}"
+    rescue StandardError => e
+      return ["YAML error, failed to parse #{fn}, #{e}"]
       return nil
     end
 
@@ -184,8 +183,8 @@ module SchemaValidator
 
     begin
       data = YAML.load_file(fn)
-    rescue StandardError
-      warn "Skipping #{fn}"
+    rescue StandardError => e
+      return ["YAML error, failed to parse #{fn}, #{e}"]
       return nil
     end
 
@@ -228,7 +227,7 @@ module SchemaValidator
 
       else
         last_component = path.split('/')[-1]
-        if last_component =~ /slides.*html$/ || last_component =~ /tutorial.*md/ || last_component =~ /metadata.ya?ml/
+        if last_component =~ /slides.*html$/ || last_component =~ /^tutorial_?(ES|FR|).md/ || last_component =~ /metadata.ya?ml/
           errs = lint_file(path)
           errors += [[path, errs]] if !errs.nil? && errs.length.positive?
         end
