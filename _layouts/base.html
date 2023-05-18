@@ -18,7 +18,7 @@
         <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}">
         <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
-	<link rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
+        <link rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
 
         {{ page | generate_dublin_core: site }}
 
@@ -68,9 +68,13 @@
         <script src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
         <script src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
         <script>
-        var snippets=document.querySelectorAll('div.highlight');
-        [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        document.querySelectorAll('div.highlight').forEach((snippet) => {
+                // Google translate has additional #text nodes mixed in with
+                // the pre for some reason.
+                var gtn_snippet_pres = [...snippet.childNodes].filter(x => x.tagName == "PRE")
+                if(gtn_snippet_pres && gtn_snippet_pres.length > 0){
+                        gtn_snippet_pres[0].insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+                }
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
