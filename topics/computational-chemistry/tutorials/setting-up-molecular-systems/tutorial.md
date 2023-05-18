@@ -107,6 +107,7 @@ The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a comp
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets.

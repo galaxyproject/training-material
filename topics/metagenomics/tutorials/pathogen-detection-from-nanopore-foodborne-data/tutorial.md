@@ -103,6 +103,7 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 2. Add a tag to each dataset (one with `#Barcode10` and the other `#Barcode11`)

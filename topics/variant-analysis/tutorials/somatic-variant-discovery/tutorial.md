@@ -61,6 +61,7 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 > 1. For this tutorial, make a new history.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the data files from

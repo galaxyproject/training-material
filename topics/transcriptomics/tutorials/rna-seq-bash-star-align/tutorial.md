@@ -78,6 +78,7 @@ The "Data Upload" process is the only one in this tutorial that takes place dire
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > <comment-title></comment-title>

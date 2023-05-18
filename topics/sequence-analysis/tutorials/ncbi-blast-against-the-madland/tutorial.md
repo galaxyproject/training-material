@@ -45,6 +45,7 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the file `query.faa` from [Zenodo](https://doi.org/10.5281/zenodo.7524427) 

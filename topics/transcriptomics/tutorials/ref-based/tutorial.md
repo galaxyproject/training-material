@@ -110,6 +110,7 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > <comment-title></comment-title>

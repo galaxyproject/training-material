@@ -51,6 +51,7 @@ We will use three files for this analysis:
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq heatmap`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the normalized counts table.
@@ -61,6 +62,7 @@ We will use three files for this analysis:
 >
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >

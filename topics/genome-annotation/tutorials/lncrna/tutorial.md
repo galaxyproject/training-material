@@ -99,6 +99,7 @@ To assemble transcriptome with StringTie and annotate {lncRNAs} with FEELnc, we 
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}

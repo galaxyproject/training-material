@@ -67,6 +67,7 @@ First we will be uploading the data to Galaxy so that we can run our tools on it
 > 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Mycoplasma comparison hands-on")
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `mycoplasma-232.fasta` and `mycoplasma-7422.fasta` from [Zenodo](https://zenodo.org/record/4485547#.YBj8XHmCGUk).
@@ -83,6 +84,7 @@ First we will be uploading the data to Galaxy so that we can run our tools on it
 > 3. Rename the files to `232.fasta` and `7422.fasta` and change the datatype if needed to `fasta` (Galaxy will auto-discover the format of the files).
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 {: .hands_on}
@@ -170,6 +172,7 @@ Let's extract the repeats highlighted in red (Figure 1, right) which are aligned
 > 2. Change the name of the output file `Text reformatting on data ...` to `repeats` Change the datatype to `.fasta`.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 3. {% tool [ClustalW](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters
@@ -259,6 +262,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 > 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Chromosome comparison hands-on")
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `aegilops_tauschii_chr1.fasta` and `triticum_aestivum_chr1.fasta` from [Zenodo](https://zenodo.org/record/4485547#.YBj8XHmCGUk).
@@ -275,7 +279,9 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 > 3. Rename the files to `aegilops.fasta` and `triticum.fasta` and change the datatype to `fasta` if needed.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
+>
 >    > <comment-title>Note on the name of the chromosomes</comment-title>
 >    > Please notice that these chromosomes are not labelled as "chromosome 1" at their original sources. We have renamed them for simplicity.
 >    {: .comment}

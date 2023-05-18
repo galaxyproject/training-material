@@ -85,6 +85,7 @@ To annotate a genome using Maker, you need the following files:
 >    {% endif %}
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets

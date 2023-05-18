@@ -113,6 +113,7 @@ Each analysis in Galaxy starts by creating a new analysis history and loading da
 >      - Option 2: Datatypes can be **manually set**
 >
 >    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
 > 4. Add an `#iris` tag {% icon galaxy-tags %} to the dataset

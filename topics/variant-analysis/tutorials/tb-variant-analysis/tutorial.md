@@ -50,6 +50,7 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 >```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
