@@ -529,7 +529,7 @@ Here we recover 278 high quality cells instead of the 272 detected via the defau
 
 In this workflow we have learned to quickly perform mapping and quantification of scRNA-seq FASTQ data in a single step via **RNA STARsolo**, and have reproduced a *Cell Ranger* workflow using the **DropletUtils** suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.
 
-A full pipeline which produces both an AnnData and tabular file for inspection is provided [in this workflow](workflows/scrna_tenx.ga).
+A full pipeline which produces both an AnnData and tabular file for inspection is provided [in this workflow](workflows/scRNA-seq-Preprocessing-TenX.ga).
 
 Note that, since version *2.7.7a* of the tool, the entire *Cell Ranger* pipeline including the filtering can be performed natively within **RNA STARsolo**. As this is still a relatively new feature, we do not use it here in this tutorial, but eager users are encouraged to try it out.
 
