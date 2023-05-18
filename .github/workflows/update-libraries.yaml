@@ -1,8 +1,8 @@
-name: Update Shortlinks
+name: Add missing data-library.yaml files
 on:
   workflow_dispatch:
   schedule:
-    - cron: '45 0 * * 1'
+    - cron: '45 0 * * 3'
 jobs:
   runner-job:
     runs-on: ubuntu-latest
@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 10
+          fetch-depth: 1
 
       # BEGIN Dependencies
       - uses: ruby/setup-ruby@v1
@@ -38,15 +38,15 @@ jobs:
       - name: Update Shortlinks
         id: generate
         run: |
-          echo "new_ids=$(ruby bin/update-shortlink.rb | wc -l)" >> $GITHUB_OUTPUT
+          grep zenodo_link: -R topics -l | grep '.md$' | xargs -r -n 1 ruby bin/update-data-library update --fragile
 
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.
         if: |
-          github.event_name != 'pull_request' &&
-          steps.generate.outputs.new_ids != ''
+          github.event_name != 'pull_request'
         uses: peter-evans/create-pull-request@v3
         with:
-          title: Update Persistent uniform resource locators
+          title: Add missing data-library.yaml files
           branch-suffix: timestamp
-          commit-message: Update PURLs
+          commit-message: Adds data-library.yaml for tutorials
+
