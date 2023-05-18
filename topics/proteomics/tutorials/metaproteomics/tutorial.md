@@ -64,6 +64,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.

@@ -147,11 +147,11 @@ Concerning the current GC-MS tutorial, you **just have to compute the following 
 >    > <comment-title></comment-title>
 >    >
 >    > To merge your data, you need to **input a sampleMetadata file** containing filenames and their metadata informations like their class for example.
-If you don't add a sampleMetadata file, the **xcms findChromPeaks Merger** {% icon tool %} tool will **group all your files together**. 
-You can also **create your sampleMetadata file** with W4M Galaxy tool **xcms get a sampleMetadata file** {% icon tool %} with the following parameters: *"RData file"* outputed from **MSnbase readMSData** {% icon tool %}. 
-Here is an example of the minimum expectations about a sampleMetadata file (**important**: don't write the format of the file, just their names):
->    > {: .text-justify}
->    > 
+>    > If you don't add a sampleMetadata file, the **xcms findChromPeaks Merger** {% icon tool %} tool will **group all your files together**. 
+>    > You can also **create your sampleMetadata file** with W4M Galaxy tool **xcms get a sampleMetadata file** {% icon tool %} with the following parameters: *"RData file"* outputed from **MSnbase readMSData** {% icon tool %}. 
+>    > Here is an example of the minimum expectations about a sampleMetadata file (**important**: don't write the format of the file, just their names):
+>    >
+>    >
 >    > | sample_name |  class  | 
 >    > |:-----------:|:-------:|
 >    > |    file1    |   man   |
@@ -159,7 +159,7 @@ Here is an example of the minimum expectations about a sampleMetadata file (**im
 >    > |    file2    |  woman  |
 >    > |-------------+---------|
 >    > |    file3    |   man   |
->    > 
+>    >
 >    {: .comment}
 >
 {: .hands_on}
@@ -198,7 +198,7 @@ The outputs of this strategy are similar to the ones discribed in the LC-MS tuto
 >
 > During each step of pre-processing, your dataset has its format changed and can have also its name changed.
 > To be able to continue to MSMS processing, you need to have a RData object wich is **merged and grouped** (from **xcms findChromPeaks Merger** {% icon tool %} and **xcms groupChromPeaks (group)** {% icon tool %}) at least. 
-It means that you should have a file named `xset.merged.groupChromPeaks.RData` (and maybe with some step more in it).
+> It means that you should have a file named `xset.merged.groupChromPeaks.RData` (and maybe with some step more in it).
 {: .comment} 
 
 

@@ -110,6 +110,7 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > <comment-title></comment-title>
@@ -1615,7 +1616,7 @@ For more information about **DESeq2** and its outputs, you can have a look at th
 > >    The log2 fold-change is negative so it is indeed downregulated and the adjusted p-value is below 0.05 so it is part of the significantly changed genes.
 > >
 > > 3. DESeq2 in Galaxy returns the comparison between the different levels for the 1st factor, after
-correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare sequencing types, we should run DESeq2 again switching factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.
+> >    correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare sequencing types, we should run DESeq2 again switching factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.
 > > 4. To add the interaction between two factors (e.g. treated for paired-end data vs untreated for single-end), we should run DESeq2 another time but with only one factor with the following 4 levels:
 > >    - treated-PE
 > >    - untreated-PE

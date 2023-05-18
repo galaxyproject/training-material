@@ -70,6 +70,7 @@ Our objective is to automatically count the number of cells contained in this im
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. **Unzip file** {% icon tool %} with the following parameters:

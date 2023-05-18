@@ -129,6 +129,7 @@ Now, we need to import the data
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 2. Create a paired collection.

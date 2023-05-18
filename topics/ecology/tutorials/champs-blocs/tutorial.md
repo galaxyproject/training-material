@@ -80,12 +80,14 @@ Now let's focus on our workflow on boulder field ecological state
 {% include _includes/cyoa-choices.html option1="Yes" option2="No" default="Yes" text="Are your ESTAMP data ready ?" %}
 
 <div class="No" markdown="1">
-> 1. Download your data on ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/) website, clicking on "Accédez aux données" at the bottom of the page. You will get a zip folder.
->
-> 2. Unzip your folder. In the folder three files .csv will interest us :
-> - champbloc_ivr.csv
-> - champbloc_qecb.csv
-> - ficheterrain.csv
+
+1. Download your data on ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/) website, clicking on "Accédez aux données" at the bottom of the page. You will get a zip folder.
+2. Unzip your folder. In the folder three files .csv will interest us :
+
+   - champbloc_ivr.csv
+   - champbloc_qecb.csv
+   - ficheterrain.csv
+
 </div>
 
 <div class="Yes" markdown="1">

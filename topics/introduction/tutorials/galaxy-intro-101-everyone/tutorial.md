@@ -121,6 +121,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
@@ -136,6 +137,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >      - Option 2: Datatypes can be **manually set**
 >
 >    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
 > 4. Add an `#iris` tag {% icon galaxy-tags %} to the dataset
@@ -634,6 +636,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. **Rename** {% icon galaxy-pencil %} the dataset to `diamonds`

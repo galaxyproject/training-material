@@ -363,6 +363,27 @@ module GtnLinter
     end
   end
 
+  def self.snippets_too_close_together(contents)
+    prev_line = -2
+    res = []
+    find_matching_texts(contents, /^[> ]*{% snippet/)
+      .each do |idx, _text, selected|
+        if idx == prev_line + 1
+          res.push(ReviewDogEmitter.error(
+            path: @path,
+            idx: idx,
+            match_start: selected.begin(0),
+            match_end: selected.end(0) + 1,
+            replacement: nil,
+            message: 'Snippets too close together',
+            code: 'GTN:032'
+          ))
+        end
+        prev_line = idx
+    end
+    res
+  end
+
   ALLOWED_SHORT_IDS = [
     'ChangeCase',
     'Convert characters1',
@@ -683,7 +704,8 @@ module GtnLinter
       *check_bad_tag(contents),
       *check_useless_box_prefix(contents),
       *check_bad_heading_order(contents),
-      *check_bolded_heading(contents)
+      *check_bolded_heading(contents),
+      *snippets_too_close_together(contents),
     ]
   end
 
@@ -939,7 +961,6 @@ module GtnLinter
       end
 
       results = []
-
       # Check if there's a missing workflow test
       folder = File.dirname(path)
       basename = File.basename(path).gsub(/.ga$/, '')
@@ -958,6 +979,14 @@ module GtnLinter
       else
         # Load tests and run some quick checks:
         possible_tests.each do |test_file|
+          if ! test_file.match(/-test.yml/)
+            results += [
+              ReviewDogEmitter.file_error(path: path,
+                                          message: 'Please use the extension -test.yml for this test file.',
+                                          code: 'GTN:032')
+            ]
+          end
+          
           test = YAML.safe_load(File.open(test_file))
           # check that for each test, the outputs is non-empty
           test.each do |test_job|

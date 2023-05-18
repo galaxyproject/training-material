@@ -71,6 +71,7 @@ As always, it is best to give each analysis you are performing with Galaxy its o
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 {: .hands_on}

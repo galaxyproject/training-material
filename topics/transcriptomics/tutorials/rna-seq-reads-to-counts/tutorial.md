@@ -137,6 +137,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 > 1. Create a new history for this tutorial e.g. `RNA-seq reads to counts`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files from Zenodo using Galaxy's Rule-based Uploader.

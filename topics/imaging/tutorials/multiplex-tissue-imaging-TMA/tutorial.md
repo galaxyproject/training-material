@@ -136,13 +136,13 @@ After illumination is corrected across round tiles, the tiles must be stitched t
 > <warning-title>**Imaging platform differences**</warning-title> 
 > 
 > ASHLAR, among other tools in the MCMICRO and Galaxy-ME pre-processing tools have some parameters that are specific to the 
-imaging patform used. By default, ASHLAR is oriented to work with images from RareCyte scanners. AxioScan scanners render images
-in a different orientation. Because of this, when using ASHLAR on AxioScan images, it is important to select the **Flip Y-Axis**
-parameter to *Yes*
+> imaging patform used. By default, ASHLAR is oriented to work with images from RareCyte scanners. AxioScan scanners render images
+> in a different orientation. Because of this, when using ASHLAR on AxioScan images, it is important to select the **Flip Y-Axis**
+> parameter to *Yes*
 > 
 > ASHLAR will work for most imaging modalities; however, certain modalities require different tools to be registered. For example,
-multiplex immunohistochemistry (mIHC) images must use an aligner that registers each moving image to a reference Hematoxylin image. 
-For this, Galaxy-ME includes the alternative registration tool {% tool **PALOM** %}. 
+> multiplex immunohistochemistry (mIHC) images must use an aligner that registers each moving image to a reference Hematoxylin image. 
+> For this, Galaxy-ME includes the alternative registration tool {% tool **PALOM** %}. 
 >
 {: .warning}
 
@@ -253,7 +253,7 @@ Learn more about this file format at the [anndata documentation](https://anndata
 >    > <warning-title>Important parameter: Unique names for cells/rows</warning-title> 
 >    >
 >    > Setting *"Whether to use unique name for cells/rows"* to `No` to ensures that downstream interactive visualizations will be able to map observational features to the mask CellIDs. 
->    {: .comment}
+>    {: .warning}
 >
 {: .hands_on}
 

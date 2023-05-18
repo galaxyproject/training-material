@@ -390,10 +390,10 @@ Once your sampleMetadata table is ready, you can proceed to the upload. In this 
 > > > <solution-title></solution-title>
 > > >
 > > > 1. At least 2, with the identifiers and the class column. But as many as you need to describe the potential variability of your samples
-> (*e.g.* the person in charge of the sample preparation, the temperature...). This will allow later statistical analysis to expose the relevant parameters.
+> > >    (*e.g.* the person in charge of the sample preparation, the temperature...). This will allow later statistical analysis to expose the relevant parameters.
 > > > 2. Sample, QC, blank... The class (the 2nd column) is useful for the preprocessing step with XCMS to detect the metabolite across the samples.
-> Thus, it can be important to separate very different types of samples, as biological ones and blank ones for example. If you don't have any specific class
-> that you want to consider in XCMS preprocessing, just fill everywhere with `sample` or a dot `.` for example.
+> > >    Thus, it can be important to separate very different types of samples, as biological ones and blank ones for example. If you don't have any specific class
+> > >    that you want to consider in XCMS preprocessing, just fill everywhere with `sample` or a dot `.` for example.
 > > >
 > > {: .solution}
 > >
@@ -746,10 +746,10 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 >    > <comment-title></comment-title>
 >    >
 >    > If you have a very large number of samples (*e.g.* a thousand), it might be impossible to find peaks that are present in 100% of your samples.
->    If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
->    time correction.
->    A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
->    (*e.g.* when dealing with some blank samples).
+>    > If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
+>    > time correction.
+>    > A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
+>    > (*e.g.* when dealing with some blank samples).
 >    {: .comment}
 >
 > > <tip-title>Comment to W4M users</tip-title>

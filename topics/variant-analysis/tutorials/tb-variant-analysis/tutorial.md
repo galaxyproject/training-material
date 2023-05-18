@@ -50,6 +50,7 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 >```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
@@ -269,8 +270,8 @@ We still cannot entirely trust the proposed variants. In particular, there are r
 > variants predicted in the M. tuberculosis
 > genome, using multiple different strategies.
 > Firstly, certain regions of the Mtb genome
-contain repetitive sequences, e.g. from
-the PE/PPE gene family. Historically all of the genomic regions corresponding to
+> contain repetitive sequences, e.g. from
+> the PE/PPE gene family. Historically all of the genomic regions corresponding to
 > those genes were filtered out but 
 > the new default draws on work from
 > Maximillian Marin and others. This
@@ -278,12 +279,12 @@ the PE/PPE gene family. Historically all of the genomic regions corresponding to
 > regions is the current region filter in
 > TB Variant Filter for reads over 100 bp.
 > If you are using shorter reads (e.g. from Illumina iSeq) the "Refined Low Confidence and Low Mappability" region list should be used instead.
->For more on how these regions were calculated read the [paper](https://academic.oup.com/bioinformatics/article-abstract/38/7/1781/6502279?login=false) or [preprint](https://www.biorxiv.org/content/10.1101/2021.04.08.438862v3.full).
+> For more on how these regions were calculated read the [paper](https://academic.oup.com/bioinformatics/article-abstract/38/7/1781/6502279?login=false) or [preprint](https://www.biorxiv.org/content/10.1101/2021.04.08.438862v3.full).
 >
 > In addition to region filters, filters for variant type, allele frequency, coverage depth and distance from indels are provided.
 > Older variant callers struggled to accurately
 > call insertions and deletions (indels) but more recent tools (e.g. GATK v4 and the variant caller used in Snippy, Freebayes) no longer have this weakness. One remaining reason to filter SNVs/SNPs near indels is that they might have a different
-evolutionary history to "free standing" SNVs/SNPs, so the "close to indel filter" is still available in TB Variant Filter in case such SNPs/SNVs should be filtered out.
+> evolutionary history to "free standing" SNVs/SNPs, so the "close to indel filter" is still available in TB Variant Filter in case such SNPs/SNVs should be filtered out.
 {: .details}
 
 Now that we have a collection of *high quality variants* we can search them against variants known to be associated with drug resistance. The *TB Profiler* tool does this using a database of variants curated by Dr Jody Phelan at the London School of Hygiene and Tropical Medicine. It can do its own mapping and variant calling but also accepts mapped reads in BAM format as input. It does its own variant calling and filtering.

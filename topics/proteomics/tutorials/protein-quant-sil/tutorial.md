@@ -94,6 +94,7 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > <comment-title></comment-title>

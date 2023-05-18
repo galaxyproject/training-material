@@ -99,6 +99,7 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. For all the datasets that you have just uploaded, please rename them as follows:

@@ -78,10 +78,10 @@ In this section we'll access the PDB, download the correct structure, import it 
 >
 > More resources:
 >
-  - [https://en.wikipedia.org/wiki/Cellulase](https://en.wikipedia.org/wiki/Cellulase)
-  - [https://en.wikipedia.org/wiki/Biofuel](https://en.wikipedia.org/wiki/Biofuel)
-  - [Fungal Cellulases](https://pubs.acs.org/doi/full/10.1021/cr500351c)
-  - [Cellobiohydrolase I Induced Conformational Stability and Glycosidic Bond Polarization ](https://pubs.acs.org/doi/10.1021/ja103766w)
+>  - [https://en.wikipedia.org/wiki/Cellulase](https://en.wikipedia.org/wiki/Cellulase)
+>  - [https://en.wikipedia.org/wiki/Biofuel](https://en.wikipedia.org/wiki/Biofuel)
+>  - [Fungal Cellulases](https://pubs.acs.org/doi/full/10.1021/cr500351c)
+>  - [Cellobiohydrolase I Induced Conformational Stability and Glycosidic Bond Polarization ](https://pubs.acs.org/doi/10.1021/ja103766w)
 {: .details}
 
 ## Get data
@@ -107,6 +107,7 @@ The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a comp
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets.
@@ -237,11 +238,11 @@ Go to the correct section depending on which MD engine you will be using.
 
 ### Upload to Galaxy
 > <hands-on-title>Upload files to Galaxy</hands-on-title>
-Upload the following files to your Galaxy instance and ensure the correct datatype is selected:
- - step3_pbcsetup.psf -> xplor psf input (psf format)
- - step3_pbcsetup.pdb -> pdb input (pdb format)
- - Checkfft.str -> PME grid specs (txt format)
-- step2.1_waterbox.prm -> waterbox prm input (txt format)
+> Upload the following files to your Galaxy instance and ensure the correct datatype is selected:
+> - step3_pbcsetup.psf -> xplor psf input (psf format)
+> - step3_pbcsetup.pdb -> pdb input (pdb format)
+> - Checkfft.str -> PME grid specs (txt format)
+> - step2.1_waterbox.prm -> waterbox prm input (txt format)
 {: .hands_on}
 
 You are now ready to run the NAMD workflow, which is discussed in another [tutorial]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}).
