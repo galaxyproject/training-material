@@ -24,6 +24,7 @@ requirements:
         - cheminformatics
 tags:
 - covid19
+- one-health
 contributors:
 - simonbray
 

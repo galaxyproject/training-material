@@ -25,6 +25,7 @@ tags:
 - illumina
 - assembly
 - amr
+- one-health
 
 contributions:
   authorship:
