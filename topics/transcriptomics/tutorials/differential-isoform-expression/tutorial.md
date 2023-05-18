@@ -26,7 +26,7 @@ contributions:
 abbreviations:
     AS: Alternative splicing
     IS: Isoform switching
-    TGSs: Tumor supression genes
+    TSGs: Tumor supression genes
     OCGs: Activation of oncogenes
 ---
 
