@@ -1,16 +1,15 @@
 ---
+layout: news
 title: "New Galaxy training: Genome-wide alternative splicing analysis"
-date: "2023-05-17"
-tease: "GTN hosts a new training for analyzing alternative splicing at genome-wide scale"
-hide_tease: false
-authors: 'Cristóbal Gallardo'
-authors_structured:
-- github: gallardoalba
-tags: [training]
-subsites: [all-eu]
-main_subsite: eu
+contributions:
+  authorship: [gallardoalba]
+
+cover: news/images/isoform_usage_post.jpg
+cover_alt: "Schematic of an isoform switch and detection pipeline. Data is annotated and a prediction is made for isoform switch consequences"
+tags: [new tutorial]
 ---
 
+The GTN hosts a new training for analyzing alternative splicing at genome-wide scale!
 
 # New Galaxy training: Genome-wide alternative splicing analysis
 
@@ -18,6 +17,8 @@ Isoform switching is a biological phenomenon that plays a crucial role in the re
 
 This new Galaxy training explores the isoform switching concept and provides a step-by-step guide for analyzing this regulatory mechanism. It makes use of [IsoformSwitchAnalyzeR](https://bioconductor.org/packages/release/bioc/html/IsoformSwitchAnalyzeR.html), a R package which integrates a multi-step analysis for isoform detection and functional prediction.
 
-![Overview of computational pipeline for isoform detection and functional prediction. Adapted from Vitting-Seerup et Sandelin, 2017.]({{site.baseurl}}/news/images/isoform_usage_post.jpg)
+![Overview of computational pipeline for isoform detection and functional prediction.]({% link news/images/isoform_usage_post.jpg %} "Adapted from Vitting-Seerup et Sandelin, 2017.")
 
 A second important aspect of this pipeline is that it allows to evaluate alternative splicing at two different levels: gene-specific and genome-wide scale. This dual-approach allows not only to indentify specific genes, but also prividing an analytical instrument for the study of genome-wide regulatory networks. Finally, a third important element of this training, directly derived from the operational capabilities of IsoformSwitchAnalyzeR, is that it allows to integrate multiple layers of information in the analysis. Concretely, in order to evaluate the functional consequences of the isoform switching events, IsoformSwitchAnalyzeR allows to integrate information bout coding-potential, protein-domains, signal peptides and instrinsically disordered regions.
+
+[Genome-wide alternative splicing analysis]({% link topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.md %}){: class="btn btn-primary"}
