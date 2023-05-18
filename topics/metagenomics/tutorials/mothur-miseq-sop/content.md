@@ -1653,7 +1653,7 @@ taxonomy files. In the following exercise, we will create a Krona plot with per-
 {: .question}
 
 
-
+<!--
 ## Phinch
 
 We may now wish to further visualize our results. We can convert our *shared* file to the more widely used `biom` format and
@@ -1688,7 +1688,7 @@ view it in a platform like [Phinch](http://www.phinch.org/).
 > > This file can also be visualized in Phinch2, but requires installation of Phinch to your local machine
 > {: .comment}
 {: .hands_on}
-
+-->
 
 # Conclusion
 
