@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Welcome to the BioImage Model Zoo</title>
+        <title>Contribute to the BioImage.IO models</title>
         
             <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 
@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@81a65d4f9b8b4a5236cf00e6c01a3adba9e2dfd9",
+  release: "galaxy-training-network@37aabd7fe18d9445ff47887459affaea8dbe8791",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -44,9 +44,9 @@ Sentry.init({
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Welcome to the BioImage Model Zoo">
+<meta name="DC.title" content="Contribute to the BioImage.IO models">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-18 12:44:18 +0000">
+<meta name="DC.date" content="2023-05-18 14:08:30 +0000">
 <meta name="DC.creator" content="Caterina Fuster-Barceló">
 
         
@@ -55,7 +55,7 @@ Sentry.init({
         
         <meta name="description" content="Collection of tutorials developed and maintained by the w...">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: Welcome to the BioImage Model Zoo">
+        <meta property="og:title" content="Galaxy Training: Contribute to the BioImage.IO models">
         <meta property="og:description" content="Collection of tutorials developed and maintained by the w...">
         
         <meta property="og:image" content="/training-material/assets/images/GTN.png">
@@ -208,7 +208,7 @@ Sentry.init({
         <div class="container main-content" role="main">
         <section class="tutorial">
 	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/ai4life/tutorials/contribute-materials/slides.html">View markdown source on GitHub</a>
-	<h1>Welcome to the BioImage Model Zoo</h1>
+	<h1>Contribute to the BioImage.IO models</h1>
 		<h2>Contributors</h2>
 <div markdown="0">
 
@@ -223,13 +223,13 @@ Sentry.init({
 		<h2>Questions</h2>
 		<ul>
 		
-		<li><p>What can be found in the BioImage Model Zoo?</p>
+		<li><p>What is contained in a BioImage.IO model?</p>
 </li>
 		
-		<li><p>Why is it worth trying?</p>
+		<li><p>Which are the requirements to contribute?</p>
 </li>
 		
-		<li><p>How does it work?</p>
+		<li><p>How to contribute?</p>
 </li>
 		
 		</ul>
@@ -239,13 +239,7 @@ Sentry.init({
 		<h2>Objectives</h2>
 		<ul>
 		
-		<li><p>Overview of the BioImage Model Zoo</p>
-</li>
-		
-		<li><p>Content of the BioImage Model Zoo</p>
-</li>
-		
-		<li><p>Models of the BioImage Model Zoo</p>
+		<li><p>Get to know how to contribute with models to the BioImage.IO</p>
 </li>
 		
 		</ul>
@@ -258,92 +252,166 @@ Sentry.init({
 	<hr />
 
 
-	<h2 id="what-you-can-find">What you can find:</h2>
+	<h2 id="what-is-a-bioimageio-model">What is a BioImage.IO model?</h2>
 
+<p>A BioImage.IO model contains:</p>
 <ul>
-  <li>Pretrained AI models to perform bioimage analysis tasks.</li>
-  <li>Reference datasets used to train the models (and to test them!)</li>
-  <li>Python notebooks to train or fine-tune your models.</li>
+  <li>A trained model in the correct format</li>
+  <li>Example input image</li>
+  <li>Example output</li>
+  <li>An example cover image for visual representation of the model in the zoo</li>
+  <li>Resource description file specifications</li>
 </ul>
 
 <p><span>Speaker Notes</span>
-In the Bioimage Model Zoo you can find pretrained models to perform different bioimage analysis tasks as well as
-reference datasets used to train the models.
-Between many different tools and softwares, you can also find python notebooks to train or fine-tune your models easily.</p>
+A BioImage.IO model is a zip file containing all the items, technical description and metadata of the model, together with the trained architecture of the model.
+Hence, a BioImage.IO model contains different items such as the trained model, an example input image as a numpy array, an example output (also as a numpy array), an example cover image and, particularlly, a resource description file specifications as a r d f . yaml.
+—</p>
 
-<hr />
+<h2 id="model-contribution-requirements">Model contribution requirements</h2>
 
-<h2 id="why-is-it-worth-trying">Why is it worth trying?</h2>
-
-<p>You can easily run any of the models in user-friendly tools such as Ilastik, deepImageJ, ZeroCostDL4Mic, ImJoy, Fiji,
-Icy, QuPath or more.</p>
-
-<p><span>Speaker Notes</span>
-You can easily run any of the models in user-friendly tools such as Ilastik, deepImageJ, ZeroCostDL4Mic, ImJoy, Fiji,
-Icy, QuPath or more.</p>
-
-<hr />
-<h3 id="bioimage-model-zoo-overview">BioImage Model Zoo: Overview</h3>
-
-<p><img src="../../images/welcome-bioimageio-01.png" alt="Consumer Software of Bioimageio" title="Consumer software of the Bioimageio" /></p>
+<ul>
+  <li>Follow the <a href="https://bioimage.io/docs/#/bioimageio_model_spec">BioImage.IO Model RDF Specification</a> with <code class="language-plaintext highlighter-rouge">format_version&gt;= 0.4.5</code></li>
+  <li>The model is expected to be cross-compatible among the <a href="https://github.com/bioimage-io/spec-bioimage-io/blob/main/supported_formats_and_operations.md#consumers">consumer software</a>, and should always run on at least one.</li>
+  <li>The model should be well documented (i.e., human readable name and rich description tailored for life-scientists, citations)</li>
+  <li>The model should be public and can be used by anyone under the chosen licensing conditions.</li>
+</ul>
 
 <p><span>Speaker Notes</span>
-If you access the BioImage Model Zoo webpage you can find all consumer software that can run the bioimage io models.</p>
+If you want to contribute with models, there are some requirements that need to be followed. For example, you have to follow the bioimage.io model Resource Description File Specification with a certain format version.
+The model is expected to be cross-compatible among the consumer software. It also should be well documented and, of course, it has to be public and can be used by anyone unde the chosen licensing conditions.
+—</p>
 
-<hr />
-<h3 id="bioimage-model-zoo-overview-1">BioImage Model Zoo: Overview</h3>
+<h2 id="model-contribution-guidelines">Model contribution guidelines</h2>
 
-<p><img src="../../images/welcome-bioimageio-02.png" alt="Choose a category" title="Choose a category" /></p>
-
-<p><span>Speaker Notes</span>
-Depending on the task you wish to perform, you may choose the type of card you are looking for. It will depend on the
-model, application or dataset you wish to use.</p>
-
-<hr />
-<h3 id="bioimage-model-zoo-overview-2">BioImage Model Zoo: Overview</h3>
-
-<p><img src="../../images/welcome-bioimageio-03.png" alt="Search bar" title="Search bar" /></p>
+<ol>
+  <li>Create a BioImage.IO model</li>
+  <li>Upload the model to the BioImage Model Zoo</li>
+</ol>
 
 <p><span>Speaker Notes</span>
-In the search bar you can write an image processing task, the name of a model or a bioimaging modality. It will suggest
-you the existing choices.</p>
+To contribute with a model to the BioImage Model Zoo you will only need to follow two steps. Let’s see them closely!
+—</p>
 
-<hr />
-<h3 id="bioimage-model-zoo-content">BioImage Model Zoo: Content</h3>
+<h3 id="create-a-bioimageio-model">Create a BioImage.IO model</h3>
 
-<p><img src="../../images/welcome-bioimageio-04.png" alt="BioImage Model Zoo Content" title="BioImage Model Zoo Content" /></p>
-
-<p><span>Speaker Notes</span>
-The content of bioimage io such as models, datasets and applications are provided as cards.</p>
-
-<hr />
-<h3 id="bioimage-model-zoo-models">BioImage Model Zoo: Models</h3>
-
-<p><img src="../../images/welcome-bioimageio-05.png" alt="BioImage Model Zoo Model Cards" title="BioImage Model Zoo Model Cards" /></p>
+<p>Two steps:</p>
+<ol>
+  <li>Choose one way to create your model (automatically or manually)</li>
+  <li>Check that the model is correctly created</li>
+</ol>
 
 <p><span>Speaker Notes</span>
-In each model card you can find interactive buttons and the description of the model itself. These buttons will provide
-you some of the features of that model such as the training dataset or the license.
-You can also choose the consumer software to run the model, share this model, download it and more.</p>
+Firstly, you will need to create a Bioimage.io model. To do so, you will need to create the model and check that it is correct. To create the model, you will have to choose if you want to do it automatically or manually. After that, you will have to check that the model is correctly created.
+—</p>
 
-<hr />
-<h3 id="bioimage-model-zoo-models-1">BioImage Model Zoo: Models</h3>
+<h4 id="create-a-bioimageio-model-create-your-model">Create a BioImage.IO model: Create your model</h4>
 
-<p><img src="../../images/welcome-bioimageio-06.png" alt="BioImage Model Zoo Model Download" title="BioImage Model Zoo Model Download" /></p>
-
-<p><span>Speaker Notes</span>
-If you want, you can click on the download button to download the model and click on the consumer software you choose.
-It will download automatically.</p>
-
-<hr />
-<h3 id="bioimage-model-zoo-models-2">BioImage Model Zoo: Models</h3>
-
-<p>If you want to know more about the Bioimage Model Zoo, check out the documentation or contact us!</p>
-
-<p><img src="../../images/welcome-bioimageio-07.png" alt="BioImage Model Zoo Documentation" title="BioImage Model Zoo Documentation" /></p>
+<ul>
+  <li>Automatic export of the model using the <a href="https://github.com/bioimage-io/core-bioimage-io-python">bioimage.core python library</a> (recomended). Example code <a href="https://github.com/bioimage-io/core-bioimage-io-python/blob/main/example/model_creation.ipynb">here</a>.</li>
+  <li>The main function to build the model is <code class="language-plaintext highlighter-rouge">bioimageio.core.build_model</code></li>
+  <li>Manual generation of the model.</li>
+  <li>Creating the <a href="https://bioimage.io/docs/#/bioimageio_model_spec">BioImage.IO Model Resource Description File Specifications</a> (rdf.yaml file)</li>
+  <li>Some examples can be found on the Bioimage Model Zoo webpage.</li>
+</ul>
 
 <p><span>Speaker Notes</span>
-If you want to know more about the Bioimage Model Zoo, check our documentation or contact us!</p>
+When creating your model, the first step would consist in choosing how to create this model: you can either do an automatic expoert of the model using the bioimageio.core python library (the recommended option with an example code available) or to generate the model manually.
+If you choose to do it manually, you will have to create the r d f . yaml file where there exist mandatory or optional fields on it. In the Bioimage Model Zoo webpage you can find different examples.
+—</p>
+
+<h4 id="create-a-bioimageio-model-check-that-the-model-is-correctly-created">Create a BioImage.IO model: Check that the model is correctly created</h4>
+
+<ul>
+  <li>Static Validation of the model format using the bioimage.core python library
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python bioimageio validate /../rdf.yaml
+</code></pre></div>    </div>
+  </li>
+  <li>Dynamic Validation of the model’s deployment
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python test_model --weights tensorflow_saved_model_bundle --device cpu /.../rdf.yaml
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Then, you will need to check that the model is correctly created. To do so, you should perform a static and dynamic validation of the model format by executing those commands in the terminal.
+—</p>
+
+<h3 id="upload-the-model-to-the-bioimage-model-zoo">Upload the model to the BioImage Model Zoo</h3>
+
+<p>In the bioimage.IO click on the Upload button.</p>
+
+<p><img src="../../images/contribute_model.png" alt="Contribute Models" /></p>
+
+<p><span>Speaker Notes</span>
+Now it is time to upload your crated model through several new steps that you need to follow.
+—</p>
+
+<h4 id="upload-the-model-log-in-to-zenodo">Upload the model: Log in to Zenodo</h4>
+
+<p>Log in to Zenodo and give access to the BioEngine application.</p>
+
+<p><img src="../../images/contribute_model.png" alt="Contribute Models" /></p>
+
+<p><span>Speaker Notes</span>
+The first step will be to log in to Zenodo and give access to the BioEngine application. You will see an automatic message once you are logged in. If not, refresh the page. This step needs to be done only for the first time you upload a model.
+—</p>
+
+<h4 id="upload-your-model-upload-your-model-rdf">Upload your model: Upload your model RDF</h4>
+
+<p><img src="../../images/contribute_model_upload_1.png" alt="Contribute Models-Upload model rdf" /></p>
+
+<p><span>Speaker Notes</span>
+The second step will be to upload your model r d f as you see in the image.
+—</p>
+
+<h4 id="upload-your-model-complete-fields">Upload your model: Complete fields</h4>
+
+<p><img src="../../images/contribute_model_upload_2.png" alt="Contribute Models-Complete Fields" /></p>
+
+<p><span>Speaker Notes</span>
+Then you will have to complete all the missing fields as in the image shown here.
+—</p>
+
+<h4 id="upload-your-model-complete-fields-1">Upload your model: Complete fields</h4>
+
+<p><img src="../../images/contribute_model_upload_3.png" alt="Contribute Models-Complete Fields" /></p>
+
+<p><span>Speaker Notes</span>
+And here.
+—</p>
+
+<h4 id="upload-your-model-pull-request">Upload your model: pull request</h4>
+
+<ol>
+  <li>A <a href="https://github.com/bioimage-io/collection-bioimage-io/pulls/bioimageiobot">Pull Request (PR)</a> will be generated</li>
+  <li>Continious Integration (CI) workflow test</li>
+  <li>Review by a maintainer from the BioImage.IO terminal</li>
+</ol>
+
+<p><span>Speaker Notes</span>
+A pull request (PR) is generated (this process may take some minutes). In the PR, the model is tested by a Continuous Integration (CI) workflow for its technical correctness. and reviewed by a maintainer from the BioImage.IO team. This PR is aimed for further discussions between model contributors and the BioImage.IO team.
+—</p>
+
+<h4 id="upload-your-model-you-are-done">Upload your model: you are done!</h4>
+
+<p>If everything went as it should be, your model will be uploaded and displayed in the webpage!</p>
+
+<p><span>Speaker Notes</span>
+Once the model passes all checks and has the approval of a maintainer, it will be added to the BioImage.IO collection and displayed in the webpage (this process may take some minutes).
+—</p>
+
+<h2 id="additional-information">Additional information</h2>
+
+<ul>
+  <li><a href="https://bioimage.io/docs/#/contribute_models/README?id=how-to-get-most-of-your-model-documentation">How to get most of your model documentation</a></li>
+  <li><a href="https://bioimage.io/docs/#/contribute_models/README?id=considerations-for-the-model-description-file-format_versiongt030">Considerations for the model description file</a></li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Remember that you can always read our documentation or additional information on this topic or others in our resources.
+For example, you could check how to get most of your model documentation and considerations for the model description file.
+—</p>
 
 
 	<hr />
@@ -386,7 +454,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/81a65d4f9b8b4a5236cf00e6c01a3adba9e2dfd9">81a65d4</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/37aabd7fe18d9445ff47887459affaea8dbe8791">37aabd7</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
