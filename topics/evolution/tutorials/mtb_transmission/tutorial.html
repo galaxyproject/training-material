@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3",
+  release: "galaxy-training-network@6038db5f86616c4c62b95a934da425903af50dd4",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -46,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Identifying tuberculosis transmission links: from SNPs to transmission clusters">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-03-27 13:17:12 +0000">
+<meta name="DC.date" content="2023-05-16 17:14:43 +0000">
 <meta name="DC.creator" content="Galo A. Goig">
 <meta name="DC.creator" content="Daniela Brites">
 <meta name="DC.creator" content="Christoph Stritt">
@@ -89,7 +89,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-27 13:17:12 +0000",
+  "dateModified": "2023-05-16 17:14:43 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Identifying tuberculosis transmission links: from SNPs to transmission clusters",
   "interactivityType": "mixed",
@@ -118,7 +118,7 @@ Sentry.init({
   "workTranslation": [
 
   ],
-  "creativeWorkStatus": "Under development",
+  "creativeWorkStatus": "Active",
   "accessMode": [
     "textual",
     "visual"
@@ -147,7 +147,7 @@ Sentry.init({
   "url": "https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html",
   "timeRequired": "PT2H",
   "teaches": "Create a SNP alignment\n - Calculate pairwise SNP distances between MTB samples\n - Identify transmission clusters based on SNP distances\n - Study the emergence and spread of drug resistance based on transmission analysis.",
-  "keywords": "evolution",
+  "keywords": "evolution, prokaryote, one-health",
   "description": "The objectives are:\n - Create a SNP alignment\n - Calculate pairwise SNP distances between MTB samples\n - Identify transmission clusters based on SNP distances\n - Study the emergence and spread of drug resistance based on transmission analysis.\n\n",
   "inLanguage": {
     "@type": "Language",
@@ -161,6 +161,36 @@ Sentry.init({
       "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
       "name": "Introduction to Galaxy Analyses",
       "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html",
+      "name": "Using dataset collections",
+      "description": "Hands-on for 'Using dataset collections' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html",
+      "name": "M. tuberculosis Variant Analysis",
+      "description": "Hands-on for 'M. tuberculosis Variant Analysis' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
         "email": "galaxytrainingnetwork@gmail.com",
@@ -251,9 +281,16 @@ Sentry.init({
   ],
   "educationalLevel": "Intermediate",
   "mentions": [
-
+    {
+      "@type": "Thing",
+      "name": "prokaryote"
+    },
+    {
+      "@type": "Thing",
+      "name": "one-health"
+    }
   ],
-  "abstract": "# Pre-requisites"
+  "abstract": "# Introduction"
 }
         </script>
         
@@ -443,18 +480,41 @@ Sentry.init({
 <article class="tutorial topic-evolution">
     <h1 data-toc-skip>Identifying tuberculosis transmission links: from SNPs to transmission clusters</h1>
     
-    <div class="alert alert-warning" role="alert">
-        <h4 class="alert-heading">Under Development!</h4>
-        <p>This tutorial is not in its final state. The content may change a lot in the next months.
-        Because of this status, it is also not listed in the topic pages.</p>
-    </div>
-    
 
     <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/GaloGS/" class="contributor-badge contributor-GaloGS"><img src="https://avatars.githubusercontent.com/GaloGS?s=27" alt="Avatar">Galo A. Goig</a><a href="/training-material/hall-of-fame/dbrites/" class="contributor-badge contributor-dbrites"><img src="https://avatars.githubusercontent.com/dbrites?s=27" alt="Avatar">Daniela Brites</a><a href="/training-material/hall-of-fame/cstritt/" class="contributor-badge contributor-cstritt"><img src="https://avatars.githubusercontent.com/cstritt?s=27" alt="Avatar">Christoph Stritt</a>
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/GaloGS/" class="contributor-badge contributor-GaloGS"><img src="https://avatars.githubusercontent.com/GaloGS?s=27" alt="Avatar">Galo A. Goig</a><a href="/training-material/hall-of-fame/dbrites/" class="contributor-badge contributor-dbrites"><img src="https://avatars.githubusercontent.com/dbrites?s=27" alt="Avatar">Daniela Brites</a><a href="/training-material/hall-of-fame/cstritt/" class="contributor-badge contributor-cstritt"><img src="https://avatars.githubusercontent.com/cstritt?s=27" alt="Avatar">Christoph Stritt</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/wm75?s=27" alt="Avatar">Wolfgang Maier</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
 	</div>
 
 </div>
@@ -501,6 +561,130 @@ Sentry.init({
     </li>
 
         
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">Using Galaxy and Managing your Data</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Using dataset collections:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/variant-analysis">Variant Analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> M. tuberculosis Variant Analysis:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
         </ul>
         
 
@@ -654,7 +838,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 27, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 16, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -676,39 +860,47 @@ Sentry.init({
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <h1 id="pre-requisites">Pre-requisites</h1>
-<p>This tutorial assumes that you have watched the respective webinars about (<a href="https://youtu.be/Ddwt-_gQR2M">Drug resistance prediction</a>, <a href="https://youtu.be/1ps_o5rpnmw">Phylogenetic mutations</a>, <a href="https://youtu.be/l4cPUECJ7VU">The concept of clustering</a> and
-  <a href="https://youtu.be/kKNgmpy1N94">Genetic distance thresholds</a>) and therefore you understand 1) How genotypic drug susceptibility is determined
-based on WGS analysis 2) The concept of clustering. It also assumes that you have completed the tutorial on <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">MTB variant analysis</a>.</p>
+                <h1 id="introduction">Introduction</h1>
 
-<h1 id="introduction">Introduction</h1>
+<p>In a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates.</p>
 
-<p>Now you are familiar with the process of genome sequencing, quality control of sequencing data, mapping and
-variant calling. Additionally, you know how to run <code class="language-plaintext highlighter-rouge">TB-profiler</code> in order to detect drug resistance-conferring
-mutations and predict drug-resistant phenotypes. However you have only analyzed one sample unrelated to our study for the purpose of
-learning. Before starting the transmission analysis, we would need to analyze the 20 samples that we
-have been asked to analyze. The process to follow is exactly the same for any sample, meaning that
-we would need to analyze the 20 samples following the same steps… twenty times??? Of course not.</p>
+<p>This tutorial guides you through transmission cluster identification from preprocessed whole-genome sequencing data of MTB strains. It consists of two parts:</p>
 
-<p>The way you can perform the same analysis tasks on multiple samples at a a time in Galaxy (being it
-a simple step like running Trimmomatic, or a complete analysis pipeline composed of many different steps)
-is by using <code class="language-plaintext highlighter-rouge">Dataset collections</code>. To know more about dataset collections,
-you can <a href="https://galaxyproject.org/tutorials/collections/">have a look at the following material</a>, however the idea is very simple:
-all samples to be analyzed are merged into a “dataset collection”, and then you analyze that “collection”
-as you would analyze a single sample, with the difference that all steps will be performed for each
-sample individually. Do not worry if you do not fully understand this right now, we will be creating
-a dataset collection at the beginning of this tutorial and we will analyze it.</p>
+<ol>
+  <li>
+    <p>Part one starts from per-sample lists of mutations/variants (in <em>variant call format</em>, VCF), as derived from sequencing data through mapping of sequenced reads to a reference genome followed by variant calling. From the lists of variants, more specifically from the single nucleotide variants found for every sample, you will construct a sample distance matrix and identify likely transmission clusters based on overall sample similarity.</p>
+  </li>
+  <li>
+    <p>Part two starts with drug-resistance profiles of the same samples and combines these profiles with the cluster information obtained in part one to enable reasoning about the validity of identified clusters and about evolution of drug resistance in the samples.</p>
+  </li>
+</ol>
 
-<p>To save you some time, (and server load) we have run the pipeline that you used in the previous tutorial for
-the 20 samples that we want to analyze. Thus, we now have 20 VCF files that describe the
-mutations found for each of the samples. <strong>These 20 VCFs files will be the starting point of this tutorial.</strong>
- If you want to perform the mapping and variant calling for
-all of the samples, feel free to do it. You can find the respective <a href="https://zenodo.org/record/5911437">FASTQ files here</a>, and
-the <a href="./workflows/Galaxy-Workflow-From_Fastqs_to_VCFs_and_BAMs.ga">Galaxy workflows used here</a>. However this is completely optional,
-and we suggest you to do it after you have finished all the tutorials of this workshop.</p>
+<p>Both the lists of variants and the drug-resistance reports for all samples have been pre-generated for you, and can simply be imported into Galaxy from public sources.</p>
 
-<p>Before starting, bear in mind that this tutorial assumes that you watched the respective webinars of
-this lesson</p>
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-origin-of-the-input-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Origin of the input data</div>
+
+  <p>This tutorial does <em>not</em> discuss the analysis steps that lead from sequencing data to lists of variants, nor the generation of drug-resistance profiles with the tool TB-Profiler. These topics are covered in the separate tutorial <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">M. tuberculosis Variant Analysis</a> instead.</p>
+
+  <p>If, after working through this and the other tutorial, you would like to combine the two to perform the complete analysis from sequenced reads to transmission clusters for the 20 samples used here, you can find their raw sequencing data in this <a href="https://zenodo.org/record/5911437">Zenodo record</a>, and two Galaxy workflows to process the data into VCFs and to generate drug-resistance profiles as <a href="./workflows">supplementary material</a> to this tutorial.</p>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-recommended-background-information"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Recommended background information</div>
+
+  <p>A series of webinars has been produced alongside this tutorial to provide some theoretical background for the topics touched here. Specifically, these are:</p>
+
+  <ul>
+    <li><a href="https://youtu.be/Ddwt-_gQR2M"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Drug resistance prediction</a></li>
+    <li><a href="https://youtu.be/1ps_o5rpnmw"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Phylogenetic mutations</a></li>
+    <li><a href="https://youtu.be/l4cPUECJ7VU"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> The concept of clustering</a></li>
+    <li><a href="https://youtu.be/kKNgmpy1N94"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Genetic distance thresholds</a></li>
+  </ul>
+
+  <p>Watching at least some of them before or after doing the tutorial is highly recommended.</p>
+
+</blockquote>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -716,47 +908,68 @@ this lesson</p>
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#pre-requisites" id="markdown-toc-pre-requisites">Pre-requisites</a></li>
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
-  <li><a href="#get-the-data" id="markdown-toc-get-the-data">Get the data</a></li>
-  <li><a href="#generate-a-snp-alignment" id="markdown-toc-generate-a-snp-alignment">Generate a SNP alignment</a>    <ol>
-      <li><a href="#generate-complete-genomes" id="markdown-toc-generate-complete-genomes">Generate complete genomes</a></li>
-      <li><a href="#multiple-sequence-alignment-msa-of-all-genomes" id="markdown-toc-multiple-sequence-alignment-msa-of-all-genomes">Multiple-sequence alignment (MSA) of all genomes</a></li>
+  <li><a href="#analysis-part-1-identification-of-transmission-clusters-from-per-sample-variants" id="markdown-toc-analysis-part-1-identification-of-transmission-clusters-from-per-sample-variants">Analysis Part 1: Identification of transmission clusters from per-sample variants</a>    <ol>
+      <li><a href="#get-the-data" id="markdown-toc-get-the-data">Get the data</a></li>
+      <li><a href="#generate-a-snp-alignment" id="markdown-toc-generate-a-snp-alignment">Generate a SNP alignment</a></li>
+      <li><a href="#identify-transmission-clusters" id="markdown-toc-identify-transmission-clusters">Identify transmission clusters</a></li>
     </ol>
   </li>
-  <li><a href="#identify-transmission-clusters" id="markdown-toc-identify-transmission-clusters">Identify transmission clusters</a>    <ol>
-      <li><a href="#calculate-pairwise-snp-distances" id="markdown-toc-calculate-pairwise-snp-distances">Calculate pairwise SNP distances</a></li>
-      <li><a href="#determine-transmission-clusters-based-on-a-snp-threshold" id="markdown-toc-determine-transmission-clusters-based-on-a-snp-threshold">Determine transmission clusters based on a SNP threshold</a></li>
-      <li><a href="#determine-transmission-clusters-using-rscript" id="markdown-toc-determine-transmission-clusters-using-rscript">Determine transmission clusters using Rscript</a></li>
-    </ol>
-  </li>
-  <li><a href="#using-clustering-to-investigate-the-emergence-of-drug-resistance" id="markdown-toc-using-clustering-to-investigate-the-emergence-of-drug-resistance">Using clustering to investigate the emergence of drug resistance</a>    <ol>
+  <li><a href="#analysis-part-2-combining-cluster-information-with-drug-resistance-reports" id="markdown-toc-analysis-part-2-combining-cluster-information-with-drug-resistance-reports">Analysis Part 2: Combining cluster information with drug-resistance reports</a>    <ol>
       <li><a href="#get-the-data-1" id="markdown-toc-get-the-data-1">Get the data</a></li>
       <li><a href="#summarize-the-data" id="markdown-toc-summarize-the-data">Summarize the data</a></li>
+      <li><a href="#combine-the-drug-resistance-and-the-cluster-tables" id="markdown-toc-combine-the-drug-resistance-and-the-cluster-tables">Combine the drug-resistance and the cluster tables</a></li>
     </ol>
   </li>
-  <li><a href="#put-everything-together" id="markdown-toc-put-everything-together">Put everything together</a></li>
+  <li><a href="#interpretation-of-results" id="markdown-toc-interpretation-of-results">Interpretation of results</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
   <li><a href="#bonus" id="markdown-toc-bonus">Bonus</a></li>
 </ol>
 
 </blockquote>
 
-<h1 id="get-the-data">Get the data</h1>
-<p>As mentioned in the introduction, we have performed mapping and variant calling for the 20 samples
-that we need to analyze. The result are the respective 20 VCF files that describe the mutations found
-for each of the samples. Before starting the analysis of such mutations, we will need to import them
-into Galaxy:</p>
+<h1 id="analysis-part-1-identification-of-transmission-clusters-from-per-sample-variants">Analysis Part 1: Identification of transmission clusters from per-sample variants</h1>
+
+<h2 id="get-the-data">Get the data</h2>
+
+<p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the Galaxy history</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this analysis</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Give the history a suitable name</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name: <code class="language-plaintext highlighter-rouge">MTB transmission clusters tutorial</code></li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name: <code class="language-plaintext highlighter-rouge">MTB transmission clusters tutorial</code></li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>As mentioned in the introduction, mapping and variant calling have already be performed for the 20 samples
+that we need to analyze. The result of this preprocessing are 20 VCF files that describe the mutations found
+for each of the samples, and which we now need to import into Galaxy.</p>
+
+<p>The fastest way to do so, which lets us build a collection from the 20 datasets with correctly named elements (corresponding to the sample identifiers) directly during data upload is through the so-called <em>Rule-based uploader</em>. The Galaxy training material has dedicated tutorials, <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html">Rule Based Uploader</a> and <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.html">Rule Based Uploader Advanced</a>, that introduce this powerful feature in detail.</p>
+
+<p>For the purpose of this tutorial, it is enough if you simply follow the step-by-step instructions provided here exactly.</p>
+
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
-    <li>Create a new history for this tutorial</li>
     <li>
-      <p>Import the files from <a href="https://zenodo.org/record/6010176">Zenodo</a> or from
-the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">evolution</code>
- -&gt; <code class="language-plaintext highlighter-rouge">Identifying tuberculosis transmission links: from SNPs to transmission clusters</code>):
-Import the VCF files containing the variants of each sample</p>
+      <p>Import the following files from <a href="https://zenodo.org/record/6010176">Zenodo</a></p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6010176/files/ERR1203059.vcf
 https://zenodo.org/record/6010176/files/ERR181435.vcf
@@ -780,25 +993,74 @@ https://zenodo.org/record/6010176/files/SRR13046689.vcf
 https://zenodo.org/record/6010176/files/SRR998584.vcf
 </code></pre></div>      </div>
 
-      <p>We will also need the reference genome that was used for SNP calling</p>
+      <ol>
+        <li>Copy the links above</li>
+        <li>Open the <span class="tool" data-tool="upload1" title="Upload tool" aria-role="link"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span> Manager</li>
+        <li>In the top row of tabs select <strong>Rule-based</strong></li>
+        <li>Set <strong>Upload data as</strong> to <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li>Paste the copied links into the text field on the right</li>
+        <li>Click <strong>Build</strong> to bring up the <em>Rule Builder</em> dialog</li>
+        <li>Click on the wrench icon <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> next to <strong>Rules</strong> in the left panel of the window</li>
+        <li>
+          <p>In the text field, erase the prefilled content and copy/paste the following rule definition into it instead:</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "rules": [
+    {
+      "type": "add_column_basename",
+      "target_column": 0
+    },
+    {
+      "type": "add_column_substr",
+      "target_column": 1,
+      "length": 4,
+      "substr_type": "drop_suffix"
+    }
+  ],
+  "mapping": [
+    {
+      "type": "url",
+      "columns": [
+        0
+      ]
+    },
+    {
+      "type": "list_identifiers",
+      "columns": [
+        2
+      ],
+      "editing": false
+    }
+  ]
+}
+</code></pre></div>          </div>
+        </li>
+        <li>Click on <strong>Apply</strong></li>
+        <li>In the bottom row of options, change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">vcf</code></li>
+        <li>Set the name of the new collection to <code class="language-plaintext highlighter-rouge">MTB sample variants</code></li>
+        <li>Click on <strong>Upload</strong></li>
+      </ol>
+
+      <p>It is ok to continue with the next step even while the upload of this data is still ongoing.
+Just click on the <strong>Close</strong> button of the information pop-up window if it is still open when you are ready to proceed.</p>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="link"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span> the reference genome that was used for SNP calling from:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta
 </code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Finally  Create a <strong>Dataset List (Collection)</strong> for all the VCFs.</p>
 
-      <p>Use a meaningful name, for example <strong>MTB VCFs</strong>.</p>
+      <p>and make sure the dataset format is set to <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a dataset collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all 20 VCFs files that we just imported</li>   <li>     <p>Click <strong>20 of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
   </ol>
 
 </blockquote>
 
-<h1 id="generate-a-snp-alignment">Generate a SNP alignment</h1>
+<h2 id="generate-a-snp-alignment">Generate a SNP alignment</h2>
 
 <p>In this tutorial we aim to calculate the genetic differences (in SNPs) between pairs of MTB genomes.
 To do so, we need to compare, between each pair of genomes (thus pairwise), the nucleotides that are
@@ -807,27 +1069,25 @@ observed at each position. Each time we find a different nucleotide at a given p
 mean that their respective genomes are almost identical, except for 5 positions along all the genome
 in which they have different nucleotides.</p>
 
-<p>To do such calculation we need to first build an alignment of all the genomes (multiple-sequence
-  alignment, or MSA). Afterwards, we will use specific software to analyze this MSA, count SNPs,
-  and thus calculate the genetic distance between each pair of samples.</p>
+<p>To do such calculation we need to first build an alignment of all the genomes (a multiple-sequence alignment, or MSA).
+Afterwards, we will use specific software to analyze this MSA, count SNPs, and thus calculate the genetic distance between each pair of samples.</p>
 
 <figure id="figure-1"><img src="./images/MSA.png" alt="MSA of 5 MTB genomes. " width="500" height="129" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A SNP is highlighted in a MSA of five MTB genomes</figcaption></figure>
 
-<h2 id="generate-complete-genomes">Generate complete genomes</h2>
+<h3 id="generate-complete-genomes">Generate complete genomes</h3>
+
 <p>The first step to generate the genomes MSA will be… to get the complete genomes of our samples!
 In the <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">MTB Variant Analysis tutorial</a> we have analyzed short-read high-throughput sequencing data (Illumina) to
 obtain the respective VCF files that describe the mutations found in each of our samples, as compared
 to the reference genome. We can now use these VCF files to build the complete genome of each of our
 samples.</p>
 
-<h3 id="filter-vcf-files-for-epidemiologicalphylogenetic-investigation">Filter VCF files for epidemiological/phylogenetic investigation</h3>
+<h4 id="filter-vcf-files-for-epidemiologicalphylogenetic-investigation">Filter VCF files for epidemiological/phylogenetic investigation</h4>
 <p>Interpreting <strong>mixed calls</strong> or <strong>indels</strong> in phylogenetic/epidemiological applications can be very
-complicated. That is the reason why we tipically use alignments that only contain <strong>fixed SNPs</strong>.</p>
+complicated. That is the reason why we typically use alignments that only contain <strong>fixed SNPs</strong>.</p>
 
 <p>Thus, the first step in this tutorial will be to filter the VCFs so we are sure that
-they only contain <strong>fixed SNPs</strong>. As it was introduced in day 2 webinar <a href="https://youtu.be/38GUBKwWXv8">Mapping and Variant calling</a>, we will consider fixed
-those variants at a frequency equal or greater than 90%. We will be using here the tool
-<strong>TB Variant Filter</strong>.</p>
+they only contain <strong>fixed SNPs</strong>, which we (somewhat arbitrarily) define as those single-nucleotide variants that are observed at an allele frequency of 90% or greater. We will be using the tool <strong>TB Variant Filter</strong> for this task.</p>
 
 <p><em>Note: TB variant Filter refers to SNPs as SNVs. These two short forms are interchangeable, meaning <strong>S</strong>ingle <strong>N</strong>ucleotide <strong>P</strong>olymorphism and <strong>S</strong>ingle <strong>N</strong>ucleotide <strong>V</strong>ariant, respectively.</em></p>
 
@@ -835,9 +1095,9 @@ those variants at a frequency equal or greater than 90%. We will be using here t
   <div class="box-title hands-on-title" id="hands-on-filter-vcf-files-for-epidemiological-investigation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter VCF files for epidemiological investigation</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.5+galaxy2" title="TB Variant Filter tool" aria-role="link"><strong>TB Variant Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.5+galaxy2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.6+galaxy0" title="TB Variant Filter tool" aria-role="link"><strong>TB Variant Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.6+galaxy0</span></span> with the following parameters:
       <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“VCF file to be filter”</em>: <code class="language-plaintext highlighter-rouge">MTB VCFs</code> (Select Dataset Collection instead of Single Dataset)</li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“VCF file to be filter”</em>: <code class="language-plaintext highlighter-rouge">MTB variants per sample</code>; the uploaded collection of VCF datasets</li>
         <li><em>“Filters to apply”</em>: <code class="language-plaintext highlighter-rouge">Only accept SNVs</code>, <code class="language-plaintext highlighter-rouge">Filter variants by percentage alt allele</code></li>
         <li><em>“Show options for the filters”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Minimum alternate allele percentage to accept”</em>: <code class="language-plaintext highlighter-rouge">90.0</code></li>
@@ -845,51 +1105,46 @@ those variants at a frequency equal or greater than 90%. We will be using here t
     </li>
   </ol>
 
-</blockquote>
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
-<blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <p><strong>TB Variant Filter</strong> reads the VCF and output only SNPs that have, at least, 90% frequency.
+How can the software extract such information from the VCF datasets?</p>
 
-  <p><strong><code class="language-plaintext highlighter-rouge">TB Variant Filter</code></strong> reads the VCF and output only SNPs that have, at least, 90% frequency.
-How can this sofware extract such information from the VCF files?</p>
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-    <p>That information is contained, for each mutation, in the VCF:</p>
-    <ul>
-      <li>The <code class="language-plaintext highlighter-rouge">TYPE</code> field within the INFO string will tell us if the mutation is a SNP (TYPE=snp)</li>
-      <li>You can look for other types of mutations like insertions (TYPE=ins)</li>
-      <li>The <code class="language-plaintext highlighter-rouge">AF</code> field within the INFO string describes the estimated <strong>A</strong>llele <strong>F</strong>requency</li>
-      <li>An alterntive way to calculate it, would be to divide the number of observations of the
-alternate allele (<code class="language-plaintext highlighter-rouge">AO</code>) by the total depth at that position (<code class="language-plaintext highlighter-rouge">DP</code>)</li>
-    </ul>
+      <p>That information is contained, for each mutation, in the VCF:</p>
+      <ul>
+        <li>The <code class="language-plaintext highlighter-rouge">TYPE</code> field within the INFO string will tell us if the mutation is a SNP (TYPE=snp)</li>
+        <li>You can look for other types of mutations like insertions (TYPE=ins)</li>
+        <li>The <code class="language-plaintext highlighter-rouge">AF</code> field within the INFO string describes the estimated <strong>A</strong>llele <strong>F</strong>requency</li>
+        <li>In the absence of the <code class="language-plaintext highlighter-rouge">AF</code> field, the allele frequency can be calculated as: <code class="language-plaintext highlighter-rouge">AO</code> (alternate allele observations) / <code class="language-plaintext highlighter-rouge">DP</code> (depth of reads at the variant site)</li>
+      </ul>
+    </blockquote>
   </blockquote>
-
 </blockquote>
 
-<h3 id="reconstruct-the-complete-genome-of-each-sample-with-bcftools-consensus">Reconstruct the complete genome of each sample with <strong>bcftools consensus</strong></h3>
-<p>Our VCF files now only contain <strong>fixed SNPs</strong> that were found in the genome of the respective strains.
+<h4 id="reconstruct-the-complete-genome-of-each-sample">Reconstruct the complete genome of each sample</h4>
+<p>Our new collection of VCF datasets now only contains <strong>fixed SNPs</strong> that were found in the genome of the respective strains.
 Genomic positions not in the VCF mean that, at that particular position, the strain has the
 same nucleotide than the reference genome. Knowing this information, one could reconstruct the
 complete genome of each strain pretty easily. From the first to the last position in the genome,
 one would put the same nucleotide than in the reference if that position is not in the VCF, or the
-SNP described in the VCF otherwise. This is exactly what <code class="language-plaintext highlighter-rouge">bcftools consensus</code> will do for us,
+SNP described in the VCF otherwise. This is exactly what the tool <strong>bcftools consensus</strong> will do for us,
 given the reference genome and the VCF of the strain we want to reconstruct the genome for.</p>
-
-<p>https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-reconstruct-the-complete-genome-of-each-sample"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Reconstruct the complete genome of each sample</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2" title="bcftools consensus tool" aria-role="link"><strong>bcftools consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3" title="bcftools consensus tool" aria-role="link"><strong>bcftools consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3</span></span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“VCF/BCF Data”</em>: <code class="language-plaintext highlighter-rouge">MTB VCFs filtered</code> (output of <strong>TB Variant Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history</code> (The reference genome that was used for SNP-calling)
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“VCF/BCF Data”</em>: the collection of filtered variants per sample; output of <strong>TB Variant Filter</strong></li>
+        <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">(MTB_ancestor_reference.fasta)</code></li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Set output FASTA ID from name of VCF”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference genome”</em>: the uploaded MTB ancestor reference fasta dataset (the reference genome that was used for SNP-calling)</li>
+            <li><em>“Set output FASTA ID from name of VCF”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -925,24 +1180,25 @@ are diploid and thus each posible position in the genome has two possible allele
 bacterial genomics, in contrast, we are <strong>always sequencing a population</strong> of cells with
 potential genetic diversity (with the exception of single-cell sequencing).
 That does not mean that we cannot use this type of software, we can (and we do!) but it is
-good to know what they are ment for, and their possible limitations</p>
+good to know what they are meant for, and their possible limitations.</p>
   </blockquote>
 </blockquote>
 
-<h2 id="multiple-sequence-alignment-msa-of-all-genomes">Multiple-sequence alignment (MSA) of all genomes</h2>
+<h3 id="multiple-sequence-alignment-msa-of-all-genomes">Multiple-sequence alignment (MSA) of all genomes</h3>
+
 <p>Multiple sequence alignment is a process in which multiple DNA, RNA or protein sequences are arranged
 to find regions of similarity that are supposed to reflect the consequences of different evolutionary
-processes (Figure 1). MSAs are used to test hypotheses about this evoluitionary processes and infer phylogenetic
+processes (Figure 1). MSAs are used to test hypotheses about these evolutionary processes and to infer phylogenetic
 relationships, and for these reasons we build MSA for sequences for which we already assume some sort
 of evolutionary relationship. You will learn more on MSAs and phylogenetic inference in the next
 tutorial.</p>
 
 <p>Building MSAs of several complete genomes can be a complicated process and computationally demanding. To perform
-such task there are many software packages available like <code class="language-plaintext highlighter-rouge">Muscle</code>, <code class="language-plaintext highlighter-rouge">MAFFT</code> or <code class="language-plaintext highlighter-rouge">Clustal</code> just to mention some.
+such a task there are many software packages available like <strong>Muscle</strong>, <strong>MAFFT</strong> or <strong>Clustal</strong>, just to mention some.
 Which one are we going to use in this tutorial? Well, we are going to use a trick. We are going to
 just stack one genome on top of each other within a text file. (More on why we can do this below).</p>
 
-<p>Our aim is to generate a <strong>multifasta</strong> file in which the genomes of our samples are aligned.
+<p>Our aim is to generate a <strong>multifasta</strong> dataset in which the genomes of our samples are aligned.
 Something that looks like this:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;Sample 1
@@ -954,9 +1210,7 @@ TTCGTTCGATGACCCCGGTTCAGGCTTCACCACAGTGTGGAACG...
 </code></pre></div></div>
 
 <p>This could be done manually, by copy-pasting all genomes in a single text file.
-However we can do the same with a specific command that <em>concatenates</em> files.</p>
-
-<h3 id="build-a-multiple-sequence-alignment-from-complete-genomes-with-concatenate-datasets">Build a multiple-sequence alignment from complete genomes with “<strong>Concatenate datasets</strong>”</h3>
+However we can do the same with a specific command that <em>concatenates</em> datasets.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-concatenate-genomes-to-build-a-msa"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Concatenate genomes to build a MSA</div>
@@ -964,11 +1218,9 @@ However we can do the same with a specific command that <em>concatenates</em> fi
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tail-to-head (cat) tool" aria-role="link"><strong>Concatenate datasets tail-to-head (cat)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1</span></span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Datasets to concatenate”</em>: <code class="language-plaintext highlighter-rouge">Dataset collection</code> (output of <strong>bcftools consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Datasets to concatenate”</em>: the collection of consensus genomes; output of <strong>bcftools consensus</strong></li>
       </ul>
     </li>
-    <li>The output of <strong>concatenate datasets</strong> may be of type tabular. Make sure Galaxy sees this file as
-a fasta file by editing its attributes. Click in the pencil icon, select “Datatypes” and then select fasta.</li>
   </ol>
 
 </blockquote>
@@ -981,7 +1233,7 @@ all of our genomes! However, it is important that you understand the following q
   <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>Generating multiple-sequence alignments can be complicated and computationally demanding, and there are
-many software packages to perform such task. How is then possible that we were able to build a MSA by just
+many software packages to perform such task. How is it possible that we were able to build a MSA by just
 stacking genomes one on top of each other? Can you think about what makes our case special, so we can
 just use this “trick”?</p>
 
@@ -993,13 +1245,13 @@ those <strong>SNPs</strong> that we found in that said sample (described in the 
 removed indels from the VCF when filtering!</strong> Because the complete genomes we generated do not
 contain insertions or deletions, ALL the genomes have the same length (the length of the
 reference genome) and each nucleotide corresponds to the same genomic coordinate (the one
-also in the reference genome). So we are not aligning genomes <em>per se</em> but, knowing this, we
+also in the reference genome). So we are not aligning genomes <em>per se</em> and, knowing this, we
 can build a MSA by just stacking genomes that <strong>are the same length »AND« have the same coordinates</strong>.</p>
   </blockquote>
 
 </blockquote>
 
-<h3 id="remove-invariant-positions-with-finds-snp-sites">Remove invariant positions with <strong>Finds SNP sites</strong></h3>
+<h3 id="remove-invariant-positions">Remove invariant positions</h3>
 
 <p>We have generated a MSA that is the basis for the transmission (clustering) and phylogenetic
 analysis. Although we could already use this MSA for such analysis, it is common practice to remove
@@ -1029,7 +1281,7 @@ our file larger than necessary.</p>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0" title="Finds SNP sites tool" aria-role="link"><strong>Finds SNP sites</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0</span></span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Single dataset</code> (output of <strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: the concatenated consensus genomes; output of <strong>Concatenate datasets</strong></li>
         <li><em>“Output”</em>: <code class="language-plaintext highlighter-rouge">Sequence alignment / VCF</code>
           <ul>
             <li><em>“Output formats”</em>: <code class="language-plaintext highlighter-rouge">Multi-FASTA alignment file</code></li>
@@ -1045,9 +1297,10 @@ our file larger than necessary.</p>
 coordinates</strong>, meaning that two contiguous nucleotides may correspond to coordinates thousands of
 positions apart.</p>
 
-<h1 id="identify-transmission-clusters">Identify transmission clusters</h1>
+<h2 id="identify-transmission-clusters">Identify transmission clusters</h2>
 
-<h2 id="calculate-pairwise-snp-distances">Calculate pairwise SNP distances</h2>
+<h3 id="calculate-pairwise-snp-distances">Calculate pairwise SNP distances</h3>
+
 <p>Now we are all set to calculate pairwise SNP distances between samples and decide whether two
 patients are within the same transmission cluster or not. Having a SNP alignment, this is fairly
 easy. We will use <strong>SNP distance matrix</strong>, that will generate a matrix with pairwise SNP distances.</p>
@@ -1056,24 +1309,25 @@ easy. We will use <strong>SNP distance matrix</strong>, that will generate a mat
   <div class="box-title hands-on-title" id="hands-on-distance-matrix-from-snp-alignment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Distance matrix from SNP alignment.</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0" title="SNP distance matrix tool" aria-role="link"><strong>SNP distance matrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.8.2+galaxy0" title="SNP distance matrix tool" aria-role="link"><strong>SNP distance matrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.8.2+galaxy0</span></span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA multiple sequence alignment”</em>: <code class="language-plaintext highlighter-rouge">Single dataset</code> (output of <strong>Finds SNP sites</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA multiple sequence alignment”</em>: the concatenated SNP sites-only sequences; output of <strong>Finds SNP sites</strong></li>
       </ul>
-
-      <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
-
-        <p>Have a look at the distance matrix to make sure you understand the whole process. Given that
-we only have 20 samples, you could already spot some samples that are involved in the same
-transmission chain (samples with a small number of SNPs between them as explained below).</p>
-      </blockquote>
     </li>
   </ol>
 
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+
+    <p>Have a look at the distance matrix to make sure you understand the whole process. Given that
+we only have 20 samples, you could already spot some samples that are involved in the same
+transmission chain (samples with a small number of SNPs between them as explained below).</p>
+  </blockquote>
+
 </blockquote>
 
-<h2 id="determine-transmission-clusters-based-on-a-snp-threshold">Determine transmission clusters based on a SNP threshold</h2>
+<h3 id="determine-transmission-clusters-based-on-a-snp-threshold">Determine transmission clusters based on a SNP threshold</h3>
+
 <p>Now that we have a distance matrix that describes the SNP distance between each pair of samples, we
 could already describe the transmission clusters based on a <strong>SNP threshold</strong>, as <a href="https://youtu.be/kKNgmpy1N94">explained in the
 respective webinar</a> . If two samples are at a distance below that threshold, we will say that they
@@ -1111,91 +1365,99 @@ same SNP distances, another possible (yet still oversimplified) scenario could b
   </blockquote>
 </blockquote>
 
-<h2 id="determine-transmission-clusters-using-rscript">Determine transmission clusters using Rscript</h2>
+<h3 id="determine-transmission-clusters-using-rscript">Determine transmission clusters using Rscript</h3>
 
 <p>Currently there is not tool in Galaxy to perform the exact task that we need (although we plan to
-include it!).  So far, we can use <code class="language-plaintext highlighter-rouge">R</code> and the library <code class="language-plaintext highlighter-rouge">cluster</code> within Galaxy to perform such task.
-Again, don’t worry about this, programming in <code class="language-plaintext highlighter-rouge">R</code> is beyong the scope of this workshop, but if you
-have some <code class="language-plaintext highlighter-rouge">R</code> or other programming language knowledge, or if you plan to learn in the future, you could
-also reuse this code for your own analyses.</p>
+include it!).  So far, we can use <strong>R</strong> and the <strong>cluster</strong> library through an <strong>interactive tool</strong> from within Galaxy to achieve what we want.
+Again, don’t worry about this, programming in <strong>R</strong> is beyond the scope of this tutorial, but if you
+have some <strong>R</strong> or other programming language knowledge, you could also use the code shown in the following as a starting point for your own analyses.</p>
 
-<p>First you will need to open Rstudio within Galaxy. To do this look for Rstudio in the tool panel,
-click on it and click on <code class="language-plaintext highlighter-rouge">execute</code>. Rstudio will appear in your story as a job that is being continously
-executed. This is the normal behaviour because, indeed, Rstudio is now being executed and will only
-stop once we have finish using it.</p>
+<p>First you will need to open Rstudio within Galaxy.
+To do this look for Rstudio in the tool panel, click on it and run the interactive tool.
+An Rstudio dataset will appear in your history, representing an interactive tool run that, once started, will stay in the running state indefinitely.
+This is the normal behaviour because, indeed, Rstudio is getting executed until we finish using it.</p>
 
-<p>To access your Rstudio instance within Galaxy, go to <em>User&gt;Active Interactive Tools</em> in the top center
-panel. Now click on the link <code class="language-plaintext highlighter-rouge">Rstudio</code> that appears below <em>Name</em>. The status below <em>Job Info</em> should be <code class="language-plaintext highlighter-rouge">running</code>.</p>
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-interactive-tool-session-to-generate-a-cluster-report"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Interactive tool session to generate a cluster report</div>
 
-<p>Wait for Rstudio to open, and copy-paste the following code in the Console of Rstudio (left panel):</p>
+  <ol>
+    <li>Note the dataset number (the number in front of and separated with a <strong>:</strong> from the dataset name) of the SNP distance matrix generated by the last tool run in your history</li>
+    <li>Once the Rstudio dataset is in running state, click on its <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon and wait for Rstudio to open</li>
+    <li>
+      <p>Load the SNP distance matrix dataset generated before as an R object</p>
 
-<p><strong>IMPORTANT</strong>: Note the third line of the next block of code, where it reads:
-<code class="language-plaintext highlighter-rouge">distance &lt;- gx_get(Galaxy history ID)</code>
-In this part is where we are importing the SNP distance matrix generated in Galaxy into
-R. You need to take note of the history ID of the step that generated the SNP distance
-matrix. For example, imagine that in our story says <em>198: SNP distance matrix on data 197</em>.</p>
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get the SNP distance matrix object from Galaxy</span><span class="w">
+</span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gx_get</span><span class="p">(</span><span class="m">109</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
 
-<p>Then the history ID is <em>198</em>, and the block of code should be:</p>
+      <ol>
+        <li>Copy the above code into the Rstudio session</li>
+        <li>Replace the <code class="language-plaintext highlighter-rouge">109</code> in parentheses with the dataset number of your SNP distance matrix.</li>
+        <li>Press <strong>Enter</strong> on your keyboard to execute the code in Rstudio</li>
+      </ol>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span><span class="w">
+      <p>When the data import finishes, the content of the dataset from your Galaxy history will be available in the R object <code class="language-plaintext highlighter-rouge">distance</code>.</p>
+    </li>
+    <li>
+      <p>Run the following R commands</p>
 
-</span><span class="c1"># Get the SNP distance matrix object from Galaxy</span><span class="w">
-</span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gx_get</span><span class="p">(</span><span class="m">198</span><span class="p">)</span><span class="w">
-</span><span class="c1"># Read the SNP distance matrix</span><span class="w">
-</span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.table</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">"\t"</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
-</span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.dist</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span><span class="w">
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library(cluster)
 
-</span><span class="c1"># Perform clustering based on SNP distances and a SNP threshold of 10 (h=10)</span><span class="w">
-</span><span class="n">clusters</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">agnes</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span><span class="w"> </span><span class="n">diss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"average"</span><span class="p">)</span><span class="w">
-</span><span class="n">clusters</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">cutree</span><span class="p">(</span><span class="n">as.hclust</span><span class="p">(</span><span class="n">clusters</span><span class="p">),</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">))</span><span class="w">
-</span><span class="n">colnames</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"cluster_id"</span><span class="w">
+# Read the SNP distance matrix
+distance &lt;- read.table(distance, header=T, sep="\t", row.names = 1)
+distance &lt;- as.dist(distance)
 
-</span><span class="c1">## Discard groups of only one patient by picking clusters with more than one entry</span><span class="w">
-</span><span class="c1"># Get cluster_ids that are "duplicated" (meaning they have more than one patient)</span><span class="w">
-</span><span class="n">clusterIDs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unique</span><span class="p">(</span><span class="n">subset</span><span class="p">(</span><span class="n">clusters</span><span class="p">,</span><span class="w"> </span><span class="n">duplicated</span><span class="p">(</span><span class="n">clusters</span><span class="o">$</span><span class="n">cluster_id</span><span class="p">))</span><span class="o">$</span><span class="n">cluster_id</span><span class="p">)</span><span class="w">
-</span><span class="c1"># Get samples within these "duplicated" clusters</span><span class="w">
-</span><span class="n">clusters</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">clusters</span><span class="p">,</span><span class="w"> </span><span class="n">cluster_id</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">clusterIDs</span><span class="p">)</span><span class="w">
-</span><span class="c1"># Add proper Sample name column</span><span class="w">
-</span><span class="n">clusters</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">Sample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rownames</span><span class="p">(</span><span class="n">clusters</span><span class="p">),</span><span class="w"> </span><span class="n">clusters</span><span class="p">)</span><span class="w">
-</span><span class="n">write.table</span><span class="p">(</span><span class="n">clusters</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Transmission_clusters.tsv"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">"\t"</span><span class="p">,</span><span class="w"> </span><span class="n">quote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+# Perform clustering based on SNP distances and a SNP threshold of 10 (h=10)
+clusters &lt;- agnes(distance, diss = TRUE, method = "average")
+clusters &lt;- as.data.frame(cutree(as.hclust(clusters), h = 10))
+colnames(clusters) &lt;- "cluster_id"
 
-<p>This code has written the results to a file called <em>Transmission_clusters.tsv</em>. You can
-check the results and/or download the file by clicking in the right bottom panel, under <em>Files</em>.</p>
+## Discard groups of only one patient by picking clusters with more than one entry
+# Get cluster_ids that are "duplicated" (meaning they have more than one patient)
+clusterIDs &lt;- unique(subset(clusters, duplicated(clusters$cluster_id))$cluster_id)
+# Get samples within these "duplicated" clusters
+clusters &lt;- subset(clusters, cluster_id %in% clusterIDs)
+# Add proper Sample name column
+clusters &lt;- cbind(Sample = rownames(clusters), clusters)
+write.table(clusters, file = "Transmission_clusters.tsv", sep="\t", quote = F, row.names = F)
+</code></pre></div>      </div>
 
-<p>The output of the R script is a table containing, for samples that were found within a cluster,
-their respective names and the cluster id (an arbitrary number) they belong to:</p>
+      <ol>
+        <li>Again, copy the code into Rstudio</li>
+        <li>Press <strong>Enter</strong> on your keyboard to excute it in Rstudio</li>
+      </ol>
 
-<table>
-  <thead>
-    <tr>
-      <th>Sample</th>
-      <th>cluster_id</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>ERR6362484.vcf</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <td>ERR6362138.vcf</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <td>ERR6362156.vcf</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <td>ERR6362253.vcf</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <td>ERR5987352.vcf</td>
-      <td>10</td>
-    </tr>
-  </tbody>
-</table>
+      <p>This code will write the results of a cluster analysis into a file called <em>Transmission_clusters.tsv</em>
+(the file should appear in the <strong>Files</strong> tab of the lower-right panel of Rstudio).</p>
+    </li>
+    <li>
+      <p>Export the new file back to the Galaxy history as a dataset of format tabular</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gx_put("Transmission_clusters.tsv", file_type="tabular")
+</code></pre></div>      </div>
+
+      <ol>
+        <li>Copy the code into Rstudio</li>
+        <li>Press <strong>Enter</strong> on your keyboard to execute it</li>
+        <li>Wait for the export to finish</li>
+      </ol>
+    </li>
+    <li>Stop Rstudio
+      <ol>
+        <li>Close the Rstudio tab in your browser and go back to Galaxy</li>
+        <li>Either
+          <ul>
+            <li>delete the Rstudio data (still shown in running state) from your history, or</li>
+            <li>in Galaxy’s top menu, go to <em>“User”</em> -&gt; <em>“Active Interactive Tools”</em>, select the Rstudio instance and click on the <strong>Stop</strong> button at the bottom</li>
+          </ul>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output of the R script, which is now available as a dataset in your history is a table listing only samples that were found to belong to a cluster together with the (arbitrary) ID of their cluster.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1205,9 +1467,7 @@ their respective names and the cluster id (an arbitrary number) they belong to:<
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-answer"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answer<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>We have found two transmission clusters with respective IDs 10 and 12. Transmission cluster 10
-is composed by two samples linked by recent transmission and transmission cluster 12 by three samples
-linked by recent transmission. For example samples ERR6362484 and ERR5987352 are linked by
-recent transmission.</p>
+is composed of two samples, <em>ERR6362484</em> and <em>ERR5987352</em>, linked by recent transmission and transmission cluster 12 of three samples, <em>ERR6362138</em>, <em>ERR6362156</em> and <em>ERR6362253</em>.</p>
   </blockquote>
 </blockquote>
 
@@ -1232,7 +1492,7 @@ that patients within the cluster were infected by an index case that was not sam
   </blockquote>
 </blockquote>
 
-<h1 id="using-clustering-to-investigate-the-emergence-of-drug-resistance">Using clustering to investigate the emergence of drug resistance</h1>
+<h1 id="analysis-part-2-combining-cluster-information-with-drug-resistance-reports">Analysis Part 2: Combining cluster information with drug-resistance reports</h1>
 
 <p>Although we have stressed the fact that <strong>clustering cannot be used to delineate
 transmission events</strong>, clustering is very useful to investigate outbreaks and determine which cases are
@@ -1244,22 +1504,20 @@ on our clustering analysis.</p>
 
 <h2 id="get-the-data-1">Get the data</h2>
 
-<p>In the <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">MTB Variant Analysis tutorial</a>
-you have used <strong>TB-profiler</strong> to generate a report with determinants of drug resistance of a
+<p>The <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">MTB Variant Analysis tutorial</a>
+demonstrates the use of <strong>TB-profiler</strong> to generate a report with determinants of drug resistance of a
 particular MTB strain, and predict its genotypic drug susceptibility. We have done <strong>exactly the same</strong>
-for the 20 samples that we used in the clustering analysis, so we have now the TB-profiler report for
+for the 20 samples that we used in the clustering analysis, so we have now the TB-profiler reports for
 all of them.</p>
+
+<p>Like in part 1, we can use Galaxy’s rule-based uploader functionality to upload the data, build a collection from it and name its elements correctly, all in one step.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
-      <p>Import the files from <a href="https://zenodo.org/record/6010176">Zenodo</a> or from
-the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">evolution</code>
- -&gt; <code class="language-plaintext highlighter-rouge">Identifying tuberculosis transmission links: from SNPs to transmission clusters</code>):</p>
-
-      <p>Import the TB profiler report of each sample</p>
+      <p>Import the TB-profiler reports for the samples</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6010176/files/ERR1203059.TBprof.txt
 https://zenodo.org/record/6010176/files/ERR181435.TBprof.txt
@@ -1282,16 +1540,61 @@ https://zenodo.org/record/6010176/files/ERR6362653.TBprof.txt
 https://zenodo.org/record/6010176/files/SRR13046689.TBprof.txt
 https://zenodo.org/record/6010176/files/SRR998584.TBprof.txt
 </code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Create a <strong>Dataset List (Collection)</strong> for all the report files.</p>
 
-      <p>Use a meaningful name, for example <strong>TBprofiler reports</strong>.</p>
+      <ol>
+        <li>Copy the links above</li>
+        <li>Open the <span class="tool" data-tool="upload1" title="Upload tool" aria-role="link"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span> Manager</li>
+        <li>In the top row of tabs select <strong>Rule-based</strong></li>
+        <li>Set <strong>Upload data as</strong> to <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li>Paste the copied links into the text field on the right</li>
+        <li>Click <strong>Build</strong> to bring up the <em>Rule Builder</em> dialog</li>
+        <li>Click on the wrench icon <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> next to <strong>Rules</strong> in the left panel of the window</li>
+        <li>
+          <p>In the text field, erase the prefilled content and copy/paste the following rule definition into it instead:</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "rules": [
+    {
+      "type": "add_column_basename",
+      "target_column": 0
+    },
+    {
+      "type": "add_column_substr",
+      "target_column": 1,
+      "length": 11,
+      "substr_type": "drop_suffix"
+    }
+  ],
+  "mapping": [
+    {
+      "type": "url",
+      "columns": [
+        0
+      ]
+    },
+    {
+      "type": "list_identifiers",
+      "columns": [
+        2
+      ],
+      "editing": false
+    }
+  ]
+}
+</code></pre></div>          </div>
+        </li>
+        <li>Click on <strong>Apply</strong></li>
+        <li>In the bottom row of options, change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">txt</code></li>
+        <li>Set the name of the new collection to <code class="language-plaintext highlighter-rouge">TB profiler reports</code></li>
+        <li>Click on <strong>Upload</strong></li>
+      </ol>
     </li>
   </ol>
+
 </blockquote>
 
 <h2 id="summarize-the-data">Summarize the data</h2>
+
 <p>TB-profiler reports are very useful and comprehensive, and we will use them to better investigate
 drug resistance in our dataset. However, it is always useful to summarize the data on a per-sample basis,
 on a table, so we can quickly check which strains are, for example, MDR, an which are pan-susceptible.
@@ -1324,7 +1627,9 @@ We would like to generate a table like the following:</p>
   </tbody>
 </table>
 
-<p>If we have a look at a TB profiler report we can see that there is one line describing the genotypic drug susceptibility.
+<p>and merge this with the tabular per-sample cluster report that we have generated in the first part of the tutorial.</p>
+
+<p>If we take a look at a TB profiler report we can see that there is one line describing the genotypic drug susceptibility.
 Let’s have a look at the first part of the TB-profiler report for sample ERR6362653:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -1348,103 +1653,64 @@ lineage2.2	0.996	East-Asian (Beijing)	Beijing-RD207	RD105;RD207
 lineage2.2.1	0.999	East-Asian (Beijing)	Beijing-RD181	RD105;RD207;RD181
 </code></pre></div></div>
 
-<p>As you can see, this strain is multi-drug resistant as inficated by (<code class="language-plaintext highlighter-rouge">Drug-resistance: MDR</code>)
+<p>As you can see, this strain is multi-drug resistant as indicated by (<code class="language-plaintext highlighter-rouge">Drug-resistance: MDR</code>)
 We could then look for this information in each TB-profiler report and generate this table manually,
 for example in a spreadsheet. However this is not feasible when analyzing hundreds or thousands of samples
 (and very <strong>error-prone!</strong>).</p>
 
-<p>We are here to learn bioinformatics, so let’s generate this table using Linux commands.</p>
+<p>A far more scalable approach is to combine Galaxy tools to automate the necessary data processing steps for us.</p>
 
-<p>The process will consist of three steps:</p>
-
-<ol>
-  <li>
-    <p>Select the line containing the drug resistance profile with <strong>grep</strong>:</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Drug-resistance: MDR
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Prepend the name of the sample with <strong>Add input name as column</strong>:</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR6362653.txt Drug-resistance: MDR
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Concatenate results from all samples in a single file with <strong>Concatenate datasets</strong>:</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR6362653.txt Drug-resistance: MDR
-ERR313115.txt Drug-resistance: Sensitive
-ERR5987300.txt Drug-resistance: Pre-XDR
-.... etc
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>As an optional step, we can reformat the table with <strong>sed</strong> to get rid of the <code class="language-plaintext highlighter-rouge">.txt</code> and <code class="language-plaintext highlighter-rouge">Drug-resistance:</code>
-so the table looks like:</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR6362653 MDR
-ERR313115 Sensitive
-ERR5987300 Pre-XDR
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<h4 id="select-the-line-containing-the-drug-resistance-profile-with-grep">Select the line containing the drug resistance profile with <code class="language-plaintext highlighter-rouge">grep</code></h4>
+<h3 id="select-the-line-containing-the-drug-resistance-profile-in-the-report-of-every-sample">Select the line containing the drug resistance profile in the report of every sample</h3>
 
 <p><strong>grep</strong> is used to search patterns of text within text files. Each time <strong>grep</strong> finds that
 pattern, it will print as a result <strong>the complete line</strong> containing such pattern.</p>
 
-<p>If we use <strong>grep</strong> to search for the pattern “<code class="language-plaintext highlighter-rouge">Drug-resistance</code>”, in a TB-profiler file, we will get
+<p>If we use <strong>grep</strong> to search for the pattern “<code class="language-plaintext highlighter-rouge">Drug-resistance:</code>”, in a TB-profiler file, we will get
 as output the complete line, for example <code class="language-plaintext highlighter-rouge">Drug-resistance: MDR</code></p>
 
-<h4 id="search-in-textfiles-grep"><em>Search in textfiles (grep)</em></h4>
-
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-search-for-drug-resistance-in-tb-profiler-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Search for `Drug-resistance` in TB-profiler files</div>
+  <div class="box-title hands-on-title" id="hands-on-keep-only-drug-resistance-lines-from-tb-profiler-reports"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Keep only `Drug-resistance:` lines from TB-profiler reports</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="link"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="link"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">Dataset collection</code> (Collection of the TB profiler reports we just imported) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">Drug-Resistance</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: the uploaded collection of TB-profiler reports</li>
+        <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">Drug-resistance:</code></li>
       </ul>
     </li>
   </ol>
+
 </blockquote>
 
-<h4 id="prepend-the-sample-name">Prepend the sample name</h4>
-<p>We will add the name of the input file, to know to which sample the DR line refers to.
-We will <em>prepend</em> the column with the sample name so it appears as the first column.
- This is arbitrary and just a matter of personal taste:</p>
+<h3 id="collapse-collection-into-a-table-with-each-line-prepended-with-a-sample-name">Collapse collection into a table with each line prepended with a sample name</h3>
 
+<p>Next, we want to turn the collection of single-line datasets we just created into a single two-column table with
+one column of sample IDs and another one with the corresponding drug resistance status.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-prepend-the-sample-name-to-the-dr-profile"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepend the sample name to the DR profile</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0" title="Add input name as column tool" aria-role="link"><strong>Add input name as column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool" aria-role="link"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0</span></span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“to Dataset”</em>: <code class="language-plaintext highlighter-rouge">Dataset collection</code> (output of <strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“input contains a header line?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><em>“Prepend the colum”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-      </ul>
-    </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tool" aria-role="link"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1</span></span> with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Datasets to concatenate”</em>: <code class="language-plaintext highlighter-rouge">Dataset collection</code> (output of <strong>Add input name as column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>: the collection of single-line drug-resistance reports; output of <strong>Select lines</strong></li>
+        <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Where to add dataset name”</em>: <code class="language-plaintext highlighter-rouge">Same line and each line in dataset</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ol>
 
 </blockquote>
 
-<h4 id="cleanup-the-table-optional">Cleanup the table (optional)</h4>
-<p>In this step we will use a simple tool that searches and replaces text. We want to remove the “.txt”
-at the end of sample names, and the string “Drug-resistance:”. So we will tell the tool to search
-for these two <em>patterns</em> and to replace them with “<em>nothing</em>”</p>
+<h3 id="clean-up-the-table">Clean up the table</h3>
+
+<p>In this step we will use a simple tool that searches and replaces text to remove the redundant string “Drug-resistance: “ from our table by replacing it with <em>nothing</em>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-removing-redundant-content"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Removing redundant content</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text tool" aria-role="link"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span> with the following parameters:
@@ -1454,19 +1720,28 @@ for these two <em>patterns</em> and to replace them with “<em>nothing</em>”<
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
               <ul>
-                <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">.txt</code></li>
-                <li><em>“Replace with:” (leave this in blank)</em>:</li>
-              </ul>
-            </li>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
-              <ul>
-                <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">Drug-resistance:</code></li>
-                <li><em>“Replace with:”(leave this in blank)</em>:</li>
+                <li>
+                  <p><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">Drug-resistance: </code></p>
+
+                  <p>Note the space at the end of the pattern!</p>
+                </li>
+                <li>
+                  <p><em>“Replace with”</em>: leave this field empty</p>
+                </li>
               </ul>
             </li>
           </ul>
         </li>
       </ul>
+    </li>
+    <li>
+      <p>Once the tool has finished running, change the format of the output to <strong>tabular</strong></p>
+
+      <p>Though by now the content of the dataset looks like a nice table, Galaxy still thinks it is in general <strong>txt</strong> format because the original TB-profiler reports were of that format.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
     </li>
   </ol>
 
@@ -1490,11 +1765,54 @@ If we have a look at the respective TB-profiler reports, we can see that these t
   </blockquote>
 </blockquote>
 
-<h1 id="put-everything-together">Put everything together</h1>
-<p>Now that we have performed a clustering analysis and know which DR mutations carry each strain,
-let’s try answer a series of questions about how DR may be emerging and spreading in our study
-population.
-We will be supporting our findings in the results of our analysis, and the concepts introduced in the webinars.</p>
+<h2 id="combine-the-drug-resistance-and-the-cluster-tables">Combine the drug-resistance and the cluster tables</h2>
+
+<p>The two tables we have generated in the two parts of the tutorial share a sample column, which we can use now to join the two tables.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-joining-tables"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Joining tables</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Join two files tool" aria-role="link"><strong>Join two files</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: transmission clusters report; output of <strong>Rstudio</strong> session</li>
+        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: final drug-resistance report; output of <strong>Replace Text</strong> above</li>
+        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li>
+          <p><em>“Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">Both 1st &amp; 2nd file, plus unpairable lines from 2st file. (-a 2)</code></p>
+
+          <p>The <em>transmission clusters</em> report only lists the subset of samples that were assigned to a cluster, while the drug-resistance table has a line for every sample. We want to keep all samples from the second table and indicate missing information from the first with <code class="language-plaintext highlighter-rouge">-</code> values (see next parameter).</p>
+        </li>
+        <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="language-plaintext highlighter-rouge">-</code>
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
+              <ul>
+                <li>
+                  <p><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">Drug-resistance: </code></p>
+
+                  <p>Note the space at the end of the pattern!</p>
+                </li>
+                <li>
+                  <p><em>“Replace with”</em>: leave this field empty</p>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="interpretation-of-results">Interpretation of results</h1>
+
+<p>Now that we have performed a clustering analysis and know which DR mutations each strain carries,
+we can try to answer a series of questions about how DR may have been emerging and spreading in our study
+population.</p>
+
+<p>The final combined table you generated and that we are going to base some questions on, should look similar to this one (header added and sample order rearranged for clarity here):</p>
 
 <table>
   <thead>
@@ -1502,7 +1820,6 @@ We will be supporting our findings in the results of our analysis, and the conce
       <th>Sample</th>
       <th>Cluster_id</th>
       <th>DR profile</th>
-      <th>Clustering</th>
     </tr>
   </thead>
   <tbody>
@@ -1510,121 +1827,101 @@ We will be supporting our findings in the results of our analysis, and the conce
       <td>ERR1203059</td>
       <td>-</td>
       <td>Sensitive</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR181435</td>
       <td>-</td>
       <td>Sensitive</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR2659153</td>
       <td>-</td>
       <td>Sensitive</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR2704678</td>
       <td>-</td>
       <td>Sensitive</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR2704679</td>
       <td>-</td>
       <td>Sensitive</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR2704687</td>
       <td>-</td>
       <td>Sensitive</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR313115</td>
       <td>-</td>
       <td>Sensitive</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR551620</td>
       <td>-</td>
       <td>MDR</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR5987300</td>
       <td>-</td>
       <td>Pre-XDR</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR6362078</td>
       <td>-</td>
       <td>MDR</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR6362139</td>
       <td>-</td>
       <td>Pre-MDR</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR6362333</td>
       <td>-</td>
       <td>Pre-XDR</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR6362653</td>
       <td>-</td>
       <td>MDR</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>SRR13046689</td>
       <td>-</td>
       <td>Other</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>SRR998584</td>
       <td>-</td>
       <td>Sensitive</td>
-      <td>Unclustered</td>
     </tr>
     <tr>
       <td>ERR5987352</td>
       <td>10</td>
       <td>Pre-MDR</td>
-      <td>Clustered</td>
     </tr>
     <tr>
       <td>ERR6362484</td>
       <td>10</td>
       <td>Pre-MDR</td>
-      <td>Clustered</td>
     </tr>
     <tr>
       <td>ERR6362138</td>
       <td>12</td>
       <td>MDR</td>
-      <td>Clustered</td>
     </tr>
     <tr>
       <td>ERR6362156</td>
       <td>12</td>
       <td>Pre-XDR</td>
-      <td>Clustered</td>
     </tr>
     <tr>
       <td>ERR6362253</td>
       <td>12</td>
       <td>MDR</td>
-      <td>Clustered</td>
     </tr>
   </tbody>
 </table>
@@ -1643,12 +1940,12 @@ unclustered strains as instances of de novo evolution of DR. Thus, we see that f
 are three MDR strains (ERR551620, ERR6362078, ERR6362653) that are unclustered and therefore may
 represent cases in which drug resistance evolved independently as response to treatment within the respective
 patients. However you need to always bear in mind that, although <strong>within our population</strong> those MDR
-strains doesn’t seem to be linked to transmission, this does NOT rule out the possibility that
+strains do not seem to be linked to transmission, this does NOT rule out the possibility that
 some of these patients were infected with an MDR strain somewhere else.</p>
 
     <p>When looking at clustered strains, distinguishing between transmitted and <em>de-novo</em> may be tricky. Note
 that, for example, for the two RIF-monoresistant strains linked within the same transmission
-cluster there are, at least, a couple of scenarios possibe: one in which a RIF-monoresistant strain
+cluster there are, at least, a couple of possible scenarios: one in which a RIF-monoresistant strain
 evolved in one patient and was transmitted to the other patient afterwards, and one in which both
 were infected with the same RIF-monoresistant strain from a third patient that we have not sampled.
 We need to note that, in the first scenario, drug resistance evolved <em>de novo</em> in one patient,
@@ -1661,10 +1958,9 @@ and was <em>transmitted</em> to the other patient, whereas in the second scenari
   <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
-    <li>The same principles than those explained above apply to the three MDR strains that are
-within the same transmission cluster. However in this case there is one strain that shows clear
+    <li>The same principles as explained above apply to the three MDR strains that are
+within the same transmission cluster. In this case, however, there is one strain that shows clear
 evidence of <em>de-novo</em> evolution of DR. Do you know which strain and why?</li>
-    <li>Are there possible scenarios other than <em>de-novo</em> evolution of DR for this strain?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1683,8 +1979,8 @@ the MDR strain.</li>
   <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>There is one strain with a DR profile “other”, because it is only resistant to pyrazinamide. This
-strain is not within a transmission cluster. Therefore, we conclude that pyrazinamide resistance
-most likely evolved <em>de-novo</em> in this patient due to antibiotic treatment. But we are wrong. Do you know why?</p>
+strain is not within a transmission cluster. Therefore, we might conclude that pyrazinamide resistance
+most likely evolved <em>de-novo</em> in this patient due to antibiotic treatment, but we would be wrong. Do you know why?</p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1698,16 +1994,16 @@ is a <em>M. bovis</em> strain, which are known to be intrinsically resistant to 
   <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <ol>
-    <li>Is it possible to find in the same transmission cluster two RIF-monoresistant strains that
+    <li>Is it possible to find, in the same transmission cluster, two RIF-monoresistant strains that
 carry different rpoB mutations?</li>
-    <li>Is it possible to find in the same transmission cluster strains of different MTB sublineages?</li>
+    <li>Is it possible to find, in the same transmission cluster, strains of different MTB sublineages?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
-      <li>Yes, it is <strong>possible</strong>. In that scenario, both patiens were <strong>recently</strong>
-transmitted with the <strong>same susceptible strain</strong>, and RIF resistance evolved <strong>independently</strong> in both.</li>
+      <li>Yes, it is <strong>possible</strong>. In that scenario, the <strong>same susceptible strain</strong> would <strong>recently</strong>
+have been transmitted to two patients, and RIF resistance would have evolved <strong>independently</strong> in both.</li>
       <li>No, by definition. Remember that clustering is based on a threshold that we set of genetic
 distance measured in SNPs. We want to cluster samples that are genetically so similar that we
 can consider them as the same genotype, that is to say, as the same strain. Two different
@@ -1733,7 +2029,7 @@ which may help overcome some of these limitations.</p>
 <p>You might have noticed that one of the strains analyzed presents thousands of differences (SNPs) to
 the reference genome, standing out from the rest of strains. This strain is a <em>M. canettii</em> strain,
 that was actually not part of the outbreak investigated. However we decided to include it here. Why? Let’s find out
-in the next tutorial.</p>
+in the follow-up tutorial <a href="/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html">Tree thinking for tuberculosis evolution and epidemiology</a>.</p>
 
                 </section>
 
@@ -1840,6 +2136,9 @@ note = "[Online; accessed TODAY]"
                 </blockquote>
 
                 
+                
+
+                
 
 
 <script>
@@ -1886,6 +2185,16 @@ tools:
   revisions: d698c222f354
   tool_panel_section_label: Evolution
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Evolution
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bcftools_consensus
+  owner: iuc
+  revisions: 147de996e34f
+  tool_panel_section_label: Evolution
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: bcftools_consensus
   owner: iuc
   revisions: a87ae767b01d
@@ -1911,6 +2220,11 @@ tools:
   revisions: 1959cc43b414
   tool_panel_section_label: Evolution
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: snp_dists
+  owner: iuc
+  revisions: f78492521996
+  tool_panel_section_label: Evolution
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: snp_sites
   owner: iuc
   revisions: 5804f786060d
@@ -1926,6 +2240,11 @@ tools:
   revisions: e7aff4a85df5
   tool_panel_section_label: Evolution
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: tb_variant_filter
+  owner: iuc
+  revisions: ee4a90760848
+  tool_panel_section_label: Evolution
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: tbprofiler
   owner: iuc
   revisions: 809dfc93d593
@@ -1934,6 +2253,11 @@ tools:
 - name: add_input_name_as_column
   owner: mvdbeek
   revisions: 3284b72eef56
+  tool_panel_section_label: Evolution
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: collapse_collections
+  owner: nml
+  revisions: 90981f86000f
   tool_panel_section_label: Evolution
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: trimmomatic
@@ -1970,7 +2294,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3">a4bd07d</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6038db5f86616c4c62b95a934da425903af50dd4">6038db5</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
