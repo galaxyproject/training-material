@@ -15,6 +15,7 @@ module SchemaValidator
   @SLIDES_SCHEMA_UNSAFE = YAML.load_file('bin/schema-slides.yaml')
   @FAQ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-faq.yaml')
   @QUIZ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-quiz.yaml')
+  @NEWS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-news.yaml')
   @requirement_external_schema = YAML.load_file('bin/schema-requirement-external.yaml')
   @requirement_internal_schema = YAML.load_file('bin/schema-requirement-internal.yaml')
 
@@ -24,6 +25,7 @@ module SchemaValidator
   @TOPIC_SCHEMA = automagic_loading(@TOPIC_SCHEMA_UNSAFE)
   @FAQ_SCHEMA = automagic_loading(@FAQ_SCHEMA_UNSAFE)
   @QUIZ_SCHEMA = automagic_loading(@QUIZ_SCHEMA_UNSAFE)
+  @NEWS_SCHEMA = automagic_loading(@NEWS_SCHEMA_UNSAFE)
 
   @TUTORIAL_SCHEMA['mapping']['contributions']['required'] = false
   @SLIDES_SCHEMA['mapping']['contributions']['required'] = false
@@ -34,6 +36,7 @@ module SchemaValidator
   @slides_validator = Kwalify::Validator.new(@SLIDES_SCHEMA)
   @faq_validator = Kwalify::Validator.new(@FAQ_SCHEMA)
   @quiz_validator = Kwalify::Validator.new(@QUIZ_SCHEMA)
+  @news_validator = Kwalify::Validator.new(@NEWS_SCHEMA)
   @requirement_external_validator = Kwalify::Validator.new(@requirement_external_schema)
   @requirement_internal_validator = Kwalify::Validator.new(@requirement_internal_schema)
 
@@ -178,6 +181,25 @@ module SchemaValidator
     errs
   end
 
+  def self.lint_news_file(fn)
+    errs = []
+
+    begin
+      data = YAML.load_file(fn)
+    rescue StandardError
+      warn "Skipping #{fn}"
+      return nil
+    end
+
+    if !data.is_a?(Hash)
+      warn "Skipping #{fn}"
+      return nil
+    end
+
+    errs.push(*validate_document(data, @news_validator))
+    errs
+  end
+
   def self.lint_quiz_file(fn)
     errs = []
 
@@ -219,52 +241,29 @@ module SchemaValidator
 
   def self.run
     errors = []
-    Find.find('./topics') do |path|
-      if FileTest.directory?(path)
-        next unless File.basename(path).start_with?('.')
+    # Lint tutorials/slides/metadata
+    materials = Dir.glob('./topics/**/slides.*html') +
+      Dir.glob('./topics/**/tutorial.*md') +
+      Dir.glob('./topics/**/metadata.*')
+    errors += materials.map { |x| [x, lint_file(x)] }
 
-        Find.prune       # Don't look any further into this directory.
+    # Lint FAQs
+    errors += Dir.glob('**/faqs/**/*.md')
+      .reject { |x| x =~ /aaaa_dontquestionthislinkitisthegluethatholdstogetherthegalaxy/ }
+      .reject { |x| x =~ /index.md$/ }
+      .reject { |x| x =~ /README.md$/ }
+      .map { |x| [x, lint_faq_file(x)] }
 
-      else
-        last_component = path.split('/')[-1]
-        if last_component =~ /slides.*html$/ || last_component =~ /^tutorial_?(ES|FR|).md/ || last_component =~ /metadata.ya?ml/
-          errs = lint_file(path)
-          errors += [[path, errs]] if !errs.nil? && errs.length.positive?
-        end
-      end
-    end
+    # Lint quizzes
+    errors += Dir.glob('./topics/**/quiz/*')
+      .select { |x| x =~ /ya?ml$/ }
+      .map { |x| [x, lint_quiz_file(x)] }
 
-    Dir.glob('**/faqs/**/*.md') do |path|
-      if FileTest.directory?(path)
-        next unless File.basename(path).start_with?('.')
+    # Lint news
+    errors += Dir.glob('./news/_posts/*')
+      .map { |x| [x, lint_news_file(x)] }
 
-        Find.prune       # Don't look any further into this directory.
-
-      else
-        last_component = path.split('/')[-1]
-        next if path =~ /aaaa_dontquestionthislinkitisthegluethatholdstogetherthegalaxy.md/
-
-        if last_component =~ (/.*.md/) && !(last_component =~ /index.md$/ || last_component =~ /README.md/)
-          errs = lint_faq_file(path)
-          if !errs.nil? && errs.length.positive?
-            puts "#{path}: #{errs}"
-            errors += [[path, errs]]
-          end
-        end
-      end
-    end
-
-    Dir.glob('./topics/**/quiz/*') do |path|
-      if FileTest.directory?(path)
-        next unless File.basename(path).start_with?('.')
-
-        Find.prune       # Don't look any further into this directory.
-
-      else
-        last_component = path.split('/')[-1]
-        errors += lint_quiz_file(path) if last_component =~ /ya?ml/
-      end
-    end
+    errors.reject!{|path, errs| errs.nil? or errs.empty?}
 
     errors
   end
