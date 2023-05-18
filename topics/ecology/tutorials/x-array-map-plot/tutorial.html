@@ -17,11 +17,12 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@310dbe44a2126c04713a43f88e93cb1a99e79405",
+  release: "galaxy-training-network@a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  tracesSampleRate: 0.01,
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
   // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0,
+  replaysSessionSampleRate: 0.01,
   // plus for 1% of sessions with an error
   replaysOnErrorSampleRate: 0.01,
   // PII OFF
@@ -45,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Visualization of Climate Data using  NetCDF xarray Map Plotting">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-15 15:46:39 +0000">
+<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
 <meta name="DC.creator" content="Soumya Jha">
 
         
@@ -86,7 +87,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-15 15:46:39 +0000",
+  "dateModified": "2023-05-17 17:21:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Visualization of Climate Data using  NetCDF xarray Map Plotting",
   "interactivityType": "mixed",
@@ -632,7 +633,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 15, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -956,7 +957,9 @@ variables:
     <p>Although we are not using <code class="language-plaintext highlighter-rouge">splithour</code> here, you can find below the syntax for future uses.</p>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0" title="CDO Operations tool" aria-role="link"><strong>CDO Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0</span></span> with the following parameters:
+      <li>
+        <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0" title="CDO Operations tool" aria-role="link"><strong>CDO Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0</span></span> with the following parameters:</p>
+
         <ul>
           <li>In <em>“CDO Operators”</em>:</li>
           <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert CDO Operators”</em></li>
@@ -1596,14 +1599,14 @@ Some other important color variants of the same map can be found below :</p>
 
     <ol>
       <li>Every piece of data recites a story. The air temperature at a certain height has a lot of significance in major commercial and day to day activities. Read this data-blog on the above analysis. <a href="https://quickbeasts51429.github.io/Outreachy_Galaxy_Community_contributor/">Click Here</a>.</li>
-      <li>The tutorial has summed up a proper way of plotting data from a netcdf file. It has discussed everything from loading of data to its final display. Some other key points to keep in mind are :
-        <blockquote>
-          <ol>
-            <li>It may take some time while plotting the maps. It depends on traffic / load on the Galaxy server. It is suggested to have a 64-bit processor with 8GB RAM storage. Be patient.</li>
-            <li>You can view as well as download the generated plots to use further.</li>
-            <li>Plotting over global maps is very convinient as you saw above. But many a times,  you want to plot a specific region, it becomes very easy using CDO tool. Refer to <a href="/training-material/topics/climate/tutorials/pangeo/tutorial.html">this tutorial</a> for more info.</li>
-          </ol>
-        </blockquote>
+      <li>
+        <p>The tutorial has summed up a proper way of plotting data from a netcdf file. It has discussed everything from loading of data to its final display. Some other key points to keep in mind are :</p>
+
+        <ol>
+          <li>It may take some time while plotting the maps. It depends on traffic / load on the Galaxy server. It is suggested to have a 64-bit processor with 8GB RAM storage. Be patient.</li>
+          <li>You can view as well as download the generated plots to use further.</li>
+          <li>Plotting over global maps is very convinient as you saw above. But many a times,  you want to plot a specific region, it becomes very easy using CDO tool. Refer to <a href="/training-material/topics/climate/tutorials/pangeo/tutorial.html">this tutorial</a> for more info.</li>
+        </ol>
       </li>
       <li>If you wish to present all the plotted maps at one place for comparision or analysis. It is a short and simple step and can be doe using the tool name <code class="language-plaintext highlighter-rouge">Image Montage</code>.</li>
     </ol>
@@ -1805,7 +1808,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/310dbe44a2126c04713a43f88e93cb1a99e79405">310dbe4</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3">a4bd07d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

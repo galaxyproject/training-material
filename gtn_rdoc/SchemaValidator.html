@@ -120,9 +120,8 @@
 
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">fn</span>)
-  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Skipping #{fn}&quot;</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">return</span> [<span class="ruby-node">&quot;YAML error, failed to parse #{fn}, #{e}&quot;</span>]
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Check this is something we actually want to process</span>
@@ -150,15 +149,15 @@
           
 
           <div class="method-source-code" id="lint_file-source">
-            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 121</span>
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_file</span>(<span class="ruby-identifier">fn</span>)
   <span class="ruby-comment"># Any error messages</span>
   <span class="ruby-identifier">errs</span> = []
 
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">fn</span>)
-  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Skipping #{fn}&quot;</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">return</span> [<span class="ruby-node">&quot;YAML error, failed to parse #{fn}, #{e}&quot;</span>]
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">end</span>
 
@@ -228,14 +227,14 @@
           
 
           <div class="method-source-code" id="lint_quiz_file-source">
-            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 182</span>
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_quiz_file</span>(<span class="ruby-identifier">fn</span>)
   <span class="ruby-identifier">errs</span> = []
 
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">fn</span>)
-  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
-    <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Skipping #{fn}&quot;</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">return</span> [<span class="ruby-node">&quot;YAML error, failed to parse #{fn}, #{e}&quot;</span>]
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">end</span>
 
@@ -284,7 +283,7 @@
           
 
           <div class="method-source-code" id="run-source">
-            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 221</span>
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 220</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">run</span>
   <span class="ruby-identifier">errors</span> = []
   <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-string">&#39;./topics&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
@@ -295,7 +294,7 @@
 
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">last_component</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">-1</span>]
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/slides.*html$/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/tutorial.*md/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/metadata.ya?ml/</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/slides.*html$/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^tutorial_?(ES|FR|).md/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">last_component</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/metadata.ya?ml/</span>
         <span class="ruby-identifier">errs</span> = <span class="ruby-identifier">lint_file</span>(<span class="ruby-identifier">path</span>)
         <span class="ruby-identifier">errors</span> <span class="ruby-operator">+=</span> [[<span class="ruby-identifier">path</span>, <span class="ruby-identifier">errs</span>]] <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">errs</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
       <span class="ruby-keyword">end</span>

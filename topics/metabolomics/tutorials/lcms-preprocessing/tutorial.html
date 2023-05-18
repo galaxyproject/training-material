@@ -17,11 +17,12 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@310dbe44a2126c04713a43f88e93cb1a99e79405",
+  release: "galaxy-training-network@a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  tracesSampleRate: 0.01,
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
   // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0,
+  replaysSessionSampleRate: 0.01,
   // plus for 1% of sessions with an error
   replaysOnErrorSampleRate: 0.01,
   // PII OFF
@@ -45,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mass spectrometry: LC-MS preprocessing with XCMS">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-03-14 12:25:23 +0000">
+<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
 <meta name="DC.creator" content="Mélanie Petera">
 <meta name="DC.creator" content="Jean-François Martin">
 <meta name="DC.creator" content="Gildas Le Corguillé">
@@ -89,7 +90,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-14 12:25:23 +0000",
+  "dateModified": "2023-05-17 17:21:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mass spectrometry: LC-MS preprocessing with XCMS",
   "interactivityType": "mixed",
@@ -661,7 +662,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 14, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -1784,10 +1785,10 @@ peaks’ parameter to put them aside.</p>
     <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
 
     <p>If you have a very large number of samples (<em>e.g.</em> a thousand), it might be impossible to find peaks that are present in 100% of your samples.
-   If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
-   time correction.
-   A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
-   (<em>e.g.</em> when dealing with some blank samples).</p>
+If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
+time correction.
+A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
+(<em>e.g.</em> when dealing with some blank samples).</p>
   </blockquote>
 
   <blockquote class="tip">
@@ -2367,7 +2368,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/310dbe44a2126c04713a43f88e93cb1a99e79405">310dbe4</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3">a4bd07d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

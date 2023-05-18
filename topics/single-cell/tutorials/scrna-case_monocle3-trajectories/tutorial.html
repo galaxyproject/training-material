@@ -17,11 +17,12 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@310dbe44a2126c04713a43f88e93cb1a99e79405",
+  release: "galaxy-training-network@a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  tracesSampleRate: 0.01,
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
   // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0,
+  replaysSessionSampleRate: 0.01,
   // plus for 1% of sessions with an error
   replaysOnErrorSampleRate: 0.01,
   // PII OFF
@@ -45,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Inferring trajectories using Monocle3">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-27 15:45:40 +0000">
+<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
 <meta name="DC.creator" content="Julia Jakiela">
 
         
@@ -86,7 +87,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-27 15:45:40 +0000",
+  "dateModified": "2023-05-17 17:21:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Inferring trajectories using Monocle3",
   "interactivityType": "mixed",
@@ -899,7 +900,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 27, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -1539,12 +1540,10 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 <h2 id="clustering">Clustering</h2>
 
 <p>Don’t get confused - we haven’t clustered our cells yet, for now we have only plotted them based on cell type annotation. Now it’s time to create clusters, which - in an ideal world where all computation picks up the exact biological phenomenons - would yield the same areas as the clusters determined by the Scanpy algorithms. Is this the case here? Do Monocle and Scanpy identify the same clusters?</p>
-<blockquote>
 
-  <p>Monocle uses a technique called “community detection” (<span class="citation"><a href="#Traag_2019">Traag <i>et al.</i> 2019</a></span>) to group cells. This approach was introduced by <span class="citation"><a href="#Levine_2015">Levine <i>et al.</i> 2015</a></span> as part of the phenoGraph algorithm.</p>
+<p>Monocle uses a technique called “community detection” (<span class="citation"><a href="#Traag_2019">Traag <i>et al.</i> 2019</a></span>) to group cells. This approach was introduced by <span class="citation"><a href="#Levine_2015">Levine <i>et al.</i> 2015</a></span> as part of the phenoGraph algorithm.</p>
 
-  <p>Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from <span class="citation"><a href="#Wolf_2019">Wolf <i>et al.</i> 2019</a></span>, introduced as part of their <a href="https://github.com/theislab/paga">PAGA</a> algorithm.</p>
-</blockquote>
+<p>Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from <span class="citation"><a href="#Wolf_2019">Wolf <i>et al.</i> 2019</a></span>, introduced as part of their <a href="https://github.com/theislab/paga">PAGA</a> algorithm.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-clusters-vs-partitions"><button class="gtn-boxify-button details" type="button" aria-controls="details-clusters-vs-partitions" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Clusters vs partitions<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1611,10 +1610,9 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 <figure id="figure-14"><img src="../../images/scrna-casestudy-monocle/cell_type_vs_cluster.png" alt="When projected onto a graph, clusters quite accurately corresponding to the cell type." width="980" height="529" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Comparision between annotated cell types and formed clusters.</figcaption></figure>
 
 <h2 id="gene-expression">Gene expression</h2>
-<blockquote>
-  <p>We haven’t looked at gene expression yet! This step is particularly important when working with data which is not annotated. Then, based on the expression of marker genes, you are able to identify which clusters correspond to which cell types. This is indeed what we did in the previous tutorial using scanpy. We can do the same using Monocle3! Since we work on annotated data, we can directly check if the expressed genes actually correspond to the previously assigned cell types. If they do, that’s great - if two different methods are consistent, that gives us more confidence that our results are valid.
+
+<p>We haven’t looked at gene expression yet! This step is particularly important when working with data which is not annotated. Then, based on the expression of marker genes, you are able to identify which clusters correspond to which cell types. This is indeed what we did in the previous tutorial using scanpy. We can do the same using Monocle3! Since we work on annotated data, we can directly check if the expressed genes actually correspond to the previously assigned cell types. If they do, that’s great - if two different methods are consistent, that gives us more confidence that our results are valid.
 Below is the table that we used in the previous tutorial to identify the cell types.</p>
-</blockquote>
 
 <table>
   <thead>
@@ -1774,12 +1772,10 @@ The plot also indicates other specifically expressed genes, such as Hmgb2, Pclaf
 
 </blockquote>
 
-<p>As you can see, the learned trajectory path is just a line connecting the clusters. However, there are some important points to understand here.</p>
-<blockquote>
-  <p>If the resolution of the clusters is high, then the trajectory path will be very meticulous, strongly branched and curved. There’s a danger here that we might start seeing things that don’t really exist.
+<p>As you can see, the learned trajectory path is just a line connecting the clusters. However, there are some important points to understand here.
+If the resolution of the clusters is high, then the trajectory path will be very meticulous, strongly branched and curved. There’s a danger here that we might start seeing things that don’t really exist.
 You can set an option to learn a single tree structure for all the partitions or use the partitions calculated when clustering and identify disjoint graphs in each. To make the right decision, you have to understand how/if the partitions are related and what would make more biolgical sense. In our case, we were only interested in a big partition containing all the cells and we ignored the small ‘dot’ classified as another partition.
 There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. Those patterns might correspond to various biological processes: transition events for different phases, cell cycle, cell differentiation. Therefore, branching points are quite important on the trajectory path. You can always plot them, <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> checking the correct box in <span><strong>Monocle3 plotCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>.</p>
-</blockquote>
 
 <figure id="figure-18"><img src="../../images/scrna-casestudy-monocle/learned_trajectory.png" alt="A trajectory path, branching out to connect all the clusters and thus show their relationships." width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Learned trajectory path</figcaption></figure>
 
@@ -1844,10 +1840,8 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
 </blockquote>
 
 <p>Now we can see how all our hard work has come together to give a final pseudotime trajectory analysis. DN cells gently switching to DP-M which change into DP-L to finally become mature T-cells. Isn’t it beautiful? But wait, don’t be too enthusiastic - why on earth DP-M1 group branches out? We didn’t expect that… What could that mean?</p>
-<blockquote>
 
-  <p>There are a lot of such questions in bioinformatics, and we’re always get excited to try to answer them. However, with analysing scRNA-seq data, it’s almost like you need to know about 75% of your data to make sure that your analysis is reasonable, before you can identify the 25% new information. Additionally, pseudotime analysis crucially depends on choosing the right analysis and parameter values, as we showed for example with initial dimensionality reduction during pre-processing. The outputs here, at least in our hands, are more sensitive to parameter choice than standard clustering analysis with Scanpy.</p>
-</blockquote>
+<p>There are a lot of such questions in bioinformatics, and we’re always get excited to try to answer them. However, with analysing scRNA-seq data, it’s almost like you need to know about 75% of your data to make sure that your analysis is reasonable, before you can identify the 25% new information. Additionally, pseudotime analysis crucially depends on choosing the right analysis and parameter values, as we showed for example with initial dimensionality reduction during pre-processing. The outputs here, at least in our hands, are more sensitive to parameter choice than standard clustering analysis with Scanpy.</p>
 
 <figure id="figure-20"><img src="../../images/scrna-casestudy-monocle/pseudotime.png" alt="Pseudotime plot, showing the development of T-cells – starting in dark blue on DN cells and ending up on mature T-cells, marked in yellow on pseudotime scale and (going in the opposite direction) DP-M1 branch which is marked in light orange." width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Trajectory analysis - pseudotime</figcaption></figure>
 
@@ -2127,7 +2121,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/310dbe44a2126c04713a43f88e93cb1a99e79405">310dbe4</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3">a4bd07d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

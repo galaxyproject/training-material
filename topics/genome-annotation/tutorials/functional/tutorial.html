@@ -17,11 +17,12 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@310dbe44a2126c04713a43f88e93cb1a99e79405",
+  release: "galaxy-training-network@a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  tracesSampleRate: 0.01,
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
   // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0,
+  replaysSessionSampleRate: 0.01,
   // plus for 1% of sessions with an error
   replaysOnErrorSampleRate: 0.01,
   // PII OFF
@@ -45,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Functional annotation of protein sequences">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-02-07 10:10:33 +0000">
+<meta name="DC.date" content="2023-05-18 09:34:29 +0000">
 <meta name="DC.creator" content="Anthony Bretaudeau">
 
         
@@ -86,7 +87,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-02-07 10:10:33 +0000",
+  "dateModified": "2023-05-18 09:34:29 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Functional annotation of protein sequences",
   "interactivityType": "mixed",
@@ -619,7 +620,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 7, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 18, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -692,8 +693,11 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
-      <p><!--END_SNIPPET-->
-<!--SNIPPET-->&lt;blockquote class="tip"&gt;   &lt;div class="box-title tip-title" id="tip-importing-data-from-a-data-library"&gt;<button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button>&lt;/div&gt;   &lt;p&gt;As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:&lt;/p&gt;   &lt;ol&gt;   &lt;li&gt;Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong>&lt;/li&gt;   &lt;li&gt;Navigate to the correct folder as indicated by your instructor&lt;/li&gt;   &lt;li&gt;Select the desired files&lt;/li&gt;   &lt;li&gt;Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu&lt;/li&gt;   &lt;li&gt;     &lt;p&gt;In the pop-up window, choose&lt;/p&gt;     &lt;ul&gt;       &lt;li&gt;<em>“Select history”</em>: the history you want to import the data to (or create a new one)&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Click on <strong>Import</strong>&lt;/li&gt; &lt;/ol&gt; &lt;/blockquote&gt; <!--END_SNIPPET--></p>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
     </li>
   </ol>
 
@@ -984,7 +988,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/310dbe44a2126c04713a43f88e93cb1a99e79405">310dbe4</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3">a4bd07d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

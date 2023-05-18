@@ -25,7 +25,7 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
-date: '2023-05-04 10:18:21 +0000'
+date: '2023-05-17 17:21:19 +0000'
 link-citations: true
 anchor_sections: true
 code_download: true
@@ -480,21 +480,21 @@ plot_cells(cds_clustered, genes=c('Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','H
 <figure id="figure-9"><img src="../../images/scrna-casestudy-monocle/genes.png" alt="7 graphs, each showing expression of one of the genes in the corresponding clusters: 'Il2ra' – cluster 4; 'Cd8b1' and 'Cd8a' – clusters 1,6,2; 'Cd4' – high expression in cluster 5; 'Itm2a' – cluster 3; 'Aif1' – barely anything, no specific cluster assigned; 'Hba-a1' - throughout the entire sample in low numbers."  width="700" height=540 loading="lazy"><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Expression of the reference marker genes across analysed sample.</figcaption></figure>
 
 
-> <div class="box-title question-title" id="question-genes-cell-types-and-clusters"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Genes, cell types and clusters</div>
-> Based on the gene expression graph that we just generated, the table above and your knowledge from the previous tutorials, how would you assign the clusters?
->
-> > <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-> >
-> > Keep in mind that these results refer to our numbered clusters, while yours might be slightly different.
-> > - `Il2ra` (DN): mostly expressed in cluster 4
-> > - `Cd8b1, Cd8a` (DP middle): expressed in clusters 1, 6, and highly in cluster 2
-> > - `Cd4` (DP late): average expression in clusters 1, 6, 2 and high expression in cluster 5
-> > - `Itm2a` (T-mat): expressed in cluster 3
-> > - `Aif1` (macrophages): barely anything here, minimal expression spread across the sample with some more cells in cluster 4 and 3 – not enough to form a distinct cluster though). In theory, we shouldn’t have any macrophages in our sample. If you remember from the previous tutorials, we actually filtered out macrophages from the sample during the processing step, because we worked on annotated data. When analysing unannotated data, we could only assign macrophages and then filter them out, provided that Monocle clusters them into a separate group. As you can see, it’s not the case here, so we will just carry on with the analysis, interpreting this as a contamination.
-> > - `Hba-a1` (RBC): appears throughout the entire sample in low numbers suggesting some background contamination of red blood cell debris in the cell samples during library generation, but also shows higher expression in a distinct tiny bit of cluster 3, at the border between clusters 1 and 5. However, it’s too small to be clustered into a separate group and filtered out in this case.
-If you remember, this gene was found to be expressed in the previous Scanpy tutorial also in low numbers across the sample, and in the other Monocle tutorial (using Galaxy tools and annotated data) algorithms allowed us to gather the cells expressing that gene into a distinct group. Our result now sits somewhere in between.
 :::{.question}
+<div class="box-title question-title" id="question-genes-cell-types-and-clusters"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Genes, cell types and clusters</div>
+Based on the gene expression graph that we just generated, the table above and your knowledge from the previous tutorials, how would you assign the clusters?
+
 :::{.solution}
+<div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+Keep in mind that these results refer to our numbered clusters, while yours might be slightly different.
+- `Il2ra` (DN): mostly expressed in cluster 4
+- `Cd8b1, Cd8a` (DP middle): expressed in clusters 1, 6, and highly in cluster 2
+- `Cd4` (DP late): average expression in clusters 1, 6, 2 and high expression in cluster 5
+- `Itm2a` (T-mat): expressed in cluster 3
+- `Aif1` (macrophages): barely anything here, minimal expression spread across the sample with some more cells in cluster 4 and 3 – not enough to form a distinct cluster though). In theory, we shouldn’t have any macrophages in our sample. If you remember from the previous tutorials, we actually filtered out macrophages from the sample during the processing step, because we worked on annotated data. When analysing unannotated data, we could only assign macrophages and then filter them out, provided that Monocle clusters them into a separate group. As you can see, it’s not the case here, so we will just carry on with the analysis, interpreting this as a contamination.
+- `Hba-a1` (RBC): appears throughout the entire sample in low numbers suggesting some background contamination of red blood cell debris in the cell samples during library generation, but also shows higher expression in a distinct tiny bit of cluster 3, at the border between clusters 1 and 5. However, it’s too small to be clustered into a separate group and filtered out in this case.
+If you remember, this gene was found to be expressed in the previous Scanpy tutorial also in low numbers across the sample, and in the other Monocle tutorial (using Galaxy tools and annotated data) algorithms allowed us to gather the cells expressing that gene into a distinct group. Our result now sits somewhere in between.
 <figure id="figure-10"><img src="../../images/scrna-casestudy-monocle/hb_all.png" alt="In Scanpy graph the marker gene appears throughout the entire sample in low numbers, in Monocle in Galaxy cells expressing hemoglobin gene were grouped into a small branch of DP-M4, allowing to group those cells. Monocle in RStudio graph is somewhere in between showing mostly low expression across the sample, but also having a tiny bit of grouped cells, less distinct than in Galaxy though."  width="1548" height=591 loading="lazy"><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Hemoglobin across clusters - comparison between Scanpy, Monocle using Galaxy tools and Monocle run in RStudio.</figcaption></figure>
 
 :::

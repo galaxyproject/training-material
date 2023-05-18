@@ -17,11 +17,12 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@310dbe44a2126c04713a43f88e93cb1a99e79405",
+  release: "galaxy-training-network@a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  tracesSampleRate: 0.01,
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
   // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0,
+  replaysSessionSampleRate: 0.01,
   // plus for 1% of sessions with an error
   replaysOnErrorSampleRate: 0.01,
   // PII OFF
@@ -45,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Automating Galaxy workflows using the command line">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
 <meta name="DC.creator" content="Simon Bray">
 <meta name="DC.creator" content="Wolfgang Maier">
 
@@ -87,7 +88,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2023-05-17 17:21:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Automating Galaxy workflows using the command line",
   "interactivityType": "mixed",
@@ -568,7 +569,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -770,19 +771,18 @@ Sentry.init({
     <li>
       <p>Replace the placeholder values in the job file, so that it looks like the following:</p>
 
-      <blockquote>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Dataset 1</span><span class="pi">:</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Dataset 1</span><span class="pi">:</span>
   <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
   <span class="na">path</span><span class="pi">:</span> <span class="s">dataset1.txt</span>
 <span class="na">Dataset 2</span><span class="pi">:</span>
   <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
   <span class="na">path</span><span class="pi">:</span> <span class="s">dataset2.txt</span>
 <span class="na">Number of lines</span><span class="pi">:</span> <span class="m">3</span>
-</code></pre></div>        </div>
-        <p>Now we are ready to execute the workflow with our chosen parameters!</p>
-      </blockquote>
+</code></pre></div>      </div>
     </li>
   </ol>
+
+  <p>Now we are ready to execute the workflow with our chosen parameters!</p>
 </blockquote>
 
 <h2 id="running-the-workflow">Running the workflow</h2>
@@ -837,9 +837,10 @@ Sentry.init({
         <li>Under the heading <code class="language-plaintext highlighter-rouge">Dataset Information</code>, find the row <code class="language-plaintext highlighter-rouge">History Content API ID</code> and copy the hexadecimal ID next to it.</li>
       </ol>
     </li>
-    <li>Modify <code class="language-plaintext highlighter-rouge">tutorial-init-job.yml</code> to look like the following:
-      <blockquote>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Dataset 1</span><span class="pi">:</span>
+    <li>
+      <p>Modify <code class="language-plaintext highlighter-rouge">tutorial-init-job.yml</code> to look like the following:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Dataset 1</span><span class="pi">:</span>
   <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
   <span class="c1"># path: dataset1.txt</span>
   <span class="na">galaxy_id</span><span class="pi">:</span> <span class="s">&lt;ID OF DATASET 1&gt;</span>
@@ -848,8 +849,7 @@ Sentry.init({
   <span class="c1"># path: dataset2.txt</span>
   <span class="na">galaxy_id</span><span class="pi">:</span> <span class="s">&lt;ID OF DATASET 2&gt;</span>
 <span class="na">Number of lines</span><span class="pi">:</span> <span class="m">3</span>
-</code></pre></div>        </div>
-      </blockquote>
+</code></pre></div>      </div>
     </li>
     <li>Now we need to get the workflow ID:
       <ol>
@@ -1348,7 +1348,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/310dbe44a2126c04713a43f88e93cb1a99e79405">310dbe4</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3">a4bd07d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

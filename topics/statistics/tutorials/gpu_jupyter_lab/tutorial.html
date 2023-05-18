@@ -17,11 +17,12 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@310dbe44a2126c04713a43f88e93cb1a99e79405",
+  release: "galaxy-training-network@a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  tracesSampleRate: 0.01,
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
   // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0,
+  replaysSessionSampleRate: 0.01,
   // plus for 1% of sessions with an error
   replaysOnErrorSampleRate: 0.01,
   // PII OFF
@@ -45,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-01-24 14:21:57 +0000">
+<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
 <meta name="DC.creator" content="Anup Kumar">
 
         
@@ -86,7 +87,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-24 14:21:57 +0000",
+  "dateModified": "2023-05-17 17:21:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy",
   "interactivityType": "mixed",
@@ -753,7 +754,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -879,10 +880,8 @@ Sentry.init({
     <li>Create a new folder named <code class="language-plaintext highlighter-rouge">covid_ct_segmentation</code> alongside other folders such as “data”, “outputs”, “elyra” or you can use your favourite folder name.</li>
     <li>Inside the created folder, clone a code repository by clicking on “Git” icon as shown in Figure 6.</li>
     <li>In the shown popup, provide the repository path as shown below and then, click on “clone”:
-      <blockquote>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/anuprulez/gpu_jupyterlab_ct_image_segmentation
-</code></pre></div>        </div>
-      </blockquote>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/anuprulez/gpu_jupyterlab_ct_image_segmentation
+</code></pre></div>      </div>
     </li>
     <li>The repository “anuprulez/gpu_jupyterlab_ct_image_segmentation” gets immediately cloned.</li>
     <li>Move inside the created folder <code class="language-plaintext highlighter-rouge">gpu_jupyterlab_ct_image_segmentation</code>. A few notebooks can be found inside that are numbered.
@@ -955,9 +954,7 @@ Sentry.init({
 
       </blockquote>
 
-      <blockquote>
-        <figure id="figure-8"><img src="../../images/finished_history_remote_ai.png" alt="Galaxy history. " width="340" height="766" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Galaxy history showing finished datasets after remote training on a Galaxy cluster</figcaption></figure>
-      </blockquote>
+      <figure id="figure-8"><img src="../../images/finished_history_remote_ai.png" alt="Galaxy history. " width="340" height="766" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Galaxy history showing finished datasets after remote training on a Galaxy cluster</figcaption></figure>
     </li>
   </ol>
 
@@ -998,9 +995,7 @@ Sentry.init({
 <h2 id="run-as-a-tool-in-workflow">Run as a tool in workflow</h2>
 <p>When the parameter <code class="language-plaintext highlighter-rouge">Execute notebook and return a new one</code> is set to <code class="language-plaintext highlighter-rouge">yes</code>, the GPU Jupyterlab tool can be used as a part of any workflow. In this mode, it requires an <code class="language-plaintext highlighter-rouge">ipynb</code> file/notebook that gets executed in Galaxy and output datasets if any become available in the Galaxy history. Along with a notebook, multiple input datasets can also be attached that become automatically available inside the notebook. They can be accessed inside the notebook and processed to produce desired output datasets. These output datasets can further be used with other Galaxy tools. The following image shows a sample workflow for illustration purposes. Similarly, high-quality workflows to analyse scientific datasets can be created.</p>
 
-<blockquote>
-  <figure id="figure-10"><img src="../../images/workflow_gpu_jupyterlab.png" alt="&quot;A sample Galaxy workflow that uses GPU Jupyterlab as a tool&quot;. " width="832" height="501" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A sample Galaxy workflow that uses GPU Jupyterlab as a tool which takes input datasets from one tool, trains a machine learning model to predict classes and then the predicted datasets is used as input to another Galaxy tool.</figcaption></figure>
-</blockquote>
+<figure id="figure-10"><img src="../../images/workflow_gpu_jupyterlab.png" alt="&quot;A sample Galaxy workflow that uses GPU Jupyterlab as a tool&quot;. " width="832" height="501" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A sample Galaxy workflow that uses GPU Jupyterlab as a tool which takes input datasets from one tool, trains a machine learning model to predict classes and then the predicted datasets is used as input to another Galaxy tool.</figcaption></figure>
 
 <p>Let’s look at how can this workflow be created in a step-wise manner. There are 3 steps - first, the training dataset is filtered using the <code class="language-plaintext highlighter-rouge">Filter</code> tool. The output of this tool along with 2 other datasets (<code class="language-plaintext highlighter-rouge">test_rows</code> and <code class="language-plaintext highlighter-rouge">test_rows_labels</code>), a sample IPython notebook is executed by the GPU Jupyterlab tool. The sample IPython notebook trains a simple machine learning model using the train dataset and creates a classification model using <code class="language-plaintext highlighter-rouge">RandomForestClassifier</code>. The trained model is then used to predict classes using the test dataset. The predicted classes is produced as a file in an output collection by the GPU Jupyterlab tool. As a last step, <code class="language-plaintext highlighter-rouge">Cut</code> tool is used to extract the first column of the output collection. Together, these steps showcase how the GPU Jupyterlab tool is used with other Galaxy tools in a workflow.</p>
 
@@ -1307,7 +1302,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/310dbe44a2126c04713a43f88e93cb1a99e79405">310dbe4</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3">a4bd07d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

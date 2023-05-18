@@ -17,11 +17,12 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@310dbe44a2126c04713a43f88e93cb1a99e79405",
+  release: "galaxy-training-network@a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  tracesSampleRate: 0.01,
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
   // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0,
+  replaysSessionSampleRate: 0.01,
   // plus for 1% of sessions with an error
   replaysOnErrorSampleRate: 0.01,
   // PII OFF
@@ -45,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Version Control with Git">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000">
+<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
 <meta name="DC.creator" content="Sofoklis Keisaris">
 
         
@@ -86,7 +87,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-28 09:55:50 +0000",
+  "dateModified": "2023-05-17 17:21:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Version Control with Git",
   "interactivityType": "mixed",
@@ -519,7 +520,7 @@ Sentry.init({
 
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -680,7 +681,7 @@ We go to “Tools” and pick the “Shell…” option and we are good to go. O
 
   <p>Fortunately, <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.</p>
 
-  <blockquote class="code_in">
+  <blockquote class="code-in">
     <div class="box-title code-in-title" id="code-in-environment-and-packages"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Environment and Packages</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>conda create <span class="nt">-n</span> name_of_your_env nano git
 <span class="nv">$ </span>conda activate name_of_your_env
@@ -954,7 +955,7 @@ may also need to tell Git about the proxy:</p>
 
   <p>More generally, you can get the list of available <code class="language-plaintext highlighter-rouge">git</code> commands and further resources of the Git manual typing:</p>
 
-  <blockquote>
+  <blockquote class="code-in">
     <div class="box-title code-in-title" id="code-in-access-available-commands"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Access available commands</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">help</span>
 </code></pre></div>    </div>
@@ -1078,7 +1079,7 @@ wording of the output might be slightly different.</p>
 </code></pre></div>  </div>
 </blockquote>
 
-<blockquote>
+<blockquote class="question">
   <div class="box-title question-title" id="question-tracking-in-a-subdirectory"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Tracking in a subdirectory</div>
   <p>Is the <code class="language-plaintext highlighter-rouge">git init</code> command, run inside the <code class="language-plaintext highlighter-rouge">clues</code> subdirectory, required for tracking files stored in the <code class="language-plaintext highlighter-rouge">clues</code> subdirectory?</p>
 
@@ -1094,7 +1095,7 @@ to the <code class="language-plaintext highlighter-rouge">suspects</code> direct
   </blockquote>
 </blockquote>
 
-<blockquote class="question tip">
+<blockquote class="tip">
   <div class="box-title tip-title" id="tip-quot-nested-quot-repositories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-quot-nested-quot-repositories" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: &quot;Nested&quot; repositories<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Additionally, Git repositories can interfere with each other if they are “nested”:
 the outer repository will try to version-control
@@ -1746,14 +1747,12 @@ Try it for yourself:</p>
 </code></pre></div>        </div>
       </blockquote>
 
-      <blockquote>
-        <p>Note, our newly created empty directory <code class="language-plaintext highlighter-rouge">mysteries</code> does not appear in
+      <p>Note, our newly created empty directory <code class="language-plaintext highlighter-rouge">mysteries</code> does not appear in
 the list of untracked files even if we explicitly add it (<em>via</em> <code class="language-plaintext highlighter-rouge">git add</code>) to our
 repository. This is the reason why you will sometimes see <code class="language-plaintext highlighter-rouge">.gitkeep</code> files
 in otherwise empty directories. Unlike <code class="language-plaintext highlighter-rouge">.gitignore</code>, these files are not special
 and their sole purpose is to populate a directory so that Git adds it to
 the repository. In fact, you can name such files anything you like.</p>
-      </blockquote>
     </li>
     <li>
       <p>If you create a directory in your Git repository and populate it with files,
@@ -2768,7 +2767,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/310dbe44a2126c04713a43f88e93cb1a99e79405">310dbe4</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3">a4bd07d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

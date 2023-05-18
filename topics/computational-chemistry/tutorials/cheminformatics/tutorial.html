@@ -17,11 +17,12 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@310dbe44a2126c04713a43f88e93cb1a99e79405",
+  release: "galaxy-training-network@a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  tracesSampleRate: 0.01,
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
   // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0,
+  replaysSessionSampleRate: 0.01,
   // plus for 1% of sessions with an error
   replaysOnErrorSampleRate: 0.01,
   // PII OFF
@@ -45,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Protein-ligand docking">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000">
+<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
 <meta name="DC.creator" content="Simon Bray">
 
         
@@ -86,7 +87,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-28 09:55:50 +0000",
+  "dateModified": "2023-05-17 17:21:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Protein-ligand docking",
   "interactivityType": "mixed",
@@ -567,7 +568,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -777,11 +778,13 @@ Sentry.init({
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-problems-using-the-chembl-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-problems-using-the-chembl-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Problems using the ChEMBL tool?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>A number of users encounter issues with the ChEMBL tool - sometimes the tool fails, or the output is returned successfully but is empty. If this happens to you, try the following:</p>
-  <blockquote>
-    <p>Rerun the tool - if a transient error on the ChEMBL server was at fault, this might be enough to fix it.
-Try modifying some of the parameters. For example, reducing the Tanimoto coefficient should increase the number of compounds returned.
-If all else fails, you can use the following list of SMILES:</p>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cc1n[nH]c(c2ccc(O)c(Cl)c2)c1c3ccc4OCCOc4c3	CHEMBL187670
+  <ol>
+    <li>Rerun the tool - if a transient error on the ChEMBL server was at fault, this might be enough to fix it.</li>
+    <li>Try modifying some of the parameters. For example, reducing the Tanimoto coefficient should increase the number of compounds returned.</li>
+    <li>
+      <p>If all else fails, you can use the following list of SMILES:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cc1n[nH]c(c2ccc(O)c(Cl)c2)c1c3ccc4OCCOc4c3	CHEMBL187670
 COc1ccc(cc1)c2c(C)[nH]nc2c3ccc(O)cc3O	CHEMBL192894
 COc1ccc(c(O)c1)c2onc(C)c2c3ccc4OCCOc4c3	CHEMBL1541585
 CCOc1ccc(c(O)c1)c2[nH]nc(C)c2c3ccccc3OC	CHEMBL1504505
@@ -826,9 +829,11 @@ CCc1cc(c(O)cc1OCC(=O)O)c2n[nH]c(C)c2c3ccc4OCCCOc4c3	CHEMBL3952001
 Cc1[nH]nc(c2ccc(O)c(O)c2O)c1c3ccc(Cl)cc3	CHEMBL1092945
 COc1cc(cc(OC)c1OC)c2n[nH]nc2c3ccc4OCCOc4c3	CHEMBL3740841
 Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
-</code></pre></div>    </div>
-    <p>Don’t worry if you can’t get it to work - successfully generating this list is a very minor part of the tutorial!</p>
-  </blockquote>
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+  <p>Don’t worry if you can’t get it to work - successfully generating this list is a very minor part of the tutorial!</p>
 </blockquote>
 
 <p>There are some other tools available, which will not be used in this tutorial, which help to develop a more focused compound library. For example, the ‘Natural product likeness calculator’ and ‘Drug-likeness’ tools assign a score to compounds based on how similar they are to typical natural products and drugs respectively, which could then be used to filter the library. If you are interested, you can try testing them out on the library just generated.</p>
@@ -1386,7 +1391,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/310dbe44a2126c04713a43f88e93cb1a99e79405">310dbe4</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/a4bd07d5c1859b1b6c9ac9b76f4a802dad0245f3">a4bd07d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
