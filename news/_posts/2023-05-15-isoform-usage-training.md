@@ -6,7 +6,6 @@ hide_tease: false
 authors: 'Cristóbal Gallardo'
 authors_structured:
 - github: gallardoalba
-- github: hexylena
 tags: [training]
 subsites: [all-eu]
 main_subsite: eu
