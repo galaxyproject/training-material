@@ -42,6 +42,7 @@ contributors:
   - hrhotz
   - blankenberg
   - nomadscientist
+  - pavanvidem
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
@@ -426,7 +427,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 >            - *"Expected Number of Cells"*: `3000`
 >            - *"Upper Quantile"*: `0.99`
 >            - *"Lower Proportion"*: `0.1`
->        - *"Format for output matrices"*: `Tabular`
+>        - *"Format for output matrices"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >
 > > <comment-title>Default Parameter</comment-title>
 > >
@@ -487,22 +488,20 @@ A useful diagnostic for droplet-based data is the barcode rank plot, which shows
 
 ![knee]({% link topics/single-cell/images/scrna-pre-processing/tenx_knee.png %} "Barcode Ranks: The separating thresholds of high and low quality cells")
 
-The knee and inflection points on the curve mark the transition between two components of the total count distribution. This is assumed to represent the difference between empty droplets with little RNA and cell-containing droplets with much more RNA, and gives us a rough idea of how many cells to expect in our sample.
+The knee and inflection points on the curve mark the transition between two components of the total count distribution. This is assumed to represent the difference between cells with high RNA content and empty droplets with little RNA, and gives us a rough idea of how many cells to expect in our sample.
 
 > ### Question {% icon question %} Questions
 >
-> 1. How many cells do we expect to see in our sample based on the above plot?
-> 1. How many high quality cells do we expect to see in our sample bed on the above plot?
-> 1. What is the minimum number of UMIs that we can expect to see for high quality cells?
+> 1. How many presumably real cells can we expect to see in our sample based on the above plot?
+> 1. What is the number of cells that we can expect to see with a cut-off detected at inflection line?
 >
 > > <solution-title></solution-title>
-> > 1. We see the blue knee line cross the threshold of barcodes at just below than the 10000 Rank on the horizontal log scale, which is shown in the expanded view of our data as `"knee = 5300"`. This is in good accordance with the `5200` cells shown in the STARsolo log output previously.
-> > 1. This threshold is given by the inflection line, which is given at `"inflection = 260"`, so 260 cells.
-> > 1. The vertical drop in the chart occurs at a log X-axis position just above `1e+02`, so we can estimate ~ 200 UMIs minimum per cell.
+> > 1. We see the blue knee line cross the threshold of barcodes at just below than the 10000 Rank on the horizontal log scale, which is shown in the expanded view of our data as `"knee = 4861"`. This line intersects with the ranked cells near 100 on x-axis. We can expect 100-200 cells with high RNA content.
+> > 1. This threshold is given by the inflection line, which is given at `"inflection = 260"`. The vertical drop in the ranked cells at the inflection line is between 100 and 10000 on the x-axis. The axis is log scaled it is close to 100. Hence, we can expect between 200 and 400 cells.  
 > {: .solution}
 {: .question}
 
-On large 10x datasets we can use these thresholds as metrics to utilise in our own custom filtering, which is once again provided by the **DropletUtils** tool.
+On large 10x datasets we can use these thresholds as metrics to utilise in our own custom filtering, which is once again provided by the **DropletUtils** tool. In this case, we will use a bit less stringent threshold of 200 (instead of 260 at inflection) and use a FDR threshold of 0.01 so that our detected cells contain only 1% of false positives.
 
 > <hands-on-title>Custom Filtering</hands-on-title>
 >
@@ -515,7 +514,7 @@ On large 10x datasets we can use these thresholds as metrics to utilise in our o
 >        - *"Method"*: `EmptyDrops`
 >            - *"Lower-bound Threshold"*: `200`
 >            - *"FDR Threshold"*: `0.01`
->        - *"Format for output matrices"*: `Tabular`
+>        - *"Format for output matrices"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >
 {: .hands_on}
 
