@@ -797,7 +797,7 @@ It generates five tabular files with the results of the different statistical an
 
 - Splicing summary: values of the different splicing events
 - Splicing enrichment: results of enrichment statistical analysis for the different splicing events.
-- Consequences summary: values of global usage of {IS}}
+- Consequences summary: values of global usage of {IS}
 - Consequences enrichment: results of enrichment statistical analysis for the different functional consequences.
 - Switching gene/isoforms: list of genes with statistically significant isoform swiching between conditions (table 1). The switches are ranked (by p-value or switch size).
 
