@@ -102,9 +102,7 @@ module SchemaValidator
     errs
   end
 
-  def self.lint_faq_file(fn)
-    errs = []
-
+  def self.is_lintable(fn)
     begin
       data = YAML.load_file(fn)
     rescue StandardError => e
@@ -116,44 +114,49 @@ module SchemaValidator
       puts "Skipping #{fn}"
       return nil
     end
+
+    data
+  end
+
+  def self.lint_faq_file(fn)
+    errs = []
+    data = is_lintable(fn)
+    return data if (data.nil? or data.is_a?(Array))
+
     errs.push(*validate_document(data, @faq_validator))
     errs
   end
 
-  def self.lint_file(fn)
+  def self.lint_topic(fn)
     # Any error messages
     errs = []
+    data = is_lintable(fn)
+    return data if (data.nil? or data.is_a?(Array))
 
-    begin
-      data = YAML.load_file(fn)
-    rescue StandardError => e
-      return ["YAML error, failed to parse #{fn}, #{e}"]
-      return nil
-    end
+    errs.push(*validate_document(data, @topic_validator))
+  end
 
-    # Check this is something we actually want to process
-    if !data.is_a?(Hash)
-      puts "Skipping #{fn}"
-      return nil
-    end
+  def self.lint_material(fn)
+    # Any error messages
+    errs = []
+    data = is_lintable(fn)
+    return data if (data.nil? or data.is_a?(Array))
 
-    if !fn.include?('metadata.yaml')
-      # Load topic metadata for this file
-      topic = fn.split('/')[2]
-      topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
+    # Load topic metadata for this file
+    topic = fn.split('/')[2]
+    topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
 
-      # Load subtopic titles
-      if data.key?('subtopic')
-        subtopic_ids = []
-        topic_metadata['subtopics'].each do |x|
-          subtopic_ids.push(x['id'])
-        end
-
-        @TUTORIAL_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
-        @SLIDES_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
-        @tutorial_validator = Kwalify::Validator.new(@TUTORIAL_SCHEMA)
-        @slides_validator = Kwalify::Validator.new(@SLIDES_SCHEMA)
+    # Load subtopic titles
+    if data.key?('subtopic')
+      subtopic_ids = []
+      topic_metadata['subtopics'].each do |x|
+        subtopic_ids.push(x['id'])
       end
+
+      @TUTORIAL_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
+      @SLIDES_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
+      @tutorial_validator = Kwalify::Validator.new(@TUTORIAL_SCHEMA)
+      @slides_validator = Kwalify::Validator.new(@SLIDES_SCHEMA)
     end
 
     # Generic error handling:
@@ -166,8 +169,6 @@ module SchemaValidator
     # Custom error handling:
     if tutorial?(fn)
       errs.push(*validate_document(data, @tutorial_validator))
-    elsif fn.include?('metadata.yaml')
-      errs.push(*validate_document(data, @topic_validator))
     elsif slide?(fn)
       errs.push(*validate_document(data, @slides_validator))
     end
@@ -183,18 +184,8 @@ module SchemaValidator
 
   def self.lint_news_file(fn)
     errs = []
-
-    begin
-      data = YAML.load_file(fn)
-    rescue StandardError
-      warn "Skipping #{fn}"
-      return nil
-    end
-
-    if !data.is_a?(Hash)
-      warn "Skipping #{fn}"
-      return nil
-    end
+    data = is_lintable(fn)
+    return data if (data.nil? or data.is_a?(Array))
 
     errs.push(*validate_document(data, @news_validator))
     errs
@@ -202,18 +193,8 @@ module SchemaValidator
 
   def self.lint_quiz_file(fn)
     errs = []
-
-    begin
-      data = YAML.load_file(fn)
-    rescue StandardError => e
-      return ["YAML error, failed to parse #{fn}, #{e}"]
-      return nil
-    end
-
-    if !data.is_a?(Hash)
-      warn "Skipping #{fn}"
-      return nil
-    end
+    data = is_lintable(fn)
+    return data if (data.nil? or data.is_a?(Array))
 
     data['questions'].select { |q| q.key? 'correct' }.each do |q|
       if q['correct'].is_a?(Array)
@@ -241,11 +222,14 @@ module SchemaValidator
 
   def self.run
     errors = []
+    # Topics
+    materials = Dir.glob('./topics/**/metadata.*')
+    errors += materials.map { |x| [x, lint_topic(x)] }
+
     # Lint tutorials/slides/metadata
     materials = Dir.glob('./topics/**/slides.*html') +
-      Dir.glob('./topics/**/tutorial.*md') +
-      Dir.glob('./topics/**/metadata.*')
-    errors += materials.map { |x| [x, lint_file(x)] }
+      Dir.glob('./topics/**/tutorial.*md')
+    errors += materials.map { |x| [x, lint_material(x)] }
 
     # Lint FAQs
     errors += Dir.glob('**/faqs/**/*.md')

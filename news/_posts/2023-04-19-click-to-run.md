@@ -1,6 +1,7 @@
 ---
 title: "New Feature: Click-to-run Workflows"
-contributors: [hexylena]
+contributions:
+  authorship: [hexylena]
 tags: [new feature, gtn]
 layout: news
 tutorial: topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/

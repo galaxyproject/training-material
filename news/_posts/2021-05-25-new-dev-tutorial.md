@@ -1,7 +1,8 @@
 ---
 title: "Contributing to BioBlend as a developer"
 tags: [new tutorial]
-contributors: [rikeshi, simonbray]
+contributions:
+  authorship: [rikeshi, simonbray]
 tutorial: "topics/dev/tutorials/bioblend-dev/tutorial.html"
 layout: news
 ---
