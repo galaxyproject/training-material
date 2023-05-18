@@ -363,6 +363,27 @@ module GtnLinter
     end
   end
 
+  def self.snippets_too_close_together(contents)
+    prev_line = -2
+    res = []
+    find_matching_texts(contents, /^[> ]*{% snippet/)
+      .each do |idx, _text, selected|
+        if idx == prev_line + 1
+          res.push(ReviewDogEmitter.error(
+            path: @path,
+            idx: idx,
+            match_start: selected.begin(0),
+            match_end: selected.end(0) + 1,
+            replacement: nil,
+            message: 'Snippets too close together',
+            code: 'GTN:032'
+          ))
+        end
+        prev_line = idx
+    end
+    res
+  end
+
   ALLOWED_SHORT_IDS = [
     'ChangeCase',
     'Convert characters1',
@@ -683,7 +704,8 @@ module GtnLinter
       *check_bad_tag(contents),
       *check_useless_box_prefix(contents),
       *check_bad_heading_order(contents),
-      *check_bolded_heading(contents)
+      *check_bolded_heading(contents),
+      *snippets_too_close_together(contents),
     ]
   end
 
