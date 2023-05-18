@@ -59,6 +59,7 @@ For this tutorial we have prepared a subset of data previously by our group ({% 
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 1. Import files from [Zenodo](https://zenodo.org/record/1251112):

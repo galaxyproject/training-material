@@ -127,6 +127,7 @@ steps are independent of the data source you choose.
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Create a new dataset listing the SRA accession numbers of the Illumina paired-end input data for this tutorial:
@@ -220,6 +221,7 @@ steps are independent of the data source you choose.
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import Illumina-sequenced reads data from [Zenodo](https://zenodo.org/record/3732359)

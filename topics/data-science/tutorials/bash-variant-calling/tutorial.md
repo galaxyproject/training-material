@@ -124,7 +124,7 @@ The alignment process consists of two steps:
 > > $ mv sub/ ~/dc_workshop/data/trimmed_fastq_small
 > > ```
 > {: .code-in}
-> >
+>
 > You will also need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because `mkdir` can accept multiple new directory names as input.
 >
 > > <code-in-title>Create result directories</code-in-title>

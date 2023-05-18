@@ -179,7 +179,7 @@ This then provides us with the true count of the number of true transcripts for 
 >
 > > <solution-title></solution-title>
 > >
-> 1. Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias.
+> > 1. Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias.
 > > 2. Yes, UMIs are not precise but operate probabilistically. In most cases, two transcripts of the same gene will be tagged by different UMIs. In rarer (but still prevalent) cases, the same UMI will capture different transcripts of the same gene.
 > >  * One helpful way to think about how quantification is performed is to observe the following hierarchy of data `Cell Barcode → Gene → UMI`
 > >

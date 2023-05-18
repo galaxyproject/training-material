@@ -145,6 +145,7 @@ At the first step, we should upload the iris dataset and two other datasets whic
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
@@ -160,6 +161,7 @@ At the first step, we should upload the iris dataset and two other datasets whic
 >      - Option 2: Datatypes can be **manually set**
 >
 >    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
 {: .hands_on}

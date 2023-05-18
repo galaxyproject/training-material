@@ -61,6 +61,7 @@ First, start with uploading and preparing the input data to analyze. The sequenc
 > 1. For this tutorial, make a new history.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the data files from
@@ -318,9 +319,9 @@ However, because of the high average data quality, there was no need to perform 
 >        - *"Read group sample name (SM)"*: `Not available.`
 >      - *"Platform/technology used to produce the reads (PL)"*: `ILLUNINA`
 >      - *"Select analysis mode"*: `Simple illumina mode`
- {: .hands_on}
+{: .hands_on}
 
- > Name the created list as **Mapping-lsit**
+Name the created list as **Mapping-lsit**
 
 
 

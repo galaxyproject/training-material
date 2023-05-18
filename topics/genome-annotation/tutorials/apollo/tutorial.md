@@ -94,6 +94,7 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 > 0. Create a new history and give it a good name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 1. Click the upload icon {% icon galaxy-upload %}

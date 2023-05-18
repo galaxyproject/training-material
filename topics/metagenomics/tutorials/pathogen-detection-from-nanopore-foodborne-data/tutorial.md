@@ -103,6 +103,7 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 2. Add a tag to each dataset (one with `#Barcode10` and the other `#Barcode11`)
@@ -908,7 +909,7 @@ To identify variants, we
 
     > <comment-title></comment-title>
     > [__Medaka consensus tool__ and __medaka variant tool__](https://github.com/nanoporetech/medaka) can be also used instead of **Clair3**, they give similar results but they are much slower then **Clair3** and offer fewer options.
-    {: .comment-on}
+    {: .comment}
 
     <div class="Long-Version" markdown="1">
 
@@ -948,7 +949,7 @@ To identify variants, we
 
     > <comment-title></comment-title>
     > [__LoFreq filter__](https://csb5.github.io/lofreq/) can be also used instead, both tools performs equal and fast results.
-    {: .comment-on}
+    {: .comment}
 
     <div class="Long-Version" markdown="1">
 

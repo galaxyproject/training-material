@@ -126,6 +126,7 @@ We are also using a reference genome *Arabidopsis thaliana* for a later comparis
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/record/7055935) or a data library (ask your instructor):
@@ -142,6 +143,7 @@ We are also using a reference genome *Arabidopsis thaliana* for a later comparis
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >    
 > 3. Check that the datatypes for the three files of sequencing reads are `fastq.gz`, not `fastqsanger.gz` and change datatype if needed.
