@@ -955,18 +955,18 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># 13:  doi = {https://doi.org/10.1016/j.cmpbup.2021.100007},</span>
-  <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/doi\s*=\s*{(https?:\/\/doi.org\/)/</span>)
-      .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">%r{doi\s*=\s*\{(https?://doi.org/)}</span>)
+             .<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">_text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
     <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">warning</span>(
       <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
       <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
       <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
       <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
-      <span class="ruby-value">replacement:</span> <span class="ruby-string">&quot;&quot;</span>,
-      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Unnecessary use of URL in DOI-only field, please just use the doi component itself&quot;</span>,
-      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:031&quot;</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-string">&#39;&#39;</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&#39;Unnecessary use of URL in DOI-only field, please just use the doi component itself&#39;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&#39;GTN:031&#39;</span>
     )
-  }
+  <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">results</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1044,14 +1044,14 @@
     <span class="ruby-keyword">else</span>
       <span class="ruby-comment"># Load tests and run some quick checks:</span>
       <span class="ruby-identifier">possible_tests</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">test_file</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">test_file</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/-test.yml/</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">test_file</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/-test.yml/</span>)
           <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> [
             <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>,
                                         <span class="ruby-value">message:</span> <span class="ruby-string">&#39;Please use the extension -test.yml for this test file.&#39;</span>,
                                         <span class="ruby-value">code:</span> <span class="ruby-string">&#39;GTN:032&#39;</span>)
           ]
         <span class="ruby-keyword">end</span>
-        
+
         <span class="ruby-identifier">test</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">safe_load</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">test_file</span>))
         <span class="ruby-comment"># check that for each test, the outputs is non-empty</span>
         <span class="ruby-identifier">test</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">test_job</span><span class="ruby-operator">|</span>
@@ -1209,7 +1209,7 @@
     <span class="ruby-operator">*</span><span class="ruby-identifier">check_useless_box_prefix</span>(<span class="ruby-identifier">contents</span>),
     <span class="ruby-operator">*</span><span class="ruby-identifier">check_bad_heading_order</span>(<span class="ruby-identifier">contents</span>),
     <span class="ruby-operator">*</span><span class="ruby-identifier">check_bolded_heading</span>(<span class="ruby-identifier">contents</span>),
-    <span class="ruby-operator">*</span><span class="ruby-identifier">snippets_too_close_together</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">snippets_too_close_together</span>(<span class="ruby-identifier">contents</span>)
   ]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1237,9 +1237,9 @@
       <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
       <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
       <span class="ruby-value">text:</span> <span class="ruby-identifier">text</span>,
-      <span class="ruby-value">message:</span> <span class="ruby-string">&quot;Setting no_toc is discouraged, these headings provide useful places for readers to jump to.&quot;</span>,
-      <span class="ruby-value">code:</span> <span class="ruby-string">&quot;GTN:001&quot;</span>,
-      <span class="ruby-value">full_line:</span> <span class="ruby-identifier">text</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&#39;Setting no_toc is discouraged, these headings provide useful places for readers to jump to.&#39;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&#39;GTN:001&#39;</span>,
+      <span class="ruby-value">full_line:</span> <span class="ruby-identifier">text</span>
     )
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1729,18 +1729,18 @@
   <span class="ruby-identifier">res</span> = []
   <span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/^[&gt; ]*{% snippet/</span>)
     .<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">_text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">idx</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">prev_line</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-        <span class="ruby-identifier">res</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
-          <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
-          <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
-          <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>),
-          <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
-          <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
-          <span class="ruby-value">message:</span> <span class="ruby-string">&#39;Snippets too close together&#39;</span>,
-          <span class="ruby-value">code:</span> <span class="ruby-string">&#39;GTN:032&#39;</span>
-        ))
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">prev_line</span> = <span class="ruby-identifier">idx</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">idx</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">prev_line</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">res</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+                 <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+                 <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+                 <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>),
+                 <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+                 <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+                 <span class="ruby-value">message:</span> <span class="ruby-string">&#39;Snippets too close together&#39;</span>,
+                 <span class="ruby-value">code:</span> <span class="ruby-string">&#39;GTN:032&#39;</span>
+               ))
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">prev_line</span> = <span class="ruby-identifier">idx</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">res</span>
 <span class="ruby-keyword">end</span></pre>

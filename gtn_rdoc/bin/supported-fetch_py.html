@@ -86,6 +86,7 @@
     <li><a href="../bin/schema-contributors_yaml.html">schema-contributors.yaml</a>
     <li><a href="../bin/schema-faq_yaml.html">schema-faq.yaml</a>
     <li><a href="../bin/schema-learning-pathway_yaml.html">schema-learning-pathway.yaml</a>
+    <li><a href="../bin/schema-news_yaml.html">schema-news.yaml</a>
     <li><a href="../bin/schema-quiz_yaml.html">schema-quiz.yaml</a>
     <li><a href="../bin/schema-requirement-external_yaml.html">schema-requirement-external.yaml</a>
     <li><a href="../bin/schema-requirement-internal_yaml.html">schema-requirement-internal.yaml</a>
@@ -167,6 +168,9 @@ for server in serverlist:
         continue
     # The aussies will soon
     if &#39;.usegalaxy.org.au&#39; in server[&#39;url&#39;]:
+        continue
+    # No test servers permitted
+    if &#39;test.&#39; in server[&#39;url&#39;]:
         continue
 
     s = { &#39;name&#39;: server[&#39;title&#39;], &#39;url&#39;: server[&#39;url&#39;] }

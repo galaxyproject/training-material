@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@0a45a3c06b2fc7a90b39ddce8f4331beae628c24",
+  release: "galaxy-training-network@fdf710dc44d784c3cb3a71f70187fdd52c6aeee0",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -40,13 +40,13 @@ Sentry.init({
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2021/06/30/tutorial-sars-cov-2-variant-discovery.html">
-	<link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="New Tutorial: Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2021-06-30 08:36:29 +0000">
+<meta name="DC.date" content="2023-05-18 11:55:15 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Wolfgang Maier">
 
@@ -210,24 +210,48 @@ Sentry.init({
         <section>
   <h1>New Tutorial: Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data</h1>
 
-  
+  <article>
+
 
 <div class="newsitem">
 <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/wm75?s=27" alt="Avatar">Wolfgang Maier</a>
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/wm75?s=27" alt="Avatar">Wolfgang Maier</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
 	</div>
 
 </div>
 
 
 
-<button class="label label-default tutorial_tag" id="new tutorial" style="--color-primary: #ffb55e; --color-darker: #ef9d00; --color-dimmed: #fda700;" title="new tutorial">new tutorial</button>
+<button class="label label-default tutorial_tag" id="new tutorial" style="--color-primary: #fda700; --color-darker: #e29400; --color-dimmed: #ef9d00;" title="new tutorial">new tutorial</button>
 
-<button class="label label-default tutorial_tag" id="variant-analysis" style="--color-primary: #00ddad; --color-darker: #00c59a; --color-dimmed: #00d1a3;" title="variant-analysis">variant-analysis</button>
+<button class="label label-default tutorial_tag" id="variant-analysis" style="--color-primary: #00d1a3; --color-darker: #00ba91; --color-dimmed: #00c69a;" title="variant-analysis">variant-analysis</button>
 
-<button class="label label-default tutorial_tag" id="covid-19" style="--color-primary: #e7afff; --color-darker: #e08eff; --color-dimmed: #e39fff;" title="covid-19">covid-19</button>
+<button class="label label-default tutorial_tag" id="covid-19" style="--color-primary: #e39fff; --color-darker: #dd7dff; --color-dimmed: #e08eff;" title="covid-19">covid-19</button>
 
 
 <hr/>
@@ -263,9 +287,12 @@ Sentry.init({
     
 
     
-    <a href="/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html" class="btn btn-primary">View Tutorial</a>
+    <a href="/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html" class="btn btn-primary">View Material</a>
     
 
+    
+
+    
     
 
     
@@ -292,7 +319,7 @@ Sentry.init({
   "description": "<p>Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires c",
   "articleBody": "<p>Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for monitoring the emergence and spread of new variants, and for understanding the evolutionary dynamics of the virus.</p>\n\n<p>The Galaxy community has developed <a href=\"https://covid19.galaxyproject.org/\">high-quality analysis workflows</a> to support</p>\n\n<ul>\n  <li>sensitive identification of SARS-CoV-2 allelic variants (AVs) starting with allele frequencies as low as 5% from deep sequencing reads</li>\n  <li>generation of user-friendly reports for batches of results</li>\n  <li>reliable and configurable consensus genome generation from called variants</li>\n</ul>\n\n<p>The new tutorial <a href=\"/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html\">“Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data”</a> will teach you how to obtain, run and combine these workflows appropriately for different types of input data, be it:</p>\n\n<ul>\n  <li>Single-end data derived from Illumina-based RNAseq experiments</li>\n  <li>Paired-end data derived from Illumina-based RNAseq experiments</li>\n  <li>Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols, or</li>\n  <li>ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols</li>\n</ul>\n\n<p>We would be happy to have your feedback or contributions for this new tutorial. That would help us improving it!</p>\n",
   "datePublished": "2021-06-30 00:00:00 +0000",
-  "dateModified": "2021-06-30 08:36:29 +0000",
+  "dateModified": "2023-05-18 11:55:15 +0000",
   "author": [
     {
       "@context": "https://schema.org",
@@ -376,6 +403,122 @@ Sentry.init({
   "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
 }
 </script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div class="newslist">
+
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/05/15/isoform-usage-training.html">New Galaxy training: Genome-wide alternative splicing analysis</a>
+	</h3>
+	<p>
+	15 May 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fda700; --color-darker: #e29400; --color-dimmed: #ef9d00;">new tutorial</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The GTN hosts a new training for analyzing alternative splicing at genome-wide scale!
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/05/11/ro-crate.html">BY-COVID and RO-Crate collaboration brings new topic: FAIR Data, Workflows & More</a>
+	</h3>
+	<p>
+	11 May 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b4b1ff; --color-darker: #9d99ff; --color-dimmed: #a9a5ff;">new topic</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b0b2ff; --color-darker: #989bff; --color-dimmed: #a4a7ff;">new feature</span>
+	
+	</p>
+	<p class="card-text">
+		
+		As part of the BY-COVID project, the RO-Crate team and BY-COVID members have
+brought several RO-Crate related tutorials into the Galaxy Training Network, under a brand new {FAIR} topic!
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/04/20/my-galaxy-training.html">New Feature: my.galaxy.training</a>
+	</h3>
+	<p>
+	20 April 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b0b2ff; --color-darker: #989bff; --color-dimmed: #a4a7ff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef8b; --color-darker: #e9d500; --color-dimmed: #f8e200;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The GTN has set up a very simple “redirection” service based on my.home-assistant.io which Helena discovered after reading some Home Assistant documentation and saw a really neat link which led to her own internal home assistant.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/04/19/shortlinks.html">New Feature: Persistent URLs (PURLs) / Shortlinks</a>
+	</h3>
+	<p>
+	19 April 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b0b2ff; --color-darker: #989bff; --color-dimmed: #a4a7ff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef8b; --color-darker: #e9d500; --color-dimmed: #f8e200;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The GTN has added persistent URL identifiers for our tutorials, slides, and FAQs. Using the gxy.io service, we have reserved GTN namespace for our persistent URLs. These work similarly to DOIs in that they will always point to a specific training material.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/04/19/gtn-rdoc.html">New Feature: GTN Rdoc</a>
+	</h3>
+	<p>
+	19 April 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b0b2ff; --color-darker: #989bff; --color-dimmed: #a4a7ff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef8b; --color-darker: #e9d500; --color-dimmed: #f8e200;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The internal functions of the GTN have, in the past, not been very well documented. Now we have started the process of fully documenting the functions and modules available to GTN developers.
+
+		
+	</p>
+</article>
+
+
+</div>
+
 
 
 </section>
@@ -394,7 +537,7 @@ Sentry.init({
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/0a45a3c06b2fc7a90b39ddce8f4331beae628c24">0a45a3c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/fdf710dc44d784c3cb3a71f70187fdd52c6aeee0">fdf710d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -430,9 +573,13 @@ Sentry.init({
         <script src="/training-material/assets/js/main.js"></script>
         <script src="/training-material/assets/js/clipboard.min.js"></script>
         <script>
-        var snippets=document.querySelectorAll('div.highlight');
-        [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        document.querySelectorAll('div.highlight').forEach((snippet) => {
+                // Google translate has additional #text nodes mixed in with
+                // the pre for some reason.
+                var gtn_snippet_pres = [...snippet.childNodes].filter(x => x.tagName == "PRE")
+                if(gtn_snippet_pres && gtn_snippet_pres.length > 0){
+                        gtn_snippet_pres[0].insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+                }
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

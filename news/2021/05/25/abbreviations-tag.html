@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@0a45a3c06b2fc7a90b39ddce8f4331beae628c24",
+  release: "galaxy-training-network@fdf710dc44d784c3cb3a71f70187fdd52c6aeee0",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -40,13 +40,13 @@ Sentry.init({
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2021/05/25/abbreviations-tag.html">
-	<link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="New Feature: Easy Abbreviation">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2021-05-25 11:09:29 +0000">
+<meta name="DC.date" content="2023-05-18 11:55:15 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Erik Schill">
 <meta name="DC.creator" content="Simon Bray">
@@ -211,20 +211,44 @@ Sentry.init({
         <section>
   <h1>New Feature: Easy Abbreviation</h1>
 
-  
+  <article>
+
 
 <div class="newsitem">
 <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a><a href="/training-material/hall-of-fame/rikeshi/" class="contributor-badge contributor-rikeshi"><img src="https://avatars.githubusercontent.com/rikeshi?s=27" alt="Avatar">Erik Schill</a><a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=27" alt="Avatar">Simon Bray</a>
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a><a href="/training-material/hall-of-fame/rikeshi/" class="contributor-badge contributor-rikeshi"><img src="https://avatars.githubusercontent.com/rikeshi?s=27" alt="Avatar">Erik Schill</a><a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=27" alt="Avatar">Simon Bray</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
 	</div>
 
 </div>
 
 
 
-<button class="label label-default tutorial_tag" id="new feature" style="--color-primary: #bcbeff; --color-darker: #a3a6ff; --color-dimmed: #b0b2ff;" title="new feature">new feature</button>
+<button class="label label-default tutorial_tag" id="new feature" style="--color-primary: #b0b2ff; --color-darker: #989bff; --color-dimmed: #a4a7ff;" title="new feature">new feature</button>
 
 
 <hr/>
@@ -274,9 +298,12 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
     
 
     
-    <a href="/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html" class="btn btn-primary">View Tutorial</a>
+    <a href="/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html" class="btn btn-primary">View Material</a>
     
 
+    
+
+    
     
 
     
@@ -301,7 +328,7 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
   "description": "<p>Thanks to the great tutorial developed by first time contributor <a href=\"/training-material/hall-",
   "articleBody": "<p>Thanks to the great tutorial developed by first time contributor <a href=\"/training-material/hall-of-fame/rikeshi/\" class=\"contributor-badge contributor-rikeshi\"><img src=\"https://avatars.githubusercontent.com/rikeshi?s=27\" alt=\"Avatar\" />Erik Schill</a> and edited by <a href=\"/training-material/hall-of-fame/simonbray/\" class=\"contributor-badge contributor-simonbray\"><img src=\"https://avatars.githubusercontent.com/simonbray?s=27\" alt=\"Avatar\" />Simon Bray</a>, we noticed that they defined a number of abbreviations and re-used those throughout their tutorial.</p>\n\n<p>As the GTN is intended to be easy for contributors and easy for learners, we wanted to make use of the <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr\"><code class=\"language-plaintext highlighter-rouge\">&lt;abbr&gt;</code></a> tag which allows you to define commonly re-used terms in your HTML. However this is a bit clumsy to write every time, so we’ve implemented a tag and some metadata which permits easily defining and referencing abbreviations throughout your text.</p>\n\n<p>In your tutorial metadata you can add an abbreviations section like:</p>\n\n<div class=\"language-yaml highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code><span class=\"nn\">---</span>\n<span class=\"na\">title</span><span class=\"pi\">:</span> <span class=\"s\">My awesome tutorial</span>\n<span class=\"nn\">...</span>\n<span class=\"na\">abbreviations</span><span class=\"pi\">:</span>\n  <span class=\"na\">API</span><span class=\"pi\">:</span> <span class=\"s\">Application Programming Interface</span>\n  <span class=\"na\">JSON</span><span class=\"pi\">:</span> <span class=\"s\">JavaScript Object Notation</span>\n<span class=\"nn\">---</span>\n</code></pre></div></div>\n\n<p>And in your text you can use braces to refer to the term</p>\n\n<blockquote class=\"code-2col\">\n  <blockquote class=\"code-in\">\n    <h3 id=\"code-in-input-markdown\"><i class=\"far fa-keyboard\" aria-hidden=\"true\"></i><span class=\"visually-hidden\">code-in</span> Input: Markdown</h3>\n    <p><code>\nThe `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call the &lbrace;API&rbrace; we'll get back this result &lbrace;JSON&rbrace;.\n</code></p>\n  </blockquote>\n\n  <blockquote class=\"code-out\">\n    <h3 id=\"code-out-output\"><i class=\"fas fa-laptop-code\" aria-hidden=\"true\"></i><span class=\"visually-hidden\">code-out</span> Output</h3>\n\n    <p>The <code class=\"language-plaintext highlighter-rouge\">/jobs</code> Application Programming Interface (API) will return JavaScript Object Notation (JSON). When we call the <abbr title=\"Application Programming Interface\">API</abbr> we’ll get back this result <abbr title=\"JavaScript Object Notation\">JSON</abbr>.</p>\n\n  </blockquote>\n</blockquote>\n\n<p>These will even generate an automatic Glossary at the end. Check out the use of this new feature in the BioBlend Dev Tutorial!</p>\n",
   "datePublished": "2021-05-25 00:00:00 +0000",
-  "dateModified": "2021-05-25 11:09:29 +0000",
+  "dateModified": "2023-05-18 11:55:15 +0000",
   "author": [
     {
       "@context": "https://schema.org",
@@ -404,6 +431,122 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
   "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
 }
 </script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div class="newslist">
+
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/05/15/isoform-usage-training.html">New Galaxy training: Genome-wide alternative splicing analysis</a>
+	</h3>
+	<p>
+	15 May 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fda700; --color-darker: #e29400; --color-dimmed: #ef9d00;">new tutorial</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The GTN hosts a new training for analyzing alternative splicing at genome-wide scale!
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/05/11/ro-crate.html">BY-COVID and RO-Crate collaboration brings new topic: FAIR Data, Workflows & More</a>
+	</h3>
+	<p>
+	11 May 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b4b1ff; --color-darker: #9d99ff; --color-dimmed: #a9a5ff;">new topic</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b0b2ff; --color-darker: #989bff; --color-dimmed: #a4a7ff;">new feature</span>
+	
+	</p>
+	<p class="card-text">
+		
+		As part of the BY-COVID project, the RO-Crate team and BY-COVID members have
+brought several RO-Crate related tutorials into the Galaxy Training Network, under a brand new {FAIR} topic!
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/04/20/my-galaxy-training.html">New Feature: my.galaxy.training</a>
+	</h3>
+	<p>
+	20 April 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b0b2ff; --color-darker: #989bff; --color-dimmed: #a4a7ff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef8b; --color-darker: #e9d500; --color-dimmed: #f8e200;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The GTN has set up a very simple “redirection” service based on my.home-assistant.io which Helena discovered after reading some Home Assistant documentation and saw a really neat link which led to her own internal home assistant.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/04/19/shortlinks.html">New Feature: Persistent URLs (PURLs) / Shortlinks</a>
+	</h3>
+	<p>
+	19 April 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b0b2ff; --color-darker: #989bff; --color-dimmed: #a4a7ff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef8b; --color-darker: #e9d500; --color-dimmed: #f8e200;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The GTN has added persistent URL identifiers for our tutorials, slides, and FAQs. Using the gxy.io service, we have reserved GTN namespace for our persistent URLs. These work similarly to DOIs in that they will always point to a specific training material.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/04/19/gtn-rdoc.html">New Feature: GTN Rdoc</a>
+	</h3>
+	<p>
+	19 April 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b0b2ff; --color-darker: #989bff; --color-dimmed: #a4a7ff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef8b; --color-darker: #e9d500; --color-dimmed: #f8e200;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The internal functions of the GTN have, in the past, not been very well documented. Now we have started the process of fully documenting the functions and modules available to GTN developers.
+
+		
+	</p>
+</article>
+
+
+</div>
+
 
 
 </section>
@@ -422,7 +565,7 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/0a45a3c06b2fc7a90b39ddce8f4331beae628c24">0a45a3c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/fdf710dc44d784c3cb3a71f70187fdd52c6aeee0">fdf710d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -458,9 +601,13 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
         <script src="/training-material/assets/js/main.js"></script>
         <script src="/training-material/assets/js/clipboard.min.js"></script>
         <script>
-        var snippets=document.querySelectorAll('div.highlight');
-        [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        document.querySelectorAll('div.highlight').forEach((snippet) => {
+                // Google translate has additional #text nodes mixed in with
+                // the pre for some reason.
+                var gtn_snippet_pres = [...snippet.childNodes].filter(x => x.tagName == "PRE")
+                if(gtn_snippet_pres && gtn_snippet_pres.length > 0){
+                        gtn_snippet_pres[0].insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+                }
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{

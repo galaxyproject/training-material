@@ -236,6 +236,24 @@
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
+  <span class="ruby-comment"># Videos.json</span>
+  <span class="ruby-comment"># {</span>
+  <span class="ruby-comment"># &quot;id&quot;: &quot;transcriptomics/tutorials/mirna-target-finder/slides&quot;,</span>
+  <span class="ruby-comment"># &quot;topic&quot;: &quot;Transcriptomics&quot;,</span>
+  <span class="ruby-comment"># &quot;title&quot;: &quot;Whole transcriptome analysis of Arabidopsis thaliana&quot;</span>
+  <span class="ruby-comment"># },</span>
+
+  <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;api/&#39;</span>, <span class="ruby-string">&#39;videos.json&#39;</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_videos</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+    {
+      <span class="ruby-value">id:</span> <span class="ruby-node">&quot;#{m[&#39;topic_name&#39;]}/tutorials/#{m[&#39;tutorial_name&#39;]}/slides&quot;</span>,
+      <span class="ruby-value">topic:</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;topic_name_human&#39;</span>],
+      <span class="ruby-value">title:</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;title&#39;</span>]
+    }
+  <span class="ruby-keyword">end</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+
   <span class="ruby-comment"># Overall topic index</span>
   <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;api/&#39;</span>, <span class="ruby-string">&#39;topics.json&#39;</span>)
   <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">topics</span>)

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@0a45a3c06b2fc7a90b39ddce8f4331beae628c24",
+  release: "galaxy-training-network@fdf710dc44d784c3cb3a71f70187fdd52c6aeee0",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -40,7 +40,7 @@ Sentry.init({
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/learning-pathways/">
-	<link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
@@ -233,7 +233,7 @@ Sentry.init({
    <div class="card-body">
    <p></p>
    
-   <span class="label label-default tutorial_tag" style="--color-primary: #ffefc1; --color-darker: #f6d400; --color-dimmed: #ffe16c;">beginner</span>
+   <span class="label label-default tutorial_tag" style="--color-primary: #ffecb3; --color-darker: #f3d100; --color-dimmed: #ffde4f;">beginner</span>
     
    <hr />
    <p class="card-text">
@@ -267,9 +267,9 @@ sequences.
    <div class="card-body">
    <p></p>
    
-   <span class="label label-default tutorial_tag" style="--color-primary: #ffabd3; --color-darker: #ff86c4; --color-dimmed: #ff99cb;">Galaxy administrators</span>
+   <span class="label label-default tutorial_tag" style="--color-primary: #ff99cb; --color-darker: #ff73bd; --color-dimmed: #ff87c4;">Galaxy administrators</span>
     
-   <span class="label label-default tutorial_tag" style="--color-primary: #ffb471; --color-darker: #f69900; --color-dimmed: #ffa53a;">5-day course</span>
+   <span class="label label-default tutorial_tag" style="--color-primary: #ffa439; --color-darker: #e89000; --color-dimmed: #f69900;">5-day course</span>
     
    <hr />
    <p class="card-text">
@@ -302,7 +302,7 @@ configuring it, and making it production ready.
    <div class="card-body">
    <p></p>
    
-   <span class="label label-default tutorial_tag" style="--color-primary: #ffefc1; --color-darker: #f6d400; --color-dimmed: #ffe16c;">beginner</span>
+   <span class="label label-default tutorial_tag" style="--color-primary: #ffecb3; --color-darker: #f3d100; --color-dimmed: #ffde4f;">beginner</span>
     
    <hr />
    <p class="card-text">
@@ -335,9 +335,9 @@ steps of biodiversity data analysis: download, check, filter and explore biodive
    <div class="card-body">
    <p></p>
    
-   <span class="label label-default tutorial_tag" style="--color-primary: #ffa6f2; --color-darker: #ff7eee; --color-dimmed: #ff93f0;">training</span>
+   <span class="label label-default tutorial_tag" style="--color-primary: #ff92f0; --color-darker: #ff68ed; --color-dimmed: #ff7fee;">training</span>
     
-   <span class="label label-default tutorial_tag" style="--color-primary: #ffa8e8; --color-darker: #ff81e1; --color-dimmed: #ff95e4;">trainers</span>
+   <span class="label label-default tutorial_tag" style="--color-primary: #ff95e4; --color-darker: #ff6cde; --color-dimmed: #ff82e1;">trainers</span>
     
    <hr />
    <p class="card-text">
@@ -370,7 +370,7 @@ steps of biodiversity data analysis: download, check, filter and explore biodive
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/0a45a3c06b2fc7a90b39ddce8f4331beae628c24">0a45a3c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/fdf710dc44d784c3cb3a71f70187fdd52c6aeee0">fdf710d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -406,9 +406,13 @@ steps of biodiversity data analysis: download, check, filter and explore biodive
         <script src="/training-material/assets/js/main.js"></script>
         <script src="/training-material/assets/js/clipboard.min.js"></script>
         <script>
-        var snippets=document.querySelectorAll('div.highlight');
-        [].forEach.call(snippets,function(snippet){
-            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        document.querySelectorAll('div.highlight').forEach((snippet) => {
+                // Google translate has additional #text nodes mixed in with
+                // the pre for some reason.
+                var gtn_snippet_pres = [...snippet.childNodes].filter(x => x.tagName == "PRE")
+                if(gtn_snippet_pres && gtn_snippet_pres.length > 0){
+                        gtn_snippet_pres[0].insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+                }
         });
 
         var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
