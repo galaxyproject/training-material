@@ -813,7 +813,7 @@ module GtnLinter
     end
 
     # 13:  doi = {https://doi.org/10.1016/j.cmpbup.2021.100007},
-    results += find_matching_texts(contents, %r{doi\s*=\s*{(https?://doi.org/)})
+    results += find_matching_texts(contents, %r{doi\s*=\s*\{(https?://doi.org/)})
                .map do |idx, _text, selected|
       ReviewDogEmitter.warning(
         path: @path,
