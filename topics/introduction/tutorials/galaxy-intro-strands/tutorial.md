@@ -317,7 +317,7 @@ Here's how we'll answer this question:
 
 It turns out that all of these steps are easy in Galaxy!
 
-### Split the genes into forward and reverse datasets
+## Split the genes into forward and reverse datasets
 
 How might we do this?  Column 6 contains the strand information.  Can we split genes into two datasets based on the value of Column 6.  How?  Lets take a look at our available tools.  And *whoa! There are over 40 toolboxes, and several hundred tools.* How are we going to find a tool that can do the split?
 
@@ -396,7 +396,7 @@ Your history should now have (at least) 3 datasets in it, with names like:
 
 The number of genes in the `forward` plus `reverse` datasets should be the same as in the `Genes chr22` dataset.  If they aren't can you figure out why?
 
-### Check for overlaps
+## Check for overlaps
 
 Genes are an example of a *genomic interval*.
 
@@ -436,7 +436,7 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 {: .hands_on}
 
 
-## Results and final steps.
+# Results and final steps.
 
 At this point we *could* say that we have answered our question. Using dataset previews in the history panel, we can compare the number of genes in the `Overlapping forward` and `Overlapping reverse` datasets with the number of genes in the full `Genes chr22` dataset, and *conclude that overlapping genes on opposite strands are actually pretty common.*
 
@@ -470,7 +470,7 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 
 Once the concatenate operation is finished, preview the dataset in your history panel.  Does it have the expected number of genes in it?  If not, see if you can figure out what happened.
 
-### Visualize the overlapping genes
+## Visualize the overlapping genes
 
 Galaxy knows about several visualization options for lots of different dataset types, including BED.  Whenever you preview a dataset in the history panel, Galaxy provides links to these visualizations.  For BED files (which is the format we have), options include **IGB, IGV,** and **UCSC main.**  IGB and IGV are widely used desktop applications and eventually you may want to install one or both of them.  For now, let's visualize the data at UCSC, using the UCSC *Genome* Browser.
 
@@ -549,7 +549,7 @@ Let's refine our question slightly
 
 Run the [Create a reusable workflow from a history]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md %}) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
 
-## Rerun analysis with exon data
+# Rerun analysis with exon data
 
 We want to run the same analysis, but this time only look for overlaps that happen in *exons*, the parts of genes that produce stuff our body uses.  Before we start looking at exons, let's start a new history, one that contains only the genes file we got from UCSC. We could go back to UCSC and refetch the file, but there is an easier way.
 
@@ -568,7 +568,7 @@ We want to run the same analysis, but this time only look for overlaps that happ
 > 6. The history name is a link.  *Click* on it.
 {: .hands_on}
 
-### Get the exon data
+## Get the exon data
 
 And your new history appears in the history panel with the copied *genes* dataset.  What we need is *exons.* How can we get the exon information?  There are two relatively easy ways to get this information, one of which will be very familiar.
 
@@ -589,7 +589,7 @@ If you got the data from UCSC it will look something like this:
 
 Your history should now have two datasets: one describing entire genes, and one describing just the exons.
 
-### Rerun the analysis, this time on exons.
+## Rerun the analysis, this time on exons.
 
 When you did the *History to Workflow* tutorial you created a new workflow that was then added to your list of defined workflows.
 
