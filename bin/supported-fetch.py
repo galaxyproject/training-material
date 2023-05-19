@@ -63,6 +63,9 @@ def extract_public_galaxy_servers_tools():
         # The aussies will soon
         if '.usegalaxy.org.au' in server['url']:
             continue
+        # No test servers permitted
+        if 'test.' in server['url']:
+            continue
 
         s = { 'name': server['title'], 'url': server['url'] }
         to_process.append(s)

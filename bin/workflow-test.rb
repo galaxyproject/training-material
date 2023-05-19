@@ -16,7 +16,7 @@ def test_workflow(workflow_file, galaxy_id)
       --galaxy_user_key #{galaxy_user_key}
       --no_shed_install
       --engine external_galaxy
-      --polling_backoff
+      --polling_backoff 1
       --test_output_json #{workflow_output_json}
       #{workflow_file}
   ) .split.map(&:strip).join(' ').strip
@@ -24,4 +24,4 @@ def test_workflow(workflow_file, galaxy_id)
   `#{cmd}`
 end
 
-test_workflow('topics/introduction/tutorials/galaxy-intro-101/workflows/galaxy-intro-101-workflow.ga', :eu)
+test_workflow(ARGV[0], :eu)
