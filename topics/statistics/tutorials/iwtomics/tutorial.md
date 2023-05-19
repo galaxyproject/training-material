@@ -128,5 +128,5 @@ The third tool (IWTomics Plot with Threshold on Test Scale) allows to select the
 
 > <details-title>Additional resources</details-title>
 >
-> Read more about **IWTomics** [here](https://bioconductor.org/packages/release/bioc/vignettes/IWTomics/inst/doc/IWTomics.pdf).
+> Read more about **IWTomics** [in the documentation (PDF)](https://bioconductor.org/packages/release/bioc/vignettes/IWTomics/inst/doc/IWTomics.pdf).
 {:.details}
