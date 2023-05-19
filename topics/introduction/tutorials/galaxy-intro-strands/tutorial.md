@@ -445,7 +445,7 @@ However, before we rush off to publish our conclusions, let's
 1. Get both the forward and reverse overlapping genes into a single dataset (one link will look better in our publication), and
 2. *Visualize* our new dataset, just to double-check our results.
 
-### Combine forward and reverse overlapping genes into one dataset.
+## Combine forward and reverse overlapping genes into one dataset.
 
 What tool can we use to combine the two datasets into one?  Try *searching* for `combine` or `join` or `stack` in the tool search box.  You'll find lots of tools, but none of them do what we want to do. *Some times you just have to manually look through toolboxes to find what you need.*  Where should we look?  It's probably not **Get Data** or **Send Data**, but it could easily be in any of the next 4 toolboxes: **Lift-Over, Collection Operations, Text Manipulation, or Datamash**.
 
