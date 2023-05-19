@@ -479,7 +479,7 @@ Galaxy knows about several visualization options for lots of different dataset t
 > 1. Click on your `Overlapping genes` dataset in your history panel. This will show the dataset preview in the history panel.
 > 2. Click to expand the dataset, if it isn't already, so that you can see the dataset metadata and additional actions like Visualize.
 > 3. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
-> 4. Click on the **display at UCSC main** link that appears in the blue box at the top of the screen.
+> 4. Click on the **display at UCSC (main)** link that appears in the blue box at the top of the screen.
 >    ![visualisation options are shown in Galaxy's middle panel]({% link topics/introduction/images/101_displayucsc.png %})
 >
 > This will launch a new window, showing UCSC's Genome Browser with our dataset shown right at the top.  UCSC figures out that our first overlapping gene is ~11 million bases into chromosome 22, and it has landed us there.
