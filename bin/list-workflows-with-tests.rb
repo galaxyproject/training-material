@@ -18,5 +18,5 @@ Dir.glob('./topics/**/*.ga') do |path|
     end
   end
 
-  puts path.to_s if !possible_tests.empty?
+  puts path if !possible_tests.empty?
 end
