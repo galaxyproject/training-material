@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@472b518048eb331b419e441ae61384be9db08e6e",
+  release: "galaxy-training-network@5b091b3dc7a3693d338bca5146f8e2281f7f2759",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -46,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Introduction to Genomics and Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-02-02 12:10:56 +0000">
+<meta name="DC.date" content="2023-05-19 08:06:46 +0000">
 <meta name="DC.creator" content="Dave Clements">
 <meta name="DC.creator" content="Cristóbal Gallardo">
 
@@ -88,7 +88,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-02-02 12:10:56 +0000",
+  "dateModified": "2023-05-19 08:06:46 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Introduction to Genomics and Galaxy",
   "interactivityType": "mixed",
@@ -335,11 +335,11 @@ Sentry.init({
 
             <div id="archive-selector">
             
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord3/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html" title="Version smorgasbord3">smorgasbord3</a>
+            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-05-02/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html" title="Version 2023-05-02">2023-05-02</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-05-01/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html" title="Version 2023-05-01">2023-05-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-04-01/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html" title="Version 2023-04-01">2023-04-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
             </div>
@@ -593,7 +593,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 2, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 19, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -641,10 +641,20 @@ Sentry.init({
     </ol>
   </li>
   <li><a href="#weve-got-the-data---whats-our-plan-for-answering-the-question" id="markdown-toc-weve-got-the-data---whats-our-plan-for-answering-the-question">We’ve got the data - what’s our plan for answering the question?</a>    <ol>
-      <li><a href="#results-and-final-steps" id="markdown-toc-results-and-final-steps">Results and final steps.</a></li>
+      <li><a href="#split-the-genes-into-forward-and-reverse-datasets" id="markdown-toc-split-the-genes-into-forward-and-reverse-datasets">Split the genes into forward and reverse datasets</a></li>
+      <li><a href="#check-for-overlaps" id="markdown-toc-check-for-overlaps">Check for overlaps</a></li>
+    </ol>
+  </li>
+  <li><a href="#results-and-final-steps" id="markdown-toc-results-and-final-steps">Results and final steps.</a>    <ol>
+      <li><a href="#combine-forward-and-reverse-overlapping-genes-into-one-dataset" id="markdown-toc-combine-forward-and-reverse-overlapping-genes-into-one-dataset">Combine forward and reverse overlapping genes into one dataset.</a></li>
+      <li><a href="#visualize-the-overlapping-genes" id="markdown-toc-visualize-the-overlapping-genes">Visualize the overlapping genes</a></li>
       <li><a href="#do-we-have-a-problem" id="markdown-toc-do-we-have-a-problem">Do we have a problem?</a></li>
       <li><a href="#walk-through-the-workflow-tutorial" id="markdown-toc-walk-through-the-workflow-tutorial">Walk through the workflow tutorial</a></li>
-      <li><a href="#rerun-analysis-with-exon-data" id="markdown-toc-rerun-analysis-with-exon-data">Rerun analysis with exon data</a></li>
+    </ol>
+  </li>
+  <li><a href="#rerun-analysis-with-exon-data" id="markdown-toc-rerun-analysis-with-exon-data">Rerun analysis with exon data</a>    <ol>
+      <li><a href="#get-the-exon-data" id="markdown-toc-get-the-exon-data">Get the exon data</a></li>
+      <li><a href="#rerun-the-analysis-this-time-on-exons" id="markdown-toc-rerun-the-analysis-this-time-on-exons">Rerun the analysis, this time on exons.</a></li>
       <li><a href="#are-we-done" id="markdown-toc-are-we-done">Are we done?</a></li>
     </ol>
   </li>
@@ -1050,7 +1060,7 @@ Sentry.init({
 
 <p>It turns out that all of these steps are easy in Galaxy!</p>
 
-<h3 id="split-the-genes-into-forward-and-reverse-datasets">Split the genes into forward and reverse datasets</h3>
+<h2 id="split-the-genes-into-forward-and-reverse-datasets">Split the genes into forward and reverse datasets</h2>
 
 <p>How might we do this?  Column 6 contains the strand information.  Can we split genes into two datasets based on the value of Column 6.  How?  Lets take a look at our available tools.  And <em>whoa! There are over 40 toolboxes, and several hundred tools.</em> How are we going to find a tool that can do the split?</p>
 
@@ -1159,7 +1169,7 @@ Sentry.init({
 
 <p>The number of genes in the <code class="language-plaintext highlighter-rouge">forward</code> plus <code class="language-plaintext highlighter-rouge">reverse</code> datasets should be the same as in the <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.  If they aren’t can you figure out why?</p>
 
-<h3 id="check-for-overlaps">Check for overlaps</h3>
+<h2 id="check-for-overlaps">Check for overlaps</h2>
 
 <p>Genes are an example of a <em>genomic interval</em>.</p>
 
@@ -1212,7 +1222,7 @@ This looks like it might return whole genes, while <code class="language-plainte
   </ol>
 </blockquote>
 
-<h2 id="results-and-final-steps">Results and final steps.</h2>
+<h1 id="results-and-final-steps">Results and final steps.</h1>
 
 <p>At this point we <em>could</em> say that we have answered our question. Using dataset previews in the history panel, we can compare the number of genes in the <code class="language-plaintext highlighter-rouge">Overlapping forward</code> and <code class="language-plaintext highlighter-rouge">Overlapping reverse</code> datasets with the number of genes in the full <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset, and <em>conclude that overlapping genes on opposite strands are actually pretty common.</em></p>
 
@@ -1223,7 +1233,7 @@ This looks like it might return whole genes, while <code class="language-plainte
   <li><em>Visualize</em> our new dataset, just to double-check our results.</li>
 </ol>
 
-<h3 id="combine-forward-and-reverse-overlapping-genes-into-one-dataset">Combine forward and reverse overlapping genes into one dataset.</h3>
+<h2 id="combine-forward-and-reverse-overlapping-genes-into-one-dataset">Combine forward and reverse overlapping genes into one dataset.</h2>
 
 <p>What tool can we use to combine the two datasets into one?  Try <em>searching</em> for <code class="language-plaintext highlighter-rouge">combine</code> or <code class="language-plaintext highlighter-rouge">join</code> or <code class="language-plaintext highlighter-rouge">stack</code> in the tool search box.  You’ll find lots of tools, but none of them do what we want to do. <em>Some times you just have to manually look through toolboxes to find what you need.</em>  Where should we look?  It’s probably not <strong>Get Data</strong> or <strong>Send Data</strong>, but it could easily be in any of the next 4 toolboxes: <strong>Lift-Over, Collection Operations, Text Manipulation, or Datamash</strong>.</p>
 
@@ -1261,7 +1271,7 @@ This looks like it might return whole genes, while <code class="language-plainte
 
 <p>Once the concatenate operation is finished, preview the dataset in your history panel.  Does it have the expected number of genes in it?  If not, see if you can figure out what happened.</p>
 
-<h3 id="visualize-the-overlapping-genes">Visualize the overlapping genes</h3>
+<h2 id="visualize-the-overlapping-genes">Visualize the overlapping genes</h2>
 
 <p>Galaxy knows about several visualization options for lots of different dataset types, including BED.  Whenever you preview a dataset in the history panel, Galaxy provides links to these visualizations.  For BED files (which is the format we have), options include <strong>IGB, IGV,</strong> and <strong>UCSC main.</strong>  IGB and IGV are widely used desktop applications and eventually you may want to install one or both of them.  For now, let’s visualize the data at UCSC, using the UCSC <em>Genome</em> Browser.</p>
 
@@ -1272,7 +1282,8 @@ This looks like it might return whole genes, while <code class="language-plainte
     <li>Click on your <code class="language-plaintext highlighter-rouge">Overlapping genes</code> dataset in your history panel. This will show the dataset preview in the history panel.</li>
     <li>Click to expand the dataset, if it isn’t already, so that you can see the dataset metadata and additional actions like Visualize.</li>
     <li>Click on the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> (<strong>Visualize</strong>) icon</li>
-    <li>Click on the <strong>display at UCSC main</strong> link.</li>
+    <li>Click on the <strong>display at UCSC (main)</strong> link that appears in the blue box at the top of the screen.
+<img src="/training-material/topics/introduction/images/101_displayucsc.png" alt="visualisation options are shown in Galaxy's middle panel. " loading="lazy" /></li>
   </ol>
 
   <p>This will launch a new window, showing UCSC’s Genome Browser with our dataset shown right at the top.  UCSC figures out that our first overlapping gene is ~11 million bases into chromosome 22, and it has landed us there.</p>
@@ -1356,7 +1367,7 @@ In humans (and in all plants and animals) the molecules that are built from gene
 
 <p>Run the <a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html">Create a reusable workflow from a history</a> tutorial for how to do this, <em>and then come back here to run your newly created workflow with the exon data.</em></p>
 
-<h2 id="rerun-analysis-with-exon-data">Rerun analysis with exon data</h2>
+<h1 id="rerun-analysis-with-exon-data">Rerun analysis with exon data</h1>
 
 <p>We want to run the same analysis, but this time only look for overlaps that happen in <em>exons</em>, the parts of genes that produce stuff our body uses.  Before we start looking at exons, let’s start a new history, one that contains only the genes file we got from UCSC. We could go back to UCSC and refetch the file, but there is an easier way.</p>
 
@@ -1387,7 +1398,7 @@ In humans (and in all plants and animals) the molecules that are built from gene
   </ol>
 </blockquote>
 
-<h3 id="get-the-exon-data">Get the exon data</h3>
+<h2 id="get-the-exon-data">Get the exon data</h2>
 
 <p>And your new history appears in the history panel with the copied <em>genes</em> dataset.  What we need is <em>exons.</em> How can we get the exon information?  There are two relatively easy ways to get this information, one of which will be very familiar.</p>
 
@@ -1409,7 +1420,7 @@ In humans (and in all plants and animals) the molecules that are built from gene
 
 <p>Your history should now have two datasets: one describing entire genes, and one describing just the exons.</p>
 
-<h3 id="rerun-the-analysis-this-time-on-exons">Rerun the analysis, this time on exons.</h3>
+<h2 id="rerun-the-analysis-this-time-on-exons">Rerun the analysis, this time on exons.</h2>
 
 <p>When you did the <em>History to Workflow</em> tutorial you created a new workflow that was then added to your list of defined workflows.</p>
 
@@ -1634,7 +1645,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/472b518048eb331b419e441ae61384be9db08e6e">472b518</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5b091b3dc7a3693d338bca5146f8e2281f7f2759">5b091b3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
