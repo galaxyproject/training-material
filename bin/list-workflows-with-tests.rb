@@ -4,22 +4,19 @@
 require 'json'
 require 'yaml'
 
-Dir.glob('./topics/**/*.ga') do  |path|
+Dir.glob('./topics/**/*.ga') do |path|
   folder = File.dirname(path)
   basename = File.basename(path).gsub(/.ga$/, '')
   possible_tests = Dir.glob("#{folder}/#{basename}*ym*")
   possible_tests = possible_tests.grep(/#{basename}[_-]tests?.ya?ml/)
 
   possible_tests.each do |possib|
-    if ! possib.match(/-test.yml/)
+    if !possib.match(/-test.yml/)
       puts "Renaming #{possib}"
       # Rename the file to have the correct extension
       File.rename(possib, possib.gsub(/[_-]tests?.ya?ml$/, '-test.yml'))
     end
   end
 
-  if ! possible_tests.empty? 
-    puts "#{path}"
-  end
-
+  puts path.to_s if !possible_tests.empty?
 end

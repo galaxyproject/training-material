@@ -249,14 +249,13 @@ module Jekyll
       page2 = PageWithoutAFile.new(site, '', 'api/', 'videos.json')
       page2.content = JSON.pretty_generate(TopicFilter.list_videos(site).map do |m|
         {
-          "id": "#{m['topic_name']}/tutorials/#{m['tutorial_name']}/slides",
-          "topic": m['topic_name_human'],
-          "title": m['title']
+          id: "#{m['topic_name']}/tutorials/#{m['tutorial_name']}/slides",
+          topic: m['topic_name_human'],
+          title: m['title']
         }
       end)
       page2.data['layout'] = nil
       site.pages << page2
-
 
       # Overall topic index
       page2 = PageWithoutAFile.new(site, '', 'api/', 'topics.json')

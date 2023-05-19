@@ -26,7 +26,7 @@ def parse_zenodo_id_formats(link)
   # https://doi.org/10.5281/zenodo.3732358#.X0X0X0X0X0X
   #
   link = link.split('#')[0]
-  if link.match(/doi:/) or link.match(/^10.5281/) or link.match(/doi.org/)
+  if link.match(/doi:/) || link.match(/^10.5281/) || link.match(/doi.org/)
     link.split('.')[-1]
   else
     link.split('/')[-1]
@@ -37,20 +37,18 @@ def update_tutorial(path, zenodo_id)
   # Edit the yaml header of the markdown file to update the ID
   contents = File.read(path)
   contents.gsub!(/^zenodo_link:.*/, "zenodo_link: 'https://zenodo.org/record/#{zenodo_id}'")
-  File.open(path, 'w') do |f|
-    f.write(contents)
-  end
+  File.write(path, contents)
 end
 
 def update_data_library(path, topic, tutorial, zenodo_record)
   zenodo_id = zenodo_record['id'].to_s
   zenodo_files = zenodo_record.fetch('files', []).map do |f|
     official_extension = f['type']
-    unofficial_extension =f['links']['self'].split('.')[-2..].join('.')
+    unofficial_extension = f['links']['self'].split('.')[-2..].join('.')
     ext = @SHARED_DATATYPES.fetch(unofficial_extension, nil) || @SHARED_DATATYPES.fetch(official_extension, nil)
-    #puts "Processing file: #{f['type']} #{f['links']['self']} => #{ext}"
-    #puts "#{unofficial_extension} => #{@SHARED_DATATYPES.fetch(unofficial_extension, nil)}"
-    #puts "#{official_extension} => #{@SHARED_DATATYPES.fetch(official_extension, nil)}"
+    # puts "Processing file: #{f['type']} #{f['links']['self']} => #{ext}"
+    # puts "#{unofficial_extension} => #{@SHARED_DATATYPES.fetch(unofficial_extension, nil)}"
+    # puts "#{official_extension} => #{@SHARED_DATATYPES.fetch(official_extension, nil)}"
     warn "Unknown file type: #{f['type']}. Consider adding this to shared/datatypes.yaml" if ext.nil?
 
     {
@@ -58,8 +56,8 @@ def update_data_library(path, topic, tutorial, zenodo_record)
       'src' => 'url',
       'ext' => ext || f['type'],
       'info' => "https://doi.org/10.5281/zenodo.#{zenodo_id}",
-      #'checksum' => f['checksum'],
-      #'key' => f['key'],
+      # 'checksum' => f['checksum'],
+      # 'key' => f['key'],
     }
   end
 
@@ -85,9 +83,7 @@ def update_data_library(path, topic, tutorial, zenodo_record)
   }
   data_library_path = data_library_for_tutorial(path)
   puts "Writing data library to #{data_library_path}"
-  File.open(data_library_path, 'w') do |f|
-    f.write(library.to_yaml)
-  end
+  File.write(data_library_path, library.to_yaml)
 end
 
 def write_data_library(path, topic, tutorial, tutorial_zenodo_id, force)
@@ -100,15 +96,13 @@ def write_data_library(path, topic, tutorial, tutorial_zenodo_id, force)
   puts "Discovered zenodo link: #{new_zenodo_id}"
 
   # So load the data library, and check what's written there
-  if File.exist?(data_library_for_tutorial(path))
-    datalibrary_zenodo_id = YAML.load_file(data_library_for_tutorial(path))['zenodo_id'].to_s
-  else
-    datalibrary_zenodo_id = nil
-  end
+  datalibrary_zenodo_id = if File.exist?(data_library_for_tutorial(path))
+                            YAML.load_file(data_library_for_tutorial(path))['zenodo_id'].to_s
+                          end
 
   # If the ID has changed we should update the tutorial as well:
   if new_zenodo_id == tutorial_zenodo_id && !force
-    warn "Tutorial is up to date"
+    warn 'Tutorial is up to date'
   else
     warn "Zenodo ID has changed from #{tutorial_zenodo_id} to #{new_zenodo_id}, updating the tutorial"
     update_tutorial(path, new_zenodo_id)
@@ -116,7 +110,7 @@ def write_data_library(path, topic, tutorial, tutorial_zenodo_id, force)
 
   # If the new ID doesn't match the data library, then we should update it.
   if new_zenodo_id == datalibrary_zenodo_id && !force
-    warn "Data library is up to date"
+    warn 'Data library is up to date'
   else
     warn "Zenodo ID has changed from #{datalibrary_zenodo_id} to #{new_zenodo_id}, updating the data library"
     update_data_library(path, topic, tutorial, zenodo_record)
@@ -128,21 +122,18 @@ def data_library_for_tutorial(path)
 end
 
 def parse_tutorial_for_zenodo_link(path)
-  begin
-    parse_zenodo_id_formats(YAML.load_file(path)['zenodo_link'])
-  rescue
-    nil
-  end
+  parse_zenodo_id_formats(YAML.load_file(path)['zenodo_link'])
+rescue StandardError
+  nil
 end
 
 def parse_metadata(path)
   parts = path.to_s.split('/')
   topic_id = parts[1]
-  tutorial_id = parts[3]
   topic_metadata = YAML.load_file(File.join('metadata', "#{topic_id}.yaml"))
   tutorial_metadata = YAML.load_file(path)
-  topic = {'name' => topic_metadata['title'], 'description' => topic_metadata['summary']}
-  tutorial = {'name' => tutorial_metadata['title']}
+  topic = { 'name' => topic_metadata['title'], 'description' => topic_metadata['summary'] }
+  tutorial = { 'name' => tutorial_metadata['title'] }
   [topic, tutorial]
 end
 
@@ -154,7 +145,7 @@ command :update do |c|
   c.action do |args, options|
     path = Pathname.new(args.first).cleanpath
     zenodo_id = parse_tutorial_for_zenodo_link(path).to_s
-    if zenodo_id.nil? or zenodo_id.empty?
+    if zenodo_id.nil? || zenodo_id.empty?
       warn "Could not parse zenodo ID from #{path}"
       exit 0
     end
@@ -174,7 +165,7 @@ command :test do |c|
   c.syntax = 'test'
   c.description = 'self test'
   c.action do |_args, _options|
-    puts "Running self test"
+    puts 'Running self test'
     p parse_zenodo_id_formats('https://zenodo.org/record/1234567')
     p parse_zenodo_id_formats('https://zenodo.org/record/1234567#.X0X0X0X0X0X')
     p parse_zenodo_id_formats('doi:10.5281/zenodo.1234567')

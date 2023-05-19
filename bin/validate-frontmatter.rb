@@ -102,7 +102,7 @@ module SchemaValidator
     errs
   end
 
-  def self.is_lintable(fn)
+  def self.lintable?(fn)
     begin
       data = YAML.load_file(fn)
     rescue StandardError => e
@@ -120,8 +120,8 @@ module SchemaValidator
 
   def self.lint_faq_file(fn)
     errs = []
-    data = is_lintable(fn)
-    return data if (data.nil? or data.is_a?(Array))
+    data = lintable?(fn)
+    return data if data.nil? || data.is_a?(Array)
 
     errs.push(*validate_document(data, @faq_validator))
     errs
@@ -130,8 +130,8 @@ module SchemaValidator
   def self.lint_topic(fn)
     # Any error messages
     errs = []
-    data = is_lintable(fn)
-    return data if (data.nil? or data.is_a?(Array))
+    data = lintable?(fn)
+    return data if data.nil? || data.is_a?(Array)
 
     errs.push(*validate_document(data, @topic_validator))
   end
@@ -139,8 +139,8 @@ module SchemaValidator
   def self.lint_material(fn)
     # Any error messages
     errs = []
-    data = is_lintable(fn)
-    return data if (data.nil? or data.is_a?(Array))
+    data = lintable?(fn)
+    return data if data.nil? || data.is_a?(Array)
 
     # Load topic metadata for this file
     topic = fn.split('/')[2]
@@ -184,8 +184,8 @@ module SchemaValidator
 
   def self.lint_news_file(fn)
     errs = []
-    data = is_lintable(fn)
-    return data if (data.nil? or data.is_a?(Array))
+    data = lintable?(fn)
+    return data if data.nil? || data.is_a?(Array)
 
     errs.push(*validate_document(data, @news_validator))
     errs
@@ -193,8 +193,8 @@ module SchemaValidator
 
   def self.lint_quiz_file(fn)
     errs = []
-    data = is_lintable(fn)
-    return data if (data.nil? or data.is_a?(Array))
+    data = lintable?(fn)
+    return data if data.nil? || data.is_a?(Array)
 
     data['questions'].select { |q| q.key? 'correct' }.each do |q|
       if q['correct'].is_a?(Array)
@@ -228,26 +228,26 @@ module SchemaValidator
 
     # Lint tutorials/slides/metadata
     materials = Dir.glob('./topics/**/slides.*html') +
-      Dir.glob('./topics/**/tutorial.*md')
+                Dir.glob('./topics/**/tutorial.*md')
     errors += materials.map { |x| [x, lint_material(x)] }
 
     # Lint FAQs
     errors += Dir.glob('**/faqs/**/*.md')
-      .reject { |x| x =~ /aaaa_dontquestionthislinkitisthegluethatholdstogetherthegalaxy/ }
-      .reject { |x| x =~ /index.md$/ }
-      .reject { |x| x =~ /README.md$/ }
-      .map { |x| [x, lint_faq_file(x)] }
+                 .grep_v(/aaaa_dontquestionthislinkitisthegluethatholdstogetherthegalaxy/)
+                 .grep_v(/index.md$/)
+                 .grep_v(/README.md$/)
+                 .map { |x| [x, lint_faq_file(x)] }
 
     # Lint quizzes
     errors += Dir.glob('./topics/**/quiz/*')
-      .select { |x| x =~ /ya?ml$/ }
-      .map { |x| [x, lint_quiz_file(x)] }
+                 .grep(/ya?ml$/)
+                 .map { |x| [x, lint_quiz_file(x)] }
 
     # Lint news
     errors += Dir.glob('./news/_posts/*')
-      .map { |x| [x, lint_news_file(x)] }
+                 .map { |x| [x, lint_news_file(x)] }
 
-    errors.reject!{|path, errs| errs.nil? or errs.empty?}
+    errors.reject! { |_path, errs| errs.nil? or errs.empty? }
 
     errors
   end

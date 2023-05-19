@@ -10,7 +10,7 @@ require './bin/gtn'
 learning_pathway_SCHEMA_UNSAFE = YAML.load_file('bin/schema-learning-pathway.yaml')
 learning_pathway_SCHEMA = automagic_loading(learning_pathway_SCHEMA_UNSAFE)
 
-Dir.glob('learning-pathways/*.md').reject{|p| p.match /index.md/}.each do |file|
+Dir.glob('learning-pathways/*.md').reject { |p| p.match(/index.md/) }.each do |file|
   errs = []
   pathway = YAML.load_file(file)
 

@@ -417,7 +417,7 @@ module TopicFilter
         license = wf_json['license']
         creators = wf_json['creator'] || []
 
-        #/galaxy-intro-101-workflow.eu.json
+        # /galaxy-intro-101-workflow.eu.json
         workflow_test_results = Dir.glob(wf_path.gsub(/.ga$/, '.*.json'))
         workflow_test_outputs = {}
         workflow_test_results.each do |test_result|
