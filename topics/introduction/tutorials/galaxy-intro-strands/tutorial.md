@@ -159,7 +159,7 @@ The Table Browser has a daunting number of options. Fortunately, they are all se
 **track** has a bewildering list of options. UCSC suggests `GENCODE v41`.  A web search leads us to the [GENCODE web site](https://www.gencodegenes.org/) which prominently states:
 
 > <warning-title>ALL GENCODE is different from GENCODE</warning-title>
-> **Warning** The Table browser only provides the most recent release of GENCODE which is updated several times per year. ALL GENCODE does not contain the same data as GENCODE and you should select the GENCODE track even if the version number is wrong. 
+> **Warning** The Table browser only provides the most recent release of GENCODE which is updated several times per year. ALL GENCODE does not contain the same data as GENCODE and you should select the GENCODE track even if the version number is wrong.
 {: .warning}
 
 >The goal of the GENCODE project is to identify and classify all gene features in the human and mouse genomes with high accuracy based on biological evidence...
@@ -424,7 +424,7 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 >     - {% icon param-files %}*"of"*:  `Genes, forward strand` (the first dataset)
 >     - {% icon param-files %} *"that intersect"* : `Genes, reverse strand` (the second dataset)
 >     - *"for at least"*: `1`
->       
+>
 >       This will return genes with even just one position overlapping.
 >     - *Click* **Run Tool**.
 >
@@ -459,10 +459,10 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 >   - {% icon param-files %} *"Concatenate Dataset"*: `Overlapping reverse genes`.
 >   - *"Dataset*"
 >      - Click on {% icon param-repeat %} *"Insert Dataset"*
->      
+>
 >         This adds a second dataset pull-down menu to the form.
 >
->      - In *"1: Dataset"*      
+>      - In *"1: Dataset"*
 >         - {% icon param-files %} *"Select"*: `Overlapping forward genes` as the second dataset.
 > 4. *Click* **Run Tool**
 > 5. *Rename* the resulting dataset something informative like `Overlapping genes`
@@ -479,7 +479,8 @@ Galaxy knows about several visualization options for lots of different dataset t
 > 1. Click on your `Overlapping genes` dataset in your history panel. This will show the dataset preview in the history panel.
 > 2. Click to expand the dataset, if it isn't already, so that you can see the dataset metadata and additional actions like Visualize.
 > 3. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
-> 3. Click on the **display at UCSC main** link.
+> 4. Click on the **display at UCSC main** link that appears in the blue box at the top of the screen.
+>    ![visualisation options are shown in Galaxy's middle panel]({% link topics/introduction/images/101_displayucsc.png %})
 >
 > This will launch a new window, showing UCSC's Genome Browser with our dataset shown right at the top.  UCSC figures out that our first overlapping gene is ~11 million bases into chromosome 22, and it has landed us there.
 >
