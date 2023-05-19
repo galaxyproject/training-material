@@ -822,7 +822,7 @@ In addition, it provides a RData object and three collections of plots: {IS} eve
 
 #### Analysis of splicing enrichment
 
-In this section We will assess whether there are differences with respect to the type of {AS} event .
+In this section we will assess whether there are differences with respect to the type of {AS} event .
 
 > <comment-title>Interpretation of splicing events</comment-title>
 >
