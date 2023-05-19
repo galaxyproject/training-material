@@ -41,7 +41,7 @@ contributors:
 # Introduction
 
 
-In this tutorial, we'll cover the basics of molecular modelling by setting up a protein in complex with a ligand and uploading the structure to Galaxy. This tutorial will make use of CHARMM-GUI. Please note that the follow-up to this tutorial (located [here]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %})) requires access to NAMD Galaxy tools, which can be accessed using the [Docker container](https://github.com/scientificomputing/BRIDGE) but are currently not available on any public Galaxy server.
+In this tutorial, we'll cover the basics of molecular modelling by setting up a protein in complex with a ligand and uploading the structure to Galaxy. This tutorial will make use of CHARMM-GUI. Please note that the follow-up to this tutorial (located in [Running molecular dynamics simulations using NAMD]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %})) requires access to NAMD Galaxy tools, which can be accessed using the [Docker container](https://github.com/scientificomputing/BRIDGE) but are currently not available on any public Galaxy server.
 
 > <agenda-title></agenda-title>
 >
@@ -80,8 +80,8 @@ In this section we'll access the PDB, download the correct structure, import it 
 >
 >  - [https://en.wikipedia.org/wiki/Cellulase](https://en.wikipedia.org/wiki/Cellulase)
 >  - [https://en.wikipedia.org/wiki/Biofuel](https://en.wikipedia.org/wiki/Biofuel)
->  - [Fungal Cellulases](https://pubs.acs.org/doi/full/10.1021/cr500351c)
->  - [Cellobiohydrolase I Induced Conformational Stability and Glycosidic Bond Polarization ](https://pubs.acs.org/doi/10.1021/ja103766w)
+>  - {% cite Payne_2015 %}
+>  - {% cite Barnett_2010 %}
 {: .details}
 
 ## Get data
@@ -218,7 +218,7 @@ Go to the correct section depending on which MD engine you will be using.
 ### Generate the FFT automatically
 
 > <hands-on-title>Generate the FFT</hands-on-title>
-> Particle Mesh Ewald (PME) summation is the method being used to calculate long-range interactions in this system. To improve the computational time a Fast Fourier Transform (FFT) is used. A detailed discussion of FFT will not be presented here; there are many articles on the subject. Try [Wikipedia](https://en.wikipedia.org/wiki/Ewald_summation) and [Ewald summation techniques in perspective: a survey](https://doi.org/10.1016/0010-4655(96)00016-1).
+> Particle Mesh Ewald (PME) summation is the method being used to calculate long-range interactions in this system. To improve the computational time a Fast Fourier Transform (FFT) is used. A detailed discussion of FFT will not be presented here; there are many articles on the subject. Try [Wikipedia](https://en.wikipedia.org/wiki/Ewald_summation) and {% cite Toukmaji_1996 %}.
 > ![Snapshot of CHARMM-GUI FFT section]({% link topics/computational-chemistry/images/charmmgui-fft.png %} "Setting up a FFT in CHARMM-GUI")
 {: .hands_on}
 

@@ -745,17 +745,17 @@ blockquote {
 @media (max-width: 768px) {
     .navbar {
         .dropdown-menu {
-            background-color: transparent;
+		background-color: var(--color-background);
             border-color: transparent;
         }
 
         .dropdown-item {
-            color: var(--text-color-muted);
+		color: var(--text-color);
 
             &:hover,
             &:focus,
             &:active {
-                background-color: transparent;
+                background-color: var(--brand-color);
                 color:  var(--text-color);
             }
         }
@@ -1428,4 +1428,34 @@ a[target="_blank"]::after {
         display: unset;
     }
 }
+}
+
+// For the git-gat learning pathway boxes
+#git-gat-timeline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#git-gat-timeline li  {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+#git-gat-timeline li.active {
+    background: #a8ffa8;
+}
+#git-gat-timeline li.active a {
+    color: black;
+}
+#git-gat-timeline li.disabled {
+    background: #eee;
+}
+#git-gat-timeline li.disabled a {
+    color: #555;
+}
+#git-gat-timeline span {
+    align-self: center;
 }

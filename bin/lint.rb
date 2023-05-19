@@ -122,9 +122,9 @@ module GtnLinter
         path: @path,
         idx: idx,
         text: text,
-        message: "Setting no_toc is discouraged, these headings provide useful places for readers to jump to.",
-        code: "GTN:001",
-        full_line: text,
+        message: 'Setting no_toc is discouraged, these headings provide useful places for readers to jump to.',
+        code: 'GTN:001',
+        full_line: text
       )
     end
   end
@@ -368,18 +368,18 @@ module GtnLinter
     res = []
     find_matching_texts(contents, /^[> ]*{% snippet/)
       .each do |idx, _text, selected|
-        if idx == prev_line + 1
-          res.push(ReviewDogEmitter.error(
-            path: @path,
-            idx: idx,
-            match_start: selected.begin(0),
-            match_end: selected.end(0) + 1,
-            replacement: nil,
-            message: 'Snippets too close together',
-            code: 'GTN:032'
-          ))
-        end
-        prev_line = idx
+      if idx == prev_line + 1
+        res.push(ReviewDogEmitter.error(
+                   path: @path,
+                   idx: idx,
+                   match_start: selected.begin(0),
+                   match_end: selected.end(0) + 1,
+                   replacement: nil,
+                   message: 'Snippets too close together',
+                   code: 'GTN:032'
+                 ))
+      end
+      prev_line = idx
     end
     res
   end
@@ -705,7 +705,7 @@ module GtnLinter
       *check_useless_box_prefix(contents),
       *check_bad_heading_order(contents),
       *check_bolded_heading(contents),
-      *snippets_too_close_together(contents),
+      *snippets_too_close_together(contents)
     ]
   end
 
@@ -813,18 +813,18 @@ module GtnLinter
     end
 
     # 13:  doi = {https://doi.org/10.1016/j.cmpbup.2021.100007},
-    results += self.find_matching_texts(contents, /doi\s*=\s*{(https?:\/\/doi.org\/)/)
-        .map { |idx, text, selected|
+    results += find_matching_texts(contents, %r{doi\s*=\s*\{(https?://doi.org/)})
+               .map do |idx, _text, selected|
       ReviewDogEmitter.warning(
         path: @path,
         idx: idx,
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
-        replacement: "",
-        message: "Unnecessary use of URL in DOI-only field, please just use the doi component itself",
-        code: "GTN:031",
+        replacement: '',
+        message: 'Unnecessary use of URL in DOI-only field, please just use the doi component itself',
+        code: 'GTN:031'
       )
-    }
+    end
     results
   end
 
@@ -979,14 +979,14 @@ module GtnLinter
       else
         # Load tests and run some quick checks:
         possible_tests.each do |test_file|
-          if ! test_file.match(/-test.yml/)
+          if !test_file.match(/-test.yml/)
             results += [
               ReviewDogEmitter.file_error(path: path,
                                           message: 'Please use the extension -test.yml for this test file.',
                                           code: 'GTN:032')
             ]
           end
-          
+
           test = YAML.safe_load(File.open(test_file))
           # check that for each test, the outputs is non-empty
           test.each do |test_job|

@@ -1,6 +1,7 @@
 ---
 title: "New Feature: my.galaxy.training"
-contributors: [hexylena]
+contributions:
+  authorship: [hexylena]
 tags: [new feature, gtn]
 layout: news
 ---

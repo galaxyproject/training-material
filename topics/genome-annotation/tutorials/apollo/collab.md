@@ -5,7 +5,6 @@
 {% endif %}
 
 ## Exporting annotation
-{:.no_toc}
 
 You can continue improving annotation whenever you want, the Apollo server will keep your changes in a safe place for future use. However at some point you will want to export your work to perform other analyses base on it. This can be done from Galaxy:
 
@@ -32,7 +31,6 @@ If you prefer, the same data can be downloaded directly from the Apollo right pa
 Note that if you have inserted some sequence alterations, the fasta sequences will take them into account.
 
 ## Collaborating with other annotators
-{:.no_toc}
 
 As explained at the beginning of this tutorial, Apollo is a collaborative annotation tool, which means you can work with other people from anywhere in the world. By default the organisms you create in Apollo are only accessible by yourself. But you can easily open the access to other people by creating a group of users on Apollo, and then allowing this group to access one or several of your organisms. This works for users having an account on the same Galaxy  (most probably usegalaxy.eu).
 

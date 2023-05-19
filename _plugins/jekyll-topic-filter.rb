@@ -417,6 +417,15 @@ module TopicFilter
         license = wf_json['license']
         creators = wf_json['creator'] || []
 
+        # /galaxy-intro-101-workflow.eu.json
+        workflow_test_results = Dir.glob(wf_path.gsub(/.ga$/, '.*.json'))
+        workflow_test_outputs = {}
+        workflow_test_results.each do |test_result|
+          server = workflow_test_results[0].match(/\.(..)\.json$/)[1]
+          workflow_test_outputs[server] = JSON.parse(File.read(test_result))
+        end
+        workflow_test_outputs = nil if workflow_test_outputs.empty?
+
         {
           'workflow' => wf,
           'tests' => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length.positive?,
@@ -427,6 +436,7 @@ module TopicFilter
           'trs_endpoint' => "#{domain}/#{trs}",
           'license' => license,
           'creators' => creators,
+          'test_results' => workflow_test_outputs,
         }
       end
     end
@@ -451,6 +461,7 @@ module TopicFilter
     page_obj['supported_servers'] = Gtn::Supported.calculate(site.data['public-server-tools'], page_obj['tools'])
 
     topic_name_human = site.data[page_obj['topic_name']]['title']
+    page_obj['topic_name_human'] = topic_name_human # TODO: rename 'topic_name' and 'topic_name' to 'topic_id'
     admin_install = Gtn::Toolshed.format_admin_install(site.data['toolshed-revisions'], page_obj['tools'],
                                                        topic_name_human)
     page_obj['admin_install'] = admin_install
@@ -523,6 +534,13 @@ module TopicFilter
   # This is a helper function to get all the materials in a site.
   def self.list_all_materials(site)
     process_pages(site, site.pages)
+  end
+
+  ##
+  # This is a helper function to get all the materials in a site.
+  def self.list_videos(site)
+    materials = process_pages(site, site.pages)
+    materials.select { |x| x['video'] == true }
   end
 
   ##

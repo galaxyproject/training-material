@@ -1,6 +1,7 @@
 ---
 title: "New Feature: Persistent URLs (PURLs) / Shortlinks"
-contributors: [hexylena]
+contributions:
+  authorship: [hexylena]
 tags: [new feature, gtn]
 layout: news
 cover: "assets/images/purl.png"
