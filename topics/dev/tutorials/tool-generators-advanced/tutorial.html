@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@fdf710dc44d784c3cb3a71f70187fdd52c6aeee0",
+  release: "galaxy-training-network@e90ee43f3a9bd0096b253104b79ccdcce2dafb1d",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -46,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="ToolFactory: Generating Tools From More Complex Scripts">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000">
+<meta name="DC.date" content="2023-05-21 01:58:17 +0000">
 <meta name="DC.creator" content="Ross Lazarus">
 
         
@@ -87,7 +87,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-28 09:55:50 +0000",
+  "dateModified": "2023-05-21 01:58:17 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "ToolFactory: Generating Tools From More Complex Scripts",
   "interactivityType": "mixed",
@@ -944,7 +944,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 21, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -970,28 +970,39 @@ Sentry.init({
   <div class="box-title agenda-title" id="agenda">Agenda</div>
 
 <ol id="markdown-toc">
-  <li><a href="#welcome-background-and-a-users-guide-to-this-training-material" id="markdown-toc-welcome-background-and-a-users-guide-to-this-training-material">Welcome, background and a user’s guide to this training material</a>    <ol>
-      <li><a href="#the-toolfactory-appliance-for-scientists-and-developers-who-write-command-line-scripts-in-their-work" id="markdown-toc-the-toolfactory-appliance-for-scientists-and-developers-who-write-command-line-scripts-in-their-work">The ToolFactory Appliance for scientists and developers who write command line scripts in their work.</a></li>
+  <li><a href="#background-and-a-users-guide-to-this-training-material" id="markdown-toc-background-and-a-users-guide-to-this-training-material">Background and a user’s guide to this training material</a>    <ol>
+      <li><a href="#the-toolfactory-is-for-scientists-and-developers-who-write-command-line-scripts-in-their-work" id="markdown-toc-the-toolfactory-is-for-scientists-and-developers-who-write-command-line-scripts-in-their-work">The ToolFactory is for scientists and developers who write command line scripts in their work.</a></li>
       <li><a href="#limits-and-scope" id="markdown-toc-limits-and-scope">Limits and scope</a></li>
     </ol>
   </li>
-  <li><a href="#getting-your-hands-on-a-toolfactory-appliance-for-some-hands-on-training" id="markdown-toc-getting-your-hands-on-a-toolfactory-appliance-for-some-hands-on-training">Getting your hands on a ToolFactory Appliance for some hands-on training.</a>    <ol>
-      <li><a href="#installation" id="markdown-toc-installation">Installation</a></li>
-      <li><a href="#generating-new-tools---what-happens-when-you-press-execute-on-a-completed-toolfactory-form" id="markdown-toc-generating-new-tools---what-happens-when-you-press-execute-on-a-completed-toolfactory-form">Generating new tools - what happens when you press <code class="language-plaintext highlighter-rouge">execute</code> on a completed ToolFactory form?</a></li>
+  <li><a href="#installation-copied-from-the-introductory-tutorial" id="markdown-toc-installation-copied-from-the-introductory-tutorial">Installation (Copied from the introductory tutorial)</a></li>
+  <li><a href="#logging-in-as-an-administrator" id="markdown-toc-logging-in-as-an-administrator">Logging in as an administrator</a></li>
+  <li><a href="#docker" id="markdown-toc-docker">Docker</a></li>
+  <li><a href="#local-workstation-development-galaxy-server-installation" id="markdown-toc-local-workstation-development-galaxy-server-installation">Local workstation development Galaxy server installation</a></li>
+  <li><a href="#toolfactory-tips-and-tricks-illustrated-by-some-of-the-examples" id="markdown-toc-toolfactory-tips-and-tricks-illustrated-by-some-of-the-examples">ToolFactory tips and tricks illustrated by some of the examples.</a>    <ol>
+      <li><a href="#before-you-begin-a-new-tool" id="markdown-toc-before-you-begin-a-new-tool">Before you begin a new tool</a></li>
+      <li><a href="#stdin-and-stdout" id="markdown-toc-stdin-and-stdout">STDIN and STDOUT</a></li>
+      <li><a href="#repeats-in-the-toolfactory-form-theoretically-permit-any-number-of-parameters" id="markdown-toc-repeats-in-the-toolfactory-form-theoretically-permit-any-number-of-parameters">Repeats in the ToolFactory form theoretically permit <em>any</em> number of parameters.</a></li>
+      <li><a href="#repeated-parameters-in-generated-tools-allow-the-end-user-to-supply-multiple-values" id="markdown-toc-repeated-parameters-in-generated-tools-allow-the-end-user-to-supply-multiple-values">Repeated parameters in generated tools allow the end user to supply multiple values</a></li>
+      <li><a href="#toolfactory-collection-outputs-are-handy-for-hiding-dozens-of-miscellaneous-tool-outputs-in-a-single-history-item" id="markdown-toc-toolfactory-collection-outputs-are-handy-for-hiding-dozens-of-miscellaneous-tool-outputs-in-a-single-history-item">ToolFactory <code class="language-plaintext highlighter-rouge">collection</code> outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item</a></li>
+      <li><a href="#selects-as-user-supplied-parameters" id="markdown-toc-selects-as-user-supplied-parameters">Selects as user supplied parameters</a></li>
+      <li><a href="#the-toolfactory-can-wrap-some-conda-packages-correctly-using-a-simple-wrapper-script-to-work-around-limitations" id="markdown-toc-the-toolfactory-can-wrap-some-conda-packages-correctly-using-a-simple-wrapper-script-to-work-around-limitations">The ToolFactory can wrap some Conda packages correctly using a simple wrapper script to work around limitations.</a></li>
+      <li><a href="#other-languages-such-as-lisp-and-prolog-scripts-in-galaxy" id="markdown-toc-other-languages-such-as-lisp-and-prolog-scripts-in-galaxy">Other languages such as Lisp and Prolog scripts in Galaxy.</a></li>
+      <li><a href="#command-over-ride-and-test-over-ride" id="markdown-toc-command-over-ride-and-test-over-ride">Command over-ride and test over-ride</a></li>
     </ol>
   </li>
-  <li><a href="#toolfactory-functional-documentation---the-demonstration-tools" id="markdown-toc-toolfactory-functional-documentation---the-demonstration-tools">ToolFactory functional documentation - the demonstration tools.</a></li>
-  <li><a href="#hands-on-learning-to-use-the-toolfactory" id="markdown-toc-hands-on-learning-to-use-the-toolfactory">Hands-on: Learning to use the ToolFactory</a>    <ol>
-      <li><a href="#toolfactory-tips-and-tricks-illustrated-by-some-of-the-examples" id="markdown-toc-toolfactory-tips-and-tricks-illustrated-by-some-of-the-examples">ToolFactory tips and tricks illustrated by some of the examples.</a></li>
-      <li><a href="#limits-and-workarounds" id="markdown-toc-limits-and-workarounds">Limits and workarounds</a></li>
+  <li><a href="#limits-and-workarounds" id="markdown-toc-limits-and-workarounds">Limits and workarounds</a></li>
+  <li><a href="#notes-on-common-issues" id="markdown-toc-notes-on-common-issues">Notes on common issues</a>    <ol>
+      <li><a href="#my-rscript-generates-a-strange-r-error-on-stdout-about-an-invalid-operation-on-a-closure-called-args-" id="markdown-toc-my-rscript-generates-a-strange-r-error-on-stdout-about-an-invalid-operation-on-a-closure-called-args-">My Rscript generates a strange R error on STDOUT about an invalid operation on a closure called ‘args’ ?</a></li>
+      <li><a href="#i-want-to-use-a-collection-for-outputs-but-it-always-passes-the-test-even-when-the-script-fails-what-gives" id="markdown-toc-i-want-to-use-a-collection-for-outputs-but-it-always-passes-the-test-even-when-the-script-fails-what-gives">I want to use a collection for outputs but it always passes the test even when the script fails. What gives?</a></li>
+      <li><a href="#only-one-toolfactory-job-runs-at-a-time-why-doesnt-the-server-allow-more-than-one-at-once" id="markdown-toc-only-one-toolfactory-job-runs-at-a-time-why-doesnt-the-server-allow-more-than-one-at-once">Only one ToolFactory job runs at a time. Why doesn’t the server allow more than one at once?</a></li>
+      <li><a href="#the-tool-i-just-generated-is-not-in-the-tool-menu" id="markdown-toc-the-tool-i-just-generated-is-not-in-the-tool-menu">The tool I just generated is not in the tool menu?</a></li>
     </ol>
   </li>
-  <li><a href="#notes-on-common-issues" id="markdown-toc-notes-on-common-issues">Notes on common issues</a></li>
   <li><a href="#appendices---material-of-potential-interest-for-those-interested-in-details" id="markdown-toc-appendices---material-of-potential-interest-for-those-interested-in-details">Appendices - material of potential interest for those interested in details</a>    <ol>
-      <li><a href="#appliance-and-toolfactory-functional-test-workflows" id="markdown-toc-appliance-and-toolfactory-functional-test-workflows">Appliance and ToolFactory functional test workflows</a></li>
+      <li><a href="#toolfactory-functional-test-workflows" id="markdown-toc-toolfactory-functional-test-workflows">ToolFactory functional test workflows</a></li>
       <li><a href="#why-is-the-form-so-complex" id="markdown-toc-why-is-the-form-so-complex">Why is the form so complex?</a></li>
-      <li><a href="#food-for-thought-and-beer" id="markdown-toc-food-for-thought-and-beer">Food for thought and beer.</a></li>
-      <li><a href="#learning-more-about-security-issues-and-the-methods-implemented-in-the-appliance" id="markdown-toc-learning-more-about-security-issues-and-the-methods-implemented-in-the-appliance">Learning more about security issues and the methods implemented in the Appliance.</a></li>
+      <li><a href="#motivation" id="markdown-toc-motivation">Motivation</a></li>
     </ol>
   </li>
   <li><a href="#your-turn-please-help-improve-this-community-resource" id="markdown-toc-your-turn-please-help-improve-this-community-resource">Your turn! Please help improve this community resource!</a></li>
@@ -1002,7 +1013,7 @@ Sentry.init({
 
 <hr />
 
-<h1 id="welcome-background-and-a-users-guide-to-this-training-material">Welcome, background and a user’s guide to this training material</h1>
+<h1 id="background-and-a-users-guide-to-this-training-material">Background and a user’s guide to this training material</h1>
 
 <p>Galaxy users who write and share scripts useful for scientific analyses are likely to be reading this material, perhaps after seeing the “Hello Galaxy”
 demonstration. It was written to help you find out about the capabilities and limits of the ToolFactory by experimenting with it yourself.
@@ -1019,7 +1030,7 @@ The result of editing and regenerating a tool is immediately available in the To
 Developers are free to explore their own specific requirements.</p>
 
 <p>Simple demonstration tools are provided. The are both the functional documentation, and useful models to adjust and explore.
-They each address a specific feature (such as the <code class="language-plaintext highlighter-rouge">plotter</code> illustrating collections),
+They each address a specific feature (such as the <code class="language-plaintext highlighter-rouge">plotter</code> illustrating R parameter passing and collectionscollections),
 and they illustrate some of the styles of tool building supported by the ToolFactory. The <code class="language-plaintext highlighter-rouge">sed</code> example does not use a script. All the others do.
 The ToolFactory is likely to be more useful for scripts than directly driving Conda packages. Many Conda package interfaces have requirements that the ToolFactory cannot
 currently address. Those will probably always require a skilled tool document developer. Conda dependencies requiring minimal conditional parameter
@@ -1029,11 +1040,9 @@ logic for the construction of a command line or for adjusting outputs, such as t
 The introductory tutorial walked through some simple tools. This advanced tutorial shows some examples but the focus is on self-guided
 exploration of the sample tools to see how they might be used in your work.</p>
 
-<h2 id="the-toolfactory-appliance-for-scientists-and-developers-who-write-command-line-scripts-in-their-work">The ToolFactory Appliance for scientists and developers who write command line scripts in their work.</h2>
+<h2 id="the-toolfactory-is-for-scientists-and-developers-who-write-command-line-scripts-in-their-work">The ToolFactory is for scientists and developers who write command line scripts in their work.</h2>
 
-<p>The ToolFactory is distributed as a Docker appliance, created as a “flavour” of the widely used <code class="language-plaintext highlighter-rouge">docker-galaxy-stable</code> infrastructure, so it includes a fully functional
-Galaxy server. New tools can be generated locally or they can be added from any Toolshed. This is intended to make it easy to create
-tailored private development Galaxy servers, so new tools, analyses and workflows can be developed to help speed uptake in areas of data-intensive science where
+<p>The ToolFactory is distributed as a docker image or as a self-configuring clone of the Galaxy server code. This is intended to make it easy to create new tools, analyses and workflows can be developed to help speed uptake in areas of data-intensive science where
 few Galaxy tools are currently available.</p>
 
 <p>The ToolFactory automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer
@@ -1046,20 +1055,15 @@ development environment for simple scripts. Jobs that generate tools can always 
 when the tool was generated. Data and user configurable parameters can be added or removed. Text that appears when the tool is run, such as user parameter or data input
 labels and help, can be updated by editing the form. When the updated tool is generated, installed and run as a tool, the tool form will include all the changes, ready to run.</p>
 
-<p>Tools can be tested and prepared for export as toolshed ready archives when the developer is ready using a companion <code class="language-plaintext highlighter-rouge">planemo_test</code> tool in the ToolFactory tool section.</p>
-
-<p>The Appliance is a pop-up platform for a data intensive scientist to quickly learn how Galaxy tools work, in preparation for the more flexible and efficient
+<p>The development server is a self-configuring, disposable platform for a data intensive scientist to learn how Galaxy tools work, in preparation for the more flexible and efficient
 Galaxy project supported manual tool building infrastructure. At the same time, they can wrap and refine new tools from existing scripts
-on their own workstations, preparing them for sharing and deployment to production servers. It also may be useful as a private sandbox for learning about tools and Galaxy administration or experimenting with code development. In the worst possible scenario where the
-system is damaged, the Appliance can be rebuilt from scratch in a few minutes.</p>
+on their own workstations, preparing them for sharing and deployment to production servers. It also may be useful as a private sandbox for learning about tools and
+Galaxy administration or experimenting with code development.</p>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-under-the-hood"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-under-the-hood" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Under the hood:<span class="fold-unfold fa fa-minus-square"></span></button></div>
-
   <ul>
     <li>It uses <a href="https://github.com/hexylena/galaxyxml">galaxyml</a> to generate the tool XML from ToolFactory form settings.</li>
-    <li>It uses <a href="https://github.com/galaxyproject/planemo">Planemo</a> to generate the test outputs and then again to test newly generated code</li>
-    <li>The Appliance is a flavour added to the base <a href="https://github.com/bgruening/docker-galaxy-stable/compose">docker-galaxy-stable</a> infrastructure</li>
   </ul>
 </blockquote>
 
@@ -1068,19 +1072,17 @@ system is damaged, the Appliance can be rebuilt from scratch in a few minutes.</
 <h2 id="limits-and-scope">Limits and scope</h2>
 
 <ul>
-  <li>The Appliance can generate, install and run new tools from scripts on your desktop.
+  <li>The ToolFactory can generate, install and run new tools from scripts on your desktop.
     <ul>
       <li>It is a fully functional development Galaxy instance, so it can import any existing tool from a toolshed and can handle as much data as your desktop disks will fit.</li>
-      <li>It <a href="https://github.com/bgruening/docker-galaxy-stable/compose">can connect to a cluster for real work</a> so potentially useful for development at scale.</li>
-      <li>It takes only a few minutes to install and can be completely removed even more quickly when no longer useful.</li>
-      <li>It lacks the data backup and security provided by an institutional Galaxy service.</li>
-      <li>The user is entirely responsible for securing and backing up all their work.</li>
-      <li>It is not recommended for production and is not supported by the Galaxy developers.</li>
+      <li>It takes 30 minutes to install locally or a few minutes as a docker image, and can be completely removed when no longer useful.</li>
+      <li>The user is entirely responsible for securing and backing up all their work in the docker version. The desktop version is a normal persistent Galaxy development server.</li>
+      <li>It is not recommended for production and is <em>not supported by the Galaxy team</em>.</li>
       <li>A well endowed modern workstation or laptop with plenty of cores, disk and RAM is needed. Older commodity hardware may struggle.</li>
     </ul>
   </li>
   <li>The ToolFactory works best wrapping simple R/Bash/Python and other interpreted scripts, with a few user supplied parameters and a few I/O history files.</li>
-  <li>XML macros, output filters and many other advanced features that are available when writing wrappers manually are not currently supported.</li>
+  <li>Conditional parameters, XML macros, output filters and many other advanced features are not currently supported. Manual coding will be needed.</li>
   <li>Scripts are easier than some Conda packages
     <ul>
       <li>This is because the tool builder can modify the code to respond to default empty parameters as if they had not been passed.</li>
@@ -1117,222 +1119,83 @@ automated code generator in a tailored, readily deployed appliance.</li>
 
 <hr />
 
-<h1 id="getting-your-hands-on-a-toolfactory-appliance-for-some-hands-on-training">Getting your hands on a ToolFactory Appliance for some hands-on training.</h1>
-
-<h2 id="installation">Installation</h2>
+<h1 id="installation-copied-from-the-introductory-tutorial">Installation (Copied from the introductory tutorial)</h1>
 
 <blockquote class="warning">
   <div class="box-title warning-title" id="warning-security-advisory"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Security advisory!</div>
   <ul>
     <li><em>Please do not install the ToolFactory on any public server</em></li>
-    <li>Although it will only run for administrative users, it allows unlimited scripting and that exposes unwise security weakness for any public facing machine.</li>
-    <li>In fact, Galaxy is very good at isolating tools to stop them doing mischief. But that’s no reason to chance your arm. They keep inventing better mice.</li>
-    <li>Please install it locally as described below.</li>
+    <li>Configured as a default server, it has none of the usual additional security layers required for a safe public Galaxy server.</li>
+    <li>Although it will only run for administrative users, it allows unlimited scripting and exposes unacceptable risks.</li>
+    <li>Please install it locally.</li>
     <li>For this reason, the training materials can’t make use of existing public Galaxy infrastructure like most of the GTN material.</li>
   </ul>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-launching-the-appliance"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Launching the Appliance</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-and-managing-a-galaxy-toolfactory-development-server"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing and managing a Galaxy ToolFactory development server</div>
+  <h1 id="logging-in-as-an-administrator">Logging in as an administrator</h1>
 
-  <blockquote class="warning">
-    <div class="box-title warning-title" id="warning-pull-the-images-first-as-shown-below-to-save-time"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: `Pull` the images first as shown below to save time.</div>
+  <p>Once you have a working installation running as described below, the server should be ready in 20-30 seconds or so, at <a href="http://localhost:8080">http://localhost:8080</a>.
+<em>The ToolFactory will only execute for administrative users as a minimal security barrier.</em> 
+When the webserver starts, immediately login using the administrative user email <em>toolfactory@galaxy.org</em> with the password <em>ChangeMe!</em> which of course you should change.</p>
 
-    <p>If they are not found locally the first time you run <code class="language-plaintext highlighter-rouge">docker-compose up</code>, docker will build them, taking half an hour or more instead of a couple of minutes.</p>
+  <h1 id="docker">Docker</h1>
+  <p>Note: <em>Nothing is persistent in the image</em>. Useful work must be manually exported and saved.
+For following the GTN tutorial and for test driving the ToolFactory for the first time, the docker version is recommended.
+Non-persistent means it does not remember anything after you stop the container. The next time it starts it will be a fresh installation.
+You can save your work by exporting the histories and tool tarballs you want to keep. You need the history to rerun the job that generated a tarball, so the history is the most important thing to preserve if you make a useful tool.
+The image must be pulled first, then run with port 8080 open for the Galaxy server.</p>
 
-  </blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull quay.io/fubar2/galaxy_toolfactory:latest
+docker run -d -p 8080:8080 quay.io/fubar2/galaxy_toolfactory:latest
+</code></pre></div>  </div>
+  <p>Check the docker logs until gunicorn is ready to serve or wait 
+about 20-30 seconds, then browse to <a href="http://localhost:8080">http://localhost:8080</a>
+If a Galaxy server appears, proceed with the login instructions above and you should see a history containing all the example tools. There is also a workflow that can reproduce that history if you set all the inputs to the right input datasets in that history.</p>
 
-  <ol>
-    <li>
-      <p><a href="https://docs.docker.com/engine/install/">Install Docker</a> following the appropriate instructions for your platform.</p>
-    </li>
-    <li>
-      <p>Then, <code class="language-plaintext highlighter-rouge">pip3 install docker-compose</code></p>
-    </li>
-    <li>
-      <p>Clone/Download, Change to the compose directory, and launch it:</p>
+  <h1 id="local-workstation-development-galaxy-server-installation">Local workstation development Galaxy server installation</h1>
 
-      <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-installing-the-docker-files-pulling-and-launching-the-appliance"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-installing-the-docker-files-pulling-and-launching-the-appliance" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Installing the docker files, pulling and launching the Appliance<span class="fold-unfold fa fa-minus-square"></span></button></div>
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/fubar2/toolfactory-galaxy-server
-<span class="nb">cd </span>toolfactory-galaxy-server/compose
-<span class="nb">mkdir export
-</span>docker-compose pull
-docker-compose up
-</code></pre></div>        </div>
-      </blockquote>
+  <p>A persistent desktop development ToolFactory server can be built by cloning the <a href="https://github.com/fubar2/galaxy_tf_overlay">bootstrap github repository</a>, and using the included <em>localtf.sh</em> script, to build a complete, new development server with the ToolFactory installed and ready to run.</p>
 
-      <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-appliance-tips"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-appliance-tips" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Appliance tips<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>From a convenient directory, download the overlay configuration code repository, then
+run the <em>localtf.sh</em> setup script from that cloned repository root directory:</p>
 
-        <ul>
-          <li><code class="language-plaintext highlighter-rouge">docker-compose pull</code> and making the local export directory <em>are only needed the first time</em>.</li>
-          <li>Add <code class="language-plaintext highlighter-rouge">-d</code> at the end of the <code class="language-plaintext highlighter-rouge">docker-compose up</code> command to detach the terminal so you can keep working - but only after watching the process the first time.
-            <ul>
-              <li>It is important to wait until the server stops sending log messages before you first log in. That means everything is ready. The first startup is very complex and takes time.</li>
-            </ul>
-          </li>
-          <li>For the first time start, watching the startup process logs reveals a lot of interesting activity.
-            <ul>
-              <li>You will learn a lot about how a Galaxy server works and see when the Appliance is ready to use.</li>
-            </ul>
-          </li>
-          <li>Expect a few minutes for the pull to complete.</li>
-          <li>Expect another 5 to 10 minutes to complete the first startup. Subsequent starts are much faster but a lot has to be done the first time.</li>
-          <li>The docker containers may not fit or run well on an underpowered machine. Multiple CPU cores, 8+GB of RAM and fast disk are needed for an enjoyable appliance.</li>
-          <li>The demonstration history will only be available after logging in with the administrator credentials - <code class="language-plaintext highlighter-rouge">admin@galaxy.org</code> and password <code class="language-plaintext highlighter-rouge">password</code>. Check your histories if the smaller data-only history appears when you log in.</li>
-          <li>Change your admin password.</li>
-          <li>It is important that your appliance is not accessible to any potential miscreants on the local or public internet.</li>
-          <li>It is recommended for use only as a private disposable desktop development environment.
-            <ul>
-              <li>The Appliance keeps no backup of any work.</li>
-              <li>The user can backup the export directory if desired.</li>
-              <li>An institutional server is a safer bet for preserving real research.</li>
-            </ul>
-          </li>
-        </ul>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/fubar2/galaxy_tf_overlay.git
+cd galaxy_tf_overlay
+sh ./localtf.sh
+</code></pre></div>  </div>
+  <p>Running <em>localtf.sh</em> will create a new directory, <em>galaxytf</em>, in the parent directory of the <em>galaxy_tf_overlay</em> clone.
+The script will configure a fresh Galaxy 23.0 server, with the ToolFactory installed, in that new directory.
+This takes 20 minutes or more to complete since the client must be built once.</p>
 
-      </blockquote>
-    </li>
-    <li>
-      <p>Your appliance should be running with a local Galaxy on <a href="http://localhost:8080">port 8080 of your workstation</a> after a fair bit of activity.</p>
+  <p>The resulting development server directory will occupy ~9GB of disk space, so be sure your machine has plenty of room.
+It will be based in a single directory, <em>galaxytf</em> in the same directory as the galaxy_tf_overlay repository was cloned into.
+That is where the script should be run as shown above.</p>
 
-      <ul>
-        <li>Out of the box login is ‘admin@galaxy.org’ and the password is ‘password’</li>
-        <li>This is obviously insecure but convenient and easily changed at first login.</li>
-        <li>Or more permanently in the docker-compose.yml if you prefer.</li>
-        <li>The container <code class="language-plaintext highlighter-rouge">/export</code> directory is mounted locally at <code class="language-plaintext highlighter-rouge">compose/export</code> so you can find your generated and tested tools for sharing.</li>
-      </ul>
+  <p>Rerunning the <em>localtf.sh</em> script will <em>destroy the entire galaxytf directory</em> - all ~9GB, and create a clean new installation.
+It should only need to be run once in the life of the development server.</p>
 
-      <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-demonstration-tools-are-the-functional-documentation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-demonstration-tools-are-the-functional-documentation" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Demonstration tools are the functional documentation<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Remove the <em>galaxytf</em> directory to remove the entire development server when it is no longer needed. Save all your tools and histories,
+because the jobs in a history can be used to update a tool easily, and a history can be imported into a fresh development instance
+when needed.</p>
 
-        <ul>
-          <li>At first login you will find the demonstration history ready to explore if you waited for all the first run installation activity to die down</li>
-          <li>First run startup takes about 5 minutes. Subsequent starts take less than a minute.</li>
-          <li>First planemo_test run takes about 5 minutes - subsequently more like 1 minute depending on Conda dependency install time</li>
-          <li>To explore an example, open the toolshed XML history item by clicking on the name, and select the <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> <code class="language-plaintext highlighter-rouge">rerun</code> button from the expanded view
-            <ul>
-              <li>The form that generated that tool will appear for you to examine</li>
-              <li>Edit the form - add parameters and change the script to suit - and rerun to create an <em>updated</em> tool. The history has previous versions.</li>
-              <li>Change the tool ID to change the tool name and generate a different tool. <em>Generating a same-name tool will overwrite the old version</em>.</li>
-            </ul>
-          </li>
-        </ul>
-      </blockquote>
-
-      <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-patience"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-patience" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Patience!<span class="fold-unfold fa fa-minus-square"></span></button></div>
-        <p>When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
-Check for Conda or other processes if things seem stuck.</p>
-      </blockquote>
-    </li>
-    <li>
-      <p>Later, after you’ve finished:</p>
-
-      <p>To safely shut the appliance down</p>
-      <ul>
-        <li>If the console was not detached using the –detach/-d flag:
-          <ul>
-            <li><code class="language-plaintext highlighter-rouge">&lt;ctrl&gt;&lt;c&gt;</code> in the console will gracefully shut the server down - takes time but your work will be preserved.</li>
-          </ul>
-        </li>
-        <li>If the -d flag was used:
-          <ul>
-            <li><code class="language-plaintext highlighter-rouge">docker-compose down</code> from the same directory it was started <code class="language-plaintext highlighter-rouge">.../compose</code>, should shut it down nicely</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-brief-guide-to-toolfactory-appliance-operation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Brief Guide to ToolFactory Appliance Operation</div>
-
-  <h2 id="generating-new-tools---what-happens-when-you-press-execute-on-a-completed-toolfactory-form">Generating new tools - what happens when you press <code class="language-plaintext highlighter-rouge">execute</code> on a completed ToolFactory form?</h2>
-
+  <p>Once installation is complete:</p>
   <ul>
-    <li>The form is processed and a new tool XML is generated, appearing in the history.</li>
-    <li>The generated tool is installed in the Appliance. It will appear in the <code class="language-plaintext highlighter-rouge">ToolFactory Generated Tools</code> tool menu.
-      <ul>
-        <li>The tool generation process takes a few seconds.</li>
-        <li>The <code class="language-plaintext highlighter-rouge">Home</code> or <code class="language-plaintext highlighter-rouge">Analysis</code> tab should be selected so the screen is refreshed after building.
-          <ul>
-            <li>Otherwise the new tool menu will not be loaded so the newly generated tool will not be there</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li>Choose tool names thoughtfully and be warned: <em>there are no checks on tool name duplicates</em></li>
-    <li>Any existing installed tool XML with the same name will be overwritten permanently.</li>
-    <li>The history will retain all the generating jobs if you accidentally overwrite a tool.</li>
-    <li>
-      <p>Rerun the job and adjust the form. Rinse and repeat until ready.</p>
-    </li>
-    <li>
-      <p>Note that the generated tool has no test outputs yet so the test is broken until the tool is “finalised” with the companion tool tester.</p>
-    </li>
-    <li>To generate a “proper” tested toolshed archive, execute the <code class="language-plaintext highlighter-rouge">planemo_test</code> tool from the ToolFactory tool submenu after selecting the relevant tool XML from the history.</li>
-    <li>The appliance will run <code class="language-plaintext highlighter-rouge">planemo lint</code>, then <code class="language-plaintext highlighter-rouge">planemo test</code> to generate sample outputs, then again for final “real” test.
-      <ul>
-        <li>A finalised archive will be available in the history after a while - testing takes time - with a collection containing the test run log, planemo lint and test reports.</li>
-        <li>The archive can be downloaded and shared in the usual ways. It is a normal Galaxy tool that wraps the supplied script and contains a test to validate it.</li>
-        <li>It will also be found in the <code class="language-plaintext highlighter-rouge">..compose/export/galaxy/testedTFtools/[tool name]</code> on your workstation, mounted as a volume in the container.</li>
-      </ul>
-    </li>
+    <li>start the server from the <em>galaxytf</em> directory with <em>sh run.sh</em>. The logs will be displayed.</li>
+    <li>^c (control+c) will stop it from the console.</li>
+    <li>In 23.0 that is equivalent to <em>.venv/bin/galaxyctl start</em> and <em>.venv/bin/galaxyctl stop</em>.</li>
   </ul>
-</blockquote>
 
-<hr />
-
-<h1 id="toolfactory-functional-documentation---the-demonstration-tools">ToolFactory functional documentation - the demonstration tools.</h1>
-
-<blockquote class="congratulations">
-  <p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span>
-Congratulations on acquiring a local instance of the ToolFactory Appliance</p>
-  <ul>
-    <li>There is a sample history built in that shows some sample tools.</li>
-    <li>If there is an empty history when you first log in, check the histories after a minute - if still not there, follow the Welcome page instructions to install it manually.</li>
-    <li>They can be examined to learn how the ToolFactory form was configured to generate the tool.</li>
-  </ul>
-</blockquote>
-
-<h1 id="hands-on-learning-to-use-the-toolfactory">Hands-on: Learning to use the ToolFactory</h1>
-
-<blockquote class="tip">
-  <div class="box-title tip-title" id="tip-using-an-appliance-involves-dependency-installation-that-may-cause-long-pauses"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-an-appliance-involves-dependency-installation-that-may-cause-long-pauses" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Using an Appliance involves dependency installation that may cause long pauses...<span class="fold-unfold fa fa-minus-square"></span></button></div>
-  <p>There will be delays as any new dependencies are installed for the first time</p>
-  <ul>
-    <li>the first ToolFactory run after first starting a new Appliance will involve Conda installing the ToolFactory dependencies before running the job.</li>
-    <li>the first time any new tool with a new dependency is run, Conda must install it locally taking a variable amount of time depending on complexity.</li>
-    <li>the first time the planemo_test tool is run, there will be a 10+ minute delay as Conda grinds away.</li>
-    <li>Check for Conda and other running processes before assuming it has frozen.</li>
-  </ul>
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-exploring-the-sample-tools-by-regenerating-their-original-toolfactory-forms"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Exploring the sample tools by regenerating their original ToolFactory forms</div>
-
-  <ul>
-    <li>With the ToolFactory working and the sample history active as described above</li>
-    <li>Select any of the generated toolshed archive history items.</li>
-    <li>This should open the item details up, so you can see the circular “redo” button</li>
-    <li>Click that button - the ToolFactory form that generated that tool will appear.</li>
-    <li>Examine the form settings used to generate the tool.</li>
-    <li>Try changing names or prompts. Add new parameters or inputs/outputs; press <code class="language-plaintext highlighter-rouge">execute</code>; check the new version of the tool</li>
-    <li>For example, change the default for the Hello example to <code class="language-plaintext highlighter-rouge">Galaxy Training Network</code> and generate an updated version.</li>
-  </ul>
 </blockquote>
 
 <p>The trivial <code class="language-plaintext highlighter-rouge">Hello World!</code> tool example is readily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter.
 For example, the planemo <code class="language-plaintext highlighter-rouge">lint</code> tool example (described below) can be derived by adding a history toolshed archive as input, plus a few more lines of bash script.
 In practice, it’s a flexible basis for generating many simple tools.</p>
 
-<h2 id="toolfactory-tips-and-tricks-illustrated-by-some-of-the-examples">ToolFactory tips and tricks illustrated by some of the examples.</h2>
+<h1 id="toolfactory-tips-and-tricks-illustrated-by-some-of-the-examples">ToolFactory tips and tricks illustrated by some of the examples.</h1>
 
-<h4 id="before-you-begin-a-new-tool">Before you begin a new tool</h4>
+<h2 id="before-you-begin-a-new-tool">Before you begin a new tool</h2>
 
 <ul>
   <li>Make sure it runs correctly on a command line with your sample inputs and default parameter settings. That is how the test will be generated.</li>
@@ -1341,7 +1204,7 @@ In practice, it’s a flexible basis for generating many simple tools.</p>
   <li>Be well prepared. The ToolFactory cannot do that preparation for  you.</li>
 </ul>
 
-<h4 id="stdin-and-stdout">STDIN and STDOUT</h4>
+<h2 id="stdin-and-stdout">STDIN and STDOUT</h2>
 
 <ul>
   <li>Demonstration tools often capture output from a bash script using the special STDOUT designation for output files</li>
@@ -1352,7 +1215,7 @@ selection list will generate a simple filter tool, executing a script or Conda d
 for those rare situations where that’s all you need. No i/o or other parameters for the user to set. Used in the tacrev demonstration tool.</li>
 </ul>
 
-<h4 id="repeats-in-the-toolfactory-form-theoretically-permit-any-number-of-parameters">Repeats in the ToolFactory form theoretically permit <em>any</em> number of parameters.</h4>
+<h2 id="repeats-in-the-toolfactory-form-theoretically-permit-any-number-of-parameters">Repeats in the ToolFactory form theoretically permit <em>any</em> number of parameters.</h2>
 
 <ul>
   <li>Inputs, outputs and additional user parameters are all presented within repeat elements on the form.</li>
@@ -1362,7 +1225,7 @@ for those rare situations where that’s all you need. No i/o or other parameter
   <li>A handful is easily manageable.</li>
 </ul>
 
-<h4 id="repeated-parameters-in-generated-tools-allow-the-end-user-to-supply-multiple-values">Repeated parameters in generated tools allow the end user to supply multiple values</h4>
+<h2 id="repeated-parameters-in-generated-tools-allow-the-end-user-to-supply-multiple-values">Repeated parameters in generated tools allow the end user to supply multiple values</h2>
 
 <ul>
   <li>Repeats <em>on the generated tool form</em> are supported for input and user edited parameters</li>
@@ -1383,7 +1246,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
   <div class="box-title details-title" id="details-repeats-demonstration-generated-tool-xml"><button class="gtn-boxify-button details" type="button" aria-controls="details-repeats-demonstration-generated-tool-xml" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Repeats demonstration generated tool XML<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"repeats_demo"</span> <span class="na">id=</span><span class="s">"repeats_demo"</span> <span class="na">version=</span><span class="s">"2.00"</span><span class="nt">&gt;</span>
-  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/galaxy_tf_overlay--&gt;</span>
   <span class="c">&lt;!--Created by admin@galaxy.org at 29/05/2021 07:46:08 using the Galaxy Tool Factory.--&gt;</span>
   <span class="nt">&lt;description&gt;</span>Repeated parameter demonstration<span class="nt">&lt;/description&gt;</span>
   <span class="nt">&lt;requirements/&gt;</span>
@@ -1485,7 +1348,7 @@ Script::
   <p><img src="../../images/toolfactory_repeats_sample_form.png" alt="User can add as many repeats as they want for repeated input file and parameter values. " loading="lazy" /></p>
 </blockquote>
 
-<h4 id="toolfactory-collection-outputs-are-handy-for-hiding-dozens-of-miscellaneous-tool-outputs-in-a-single-history-item">ToolFactory <code class="language-plaintext highlighter-rouge">collection</code> outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item</h4>
+<h2 id="toolfactory-collection-outputs-are-handy-for-hiding-dozens-of-miscellaneous-tool-outputs-in-a-single-history-item">ToolFactory <code class="language-plaintext highlighter-rouge">collection</code> outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item</h2>
 
 <ul>
   <li>If the script writes a large number of different output file types (images, reports..) that are not in themselves useful for downstream analyses.</li>
@@ -1507,9 +1370,8 @@ Script::
     <li>Example code is shown on the sample tool’s form and in the original example code below - removed from the current sample.</li>
     <li>For a real test, one or more expected <element...></element...> tags must be provided so the test really does test something.</li>
     <li>Add your own file names to the sample to make a real test for your own collections.</li>
-    <li>Otherwise, the generated test will be empty, because that is what the code generator knows about what’s in the collection when the <code class="language-plaintext highlighter-rouge">&lt;test&gt;</code> code is generated. Nothing.</li>
+    <li>Otherwise, the generated test will be empty, because the code generator knows nothing about what’s going to appear in the collection at the time the <code class="language-plaintext highlighter-rouge">&lt;test&gt;</code> code is generated.</li>
     <li>Introspecting arbitrary scripts to reliably populate the test with actual file names?. Not likely any time soon.</li>
-    <li>Introspecting the Planemo test result to write the test and then retest might be possible but is not planned.</li>
   </ul>
 
 </blockquote>
@@ -1527,7 +1389,7 @@ Script::
   <p>The Rscript is contained in a configfile so<code class="language-plaintext highlighter-rouge">#</code> is escaped - this is automatic.</p>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"plotter"</span> <span class="na">id=</span><span class="s">"plotter"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
-  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/tgalaxy_tf_overlay--&gt;</span>
   <span class="c">&lt;!--Created by admin@galaxy.org at 24/01/2021 05:02:33 using the Galaxy Tool Factory.--&gt;</span>
   <span class="nt">&lt;description&gt;</span>ToolFactory collection demonstration - random plots<span class="nt">&lt;/description&gt;</span>
   <span class="nt">&lt;requirements&gt;</span>
@@ -1637,7 +1499,7 @@ Script::
   <p><img src="../../images/toolfactory_plotter_sample_output.png" alt="Plotter collection opens to show all the plots as separate items to be viewed or downloaded. " loading="lazy" /></p>
 </blockquote>
 
-<h4 id="selects-as-user-supplied-parameters">Selects as user supplied parameters</h4>
+<h2 id="selects-as-user-supplied-parameters">Selects as user supplied parameters</h2>
 
 <ul>
   <li>Additional parameter types are selected from a drop down list. It includes text, numeric and select parameters.</li>
@@ -1658,7 +1520,7 @@ Script::
   <p>The generated XML is shown below.</p>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"select_test"</span> <span class="na">id=</span><span class="s">"select_test"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
-  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/galaxy_tf_overlay--&gt;</span>
   <span class="c">&lt;!--Created by admin@galaxy.org at 24/01/2021 05:03:21 using the Galaxy Tool Factory.--&gt;</span>
   <span class="nt">&lt;description&gt;</span>ToolFactory select demonstration<span class="nt">&lt;/description&gt;</span>
   <span class="nt">&lt;stdio&gt;</span>
@@ -1717,21 +1579,9 @@ Script::
   <p><img src="../../images/toolfactory_select_test_tool.png" alt="Generated form seen by users of the select demonstration tool. " loading="lazy" /></p>
 </blockquote>
 
-<h4 id="the-toolfactory-can-wrap-some-conda-packages-correctly-using-a-simple-wrapper-script-to-work-around-limitations">The ToolFactory can wrap some Conda packages correctly using a simple wrapper script to work around limitations.</h4>
+<h2 id="the-toolfactory-can-wrap-some-conda-packages-correctly-using-a-simple-wrapper-script-to-work-around-limitations">The ToolFactory can wrap some Conda packages correctly using a simple wrapper script to work around limitations.</h2>
 
 <ul>
-  <li>There are two tools that use Planemo as a Conda dependency</li>
-  <li>One runs <code class="language-plaintext highlighter-rouge">planemo test...</code> and the other <code class="language-plaintext highlighter-rouge">planemo lint....</code> on toolshed archives in a history</li>
-  <li>
-    <p>The linter XML is available below. It is a small python script that parses out the tool name from the XML input file and
-runs planemo lint on the inferred tool path. STDOUT is captured with the linter output.</p>
-  </li>
-  <li>The ToolFactory exposes the Planemo function as Galaxy tool that works on ToolFactory generated XML files.
-    <ul>
-      <li>Planemo test will not work as it involves planemo within planemo in a tool and this, unsurprisingly, does not seem to work.</li>
-      <li>Some other tractable Conda dependencies are also potential candidates for being wrapped as tools</li>
-    </ul>
-  </li>
   <li>Many complex tools require manual coding to make them useable.
     <ul>
       <li>Often complex tools hide data being moved between multiple dependencies such as samtools in the bwa tool.</li>
@@ -1751,8 +1601,8 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
   <p>The labels for outputs have been edited to include the tool name in this sample - this is not possible at present in the ToolFactory.</p>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"planemo_lint"</span> <span class="na">id=</span><span class="s">"planemo_lint"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
-  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
-  <span class="c">&lt;!--Created by admin@galaxy.org at 18/05/2021 01:16:17 using the Galaxy Tool Factory.--&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/galaxy_tf_overlay-&gt;
+  &lt;!--Created by admin@galaxy.org at 18/05/2021 01:16:17 using the Galaxy Tool Factory.--&gt;</span>
   <span class="nt">&lt;description&gt;</span>Runs Planemo lint on any ToolFactory xml history file<span class="nt">&lt;/description&gt;</span>
   <span class="nt">&lt;requirements&gt;</span>
     <span class="nt">&lt;requirement</span> <span class="na">version=</span><span class="s">"0.74.3"</span> <span class="na">type=</span><span class="s">"package"</span><span class="nt">&gt;</span>planemo<span class="nt">&lt;/requirement&gt;</span>
@@ -1851,7 +1701,7 @@ Script::
 </code></pre></div>  </div>
 </blockquote>
 
-<h4 id="other-languages-such-as-lisp-and-prolog-scripts-in-galaxy">Other languages such as Lisp and Prolog scripts in Galaxy.</h4>
+<h2 id="other-languages-such-as-lisp-and-prolog-scripts-in-galaxy">Other languages such as Lisp and Prolog scripts in Galaxy.</h2>
 
 <ul>
   <li>Any interpreted language in Conda can be used, as long as it will take a command line script path or read from STDIN.</li>
@@ -1864,7 +1714,7 @@ Script::
 <blockquote class="details">
   <div class="box-title details-title" id="details-prolog-and-lisp-demonstration-tools"><button class="gtn-boxify-button details" type="button" aria-controls="details-prolog-and-lisp-demonstration-tools" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: `Prolog` and `Lisp` demonstration tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"prolog_demo"</span> <span class="na">id=</span><span class="s">"prolog_demo"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
-  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/galaxy_tf_overlay--&gt;</span>
   <span class="c">&lt;!--Created by admin@galaxy.org at 04/04/2021 17:21:32 using the Galaxy Tool Factory.--&gt;</span>
   <span class="nt">&lt;description&gt;</span>Runs a prolog script<span class="nt">&lt;/description&gt;</span>
   <span class="nt">&lt;requirements&gt;</span>
@@ -1947,7 +1797,7 @@ Script::
  It or any other lisp script can be used as input to the SBCL Conda dependency.</p>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"lisp_demo"</span> <span class="na">id=</span><span class="s">"lisp_demo"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
-  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/galaxy_tf_overlay--&gt;</span>
   <span class="c">&lt;!--Created by admin@galaxy.org at 04/04/2021 16:38:47 using the Galaxy Tool Factory.--&gt;</span>
   <span class="nt">&lt;description&gt;</span>Runs SBCL hello world demonstration<span class="nt">&lt;/description&gt;</span>
   <span class="nt">&lt;requirements&gt;</span>
@@ -1988,7 +1838,7 @@ Lisp in the ToolFactory
 </code></pre></div>  </div>
 </blockquote>
 
-<h4 id="command-over-ride-and-test-over-ride">Command over-ride and test over-ride</h4>
+<h2 id="command-over-ride-and-test-over-ride">Command over-ride and test over-ride</h2>
 
 <ul>
   <li>If necessary, the automatically generated <code class="language-plaintext highlighter-rouge">&lt;command&gt;</code> section and/or the <code class="language-plaintext highlighter-rouge">&lt;test&gt;</code> section can be over-written by a developer supplied text.</li>
@@ -2054,7 +1904,7 @@ samtools sort -o "$BAMOUT" temporary_bam_file.bam
 
 <hr />
 
-<h2 id="limits-and-workarounds">Limits and workarounds</h2>
+<h1 id="limits-and-workarounds">Limits and workarounds</h1>
 
 <ul>
   <li>The ToolFactory is an automated, form based code generator.</li>
@@ -2081,26 +1931,14 @@ samtools sort -o "$BAMOUT" temporary_bam_file.bam
 
 <h1 id="notes-on-common-issues">Notes on common issues</h1>
 
-<h4 id="first-job-i-submitted-remains-grey-or-running-for-a-long-time---is-it-broken">First job I submitted remains grey or running for a long time - is it broken?</h4>
-
-<ul>
-  <li>Check with <code class="language-plaintext highlighter-rouge">top</code> or your system monitor - if Conda is running, things are working but it’s slow the first time a dependency is installed.</li>
-  <li>The first run generally takes a while to install all the needed dependencies.</li>
-  <li>Subsequent runs should start immediately with all dependencies already in place.</li>
-  <li>Installing new Conda dependencies just takes time so tools that have new Conda packages will take longer to run the first time if they must be installed.</li>
-  <li>In general, a <code class="language-plaintext highlighter-rouge">planemo_test</code> job usually takes around a minute - planemo has to build and tear down a new Galaxy for generating test results and then
-again for testing properly. Longer if the tool has Conda dependencies.</li>
-  <li>The very first test in a fresh appliance may take 5 minutes so be patient.</li>
-</ul>
-
-<h4 id="my-rscript-generates-a-strange-r-error-on-stdout-about-an-invalid-operation-on-a-closure-called-args-">My Rscript generates a strange R error on STDOUT about an invalid operation on a closure called ‘args’ ?</h4>
+<h2 id="my-rscript-generates-a-strange-r-error-on-stdout-about-an-invalid-operation-on-a-closure-called-args-">My Rscript generates a strange R error on STDOUT about an invalid operation on a closure called ‘args’ ?</h2>
 
 <ul>
   <li>Did your code declare the <code class="language-plaintext highlighter-rouge">args vector</code> with something like <code class="language-plaintext highlighter-rouge">args = commandArgs(trailingOnly=TRUE)</code> before it tried to access args[1] ?</li>
   <li>See the plotter tool for a sample</li>
 </ul>
 
-<h4 id="i-want-to-use-a-collection-for-outputs-but-it-always-passes-the-test-even-when-the-script-fails-what-gives">I want to use a collection for outputs but it always passes the test even when the script fails. What gives?</h4>
+<h2 id="i-want-to-use-a-collection-for-outputs-but-it-always-passes-the-test-even-when-the-script-fails-what-gives">I want to use a collection for outputs but it always passes the test even when the script fails. What gives?</h2>
 
 <ul>
   <li>Collections are tricky for generating tests.
@@ -2115,44 +1953,16 @@ again for testing properly. Longer if the tool has Conda dependencies.</li>
 or more of the file names you expect to see after the collection is filled by your new tool for the <code class="language-plaintext highlighter-rouge">&lt;element.../&gt;</code> used in the plotter sample’s tool test.</li>
 </ul>
 
-<h4 id="docker-compose-up-fails-and-the-last-log-message-before-the-galaxy-server_1-exits-is-usrbinstartsh-line-133-galaxyvenvbinuwsgi-no-such-file-or-directory"><code class="language-plaintext highlighter-rouge">docker-compose up</code> fails and the last log message before the galaxy-server_1 exits is <code class="language-plaintext highlighter-rouge">/usr/bin/start.sh: line 133: /galaxy/.venv/bin/uwsgi: No such file or directory</code></h4>
+<h2 id="only-one-toolfactory-job-runs-at-a-time-why-doesnt-the-server-allow-more-than-one-at-once">Only one ToolFactory job runs at a time. Why doesn’t the server allow more than one at once?</h2>
 
 <ul>
-  <li>This is why it’s useful to watch the boot process without detaching</li>
-  <li>This can happen if a container has become corrupt on disk after being interrupted
-    <ul>
-      <li>cured by a complete cleanup.
-        <ul>
-          <li>make sure no docker galaxy-server related processes are running - use docker ps to check and stop them manually</li>
-          <li>delete the <code class="language-plaintext highlighter-rouge">..compose/export</code> directory with <code class="language-plaintext highlighter-rouge">sudo rm -rf export/*</code> to clean out any corrupted files</li>
-          <li>enter “y” when you run <code class="language-plaintext highlighter-rouge">docker system prune</code> to clear out any old corrupted containers, images or networks.</li>
-          <li>run <code class="language-plaintext highlighter-rouge">docker-compose pull</code> again to ensure the images are correct</li>
-          <li>run <code class="language-plaintext highlighter-rouge">docker-compose up</code> to completely rebuild the appliance from scratch. Please be patient.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h4 id="only-one-planemo-test-runs-at-a-time-why-doesnt-the-server-allow-more-than-one-at-once">Only one Planemo test runs at a time. Why doesn’t the server allow more than one at once?</h4>
-
-<ul>
-  <li>When a new dependency is being installed in the Planemo Conda repository, there is no locking to prevent a second process from overwriting or otherwise
+  <li>When a new dependency is being installed in the Conda repository, there is no locking to prevent a second process from overwriting or otherwise
 interfering with it’s own independent repository update. The result is not pretty.</li>
-  <li>Allowing two tests to run at once has proven to be unstable so the Appliance is currently limited to one.</li>
+  <li>Allowing two tests to run at once has proven to be unstable so the job queue is currently limited to one.</li>
 </ul>
 
-<h4 id="pip-hangs-inside-the-docker-container-when-i-have-my-vpn-turned-on">pip hangs inside the Docker container when I have my VPN turned on</h4>
+<h2 id="the-tool-i-just-generated-is-not-in-the-tool-menu">The tool I just generated is not in the tool menu?</h2>
 
-<ul>
-  <li>This affects Ross with a Private Internet Access client running. Other VPNs may be similarly affected. If the VPN is running, docker containers will
-fail to download dependencies with timeouts on the pip web site. No idea why - some strange DNS problem - but I turn mine off and that solves the problem for me.
-Toolfactory timeouts, particularly on the first test may be related or at least, was for me. Check your logs carefully or just try turning your VPN off since there are
-situations where nothing is logged - pip will be seen running but with no obvious network activity.
-Your mileage may vary…</li>
-</ul>
-
-<h4 id="the-is-the-tool-i-just-generated-not-in-the-tool-menu">The is the tool I just generated not in the tool menu?</h4>
 <ul>
   <li>Did you refresh your browser’s Galaxy page? Click on the “Analyse data” or “home” or the left side of the masthead to do that, then open the “ToolFactory Generated Tools” submenu.
 It should be there if the XML for the new tool appeared without complaint. Please export and send me a copy of the history so I can see what’s going on?</li>
@@ -2160,7 +1970,7 @@ It should be there if the XML for the new tool appeared without complaint. Pleas
 
 <h1 id="appendices---material-of-potential-interest-for-those-interested-in-details">Appendices - material of potential interest for those interested in details</h1>
 
-<h2 id="appliance-and-toolfactory-functional-test-workflows">Appliance and ToolFactory functional test workflows</h2>
+<h2 id="toolfactory-functional-test-workflows">ToolFactory functional test workflows</h2>
 
 <ul>
   <li>There are two workflows supplied in the Appliance.</li>
@@ -2204,14 +2014,6 @@ starting a new tool in the ToolFactory. No tool will be generated without sample
         <li>Multiple dependencies. Conda is currently supported.</li>
         <li>Interpreters such as python, r-base and perl are typically used for ToolFactory tools.</li>
         <li>System utilities such as bash and sed can be used.</li>
-        <li>The Appliance server always exposes them to tools, but this may/should not happen on production servers.
-          <ul>
-            <li>It is recommended that they be added as dependencies after testing locally before testing and export of production ready toolshed archives.</li>
-            <li>They can be added to the tool form like other Conda dependencies</li>
-            <li>This will ensure that they are available when the script runs. Bash, sed and so on are all available in Conda.</li>
-            <li>Versions may not matter as much as other packages. Latest will be selected by default but a version can be specified.</li>
-          </ul>
-        </li>
         <li>Argparse (named) or positional (ordered) style parameter passing at tool execution time depending on the script requirements. Positional works well for bash scripts with only a handful of parameters. Argparse is preferred for clarity.</li>
         <li>Unlimited individual input data files to be selected from the user’s history.</li>
         <li>Unlimited individual output files to be written to the user’s history, paths determined at tool execution.</li>
@@ -2242,7 +2044,7 @@ starting a new tool in the ToolFactory. No tool will be generated without sample
 
 </blockquote>
 
-<h2 id="food-for-thought-and-beer">Food for thought and beer.</h2>
+<h2 id="motivation">Motivation</h2>
 
 <ul>
   <li>Uptake of Galaxy in new quantitative scientific fields requiring complex computing for analyses is arguably rate-limited early on by the availability of domain specific tools.
@@ -2254,7 +2056,7 @@ starting a new tool in the ToolFactory. No tool will be generated without sample
   <li>Galaxy tool wrapping has a well established and growing range of project supported infrastructure.</li>
   <li>Much complex Galaxy tool logic is embedded in the tool document namespace.
     <ul>
-      <li>Some document logic cannot be replaced by code in a script. These include output filters and other constructs and are hard to generate automatically.</li>
+      <li>Some document logic cannot be easily automated. This includes output filters and other constructs that are hard to generate automatically.</li>
       <li>Being in the namespace saves substantial effort compared to the alternative of writing the command  section logic in a script, as provided by the ToolFactory.</li>
       <li>That extra effort is needed to pass those parameters on the command line and then to parse them in the script so the logic can be implemented.</li>
     </ul>
@@ -2298,16 +2100,6 @@ starting a new tool in the ToolFactory. No tool will be generated without sample
   </li>
 </ul>
 
-<h2 id="learning-more-about-security-issues-and-the-methods-implemented-in-the-appliance">Learning more about security issues and the methods implemented in the Appliance.</h2>
-
-<p>For private desktop applications like the ToolFactory, it is sometimes convenient to be able to do things that normal Galaxy security does not permit, such
-as allowing a tool to update a configuration file to install a new tool. The Appliance uses a readily adaptable model for private desktop applications that
-allow tools to call exposed <code class="language-plaintext highlighter-rouge">rpyc</code> python functions in a companion container. These could, for example, offload calculation to GPU or other hardware and services.
-Please see the documentation on the <a href="https://github.com/fubar2/toolfactory-galaxy-server/tree/main/compose#readme">Appliance’s embedded <code class="language-plaintext highlighter-rouge">rpyc</code> server</a>. The
-model is powerful and requires explicit security bypasses. These may be manageable and acceptable in a private development, but mitigate
-strongly against deployment exposed to the public internet. Aside from that, allowing potentially hostile users to run the ToolFactory and thus unrestricted code as tools on your
-production server seems like a bad idea to me.</p>
-
 <hr />
 
 <h1 id="your-turn-please-help-improve-this-community-resource">Your turn! Please help improve this community resource!</h1>
@@ -2317,12 +2109,12 @@ production server seems like a bad idea to me.</p>
   <li>Please use the fork at <a href="https://github.com/fubar2/training-material">fubar2/training-material</a> for issues and pull requests for the nonce.</li>
   <li>The ToolFactory has had little testing in the present form so expect many bugs</li>
   <li>If the ToolFactory works well for you, please tell your friends.</li>
-  <li>If you find bugs, please tell me by raising an issue at <a href="https://github.com/fubar2/toolfactory">fubar2/toolfactory</a>, or better, a pull request with the fix :)</li>
+  <li>If you find bugs, please tell me by raising an issue at <a href="https://github.com/fubar2/galaxy_tf_overlay">fubar2/galaxy_tf_overlay</a>, or better, a pull request with the fix :)</li>
 </ul>
 
 <h1 id="acknowledgements">Acknowledgements</h1>
 
-<p>This tutorial is based on the work of thousands of individual contributers to the Galaxy project over the last 15 years or so.
+<p>This tutorial is based on the work of thousands of individual contributers to the Galaxy project over the last 18 years or so.
 Thanks all! It has been a lot of fun.</p>
 
 <p>Special thanks to:</p>
@@ -2335,8 +2127,7 @@ Thanks all! It has been a lot of fun.</p>
       <li>elegantly generated lint-free XML provided by <a href="https://github.com/hexylena/galaxyxml">galaxyml code</a></li>
     </ul>
   </li>
-  <li><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" /><img src="https://avatars.githubusercontent.com/bgruening?s=27" alt="Avatar" />Björn Grüning</a> for making it easy to pop-up and flavour <a href="https://github.com/bgruening/docker-galaxy-stable">docker-galaxy-stable</a>
- <a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=27" alt="Avatar" />Marius van den Beek</a> for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.</li>
+  <li><a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=27" alt="Avatar" />Marius van den Beek</a> for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.</li>
 </ul>
 
                 </section>
@@ -2347,10 +2138,10 @@ Thanks all! It has been a lot of fun.</p>
                     <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
-                        <li><p>The ToolFactory Appliance includes an automated form driven tool generator available as a pop-up Docker appliance.</p>
+                        <li><p>The ToolFactory Appliance includes an automated form driven tool generator.</p>
 </li>
                         
-                        <li><p>It runs in a flavour of docker-galaxy-stable and produces new tools as Toolshed ready archives</p>
+                        <li><p>It produces new tools as Toolshed ready archives</p>
 </li>
                         
                         <li><p>It was designed for scientists and developers who routinely write scripts for their analyses.</p>
@@ -2511,7 +2302,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/fdf710dc44d784c3cb3a71f70187fdd52c6aeee0">fdf710d</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/e90ee43f3a9bd0096b253104b79ccdcce2dafb1d">e90ee43</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
