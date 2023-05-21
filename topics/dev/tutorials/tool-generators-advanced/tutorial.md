@@ -204,16 +204,22 @@ automated code generator in a tailored, readily deployed appliance.
 >
 {: .hands_on}
 
-## ToolFactory tips and tricks illustrated by some of the examples.
 
-#### Before you begin a new tool
+The trivial `Hello World!` tool example is readily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter.
+For example, the planemo `lint` tool example (described below) can be derived by adding a history toolshed archive as input, plus a few more lines of bash script.
+In practice, it's a flexible basis for generating many simple tools.
+
+
+# ToolFactory tips and tricks illustrated by some of the examples.
+
+## Before you begin a new tool
 
 - Make sure it runs correctly on a command line with your sample inputs and default parameter settings. That is how the test will be generated.
 - You cannot specify any inputs on the form without providing samples, and those samples must run correctly, with the supplied defaults.
 - Easiest to make sure those samples are in the history before you begin.
 - Be well prepared. The ToolFactory cannot do that preparation for  you.
 
-#### STDIN and STDOUT
+## STDIN and STDOUT
 
 - Demonstration tools often capture output from a bash script using the special STDOUT designation for output files
 - This can save sending the output path as a parameter to the script or executable
@@ -222,7 +228,7 @@ automated code generator in a tailored, readily deployed appliance.
 selection list will generate a simple filter tool, executing a script or Conda dependency with input on STDIN and output on STDOUT
 for those rare situations where that's all you need. No i/o or other parameters for the user to set. Used in the tacrev demonstration tool.
 
-#### Repeats in the ToolFactory form theoretically permit *any* number of parameters.
+## Repeats in the ToolFactory form theoretically permit *any* number of parameters.
 
 - Inputs, outputs and additional user parameters are all presented within repeat elements on the form.
 - For any given tool, repeats allow an unlimited number of each of those tool elements - from a technical perspective.
@@ -230,7 +236,7 @@ for those rare situations where that's all you need. No i/o or other parameters 
 - The form gets very long, very quickly.
 - A handful is easily manageable.
 
-#### Repeated parameters in generated tools allow the end user to supply multiple values
+## Repeated parameters in generated tools allow the end user to supply multiple values
 
 - Repeats *on the generated tool form* are supported for input and user edited parameters
 - The generated tool form has the usual "Add..." button associated with the parameter, so the tool user can add any number of them.
@@ -351,7 +357,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 >  ![User can add as many repeats as they want for repeated input file and parameter values](../../images/toolfactory_repeats_sample_form.png)
 {: .details}
 
-#### ToolFactory `collection` outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item
+## ToolFactory `collection` outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item
 
 - If the script writes a large number of different output file types (images, reports..) that are not in themselves useful for downstream analyses.
 - A Collection can be used to hide them in an organised list as a single new history item.
@@ -496,7 +502,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 > ![Plotter collection opens to show all the plots as separate items to be viewed or downloaded](../../images/toolfactory_plotter_sample_output.png)
 {: .details}
 
-#### Selects as user supplied parameters
+## Selects as user supplied parameters
 
 - Additional parameter types are selected from a drop down list. It includes text, numeric and select parameters.
 - Selects offer a list of prespecified options to the user.
@@ -576,7 +582,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 
 
 
-#### The ToolFactory can wrap some Conda packages correctly using a simple wrapper script to work around limitations.
+## The ToolFactory can wrap some Conda packages correctly using a simple wrapper script to work around limitations.
 
 - Many complex tools require manual coding to make them useable.
   - Often complex tools hide data being moved between multiple dependencies such as samtools in the bwa tool.
@@ -691,7 +697,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 {: .details}
 
 
-#### Other languages such as Lisp and Prolog scripts in Galaxy.
+## Other languages such as Lisp and Prolog scripts in Galaxy.
 
 - Any interpreted language in Conda can be used, as long as it will take a command line script path or read from STDIN.
 - Trivial samples using Lisp and Prolog are included in the demonstration history.
@@ -828,7 +834,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 {: .details}
 
 
-#### Command over-ride and test over-ride
+## Command over-ride and test over-ride
 
 - If necessary, the automatically generated `<command>` section and/or the `<test>` section can be over-written by a developer supplied text.
 - This is a hybrid solution.
@@ -883,7 +889,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 
 ---
 
-## Limits and workarounds
+# Limits and workarounds
 
 - The ToolFactory is an automated, form based code generator.
 - A generator can replace manual editing by a skilled developer only in relatively constrained, simple cases.
@@ -902,12 +908,12 @@ line will echo all the repeated parameters is shown in the example shown in the 
 
 # Notes on common issues
 
-#### My Rscript generates a strange R error on STDOUT about an invalid operation on a closure called 'args' ?
+## My Rscript generates a strange R error on STDOUT about an invalid operation on a closure called 'args' ?
 
 - Did your code declare the `args vector` with something like `args = commandArgs(trailingOnly=TRUE)` before it tried to access args[1] ?
 - See the plotter tool for a sample
 
-#### I want to use a collection for outputs but it always passes the test even when the script fails. What gives?
+## I want to use a collection for outputs but it always passes the test even when the script fails. What gives?
 
 - Collections are tricky for generating tests.
   - The contents appear only after the tool has been run and even then may vary with settings.
@@ -917,13 +923,13 @@ line will echo all the repeated parameters is shown in the example shown in the 
 - It is recommended that you modify the test over-ride that appears in that sample form. Substitute one
 or more of the file names you expect to see after the collection is filled by your new tool for the `<element.../>` used in the plotter sample's tool test.
 
-#### Only one ToolFactory job runs at a time. Why doesn't the server allow more than one at once?
+## Only one ToolFactory job runs at a time. Why doesn't the server allow more than one at once?
 
 - When a new dependency is being installed in the Conda repository, there is no locking to prevent a second process from overwriting or otherwise
 interfering with it's own independent repository update. The result is not pretty.
 - Allowing two tests to run at once has proven to be unstable so the job queue is currently limited to one.
 
-#### The tool I just generated is not in the tool menu?
+## The tool I just generated is not in the tool menu?
 
 - Did you refresh your browser's Galaxy page? Click on the "Analyse data" or "home" or the left side of the masthead to do that, then open the "ToolFactory Generated Tools" submenu.
 It should be there if the XML for the new tool appeared without complaint. Please export and send me a copy of the history so I can see what's going on?
