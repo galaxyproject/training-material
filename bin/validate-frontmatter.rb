@@ -223,7 +223,10 @@ module SchemaValidator
   def self.run
     errors = []
     # Topics
-    materials = Dir.glob('./topics/**/metadata.*')
+    materials = (Dir.glob('./metadata/*.yaml') + Dir.glob('./metadata/*.yml'))
+      .reject { |x| x =~ /schema-*/ }
+      .select{ |x| d = YAML.load_file(x); d.key? 'maintainers' or d.key? 'summary' or d.key? 'type' }
+
     errors += materials.map { |x| [x, lint_topic(x)] }
 
     # Lint tutorials/slides/metadata
