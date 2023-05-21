@@ -218,21 +218,39 @@ In this case, a single text string is needed from the user.
 
 Tool definition involves configuring the major sections of the ToolFactory form for the new tool.
 
-The following information about a script is needed:
+Five categories needed to generate a script:
 
 - Conda dependency requirements
 - History data inputs
-- History outputs - data and collections
+- History outputs
 - User controlled parameters
+- Developer supplied code/scripts to embed
 
 For the `hello` tool case:
 
+Conda dependency requirements:
+
 - There are no dependencies usually because bash is available and version is not important.
 - For completeness, it could be included as a Conda package. It's your tool.
+
+History data inputs:
+
 - This tool requires no history input files.
+
+History outputs - data and collections:
 - It produces one text output file.
+
+User controlled parameters:
 - The tool form should show a single input text field for the user to supply.
-- Executing the tool is expected to write the combined string to a new history item.
+
+Developer supplied code/scripts to embed:
+- These are optional - many Conda packages will not need them.
+- Most simple use-cases will involve developer supplied, known working code.
+- Executing the tool is expected to write the decorated string to a new history item.
+- This must be known to work with suitable inputs on the command line. 
+  - Broken code == broken tool.
+- Such as `echo "Hello $1!"` as a Bash script
+- There are other advanced features, such as command over-rides where code can be embedded
 
 At this point, the plan for this new tool is:
 
@@ -242,12 +260,6 @@ At this point, the plan for this new tool is:
 - It should contain the expected decorated input text.
 - Galaxy tools need a test.
    - A simple test would be to supply a default value for the text string, run the tool and check that the output is correct.
-
-This is a trivial example, but it demonstrates a flexible model worth studying in detail, because it is easily extended to do
-more useful things.
-
-This is the simplest case of a very useful generic model for Galaxy tools. More useful tools will require one or more input files and more parameters, as discussed below.
-Bash is used here but any scripting language but any other package available in Conda can be made available for tool execution.
 
 ## Putting the plan into action using the ToolFactory
 
@@ -346,16 +358,24 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >
 {: .tip}
 
-> <comment-title>Limits and scope</comment-title>
->
+## Extending this trivial example
+
+This demonstrates a script based model, that can be extended to do more useful things with more complex scripts. More useful tools will ingest one or more user supplied input files, emit more complex outputs such as collections, and allow more user controlled parameters. 
+These ToolFactory features are illustrated in the examples, and discussed in the advanced Tutorial.
+
+Bash was used for this demonstration. Literally any scripting language, or any other useful package available in Conda, can be made available for tool execution by adding the appropriate dependency to the ToolFactory form.
+
+> <comment-title>ToolFactory limitations and scope</comment-title>
+>  
+> The ToolFactory includes a very simple, automated, form driven XML code generator. Code automation is limited to the most common and easily implemented features. For example, conditionals are not available, so many complicated tools cannot be automatically generated with this tool. Send code.
 > - It works best wrapping simple R/Bash/Python and other interpreted scripts, with few user supplied parameters and a few input and output files.
 > - Scripts are easier than some Conda packages
->   - They can easily be modified to respond to default empty parameters as if they had not been passed.
->   - As a result, advanced tool building elements such as conditionals and related tricks requiring manual coding, can sometimes be avoided.
->         - where they are needed, a skilled developer will be required.
-> - On the other hand, many Conda dependencies will require XML conditionals or other tool XML constructs that are not easy to generate automatically.
-> - While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
-> - Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts.
+>   - Scripts can often be modified to suit any ToolFactory limitations.
+>   - Advanced tool components such as conditional logic and related tricks, requiring manual coding, can sometimes be worked around.
+>         - where those features are needed, a skilled developer will be required.
+>   - Many Conda dependencies will require XML conditionals or other tool XML constructs that are not easy to generate automatically.
+>   - While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
+> - Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debug your scripts.
 > - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended.
 >      - You will know exactly what to expect from the tool test for a first sanity check.
 > - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
@@ -369,16 +389,17 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 > <warning-title>Security advisory!</warning-title>
 >- *Please do not install the ToolFactory on any public server*
 >- Configured as a default server, it has none of the usual additional security layers required for a safe public Galaxy server.
->- Although it will only run for administrative users, it allows unlimited scripting and exposes unacceptable risks.
->- Please install it locally.
+>- Although it will only run for administrative users, it allows unlimited scripting and exposes unwanted risk.
+>- Install it locally and do not expose to the public internet.
 >- For this reason, the training materials can't make use of existing public Galaxy infrastructure like most of the GTN material.
 {: .warning}
 
 
 > <hands-on-title>Installing and managing a Galaxy ToolFactory development server</hands-on-title>
-> # Logging in as an administrator
 > 
-> Once you have a working installation running as described below, the server should be ready in 20-30 seconds or so, at [http://localhost:8080](http://localhost:8080).
+> # Logging in as an administrator to a new ToolFactory server
+> 
+> Once you have a working installation running, as described below, the server should be ready after 20-30 seconds, at [http://localhost:8080](http://localhost:8080).
 > *The ToolFactory will only execute for administrative users as a minimal security barrier.* 
 > When the webserver starts, immediately login using the administrative user email *toolfactory@galaxy.org* with the password *ChangeMe!* which of course you should change.
 >   
@@ -411,24 +432,22 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 > ```
 > Running *localtf.sh* will create a new directory, *galaxytf*, in the parent directory of the *galaxy_tf_overlay* clone.
 > The script will configure a fresh Galaxy 23.0 server, with the ToolFactory installed, in that new directory.
-> This takes 20 minutes or more to complete since the client must be built once.
+> This takes twenty minutes or more to complete since the client must be built once. Visualisation plugins are not built to save some time.
 >
 > The resulting development server directory will occupy ~9GB of disk space, so be sure your machine has plenty of room.
-> It will be based in a single directory, *galaxytf* in the same directory as the galaxy_tf_overlay repository was cloned into.
-> That is where the script should be run as shown above.
+> It will be based in a single directory, *galaxytf* in the same level as the cloned galaxy_tf_overlay repository directory, where the script should be run as shown above.
 >
 > Rerunning the *localtf.sh* script will *destroy the entire galaxytf directory* - all ~9GB, and create a clean new installation.
 > It should only need to be run once in the life of the development server.
 >
-> Remove the *galaxytf* directory to remove the entire development server when it is no longer needed. Save all your tools and histories,
-> because the jobs in a history can be used to update a tool easily, and a history can be imported into a fresh development instance
-> when needed.
+> Remove the *galaxytf* directory to remove the entire development server when it is no longer needed. 
+> Before doing that, save any useful histories, because the jobs in a ToolFactory history can be used to update a tool, because that history can be imported into a fresh development instance when needed and the job rerun with the necessary adjustments to the form.
 >
 >
 > Once installation is complete:
 >  * start the server from the *galaxytf* directory with *sh run.sh*. The logs will be displayed.
 >  * ^c (control+c) will stop it from the console.
->  * In 23.0 that is equivalent to *.venv/bin/galaxyctl start* and *.venv/bin/galaxyctl stop*.
+>  * In 23.0, *.venv/bin/galaxyctl start* and *.venv/bin/galaxyctl stop* should work.
 >
 >
 {: .hands_on}
@@ -436,13 +455,13 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 
 ## Exploring the ToolFactory
 
-- The best way to explore what can be done is to take a look at the sample tools in the default administrator initial history.
-- Note how the various options have been configured and what kinds of scripts this could be used for in your work.
+- The best way to understand what can be done, is to look at the sample tools in the default administrator initial history.
+- As you explore the forms for each sample tool, you can see how the various options have been configured and what kinds of scripts or Conda packages this could be used for in your work.
 - The example script can be swapped out for another one known to work and additional new parameters added to suit, to extend the toy examples and create tools of use to your users.
 - Change the tool name when you do this on the newly edited form, then press `execute`
   - The new wrapper XML will appear
   - The new tool will be installed in the `Local Tools` submenu.
-- If the tool name is not changed before re-generating a tool, the original installed tool will be updated with the new configuration.
+- If the tool name is not changed before re-generating a tool, the original installed tool will be updated with the new configuration. The old job can still be rerun from the history if necessary. Galaxy can be a clumsy but not entirely useless integrated development environment.
 
 ---
 
