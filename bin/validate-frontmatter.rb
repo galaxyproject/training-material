@@ -224,8 +224,11 @@ module SchemaValidator
     errors = []
     # Topics
     materials = (Dir.glob('./metadata/*.yaml') + Dir.glob('./metadata/*.yml'))
-      .reject { |x| x =~ /schema-*/ }
-      .select{ |x| d = YAML.load_file(x); d.key? 'maintainers' or d.key? 'summary' or d.key? 'type' }
+                .grep_v(/schema-*/)
+                .select do |x|
+      d = YAML.load_file(x)
+      d.key? 'maintainers' or d.key? 'summary' or d.key? 'type'
+    end
 
     errors += materials.map { |x| [x, lint_topic(x)] }
 
