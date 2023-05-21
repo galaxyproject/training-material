@@ -107,12 +107,14 @@ mapping:
               enum:
               - CONTRIBUTORS
     edam_ontology:
-        type: str
-        pattern: /^topic_[0-9]+$/
-        description: |
-            An edam ontology id that describes the topic.
-        examples:
-            - topic_3173
+        type: seq
+        sequence:
+          - type: str
+            pattern: /^topic_[0-9]+$/
+            description: |
+                An edam ontology id that describes the resource
+            examples:
+                - topic_3173
     requirements:
         type: seq
         description: List of resources that the reader of the material should be familiar with before starting this training. The structure is identical to `follow_up_training`.

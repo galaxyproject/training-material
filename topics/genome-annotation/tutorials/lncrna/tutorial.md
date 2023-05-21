@@ -99,6 +99,7 @@ To assemble transcriptome with StringTie and annotate {lncRNAs} with FEELnc, we 
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
@@ -119,7 +120,7 @@ A reference annotation file in GTF or GFF3 format can be provided to StringTie w
 >    - *"Use a reference file to guide assembly?"*: Use reference GTF/GFF3
 >    - *"Reference file"*: Use a file from history
 >        - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `genome_annotation.gff3`
->    - *"Use Reference transcripts only?"*: `No`
+>    - *"Use Reference transcripts only?"*: `No`
 >    - *"Output files for differential expression?"*: `No additional output`
 >    - *"Output coverage file"*: `No`
 >

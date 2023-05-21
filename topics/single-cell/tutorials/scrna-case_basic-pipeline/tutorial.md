@@ -898,7 +898,7 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 
 > <question-title>Sample purity</question-title>
 >
-> Do you think we processed these samples good enough?
+> Do you think we processed these samples well enough?
 >
 > ![Sequencing depth](../../images/scrna-casestudy/wab-hba.png "Hemoglobin across clusters")
 >

@@ -1,14 +1,14 @@
 ---
 title: "New Feature: Click-to-run Workflows"
-contributors: [hexylena]
+contributions:
+  authorship: [hexylena]
 tags: [new feature, gtn]
 layout: news
+tutorial: topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/
 ---
 
 The GTN has implemented "click to run" workflows! One click, will get you into Galaxy with a workflow imported and ready to run.
 If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy buttons which you can click that will direct you straight to your Galaxy server.
-
-[Go try it now!](https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/){: class="btn btn-primary"}
 
 Clicking a single button will bring you directly into the associated Galaxy interface, with the workflow loaded into your account, and ready to run.
 

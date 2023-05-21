@@ -262,7 +262,7 @@ Let's try one more inference - this time, we'll use only healthy cells as a refe
 >
 > > <solution-title></solution-title>
 > >
-> > > > ![Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph.](../../images/bulk-music/compare_3.png "The impact of the single cell reference")
+> > ![Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph.](../../images/bulk-music/compare_3.png "The impact of the single cell reference")
 > >
 > > 1. If using a like4like inference reduced the difference between the phenotype, aligning both phenotypes to the same (healthy) reference exacerbated them - there are even fewer beta cells in the output of this analysis.
 > >

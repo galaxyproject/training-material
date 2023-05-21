@@ -287,7 +287,7 @@ We can now try to filter our input reads to an even higher standard, and see how
 > How many reads were discarded under these new filtering conditions?
 >
 >   > <solution-title></solution-title>
->   > 11517 low-quality reads were discarded
+>   > If you selected 80% of bases with 36 as quality cut-off, then 11517 reads (92%) should have been discarded, which indicates that we have gone too far with the filtering in this case.
 >   {: .solution}
 {: .question}
 

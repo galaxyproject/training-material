@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 require 'jekyll'
 require 'time'
 
 module Gtn
+  # Parse the git repo to get some facts
   module Git
     def self.cache
-      @@cache ||= Jekyll::Cache.new("Git")
+      @@cache ||= Jekyll::Cache.new('Git')
     end
 
     ##
@@ -14,8 +17,8 @@ module Gtn
     # Returns:
     # +Hash+:: A hash of git facts like the current revision, tags, etc.
     def self.discover
-      self.cache.getset('facts') do
-        self._discover
+      cache.getset('facts') do
+        _discover
       end
     end
 
@@ -23,19 +26,19 @@ module Gtn
       # Cache the git facts
 
       begin
-        git_head = File.open(File.join('.git', 'HEAD')).read.strip.split(' ')[1]
-        git_head_ref = File.open(File.join('.git', git_head)).read.strip
-      rescue
+        git_head = File.read(File.join('.git', 'HEAD')).strip.split[1]
+        git_head_ref = File.read(File.join('.git', git_head)).strip
+      rescue StandardError
         git_head_ref = 'none'
       end
 
       begin
         tags = `git tag -l`.strip.split.sort
-      rescue
+      rescue StandardError
         tags = []
-      end 
+      end
 
-      first_commit = Date.parse("2015-06-29")
+      first_commit = Date.parse('2015-06-29')
       today = Date.today
 
       {

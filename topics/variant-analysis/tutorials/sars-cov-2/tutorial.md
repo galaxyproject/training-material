@@ -79,7 +79,7 @@ So lets see how we can find its raw data in the SRA, and how we can get some of 
 
 > <hands-on-title>Find the example data in the SRA</hands-on-title>
 >
-> 1. Go to NCBI's SRA page by pointing your browser to [](https://www.ncbi.nlm.nih.gov/sra)
+> 1. Go to NCBI's SRA page by pointing your browser to [https://www.ncbi.nlm.nih.gov/sra](https://www.ncbi.nlm.nih.gov/sra)
 > 2. In the search box enter `PRJNA622837[BioProject]`
 >
 >    Oh, this finds a *lot* of samples (more than 22,000 at the time of writing)!

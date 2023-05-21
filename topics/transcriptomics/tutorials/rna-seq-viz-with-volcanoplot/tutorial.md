@@ -61,6 +61,7 @@ We will use two files for this analysis:
 > 1. Create a new history for this RNA-seq exercise e.g. `Volcano plot`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the differentially results table.
@@ -70,6 +71,7 @@ We will use two files for this analysis:
 >    - Option 2: From [Zenodo](https://zenodo.org/record/2529117)
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    - You can paste the links below into the **Paste/Fetch** box:

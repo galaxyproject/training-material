@@ -60,6 +60,7 @@ We will annotate a small set of **protein sequences**. These sequences were pred
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}

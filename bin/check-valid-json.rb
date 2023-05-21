@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'json'
 
-ARGV.each{|fn|
-  begin
-    JSON.parse(File.open(fn, "r").read)
-  rescue
-    puts "#{fn}:0:0:e: This notebook is invalid"
-  end
-}
+ARGV.each do |fn|
+  JSON.parse(File.read(fn))
+rescue StandardError
+  puts "#{fn}:0:0:e: This notebook is invalid"
+end

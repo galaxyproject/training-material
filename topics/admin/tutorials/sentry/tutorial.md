@@ -53,7 +53,6 @@ To proceed from here it is expected that:
 >
 > 1. You have set up a working Galaxy instance as described in the [ansible-galaxy](../ansible-galaxy/tutorial.html) tutorial.
 >
-
 {: .comment}
 
 # Installing and Configuring
@@ -354,7 +353,7 @@ In addition to sending logging errors to Sentry you can also collect failing too
 >    {: data-commit="Configure error reporting"}
 >
 > 2. Create a testing tool in `files/galaxy/tools/job_properties.xml`.
-.
+>
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
@@ -481,7 +480,6 @@ To generate a tool error, run the job properties testing tool and set the `failb
 
 > <hands-on-title>Open the Galaxy Project in Sentry</hands-on-title>
 > 1. Go to your Sentry instance and click on issues. You should see an issue for the tool run error.
-
 {: .hands_on }
 
 ## Reporting errors from the Pulsar server
@@ -518,7 +516,7 @@ It is also possible to report errors from the Pulsar server. You can either use 
 >    ```
 >    {: data-commit="Configure pulsar for error reporting"}
 >
-> > 4. Run the pulsar playbook.
+> 4. Run the pulsar playbook.
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash

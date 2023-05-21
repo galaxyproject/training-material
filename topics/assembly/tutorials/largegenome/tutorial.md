@@ -25,6 +25,8 @@ contributors:
 
 # Introduction
 
+*Note: We recommend running this tutorial on either the Galaxy Europe or Galaxy Australia servers. Other servers (such as Galaxy main) have not yet been configured fully for all the tools in this analysis.*
+
 ## What is genome assembly?
 
 A genome is a representation of the set of DNA in an organism, such as the set of chromosomes. When the DNA is extracted from the sample, it is broken up into fragments much smaller than the lengths of DNA in the chromosomes. After being sequenced, these fragments (and their copies) are called sequencing reads. To assemble the genome, we need to join the reads back into, ideally, chromosome-sized lengths.
@@ -124,6 +126,7 @@ We are also using a reference genome *Arabidopsis thaliana* for a later comparis
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/record/7055935) or a data library (ask your instructor):
@@ -140,7 +143,11 @@ We are also using a reference genome *Arabidopsis thaliana* for a later comparis
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>    
+> 3. Check that the datatypes for the three files of sequencing reads are `fastq.gz`, not `fastqsanger.gz` and change datatype if needed.
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 {: .hands_on}
 
 * This tutorial uses these input files and gives some examples from the results.
@@ -409,7 +416,7 @@ Extreme simplification of genome assembly:
 
 Genome assembly algorithms use different approaches to work with the complexities of large sequencing read data sets, large genomes, different sequencing error rates, and computational resources. Many use graph-based algorithms.  For more about genome assembly algorithms see [these tutorials by Ben Langmead](https://langmead-lab.org/teaching-materials/).
 
-### Which assembly tool and approach to use?
+## Which assembly tool and approach to use?
 
 Here, we will use the assembly tool called Flye to assemble the long reads. This is fast and deals well with the high error rate. Then, we will polish (correct) the assembly using information from the long reads (in their unassembled state), as well as the more accurate short Illumina reads.
 
@@ -417,7 +424,7 @@ There are many other approaches and combinations of using short and long reads, 
 
 For more about the differences between current assembly and polishing tools see {% cite Chen2021%} and {% cite McCartney2021 %}.
 
-#### Assembly with Flye workflow
+## Assembly with Flye workflow
 
 
 What it does: Assembles long reads with the tool Flye
@@ -471,7 +478,7 @@ Options
 
 
 
-#### Assembly results
+## Assembly results
 
 The assembled contigs are in the "Flye assembly on data X (consensus)" (X is a number that will vary depending on where it sits in your history).  
 Open the Quast tabular report to see the assembly statistics:
@@ -490,11 +497,11 @@ View the Bandage image of the assembly graph:
 
 As this is a subsampled data set, it is not surprising that most of the contigs are unjoined. The joined contigs at the top left are likely to be part of the mitochondrial genome as these reads were probably over-represented in our subsampled data set.
 
-#### What about centromeres and telomeres?
+### What about centromeres and telomeres?
 
 Some genomic areas such as centromeres, telomeres, and ribosomal DNA arrays, are much harder to assemble. These are long stretches of very similar repeats. With improved sequencing accuracy, length, and technologies (particularly long-range scaffolding), these may soon be much easier to assemble. The latest human genome assembly has a good demonstration of the techniques used for this.   See {% cite Nurk2021 %}, and in particular, Figure 2: Bandage graphs of the human genome chromosomes, with the grey shading showing centromeric regions. 
 
-#### What about haplotigs?
+### What about haplotigs?
 
 Although our sample may be diploid, with pairs of chromosomes, the resulting assembly is often a haploid (or "collapsed") assembly. This is not the sequence of one of the chromosomes, but a mix of the two. 
 
@@ -685,7 +692,7 @@ Options:
 {: .hands_on}
 
 
-### Assessment results
+## Assessment results
 
 The output is a set of Quast and Busco reports. 
 

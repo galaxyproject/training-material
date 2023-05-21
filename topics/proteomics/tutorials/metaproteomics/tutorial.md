@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Metaproteomics tutorial"
-edam_ontology: "topic_0121"
+edam_ontology: ["topic_0121"]
 zenodo_link: "https://doi.org/10.5281/zenodo.839701"
 questions:
   - "How can I match metaproteomic mass spectrometry data to peptide sequences derived from shotgun metagenomic data?"
@@ -64,6 +64,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.

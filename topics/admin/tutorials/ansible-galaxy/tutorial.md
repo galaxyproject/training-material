@@ -44,6 +44,11 @@ requirements:
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 20.04 - 22.04."
 abbreviations:
     DVCS: Distributed Version Control System
+
+edam_ontology:
+- topic_3489 # Database Management
+- topic_0605 # Informatics
+- topic_3071 # Data Management
 ---
 
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
@@ -1779,7 +1784,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    > Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Consumed 3.381s CPU time.
 >    > ```
 >    >
->    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect.
+>    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect. You might observe a warning that `Dynamic handlers are configured in Gravity but Galaxy is not configured to assign jobs to handlers dynamically`. We will address this [below](#job-configuration), and you can disregard it for now.
 >    {: .tip}
 >
 > 6. Some things to note:
@@ -1814,7 +1819,7 @@ With this we have:
 - PostgreSQL running
 - Galaxy running (managed by Gravity + systemd)
 
-Although Gunicorn can server HTTP for us directly, a reverse proxy in front of Gunicorn can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
+Although Gunicorn can serve HTTP for us directly, a reverse proxy in front of Gunicorn can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
 
 For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EKS). It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.
 
