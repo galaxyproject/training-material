@@ -204,12 +204,6 @@ automated code generator in a tailored, readily deployed appliance.
 >
 {: .hands_on}
 
-
-The trivial `Hello World!` tool example is readily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter.
-For example, the planemo `lint` tool example (described below) can be derived by adding a history toolshed archive as input, plus a few more lines of bash script.
-In practice, it's a flexible basis for generating many simple tools.
-
-
 ## ToolFactory tips and tricks illustrated by some of the examples.
 
 #### Before you begin a new tool
