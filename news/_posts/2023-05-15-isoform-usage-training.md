@@ -7,7 +7,7 @@ contributions:
 cover: news/images/isoform_usage_post.jpg
 coveralt: "Schematic of an isoform switch and detection pipeline. Data is annotated and a prediction is made for isoform switch consequences"
 tags: [new tutorial]
-tutorial: topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.md
+tutorial: topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html
 ---
 
 The GTN hosts a new training for analyzing alternative splicing at genome-wide scale!
