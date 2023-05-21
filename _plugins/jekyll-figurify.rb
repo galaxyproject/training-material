@@ -24,7 +24,7 @@ module Jekyll
     private
 
     def figurify(page, site)
-      num = 0
+      num_figure = 0
       return if page.content.nil?
 
       tuto_dir = File.dirname(page.path)
@@ -37,7 +37,7 @@ module Jekyll
         if skip_titles?(title) || (title.to_s.empty? && skip_empty?)
           Regexp.last_match
         else
-          num += 1
+          num_figure += 1
 
           alt.gsub!(/"/, '&quot;')
           if alt.strip.length.positive? && !(alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?'))
@@ -48,22 +48,37 @@ module Jekyll
 
           prefix = figcaption_prefix(page, site)
 
-          "<figure id=\"figure-#{num}\"><img src=\"#{url}\" alt=\"#{alt}\" #{style} #{dimensions} loading=\"lazy\">" \
-            "<figcaption><span class=\"figcaption-prefix\"><strong>#{prefix}#{num}</strong>:</span> #{title}" \
-            '</figcaption></figure>'
+          %(
+            <figure id="figure-#{num_figure}">
+              <img src="#{url}" alt="#{alt}" #{style} #{dimensions} loading="lazy">
+              <figcaption>
+                <span class="figcaption-prefix"><strong>#{prefix}#{num_figure}</strong>:</span> #{title}
+              </figcaption>
+            </figure>
+          ).split("\n").map(&:strip).join
         end
       end
 
+      num_image = 0
       page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)?\)({:(.*)})?/) do
         alt = ::Regexp.last_match(1)
         url = ::Regexp.last_match(2)
         style = ::Regexp.last_match(4)
 
+        dimensions = Gtn::Images.html_image_dimensions(tuto_dir, url)
+
         alt.gsub!(/"/, '&quot;')
         if alt.strip.length.positive? && !(alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?'))
           alt = "#{alt}. "
         end
-        "<img src=\"#{url}\" alt=\"#{alt}\" #{style} loading=\"lazy\">"
+
+        num_image += 1
+
+        %(
+          <figure id="image-#{num_image}">
+            <img src="#{url}" alt="#{alt}" #{style} #{dimensions} loading="lazy">
+          </figure>
+        ).split("\n").map(&:strip).join
       end
     end
 

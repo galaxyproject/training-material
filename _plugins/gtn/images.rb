@@ -42,7 +42,7 @@ module Gtn
       cache.getset(path) do
         FastImage.size(path)
       rescue StandardError
-        puts "Could not resolve size of #{path}"
+        Jekyll.logger.info "[GTN/Images] Could not resolve size of #{path}"
       end
     end
   end
