@@ -10,7 +10,6 @@
 	}).addTo(map);
 
 	function onEachFeature(feature, layer) {
-		console.log(feature.properties)
 		let orcid = "";
 		if(feature.properties.orcid !== null && feature.properties.orcid !== undefined){
 			orcid = `<a href="https://orcid.org/${feature.properties.orcid}"><img src="{% link assets/images/orcid.png %}" alt="orcid logo"/></a>`
@@ -58,8 +57,6 @@
 		.then(response => response.json())
 		.then(data => {
 			// Do something with the data
-			console.log(data);
-
 			const trainerLayer = L.geoJSON([data], {
 				style(feature) {
 					return feature.properties && feature.properties.style;
