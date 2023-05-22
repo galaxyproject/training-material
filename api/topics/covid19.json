@@ -1028,56 +1028,39 @@
       "layout": "tutorial_hands_on",
       "title": "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis",
       "subtopic": "one-health",
-      "zenodo_link": "http://zenodo.org/record/3906454",
       "questions": [
-        "Learn how to get and use data from the Sequence Read Archive in Galaxy."
+        "How can you download public sequencing data deposited in the NCBI Sequence Read Archive (SRA) into a Galaxy history for analysis?",
+        "How can you process a batch of sequencing data from several samples efficiently/in parallel with Galaxy?",
+        "Starting from raw sequenced reads of whole-genome sequenced samples of SARS-CoV-2, how can you identify mutations in the genomes of these samples?"
       ],
       "objectives": [
-        "Understand how Galaxy and the Sequence Read Archive interact.",
-        "Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy."
+        "Understand how Galaxy and the Sequence Read Archive interact",
+        "Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy",
+        "Understand how collections enable processing of sequencing data in batches",
+        "Understand the analysis steps required to identify and annotate genomic mutations from sequencing data of SARS-CoV-2 samples"
       ],
-      "time_estimation": "45m",
+      "time_estimation": "1H",
       "key_points": [
-        "Sequence data in the SRA can be directly imported into Galaxy"
+        "Sequence data in the SRA can be directly imported into Galaxy",
+        "Collections enable efficient/parallel processing of sequence data from whole batches of samples",
+        "Genomic mutations in SARS-CoV-2 viral isolates can be identified through a straightforward pipeline involving sequenced reads preprocessing, mapping to the SARS-CoV-2 reference genome, postprocessing of mapping results, and variant calling"
       ],
       "tags": [
         "covid19",
-        "virology"
+        "virology",
+        "one-health"
       ],
-      "contributors": [
-        {
-          "name": "Marius van den Beek",
-          "joined": "2018-06",
-          "id": "mvdbeek",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mvdbeek.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/"
-        },
-        {
-          "name": "Dave Clements",
-          "joined": "2017-09",
-          "orcid": "0000-0002-9970-6657",
-          "id": "tnabtaf",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/tnabtaf.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/"
-        },
-        {
-          "name": "Daniel Blankenberg",
-          "twitter": "dblankenberg",
-          "orcid": "0000-0002-6833-9049",
-          "joined": "2018-07",
-          "id": "blankenberg",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
-        },
-        {
-          "name": "Anton Nekrutenko",
-          "email": "anton@nekrut.org",
-          "joined": "2017-09",
-          "id": "nekrut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
-        }
-      ],
+      "contributions": {
+        "authorship": [
+          "mvdbeek",
+          "tnabtaf",
+          "blankenberg",
+          "nekrut"
+        ],
+        "editing": [
+          "wm75"
+        ]
+      },
       "url": "/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html",
       "topic_name": "variant-analysis",
       "tutorial_name": "sars-cov-2",
@@ -1140,6 +1123,9 @@
       ],
       "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2/tutorial.json",
       "tools": [
+        "Filter1",
+        "Grep1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
         "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
         "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2",
         "toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2",
@@ -1150,20 +1136,11 @@
         "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19",
         "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.7+galaxy1"
+        "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.7+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/3.0.3+galaxy0"
       ],
       "supported_servers": {
         "exact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
@@ -1176,6 +1153,16 @@
           }
         ],
         "inexact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
@@ -1199,6 +1186,13 @@
         "install_repository_dependencies": true,
         "install_resolver_dependencies": true,
         "tools": [
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
           {
             "name": "bwa",
             "owner": "devteam",
@@ -1275,10 +1269,17 @@
             "revisions": "494b2ec08162",
             "tool_panel_section_label": "Variant Analysis",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "sra_tools",
+            "owner": "iuc",
+            "revisions": "4df8de2d0e48",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bwa\n  owner: devteam\n  revisions: 3fe632431b68\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: picard\n  owner: devteam\n  revisions: a1f0b3f4b781\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_stats\n  owner: devteam\n  revisions: 145f6d74ff5e\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastp\n  owner: iuc\n  revisions: dbf9c561ef29\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: lofreq_call\n  owner: iuc\n  revisions: 65432c3abf6c\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: lofreq_indelqual\n  owner: iuc\n  revisions: 426d707dfc47\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: lofreq_viterbi\n  owner: iuc\n  revisions: aa35ee7f3ab2\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: bf675f34b056\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff_sars_cov_2\n  owner: iuc\n  revisions: 2a3a00c1fa0a\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpsift\n  owner: iuc\n  revisions: 5fab4f81391d\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sra_tools\n  owner: iuc\n  revisions: 494b2ec08162\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: 3fe632431b68\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: picard\n  owner: devteam\n  revisions: a1f0b3f4b781\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_stats\n  owner: devteam\n  revisions: 145f6d74ff5e\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastp\n  owner: iuc\n  revisions: dbf9c561ef29\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: lofreq_call\n  owner: iuc\n  revisions: 65432c3abf6c\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: lofreq_indelqual\n  owner: iuc\n  revisions: 426d707dfc47\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: lofreq_viterbi\n  owner: iuc\n  revisions: aa35ee7f3ab2\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: bf675f34b056\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff_sars_cov_2\n  owner: iuc\n  revisions: 2a3a00c1fa0a\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpsift\n  owner: iuc\n  revisions: 5fab4f81391d\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sra_tools\n  owner: iuc\n  revisions: 494b2ec08162\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sra_tools\n  owner: iuc\n  revisions: 4df8de2d0e48\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -1291,6 +1292,49 @@
         "video": false
       },
       "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Marius van den Beek",
+          "joined": "2018-06",
+          "id": "mvdbeek",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mvdbeek.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/"
+        },
+        {
+          "name": "Dave Clements",
+          "joined": "2017-09",
+          "orcid": "0000-0002-9970-6657",
+          "id": "tnabtaf",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/tnabtaf.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/"
+        },
+        {
+          "name": "Daniel Blankenberg",
+          "twitter": "dblankenberg",
+          "orcid": "0000-0002-6833-9049",
+          "joined": "2018-07",
+          "id": "blankenberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
+        },
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
+        },
+        {
+          "name": "Wolfgang Maier",
+          "orcid": "0000-0002-9464-6640",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+        }
+      ],
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2/tutorial.json"

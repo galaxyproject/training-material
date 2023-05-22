@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@aa21e9d7c0b71c76be988a745f64096f29ff644e",
+  release: "galaxy-training-network@799aa56382af7fe2eec6c2fc65125c95d3e8e019",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -46,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
+<meta name="DC.date" content="2023-05-21 22:15:49 +0000">
 <meta name="DC.creator" content="Marius van den Beek">
 <meta name="DC.creator" content="Dave Clements">
 <meta name="DC.creator" content="Daniel Blankenberg">
@@ -90,7 +90,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-17 17:21:19 +0000",
+  "dateModified": "2023-05-21 22:15:49 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis",
   "interactivityType": "mixed",
@@ -146,10 +146,10 @@ Sentry.init({
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on for 'From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis' tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html",
-  "timeRequired": "PT45M",
-  "teaches": "Understand how Galaxy and the Sequence Read Archive interact.\n - Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy.",
-  "keywords": "variant-analysis, covid19, virology",
-  "description": "The questions this  addresses are:\n - Learn how to get and use data from the Sequence Read Archive in Galaxy.\n\n\nThe objectives are:\n - Understand how Galaxy and the Sequence Read Archive interact.\n - Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy.\n\n",
+  "timeRequired": "PT1H",
+  "teaches": "Understand how Galaxy and the Sequence Read Archive interact\n - Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy\n - Understand how collections enable processing of sequencing data in batches\n - Understand the analysis steps required to identify and annotate genomic mutations from sequencing data of SARS-CoV-2 samples",
+  "keywords": "variant-analysis, covid19, virology, one-health",
+  "description": "The questions this  addresses are:\n - How can you download public sequencing data deposited in the NCBI Sequence Read Archive (SRA) into a Galaxy history for analysis?\n - How can you process a batch of sequencing data from several samples efficiently/in parallel with Galaxy?\n - Starting from raw sequenced reads of whole-genome sequenced samples of SARS-CoV-2, how can you identify mutations in the genomes of these samples?\n\n\nThe objectives are:\n - Understand how Galaxy and the Sequence Read Archive interact\n - Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy\n - Understand how collections enable processing of sequencing data in batches\n - Understand the analysis steps required to identify and annotate genomic mutations from sequencing data of SARS-CoV-2 samples\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -344,6 +344,10 @@ Sentry.init({
     {
       "@type": "Thing",
       "name": "virology"
+    },
+    {
+      "@type": "Thing",
+      "name": "one-health"
     }
   ],
   "abstract": "# Introduction"
@@ -541,7 +545,36 @@ Sentry.init({
     <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=27" alt="Avatar">Marius van den Beek</a><a href="/training-material/hall-of-fame/tnabtaf/" class="contributor-badge contributor-tnabtaf"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/tnabtaf?s=27" alt="Avatar">Dave Clements</a><a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge contributor-blankenberg"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/blankenberg?s=27" alt="Avatar">Daniel Blankenberg</a><a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=27" alt="Avatar">Anton Nekrutenko</a>
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=27" alt="Avatar">Marius van den Beek</a><a href="/training-material/hall-of-fame/tnabtaf/" class="contributor-badge contributor-tnabtaf"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/tnabtaf?s=27" alt="Avatar">Dave Clements</a><a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge contributor-blankenberg"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/blankenberg?s=27" alt="Avatar">Daniel Blankenberg</a><a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=27" alt="Avatar">Anton Nekrutenko</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/wm75?s=27" alt="Avatar">Wolfgang Maier</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
 	</div>
 
 </div>
@@ -555,7 +588,13 @@ Sentry.init({
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
         
-        <li><p>Learn how to get and use data from the Sequence Read Archive in Galaxy.</p>
+        <li><p>How can you download public sequencing data deposited in the NCBI Sequence Read Archive (SRA) into a Galaxy history for analysis?</p>
+</li>
+        
+        <li><p>How can you process a batch of sequencing data from several samples efficiently/in parallel with Galaxy?</p>
+</li>
+        
+        <li><p>Starting from raw sequenced reads of whole-genome sequenced samples of SARS-CoV-2, how can you identify mutations in the genomes of these samples?</p>
 </li>
         
         </ul>
@@ -563,10 +602,16 @@ Sentry.init({
         <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
         <ul>
         
-        <li><p>Understand how Galaxy and the Sequence Read Archive interact.</p>
+        <li><p>Understand how Galaxy and the Sequence Read Archive interact</p>
 </li>
         
-        <li><p>Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy.</p>
+        <li><p>Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy</p>
+</li>
+        
+        <li><p>Understand how collections enable processing of sequencing data in batches</p>
+</li>
+        
+        <li><p>Understand the analysis steps required to identify and annotate genomic mutations from sequencing data of SARS-CoV-2 samples</p>
 </li>
         
         </ul>
@@ -648,7 +693,7 @@ Sentry.init({
         
 
         
-        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 45 minutes</div>
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
         
 
         
@@ -661,15 +706,6 @@ Sentry.init({
         <ul class="supporting_material">
             
 
-            
-                <li class="btn btn-default supporting_material">
-
-
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="http://zenodo.org/record/3906454">
-    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
-</a>
-
-</li>
             
 
             
@@ -763,12 +799,6 @@ Sentry.init({
 
     
 	<li>
-		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
-			UseGalaxy.be <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
-		</a>
-	</li>
-    
-	<li>
 		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
 			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
 		</a>
@@ -781,14 +811,20 @@ Sentry.init({
 	</li>
     
     
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
 	<li>
 		<a class="dropdown-item" href="https://galaxy.genouest.org" title="">
-			Galaxy@GenOuest <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+			Galaxy@GenOuest
 		</a>
 	</li>
     
-	<li class="dropdown-header">
-		<b>Possibly Working</b>
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be
+		</a>
 	</li>
     
 	<li>
@@ -827,7 +863,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 21, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
@@ -851,362 +887,282 @@ Sentry.init({
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
-<p>The aim of this tutorial is to introduce you to the processing of next generation sequencing data in Galaxy.  This tutorial uses a COVID-19 variant calling from Illumina data, but it isn’t about variant calling <em>per se</em>.</p>
+<p>The aim of this tutorial is twofold:</p>
 
-<!--
-SRA, like many data sources is Galaxy aware.  It has support for sending information directly to Galaxy, and it tracks which Galaxy instance it was invoked from.  Getting sequence data from SRA is a multi-step process.  This tutorial explains each step in the process and then demonstrates a particular example of how to use SRA data in Galaxy.
--->
+<ol>
+  <li>It introduces general patterns of working with high-throughput sequencing data in Galaxy,</li>
+  <li>It uses SARS-CoV-2 sequencing data analysis as a concrete example of how to identify genomic mutations from high-throughput sequencing data for a batch of viral isolates in Galaxy.</li>
+</ol>
 
-<p>At the completion of this tutorial you will know:</p>
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
-<!--
+  <p>In this tutorial, we will cover:</p>
 
-* how to go from Galaxy to SRA.
-* a basic understanding of how to select data in SRA
-  * see the [Search in SRA documentation](https://www.ncbi.nlm.nih.gov/sra/docs/srasearch/) from the SRA team for a fuller introduction to this topic
-* how to send SRA *metadata* (such as accession numbers) to Galaxy
-* how to use that SRA metadata to import *sequence* data from SRA into Galaxy.
-* how to run a simple variant analysis in Galaxy using that data
-  * See these [variant analysis tutorials](/training-material/topics/variant-analysis) for a more in-depth explanation of variant analysis.
-
--->
-
-<ul>
-  <li>How to find data in SRA and transfer this information to Galaxy</li>
-  <li>How to perform basic NGS data processing in Galaxy including:
-    <ul>
-      <li>Quality Control (QC) of Illumina data</li>
-      <li>Mapping</li>
-      <li>Removal of duplicates</li>
-      <li>Variant calling with <code class="language-plaintext highlighter-rouge">lofreq</code></li>
-      <li>Variant annotation</li>
-    </ul>
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#prepare-analysis-history-and-data" id="markdown-toc-prepare-analysis-history-and-data">Prepare analysis history and data</a>    <ol>
+      <li><a href="#create-a-new-history-for-this-analysis" id="markdown-toc-create-a-new-history-for-this-analysis">Create a new history for this analysis</a></li>
+      <li><a href="#find-obtain-and-filter-information-about-public-sequencing-data" id="markdown-toc-find-obtain-and-filter-information-about-public-sequencing-data">Find, obtain and filter information about public sequencing data</a></li>
+      <li><a href="#retrieve-selected-sequencing-data-from-the-sra" id="markdown-toc-retrieve-selected-sequencing-data-from-the-sra">Retrieve selected sequencing data from the SRA</a></li>
+      <li><a href="#get-the-reference-genome-data" id="markdown-toc-get-the-reference-genome-data">Get the reference genome data</a></li>
+    </ol>
   </li>
-  <li>Using datasets collections</li>
-</ul>
+  <li><a href="#identification-of-mutations-in-the-batch-of-sars-cov-2-sequencing-data" id="markdown-toc-identification-of-mutations-in-the-batch-of-sars-cov-2-sequencing-data">Identification of mutations in the batch of SARS-Cov-2 sequencing data</a>    <ol>
+      <li><a href="#adapter-trimming-with-fastp" id="markdown-toc-adapter-trimming-with-fastp">Adapter trimming with <strong>fastp</strong></a></li>
+      <li><a href="#alignment-with-map-with-bwa-mem" id="markdown-toc-alignment-with-map-with-bwa-mem">Alignment with <strong>Map with BWA-MEM</strong></a></li>
+      <li><a href="#remove-duplicates-with-markduplicates" id="markdown-toc-remove-duplicates-with-markduplicates">Remove duplicates with <strong>MarkDuplicates</strong></a></li>
+      <li><a href="#generate-alignment-statistics-with-samtools-stats" id="markdown-toc-generate-alignment-statistics-with-samtools-stats">Generate alignment statistics with <strong>Samtools stats</strong></a></li>
+      <li><a href="#realign-reads-with-lofreq-viterbi" id="markdown-toc-realign-reads-with-lofreq-viterbi"><strong>Realign reads</strong> with lofreq viterbi</a></li>
+      <li><a href="#add-indel-qualities-with-lofreq-insert-indel-qualities" id="markdown-toc-add-indel-qualities-with-lofreq-insert-indel-qualities">Add indel qualities with lofreq <strong>Insert indel qualities</strong></a></li>
+      <li><a href="#call-variants-using-lofreq-call-variants" id="markdown-toc-call-variants-using-lofreq-call-variants">Call Variants using lofreq <strong>Call variants</strong></a></li>
+      <li><a href="#annotate-variant-effects-with-snpeff-eff" id="markdown-toc-annotate-variant-effects-with-snpeff-eff">Annotate variant effects with <strong>SnpEff eff:</strong></a></li>
+      <li><a href="#create-table-of-variants-using-snpsift-extract-fields" id="markdown-toc-create-table-of-variants-using-snpsift-extract-fields">Create table of variants using <strong>SnpSift Extract Fields</strong></a></li>
+      <li><a href="#summarize-data-with-multiqc" id="markdown-toc-summarize-data-with-multiqc">Summarize data with <strong>MultiQC</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
 
-<!--
-> <div class="box-title agenda-title" id="agenda">Agenda</div>
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
+</blockquote>
 
-## Two paths through this tutorial
+<h1 id="prepare-analysis-history-and-data">Prepare analysis history and data</h1>
 
-We created twoi trajectories that you can follow through this tutorial.
+<h2 id="create-a-new-history-for-this-analysis">Create a new history for this analysis</h2>
 
-1. **Trajectory 1** - start with NCBI's SRA and search for available accessions &rarr; Start [in the SRA section](#the-sequence-read-archive)
-2. **Trajectory 2** - bypass NCBI's SRA and start with Galaxy directly. &rarr; Start [in the Galaxy section](#back-in-galaxy)
-
-We recommend beginning with **Trajectory 2**.
-# The Sequence Read Archive
-
-The [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) is the primary archive of *unassembled reads*  for the [US National Institutes of Health (NIH)](https://www.ncbi.nlm.nih.gov/).  SRA is a great place to get the sequencing data that underlie publications and studies.
-
-This tutorial covers how to get sequence data from SRA into Galaxy using a direct connection between the two.
-
-> <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
->
-> You will also hear SRA referred to as the *Short Read Archive*, its original name.
->
-{: .comment}
-
-
-## Accessing SRA
-
-SRA can be reached either directly through it's website, or through the tool panel on Galaxy.
-
-> <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
->
-> Initially the tool panel option for accessing SRA exists only on the [usegalaxy.org server](https://usegalaxy.org/).  Support for the direct connection to SRA will be included in the 20.05 release of Galaxy
-{: .comment}
-
-
-> <div class="box-title hands-on-title" id="hands-on-explore-sra-entrez"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Explore SRA Entrez</div>
->
-> 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
-> 1. If your history is not already empty, than start a new history (see [galaxy interface tutorial](/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) for more on Galaxy histories)
-> 1. **Click** `Get Data` at the top of the tool panel.
-> 1. **Click** `SRA Server` in the list of tools shown under `Get Data`.
->    This takes you the [Sequence Read Archive home page](https://www.ncbi.nlm.nih.gov/sra) -- you can also start directly from the SRA.  A search box is shown at the top of the page.  Try searching for something you are interested in, such as `dolphin` or `kidney` or `dolphin kidney` and then **click** the  `Search` button.
->
->    This returns a list of *SRA Experiments* that match your search string.  SRA Experiments, also know as *SRX entries*, contain sequence data from a particular experiment, as well as an explanation of the experiment itself and any other related data. You can explore the returned experiments by clicking on their name.  See [Understanding SRA Search Results](https://www.ncbi.nlm.nih.gov/books/NBK56913/) in the [SRA Knowledge Base](https://www.ncbi.nlm.nih.gov/books/n/helpsrakb/) for more.
->
->    When you enter text in the SRA search box, you are using [SRA's Entrez search interface](https://www.ncbi.nlm.nih.gov/sra/docs/srasearch/).  Entrez supports both simple text searches, and very precise searches that check specific metadata and use arbitrarily complex logical expressions.  Entrez allows you to scale up your searches from basic to advanced as you narrow your searches.  The syntax of advanced searches can seem daunting, but SRA provides a graphical [Advanced Search Builder](https://www.ncbi.nlm.nih.gov/sra/advanced/) to generate the specific syntax.  And, as we shall see below, the SRA Run Selector provides an even friendlier user interface for narrowing our selected data.
->
->    Play around with the SRA Entrez interface, including the advanced query builder, to see if you can identify a set of SRA experiments that are relevant to one of your research areas.
-{: .hands_on}
-
-
-> <div class="box-title hands-on-title" id="hands-on-generate-list-of-matching-experiments-using-entrez"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate list of matching experiments using Entrez</div>
->
-> Now that you have a basic familiarity with SRA Entrez, let's find the sequences used in this tutorial.
->
-> 1. If you aren't already there, **navigate** back to the [Sequence Read Archive search page](https://www.ncbi.nlm.nih.gov/sra)
-> 1. **Clear** any search text from the search box.
-> 1. **Type** `sars-cov-2` in the search box and **click** `Search`.
->    This returns a longish list of SRA experiments that match our search, and that list is far too long to use in a tutorial exercise.  At this point we could use the advanced Entrez query builder we learned about above.
->    But we won't.  Instead lets send the *too long for a tutorial* list results we have to the SRA Run Selector, and use its friendlier interface to narrow our results.
->
-> <img src="../../images/sra_entrez.png" alt="sra entrez. "  loading="lazy">
-{: .hands_on}
-
-
-> <div class="box-title hands-on-title" id="hands-on-go-from-entrez-to-sra-run-selector"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Go from Entrez to SRA Run Selector</div>
->
-> View results as an expanded interactive table using the RunSelector.
->
-> 1. Click <u>Send results to Run selector</u>, which appears in a box at the top of the search results.
->
-> <img src="../../images/sra_entrez_result.png" alt="sra entrez result. "  loading="lazy">
->
-> > <div class="box-title tip-title" id="tip-what-if-you-don-t-see-the-run-selector-link"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-if-you-don-t-see-the-run-selector-link" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What if you don't see the Run Selector Link?<span class="fold-unfold fa fa-minus-square"></span></button></div>
-> >
-> > You may have noticed this text earlier when you were exploring Entrez search.  This text only appears some of the time, when the number of search results falls within a fairly broad window.  You won't see it if you only have a few results, and you won't see it if you have more results than the Run Selector can accept.
-> >
-> > *You need to get to Run Selector to send your results to Galaxy.* What if you don't have enough results to trigger this link being shown?  In that case you call get to the Run Selector by **clicking** on the `Send to` pulldown menu at the top right of the results panel.  To get to Run Selector, **select** `Run Selector` and then **click** the `Go` button.
-> > <img src="../../images/sra_entrez_send_to.png" alt="sra entrez send to. "  loading="lazy">
-> {: .tip}
->
->
-> 1. **Click** `Send results to Run selector` at the top of the search results panel. (If you don't see this link, then see the comment directly above.)
-{: .hands_on}
-
-## SRA Run Selector
-
-We learned earlier how to narrow our search results by using Entrez's advanced syntax.  However, we didn't take advantage of that power when we were in Entrez.  Instead we used a simple search and then sent all the results to the Run Selector.  We don't yet have the (short) list of results we want to run analysis on. *What are we doing?*
-
-We are using Entrez and the Run Selector how they are designed to be used:
-
- * Use the Entrez interface to narrow your results down to a size that the Run Selector can consume.
- * Send those Entrez results to the SRA Run Selector
- * Use the Run Selector's much friendlier interface to
-    1. More easily understand the data we have
-    1. Narrow those results using that knowledge.
-
-
-> <div class="box-title comment-title" id="comment-run-selector-is-both-more-and-less-than-entrez"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Run Selector is both more and less than Entrez</div>
->
-> Run Selector can do most, but not all of what Entrez search syntax can do.  Run selector uses *faceted search* technology which is easy to use, and powerful, but which has inherent limits.  Specifically, Entrez will work better when searching on attributes that have tens, hundreds, or thousands of different values.  Run Selector will work better searching attributes with fewer than 20 different values.  Fortunately, that describes most searches.
-{: .comment}
-
-
-The Run Selector window is divided into several panels:
-
-* **`Filters List`**: In the upper left hand corner.  This is where we will refine our search.
-* **`Select`**: A summary of what was initially passed to Run Selector, and how much of that we have selected so far.  (And so far, we haven't selected any of it.)  Also note the tantalizing, but still grayed out, `Galaxy` button.
-* **`Found x Items`** Initially, this is the list of items sent to Run Selector from Entrez.  This list will shrink as we apply filters to it.
-<img src="../../images/sra_run_selector.png" alt="sra run selector. "  loading="lazy">
-
-> <div class="box-title comment-title" id="comment-why-did-the-number-of-found-items-i-go-up-i"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why did the number of found items <i>go up?</i></div>
->
-> Recall that the Entrez interface lists SRA experiments (SRX entries).  Run Selector lists *runs* &mdash; sequencing datasets &mdash; and there are *one or more* runs per experiment. We have the same data as before, we are now just seeing it in finer detail.
-{: .comment}
-
-The `Filters List` in the upper left shows columns in our results that have either continuous numerical values, or 10 or less (you can change this number) distinct values in them.  **Scroll** down through the list select a few of the filters.  When a filter is selected, a *values* box appears below, listing options for this filter, and the number of runs with each option.  These values / options are pulled from the dataset metadata.  Try **selecting** a few interesting sounding filters and then **select** one or more options for each filter. Try **unselecting** options and filters. As you do this, the number of found results will decrease or increase.
-
-> <div class="box-title tip-title" id="tip-use-filters-to-better-understand-the-data"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-use-filters-to-better-understand-the-data" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Use Filters to better understand the data<span class="fold-unfold fa fa-minus-square"></span></button></div>
->
-> Filters are how you narrow the datasets under consideration for sending to Galaxy, but they are also an excellent way to understand your data:
-> First, selecting a filter is an easy way to see the range of values in a column.  You may not be able to [find documentation on what the `sirs_outcome` column means](https://www.google.com/search?q=sra+sirs_outcome), but you can possibly figure it out by seeing what values are in it.
-> Second, you can explore how different columns relate to each other.  Is there a relationship between `sirs_outcome` values and `disease_stage` values?
-{: .tip}
-
-
-> <div class="box-title hands-on-title" id="hands-on-narrow-your-results-using-run-selector"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Narrow your results using Run Selector</div>
->
-> 1. If you have any filters turned on, **unselect** them.
->     Once you have done this, there won't be any *values* boxes appearing below the `Filters List`.
-> 2. **Copy and paste** this search string into the `Found Items` search box.
->     ```
->      SRR11772204 OR SRR11597145 OR SRR11667145
->     ```
->     This hand-picked set of runs limits our results to 3 runs from different geographic distribution.
-{: .hands_on}
-
-This reduces your `Found Items` list from tens of thousands of runs to 3 runs (a manageable number for a tutorial!). But we aren't quite done with Run Selector yet. Note that the `Galaxy` button is still grayed out.  We have narrowed our options, but we haven't actually selected anything to send to Galaxy yet.
-
-It's possible to select every remaining run by **clicking** the checkmark at the top of the first column.  You can unselect everything by **clicking** the `X`.
-
-> <div class="box-title hands-on-title" id="hands-on-select-runs-and-send-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Select runs and send to Galaxy</div>
->
-> 1. Select all runs by **clicking** the `X`.
->    And now, the `Galaxy` button is live.
-> 1. **Click** the `Galaxy` button in the `Select` section at the top of the page.
-{: .hands_on}
-
-
-## Back in Galaxy
-
-When we click `Galaxy` in Run Selector several things happen.  First, it launches a new browser tab or window which opens in Galaxy.  You will see the *big green box* indicating that the handshake between SRA and Galaxy was successful and you will then see a new `SRA` job in your history panel.  This box may start out as gray / pending, indicating that the transfer has not yet started, or it may go straight to yellow / running or to green / done.
-
-> <div class="box-title hands-on-title" id="hands-on-examine-the-new-sra-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Examine the new SRA Dataset</div>
->
-> 1. Once the `SRA` transfer is complete, **click** on the dataset's <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon.
->
->    This displays the dataset in Galaxy's center panel.
-{: .hands_on}
-
-
-The `SRA` dataset is not sequence data, but rather *metadata* that we will use to get sequence data from SRA.  This metadata mirrors the information we saw in the Run Selector's `Found Items` section.  The metadata is not the end data that we are seeking from SRA, but having all that metadata is often useful in subsequent analysis steps.
-
-Lets now use that metadata to fetch the sequence data from SRA.  SRA provides tools for extracting all sorts of information, including the sequence data itself.  The Galaxy Tool `Faster Download and Extract Reads in FASTQ` is based on the SRA [`fasterq-dump`](https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump) utility, and does just that.
-
--->
-
-<h2 id="find-necessary-data-in-sra">Find necessary data in SRA</h2>
-
-<p>First we need to find a good dataset to play with. The <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a> is the primary archive of <em>unassembled reads</em>  operated by the <a href="https://www.ncbi.nlm.nih.gov/">US National Institutes of Health (NIH)</a>.  SRA is a great place to get the sequencing data that underlie publications and studies. Let’s do that:</p>
+<p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the Galaxy history</div>
 
   <ol>
-    <li>Go to NCBI’s SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra</li>
-    <li>In the search box enter <code class="language-plaintext highlighter-rouge">SARS-CoV-2 Patient Sequencing From Partners / MGH</code>:
-<img src="../../images/find_mgh_data.png" alt="Find data. " loading="lazy" /> (Alternatively, you <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH">simply access the data via link</a>)</li>
-    <li>Note that some of the datasets found say “ARTICv3 amplicon sequencing”. This is a sequencing technique that requires addition analysis steps not discussed in this tutorial. The data that we will analyse (datasets mentioned below) uses a technique called “metagenomic sequencing”.</li>
-    <li>The web page will show a large number of SRA datasets (at the time of writing there were 3,927). This is data from a <a href="https://science.sciencemag.org/content/early/2020/12/09/science.abe3261">study</a> describing analysis of SARS-CoV-2 in Boston area.</li>
-    <li>Download metadata describing these datasets by:
-      <ul>
-        <li>clicking on <strong>Send to:</strong> dropdown</li>
-        <li>Selecting <code class="language-plaintext highlighter-rouge">File</code></li>
-        <li>Changing <strong>Format</strong> to <code class="language-plaintext highlighter-rouge">RunInfo</code></li>
-        <li>Clicking <strong>Create file</strong>
-Here is how it should look like:
-<img src="../../images/get_runinfo.png" alt="GetRunInfo. " loading="lazy" /></li>
-      </ul>
+    <li>
+      <p>Create a new history for this analysis</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
     </li>
-    <li>This would create a rather large <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> file in your <code class="language-plaintext highlighter-rouge">Downloads</code> folder.</li>
+    <li>
+      <p>Rename the history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name: <code class="language-plaintext highlighter-rouge">SARS-CoV-2 sequence data analysis</code></li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name: <code class="language-plaintext highlighter-rouge">SARS-CoV-2 sequence data analysis</code></li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
   </ol>
+
+</blockquote>
+
+<h2 id="find-obtain-and-filter-information-about-public-sequencing-data">Find, obtain and filter information about public sequencing data</h2>
+
+<p>First we need to find some good, public datasets to play with.</p>
+
+<p>The <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a> is the primary archive of <em>unassembled reads</em>  operated by the <a href="https://www.ncbi.nlm.nih.gov/">US National Institutes of Health (NIH)</a>.
+SRA is a great place to get the sequencing data that underlie publications and studies.
+The study we are interested in for this tutorial is one on sequencing of SARS-CoV-2 viral isolates that were obtained in the Boston area in the first months of the COVID-19 pandemic (<span class="citation"><a href="#Lemieux2021">Lemieux <i>et al.</i> 2021</a></span>).</p>
+
+<p>So lets see how we can find its raw data in the SRA, and how we can get some of that data into Galaxy to analyze it. The Acknowledgments section of the publication mentions that raw reads from the study have been deposited in the SRA under <strong>BioProject PRJNA622837</strong> so that’s going to be our starting point.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-find-the-example-data-in-the-sra"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Find the example data in the SRA</div>
+
+  <ol>
+    <li>Go to NCBI’s SRA page by pointing your browser to <a href="https://www.ncbi.nlm.nih.gov/sra">https://www.ncbi.nlm.nih.gov/sra</a></li>
+    <li>
+      <p>In the search box enter <code class="language-plaintext highlighter-rouge">PRJNA622837[BioProject]</code></p>
+
+      <p>Oh, this finds a <em>lot</em> of samples (more than 22,000 at the time of writing)!
+This is because the BioProject ID we used is that of “SARS-CoV-2 Patient Sequencing from the Broad Institute”, which has seen many more sample submissions since the published study.
+Let’s refine our search a bit.</p>
+    </li>
+    <li>
+      <p>Replace your previous search with <code class="language-plaintext highlighter-rouge">PRJNA622837[BioProject] AND RNA-Seq[Strategy]</code></p>
+
+      <p>This returns only those samples from the BioProject, for which the sequencing strategy was RNA-Seq.</p>
+
+      <p>At the time of writing, 1908 hits are retained with this query, which is still more than the approximately 800 genomes mentioned in the publication, but we got a lot closer.</p>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+
+        <p>The vast majority of what has been excluded by adding <code class="language-plaintext highlighter-rouge">RNA-Seq[Strategy]</code> to the query are datasets for which the “Strategy” is <em>AMPLICON</em>.
+For these datasets, the viral RNA (or more precisely, the cDNA obtained from it) got amplified with a tiled-amplicon protocol.
+While tiled-amplicon sequencing has emerged as a standard way of sequencing SARS-CoV-2 samples over the course of the pandemic, the corresponding protocols/primer schemes were simply not available during the early phase of the pandemic.</p>
+
+      </blockquote>
+    </li>
+    <li>Instead of inspecting all 1908 hits one-by-one through the web interface, lets download the metadata for all samples in a single file
+      <ol>
+        <li>Click on the  <strong>Send to:</strong> dropdown at the top of the search results list</li>
+        <li>Under <strong>Choose Destination</strong>, select <code class="language-plaintext highlighter-rouge">Run Selector</code></li>
+        <li>Click <strong>Go</strong></li>
+      </ol>
+
+      <p><img src="../../images/get_runinfo.png" alt="SRA search results with the &quot;Send to:&quot; dropdown configured for sending results to the Run Selector. " loading="lazy" /></p>
+
+      <p>You will be taken to the SRA Run Selector page, where you can browse all of the metadata of all search hits rather conveniently.</p>
+    </li>
+    <li>
+      <p>In the <strong>Select</strong> table, click <code class="language-plaintext highlighter-rouge">Metadata</code> in the <strong>Download</strong> column</p>
+
+      <p><img src="../../images/metadata_from_run_selector.png" alt="The SRA Run Selector page with the mouse hovering over the Metadata button. " loading="lazy" /></p>
+
+      <p>This will download the metadata for all retrieved sequencing runs as a comma-separated text file.</p>
+    </li>
+  </ol>
+
 </blockquote>
 
 <p>Now that we have downloaded this file we can go to a Galaxy instance and start processing it.</p>
 
 <blockquote class="comment">
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+
+  <p>Note that the file we just downloaded is <strong>not</strong> sequencing data itself. Rather, it is <em>metadata</em> describing the data itself. We will use a few Galaxy tools to filter this list down to just a few accessions that will be used in the remainder of this tutorial.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-upload-the-metadata-file-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload the metadata file into Galaxy</div>
+
+  <ol>
+    <li>
+      <p>In Galaxy, click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong></p>
+
+      <p><img src="../../images/upload_button.png" alt="The Upload Data button in Galaxy. " loading="lazy" /></p>
+    </li>
+    <li>
+      <p>In the Upload dialog box, click <strong>Choose local files</strong></p>
+
+      <p><img src="../../images/choose_local_files_button.png" alt="The Choose local files button. " loading="lazy" /></p>
+    </li>
+    <li>Find and select the downloaded metadata file on your computer</li>
+    <li>Click <strong>Start</strong></li>
+    <li>Close the dialog by pressing <strong>Close</strong></li>
+    <li>
+      <p>Once the dataset has finished uploading to your history, you can <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> inspect its contents.</p>
+
+      <p>You will see that this file contains the same metadata that you could preview on the SRA Run Selector page.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>In Galaxy, it is rather easy to perform further filtering of the metadata records. For example, the publication mentions that the authors analyzed samples collected between 4 March and 9 May 2020.</p>
+
+<p>If you inspect the metadata, you should see a column <strong>Collection_Date</strong>. That looks useful!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-filter-metadata-lines-by-collection-date-range"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter metadata lines by collection date range</div>
+
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="link"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span></p>
+
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: the uploaded metadata</li>
+        <li>
+          <p><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">"2020-03-04" &lt;= c11 &lt;= "2020-05-09"</code></p>
+
+          <p>Column 11 (c11) is the Collection_Date column in this case.
+If your input has this column in a different position, you would need to adjust the filter condition above accordingly.</p>
+        </li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>So now we are down to sequencing runs from the same date range as studied in the publication - though we still have more runs than samples discussed in the publication. Note, however, that the publication talks about assembled genomes, and it is possible that some of the sequencing runs listed in our metadata do not contain good enough data to assemble any SARS-CoV-2 genome information, or it could be that some viral samples got sequenced in several sequencing runs to obtain enough data.</p>
+
+<p>We could explore this situation in more detail, and Galaxy could also process all the sequencing runs we are currently left with, but for the sake of simplicity of the tutorial, we want to select a <em>much</em> smaller subset of sequencing runs now anyway. In particular, from previous experience with this data we suggest to continue with just the following two interesting datasets: <strong>SRR11954102</strong> and <strong>SRR12733957</strong>. So let’s pull their identifiers out of the metadata file.</p>
+
+<blockquote class="comment">
   <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
-
-  <p>Note that the file we just downloaded is <strong>not</strong> sequencing data itself. Rather, it is <em>metadata</em> describing properties of sequencing reads. We will filter this list down to just a few accessions that will be used in the remainder of this tutorial.</p>
+  <p>The following steps may seem a bit silly given that we just revealed the two identifiers above.
+However, think of them as placeholders for extracting run identifiers based on some other criteria.</p>
 
 </blockquote>
 
-<h2 id="process-and-filter-sraruninfocsv-file-in-galaxy">Process and filter <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> file in Galaxy</h2>
-
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-sraruninfo-csv-file-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload `SraRunInfo.csv` file into Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-extracting-a-subset-of-identifiers"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extracting a subset of identifiers</div>
 
   <ol>
-    <li>Go to your Galaxy instance of choice such as one of the <a href="https://usegalaxy.org/">usegalaxy.org</a>, <a href="https://usegalaxy.eu">usegalaxy.eu</a>, <a href="https://usegalaxy.org.au">usegalaxy.org.au</a> or any other. (This tutorial uses usegalaxy.org).</li>
-    <li>Click <em>Upload Data</em> button:
-<img src="../../images/upload_button.png" alt="Upload. " loading="lazy" /></li>
-    <li>In the dialog box that would appear click “<em>Choose local files</em>” button:
-<img src="../../images/choose_local_files_button.png" alt="Choose local. " loading="lazy" /></li>
-    <li>Find and select <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> file from your computer</li>
-    <li>Click <em>Start</em> button</li>
-    <li>Close dialog by pressing <strong>Close</strong> button</li>
-    <li>You can now look at the content of this file by clicking <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon. You will see that this file contains a lot of information about individual SRA accessions. In this study every accession corresponds to an individual patient whose samples were sequenced.</li>
-  </ol>
-</blockquote>
+    <li>
+      <p><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="link"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span></p>
 
-<p>Galaxy can process all 2,000+ datasets but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets <code class="language-plaintext highlighter-rouge">SRR11954102</code> and <code class="language-plaintext highlighter-rouge">SRR12733957</code>. So, let’s pull them out.</p>
-
-<!--SNIPPET-->
-<blockquote class="warning">   <div class="box-title warning-title" id="warning-beware-of-cuts"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Beware of Cuts</div>   <p>The section below uses <strong>Cut</strong> tool. There are two <strong>cut</strong> tools in Galaxy due to historical reasons. This example uses tool with the full name <strong>Cut columns from a table (cut)</strong>. However, the same logic applies to the other tool. It simply has a slightly different interface.</p> </blockquote>
-<p><!--END_SNIPPET--></p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-a-subset-of-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating a subset of data</div>
-
-  <ol>
-    <li>Find <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> “<strong>Select lines that match an expression</strong>” tool in <strong>Filter and Sort</strong> section of the tool panel.
-      <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-finding-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-finding-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Finding tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
-        <p>Galaxy may have an overwhelming amount of tools installed. To find a specific tool type the tool name in the tool panel search box to find the tool.</p>
-      </blockquote>
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: the metadata filter by collection date; output of <strong>Filter</strong> tool</li>
+        <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">SRR12733957|SRR11954102</code></li>
+      </ul>
     </li>
-    <li>Make sure the <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> dataset we just uploaded is listed in the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Select lines from</em>” field of the tool form.</li>
-    <li>In “<em>the pattern</em>” field enter the following expression → <code class="language-plaintext highlighter-rouge">SRR12733957|SRR11954102</code>. These are two accession we want to find separated by the pipe symbol <code class="language-plaintext highlighter-rouge">|</code>. The <code class="language-plaintext highlighter-rouge">|</code> means <code class="language-plaintext highlighter-rouge">or</code>: find lines containing <code class="language-plaintext highlighter-rouge">SRR12733957</code> <strong>or</strong> <code class="language-plaintext highlighter-rouge">SRR11954102</code>.</li>
-    <li>Click <code class="language-plaintext highlighter-rouge">Run Tool</code> button.</li>
-    <li>This will generate a file containing two lines (well … one line is also used as the header, so it will appear the the file has three lines. It is OK.)</li>
-    <li>Cut the first column from the file using <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> “<strong>Advanced Cut</strong>” tool, which you will find in <strong>Text Manipulation</strong> section of the tool pane.</li>
-    <li>Make sure the dataset produced by the previous step is selected in the “<em>File to cut</em>” field of the tool form.</li>
-    <li>Change “<em>Delimited by</em>” to <code class="language-plaintext highlighter-rouge">Comma</code></li>
-    <li>In “<em>List of fields</em>” select <code class="language-plaintext highlighter-rouge">Column: 1</code>.</li>
-    <li>Hit <code class="language-plaintext highlighter-rouge">Execute</code>
-This will produce a text file with just two lines:
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRR12733957
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="link"><strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span></p>
+
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: the metadata with only two runs retained; output of <strong>Select</strong> tool</li>
+        <li>Under <em>“Cut by”</em>
+          <ul>
+            <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="warning">   <div class="box-title warning-title" id="warning-beware-of-cuts"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Beware of Cuts</div>   <p>The section below uses <strong>Cut</strong> tool. There are two <strong>cut</strong> tools in Galaxy due to historical reasons. This example uses tool with the full name <strong>Cut columns from a table (cut)</strong>. However, the same logic applies to the other tool. It simply has a slightly different interface.</p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>At this point, you should have a dataset with just two lines and a single column with this content:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRR12733957
 SRR11954102
-</code></pre></div>      </div>
-    </li>
-  </ol>
-</blockquote>
+</code></pre></div></div>
 
-<p>Now that we have identifiers of datasets we want and we need to download the actual sequencing data.</p>
+<h2 id="retrieve-selected-sequencing-data-from-the-sra">Retrieve selected sequencing data from the SRA</h2>
 
-<h2 id="download-sequencing-data-with-faster-download-and-extract-reads-in-fastq">Download sequencing data with <strong>Faster Download and Extract Reads in FASTQ</strong></h2>
+<p>Now that we have our identifiers of interest extracted, we are ready to download the actual sequencing data. Since this is a very common need Galaxy offers a dedicated tool for the purpose of downloading sequencing data from the SRA identified via its run accession.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-retrieve-sequencing-data-from-sra-via-run-accessions"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Retrieve sequencing data from SRA via run accessions</div>
 
   <ol>
-    <li><strong>Faster Download and Extract Reads in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/3.0.3+galaxy0" title="Faster Download and Extract Reads in FASTQ tool" aria-role="link"><strong>Faster Download and Extract Reads in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/3.0.3+galaxy0</span></span> with the following parameters:
       <ul>
         <li><em>“select input type”</em>: <code class="language-plaintext highlighter-rouge">List of SRA accession, one per line</code>
           <ul>
-            <li>The parameter <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sra accession list”</em> should point the output of the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> “<strong>Cut</strong>” from the previous step.</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sra accession list”</em>: the dataset with the two run accessions; output of <strong>Cut</strong></li>
           </ul>
         </li>
-        <li><strong>Click</strong> the <code class="language-plaintext highlighter-rouge">Run Tool</code> button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the <code class="language-plaintext highlighter-rouge">SRA</code> dataset. It may take some time. So this may be a good time to do get coffee.</li>
-      </ul>
-    </li>
-    <li>Several entries are created in your history panel when you submit this job:
-      <ul>
-        <li><strong><code class="language-plaintext highlighter-rouge">Pair-end data (fasterq-dump)</code></strong>: Contains Paired-end datasets (if available)</li>
-        <li><strong><code class="language-plaintext highlighter-rouge">Single-end data (fasterq-dump)</code></strong> Contains Single-end datasets (if available)</li>
-        <li><strong><code class="language-plaintext highlighter-rouge">Other data (fasterq-dump)</code></strong> Contains Unpaired datasets (if available)</li>
-        <li><strong><code class="language-plaintext highlighter-rouge">fasterq-dump log</code></strong> Contains Information about the tool execution</li>
       </ul>
     </li>
   </ol>
+
 </blockquote>
 
-<p>The first three items are actually <em>collections</em> of datasets.  <em>Collections</em> in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis.  In this case the tool creates a separate collection each for paired-end reads, single reads, and <em>other</em>.
-See the Collections tutorials for more.</p>
+<p>Several entries should have been created in your history panel when you submitted the previous job:</p>
+<ul>
+  <li><strong>Pair-end data (fasterq-dump)</strong>: Contains Paired-end datasets (if available)</li>
+  <li><strong>Single-end data (fasterq-dump)</strong> Contains Single-end datasets (if available)</li>
+  <li><strong>Other data (fasterq-dump)</strong> Contains Unpaired datasets (if available)</li>
+  <li><strong>fasterq-dump log</strong> Contains Information about the tool execution</li>
+</ul>
 
-<p>Explore the collections by first <strong>clicking</strong> on the collection name in the history panel.  This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level of your history.</p>
+<p>The first three items are actually <em>collections</em> of datasets.</p>
 
-<p>Once <code class="language-plaintext highlighter-rouge">fasterq</code> finishes transferring data (all boxes are green / done), we are ready to analyze it.</p>
+<p>When the tool run is finished (all history items created by it are green / done), take a moment to explore the collections by first <strong>clicking</strong> on the collection name in the history panel.  This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level of your history.</p>
 
-<h1 id="now-what">Now what?</h1>
+<p>You should find that only the <strong>Pair-end data</strong> collection contains any sequencing data, which makes sense as both samples have been paired-end sequenced on the Illumina platform.</p>
 
-<p>You can now analyze the retrieved data using any sequence analysis tools and workflows in Galaxy.  SRA holds backing data for every imaginable type of *-seq experiment.</p>
+<h2 id="get-the-reference-genome-data">Get the reference genome data</h2>
 
-<p>If you ran this tutorial, but retrieved datasets that you were interested in, then see the rest of the GTN library for ideas on how to analyze in Galaxy.</p>
-
-<p>However, if you retrieved the datasets used in this tutorial’s examples above, then you are ready to run the SARS-CoV-2 variant analysis below.</p>
-
-<h1 id="variation-analysis-of-sars-cov-2-sequencing-data">Variation Analysis of SARS-Cov-2 sequencing data</h1>
-
-<p>In this part of the tutorial we will perform variant calling and basic analysis of the datasets downloaded above. We will start by downloading the Wuhan-Hu-1 SARS-CoV-2 reference sequence, then run adapter trimming, alignment and variant calling and finally look at the geographic distribution of some of the found variants.</p>
-
-<blockquote class="comment">
-  <div class="box-title comment-title" id="comment-the-usegalaxy-covid-19-analysis-project"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: The usegalaxy.* COVID-19 analysis project</div>
-  <p>This tutorial uses a subset of the data and runs through the
-<a href="https://covid19.galaxyproject.org/genomics/4-variation/">Variation Analysis</a>
-section of <a href="https://covid19.galaxyproject.org/">covid19.galaxyproject.org</a>.
-The data for <a href="https://covid19.galaxyproject.org/">covid19.galaxyproject.org</a> is
-being updated continuously as new datasets are made public.</p>
-</blockquote>
-
-<h1 id="get-the-reference-genome-data">Get the reference genome data</h1>
-
-<p>The reference genome data for today is for SARS-CoV-2, “Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1, complete genome”, having the accession ID of NC_045512.2.</p>
-
-<p>This <a href="https://doi.org/10.5281/zenodo.3906454">data is available from Zenodo</a>.</p>
+<p>Since our data analysis will involve mapping the sequenced reads just downloaded to the SARS-CoV-2 reference, we also need to obtain that reference now.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-get-the-reference-genome-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the reference genome data</div>
@@ -1226,14 +1182,20 @@ being updated continuously as new datasets are made public.</p>
 
 </blockquote>
 
-<!-- Previous version of the link -> https://zenodo.org/record/3906454/files/NC_045512.2.fasta -->
+<h1 id="identification-of-mutations-in-the-batch-of-sars-cov-2-sequencing-data">Identification of mutations in the batch of SARS-Cov-2 sequencing data</h1>
+
+<p>As our actual analysis we will now perform all steps necessary to identify mutations present in the genomes of our minimal batch of two samples with respect to the SARS-CoV-2 Wuhan-Hu-1 reference sequence.</p>
+
+<p>We will perform quality control and read trimming, map the reads from both samples to the reference, and perform variant calling. Finally we will annotate each sample’s variants with their predicted functional impact and report our findings in a table.</p>
+
+<p>We will also summarize different quality metrics obtained throughout the analysis in one nice summary report.</p>
 
 <h2 id="adapter-trimming-with-fastp">Adapter trimming with <strong>fastp</strong></h2>
 
 <p>Removing sequencing adapters improves alignments and variant calling. <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can automatically detect widely used sequencing adapters.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
 
   <ol>
     <li><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1253,7 +1215,7 @@ being updated continuously as new datasets are made public.</p>
   </ol>
 </blockquote>
 
-<h2 id="alignment-with--map-with-bwa-mem">Alignment with  <strong>Map with BWA-MEM</strong></h2>
+<h2 id="alignment-with-map-with-bwa-mem">Alignment with <strong>Map with BWA-MEM</strong></h2>
 
 <p><strong>BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.</p>
 
@@ -1462,10 +1424,6 @@ being updated continuously as new datasets are made public.</p>
 
 </blockquote>
 
-<p>We can inspect the output files and see check if Variants in this file are also described in <a href="https://observablehq.com/@spond/distribution-of-sars-cov-2-sequences-that-have-a-particular">an observable notebook that shows the geographic distribution of SARS-CoV-2 variant sequences</a></p>
-
-<p>Interesting variants include the C to T variant at position 14408 (14408C/T) in SRR11772204, 28144T/C in SRR11597145 and 25563G/T in SRR11667145.</p>
-
 <h2 id="summarize-data-with-multiqc">Summarize data with <strong>MultiQC</strong></h2>
 
 <p>We will now summarize our analysis with MultiQC, which generates a beautiful report for our data.</p>
@@ -1544,7 +1502,9 @@ being updated continuously as new datasets are made public.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.</p>
+<p>You have seen now how to import public sequencing data into Galaxy, and you have performed the basic steps of variant calling on a batch of RNA-Seq SARS-CoV-2 data.</p>
+
+<p>Galaxy allows you to do a lot more in terms of viral sequence data analysis though. Specifically, the advanced tutorial <a href="/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html">Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data</a> is highly recommended if you want to learn how to perform a complete and more automated analysis of SARS-CoV-2 sequencing data that does not stop at lists of identified mutations but also produces consensus sequences and lineage assignments for all samples in a batch. This tutorial also shows how to deal with input data other than Illumina paired-end-sequenced RNA-Seq data.</p>
 
                 </section>
 
@@ -1555,6 +1515,12 @@ being updated continuously as new datasets are made public.</p>
                     <ul>
                         
                         <li><p>Sequence data in the SRA can be directly imported into Galaxy</p>
+</li>
+                        
+                        <li><p>Collections enable efficient/parallel processing of sequence data from whole batches of samples</p>
+</li>
+                        
+                        <li><p>Genomic mutations in SARS-CoV-2 viral isolates can be identified through a straightforward pipeline involving sequenced reads preprocessing, mapping to the SARS-CoV-2 reference genome, postprocessing of mapping results, and variant calling</p>
 </li>
                         
                     </ul>
@@ -1574,6 +1540,9 @@ being updated continuously as new datasets are made public.</p>
                 
 
 
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Lemieux2021">Lemieux, J. E., K. J. Siddle, B. M. Shaw, C. Loreth, S. F. Schaffner <i>et al.</i>, 2021 <b>Phylogenetic analysis of SARS-CoV-2 in Boston highlights the impact of superspreading events</b>. Science 371: <a href="https://doi.org/10.1126/science.abe3261">10.1126/science.abe3261</a></li></ol>
                 
 
                 
@@ -1642,6 +1611,9 @@ note = "[Online; accessed TODAY]"
                 </blockquote>
 
                 
+                
+
+                
 
 
 <script>
@@ -1668,6 +1640,11 @@ install_tool_dependencies: true
 install_repository_dependencies: true
 install_resolver_dependencies: true
 tools:
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Variant Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: bwa
   owner: devteam
   revisions: 3fe632431b68
@@ -1723,6 +1700,11 @@ tools:
   revisions: 494b2ec08162
   tool_panel_section_label: Variant Analysis
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: sra_tools
+  owner: iuc
+  revisions: 4df8de2d0e48
+  tool_panel_section_label: Variant Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
                 </blockquote>
 		
@@ -1752,7 +1734,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/aa21e9d7c0b71c76be988a745f64096f29ff644e">aa21e9d</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/799aa56382af7fe2eec6c2fc65125c95d3e8e019">799aa56</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
