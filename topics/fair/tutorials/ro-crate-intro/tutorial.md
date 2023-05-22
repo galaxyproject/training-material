@@ -16,7 +16,7 @@ requirements:
   tutorials:
       - cli-basics
 
-license: Apache license, version 2.0 <http://www.apache.org/licenses/LICENSE-2.0>
+license: Apache-2.0
 
 copyright: © Copyright 2021-2023 University of Technology Sydney, The University of Manchester UK and RO-Crate contributors
 
@@ -41,7 +41,7 @@ key_points:
 - Cross-references between entities create a graph
 - The RO-Crate specification recommends which types and keys to use
 
-subtopic: fair
+subtopic: ro-crate
 contributors:
   - stain
   - ptsefton
