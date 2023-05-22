@@ -100,10 +100,7 @@ Create the file `ro-crate-metadata.json` using [Visual Studio Code](https://code
 
 Your folder should now look like this:
 
-<figure>
-  <img src="../../images/ro-crate-intro/crate1-folders.png" alt="Folder listing of crate1, including data.csv and ro-crate-metadata.json" style="max-height: 5em;" />
-  <figcaption>Figure 1: Any folder can be made into an RO-Crate by adding <code>ro-crate-metadata.json</code></figcaption>
-</figure>
+![Folder listing of crate1, including data.csv and ro-crate-metadata.json](../../images/ro-crate-intro/crate1-folders.png "Any folder can be made into an RO-Crate by adding <code>ro-crate-metadata.json</code>")
 
 The presence of the reserved `ro-crate-metadata.json` filename means that `crate1` (and its children) can now be considered to be an **RO-Crate**. We call the top-level folder of the crate for the **RO-Crate Root** and can now refer to its content with relative file paths.
 
@@ -206,13 +203,7 @@ In a RO-Crate Metadata Document, entities are cross-referenced using `@id` refer
 In short, this _flattened JSON-LD_ style (shown below) allows any entity to reference any other entity, and RO-Crate consumers can directly find all the descriptions of a given entity as a single JSON object. 
 
 
-<figure id="figure2">
-<object type="image/svg+xml" data="../../images/ro-crate-intro/introduction-figure-1.svg">
-JSON block with id <code>ro-crate-metadata.json</code> has some attributes, `conformsTo` RO-Crate 1.2, and <code>about</code> referencing id <code>./</code>. 
-In second JSON block with id <code>./</code> we see additional attributes such as its name and description.
-</object>
-<figcaption>Figure 2: showing RO-Crate Metadata descriptor's <code>about</code> property pointing at the RO-Crate Root entity with matching <code>@id</code></figcaption>
-</figure>
+![JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id <code>./</code> we see additional attributes such as its name and description.](../../images/ro-crate-intro/introduction-figure-1.png "showing RO-Crate Metadata descriptor's <code>about</code> property pointing at the RO-Crate Root entity with matching <code>@id</code>")
 
 > <question-title></question-title>
 > 
