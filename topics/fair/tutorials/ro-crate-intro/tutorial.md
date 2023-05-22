@@ -8,7 +8,7 @@ requirements:
   title: "Files and folder organization"
 - type: none
   title: "Familiarity with JSON file format and editor/IDE"
-- type: none
+- type: external
   title: "An overview of the RO-Crate concept and its implementations"
   link: "https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/"
 - type: "internal"
