@@ -10,7 +10,7 @@ requirements:
   title: "Familiarity with JSON file format and editor/IDE"
 - type: none
   title: "An overview of the RO-Crate concept and its implementations"
-  url: "https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/"
+  link: "https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/"
 - type: "internal"
   topic_name: data-science
   tutorials:
