@@ -21,11 +21,11 @@
 				</p>
 				{% endif %}
 				<p>
-					{% if page.layout == "tutorial_hands_on" %}
-						This material licensed under
-					{% else %}
-						Materials licensed under
+					<b>This Material</b>:<br/>
+					{% if page.copyright %}
+						{{ page.copyright }}
 					{% endif %}
+					Licensed under
 					<a rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
 						{% if page.license %}{{ page.license }}{% else %}Creative Commons Attribution 4.0 International License{% endif %}
 					</a>

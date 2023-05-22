@@ -46,7 +46,7 @@ contributors:
   - stain
   - ptsefton
 
-priority: 2
+priority: 1
 
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable; a set of principles for publishing research data and metadata
