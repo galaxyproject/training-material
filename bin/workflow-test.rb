@@ -15,10 +15,15 @@ def test_workflow(workflow_file, galaxy_id)
   galaxy_url = GALAXIES[galaxy_id][:url]
   galaxy_user_key = GALAXIES[galaxy_id][:key]
   cmd = [
-    'planemo', '--verbose', 'test', '--galaxy_url', galaxy_url,
-    '--galaxy_user_key', galaxy_user_key, '--no_shed_install', '--engine',
-    'external_galaxy', '--polling_backoff', '1', '--test_output_json',
-    workflow_output_json, workflow_file
+    'planemo', '--verbose', 'test',
+    '--galaxy_url', galaxy_url,
+    '--galaxy_user_key', galaxy_user_key,
+    '--no_shed_install',
+    '--engine', 'external_galaxy',
+    '--polling_backoff', '1',
+    '--simultaneous_uploads',
+    '--test_output_json', workflow_output_json,
+    workflow_file
   ]
   p cmd.join(' ')
 
