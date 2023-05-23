@@ -14,7 +14,7 @@ key_points:
 - New workflow releases will automatically be propagated to WorkflowHub, saving you time.
 tags:
 - ro-crate
-priority: 1
+priority: 4
 contributions:
   authorship:
     - ilveroluca
