@@ -13,10 +13,11 @@ time_estimation: 30m
 key_points:
 - FAIR principles in Galaxy training development and content creation.
 
+subtopic: fair-data
+
 requirements:
-  -
-    type: "internal"
-    topic_name: fair-data
+  - type: "internal"
+    topic_name: fair
     tutorials:
       - fair-intro
       
