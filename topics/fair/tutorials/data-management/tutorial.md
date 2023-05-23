@@ -87,12 +87,9 @@ The fundamental component of infrastructure required for the FAIR research data 
 
 The [OpenAIRE](https://www.openaire.eu/opendatapilot-repository-guide) repository guide advises users to check the availability of a suitable repository in following order:
 
-1 The most effective option (if available) is to maintain the data in accordance with acknowledged discipline-specific criteria using an established, dedicated (external) data archive or repository that caters specifically to the study domain.
-
-2 Making use of institutional data repositories is the second-best option.
-
-
-3 If none of those options is practical, a free data repository should be used.
+1. The most effective option (if available) is to maintain the data in accordance with acknowledged discipline-specific criteria using an established, dedicated (external) data archive or repository that caters specifically to the study domain.
+2. Making use of institutional data repositories is the second-best option.
+3. If none of those options is practical, a free data repository should be used.
 
 Up-to-date lists of available registered data repositories can be found at [re3data](https://www.re3data.org/) and [FAIRsharing](https://fairsharing.org/search?fairsharingRegistry=Database).
 
