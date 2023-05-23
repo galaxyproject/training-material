@@ -5,7 +5,7 @@ require 'open3'
 require 'json'
 
 GALAXIES = {
-  eu: { url: 'https://usegalaxy.eu', key: ENV.fetch('GALAXY_EU_KEY', "NONE") },
+  eu: { url: 'https://usegalaxy.eu', key: ENV.fetch('GALAXY_EU_KEY', 'NONE') },
 }
 
 def test_workflow(workflow_file, galaxy_id)
@@ -22,19 +22,16 @@ def test_workflow(workflow_file, galaxy_id)
   ]
   p cmd.join(' ')
 
-  Open3.popen3(*cmd) do |stdin, stdout, stderr, wait_thr|
-    File.open("#{directory}/#{workflow_base}.#{galaxy_id}.log", 'w') do |f|
-      f.write(stdout.read)
-    end
-    File.open("#{directory}/#{workflow_base}.#{galaxy_id}.err", 'w') do |f|
-      f.write(stderr.read)
-    end
+  Open3.popen3(*cmd) do |_stdin, stdout, stderr, wait_thr|
+    File.write("#{directory}/#{workflow_base}.#{galaxy_id}.log", stdout.read)
+    File.write("#{directory}/#{workflow_base}.#{galaxy_id}.err", stderr.read)
     exit_status = wait_thr.value # Process::Status object returned
     puts "#{workflow_file} => #{exit_status} (#{stderr})"
   end
 end
 
-workflows = %w(
+# rubocop:disable Layout/LineLength
+workflows = %w[
   ./topics/assembly/tutorials/debruijn-graph-assembly/workflows/debruijn-graph.ga
   ./topics/assembly/tutorials/general-introduction/workflows/assembly-general-introduction.ga
   ./topics/assembly/tutorials/unicycler-assembly/workflows/unicycler.ga
@@ -62,7 +59,8 @@ workflows = %w(
   ./topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/workflows/rna-seq-viz-with-heatmap2.ga
   ./topics/transcriptomics/tutorials/small_ncrna_clustering/workflows/blockclust_clustering.ga
   ./topics/variant-analysis/tutorials/non-dip/workflows/Calling_variants_in_non-diploid_systems.ga
-)
+]
+# rubocop:enable Layout/LineLength
 
 threads = []
 

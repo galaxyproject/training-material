@@ -25,17 +25,16 @@ module Jekyll
 
     def insert_image(url, alt, style, dimensions, actual_path)
       # If it's a *local* SVG (we don't want to do this with remote SVGs, doesn't work right)
-      if url =~ /svg$/ and not actual_path.nil?
+      if url =~ (/svg$/) && !actual_path.nil?
         fallback = ''
-        case
-        when actual_path.nil?
+        if actual_path.nil?
           # External image, no fallback possible
-          fallback = ""
-        when File.exist?(actual_path.gsub(/svg$/, 'png'))
+          fallback = ''
+        elsif File.exist?(actual_path.gsub(/svg$/, 'png'))
           fallback = "<img src=\"#{url.gsub(/svg$/, 'png')}\" alt=\"#{alt}\">"
-        when File.exist?(actual_path.gsub(/svg$/, 'jpg'))
+        elsif File.exist?(actual_path.gsub(/svg$/, 'jpg'))
           fallback = "<img src=\"#{url.gsub(/svg$/, 'jpg')}\" alt=\"#{alt}\">"
-        when File.exist?(actual_path.gsub(/svg$/, 'jpeg'))
+        elsif File.exist?(actual_path.gsub(/svg$/, 'jpeg'))
           fallback = "<img src=\"#{url.gsub(/svg$/, 'jpeg')}\" alt=\"#{alt}\">"
         end
 
@@ -79,9 +78,7 @@ module Jekyll
           dimensions, actual_path = Gtn::Images.html_image_dimensions(tuto_dir, url)
 
           prefix = figcaption_prefix(page, site)
-          if actual_path =~ /svg/
-            p [tuto_dir, url, actual_path]
-          end
+          p [tuto_dir, url, actual_path] if actual_path =~ /svg/
 
           image = insert_image(url, alt, style, dimensions, actual_path)
 
@@ -101,7 +98,7 @@ module Jekyll
         url = ::Regexp.last_match(2)
         style = ::Regexp.last_match(4)
 
-        dimensions, actual_path = Gtn::Images.html_image_dimensions(tuto_dir, url)
+        dimensions, _actual_path = Gtn::Images.html_image_dimensions(tuto_dir, url)
 
         alt.gsub!(/"/, '&quot;')
         if alt.strip.length.positive? && !(alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?'))
