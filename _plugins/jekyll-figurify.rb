@@ -23,16 +23,30 @@ module Jekyll
 
     private
 
-    def insert_image(url, alt, style, dimensions)
-      puts url
+    def insert_image(url, alt, style, dimensions, actual_path)
+      # If it's a *local* SVG (we don't want to do this with remote SVGs, doesn't work right)
+      if url =~ /svg$/ and not actual_path.nil?
+        fallback = ''
+        case
+        when actual_path.nil?
+          # External image, no fallback possible
+          fallback = ""
+        when File.exist?(actual_path.gsub(/svg$/, 'png'))
+          fallback = "<img src=\"#{url.gsub(/svg$/, 'png')}\" alt=\"#{alt}\">"
+        when File.exist?(actual_path.gsub(/svg$/, 'jpg'))
+          fallback = "<img src=\"#{url.gsub(/svg$/, 'jpg')}\" alt=\"#{alt}\">"
+        when File.exist?(actual_path.gsub(/svg$/, 'jpeg'))
+          fallback = "<img src=\"#{url.gsub(/svg$/, 'jpeg')}\" alt=\"#{alt}\">"
+        end
 
-      if url =~ /svg$/
-        #png_fallback = url.gsub(/svg$/, 'png')
-        #jpg_fallback = url.gsub(/svg$/, 'jpg')
         %(
+          <div style="overflow-x: auto">
           <object data="#{url}" #{style} type="image/svg+xml">
+            #{fallback}
             #{alt}
           </object>
+          </div>
+          <small><a href="#{url}">Open image in new tab</a></small>
         )
       else
         %(
@@ -62,13 +76,17 @@ module Jekyll
             alt = "#{alt}. "
           end
 
-          dimensions = Gtn::Images.html_image_dimensions(tuto_dir, url)
+          dimensions, actual_path = Gtn::Images.html_image_dimensions(tuto_dir, url)
 
           prefix = figcaption_prefix(page, site)
-          image = insert_image(url, alt, style, dimensions)
+          if actual_path =~ /svg/
+            p [tuto_dir, url, actual_path]
+          end
+
+          image = insert_image(url, alt, style, dimensions, actual_path)
 
           %(
-            <figure id="figure-#{num_figure}">
+            <figure id="figure-#{num_figure}" style="max-width: 90%; margin:auto;">
               #{image}
               <figcaption>
                 <span class="figcaption-prefix"><strong>#{prefix}#{num_figure}</strong>:</span> #{title}
@@ -78,26 +96,20 @@ module Jekyll
         end
       end
 
-      num_image = 0
       page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)?\)({:(.*)})?/) do
         alt = ::Regexp.last_match(1)
         url = ::Regexp.last_match(2)
         style = ::Regexp.last_match(4)
 
-        dimensions = Gtn::Images.html_image_dimensions(tuto_dir, url)
+        dimensions, actual_path = Gtn::Images.html_image_dimensions(tuto_dir, url)
 
         alt.gsub!(/"/, '&quot;')
         if alt.strip.length.positive? && !(alt.end_with?('.') || alt.end_with?('!') || alt.end_with?('?'))
           alt = "#{alt}. "
         end
 
-        num_image += 1
-        image = insert_image(url, alt, style, dimensions)
-
         %(
-          <figure id="image-#{num_image}">
-            #{image}
-          </figure>
+          <img src="#{url}"  alt="#{alt}" #{style} #{dimensions} loading="lazy">
         ).split("\n").map(&:strip).join
       end
     end

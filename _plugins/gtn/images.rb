@@ -21,10 +21,13 @@ module Gtn
     def self.html_image_dimensions(tuto_dir, url)
       return '' if !FASTIMAGE_AVAILABLE
 
-      width, height = get_image_dimensions(tuto_dir, url)
+      (width, height), path = get_image_dimensions(tuto_dir, url)
       return unless width && height
 
-      %(width="#{width}" height=#{height})
+      [
+        %(width="#{width}" height=#{height}),
+        path
+      ]
     end
 
     def self.get_image_dimensions(tuto_dir, url)
@@ -40,7 +43,7 @@ module Gtn
 
     def self._get_image_dimensions(path)
       cache.getset(path) do
-        FastImage.size(path)
+        [FastImage.size(path), path]
       rescue StandardError
         Jekyll.logger.info "[GTN/Images] Could not resolve size of #{path}"
       end
