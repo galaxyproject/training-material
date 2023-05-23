@@ -31,9 +31,13 @@ tags:
   - gtn
   - training
   
-contributors:
-- kkamieniecka
-- poterlowicz-lab
+contributions:
+  authorship:
+    - kkamieniecka
+    - poterlowicz-lab
+  editing:
+    - hexylena
+    
 priority: 3
 ---
 
