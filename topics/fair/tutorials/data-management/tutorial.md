@@ -1,6 +1,12 @@
 ---
 layout: tutorial_hands_on
 title: FAIR data management solutions
+...
+abbreviations:
+FAIR: Findable, Accessible, Interoperable, Reusable
+DMP: Data Management Plan 
+PID: Persistent Identifier
+
 zenodo_link: ''
 questions:
 - Is there a reproducibility crisis?
