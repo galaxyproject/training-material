@@ -14,6 +14,8 @@ key_points:
 - FAIR data are as open as possible, and as closed as necessary.
 - The main objective of FAIR data is to increase data reuse by researchers. 
 
+subtopic: fair-data
+
 tags:
   - fair
   - open
