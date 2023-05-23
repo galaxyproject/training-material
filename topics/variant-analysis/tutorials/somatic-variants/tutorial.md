@@ -685,12 +685,12 @@ license.
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Import the following **variant annotation files** from
->    [Zenodo](https://zenodo.org/record/2581873):
+>    [Zenodo](https://zenodo.org/record/7962928):
 >
 >    ```
->    https://zenodo.org/record/2581873/files/hotspots.bed
->    https://zenodo.org/record/2581873/files/cgi_variant_positions.bed
->    https://zenodo.org/record/2581873/files/01-Feb-2019-CIVic.bed
+>    https://zenodo.org/record/7962928/files/hotspots.bed
+>    https://zenodo.org/record/7962928/files/cgi_variant_positions.bed
+>    https://zenodo.org/record/7962928/files/01-Feb-2019-CIVic.bed
 >    https://zenodo.org/record/2582555/files/dbsnp.b147.chr5_12_17.vcf.gz
 >    ```
 >
