@@ -120,11 +120,10 @@ We have a choice to run all these steps using a single workflow, then discuss ea
 
 > <hands-on-title>Pretreatments</hands-on-title>
 >
-> 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/main_workflow.ga) or download it to your computer.
->    - Import the workflow into Galaxy
+> 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/metaquantome-data-creation/workflows/main_workflow.ga" title="Pretreatments" %}
+>
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
