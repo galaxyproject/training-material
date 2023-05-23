@@ -98,7 +98,7 @@ We will visualise regions later in the analysis and obtain the gene information 
 
 > <hands-on-title>Obtain Annotation for hg38 genes</hands-on-title>
 >
-> 1. {% tool [UCSC Main table browser](ucsc_table_direct1) %} with the following parameters:
+> 1. {% tool UCSC Main table browser %} with the following parameters:
 >    - *"clade"*: `Mammal`
 >    - *"genome"*: `Human`
 >    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`

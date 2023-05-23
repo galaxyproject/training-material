@@ -406,7 +406,7 @@ module GtnLinter
     'param_value_from_file',
     'random_lines1',
     'sort1',
-    'ucsc_table_direct1',
+    #'ucsc_table_direct1', # This does not work, surprisingly.
     'upload1',
     'wc_gnu',
     'wig_to_bigWig'

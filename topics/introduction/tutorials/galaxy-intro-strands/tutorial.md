@@ -134,7 +134,7 @@ The **Get Data** toolbox contains a list of data sources that this Galaxy instan
 
 > <hands-on-title>Go to UCSC</hands-on-title>
 >
-> 1. *Click* on the tool {% tool [UCSC Main table browser](ucsc_table_direct1) %} to go to UCSC.
+> 1. *Click* on the tool {% tool UCSC Main table browser %} to go to UCSC.
 >
 >    ![Click on UCSC Main table browser](../../images/101_01.png)
 >
