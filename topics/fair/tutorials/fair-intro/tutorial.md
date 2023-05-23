@@ -25,9 +25,13 @@ tags:
   - open
   - data stewardship
   
-contributors:
-- kkamieniecka
-- poterlowicz-lab
+contributions:
+  authorship:
+    - kkamieniecka
+    - poterlowicz-lab
+  editing:
+    - hexylena
+    
 priority: 1
 ---
 
