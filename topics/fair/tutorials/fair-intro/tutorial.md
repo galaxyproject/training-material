@@ -1,6 +1,10 @@
 ---
 layout: tutorial_hands_on
 title: FAIR in a nutshell
+...
+abbreviations:
+FAIR: Findable, Accessible, Interoperable, Reusable
+
 zenodo_link: ''
 questions:
 - What do the FAIR principles stand for [Wilkinson et al. 2016](https://www.nature.com/articles/sdata201618)?
