@@ -23,6 +23,24 @@ module Jekyll
 
     private
 
+    def insert_image(url, alt, style, dimensions)
+      puts url
+
+      if url =~ /svg$/
+        #png_fallback = url.gsub(/svg$/, 'png')
+        #jpg_fallback = url.gsub(/svg$/, 'jpg')
+        %(
+          <object data="#{url}" #{style} type="image/svg+xml">
+            #{alt}
+          </object>
+        )
+      else
+        %(
+          <img src="#{url}"  alt="#{alt}" #{style} #{dimensions} loading="lazy">
+        )
+      end
+    end
+
     def figurify(page, site)
       num_figure = 0
       return if page.content.nil?
@@ -47,10 +65,11 @@ module Jekyll
           dimensions = Gtn::Images.html_image_dimensions(tuto_dir, url)
 
           prefix = figcaption_prefix(page, site)
+          image = insert_image(url, alt, style, dimensions)
 
           %(
             <figure id="figure-#{num_figure}">
-              <img src="#{url}" alt="#{alt}" #{style} #{dimensions} loading="lazy">
+              #{image}
               <figcaption>
                 <span class="figcaption-prefix"><strong>#{prefix}#{num_figure}</strong>:</span> #{title}
               </figcaption>
@@ -73,10 +92,11 @@ module Jekyll
         end
 
         num_image += 1
+        image = insert_image(url, alt, style, dimensions)
 
         %(
           <figure id="image-#{num_image}">
-            <img src="#{url}" alt="#{alt}" #{style} #{dimensions} loading="lazy">
+            #{image}
           </figure>
         ).split("\n").map(&:strip).join
       end
