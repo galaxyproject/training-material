@@ -276,7 +276,7 @@ Options:
 >
 >    - Click "Expand to full workflow form"
 >
-> 2. Run **Data QC** {% icon workflow %} using the following parameters:
+> 2. Run **Kmer counting** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Input file: Illumina reads R1"*: the illumina R1 fastq.gz file
 >
