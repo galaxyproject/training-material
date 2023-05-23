@@ -564,7 +564,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 > If you had problems extracting your workflow in the previous step, we provide [a working copy for you]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
 > which you can import to Galaxy and use for the next sections (see below how to import a workflow to Galaxy).
 >
-> {% snippet faqs/galaxy/workflows_import.md %}
+> {% snippet faqs/galaxy/workflows_run_trs.md path="topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga" title="Main Workflow" %}
 >
 {: .comment}
 
