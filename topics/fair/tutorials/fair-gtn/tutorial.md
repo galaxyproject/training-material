@@ -1,6 +1,11 @@
 ---
 layout: tutorial_hands_on
 title: FAIR Galaxy Training Material
+...
+abbreviations:
+FAIR: Findable, Accessible, Interoperable, Reusable
+GTN: Galaxy Training Network 
+
 zenodo_link: ''
 questions:
 - What are the FAIR training materials?
