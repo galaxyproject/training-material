@@ -12,10 +12,12 @@ time_estimation: 10m
 key_points:
 - FAIR data management allows machines to automatically find and use the data accordingly.
 
+subtopic: fair-data
+
 requirements:
   -
     type: "internal"
-    topic_name: fair-data
+    topic_name: fair
     tutorials:
       - fair-intro
       
