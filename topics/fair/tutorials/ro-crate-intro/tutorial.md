@@ -100,7 +100,7 @@ Create the file `ro-crate-metadata.json` using [Visual Studio Code](https://code
 
 Your folder should now look like this:
 
-![Folder listing of crate1, including data.csv and ro-crate-metadata.json](../../images/ro-crate-intro/crate1-folders.png "Any folder can be made into an RO-Crate by adding <code>ro-crate-metadata.json</code>")
+![Folder listing of crate1, including data.csv and ro-crate-metadata.json](../../images/ro-crate-intro/crate1-folders.svg "Any folder can be made into an RO-Crate by adding <code>ro-crate-metadata.json</code>")
 
 The presence of the reserved `ro-crate-metadata.json` filename means that `crate1` (and its children) can now be considered to be an **RO-Crate**. We call the top-level folder of the crate for the **RO-Crate Root** and can now refer to its content with relative file paths.
 
