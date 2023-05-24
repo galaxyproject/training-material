@@ -14,7 +14,7 @@ questions:
 objectives:
 - Learn best practices in data management 
 - Learn how to introduce computational reproducibility in your research
-time_estimation: 10m
+time_estimation: "10M"
 key_points:
 - FAIR data management allows machines to automatically find and use the data accordingly.
 tags:
