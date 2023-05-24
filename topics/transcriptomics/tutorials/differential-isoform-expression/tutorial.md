@@ -118,7 +118,6 @@ Next we will retrieve the remaining datasets.
 >      gencode.v43.lncRNA_transcripts.fa.gz	{{ page.zenodo_link }}/files/gencode.v43.lncRNA_transcripts.fa.gz
 >      gencode.v43.pc_transcripts.fa.gz	{{ page.zenodo_link }}/files/gencode.v43.pc_transcripts.fa.gz
 >      gencode.v43.annotation.gtf.gz	{{ page.zenodo_link }}/files/gencode.v43.annotation.gtf.gz
->      gencode.v43.transcripts.fa.gz	{{ page.zenodo_link }}/files/gencode.v43.transcripts.fa.gz
 >      GRCh38.p13.genome.fa.gz	{{ page.zenodo_link }}/files/GRCh38.p13.genome.fa.gz
 >      Pfam-A.hmm.dat.gz	{{ page.zenodo_link }}/files/Pfam-A.hmm.dat.gz
 >      Pfam-A.hmm.gz	{{ page.zenodo_link }}/files/Pfam-A.hmm.gz
@@ -418,23 +417,27 @@ After evaluating the quality of the RNA-seq data, we can start with the transcri
 >
 > ![Figure 10. StringTie algorithm details](../../images/differential_isoform/stringtie_algorithm.png "Transcript assembly pipeline for StringTie. It begins with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned. Source: Perea et al., 2015")
 >
-> **StringTie** uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate < 0.5%, then **StringTie** requires 25% more reads than usual (the default is 1 read per bp) to support that particular spliced alignment. In addition, if a spliced read spans a very long intron (more than 100,000 bp), **StringTie** accepts that alignment (and the intron) only if a larger anchor of 25 bp (10 bp is the default) is present on both sides of the splice site. Here the term “anchor” refers to the portion of the read aligned within the exon beginning at the exon-intron boundary ({% cite Kovaka2019 %}).
+> **StringTie** uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate < 0.5%, then **StringTie** requires 25% more reads than usual to support that particular spliced alignment. In addition, if a spliced read spans a very long intron (more than 100,000 bp), **StringTie** accepts that alignment only if a larger anchor of 25 bp is present on both sides of the splice site. Here the term *anchor* refers to the portion of the read aligned within the exon beginning at the exon-intron boundary ({% cite Kovaka2019 %}).
 >
 >
 {: .comment}
 
-The main reason underlying the greater accuracy of **StringTie** most likely derives from its optimization criteria. By balancing the coverage (or flow) of each transcript across each assembly, it incorporates depth of coverage constraints into the assembly algorithm itself. When assembling a whole genome, coverage is a crucial parameter that must be used to constrain the algorithm; otherwise an assembler may incorrectly collapse repetitive sequences. Similarly, when assembling a transcript, each exon within an isoform should have similar coverage, and ignoring this parameter may produce sets of transcripts that are parsimonious but wrong ({% cite Pertea2015 %}).
+The main reason underlying the greater accuracy of **StringTie** most likely derives from its optimization criteria. By balancing the coverage of each transcript across each assembly, it incorporates depth of coverage constraints into the assembly algorithm itself ({% cite Pertea2015 %}).
 
 
 > <details-title>StringTie long RNA-seq assembly</details-title>
 >
-> To handle the high error rates in the long reads, **StringTie** implements two techniques. First, it correct potentially wrong splice sites by checking all the splice sites present in the alignment of a read with a high-error alignment rate. If a splice site is not supported by any low-error alignment reads, then it tries to find a nearby splice site (within 10 bp, by default) that is supported by the most alignments among all nearby splice sites. Secondly, it implements a pruning algorithm that reduces the size of the splicing graph to a more realistic size by removing the edges in the graph starting from the edge least supported by reads to the most supported edge, until the number of nodes in the splicing graph falls under a given threshold (by default 1000 nodes).
+> To handle the high error rates in the long reads, **StringTie** implements two techniques:
+>
+> First, it correct potentially wrong splice sites by checking all the splice sites present in the alignment of a read with a high-error alignment rate. If a splice site is not supported by any low-error alignment reads, then it tries to find a nearby splice site (within 10 bp, by default) that is supported by the most alignments among all nearby splice sites. 
+>
+> Secondly, it implements a pruning algorithm that reduces the size of the splicing graph to a more realistic size by removing the edges in the graph starting from the edge least supported by reads to the most supported edge, until the number of nodes in the splicing graph falls under a given threshold.
 >
 {: .details}
 
 Despite in this training we make use of RNA STAR as mapping tool, it is possible to use different splice-aware aligner such as HISAT2. Independently of the tool, each record with a spliced alignment should have the XS tag in the SAM/BAM file, which indicates the genomic strand from which the RNA that produced the read originated .
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Transcripts assembly and quantification </hands-on-title>
 >
 > 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
@@ -442,6 +445,20 @@ Despite in this training we make use of RNA STAR as mapping tool, it is possible
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
 >        - *"Reference file"*: `Use a file from history`
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `gencode.v43.annotation.gtf.gz`
+>        - *"Use Reference transcripts only?"*: `No`
+>
+> 2. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.1+galaxy1) with the following parameters:
+>    - {% icon param-collection %} *"Transcripts"*: `Assembled transcripts` (output of **StringTie**)
+>    - {% icon param-file %} *"Reference annotation to include in the merging"*: `gencode.v43.annotation.gtf.gz`
+>
+> 3. Rename the output as `StringTie annotation`
+>
+> 4. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
+>    - *"Input options"*: `Short reads`
+>        - {% icon param-file %} *"Input short mapped reads"*: `Mapped collection`
+>    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
+>        - *"Reference file"*: `Use a file from history`
+>            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `StringTie annotation`
 >        - *"Use Reference transcripts only?"*: `Yes`
 >        - *"Output files for differential expression?"*: `Ballgown`
 >
@@ -465,6 +482,21 @@ Despite in this training we make use of RNA STAR as mapping tool, it is possible
 >
 {: .details}
 
+Before starting with the analysis of the isoforms, we will extract the transcript sequences from the annotation generated by **Stringtie merge**. This output will be used in the next section.
+
+toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0
+
+> <hands-on-title>Extract transcriptome</hands-on-title>
+>
+> 1. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file "*: `StringTie annotation`
+>    - *"Reference Genome"*: `From your history`
+>       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.genome.fa.gz`
+>       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
+>
+> 2. Rename the output as `StringTie transcriptome`
+>
+{: .hands_on}
 
 # Isoform analysis with **IsoformSwitchAnalyzeR**
 
@@ -539,13 +571,14 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Transcripts Health`
 >        - *"Quantification data source"*: `StringTie`
 >            - *"Average read length"*: `140`
+>               - From *"Analysis mode"*:
+>                 - {% icon param-file %} *"Annotation generated by StringTie merge"*: `StringTie annotation`
 >        - {% icon param-file %} *"Genome annotation (GTF)"*: `gencode.v43.annotation.gtf.gz`
->        - {% icon param-file %} *"Transcriptome"*: `gencode.v43.transcripts.fa.gz`
+>        - {% icon param-file %} *"Transcriptome"*: `StringTie transcriptome`
 >
 {: .hands_on}
 
 It generates a **switchAnalyzeRlist** object that contains all relevant information about the isoforms involved in isoform swtches, such as each comparison of an isoform between conditions.
-
 
 
 ## Pre-processing step
@@ -663,10 +696,10 @@ Each of those metrics is computed from a set of known protein-coding genes and a
 
 CPAT generates four files:
 
-- No ORF: Sequence IDs or BED entries with no ORF found. Should be considered as non-coding.
-- ORF probabilities (TSV): ORF information (strand, frame, start, end, size, Fickett TESTCODE score, Hexamer score) and coding probability.
-- ORF best probabilities (TSV): The information of the best ORF. This file is a subset of the previous one.
-- ORF sequences (FASTA): The top ORF sequences (at least 75 nucleotides long) in FASTA format.
+- **No ORF**: Sequence IDs or BED entries with no ORF found. Should be considered as non-coding.
+- **ORF probabilities (TSV)**: ORF information (strand, frame, start, end, size, Fickett TESTCODE score, Hexamer score) and coding probability.
+- **ORF best probabilities (TSV)**: The information of the best ORF. This file is a subset of the previous one.
+- **ORF sequences (FASTA)**: The top ORF sequences (at least 75 nucleotides long) in FASTA format.
 
 For the downstream analysis, we will use only the `ORF best probabilities`, but it will require some minor modifications in order to be used as input to **IsoformSwitchAnalyzeR**.
 
@@ -796,11 +829,11 @@ A genome-wide analysis is both useful for getting an overview of the extent of {
 
 It generates five tabular files with the results of the different statistical analysis:
 
-- Splicing summary: values of the different splicing events
-- Splicing enrichment: results of enrichment statistical analysis for the different splicing events.
-- Consequences summary: values of global usage of {IS}
-- Consequences enrichment: results of enrichment statistical analysis for the different functional consequences.
-- Switching gene/isoforms: list of genes with statistically significant isoform swiching between conditions (table 1). The switches are ranked (by p-value or switch size).
+- **Splicing summary**: values of the different splicing events
+- **Splicing enrichment**: results of enrichment statistical analysis for the different splicing events.
+- **Consequences summary**: values of global usage of {IS}
+- **Consequences enrichment**: results of enrichment statistical analysis for the different functional consequences.
+- **Switching gene/isoforms**: list of genes with statistically significant isoform swiching between conditions (table 1). The switches are ranked (by p-value or switch size).
 
 > <question-title></question-title>
 >
@@ -830,14 +863,14 @@ In this section we will assess whether there are differences with respect to the
 >
 > ![Figure 16. Classification of splicing patterns](../../images/differential_isoform/isoformSwitcher_splicing_patterns.png "Splicing patterns diversity. The observed splice patterns (left column) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).")
 >
-> - ES: Exon Skipping. Compared to the hypothetical pre-RNA a single exon was skipped in the isoform analyzed.
-> - MEE: Mutually exclusive exon. Special case were two isoforms form the same gene contains two mutually exclusive exons and which are not found in any of the other isoforms from that gene.
-> - MES: Multiple Exon Skipping. Compared to the hypothetical pre-RNA multiple consecutive exon was skipped in the isoform analyzed.
-> - IR: Intron Retention. Compared to the hypothetical pre-RNA an intron was retained in the isoform analyzed.
-> - A5: Alternative 5’end donor site. Compared to the hypothetical pre-RNA an alternative 5’end donor site was used. Since it is compared to the pre-RNA, the donor site used is per definition more upstream than the pre-RNA (the upstream exon is shorter).
-> - A3: Alternative 3’end acceptor site. Compared to the hypothetical pre-RNA an alternative 3’end acceptor site was used. Since it is compared to the pre-RNA, the donor site used is per definition more downstream than the pre-RNA (the downstream exon is shorter).
-> - ATSS: Alternative Transcription Start Sites. Compared to the hypothetical pre-RNA an alternative transcription start sites was used. Since it is compared to the pre-RNA, the ATSS site used is per definition more downstream the the pre-RNA.
-> - ATTS: Alternative Transcription Termination Sites. Compared to the hypothetical pre-RNA an alternative transcription Termination sites was used. Since it is compared to the pre-RNA, the ATTS site used is per definition more upstream than the pre-RNA.
+> - **ES**: Exon Skipping.
+> - **MEE**: Mutually exclusive exon. Special case were two isoforms form the same gene contains two mutually exclusive exons and which are not found in any of the other isoforms from that gene.
+> - **MES**: Multiple Exon Skipping.
+> - **IR**: Intron Retention.
+> - **A5**: Alternative 5'end donor site.
+> - **A3**: Alternative 3'end acceptor site.
+> - **ATSS**: Alternative Transcription Start Sites.
+> - **ATTS**: Alternative Transcription Termination Sites.
 >
 {: .comment}
 
