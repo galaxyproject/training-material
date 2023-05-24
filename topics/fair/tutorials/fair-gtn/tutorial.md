@@ -13,7 +13,7 @@ questions:
 objectives:
 - Learn about metadata and findability
 - Learn how to support system and content curation
-time_estimation: 30m
+time_estimation: "30M"
 key_points:
 - FAIR principles in Galaxy training development and content creation.
 tags:
