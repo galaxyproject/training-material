@@ -73,17 +73,17 @@ The first step of our analysis consists of retrieving the RNA-seq datasets from 
 >
 >      ```
 >      SRR9050437_Health	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	1
->      SRR9050437_Health	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	2
->      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	1
->      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	2
->      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	1
->      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	2
->      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	1
->      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	2
->      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	1
->      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	2
->      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	1
->      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	2
+>      SRR9050437_Health	{{ page.zenodo_link }}/files/SRR9050437R_health.fastq.gz	fastqsanger.gz	2
+>      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050438F_health.fastq.gz	fastqsanger.gz	1
+>      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050438R_health.fastq.gz	fastqsanger.gz	2
+>      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050439F_health.fastq.gz	fastqsanger.gz	1
+>      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050439R_health.fastq.gz	fastqsanger.gz	2
+>      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050440F_health.fastq.gz	fastqsanger.gz	1
+>      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050440R_health.fastq.gz	fastqsanger.gz	2
+>      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050441F_health.fastq.gz	fastqsanger.gz	1
+>      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050441R_health.fastq.gz	fastqsanger.gz	2
+>      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050442F_health.fastq.gz	fastqsanger.gz	1
+>      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050442R_health.fastq.gz	fastqsanger.gz	2
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
