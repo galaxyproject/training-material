@@ -4,7 +4,6 @@ title: FAIR in a nutshell
 ...
 abbreviations:
 FAIR: Findable, Accessible, Interoperable, Reusable
-
 zenodo_link: ''
 questions:
 - What do the FAIR principles stand for [Wilkinson et al. 2016](https://www.nature.com/articles/sdata201618)?
@@ -17,22 +16,19 @@ key_points:
 - FAIR data are data which meet principles of findability, accessibility, interoperability, and reusability (FAIR).
 - FAIR data are as open as possible, and as closed as necessary.
 - The main objective of FAIR data is to increase data reuse by researchers. 
-
-subtopic: fair-data
-
 tags:
-  - fair
-  - open
-  - data stewardship
-  
+- fair
+- open
+- data stewardship
+priority: 1
 contributions:
   authorship:
     - kkamieniecka
     - poterlowicz-lab
   editing:
     - hexylena
-    
-priority: 1
+subtopic: fair-data
+
 ---
 
 
