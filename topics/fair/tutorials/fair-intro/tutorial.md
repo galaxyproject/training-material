@@ -35,7 +35,7 @@ subtopic: fair-data
 
 The FAIR (Findable, Accessible, Interoperable, Reusable) principles emphasize machine-actionability. The main objective of FAIR is to increase data reuse by researchers. The core concepts of the FAIR principles are based on good scientific practice and intuitively grounded. 
 
-This tutorial is a short introduction to the FAIR principles and their origin. You can find out more [here](https://elixir-uk-dash.github.io/FAIR-Pointers/ep1/index.html).
+This tutorial is a short introduction to the FAIR principles and their origin. You can find out more at the [FAIR Pointers](https://elixir-uk-dash.github.io/FAIR-Pointers/ep1/index.html) online course.
 
 > <agenda-title></agenda-title>
 >
@@ -58,7 +58,7 @@ The FAIR Guiding Principles aid in designing data publishing platforms for easie
 | To be Interoperable:        | I1. (meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation. <br>I2. (meta)data use vocabularies that follow FAIR principles<br>I3. (meta)data include qualified references to other (meta)data                                                                                         |
 | To be Reusable:             | R1. meta(data) are richly described with a plurality of accurate and relevant attributes <br>R1.1. (meta)data are released with a clear and accessible data usage license<br>R1.2. (meta)data are associated with detailed provenance<br>R1.3. (meta)data meet domain-relevant community standards                                        |
 
-Table 1: The FAIR guiding principles as described in Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and stewardship. Sci Data 3, 160018 (2016) [https://doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18). 
+Table 1: The FAIR guiding principles as described in Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and stewardship {% cite wilkinson %}.
 
 A report from the European Commission Expert Group on [FAIR data](https://zenodo.org/record/1285272#.ZGc58exByha) describes the origins of FAIR and its development in 2014-2015 by a [FORCE11](https://force11.org/groups/) Working Group. The following exercise dips into this report and asks you to investigate some of FAIR’s history and foundation.
 
@@ -75,7 +75,7 @@ Open data can be modify, and distribute for any reason. Although extensively use
 
 - FAIR data needs to be captured and presented in a form that can be used.
 
-The published FAIR Guiding Principles: Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and stewardship. Sci Data 3, 160018 (2016) [https://doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18).
+The published FAIR Guiding Principles: Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and stewardship {% cite wilkinson %}.
 
 ## FAIRification and FAIRness of data
 Making your data FAIR compatible involves adopting the 15 guiding principles listed in Table 1, which is the process known as "FAIRification." The degree to which you adhere to these criteria determines how FAIR your data are. In other words, FAIRness refers to how FAIR your data is to a certain level and indicates a tacit method of evaluating its compliance.
