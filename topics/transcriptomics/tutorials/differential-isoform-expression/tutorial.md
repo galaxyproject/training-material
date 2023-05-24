@@ -447,7 +447,7 @@ Despite in this training we make use of RNA STAR as mapping tool, it is possible
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `gencode.v43.annotation.gtf.gz`
 >        - *"Use Reference transcripts only?"*: `No`
 >
-> 2. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.1+galaxy1) with the following parameters:
+> 2. {% tool [StringTie merge](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.1+galaxy1) with the following parameters:
 >    - {% icon param-collection %} *"Transcripts"*: `Assembled transcripts` (output of **StringTie**)
 >    - {% icon param-file %} *"Reference annotation to include in the merging"*: `gencode.v43.annotation.gtf.gz`
 >
