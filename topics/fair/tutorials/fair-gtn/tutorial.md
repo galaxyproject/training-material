@@ -29,6 +29,11 @@ contributions:
     - hexylena
 subtopic: fair-data
 
+requirements:
+  - type: "internal"
+    topic_name: fair
+    tutorials:
+      - fair-intro
 ---
 
 
