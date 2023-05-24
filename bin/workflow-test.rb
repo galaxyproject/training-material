@@ -28,9 +28,9 @@ def test_workflow(workflow_file, galaxy_id)
   p cmd.join(' ')
 
   Open3.popen3(*cmd) do |_stdin, stdout, stderr, wait_thr|
+    exit_status = wait_thr.value # Process::Status object returned
     File.write("#{directory}/#{workflow_base}.#{galaxy_id}.log", stdout.read)
     File.write("#{directory}/#{workflow_base}.#{galaxy_id}.err", stderr.read)
-    exit_status = wait_thr.value # Process::Status object returned
     puts "#{workflow_file} => #{exit_status} (#{stderr})"
   end
 end

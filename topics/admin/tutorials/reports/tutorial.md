@@ -29,6 +29,12 @@ requirements:
       - ansible-galaxy
 ---
 
+> <warning-title>Requires separate domain</warning-title>
+> As of [galaxyproject/galaxy#15966](https://github.com/galaxyproject/galaxy/issues/15966), reports has issues with running under a path prefix.
+> It should still function with a separate domain, if that is possible for your setup. Otherwise, it will not work.
+> If you wish to follow this tutorial, please be aware of this.
+{: .warning}
+
 The reports application gives some pre-configured analytics screens. These are very easy to setup and can help with debugging issues in Galaxy.
 
 > <agenda-title></agenda-title>
