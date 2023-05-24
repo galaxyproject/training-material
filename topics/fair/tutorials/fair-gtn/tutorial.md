@@ -42,8 +42,6 @@ Encouraging computational reproducibility in research, we will present a variety
 
 This tutorial outlines how to set and use existing resources to make Galaxy training development and content creation FAIR.
 
-Short introduction to FAIR data stewardship can be found [here](http://fellowship.elixiruknode.org/).
-
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -82,7 +80,7 @@ GTN Tutorials aim to follow best practices in course design, so that they can be
 ## Make your training materials (re)usable for trainers
 To help others determine whether the training materials are relevant and adaptable to their particular situations, metadata published alongside training materials should include context and sufficient description including: contributor details, license, description, learning outcomes, audience, requierments, tags/keywords, duration and last revision date Applying the proper licence and tagging training materials with metadata can make it simpler for others to (re)use and adapt them.
 
-GTN provide strong technical support and set of self learning material, you can find out more [here](https://training.galaxyproject.org/training-material/topics/contributing/).
+GTN provide strong technical support and set of [contributing self learning material](https://training.galaxyproject.org/training-material/topics/contributing/).
 
 ## Make your training materials usable for trainees
 Prerequisites and learning outcomes are particularly helpful metadata. To be effective, learning objectives must be written using active verbs that describe the expected trainee behaviours as well as the knowledge, skills, and expertise they will have received. Rich metadata requierments and SMART—Specific (Measurable, Attainable, Relevant, and Time-bound) learning outcomes following Bloom's taxonomy {% cite chevron2014metacognitive %} helps to clarify which trainees will benefit most from the training. Self-learning structure of the GNT materials supported by slides and video walkthroughs/tours adds another layer of usability.
@@ -97,5 +95,4 @@ It is crucial to keep your training materials up-to-date and so you are aware of
 There are many ways to improve the training content. It is crucial that we work together to make training materials FAIR so that everyone can benefit from them. These simple suggestions are intended to encourage dialogue and cooperation among Galaxy training community and help bring the latest developments to users.
 
 The Galaxy Training Network is an example of a robust, effective Community of Practice.
-For more information please look at this great article {% cite hiltemann2023galaxy %},
-and the corresponding FAIR guidlines {% cite fair-training-materials %}
+For more information please look at this great article {% cite hiltemann2023galaxy %}, the corresponding FAIR guidlines {% cite fair-training-materials %} and follow [short introduction to FAIR data stewardship](http://fellowship.elixiruknode.org/).
