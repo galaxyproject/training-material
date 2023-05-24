@@ -17,29 +17,25 @@ objectives:
 time_estimation: 10m
 key_points:
 - FAIR data management allows machines to automatically find and use the data accordingly.
-
-subtopic: fair-data
-
-requirements:
-  -
-    type: "internal"
-    topic_name: fair
-    tutorials:
-      - fair-intro
-      
 tags:
-  - fair
-  - dmp
-  - data stewardship
-  
+- fair
+- dmp
+- data stewardship
+priority: 2
 contributions:
   authorship:
     - kkamieniecka
     - poterlowicz-lab
   editing:
     - hexylena
-    
-priority: 2
+subtopic: fair-data
+
+requirements:
+  - type: "internal"
+    topic_name: fair
+    tutorials:
+      - fair-intro
+
 ---
 
 
