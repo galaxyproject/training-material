@@ -812,24 +812,31 @@
           
 
           <div class="method-source-code" id="test_workflow-source">
-            <pre><span class="ruby-comment"># File bin/workflow-test.rb, line 10</span>
+            <pre><span class="ruby-comment"># File bin/workflow-test.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_workflow</span>(<span class="ruby-identifier">workflow_file</span>, <span class="ruby-identifier">galaxy_id</span>)
+  <span class="ruby-identifier">directory</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">workflow_file</span>)
   <span class="ruby-identifier">workflow_base</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">workflow_file</span>, <span class="ruby-string">&#39;.ga&#39;</span>)
-  <span class="ruby-identifier">workflow_output_json</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">workflow_file</span>), <span class="ruby-node">&quot;#{workflow_base}.#{galaxy_id}.json&quot;</span>)
+  <span class="ruby-identifier">workflow_output_json</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">directory</span>, <span class="ruby-node">&quot;#{workflow_base}.#{galaxy_id}.json&quot;</span>)
   <span class="ruby-identifier">galaxy_url</span> = <span class="ruby-constant">GALAXIES</span>[<span class="ruby-identifier">galaxy_id</span>][<span class="ruby-value">:url</span>]
   <span class="ruby-identifier">galaxy_user_key</span> = <span class="ruby-constant">GALAXIES</span>[<span class="ruby-identifier">galaxy_id</span>][<span class="ruby-value">:key</span>]
-  <span class="ruby-identifier">cmd</span> = <span class="ruby-node">%(
-    planemo --verbose test
-      --galaxy_url #{galaxy_url}
-      --galaxy_user_key #{galaxy_user_key}
-      --no_shed_install
-      --engine external_galaxy
-      --polling_backoff 1
-      --test_output_json #{workflow_output_json}
-      #{workflow_file}
-  )</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:strip</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">strip</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">cmd</span>
-  <span class="ruby-node">`#{cmd}`</span>
+  <span class="ruby-identifier">cmd</span> = [
+    <span class="ruby-string">&#39;planemo&#39;</span>, <span class="ruby-string">&#39;--verbose&#39;</span>, <span class="ruby-string">&#39;test&#39;</span>, <span class="ruby-string">&#39;--galaxy_url&#39;</span>, <span class="ruby-identifier">galaxy_url</span>,
+    <span class="ruby-string">&#39;--galaxy_user_key&#39;</span>, <span class="ruby-identifier">galaxy_user_key</span>, <span class="ruby-string">&#39;--no_shed_install&#39;</span>, <span class="ruby-string">&#39;--engine&#39;</span>,
+    <span class="ruby-string">&#39;external_galaxy&#39;</span>, <span class="ruby-string">&#39;--polling_backoff&#39;</span>, <span class="ruby-string">&#39;1&#39;</span>, <span class="ruby-string">&#39;--test_output_json&#39;</span>,
+    <span class="ruby-identifier">workflow_output_json</span>, <span class="ruby-identifier">workflow_file</span>
+  ]
+  <span class="ruby-identifier">p</span> <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+
+  <span class="ruby-constant">Open3</span>.<span class="ruby-identifier">popen3</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">cmd</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">stdin</span>, <span class="ruby-identifier">stdout</span>, <span class="ruby-identifier">stderr</span>, <span class="ruby-identifier">wait_thr</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{directory}/#{workflow_base}.#{galaxy_id}.log&quot;</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">stdout</span>.<span class="ruby-identifier">read</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{directory}/#{workflow_base}.#{galaxy_id}.err&quot;</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">read</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">exit_status</span> = <span class="ruby-identifier">wait_thr</span>.<span class="ruby-identifier">value</span> <span class="ruby-comment"># Process::Status object returned</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{workflow_file} =&gt; #{exit_status} (#{stderr})&quot;</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

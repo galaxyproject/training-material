@@ -221,7 +221,7 @@
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;GTN_TRS_ERROR_NIL&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">nil?</span>
 
   <span class="ruby-identifier">m</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">%r{topics/(?&lt;topic&gt;.*)/tutorials/(?&lt;tutorial&gt;.*)/workflows/(?&lt;workflow&gt;.*)\.ga}</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow].downcase}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>
 
   <span class="ruby-string">&#39;GTN_TRS_ERROR&#39;</span>
 <span class="ruby-keyword">end</span></pre>
