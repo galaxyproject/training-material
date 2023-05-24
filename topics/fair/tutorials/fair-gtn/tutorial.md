@@ -5,7 +5,6 @@ title: FAIR Galaxy Training Material
 abbreviations:
 FAIR: Findable, Accessible, Interoperable, Reusable
 GTN: Galaxy Training Network 
-
 zenodo_link: ''
 questions:
 - What are the FAIR training materials?
@@ -17,28 +16,19 @@ objectives:
 time_estimation: 30m
 key_points:
 - FAIR principles in Galaxy training development and content creation.
-
-subtopic: fair-data
-
-requirements:
-  - type: "internal"
-    topic_name: fair
-    tutorials:
-      - fair-intro
-      
 tags:
-  - fair
-  - gtn
-  - training
-  
+- fair
+- gtn
+- training
+priority: 3
 contributions:
   authorship:
     - kkamieniecka
     - poterlowicz-lab
   editing:
     - hexylena
-    
-priority: 3
+subtopic: fair-data
+
 ---
 
 
