@@ -11,7 +11,7 @@ questions:
 objectives:
 - Learn the FAIR principles
 - Recognise the relationship between FAIR and Open data
-time_estimation: 10m
+time_estimation: "10M"
 key_points:
 - FAIR data are data which meet principles of findability, accessibility, interoperability, and reusability (FAIR).
 - FAIR data are as open as possible, and as closed as necessary.
