@@ -830,7 +830,7 @@ We will try to confirm this {IS} by visualising the coverage on this gene and mo
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Genes`
->                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `gencode.v43.annotation.gtf.gz`
+>                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `StringTie annotation`
 >                - *"height"*: `10`
 >                - *"Put all labels inside the plotted region"*: `Yes`
 >                - *"Bed style"*: `UCSC`
