@@ -256,7 +256,7 @@ The choice of **RNA STAR** as mapper is also determined by the sequencing techno
 
 So, let's perform the mapping step.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Generate intermediate file with RNA STAR</hands-on-title>
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
@@ -266,33 +266,38 @@ So, let's perform the mapping step.
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `gencode.v43.annotation.gtf.gz`
 >
-> 2. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
+{: .hands_on}
+
+This first **RNA STAR** run generates three collections: logs, alignments in BAM format, and a collection of BED files with informtion about splice junction coordinates. Now we will use  process the collection of BED files with the objective of filtering non-canonical junctions (column 5 > 0) sites and junctions supported by too few reads (column 7 > 2).
+
+> <hands-on-title> Pre-processing of splice junction coordinatesR</hands-on-title>
+> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >   - {% icon param-collection %} *"Datasets to concatenate"*: `spliced junctions.bed` (output of **RNA STAR** {% icon tool %})
 >
-> 3. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
+> 2. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
 >   - {% icon param-file %} *"File to process"*: output of **Concatenate datasets** {% icon tool %}
 >   - "*AWK Program*": `($5 > 0 && $7 > 2 && $6==0)`
 >
-> > <comment-title>Filtering and collapsing junctions</comment-title>
-> >
-> > The objective of this additional processing steps is to filter non-canonical junctions ($5 > 0) sites and junctions supported by too few reads (c7 > 2).
-> >
-> {: .comment}
 >
-> 4. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
+> 3. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >   - "*Cut columns*": `c1,c2,c3,c4,c5,c6`
 >   - {% icon param-file %} *"From"*: output of **Text reformatting** {% icon tool %}
 >
-> 5. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
+> 4. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
 >   - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
 >   - "*On column*": `Notihng selected`
 >
-> 6. {% tool [Unique lines](sort1) %} assuming sorted input file with the following parameters:
+> 5. {% tool [Unique lines](sort1) %} assuming sorted input file with the following parameters:
 >   - {% icon param-file %} *"File to scan for unique values"*: output of **Sort** {% icon tool %}
 > 
-> 7. Rename the output as `Splicing database`
+> 6. Rename the output as `Splicing database`
 >
-> 8. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters:
+{: .hands_on}
+
+Finally we will re-run **RNA STAR** in order to integrate the information about the new splicing events in the analysis.
+
+> <hands-on-title> Sequence alignment with STAR</hands-on-title>
+> 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
 >        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed samples` (output of **fastp** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
@@ -304,11 +309,10 @@ So, let's perform the mapping step.
 >    - *"Compute coverage"*: `Yes in bedgraph format`
 >       - *"Generate a coverage for each strand (stranded coverage)"*: `No`
 >
-> 9. Rename the output `RNA STAR on collection X: mapped.bam` as `Mapped collection`
+> 2. Rename the output `RNA STAR on collection X: mapped.bam` as `Mapped collection`
 >
 >
 {: .hands_on}
-
 
 Before moving to the transcriptome assembly and quantification step, we are going to use **RSeQC** in order to obtain some RNA-seq-specific quality control metrics.
 
@@ -366,7 +370,7 @@ Once all required outputs have been generated, we will integrate them by using *
 
 Now, we will integrate the outputs into **MultiQC**.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title>Report integration with MultiQC</hands-on-title>
 >
 > 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
@@ -563,7 +567,7 @@ Now, we can start with the {IS} analysis.
 
 We will generate 2 collections from the Stringtie output, one with the cancer samples and one with the healthy samples.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Split collection</hands-on-title>
 >
 > 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
 >    - *"Dataset collection"*: `StringTie on collection N: transcript-level expression measurements`
@@ -592,7 +596,7 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >
 {: .comment}
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title>Import data with IsoformSwitchAnalyzeR </hands-on-title>
 >
 > 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy3) %} with the following parameters:
 >    - *"Tool function mode"*: `Import data`
