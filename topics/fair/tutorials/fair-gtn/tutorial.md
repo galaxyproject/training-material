@@ -51,10 +51,11 @@ This tutorial outlines how to set and use existing resources to make Galaxy trai
 >
 {: .agenda}
 
-Here, we refer to a set of good practices illustration from Luc Wiegers and Celia van Gelder ({% cite wiegers_luc_2019_3593258 %}).
+Here, we refer to a set of good practices as described in *"Ten simple rules for making training materials FAIR"* {% cite Garcia2020 %}.
 
- ![ Ten simple rules for making training materials FAIR.](../../images/fair_gtn.png)
-Figure 1: Ten simple rules for making training materials FAIR. The primary guideline is to share; the Findability rules are description, identity, and registration; the latter two, along with access rules, correspond to accessibility; and the first rule is to share; With the exception of the format rule, which stands alone for interoperability, the remaining four criteria all relate to various facets of reusability.
+![Ten simple rules for making training materials FAIR.](../../images/fair_gtn.png "Ten simple rules for making training materials FAIR. The primary guideline is to share; the Findability rules are description, identity, and registration; the latter two, along with access rules, correspond to accessibility; and the first rule is to share; With the exception of the format rule, which stands alone for interoperability, the remaining four criteria all relate to various facets of reusability")
+
+Image credit: Luc Wiegers and Celia van Gelder {% cite wiegers_luc_2019_3593258 %}
 
 ## Plan to share your training materials
 
