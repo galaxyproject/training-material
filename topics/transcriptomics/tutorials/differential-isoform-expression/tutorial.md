@@ -478,7 +478,7 @@ Despite in this training we make use of RNA STAR as mapping tool, it is possible
 
 This step could be divided two substeps: transcriptome assembly and quantification isoform (figure. X). The first step will allow us to obtain a description of the transcriptome, including coordinates of whole transcriipts and exon localization. This information will be used for improving the quantification in the second step.
 
-![Figure 10. StringTie workflow](../../images/differential_isoform/stringtie_algorithm.png "StringTie worklow. Yellow area represent the substep corresponding to transcriptome assembly; this substep generates an annotaiton corresponding to the set of non-redundant transcripts observed in any of the RNA-Seq samples. The blue region corresponds to the quantification step, which makes use of the previously generated. Adapted from Perea et al. 2016.")
+![Figure 10. StringTie workflow](../../images/differential_isoform/stringtie_pipeline.png "StringTie worklow. Yellow area represent the substep corresponding to transcriptome assembly; this substep generates an annotaiton corresponding to the set of non-redundant transcripts observed in any of the RNA-Seq samples. The blue region corresponds to the quantification step, which makes use of the previously generated. Adapted from Perea et al. 2016.")
 
 Then, let's start with the transcriptome assemby.
 
@@ -1127,4 +1127,4 @@ Once we have imported the workflow, we can run the pipeline on the [original dat
 
 Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. Here we present a pipeline (fig. xx) for performing genome-wide alternative splicing analysis. 
 
-![Figure xxx. Genome-wide alternative splicing pipeline scheme](../../images/differential_isoform/full_workflow.png "Genome-wide isoform switching pipeline scheme. The whole workflow includes 39 steps.")
+![Figure xxx. Genome-wide alternative splicing pipeline scheme](../../images/differential_isoform/full_workflow.png "Genome-wide isoform switching pipeline scheme. The current version (v.3) includes 39 steps.")
