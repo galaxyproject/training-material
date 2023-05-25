@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: FAIR Galaxy Training Material
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
-  GTN: Galaxy Training Network 
+  GTN: Galaxy Training Network
 zenodo_link: ''
 questions:
 - What are the FAIR training materials?
@@ -38,7 +38,7 @@ requirements:
 
 # Introduction
 
-Encouraging computational reproducibility in research, we will present a variety of data stewardship recommendations that we have found useful in the process of training development. As part of that process, we are exploring the application of the FAIR (Findable, Accessible, Interoperable, Reusable) guidelines to the Galaxy Training Network (GTN) materials, in order to improve their secondary use and adaptation. 
+Encouraging computational reproducibility in research, we will present a variety of data stewardship recommendations that we have found useful in the process of training development. As part of that process, we are exploring the application of the FAIR (Findable, Accessible, Interoperable, Reusable) guidelines to the Galaxy Training Network (GTN) materials, in order to improve their secondary use and adaptation.
 
 This tutorial outlines how to set and use existing resources to make Galaxy training development and content creation FAIR.
 
@@ -51,12 +51,12 @@ This tutorial outlines how to set and use existing resources to make Galaxy trai
 >
 {: .agenda}
 
-Here, we refer to a set of good practices illustration from [Luc Wiegers and Celia van Gelder]({% cite wiegers_luc_2019_3593258 %}).
+Here, we refer to a set of good practices illustration from Luc Wiegers and Celia van Gelder ({% cite wiegers_luc_2019_3593258 %}).
 
  ![ Ten simple rules for making training materials FAIR.](../../images/fair_gtn.png)
-Figure 1: Ten simple rules for making training materials FAIR. The primary guideline is to share; the Findability rules are description, identity, and registration; the latter two, along with access rules, correspond to accessibility; and the first rule is to share; With the exception of the format rule, which stands alone for interoperability, the remaining four criteria all relate to various facets of reusability. 
+Figure 1: Ten simple rules for making training materials FAIR. The primary guideline is to share; the Findability rules are description, identity, and registration; the latter two, along with access rules, correspond to accessibility; and the first rule is to share; With the exception of the format rule, which stands alone for interoperability, the remaining four criteria all relate to various facets of reusability.
 
-## Plan to share your training materials 
+## Plan to share your training materials
 
 The Galaxy Training Network (GTN) provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide. It provides a record of training content development and ensure materials curation via  cross-domain repositories (i.g., [GitHub](https://github.com/galaxyproject/training-material), [Zenodo](https://zenodo.org/)). Keeping your materials in the right places from the begining will make it possible for you to more effectively and widely distribute your work without any duplication in contribution. Instruction where to start creating a new tutorial can be found at [GTN contributing tutorial]({% link topics/contributing/tutorials/create-new-tutorial/tutorial.md %}).
 
@@ -66,7 +66,7 @@ Describing your training materials with structured metadata is fundamental to ma
 
 ## Give your training materials a unique identity
 
-To support teachers and trainers, the GNT tutorials rely on specific tags and identifiers. Adding persistent identifiers (PIDs) to training materials makes them easy to cite and aids citation counting in research metric systems {% cite mcmurry2017identifiers %}. Providing PIDs ensure that tag/identifier will continue to work even if webpage location changes. Data used for tutorials are requierd to be stored at [Zenodo](https://zenodo.org/) and assosciated with [Digital Object Identifiers](https://www.doi.org/) (DOI). 
+To support teachers and trainers, the GNT tutorials rely on specific tags and identifiers. Adding persistent identifiers (PIDs) to training materials makes them easy to cite and aids citation counting in research metric systems {% cite mcmurry2017identifiers %}. Providing PIDs ensure that tag/identifier will continue to work even if webpage location changes. Data used for tutorials are requierd to be stored at [Zenodo](https://zenodo.org/) and assosciated with [Digital Object Identifiers](https://www.doi.org/) (DOI).
 
 ## Register your training materials online
 Sharing and publishing with the GTN training helps minimize the amount of time and effort required for instructors to prepare for and run their training courses and workshops, by providing templates and a complete training infrastructure. Online registry makes your content more discoverable and accessible to wider community. GTN tutorials are automatically registered on [TeSS](https://tess.elixir-europe.org/) (ELIXIR Training e-support system).
