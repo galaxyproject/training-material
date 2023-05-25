@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@6f6a08d6110967e4722180e125e2808fd7cdf2b5",
+  release: "galaxy-training-network@5cb72b305bd04682c11ef75cb14841e50013e3b5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -46,7 +46,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="DNA Methylation data analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-16 11:48:41 +0000">
+<meta name="DC.date" content="2023-05-25 11:53:18 +0000">
 <meta name="DC.creator" content="Joachim Wolff">
 <meta name="DC.creator" content="Devon Ryan">
 
@@ -88,7 +88,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-16 11:48:41 +0000",
+  "dateModified": "2023-05-25 11:53:18 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "DNA Methylation data analysis",
   "interactivityType": "mixed",
@@ -749,7 +749,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 16, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 25, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -775,52 +775,73 @@ Sentry.init({
                 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
 
-  <p>In this tutorial we will do:</p>
+  <p>In this tutorial, we will deal with:</p>
 
-  <ol>
-    <li>quality control</li>
-    <li>alignment</li>
-    <li>methylation extraction</li>
-    <li>visualization of methylation levels</li>
-    <li>differentially methylated regions analysis</li>
-  </ol>
-
-  <p>We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).</p>
+<ol id="markdown-toc">
+  <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+  <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a></li>
+  <li><a href="#alignment" id="markdown-toc-alignment">Alignment</a></li>
+  <li><a href="#methylation-bias-and-metric-extraction" id="markdown-toc-methylation-bias-and-metric-extraction">Methylation bias and metric extraction</a></li>
+  <li><a href="#visualization" id="markdown-toc-visualization">Visualization</a></li>
+  <li><a href="#metilene" id="markdown-toc-metilene">Metilene</a></li>
+</ol>
 
 </blockquote>
 
+<p>We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).</p>
+
 <p>This tutorial is based off of <span class="citation"><a href="#Lin2015">Lin <i>et al.</i> 2015</a></span>. The data we use in this tutorial is available at <a href="https://zenodo.org/record/557099">Zenodo</a>.</p>
 
-<h1 id="load-data-and-quality-control">Load data and quality control</h1>
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-the-data-and-look-at-the-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the data and look at the quality</div>
+<h1 id="data-upload">Data upload</h1>
 
-  <p>We load now the example dataset which will be used for the tutorial.</p>
+<p>We will start by loading the example dataset which will be used for the tutorial into Galaxy</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-the-data-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the data into Galaxy</div>
 
   <ol>
     <li>
-      <p>Load the two example datasets from our data library: subset_1.fastq.gz and subset_2.fastq.gz.</p>
+      <p>Create a new history</p>
 
-      <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-get-data-from-the-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-get-data-from-the-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Get data from the library<span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-        <ul>
-          <li>Click on <code class="language-plaintext highlighter-rouge">Shared Data</code> –&gt; <code class="language-plaintext highlighter-rouge">Data Libraries</code> and here <code class="language-plaintext highlighter-rouge">MethylSeq_2017</code></li>
-          <li>Select the uploaded datasets <code class="language-plaintext highlighter-rouge">subset_1.fastq.gz</code> and <code class="language-plaintext highlighter-rouge">subset_2.fastq.gz</code> as the fastq files</li>
-        </ul>
-      </blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p>Quality control</p>
+      <p>Import the two example datasets from Zenodo or the shared data library:</p>
 
-      <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-search-for-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-search-for-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Search for tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/557099/files/subset_1.fastq
+https://zenodo.org/record/557099/files/subset_2.fastq
+</code></pre></div>      </div>
 
-        <ul>
-          <li><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</li>
-          <li>Select the uploaded datasets <code class="language-plaintext highlighter-rouge">subset_1.fastq.gz</code> and <code class="language-plaintext highlighter-rouge">subset_2.fastq.gz</code> as the fastq files</li>
-        </ul>
-      </blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="quality-control">Quality Control</h1>
+
+<p>The first step in any analysis should always be quality control. We will use the FastQC tool to asses the quality of our reads and determine if we need to perform any data cleaning before proceeding with our analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality Control</div>
+
+  <ol>
+    <li><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Raw read data from your current history”</em>:  <code class="language-plaintext highlighter-rouge">subset_1.fastq.gz</code> and <code class="language-plaintext highlighter-rouge">subset_2.fastq.gz</code></li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-select-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-multiple-datasets" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Select multiple datasets<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>   <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
     </li>
     <li>
       <p>Go to the web page result page and have a closer look at ‘Per base sequence content’</p>
@@ -1257,7 +1278,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/6f6a08d6110967e4722180e125e2808fd7cdf2b5">6f6a08d</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5cb72b305bd04682c11ef75cb14841e50013e3b5">5cb72b3</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
