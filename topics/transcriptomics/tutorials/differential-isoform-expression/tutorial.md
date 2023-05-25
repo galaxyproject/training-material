@@ -265,11 +265,46 @@ So, let's perform the mapping step.
 >        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.genome.fa.gz`
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `gencode.v43.annotation.gtf.gz`
->    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, perform single-sample 2-pass mapping of all reads`
+>
+> 2. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
+>   - {% icon param-collection %} *"Datasets to concatenate"*: `spliced junctions.bed` (output of **RNA STAR** {% icon tool %})
+>
+> 3. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
+>   - {% icon param-file %} *"File to process"*: output of **Concatenate datasets** {% icon tool %}
+>   - "*AWK Program*": `($5 > 0 && $7 > 2 && $6==0)`
+>
+> > <comment-title>Filtering and collapsing junctions</comment-title>
+> >
+> > The objective of this additional processing steps is to filter non-canonical junctions ($5 > 0) sites and junctions supported by too few reads (c7 > 2).
+> >
+> {: .comment}
+>
+> 4. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
+>   - "*Cut columns*": `c1,c2,c3,c4,c5,c6`
+>   - {% icon param-file %} *"From"*: output of **Text reformatting** {% icon tool %}
+>
+> 5. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
+>   - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
+>   - "*On column*": `Notihng selected`
+>
+> 6. {% tool [Unique lines](sort1) %} assuming sorted input file with the following parameters:
+>   - {% icon param-file %} *"File to scan for unique values"*: output of **Sort** {% icon tool %}
+> 
+> 7. Rename the output as `Splicing database`
+>
+> 8. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters:
+>    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
+>        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed samples` (output of **fastp** {% icon tool %})
+>    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
+>        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.genome.fa.gz`
+>        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
+>            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `gencode.v43.annotation.gtf.gz`
+>    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, I want to use multi-sample 2-pass mapping and I have obtained splice junctions database of all samples throught previous 1-pass runs of STAR`
+>       - {% icon param-file %} *"Pregenerated splice junctions datasets of your samples"*: `Splicing database`
 >    - *"Compute coverage"*: `Yes in bedgraph format`
 >       - *"Generate a coverage for each strand (stranded coverage)"*: `No`
 >
-> 2. Rename the output `RNA STAR on collection X: mapped.bam` as `Mapped collection`
+> 9. Rename the output `RNA STAR on collection X: mapped.bam` as `Mapped collection`
 >
 >
 {: .hands_on}
@@ -417,7 +452,7 @@ After evaluating the quality of the RNA-seq data, we can start with the transcri
 >
 > ![Figure 10. StringTie algorithm details](../../images/differential_isoform/stringtie_algorithm.png "Transcript assembly pipeline for StringTie. It begins with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned. Source: Perea et al., 2015")
 >
-> **StringTie** uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate < 0.5%, then **StringTie** requires 25% more reads than usual to support that particular spliced alignment. In addition, if a spliced read spans a very long intron (more than 100,000 bp), **StringTie** accepts that alignment only if a larger anchor of 25 bp is present on both sides of the splice site. Here the term *anchor* refers to the portion of the read aligned within the exon beginning at the exon-intron boundary ({% cite Kovaka2019 %}).
+> **StringTie** uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate < 0.5%, then **StringTie** requires 25% more reads than usual to support that particular spliced alignment. In addition, if a spliced read spans a very long intron, **StringTie** accepts that alignment only if a larger anchor of 25 bp is present on both sides of the splice site. Here the term *anchor* refers to the portion of the read aligned within the exon beginning at the exon-intron boundary ({% cite Kovaka2019 %}).
 >
 >
 {: .comment}
@@ -569,8 +604,8 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Transcripts Health`
 >        - *"Quantification data source"*: `StringTie`
 >            - *"Average read length"*: `140`
->               - From *"Analysis mode"*:
->                 - {% icon param-file %} *"Annotation generated by StringTie merge"*: `StringTie annotation`
+>            - From *"Analysis mode"*:
+>              - {% icon param-file %} *"Annotation generated by StringTie merge"*: `StringTie annotation`
 >        - {% icon param-file %} *"Genome annotation (GTF)"*: `gencode.v43.annotation.gtf.gz`
 >        - {% icon param-file %} *"Transcriptome"*: `StringTie transcriptome`
 >
