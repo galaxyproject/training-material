@@ -496,7 +496,7 @@ This step could be divided two substeps: transcriptome assembly and quantificati
 {: .hands_on}
 
 
-Now, we can perform the transcriptome quantification in a more accurate way by making use of the new transcriptome annotation. Then, we mergend the collection into a single file.
+Now, we can perform the transcriptome quantification in a more accurate way by making use of the new transcriptome annotation.
 
 > <hands-on-title>Isoform quantification with StringTie</hands-on-title>
 >
