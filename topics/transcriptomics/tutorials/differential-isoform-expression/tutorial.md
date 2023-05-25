@@ -474,9 +474,11 @@ The main reason underlying the greater accuracy of **StringTie** most likely der
 >
 {: .details}
 
-Despite in this training we make use of RNA STAR as mapping tool, it is possible to use different splice-aware aligner such as HISAT2. Independently of the tool, each record with a spliced alignment should have the XS tag in the SAM/BAM file, which indicates the genomic strand from which the RNA that produced the read originated .
+Despite in this training we make use of RNA STAR as mapping tool, it is possible to use different splice-aware aligner such as HISAT2. Independently of the tool, each record with a spliced alignment should have the XS tag in the SAM/BAM file, which indicates the genomic strand from which the RNA that produced the read originated.
 
-> <hands-on-title> Transcripts assembly and quantification </hands-on-title>
+This step could be divided two substeps: transcriptome assembly and quantification isoform. The first step will allow us to obtain a description of the transcriptome, including coordinates of whole transcriipts and exon localization. This information will be used for improving the quantification in the second step.
+
+> <hands-on-title>Transcriptome assembly with StringTie</hands-on-title>
 >
 > 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
@@ -491,6 +493,12 @@ Despite in this training we make use of RNA STAR as mapping tool, it is possible
 >    - {% icon param-file %} *"Reference annotation to include in the merging"*: `gencode.v43.annotation.gtf.gz`
 >
 > 3. Rename the output as `StringTie annotation`
+{: .hands_on}
+
+
+Now, we can perform the transcriptome quantification in a more accurate way by making use of the new transcriptome annotation. Then, we mergend the collection into a single file.
+
+> <hands-on-title>Isoform quantification with StringTie</hands-on-title>
 >
 > 4. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
