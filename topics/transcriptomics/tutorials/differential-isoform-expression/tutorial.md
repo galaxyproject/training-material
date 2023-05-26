@@ -4,8 +4,8 @@ layout: tutorial_hands_on
 title: Genome-wide alternative splicing analysis
 zenodo_link: 'https://zenodo.org/record/7974884'
 tags:
-    - alternative-splicing
-    - isoform-switching
+    - alternative splicing
+    - isoform switching
 questions:
 - Are there statistically significant differences in gene splicing patterns between samples?
 - Are there significant isoform switching events between the experimental conditions?
