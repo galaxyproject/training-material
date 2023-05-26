@@ -1114,7 +1114,7 @@ Also, you will need to import the additional datasets. Now, we will import the w
 > 2. Click on the **Import** button, located in the right corner.
 > 3. In the section "Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)", click on **Search form**.
 >
-> 4. In the **TRS Server: *workflowhub.eu*** menu you should type `Genome-wide alternative splicing analysis`
+> 4. In the **TRS Server: *workflowhub.eu*** menu you should type `Genome-wide alternative splicing analysis v.2`
 > 5. Finally select the latest available version.
 {: .hands_on}
 
@@ -1123,12 +1123,11 @@ Once we have imported the workflow, we can run the pipeline on the [original dat
 > <hands-on-title>Genome-wide alternative splicing analysis workflow</hands-on-title>
 >
 > 1. Click in the **Workflow** menu, located in the top bar
-> 2. Click in the {% icon workflow-run %} **Run workflow** buttom corresponding to `Genome-wide alternative splicing analysis`
+> 2. Click in the {% icon workflow-run %} **Run workflow** buttom corresponding to `Genome-wide alternative splicing analysis v.2`
 > 3. In the **Workflow: VGP genome profile analysis** menu:
 >   - {% icon param-file %} "*Reference genome*": `GRCh38.p13.chrom5.fasta.gz`
 >   - {% icon param-file %} "*Genome annotation*": `GRCh38.p13.chrom5.gtf`
 >   - {% icon param-collection %} "*RNA-seq data collection*": `Original samples`
->   - {% icon param-file %} "*Transcriptome*": `gencode.v43.transcripts.fa.gz`
 >   - {% icon param-file %} "*Protein coding transcripts*": `gencode.v43.pc_transcripts.fa.gz`
 >   - {% icon param-file %} "*lncRNA transcripts*": `gencode.v43.lncRNA_transcripts.fa.gz`
 >   - {% icon param-file %} "*CPAT header*": `CPAT_header.tab`
