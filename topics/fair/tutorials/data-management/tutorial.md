@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: FAIR data management solutions
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
-  DMP: Data Management Plan 
+  DMP: Data Management Plan
   PID: Persistent Identifier
 
 zenodo_link: ''
@@ -11,7 +11,7 @@ questions:
 - Is there a reproducibility crisis?
 - What can go wrong with data analysis?
 objectives:
-- Learn best practices in data management 
+- Learn best practices in data management
 - Learn how to introduce computational reproducibility in your research
 time_estimation: "10M"
 key_points:
@@ -40,7 +40,7 @@ requirements:
 
 # Introduction
 
-The FAIR (Findable, Accessible, Interoperable, Reusable)  data stewardship created the foundation for sharing and publishing digital assets, especially data. This apply to machine accessibility and emphasize that all digital assets should share data in a way that will enable maximum use and reuse. 
+The FAIR (Findable, Accessible, Interoperable, Reusable)  data stewardship created the foundation for sharing and publishing digital assets, especially data. This apply to machine accessibility and emphasize that all digital assets should share data in a way that will enable maximum use and reuse.
 
 This tutorial is a short introduction to the FAIR data management framework. You can find out more at the [FAIR Pointers](https://elixir-uk-dash.github.io/FAIR-Pointers/ep1/index.html) online course.
 
@@ -65,18 +65,18 @@ There are several ways to set up FAIR (Findable, Accessible, Interoperable, Reus
 ## Data description and collection or reuse of existing data
 Reusing legacy datasets from institutional repositories or the digital libraries data collections can be FAIRified retrospectively. Support for data collection and development, throughout the life cycle can be provided and followed by change management and capacity improvement.
 
-Multi-part FAIR research need a way of wraping up, describing and sharing to promote the reuse of data. **Data sharing agreements** define the purpose of data sharing. Reference roles and responsibilities; specifies the purpose and legal requirements, e.g. for data security.
+Multi-part FAIR research need a way of wrapping up, describing and sharing to promote the reuse of data. **Data sharing agreements** define the purpose of data sharing. Reference roles and responsibilities; specifies the purpose and legal requirements, e.g. for data security.
 
 An institutional aim should be to create an integrated view and context over fragmented resources using their **persistent identifiers (PIDs)** and **metadata**. To make datasets findable, these metadata need to be as widely available as possible.
 
-Enhancing reproducibility, quality and transparency by ensuring information flow and showcasing secondary use is also a part of data management. Promoting hands-on data experience and events activities built an collaborative environment for reproducible science. 
+Enhancing reproducibility, quality and transparency by ensuring information flow and showcasing secondary use is also a part of data management. Promoting hands-on data experience and events activities built an collaborative environment for reproducible science.
 
 
 ## Documentation and data quality
-Having access to local knowledge and encouraging best practises at the departmental level is a smart way to offer direction on a variety of standards and methods. In order to implement FAIR data practises within an institution, resources and infrastructure are needed. To increase the possibility of data reuse, several FAIR requirements can be satisfied using freely available guidlines e.g. [RDMkit](https://rdmkit.elixir-europe.org/), [FAIR Cookbook](https://faircookbook.elixir-europe.org/content/home.html), [ELIXIR-UK DaSH Fellowship](https://sites.google.com/view/navigation-portal-fellowship/home?authuser=0) initiative and repositories e.g. [Zenodo](https://zenodo.org/), [Harvard Dataverse](https://dataverse.harvard.edu/) and [figshare](https://figshare.com/).
+Having access to local knowledge and encouraging best practises at the departmental level is a smart way to offer direction on a variety of standards and methods. In order to implement FAIR data practises within an institution, resources and infrastructure are needed. To increase the possibility of data reuse, several FAIR requirements can be satisfied using freely available guidelines e.g. [RDMkit](https://rdmkit.elixir-europe.org/), [FAIR Cookbook](https://faircookbook.elixir-europe.org/content/home.html), [ELIXIR-UK DaSH Fellowship](https://sites.google.com/view/navigation-portal-fellowship/home?authuser=0) initiative and repositories e.g. [Zenodo](https://zenodo.org/), [Harvard Dataverse](https://dataverse.harvard.edu/) and [figshare](https://figshare.com/).
 
 ## Storage and backup
-Systems for storage, backup and collaboration depend upon technical infrastructure.The **'3-2-1 rule'**, a recommendation for saving three copies of the research data—two locally and one off-site—is a standard backup strategy for research data. Data, metadata, and other research artefacts, such as ontologies, software, documentation, and papers, must all be kept in locations where they are adequately safeguarded, backed up, and accessible to maximise their potential for reuse. Appropriate access management is essential, in addition to backup and restoration services that protect researchers against data loss, theft, malfunctioning computers or storage media, and accidental deletion or inadvertent alterations to the data. 
+Systems for storage, backup and collaboration depend upon technical infrastructure.The **'3-2-1 rule'**, a recommendation for saving three copies of the research data—two locally and one off-site—is a standard backup strategy for research data. Data, metadata, and other research artefacts, such as ontologies, software, documentation, and papers, must all be kept in locations where they are adequately safeguarded, backed up, and accessible to maximise their potential for reuse. Appropriate access management is essential, in addition to backup and restoration services that protect researchers against data loss, theft, malfunctioning computers or storage media, and accidental deletion or inadvertent alterations to the data.
 
 The fundamental component of infrastructure required for the FAIR research data lifecycle are repository services. They allow access to the data, a persistent identifier, and the descriptive metadata that support interoperability. Repositories can include basic data storage, resource finding, managing access and use of private information, facilitating peer review of information related to publications or services requiring digital preservation, and more.
 
@@ -92,6 +92,6 @@ Up-to-date lists of available registered data repositories can be found at [re3d
 Institutional support network (data stewards, ethics boards, IP, legal and financial offices) need to guide researchers in safeguarding data management responsibilities and resources.
 
 # Conclusion
-You will have the advantage of saving time and resources by planning how to FAIRify your data in the early phases of your research endeavour. To put this into action, a data management strategy, or DMP, must be written. A DMP is also where you outline your data collection, storage, processing, sharing, and disposal procedures. Planning the management and FAIRification of your data reduces the possibility of issues down the road, whether they be practical, legal, or technical. 
+You will have the advantage of saving time and resources by planning how to FAIRify your data in the early phases of your research endeavour. To put this into action, a data management strategy, or DMP, must be written. A DMP is also where you outline your data collection, storage, processing, sharing, and disposal procedures. Planning the management and FAIRification of your data reduces the possibility of issues down the road, whether they be practical, legal, or technical.
 
-Keep in mind that creating FAIR data is a complex process. Consider how you can make your data FAIR one step at a time at each stage of the creation, collection, documentation, storage, sharing, archiving, and preservation processes. The framework for the rest of your study planning is laid by incorporating your data documentation. Imagine you want to use a dataset that was generated by another researcher and how you would like it to be found. Hope this quick introduction to FAIR data management solutions will help you improve not only your expirience with data but also influence others by using your guidence and FAIRified resources.
+Keep in mind that creating FAIR data is a complex process. Consider how you can make your data FAIR one step at a time at each stage of the creation, collection, documentation, storage, sharing, archiving, and preservation processes. The framework for the rest of your study planning is laid by incorporating your data documentation. Imagine you want to use a dataset that was generated by another researcher and how you would like it to be found. Hope this quick introduction to FAIR data management solutions will help you improve not only your experience with data but also influence others by using your guidance and FAIRified resources.
