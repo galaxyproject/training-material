@@ -268,7 +268,7 @@ So, let's perform the mapping step.
 >
 {: .hands_on}
 
-This first **RNA STAR** run generates three collections: logs, alignments in BAM format, and a collection of BED files with informtion about splice junction coordinates. Now we will use  process the collection of BED files with the objective of filtering non-canonical junctions (column 5 > 0) sites and junctions supported by too few reads (column 7 > 2).
+This first **RNA STAR** run generates three collections: logs, alignments in BAM format, and a collection of BED files with informtion about splice junction coordinates. Now we will use  process the collection of BED files with the objective of filtering non-canonical (column 5 > 0), unannotated (column 6 == 0) junction sites and junctions supported by too few reads (column 7 > 2).
 
 > <hands-on-title> Pre-processing of splice junction coordinatesR</hands-on-title>
 > 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
@@ -486,7 +486,7 @@ Then, let's start with the transcriptome assemby.
 >
 > 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
->        - {% icon param-file %} *"Input short mapped reads"*: `Mapped collection`
+>        - {% icon param-collection %} *"Input short mapped reads"*: `Mapped collection`
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
 >        - *"Reference file"*: `Use a file from history`
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `gencode.v43.annotation.gtf.gz`
@@ -506,7 +506,7 @@ Now, we can perform the transcriptome quantification in a more accurate way by m
 >
 > 4. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
->        - {% icon param-file %} *"Input short mapped reads"*: `Mapped collection`
+>        - {% icon param-collection %} *"Input short mapped reads"*: `Mapped collection`
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
 >        - *"Reference file"*: `Use a file from history`
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `StringTie annotation`
