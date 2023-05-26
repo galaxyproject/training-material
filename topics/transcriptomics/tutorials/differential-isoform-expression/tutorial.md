@@ -220,7 +220,7 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 >
 {: .hands_on}
 
-# RNA-seq mapping and isoform quantification
+# RNA-seq mapping and evaluation
 
 The following section can be considered as the hard-core part of the training, the reason is  not because of it’s complexity (not all the details about the computational procedures will be presented, just those elements required for a basic understanding), but because it allows to characterize isoform quantification approach as genome-guided-based method.
 
@@ -446,7 +446,7 @@ According to the results, despite the number of new (or partially new) splicing 
 
 After evaluating the quality of the RNA-seq data, we can start with the transcriptome assembly step.
 
-## Transcriptome assembly and quantification with **StringTie**
+# Transcriptome assembly and quantification with **StringTie**
 
 **StringTie** is a fast and highly efficient assembler of RNA-seq alignments into potential transcripts. It uses a network flow algorithm to reconstruct transcripts and quantitate them simultaneously. This algorithm is combined with an assembly method to merge read pairs into full fragments in the initial phase ({% cite Kovaka2019 %}, {% cite Pertea2015 %}).
 
