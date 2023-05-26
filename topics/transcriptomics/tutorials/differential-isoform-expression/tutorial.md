@@ -1021,19 +1021,7 @@ Here will evaluate the genome-wide changes in isoform usage. This type of analys
 
 ![Figure 24. Genome-wide changes violing plot](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Genome-wide changes violin plot. The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
 
-As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events.
-
-> <comment-title>Results on original full-data</comment-title>
->
-> Let's have a look at the results corresponding to the complete original dataset analysis.
->
-> ![Figure 24. Genome-wide changes violing plot fulldata](../../images/differential_isoform/isoformSwitchAnalyzer_summary_fulldata.png "Genome-wide changes violin plot of full datasets. The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
->
-> According with results corresponding to the whole dataset, the differential isoform usage differences are not homogeneously distributed across the genome.
->
-{: .comment}
-
-Finally, we can have a look at the remaining plots (fig. 25). 
+As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events. Finally, we can have a look at the remaining plots (fig. 25). 
 
 ![Figure 25. Genome-wide changes volcano and scatterplots](../../images/differential_isoform/isoformSwitchAnalyzer_volcano.png "Genome-wide isoform switching overview. The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (A). The scaterplot represents the dIF vs gene log2 fold change (B).")
 
@@ -1043,9 +1031,9 @@ Here we can see that changes in gene expression and isoform switches are not in 
 >
 > Let's have a look at the results corresponding to the complete original dataset analysis.
 >
-> ![Figure 25. Genome-wide changes volcano and scatterplots fulldata](../../images/differential_isoform/isoformSwitchAnalyzer_volcano_fulldata.png "Genome-wide isoform switching overview of full datasets. The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (A). The scaterplot represents the dIF vs gene log2 fold change (B).")
+> ![Figure 24. Genome-wide changes violing plot fulldata](../../images/differential_isoform/isoformSwitchAnalyzer_summary_fulldata.png "Genome-wide changes violin plot of full datasets. The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
 >
-> According with the results (fig. 22), the difference in intron retention is statistically significant; it means that the probability of a specific intron to remain unspliced in the mature mRNA in cancer is higher than in health tissues.
+> According with results corresponding to the whole dataset, the differential isoform usage differences are not homogeneously distributed across the genome.
 >
 {: .comment}
 
