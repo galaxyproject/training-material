@@ -1125,8 +1125,8 @@ Once we have imported the workflow, we can run the pipeline on the [original dat
 > 1. Click in the **Workflow** menu, located in the top bar
 > 2. Click in the {% icon workflow-run %} **Run workflow** buttom corresponding to `Genome-wide alternative splicing analysis v.2`
 > 3. In the **Workflow: VGP genome profile analysis** menu:
->   - {% icon param-file %} "*Reference genome*": `GRCh38.p13.chrom5.fasta.gz`
->   - {% icon param-file %} "*Genome annotation*": `GRCh38.p13.chrom5.gtf`
+>   - {% icon param-file %} "*Reference genome*": `GRCh38.p13.genome.fa.gz`
+>   - {% icon param-file %} "*Genome annotation*": `gencode.v43.annotation.gtf.gz`
 >   - {% icon param-collection %} "*RNA-seq data collection*": `Original samples`
 >   - {% icon param-file %} "*Protein coding transcripts*": `gencode.v43.pc_transcripts.fa.gz`
 >   - {% icon param-file %} "*lncRNA transcripts*": `gencode.v43.lncRNA_transcripts.fa.gz`
