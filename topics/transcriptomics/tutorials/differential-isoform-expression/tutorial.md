@@ -285,7 +285,7 @@ This first **RNA STAR** run generates three collections: logs, alignments in BAM
 >
 > 4. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
 >   - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
->   - "*On column*": `Notihng selected`
+>   - "*On column*": `Column 1`
 >
 > 5. {% tool [Unique lines](sort1) %} assuming sorted input file with the following parameters:
 >   - {% icon param-file %} *"File to scan for unique values"*: output of **Sort** {% icon tool %}
