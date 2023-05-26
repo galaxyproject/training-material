@@ -268,7 +268,7 @@ So, let's perform the mapping step.
 >
 {: .hands_on}
 
-This first **RNA STAR** run generates three collections: logs, alignments in BAM format, and a collection of BED files with information about splice junction coordinates. Now we will use  process the collection of BED files with the objective of filtering non-canonical (column 5 > 0), unannotated (column 6 == 0) junction sites and junctions supported by too few reads (column 7 > 2).
+This first **RNA STAR** run generates three collections: logs, alignments in BAM format, and a collection of BED files with information about splice junction coordinates. Now we will process the collection of BED files with the objective of filtering non-canonical (column 5 > 0), unannotated (column 6 == 0) junction sites and junctions supported by too few reads (column 7 > 2).
 
 > <hands-on-title> Pre-processing of splice junction coordinatesR</hands-on-title>
 > 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
@@ -294,7 +294,7 @@ This first **RNA STAR** run generates three collections: logs, alignments in BAM
 >
 {: .hands_on}
 
-Finally we will re-run **RNA STAR** in order to integrate the information about the new splicing events in the analysis.
+Finally, we will re-run **RNA STAR** in order to integrate the information about the new splicing events in the analysis.
 
 > <hands-on-title> Sequence alignment with STAR</hands-on-title>
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters:
@@ -466,7 +466,7 @@ The main reason underlying the greater accuracy of **StringTie** most likely der
 >
 > To handle the high error rates in the long reads, **StringTie** implements two techniques:
 >
-> First, it correct potentially wrong splice sites by checking all the splice sites present in the alignment of a read with a high-error alignment rate. If a splice site is not supported by any low-error alignment reads, then it tries to find a nearby splice site that is supported by the most alignments among all nearby splice sites. 
+> First, it corrects potentially wrong splice sites by checking all the splice sites present in the alignment of a read with a high-error alignment rate. If a splice site is not supported by any low-error alignment reads, then it tries to find a nearby splice site that is supported by the most alignments among all nearby splice sites. 
 >
 > Secondly, it implements a pruning algorithm that reduces the size of the splicing graph to a more realistic size by removing the edges in the graph starting from the edge least supported by reads to the most supported edge, until the number of nodes in the splicing graph falls under a given threshold.
 >
@@ -474,9 +474,9 @@ The main reason underlying the greater accuracy of **StringTie** most likely der
 
 Despite in this training we make use of **RNA STAR** as mapping tool, it is possible to use different splice-aware aligner such as **HISAT2**. Independently of the tool, each record with a spliced alignment should have the XS tag in the SAM/BAM file, which indicates the genomic strand from which the RNA that produced the read originated.
 
-This step could be divided IN two substeps: transcriptome assembly and quantification isoform (fig. 11). The first step will allow us to obtain a transcriptome annotation, including coordinates of whole transcriipts and exon localization. This information will be used for improving the quantification in the second step.
+This step could be divided into two substeps: transcriptome assembly and quantification isoform (fig. 11). The first step will allow us to obtain a transcriptome annotation, including coordinates of whole transcripts and exon localization. This information will be used for improving the quantification in the second step.
 
-![Figure 11. StringTie workflow](../../images/differential_isoform/stringtie_pipeline.png "StringTie worklow. Yellow area represent the substep corresponding to transcriptome assembly; this substep generates an annotaiton corresponding to the set of non-redundant transcripts observed in any of the RNA-Seq samples. The grey region corresponds to the quantification step, which makes use of the previously generated. Adapted from Perea et al. 2016.")
+![Figure 11. StringTie workflow](../../images/differential_isoform/stringtie_pipeline.png "StringTie worklow. The yellow area represents the substep corresponding to transcriptome assembly; this substep generates an annotation corresponding to the set of non-redundant transcripts observed in any of the RNA-Seq samples. The grey region corresponds to the quantification step, which makes use of the previously generated. Adapted from Perea et al. 2016.")
 
 Then, let's start with the transcriptome assemby.
 
@@ -531,7 +531,7 @@ Now, we can perform the transcriptome quantification in a more accurate way by m
 >
 {: .details}
 
-Before starting with the analysis of the isoforms, we will extract the transcript sequences from the annotation generated by **Stringtie merge**. This output will be used in the next section.
+Before starting with the analysis of the isoforms, we will extract the transcript sequences from the annotation generated by **StringTie merge**. This output will be used in the next section.
 
 > <hands-on-title>Extract transcriptome</hands-on-title>
 >
@@ -631,9 +631,9 @@ It generates a **switchAnalyzeRlist** object that contains all relevant informat
 
 ## Pre-processing step
 
-Once the datasets have been imported into a RData file, we can start with the pre-processing step. In order to enhace the reliability of the downstream analysis, it is important to remove the non-informative genes/isoforms (e.g. single isoform genes and non-expressed isoforms).
+Once the datasets have been imported into a RData file, we can start with the pre-processing step. In order to enhance the reliability of the downstream analysis, it is important to remove the non-informative genes/isoforms (e.g. single isoform genes and non-expressed isoforms).
 
-After the pre-processing, **IsoformSwitchAnalyzieR** performs the differential isoform usage analysis by using **DESXSeq**, which despite originally designed for testing differential exon usage, it has demonstrated to perform exceptionally well for differential isoform usage.**DEXSeq** uses generalized linear models to assess the significance of observed differences in isoform usage values between conditions, taking into account the biological variation between replicates ({% cite dexseq %}).
+After the pre-processing, **IsoformSwitchAnalyzieR** performs the differential isoform usage analysis by using **DESXSeq**, which despite originally designed for testing differential exon usage, it has been demonstrated to perform exceptionally well for differential isoform usage.**DEXSeq** uses generalized linear models to assess the significance of observed differences in isoform usage values between conditions, taking into account the biological variation between replicates ({% cite dexseq %}).
 
 > <comment-title>Difference in isoform fraction concept</comment-title>
 >
@@ -808,7 +808,7 @@ Let's have a look at the generated plot (fig. 14).
 
 ![Figure 14. RGMB gene isoform expression profile plot](../../images/differential_isoform/isoformSwitchAnalyzer_gene.png "RGMB isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
 
-We can appreciate that despite differences in overall gene expression are not statistically significant between health and cancerous tissues, there exists stringking differences between isoforms:
+We can appreciate that despite differences in overall gene expression are not statistically significant between healthy and cancerous tissues, there exists stringking differences between isoforms:
 
 - The isoform [ENST00000308234.11](https://www.uniprot.org/uniprotkb/J3KNF6/entry), which encodes the 478 aminoacid **Repulsive guidance molecule BMP co-receptor b protein** is repressed in cancer. This transcript shows statistically significant differential usage. 
 - The isoform [ENST00000513185.3](https://www.uniprot.org/uniprotkb/Q6NW40/entry), which encodes the 437 aminoanid **Repulsive guidance molecule B** is induced.
@@ -934,7 +934,7 @@ In this section we will assess whether there are differences with respect to the
 >
 > ![Figure 19. Classification of splicing patterns](../../images/differential_isoform/isoformSwitcher_splicing_patterns.png "Splicing patterns diversity. The observed splice patterns (left column) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).")
 >
-> Mutually exclusive exon (MEE) is a special case were two isoforms from the same gene contains exons which are not found in any of the other isoforms from that gene.
+> Mutually exclusive exon (MEE) is a special case where two isoforms from the same gene contain exons which are not found in any of the other isoforms from that gene.
 >
 {: .comment}
 
@@ -944,16 +944,16 @@ First, we will start analyzing the total number of splicing events (fig. 20).
 
 From the figure 20 , it can be hypothesised that some of the {AS} events are not equally used. To formally analyze this type of uneven {AS}, **IsoformSwithAnalyzeR** computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 21).
 
-![Figure 21. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
+![Figure 21. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. The dashed line indicate no enrichment/depletion and the color indicate if FDR < 0.05 (red) or not (black).")
 
 
-According with the results (fig. 21), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the origital datasets in order to speed up the analysis).
+According to the results (fig. 21), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the original datasets in order to speed up the analysis).
 
 > <comment-title>Results on original full-data</comment-title>
 >
 > If we perform the analysis on the original datasets, we can see a more homogeneous distribution of the different splice junction patters (fig. 22.A).
 >
-> ![Figure 22. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event_fulldata.png "Comparison of differential splicing events. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event (A). The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black) (B).")
+> ![Figure 22. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event_fulldata.png "Comparison of differential splicing events. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event (A). The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. The dashed line indicate no enrichment/depletion and the color indicate if FDR < 0.05 (red) or not (black) (B).")
 >
 > According the results, there's statistically significant mutually exon skipping events in cancer tissues (fig. 22.B) On the other hand, health tissues utilize alternative 5’ acceptor sites (A5) more than cancer tissues, when compared with the hyphotetical pre-RNA.
 >
@@ -1013,7 +1013,7 @@ To assess this observation, **IsoformSwitchAnalyzeR** performs a standard propor
 
 #### Analysis of genome-wide changes in isoform usage
 
-Here will evaluate the genome-wide changes in isoform usage. This type of analysis allows to identify if differentes in splicing events are genome-wide or retricted to specific regions, and is particular interesting if the expected difference between conditions is large (fig. 27).
+Here, we will evaluate the genome-wide changes in isoform usage. This type of analysis allows us to identify if differences in splicing events are genome-wide or restricted to specific regions, and is particularly interesting if the expected difference between conditions is large (fig. 27).
 
 ![Figure 27. Genome-wide changes violing plot](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Genome-wide changes violin plot. The dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
 
@@ -1093,8 +1093,8 @@ Next we will retrieve the datasets corresponding to the original reference genom
 >      ```
 >      gencode.v43.lncRNA_transcripts.fa.gz	{{ page.zenodo_link }}/files/gencode.v43.lncRNA_transcripts.fa.gz
 >      gencode.v43.pc_transcripts.fa.gz	{{ page.zenodo_link }}/files/gencode.v43.pc_transcripts.fa.gz
->      GRCh38.p13.chrom5.gtf	{{ page.zenodo_link }}/files/GRCh38.p13.chrom5.gtf
->      GRCh38.p13.chrom5.fasta.gz	{{ page.zenodo_link }}/files/GRCh38.p13.chrom5.fasta.gz
+>      gencode.v43.annotation.gtf.gz	{{ page.zenodo_link }}/files/gencode.v43.annotation.gtf.gz
+>      GRCh38.p13.genome.fa.gz	{{ page.zenodo_link }}/files/GRCh38.p13.genome.fa.gz
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
