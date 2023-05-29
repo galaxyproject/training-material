@@ -138,7 +138,7 @@ Next we will retrieve the remaining datasets.
 > > <hands-on-title>Dataset subsampling</hands-on-title>
 > >
 > > 1. {% tool [Convert FASTA to Tabular](CONVERTER_fasta_to_tabular) %} converter with the following parameters:
-> >    - {% icon param-files %} *"Fasta file"*: `GRCh38.p13.chrom5.fasta.gz`
+> >    - {% icon param-files %} *"Fasta file"*: `GRCh38.p13.genome.fa.gz`
 > > 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} converter with the following parameters:
 > >    - {% icon param-files %} *"Select lines from"*: Output of **Convert FASTA to Tabular**
 > >    - *"Regular Expression2"*: `chr5`
