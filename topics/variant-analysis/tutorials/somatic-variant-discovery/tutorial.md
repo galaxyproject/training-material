@@ -18,10 +18,10 @@ key_points:
   to minimize false-positive hCNVs.
 contributors:
 - Khaled196
-- kpbioteam
+- kkamieniecka
 - wm75
 - d-salgado
-- kpoterlowicz
+- poterlowicz-lab
 
 ---
 
