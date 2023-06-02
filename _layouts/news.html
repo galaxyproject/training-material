@@ -69,11 +69,10 @@ layout: page
 <h2>Recent News</h2>
 <a href="{% link news.md %}">See all news</a>
 
-<div class="newslist">
+<div>
 {% assign recent = site.categories['news'] | where_exp: "item", "item.path != page.path" | slice: 0, 5 %}
 
 {% for n in recent %}
 	{% include _includes/news-card-small.html news=n %}
 {% endfor %}
 </div>
-
