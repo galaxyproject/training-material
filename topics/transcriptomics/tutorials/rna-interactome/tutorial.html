@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html">
@@ -777,7 +773,7 @@ results. <code class="language-plaintext highlighter-rouge">ChiRA</code> uses <c
   alignment and outputs only the best alignments per read. The final part of this tutorial gives an insight into how to
   filter, export and visualize your results using the visualization framework <code class="language-plaintext highlighter-rouge">ChiRAViz</code>.</p>
 
-<figure id="figure-1"><img src="../../images/rna-interactome/chira.png" alt="ChiRA workflow. " width="2090" height="2243" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> ChiRA workflow. First the reads deduplicated and mapped to transcriptome. Then the mapped loci are merged based on overlapping. The merged loci are quantified and the interactions are scored and reported.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/rna-interactome/chira.png" alt="ChiRA workflow. " width="2090" height="2243" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> ChiRA workflow. First the reads deduplicated and mapped to transcriptome. Then the mapped loci are merged based on overlapping. The merged loci are quantified and the interactions are scored and reported.</figcaption></figure>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -940,7 +936,7 @@ standard Illumina adapters, we need to provide them manually.</p>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">Read 1 Output</code> (output of <strong>cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>Observe the <strong>Per base sequence content</strong>
-<img src="../../images/rna-interactome/chira_fastqc_seq_content.png" alt="FastQC per base sequence content. " loading="lazy" /></li>
+<img src="../../images/rna-interactome/chira_fastqc_seq_content.png" alt="FastQC per base sequence content. " width="1125" height="600" loading="lazy" /></li>
       </ul>
     </li>
   </ol>
@@ -959,7 +955,7 @@ plot. It looks like there is huge difference in base composition after 55th base
 sequences that constitute this is very important. From the sequence length distribution, most of the sequences are
 between 53 and 57 bases long. We see the abnormality in the per base sequence content because it is from
 very few sequences.
-<img src="../../images/rna-interactome/chira_fastqc_seq_length.png" alt="FastQC sequence length distribution. " loading="lazy" /></p>
+<img src="../../images/rna-interactome/chira_fastqc_seq_length.png" alt="FastQC sequence length distribution. " width="800" height="600" loading="lazy" /></p>
 
   </blockquote>
 
@@ -1188,7 +1184,7 @@ This loads the data into the visualization framework and shows some basic plots 
       <ul>
         <li>The visualization split into two to show the left and the right arms information.</li>
         <li>On home page pie charts of left and right chimeric arms, types of interactions and top 50 expressed RNAs are shown.
-<img src="../../images/rna-interactome/chiraviz_view1.png" alt="ChiRAViz home page. " loading="lazy" /></li>
+<img src="../../images/rna-interactome/chiraviz_view1.png" alt="ChiRAViz home page. " width="1099" height="1161" loading="lazy" /></li>
       </ul>
     </li>
     <li>
@@ -1196,7 +1192,7 @@ This loads the data into the visualization framework and shows some basic plots 
 and then filter the interactions we are interested in next page. To get all interactions, choose <code class="language-plaintext highlighter-rouge">all</code> in both dropdowns
 on the top and then click on <strong>“Get interactions”</strong>.</p>
 
-      <p><img src="../../images/rna-interactome/chiraviz_choose.png" alt="ChiRAViz selector. " loading="lazy" /></p>
+      <p><img src="../../images/rna-interactome/chiraviz_choose.png" alt="ChiRAViz selector. " width="663" height="48" loading="lazy" /></p>
     </li>
   </ol>
 
@@ -1224,7 +1220,7 @@ This filters out 10 more records and results in 17 records.</li>
     <li>At this point, you can select individual interactions by clicking the individual checkboxes or by clicking <strong>“Check all”</strong>. Both the possibilities are highlighted in red color in the following figure.</li>
     <li>Click on <strong>Summary</strong> to view the summary plots for the selected interactions.</li>
     <li>Clicking on <strong>Export</strong> to export the selected interactions to a file.
-<img src="../../images/rna-interactome/chiraviz_view2.png" alt="ChiRAViz filter page. " loading="lazy" /></li>
+<img src="../../images/rna-interactome/chiraviz_view2.png" alt="ChiRAViz filter page. " width="1376" height="952" loading="lazy" /></li>
   </ul>
 </blockquote>
 
@@ -1254,7 +1250,7 @@ corresponds to 4 different transcripts of the target gene <code class="language-
         <li><strong>“Chimera”</strong> panel in the middle depicts the mapping positions on the read with read length.</li>
         <li><strong>“Interacting partners”</strong> panel shows the information on which transcripts the left and right arm are mapping to with their alignment positions on the transcripts.</li>
         <li><strong>“Alignment Information”</strong> panel shows the alignment if present with a possibility to download the alignment.
-<img src="../../images/rna-interactome/chiraviz_view3.png" alt="ChiRAViz single interaction. " loading="lazy" /></li>
+<img src="../../images/rna-interactome/chiraviz_view3.png" alt="ChiRAViz single interaction. " width="1240" height="749" loading="lazy" /></li>
       </ul>
     </li>
   </ul>
@@ -1315,6 +1311,9 @@ corresponds to 4 different transcripts of the target gene <code class="language-
                             Pavankumar Videm,  <b>RNA-RNA interactome data analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1336,12 +1335,12 @@ corresponds to 4 different transcripts of the target gene <code class="language-
 
 <code id="citation-code">@misc{transcriptomics-rna-interactome,
 author = "Pavankumar Videm",
-title = "RNA-RNA interactome data analysis (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "RNA-RNA interactome data analysis (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1458,7 +1457,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1490,7 +1489,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

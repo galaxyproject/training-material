@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/tutorial.html">
@@ -1689,7 +1685,7 @@ sleep 1
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
-          <figure id="figure-1"><img src="../../images/graph.png" alt="A simple graph. " width="888" height="635" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A simple graph showing the structure of the infrastructure in this lesson</figcaption></figure>
+          <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/graph.png" alt="A simple graph. " width="888" height="635" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A simple graph showing the structure of the infrastructure in this lesson</figcaption></figure>
         </blockquote>
       </blockquote>
     </li>
@@ -1699,13 +1695,13 @@ sleep 1
 
 <p>This is a very simple resrouce graph:</p>
 
-<figure id="figure-2"><img src="../../images/graph.png" alt="A simple graph. " width="888" height="635" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A simple graph showing the structure of the infrastructure in this lesson</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/graph.png" alt="A simple graph. " width="888" height="635" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A simple graph showing the structure of the infrastructure in this lesson</figcaption></figure>
 
 <p>The dependencies follow the arrows, the NFS depends on the keypair being setup. The <code class="language-plaintext highlighter-rouge">test</code> machine (central manager) depends on the NFS server being available (and having an IP), the exec nodes depend on the central manager server. This is a somewhat simplified view, there are more dependencies which are not shown for simplicity (e.g. the exec nodes depend on NFS)</p>
 
 <p>If you have variables this can produce a more complex dependency graph:</p>
 
-<figure id="figure-3"><img src="../../images/graph2.png" alt="A more complex graph showing variables. " width="1385" height="635" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A more complex graph showing variables</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/graph2.png" alt="A more complex graph showing variables. " width="1385" height="635" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A more complex graph showing variables</figcaption></figure>
 
 <p>Once you develop complex infrastructure, these graphics become less useful.</p>
 
@@ -1846,6 +1842,9 @@ condor_drain <span class="si">$(</span><span class="nb">hostname</span><span cla
                             Helena Rasche,  <b>Deploying a compute cluster in OpenStack via Terraform (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1867,12 +1866,12 @@ condor_drain <span class="si">$(</span><span class="nb">hostname</span><span cla
 
 <code id="citation-code">@misc{admin-terraform,
 author = "Helena Rasche",
-title = "Deploying a compute cluster in OpenStack via Terraform (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Deploying a compute cluster in OpenStack via Terraform (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1949,7 +1948,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1981,7 +1980,7 @@ tools: []
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

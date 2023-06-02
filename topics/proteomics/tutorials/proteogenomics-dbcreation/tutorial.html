@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html">
@@ -773,11 +769,11 @@ Sentry.init({
 
 <p><strong>Proteogenomics</strong> involves the use of mass spectrometry (MS) based proteomics data against genomics and transcriptomics data to identify peptides and to understand protein-level evidence of gene expression. In the first section of the tutorial, we will create a protein database (FASTA) using RNA-sequencing files (FASTQ) and then perform sequence database searching using the resulting FASTA file with the MS data to identify peptides corresponding to novel proteoforms. Then, we will assign the genomic coordinates and annotations for these identified peptides and visualize the data for its spectral quality and genomic localization</p>
 
-<p><img src="../../images/potential_novel_publication.png" alt="Novel Peptides. " loading="lazy" /></p>
+<p><img src="../../images/potential_novel_publication.png" alt="Novel Peptides. " width="1995" height="775" loading="lazy" /></p>
 
 <p>Proteogenomics integrates <strong>RNA-Seq</strong> data for generating customized protein sequence databases with mass spectrometry-based proteomics data, which are matched to these databases to identify protein sequence variants. (<span class="citation"><a href="#Chambers_2017">Chambers <i>et al.</i> 2017</a></span>).</p>
 
-<p><img src="../../images/workflow_objective1.png" alt="Proteogenomics. " loading="lazy" /></p>
+<p><img src="../../images/workflow_objective1.png" alt="Proteogenomics. " width="1445" height="672" loading="lazy" /></p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -815,7 +811,7 @@ Sentry.init({
 
 <p>This tutorial focuses on creating a <strong>FASTA</strong> database generated from RNA-seq data. There are two outputs from this workflow: (1) a <strong>sequence database</strong> consisting of variants and known reference sequences and (2) mapping files containing <strong>genomic</strong> and <strong>variant</strong> mapping data.</p>
 
-<p><img src="../../images/database_creation.png" alt="Database creation. " loading="lazy" /></p>
+<p><img src="../../images/database_creation.png" alt="Database creation. " width="1962" height="914" loading="lazy" /></p>
 
 <p>The first part of the tutorial deals with creating the FASTA file containing sequences with single amino acid variants (SAVs), insertions and deletions (indels). The second part of the workflow helps in creating a FASTA file with transcript assemblies (splicing variants).</p>
 
@@ -952,7 +948,7 @@ where fr - first strand corresponds to R and RF; fr - second strand corresponds 
 
 <p><a href="https://github.com/ekg/freebayes">FreeBayes</a> is a Bayesian genetic variant detector designed to find small polymorphisms, specifically SNPs (single-nucleotide polymorphisms), indels (insertions and deletions), MNPs (multi-nucleotide polymorphisms), and complex events (composite insertion and substitution events) smaller than the length of a short-read sequencing alignment.</p>
 
-<p><img src="../../images/variant_calling.png" alt="Variant calling. " loading="lazy" /></p>
+<p><img src="../../images/variant_calling.png" alt="Variant calling. " width="1802" height="616" loading="lazy" /></p>
 
 <p>Provided with some BAM dataset(s) and a reference sequence, FreeBayes will generate a VCF dataset describing SNPs, indels, and complex variants in samples in the input alignments. By default, FreeBayes will consider variants supported by at least two observations in a single sample (<code class="language-plaintext highlighter-rouge">-C</code>) and also by at least 20% of the reads from a single sample (<code class="language-plaintext highlighter-rouge">-F</code>). These settings are suitable for low to high depth sequencing in haploid and diploid samples, but users working with polyploid or pooled samples may adjust them depending on the characteristics of their sequencing data.</p>
 
@@ -1022,7 +1018,7 @@ The reference protein set can be filtered by transcript expression level (RPKM c
 create reference and variant protein sequences. Galaxy administrators can use the CustomProDB
 data manager to create these annotations to make them available for users.</p>
 
-<p><img src="../../images/CustomProDB.png" alt="customproDB. " loading="lazy" /></p>
+<p><img src="../../images/CustomProDB.png" alt="customproDB. " width="1895" height="697" loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-generate-protein-fastas-from-exosome-or-transcriptome-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate protein FASTAs from exosome or transcriptome data</div>
@@ -1346,7 +1342,7 @@ We will also need to similarily modify the accessions in the genomic mapping and
 Also, while running the workflow, the Title column for <strong>Tabular-to-FASTA</strong> might come empty, so please make sure you select Title Column as “1”.</p>
 </blockquote>
 
-<p><img src="../../images/Fasta_sequence.png" alt="Fasta sequence. " loading="lazy" /></p>
+<p><img src="../../images/Fasta_sequence.png" alt="Fasta sequence. " width="1737" height="412" loading="lazy" /></p>
 
 <p>For visualization purposes we also use the concatenate tool to concatenate the genomic mapping with the protein mapping dataset. This output will be used for visualization in MVP to view the genomic coordinates of the variant peptide.</p>
 
@@ -1448,7 +1444,7 @@ We need to modify the CustomProDB protein accessions the same as was done for th
     <li>
       <p>Rename the output as <strong>“genomic_mapping_sqlite”</strong></p>
 
-      <p><img src="../../images/genomic_mapping_file.png" alt="genomic mapping. " loading="lazy" /></p>
+      <p><img src="../../images/genomic_mapping_file.png" alt="genomic mapping. " width="1737" height="427" loading="lazy" /></p>
     </li>
   </ol>
 
@@ -1532,7 +1528,7 @@ FROM variant_annotation
 annotation information from the protein mapping file, will be utilized
 by MVP to visualize the genomic loci of any variant peptides.</p>
 
-<p><img src="../../images/viewing_SNP_Variant_IGV.png" alt="SNP variant. " loading="lazy" /></p>
+<p><img src="../../images/viewing_SNP_Variant_IGV.png" alt="SNP variant. " width="1733" height="1241" loading="lazy" /></p>
 
 <p>Finally, we can create a database which can be used to search Mass spectrometry (raw/mgf) files to identify peptides that match to this database.</p>
 
@@ -1691,6 +1687,9 @@ by MVP to visualize the genomic loci of any variant peptides.</p>
                             Subina Mehta, Timothy J. Griffin, Pratik Jagtap, Ray Sajulga, James Johnson, Praveen Kumar,  <b>Proteogenomics 1: Database Creation (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html">https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1712,12 +1711,12 @@ by MVP to visualize the genomic loci of any variant peptides.</p>
 
 <code id="citation-code">@misc{proteomics-proteogenomics-dbcreation,
 author = "Subina Mehta and Timothy J. Griffin and Pratik Jagtap and Ray Sajulga and James Johnson and Praveen Kumar",
-title = "Proteogenomics 1: Database Creation (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Proteogenomics 1: Database Creation (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -2032,7 +2031,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2064,7 +2063,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

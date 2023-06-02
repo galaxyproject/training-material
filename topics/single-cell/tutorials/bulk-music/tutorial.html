@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html">
@@ -789,7 +785,7 @@ or some fancier formulas…(read more <a href="https://academic.oup.com/bioinfor
 
 <p>Solid tissues often contain closely related cell types that are difficult to distinguish from one another, a phenomenon known as <em>“collinearity”</em>. To deal with collinearity, MuSiC can also employ a tree-guided procedure that recursively zooms in on closely related cell types. Briefly, MuSic first groups similar cell types into the same cluster and estimates cluster proportions, then recursively repeats this procedure within each cluster.</p>
 
-<figure id="figure-1"><img src="../../images/bulk-music/figure_method.jpg" alt="muse1. " width="1727" height="952" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Overview of MuSiC Suite</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/figure_method.jpg" alt="muse1. " width="1727" height="952" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Overview of MuSiC Suite</figcaption></figure>
 
 <h1 id="cell-proportion-estimation">Cell Proportion Estimation</h1>
 
@@ -894,7 +890,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-          <figure id="figure-2"><img src="../../images/bulk-music/peek_tabular_scrna_expr.png" alt="expr_tab. " width="349" height="154" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Peeking at the tabular scRNA expression dataset</figcaption></figure>
+          <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/peek_tabular_scrna_expr.png" alt="expr_tab. " width="349" height="154" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Peeking at the tabular scRNA expression dataset</figcaption></figure>
 
           <ol>
             <li>Rows correspond to gene names, and columns to cell identifiers</li>
@@ -920,7 +916,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-          <figure id="figure-3"><img src="../../images/bulk-music/peek_tabular_bulk_expr.png" alt="bulk_tab. " width="339" height="149" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Peeking at the tabular bulk RNA-seq expression dataset</figcaption></figure>
+          <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/peek_tabular_bulk_expr.png" alt="bulk_tab. " width="339" height="149" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Peeking at the tabular bulk RNA-seq expression dataset</figcaption></figure>
 
           <ol>
             <li>As before with the <code class="language-plaintext highlighter-rouge">#scrna</code> dataset, rows correspond to gene names and columns to sample identifiers.</li>
@@ -945,7 +941,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-          <figure id="figure-4"><img src="../../images/bulk-music/peek_tabular_scrna_pheno.png" alt="peek_tabular_scrna_pheno.png. " width="306" height="135" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Peeking at the tabular scRNA phenotype dataset</figcaption></figure>
+          <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/peek_tabular_scrna_pheno.png" alt="peek_tabular_scrna_pheno.png. " width="306" height="135" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Peeking at the tabular scRNA phenotype dataset</figcaption></figure>
 
           <ol>
             <li>The first column is the index column, which uses the cell identifiers in the header of the <code class="language-plaintext highlighter-rouge">#scrna</code> expression file, so the phenotypes file describes the cells.</li>
@@ -972,7 +968,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-          <figure id="figure-5"><img src="../../images/bulk-music/peek_tabular_bulk_pheno.png" alt="peek_tabular_bulk_pheno.png. " width="425" height="139" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Peeking at the tabular bulk RNA-seq phenotype dataset</figcaption></figure>
+          <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/peek_tabular_bulk_pheno.png" alt="peek_tabular_bulk_pheno.png. " width="425" height="139" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Peeking at the tabular bulk RNA-seq phenotype dataset</figcaption></figure>
 
           <ol>
             <li>The first column is the index column, which uses the sample identifiers in the header of the <code class="language-plaintext highlighter-rouge">#bulk</code> expression file, so the phenotypes file describes the samples.</li>
@@ -1001,7 +997,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 <blockquote class="details">
   <div class="box-title details-title" id="details-expression-set"><button class="gtn-boxify-button details" type="button" aria-controls="details-expression-set" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Expression Set<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <figure id="figure-6"><img src="../../images/bulk-music/expressionset.png" alt="expression_set. " width="1137" height="658" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Image from Stefano Monti</figcaption></figure>
+  <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/expressionset.png" alt="expression_set. " width="1137" height="658" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Image from Stefano Monti</figcaption></figure>
 
   <p><em>Expression Set</em> objects are a container for high-throughput assays and experimental metadata. The <em>ExpressionSet</em> class is derived from <em>eSet</em>, and requires a matrix named <em>exprs</em>.</p>
 
@@ -1196,11 +1192,11 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 
 <p>The estimated proportions are normalized such that the proportions of cell types within each sample sum to 1. MuSic compares itself against a previous method of deconvolution known as Non-negative Least-Squares (NNLS), which MuSic supercededs via its Weighted Non-negative Least-Squares (W-NNLS) methodology. You can remove this if you wish from within the tool parameters when running.</p>
 
-<figure id="figure-7"><img src="../../images/bulk-music/jitter_plot.png" alt="jitter_plot. " width="844" height="844" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Jitter plot of Estimated Proportions</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/jitter_plot.png" alt="jitter_plot. " width="844" height="844" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Jitter plot of Estimated Proportions</figcaption></figure>
 
 <p>In the above image you can see (a) the estimated proportion of cells for each of the 6 declared types, as calculated by MuSiC and the NNLS methods, respectively. In the (b) section, this information is better represented as a box plot to show you the distribution of cell type proportions.</p>
 
-<figure id="figure-8"><img src="../../images/bulk-music/ctprop_plot.png" alt="ctprop. " width="908" height="908" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> (top) Cell type proportions by disease factor, and (bottom) HbA1c factor expression against beta cell type proportion</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/ctprop_plot.png" alt="ctprop. " width="908" height="908" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> (top) Cell type proportions by disease factor, and (bottom) HbA1c factor expression against beta cell type proportion</figcaption></figure>
 
 <p>As stated previously, it is well known that the beta cell proportions are related to T2D disease status. As T2D progresses, the number of beta cells decreases. In the above image we can see in (a) that we have the same information as previous, but we also distinguish between cells that from patients with T2D status over the Normal cell phenotypes. Section (b) further explores this with a linear regression showing the cell type proportion of cells with HbA1c expression, where we see that there is a significant negative correlation between HbA1c level and beta cell proportions.</p>
 
@@ -1229,7 +1225,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 
 <p>Both the MuSiC and the NNLS calculations of this data is best represented in the below heatmap, with RNA samples as rows and cell types as columns:</p>
 
-<figure id="figure-9"><img src="../../images/bulk-music/subject_heatmap.png" alt="subject_heatmap. " width="844" height="844" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Heatmap of cell type proportions at the RNA sample level.</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/subject_heatmap.png" alt="subject_heatmap. " width="844" height="844" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Heatmap of cell type proportions at the RNA sample level.</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1382,7 +1378,7 @@ https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
 
 </blockquote>
 
-<figure id="figure-10"><img src="../../images/bulk-music/dendrogram.png" alt="dendrogram. " width="908" height="802" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Dendrogram of Design Matrix and Cross-Subject Mean of Relative Abundance</figcaption></figure>
+<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/dendrogram.png" alt="dendrogram. " width="908" height="802" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Dendrogram of Design Matrix and Cross-Subject Mean of Relative Abundance</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1502,7 +1498,7 @@ https://zenodo.org/record/5719228/files/immune.markers
 
 </blockquote>
 
-<figure id="figure-11"><img src="../../images/bulk-music/dendro_jitboxheat.png" alt="dendro_jitboxheat. " width="844" height="844" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Jitter and Boxplots of all cell types followed by a heatmap of each RNA sample against cell type. Note that the y-axis for each of the plots above are not constant across cell types.</figcaption></figure>
+<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/dendro_jitboxheat.png" alt="dendro_jitboxheat. " width="844" height="844" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Jitter and Boxplots of all cell types followed by a heatmap of each RNA sample against cell type. Note that the y-axis for each of the plots above are not constant across cell types.</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1532,11 +1528,11 @@ https://zenodo.org/record/5719228/files/immune.markers
 
 <p>Below is an overview of the workflow that was used throughout this tutorial.</p>
 
-<figure id="figure-12"><img src="../../images/bulk-music/workflow1.png" alt="workflow1. " width="1229" height="827" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Workflow for estimating cell types</figcaption></figure>
+<figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/workflow1.png" alt="workflow1. " width="1229" height="827" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Workflow for estimating cell types</figcaption></figure>
 
 <p>Note how two ExpressionSet objects are constructed: one from bulk RNA-seq tabular assay data, and the other from single-cell RNA-seq tabular assay data. A blind analysis of cell proportion estimation is performed first. Then in the second half of the tutorial, we performed a guided analysis using pre-grouped cell types.</p>
 
-<figure id="figure-13"><img src="../../images/bulk-music/workflow_dendro.png" alt="workflow_dendro.png. " width="1193" height="765" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Workflow for generating a dendrogram and clustering cells upon it</figcaption></figure>
+<figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/workflow_dendro.png" alt="workflow_dendro.png. " width="1193" height="765" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Workflow for generating a dendrogram and clustering cells upon it</figcaption></figure>
 
 <p>This tutorial is part of the <a href="https://singlecell.usegalaxy.eu">https://singlecell.usegalaxy.eu</a> portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
@@ -1599,6 +1595,9 @@ https://zenodo.org/record/5719228/files/immune.markers
                             Mehmet Tekman, Wendi Bacon,  <b>Bulk RNA Deconvolution with MuSiC (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1620,12 +1619,12 @@ https://zenodo.org/record/5719228/files/immune.markers
 
 <code id="citation-code">@misc{single-cell-bulk-music,
 author = "Mehmet Tekman and Wendi Bacon",
-title = "Bulk RNA Deconvolution with MuSiC (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Bulk RNA Deconvolution with MuSiC (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1797,7 +1796,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1829,7 +1828,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

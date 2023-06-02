@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/">
@@ -219,25 +215,7 @@ Sentry.init({
     </p>
 
     
-        
-        <a href="https://gallantries.github.io/video-library/events/smorgasbord3/?utm_source=gtn-banner&utm_medium=website&utm_campaign=smorgasbord2023">
-        
-        <img alt="The Gallantries, Galaxy Training Network & Galaxy Community are happy to announce: GTN Smorgasbord 3, gxy.io/smorgasbord3 a free galaxy training event, online, from may 22-26 2023. Topics covered include SARS-CoV-2, RNA-Seq, Single Cell, Proteomics, Machine Learning, Annotation, Climate, Ecology, Cancer, RO-Crates, and more! An EU flag in the corner indicates that this event is made possible with the support of the european union. A waterman butterfly projection map adorns the other corner suggesting a world wide event. Links are included to @gtn@mstdn.science @gallantries@mstdn.science, and two twitter urls @gxyTraining and @gallantries_eu
-" src="https://gallantries.github.io/assets/images/smorgasbord3/png/banner-email.png" style="margin: 0 0 1em 0;width: 100%;max-width: 100%;">
-        
-        </a>
-        
-    
 
-    
-    <div role="alert" class="alert alert-success">
-        <h2 class="alert-heading">GTN Smörgåsbord 2023</h2>
-        <p>The Galaxy Training Network is happy to announce the 3rd annual edition of the GTN Smörgåsbord global training event!
-This 5-day, 24/7 training event is completely free, and covers a wide range of topics! During the week, <strong>you</strong> decide your own schedule, pick and choose the topics that are interesting to you, and learn at your own pace, with support from the global community of over 100 Galaxy instructors available on Slack 24/7 to answer your questions!</p>
-
-<p><a href="https://gallantries.github.io/video-library/events/smorgasbord3/?utm_source=gtn-button&amp;utm_medium=website&amp;utm_campaign=smorgasbord2023" class="btn btn-success">Register today!</a></p>
-
-    </div>
     
 
     <div class="row">
@@ -1146,8 +1124,7 @@ This 5-day, 24/7 training event is completely free, and covers a wide range of t
         <div class="col-lg-5 col-md-5 col-sm-12">
           <div class="col-12">
                         <h2>The Galaxy Training Network</h2>
-                        <link rel="stylesheet" href="/training-material/assets/css/leaflet-1.9.3.css"/>
-<script src="/training-material/assets/js/leaflet-1.9.3.js"></script>
+                        <script src="/training-material/assets/js/leaflet-1.9.3.js"></script>
 
 <div id="map" style="width: 100%; height: 400px"></div>
 <script>
@@ -1159,7 +1136,6 @@ This 5-day, 24/7 training event is completely free, and covers a wide range of t
 	}).addTo(map);
 
 	function onEachFeature(feature, layer) {
-		console.log(feature.properties)
 		let orcid = "";
 		if(feature.properties.orcid !== null && feature.properties.orcid !== undefined){
 			orcid = `<a href="https://orcid.org/${feature.properties.orcid}"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/></a>`
@@ -1207,8 +1183,6 @@ This 5-day, 24/7 training event is completely free, and covers a wide range of t
 		.then(response => response.json())
 		.then(data => {
 			// Do something with the data
-			console.log(data);
-
 			const trainerLayer = L.geoJSON([data], {
 				style(feature) {
 					return feature.properties && feature.properties.style;
@@ -1239,7 +1213,7 @@ This 5-day, 24/7 training event is completely free, and covers a wide range of t
         </div>
         <h2 id="acknowledgment-and-funding">Acknowledgment and Funding</h2>
     <p>
-            More information about this project can be found in our <a href="https://doi.org/10.1016/j.cels.2018.05.012">publication in Cell Systems</a>.
+            More information about this project can be found in our <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">publication in PLOS Computational Biology</a>.
             We would like to thank all <a href="/training-material/hall-of-fame">contributors</a> to our Galaxy
             training materials, the Galaxy community for their constant support, and our funding sources:
     </p>
@@ -1288,7 +1262,7 @@ This 5-day, 24/7 training event is completely free, and covers a wide range of t
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1316,7 +1290,7 @@ This 5-day, 24/7 training event is completely free, and covers a wide range of t
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

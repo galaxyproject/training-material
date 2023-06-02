@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/tutorial.html">
@@ -779,7 +775,7 @@ Sentry.init({
 
 <p>In the structure which will be examined during this tutorial, the ligand of concern is a resorcinol, a common class of compounds with affinity for the Hsp90 N-terminal domain. It is registered in the PubChem database under the compound ID 135508238 (<span class="citation"><a href="#ligand_resorcinol">PubChem</a></span>). As can be seen by viewing the PDB structure, the resorcinol part of the structure is embedded in the binding site, bound by a hydrogen bond to residue aspartate-93. The ligand structure also contains a triazole and a fluorophenyl ring, which lie nearer to the surface of the protein.</p>
 
-<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/hsp90lig.png" alt="Image showing Hsp90 structure, with a ligand bound. " width="677" height="562" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Structure of Hsp90, with a ligand bound. <a href="https://usegalaxy.eu/u/sbray/v/hsp90-lig">Click to view</a> in NGL. (<span class="citation"><a href="#ngl">Rose <i>et al.</i> 2018</a></span>)</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/hsp90lig.png" alt="Image showing Hsp90 structure, with a ligand bound. " width="677" height="562" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Structure of Hsp90, with a ligand bound. <a href="https://usegalaxy.eu/u/sbray/v/hsp90-lig">Click to view</a> in NGL. (<span class="citation"><a href="#ngl">Rose <i>et al.</i> 2018</a></span>)</figcaption></figure>
 
 <h2 id="get-data">Get data</h2>
 
@@ -1082,7 +1078,7 @@ minimization step.</p>
 
 <p>The resulting plot should resemble the figure below. The system first drops rapidly in energy, before slowly converging on the minimized state.</p>
 
-<figure id="figure-2"><img src="/training-material/topics/computational-chemistry/images/empot.png" alt="Snapshot of Energy potential during the EM simulation. " width="640" height="525" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Energy potential during the EM simulation. <a href="https://usegalaxy.eu/u/sbray/v/em-pot">Click to view</a> as a Galaxy visualization</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/empot.png" alt="Snapshot of Energy potential during the EM simulation. " width="640" height="525" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Energy potential during the EM simulation. <a href="https://usegalaxy.eu/u/sbray/v/em-pot">Click to view</a> as a Galaxy visualization</figcaption></figure>
 
 <h2 id="equilibration">Equilibration</h2>
 
@@ -1319,9 +1315,9 @@ is a measure of how much the protein conformation has changed between different 
 
 <p>In our case the ligand is stable with a single binding mode. The RMSD fluctuates around 0.3Å, with a slight fluctuation near the end of the simulation. This is more clearly seen in the histogram. The conformation seen during simulation is very similar to that in the crystal structure and the ligand is stable in the active site.</p>
 
-<figure id="figure-5"><img src="../../images/htmd_analysis_rmsd2_series.png" alt="RMSD timeseries Hsp90 ligand. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> RMSD timeseries for the Hsp90 Residue ID G5E (ligand)</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/htmd_analysis_rmsd2_series.png" alt="RMSD timeseries Hsp90 ligand. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> RMSD timeseries for the Hsp90 Residue ID G5E (ligand)</figcaption></figure>
 
-<figure id="figure-6"><img src="../../images/htmd_analysis_rmsd2_histo.png" alt="RMSD histogram Hsp90 ligand. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> RMSD histogram for the Hsp90 Residue ID G5E (ligand)</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/htmd_analysis_rmsd2_histo.png" alt="RMSD histogram Hsp90 ligand. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> RMSD histogram for the Hsp90 Residue ID G5E (ligand)</figcaption></figure>
 
 <h2 id="rmsf-analysis">RMSF analysis</h2>
 
@@ -1341,7 +1337,7 @@ is a measure of how much the protein conformation has changed between different 
 
 </blockquote>
 
-<figure id="figure-7"><img src="../../images/htmd_analysis_rmsf.png" alt="RMSF Hsp90. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> RMSF(Å) vs the residue position. Large fluctuations occur at various positions, which correspond to flexible loop regions on the surface of the protein.</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/htmd_analysis_rmsf.png" alt="RMSF Hsp90. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> RMSF(Å) vs the residue position. Large fluctuations occur at various positions, which correspond to flexible loop regions on the surface of the protein.</figcaption></figure>
 
 <p>When considering the RMSF, fluctuations greater than 1.0Å are of interest; for example see the fluctuations near residue positions 50, 110 and 160.  Inspecting the structure with molecular visualization software such as VMD, these can be seen to correspond to flexible loop regions on the protein surface. In addition, very large fluctuations are seen for the C-terminus; this is common and no investigation is needed.</p>
 
@@ -1370,7 +1366,7 @@ Having discovered the principal components usually these are visualized. The PCA
 
 </blockquote>
 
-<figure id="figure-8"><img src="../../images/htmd_analysis_pca.png" alt="PCA Hsp90. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> PCA results which include graphs of PC2 vs PC1, PC2 vs PC3, PC3 vs PC1  colored from blue to red in order of time, and an eigenvalue rank plot. In the eigenvalue plot the cumulative variance is labeled for each data point.</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/htmd_analysis_pca.png" alt="PCA Hsp90. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> PCA results which include graphs of PC2 vs PC1, PC2 vs PC3, PC3 vs PC1  colored from blue to red in order of time, and an eigenvalue rank plot. In the eigenvalue plot the cumulative variance is labeled for each data point.</figcaption></figure>
 
 <p>The first three principal components are responsible for 32.8% of the total variance, as seen in the eigenvalue rank plot. The first principal component (PC1) accounts for 15.4% of the variance (see PC1 vs PC2 and eigenvalue rank plots). Visualization of PC1 using VMD shows a rocking motion and wagging of the C-terminus.</p>
 
@@ -1405,7 +1401,7 @@ Having discovered the principal components usually these are visualized. The PCA
 
 </blockquote>
 
-<figure id="figure-9"><img src="../../images/htmd_analysis_pc1_hsp90.gif" alt="PC1 Hsp90 gif. " width="365" height="450" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> PC1 motion for Hsp90</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/htmd_analysis_pc1_hsp90.gif" alt="PC1 Hsp90 gif. " width="365" height="450" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> PC1 motion for Hsp90</figcaption></figure>
 
 <h2 id="hydrogen-bond-analysis">Hydrogen bond analysis</h2>
 
@@ -1654,6 +1650,9 @@ table as <code class="language-plaintext highlighter-rouge">History Content API 
                             Simon Bray, Tharindu Senapathi, Christopher Barnett, Björn Grüning,  <b>High Throughput Molecular Dynamics and Analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/tutorial.html">https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1675,12 +1674,12 @@ table as <code class="language-plaintext highlighter-rouge">History Content API 
 
 <code id="citation-code">@misc{computational-chemistry-htmd-analysis,
 author = "Simon Bray and Tharindu Senapathi and Christopher Barnett and Björn Grüning",
-title = "High Throughput Molecular Dynamics and Analysis (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "High Throughput Molecular Dynamics and Analysis (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1897,7 +1896,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1929,7 +1928,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html">
@@ -724,13 +720,13 @@ Sentry.init({
 
 <p>Consider the heterogeneity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:</p>
 
-<figure id="figure-1"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_hematopoiesis.png" alt="Cell Differentiation of Hematopoietic Stem cells. " width="1100" height="492" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_hematopoiesis.png" alt="Cell Differentiation of Hematopoietic Stem cells. " width="1100" height="492" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg</figcaption></figure>
 
 <p>The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell sub-populations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental hierarchies can be inferred based on the proximity of these clusters to one another.</p>
 
 <p>Other than cell development, there are many more factors that can shape the level of gene expression exhibited by a given cell. Intercellular cell-signalling can block or enhance specific transcripts, the total amount of transcripts of a cell increases with the cell-cycle, or the proximity of a cell within a tissue to nutrients or oxygen.</p>
 
-<figure id="figure-2"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_nbt3711.png" alt="Facets of Cellular Identity. " width="1167" height="596" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_nbt3711.png" alt="Facets of Cellular Identity. " width="1167" height="596" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016</figcaption></figure>
 
 <p>This tutorial is in part inspired by aspects of the <a href="https://hemberg-lab.github.io/scRNA.seq.course/">Hemberg workflow</a> at the Sanger institute, as well as the <a href="https://github.com/CGATOxford/UMI-tools">CGATOxford workflow</a> which provides the <strong>UMI-tools</strong> suite that we make use of. The barcoding follows the CEL-Seq2 protocol <span class="citation"><a href="#Hashimshony2016">Hashimshony <i>et al.</i> 2016</a></span>,  mentioned in the <a href="/training-material/topics/single-cell/tutorials/scrna-umis/tutorial.html"><em>Understanding Barcodes</em></a> hands-on, and uses the same lane configuration as utilised by the <a href="https://www.ie-freiburg.mpg.de/gruen">Freiburg MPI Grün lab</a>.</p>
 
@@ -749,7 +745,7 @@ Sentry.init({
   <li><strong>Multi-Batch Processing</strong></li>
 </ol>
 
-<figure id="figure-3"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" alt="Overview of workflow. " width="933" height="978" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> An overview of the entire workflow</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" alt="Overview of workflow. " width="933" height="978" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> An overview of the entire workflow</figcaption></figure>
 
 <p>The first part of this tutorial will deal with batches, and use example <em>FASTQ</em> data from a single batch, which we will perform <a href="#barcode-extraction">barcode extraction</a> and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.</p>
 
@@ -797,7 +793,7 @@ Sentry.init({
 
 <p>The size of scRNA files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expedite the analysis by using a smaller subset of actual batch data. We will also be using <em>Mus Musculus</em> annotation data (.gtf) from the  <a href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/">NCBI RefSeq</a> track, as well as a barcodes file (.tsv).</p>
 
-<figure id="figure-4"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_upper.png" alt="Workflow Upper. " width="2500" height="1124" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Single batch processing</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_upper.png" alt="Workflow Upper. " width="2500" height="1124" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Single batch processing</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload-and-organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload and organization</div>
@@ -1411,11 +1407,11 @@ The number of columns can be seen by scrolling the file preview window completel
 
   <p>Galaxy provides a workflow that captures the process of all the above stages for a <a href="workflows/scrna_pp_celseq.ga">single pair of FASTQ data</a>:</p>
 
-  <figure id="figure-5"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_single.png" alt="Single Batch Workflow. " width="1416" height="935" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Single Batch Workflow</figcaption></figure>
+  <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_single.png" alt="Single Batch Workflow. " width="1416" height="935" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Single Batch Workflow</figcaption></figure>
 
   <p>For multiple batch processing, Galaxy can make use of <em>Nested Workflows</em> that in this case can take in a <a href="workflows/scrna_mp_celseq.ga">list of input paired FASTQ data</a> and process them in parallel.</p>
 
-  <figure id="figure-6"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_nested.png" alt="Multiple Batch Workflow. " width="971" height="715" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Nested Multiple Batch Workflow</figcaption></figure>
+  <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_nested.png" alt="Multiple Batch Workflow. " width="971" height="715" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Nested Multiple Batch Workflow</figcaption></figure>
 
 </blockquote>
 
@@ -1423,7 +1419,7 @@ The number of columns can be seen by scrolling the file preview window completel
 
 <h1 id="multi-batch-processing">Multi-Batch Processing</h1>
 
-<figure id="figure-7"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_lower.png" alt="Workflow Lower. " width="2500" height="1016" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Multiple batch processing</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_lower.png" alt="Workflow Lower. " width="2500" height="1016" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Multiple batch processing</figcaption></figure>
 
 <p>Handling more than one batch of sequencing data is rather trivial when we take into account our main goals and requirements:</p>
 
@@ -1492,7 +1488,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 
 <p>To resolve this we can perform a “Full Table Join” where the missing data for <em>GeneE</em> and <em>GeneA</em> in Batch1 and Batch2 respectively are replaced with zeroes:</p>
 
-<figure id="figure-8"><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/scrna_downstream.svg" alt="Table Join. " width="616" height="494" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Full Table Join</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/scrna_downstream.svg" alt="Table Join. " width="616" height="494" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Full Table Join</figcaption></figure>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
@@ -1767,7 +1763,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 
 <h4 id="cross-contamination-plot">Cross-contamination Plot</h4>
 
-<figure id="figure-9"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_crosscontamination.png" alt="Contamination Plots. " width="2348" height="1050" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> The Pre-filter and Post-filter plots</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_crosscontamination.png" alt="Contamination Plots. " width="2348" height="1050" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> The Pre-filter and Post-filter plots</figcaption></figure>
 
 <p>Two things to take note of:</p>
 
@@ -1806,7 +1802,7 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 
 <p>In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.</p>
 
-<figure id="figure-10"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" alt="Recap of workflow. " width="933" height="978" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A recap of the entire workflow</figcaption></figure>
+<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" alt="Recap of workflow. " width="933" height="978" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A recap of the entire workflow</figcaption></figure>
 
 <p>This tutorial is part of the https://singlecell.usegalaxy.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
@@ -1872,6 +1868,9 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
                             Mehmet Tekman, Bérénice Batut, Anika Erxleben, Wolfgang Maier,  <b>Pre-processing of Single-Cell RNA Data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1893,12 +1892,12 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 
 <code id="citation-code">@misc{single-cell-scrna-preprocessing,
 author = "Mehmet Tekman and Bérénice Batut and Anika Erxleben and Wolfgang Maier",
-title = "Pre-processing of Single-Cell RNA Data (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Pre-processing of Single-Cell RNA Data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -2120,7 +2119,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2152,7 +2151,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

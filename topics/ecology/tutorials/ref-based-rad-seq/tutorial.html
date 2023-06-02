@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html">
@@ -611,7 +607,7 @@ Sentry.init({
 
 <p>In the study of <a href="http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862">Hohenlohe <em>et al.</em> 2010</a>, a genome scan of nucleotide diversity and differentiation in natural populations of threespine stickleback <em>Gasterosteus aculeatus</em> was conducted. Authors used Illumina-sequenced RAD tags to identify and type over 45,000 single nucleotide polymorphisms (SNPs) in each of 100 individuals from two oceanic and three freshwater populations.</p>
 
-<p><img src="../../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png" alt="The abstract of the paper on Population Genomics. " loading="lazy" /></p>
+<p><img src="../../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png" alt="The abstract of the paper on Population Genomics. " width="774" height="1122" loading="lazy" /></p>
 
 <p>We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. <em>Gasterosteus aculeatus</em> draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conducted (see <a href="/training-material/topics/ecology/tutorials/de-novo-rad-seq/tutorial.html">de_novo tutorial</a>, enhancing discoverability of new loci of interest but also of false positive one).</p>
 
@@ -801,7 +797,7 @@ Score20		2980543		5158988		626265			129493			8895289
 
 <p>You can use the <code class="language-plaintext highlighter-rouge">Charts</code> functionality through the Visualize button to plot the data.</p>
 
-<p><img src="../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG" alt="The chart on the sorted file. " width="75%" loading="lazy" /></p>
+<p><img src="../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG" alt="The chart on the sorted file. " width="6645" height="4745" loading="lazy" /></p>
 
 <p>You can further test using a filter like <code class="language-plaintext highlighter-rouge">clean data, remove any read with an uncalled base</code> and see that here, this has only little impact on the number of retained reads.</p>
 
@@ -845,7 +841,7 @@ Score20		2980543		5158988		626265			129493			8895289
   </ol>
 </blockquote>
 
-<p><img src="../../images/RAD4_Population_Genomics/multiqc.PNG" alt="MultiQC output. " loading="lazy" /></p>
+<p><img src="../../images/RAD4_Population_Genomics/multiqc.PNG" alt="MultiQC output. " width="1916" height="899" loading="lazy" /></p>
 
 <p>Note the quality drop at bases 5-10 which are the cut site of the RADSeq
 protocol (TGCAGG). This is caused by the extremely uneven distribution the
@@ -1005,7 +1001,7 @@ Notice that each locus now has a chromosome/base pair specified in each of the <
 
 <p>In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as which loci are candidate regarding the genetic differentiation between freshwater and oceanic Stickelback populations. To answer these questions, we analyzed RAD sequence datasets using a reference-based RAD-seq data analysis approach. This approach can be sum up with the following scheme:</p>
 
-<p><img src="../../images/ref_based_workflow.PNG" alt="Ref based tutorial workflow. " loading="lazy" /></p>
+<p><img src="../../images/ref_based_workflow.PNG" alt="Ref based tutorial workflow. " width="1767" height="1017" loading="lazy" /></p>
 
                 </section>
 
@@ -1045,6 +1041,9 @@ Notice that each locus now has a chromosome/base pair specified in each of the <
                             Yvan Le Bras,  <b>RAD-Seq Reference-based data analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html">https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1066,12 +1065,12 @@ Notice that each locus now has a chromosome/base pair specified in each of the <
 
 <code id="citation-code">@misc{ecology-ref-based-rad-seq,
 author = "Yvan Le Bras",
-title = "RAD-Seq Reference-based data analysis (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "RAD-Seq Reference-based data analysis (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1198,7 +1197,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1230,7 +1229,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

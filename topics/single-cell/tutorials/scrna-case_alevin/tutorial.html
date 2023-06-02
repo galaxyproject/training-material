@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">
@@ -1137,15 +1133,15 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </ol>
 </blockquote>
 
-<figure id="figure-1"><img src="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" alt="raw droplet barcode plots-400k. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> 400k subsample raw</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" alt="raw droplet barcode plots-400k. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> 400k subsample raw</figcaption></figure>
 
 <p>Now, the image generated here (400k) isn’t the most informative - but you are dealing with a fraction of the reads! If you run the total sample (so identical steps above, but with significantly more time!) you’d get the image below.</p>
 
-<figure id="figure-2"><img src="../../images/scrna-casestudy/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Total sample - 32,579,453 reads - raw</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Total sample - 32,579,453 reads - raw</figcaption></figure>
 
 <p>This is our own formulation of the barcode plot based on a <a href="https://github.com/COMBINE-lab/salmon/issues/362#issuecomment-490160480">discussion</a> we had with community members. The left hand plots with the smooth lines are the main plots, showing the UMI counts for individual cell barcodes ranked from high to low. We expect a sharp drop-off between cell-containing droplets and ones that are empty or contain only cell debris. Now, this data is not an ideal dataset, so for perspective, in an ideal world with a very clean 10x run, data will look a bit more like the following taken from the lung atlas (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6653/results/tsne">study in Single Cell Expression Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6653/">project submission</a>).</p>
 
-<figure id="figure-3"><img src="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" alt="raw droplet barcode plots - lung atlas. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Pretty data - raw</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" alt="raw droplet barcode plots - lung atlas. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Pretty data - raw</figcaption></figure>
 
 <p>In that plot, you can see the clearer ‘knee’ bend, showing the cut-off between empty droplets and cell-containing droplets.</p>
 
@@ -1167,15 +1163,15 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </ol>
 </blockquote>
 
-<figure id="figure-4"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-400k.png" alt="raw droplet barcode plots - 400k. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> 400k subsample - Alevin processed</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-400k.png" alt="raw droplet barcode plots - 400k. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> 400k subsample - Alevin processed</figcaption></figure>
 
 <p>And the full sample looks like:</p>
 
-<figure id="figure-5"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Total sample - 32,579,453 reads - Alevin processed</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Total sample - 32,579,453 reads - Alevin processed</figcaption></figure>
 
 <p>And to round this off, here’s the lung atlas plot.</p>
 
-<figure id="figure-6"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-lung.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Pretty data - Alevin processed</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-lung.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Pretty data - Alevin processed</figcaption></figure>
 
 <p>You should see a completely vertical drop-off where Alevin has trunctated the distribution (after excluding any cell barcode that had &lt;10 UMI, Alevin then chose a threshold based off the curve and removed all barcodes with fewer UMIs).</p>
 
@@ -1420,7 +1416,7 @@ Consider…is this a complete set of data?</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<figure id="figure-7"><img src="../../images/scrna-casestudy/wab-alevin-part1workflow.png" alt="Workflow Part 1. " width="1070" height="884" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Workflow  - Steps 1-3</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-part1workflow.png" alt="Workflow Part 1. " width="1070" height="884" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Workflow  - Steps 1-3</figcaption></figure>
 
 <p>We have:</p>
 
@@ -1488,6 +1484,9 @@ Consider…is this a complete set of data?</p>
                             Wendi Bacon, Jonathan Manning,  <b>Generating a single cell matrix using Alevin (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1509,12 +1508,12 @@ Consider…is this a complete set of data?</p>
 
 <code id="citation-code">@misc{single-cell-scrna-case_alevin,
 author = "Wendi Bacon and Jonathan Manning",
-title = "Generating a single cell matrix using Alevin (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Generating a single cell matrix using Alevin (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1709,7 +1708,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1741,7 +1740,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

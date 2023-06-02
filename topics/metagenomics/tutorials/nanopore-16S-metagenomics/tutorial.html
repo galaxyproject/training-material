@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.html">
@@ -646,11 +642,11 @@ Sentry.init({
 
 <p>Among the environmental variables that have shown the greatest correlation with alterations in the composition of bacterial communities are soil pH, the carbon-nitrogen ratio (C:N), and the co-concentrations of Olsen P (a measure of plant available phosphorus), aluminium and copper (Fig. 1).</p>
 
-<figure id="figure-1"><img src="../../images/metagenomics-nanopore/bioindicators.jpg" alt="Bacterial bioindicators. " width="1280" height="894" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Relationship between bacterial community composition and soil parameters. The radius of each circle represents the taxon abundance that was accounted for by each soil variable, based on adjusted R-squared values from distance-based multivariate multiple regression analyses. The univariate relationship between the abundance of each taxon and soil variables, calculated using Pearson’s correlation coefficient, is represented by the color of the circle. Phyla or classes are ordered according to overall abundance in all the samples, from most abundant (top) to least abundant (bottom). Image published originally in <span class="citation"><a href="#Hermans2016">Hermans <i>et al.</i> 2016</a></span>.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/metagenomics-nanopore/bioindicators.jpg" alt="Bacterial bioindicators. " width="1280" height="894" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Relationship between bacterial community composition and soil parameters. The radius of each circle represents the taxon abundance that was accounted for by each soil variable, based on adjusted R-squared values from distance-based multivariate multiple regression analyses. The univariate relationship between the abundance of each taxon and soil variables, calculated using Pearson’s correlation coefficient, is represented by the color of the circle. Phyla or classes are ordered according to overall abundance in all the samples, from most abundant (top) to least abundant (bottom). Image published originally in <span class="citation"><a href="#Hermans2016">Hermans <i>et al.</i> 2016</a></span>.</figcaption></figure>
 
 <p>On the other hand, many species of microorganisms establish complex <strong>symbiotic relationships</strong> with plant organisms. The fraction of the substrate that is directly influenced by root secretions and associated microorganism is known as <strong>rhizosphere</strong>. Thus, for example, bacteria of the genus <em>Bacillus</em>, <em>Pseudomonas</em> or <em>Burkholderia</em> appear associated with the plant roots, protecting them from pathogenic microorganisms.</p>
 
-<figure id="figure-2"><img src="../../images/metagenomics-nanopore/bacteria_community.png" alt="Bacterial communities. " width="1280" height="720" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Representation of the relationships between root microbiomes and plant organisms.</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/metagenomics-nanopore/bacteria_community.png" alt="Bacterial communities. " width="1280" height="720" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Representation of the relationships between root microbiomes and plant organisms.</figcaption></figure>
 
 <p>In this tutorial, we will use sequencing data obtained through the <strong>MinION sequencer</strong> (Oxford Nanopore Technologies) with two objectives: 1) evaluate the health status of soil samples and 2) study how microbial populations are modified by their interaction with plant roots. This example was inspired by <span class="citation"><a href="#Brown2017">Brown <i>et al.</i> 2017</a></span>.</p>
 
@@ -809,7 +805,7 @@ Sentry.init({
 
 <p><strong>FastQC</strong> provides information on various parameters, such as the range of quality values across all bases at each position. <strong>MultiQC</strong> allows summarizing the output of different outputs from <strong>FastQC</strong>.</p>
 
-<figure id="figure-3"><img src="../../images/metagenomics-nanopore/fastqc_sequence_length_distribution_plot.png" alt="FastQC plots length. " width="800" height="533" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Sequence length distribution</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/metagenomics-nanopore/fastqc_sequence_length_distribution_plot.png" alt="FastQC plots length. " width="800" height="533" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Sequence length distribution</figcaption></figure>
 
 <p>In the first place, we are going to analyse the sequence length distribution of the different datasets.</p>
 
@@ -828,11 +824,11 @@ Sentry.init({
   </blockquote>
 </blockquote>
 
-<figure id="figure-4"><img src="../../images/metagenomics-nanopore/fastqc_per_base_sequence_quality_plot.png" alt="FastQC plots quality. " width="800" height="533" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Per base sequence quality</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/metagenomics-nanopore/fastqc_per_base_sequence_quality_plot.png" alt="FastQC plots quality. " width="800" height="533" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Per base sequence quality</figcaption></figure>
 
 <p>If we examine figure 3, we can see that up to 3000 bp the quality of our sequencing data is around a <strong>Phred score</strong> of 12, which is a relatively low value compared to other sequencing technologies. This is explained because Nanopore reads poses <strong>high error rates in the basecalled reads</strong> (10% as compared to 1% for Illumina). However, Nanopore sequencing generates <strong>very long reads</strong> (in theory only limited by the mechanisms of extraction of the genetic material), enabling the sequencing of the complete 16S rRNA gene, which makes it possible to identify bacterial taxa at higher resolution.</p>
 
-<figure id="figure-5"><img src="../../images/metagenomics-nanopore/fastqc_per_sequence_gc_content_plot.png" alt="FasTQC plots CG. " width="800" height="533" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Per sequence GC content</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/metagenomics-nanopore/fastqc_per_sequence_gc_content_plot.png" alt="FasTQC plots CG. " width="800" height="533" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Per sequence GC content</figcaption></figure>
 
 <p>Let’s have a look at figure 4, which shows the content of the GC by sequence.</p>
 
@@ -970,7 +966,7 @@ Sentry.init({
 
 <p>We can verify that after processing the samples, the GC content presents a unimodal distribution, which indicates that the anomalies in the sequences have been successfully eliminated (Figure 6).</p>
 
-<figure id="figure-6"><img src="../../images/metagenomics-nanopore/fasqc_per_sequence_content_plot_clean.png" alt="FasTQC plots GC. " width="746" height="475" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Per sequence GC content in processed samples</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/metagenomics-nanopore/fasqc_per_sequence_content_plot_clean.png" alt="FasTQC plots GC. " width="746" height="475" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Per sequence GC content in processed samples</figcaption></figure>
 
 <h1 id="assign-taxonomic-classifications">Assign taxonomic classifications</h1>
 
@@ -1073,7 +1069,7 @@ Sentry.init({
 
 <p>Let’s take a look at the result. Using the search bar we can check if certain taxa are present.</p>
 
-<iframe id="krona" src="krona_all.html" frameborder="0" width="100%" height="900px"> <img src="../../images/metagenomics-nanopore/krona.png" alt="Krona. " loading="lazy" /> </iframe>
+<iframe id="krona" src="krona_all.html" frameborder="0" width="100%" height="900px"> <img src="../../images/metagenomics-nanopore/krona.png" alt="Krona. " width="1325" height="874" loading="lazy" /> </iframe>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1163,6 +1159,9 @@ Sentry.init({
                             Cristóbal Gallardo,  <b>16S Microbial analysis with Nanopore data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.html">https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1184,12 +1183,12 @@ Sentry.init({
 
 <code id="citation-code">@misc{metagenomics-nanopore-16S-metagenomics,
 author = "Cristóbal Gallardo",
-title = "16S Microbial analysis with Nanopore data (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "16S Microbial analysis with Nanopore data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1306,7 +1305,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1338,7 +1337,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

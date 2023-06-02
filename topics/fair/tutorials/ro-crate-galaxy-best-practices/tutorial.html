@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.html">
@@ -46,7 +42,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Best practices for workflows in GitHub repositories">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-10 14:10:03 +0000">
+<meta name="DC.date" content="2023-05-23 11:25:40 +0000">
 <meta name="DC.creator" content="Simone Leo">
 
         
@@ -87,7 +83,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-10 14:10:03 +0000",
+  "dateModified": "2023-05-23 11:25:40 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Best practices for workflows in GitHub repositories",
   "interactivityType": "mixed",
@@ -511,7 +507,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 10, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 23, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -633,24 +629,24 @@ repo2rocrate <span class="nt">--repo-url</span> https://github.com/iwc-workflows
     <li>Run the workflow on the input dataset: click on “Workflow” in the upper menu, locate <code class="language-plaintext highlighter-rouge">sort-and-change-case</code>, and click on the play button to the right.</li>
   </ol>
 
-  <p><img src="img/workflow-entry.png" alt="Workflow Entry. " loading="lazy" /></p>
+  <p><img src="img/workflow-entry.png" alt="Workflow Entry. " width="936" height="192" loading="lazy" /></p>
 
   <ol>
     <li>
       <p>This should take you to the workflow running page. The input slot should be already filled with <code class="language-plaintext highlighter-rouge">input.bed</code> since there is nothing else in the history. Click on “Run Workflow” on the upper right of the center panel.</p>
 
-      <p><img src="img/workflow-run-page.png" alt="Workflow Run Page. " loading="lazy" /></p>
+      <p><img src="img/workflow-run-page.png" alt="Workflow Run Page. " width="974" height="175" loading="lazy" /></p>
     </li>
     <li>Wait for the workflow execution to finish.</li>
     <li>
       <p>On the upper menu, go to “User” &gt; “Workflow Invocations”, click on the invocation corresponding to the workflow just run and copy the invocation’s ID. In my case it says “Invocation: a043e8c60873170b” on the right, where <code class="language-plaintext highlighter-rouge">a043e8c60873170b</code> is the ID.</p>
 
-      <p><img src="img/workflow-invocation.png" alt="Workflow Invocation. " loading="lazy" /></p>
+      <p><img src="img/workflow-invocation.png" alt="Workflow Invocation. " width="921" height="320" loading="lazy" /></p>
     </li>
     <li>
       <p>On the upper menu, go to “User” &gt; “Preferences” &gt; “Manage API Key”. If you don’t have an API key yet, click the button to create a new one. Under “Current API key”, click the button to copy the API Key on the right.</p>
 
-      <p><img src="img/api-key.png" alt="API key. " loading="lazy" /></p>
+      <p><img src="img/api-key.png" alt="API key. " width="951" height="280" loading="lazy" /></p>
     </li>
     <li>Run <code class="language-plaintext highlighter-rouge">planemo workflow_test_init --galaxy_url https://usegalaxy.eu --from_invocation INVOCATION_ID --galaxy_user_key API_KEY</code>, replacing <code class="language-plaintext highlighter-rouge">INVOCATION_ID</code> with the actual invocation ID and <code class="language-plaintext highlighter-rouge">API_KEY</code> with the actual API key. If you’re not using the Galaxy Europe instance, also replace <code class="language-plaintext highlighter-rouge">https://usegalaxy.eu</code> with the URL of the instance you’re using.</li>
     <li>Rename <code class="language-plaintext highlighter-rouge">sort-and-change-case-(imported-from-uploaded-file).ga</code> to <code class="language-plaintext highlighter-rouge">sort-and-change-case.ga</code> and <code class="language-plaintext highlighter-rouge">sort-and-change-case-(imported-from-uploaded-file)-tests.yml</code> to <code class="language-plaintext highlighter-rouge">sort-and-change-case-tests.yml</code>. The rest of the files generated by Planemo are under <code class="language-plaintext highlighter-rouge">test-data</code>.</li>
@@ -758,6 +754,9 @@ repo2rocrate <span class="nt">--repo-url</span> https://github.com/iwc-workflows
                             Simone Leo,  <b>Best practices for workflows in GitHub repositories (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.html">https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -779,12 +778,12 @@ repo2rocrate <span class="nt">--repo-url</span> https://github.com/iwc-workflows
 
 <code id="citation-code">@misc{fair-ro-crate-galaxy-best-practices,
 author = "Simone Leo",
-title = "Best practices for workflows in GitHub repositories (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Best practices for workflows in GitHub repositories (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -886,7 +885,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -918,7 +917,7 @@ tools: []
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

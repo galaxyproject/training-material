@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/metagenomics-assembly/tutorial.html">
@@ -46,7 +42,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Assembly of metagenomic sequencing data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-06-02 00:08:40 +0000">
+<meta name="DC.date" content="2023-06-02 07:30:38 +0000">
 <meta name="DC.creator" content="Polina Polunina">
 <meta name="DC.creator" content="Bérénice Batut">
 
@@ -88,7 +84,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-06-02 00:08:40 +0000",
+  "dateModified": "2023-06-02 07:30:38 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Assembly of metagenomic sequencing data",
   "interactivityType": "mixed",
@@ -783,7 +779,7 @@ Sentry.init({
     <li>De Bruijn graphs. The following figure illustrates these strategies in brief.</li>
   </ol>
 
-  <figure id="figure-1"><img src="./images/assembly-algorithms.png" alt="Image shows greedy extention, overlap layout consensus, and de Brujin graphs assembly algorithms. " width="868" height="777" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Assembly algorithms. Image from <span class="citation"><a href="#carpentries">“<b>Metagenome Assembly – Data Processing and Visualization for Metagenomics</b>”</a></span></figcaption></figure>
+  <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="./images/assembly-algorithms.png" alt="Image shows greedy extention, overlap layout consensus, and de Brujin graphs assembly algorithms. " width="868" height="777" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Assembly algorithms. Image from <span class="citation"><a href="#carpentries">“<b>Metagenome Assembly – Data Processing and Visualization for Metagenomics</b>”</a></span></figcaption></figure>
 
   <p>The nice paper <span class="citation"><a href="#miller2010">Miller <i>et al.</i> 2010</a></span> on assemblers based on these algorithms will help you to better understand how they work.</p>
 </blockquote>
@@ -900,7 +896,7 @@ https://zenodo.org/record/7818827/files/ERR2231572_2.fastqsanger.gz
 
 <p>To reduce the differences in coverage between samples, we can use a <strong>co-assembly</strong> approach, where reads from all samples are aligned together.:</p>
 
-<figure id="figure-2"><img src="./images/co-assembly.png" alt="Image show one pile of sample1 reads and another pile of sample2 reads, then, green arrow leads to assembled reads from both piles. " width="482" height="348" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Co-assembly</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="./images/co-assembly.png" alt="Image show one pile of sample1 reads and another pile of sample2 reads, then, green arrow leads to assembled reads from both piles. " width="482" height="348" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Co-assembly</figcaption></figure>
 
 <table>
   <thead>
@@ -931,7 +927,7 @@ https://zenodo.org/record/7818827/files/ERR2231572_2.fastqsanger.gz
   <li>Binned contigs are likely to be misclassified: MAGs must be treated as a population genome.</li>
 </ul>
 
-<figure id="figure-3"><img src="./images/co-assembly-process.png" alt="Image shows the process of assembled reads from 2 samples followed by binning and there is detailed information about broken contigs, dominant coverage, chimeric contigs found during assembly process. " width="512" height="200" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Co-assembly process</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="./images/co-assembly-process.png" alt="Image shows the process of assembled reads from 2 samples followed by binning and there is detailed information about broken contigs, dominant coverage, chimeric contigs found during assembly process. " width="512" height="200" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Co-assembly process</figcaption></figure>
 
 <p>In these cases, co-assembly is reasonable if:</p>
 <ul>
@@ -943,7 +939,7 @@ https://zenodo.org/record/7818827/files/ERR2231572_2.fastqsanger.gz
 
 <p>If it is not the case, <strong>individual assembly</strong> should be prefered. In this case, an extra step of <strong>de-replication</strong> should be used:</p>
 
-<figure id="figure-4"><img src="./images/individual-assembly.png" alt="Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed. " width="512" height="316" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Individual assembly followed by de-replication vs co-assembly. Source: dRep documentation</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="./images/individual-assembly.png" alt="Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed. " width="512" height="316" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Individual assembly followed by de-replication vs co-assembly. Source: dRep documentation</figcaption></figure>
 
 <p>Co-assembly is more commonly used than individual assembly and then de-replication after binning. But in this tutorial, to show all steps, we will run an <strong>individual assembly</strong>.</p>
 
@@ -1319,7 +1315,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
 
     <p>Quast identifies missassemblies by mapping the contigs to the reference genomes of the identified organisms. 3 types of misassemblies can be identified:</p>
 
-    <figure id="figure-5"><img src="./images/quast_misassemblies.png" alt="Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2." width="592" height="180" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Source: <a href="https://quast.sourceforge.net/docs/manual.html#sec3.1.2">QUAST manual</a></figcaption></figure>
+    <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="./images/quast_misassemblies.png" alt="Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2." width="592" height="180" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Source: <a href="https://quast.sourceforge.net/docs/manual.html#sec3.1.2">QUAST manual</a></figcaption></figure>
 
     <ol>
       <li><strong>Relocation</strong> occur based on signal from two mappings of the same contig against the same chromosome, with 2 cases:
@@ -1328,7 +1324,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           <li>they map on the same chromosome with a shared mapping area of at least 1 kbp</li>
         </ol>
 
-        <figure id="figure-6"><img src="./images/relocation.svg" alt="Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2." width="802" height="219" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Source: <a href="https://blog.pierre.marijon.fr/misassemblies-in-noisy-assemblies/">Yet Another Bioinformatic blog by Pierre Marijon</a></figcaption></figure>
+        <figure id="figure-6" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="./images/relocation.svg" width="80%" type="image/svg+xml">Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2.</object></div><small><a href="./images/relocation.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Source: <a href="https://blog.pierre.marijon.fr/misassemblies-in-noisy-assemblies/">Yet Another Bioinformatic blog by Pierre Marijon</a></figcaption></figure>
 
         <blockquote class="question">
           <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1558,7 +1554,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
 
   <p>Open the Contig size viewer for ERR2231568 and define start as <code class="language-plaintext highlighter-rouge">0</code> and end as <code class="language-plaintext highlighter-rouge">500000</code></p>
 
-  <p><img src="./images/ERR2231568-contig-size-viewer.png" alt="Image shows on the Icarus Contig size viewer for ERR2231568, with a zoom between 0 500000. Below the menu, the contigs are drawn from the longest on the left to the shortest on the right. Each contig is filled with a different color: green for correct, red for misassembled, etc. Below the contigs is dispayed a bar to navigate through the contigs. " loading="lazy" /></p>
+  <p><img src="./images/ERR2231568-contig-size-viewer.png" alt="Image shows on the Icarus Contig size viewer for ERR2231568, with a zoom between 0 500000. Below the menu, the contigs are drawn from the longest on the left to the shortest on the right. Each contig is filled with a different color: green for correct, red for misassembled, etc. Below the contigs is dispayed a bar to navigate through the contigs. " width="1499" height="658" loading="lazy" /></p>
 
   <ol>
     <li>What is the color of the first contig? Why?</li>
@@ -1624,7 +1620,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
 
   <p>Open the Contig alignment viewer for ERR2231568 and <em>Leuconostoc pseudomesenteroides</em> KCTC 3652, the most covered by contigs</p>
 
-  <p><img src="./images/ERR2231568-contig-alignment-viewer-leuconostoc.png" alt="Image shows on the Icarus alignment size viewer of ERR2231568 contigs for Leuconostoc pseudomesenteroides KCTC 3652. On the top are displayed the contigs aligend on the reference genome, with a zoom. Each contig is filled with a different color: green for correct, red for misassembled, etc. Below the contigs is dispayed a bar to navigate through the contigs. Below is a graph representing the GC percentage and coverage along the reference genome. " loading="lazy" /></p>
+  <p><img src="./images/ERR2231568-contig-alignment-viewer-leuconostoc.png" alt="Image shows on the Icarus alignment size viewer of ERR2231568 contigs for Leuconostoc pseudomesenteroides KCTC 3652. On the top are displayed the contigs aligend on the reference genome, with a zoom. Each contig is filled with a different color: green for correct, red for misassembled, etc. Below the contigs is dispayed a bar to navigate through the contigs. Below is a graph representing the GC percentage and coverage along the reference genome. " width="1508" height="741" loading="lazy" /></p>
 
   <ol>
     <li>How are the organized the contigs on the top?</li>
@@ -1687,7 +1683,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
     </ol>
   </blockquote>
 
-  <figure id="figure-7"><img src="./images/ERR2231571_graph.jpg" alt="Image shows the assembly graphs, with longer stretch on the top and many small contigs on the bottom. " width="1292" height="1000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Assembly graph for ERR2231571 sample</figcaption></figure>
+  <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="./images/ERR2231571_graph.jpg" alt="Image shows the assembly graphs, with longer stretch on the top and many small contigs on the bottom. " width="1292" height="1000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Assembly graph for ERR2231571 sample</figcaption></figure>
 
   <p>The graph is quite disconnected. On the top, we can see the longer stretches, that includes multiples contigs (each contig having a different color). On the bottom are the shortest stretches or single contigs.</p>
 
@@ -1747,7 +1743,7 @@ De-replication is the process of identifying sets of genomes that are the "same"
 
 A common use for genome de-replication is the case of individual assembly of metagenomic data. If metagenomic samples are collected in a series, a common way to assemble the short reads is with a “co-assembly”. That is, combining the reads from all samples and assembling them together. The problem with this is assembling similar strains together can severely fragment assemblies, precluding recovery of a good genome bin. An alternative option is to assemble each sample separately, and then “de-replicate” the bins from each assembly to make a final genome set.
 
-<figure id="figure-8"><img src="./images/individual-assembly.png" alt="Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed. " width="80%" width="512" height=316 loading="lazy"><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Individual assembly followed by de-replication vs co-assembly</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="./images/individual-assembly.png"  alt="Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed. " width="80%" width="512" height=316 loading="lazy"><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Individual assembly followed by de-replication vs co-assembly</figcaption></figure>
 
 If we have different samples, then we do an individual assembly for each sample. In the figure above we see that after individual assembly we have results for every individual assembly represented with pie charts. Different colours on these charts show different strains (organisms). Every chart has a different percentage of every strain which means that the assemblies contain different strains in different proportions in each sample.
 
@@ -1857,6 +1853,9 @@ We will perform steps from 1 to 3 in this tutorial a bit later while steps 4 - 8
                             Polina Polunina, Bérénice Batut,  <b>Assembly of metagenomic sequencing data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/metagenomics-assembly/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/metagenomics-assembly/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1878,12 +1877,12 @@ We will perform steps from 1 to 3 in this tutorial a bit later while steps 4 - 8
 
 <code id="citation-code">@misc{assembly-metagenomics-assembly,
 author = "Polina Polunina and Bérénice Batut",
-title = "Assembly of metagenomic sequencing data (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/metagenomics-assembly/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Assembly of metagenomic sequencing data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/metagenomics-assembly/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -2058,7 +2057,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2090,7 +2089,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

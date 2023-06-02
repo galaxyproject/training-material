@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html">
@@ -744,14 +740,14 @@ You can learn how to prepare and optimize a spectral library for the analysis of
 
 <p>In clinical proteomic studies often two or more conditions should be compared against each other, thus focusing on the proteins which were found in all conditions. Using the data dependent acquisition (DDA) approach could lead to limited numbers of cumulative proteins, due to method instrinsic dependencies (e.g. if the same peptides is selected for fragmentation in all measurements).
 Over the last decade another acquisition method has been developed addressing the urgent need for increased cumulatively identified and quantified peptides and proteins across multiple measurements (<span class="citation"><a href="#Ludwig2018">Ludwig <i>et al.</i> 2018</a></span>). The so called data independent acquisition (DIA) circumvents the time and abundance dependent selection for fragmentation by using predefined fragmentation windows (m/z windows) going through the whole m/z range of the previous MS1 scan.</p>
-<figure id="figure-1"><img src="../../images/DIA_analysis_window.png" alt="DIA_window_schema. " width="1049" height="583" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Measurement principles of DIA and m/z window schema of staggered DIA windows.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/DIA_analysis_window.png" alt="DIA_window_schema. " width="1049" height="583" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Measurement principles of DIA and m/z window schema of staggered DIA windows.</figcaption></figure>
 
 <p>Therefore, all peptides which are present in the same m/z window at the same time are fragmented simultaneously and a MS2 spectra containing fragments from multiple peptides is acquired. Using the same m/z windows for all measurements, results in more reproducible fragmentation and potential identification across multiple measurements.
 However, the resulting MS2 spectra contain fragments from multiple peptides and are often more complex and do not allow to directly link a specific (m/z) mass from the MS1 to a single MS2 fragment spectra.</p>
-<figure id="figure-2"><img src="../../images/DIA_analysis_MS2.png" alt="DIA_vs_DDA. " width="1182" height="297" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The MS2 scans in the DIA approach contain fragment ions from multiple precursers and are therefore more complex than the precursor-specific MS2 scans in DDA.</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/DIA_analysis_MS2.png" alt="DIA_vs_DDA. " width="1182" height="297" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The MS2 scans in the DIA approach contain fragment ions from multiple precursers and are therefore more complex than the precursor-specific MS2 scans in DDA.</figcaption></figure>
 
 <p>To allow for the identification of peptides in those ambiguous MS2 spectra, a spectral library can be used. The spectral library contains experimentally measured  MS2 spectra, which are specific for one precursor (from previous DDA measurements). In more recent approaches the MS2 spectra can be predicted based on theoretical peptide sequences (e.g. from a protein database).</p>
-<figure id="figure-3"><img src="../../images/DIA_analysis_basic.png" alt="DIA_basics. " width="1436" height="729" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Spectral libraries are necesseary for the identification of peptides in DIA MS2 scans. In this example the spectral library is generated based on DDA data from the same samples.</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/DIA_analysis_basic.png" alt="DIA_basics. " width="1436" height="729" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Spectral libraries are necesseary for the identification of peptides in DIA MS2 scans. In this example the spectral library is generated based on DDA data from the same samples.</figcaption></figure>
 
 <p>One of the open-source software options for DIA data analysis is <em>OpenSwath</em> (<span class="citation"><a href="#Rost2014">Röst <i>et al.</i> 2014</a></span>), which requires a spectral library, retention time alignment peptides as well as the DIA MS data.</p>
 
@@ -1143,11 +1139,11 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 
 <h1 id="conclusion">Conclusion</h1>
 
-<figure id="figure-4"><img src="../../images/DIA_analysis_sum.png" alt="DIA_analysis_pipe. " width="1654" height="332" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> All-in one workflow for DIA analysis in Galaxy. The DIA data analysis using OpenSwathWorkflow is highlighted in yellow.</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/DIA_analysis_sum.png" alt="DIA_analysis_pipe. " width="1654" height="332" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> All-in one workflow for DIA analysis in Galaxy. The DIA data analysis using OpenSwathWorkflow is highlighted in yellow.</figcaption></figure>
 
 <p>Using <strong>OpenSwathWorkflow</strong> and a spectral library (from DDA data) we were able to analyze data independent acquisition (DIA) data. Furthermore, we were able to process the FDR scored results and take a guess on which Spike-in contained higher amounts of Ecoli. To further investigate the two different Spike-in amounts as well as getting a significant result we would need to perform statistical analysis e.g. using <strong>MSstats</strong>.</p>
 
-<figure id="figure-5"><img src="../../images/DIA_analysis_workflow.png" alt="DIA_OSW_galaxy. " width="1904" height="751" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Galaxy worfklow containing all necessary steps for the analysis of DIA data using a spectral library and OpenSwathWorkflow</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/DIA_analysis_workflow.png" alt="DIA_OSW_galaxy. " width="1904" height="751" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Galaxy worfklow containing all necessary steps for the analysis of DIA data using a spectral library and OpenSwathWorkflow</figcaption></figure>
 
                 </section>
 
@@ -1204,6 +1200,9 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
                             Matthias Fahrner, Melanie Föll,  <b>DIA Analysis using OpenSwathWorkflow (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html">https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1225,12 +1224,12 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 
 <code id="citation-code">@misc{proteomics-DIA_Analysis_OSW,
 author = "Matthias Fahrner and Melanie Föll",
-title = "DIA Analysis using OpenSwathWorkflow (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "DIA Analysis using OpenSwathWorkflow (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1347,7 +1346,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1379,7 +1378,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

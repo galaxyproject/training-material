@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/hicexplorer/tutorial.html">
@@ -966,7 +962,7 @@ A quality report is created in e.g. <code class="language-plaintext highlighter-
 </blockquote>
 
 <p>The resulting plot of the 1 Mb contact matrix should look like:
-<img src="../../images/plotMatrix.png" alt="TAD plot. " loading="lazy" /></p>
+<img src="../../images/plotMatrix.png" alt="TAD plot. " width="576" height="504" loading="lazy" /></p>
 
 <h1 id="correction-of-hi-c-matrix">Correction of Hi-C matrix</h1>
 
@@ -1121,9 +1117,9 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 </blockquote>
 
-<p><img src="../../images/pearson_pc1.png" alt="Pearson PC1. " loading="lazy" /></p>
+<p><img src="../../images/pearson_pc1.png" alt="Pearson PC1. " width="1200" height="1275" loading="lazy" /></p>
 
-<p><img src="../../images/pearson_pc2.png" alt="Pearson PC2. " loading="lazy" /></p>
+<p><img src="../../images/pearson_pc2.png" alt="Pearson PC2. " width="1200" height="1275" loading="lazy" /></p>
 
 <p>The first principal component correlates with the chromosome arms, while the second component correlates with A/B compartments.</p>
 
@@ -1227,13 +1223,13 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 </blockquote>
 
 <p>The resulting image should look like this one:
-<img src="../../images/plotTADs.png" alt="TAD plot. " loading="lazy" /></p>
+<img src="../../images/plotTADs.png" alt="TAD plot. " width="1133" height="502" loading="lazy" /></p>
 
 <h1 id="loop-detection">Loop detection</h1>
 
 <p>In Hi-C data, the term <code class="language-plaintext highlighter-rouge">loop</code> refers to a 3D structure which represents enhancer-promoter, gene, architectural or polycomb-mediated interactions. These interactions have the characteristics to be enriched in a single region compared to the local background. These loops are also called long-range interactions with an expected maximum distance of 2 MB (see <a href="https://doi.org/10.1016/j.cell.2014.11.021">Rao et al. 2014</a>).</p>
 
-<p><img src="../../images/loops_bonev_cavalli.png" alt="Loops visualization. " loading="lazy" /></p>
+<p><img src="../../images/loops_bonev_cavalli.png" alt="Loops visualization. " width="1666" height="580" loading="lazy" /></p>
 
 <p>To compute loops, we have to import a new data set from the shared library to our history: <code class="language-plaintext highlighter-rouge">GM12878-MboI-allreps-filtered.10kb.cool</code> or download it via the <a href="ftp://cooler.csail.mit.edu/coolers/hg19/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool">FTP cool files server</a>. (FTP links seems to be blocked, therefore the full URL: <code class="language-plaintext highlighter-rouge">ftp://cooler.csail.mit.edu/coolers/hg19/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool</code>)</p>
 
@@ -1276,7 +1272,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <p>As an output we get a loop file containing the positions of both anchor points of the loop and the p-value of the used statistical test.</p>
 
-<p><img src="../../images/loops_result.png" alt="Loops computed_file. " loading="lazy" /></p>
+<p><img src="../../images/loops_result.png" alt="Loops computed_file. " width="638" height="485" loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-plotting-of-loops"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plotting of loops</div>
@@ -1296,7 +1292,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 </blockquote>
 
-<p><img src="../../images/loops_plot.png" alt="Loops result_plot. " loading="lazy" /></p>
+<p><img src="../../images/loops_plot.png" alt="Loops result_plot. " width="2400" height="2100" loading="lazy" /></p>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -1355,6 +1351,9 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
                             Joachim Wolff, Fidel Ramirez, Vivek Bhardwaj, Ekaterina Polkh,  <b>Hi-C analysis of Drosophila melanogaster cells using HiCExplorer (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/hicexplorer/tutorial.html">https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/hicexplorer/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1376,12 +1375,12 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <code id="citation-code">@misc{epigenetics-hicexplorer,
 author = "Joachim Wolff and Fidel Ramirez and Vivek Bhardwaj and Ekaterina Polkh",
-title = "Hi-C analysis of Drosophila melanogaster cells using HiCExplorer (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/hicexplorer/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Hi-C analysis of Drosophila melanogaster cells using HiCExplorer (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/hicexplorer/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1493,7 +1492,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1525,7 +1524,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html">
@@ -1194,16 +1190,16 @@ You fractionate all 3 experiments / mixtures into 3 fractions each and measure e
 <p>We obtain several output files from MSstatsTMT. MSstats log file contains the MSstats report with warnings and information about the analysis steps. 
 The QC report allows to visualize protein abundance of conditions for all proteins (first page) or if enabled for each individual protein (following pages).</p>
 
-<figure id="figure-1"><img src="../../images/maxquant-msstats-tmt/QC_plot.png" alt="QC report. " width="768" height="768" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant-msstats-tmt/QC_plot.png" alt="QC report. " width="768" height="768" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
 
 <p>The MSstatsTMT Group Comparison Plot is a very convenient pdf, which you can search for your favorite proteins of interest to check whether these are dysregulated between the conditions. The red error bar gives you a confidence interval of the fold change.</p>
 
-<figure id="figure-2"><img src="../../images/maxquant-msstats-tmt/example_protein.png" alt="Group comparison plot. " width="944" height="593" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Group comparison plot for the protein A5YKK6 (CCR4-NOT transcription complex subunit 1)</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant-msstats-tmt/example_protein.png" alt="Group comparison plot. " width="944" height="593" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Group comparison plot for the protein A5YKK6 (CCR4-NOT transcription complex subunit 1)</figcaption></figure>
 
 <p>The volcano plot plots the negative log10 of the adjusted P Value derived from statistical testing over the log2 fold change between the conditions you compared. A value of 3 on the y axis corresponds to an adjusted P Value of 0.001, whereas a value of 1 on the x axis corresponds to a ratio of 2 meaning that the protein is twice as high in condition 1 than condition 2..
 Please bear in mind that TMT quantitation suffers from ratio compression. There are ways to calculate more accurate fold changes from measured data (or alternatively you can use MS3 quantitation on some machines). However, even with ratio compression, MS2 TMT is an excellent quantitation strategy to detect differentially regulated proteins. Just bear in mind that the reported fold chances of proteins are almost always smaller than the real fold changes between your conditions.</p>
 
-<figure id="figure-3"><img src="../../images/maxquant-msstats-tmt/volcano_plot.png" alt="Volcano plot. " width="951" height="578" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Volcano plot QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant-msstats-tmt/volcano_plot.png" alt="Volcano plot. " width="951" height="578" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Volcano plot QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
 
                 </section>
 
@@ -1256,6 +1252,9 @@ Please bear in mind that TMT quantitation suffers from ratio compression. There 
                             Klemens Fröhlich, Melanie Föll, Matthias Fahrner,  <b>MaxQuant and MSstats for the analysis of TMT data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html">https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1277,12 +1276,12 @@ Please bear in mind that TMT quantitation suffers from ratio compression. There 
 
 <code id="citation-code">@misc{proteomics-maxquant-msstats-tmt,
 author = "Klemens Fröhlich and Melanie Föll and Matthias Fahrner",
-title = "MaxQuant and MSstats for the analysis of TMT data (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "MaxQuant and MSstats for the analysis of TMT data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1369,7 +1368,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1401,7 +1400,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

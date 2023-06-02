@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/tutorial.html">
@@ -771,7 +767,7 @@ Sentry.init({
 <h2 id="what-is-the-gene-ontology">What is the Gene Ontology?</h2>
 <p>The <a href="http://www.geneontology.org/">Gene Ontology</a> (GO) is a structured, controlled vocabulary for the classification of gene function at the molecular and cellular level. It is divided in three separate sub-ontologies or GO types: biological process (e.g., signal transduction), molecular function (e.g., ATPase activity) and cellular component (e.g., ribosome). These sub-ontologies are structured as directed acyclic graphs (a hierarchy with multi-parenting) of GO terms.</p>
 
-<figure id="figure-1"><img src="../../images/transcriptomics_images/goenrichment_GOexample.png" alt="GO Example. " width="257" height="367" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> QuickGO - http://www.ebi.ac.uk/QuickGO</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/goenrichment_GOexample.png" alt="GO Example. " width="257" height="367" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> QuickGO - http://www.ebi.ac.uk/QuickGO</figcaption></figure>
 
 <p>The GO Ontology, like other ontologies, are usually coded in the <a href="http://www.geneontology.org/faq/what-obo-file-format">OBO</a> or the <a href="http://www.geneontology.org/faq/what-owl-file">OWL</a> formats. It can be downloaded from the <a href="http://geneontology.org/page/download-ontology">Gene Ontology website</a> or from the <a href="http://www.obofoundry.org/">OBO foundry</a>. You can also find in Galaxy tools that allow you to manipulate and extract information from OBO files, but this is outside the scope of this tutorial.</p>
 
@@ -819,7 +815,7 @@ Sentry.init({
 
 <p>The appropriate statistical test is the one-tailed variant of Fisher’s exact test, also known as the hypergeometric test for over-representation. When the one-tailed version is applied, this test will compute the probability of observing at least the sample frequency, given the population frequency.  The <a href="https://en.wikipedia.org/wiki/Hypergeometric_distribution">hypergeometric distribution</a> measures precisely the probability of <strong>k</strong> successes in <strong>n</strong> draws, without replacement, from a finite population of size <strong>N</strong> that contains exactly <strong>K</strong> successful objects:</p>
 
-<p><img src="../../images/transcriptomics_images/goenrichment_formula.png" alt="Go Enrichment Formula. " loading="lazy" /></p>
+<p><img src="../../images/transcriptomics_images/goenrichment_formula.png" alt="Go Enrichment Formula. " width="144" height="70" loading="lazy" /></p>
 
 <p>For this first exercise we will use data from <a href="https://www.ncbi.nlm.nih.gov/pubmed/22383036" title="Trapnell et al. data">Trapnell et al. 2014</a>. In this work, the authors created an artificial dataset of gene expression in <em>Drosophila melanogaster</em>, where 300 random genes were set (insilico) to be differentially expressed between two conditions.</p>
 
@@ -849,7 +845,7 @@ Sentry.init({
           <li><strong>Click</strong> on the upload button in the upper left of the interface.</li>
         </ul>
 
-        <p><img src="../../images/transcriptomics_images/goenrichment_galaxy_upload.png" alt="Galaxy Upload. " loading="lazy" /></p>
+        <p><img src="../../images/transcriptomics_images/goenrichment_galaxy_upload.png" alt="Galaxy Upload. " width="266" height="206" loading="lazy" /></p>
 
         <ul>
           <li>Press <strong>Choose local file</strong> and search for your file.</li>
@@ -861,7 +857,7 @@ Sentry.init({
       <p><strong>Rename</strong> the <em>go.obo</em> file to <code class="language-plaintext highlighter-rouge">GO</code> and <em>drosophila_gene_association.fb</em> file to <code class="language-plaintext highlighter-rouge">GO annotations Drosophila melanogaster</code>.</p>
 
       <p>After you upload the files, and if you press the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of <code class="language-plaintext highlighter-rouge">trapnellPopulation.tab</code> it should look something like this:</p>
-      <figure id="figure-2"><img src="../../images/transcriptomics_images/goenrichment_trapnellFile.png" alt="Trapnell File. " width="1438" height="580" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Trapnell file</figcaption></figure>
+      <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/goenrichment_trapnellFile.png" alt="Trapnell File. " width="1438" height="580" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Trapnell file</figcaption></figure>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
@@ -872,7 +868,7 @@ Sentry.init({
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">trapnellPopulation.tab</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7 &lt; 0.05</code>
-<img src="../../images/transcriptomics_images/goenrichment_galaxyFilter.png" alt="Galaxy Filter. " loading="lazy" /></li>
+<img src="../../images/transcriptomics_images/goenrichment_galaxyFilter.png" alt="Galaxy Filter. " width="921" height="278" loading="lazy" /></li>
       </ul>
     </li>
     <li>
@@ -890,7 +886,7 @@ Sentry.init({
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Study set File”</em>: <code class="language-plaintext highlighter-rouge">trapnellStudy</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Population set File”</em>: <code class="language-plaintext highlighter-rouge">trapnellPopulation.tab</code></li>
         <li>Use the default options for the rest.
-<img src="../../images/transcriptomics_images/goenrichment_galaxyTrapnell.png" alt="GO Enrichment Trapnell. " loading="lazy" /></li>
+<img src="../../images/transcriptomics_images/goenrichment_galaxyTrapnell.png" alt="GO Enrichment Trapnell. " width="918" height="799" loading="lazy" /></li>
       </ul>
 
       <blockquote class="question">
@@ -924,7 +920,7 @@ Sentry.init({
 
   <p>If you press the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the <em>Molecular Function</em> file (<code class="language-plaintext highlighter-rouge">MF Trapnell</code>) you should see something like this:</p>
 
-  <p><img src="../../images/transcriptomics_images/goenrichment_mfTrapnell.png" alt="GO Enrichment Trapnell MF. " loading="lazy" /></p>
+  <p><img src="../../images/transcriptomics_images/goenrichment_mfTrapnell.png" alt="GO Enrichment Trapnell MF. " width="329" height="293" loading="lazy" /></p>
 
   <blockquote class="question">
     <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -954,7 +950,7 @@ Sentry.init({
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">trapnellPopulation.tab</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7 != 'NA'</code>
-<img src="../../images/transcriptomics_images/goenrichment_galaxyFilterNA.png" alt="Galaxy Filter NA. " loading="lazy" /></li>
+<img src="../../images/transcriptomics_images/goenrichment_galaxyFilterNA.png" alt="Galaxy Filter NA. " width="918" height="282" loading="lazy" /></li>
       </ul>
     </li>
     <li>This generates one file. <strong>Rename</strong> to <code class="language-plaintext highlighter-rouge">trapnellFilteredPopulation</code>.</li>
@@ -965,14 +961,14 @@ Sentry.init({
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Study set File”</em>: <code class="language-plaintext highlighter-rouge">trapnellStudy</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Population set File”</em>: <code class="language-plaintext highlighter-rouge">trapnellFilteredPopulation</code></li>
         <li>Use the default options for the rest.
-<img src="../../images/transcriptomics_images/goenrichment_galaxyTrapnellNewPop.png" alt="GO Enrichment Trapnell new Population. " loading="lazy" /></li>
+<img src="../../images/transcriptomics_images/goenrichment_galaxyTrapnellNewPop.png" alt="GO Enrichment Trapnell new Population. " width="922" height="798" loading="lazy" /></li>
       </ul>
     </li>
     <li><strong>Rename</strong> all 6 output files by appending <code class="language-plaintext highlighter-rouge">FilteredPop</code> to the name, to distinguish them from the previous outputs.
 Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph FilteredPop</strong>.</li>
   </ol>
 
-  <p><img src="../../images/transcriptomics_images/goenrichment_mfTrapnellNew.png" alt="GO Enrichment Trapnell new Population MF. " loading="lazy" /></p>
+  <p><img src="../../images/transcriptomics_images/goenrichment_mfTrapnellNew.png" alt="GO Enrichment Trapnell new Population MF. " width="117" height="35" loading="lazy" /></p>
 
   <blockquote class="question">
     <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1010,14 +1006,14 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Study set File”</em>: <code class="language-plaintext highlighter-rouge">Mouse diff</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Population set File”</em>: <code class="language-plaintext highlighter-rouge">Mouse population</code></li>
         <li>Select <strong>‘No’</strong> in the Summarize Output option.
-<img src="../../images/transcriptomics_images/goenrichment_galaxyMouseDiff.png" alt="GO Enrichment Mouse Diff. " loading="lazy" /></li>
+<img src="../../images/transcriptomics_images/goenrichment_galaxyMouseDiff.png" alt="GO Enrichment Mouse Diff. " width="919" height="800" loading="lazy" /></li>
       </ul>
     </li>
     <li>This will generate 6 files with the names: <code class="language-plaintext highlighter-rouge">goenrichment on Mouse diff MF Table</code>, <code class="language-plaintext highlighter-rouge">goenrichment on Mouse diff BP Table</code>, <code class="language-plaintext highlighter-rouge">goenrichment on Mouse diff CC Table</code>, <code class="language-plaintext highlighter-rouge">goenrichment on Mouse diff MF Graph</code>, <code class="language-plaintext highlighter-rouge">goenrichment on Mouse diff BP Graph</code> and <code class="language-plaintext highlighter-rouge">goenrichment on Mouse diff CC Graph</code>.</li>
     <li>Analyze the table and graph from <em>Biological Process</em>.</li>
   </ol>
 
-  <p><img src="../../images/transcriptomics_images/goenrichment_bpMouseDiff.png" alt="GO Enrichment Mouse Diff BP. " loading="lazy" /></p>
+  <p><img src="../../images/transcriptomics_images/goenrichment_bpMouseDiff.png" alt="GO Enrichment Mouse Diff BP. " width="30775" height="2205" loading="lazy" /></p>
 
   <blockquote class="comment">
     <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
@@ -1040,13 +1036,13 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Study set File”</em>: <code class="language-plaintext highlighter-rouge">Mouse diff</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Population set File”</em>: <code class="language-plaintext highlighter-rouge">Mouse population</code></li>
         <li>Use the default options for the rest (notice that by default the Summarize Option is on).
-<img src="../../images/transcriptomics_images/goenrichment_galaxyMouseDiffSum.png" alt="GO Enrichment Mouse Diff Summarize. " loading="lazy" /></li>
+<img src="../../images/transcriptomics_images/goenrichment_galaxyMouseDiffSum.png" alt="GO Enrichment Mouse Diff Summarize. " width="919" height="798" loading="lazy" /></li>
       </ul>
     </li>
     <li>Analyze again the table and graph from <em>Biological Process</em>.</li>
   </ol>
 
-  <p><img src="../../images/transcriptomics_images/goenrichment_bpMouseDiffSum.png" alt="GO Enrichment Mouse Diff Summarize BP. " loading="lazy" /></p>
+  <p><img src="../../images/transcriptomics_images/goenrichment_bpMouseDiffSum.png" alt="GO Enrichment Mouse Diff Summarize BP. " width="4603" height="869" loading="lazy" /></p>
 
   <blockquote class="question">
     <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1082,7 +1078,7 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
     </li>
   </ol>
 
-  <p><img src="../../images/transcriptomics_images/goenrichment_galaxySlimer.png" alt="Galaxy GO Slimmer. " loading="lazy" /></p>
+  <p><img src="../../images/transcriptomics_images/goenrichment_galaxySlimer.png" alt="Galaxy GO Slimmer. " width="919" height="297" loading="lazy" /></p>
 
   <p>This will generate one file called <code class="language-plaintext highlighter-rouge">Slim Annotations</code>.</p>
 </blockquote>
@@ -1097,7 +1093,7 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
       <ul>
         <li>Use the <code class="language-plaintext highlighter-rouge">GO Slim</code>, <code class="language-plaintext highlighter-rouge">Slim Annotations</code>, <code class="language-plaintext highlighter-rouge">Mouse diff</code> and <code class="language-plaintext highlighter-rouge">Mouse population</code> files.</li>
         <li>Use the default options.
-<img src="../../images/transcriptomics_images/goenrichment_galaxyMouseSlim.png" alt="GO Enrichment Mouse Slim. " loading="lazy" /></li>
+<img src="../../images/transcriptomics_images/goenrichment_galaxyMouseSlim.png" alt="GO Enrichment Mouse Slim. " width="917" height="797" loading="lazy" /></li>
       </ul>
 
       <blockquote class="question">
@@ -1108,9 +1104,9 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
         </ol>
 
         <p><em>Component Cellular</em> with full GO
-<img src="../../images/transcriptomics_images/goenrichment_ccSum.png" alt="GO Enrichment Mouse Summarize CC. " loading="lazy" />
+<img src="../../images/transcriptomics_images/goenrichment_ccSum.png" alt="GO Enrichment Mouse Summarize CC. " width="2763" height="595" loading="lazy" />
 <em>Component Cellular</em> with GO Slim
-<img src="../../images/transcriptomics_images/goenrichment_ccSlimSum.png" alt="GO Enrichment Mouse Slim CC. " loading="lazy" /></p>
+<img src="../../images/transcriptomics_images/goenrichment_ccSlimSum.png" alt="GO Enrichment Mouse Slim CC. " width="935" height="253" loading="lazy" /></p>
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1151,8 +1147,8 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
       <ul>
         <li>Use the <code class="language-plaintext highlighter-rouge">GO</code>, the <code class="language-plaintext highlighter-rouge">GO annotations Mus musculus</code> and the <code class="language-plaintext highlighter-rouge">Mouse population</code> files.</li>
         <li>Use the default options.
-<img src="../../images/transcriptomics_images/goenrichment_galaxyMouseOver.png" alt="GO Enrichment Mouse Overexpress. " loading="lazy" />
-<img src="../../images/transcriptomics_images/goenrichment_galaxyMouseUnder.png" alt="GO Enrichment Mouse Underexpress. " loading="lazy" /></li>
+<img src="../../images/transcriptomics_images/goenrichment_galaxyMouseOver.png" alt="GO Enrichment Mouse Overexpress. " width="920" height="797" loading="lazy" />
+<img src="../../images/transcriptomics_images/goenrichment_galaxyMouseUnder.png" alt="GO Enrichment Mouse Underexpress. " width="918" height="798" loading="lazy" /></li>
       </ul>
     </li>
     <li>
@@ -1231,6 +1227,9 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
                             IGC Bioinformatics Unit, Maria Doyle,  <b>GO Enrichment Analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1252,12 +1251,12 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
 
 <code id="citation-code">@misc{transcriptomics-goenrichment,
 author = "IGC Bioinformatics Unit and Maria Doyle",
-title = "GO Enrichment Analysis (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "GO Enrichment Analysis (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1344,7 +1343,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1376,7 +1375,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

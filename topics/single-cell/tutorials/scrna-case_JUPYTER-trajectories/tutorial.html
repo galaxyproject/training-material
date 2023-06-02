@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">
@@ -1033,7 +1029,7 @@ Sentry.init({
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot1.png'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<figure id="figure-1"><img src="../../images/scrna-casestudy/draw_graph_faPlot1.png" alt="Plot1-Force-Directed Graph. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Plot1-Force-Directed Graph</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/draw_graph_faPlot1.png" alt="Plot1-Force-Directed Graph. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Plot1-Force-Directed Graph</figcaption></figure>
 
 <p>Well now this is exciting! Our DP-late is more clearly separating, and we might also suppose that DP-M1, DP-M2, and DP-M3 are actually earlier on in the differentiation towards mature T-cells. And we’re only just getting started!</p>
 
@@ -1050,7 +1046,7 @@ Sentry.init({
 <span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
 <span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot2.png'</span><span class="p">)</span>
 </code></pre></div></div>
-<figure id="figure-2"><img src="../../images/scrna-casestudy/draw_graph_faPlot2.png" alt="Diffusion Map. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Diffusion Map</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/draw_graph_faPlot2.png" alt="Diffusion Map. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Diffusion Map</figcaption></figure>
 
 <p>Oh dear! This doesn’t look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn’t seem right. Saying that, this spreads out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you’ve changed the neighborhood graph on which the clusterisation depends). You could use this:
 <code class="language-plaintext highlighter-rouge">sc.tl.louvain(adata, resolution=0.6)</code>
@@ -1092,7 +1088,7 @@ However, we tried that, and it called far too many clusters given the depth of s
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">paga</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="s">'ENSMUSG00000023274'</span><span class="p">,</span> <span class="s">'ENSMUSG00000053977'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'Cell type'</span><span class="p">,</span> <span class="s">'CD4'</span><span class="p">,</span> <span class="s">'Cd8a'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot4.png'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<figure id="figure-3"><img src="../../images/scrna-casestudy/pagaPlot4.png" alt="PAGA. " width="1386" height="264" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> PAGA</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/pagaPlot4.png" alt="PAGA. " width="1386" height="264" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> PAGA</figcaption></figure>
 
 <p>Well now that is interesting! This analysis would find that DP-M1 and DP-M4 are both driving towards differentiation, which is not something we had necessarily been able to specify before by just looking at our cluster graphs or applying our biological knowledge.</p>
 
@@ -1107,11 +1103,11 @@ However, we tried that, and it called far too many clusters given the depth of s
 <span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'ENSMUSG00000023274'</span><span class="p">,</span> <span class="s">'ENSMUSG00000053977'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'CD4'</span><span class="p">,</span> <span class="s">'Cd8a'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot7.png'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<figure id="figure-4"><img src="../../images/scrna-casestudy/draw_graph_faPlot5.png" alt="Force-Directed + PAGA - Cell type. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Force-Directed + PAGA - Cell type</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/draw_graph_faPlot5.png" alt="Force-Directed + PAGA - Cell type. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Force-Directed + PAGA - Cell type</figcaption></figure>
 
-<figure id="figure-5"><img src="../../images/scrna-casestudy/draw_graph_faPlot6.png" alt="Force-Directed + PAGA - Genotype. " width="452" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Force-Directed + PAGA - Genotype</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/draw_graph_faPlot6.png" alt="Force-Directed + PAGA - Genotype. " width="452" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Force-Directed + PAGA - Genotype</figcaption></figure>
 
-<figure id="figure-6"><img src="../../images/scrna-casestudy/draw_graph_faPlot7.png" alt="Force-Directed + PAGA - Markers. " width="827" height="269" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Force-Directed + PAGA - Markers</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/draw_graph_faPlot7.png" alt="Force-Directed + PAGA - Markers. " width="827" height="269" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Force-Directed + PAGA - Markers</figcaption></figure>
 
 <p><strong>Note</strong> - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix!</p>
 
@@ -1124,7 +1120,7 @@ However, we tried that, and it called far too many clusters given the depth of s
     <span class="n">legend_fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
-<figure id="figure-7"><img src="../../images/scrna-casestudy/paga_compare.png" alt="PAGA Compare. " width="819" height="244" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> PAGA Compare</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/paga_compare.png" alt="PAGA Compare. " width="819" height="244" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> PAGA Compare</figcaption></figure>
 
 <p><strong>Note</strong> - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix!</p>
 
@@ -1146,7 +1142,7 @@ However, we tried that, and it called far too many clusters given the depth of s
 <span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="s">'dpt_pseudotime'</span><span class="p">],</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot8.png'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<figure id="figure-8"><img src="../../images/scrna-casestudy/draw_graph_faPlot8.png" alt="Force-Directed + Pseudotime. " width="819" height="269" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Force-Directed + Pseudotime</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/draw_graph_faPlot8.png" alt="Force-Directed + Pseudotime. " width="819" height="269" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Force-Directed + Pseudotime</figcaption></figure>
 
 <p>This is nice, as it supports our conclusions thus far on the trajectory of the T-cell differentiation. With single-cell, the more ways you can prove to yourself what you’re seeing is real, the better! If we did not find consistent results, we would need to delve in further to see if the algorithm (not all algorithms fit all data!) or the biology.</p>
 
@@ -1263,6 +1259,9 @@ However, we tried that, and it called far too many clusters given the depth of s
                             Wendi Bacon, Julia Jakiela, Mehmet Tekman,  <b>Inferring Trajectories using Scanpy (Python) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1284,12 +1283,12 @@ However, we tried that, and it called far too many clusters given the depth of s
 
 <code id="citation-code">@misc{single-cell-scrna-case_JUPYTER-trajectories,
 author = "Wendi Bacon and Julia Jakiela and Mehmet Tekman",
-title = "Inferring Trajectories using Scanpy (Python) (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Inferring Trajectories using Scanpy (Python) (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1369,7 +1368,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1401,7 +1400,7 @@ tools: []
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

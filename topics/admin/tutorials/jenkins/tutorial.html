@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/jenkins/tutorial.html">
@@ -972,7 +968,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
 
 <p>Start by <strong>visiting your Jenkins instance</strong>, at <code class="language-plaintext highlighter-rouge">https://your-domain/jenkins</code></p>
 
-<figure id="figure-1"><img src="../../images/jenkins-01-welcome.png" alt="Welcome to Jenkins. " width="1713" height="499" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Welcome to Jenkins! This is how it looks once you've run the playbook and logged in. The menu on the left gives you some ability to configure Jenkins, below it is the job queue where running and queued jobs will appear. When you have configured some jobs, they will be visible in the central panel.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/jenkins-01-welcome.png" alt="Welcome to Jenkins. " width="1713" height="499" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Welcome to Jenkins! This is how it looks once you've run the playbook and logged in. The menu on the left gives you some ability to configure Jenkins, below it is the job queue where running and queued jobs will appear. When you have configured some jobs, they will be visible in the central panel.</figcaption></figure>
 
 <h2 id="a-simple-job">A simple job</h2>
 
@@ -989,12 +985,12 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
     <li>
       <p>Give your job a name like <code class="language-plaintext highlighter-rouge">my-project</code>, and select that it is a <code class="language-plaintext highlighter-rouge">freestyle project</code>, and click “OK”</p>
 
-      <figure id="figure-2"><img src="../../images/jenkins-02-create-job.png" alt="Create a job. " width="976" height="389" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> There are other types of jobs if you install plugins, but we will mostly use freestyle jobs as they are the most appropriate for our case.</figcaption></figure>
+      <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/jenkins-02-create-job.png" alt="Create a job. " width="976" height="389" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> There are other types of jobs if you install plugins, but we will mostly use freestyle jobs as they are the most appropriate for our case.</figcaption></figure>
     </li>
     <li>
       <p>The job configuration interface is split into a few sections, visible in the tabs at the top of the page:</p>
 
-      <figure id="figure-3"><img src="../../images/jenkins-03-job-config.png" alt="Job configuration interface. " width="967" height="626" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The job configuration interface, split into 'General', 'Source Code Management', 'Build Triggers', 'Build', and 'Post-build Actions'</figcaption></figure>
+      <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/jenkins-03-job-config.png" alt="Job configuration interface. " width="967" height="626" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The job configuration interface, split into 'General', 'Source Code Management', 'Build Triggers', 'Build', and 'Post-build Actions'</figcaption></figure>
     </li>
     <li>
       <p>In the <strong>Build Triggers</strong> section:</p>
@@ -1033,7 +1029,7 @@ env | sort
             </li>
           </ul>
 
-          <p><img src="../../images/jenkins-05-job1.png" alt="Executing a shell. " loading="lazy" /></p>
+          <p><img src="../../images/jenkins-05-job1.png" alt="Executing a shell. " width="937" height="350" loading="lazy" /></p>
         </li>
       </ul>
 
@@ -1051,11 +1047,11 @@ env | sort
     <li>
       <p>Your job will appear in the <em>Build History</em> box at the left. <strong>Click</strong> the ball associated with your job, to see the console.</p>
 
-      <figure id="figure-4"><img src="../../images/jenkins-06-job1-run.png" alt="Seeing a Jenkins job's console. " width="366" height="172" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> The build history box lets you see the status of previous, running, and queued builds. The 'sun' icon indicates that all builds have been successful, it will become more cloudy/overcast if you experience failures. The 'trend' button allows you to visualise how quickly builds have run historically.</figcaption></figure>
+      <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/jenkins-06-job1-run.png" alt="Seeing a Jenkins job's console. " width="366" height="172" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> The build history box lets you see the status of previous, running, and queued builds. The 'sun' icon indicates that all builds have been successful, it will become more cloudy/overcast if you experience failures. The 'trend' button allows you to visualise how quickly builds have run historically.</figcaption></figure>
 
       <p>Clicking the number will bring you to a job information page, where you can click “Console Output” to see the jobs output</p>
 
-      <figure id="figure-5"><img src="../../images/jenkins-07-job1-out.png" alt="Jenkins job output. " width="871" height="857" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> The output of your first Jenkins job. All jenkins jobs log both the commands that were run, and their outputs. Use this to see which step potentially failed.</figcaption></figure>
+      <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/jenkins-07-job1-out.png" alt="Jenkins job output. " width="871" height="857" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> The output of your first Jenkins job. All jenkins jobs log both the commands that were run, and their outputs. Use this to see which step potentially failed.</figcaption></figure>
     </li>
   </ol>
 </blockquote>
@@ -1195,7 +1191,7 @@ ok: [gcc-3.training.galaxyproject.eu]
         <li>
           <p>Configure the permissions like below. Clicking on the checked checkbox icon at the right will allow you to enable/disable all of the checkboxes for that row.</p>
 
-          <p><img src="../../images/jenkins-09-permissions.png" alt="Configuring matrix based permissions. " loading="lazy" /></p>
+          <p><img src="../../images/jenkins-09-permissions.png" alt="Configuring matrix based permissions. " width="780" height="265" loading="lazy" /></p>
 
           <p>The matrix based security plugin is provided by a plugin, we installed this by setting the variable <code class="language-plaintext highlighter-rouge">jenkins_plugins: [matrix-auth]</code> in our group variables earlier.
 The checkboxes give you the ability to grant or deny permissions to certain classes of users. Each column is an individual permission, and you can hover over each column to get more information about what that permission allows.</p>
@@ -1486,6 +1482,9 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
                             Helena Rasche,  <b>Automation with Jenkins (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/jenkins/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/jenkins/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1507,12 +1506,12 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
 
 <code id="citation-code">@misc{admin-jenkins,
 author = "Helena Rasche",
-title = "Automation with Jenkins (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/jenkins/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Automation with Jenkins (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/jenkins/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1589,7 +1588,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1621,7 +1620,7 @@ tools: []
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

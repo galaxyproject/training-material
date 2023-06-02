@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">
@@ -779,7 +775,7 @@ Sentry.init({
 
 <p>Alterations in gene splicing has been demonstrated to have significant impact on cancer development, and multiple evidences indicate that its disruption can exhibit effects on virtually all aspect of tumor progression (<span class="citation"><a href="#Namba2021">Namba <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Bonnal2020">Bonnal <i>et al.</i> 2020</a></span>). For instance, the unannotated isoform of TNS3 was found to be a novel driver of breast cancer (<span class="citation"><a href="#Namba2021">Namba <i>et al.</i> 2021</a></span>).</p>
 
-<figure id="figure-1"><img src="../../images/differential_isoform/differential_cancer.png" alt="Figure 01. Examples of cancer splicing dysregulation on cancer hallmarks. " width="957" height="779" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Effect of alternative splicing dysregulation on cancer progression. The diagram depicts various cancer hallmarks and examples of genes whose splicing dysregulation has been demostrated to be implicated in the corresponding functional modification.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/differential_cancer.png" alt="Figure 01. Examples of cancer splicing dysregulation on cancer hallmarks. " width="957" height="779" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Effect of alternative splicing dysregulation on cancer progression. The diagram depicts various cancer hallmarks and examples of genes whose splicing dysregulation has been demostrated to be implicated in the corresponding functional modification.</figcaption></figure>
 
 <p>Disregulation in <abbr title="alternative splicing">AS</abbr> can lead to the activation of oncogenes (OCGs) or the inactivation of tumor supression genes (TSGs), which can promote or suppress tumorigenesis, respectively (<span class="citation"><a href="#Bashyam2019">Bashyam <i>et al.</i> 2019</a></span>). However, the strict classification of cancer genes as either <abbr title="oncogenes">OCGs</abbr> or <abbr title="tumor supression genes">TSGs</abbr> may be an oversimplification, as some genes can exhibit a dual role in cancer development, often impacting the same facet of tumorigenesis (<span class="citation"><a href="#Bashyam2019">Bashyam <i>et al.</i> 2019</a></span>). One of the mechanism that has been proposed to partially explain this apparently contradictory effect is the differential usage of isoforms, often referred to as isoform switching (IS). This regulatory phenomenon has been demonstrated to have a substantial biological impact in a diverse range of biological contexts, caused by functional diversity potential of the different isoforms (<span class="citation"><a href="#VittingSeerup2017">Vitting-Seerup and Sandelin 2017</a></span>).</p>
 
@@ -1030,7 +1026,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
   <p>Let’s evaluate the per base sequence quality and the adapter content.</p>
 
-  <figure id="figure-2"><img src="../../images/differential_isoform/fastqc_per_base_sequence_quality.png" alt="Figure 02. MultiQC initial QC report. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> MultiQC aggregated reports. Mean quality scores.</figcaption></figure>
+  <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/fastqc_per_base_sequence_quality.png" alt="Figure 02. MultiQC initial QC report. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> MultiQC aggregated reports. Mean quality scores.</figcaption></figure>
 
   <p>As we can appreciate in the figure the per base quality of all reads seems to be very good, with values over 30 in all cases. In addition, according the report no samples werefound with adapter contamination higher than 0.1%.</p>
 
@@ -1100,7 +1096,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
   <p>During two-pass mode splice junctions are discovered in a first alignment pass with high stringency, and are used as annotation in a second pass to permit lower stringency alignment, and therefore higher sensitivity (fig. 3). Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions that one-pass alignment (<span class="citation"><a href="#Veeneman2015">Veeneman <i>et al.</i> 2015</a></span>).</p>
 
-  <figure id="figure-3"><img src="../../images/differential_isoform/RNASTAR_twopass_mode.png" alt="Figure 03. RNA STAR twopass mode. " width="1280" height="991" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Two-pass alignment flowchart. Center and right, stepwise progression of two-pass alignment. First, the genome is indexed with gene annotation. Next, novel splice junctions are discovered from RNA sequencing data at a relatively high stringency (12 nt minimum spanning length). Third, these discovered splice junctions, and expressed annotated splice junctions are used to re-index the genome. Finally, alignment is performed a second time, quantifying novel and annotated splice junctions using the same, relatively lower stringency (3 nt minimum spanning length), producing splice junction expression. Source: Veeneman et al., 2016.</figcaption></figure>
+  <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/RNASTAR_twopass_mode.png" alt="Figure 03. RNA STAR twopass mode. " width="1280" height="991" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Two-pass alignment flowchart. Center and right, stepwise progression of two-pass alignment. First, the genome is indexed with gene annotation. Next, novel splice junctions are discovered from RNA sequencing data at a relatively high stringency (12 nt minimum spanning length). Third, these discovered splice junctions, and expressed annotated splice junctions are used to re-index the genome. Finally, alignment is performed a second time, quantifying novel and annotated splice junctions using the same, relatively lower stringency (3 nt minimum spanning length), producing splice junction expression. Source: Veeneman et al., 2016.</figcaption></figure>
 
 </blockquote>
 
@@ -1325,23 +1321,23 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 <p>First, we will evaluate the plot corresponding to the <strong>RNA STAR</strong> alignment scores (fig. 4), which will allow us to easily compare the samples to get an overview of the quality of the samples. As a general criteria, we can consider that good quality samples should have at least 75% of the reads uniquely mapped. In our case, of samples have unique mapping values over 90%.</p>
 
-<figure id="figure-4"><img src="../../images/differential_isoform/star_alignment.png" alt="Figure 04. RNA STAR alignment stats plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> RNA star alignment stats plot. Note that STAR counts a paired-end read as one read.</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/star_alignment.png" alt="Figure 04. RNA STAR alignment stats plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> RNA star alignment stats plot. Note that STAR counts a paired-end read as one read.</figcaption></figure>
 
 <p>Now we can have a look at the <strong>RSeQC</strong> results;  we will evaluate the RSeQC <strong>Read Distribution plot</strong> (fig. 5).</p>
 
-<figure id="figure-5"><img src="../../images/differential_isoform/rseqc_read_distribution_plot.png" alt="Figure 05. RSeQC read distribution plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> RSeQC read distribution. This module will calculate how mapped reads were distributed over genome feature (like CDS exon, 5’UTR exon, 3’ UTR exon, Intron, Intergenic regions).</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_read_distribution_plot.png" alt="Figure 05. RSeQC read distribution plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> RSeQC read distribution. This module will calculate how mapped reads were distributed over genome feature (like CDS exon, 5’UTR exon, 3’ UTR exon, Intron, Intergenic regions).</figcaption></figure>
 
 <p>In that case, all samples show a similar trend, both in health and cancer samples, with most reads mapping on CDS exons (around 72%), 5’UTR (around 4.5%) and 3’UTR (around 13.5%).</p>
 
 <p>Now we will evaluate the results of the <strong>Infer Experiment</strong> module, which allows to speculate the experimental design (whether sequencing is strand-specific, and if so, how reads are stranded) by sampling a subset of reads from the BAM file and comparing their genome coordinates and strands with those of the reference gene model (<span class="citation"><a href="#Wang2012">Wang <i>et al.</i> 2012</a></span>).</p>
 
-<figure id="figure-6"><img src="../../images/differential_isoform/rseqc_infer_experiment_plot.png" alt="Figure 06. RSeQC infer experiment plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> RSeQC Infer Experiment plot. It counts the percentage of reads and read pairs that match the strandedness of overlapping transcripts. It can be used to infer whether RNA-seq library preps are stranded (sense or antisense).</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_infer_experiment_plot.png" alt="Figure 06. RSeQC infer experiment plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> RSeQC Infer Experiment plot. It counts the percentage of reads and read pairs that match the strandedness of overlapping transcripts. It can be used to infer whether RNA-seq library preps are stranded (sense or antisense).</figcaption></figure>
 
 <p>As can be appreciated in the image, the proportion of reads assigned as <em>sense</em> is similar to the ones assigned as <em>antisense</em>, which indicates that in that case our RNA-seq data is non-strand specific.</p>
 
 <p>Now, let’s evaluate the results generated by the <strong>Gene Body Coverage</strong> module. It scales all transcripts to 100 nt and calculates the number of reads covering each nucleotide position. The plot generated from this information illustrates the coverage profile along the gene body, defined as the entire gene from the transcription start site to the end of the transcript (fig. 7).</p>
 
-<figure id="figure-7"><img src="../../images/differential_isoform/rseqc_gene_body_coverage_plot.png" alt="Figure 07. RSeQC gene body coverage plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> RSeQC gene body coverage plot. It calculates read coverage over gene bodies. This is used to check if reads coverage is uniform and if there is any 5' or 3' bias.</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_gene_body_coverage_plot.png" alt="Figure 07. RSeQC gene body coverage plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> RSeQC gene body coverage plot. It calculates read coverage over gene bodies. This is used to check if reads coverage is uniform and if there is any 5' or 3' bias.</figcaption></figure>
 
 <p>The gene body coverage pattern is highly influenced by the RNA-seq protocol, and it is useful for identifying artifacts such as 3’ skew in libraries. For example, a skew towards increased 3’ coverage can happen in degraded samples prepared with poly-A selection. According the figure 5, there’re not bias in our reads as a result of sequencing technical problems.</p>
 
@@ -1356,13 +1352,13 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 </blockquote>
 
-<figure id="figure-8"><img src="../../images/differential_isoform/rseqc_junction_saturation_plot.png" alt="Figure 08. RSeQC junction saturation plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> RSeQC junction saturation. Saturation is checked by re-sampling the alignments from the BAM file, and the splice junctions from each subset is detected (green) and and compared them to the reference model (grey).</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_junction_saturation_plot.png" alt="Figure 08. RSeQC junction saturation plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> RSeQC junction saturation. Saturation is checked by re-sampling the alignments from the BAM file, and the splice junctions from each subset is detected (green) and and compared them to the reference model (grey).</figcaption></figure>
 
 <p>As we can appreciate in the plot, the known junctions tend to stabilize around 110.000, which indicates that the read sequencing depth is good enough for performing the <abbr title="alternative splicing">AS</abbr> analysis.</p>
 
 <p>After confirming that the saturation level is good enough, finally, we will check the output generated by the RSeQC junction annotation module; it allows to evaluate both splice junctions (multiple reads show the same splicing event) and splice events (single read level) (fig. 9).</p>
 
-<figure id="figure-9"><img src="../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png" alt="Figure 09.A RSeQC junction annotation plot. " width="1210" height="690" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> RSeQC junction annotation. The detected junctions and events are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green). Splice events refer to the number of times a RNA-read is spliced (A). Splice junctions correspond to multiple splicing events spanning the same intron.</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png" alt="Figure 09.A RSeQC junction annotation plot. " width="1210" height="690" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> RSeQC junction annotation. The detected junctions and events are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green). Splice events refer to the number of times a RNA-read is spliced (A). Splice junctions correspond to multiple splicing events spanning the same intron.</figcaption></figure>
 
 <p>According to the results, despite the number of new (or partially new) splicing junctions is relatively slow (around 0.5%), a large proportion of reads show novel splicing junction patterns.</p>
 
@@ -1377,7 +1373,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
   <p>StringTie first groups the reads into clusters, collapsing the reads that align to the identical location on the genome and keeping a count of how many alignments were collapsed,  then creates a splice graph for each cluster from which it identifies transcripts, and then for each transcript it creates a separate flow network to estimate its expression level using a maximum flow algorithm (<span class="citation"><a href="#Pertea2015">Pertea <i>et al.</i> 2015</a></span>) (fig. 10).</p>
 
-  <figure id="figure-10"><img src="../../images/differential_isoform/stringtie_algorithm.png" alt="Figure 10. StringTie algorithm details. " width="1275" height="342" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Transcript assembly pipeline for StringTie. It begins with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned. Source: Perea et al., 2015</figcaption></figure>
+  <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/stringtie_algorithm.png" alt="Figure 10. StringTie algorithm details. " width="1275" height="342" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Transcript assembly pipeline for StringTie. It begins with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned. Source: Perea et al., 2015</figcaption></figure>
 
   <p><strong>StringTie</strong> uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate &lt; 0.5%, then <strong>StringTie</strong> requires 25% more reads than usual (the default is 1 read per bp) to support that particular spliced alignment. In addition, if a spliced read spans a very long intron (more than 100,000 bp), <strong>StringTie</strong> accepts that alignment (and the intron) only if a larger anchor of 25 bp (10 bp is the default) is present on both sides of the splice site. Here the term “anchor” refers to the portion of the read aligned within the exon beginning at the exon-intron boundary (<span class="citation"><a href="#Kovaka2019">Kovaka <i>et al.</i> 2019</a></span>).</p>
 
@@ -1470,7 +1466,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 </blockquote>
 
-<figure id="figure-11"><img src="../../images/differential_isoform/scheme.jpeg" alt="Figure 11. IsoformSwitchAnalyzeR pipeline scheme. " width="939" height="659" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> IsoformSwitchAnalyzeR workflow scheme. The individual steps are indicated by arrows. Please note the boxes marked with “outward sequence analysis” requires to run a set of different tools. Adapted from IsoformSwitchAnalyzeR viggette.</figcaption></figure>
+<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/scheme.jpeg" alt="Figure 11. IsoformSwitchAnalyzeR pipeline scheme. " width="939" height="659" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> IsoformSwitchAnalyzeR workflow scheme. The individual steps are indicated by arrows. Please note the boxes marked with “outward sequence analysis” requires to run a set of different tools. Adapted from IsoformSwitchAnalyzeR viggette.</figcaption></figure>
 
 <p>Now, we can start with the <abbr title="isoform switching">IS</abbr> analysis.</p>
 
@@ -1672,7 +1668,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
   <p>CPAT makes use of for predictior variables for performing the coding-potential analysis. The figure 10 shows the scoring distribution between coding and noncoding transcripts for the four metrics.</p>
 
-  <figure id="figure-12"><img src="../../images/differential_isoform/CPAT_distributions.jpg" alt="Figure 12. CPAT predictor score distributions. " width="771" height="730" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. The different subplots correspond to ORF size (A), ORF coverage (B), Fickett score (TESTCODE statistic) (C) and hexamer usage bias measured by log-likelihood ratio (D). Source: Wang et al., 2013</figcaption></figure>
+  <figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/CPAT_distributions.jpg" alt="Figure 12. CPAT predictor score distributions. " width="771" height="730" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. The different subplots correspond to ORF size (A), ORF coverage (B), Fickett score (TESTCODE statistic) (C) and hexamer usage bias measured by log-likelihood ratio (D). Source: Wang et al., 2013</figcaption></figure>
 
   <p>The maximum length of the ORF (fig. 10,A) is one of the most fundamental features used to distinguish ncRNA from messenger RNA because a long putative ORF is unlikely to be observed by random chance in noncoding sequences.</p>
 
@@ -1799,7 +1795,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 <p>Let’s have a look at the generated plot (fig. 13).</p>
 
-<figure id="figure-13"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_gene.png" alt="Figure 13. RGMB gene isoform expression profile plot. " width="1086" height="776" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> RGMB isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.</figcaption></figure>
+<figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_gene.png" alt="Figure 13. RGMB gene isoform expression profile plot. " width="1086" height="776" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> RGMB isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.</figcaption></figure>
 
 <p>In that case, we can appreciate that despite differences in overall gene expression is not statistically significant between health and cancerous tissues, there exists statistically significant <abbr title="isoform switching">IS</abbr>: the isoform <a href="https://www.uniprot.org/uniprotkb/J3KNF6/entry">ENST00000308234.11</a>, which encodes the 478 aminoacid <strong>Repulsive guidance molecule BMP co-receptor b protein</strong> is repressed in cancer; on the other hand, the isoform <a href="https://www.uniprot.org/uniprotkb/Q6NW40/entry">ENST00000513185.3</a>, which encodes the 437 aminoanid <strong>Repulsive guidance molecule B</strong> is induced.</p>
 
@@ -1863,7 +1859,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 <p>Let’s have a look at the plot generated by <strong>pyGenometracks</strong> (fig. 14).</p>
 
-<figure id="figure-14"><img src="../../images/differential_isoform/pgt_RGMB_zoom_out.png" alt="Figure 14. RGMB gene isoform expression profile plot. " width="1133" height="844" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> pyGenometracks isoform visualization. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.</figcaption></figure>
+<figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/pgt_RGMB_zoom_out.png" alt="Figure 14. RGMB gene isoform expression profile plot. " width="1133" height="844" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> pyGenometracks isoform visualization. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.</figcaption></figure>
 
 <h3 id="isoformswitchanalyzer-genome-wide-analysis">IsoformSwitchAnalyzer genome-wide analysis</h3>
 
@@ -1939,7 +1935,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
     <p>The top three genes are MPDU1, RGMB and ARAP1 (fig. 15).</p>
 
-    <figure id="figure-15"><img src="../../images/differential_isoform/list_genes.png" alt="Figure  15. Switching gene/isoform tabular dataset. " width="1226" height="410" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Switching gene/isoform dataset.</figcaption></figure>
+    <figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/list_genes.png" alt="Figure  15. Switching gene/isoform tabular dataset. " width="1226" height="410" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Switching gene/isoform dataset.</figcaption></figure>
 
   </blockquote>
 </blockquote>
@@ -1955,7 +1951,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
   <p>The events are classified by comparing the splicing patterns with a hypothetical pre-RNA generated by combining all the exons (fig. 16).</p>
 
-  <figure id="figure-16"><img src="../../images/differential_isoform/isoformSwitcher_splicing_patterns.png" alt="Figure 16. Classification of splicing patterns. " width="1214" height="880" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Splicing patterns diversity. The observed splice patterns (left column) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).</figcaption></figure>
+  <figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitcher_splicing_patterns.png" alt="Figure 16. Classification of splicing patterns. " width="1214" height="880" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Splicing patterns diversity. The observed splice patterns (left column) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).</figcaption></figure>
 
   <ul>
     <li>ES: Exon Skipping. Compared to the hypothetical pre-RNA a single exon was skipped in the isoform analyzed.</li>
@@ -1972,11 +1968,11 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 <p>First, we will start analyzing the total number of splicing events (fig. 17).</p>
 
-<figure id="figure-17"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png" alt="Figure 17. Summary of genome-wide total splicing events. " width="866" height="568" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Analysis of splicing enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event.</figcaption></figure>
+<figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png" alt="Figure 17. Summary of genome-wide total splicing events. " width="866" height="568" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Analysis of splicing enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event.</figcaption></figure>
 
 <p>From the figure 17 , it can be hypothesised that some of the <abbr title="alternative splicing">AS</abbr> events are not equally used. To formally analyze this type of uneven <abbr title="alternative splicing">AS</abbr>, <strong>IsoformSwithAnalyzeR</strong> computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 18).</p>
 
-<figure id="figure-18"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png" alt="Figure 18. Enrichment/depletion in isoform switch with consequences statistical analysis. " width="860" height="571" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
+<figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png" alt="Figure 18. Enrichment/depletion in isoform switch with consequences statistical analysis. " width="860" height="571" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
 
 <p>According with the results (fig. 18), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the origital datasets in order to speed up the analysis).</p>
 
@@ -1985,7 +1981,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
   <p>If we perform the analysis on the original datasets, there exist statistically significant differences in <abbr title="isoform switching">IS</abbr> in three splicing patterns (fig. 19).</p>
 
-  <figure id="figure-19"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event_fulldata.png" alt="Figure 19. Enrichment/depletion in isoform switch with consequences statistical analysis. " width="854" height="565" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
+  <figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event_fulldata.png" alt="Figure 19. Enrichment/depletion in isoform switch with consequences statistical analysis. " width="854" height="565" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
 
   <p>According the results, there’s statistically significant gain of introl retention in cancer tissues. On the other hand, health tissues utilize alternative 3’ acceptor sites (A3) and alternative 5’ acceptor sites (A5) more than cancer tissues, when compared with the hyphotetical pre-RNA.</p>
 
@@ -1995,11 +1991,11 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 <p>To analyze large-scale patterns in predicted <abbr title="isoform switching">IS</abbr> consequences, <strong>IsoformSwitchAnalyzer</strong> computes all <abbr title="isoform switching">IS</abbr> events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss) when comparing cancer and ctrl (fig. 20). According the results some types of functional consequences seem to be enriched or depleted between health and tumoral samples (e.g. intron retention).</p>
 
-<figure id="figure-20"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png" alt="Figure 20. Summary of genome-wide enrichment/depletion o isoform switching events. " width="859" height="577" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Analysis of consequence enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one isoform switch consequence.</figcaption></figure>
+<figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png" alt="Figure 20. Summary of genome-wide enrichment/depletion o isoform switching events. " width="859" height="577" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Analysis of consequence enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one isoform switch consequence.</figcaption></figure>
 
 <p>To assess this observation, a standard proportion test is performed (fig. 21). The results indicate that differences in intron retention between health and cancer samples is statistically significant).</p>
 
-<figure id="figure-21"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png" alt="Figure 20. Enrichment/depletion isoform switch analysis. " width="854" height="569" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
+<figure id="figure-21" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png" alt="Figure 20. Enrichment/depletion isoform switch analysis. " width="854" height="569" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
 
 <p>According with the results (fig. 21), there are not statistically significant differences of IS consequences despite the apparent differentes in total event counts. However, as noted previously, in that case it is due to the small size of the datasets used.</p>
 
@@ -2008,7 +2004,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
   <p>Let’s have a look at the results corresponding to the complete original dataset analysis.</p>
 
-  <figure id="figure-22"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform_fulldata.png" alt="Figure 20. Enrichment/depletion isoform switch analysis. " width="861" height="573" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 22</strong>:</span> Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
+  <figure id="figure-22" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform_fulldata.png" alt="Figure 20. Enrichment/depletion isoform switch analysis. " width="861" height="573" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 22</strong>:</span> Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
 
   <p>According with the results (fig. 22), the difference in intron retention is statistically significant; it means that the probability of a specific intron to remain unspliced in the mature mRNA in cancer is higher than in health tissues.</p>
 
@@ -2043,7 +2039,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
     <p>This information can be found in the eighth column of the Consequences enrichment dataset (fig. 23).</p>
 
-    <figure id="figure-23"><img src="../../images/differential_isoform/consequences_dataset.png" alt="Figure 23. Consequences enrichment dataset. " width="1583" height="302" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 23</strong>:</span> Consequences enrichment table.</figcaption></figure>
+    <figure id="figure-23" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/consequences_dataset.png" alt="Figure 23. Consequences enrichment dataset. " width="1583" height="302" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 23</strong>:</span> Consequences enrichment table.</figcaption></figure>
 
     <p>In that case, the adjusted P-value is 0.598.</p>
 
@@ -2054,7 +2050,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 <p>Finally, we will evaluate the genome-wide changes in isoform usage. This type of analysis allows to identify if differentes in splicing events are genome-wide or retricted to specific regions, and is particular interesting if the expected difference between conditions is large (fig. 24).</p>
 
-<figure id="figure-24"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_summary.png" alt="Figure 24. Genome-wide changes violing plot. " width="861" height="561" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 24</strong>:</span> Genome-wide changes violin plot. The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.</figcaption></figure>
+<figure id="figure-24" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_summary.png" alt="Figure 24. Genome-wide changes violing plot. " width="861" height="561" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 24</strong>:</span> Genome-wide changes violin plot. The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.</figcaption></figure>
 
 <p>As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events.</p>
 
@@ -2247,6 +2243,9 @@ SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fas
                             Cristóbal Gallardo, Lucille Delisle,  <b>Genome-wide alternative splicing analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -2268,12 +2267,12 @@ SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fas
 
 <code id="citation-code">@misc{transcriptomics-differential-isoform-expression,
 author = "Cristóbal Gallardo and Lucille Delisle",
-title = "Genome-wide alternative splicing analysis (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Genome-wide alternative splicing analysis (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -2483,7 +2482,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2515,7 +2514,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

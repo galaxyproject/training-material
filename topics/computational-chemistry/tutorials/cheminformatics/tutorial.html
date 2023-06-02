@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html">
@@ -656,7 +652,7 @@ Sentry.init({
 
 </blockquote>
 
-<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/2brc.png" alt="Hsp90 N-terminus structure. " width="1920" height="1031" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Structure of Hsp90 N-terminus, as recorded on the PDB. Visualization produced using VMD  (<span class="citation"><a href="#Humphrey1996">Humphrey <i>et al.</i> 1996</a></span>).</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/2brc.png" alt="Hsp90 N-terminus structure. " width="1920" height="1031" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Structure of Hsp90 N-terminus, as recorded on the PDB. Visualization produced using VMD  (<span class="citation"><a href="#Humphrey1996">Humphrey <i>et al.</i> 1996</a></span>).</figcaption></figure>
 
 <h1 id="separating-protein-and-ligand-structures">Separating protein and ligand structures</h1>
 
@@ -990,7 +986,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>This produces an SVG image of all the structures generated ordered by molecular weight.</p>
 
-<figure id="figure-2"><img src="/training-material/topics/computational-chemistry/images/compound_library.png" alt="Image showing structures of compounds from ChEMBL. " width="890" height="881" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Structures of the compounds from ChEMBL.</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/compound_library.png" alt="Image showing structures of compounds from ChEMBL. " width="890" height="881" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Structures of the compounds from ChEMBL.</figcaption></figure>
 
 <h3 id="calculation-of-fingerprints-and-clustering">Calculation of fingerprints and clustering</h3>
 
@@ -1027,7 +1023,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>Taylor-Butina clustering  (<span class="citation"><a href="#Butina1999">Butina 1999</a></span>) provides a classification of the compounds into different groups or clusters, based on their structural similarity. This methods shows us how similar the compounds are to the original ligand, and after docking, we can compare the results to the proposed clusters to observe if there is any correlation.</p>
 
-<figure id="figure-3"><img src="/training-material/topics/computational-chemistry/images/fingerprints.png" alt="Image showing a Fingerprinting System. " width="978" height="728" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/fingerprints.png" alt="Image showing a Fingerprinting System. " width="978" height="728" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-cluster-molecules-using-molecular-fingerprints"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cluster molecules using molecular fingerprints</div>
@@ -1051,7 +1047,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>The image produced by the NxN clustering shows the clustering in the form of a dendrogram, where individual molecules are represented as vertical lines and merged into clusters. Merges are represented by horizontal lines. The y-axis represents the similarity of data points to each other; thus, the lower a cluster is merged, the more similar the data points are which it contains. Clusters in the dendogram are colored differently. For example, all molecules connected in red are similar enough to be grouped into the same cluster.</p>
 
-<figure id="figure-4"><img src="/training-material/topics/computational-chemistry/images/nxn.png" alt="NxN clustering. " width="640" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 80; here 15 search results are shown, plus the original ligand contained in the PDB file.</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/nxn.png" alt="NxN clustering. " width="640" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 80; here 15 search results are shown, plus the original ligand contained in the PDB file.</figcaption></figure>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-further-investigation-optional"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-investigation-optional" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Further investigation (optional)<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1113,7 +1109,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
   <p>There are visualizations available in Galaxy for producing various types of plots - for example, a scatter plot of RMSD (compared to optimal docking pose) against docking score can be calculated very easily:</p>
 
-  <figure id="figure-5"><img src="/training-material/topics/computational-chemistry/images/scatterplot.png" alt="Scatter plot of RMSD against docking score. " width="1310" height="935" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Scatter plot of RMSD against docking score.</figcaption></figure>
+  <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/scatterplot.png" alt="Scatter plot of RMSD against docking score. " width="1310" height="935" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Scatter plot of RMSD against docking score.</figcaption></figure>
 
   <p>The plot shows a correlation between the two variables, as expected, though only a slight one, given the narrow range of docking scores in the dataset and the structural similarity of the ligands tested.</p>
 
@@ -1122,7 +1118,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>Use the NGLviewer to inspect the protein and various ligand poses generated by docking. This can be done using either the visualization of NGLViewer in Galaxy, or via the <a href="http://nglviewer.org/ngl/">NGL website</a>.</p>
 
-<figure id="figure-6"><img src="/training-material/topics/computational-chemistry/images/activesite.gif" alt="Two docking poses for a ligand bound to Hsp90. " width="1027" height="672" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Two docking poses for a ligand bound to the active site of Hsp90. One (docking score -8.4) can be seen to be bound deeper in the active site than the other (docking score -5.7), which is reflected in the difference between the docking scores.</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/activesite.gif" alt="Two docking poses for a ligand bound to Hsp90. " width="1027" height="672" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Two docking poses for a ligand bound to the active site of Hsp90. One (docking score -8.4) can be seen to be bound deeper in the active site than the other (docking score -5.7), which is reflected in the difference between the docking scores.</figcaption></figure>
 
                 </section>
 
@@ -1189,6 +1185,9 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
                             Simon Bray,  <b>Protein-ligand docking (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html">https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1210,12 +1209,12 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <code id="citation-code">@misc{computational-chemistry-cheminformatics,
 author = "Simon Bray",
-title = "Protein-ligand docking (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Protein-ligand docking (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1392,7 +1391,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1424,7 +1423,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

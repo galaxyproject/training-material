@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/bash-git/tutorial.html">
@@ -572,7 +568,7 @@ to keep track of what one person did and when.
 Even if you aren’t collaborating with other people,
 automated version control is much better than this situation:</p>
 
-<figure id="figure-1"><img src="../../images/bash-git/phd101212s.png" alt="Cartoon titled 'final'.doc, showing a grad student and their advisor going through multiple revisions. The first named final.doc, then final_rev.2.doc, final_rev.6.comments.doc, a long filename with the revision number 18, until a final filename, revision 22, with special characters indicating frustration where the file name includes the text 'why did I come to grad school'." width="600" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/bash-git/phd101212s.png" alt="Cartoon titled 'final'.doc, showing a grad student and their advisor going through multiple revisions. The first named final.doc, then final_rev.2.doc, final_rev.6.comments.doc, a long filename with the revision number 18, until a final filename, revision 22, with special characters indicating frustration where the file name includes the text 'why did I come to grad school'." width="600" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com</figcaption></figure>
 
 <p>We’ve all been in this situation before: it seems unnecessary to have
 multiple nearly-identical versions of the same document. Some word
@@ -588,19 +584,19 @@ think of it as a recording of your progress: you can rewind to start at the base
 document and play back each change you made, eventually arriving at your
 more recent version.</p>
 
-<p><img src="../../images/bash-git/play-changes.svg" alt="Changes Are Saved Sequentially, graphic shows three documents with text being added in each new revision." loading="lazy" /></p>
+<p><img src="../../images/bash-git/play-changes.svg" alt="Changes Are Saved Sequentially, graphic shows three documents with text being added in each new revision." width="615" height="196" loading="lazy" /></p>
 
 <p>Once you think of changes as separate from the document itself, you
 can then think about “playing back” different sets of changes on the base document, ultimately
 resulting in different versions of that document. For example, two users can make independent
 sets of changes on the same document.</p>
 
-<p><img src="../../images/bash-git/versions.svg" alt="Different Versions Can be Saved, showing a document splitting into two, with different changes." loading="lazy" /></p>
+<p><img src="../../images/bash-git/versions.svg" alt="Different Versions Can be Saved, showing a document splitting into two, with different changes." width="384" height="354" loading="lazy" /></p>
 
 <p>Unless multiple users make changes to the same section of the document - a conflict - you can
 incorporate two sets of changes into the same base document.</p>
 
-<p><img src="../../images/bash-git/merge.svg" alt="Multiple Versions Can be Merged, shows two documents with different changes merging into a final document with both changes." loading="lazy" /></p>
+<p><img src="../../images/bash-git/merge.svg" alt="Multiple Versions Can be Merged, shows two documents with different changes merging into a final document with both changes." width="398" height="382" loading="lazy" /></p>
 
 <p>A version control system is a tool that keeps track of these changes for us,
 effectively creating different versions of our files. It allows us to decide
@@ -971,7 +967,7 @@ we can start using it.</p>
 
 <p>We will continue with the story of Sherlock who is investigating a crime and is collecting information about suspects.</p>
 
-<p><img src="../../images/bash-git/sherlock_git.png" alt="Cartoon of sherlock examining the git logo with his magnifying glass." loading="lazy" /></p>
+<p><img src="../../images/bash-git/sherlock_git.png" alt="Cartoon of sherlock examining the git logo with his magnifying glass." width="968" height="864" loading="lazy" /></p>
 
 <p>First, let’s create a directory for our work and then move into that directory:</p>
 
@@ -1501,7 +1497,7 @@ or you might find yourself searching for “git undo commit” more
 than you would like!</p>
 </blockquote>
 
-<p><img src="../../images/bash-git/git-staging-area.svg" alt="The Git Staging Area cartoon, a document is shown going into the staging area via &quot;git add&quot;, and then into the repository via &quot;git commit&quot;." loading="lazy" /></p>
+<p><img src="../../images/bash-git/git-staging-area.svg" alt="The Git Staging Area cartoon, a document is shown going into the staging area via &quot;git add&quot;, and then into the repository via &quot;git commit&quot;." width="622" height="218" loading="lazy" /></p>
 
 <p>Let’s watch as our changes to a file move from our editor
 to the staging area
@@ -1789,7 +1785,7 @@ we first need to add the changed files to the staging area
 (<code class="language-plaintext highlighter-rouge">git add</code>) and then commit the staged changes to the
 repository (<code class="language-plaintext highlighter-rouge">git commit</code>):</p>
 
-<p><img src="../../images/bash-git/git-committing.svg" alt="The Git Commit Workflow. " loading="lazy" /></p>
+<p><img src="../../images/bash-git/git-committing.svg" alt="The Git Commit Workflow. " width="622" height="355" loading="lazy" /></p>
 
 <h1 id="lets-put-us-to-the-test">Let’s put us to the test</h1>
 
@@ -2307,12 +2303,12 @@ the commit in which we made the change we’re trying to discard.
 In the example below, we want to retrieve the state from before the most
 recent commit (<code class="language-plaintext highlighter-rouge">HEAD~1</code>), which is commit <code class="language-plaintext highlighter-rouge">f22b25e</code>:</p>
 
-<p><img src="../../images/bash-git/git-checkout.svg" alt="Git Checkout. " loading="lazy" /></p>
+<p><img src="../../images/bash-git/git-checkout.svg" alt="Git Checkout. " width="622" height="355" loading="lazy" /></p>
 
 <p>So, to put it all together,
 here’s how Git works in cartoon form:</p>
 
-<p><img src="../../images/bash-git/git_staging.svg" alt="https://figshare.com/articles/How_Git_works_a_cartoon/1328266. " loading="lazy" /></p>
+<p><img src="../../images/bash-git/git_staging.svg" alt="https://figshare.com/articles/How_Git_works_a_cartoon/1328266. " width="551" height="407" loading="lazy" /></p>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-simplifying-the-common-case"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-simplifying-the-common-case" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Simplifying the Common Case<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2630,6 +2626,9 @@ the difference between each commit.</p>
                             Sofoklis Keisaris,  <b>Version Control with Git (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/bash-git/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/bash-git/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -2651,12 +2650,12 @@ the difference between each commit.</p>
 
 <code id="citation-code">@misc{data-science-bash-git,
 author = "Sofoklis Keisaris",
-title = "Version Control with Git (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/bash-git/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Version Control with Git (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/bash-git/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -2768,7 +2767,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2800,7 +2799,7 @@ tools: []
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html">
@@ -705,7 +701,7 @@ Create the file <code class="language-plaintext highlighter-rouge">ro-crate-meta
 
 <p>Your folder should now look like this:</p>
 
-<figure id="figure-1"><img src="../../images/ro-crate-intro/crate1-folders.svg" alt="Folder listing of crate1, including data.csv and ro-crate-metadata.json. " width="290" height="115" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Any folder can be made into an RO-Crate by adding <code>ro-crate-metadata.json</code></figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/ro-crate-intro/crate1-folders.svg" type="image/svg+xml"><img src="../../images/ro-crate-intro/crate1-folders.png" alt="Folder listing of crate1, including data.csv and ro-crate-metadata.json. " />Folder listing of crate1, including data.csv and ro-crate-metadata.json.</object></div><small><a href="../../images/ro-crate-intro/crate1-folders.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Any folder can be made into an RO-Crate by adding <code>ro-crate-metadata.json</code></figcaption></figure>
 
 <p>The presence of the reserved <code class="language-plaintext highlighter-rouge">ro-crate-metadata.json</code> filename means that <code class="language-plaintext highlighter-rouge">crate1</code> (and its children) can now be considered to be an <strong>RO-Crate</strong>. We call the top-level folder of the crate for the <strong>RO-Crate Root</strong> and can now refer to its content with relative file paths.</p>
 
@@ -799,7 +795,7 @@ it is nevertheless best practice to propagate permalinks where known.</p>
 <p>In a RO-Crate Metadata Document, entities are cross-referenced using <code class="language-plaintext highlighter-rouge">@id</code> reference objects, rather than using deeply nested JSON objects.
 In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity to reference any other entity, and RO-Crate consumers can directly find all the descriptions of a given entity as a single JSON object.</p>
 
-<figure id="figure-2"><img src="../../images/ro-crate-intro/introduction-figure-1.svg" alt="JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id &lt;code&gt;./&lt;/code&gt; we see additional attributes such as its name and description." width="505" height="381" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> showing RO-Crate Metadata descriptor's <code>about</code> property pointing at the RO-Crate Root entity with matching <code>@id</code></figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/ro-crate-intro/introduction-figure-1.svg" type="image/svg+xml"><img src="../../images/ro-crate-intro/introduction-figure-1.png" alt="JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id &lt;code&gt;./&lt;/code&gt; we see additional attributes such as its name and description." />JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id <code>./</code> we see additional attributes such as its name and description.</object></div><small><a href="../../images/ro-crate-intro/introduction-figure-1.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> showing RO-Crate Metadata descriptor's <code>about</code> property pointing at the RO-Crate Root entity with matching <code>@id</code></figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1072,7 +1068,7 @@ at line 29 column 5 of the JSON data
 
 <p>This verbose listing of the JSON-LD shows how the <code class="language-plaintext highlighter-rouge">@context</code> has correctly expanded the keys, but is not particularly readable. Try the <em>Visualized</em> tab to see an interactive rendering of the entities:</p>
 
-<p><img src="../../images/ro-crate-intro/jsonld-playground-visualized.png" alt="Visualized in the JSON-LD Playground. " loading="lazy" /></p>
+<p><img src="../../images/ro-crate-intro/jsonld-playground-visualized.png" alt="Visualized in the JSON-LD Playground. " width="1344" height="764" loading="lazy" /></p>
 
 <p>As the RO-Crate Metadata Document is valid JSON-LD it is also possible to process it using Linked Data technologies such as triple stores and SPARQL queries. It is beyond the scope of this tutorial to explain this aspect fully, but interested readers should consider how to <a href="https://www.researchobject.org/ro-crate/1.1/appendix/relative-uris.html">handle relative URI references</a>.
 As an example, try the <em>Table</em> button and notice that the entities with relative identifiers are not included. This is because when converting to RDF you need absolute URIs which do not readily exist when a crate is stored on disk, we’ve not decided where the crate is to be published yet.</p>
@@ -1090,7 +1086,7 @@ As an example, try the <em>Table</em> button and notice that the entities with r
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../../images/ro-crate-intro/jsonld-playground-table.png" alt="Triples table in the JSON-LD Playground. " loading="lazy" /></p>
+<p><img src="../../images/ro-crate-intro/jsonld-playground-table.png" alt="Triples table in the JSON-LD Playground. " width="1074" height="996" loading="lazy" /></p>
 
 <p>Above <code class="language-plaintext highlighter-rouge">arcp://uuid,deffa754-c764-4e04-aabf-e600c6200553/</code> is a randomly generated identifier to represent the RO-Crate root, and now the JSON-LD Playground can show all the triples from the metadata file. You can likewise use the <em>N-Quads</em> button to convert the metadata file to the <a href="http://www.w3.org/TR/n-quads/">RDF N-Quads</a> format. Most RDF libraries and stores have JSON-LD support, but may need to specify a base URI as we did above, making a new UUID for each imported RO-Crate.</p>
 
@@ -1098,7 +1094,7 @@ As an example, try the <em>Table</em> button and notice that the entities with r
 
 <p>An RO-Crate can be distributed on disk, in a packaged format such as a zip file or disk image, or placed on a static website. In any of these cases, an RO-Crate can have an accompanying HTML version (<code class="language-plaintext highlighter-rouge">ro-crate-metadata.html</code>) designed to be human-readable.</p>
 
-<p><img src="../../images/ro-crate-intro/ro-crate-preview-example.png" alt="Example dataset for RO-Crate specification. " loading="lazy" /></p>
+<p><img src="../../images/ro-crate-intro/ro-crate-preview-example.png" alt="Example dataset for RO-Crate specification. " width="1044" height="1027" loading="lazy" /></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1314,6 +1310,9 @@ docker run <span class="nt">-v</span> <span class="si">$(</span><span class="nb"
                             Stian Soiland-Reyes, Peter Sefton,  <b>RO-Crate - Introduction (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html">https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1335,12 +1334,12 @@ docker run <span class="nt">-v</span> <span class="si">$(</span><span class="nb"
 
 <code id="citation-code">@misc{fair-ro-crate-intro,
 author = "Stian Soiland-Reyes and Peter Sefton",
-title = "RO-Crate - Introduction (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "RO-Crate - Introduction (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1425,7 +1424,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1459,7 +1458,7 @@ tools: []
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

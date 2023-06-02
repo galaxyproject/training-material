@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html">
@@ -714,7 +710,7 @@ biological samples) and 3 blank samples (‘blanks’ - solvent injection).</p>
 <p>To analyze these data, we will then follow a Galaxy workflow
 developed by the <a href="http://workflow4metabolomics.org/">Wokflow4metabolomics group</a> (<span class="citation"><a href="#Giacomoni2014">Giacomoni <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#Guitton2017">Guitton <i>et al.</i> 2017</a></span>).</p>
 
-<p><a href="../../images/lcmspreproc_wf.png"><figure id="figure-1"><img src="../../images/lcmspreproc_wf.png" alt="The full tutorial workflow represented as boxes linked with arrows, each box being labeled with the corresponding galaxy tool name. " width="1500" height="1030" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The tutorial workflow&lt;/figcaption&gt;</figure></a></p>
+<p><a href="../../images/lcmspreproc_wf.png"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_wf.png" alt="The full tutorial workflow represented as boxes linked with arrows, each box being labeled with the corresponding galaxy tool name. " width="1500" height="1030" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The tutorial workflow&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-workflow4metabolomics-public-history"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Workflow4Metabolomics public history</div>
@@ -1423,7 +1419,7 @@ this step corresponds to the datasets number 29 and 30.</p>
 <p>This tool generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chromatograms (TICs). If you provide groups as we do here, you obtain two plots:
 one with colours based on provided groups, one with one colour per sample.</p>
 
-<figure id="figure-2"><img src="../../images/lcmspreproc_BPC12samp.png" alt="Screenshot of the PDF output corresponding to the Base Peak Intensity Chromatograms. It is composed of the layering of BPIs: one drawn line per sample." width="2578" height="806" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Base Peak Intensity Chromatograms</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_BPC12samp.png" alt="Screenshot of the PDF output corresponding to the Base Peak Intensity Chromatograms. It is composed of the layering of BPIs: one drawn line per sample." width="2578" height="806" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Base Peak Intensity Chromatograms</figcaption></figure>
 
 <p>How BPIs and TICs look like is dependant of the kind of data you have: LC-MS technology used, study design, type of samples, events that may have occured during the analysis…
 It can vary a lot from one experiment to another due to these characteristics.
@@ -1637,7 +1633,7 @@ The grey areas’ width is associated with the bandwidth parameter.</p>
 
 <p>Here is an example of two m/z slices obtained from the hands-on:</p>
 
-<figure id="figure-3"><img src="../../images/lcmspreproc_group12samp.png" alt="Picture with two plots extracted from the plotChromPeakDensity.pdf output, one representing the 283.1127-283.1163 m/z slice and the other the 284.1198-284.1253 m/z slice. " width="1689" height="872" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Extract from plotChromPeakDensity.pdf</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_group12samp.png" alt="Picture with two plots extracted from the plotChromPeakDensity.pdf output, one representing the 283.1127-283.1163 m/z slice and the other the 284.1198-284.1253 m/z slice. " width="1689" height="872" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Extract from plotChromPeakDensity.pdf</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1723,7 +1719,7 @@ the datasets number 62 and 63.</p>
 With the example provided in this tutorial, you can notice that the blk class containing blanks has a high number of NA with 4394 ions
 that have not been found, in any blank.</p>
 
-  <figure id="figure-4"><img src="../../images/lcmspreproc_ICgp1.png" alt="Picture representing the proportions of NA in the 3 groups of the class column (blk, QC and sample). It is displayed as number of ions having given proportions of NA - proportions being grouped from 0 to 100 percents by classes of 20 percents." width="912" height="881" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Content of IC_Graphs.pdf</figcaption></figure>
+  <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_ICgp1.png" alt="Picture representing the proportions of NA in the 3 groups of the class column (blk, QC and sample). It is displayed as number of ions having given proportions of NA - proportions being grouped from 0 to 100 percents by classes of 20 percents." width="912" height="881" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Content of IC_Graphs.pdf</figcaption></figure>
 
   <blockquote class="question">
     <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -2206,6 +2202,9 @@ and create, run and share!</p>
                             Mélanie Petera, Jean-François Martin, Gildas Le Corguillé, Workflow4Metabolomics core team,  <b>Mass spectrometry: LC-MS preprocessing with XCMS (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html">https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -2227,12 +2226,12 @@ and create, run and share!</p>
 
 <code id="citation-code">@misc{metabolomics-lcms-preprocessing,
 author = "Mélanie Petera and Jean-François Martin and Gildas Le Corguillé and Workflow4Metabolomics core team",
-title = "Mass spectrometry: LC-MS preprocessing with XCMS (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Mass spectrometry: LC-MS preprocessing with XCMS (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -2369,7 +2368,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2401,7 +2400,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

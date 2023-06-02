@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html">
@@ -988,7 +984,7 @@ Sentry.init({
 
 <p>The purpose of this tutorial is to demonstrate how a set of workflows developed by the <a href="https://galaxyproject.org/projects/covid19/">Galaxy Covid-19 project</a> can be combined and used together with a handful of additional tools to achieve all of the above. Specifically, we will cover the analysis flow presented in figure 1.</p>
 
-<figure id="figure-1"><img src="../../images/sars-cov-2-variant-discovery/schema.png" alt="Analysis flow in the tutorial. " width="768" height="713" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Analysis flow in the tutorial</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/sars-cov-2-variant-discovery/schema.png" alt="Analysis flow in the tutorial. " width="768" height="713" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Analysis flow in the tutorial</figcaption></figure>
 
 <p>Depending on the type of sequencing data <strong>one of four variation analysis workflows</strong> can be run to discover mutations in a batch of input samples. Outputs of any of these workflows can then be processed further with two additional workflows: the <strong>variation reporting workflow</strong> generates a per-sample report of mutations, but also batch-level reports and visualizations, while the <strong>consensus construction workflow</strong> reconstructs the full viral genomes of all samples in the batch by modifying the SARS-CoV-2 reference genome with each sample’s set of mutations.</p>
 
@@ -1993,7 +1989,7 @@ Generating an optimal plot sometimes requires some experimenting with this value
   <li>
     <p><strong>Variant frequency plot</strong></p>
 
-    <p><img src="../../images/sars-cov-2-variant-discovery/variant-frequency.svg" alt="Variant frequency plot. " loading="lazy" /></p>
+    <p><img src="../../images/sars-cov-2-variant-discovery/variant-frequency.svg" alt="Variant frequency plot. " width="1803" height="390" loading="lazy" /></p>
 
     <p>This plot represents the allele-frequencies (AFs, cell color) for the different mutations (columns) in the different samples (rows). Mutations are grouped by viral ORFs (different colors on the 1st row). Information about their impact on translation of viral proteins is color-coded on the second row. Sample clustering is indicated by the tree displayed on the left.</p>
   </li>
@@ -2409,7 +2405,7 @@ Several possibilities exist:</p>
 
 <p>The relationships between the clades (the ones known about in the Spring of 2023) and their correspondence to pangolin lineages are shown in Figure 2.</p>
 
-<figure id="figure-2"><img src="../../images/sars-cov-2-variant-discovery/ncov_clades.svg" alt="Illustration of phylogenetic relationship of clades, as used in Nextclade. " width="1850" height="1150" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Illustration of phylogenetic relationship of clades, as used in Nextclade (Source: <a href="https://github.com/nextstrain/ncov-clades-schema/#ncov-clade-schema">Nextstrain</a>)</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/sars-cov-2-variant-discovery/ncov_clades.svg" type="image/svg+xml">Illustration of phylogenetic relationship of clades, as used in Nextclade.</object></div><small><a href="../../images/sars-cov-2-variant-discovery/ncov_clades.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Illustration of phylogenetic relationship of clades, as used in Nextclade (Source: <a href="https://github.com/nextstrain/ncov-clades-schema/#ncov-clade-schema">Nextstrain</a>)</figcaption></figure>
 
 <p>Let’s use <strong>Datamash</strong> again to obtain a lineage summary report from the Nextclade results comparable to the one we created for pangolin, but including the additional lineage/clade identifiers available with Nextclade.</p>
 
@@ -2554,6 +2550,9 @@ The GTN material has <a href="/training-material/topics/galaxy-interface/tutoria
                             Wolfgang Maier, Bérénice Batut,  <b>Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html">https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -2575,12 +2574,12 @@ The GTN material has <a href="/training-material/topics/galaxy-interface/tutoria
 
 <code id="citation-code">@misc{variant-analysis-sars-cov-2-variant-discovery,
 author = "Wolfgang Maier and Bérénice Batut",
-title = "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -2677,7 +2676,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2709,7 +2708,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

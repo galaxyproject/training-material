@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html">
@@ -1120,9 +1116,9 @@ A feature in label-free DDA data corresponds to a peptide at a given charge stat
 The MSstats QCPlot visualizes the log transformed intensities for all proteins and runs.
 The volcano plot plots the statistical result as transformed p-values vs. the log2 fold change. A fold change of 1.5 means that a protein is 50% more abundand in one condition than the other. The log2 fold change is 0.58.</p>
 
-<figure id="figure-1"><img src="../../images/maxquant-msstats-lfq/qc_plot.png" alt="qc plot. " width="949" height="594" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> QC plot of all proteins</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant-msstats-lfq/qc_plot.png" alt="qc plot. " width="949" height="594" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> QC plot of all proteins</figcaption></figure>
 
-<figure id="figure-2"><img src="../../images/maxquant-msstats-lfq/volcano_plot.png" alt="volcano plot. " width="951" height="580" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Volcano plot showing p-values and log2 fold changes for all proteins. Dashed line indicates p-value of 0.05 and log2 fold change of ± 0.58</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant-msstats-lfq/volcano_plot.png" alt="volcano plot. " width="951" height="580" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Volcano plot showing p-values and log2 fold changes for all proteins. Dashed line indicates p-value of 0.05 and log2 fold change of ± 0.58</figcaption></figure>
 
 <p>The FeatureLevelData file contains the transformed, normalized and imputed intensities for each peptide in each run. ProteinLevelData data summarizes intensities per run and protein.
 We’ll count and visualize the number of features per run and calculate the distribution of proteins per sample.</p>
@@ -1182,7 +1178,7 @@ We’ll count and visualize the number of features per run and calculate the dis
     <ol>
       <li>RDEB cSCC4</li>
     </ol>
-    <figure id="figure-3"><img src="../../images/maxquant-msstats-lfq/features_sample.png" alt="Number of proteins per sample. " width="1272" height="858" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Number of proteins per sample (run)</figcaption></figure>
+    <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant-msstats-lfq/features_sample.png" alt="Number of proteins per sample. " width="1272" height="858" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Number of proteins per sample (run)</figcaption></figure>
     <ol>
       <li>Around 6 features per protein (mean in summary statistics).</li>
     </ol>
@@ -1423,7 +1419,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 
 <p>Three of the differentially abundant proteins found here were also found and stained with antibodies in the original publication: Collagen XIV which is higher in RDEB cSCC than in metastasizing cSCC and Serum amyloid P-component as well as X-ray repair cross-complementing protein 6, which are both higher in metastasizing cSCC than in RDEB cSCC. Collagen XIV is a fibril associated collagen which may have tissue stabilizing function in the dermis. The upregulation of collagen XIV as well as other collagens in RDEB cSCC could be a compensation effort for the impaired collagen VII in RDEB tissues. Collagen VII is indeed only found in some RDEB samples and with such low intensities that it appears as upregulated in metastasized cSCC.</p>
 
-<figure id="figure-4"><img src="../../images/maxquant-msstats-lfq/col14_ihc.png" alt="col14 staining. " width="781" height="307" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Immunoflourescence staining of collagen XIV in RDEB and metastasizing cSCC skin tissues</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/maxquant-msstats-lfq/col14_ihc.png" alt="col14 staining. " width="781" height="307" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Immunoflourescence staining of collagen XIV in RDEB and metastasizing cSCC skin tissues</figcaption></figure>
 
                 </section>
 
@@ -1476,6 +1472,9 @@ In order to make its IDs compatible with the ones from the comparison result at 
                             Melanie Föll, Matthias Fahrner,  <b>MaxQuant and MSstats for the analysis of label-free data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html">https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1497,12 +1496,12 @@ In order to make its IDs compatible with the ones from the comparison result at 
 
 <code id="citation-code">@misc{proteomics-maxquant-msstats-dda-lfq,
 author = "Melanie Föll and Matthias Fahrner",
-title = "MaxQuant and MSstats for the analysis of label-free data (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "MaxQuant and MSstats for the analysis of label-free data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1624,7 +1623,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1656,7 +1655,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

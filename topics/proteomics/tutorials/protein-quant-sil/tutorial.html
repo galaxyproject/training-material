@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">
@@ -862,7 +858,7 @@ Incorporation of stable isotopes results in different peptide masses on MS1 leve
 
 <p>In this tutorial, we will use tools of the <a href="http://www.openms.org">OpenMS suite</a> to identify and quantify peptides and proteins.</p>
 
-<figure id="figure-1"><img src="../../images/protein-quant-sil_ms1feature.png" alt="ms1 feature. " width="3265" height="684" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> MS1 mass traces. A) Two peptide features of co-eluting SIL peptides. B) MS1 spectra at a given RT. C) XIC monoisotopic peak light peptide. D) XIC monoisotopic peak heavy peptide.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/protein-quant-sil_ms1feature.png" alt="ms1 feature. " width="3265" height="684" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> MS1 mass traces. A) Two peptide features of co-eluting SIL peptides. B) MS1 spectra at a given RT. C) XIC monoisotopic peak light peptide. D) XIC monoisotopic peak heavy peptide.</figcaption></figure>
 
 <h2 id="prerequisites">Prerequisites</h2>
 
@@ -1234,13 +1230,13 @@ Basic TOPPView tutorials are available as <a href="https://www.openms.de/getting
     <li>Activate the <code class="language-plaintext highlighter-rouge">mzML</code> layer and click on <code class="language-plaintext highlighter-rouge">Show projections</code></li>
   </ol>
 
-  <figure id="figure-2"><img src="../../images/protein-quant-sil_showProjections.png" alt="showProjections. " width="1265" height="692" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The projections display intensities plotted against RT (top panel) and plotted against m/z (right panel).</figcaption></figure>
+  <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/protein-quant-sil_showProjections.png" alt="showProjections. " width="1265" height="692" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> The projections display intensities plotted against RT (top panel) and plotted against m/z (right panel).</figcaption></figure>
 
   <ol>
     <li>Activate the <code class="language-plaintext highlighter-rouge">consensusXML</code> layers and click on <code class="language-plaintext highlighter-rouge">Show consensus feature element positions</code></li>
   </ol>
 
-  <figure id="figure-3"><img src="../../images/protein-quant-sil_showConsensus.png" alt="showConsensus. " width="1396" height="214" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Arrows between linked light and heavy features centroids are displayed.</figcaption></figure>
+  <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/protein-quant-sil_showConsensus.png" alt="showConsensus. " width="1396" height="214" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Arrows between linked light and heavy features centroids are displayed.</figcaption></figure>
 
   <ol>
     <li>Evaluate your data analysis, by
@@ -1260,18 +1256,18 @@ Basic TOPPView tutorials are available as <a href="https://www.openms.de/getting
   <li>
     <p><strong>Displaying annotated vs. UNannotated features</strong>: visualize annotated (= mapped) and unannotated (= unmapped) features by switching between activating only the “Annotated_features.consensusxml” or only the “UNannotated_features.consensusxml” layer</p>
 
-    <figure id="figure-4"><img src="../../images/protein-quant-sil_example_featureAnnotation.png" alt="displaying feature annotations. " width="2496" height="565" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> The feature below was mapped to and annotated with a peptide identification, the feature above was not mapped. A) Annotated layer is active. B) UNannotated layer is active.</figcaption></figure>
+    <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/protein-quant-sil_example_featureAnnotation.png" alt="displaying feature annotations. " width="2496" height="565" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> The feature below was mapped to and annotated with a peptide identification, the feature above was not mapped. A) Annotated layer is active. B) UNannotated layer is active.</figcaption></figure>
   </li>
   <li>
     <p><strong>Correct mapping</strong>: a feature was detected, a peptide was identified and the two were mapped.</p>
 
-    <figure id="figure-5"><img src="../../images/protein-quant-sil_example_highAbundant.png" alt="Correct mapping of a high-abundant peptide. " width="1772" height="584" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> A high-abundant peptide. A) 2D View. B) 3D View.</figcaption></figure>
-    <figure id="figure-6"><img src="../../images/protein-quant-sil_example_lowAbundant.png" alt="Correct mapping of a low-abundant peptide. " width="1802" height="611" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> A low-abundant peptide. A) 2D View. B) 3D View.</figcaption></figure>
+    <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/protein-quant-sil_example_highAbundant.png" alt="Correct mapping of a high-abundant peptide. " width="1772" height="584" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> A high-abundant peptide. A) 2D View. B) 3D View.</figcaption></figure>
+    <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/protein-quant-sil_example_lowAbundant.png" alt="Correct mapping of a low-abundant peptide. " width="1802" height="611" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> A low-abundant peptide. A) 2D View. B) 3D View.</figcaption></figure>
   </li>
   <li>
     <p><strong>No feature detected for a contaminant.</strong> Contaminants are often not labelled, but occur only in their unlabelled isoform. Therefore, they do not give rise to a consensus feature in FeatureFinderMultiplex.</p>
 
-    <figure id="figure-7"><img src="../../images/protein-quant-sil_example_contaminant.png" alt="contaminant. " width="1893" height="591" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> A contaminant. There are no elution peaks for the heavy labelled peptide isoform. A) 2D View. B) 3D View.</figcaption></figure>
+    <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/protein-quant-sil_example_contaminant.png" alt="contaminant. " width="1893" height="591" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> A contaminant. There are no elution peaks for the heavy labelled peptide isoform. A) 2D View. B) 3D View.</figcaption></figure>
   </li>
 </ol>
 
@@ -1306,7 +1302,7 @@ Basic TOPPView tutorials are available as <a href="https://www.openms.de/getting
       <li><em>Possible solution</em>: Improve your search engine settings.</li>
     </ul>
 
-    <figure id="figure-8"><img src="../../images/protein-quant-sil_problem_noID.png" alt="noID. " width="1267" height="692" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Several features without peptide IDs. Several MS2 spectra were generated (fragment scan precursors marked with red circles), but did not lead to a peptide identification.</figcaption></figure>
+    <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/protein-quant-sil_problem_noID.png" alt="noID. " width="1267" height="692" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Several features without peptide IDs. Several MS2 spectra were generated (fragment scan precursors marked with red circles), but did not lead to a peptide identification.</figcaption></figure>
   </li>
   <li>
     <p><strong>A peptide was identified, but no feature is nearby.</strong></p>
@@ -1326,7 +1322,7 @@ Basic TOPPView tutorials are available as <a href="https://www.openms.de/getting
       </li>
     </ul>
 
-    <figure id="figure-9"><img src="../../images/protein-quant-sil_problem_noFeature.png" alt="noID. " width="1793" height="586" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> A peptide was identified in its unlabelled and in its labelled isoform, but no feature was detected. A) 2D View. No third isotopic peak was detected for the labelled peptide. B) 3D View.</figcaption></figure>
+    <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/protein-quant-sil_problem_noFeature.png" alt="noID. " width="1793" height="586" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> A peptide was identified in its unlabelled and in its labelled isoform, but no feature was detected. A) 2D View. No third isotopic peak was detected for the labelled peptide. B) 3D View.</figcaption></figure>
   </li>
   <li>
     <p><strong>A peptide was identified and a feature was detected nearby, but the two are not mapped to each other.</strong></p>
@@ -1347,7 +1343,7 @@ Basic TOPPView tutorials are available as <a href="https://www.openms.de/getting
       </li>
     </ul>
 
-    <figure id="figure-10"><img src="../../images/protein-quant-sil_problem_noMapping.png" alt="noMapping. " width="1833" height="589" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A feature was detected, but the RT dimension is shorter than the peptides's elution peak. Also, the 2nd isotopic peak was fragmented and was not corrected due to the short feature. A) 2D View. B) 3D View.</figcaption></figure>
+    <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/protein-quant-sil_problem_noMapping.png" alt="noMapping. " width="1833" height="589" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> A feature was detected, but the RT dimension is shorter than the peptides's elution peak. Also, the 2nd isotopic peak was fragmented and was not corrected due to the short feature. A) 2D View. B) 3D View.</figcaption></figure>
   </li>
 </ol>
 
@@ -1493,6 +1489,9 @@ Also, it is recommended to optimize the tools in the order of their position in 
                             Florian Christoph Sigloch, Björn Grüning, Matthias Fahrner,  <b>Peptide and Protein Quantification via Stable Isotope Labelling (SIL) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1514,12 +1513,12 @@ Also, it is recommended to optimize the tools in the order of their position in 
 
 <code id="citation-code">@misc{proteomics-protein-quant-sil,
 author = "Florian Christoph Sigloch and Björn Grüning and Matthias Fahrner",
-title = "Peptide and Protein Quantification via Stable Isotope Labelling (SIL) (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Peptide and Protein Quantification via Stable Isotope Labelling (SIL) (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1671,7 +1670,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1703,7 +1702,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

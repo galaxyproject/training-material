@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/tutorial.html">
@@ -715,13 +711,13 @@ Sentry.init({
 
 <p>A genome is a representation of the set of DNA in an organism, such as the set of chromosomes. When the DNA is extracted from the sample, it is broken up into fragments much smaller than the lengths of DNA in the chromosomes. After being sequenced, these fragments (and their copies) are called sequencing reads. To assemble the genome, we need to join the reads back into, ideally, chromosome-sized lengths.</p>
 
-<p><img src="images/sampletogenome.png" alt="&quot;Image showing the concept of a genome assembly: a sample (a tree), with an arrow going to sequencing reads, with an arrow going to a genome (a set of diploid chromosomes)&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/sampletogenome.png" alt="&quot;Image showing the concept of a genome assembly: a sample (a tree), with an arrow going to sequencing reads, with an arrow going to a genome (a set of diploid chromosomes)&quot;. " width="938" height="270" loading="lazy" /></p>
 
 <h3 id="assembly-challenges">Assembly challenges</h3>
 
 <p>In reality, we rarely get chromosome-length assemblies, due to many challenges. Here are some examples of particular challenges in a diploid genome assembly:</p>
 
-<p><img src="images/challenges.png" alt="&quot;Image showing potential assembly challenges: a set of diploid chromosomes with descriptions of different problems which are: a contig may be a consensus from both chromosomes; telomeres and centromeres are difficult to assemble; contigs may be assembled separately as a copy in both chromosomes but it is unclear which parental chromosome they are from; some contigs are short or missing; some contigs are not placed in the assembly.&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/challenges.png" alt="&quot;Image showing potential assembly challenges: a set of diploid chromosomes with descriptions of different problems which are: a contig may be a consensus from both chromosomes; telomeres and centromeres are difficult to assemble; contigs may be assembled separately as a copy in both chromosomes but it is unclear which parental chromosome they are from; some contigs are short or missing; some contigs are not placed in the assembly.&quot;. " width="936" height="436" loading="lazy" /></p>
 
 <p>Even though most assemblies are not chromosome-length, the assembly in contigs is still valuable for many research questions. Lengths of assembled contigs are increasing as sequencing technology and assembly tools improve.</p>
 
@@ -797,7 +793,7 @@ Sentry.init({
 
 <p>In this tutorial, we will follow these steps:</p>
 
-<p><img src="images/steps.png" alt="&quot;An image showing the steps in the tutorial in a stylized form: quality control and kmer counting, represented by bold lines as sequencing reads; trimming and filtering reads, represented by truncated reads; assembly, represented by joined reads into one long piece; polishing, represented by corrections (ticks) in the assembly; the finished genome assembly, represented by a set of diploid chromosomes; quality assessment, represented by ticks and crosses at different chromosome locations.&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/steps.png" alt="&quot;An image showing the steps in the tutorial in a stylized form: quality control and kmer counting, represented by bold lines as sequencing reads; trimming and filtering reads, represented by truncated reads; assembly, represented by joined reads into one long piece; polishing, represented by corrections (ticks) in the assembly; the finished genome assembly, represented by a set of diploid chromosomes; quality assessment, represented by ticks and crosses at different chromosome locations.&quot;. " width="960" height="540" loading="lazy" /></p>
 
 <ul>
   <li>Each of these steps is described in a section in this tutorial.</li>
@@ -1058,7 +1054,7 @@ https://zenodo.org/record/7055935/files/Ref_genome_Arabidopsis.fasta
 
 <p>A read broken into kmers:</p>
 
-<p><img src="images/kmers.png" alt="&quot;An image of the a read broken into kmers: the read is a bold bar with the letters ABCDEF; each kmer is a smaller bar with three letters in it: the kmers are ABC, BCD, CDE, and DEF.&quot;. " width="650" loading="lazy" /></p>
+<p><img src="images/kmers.png" alt="&quot;An image of the a read broken into kmers: the read is a bold bar with the letters ABCDEF; each kmer is a smaller bar with three letters in it: the kmers are ABC, BCD, CDE, and DEF.&quot;. " width="819" height="414" loading="lazy" /></p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-what-is-kmer-counting"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What is kmer counting?</div>
@@ -1135,7 +1131,7 @@ https://zenodo.org/record/7055935/files/Ref_genome_Arabidopsis.fasta
 
 <p>GenomeScope transformed linear plot:</p>
 
-<p><img src="images/genomescope.png" alt="&quot;An image of the Genomescope plot, described fully in the text following this image.&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/genomescope.png" alt="&quot;An image of the Genomescope plot, described fully in the text following this image.&quot;. " width="791" height="791" loading="lazy" /></p>
 
 <p>Here we can see a central peak - showing that most of the different kmers were found at counts of ~ 120. These are kmers from single-copy homozygous alleles. To the left, a smaller peak at around half the coverage, showing kmers from heterozygous alleles (note that this peak gets higher than the main peak when heterozygosity is only ~ 1.2%). To the right, another smaller peak showing kmers at higher coverage, from repeat regions. Information from these three peaks provide a haploid genome length estimate of ~240,000 bp (note this is test data so smaller than whole plant genome size).</p>
 
@@ -1166,7 +1162,7 @@ https://zenodo.org/record/7055935/files/Ref_genome_Arabidopsis.fasta
 
 <p>Trimming and filtering reads:</p>
 
-<p><img src="images/trimfilterreads.png" alt="&quot;An image of the concepts of trimming and filtering reads, with reads represented by bold bars; trimming represented by crosses over various locations in each read.&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/trimfilterreads.png" alt="&quot;An image of the concepts of trimming and filtering reads, with reads represented by bold bars; trimming represented by crosses over various locations in each read.&quot;. " width="830" height="409" loading="lazy" /></p>
 
 <h2 id="trimming-and-filtering-workflow">Trimming and filtering workflow</h2>
 
@@ -1260,7 +1256,7 @@ https://zenodo.org/record/7055935/files/Ref_genome_Arabidopsis.fasta
 
 <p>Filtering results from fastp on short reads:</p>
 
-<p><img src="images/fastp.png" alt="&quot;Image of a table of results from fastp, showing the percentage of reads that were low quality, had too many Ns, or too short.&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/fastp.png" alt="&quot;Image of a table of results from fastp, showing the percentage of reads that were low quality, had too many Ns, or too short.&quot;. " width="1239" height="229" loading="lazy" /></p>
 
 <p>Here we can see that less than 0.5 % of the reads were discarded based on quality. If our read set had high enough coverage for downstream analyses, we might choose to apply a stricter quality filter.</p>
 
@@ -1293,7 +1289,7 @@ These coverages are very high but are ok to use with tutorial data. With a typic
 
 <p>Extreme simplification of genome assembly:</p>
 
-<p><img src="images/assembly.png" alt="&quot;Image of the simplified process of genome assembly, from a tree, to reads (represented by bold bars), to an assembly (represented by one long bold bar), to contigs (various long bold bars) and to an assembly graph.&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/assembly.png" alt="&quot;Image of the simplified process of genome assembly, from a tree, to reads (represented by bold bars), to an assembly (represented by one long bold bar), to contigs (various long bold bars) and to an assembly graph.&quot;. " width="876" height="311" loading="lazy" /></p>
 
 <p>Genome assembly algorithms use different approaches to work with the complexities of large sequencing read data sets, large genomes, different sequencing error rates, and computational resources. Many use graph-based algorithms.  For more about genome assembly algorithms see <a href="https://langmead-lab.org/teaching-materials/">these tutorials by Ben Langmead</a>.</p>
 
@@ -1380,17 +1376,17 @@ These coverages are very high but are ok to use with tutorial data. With a typic
 <p>The assembled contigs are in the “Flye assembly on data X (consensus)” (X is a number that will vary depending on where it sits in your history).<br />
 Open the Quast tabular report to see the assembly statistics:</p>
 
-<p><img src="images/quast.png" alt="&quot;Image of the Quast tabular report, showing various assembly statistics.&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/quast.png" alt="&quot;Image of the Quast tabular report, showing various assembly statistics.&quot;. " width="753" height="597" loading="lazy" /></p>
 
 <p>There are 153 contigs, largest is ~246,000 bp, and total length almost 10 million bp. This is a fair bit longer than the estimated genome size from kmer counting (which was ~240,000 bp), but the difference is likely mainly due to idiosyncrasies of using a subsampled data set. The read coverage was likely &lt;1, causing many kmers to have frequency of &lt;1 and be classed as errors, rather than contributing to the genome size estimate.</p>
 
 <p>Open the Quast HTML report, then click on “View in Icarus contig browser”.  This is a way to visualize the contigs and their sizes:</p>
 
-<p><img src="images/icarus.png" alt="&quot;Image of the Icarus contig browser, showing the set of contigs arranged from larges to smallest, represented by rectangles of different widths.&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/icarus.png" alt="&quot;Image of the Icarus contig browser, showing the set of contigs arranged from larges to smallest, represented by rectangles of different widths.&quot;. " width="1246" height="526" loading="lazy" /></p>
 
 <p>View the Bandage image of the assembly graph:</p>
 
-<p><img src="images/bandagegraphpartial.png" alt="&quot;Image of the bandage graph showing one multi-part set of joined contigs, some smaller one- or two- piece contigs, and many single contigs.&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/bandagegraphpartial.png" alt="&quot;Image of the bandage graph showing one multi-part set of joined contigs, some smaller one- or two- piece contigs, and many single contigs.&quot;. " width="1212" height="466" loading="lazy" /></p>
 
 <p>As this is a subsampled data set, it is not surprising that most of the contigs are unjoined. The joined contigs at the top left are likely to be part of the mitochondrial genome as these reads were probably over-represented in our subsampled data set.</p>
 
@@ -1414,7 +1410,7 @@ Open the Quast tabular report to see the assembly statistics:</p>
 
 <p>Assembly polishing:</p>
 
-<p><img src="images/polish.png" alt="&quot;Image of the concept of assembly polishing, showing reads mapped to the assembly contigs.&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/polish.png" alt="&quot;Image of the concept of assembly polishing, showing reads mapped to the assembly contigs.&quot;. " width="848" height="275" loading="lazy" /></p>
 
 <h2 id="polishing-workflow">Polishing workflow</h2>
 
@@ -1550,7 +1546,7 @@ Open the Quast tabular report to see the assembly statistics:</p>
 
 <p>Genome assessment:</p>
 
-<p><img src="images/assess.png" alt="&quot;Image of genome assessment, showing contigs as bold bars, with one contig annotated (various sections labelled by coloured boxes), and then compared to an expected annotation.&quot;. " width="800" loading="lazy" /></p>
+<p><img src="images/assess.png" alt="&quot;Image of genome assessment, showing contigs as bold bars, with one contig annotated (various sections labelled by coloured boxes), and then compared to an expected annotation.&quot;. " width="906" height="276" loading="lazy" /></p>
 
 <p>We will also map the assembled contigs to a known reference genome using the tool Quast, to see how they align. For more about quast see <a href="http://quast.sourceforge.net/docs/manual.html">the manual</a>.</p>
 
@@ -1652,11 +1648,11 @@ Open the Quast tabular report to see the assembly statistics:</p>
 
 <p>Open the Quast HTML report, and at the top of this, click on “View in Icarus contig browser”.  This shows how our assembly contigs have mapped to the reference genome. For this reference genome there are 5 chromosomes and two organelles. As this reference genome species is not closely related, not many contigs have mapped well. But we can see that some of them match the organelles (which is expected, as these reads are likely to be overrepresented in the test data). For the nuclear genome, there are some matches to parts of chromosome 2 and 3.</p>
 
-<p><img src="images/quast2.png" alt="&quot;Image of quast results showing contig lengths.&quot;. " width="650" loading="lazy" /></p>
+<p><img src="images/quast2.png" alt="&quot;Image of quast results showing contig lengths.&quot;. " width="1238" height="438" loading="lazy" /></p>
 
 <p>Click on the “mitochondria” to see how the assembly contigs align to the reference mitochondrial genome. Click the -5x button to zoom out to the full length.</p>
 
-<p><img src="images/mitocontigs.png" alt="&quot;Image of mitochondrial contigs.&quot;. " width="650" loading="lazy" /></p>
+<p><img src="images/mitocontigs.png" alt="&quot;Image of mitochondrial contigs.&quot;. " width="1239" height="404" loading="lazy" /></p>
 
 <h1 id="combining-workflows">Combining workflows</h1>
 
@@ -1711,7 +1707,7 @@ Open the Quast tabular report to see the assembly statistics:</p>
 
 <p>A summary of the workflow steps and the main tools used:</p>
 
-<p><img src="images/summary.png" alt="&quot;A graphical summary of the steps in the assembly: quality control, kmer counting, trimming/filtering reads, assembly, polishing and assessment. A composite of all the earlier images in the tutorial.&quot;. " width="650" loading="lazy" /></p>
+<p><img src="images/summary.png" alt="&quot;A graphical summary of the steps in the assembly: quality control, kmer counting, trimming/filtering reads, assembly, polishing and assessment. A composite of all the earlier images in the tutorial.&quot;. " width="960" height="540" loading="lazy" /></p>
 
 <p>We hope this has been useful for both learning about genome assembly concepts and as a customisable example for your own assembly data.</p>
 
@@ -1779,6 +1775,9 @@ Open the Quast tabular report to see the assembly statistics:</p>
                             Anna Syme,  <b>Large genome assembly and polishing (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1800,12 +1799,12 @@ Open the Quast tabular report to see the assembly statistics:</p>
 
 <code id="citation-code">@misc{assembly-largegenome,
 author = "Anna Syme",
-title = "Large genome assembly and polishing (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Large genome assembly and polishing (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1952,7 +1951,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1984,7 +1983,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

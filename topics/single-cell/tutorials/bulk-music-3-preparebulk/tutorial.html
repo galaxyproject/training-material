@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html">
@@ -937,7 +933,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 
 <p>Now examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> your resultant metadata file in the Galaxy history. Better, right?</p>
 
-<figure id="figure-1"><img src="../../images/bulk-music/bulk-metadata-pretty.png" alt="5 columns with numerical or string information on Run, Age, BMI, Disease and Sex. " width="770" height="366" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Look at the pretty metadata</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/bulk-metadata-pretty.png" alt="5 columns with numerical or string information on Run, Age, BMI, Disease and Sex. " width="770" height="366" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Look at the pretty metadata</figcaption></figure>
 
 <p>This is ready to go, so now we’ll reformat the matrix!</p>
 
@@ -991,7 +987,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
   <blockquote class="solution">
     <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <figure id="figure-2"><img src="../../images/bulk-music/raw-matrix.png" alt="Column 1 contains Gene ID followed by many lines of ENSG####. Column 2 contains the gene names. The following columns contain numerous iterations of ERR#####. " width="1802" height="358" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Gene info</figcaption></figure>
+    <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/raw-matrix.png" alt="Column 1 contains Gene ID followed by many lines of ENSG####. Column 2 contains the gene names. The following columns contain numerous iterations of ERR#####. " width="1802" height="358" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Gene info</figcaption></figure>
 
     <ol>
       <li>By examining the matrix, you can find that genes are the rows while samples are the columns.</li>
@@ -1054,7 +1050,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 
 <p>The output will likely be called <strong>Text transformation</strong> and will look like this:</p>
 
-<figure id="figure-3"><img src="../../images/bulk-music/ensidcollapse_bulk.png" alt="Alphabetised gene symbols appear in column one with integers in the following columns corresponding to samples. " width="448" height="288" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Output of the ENS ID collapsing workflow for bulk dataset</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/ensidcollapse_bulk.png" alt="Alphabetised gene symbols appear in column one with integers in the following columns corresponding to samples. " width="448" height="288" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Output of the ENS ID collapsing workflow for bulk dataset</figcaption></figure>
 
 <p>Success! You’ve now prepared your metadata and your matrix. It’s time to put it together to create the Expression Set objects needed for MuSiC deconvolution.</p>
 
@@ -1090,7 +1086,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
     <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The trick with all of these questions is to examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <code class="language-plaintext highlighter-rouge">General info</code> output <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> of the <strong>Construct Expression Set Object</strong> tool.</p>
-    <figure id="figure-4"><img src="../../images/bulk-music/generalinfo.png" alt="Lines showing ExpressionSet'; assayData: 34997 features, 7 samples; protocolData: none; phenoData; sampleNames: ERR### (7 total); varLabels: Age BMI Disease Sex; varMetadata: labelDescription; and 3 more useless lines . " width="844" height="312" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> General info output</figcaption></figure>
+    <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/generalinfo.png" alt="Lines showing ExpressionSet'; assayData: 34997 features, 7 samples; protocolData: none; phenoData; sampleNames: ERR### (7 total); varLabels: Age BMI Disease Sex; varMetadata: labelDescription; and 3 more useless lines . " width="844" height="312" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> General info output</figcaption></figure>
 
     <ol>
       <li>There are <code class="language-plaintext highlighter-rouge">34997</code> features, which are the genes.</li>
@@ -1175,7 +1171,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 
 <p>You can find the <a href="https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--bulk--eset">workflow for generating the ESet object</a> and the <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--bulk--eset">answer key history</a>.</p>
 
-<figure id="figure-5"><img src="../../images/bulk-music/workflow-bulk.png" alt="7 boxes in the workflow editor and a subworkflow box for converting Ensembl to GeneSymbol. " width="2302" height="1292" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Workflow: Generating the bulk ESet Objects</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/workflow-bulk.png" alt="7 boxes in the workflow editor and a subworkflow box for converting Ensembl to GeneSymbol. " width="2302" height="1292" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Workflow: Generating the bulk ESet Objects</figcaption></figure>
 
 <p>This tutorial is part of the <a href="https://singlecell.usegalaxy.eu">https://singlecell.usegalaxy.eu</a> portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
@@ -1236,6 +1232,9 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
                             Wendi Bacon, Mehmet Tekman,  <b>Creating the bulk RNA-seq dataset for deconvolution (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1257,12 +1256,12 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 
 <code id="citation-code">@misc{single-cell-bulk-music-3-preparebulk,
 author = "Wendi Bacon and Mehmet Tekman",
-title = "Creating the bulk RNA-seq dataset for deconvolution (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Creating the bulk RNA-seq dataset for deconvolution (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1467,7 +1466,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1499,7 +1498,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

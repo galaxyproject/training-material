@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html">
@@ -792,13 +788,13 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 
 <p>10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level, but has defined the standards of the field that many downstream analysis packages are now scrambling to accommodate.</p>
 
-<figure id="figure-1"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_clusters_intro.png" alt="clusters. " width="953" height="415" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> From less than 1K to over 10K with 10x genomics: Analyses of two separate scRNA datasets using the (left) CelSEQ2 protocol, and the (right) 10x Chromium system.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_clusters_intro.png" alt="clusters. " width="953" height="415" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> From less than 1K to over 10K with 10x genomics: Analyses of two separate scRNA datasets using the (left) CelSEQ2 protocol, and the (right) 10x Chromium system.</figcaption></figure>
 
 <p>The gain in resolution reduces the granularity and noise issues that plagued the field of scRNA-seq not long ago, where now individual clusters are much easier to decipher due to the added stability added by this gain in information.</p>
 
 <h2 id="library-preparation">Library Preparation</h2>
 
-<figure id="figure-2"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_libprep.png" alt="Library Preparation. " width="1861" height="697" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> An overview of the library preparation</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_libprep.png" alt="Library Preparation. " width="1861" height="697" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> An overview of the library preparation</figcaption></figure>
 
 <p>The 10X barcoded gel beads consist of a pool barcodes which are used to separately index each cell’s transcriptome. The individual gel barcodes are delivered to each cell via flow-cytometry, where each cell is fed single-file along a liquid tube and tagged with a 10X gel bead. The cells are then isolated from one another within thousands of nanoliter droplets, where each droplet described by a unique 10x barcode that all reads in that droplet are associated with once they undergo reverse-transcription (RT) which reconstructs the mRNA into a cDNA counterpart. The oil is then removed and all (now barcoded) cDNA reads are pooled together to be sequenced.</p>
 
@@ -854,7 +850,7 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 
 </blockquote>
 
-<figure id="figure-3"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_workflow.png" alt="Overview of workflow. " width="1096" height="641" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> An overview of the workflow</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_workflow.png" alt="Overview of workflow. " width="1096" height="641" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> An overview of the workflow</figcaption></figure>
 
 <p>The first part of this tutorial is essentially a one-click “fire and forget” solution to demultiplexing and quantifying scRNA-seq data, where much of the complexity required in this extremely crucial stage is simplified into a single step.</p>
 
@@ -867,7 +863,7 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 <blockquote class="details">
   <div class="box-title details-title" id="details-benchmark-of-cell-ranger-to-others"><button class="gtn-boxify-button details" type="button" aria-controls="details-benchmark-of-cell-ranger-to-others" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Benchmark of Cell Ranger to others<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <figure id="figure-4"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_runtimes.jpg" alt="tenx_runtimes. " width="490" height="347" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Benchmark of different mapping software.</figcaption></figure>
+  <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_runtimes.jpg" alt="tenx_runtimes. " width="490" height="347" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Benchmark of different mapping software.</figcaption></figure>
 
   <p>The image is from <span class="citation"><a href="#Melsted2019">Melsted <i>et al.</i> 2019</a></span>. Notice the order of magnitude speed up that STARsolo and a few others display, for a variety of different datasets in comparison to Cell Ranger.</p>
 </blockquote>
@@ -939,7 +935,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
 <p>There are two main reagent kits used during the library preparation, and the choice of one will influence the size of the sequences we work with. Below we can see the layout of the primers used in both chemistries. We can ignore most of these as they are not relevant, namely: the P5 and P7 illumina primers are used in the illumina <a href="https://en.wikipedia.org/wiki/Illumina_dye_sequencing#Bridge_amplification">bridge amplification</a> process; the Sample Index is an 8bp primer which is related to the Chromium system that balances nucleotide bias and ensures that there is no sample overlap during the multiplexed sequencing; and the Poly(dT) VN primer used to capture RNA sequences with poly-A tails (i.e. mRNA).</p>
 
-<figure id="figure-5"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_primers.svg" alt="chem. " width="899" height="213" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> 10x Chromiumv2 and Chromiumv3 Chemistries</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_primers.svg" alt="chem. " width="899" height="213" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> 10x Chromiumv2 and Chromiumv3 Chemistries</figcaption></figure>
 
 <p>The primers of interest to us are the Cell Barcode (CB) and the Unique Molecular Identifiers (UMI) used in the Read 1 sequencing primer, as they describe to us how to demultiplex and deduplicate our reads. It is highly advised that the <a href="/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html">Plates, Batches, and Barcodes</a> slides are revisited to refresh your mind on these concepts.</p>
 
@@ -975,7 +971,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
   <p>Unstranded protocols do not distinguish between whether a fragment was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.</p>
 
-  <figure id="figure-6"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_strandedness.svg" alt="strandedness. " width="354" height="210" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Mapping fragments to overlapping transcripts is ambiguous with unstranded protocols.</figcaption></figure>
+  <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_strandedness.svg" alt="strandedness. " width="354" height="210" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Mapping fragments to overlapping transcripts is ambiguous with unstranded protocols.</figcaption></figure>
 
   <p>Stranded protocols overcome this by fitting different 5’ and 3’ primers and adaptors, meaning that the orientation of the fragment is fixed during sequencing. For the Chromium v2 and v3 chemistries, the barcode information is purely within the R1 forward strand.</p>
 
@@ -1347,7 +1343,7 @@ Genes:
 
   <p>As expected, the format that usually wins is the one which is most common in the field. In this case, the format <em>also</em> happens to be a very good format that stores data in a concise, compressed, and extremely readable manner:</p>
 
-  <p>&lt;img src=”/training-material/topics/single-cell/images/scrna-pre-processing/tenx_anndata.svg “AnnData is an HDF5-based format, which stores gene and cell information in their own matrices, complementary to the main data matrix.” “ alt=”anddata. “  loading=”lazy”&gt;</p>
+  <p>&lt;img src=”/training-material/topics/single-cell/images/scrna-pre-processing/tenx_anndata.svg “AnnData is an HDF5-based format, which stores gene and cell information in their own matrices, complementary to the main data matrix.” “  alt=”anddata. “  width=”194” height=158 loading=”lazy”&gt;</p>
 
   <p>The <em>AnnData</em> format (<code class="language-plaintext highlighter-rouge">hda5</code>) is an extension of the <a href="https://en.wikipedia.org/wiki/Hierarchical_Data_Format">HDF5 format</a>, which supports multidimensional datasets to be stored in a consistent and space-optimised way. This is the default output of <em>Cell Ranger</em> and so is also the default output of <strong>RNA STARsolo</strong>. The format is also now a widely accepted format in many downstream analysis suites.</p>
 </blockquote>
@@ -1381,7 +1377,7 @@ Genes:
 
 </blockquote>
 
-<figure id="figure-7"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_knee.png" alt="knee. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Barcode Ranks: The separating thresholds of high and low quality cells</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_knee.png" alt="knee. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Barcode Ranks: The separating thresholds of high and low quality cells</figcaption></figure>
 
 <p>The knee and inflection points on the curve mark the transition between two components of the total count distribution. This is assumed to represent the difference between cells with high RNA content and empty droplets with little RNA, and gives us a rough idea of how many cells to expect in our sample.</p>
 
@@ -1431,7 +1427,7 @@ Genes:
 
 </blockquote>
 
-<figure id="figure-8"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_cells.png" alt="cells. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Detected Cells (red)</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_cells.png" alt="cells. " width="480" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Detected Cells (red)</figcaption></figure>
 
 <p>Here we recover 282 high quality cells instead of the 272 detected via the default method previously. On large datasets, this difference can help clean downstream clustering. For example, soft or less well-defined clusters are derived from too much noise in the data due to too many low quality cells being in the data during the clustering. Filtering these out during the pre-processing would produce much better separation, albeit at the cost of having less cells to cluster. This filter-cluster trade-off is discussed in more detail in the downstream analysis training materials.</p>
 
@@ -1445,7 +1441,7 @@ Genes:
 
 <p>This tutorial is part of the https://singlecell.usegalaxy.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
-<!-- <figure id="figure-9"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" alt="Recap of workflow. "  width="933" height=978 loading="lazy"><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> A recap of the entire workflow</figcaption></figure> -->
+<!-- <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg"  alt="Recap of workflow. "  width="933" height=978 loading="lazy"><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> A recap of the entire workflow</figcaption></figure> -->
 
                 </section>
 
@@ -1502,6 +1498,9 @@ Genes:
                             Mehmet Tekman, Hans-Rudolf Hotz, Daniel Blankenberg, Wendi Bacon, Pavankumar Videm,  <b>Pre-processing of 10X Single-Cell RNA Datasets (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1523,12 +1522,12 @@ Genes:
 
 <code id="citation-code">@misc{single-cell-scrna-preprocessing-tenx,
 author = "Mehmet Tekman and Hans-Rudolf Hotz and Daniel Blankenberg and Wendi Bacon and Pavankumar Videm",
-title = "Pre-processing of 10X Single-Cell RNA Datasets (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Pre-processing of 10X Single-Cell RNA Datasets (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1698,7 +1697,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1730,7 +1729,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

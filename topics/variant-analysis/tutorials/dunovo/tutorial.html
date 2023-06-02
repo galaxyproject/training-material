@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dunovo/tutorial.html">
@@ -806,7 +802,7 @@ Sentry.init({
 </blockquote>
 
 <p><a href="http://www.pnas.org/content/109/36/14508.short">Schmitt <em>et al.</em> 2012</a> provides this overview of the whole method:
-<img src="../../images/ds.png" alt="duplex. " loading="lazy" /></p>
+<img src="../../images/ds.png" alt="duplex. " width="1280" height="576" loading="lazy" /></p>
 
 <p><strong>Figure 1:</strong> The logic of duplex sequencing. The computational process is shown in part <strong>C</strong>.</p>
 
@@ -814,7 +810,7 @@ Sentry.init({
 
 <p>The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a duplex experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since the duplex procedure requires a substantial amount of starting DNA (between <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4271547/">between 0.2 and 3 micrograms</a>) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming heteroduplex molecules:</p>
 
-<p><img src="../../images/het.png" alt="hd. " height="444px" width="605px" loading="lazy" /></p>
+<p><img src="../../images/het.png" alt="hd. " height="888" width="1210" loading="lazy" /></p>
 
 <p><strong>Figure 2:</strong> Heteroduplex formation in ampliconic templates. Image by Barbara Arbeithuber from <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1039-4">Stoler <em>et al.</em> 2016</a>. Here there are two distinct types of viral genomes: carrying <code class="language-plaintext highlighter-rouge">A</code> and <code class="language-plaintext highlighter-rouge">G</code>. Because the population of genomes is enriched via PCR, heteroduplex formation takes place, skewing frequency estimates performed using DCSs.</p>
 
@@ -848,7 +844,7 @@ Sentry.init({
   <li>Note: Galaxy histories show the first step at the bottom!</li>
 </ul>
 
-<p><img src="../../images/history-dunovo.png" alt="steps. " loading="lazy" /></p>
+<p><img src="../../images/history-dunovo.png" alt="steps. " width="831" height="1467" loading="lazy" /></p>
 
 <p><strong>Figure 3:</strong> Analysis outline</p>
 
@@ -886,8 +882,8 @@ Sentry.init({
 <table>
   <tbody>
     <tr>
-      <td><img src="../../images/abl1-f-qc.png" alt="Quality scores across all bases: foward. " loading="lazy" /></td>
-      <td><img src="../../images/abl1-r-qc.png" alt="Quality scores across all bases: reverse. " loading="lazy" /></td>
+      <td><img src="../../images/abl1-f-qc.png" alt="Quality scores across all bases: foward. " width="825" height="600" loading="lazy" /></td>
+      <td><img src="../../images/abl1-r-qc.png" alt="Quality scores across all bases: reverse. " width="825" height="600" loading="lazy" /></td>
     </tr>
   </tbody>
 </table>
@@ -1279,9 +1275,9 @@ This is because we want to make sure you only share data knowingly.</p>
 
 <p>You can use the variant calling workflow to call variants using the SSCS instead of the DCS.</p>
 
-<figure id="figure-1"><img src="../../images/workflow-dunovo.png" alt="Du Novo workflow. " width="1053" height="438" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Workflow 1: Making consensus sequences</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/workflow-dunovo.png" alt="Du Novo workflow. " width="1053" height="438" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Workflow 1: Making consensus sequences</figcaption></figure>
 
-<figure id="figure-2"><img src="../../images/workflow-dunovo-variant-calling.png" alt="Variant calling workflow. " width="777" height="360" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Workflow 2: Variant calling</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/workflow-dunovo-variant-calling.png" alt="Variant calling workflow. " width="777" height="360" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Workflow 2: Variant calling</figcaption></figure>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -1341,6 +1337,9 @@ This is because we want to make sure you only share data knowingly.</p>
                             Anton Nekrutenko, Nick Stoler,  <b>Calling very rare variants (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dunovo/tutorial.html">https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dunovo/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1362,12 +1361,12 @@ This is because we want to make sure you only share data knowingly.</p>
 
 <code id="citation-code">@misc{variant-analysis-dunovo,
 author = "Anton Nekrutenko and Nick Stoler",
-title = "Calling very rare variants (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dunovo/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Calling very rare variants (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dunovo/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1489,7 +1488,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1521,7 +1520,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

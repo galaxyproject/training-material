@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html">
@@ -665,7 +661,7 @@ Sentry.init({
 Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based RNA interference (RNAi) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alternative to performing new experiments.
 In particular, regardless of the targeted biological process, many screens include a DNA label and therefore can also reveal the effect of gene knock-downs on nucleoli.</p>
 
-<figure id="figure-1"><img src="../../images/tutorial-CP/img_dna_channel.png" alt="DNA channel. " width="804" height="626" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> DNA channel from the screen described in <span class="citation"><a href="#Heriche_2014">“<b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>” 2014</a></span>. The red arrows point at nucleoli.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/tutorial-CP/img_dna_channel.png" alt="DNA channel. " width="804" height="626" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> DNA channel from the screen described in <span class="citation"><a href="#Heriche_2014">“<b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>” 2014</a></span>. The red arrows point at nucleoli.</figcaption></figure>
 
 <p>In this tutorial, we will analyse DNA channel images of publicly available RNAi screens to extract numerical descriptors (i.e. features) of nucleoli.
 The images and associated metadata will be retrieved from the <a href="http://idr.openmicroscopy.org/">Image Data Resource (IDR)</a>, a repository that collects image datasets of tissues and cells.</p>
@@ -680,7 +676,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>3) <strong>CellProfiler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to actually run the pipeline.</p>
 
-<figure id="figure-2"><img src="../../images/tutorial-CP/wf.jpg" alt="High-level view of the workflow. " width="2874" height="1156" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> High-level view of the workflow</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/tutorial-CP/wf.jpg" alt="High-level view of the workflow. " width="2874" height="1156" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> High-level view of the workflow</figcaption></figure>
 
 <p>In this tutorial, you will learn how to create a workflow that downloads a selection of images from the IDR, and uses CellProfiler to segment the nuclei and nucleoli. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.</p>
 
@@ -748,7 +744,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
         <p>To get the valid IDR link, go to the <a href="http://idr.openmicroscopy.org/webclient/?show=screen-102">dataset of interest in the IDR</a> and select in the preview of a plate a few images ((figure <a href="#figure-3">Fig. 3</a> - 1)). Once you see them at the bottom of the page (figure <a href="#figure-3">Fig. 3</a> - 2), select them again and click the link button in the top-right corner of the right panel (figure <a href="#figure-3">Fig. 3</a> - 3).</p>
 
-        <figure id="figure-3"><img src="../../images/tutorial-CP/IDR_interface.jpg" alt="IDR interface. " width="2452" height="1376" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> IDR interface</figcaption></figure>
+        <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/tutorial-CP/IDR_interface.jpg" alt="IDR interface. " width="2452" height="1376" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> IDR interface</figcaption></figure>
       </blockquote>
 
       <blockquote class="comment">
@@ -929,7 +925,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>From the previous tool, we got a group of objects (nuclei). Now, we want to export the segmentation masks as a single image to check how well the segmentation algorithm is performing. We also want to label the nuclei with their identifiers for future visual inspection of the results. The output of this step will look like (you will only get this image after running the whole workflow):</p>
 
-<figure id="figure-4"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="Identified nuclei with labels. " width="1534" height="1180" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Identified nuclei with labels.</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="Identified nuclei with labels. " width="1534" height="1180" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Identified nuclei with labels.</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
@@ -1105,7 +1101,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>We have now one segmentation mask per image with all the nuclei detected, <code class="language-plaintext highlighter-rouge">MaskNuclei</code>, and another one for the nucleoli, <code class="language-plaintext highlighter-rouge">MaskNucleoli</code>. These are binary masks in which the background is black and the objects detected are white. We would like to check whether both segmentation steps went well. That could be achieved by combining both of them (using different colors) into one image. Here, we are converting the nucleus mask to blue and the nucleoli to magenta. The outcome that you will obtain after the execution of the workflow will look like:</p>
 
-<figure id="figure-5"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="Combined mask for nuclei and nucleoli. " width="2116" height="1708" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Combined segmentation masks for nuclei (blue) and nucleoli (magenta).</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="Combined mask for nuclei and nucleoli. " width="2116" height="1708" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Combined segmentation masks for nuclei (blue) and nucleoli (magenta).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-convert-and-save-the-nuclei-and-nucleoli-masks"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Convert and save the nuclei and nucleoli masks</div>
@@ -1625,6 +1621,9 @@ The images and associated metadata will be retrieved from the <a href="http://id
                             Beatriz Serrano-Solano, Jean-Karim Hériché,  <b>Nucleoli segmentation and feature extraction using CellProfiler (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1646,12 +1645,12 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <code id="citation-code">@misc{imaging-tutorial-CP,
 author = "Beatriz Serrano-Solano and Jean-Karim Hériché",
-title = "Nucleoli segmentation and feature extraction using CellProfiler (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "Nucleoli segmentation and feature extraction using CellProfiler (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1828,7 +1827,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1860,7 +1859,7 @@ tools:
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

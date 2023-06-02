@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c7c213be450c13d64551e41fbe653db4c1b2095c",
+  release: "galaxy-training-network@934378dc1320c18ab47ece07366423f8ed215f18",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,7 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/training-material/assets/fontawesome/css/all.css">
-        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-bash-star-align/tutorial.html">
@@ -1006,7 +1002,7 @@ Fortunately, this step is pretty simple with Galaxy:</p>
 
 <h1 id="alignment-to-a-reference-genome">Alignment to a reference genome</h1>
 
-<p><img src="../../images/bash-star-rnaseq/workflow_align.png" alt="Simplified workflow that starts with the raw sequence reads and ends up to genome alignment. " loading="lazy" /></p>
+<p><img src="../../images/bash-star-rnaseq/workflow_align.png" alt="Simplified workflow that starts with the raw sequence reads and ends up to genome alignment. " width="383" height="299" loading="lazy" /></p>
 
 <p>Image from <a href="https://datacarpentry.org/wrangling-genomics/">“Data Wrangling and Processing for Genomics”</a></p>
 
@@ -1098,11 +1094,11 @@ that follows corresponds to alignment information for a single read. Each alignm
 mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is
 displayed below with the different fields highlighted.</p>
 
-<p><img src="../../images/bash-star-rnaseq/sam_bam.png" alt="sam file example with fields description, showing qname, flag, rname, pos, maqp, and cigar as the first fields. " loading="lazy" /></p>
+<p><img src="../../images/bash-star-rnaseq/sam_bam.png" alt="sam file example with fields description, showing qname, flag, rname, pos, maqp, and cigar as the first fields. " width="712" height="177" loading="lazy" /></p>
 
 <p>Image from <a href="https://datacarpentry.org/wrangling-genomics/">Data Wrangling and Processing for Genomics</a></p>
 
-<p><img src="../../images/bash-star-rnaseq/sam_bam3.png" alt="sam file example with fields description, showing seq, qual, mrnm, mpos, and size as the second set of fields." loading="lazy" /></p>
+<p><img src="../../images/bash-star-rnaseq/sam_bam3.png" alt="sam file example with fields description, showing seq, qual, mrnm, mpos, and size as the second set of fields." width="677" height="166" loading="lazy" /></p>
 
 <p>Image from <a href="https://datacarpentry.org/wrangling-genomics/">“Data Wrangling and Processing for Genomics”</a></p>
 
@@ -1151,7 +1147,7 @@ displayed below with the different fields highlighted.</p>
 
 <p>Time to tie things up! To compare the expression of single genes between different conditions (e.g. with or without PS depletion), an essential first step is to quantify the number of reads per gene, or more specifically the number of reads mapping to the exons of each gene.</p>
 
-<figure id="figure-1"><img src="../../images/transcriptomics_images/gene_counting.png" alt="Counting the number of reads per annotated gene. " width="981" height="142" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Counting the number of reads per annotated gene</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/gene_counting.png" alt="Counting the number of reads per annotated gene. " width="981" height="142" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Counting the number of reads per annotated gene</figcaption></figure>
 
 <p>For the final step of this tutorial we will use featureCounts to count the number of reads per annotated gene.</p>
 
@@ -1232,6 +1228,9 @@ displayed below with the different fields highlighted.</p>
                             Sofoklis Keisaris,  <b>RNA-seq Alignment with STAR (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-bash-star-align/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-bash-star-align/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -1253,12 +1252,12 @@ displayed below with the different fields highlighted.</p>
 
 <code id="citation-code">@misc{transcriptomics-rna-seq-bash-star-align,
 author = "Sofoklis Keisaris",
-title = "RNA-seq Alignment with STAR (Galaxy Training Materials)",
-year = "",
-month = "",
-day = ""
-url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-bash-star-align/tutorial.html}",
-note = "[Online; accessed TODAY]"
+	title = "RNA-seq Alignment with STAR (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-bash-star-align/tutorial.html}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},
@@ -1338,7 +1337,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c7c213be450c13d64551e41fbe653db4c1b2095c">c7c213b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/934378dc1320c18ab47ece07366423f8ed215f18">934378d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1370,7 +1369,7 @@ tools: []
 </footer>
 
         <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-        <script src="/training-material/assets/js/popper.min.js"></script>
+	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
         <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
         <script src="/training-material/assets/js/details-element-polyfill.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
