@@ -72,7 +72,7 @@ if(gtnThemeCurrentMonth === 1 && window.location.pathname === "/"){ // Just for 
 		setTheme("blm", true);
 	}
 }
-else if(gtnThemeCurrentMonth === 6 && window.location.pathname === "/"){ // Just for June
+else if(gtnThemeCurrentMonth === 5 && window.location.pathname === "/"){ // Just for June
 	// If the user hasn't chosen a theme
 	if(getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
 		setTheme("progress", true);
