@@ -76,10 +76,7 @@ module Jekyll
           end
 
           dimensions, actual_path = Gtn::Images.html_image_dimensions(tuto_dir, url)
-
           prefix = figcaption_prefix(page, site)
-          p [tuto_dir, url, actual_path] if actual_path =~ /svg/
-
           image = insert_image(url, alt, style, dimensions, actual_path)
 
           %(
