@@ -65,25 +65,27 @@ if(training_theme_cookie){
 // However we have some additional things:
 var gtnThemeCurrentDate = new Date();
 var gtnThemeCurrentMonth = gtnThemeCurrentDate.getMonth();
+// If we had automatically set the theme in the past, or never automatically set one before
+var gtnThemeIsAutomatic = (gtnLocalGet('training-theme-automatic') === "true" || gtnLocalGet('training-theme-automatic') === undefined)
+// If the user had manually chosen a theme, then gtnThemeIsAutomatic === false
 
-if(gtnThemeCurrentMonth === 1 && window.location.pathname === "/"){ // Just for February
-	// If the user hasn't chosen a theme
-	if(getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
+if(gtnThemeCurrentMonth === 1 && window.location.pathname === "/training-material/"){ // Just for February
+	// If the user hasn't manually chosen a theme
+	if(gtnThemeIsAutomatic || getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
 		setTheme("blm", true);
 	}
 }
-else if(gtnThemeCurrentMonth === 6 && window.location.pathname === "/"){ // Just for June
-	// If the user hasn't chosen a theme
-	if(getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
+else if(gtnThemeCurrentMonth === 5 && window.location.pathname === "/training-material/"){ // Just for June
+	// If the user hasn't manually chosen a theme
+	if(gtnThemeIsAutomatic || getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
 		setTheme("progress", true);
 	}
 }
 else { // Not one of the "special" months
-	// If we had automatically set the theme in the past, or never automatically set one before
-	if (gtnLocalGet('training-theme-automatic') === "true" || gtnLocalGet('training-theme-automatic') === undefined){
-		// Then we mark it as non-automatic
-		gtnLocalSet('training-theme-automatic', 'false');
+	if (gtnThemeIsAutomatic){
+		// Then we mark it as automatic
+		gtnLocalSet('training-theme-automatic', 'true');
 		// And set the theme back to default
-		setTheme("default", false);
+		setTheme("default", true);
 	}
 }
