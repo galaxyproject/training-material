@@ -13,7 +13,7 @@ key_points:
 - Generating tests is easy and something everyone should do.
 tags:
 - ro-crate
-priority: 1
+priority: 3
 contributions:
   authorship:
     - simleo

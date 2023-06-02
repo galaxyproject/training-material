@@ -79,6 +79,16 @@ $tutorial-box-spacing: 1rem;
 /* THEMES */
 @import "./themes.scss";
 
+/* Other CSS libraries we use */
+// If you use .css (i.e. from the file extension) it will use a CSS import
+// which triggers multiple requests.
+@import "./academicons";
+@import "./bootstrap.min";
+@import "./bootstrap-toc.min";
+@import "./leaflet-1.9.3";
+@import "../fontawesome/css/all.min";
+
+
 // palette
 // These remain SASS variables because they're used in mixins.
 // Boxes
@@ -220,6 +230,28 @@ img {
     margin: 2.5%;
 }
 
+div.main-content {
+	img {
+		height: auto;
+		width: auto;
+	}
+}
+
+figure {
+  text-align: center;
+  margin: 1rem 2rem;
+
+  & > img {
+      margin-bottom: 1rem;
+      height: auto;
+  }
+
+  figcaption {
+    text-align: justify;
+  }
+}
+
+
 :not(pre) > code {
     color: var(--code-foreground);
     background: var(--code-background);
@@ -255,20 +287,6 @@ div.language-diff .p {
 	margin-right: 1em;
 	padding-left: 1em;
 	padding-right: 1em;
-}
-
-figure {
-  text-align: center;
-  margin: 1rem 2rem;
-
-  & > img {
-      margin-bottom: 1rem;
-      height: auto;
-  }
-
-  figcaption {
-    text-align: justify;
-  }
 }
 
 footer {
@@ -971,7 +989,8 @@ nav[data-toggle='toc'] {
     flex-shrink: 0;
 
     img {
-        height: 1em;
+	height: 2em !important;
+	width: 2em !important;
         border-radius: 50%;
         margin: 0 0.25em 0 0;
     }
@@ -1459,3 +1478,4 @@ a[target="_blank"]::after {
 #git-gat-timeline span {
     align-self: center;
 }
+

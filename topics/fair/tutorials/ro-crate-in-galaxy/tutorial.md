@@ -16,7 +16,7 @@ key_points:
 tags:
 - ro-crate
 - workflows
-priority: 1
+priority: 2
 contributions:
   authorship:
     - pauldg
