@@ -69,13 +69,13 @@ var gtnThemeCurrentMonth = gtnThemeCurrentDate.getMonth();
 var gtnThemeIsAutomatic = (gtnLocalGet('training-theme-automatic') === "true" || gtnLocalGet('training-theme-automatic') === undefined)
 // If the user had manually chosen a theme, then gtnThemeIsAutomatic === false
 
-if(gtnThemeCurrentMonth === 1 && window.location.pathname === "/"){ // Just for February
+if(gtnThemeCurrentMonth === 1 && window.location.pathname === "/training-material/"){ // Just for February
 	// If the user hasn't manually chosen a theme
 	if(gtnThemeIsAutomatic || getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
 		setTheme("blm", true);
 	}
 }
-else if(gtnThemeCurrentMonth === 5 && window.location.pathname === "/"){ // Just for June
+else if(gtnThemeCurrentMonth === 5 && window.location.pathname === "/training-material/"){ // Just for June
 	// If the user hasn't manually chosen a theme
 	if(gtnThemeIsAutomatic || getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
 		setTheme("progress", true);
