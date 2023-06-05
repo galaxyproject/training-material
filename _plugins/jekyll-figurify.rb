@@ -40,7 +40,7 @@ module Jekyll
 
         %(
           <div style="overflow-x: auto">
-          <object data="#{url}" #{style} type="image/svg+xml">
+          <object data="#{url}" #{style} type="image/svg+xml" alt="#{alt}">
             #{fallback}
             #{alt}
           </object>
