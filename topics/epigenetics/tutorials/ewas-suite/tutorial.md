@@ -1,7 +1,9 @@
 ---
 layout: tutorial_hands_on
-
 title: "Infinium Human Methylation BeadChip"
+abbreviations:
+  EWAS: Epigenome-Wide Association Studies
+  SNP: Single Nucleotide Polymorphism
 zenodo_link: "https://zenodo.org/record/1251211#.WwREQ1Mvz-Y"
 questions:
   - "Which DNA regions and positions are diffrentialy methylated in pre MAPKi treatment and post MAPKi resistance Melanomas GSE65183?"
@@ -13,9 +15,12 @@ objectives:
 key_points:
 - "Infinium Human Methylation BeadChip is an array based technology to generate DNA methylation profiling at individual CpG loci in the human genome based on Illumina’s bead technology."
 - "Time and cost efficiency followed by high sample output, and overall quantitative accuracy and reproducibility made Infinium Human Methylation BeadChip one of the most widely used arrays on the market."
-contributors:
-  - kkamieniecka
-  - poterlowicz-lab
+contributions:
+  authorship:
+    - kkamieniecka
+    - poterlowicz-lab
+  editing:
+    - khaled196
 ---
 > <agenda-title></agenda-title>
 > In this tutorial we will do:
