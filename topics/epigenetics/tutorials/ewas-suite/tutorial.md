@@ -93,7 +93,7 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Run **Infinium Human Methylation BeadChip** {% icon tool %} with the following parameters:
+> 3. Run {% tool [Infinium Human Methylation BeadChip](toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0) %} with the following parameters:
 >    - {% icon param-files %} *"red channel files"*: all files ending in `_Red`
 >    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
 > ![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png)
@@ -118,7 +118,7 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 
 # Differentially methylated regions and positions analysis
 
-The main goal of the **Infinium Human Methylation BeadChip** analysis is to simplify the way differentially methylated loci sites are detected. The **Infinium Human Methylation BeadChip** pipeline contains differentially methylated positions (DMPs) detection with respect to a phenotype covariate, and more complex solutions for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
+The main goal of the {% tool [Infinium Human Methylation BeadChip](toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0) %} analysis is to simplify the way differentially methylated loci sites are detected. The {% tool [Infinium Human Methylation BeadChip](toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0) %} pipeline contains differentially methylated positions (DMPs) detection with respect to a phenotype covariate, and more complex solutions for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
 > <comment-title>Phenotype table</comment-title>
 > Phenotype table can be in different sizes with different arguments, however the second column is required to contain phenotype covariate information for each sample.
 {: .comment}
@@ -127,7 +127,7 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 
 > <hands-on-title>Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or data library:</hands-on-title>
 >    ```
->    https://zenodo.org/record/1251211/files/phenotypeTable.txt
+> https://zenodo.org/record/1251211/files/phenotypeTable.txt
 >    ```
 > ![pheno table](../../images/3parameters.png)
 > Set the following parameters:
@@ -152,7 +152,7 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 >    - *"Variance Shrinkage"*:` TRUE`
 > Default TRUE as it is recommended when sample sizes are small <10
 >    - *"Genome Table"*: `wgEncodeHaibMethyl450 ... `
-> Click on `UCSC Main` {% icon tool %}. You will be taken to the **UCSC table browser**
+> Click on {% tool UCSC Main %}. You will be taken to the **UCSC table browser**
 > ![UCSC](../../images/5UCSC.png "UCSC")
 > Set the following options:
 >     - *"clade"*: `Mammal`
@@ -191,8 +191,8 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 In addition to downstream analysis users can annotate the differentially methylated loci at the promoter regions of genes with gene function descriptions, and relationships between these concepts.
 
 > <hands-on-title> Annotate Differentially Methylated Position</hands-on-title>
-> 1. Run **chipeakanno annopeaks** {% icon tool %}on the output of minfi_dmp with the following parameters
->   - {% icon param-file %} *"Differentialy methylated data"*: output of **minfi dmp** {% icon tool %}
+> 1. Run {% tool [chipeakanno annopeaks](https://toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks) %} on the output of {% tool [Infinium Human Methylation BeadChip](toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0) %} with the following parameters
+>   - {% icon param-file %} *"Differentialy methylated data"*: output of {% tool [Infinium Human Methylation BeadChip](toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0) %}
 >   - *"bindingType"*: `StartSite`
 >   - *"bindingRegionStart"*:`-5000`
 >   - *"bindingRegionEnd"*:`3000`
@@ -200,20 +200,20 @@ In addition to downstream analysis users can annotate the differentially methyla
 >
 >        Position of column of score optional value if it is required
 >
-> 2. **Cut** {% icon tool %} on the previous output adjusting the following parameters to cut "gene_name" column from table of annotated peaks and then get a list of genes
+> 2. {% tool Cut %} on the previous output adjusting the following parameters to cut "gene_name" column from table of annotated peaks and then get a list of genes
 >   - *"Cut columns"*: `c16`hhh
 >   - *"Delimited by"*: `Tab`
->   - {% icon param-file %} *"From"*: output of **chipeakanno annopeaks** {% icon tool %}
+>   - {% icon param-file %} *"From"*: output of {% tool [chipeakanno annopeaks](https://toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks) %}
 >
-> 3. **Remove beginning** {% icon tool %} of `Gene List` with the following parameters
+> 3. {% Remove beginning %} of `Gene List` with the following parameters
 >   - *"Remove first"*: `1`
->   - {% icon param-file %} *"from"*: output of **Cut** {% icon tool %}
+>   - {% icon param-file %} *"from"*: output of {% tool Cut %} 
 >
-> 4. Run  **clusterProfiler bitr** {% icon tool %} on the previous output adjusting the following parameters to convert the list of genes to list of entrez ID
+> 4. Run  {% tool [clusterProfiler bitr](https://toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr) %} on the previous output adjusting the following parameters to convert the list of genes to list of entrez ID
 >   - *"Input Type Gene ID"*: `SYMBOL`
 >   - *"Output Type Gene ID"*: `ENTREZID`
 >
-> 5. Use the output of the  clusterProfiler bitr {% icon tool %} to run a GO Enrichment Analysis using **clusterProfiler go**
+> 5. Use the output of the  {% tool [clusterProfiler bitr](https://toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr) %} to run a GO Enrichment Analysis using {% tool [clusterProfiler go](https://toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_go) %}
 {: .hands_on}
 
 ![Functional annotations](../../images/funcann.jpg "Results of GO enrichments analysis for DMPs")
