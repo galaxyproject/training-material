@@ -20,7 +20,7 @@ contributions:
     - kkamieniecka
     - poterlowicz-lab
   editing:
-    - khaled196
+    - Khaled196
 
 ---
 > <agenda-title></agenda-title>
