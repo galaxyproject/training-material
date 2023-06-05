@@ -211,7 +211,7 @@ In addition to downstream analysis users can annotate the differentially methyla
 >   - *"Delimited by"*: `Tab`
 >   - {% icon param-file %} *"From"*: output of {% tool [chipeakanno annopeaks](https://toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks) %}
 >
-> 3. {% Remove beginning %} of `Gene List` with the following parameters
+> 3. {% tool Remove beginning %} of `Gene List` with the following parameters
 >   - *"Remove first"*: `1`
 >   - {% icon param-file %} *"from"*: output of {% tool Cut %} 
 >
