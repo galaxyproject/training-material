@@ -621,7 +621,7 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 
 > <hands-on-title>Import data with IsoformSwitchAnalyzeR </hands-on-title>
 >
-> 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy3) %} with the following parameters:
+> 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5) %} with the following parameters:
 >    - *"Tool function mode"*: `Import data`
 >        - In *"1: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Cancer`
@@ -669,7 +669,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 
 > <hands-on-title>IsoformSwitchAnalyzeR pre-processing step</hands-on-title>
 >
-> 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy3) %} with the following parameters:
+> 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5) %} with the following parameters:
 >    - *"Tool function mode"*: `Analysis part one: Extract isoform switches and their sequences`
 >        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `SwitchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >   - In *"Sequence extraction parameters"*:
@@ -803,7 +803,7 @@ The gene-specific mode is interesting for those experimental designs which aim t
 
 > <hands-on-title>Gene-specific isoform switching analysis</hands-on-title>
 >
-> 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0) %} with the following parameters:
+> 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5) %} with the following parameters:
 >    - *"Tool function mode"*: `Analysis part two: Plot all isoform switches and their annotation`
 >        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %} part 1)
 >        - *"Analysis mode"*: `Analyze specific gene`
@@ -891,7 +891,7 @@ A genome-wide analysis is both useful for getting an overview of the extent of {
 
 > <hands-on-title>Isoform switch analysis</hands-on-title>
 >
-> 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy3) %} with the following parameters:
+> 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5) %} with the following parameters:
 >    - *"Tool function mode"*: `Analysis part two: Plot all isoform switches and their annotation`
 >        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %} part 1)
 >        - *"Analysis mode"*: `Full analysis`
