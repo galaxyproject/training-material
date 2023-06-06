@@ -208,9 +208,6 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 >        - {% icon param-collection %} *"Select paired collection(s)"*: `All samples`
 >        - In *"Global trimming options"*:
 >            - *"Trim front for input 1"*: `10`
->    - In *"Overrepresented Sequence Analysis"*:
->        - *"Enable overrepresented analysis"*: `Yes`
->        - *"Overrepresentation sampling"*: `50`
 >    - In *"Filter Options"*:
 >        - In *"Quality filtering options"*:
 >            - *"Qualified quality phred"*: `20`
@@ -242,8 +239,6 @@ In that section makes use of three main tools: **RNA STAR**, considered a state-
 >
 {: .details}
 
-
-
 The choice of **RNA STAR** as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use **GMAP** as alignment tool ({% cite Krianovi2017 %}).
 
 > <comment-title>Intron spanning in RNA-seq analysis</comment-title>
@@ -252,7 +247,41 @@ The choice of **RNA STAR** as mapper is also determined by the sequencing techno
 >
 {: .comment}
 
-So, let's perform the mapping step.
+Before running **RNA STAR** we are going to two parameters that will be used during the mapping step, and that will allow us to tune the assembly according the genome characristics: the **minimum and the maximum intron sizes**. **RNA STAR** default configuration is optimized for mammalia genomes, so if you plan to work with a different taxa, this step is important.
+
+> <hands-on-title>Inference of intron size </hands-on-title>
+>
+> 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} with the following parameters:
+>    - {% icon param-file %} *"GTF File to convert"*: `GRCh38.p13.chrom5.gtf`
+>    - *"Advanced options"*: `Set advanced options`
+>        - *"Ignore groups without exons"*: `Yes`
+>
+> 2. Rename the output as `BED12 annotation`
+>
+> 3. {% tool [Gene BED To Exon/Intron/Codon BED](gene2exon1) %} with the following parameters:
+>    - *"Extract"*: `Introns`
+>        - {% icon param-file %} *"from"*: `BED12 annotation`
+>
+> 4. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
+>   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
+>   - "*AWK Program*": `{print $4,$3-$2}`
+>
+> 5. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
+>   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
+>   - "*AWK Program*": `{if (min == "") min=$2 ; else if ($2 &lt; min) min=$2}END{print min}`
+>
+> 6. Rename the output as `Minimum intron size`
+>
+> 7. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
+>   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
+>   - "*AWK Program*": `{if (max == "") max=$2 ; else if ($2 &gt; max) max=$2}END{print max}`
+>
+> 8. Rename the output as `Maximum intron size`
+>
+{: .hands_on}
+
+
+Now we can perform the mapping step.
 
 > <hands-on-title> Generate intermediate file with RNA STAR</hands-on-title>
 >
@@ -263,6 +292,13 @@ So, let's perform the mapping step.
 >        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `GRCh38.p13.chrom5.gtf`
+>            - *"Length of the genomic sequence around annotated junctions*": `150`
+>    - In *"Algorithmic settings"*:
+>        - *"Configure seed, alignment and limits options*": `Extended parameter list`
+>            -  In *"Alignment parameters"*:
+>                - *"Minimum intron size*": `14` (value of the `Minimium intron size file`)
+>                - *"Maximum intron size*": `772519` (value of the `Maximum intron size file`)
+>
 >
 {: .hands_on}
 
@@ -304,6 +340,12 @@ Finally, we will re-run **RNA STAR** in order to integrate the information about
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `GRCh38.p13.chrom5.gtf`
 >    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, I want to use multi-sample 2-pass mapping and I have obtained splice junctions database of all samples throught previous 1-pass runs of STAR`
 >       - {% icon param-file %} *"Pregenerated splice junctions datasets of your samples"*: `Splicing database`
+>            - *"Length of the genomic sequence around annotated junctions*": `150`
+>    - In *"Algorithmic settings"*:
+>        - *"Configure seed, alignment and limits options*": `Extended parameter list`
+>            -  In *"Alignment parameters"*:
+>                - *"Minimum intron size*": `14` (value of the `Minimium intron size file`)
+>                - *"Maximum intron size*": `772519` (value of the `Maximum intron size file`)
 >    - *"Compute coverage"*: `Yes in bedgraph format`
 >       - *"Generate a coverage for each strand (stranded coverage)"*: `No`
 >
@@ -318,18 +360,7 @@ Before moving to the transcriptome assembly and quantification step, we are goin
 
 RNA-seq-specific quality control metrics, such as sequencing depth, read distribution and coverage uniformity, are essential to ensure that the RNA-seq data are adequate for transcriptome reconstruction and {AS} analysis. For example, the use of RNA-seq with unsaturated sequencing depth gives imprecise estimations  and fails to detect low abundance splice junctions, limiting the precision of many analyses ({% cite Wang2012 %}).
 
-In this section we will make use of of the **RSeQC** toolkit in order to generate the RNA-seq-specific quality control metrics. But before starting, we need to convert the annotation GTF file into BED12 format, which will be required in subsequent steps.
-
-> <hands-on-title>GTF to BED12 GTF conversion</hands-on-title>
->
-> 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} with the following parameters:
->    - {% icon param-file %} *"GTF File to convert"*: `GRCh38.p13.chrom5.gtf`
->    - *"Advanced options"*: `Set advanced options`
->        - *"Ignore groups without exons"*: `Yes`
->
-> 2. Rename the output as `BED12 annotation`
->
-{: .hands_on}
+In this section we will make use of of the **RSeQC** toolkit in order to generate the RNA-seq-specific quality control metrics.
 
 We are going to use the following RSeQC modules:
 
@@ -455,7 +486,11 @@ Finally from the the Inner Distance plot (fig. 10), we can infer some additional
 
 After evaluating the quality of the RNA-seq data, we can start with the transcriptome assembly step.
 
-# Transcriptome assembly and quantification
+# Transcriptome assembly, quantification and evaluation
+
+Once the mapping is done, in this section we will use the information contained in the BAM files to carry out the assembly of the transcriptomes, as well as the quantification of the transcripts. In addition, we will evaluate the transcriptome assemblies quality.
+
+## Reference-based transcriptome assembly and quantification with **Stringtie**
 
 **StringTie** is a fast and highly efficient assembler of RNA-seq alignments into potential transcripts. It uses a network flow algorithm to reconstruct transcripts and quantitate them simultaneously. This algorithm is combined with an assembly method to merge read pairs into full fragments in the initial phase ({% cite Kovaka2019 %}, {% cite Pertea2015 %}).
 
@@ -467,11 +502,9 @@ After evaluating the quality of the RNA-seq data, we can start with the transcri
 >
 > **StringTie** uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate < 0.5%, then **StringTie** requires 25% more reads than usual to support that particular spliced alignment. In addition, if a spliced read spans a very long intron, **StringTie** accepts that alignment only if a larger anchor of 25 bp is present on both sides of the splice site. Here the term *anchor* refers to the portion of the read aligned within the exon beginning at the exon-intron boundary ({% cite Kovaka2019 %}).
 >
->
 {: .comment}
 
 The main reason underlying the greater accuracy of **StringTie** most likely derives from its optimization criteria. By balancing the coverage of each transcript across each assembly, it incorporates depth of coverage constraints into the assembly algorithm itself ({% cite Pertea2015 %}).
-
 
 > <details-title>StringTie long RNA-seq assembly</details-title>
 >
@@ -501,19 +534,28 @@ Then, let's start with the transcriptome assemby.
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `GRCh38.p13.chrom5.gtf`
 >        - *"Use Reference transcripts only?"*: `No`
 >
-> 2. {% tool [StringTie merge](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.1+galaxy1) with the following parameters:
+> 2. Rename the generated collection as `Assembled transcripts coordinates`
+>
+> 3. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file "*: `Assembled transcripts`
+>    - *"Reference Genome"*: `From your history`
+>       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
+>       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
+>
+> 4. Rename the collection as `Assembled transcripts sequences`
+>
+> 5. {% tool [StringTie merge](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.1+galaxy1) with the following parameters:
 >    - {% icon param-collection %} *"Transcripts"*: `Assembled transcripts` (output of **StringTie**)
 >    - {% icon param-file %} *"Reference annotation to include in the merging"*: `GRCh38.p13.chrom5.gtf`
 >
-> 3. Rename the output as `StringTie annotation`
+> 6. Rename the output as `StringTie reference transcriptome annotation`
 {: .hands_on}
-
 
 Now, we can perform the transcriptome quantification in a more accurate way by making use of the new transcriptome annotation.
 
 > <hands-on-title>Isoform quantification with StringTie</hands-on-title>
 >
-> 4. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
+> 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
 >        - {% icon param-collection %} *"Input short mapped reads"*: `Mapped collection`
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
@@ -521,6 +563,8 @@ Now, we can perform the transcriptome quantification in a more accurate way by m
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `StringTie annotation`
 >        - *"Use Reference transcripts only?"*: `Yes`
 >        - *"Output files for differential expression?"*: `Ballgown`
+>
+> 2. Rename the collection `StringTie on data X: transcript-level expression measurements` as `All transcriptomes quantification`
 >
 {: .hands_on}
 
@@ -542,19 +586,58 @@ Now, we can perform the transcriptome quantification in a more accurate way by m
 >
 {: .details}
 
-Before starting with the analysis of the isoforms, we will extract the transcript sequences from the annotation generated by **StringTie merge**. This output will be used in the next section.
+Before starting with the analysis of the isoforms, we will generate a FASTA file that will be used in the next step: the reference transcriptome. This output will be used in the next section.
 
-> <hands-on-title>Extract transcriptome</hands-on-title>
+> <hands-on-title>Extract reference transcriptome</hands-on-title>
 >
 > 1. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file "*: `StringTie annotation`
+>    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file "*: `StringTie reference transcriptome annotation`
 >    - *"Reference Genome"*: `From your history`
 >       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
 >       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
 >
-> 2. Rename the output as `StringTie transcriptome`
+> 2. Rename the output as `StringTie reference transcriptome sequences`
 >
 {: .hands_on}
+
+## Transcriptome quality evaluation with **rnaQUAST**
+
+To assess the quality of assembled transcripts, we are going to use **rnaQUAST**, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. In addition, it will allow us to identify misassembled transcriptomes, ensuring higher data quality for downstream analyses ({% cite Bushmanova2016 %}).
+
+rnaQUAST generates several metrics to evaluate the quality of transcriptome assemblies, such as:
+
+- **Isoform metrics**: Aligned transcripts are compared to the gene database and calculates metrics such as sensitivity, specificity, and precision. These metrics assess how well the assembled transcripts match the known gene isoforms, indicating the completeness and correctness of the assembly.
+- **Exon metrics**: It calculates metrics such as the number of correctly predicted exons, missed exons, and falsely predicted exons. These metrics provide insights into the accuracy of exon prediction.
+- **Gene coverage by raw reads**: This metric indicates the extent to which the expression of genes in the dataset is captured by the assembled transcriptome.
+- **BUSCO score**: This metric represents the completeness of the assembly based on conserved orthologs.
+
+> <hands-on-title>Transcriptome evaluation</hands-on-title>
+>
+> 1. {% tool [rnaQUAST](toolshed.g2.bx.psu.edu/repos/iuc/rnaquast/rna_quast/2.2.1) %} with the following parameters:
+>    - {% icon param-collection %} *"Transcripts"*: `Assembled transcripts sequences`
+>    - {% icon param-files %} *"Reference genome"*: `Assembled transcripts sequences`
+>    - *"Genome annotation"*: `Enabled`
+>       - {% icon param-files %} *"GTF/GFF"*: `Assembled transcripts sequences`
+>    - *"Disable infer genes"*: `Yes`
+>    - *"Disable infer transcripts"*: `Yes`
+>    - {% icon param-file %} *"Aligned reads to reference genome"*: `Assembled transcripts sequences`
+>    - *"Run BUSCO"*: `Enabled`
+>       - *"Lineage data source"*: `Download lineage data`
+>       - *"Lineage"*: `Vertebrata`
+>
+{: .hands_on}
+
+Let's have a look at the plots:
+
+<!-- Explanations are missing-->
+
+![Figure X. rnaQUAST cummulative isoform](../../images/differential_isoform/rnaQUAST_cumulative_isoform.png "rnaQUAST cummulative isoform.")
+
+![Figure X. rnaQUAST cumulativesubstitutions](../../images/differential_isoform/rnaQUAST_cumulative_substitutions.png "rnaQUAST cumulativesubstitutions.")
+
+![Figure X. rnaQUAST NAx](../../images/differential_isoform/rnaQUAST_NAx.png "rnaQUAST NAx.")
+
+![Figure X. rnaQUAST cumulative transcript](../../images/differential_isoform/rnaQUAT_cumulative_transcrit.png "rnaQUAST cumulative transcript.")
 
 # Isoform switching analysis 
 
@@ -591,7 +674,7 @@ We will generate 2 collections from the Stringtie output, one with the cancer sa
 > <hands-on-title> Split collection</hands-on-title>
 >
 > 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
->    - *"Dataset collection"*: `StringTie on collection N: transcript-level expression measurements`
+>    - *"Dataset collection"*: `All transcriptomes quantification`
 >
 > 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
 >    - *"Select lines from"*: `Extract element identifiers on data N` (output of  **Extract element identifiers** {% icon tool %})
@@ -603,7 +686,7 @@ We will generate 2 collections from the Stringtie output, one with the cancer sa
 >    - *"How should the elements to remove be determined"*: `Remove if identifiers are ABSENT from file`
 >        - *"Filter out identifiers absent from"*: `Search in textfiles on data N` (output of  **Search in textfiles** {% icon tool %})
 >
-> 4. Rename both collections `Transcripts Health` and `Transcripts Cancer`.
+> 4. Rename both collections `Health transcriptomes quantification` (the filtered collection) and `Health transcriptomes quantification` (the discarted collection).
 >
 {: .hands_on}
 
@@ -632,7 +715,7 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >            - From *"Analysis mode"*:
 >              - {% icon param-file %} *"Annotation generated by StringTie merge"*: `StringTie annotation`
 >        - {% icon param-file %} *"Genome annotation (GTF)"*: `GRCh38.p13.chrom5.gtf`
->        - {% icon param-file %} *"Transcriptome"*: `StringTie transcriptome`
+>        - {% icon param-file %} *"Transcriptome"*: `StringTie reference transcriptome sequences`
 >        - *"Remove non-conventional chromosomes"*: `Yes`
 >
 {: .hands_on}
