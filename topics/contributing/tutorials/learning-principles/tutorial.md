@@ -117,16 +117,15 @@ We can use metaphors to shape and reveal our way of thinking about learning and,
 
 How the mind-as-a-vessel-to-be-filled metaphor may affect your way of teaching? You are likely to spend your time in the class at the blackboard, trying to 'transmit' to the students your own knowledge.
 
-{% include _includes/quiz.html id="learning_metaphors.yaml" %}
+<!--{% include _includes/quiz.html id="learning_metaphors.yaml" %}-->
 
-<!-- 
-> <hands-on-title>Challenge- *⏰ 5 min*</hands-on-title>
+
+> <hands-on-title>Learning metaphors - *{% icon time %} 5 min*</hands-on-title>
 >
-> - Think about the following metaphors:
->	* A mind is a fire to be kindled
->	* Teaching is growing a garden
-> - Write on the shared notes how these metaphors may affect your way of teaching
-{: .hands_on}-->
+> 1. Think about the following metaphors "A mind is a fire to be kindled". How this metaphors may affect your way of teaching?
+> 2. Think about the following metaphors "Teaching is growing a garden". How this metaphors may affect your way of teaching?
+>
+{: .hands_on}
 
 
 ## Metaphors define the role of the teacher and the learners
@@ -197,7 +196,7 @@ The distinction is rough and inexact, but a good place to begin. Let’s conside
 {: .details}
 
 
-> <hands-on-title>How do you go about learning something new? / How do you approach learning new things? - *⏰ 5 min*</hands-on-title>
+> <hands-on-title>How do you go about learning something new? / How do you approach learning new things? - *{% icon time %} 5 min*</hands-on-title>
 >
 > - Order the following approaches (from the most to the less effective one) for you when you want to learn something new
 >	* Read about it
@@ -274,40 +273,40 @@ In a simple model from cognitive science (quite involved in constructivism), lea
 5. Long term: slow
 	* How much effort to remember a full poem-->
 
-<!-- 
-> <hands-on-title>How short is your short term memory? - *⏰ 10 min*</hands-on-title>
+ 
+> <hands-on-title>How short is your short term memory? - *{% icon time %} 10 min*</hands-on-title>
 >
 > Based on {% cite Willingham2009 %}.
 >
 > 1. Read the following letter combination:
->    > ### Hide
+>  
+>    > <solution-title>Hide</solution-title>
 >    >
 >    >    ```APH D BDN A CKG B DCI A```
 >    >
 >    {: .solution}
 >
-> 2. Hide them after 10 secondes
-> 3. Take a piece of paper
-> 4. Write how many consecutive letters you can remember
-> 5. Unhide them after 2 minutes
-> 6. Thnik how can we take advantage of this model?
-> 7. Now read the following letter combination
->    > ### Hide
+>   1. Hide them after 10 seconds
+>   2. Take a piece of paper and write what you remember
+>   3. Unhide them after 2 minutes
+>   4. Check how many consecutive letters you can remember
+>
+> 2. Read the following letter combination
+>
+>    > <solution-title>Hide</solution-title>
 >    >
 >    >    ```A   PHD   B   DNA   C   KGB   D   CIA```
 >    >
 >    {: .solution}
 >
-> 8. Hide them after 2 minutes
-> 9. Take a piece of paper
-> 10. Write how many consecutive letters you can remember
-> 11. Unhide them after 2 minutes
+>   1. Hide them after 10 seconds
+>   2. Take a piece of paper and write what you remember
+>   3. Unhide them after 2 minutes
+>   4. Check how many consecutive letters you can remember
 >
-> The amount of space in working memory does not depend on the number of letters.
-> It depends on the **number of meaningful objects**.
-{: .hands_on} -->
+{: .hands_on}
 
-{% include _includes/quiz.html id="short_term_memory.yaml" %}
+<!--{% include _includes/quiz.html id="short_term_memory.yaml" %}-->
 
 The amount of space in working memory does not depend on the number of letters. It depends on the **number of meaningful objects**. In the 2nd round, the meaning of the words (long-term memory) or connecting words with a story helps to remember. It make room in working memory.
 
@@ -315,14 +314,14 @@ To facilitate learning, we as instructors have to make room in working memory.
 
 ### What can we do to make room in working memory?
 
-{% include _includes/quiz.html id="short_term_memory.yaml" %}
+<!--{% include _includes/quiz.html id="short_term_memory.yaml" %}-->
 
-<!-- 
-> <hands-on-title>How can you avoid to overload learners working memory?  - *⏰ 5 min - Groups of 2/3 persons*</hands-on-title>
+
+> <hands-on-title>How can you avoid to overload learners working memory?  - *{% icon details %} 5 min - Groups of 2/3 persons*</hands-on-title>
 >
-> - Discuss one thing a teacher could do to avoid overloading their students' working memory.
+> - Discuss one thing a teacher could do to avoid overloading their students' working memory
 > - Write your proposal in the shared notes
-{: .hands_on} -->
+{: .hands_on} 
 
 What can we do to make room in working memory?
 * Chunking
@@ -345,7 +344,7 @@ There are 3 cognitive loads recognized by cognitive science:
 
 Split-attention occurs when learners are required to **split their attention** between **at least two sources of information** that have been separated either spatially or temporally
 
-> <hands-on-title>Extraneous cognitive load - *⏰ 10 min - Groups of 2/3 persons*</hands-on-title>
+> <hands-on-title>Extraneous cognitive load - *{% icon time %} 10 min - Groups of 2/3 persons*</hands-on-title>
 >
 > * Pick one task you teach in your lessons/courses
 > * Think and discuss within the room about the following questions
@@ -461,7 +460,7 @@ Dreyfuss model for skill acquisition | Differences between novices and experts. 
 
 
 <!-- 
-> <hands-on-title>What is learning in your opinion/experience? How does learning occur? - *⏰ 5 min*</hands-on-title>
+> <hands-on-title>What is learning in your opinion/experience? How does learning occur? - *{% icon time %} 5 min*</hands-on-title>
 >
 > _Break-out_ room (2 ppl per room)
 >
@@ -512,7 +511,7 @@ Our learning model is based on such evidence-based learning principles and strat
 
     Concept maps are examples of a retrieval practice when you bring out knowledge/memories from long-term memory
 
-> <hands-on-title>How do you understand the 6 strategies for effective learning? - *⏰ 15 min - Groups of 2 persons*</hands-on-title>
+> <hands-on-title>How do you understand the 6 strategies for effective learning? - *{% icon time %} 15 min - Groups of 2 persons*</hands-on-title>
 >
 > - Pick up one strategy per group
 > - Discuss about the strategy
@@ -568,7 +567,7 @@ From ["How Learning works"](https://www.academia.edu/6743627/How_Learning_Works_
     - apply strategies to monitor their performance, while making adjustments to the selected approach.
 
 <!-- 
-> <hands-on-title>How do you understand the 7 principles of learning?  (15 min - Groups of 2/3 persons)</hands-on-title>
+> <hands-on-title>How do you understand the 7 principles of learning?  - *{% icon time %} 15 min - Groups of 2/3 person*</hands-on-title>
 >
 > * Read and reflect together the principles
 > * Pick one principle that is not (fully) clear to you
@@ -579,6 +578,12 @@ From ["How Learning works"](https://www.academia.edu/6743627/How_Learning_Works_
 # Teaching or training?
 
 {% include _includes/quiz.html id="teaching_or_training.yaml" %}
+
+> <hands-on-title>Teaching or training?  - *{% icon time %} 15 min*</hands-on-title>
+>
+> * Based on your experience, what are the differences between teaching and training?
+> * Write your reflexions in the shared notes
+{: .hands_on}
 
 ![A cartoon showing one of the differences between teaching and training. One the left side, the teacher is showing the information on a blackboards - in training, the instructor is showing, in practice, how this can be applied.](./images/teachingVStraining.png "A cartoon showing one of the differences between teaching and training. Source: [Open Science Training Handbook](https://www.fosteropenscience.eu/content/open-science-training-handbook)")
 

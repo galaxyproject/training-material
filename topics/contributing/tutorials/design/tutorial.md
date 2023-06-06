@@ -145,7 +145,7 @@ used to inform the design of effective courses.
 >
 {: .comment}
 
-> <hands-on-title>Select a topic for a 3 minute training - _⏰ 1 min - Silent reflection_</hands-on-title>
+> <hands-on-title>Select a topic for a 3 minute training - _{% icon time %} 1 min - Silent reflection_</hands-on-title>
 >
 > - Choose a topic for a 3 minutes training related to Galaxy
 >
@@ -220,7 +220,7 @@ and courses.
 >
 {: .comment}
 
-> <hands-on-title>Define audience and teaching goal - _⏰ 10 min - Silent reflection_</hands-on-title>
+> <hands-on-title>Define audience and teaching goal - _{% icon time %} 10 min - Silent reflection_</hands-on-title>
 >
 > 1. Take the topic you chose before
 > 2. Define teaching objectives
@@ -429,24 +429,32 @@ In order to write learning outcomes, you can use the following scheme:
 
 Identify observable and non observable actions (verbs)
 
-<!--
-> <hands-on-title>Identify observable and non observable actions (verbs) - *⏰ 3 min*</hands-on-title>
+> <hands-on-title>Identify observable and non observable actions (verbs) - *{% icon time %} 3 min*</hands-on-title>
 >
-> Here is a list of verbs: Compare, classify, distinguish, explain, believe, give examples of, define, learn, describe, list, recognize, know, connect, measure, identify, have faith in
+> Here is a list of verbs:
+> - Compare
+> - Classify
+> - Distinguish
+> - Explain
+> - Believe
+> - Give examples of
+> - Define
+> - Learn
+> - Describe
+> - List
+> - Recognize
+> - Know
+> - Connect
+> - Measure
+> - Identify
+> - Have faith in
+>
 > * Write in the shared notes which ones describe observable actions
 > * Write in the shared notes which ones are instead open to multiple interpretation
 >
->   > <tip-title>Requirements</tip-title>
->   > In classifying verbs, it may help to focus on how you would assess the corresponding action / behaviour.
->   > Example: "identify"
->   > - Q: What would I do to assess whether a learner is able to identify something?
->   > - A: Ask them to do this challenge.
->   {: .tip}
->
-> Good example of feedback: We will stress the importance of feedback on last day
-{: .hands_on}-->
+{: .hands_on}
 
-{% include _includes/quiz.html id="verbs.yaml" %}
+<!--{% include _includes/quiz.html id="verbs.yaml" %}-->
 
 > <tip-title>Observable and non observable actions (verbs)</tip-title>
 >
@@ -528,7 +536,7 @@ below.
 
 <!-- NILOA five principles for articulating LOs -->
 
-> <hands-on-title>Learning outcomes - _⏰ 2 min - Silent working_</hands-on-title>
+> <hands-on-title>Learning outcomes - _{% icon time %} 2 min - Silent working_</hands-on-title>
 >
 > 1. Take the small lesson you selected at the beginning
 > 2. Try to jot a few LOs down
@@ -546,24 +554,30 @@ outcomes.
 
 {% include _includes/quiz.html id="evaluate_learning_outcomes.yaml" %}
 
-> <solution-title>Evaluate Learning outcomes - Solution</solution-title>
+> <question-title>Evaluate LOs</question-title>
 >
-> "By the end of the course learners will know the Pythagora's theorem"
+> "By the end of the course learners will know the Pythagora's theorem
+> 
+> What do you think about this LO?
 >
->  This LO is not good:
->
-> - How to assess whether learners know the Pythagora's theorem?
-> - What do we mean by "knowing" the Pythagorean theorem?
->   - They are able state it?
->   - They are able explain it?
->   - They are able apply it?
->   - They are able demonstrate it?
->   - They are able to use it in solving problem?
->
-> It would make more sense to ask: "What will learners be able to do to show
-> they know the Pythagorean theorem?"
->
-{: .solution}
+> > <solution-title>Evaluate Learning outcomes - Solution</solution-title>
+> >
+> > "By the end of the course learners will know the Pythagora's theorem"
+> >
+> >  This LO is not good:
+> >
+> > - How to assess whether learners know the Pythagora's theorem?
+> > - What do we mean by "knowing" the Pythagorean theorem?
+> >   - They are able state it?
+> >   - They are able explain it?
+> >   - They are able apply it?
+> >   - They are able demonstrate it?
+> >   - They are able to use it in solving problem?
+> >
+> > It would make more sense to ask: "What will learners be able to do to show they know the Pythagorean theorem?"
+> >
+> {: .solution}
+{: .question}
 
 In short, when defining LOs, the key question to ask is, are they SMART?
 
@@ -578,7 +592,7 @@ these criteria is it safe to progress to Phase 2, as shown in [Figure 2](#figure
 SMART LOs will be the roadmap as we plan out instructional strategies, write the
 content and **create assessments**.
 
-> <hands-on-title>Create SMART LOs - _⏰ 10 min - Silent working_</hands-on-title>
+> <hands-on-title>Create SMART LOs - _{% icon time %} 10 min - Silent working_</hands-on-title>
 >
 > 1. Take the LOs you created
 > 2. Consider if your LOs are SMART
@@ -710,7 +724,7 @@ then the LOs should be revised – i.e., LOs are still the most important featur
 to consider.**The key is to determine exactly what specific LEs can contribute
 to learning or how they will help move learners towards the LOs.**
 
-<!-- >> <question-title>Evaluate LEs in GTN tutorials</question-title>
+> <question-title>Evaluate LEs in GTN tutorials</question-title>
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
@@ -744,21 +758,20 @@ to learning or how they will help move learners towards the LOs.**
 >   >
 >   {: .solution}
 >
-{: .question} -->
+> > <solution-title>LEs in GTN tutorials</solution-title>
+> >
+> > Most of the GTN tutorials are using Practical and Exercises as LEs.
+> >
+> > They are most likely to show how to do things and give an idea of how a tool works.
+> >
+> > In the [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}),
+> > the LO "Determine the best strategy to get data into Galaxy" may not be achieved
+> > with only practical
+> >
+> {: .solution}
+{: .question} 
 
-{% include _includes/quiz.html id="LEs_GTN_tutorials.yaml" %}
-
-> <solution-title>LEs in GTN tutorials</solution-title>
->
-> Most of the GTN tutorials are using Practical and Exercises as LEs.
->
-> They are most likely to show how to do things and give an idea of how a tool works.
->
-> In the [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}),
-> the LO "Determine the best strategy to get data into Galaxy" may not be achieved
-> with only practical
->
-{: .solution}
+<!--{% include _includes/quiz.html id="LEs_GTN_tutorials.yaml" %}-->
 
 ## Select and develop content relevant to the LOs
 
@@ -888,7 +901,7 @@ learners and new concepts This helps in the teaching plan to measure how much
 can be covered, and the hierarchical organization suggests a sequence to cover
 material.
 
-> <hands-on-title>Draw a concept map - _⏰ 15 min - Silent working_</hands-on-title>
+> <hands-on-title>Draw a concept map - _{% icon time %} 15 min - Silent working_</hands-on-title>
 >
 > - Draw a concept map of your topic of interest
 > - Start with a question
@@ -898,7 +911,7 @@ material.
 > - Count the items (concepts and links)
 {: .hands_on}
 
-> <hands-on-title>Give / receive feedback on concept maps - _⏰ 10 min - Group of 2 persons_</hands-on-title>
+> <hands-on-title>Give / receive feedback on concept maps - _{% icon time %} 10 min - Group of 2 persons_</hands-on-title>
 >
 > - Pair with someone
 > - Check the concept name of your partner
@@ -922,7 +935,7 @@ material.
 - **Content reduction**: one of the biggest challenges in designing training
   courses is the reduction of content to the training format. key points!
 
-> <hands-on-title>Producing the content and the training material - _⏰ 15 min_</hands-on-title>
+> <hands-on-title>Producing the content and the training material - _{% icon time %} 15 min_</hands-on-title>
 >
 > - Prepare the content for your 3 min training
 >
@@ -1050,7 +1063,7 @@ Using actionable formative and summative assessment can help to ensure that LOs,
 and progress towards them, are explicitly supported. **LOs clarify what
 specifically needs to be assessed and why.**
 
-<!-- >> <question-title>Evaluate assessment</question-title>
+> <question-title>Evaluate assessment</question-title>
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
@@ -1060,11 +1073,11 @@ specifically needs to be assessed and why.**
 > - To what extent are the tests aligned with the KSAs & Bloom's levels
 >   expressed in the LOs?
 >
-{: .question} -->
+{: .question}
 
-{% include _includes/quiz.html id="assessments_GTN_tutorials.yaml" %}
+<!--{% include _includes/quiz.html id="assessments_GTN_tutorials.yaml" %}-->
 
-> <hands-on-title>Assessment in mini-training - _⏰ 5 min_</hands-on-title>
+> <hands-on-title>Assessment in mini-training - _{% icon time %} 5 min_</hands-on-title>
 >
 > - Take the content of your 3 min training
 > - Analyse the flow of the lesson, identify points where you could introduce
@@ -1155,10 +1168,9 @@ standards. **Ultimately, the evaluation should identify what works in a course,
 and what needs remediation, to better support the achievement of the intended
 LOs**.
 
-<!-- >> <question-title>Evaluate effectiveness</question-title>
+> <question-title>Evaluate effectiveness</question-title>
 >
-> - Think of the course or tutorial you selected before (*e.g.*, the
->   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
+> - Think of the course or tutorial you selected before (*e.g.*, the [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
 >
 > - Do you evaluate its effectiveness?
 >
@@ -1169,33 +1181,15 @@ LOs**.
 >   >
 >   {: .solution}
 >
->   If so, how do you do this? How do you determine its effectiveness in leading
->   learners to your intended LOs?
+>   If so, how do you do this? How do you determine its effectiveness in leading learners to your intended LOs?
 >
->   > <solution-title>for the dummy tutorial</solution-title>
->   >
->   >
->   {: .solution}
+> - Consider the Kirkpatrick-Katzell framework. What level(s) does your evaluation incorporate?
 >
-> - Consider the Kirkpatrick-Katzell framework. What level(s) does your
->   evaluation incorporate?
+> - What adjustments would you need to make, if any, in order to align your evaluation with the Kirkpatrick-Katzell strategy?
 >
->   > <solution-title>for the dummy tutorial</solution-title>
->   >
->   >
->   {: .solution}
->
-> - What adjustments would you need to make, if any, in order to align your
->   evaluation with the Kirkpatrick-Katzell strategy?
->
->   > <solution-title>for the dummy tutorial</solution-title>
->   >
->   >
->   {: .solution}
->
-{: .question}-->
+{: .question}
 
-{% include _includes/quiz.html id="effectiveness_GTN_tutorials.yaml" %}
+<!--{% include _includes/quiz.html id="effectiveness_GTN_tutorials.yaml" %}-->
 
 > <solution-title>Evaluate effectiveness in GTN tutorials</solution-title>
 >
@@ -1210,7 +1204,7 @@ LOs**.
 <!-- ELIXIR TtT -->
 # Testing the mini-training
 
-> <hands-on-title>Delivery planning - _⏰ 10 min - Silent working_</hands-on-title>
+> <hands-on-title>Delivery planning - _{% icon time %} 10 min - Silent working_</hands-on-title>
 >
 > - Think if you want to make your training interactive
 > - Think whether you need or want to use a visual support (images)
@@ -1220,10 +1214,9 @@ LOs**.
 >
 {: .hands_on}
 
-> <hands-on-title>Deliver mini-training and Give / receive feedback on its delivery - _⏰ 15 min - Groups of 2 persons_</hands-on-title>
+> <hands-on-title>Deliver mini-training and Give / receive feedback on its delivery - _{% icon time %} 15 min - Groups of 2 persons_</hands-on-title>
 >
-> - Deliver each one your 3 minute session to others with 1 person noting down
->   feedback in real-time
+> - Deliver each one your 3 minute session to others with 1 person noting down feedback in real-time
 >
 >    > <details-title>How to give feedback on training</details-title>
 >    >
