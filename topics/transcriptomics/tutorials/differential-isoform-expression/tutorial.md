@@ -340,6 +340,7 @@ We are going to use the following RSeQC modules:
 - **Junction Saturation**: check junction saturation
 - **Junction Annotation**: compares detected splice junctions to a reference gene model
 - **Read Distribution**: calculates how mapped reads are distributed over genome features
+- **Inner Distance**: calculate the inner distance (or insert size) between two paired RNA reads
 
 Once all required outputs have been generated, we will integrate them by using **MultiQC** in order to interpret the results.
 
@@ -363,6 +364,10 @@ Once all required outputs have been generated, we will integrate them by using *
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >
 > 5. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
+>    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
+>    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
+>
+> 6. {% tool [Inner Distance](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_inner_distance/5.0.1+galaxy2) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >
@@ -398,6 +403,9 @@ Now, we will integrate the outputs into **MultiQC**.
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Gene body coverage`
 >                            - {% icon param-collection %} *"RSeQC gene body coverage: stats file"*: select **stats (TXT)** collections
+>                    - {% icon param-repeat %} *"Inner Distance output"*
+>                        - *"Type of RSeQC output?"*: `Inner distance`
+>                            - {% icon param-collection %} *"RSeQC inner distance: frequency file"*: select **frequency (TXT)** collections
 >
 {: .hands_on}
 
@@ -441,6 +449,11 @@ After confirming that the saturation level is good enough, now we will check the
 ![Figure 09. RSeQC junction annotation plot](../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png "RSeQC junction annotation. The detected junctions and events are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green). Splice events refer to the number of times a RNA-read is spliced (A). Splice junctions correspond to multiple splicing events spanning the same intron.") 
 
 According to the results, despite the number of new (or partially new) splicing junctions is relatively slow (around 0.5%) (fig. 9.B), a large proportion of reads show novel splicing junction patterns (fig. 9.A).
+
+![Figure 10. RSeQC inner distance plot](../../images/differential_isoform/rseq_inner_distance_plot.png "RSeQC inner distance. The plot represents gap sizes between R1 and R2.") 
+
+
+Finally from the the Inner Distance plot (fig. 10), we can infer some additional information about the degree of degradation of the samples. Usually veery short inner distances appear in old or degraded samples; in addition and values can be negative if the reads overlap consistently.
 
 After evaluating the quality of the RNA-seq data, we can start with the transcriptome assembly step.
 
