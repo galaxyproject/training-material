@@ -115,8 +115,6 @@ Next we will retrieve the remaining datasets.
 >      ```
 >      CPAT_header.tab  {{ page.zenodo_link }}/files/CPAT_header.tab
 >      active_site.dat.gz	{{ page.zenodo_link }}/files/active_site.dat.gz
->      gencode.v43.lnc.chr5.fasta.gz	{{ page.zenodo_link }}/files/gencode.v43.lnc.chr5.fasta.gz
->      gencode.v43.pc.chr5.fasta.gz	{{ page.zenodo_link }}/files/gencode.v43.pc.chr5.fasta.gz
 >      GRCh38.p13.chrom5.gtf	{{ page.zenodo_link }}/files/GRCh38.p13.chrom5.gtf
 >      GRCh38.p13.chrom5.fasta.gz	{{ page.zenodo_link }}/files/GRCh38.p13.chrom5.fasta.gz
 >      Pfam-A.hmm.dat.gz	{{ page.zenodo_link }}/files/Pfam-A.hmm.dat.gz
@@ -624,11 +622,11 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 > 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5) %} with the following parameters:
 >    - *"Tool function mode"*: `Import data`
 >        - In *"1: Factor level"*:
->            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Cancer`
->            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Transcripts Cancer`
->        - In *"2: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Health`
 >            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Transcripts Health`
+>        - In *"2: Factor level"*:
+>            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Cancer`
+>            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Transcripts Cancer`
 >        - *"Quantification data source"*: `StringTie`
 >            - *"Average read length"*: `140`
 >            - From *"Analysis mode"*:
@@ -674,7 +672,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 >        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `SwitchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >   - In *"Sequence extraction parameters"*:
 >       - "*Remove short aminoacid sequences*": `No`
->   - In *"Remove ORFs containint STOP codons*": `No`
+>       - *"Remove ORFs containint STOP codons*": `No`
 >
 >   > <comment-title>Reduce to switch genes option</comment-title>
 >   >
@@ -694,6 +692,7 @@ The next step is to use to use generated FASTA files corresponding to the aminoa
 > Note that **IsoformSwitchAnalyzeR** allows to integrate additional sources, such as prediction of signal peptides (SignalP) and intrinsically disordered regions (IUPred2AIUPred2A or NetSurfP-2). However, those tools are not currenly available in Galaxy, so for this reason we will not make use of them. You can find more information in the [IsoformSwitchAnalyzeR viggette](https://bioconductor.org/packages/release/bioc/vignettes/IsoformSwitchAnalyzeR/inst/doc/IsoformSwitchAnalyzeR.html#advice-for-running-external-sequence-analysis-tools-and-downloading-results).
 >
 {: .comment}
+
 
 ### Protein domain identification with **PfamScan**
 
@@ -746,14 +745,36 @@ Each of those metrics is computed from a set of known protein-coding genes and a
 >
 {: .details}
 
+First, we will generate two intermediate files that we will use as input for CPAT.
+
+> <hands-on-title>Extract lncRNA and protein sequences</hands-on-title>
+>
+> 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} converter with the following parameters:
+>    - {% icon param-files %} *"Select lines from"*: `GRCh38.p13.chrom5.gtf`
+>    - *"Regular Expression2"*: `lncRNA`
+> 2. Rename the output as `gencode.v43.annotation.chrm5.lncRNA.gtf`
+> 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} converter with the following parameters:
+>    - {% icon param-files %} *"Select lines from"*: `GRCh38.p13.chrom5.gtf`
+>    - *"Regular Expression2"*: `protein_coding`
+> 4. Rename the output as `gencode.v43.annotation.chrm5.pc.gtf`
+> 3. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Input BED, GFF3 or GTF feature file "*: `gencode.v43.annotation.chrm5.lncRNA.gtf` and `gencode.v43.annotation.chrm5.pc.gtf`
+>    - *"Reference Genome"*: `From your history`
+>       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
+>       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
+> 4. Rename the output as `GRCh38.p53.chrom5.lncRNA.fasta` and `GRCh38.p53.chrom5.pc.fasta`
+{: .hands_on}
+
+As result, we will have two new FASTA files, one of them corresponding to long non-coding RNAs and the other one corresponding to the sequences of protein coding isoforms. Now, we can run CPAT:
+
 
 > <hands-on-title>Coding prediction with CPAT</hands-on-title>
 >
 > 1. {% tool [CPAT](toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Query nucletide sequences"*: `Nucleotide sequences` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >    - {% icon param-file %} *"Reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
->    - {% icon param-file %} *"Coding sequences file"*: `gencode.v43.pc.chr5.fasta.gz`
->    - {% icon param-file %} *"Non coding sequeces file"*: `gencode.v43.lnc.chr5.fasta.gz`
+>    - {% icon param-file %} *"Coding sequences file"*: `GRCh38.p53.chrom5.lncRNA.fasta`
+>    - {% icon param-file %} *"Non coding sequeces file"*: `GRCh38.p53.chrom5.pc.fasta`
 >
 >
 {: .hands_on}
@@ -1104,8 +1125,6 @@ Next we will retrieve the datasets corresponding to the original reference genom
 >    - Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      gencode.v43.lncRNA_transcripts.fa.gz	{{ page.zenodo_link }}/files/gencode.v43.lncRNA_transcripts.fa.gz
->      gencode.v43.pc_transcripts.fa.gz	{{ page.zenodo_link }}/files/gencode.v43.pc_transcripts.fa.gz
 >      gencode.v43.annotation.gtf.gz	{{ page.zenodo_link }}/files/gencode.v43.annotation.gtf.gz
 >      GRCh38.p13.genome.fa.gz	{{ page.zenodo_link }}/files/GRCh38.p13.genome.fa.gz
 >      ```
@@ -1141,8 +1160,6 @@ Once we have imported the workflow, we can run the pipeline on the [original dat
 >   - {% icon param-file %} "*Reference genome*": `GRCh38.p13.genome.fa.gz`
 >   - {% icon param-file %} "*Genome annotation*": `gencode.v43.annotation.gtf.gz`
 >   - {% icon param-collection %} "*RNA-seq data collection*": `Original samples`
->   - {% icon param-file %} "*Protein coding transcripts*": `gencode.v43.pc_transcripts.fa.gz`
->   - {% icon param-file %} "*lncRNA transcripts*": `gencode.v43.lncRNA_transcripts.fa.gz`
 >   - {% icon param-file %} "*CPAT header*": `CPAT_header.tab`
 >   - {% icon param-file %} "*Pfam-A HMM Stockholm file*": `Pfam-A.hmm.dat.gz`
 >   - {% icon param-file %} "*Active sites dataset*": `active_site.dat.gz`
