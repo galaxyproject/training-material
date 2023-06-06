@@ -296,13 +296,13 @@ Now we can perform the mapping step.
 >    - In *"Algorithmic settings"*:
 >        - *"Configure seed, alignment and limits options*": `Extended parameter list`
 >            -  In *"Alignment parameters"*:
->                - *"Minimum intron size*": `14` (value of the `Minimium intron size file`)
->                - *"Maximum intron size*": `772519` (value of the `Maximum intron size file`)
+>                - *"Minimum intron size*": `14` (value of the **Minimium intron size** file)
+>                - *"Maximum intron size*": `772519` (value of the **Maximum intron size** file)
 >
 >
 {: .hands_on}
 
-This first **RNA STAR** run generates three collections: logs, alignments in BAM format, and a collection of BED files with information about splice junction coordinates. Now we will process the collection of BED files with the objective of filtering non-canonical (column 5 > 0), unannotated (column 6 == 0) junction sites and junctions supported by too few reads (column 7 > 2).
+The first **RNA STAR** run generates three collections: logs, alignments in BAM format, and a collection of BED files with splice junction coordinates. Now we will process the collection of BED files with the objective of filtering non-canonical (column 5 > 0), unannotated junction sites (column 6 == 0) and junctions supported by too few reads (column 7 > 5).
 
 > <hands-on-title> Pre-processing of splice junction coordinatesR</hands-on-title>
 > 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
@@ -636,8 +636,6 @@ Let's have a look at the plots:
 ![Figure X. rnaQUAST cumulativesubstitutions](../../images/differential_isoform/rnaQUAST_cumulative_substitutions.png "rnaQUAST cumulativesubstitutions.")
 
 ![Figure X. rnaQUAST NAx](../../images/differential_isoform/rnaQUAST_NAx.png "rnaQUAST NAx.")
-
-![Figure X. rnaQUAST cumulative transcript](../../images/differential_isoform/rnaQUAT_cumulative_transcrit.png "rnaQUAST cumulative transcript.")
 
 # Isoform switching analysis 
 
