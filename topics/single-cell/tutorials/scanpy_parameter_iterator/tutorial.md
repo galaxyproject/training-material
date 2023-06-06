@@ -1,54 +1,50 @@
 ---
 layout: tutorial_hands_on
 
-title: https://zenodo.org/record/8011681
-zenodo_link: ''
+title: Scanpy Parameter Iterator
+zenodo_link: 'https://zenodo.org/record/8011681'
+subtopic: tricks
+priority: 3
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- 
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+- 
+requirements:
+-
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - scrna-case_alevin
+        - scrna-case_alevin-combine-datasets
+        - scrna-case_basic-pipeline
+
+time_estimation: 1H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
-contributors:
-- contributor1
-- contributor2
+- 
+
+tags:
+- single-cell
+- tips&tricks
+- parameter-iterator
+
+contributions:
+  authorship:
+    - wee-snufkin
+  funding:
+    - eosc-life
+
 
 ---
 
 
 # Introduction
 
-<!-- This is a comment. -->
+The magic of bioinformatic analysis is that we use maths, statistics and complicated algorithms to deal with huge amounts of data to help us interpret the biology behind. However, it’s not always so straightforward – each tool has various parameters so eventually, we might end up with very different outcomes depending on the values we choose. With analysing scRNA-seq data, it’s almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information. 
+Since there is a vast number of values that we can specify in the tools, how can we know if the values we choose are the most optimal ones or at least good enough? Well, we can use different values and then compare the outputs to see which is consistent with our understanding of the underlying biology. 
+And here the Parameter Iterator comes in – it allows to run the analysis using different variables quickly and easily. Now you don’t have to execute your workflow every time you change one value to compare the output. This tutorial will show you how to use Parameter Iterator to generate multiple outputs with different parameter values at one go. 
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+{% snippet faqs/galaxy/tutorial_mode.md %}
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > <agenda-title></agenda-title>
 >
@@ -59,57 +55,91 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Get Data
+The data used in this tutorial is from a mouse dataset of fetal growth restriction ({% cite Bacon2018 %}). You can download the dataset below or import the history with the starting data.
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+> <comment-title></comment-title> 
+> If you've been working through the Single-cell RNA-seq: Case Study then you can use your dataset from the [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial here. We’ll be working on the output of **Scanpy RunPCA** {% icon tool %}, so you can run the analysis using this dataset. If you haven’t completed that tutorial but you’re interested in how we get to this point, feel free to have a look.
+{: .comment}
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+Here are several ways of getting our toy dataset – choose whichever you like! 
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+> <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
+>
+> 1. Import history from: [example input history](https://usegalaxy.eu/u/j.jakiela/h/scanpy-parameter-iterator)
+>
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
+>
+{: .hands_on}
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
-
-> <hands-on-title> Data Upload </hands-on-title>
+> <hands-on-title>Option 2: Data upload - Add to history</hands-on-title>
 >
 > 1. Create a new history for this tutorial
+>
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
 >    ```
->    
+>    {{ page.zenodo_link }}
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
+>    
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+> 3. Rename the dataset if you wish: 
+>
+>    {% snippet  faqs/galaxy/datasets_rename.md %}
+>
+> 4. Check that the datatype is `h5ad`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
 {: .hands_on}
+
+
+
+# Inputs
+Scanpy ParameterIterator tool currently works only for the following parameters:
+1.	Number of neighbours to derive kNN graph (for **Scanpy ComputeGraph** {% icon tool %})
+2.	Perplexity (for **Scanpy RunTSNE** {% icon tool %})
+3.	Resolution (for **Scanpy FindCluster** {% icon tool %})
+
+There are two formats of the input values:
+1.	List of all parameter values to be iterated
+2.	Step increase values to be iterated
+
+> <comment-title></comment-title>
+> Iterating the parameters within one tool will give you a list with X datasets: each dataset is the output with the given parameter value. However, if you want to use Parameter Iterator again within another tool, specifying Y parameter values, you **will not** get X x Y datasets as you might expect. Therefore you have to choose **just one** output file to be passed on to the next tool which will use Parameter Iterator again. Alternatively, you can use Parameter Iterator once and run the rest of the tools on dataset collection with just one parameter value. 
+{: .comment}
+
+# Number of neighbours to derive kNN graph (for **Scanpy ComputeGraph** {% icon tool %})
+Our dataset is right after PCA. Therefore we will now use Scanpy ComputeGraph to derive kNN graph. We can use Parameter Iterator to check how different values of the number of neighbors affect the final outcome. It is important that n-neighbours is an integer. 
+
+Warning
+Using ‘Step increase values to be iterated’ as the format of the input values automatically generates float values instead of integers. Therefore in this case you have to use ‘List of all parameter values to be iterated’ with your chosen values.
+
+k-nearest neighbor (kNN) graph will be needed for plotting a UMAP. From [UMAP developers](https://github.com/lmcinnes/umap): “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”. Therefore, let’s pick some values bigger and smaller than 15 to check how it changes the final UMAP.
+
+HANDS ON
+
+Now you have two options: either pick one of the generated output files and proceed to the next tool with another parameter iteration or continue with the current collection of datasets. We choose the second option as only then you will be able to see the effect of using different n-neighbours values. However, the disadvantage of this attitude is that you have to come up with one value for the subsequent parameters in the workflow to see the changes in the final plots.
+
+The part of the workflow we are using in this tutorial is as follows:
+Scanpy 
+For the detailed explanation of the tools used below, check out [this tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}).
+
+HANDS ON
+
+If you compare the UMAP graphs, you can see the differences that were caused by changing the value of n-neighbors. Relying on your biological knowledge, you can now choose which parameter value works best and use it for further analysis. 
+We will go forward with n-neighbor value equal to 15. 
+HANDS ON 
+Unhide n-neighbours equal to 15
+
 
 # Title of the section usually corresponding to a big step in the analysis
 
