@@ -186,7 +186,7 @@ With the help of Mazur, you hopefully started believing that active, interactive
 - which is the most effective technique I can incorporate in my teaching?
 - is there any "ideal" teaching technique I should absolutely learn?
 
-**There is not "the" ideal teaching technique nor the "most effective" teaching technique.**
+There is **not "the" ideal teaching technique nor the "most effective" teaching technique.**
 
 You may remember from the Nichols' steps of curriculum design, that it is **essential that you align learning experiences to the learning outcomes** of your course. In other words, for each LO, you should identify the learning experience(s) that will best support the achievement of the LO.
 

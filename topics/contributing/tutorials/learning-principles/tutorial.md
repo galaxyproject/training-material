@@ -50,7 +50,7 @@ Since this material cannot cover the broad literature on the subject of learning
 > of ELIXIR-GOBLET Train the Trainer curriculum.
 {: .comment}
 
-### Instruction design in 5 Phases
+<!--## Instruction design in 5 Phases
 
 So how can we now use the knowledge we have gathered during this time in the course? Here we will go through the Instructional design in 5 phases and explain why learning outcomes (to articulate and specify these) is so important for the curricula and the course design process.
 
@@ -68,6 +68,7 @@ So how can we now use the knowledge we have gathered during this time in the cou
     Example
     * Final exams at university
     * Final feedback
+-->
 
 # How do people learn?
 
