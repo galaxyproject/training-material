@@ -803,3 +803,5 @@ If you have completed the exercise, you can try to perform these extra tasks wit
 
 1. Download the workflow result to your computer
 2. Publish your history
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="bioblend-api" %}

@@ -29,6 +29,12 @@ requirements:
       - ansible-galaxy
 ---
 
+> <warning-title>Requires separate domain</warning-title>
+> As of [galaxyproject/galaxy#15966](https://github.com/galaxyproject/galaxy/issues/15966), reports has issues with running under a path prefix.
+> It should still function with a separate domain, if that is possible for your setup. Otherwise, it will not work.
+> If you wish to follow this tutorial, please be aware of this.
+{: .warning}
+
 The reports application gives some pre-configured analytics screens. These are very easy to setup and can help with debugging issues in Galaxy.
 
 > <agenda-title></agenda-title>
@@ -56,7 +62,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    @@ -0,0 +1,4 @@
 >    +reports:
 >    +    database_connection: "{{ galaxy_config.galaxy.database_connection }}"
->    +    file_path: /data
+>    +    file_path: "{{ galaxy_config.galaxy.file_path }}"
 >    +    template_cache_path: "{{ galaxy_mutable_data_dir }}/compiled_templates/reports/"
 >    {% endraw %}
 >    ```
@@ -70,7 +76,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -143,6 +143,11 @@ galaxy_config:
+>    @@ -148,6 +148,11 @@ galaxy_config:
 >             pools:
 >               - job-handlers
 >               - workflow-schedulers
@@ -82,7 +88,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >     
 >     galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
 >     
->    @@ -163,6 +168,8 @@ galaxy_config_templates:
+>    @@ -168,6 +173,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >       - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
@@ -90,7 +96,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    +    dest: "{{ galaxy_config.gravity.reports.config_file }}"
 >     
 >     galaxy_extra_dirs:
->       - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
+>       - /data
 >    {% endraw %}
 >    ```
 >    {: data-commit="Enable gravity to manage reports"}
@@ -102,14 +108,15 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -110,4 +110,8 @@ server {
+>    @@ -103,4 +103,9 @@ server {
+>     		proxy_set_header Upgrade $http_upgrade;
+>     		proxy_set_header Connection "upgrade";
 >     	}
->     
->     	{{ tiaas_nginx_routes }}
 >    +
 >    +	location /reports/ {
->    +		proxy_pass http://unix:{{ galaxy_config.gravity.reports.bind }}:/;
+>    +		proxy_pass http://{{ galaxy_config.gravity.reports.bind }}:/;
 >    +	}
+>    +
 >     }
 >    {% endraw %}
 >    ```
@@ -124,7 +131,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 6. The reports application should be available, under `<server_url>/reports/`.>
+> 6. The reports application should be available, under [`/reports`](https://my.gat.galaxy.training/?path=/reports)
 {: .hands_on}
 
 > ```bash

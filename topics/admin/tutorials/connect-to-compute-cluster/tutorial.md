@@ -74,11 +74,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -20,5 +20,11 @@
->     # CVMFS Support
->     - src: galaxyproject.cvmfs
->       version: 0.2.21
->    +# Singularity
+>    @@ -23,3 +23,8 @@
+>     # Singularity/Apptainer
 >     - src: usegalaxy_eu.apptainer
 >       version: 0.0.1
 >    +# SLURM as our DRM
@@ -128,7 +125,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -189,6 +189,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -191,6 +191,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >     
@@ -329,17 +326,13 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -32,6 +32,10 @@
->         - git:
->             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
->             dest: /libraries/
->    +  post_tasks:
+>    @@ -52,3 +52,6 @@
+>             minute: "0"
+>             hour: "0"
+>             job: "GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server /usr/local/bin/gxadmin galaxy cleanup 60"
 >    +    - name: Install slurm-drmaa
 >    +      package:
 >    +        name: slurm-drmaa1
->       roles:
->         - galaxyproject.tusd
->         - galaxyproject.repos
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add post task to install slurm-drmaa"}
@@ -394,7 +387,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    +          value: C
 >    +        - name: SINGULARITY_CACHEDIR
 >    +          value: /tmp/singularity
->    +        - name: SINGULARITY_TMPDIR
+>    +        - name: APPTAINER_TMPDIR
 >    +          value: /tmp
 >           singularity:
 >             runner: local_runner
@@ -416,7 +409,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```
->    > journalctl -f -u galaxy
+>    > journalctl -f -u 'galaxy-*'
 >    > ```
 >    {: .code-in}
 >
@@ -433,7 +426,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 
 ## Running a Job
 
-You should now be able to run a Galaxy job through Slurm. The simplest way to test is using the upload tool to upload some text.
+You should now be able to run a Galaxy job through Slurm. The simplest way to test is using the digest tool to calculate an md5sum.
 
 > <hands-on-title>Testing a Slurm Job</hands-on-title>
 >
@@ -441,7 +434,7 @@ You should now be able to run a Galaxy job through Slurm. The simplest way to te
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```
->    > journalctl -f -u galaxy
+>    > journalctl -f -u 'galaxy-*'
 >    > ```
 >    {: .code-in}
 >
@@ -449,6 +442,7 @@ You should now be able to run a Galaxy job through Slurm. The simplest way to te
 > 3. In the resulting modal dialog, click the "Paste/Fetch data" button.
 > 4. Type some random characters into the text field that has just appeared.
 > 5. Click "Start" and then "Close"
+> 5. Open [*Secure Hash / Message Digest*](https://my.gat.galaxy.training/?path=/%3Ftool_id=secure_hash_message_digest) tool
 >
 >    > <code-out-title></code-out-title>
 >    > Your output may look slightly different. In your `journalctl` terminal window you should see the following messages:
@@ -666,7 +660,7 @@ There is not a good rule we can tell you, just choose what you think is useful o
 
 ## Accessing the data
 
-You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)), or via SQL with [`gxadmin`](https://usegalaxy-eu.github.io/gxadmin/#/README.query?id=query-tool-metrics).
+You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)), or via SQL with [`gxadmin`](https://galaxyproject.github.io/gxadmin/#/README.query?id=query-tool-metrics).
 
 
 {% snippet topics/admin/faqs/git-commit.md page=page %}

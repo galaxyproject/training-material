@@ -8,7 +8,7 @@ contributors: [hexylena]
 
 The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.
 
-{% assign tutorials = "admin/ansible-galaxy admin/backup-cleanup admin/customization admin/tus admin/cvmfs admin/apptainer admin/tool-management admin/data-library dev/bioblend-api admin/connect-to-compute-cluster admin/job-destinations admin/pulsar admin/celery admin/gxadmin admin/monitoring admin/tiaas admin/reports admin/ftp admin/beacon" | split: " " %}
+{% assign tutorials = "admin/ansible-galaxy admin/backup-cleanup admin/customization admin/tus admin/cvmfs admin/apptainer admin/tool-management admin/reference-genomes admin/data-library dev/bioblend-api admin/connect-to-compute-cluster admin/job-destinations admin/pulsar admin/celery admin/gxadmin admin/reports admin/monitoring admin/tiaas admin/sentry admin/ftp admin/beacon" | split: " " %}
 
 
 {% assign seen_tuto = 0 %}
@@ -32,29 +32,3 @@ The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use t
     {% endunless %}
 {% endfor %}
 </ol>
-
-<style type="text/css">
-#git-gat-timeline {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-#git-gat-timeline li  {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 0.5em;
-    margin: 0.5em;
-}
-#git-gat-timeline li.active {
-    background: #a8ffa8;
-    color: black;
-}
-#git-gat-timeline li.disabled {
-    background: #eee;
-}
-#git-gat-timeline span {
-    align-self: center;
-}
-</style>

@@ -72,6 +72,23 @@ $tutorial-box-spacing: 1rem;
 	--h2-theme-after: "";
 }
 
+/* SLIDES */
+@import "./slides.scss";
+/* SYNTAX */
+@import "./syntax_highlighting.scss";
+/* THEMES */
+@import "./themes.scss";
+
+/* Other CSS libraries we use */
+// If you use .css (i.e. from the file extension) it will use a CSS import
+// which triggers multiple requests.
+@import "./academicons";
+@import "./bootstrap.min";
+@import "./bootstrap-toc.min";
+@import "./leaflet-1.9.3";
+@import "../fontawesome/css/all.min";
+
+
 // palette
 // These remain SASS variables because they're used in mixins.
 // Boxes
@@ -220,19 +237,11 @@ img {
     margin: 2.5%;
 }
 
-:not(pre) > code {
-    color: var(--code-foreground);
-    background: var(--code-background);
-    border: 1px solid var(--text-color-muted);
-    border-radius: 0.25rem;
-}
-
-pre.highlight {
-    padding: 1rem;
-    background-color: var(--code-background);
-    color: var(--code-foreground);
-    border: 1px solid var(--text-color-muted);
-    @include syntax-dark;
+div.main-content {
+	img {
+		height: auto;
+		width: auto;
+	}
 }
 
 figure {
@@ -249,8 +258,46 @@ figure {
   }
 }
 
+
+:not(pre) > code {
+    color: var(--code-foreground);
+    background: var(--code-background);
+    border: 1px solid var(--text-color-muted);
+    border-radius: 0.25rem;
+}
+
+pre.highlight {
+    padding: 1rem;
+    background-color: var(--code-background);
+    color: var(--code-foreground);
+    border: 1px solid var(--text-color-muted);
+    @include syntax-dark;
+
+	code > ::selection {
+		color: var(--code-background);
+		background: var(--code-foreground);
+	}
+}
+
+/* Make the @@ portions of diffs, which indicate area, much more visible */
+div.language-diff .p {
+	border-top: 1px solid #66d9ef;
+	border-bottom: 1px solid #66d9ef;
+
+	border-left: 5px solid #66d9ef;
+	border-right: 5px solid #66d9ef;
+
+	font-weight: 900;
+
+	line-height: 3em;
+
+	margin-right: 1em;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
 footer {
-    margin-top: 3em;
+    margin-top: 5em;
     text-align: center;
     color: var(--text-color-muted);
     font-size: $font-size - 2;
@@ -723,17 +770,17 @@ blockquote {
 @media (max-width: 768px) {
     .navbar {
         .dropdown-menu {
-            background-color: transparent;
+		background-color: var(--color-background);
             border-color: transparent;
         }
 
         .dropdown-item {
-            color: var(--text-color-muted);
+		color: var(--text-color);
 
             &:hover,
             &:focus,
             &:active {
-                background-color: transparent;
+                background-color: var(--brand-color);
                 color:  var(--text-color);
             }
         }
@@ -784,11 +831,14 @@ blockquote {
     border-width: 0 2px 1px 0;
     background-color: var(--color-primary);
     border-color: var(--color-darker);
-    cursor: pointer;
 
     &:hover {
         color: #000;
         background-color: var(--color-dimmed);
+    }
+
+    &.label-large {
+	    font-size: 150%;
     }
 }
 
@@ -946,7 +996,8 @@ nav[data-toggle='toc'] {
     flex-shrink: 0;
 
     img {
-        height: 1em;
+	height: 2em !important;
+	width: 2em !important;
         border-radius: 50%;
         margin: 0 0.25em 0 0;
     }
@@ -1030,36 +1081,45 @@ ul.supporting_material{
   margin-top: 1em;
 }
 
-span.tool, span.workflow {
-	border: 1px solid #999;
-	padding: 2px;
-	border-radius: 5px;
 
-	&:hover {
-		border: 1px solid blue;
-
+// The default presentation
+body {
+	.show-when-galaxy-proxy-active {
+		cursor: not-allowed;
 	}
 
-	&.galaxy-proxy-active {
+	span.tool, span.workflow {
+		border: 1px solid #999;
+		padding: 2px;
+		border-radius: 5px;
+
+		&:hover {
+			border: 1px solid blue;
+		}
+	}
+}
+
+// The fancier presentation when possible
+body.galaxy-proxy-active {
+	.show-when-galaxy-proxy-active {
+		cursor: pointer;
+	}
+
+	.hide-when-galaxy-proxy-active {
+		display: none;
+	}
+
+	span.tool, span.workflow {
 		cursor: pointer;
 		color: var(--brand-color-contrast);
 		background-color: var(--brand-color);
 		border-color: var(--brand-color);
 		padding: 0.2em 0.5em;
-	}
 
-	&.galaxy-proxy-active:hover {
-		background-color: var(--hyperlink);
-		border-color: var(--hyperlink);
-	}
-}
-
-body.galaxy-proxy-active {
-	.galaxy-proxy-active-show {
-		//
-	}
-	.galaxy-proxy-active-hide {
-		display: none;
+		&:hover {
+			background-color: var(--hyperlink);
+			border-color: var(--hyperlink);
+		}
 	}
 }
 
@@ -1395,3 +1455,34 @@ a[target="_blank"]::after {
     }
 }
 }
+
+// For the git-gat learning pathway boxes
+#git-gat-timeline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#git-gat-timeline li  {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+#git-gat-timeline li.active {
+    background: #a8ffa8;
+}
+#git-gat-timeline li.active a {
+    color: black;
+}
+#git-gat-timeline li.disabled {
+    background: #eee;
+}
+#git-gat-timeline li.disabled a {
+    color: #555;
+}
+#git-gat-timeline span {
+    align-self: center;
+}
+

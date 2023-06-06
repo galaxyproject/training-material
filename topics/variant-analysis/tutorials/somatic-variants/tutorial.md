@@ -97,6 +97,7 @@ downsampled though to include only the reads from human chromosomes 5, 12 and
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the following four files from
@@ -684,12 +685,12 @@ license.
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Import the following **variant annotation files** from
->    [Zenodo](https://zenodo.org/record/2581873):
+>    [Zenodo](https://zenodo.org/record/7962928):
 >
 >    ```
->    https://zenodo.org/record/2581873/files/hotspots.bed
->    https://zenodo.org/record/2581873/files/cgi_variant_positions.bed
->    https://zenodo.org/record/2581873/files/01-Feb-2019-CIVic.bed
+>    https://zenodo.org/record/7962928/files/hotspots.bed
+>    https://zenodo.org/record/7962928/files/cgi_variant_positions.bed
+>    https://zenodo.org/record/7962928/files/01-Feb-2019-CIVic.bed
 >    https://zenodo.org/record/2582555/files/dbsnp.b147.chr5_12_17.vcf.gz
 >    ```
 >

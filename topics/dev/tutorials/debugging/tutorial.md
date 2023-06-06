@@ -560,7 +560,8 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >
 >    Here's the bug report:
 >
->    ```In the User menu, clicking the Datasets option causes an error message to be displayed on the page: "Uncaught exception in exposed API method".```
+>    > In the User menu, clicking the Datasets option causes an error message to be displayed on the page: "Uncaught exception in exposed API method".
+>    {: .quote}
 >
 >    Make sure you are in `GALAXY_ROOT`. Then start your local Galaxy using the `uvicorn` command*:
 >
@@ -716,9 +717,9 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >
 >    > <code-in-title>Pdb</code-in-title>
 >    > ```
->    (Pdb) str_as_bool('True')
->    False
->    ```
+>    > (Pdb) str_as_bool('True')
+>    > False
+>    > ```
 >    {: .code-in}
 >
 >    That doesn't look right! Exit the debugger (type in `q`, then `Enter`, then `CTRL-C ` to exit Galaxy.

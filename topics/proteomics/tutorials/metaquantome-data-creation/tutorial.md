@@ -80,6 +80,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files: 6 MZML files, a Protein FASTA file, and an Experimental Design file from [Zenodo]({{ page.zenodo_link }})
@@ -93,7 +94,9 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    https://zenodo.org/record/4037137/files/T7A_1.mzml
 >    https://zenodo.org/record/4037137/files/T7B_1.mzml
 >    ```
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
@@ -117,11 +120,10 @@ We have a choice to run all these steps using a single workflow, then discuss ea
 
 > <hands-on-title>Pretreatments</hands-on-title>
 >
-> 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/main_workflow.ga) or download it to your computer.
->    - Import the workflow into Galaxy
+> 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/metaquantome-data-creation/workflows/main_workflow.ga" title="Pretreatments" %}
+>
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`

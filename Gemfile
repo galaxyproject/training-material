@@ -1,13 +1,17 @@
-source "https://rubygems.org"
-gem "nokogiri", ">= 1.10.4"
+# frozen_string_literal: true
+
+# ruby '>= 3.0.0'
+
+source 'https://rubygems.org'
 gem 'addressable'
+gem 'awesome_bot'
+gem 'html-proofer'
 gem 'jekyll'
 gem 'jekyll-feed'
 gem 'jekyll-redirect-from'
-gem 'awesome_bot'
-gem 'html-proofer'
-gem 'pkg-config'
 gem 'kwalify'
+gem 'nokogiri', '>= 1.10.4'
+gem 'pkg-config'
 gem 'webrick' if RUBY_VERSION >= '3.0' # Ruby3 does not ship with webrick and Jekyll needs it, see https://github.com/jekyll/jekyll/issues/8523
 
 # Citations
@@ -17,3 +21,6 @@ gem 'csl-styles'
 
 # Image processing
 gem 'fastimage'
+
+# For our CLI tools
+gem 'commander'

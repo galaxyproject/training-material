@@ -1,14 +1,16 @@
-module Jekyll
-  class IconTag < Liquid::Tag
+# frozen_string_literal: true
 
+module Jekyll
+  # Our {% icon X %} tag
+  class IconTag < Liquid::Tag
     def initialize(tag_name, text, tokens)
       super
       parts = text.strip.split
       @text = parts[0]
       @aria = true
-      if parts[1] == 'aria=false' then
-        @aria = false
-      end
+      return unless parts[1] == 'aria=false'
+
+      @aria = false
     end
 
     ##
@@ -20,7 +22,8 @@ module Jekyll
     #
     # Returns:
     # The HTML for the icon
-    # Note: The icon text label is wrapped in a span with class "visually-hidden" to make it accessible to screen readers.
+    # Note: The icon text label is wrapped in a span with class
+    #       "visually-hidden" to make it accessible to screen readers.
     #
     # Example:
     #  {% icon fa fa-github %}
@@ -29,23 +32,20 @@ module Jekyll
     #  => <i class="fa fa-github"></i>
     def render_for_text(icon)
       if icon.empty?
-        raise SyntaxError.new(
-          "No icon defined for: '#{@text}'. " +
-          "Please define it in `_config.yml` (under `icon-tag:`)."
-        )
+        raise SyntaxError, "No icon defined for: '#{@text}'. Please define it in `_config.yml` (under `icon-tag:`)."
       end
 
-      if icon.start_with?("fa")
+      if icon.start_with?('fa')
         if @aria
-          %Q(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+          %(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
         else
-          %Q(<i class="#{icon}" aria-hidden="true"></i>)
+          %(<i class="#{icon}" aria-hidden="true"></i>)
         end
-      elsif icon.start_with?("ai")
+      elsif icon.start_with?('ai')
         if @aria
-          %Q(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+          %(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
         else
-          %Q(<i class="ai #{icon}" aria-hidden="true"></i>)
+          %(<i class="ai #{icon}" aria-hidden="true"></i>)
         end
       end
     end
@@ -61,6 +61,7 @@ module Jekyll
     end
   end
 
+  # The variable version that can accept a variable name instead of a string
   class IconTagVar < IconTag
     def initialize(tag_name, text, tokens)
       super

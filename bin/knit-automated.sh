@@ -3,7 +3,7 @@ DIR=/tmp/git-gat
 op="$1"
 
 declare -a tutorials
-tutorials=(admin/ansible-galaxy admin/backup-cleanup admin/customization admin/tus admin/cvmfs admin/apptainer admin/tool-management admin/data-library admin/connect-to-compute-cluster admin/job-destinations admin/pulsar admin/celery admin/monitoring admin/tiaas admin/reports admin/ftp admin/beacon)
+tutorials=(admin/ansible-galaxy admin/backup-cleanup admin/customization admin/tus admin/cvmfs admin/apptainer admin/tool-management admin/data-library admin/connect-to-compute-cluster admin/job-destinations admin/pulsar admin/celery admin/reports admin/monitoring admin/tiaas admin/sentry admin/ftp admin/beacon)
 #tutorials=(admin/wireguard-headscale)
 #tutorials=(admin/wireguard)
 
@@ -71,14 +71,12 @@ elif [[ "$op" == "import" ]]; then
 
 	# Import all of the patches
 	for idx in "${!tutorials[@]}"; do
-		if [[ "${tutorials[$idx]}" != "admin/tool-management" ]]; then
 		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
 		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
 
 		python3 bin/knit.py \
 			topics/${folder}/tutorials/${tuto}/tutorial.md \
 			--patches ${DIR}/*${folder}-${tuto}*.patch
-		fi
 	done
 elif [[ "$op" == "deploy" ]]; then
 	if [[ ! -d "${DIR}" ]]; then

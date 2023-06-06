@@ -51,6 +51,7 @@ Let's start with uploading the data.
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/record/3567224) or a data library (ask your instructor):
@@ -63,6 +64,7 @@ Let's start with uploading the data.
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 {: .hands_on}
 

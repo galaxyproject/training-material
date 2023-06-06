@@ -1,4 +1,4 @@
-name: Accessibility Linting
+name: "[CI] Accessibility Linting"
 
 concurrency:
   group: ci-${{ github.head_ref }}
@@ -6,11 +6,8 @@ concurrency:
 
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-using-a-list-of-events
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    types: [opened, reopened, synchronize, ready_for_review, review_requested]
+    types: [opened, reopened, synchronize, ready_for_review]
     paths:
       - 'Gemfile.lock'
       - '**/*.md'
@@ -39,7 +36,7 @@ jobs:
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "2.7"
+          ruby-version: "3.0"
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
