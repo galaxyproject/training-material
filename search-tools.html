@@ -3,7 +3,13 @@ layout: page
 title: Pan Galactic Tool Search
 ---
 
-<div class="row" class="form-inline" id="search-form">
+This allows you to search the list of tools available on the <a href="https://galaxyproject.org/use/">public Galaxy servers</a>,
+known to the Galaxy Hub. The list of tools is updated daily. These results
+include tools from the {{ site.data['public-server-tools'].servers | size }}
+responding Galaxy servers, including {{ site.data['public-server-tools'].tools
+| size }} tools total.
+
+<div class="row" id="search-form">
 	<div class="col-md-12">
 		<div class="form-group">
 			<label for="title">Tool ID</label>
@@ -22,22 +28,22 @@ title: Pan Galactic Tool Search
 		</tr>
 	</thead>
 	<tbody>
-		{%- for tool in site.data['public-server-tools'].tools -%}
-			{%- for version in tool[1] -%}
-			<tr>
-				<td>
-					{{ tool[0] }}{%- if version[0] != "_" -%}/{{ version[0] }}{%- endif -%}
-				</td>
-				<td>
-					{%- for server in version[1] -%}
-					<a href="{{ site.data['public-server-tools']['servers'][server].url }}/?tool_id={{ tool[0] }}{%- if version[0] != "_" -%}/{{ version[0] }}{%- endif -%}">{{ site.data['public-server-tools']['servers'][server].name }}</a>
-					{%- if forloop.last == false %}, {% endif -%}
-					{%- endfor -%}
-				</td>
-			</tr>
-			{%- endfor -%}
-		{%- endfor -%}
-	</tbody>
+{%- for tool in site.data['public-server-tools'].tools -%}
+{%- for version in tool[1] -%}
+<tr>
+<td>
+{{ tool[0] }}{%- if version[0] != "_" -%}/{{ version[0] }}{%- endif -%}
+</td>
+<td>
+{%- for server in version[1] -%}
+<a href="{{ site.data['public-server-tools']['servers'][server].url }}?tool_id={{ tool[0] }}{%- if version[0] != "_" -%}/{{ version[0] }}{%- endif -%}">{{ site.data['public-server-tools']['servers'][server].name }}</a>
+{%- if forloop.last == false %}, {% endif -%}
+{%- endfor -%}
+</td>
+</tr>
+{%- endfor -%}
+{%- endfor -%}
+</tbody>
 </table>
 
 <script>
