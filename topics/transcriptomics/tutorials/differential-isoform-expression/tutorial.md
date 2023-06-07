@@ -637,7 +637,7 @@ Let's have a look at the plots:
 
 ![Figure X. rnaQUAST NAx](../../images/differential_isoform/rnaQUAST_NAx.png "rnaQUAST NAx.")
 
-# Isoform switching analysis 
+# Isoform switching analysis with **IsoformSwitchAnalyzeR**
 
 **IsoformSwitchAnalyzeR** is an open-source R package that enables both analyze changes in genome-wide patterns of {AS} and specific gene isoforms switch consequences (note: {AS} literally will result in {IS}). An advantage of **IsoformSwitchAnalyzeR** over other approaches is that it allows allows to integrate multiple layers of information, such as previously annotated coding sequences, de-novo coding potential predictions, protein domains and signal peptides. In addition, IsoformSwitchAnalyzeR facilitates identification of IS by making use of a new statistical methods that tests each individual isoform for differential usage, identifying the exact isoforms involved in an {IS} ({% cite isoformswitchanalyzer %})
 
@@ -688,7 +688,7 @@ We will generate 2 collections from the Stringtie output, one with the cancer sa
 >
 {: .hands_on}
 
-## Import data into **IsoformSwitchAnalyzeR**
+## Import data
 
 The first step of the IsoformSwitchAnalyzeR pipeline is to import the required datasets.
 
