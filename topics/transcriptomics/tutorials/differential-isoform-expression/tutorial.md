@@ -628,7 +628,7 @@ rnaQUAST generates several metrics to evaluate the quality of transcriptome asse
 
 By default, **rnaQUAST** generates a user-friendly report in PDF format; it summarizes of the metrics, plots and statistics computed across the different samples. The table (fig. 13) provides various metrics that describe completeness and correctness levels of the assembled transcripts, including NGA50, NGA75, misassemblies, and mismatches.
 
-![Figure 13. rnaQUAST metrics table summary](../../images/differential_isoform/rnaQUAST_summary_table.png  "rnaQUAST tabular summary of metrics and statistics.")
+![Figure 13. rnaQUAST metrics table summary](../../images/differential_isoform/rnaQUAST_summary_table.png "rnaQUAST tabular summary of metrics and statistics.")
 
 Let's have a look at the plots. The rnaQUAST cumulative isoform (fig. 14) can help us to identify any trends or patterns in the distribution of transcript and isoform lengths across different abundance levels.
 
