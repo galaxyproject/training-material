@@ -313,7 +313,6 @@ module Jekyll
       'GTN_TRS_ERROR'
     end
 
-
     def layout_to_human(layout)
       if layout =~ /slides/
         'Slides'
