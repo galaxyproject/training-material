@@ -24,6 +24,7 @@ body.remark-container {
 		font-family: 'Yanone Kaffeesatz';
 		font-weight: normal;
 		text-align: center;
+		margin: 0; // override main.scss
 	}
 
 	h3 {
@@ -70,12 +71,22 @@ body.remark-container {
 	}
 
 	img {
-		max-height: 400px;
-		max-width: min(700px, 100%);
+		max-height: 500px;
+		//max-width: min(700px, 100%);
 		border: 0 !important;
 		box-shadow: none !important;
 		background: none !important;
 		margin: initial;
+	}
+
+	div.tip {
+		@include tutorial-box($tip-color);
+	}
+	div.comment {
+		@include tutorial-box($comment-color);
+	}
+	div.key_points {
+		@include tutorial-box($keypoints-color);
 	}
 
 	img.cover-logo {
@@ -86,40 +97,10 @@ body.remark-container {
 		width: 5%;
 	}
 
-	.image-10 img {
-		width: 10%;
-	}
-
-	.image-15 img {
-		width: 15%;
-	}
-
-	.image-25 img {
-		width: 25%;
-	}
-
-	.image-40 img {
-		width: 40%;
-	}
-
-	.image-50 img {
-		width: 50%;
-	}
-
-	.image-60 img {
-		width: 60%;
-	}
-
-	.image-75 img {
-		width: 75%;
-	}
-
-	.image-90 img {
-		width: 100%;
-	}
-
-	.image-100 img {
-		width: 100%;
+	@for $i from 1 through 30 {
+		.image-#{$i * 5} img {
+			width: calc(#{$i}% * 5); // To work around an SCSS issue.
+		}
 	}
 
 	.table-100 table {
@@ -128,7 +109,7 @@ body.remark-container {
 
 	.footnote {
 		position: absolute;
-		bottom: 60px;
+		bottom: 1em;
 		left: 0px;
 		width: 100%;
 		font-size: 15px;
@@ -225,74 +206,15 @@ body.remark-container {
 		border-bottom: 1px solid #ddd;
 	}
 
-	.left-column5 {
-		width: 5%;
-		float: left;
-	}
-
-	.right-column95 {
-		width: 93%;
-		float: right;
-	}
-
-	.left-column95 {
-		width: 93%;
-		float: left;
-	}
-
-	.right-column5 {
-		width: 5%;
-		float: right;
-	}
-
-	.left-column40 {
-		width: 40%;
-		float: left;
-	}
-
-	.right-column40 {
-		width: 40%;
-		float: right;
-	}
-
-	.left-column50 {
-		width: 50%;
-		float: left;
-	}
-
-	.right-column50 {
-		width: 50%;
-		float: right;
-	}
-
-	.left-column60 {
-		width: 60%;
-		float: left;
-	}
-
-	.right-column60 {
-		width: 60%;
-		float: right;
-	}
-
-	.left-column70 {
-		width: 70%;
-		float: left;
-	}
-
-	.right-column30 {
-		width: 30%;
-		float: right;
-	}
-
-	.left-column30 {
-		width: 30%;
-		float: left;
-	}
-
-	.right-column70 {
-		width: 70%;
-		float: right;
+	@for $i from 1 through 20 {
+		.left-column#{$i * 5} {
+			width: calc(#{$i}% * 5);
+			float: left;
+		}
+		.right-column#{$i * 5} {
+			width: calc(#{$i}% * 5);
+			float: right;
+		}
 	}
 
 	.reduce90 {
@@ -347,14 +269,7 @@ body.remark-container {
 		text-decoration: line-through;
 	}
 
-	.pull-left-large {
-		/* this does not break compatibility with .pull-right */
-		float: left;
-		margin-left: -3em;
-		width: 60%;
-	}
-
-	.pull-left {
+	.pull-left{
 		float: left;
 		width: 47%;
 	}
@@ -362,6 +277,26 @@ body.remark-container {
 	.pull-right {
 		float: right;
 		width: 47%;
+	}
+
+	.pull-left-66 {
+		float: left;
+		width: 64%;
+	}
+
+	.pull-right-66 {
+		float: right;
+		width: 64%;
+	}
+
+	.pull-left-33 {
+		float: left;
+		width: 31%;
+	}
+
+	.pull-right-33 {
+		float: right;
+		width: 31%;
 	}
 
 	.force-right {
@@ -532,6 +467,6 @@ body.remark-container {
 		text-align: center;
 		font-size: 150%;
 		padding: 0.3em;
-		
+
 	}
 }

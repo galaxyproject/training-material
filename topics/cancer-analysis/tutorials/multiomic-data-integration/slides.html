@@ -1,0 +1,429 @@
+---
+layout: tutorial_slides
+logo: "topics/cancer-analysis/images/bioinformatics-ca.svg"
+
+title: "Multi-Modal Data Integration"
+questions:
+objectives:
+- Understand the value of multi-modal data integration for precision medicine
+- Be able to articulate key concepts in machine learning
+- Understand why interpretability is important for machine learning applications
+- Be able to develop a patient classifier that integrates multiple data layers
+key_points:
+contributions:
+  authorship: [shraddhapai]
+  editing: [hexylena]
+  funding: [bioinformatics-ca,oicr,erasmusplus]
+---
+
+# Outline
+
+- Precision medicine and need for data integration
+- Where do I find multi-modal datasets?
+- Patient classifiers that integrate data
+- Machine learning: key concepts
+- netDx workflow
+- Need for interpretability
+- Pathway-level features
+
+---
+
+# Precision medicine and need for data integration
+
+---
+
+## Precision medicine: Deconstructing data for better clinical management
+
+Comorbidities in Autism Spectrum Disorders
+
+![](images/CAN_Module11_DataIntegration-7_1.jpg)
+
+.footnote[
+Sarah Spence. Cold Spring Harbor Laboratory Autism Spectrum Disorders workshop, 2009.
+]
+
+---
+
+## Invasive Breast Cancer
+
+![](images/bc.png)
+
+.footnote[
+National Comprehensive Cancer Network Guidelines v3.2019
+Invasive Breast Cancer
+]
+
+---
+
+## Which layers contribute to disease outcome? How is a disease deconstructed?
+
+![](images/layers.png)
+
+---
+
+## Molecular subtypes in medulloblastoma
+
+![](images/CAN_Module11_DataIntegration-10_1.jpg)
+
+.footnote[
+{% cite Cavalli_2017 %}
+]
+
+---
+
+## Ependymoma: DNA Methylation
+
+![](images/CAN_Module11_DataIntegration-11_1.jpg)
+
+.footnote[
+{% cite Mack_2014 %}
+]
+---
+
+.pull-left[
+.enlarge120[Much data, many consortia]
+![](images/CAN_Module11_DataIntegration-12_2.png)
+]
+.pull-right[
+.enlarge120[Doctor’s clinic of the future]
+![](images/CAN_Module11_DataIntegration-12_1.png)
+]
+
+.footnote[
+{% cite Pai_2018 %}
+]
+
+---
+
+## Data integration is important for risk models and clinical decision-making
+
+Model Name                                                         | Family History | Medical History | Lifestyle Factors | Pathology or physiol. measures | High risk Genotypes | Polygenic risk score
+----------                                                         | -------------- | --------------- | ----------------- | ------------------------------ | ------------------- | --------------------
+Framingham Risk score<br/>(*cardiovascular disease events*)        | ✅             | ✅              | ✅                | ✅                             |                     |
+Atherosclerosis Risk in Communities Study <br/>(*type 2 diabetes*) | ✅             | ✅              | ✅                | ✅                             |                     |
+Prostate cancer BPC3                                               |                |                 |                   | ✅                             |                     |
+BOADICEA<br/>(*breast cancer*)                                     | ✅             | ✅              | ✅                | ✅                             | ✅                  | ✅
+Schizophrenia, ADHD                                                |                |                 |                   |                                |                     | ✅
+
+---
+
+# Where do I find multi-modal datasets?
+
+---
+
+## Where to find multi-modal datasets
+
+
+.pull-left[
+![](images/CAN_Module11_DataIntegration-15_1.jpg)
+
+[https://dcc.icgc.org](https://dcc.icgc.org)
+
+Gene Expression Omnibus
+
+dbGaP
+]
+
+.pull-right[
+![](images/CAN_Module11_DataIntegration-15_2.jpg)
+
+curatedTCGAData
+
+.reduce90[
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("curatedTCGAData")
+```
+]
+]
+
+
+---
+
+# Patient classifiers that integrate data
+
+---
+
+## Tools for integration & classification
+
+
+.pull-left[
+![](images/groupings.png)
+Patient similarity networks,
+Variable groupings
+
+.image-70[![](images/CAN_Module11_DataIntegration-17_3.jpg)]
+]
+
+.pull-right[
+image-70[![](images/CAN_Module11_DataIntegration-17_2.jpg)]
+
+Latent variable analysis,
+Individual variables
+
+{% cite Pai_2019 %}
+{% cite Rohart_2017 %}
+]
+
+---
+
+## Patient similarity networks help integrate data
+
+.pull-left-66[
+![](images/CAN_Module11_DataIntegration-18_1.png)
+]
+
+.pull-right-33[
+**What is "similarity"?**
+- Correlation
+- Normalized diff.
+- Distance-based
+- … *any metric that is meaningful!*
+]
+
+
+---
+
+## Similarity to predict outcome
+
+![](images/predict.png)
+
+- General-purpose
+- Uses machine learning (type of AI)
+
+.footnote[{% cite Pai_2019 %}]
+
+---
+
+# Machine learning: key concepts
+
+---
+
+## Machine Learning
+
+![](images/ml.png)
+
+---
+
+## Machine Learning
+
+Computational algorithms that **learn generalizable patterns in known** data
+
+&
+
+**predict / make choices for new** data
+
+---
+
+
+Unsupervised learning | Supervised learning (e.g. classification) | Reinforcement Learning
+---                   | ---                                       | ---
+Find structure        | Predict label or value                    | Take action to alter environment
+![](images/ml2a.png)  | ![](images/ml2b.png)                      | ![](images/ml2c.png)
+
+---
+
+## Machine learning in medicine
+
+![](images/CAN_Module11_DataIntegration-24_1.jpg)
+
+.footnote[
+https://medicalfuturist.com/fda-approved-ai-based-algorithms/ <br/>
+https://medicalfuturist.com/fda-approvals-for-algorithms-in-medicine/
+]
+
+---
+
+## Simple classifier workflow
+
+![](images/CAN_Module11_DataIntegration-25_1.jpg)
+
+- Training data, test data (held-out / blind test)
+- Cross-validation
+
+---
+
+# Simple classifier workflow
+
+.pull-left[
+  ![](images/classifier.png)
+]
+
+.pull-right[
+  ![](images/CAN_Module11_DataIntegration-26_1.jpg)
+]
+
+
+---
+
+## Overfitting results in models that don’t generalize
+
+![](images/CAN_Module11_DataIntegration-27_1.jpg)
+
+---
+
+## Evaluating model performance
+
+![](images/CAN_Module11_DataIntegration-28_1.jpg)
+
+---
+
+## Evaluating model performance
+
+.pull-left[
+![](images/CAN_Module11_DataIntegration-29_2.jpg)
+]
+
+.pull-right[
+- Accuracy
+- Sensitivity
+- Specificity 
+- Precision, recall, F1
+- Percent Positivity Rate 
+- AUROC, AUPR
+
+.tip[
+<tip-title>Key messages</tip-title>
+1. Look at multiple metrics!
+2. Particularly if you have  **unbalanced classes**
+]
+
+]
+
+---
+
+## Confusion matrix
+
+![](images/confusion.png)
+
+---
+
+## Learn more
+
+![](images/CAN_Module11_DataIntegration-31_1.jpg)
+![](images/CAN_Module11_DataIntegration-31_2.jpg)
+![](images/CAN_Module11_DataIntegration-31_3.jpg)
+![](images/CAN_Module11_DataIntegration-31_4.jpg)
+
+---
+
+# netDx workflow
+
+---
+
+## netDx classifies patients by integrating multi-modal data
+
+![](images/netdx.png)
+
+.footnote[{% cite Pai_2019 %}]
+
+---
+
+## How netDx works
+
+![](images/netdx-3.png)
+
+---
+
+
+## How netDx works
+
+![](images/netdx-4.png)
+---
+
+
+## How netDx works
+
+![](images/netdx-5.png)
+
+---
+
+
+## How netDx works
+
+![](images/netdx-6.png)
+
+
+---
+
+## Benchmarking: PanCancer survival prediction
+
+![](images/bench.png)
+
+- KIRC: Renal clear cell carcinoma (N=150)
+- OV: Ovarian serous cysteadenocarcinoma (N=252)
+- GBM: Glioblastoma multiforme (N=155)
+- LUSC: Lung squamous cell carcinoma (N=77)
+
+.footnote[
+{% cite Pai_2019 %} | Data from {% cite Yuan_2014 %}
+]
+
+---
+
+## netDx performance
+
+![](images/netdx-perf.png)
+
+.pull-left[
+- Each dot shows avg perf for a given design
+- 10X train-test splits
+- Feature scores 0 – 10
+]
+.pull-right[
+.image-40[
+![](images/netdx-perf-legend.png)
+]
+]
+
+.footnote[{% cite Pai_2019 %}]
+
+---
+
+# Need for interpretability
+
+---
+
+## Genomic classifiers need interpretability
+
+Identifying plausible mechanism helps:
+
+⬇ overfitting due to small sample size <br/>
+⬆ confidence for high-risk decisions<br/>
+🔎mechanism for drug discovery
+
+.footnote[{% cite PaiBader_2018 %}]
+
+---
+
+# Pathway-level features
+
+---
+
+## Pathway-level features for breast cancer subtype classification
+
+![](images/pathways.png)
+
+.pull-left[
+Data from TCGA (2012)<br/>
+100 splits; features scored 0-10
+]
+.pull-right[
+AUROC = 0.97, AUPR = 0.92 <br/>
+{% cite Pai_2019 %}
+]
+
+---
+
+## Top pathway features capture dysregulated processes in breast tumours 
+
+
+.pull-left-66[
+  ![](images/pathways2.png)
+]
+.pull-left-33[
+  This is a visualization of top features, an Enrichment Map. Nodes in this
+  figure show pathway features, not patients.
+]

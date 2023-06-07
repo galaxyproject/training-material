@@ -1,0 +1,1011 @@
+---
+layout: introduction_slides
+logo: "GTN"
+
+title: "Introduction to Cancer Genomics"
+questions:
+  - TODO
+objectives:
+  - Describe how cancer genomes differ from normal genomes and various sources of cancer genome variation
+  - Understand different bioinformatic approaches to detecting cancer genome variation
+  - Learn strengths and weaknesses of different approaches to cancer genome analysis (whole genome, exome, RNA-seq, targeted sequencing, etc.)
+  - Inform how cancer genome analysis may be used to guide cancer patient management
+key_points:
+   - TODO
+
+contributions:
+  authorship:
+   - trevor-pugh
+  editing:
+   - shiltemann
+  funding:
+   - bioinformatics-ca
+   - erasmusplus
+
+subtopic: introduction
+---
+
+# We are all made of cells
+
+![a baby in a diaper, surrounded by graphics of types of cells pointing to various body parts. Brain cells, fat cells, heart muscle cells, red blood cells, nerve cells ](images/CAN_Module1_Lecture-5_1.jpg)
+
+.footnote[
+Image credit: [genographic.nationalgeographic.com/science-behind/genetics-overview](https://genographic.nationalgeographic.com/science-behind/genetics-overview/)
+]
+
+---
+
+# My human genome
+
+![Microscopy image of chromosomes](images/CAN_Module1_Lecture-6_1.jpg)
+
+---
+
+# My human genome
+
+![Microscopy image of chromosomes arranged in pairs](images/CAN_Module1_Lecture-7_1.jpg)
+
+
+---
+
+# Cancer is a disease of the genome
+
+![Microscopy image of chromosomes in a cancer cell, showing chromosomal duplications and other large-scale aberrations](images/CAN_Module1_Lecture-8_1.jpg)
+
+.footnote[
+Image credit: [www.cityofhope.org/research/support/cytogenetics)](https://www.cityofhope.org/research/support/cytogenetics/)
+]
+
+---
+
+# "All happy families are alike; each unhappy family is unhappy in its own way" - *Anna Kerenina (Leo Tolstoy)*
+
+![A circular chromosome plot with examples of various mutations. Point mutations, copy number alterations, structural rearrangements, genes & regulatory elements, Pathways, Homologs and epigenetics modifications](images/CAN_Module1_Lecture-9.jpg)
+
+---
+
+# Cancer cells accumulate somatic alterations over time
+
+![A graphic of the evolution of a cancer cell over time, acquiring mutations along the way](images/CAN_Module1_Lecture-10_1.jpg)
+
+- Mutation frequency depends on cancer type
+- External forces (e.g. drug treatment) can select for specific
+clones (e.g. cells with resistance mutations)
+
+
+.footnote[Stratton MR, Campbell PJ, Futreal PA. *Nature* . 2009 Apr 9;458(7239):719-24. Review.]
+
+---
+
+# Mutation burden varies by cancer type, exposure, age of onset, & DNA repair ability
+
+![Plot of somatic mutation frequence for different tumour types](images/CAN_Module1_Lecture-11.jpg)
+
+.footnote[Lawrence et al. Nature 2013 Jul 11;499(7457):214-8.]
+
+---
+
+# Tumour cells acquire abnormal abilities by co-opting normal cell behaviour
+
+.image-75[ ![image depicting the hallmarks of cancer in a circle. Sustaining proliferative signaling, evading growth supporessors, activating invasion and metastasis, enabling replicative immortality, inducing angiogenesis, resisting cell death](images/CAN_Module1_Lecture-12_1.jpg) ]
+
+.footnote[Hanahan and Weinberg, Cell. 2011 Mar 4;144(5):646-74.]
+
+---
+
+# Oncogenic somatic alterations target a core set of biological functions
+
+.image-75[![image of cells evolving into tumours under the effect of known oncogenes](images/CAN_Module1_Lecture-13_1.jpg)]
+
+
+##  Differentiating “driver” from “passenger” mutations is a central challenge of cancer genome analysis
+
+
+---
+
+# Targeted therapies exploit specific mutations
+
+.pull-right[
+![MRI image of ung adenocarcinoma](images/CAN_Module1_Lecture-14_1.jpg)
+![Fluorescent imaging of a human with metastatic cancer spread throughout the body](images/CAN_Module1_Lecture-14_2.jpg)
+]
+
+.pull-left[
+
+**Lung adenocarcinoma with activating mutations of  *EGFR* **
+
+{% icon arrow-down %}
+
+**Inhibiting EGFR shrinks tumors**
+
+*Lynch et al. N Engl J Med. 2004 May 20;350(21):2129-39*
+
+<hr/>
+
+**Metastatic melanoma with activating mutations of *BRAF* **
+
+{% icon arrow-down %}
+
+**Inhibiting *BRAF* shrinks tumors**
+
+*Bollag et al. Nat Rev Drug Discov. 2012 Nov;11(11):873-86*
+
+<hr/>
+
+**Resistance inevitably arises**
+]
+
+---
+
+# "Actionable" mutations in 3,299 tumours
+
+![A graphic from a publication describing actional mutations in a cohord of tumors, coloured by mutation type](images/CAN_Module1_Lecture-15.jpg)
+![Legend for the graphic listing the types of mutations displayed](images/CAN_Module1_Lecture-15_2.jpg)
+
+.footnote[ Ciriello et al. Nature Genetics 2013]
+
+---
+
+# Even within the same tumour mass, different cells may have different mutations
+
+![A graphic of a clump of cells with different subclones visible](images/CAN_Module1_Lecture-16_1.jpg)
+
+.footnote[Burrell et al. Nature. 2013 Sep 19;501(7467):338-45.]
+
+---
+
+# Cancers are a mix of subclones that can respond differently to therapy
+
+![A graphical timeline depicting the evolution of subclones over time. The number of subclones steadily grow, then drastically decrease after treatment, but steadily grow again towards relapse.](images/CAN_Module1_Lecture-17_1.jpg)
+
+.footnote[Ding et al. Nature. 2012 Jan 11;481(7382):506-10.]
+
+---
+
+# Subclones and metastases are genetically related, diverge to form subpopulations
+
+![A graphic showing clonal nature of metastases, originating from the primary tumour, or from other metastates](images/CAN_Module1_Lecture-18_1.jpg)
+
+.footnotes[Campbell et al. Nature. 2010 Oct 28;467(7319):1109-13.]
+
+---
+
+# Reasons for molecular testing for cancer
+
+<br/><br/>
+
+## Treatment
+
+treatment susceptibility, predict adverse side-effects, watch-and-wait versus aggressive treatment
+
+
+## Drug resistance and metabolism
+
+pre-existing resistance mutations, drug dosage
+
+
+## Inherited cancer syndromes
+
+additional primary tumors, at-risk family members
+
+
+## Prognosis
+
+molecular subtyping, benign vs. malignant,
+determine unknown primary, predict metastatic potential
+
+---
+
+# What are the targets in *my* cancer…
+
+<br/><br/>
+
+- Sequence**:  Mutations, polymorphisms
+
+- **Structure:** Copy number variation, translocation, loss-of-heterozygosity
+
+- **Function:** Expression, exon-usage
+
+- **External:** Viruses, bacteria
+
+<br/></br>
+
+## …and what can be done about them?
+
+
+---
+
+# Applications of next-generation DNA sequencing technology to cancer
+
+---
+
+# General DNA sequencing workflow
+
+![high-level view of DNA sequencing flow, from isolating the genomic DNA or RNA, to creation of a library of DNA fragments, to the sequencing device, and finally the computaional analysis](images/CAN_Module1_Lecture-22.jpg)
+
+---
+
+.image-120[![](images/CAN_Module1_Lecture-23.png)]
+
+On an Illumina HiSeq 2500, one lane of an eight-lane flow cell generates >600 million reads
+
+---
+
+# "Pipeline"
+
+![an oil pipline, starting at the horizon, which has the words "raw dna sequence" written near it, ending in the foreground, where the text "variants" appears](images/CAN_Module1_Lecture-24.jpg)
+
+.footnote[www.hickerphoto.com]
+
+---
+
+# "Pipeline"
+
+.pull-right-66[
+![The oil pipeline before it was laid, a collection of individual segments of pipes](images/CAN_Module1_Lecture-25_1.jpg)
+]
+
+.pull-left-33[
+
+.enlarge200[
+
+1. Alignment
+
+2. Pre-processing
+
+3. QC metrics
+
+4. Variant calling
+
+5. Interpretation
+
+6. Clinical report
+]
+]
+
+.footnote[www.vnf.com]
+
+---
+
+# Adapting Genome Analysis Toolkit Best Practices for analysis of cancer genomics data
+
+![graphical depiction of an analysis pipeline, from experimental setup, to computational pipeline, resulting in variant, SNPs and Indels ](images/CAN_Module1_Lecture-26_1.jpg)
+
+.footnote[
+http://www.broadinstitute.org/gatk/guide/best-practices
+and http://picard.sourceforge.net/
+]
+
+---
+
+# Adapting Genome Analysis Toolkit Best Practices for analysis of cancer genomics data
+
+![The same pipeline image as the previous image, adapted for cancer to include copy number variants, translocations, tumour purity and ploidy, and somatic vs germline analysis steps](images/CAN_Module1_Lecture-27.jpg)
+
+.footnote[
+.pull-left[
+http://www.broadinstitute.org/gatk/guide/best-practices
+and http://picard.sourceforge.net/
+]]
+
+---
+
+# An alignment of reads to a human genome reference
+
+
+![A screenshot of IGV showing an alignment of reads to a reference genome](images/CAN_Module1_Lecture-28_1.jpg)
+
+BWA, Novoalign, Stampy, SOAP, and >50 more listed on Wikipedia under “Short-Read Sequence Alignment”
+
+---
+
+# Multiple types of cancer genome variation may be inferred from sequencing read alignments
+
+![A graphical representation of reads mapped to a reference genome, with examples of a single nucleotide variant, a interchromosomal rearrangement, and contamination](images/CAN_Module1_Lecture-29.jpg)
+
+.footnote[Meyerson M, Gabriel S, Getz G. Nat Rev Genet. 2010 Oct;11(10):685-96. Review.]
+
+---
+
+# DNA sequencing approaches to cancer
+
+.enlarge120[
+
+
+.pull-left[
+
+- Whole genome sequencing (WGS)
+- Whole exome sequencing (WES)
+- Targeted gene sequencing
+- Targeted variant genotyping
+- Epigenome modification (bisulphite)
+
+<br>
+
+- Transcriptome sequencing (RNAseq)
+- miRNA sequencing
+
+<br>
+
+- Protein/DNA interaction mapping
+- Epigenome mapping (histones)
+]
+]
+
+
+.pull-right[
+
+<br>
+
+## DNA
+
+<br><br><br><br>
+
+## RNA
+
+<br><br>
+
+## Protein
+(DNA footprint)
+
+]
+
+---
+
+# Coverage of genome, exome, & RNAseq data
+
+![Screenshot of IGV with coverage track depicting the variable coverage at different locations in the genome](images/CAN_Module1_Lecture-31.png)
+
+.footnote[www.broadinstitute.org/igv]
+
+---
+
+# Exomes & Genomes don't measure everything
+
+Fraction of each exon “callable”
+
+![A plot depicting the fraction of exons that are callable. Many locations are not fully callable](images/CAN_Module1_Lecture-32.jpg)
+
+.footnote[Pugh et al. Nature 2013]
+
+---
+
+# Transcriptome coverage depends on expression
+
+![A set of three plots in difference cancers showing coverage depends on expression levels](images/CAN_Module1_Lecture-33.jpg)
+
+Genes ordered by rank expression
+
+---
+
+# Epigenetic modifications that regulate gene expression detectable by bisulphite sequencing, even in admixed tissues
+
+![Two IGV screenshots, one from normal tissue and one from endometrial carcinoma, from bisulphate sequencing, showing methylation of the MLH1 promotor in the tumour sample versus the unmethylated normal tissue](images/CAN_Module1_Lecture-34.jpg)
+
+---
+
+# Data types are confirmatory and complementary
+
+![a table depicting the types of data (Genome, Exome, RNAseq and MethylSeq), and the different and overlapping types of information they can provide (sequence mutations, copy number, rearrangements, pahtogens, purity/ploidy, gene expression).](images/CAN_Module1_Lecture-35.jpg)
+
+
+---
+
+# Somatic Mutations
+
+---
+
+# Germline variants are detectable at low coverage
+
+![IGV screenshot of a variant at low coverage](images/CAN_Module1_Lecture-37.png)
+
+---
+
+# Variable DNA quality & quantity from tissues used for routine diagnosis
+
+![TODO](images/CAN_Module1_Lecture-38_1.jpg)
+
+.footnote[Pugh et al. BMC Cancer. 2007 Jul 13;7:128.]
+
+---
+
+# Tumors are a mix of cancer & normal cells
+# ("purity" or "tumour content")
+
+
+![Microscopy image showing a mixture of tumour and normal cells](images/CAN_Module1_Lecture-39_1.jpg)
+
+.footnote[Pugh et al. BMC Cancer. 2007 Jul 13;7:128.]
+
+
+---
+
+# Tumors can have multiple genome copies
+# ("ploidy")
+
+![Microscopy image of chromosomes in cancer, with many having more thatn the usual 2 copies](images/CAN_Module1_Lecture-40_1.jpg)
+
+.footnote[www.cityofhope.org/research/support/cytogenetics/]
+
+---
+
+# Deep coverage is necessary to detect mutations in low purity or high ploidy tumors
+
+<br/>
+
+## Genome 0/15 reads &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Exome 6/139 reads
+
+![IGV screenshot of a low-coverage genome sequencing data. The mutation is not detected in any of the 15 reads.](images/CAN_Module1_Lecture-41_2.jpg)
+![IGV screenshot of the same location in high-coverage exome sequencing data.Here the mutation is picked up in 6 out of 139 reads](images/CAN_Module1_Lecture-41_1.jpg)
+
+
+
+---
+# Deep (e.g. 250X) DNA sequencing coverage enables inference of tumour purity, ploidy, & subclonal structure
+
+![a set of plots showing tumour ploidy, via B allele frequence, depth ratio](images/CAN_Module1_Lecture-42.jpg)
+
+.footnote[Roth et al. Nat Methods. 2014 Apr;11(4):396-8. Favero et al. Ann Oncol. 2015 Jan;26(1):64-70.]
+
+---
+
+# Multiple DNA sequencing technologies enable mutation confirmation & cross-validation
+
+![screenshot of IGV combining multiple sequencing sources, PacBio and Illumina, both showing the same variants](images/CAN_Module1_Lecture-43.png)
+
+.footnote[Pugh et al. Nature 2012.]
+
+---
+
+# Mutation detection sensitivity is dictated by sequencing depth and is limited by sequencer & polymerase error
+
+![Plot showing percent tumor allele fraction detectable vs coverage. Exome in the top left of the line (high tumour allele fraction detectable at relatively low coverage), clinical lab, subclonality and cirulating tumour DNA are shown further along the line, needing higher coverage for a smaller percent tumour allele frequnce detectable, nearing the sequencing error rate.](images/CAN_Module1_Lecture-44.jpg)
+
+.footnote[Kis et al.  <i>Nat Commun. </i> 2017 May 11;8:15086.]
+
+---
+
+# The ultimate complex mixture: Cell-free DNA dissolved in blood is derived from many normal cells and a few tumour cells
+
+![graphic depicting circulating tumour cells in the bloodstream](images/CAN_Module1_Lecture-45_1.jpg)
+
+.footnote[Crowley et al., *Nature Reviews Clinical Oncology* , 2013]
+
+---
+
+# Coverage dependent on laboratory method used to target regions of interest
+
+![two IGV screenshots contrasting coverage of different laboratory methods. with PCR having high depth in targeted regions, and hybrid capture lower depth but higher coverage](images/CAN_Module1_Lecture-46.png)
+
+---
+
+# Quantity of circulating tumour DNA reflects cancer burden
+
+![A plot showing a correlation between the amount of circulating tumour cells and cancer burden](images/CAN_Module1_Lecture-47_1.jpg)
+
+.footnote[Newman, Bratman et al. Nature Medicine. 2014 May;20(5):548-54.]
+
+---
+
+# Quantity of circulating tumour DNA reflects clinical course
+
+![image showing correlating between quantityt of circulating tumour DNA and clinical stage](images/CAN_Module1_Lecture-48_1.jpg)
+
+.footnote[Newman, Bratman et al. Nature Medicine. 2014 May;20(5):548-54.]
+
+---
+
+# Somatic copy number alterations and rearrangements (structural alterations)
+
+---
+
+# Tumors can have complex structural alterations
+
+![colored karyogram image of chromosomes in a tumour cell](images/CAN_Module1_Lecture-50_1.jpg)
+
+.footnote[http://www.bclq.org/en/index.html]
+
+---
+
+# Gains and losses evident from sequence data
+
+![A plot depicting copy number gains and losses in tumour and normal exomes. There is a clear increase in copy number changes present in the tumour](images/CAN_Module1_Lecture-51.jpg)
+
+---
+
+# Re-analysis of existing clinical sequence data provides additional diagnostic value
+
+![plot showing significant log2 ratios for EGFR amplification (6 copies) in a lung adenocarcinoma and PTEN deletion in a breast invasive ductal carcinoma](images/CAN_Module1_Lecture-52.jpg)
+
+---
+
+# Additional probes provide richer copy number profiles (183 gene panel, all exons plus select introns)
+
+![same plot as the previous slide, with additional probes plotted, confirming the previous observation](images/CAN_Module1_Lecture-53.jpg)
+
+---
+
+# Exact breakpoints can be detected by examining reads that span the region
+
+![A pictogram showing an example of split reads spanning a breakpoint in the genome](images/CAN_Module1_Lecture-54_1.jpg)
+
+.footnote[Imielinski et al. Cell. 2012 Sep 14;150(6):1107-20.]
+
+---
+
+# Translocation detection from soft-clipped bases plus large-insert or intrachromosomal read-pairs
+
+- **EWS-FLI**
+![Screenshot from IGV genome browser depicting reads surrounding breakpoint of a large rearrangement EWS-FLI](images/CAN_Module1_Lecture-55_1.jpg)
+- **PML-RARA**
+![Screenshot from IGV genome browser depicting reads surrounding breakpoint of a large rearrangement MPL-RARA](images/CAN_Module1_Lecture-55_2.jpg)
+
+---
+
+# Rearrangements can be highly complex and detectable at base-pair resolution
+
+![a large genome-browser like image showing complex rearrangements involving numerous breakpoints](images/CAN_Module1_Lecture-56_1.jpg)
+
+.footnote[Berger et al. Nature. 2011 Feb 10;470(7333):214-20.]
+
+---
+
+# Some tumor genomes are highly rearranged, some are quiet, some have no rearrangements
+
+![two sets of 3 circular genome plots showing breakpoints. The lung adenocarcinoma displays a large number of these large rearrangements, while the neuroblastoma has only a couple](images/CAN_Module1_Lecture-57.jpg)
+
+.footnote[Molenaar et al. 2012.]
+
+---
+
+# Transcriptome sequencing
+
+---
+
+# RNAseq can detect differences in exon usage that underlie resistance to treatment
+
+![A graphic displaying the concept of alternative splicing and its impact on the detectable expression levels](images/CAN_Module1_Lecture-59_1.jpg)
+
+.footnote[Griffith et al. Nat Methods. 2010 Oct;7(10):843-7.]
+
+---
+
+# RNAseq enables expression profiling & subtyping
+
+![A series of heatmaps showing expression levels, which when put together cluster nicely into tumour subtypes](images/CAN_Module1_Lecture-60_1.jpg)
+
+---
+
+# Primary tissue of origin evident from expression (if normal samples are available for comparison)
+
+![a circular phylogeny tree showing relatedness of various cancer cells and their origins](images/CAN_Module1_Lecture-61.jpg)
+
+---
+
+# Pathogens seen in Genomes, RNAseq, sometimes Exomes
+
+.pull-left[
+
+![circular genomic diagram mapping reads to a viral genome](images/CAN_Module1_Lecture-62_1.jpg)
+
+Unusual mapping of RNAseq reads to Epstein-Barr
+virus in lung adenocarcinoma
+
+]
+
+.pull-right[
+.image-75[ ![microscopy image of tissue with tumor cells](images/CAN_Module1_Lecture-62_2.jpg) ]
+
+0.8 mm, ISH shows EBV confined to tumor cells,
+tumor is actually a lymphoepithelioma-like carcinoma
+
+]
+
+---
+
+# Transcriptomes from single cells can now be amplified and sequenced *en masse*
+
+![a graphic depicting the laboratory process of amplifying single cells. ](images/CAN_Module1_Lecture-63_1.jpg)
+
+
+.footnote[
+
+[10X Genomics Chromium technology](www.10xgenomics.com/solutions/single-cell/) and
+[Princess Margaret Genomics Centre (a service provider)](www.pmgenomics.ca/pmgenomics/services/single_cell_genomics.html)
+
+]
+
+---
+
+# Combining cancer & healthy cell data highlights shared & private populations
+
+![a principle component plot showing clusters of samples, labeled first by cluster, and then by donor, from both healthy individuals and cancer patients.](images/CAN_Module1_Lecture-64.jpg)
+
+---
+
+# HumanCellAtlas.org: Scientific and Funding Opportunities
+
+![Screenshot from the human cell atlas](images/CAN_Module1_Lecture-65_1.jpg)
+
+Chan Zuckerberg Initiative funding pilot projects in areas of technology
+development, tissue sourcing, and computational methods
+[chanzuckerberg.com/human-cell-atlas](http://chanzuckerberg.com/human-cell-atlas)
+
+---
+
+# Germline cancer genetics (Hereditary Cancer Syndromes)
+
+---
+
+# "Second hit" can unmask a pathogenic germline allele
+
+
+![image depicting a chromosome with a single pathogenic germline allele, which can lose its healthy counterpart due to a number of events in the tumour such as local events, somatic recombination, loss and duplication and a chromosome loss](images/CAN_Module1_Lecture-67_1.jpg)
+
+
+---
+
+# Carrier for a pathogenic ***SUFU*** mutation developed medulloblastoma (10-)
+
+.pull-left[Normal, heterozygous]
+.pull-right[Tumor, hemizygous]
+
+![a screenshot from a genome browser illustrating this concept, where a cell went from heterozygous in the normal cells, to hemizygous in the tumour, with the variant now being present in all reads](images/CAN_Module1_Lecture-68.jpg)
+
+
+---
+
+# Once found, variants (of all types) require annotation to guide interpretation*
+
+![graphic of reads mapped to a genome, with various variant calling tools calling the variants at different positions](images/CAN_Module1_Lecture-69.jpg)
+
+
+---
+
+# How do we interpret variants en masse?
+
+
+- **Clinical indication & history** (family members, de novo)
+- **Locus-specific and internal variant databases**
+- **Population frequency**
+- **Public databases** (disease-specific & general)
+- **Publications**
+- **Amino acid & biochemistry conservation**
+- **Substitution prediction tools** (Polyphen2, SIFT, AlignGVGD, SarcomerePolyphen)
+- **Splicing prediction tools** (SpliceSiteFinder-like, MaxEntScan, NNSPLICE, GeneSplicer, Human Splice Finder)
+- **Druggable targets and pathways** Drug Gene Interaction Database (DGIdb), Drug Bank
+
+---
+
+# Command-line versus Manual Annotation
+
+Oncotator – plain text table with >150 columns
+
+![example of oncotator text-based output table](images/CAN_Module1_Lecture-71_1.jpg)
+
+Alamut – Interactive desktop software
+
+.image-50[ ![Example of alamut software graphical representation](images/CAN_Module1_Lecture-71_2.jpg) ]
+
+*Varient Effect Predictor, ANNOVAR, SNPeff, VAT, & many others*
+
+---
+
+# Novel Variant Assessment is still a manual enterprise, aided greatly by sharing interpretations
+
+![A table showing various sources of variant data and their ability to assess benign and pathogenic variants](images/CAN_Module1_Lecture-72_1.jpg)
+
+.footnote[Richards et al. Genetics in Medicine. (2015) 17, 405&#8211;423]
+
+---
+# How do we report and share these results?
+
+![A card with a text-based variant report. The text reads: Overall result: Somatic variants identified: BRAF (NM_004333.4) Heterozygous, c.1406G>T (p.G469V) RB1 (NM_000321.2) Heterozygous, c.607+1G>A (splice) TP53 (NM_000546.4) Heterozygous, c.488A>G (p.Y163C) <b>Class 4A mutation: </b> BRAF p.Gly469Val (58% of reads) BRAF p.G469V is a rare mutation across cancer (76 of >193,000 cases in the Catalogue of Somatic Mutations in Cancer), and has not been previously reported in over 4,300 ovarian cancers. BRAF is recurrently mutated in ovarian cancers, but is rarely mutated in high grade serous carcinoma (mycancergenome.org). The most common variant found in ovarian tumours is p.V600E (mycancergenome.org). Currently, the impact of this mutation on patient prognosis or treatment in this tumour site is unknown.
+](images/CAN_Module1_Lecture-73.jpg)
+
+---
+
+
+![A screenshot form Project Genie website](images/CAN_Module1_Lecture-74_1.jpg)
+
+.footnote[www.aacr.org/genie]
+
+---
+
+## Molecular report of the future? Concise, systematic (crowd-sourced?) genome interpretation alongside clinical annotations
+
+.image-75[ ![A screenshot from cBioPortal graphical variant report](images/CAN_Module1_Lecture-75_1.jpg) ]
+
+.footnote[www.cbioportal.org]
+
+---
+
+# Case study
+
+![screenshot of a publication in Genome Biology entitled Evolution of an adenocarcinoma in response to selection by targeted kinase inhibitors](images/CAN_Module1_Lecture-76.jpg)
+
+---
+
+# Initial presentation
+
+.enlarge150[
+- 78 year-old Caucasian man
+- Fit and active
+- Presented in August 2007 with throat discomfort
+- Examination found a 2 cm mass at left base of tongue
+- Minimal comorbidities
+- No obvious risk factors for oropharyngeal malignancy
+]
+
+---
+
+# PET-CT scan & subsequent biopsy
+
+.pull-left[
+![PET-CT scan](images/CAN_Module1_Lecture-78_2.jpg)
+
+Fukui et al. Radiographics. 2005 Jul-Aug;25(4):913-30.
+
+]
+
+.pull-right[
+![Microscopy image of the biopsy](images/CAN_Module1_Lecture-78_1.jpg)
+
+Primary tongue mass,
+
+H&E stain, 20X objective
+
+]
+
+---
+
+# Surgery & further pathology
+
+.enlarge150[
+Laser resection of tumor & lymph nodes
+
+**Primary:** 1.5 cm poorly differentiated adenocarcinoma with
+micropapillary & mucinous features
+
+**Lymph nodes:** 3 of 21 neck nodes contain metastatic
+adenocarcinoma
+
+60 Gy of adjuvant radiation therapy completed in Feb.
+]
+
+Good quality of life, returned to work for four months.
+
+Then…numerous small (< 1.2 cm) bilateral pulmonary metastases
+
+---
+
+# EGFR IHC positive expression
+
+.pull-left-66[
+
+![microscopy image](images/CAN_Module1_Lecture-80_1.jpg)
+
+40X
+]
+
+.pull-right-33[
+<br><br>
+.enlarge150[
++2 EGFR expression by Zymed
+immunohistochemistry
+protein expression assay
+
+*Treatments?*
+]
+]
+
+
+---
+
+# 6 week trial of erlotinib
+
+.enlarge150[
+- All pulmonary nodules grew while on erlotinib
+
+- Largest lesion grew from 1.5 to 2.1 cm
+
+- Erlotinib discontinued in August
+
+*Palliative care? What next?*
+]
+
+![timeline showing initial presentation in August, Surgical resection in November, Radiation complete in February, lung metastases and erlotbib treatment in June, Erlotnib failure in August](images/CAN_Module1_Lecture-81.jpg)
+
+---
+
+# What are the targets in *our* case?
+
+.enlarge150[
+Having exhausted standard of care, BC Cancer Agency
+oncologist turned to the Genome Sciences Centre (a large
+research group) for new leads
+
+
+Special meeting of the BCCA Research Ethnics Board
+approved a single-case analysis for this patient
+
+
+Patient consented to full genomic sequencing and analysis
+with the understanding that novel treatment options may
+be *suggested*
+]
+
+---
+
+# Fresh frozen biopsy taken for RNA-seq
+
+.pull-left[
+![MRA image of the mass](images/CAN_Module1_Lecture-83_1.jpg)
+]
+.pull-right[
+![microscopy image of the biopsy](images/CAN_Module1_Lecture-83_2.jpg)
+40X
+]
+
+Fine-needle aspirates taken from large lung lesion
+
+Pathologist reviewed, used samples with highest tumor
+content (~80%) for RNA sequencing
+
+FFPE DNA from surgical resection used for DNA
+
+
+---
+
+# Somatic Mutations
+
+![table showhing the detected somatic mutations in TP53, RB1, ZNF187 and ZFPM2](images/CAN_Module1_Lecture-84.jpg)
+
+Confirmed by secondary sequencing method (Sanger)
+
+---
+
+# Copy number alterations
+
+![circular genome plot showing copy number alterations. EGFR amplification, 10q loss (PTEN), MAPK3 amplification, TP53 LOH, 18q loss (SMAD4)](images/CAN_Module1_Lecture-85.jpg)
+
+---
+
+# FISH confirmation of copy number alterations
+
+![3 FISH images showing the RBBP8 amplification, PTEN single copy loss, and Focal RET amplification](images/CAN_Module1_Lecture-86.jpg)
+
+---
+
+# Tumour gene expression levels compared against reference set of 50 tumors & matched blood sample
+
+.enlarge120[
+
+<br>
+
+*SMAD4* expression 43X lower vs compendium
+
+***deleted & down-regulated, associated with metastasis of colorectal cancer***
+
+<br>
+
+*RET* in top 5% of expressed genes, 34X vs compendium
+
+***most highly expressed oncogene***
+
+<br>
+
+*PTEN* in bottom 5% of expressed genes
+
+***significantly under-expressed***
+
+]
+
+---
+
+# Tumor driven by RET up-regulation, PTEN loss, not AKT
+
+![regulatory network affected by RET,PTEN](images/CAN_Module1_Lecture-88_1.jpg)
+
+
+---
+
+# Short list presented to oncologist
+
+![summary report listing targetable aberrations and potential drug treatments](images/CAN_Module1_Lecture-89.jpg)
+
+---
+
+# 22% decrease after 4 weeks on sunitinib (16% growth prior to sunitinib)
+
+![a series of 6 MRI images, showing two nodules increasing in size, then decreaseing after treatment](images/CAN_Module1_Lecture-90.jpg)
+
+---
+
+# Stabilization for 7 months
+
+.enlarge150[
+
+Sunitinib dose reduced due to known side-
+effects, otherwise excellent quality of life
+
+Repeated scans showed  no new nodules and
+disease stabilization and 4 months
+
+…then, existing lung mets began to grow
+
+Switched to sorafenib & sulindac
+
+Disease again stabilized within 4 weeks and
+continued for 3 months
+
+]
+
+---
+
+# Recurrent disease after 7 months
+
+.enlarge150[
+
+Recurrent disease at primary site on tongue
+
+New neck skin nodule
+
+Progressive & new metastases in lung
+
+Deteriorating quality of life
+
+<br>
+
+*What changed?*
+]
+
+---
+
+# Skin metastasis contains new mutations
+
+![table with 9 new mutations in metastases](images/CAN_Module1_Lecture-93.jpg)
+
+No evidence of these in the pre-treatment biopsy,
+even at low frequency
+
+---
+
+# Resistance due to intensified RET and new AKT signaling?
+
+![regulatory pathway](images/CAN_Module1_Lecture-94_1.jpg)
+
+
+---
+
+# Overcoming mechanisms of resistance
+
+.enlarge120[
+<br>
+**Cocktail of targeted drugs against multiple members of
+activated and parallel pathways?**
+
+{% icon arrow-right %} RET, EGFR, mTOR, Akt, etc.
+
+{% icon arrow-right %} untested, risk of adverse side-effects
+
+<br>
+
+**Detection of resistance mechanisms pre-treatment**
+
+{% icon arrow-right %} none of the new mutations were evident pre-treatment
+
+<br>
+
+**Can resistance be modeled & monitored?**
+
+{% icon arrow-right %} serial biopsies? blood test?
+
+]
+
+---
+
+# Timeline
+
+![Full timeline of the patient. Initial presentation in August, surgical resection in November, Radiation complete in February, Lung metastases and erlotnib begun in june, erlotnib failure in August, 1st biposy for sequencing in October, Sunitiinnib begun in November, Lung mets grow and switched to sorafinib and sulindac in February, Primary recurrence and 2nd biopsy in May, palliative care until death](images/CAN_Module1_Lecture-96.jpg)
+

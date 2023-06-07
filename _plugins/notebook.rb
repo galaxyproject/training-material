@@ -376,7 +376,7 @@ module GTNNotebooks
 
     final_content = [
       "# Introduction\n",
-      content.gsub(/```r/, '```{r}'),
+      content.gsub(/```(R|r)/, '```{r}'),
       "# Key Points\n"
     ] + page_data['key_points'].map { |k| "- #{k}" } + [
       "\n# Congratulations on successfully completing this tutorial!\n",

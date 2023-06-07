@@ -1,0 +1,473 @@
+---
+layout: tutorial_slides
+logo: "topics/cancer-analysis/images/bioca-logo.png"
+
+title: "Module 10: Clinical Integration"
+questions: []
+objectives:
+- Clinical data overview
+- Some single data type analysis (quick review)
+- Some data integration methods
+- Concatenate and Cluster (iCluster, SNF)
+- Advantages and drawbacks of different integration methods
+- Survival analysis
+
+key_points: []
+time_estimation: 2H
+contributions:
+  authorship: [larunerdman]
+  editing: [hexylena]
+  funding: [bioinformatics-ca,erasmusplusgsickkids,vector-institute,uni-toronto,mcgill]
+
+requirements:
+- type: "internal"
+  topic_name: data-science
+  tutorials:
+      - r-basics
+      - r-advanced
+
+priority: 11
+---
+
+# Canadian Bioinformatics Workshops
+
+[www.bioinformatics.ca](www.bioinformatics.ca)
+
+[bioinformaticsdotca.github.io](bioinformaticsdotca.github.io)
+
+Bioinformatics for Cancer Genomics
+
+June 2021
+
+---
+
+# 5
+
+.pull-left[
+.image-35[![DNA strands](images/CBW_CG2021_Erdman_v3-5_1.jpg)] genetic
+.image-35[![schematic of gene expression](images/CBW_CG2021_Erdman_v3-5_2.jpg)] epigenetic
+.image-35[![survey diagram](images/CBW_CG2021_Erdman_v3-5_3.jpg)] questionnaire
+.image-35[![another tiny gene schematic](images/CBW_CG2021_Erdman_v3-5_4.jpg)] mRNA expression
+.image-35[![cell nucleus with arrows coming out to proteins](images/CBW_CG2021_Erdman_v3-5_5.jpg)] miRNA
+]
+.pull-right[
+.image-35[![photo of many fruits and vegetables](images/CBW_CG2021_Erdman_v3-5_6.jpg)] diet
+.image-35[![cropped photo of white man wearing blue scrubs with hexagonal health graphics](images/CBW_CG2021_Erdman_v3-5_7.jpg)] clinical 
+.image-35[![brain scans in rainbow colours](images/CBW_CG2021_Erdman_v3-5_8.jpg)] imaging
+.image-35[![3d protein model](images/CBW_CG2021_Erdman_v3-5_9.jpg)] protein
+.image-35[![cartoon of a person in bed](images/CBW_CG2021_Erdman_v3-5_10.jpg)] **available patient data**
+]
+
+
+---
+
+# Why integrate patient data
+
+- To identify more homogeneous subsets of patients that
+- might respond similarly to a given drug
+- may have a similar prognosis
+- may respond better to similar clinical management
+
+---
+
+# Single data type analysis
+
+20 GBM, gene expression for ~18,000 genes
+
+.pull-right[
+![hierarchically clustered gene expression table. It's mostly black except for some green squares in a line at the right](images/CBW_CG2021_Erdman_v3-7_1.jpg)
+]
+
+.pull-left[
+
+- Collect gene expression
+- Select most varied genes
+- Perform hierarchical clustering using selected genes
+- Identify clusters (here, 2 clusters)
+- Identify genes associated that differ between clusters using t-test (if 2 clusters) or ANOVA (if more)
+- Correct for multiple hypothesis testing
+
+{% cite Liang_2005 %}
+]
+
+---
+
+# Single data type analysis
+
+20 GBM, gene expression for ~18,000 genes
+
+.pull-left[
+![](images/CBW_CG2021_Erdman_v3-8_2.jpg)
+{% cite Liang_2005 %}
+]
+
+.pull-right[
+Becomes this:
+![](images/CBW_CG2021_Erdman_v3-8_1.jpg)
+]
+
+---
+
+# Kaplan-Meier Curve
+
+![](images/CBW_CG2021_Erdman_v3-8_1.jpg)
+
+--
+
+The probability of surviving for 1 year is 20% for Group 2
+The probability of surviving for 1 year is 80% for Group 1
+Black dots represent censored observations
+
+---
+
+# Single data type driven integration
+
+200 GBMs
+
+![](images/200gbms.png)
+
+--
+
+Lead to identification of proneural, neural, classical and mesenchymal groups
+
+{% cite Verhaak_2010 %}
+
+--
+
+**What about methylation data?**
+
+---
+
+# Integration approaches
+
+1. Concatenate and cluster (commonly used in TCGA analysis)
+2. iCluster ({% cite Shen_2010 %})
+3. SNF ({% cite Wang_2014 %})
+
+**Not an exhaustive list!**
+
+---
+
+# Concatenate and Cluster
+
+![](images/before.png)
+
+---
+
+# Concatenate and Cluster
+
+![](images/after.png)
+
+
+---
+
+# Concatenate and Cluster
+
+## Hierarchical Clustering
+
+![](images/hierarchical.png)
+
+
+.footnote[
+[source](http://people.revoledu.com/kardi/tutorial/Clustering/Numerical%20Example.htm)
+]
+
+---
+
+# Concatenate and Cluster
+
+## Hierarchical Clustering
+
+
+![](images/CBW_CG2021_Erdman_v3-20_1.jpg)
+![](images/CBW_CG2021_Erdman_v3-20_2.jpg)
+![](images/CBW_CG2021_Erdman_v3-20_3.jpg)
+
+
+.footnote[
+[source](http://people.revoledu.com/kardi/tutorial/Clustering/Numerical%20Example.htm)
+]
+
+
+---
+
+# Deciding on the number of clusters
+
+- Arbitrarily cutting the dendrogram (by eye)
+- Silhouette statistic
+- Eigen gap (for spectral clustering)
+- Many more!
+
+---
+
+# Silhouette statistic
+
+- First presented by Rousseeuw (1987) to show graphically how well each pattern (observation) is classified to a cluster
+- For each pattern *i* in Class Cr:
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>S</mi><mi>i</mi><msub><mi>l</mi><mi>j</mi></msub><mo>=</mo><mfrac><mrow><mi>b</mi><mo>(</mo><mi>i</mi><mo>)</mo><mo>-</mo><mi>a</mi><mo>(</mo><mi>i</mi><mo>)</mo></mrow><mrow><mtext>max</mtext><mo>{</mo><mi>b</mi><mo>(</mo><mi>i</mi><mo>)</mo><mo>,</mo><mi>a</mi><mo>(</mo><mi>i</mi><mo>)</mo><mo>}</mo></mrow></mfrac></math>
+
+- a(i) is the average distance to all other patterns in Cr
+- b(i) is the average distance to all other patterns in other clusters
+
+.pull-left[
+- -1≤ <i>sil</i><sub>i</sub>≤1
+- <i>Sil = 1: </i> good assignment
+- <i>Sil = -1: </i> bad assignment
+- <i>Sil = 0: </i> borderline
+]
+.pull-right[
+.image-30[![](images/CBW_CG2021_Erdman_v3-22_2.jpg)]
+]
+
+---
+
+# iCluster ({% cite Shen_2010 %})
+
+- Gaussian latent variable model
+- Sparsity regularization (Lasso-type)
+- Latent variables Z (embedding is shared)
+
+![](images/CBW_CG2021_Erdman_v3-23_1.jpg)
+
+Package on CRAN: iCluster
+
+---
+
+# Drawbacks of existing methods
+
+- A lot of manual processing (e.g. need to pre-filter genes for iCluster – takes ~1500 genes max)
+- Many steps in the pipeline
+- Integration mostly done in the feature space – if there is signal in a combination of features, it’ll be lost
+- Focusing on similarity across data types – what if there is complementary information?
+
+---
+
+# Similarity Network Fusion ({% cite Wang_2014 %})
+
+Integrate data in the patient space
+
+1. Construct patient similarity matrix
+2. Fuse multiple matrices
+
+---
+
+# 1. Create Data Type-Specific
+
+![](images/data-specific.png)
+
+Similarity Networks
+
+---
+
+# 1. Create Data Type-Specific
+
+![](images/data-specific2.png)
+
+---
+
+# 2. Combine networks
+
+![](images/combine1.png)
+
+---
+
+# 2. Combine networks
+
+![](images/combine2.png)
+
+---
+
+# 2. Combine networks
+
+![](images/combine3.png)
+
+---
+
+# Case study: Glioblastoma
+
+.pull-left[
+![](images/case.png)
+]
+
+--
+
+.pull-left[
+![](images/case2.png)
+]
+
+---
+
+
+# Clinical properties of the subtypes
+
+
+.pull-left[
+![](images/subtypes.png)
+]
+
+---
+
+# Patient networks: advantages and disadvantages
+
+- Integrative feature selection
+- Growing the network requires extra work
+- Unsupervised – hard to turn into a supervised problem
+
+✓ Creates a unified view of patients based on multiple heterogeneous sources
+✓ Integrates gene and non-gene based data
+✓ No need to do gene pre-selection
+✓ Robust to different types of noise
+✓ Scalable
+
+Package on CRAN: **{SNFtool}**
+
+---
+
+# Survival Analysis
+
+- Survival data
+	– Hazard Rates
+	– Survival Functions
+- Kaplan-Meier Estimator
+- Log-rank test
+- Cox proportional hazards ratio model
+
+---
+
+# Survival data
+
+- Time to a single event (e.g. time to death or time to treatment failure)
+- Some data on patients maybe missing, e.g. lost due to the end of
+the study – such data is called **right censored** (*i.e. death occurred to the right of the last observation*)
+	– Uncensored data:  we observe death time
+	– Censored data: we know that it’s beyond the reported time
+
+**Note:** Assume non-informative (independent) censoring (e.g. moved out of town and lost track of the patient not related to the disease)
+
+---
+# Survival data example
+
+![](images/survival.png)
+
+---
+
+
+# Two important statistics
+
+- Event time: t
+- Survival function (probability of a person being alive at time t)
+
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>S</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>P</mi><mo>(</mo><mi>T</mi><mo>></mo><mi>t</mi><mo>)</mo></math>
+
+- Hazard rate (Probability of a person dying (failing) in the next instant)
+
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>H</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><munder><mi>lim</mi><mrow><mi mathvariant="normal">Δ</mi><mi>t</mi><mo>→</mo><mn>0</mn></mrow></munder><mi>P</mi><mo>(</mo><mi>t</mi><mo>≤</mo><mi>T</mi><mo>≤</mo><mi>t</mi><mo>+</mo><mi mathvariant="normal">Δ</mi><mi>t</mi><mo>|</mo><mi>T</mi><mo>></mo><mi>t</mi><mo>)</mo></math>
+
+
+---
+
+# Some examples of the hazard rate
+
+- Constant hazard rate – no aging
+- Positive hazard rate – the older you are the more likely you are to die
+- Negative hazard rate – e.g. dying risk is the highest at birth (infant mortality)
+
+---
+
+# Kaplan Meier Estimator
+
+- Basic estimator {% cite Kaplan1958 %}
+- S(t) – probability that a member from a given population will have a lifetime exceeding t
+- <i>n<sub>i</sub></i> – number of people at risk of dying at time t
+- <i>d<sub>i</sub></i> – number of actual deaths at time t
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>S</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><munder><mo>∏</mo><mrow><msub><mi>t</mi><mi>i</mi></msub><mo><</mo><mi>t</mi></mrow></munder><mfrac><mrow><msub><mi>n</mi><mi>i</mi></msub><mo>-</mo><msub><mi>d</mi><mi>i</mi></msub></mrow><msub><mi>n</mi><mi>i</mi></msub></mfrac></math>
+
+---
+
+# Kaplan-Meier Curve
+
+![](images/CBW_CG2021_Erdman_v3-42_1.png)
+
+.footnote[
+https://www.graphpad.com/guides/prism/latest/statistics/stat_determining_the_median_followu.htm
+]
+
+---
+
+# Are Kaplan Meier curves significantly different? ⇒ Log-rank test
+
+- Comparing 2 groups
+- j = 1..J be the distinct events in either group
+- For each j, N<sub>1j</sub> and N<sub>2j</sub> – numbers of people at risk in groups 1 and 2 respectively at the start of period j (N<sub>j</sub> = N<sub>1j</sub> + N<sub>2j</sub>)
+- O<sub>1J</sub> and O<sub>2J</sub> - observed number of events in each group (corresponds to variable d<sub>i</sub> above). (O<sub>j</sub> = O<sub>1J</sub> + O<sub>2J</sub>)
+- Null hypothesis: the distributions (2 curves) are the same. Given that O<sub>j</sub> happened across both groups at time j, O<sub>1J</sub> is hypergeometric with expected value and variance:
+
+.pull-left[
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub><mo>=</mo><mfrac><msub><mi>O</mi><mi>j</mi></msub><msub><mi>N</mi><mi>j</mi></msub></mfrac><msub><mi>N</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub></math>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>V</mi><mi>j</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>O</mi><mi>j</mi></msub><mo>(</mo><mfrac><msub><mi>N</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub><msub><mi>N</mi><mi>j</mi></msub></mfrac><mo>)</mo><mo>(</mo><mn>1</mn><mo>-</mo><mfrac><msub><mi>N</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub><msub><mi>N</mi><mi>j</mi></msub></mfrac><mo>)</mo><mo>(</mo><msub><mi>N</mi><mi>j</mi></msub><mo>-</mo><msub><mi>O</mi><mi>j</mi></msub><mo>)</mo></mrow><mrow><msub><mi>N</mi><mi>j</mi></msub><mo>-</mo><mn>1</mn></mrow></mfrac></math>
+]
+
+.pull-right[
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Z</mi><mo>=</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>J</mi></munderover><mo>(</mo><msub><mi>O</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub><mo>-</mo><msub><mi>E</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub><mo>)</mo></mrow><msqrt><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>J</mi></munderover><msub><mi>V</mi><mi>j</mi></msub></mrow></msqrt></mfrac><mi mathvariant="normal">~</mi><mi>N</mi><mo>(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>)</mo></math>
+
+get p-value from look up table
+]
+
+---
+
+# Hazard ratio
+
+Hazard ratio compares two groups diffing in treatments or prognostic variables, etc. Measures relative survival in two groups based on the complete period studied.
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>R</mi><mo>=</mo><mfrac><mfrac><msub><mi>O</mi><mn>1</mn></msub><msub><mi>E</mi><mn>1</mn></msub></mfrac><mfrac><msub><mi>O</mi><mn>2</mn></msub><msub><mi>E</mi><mn>2</mn></msub></mfrac></mfrac></math>
+
+R = 0.43 - relative risk (hazard) of poor outcome under the condition of group 1 is 43% of that of group2
+R = 2.0 then the rate of failure in group 1 is twice the rate in group 2.
+
+
+---
+
+# Cox proportional hazard (Cox PH) model
+
+- Captures how well multiple variables x<sub>1</sub>…x<sub>p</sub> (e.g. genes, clinical variables, etc) affect survival
+- Estimates the ratio of the risks
+- h<sub>0</sub>(t) - baseline hazard
+- other predictors are exponentially increasing the hazard prognostic index (β<sub>1</sub>x<sub>i1</sub> ...)
+- Cox regression:
+
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>h</mi><mi>i</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msub><mi>h</mi><mn>0</mn></msub><mo>(</mo><mi>t</mi><mo>)</mo><msup><mi>e</mi><mrow><msub><mi>β</mi><mn>1</mn></msub><msub><mi>x</mi><mrow><mi>i</mi><mn>1</mn></mrow></msub><mo>+</mo><mo>…</mo><mo>+</mo><msub><mi>β</mi><mi>p</mi></msub><msub><mi>x</mi><mrow><mi>i</mi><mi>p</mi></mrow></msub></mrow></msup></math>
+
+---
+
+# Some intuition behind the model
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>h</mi><mi>i</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msub><mi>h</mi><mn>0</mn></msub><mo>(</mo><mi>t</mi><mo>)</mo><msup><mi>e</mi><mrow><msub><mi>β</mi><mn>1</mn></msub><msub><mi>x</mi><mrow><mi>i</mi><mn>1</mn></mrow></msub><mo>+</mo><mo>…</mo><mo>+</mo><msub><mi>β</mi><mi>p</mi></msub><msub><mi>x</mi><mrow><mi>i</mi><mi>p</mi></mrow></msub></mrow></msup></math>
+
+- β<sub>j</sub> represents log hazard ratio increase for one unit increase of the predictor ( <i>x<sub>j</sub></i>) holding all other predictors constant
+- <i>e<sup>β<sub>j</sub></sup></i> Hazard ratio increase for one unit increase of x<sub>j</sub>
+- β<sub>j</sub> < 0 Means increasing x<sub>j</sub> is associated with decreased hazard and longer survival times
+
+---
+
+# Using and interpreting Cox PH
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>H</mi><mi>R</mi><mo>=</mo><mfrac><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mrow><msub><mi>h</mi><mi>j</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo></mrow></mfrac><mo>=</mo><mfrac><msup><mi>e</mi><mrow><mi>β</mi><mi>X</mi></mrow></msup><msup><mi>e</mi><mrow><mi>β</mi><mi>X</mi><mo>*</mo></mrow></msup></mfrac><mo>=</mo><msup><mi>e</mi><mrow><mi>β</mi><mo>(</mo><mi>X</mi><mo>-</mo><mi>X</mi><mo>*</mo><mo>)</mo></mrow></msup></math>
+
+1. Hazard ratio for a subject i with a set of predictors X compared to a subject j with a set of predictors X*:
+2. HR can be interpreted as a percentage change in risk
+
+Example:  Let x = 1 when treatment is active and x=0 when
+treatment is placebo. If HR = e<sup>β</sup> =0.8, it means 20% decrease
+in mortality risk if using treatment compared to placebo
+
+---
+
+# Concordance index (C-index)
+
+- Captures the ability of the model to order individuals correctly with respect to their survival time
+- Important – no other metric captures the ordering of individuals
+
+C-index = (#concordant pairs of indiv. + 0.5 * ties)/ all pairs

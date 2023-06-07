@@ -14,9 +14,11 @@
 		{% endif %}
 		<a href="{{ site.baseurl }}/hall-of-fame/{{ id }}/" class="btn btn-secondary">See Funder Profile</a>
 	</div>
+    {% if site.data.contributors[id].funding_statement %}
 	<div class="col-md-9 col-xs-12">
 		{{ site.data.contributors[id].funding_statement | markdownify }}
 	</div>
+    {% endif %}
 {% endfor %}
 </div>
 </div>
