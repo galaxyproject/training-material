@@ -58,10 +58,6 @@ And here the Parameter Iterator comes in – it allows to run the analysis using
 # Get Data
 The data used in this tutorial is from a mouse dataset of fetal growth restriction ({% cite Bacon2018 %}). You can download the dataset below or import the history with the starting data.
 
-> <comment-title></comment-title> 
-> If you've been working through the Single-cell RNA-seq: Case Study then you can use your dataset from the [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial here. We’ll be working on the output of **Scanpy RunPCA** {% icon tool %}, so you can run the analysis using this dataset. If you haven’t completed that tutorial but you’re interested in how we get to this point, feel free to have a look.
-{: .comment}
-
 Here are several ways of getting our toy dataset – choose whichever you like! 
 
 > <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
@@ -102,6 +98,13 @@ Here are several ways of getting our toy dataset – choose whichever you like!
 {: .hands_on}
 
 
+# Workflow
+
+This tutorial is an extension of the full analysis shown in [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial in the Single-cell RNA-seq: Case Study series. So if you've been working through it, you can use your dataset from that tutorial here. If you haven’t completed it but you’re interested in how we get to this point, feel free to have a look at the mentioned tutorial.
+
+Our starting data will be the output of **Scanpy RunPCA** {% icon tool %}. It is part of the full analysis tutorial, but we will only focus on a smaller and shortened bit of the [workflow]() to show the application of the Parameter Iterator. Our workflow consists of the following steps:
+
+![Workflow that we are  going to use in this tutorial: Scanpy RunPCA, Scanpy ComputeGraph, Scanpy RunTSNE, Scanpy RunUMAP, Scanpy FindCluster, Scanpy PlotEmbed](../../images/scrna-casestudy_parameter-iterator/workflow.png "Shortened workflow that we are going to use in this tutorial.")
 
 # Inputs
 Scanpy ParameterIterator tool currently works only for the following parameters:
@@ -118,14 +121,32 @@ There are two formats of the input values:
 {: .comment}
 
 # Number of neighbours to derive kNN graph (for **Scanpy ComputeGraph** {% icon tool %})
-Our dataset is right after PCA. Therefore we will now use Scanpy ComputeGraph to derive kNN graph. We can use Parameter Iterator to check how different values of the number of neighbors affect the final outcome. It is important that n-neighbours is an integer. 
+Our dataset is right after PCA. Therefore we will now use **Scanpy ComputeGraph** {% icon tool %} to derive kNN graph. We can use Parameter Iterator to check how different values of the number of neighbours affect the final outcome. It is important that **n-neighbours is an integer**. 
 
-Warning
-Using ‘Step increase values to be iterated’ as the format of the input values automatically generates float values instead of integers. Therefore in this case you have to use ‘List of all parameter values to be iterated’ with your chosen values.
+> <warning-title>Float vs integer</warning-title>
+> Using ‘Step increase values to be iterated’ as the format of the input values automatically generates float values instead of integers. Therefore in this case you have to use ‘List of all parameter values to be iterated’ with your chosen values.
+{: .warning}
 
-k-nearest neighbor (kNN) graph will be needed for plotting a UMAP. From [UMAP developers](https://github.com/lmcinnes/umap): “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”. Therefore, let’s pick some values bigger and smaller than 15 to check how it changes the final UMAP.
 
-HANDS ON
+k-nearest neighbor (kNN) graph will be needed for plotting a UMAP. From [UMAP developers](https://github.com/lmcinnes/umap): “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”. Therefore, let’s pick some values bigger and smaller than 15 to check how it changes the final UMAP. This is where the Parameter Iterator comes in!
+
+> <hands-on-title> Set your values in Parameter Iterator </hands-on-title>
+>
+> 1. {% tool [Scanpy ParameterIterator](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_parameter_iterator/scanpy_parameter_iterator/0.0.1+galaxy9) %} with the following parameters:
+>    - *"Parameter type"*: `Scanpy RunPCA: AnnData object`
+>    - *"Choose the format of the input values"*: `List of all parameter values to be iterated
+>    - *"User input values"*: `5,10,15,20,25,30,35,40`
+>
+>
+{: .hands_on}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9) %} with the following parameters:
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunPCA** {% icon tool %})
+>
+>
+{: .hands_on}
 
 Now you have two options: either pick one of the generated output files and proceed to the next tool with another parameter iteration or continue with the current collection of datasets. We choose the second option as only then you will be able to see the effect of using different n-neighbours values. However, the disadvantage of this attitude is that you have to come up with one value for the subsequent parameters in the workflow to see the changes in the final plots.
 
@@ -141,43 +162,12 @@ HANDS ON
 Unhide n-neighbours equal to 15
 
 
-# Title of the section usually corresponding to a big step in the analysis
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> <details-title> More details about the theory </details-title>
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
 
 
 ## Sub-step with **Scanpy ComputeGraph**
 
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunPCA** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
