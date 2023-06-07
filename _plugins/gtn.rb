@@ -313,6 +313,19 @@ module Jekyll
       'GTN_TRS_ERROR'
     end
 
+
+    def layout_to_human(layout)
+      if layout =~ /slides/
+        'Slides'
+      elsif layout =~ /tutorial_hands_on/
+        'Hands-on'
+      end
+    end
+
+    def topic_name_from_page(page, site)
+      site.data[page['topic_name']]['title']
+    end
+
     ##
     # Get the topic of a page's path
     # Params:
