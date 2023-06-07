@@ -290,6 +290,8 @@ module TopicFilter
 
     interesting = {}
     pages.each do |page|
+      page.data['short_id'] = shortlinks_reversed[page.data['url']]
+
       # Skip anything outside of topics.
       next if !page.url.include?('/topics/')
 
