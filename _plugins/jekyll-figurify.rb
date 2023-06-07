@@ -45,7 +45,7 @@ module Jekyll
             #{alt}
           </object>
           </div>
-          <small><a href="#{url}">Open image in new tab</a></small>
+          <small><a target="_blank" href="#{url}">Open image in new tab</a></small>
         )
       else
         %(
